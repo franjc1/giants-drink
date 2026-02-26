@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jump</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width = 800;
+const H = canvas.height = 500;
+
+const SIZE = 40;
+const GROUND = H - 80;
+const BASE_Y = GROUND - SIZE / 2;
+const MOVE_SPEED = 7;
+const JUMP_HEIGHT = 210;
+const JUMP_DURATION = 560; // ms
+
+const sq = {
+  x: W / 2,
+  y: BASE_Y,
+  vx: 0,
+  jumping: false,
+  jumpT: 0,
+  jumpStart: 0,
+  squash: 0,
+};
+
+const held = new Set();
+
+window.addEventListener('keydown', e => {
+  if (['ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
+  if (!held.has(e.code)) {
+    held.add(e.code);
+    if (e.code === 'Space' && !sq.jumping) {
+      sq.jumping = true;
+      sq.jumpStart = performance.now();
+    }
+  }
+});
+window.addEventListener('keyup', e => held.delete(e.code));
+
+function update(now) {
+  // Horizontal — snappy with just enough easing to not feel choppy
+  const dir = (held.has('ArrowRight') ? 1 : 0) - (held.has('ArrowLeft') ? 1 : 0);
+  sq.vx += (dir * MOVE_SPEED - sq.vx) * 0.28;
+  if (!dir && Math.abs(sq.vx) < 0.2) sq.vx = 0;
+  sq.x = Math.max(SIZE / 2 + 5, Math.min(W - SIZE / 2 - 5, sq.x + sq.vx));
+
+  // Jump — sine arc: eases out going up, eases in coming down
+  if (sq.jumping) {
+    const elapsed = now - sq.jumpStart;
+    sq.jumpT = Math.min(elapsed / JUMP_DURATION, 1);
+    sq.y = BASE_Y - JUMP_HEIGHT * Math.sin(Math.PI * sq.jumpT);
+    if (sq.jumpT >= 1) {
+      sq.jumping = false;
+      sq.y = BASE_Y;
+      sq.squash = 1;
+    }
+  }
+
+  // Squash decays exponentially after landing
+  if (sq.squash > 0.01) sq.squash *= 0.72;
+  else sq.squash = 0;
+}
+
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  const airFrac = Math.max(0, (BASE_Y - sq.y) / JUMP_HEIGHT);
+
+  // Ground line
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, GROUND);
+  ctx.lineTo(W, GROUND);
+  ctx.stroke();
+
+  // Shadow — shrinks and fades as square rises
+  {
+    const t = 1 - airFrac;
+    const sW = SIZE * 0.55 * t + SIZE * 0.12;
+    const sH = 5 * t + 1;
+    const sA = 0.45 * t;
+    const g = ctx.createRadialGradient(sq.x, GROUND + 2, 0, sq.x, GROUND + 2, sW);
+    g.addColorStop(0, `rgba(255,255,255,${sA})`);
+    g.addColorStop(1, `rgba(255,255,255,0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.ellipse(sq.x, GROUND + 2, sW, sH, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Squash/stretch
+  let sx = 1, sy = 1;
+  if (sq.jumping) {
+    // Stretch tall and thin during arc, peaking at apex
+    const stretch = 0.22 * Math.sin(Math.PI * sq.jumpT);
+    sx = 1 - stretch * 0.55;
+    sy = 1 + stretch;
+  }
+  if (sq.squash > 0) {
+    // Landing: wide and squat, recovers quickly
+    sx = 1 + sq.squash * 0.55;
+    sy = 1 - sq.squash * 0.38;
+  }
+
+  // Draw square with subtle glow while airborne
+  ctx.save();
+  ctx.translate(sq.x, sq.y);
+  ctx.scale(sx, sy);
+  if (airFrac > 0.05) {
+    ctx.shadowColor = 'rgba(255,255,255,0.22)';
+    ctx.shadowBlur = 14 * airFrac;
+  }
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(-SIZE / 2, -SIZE / 2, SIZE, SIZE);
+  ctx.restore();
+
+  // Hint
+  ctx.fillStyle = 'rgba(255,255,255,0.18)';
+  ctx.font = '12px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('← → to move   SPACE to jump', W / 2, H - 18);
+}
+
+function loop(now) {
+  update(now);
+  draw();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
