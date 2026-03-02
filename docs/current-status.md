@@ -1,75 +1,116 @@
 # Two Fires — Current Status
 
-Last updated: 2026-02-28
+**Last updated:** 2026-03-01
 
 ---
 
-## Phase: 0.5 — Ground Truth Ingestion
+## What Just Happened
 
-### What's Done
+### Diagnostic & Tuning Framework Designed and Integrated into Build Plan
 
-**Physics library (complete):**
-55 physics JSON files in `data/ground-truth/physics/` covering:
-- 25 NES games (SMB1/2/3/Lost Levels, MM1–6, CV1–3, Metroid, Contra, Ninja Gaiden, GnG, Bionic Commando, DuckTales, Batman, Kirby's Adventure, Little Nemo, Chip 'n Dale, Tiny Toons, Battletoads, Gargoyle's Quest II, Metal Storm)
-- 15 SNES games (SMW, Super Metroid, MMX/X2/X3, MM7, DKC1–3, Yoshi's Island, Kirby Super Star, SCIV, SGnG, Demon's Crest, TMNT IV)
-- 15 Genesis games (Sonic 1/2/3+K, Castle of Illusion, Gunstar Heroes, Aladdin, EWJ, Ristar, Rocket Knight Adventures, Ghouls 'n Ghosts, Strider, Vectorman, Comix Zone, CV Bloodlines, Contra Hard Corps)
+Extended design session addressing the fundamental challenge: how do you quality-assure a system that generates infinite variety? Traditional playtesting breaks down when every game instance is procedurally different. You can't QA infinity.
 
-**1 palette file:** `data/ground-truth/palettes/nes-palette.json` — full 64-color NES hardware palette.
+**The solution:** Don't test instances — test the generator. Joe's time is spent on diagnostic moments and taste decisions, not full playthroughs. Taste principles extracted from ratings compound over time, making the generator itself better.
 
-**Ingestion pipeline (built, not yet run at scale):**
-All scripts in `tools/ingestion/`:
-- `batch-scraper.js` — fetches docs from source URLs → raw-data/
-- `data-extractor.js` — Claude Haiku extraction, one dimension per call
-- `validator.js` — schema validation + coverage report
-- `run-pipeline.sh` — orchestrates all three
+**Framework designed:**
+1. **Fast-fail evaluation funnel** — Gate 1 (automated checks) → Gate 2 (5 necessary conditions, Joe reviews clips in ~30-45s) → Gate 3 (INUS conditions, ~45-60s) → Gate 4 (periodic holistic playthroughs)
+2. **Five necessary conditions** — readable opening, responsive controls (latency auto-checked; physics character via side-by-side comparison clip), teachability integrity, visual coherence, rhythm heartbeat
+3. **Three-tier rating** — 👎/👍/🔥 with optional text rationale
+4. **Pattern Distiller** — converts Joe's ratings into transferable design principles (Living Taste Document). Three modes: failure patterns, excellence patterns, parameter correlation.
+5. **Testing UI** — zero-navigation card-based web interface. Phase-aware. Two modes: review pre-generated queue, or type prompt and evaluate. Principles tab for approving/rejecting distilled taste principles.
+6. **Archetype Stress-Tester** — canonical prompt battery ensuring quality transfers across all game types, with regression detection
+7. **Comparative Diagnostician** — variance analysis across multiple generations of same prompt (consistent vs. healthy variance vs. erratic)
 
-**Game master lists (being expanded):**
-- NES: expanding to 300+ (was 85)
-- SNES: expanding to 250+ (was 62)
-- Genesis: expanding to 200+ (was 58)
-- PC: expanding to 100+ (was 55)
-- Target total: 850+ games
+**Build plan updated to v2 (45 sessions):** Diagnostic infrastructure threaded through all phases, not bolted on as a separate phase. +5 sessions spread across the plan.
 
-### What's In Progress
+**Session protocol established:** Rules for syncing context across Claude.ai and Claude Code sessions. `claude.md` gets a session protocol section + diagnostic framework summary + design philosophy summary.
 
-Expanding game master lists to 850+ total coverage. Once lists are finalized, running full pipeline (scrape → extract → validate) for all four platforms.
+## Current Agent Execution Order
 
-### What's Next
+```
+Pre-game:
+  Experience Interpreter
+    → Artistic Director
+    → Design Philosopher
+    → Dramaturgical Agent (setup: initial conditions, pressure ramp,
+                           social hooks, drama density threshold, catalysts)
+    → Grammarian → Rhythmist → Game Compiler → Cartographer
+    → Provocateur → Coherence Auditor
 
-1. **Finish list expansion** — NES 300+, SNES 250+, Genesis 200+, PC 100+
-2. **Run full pipeline** — `./run-pipeline.sh all` overnight
-3. **Validate coverage** — `node validator.js --report`
-4. **Gap filling** — targeted re-runs for missing dimensions
+Runtime (per episode):
+  CAS engine ticks (per paradigm spec)
+  Drama density monitor (threshold check, catalyst trigger)
+  Claude interprets CAS state → narrative
+  Visual Manifestation Engine (narrative → scene spec → assets)
+  Visibility manager (CAS state → observable behaviors)
+  Content agents generate next episode
 
-Then **Phase 1 begins:**
-- Session 1: Core game loop + SMW physics read from ground truth JSON config
-- Session 2: Tiles + collision + camera (16x16 tiles, SMW-standard)
-- Session 3: Entities + interaction (real enemy behaviors from ground truth)
-- Session 4: Multiple levels, HUD, level transitions, physics swap demo
+Diagnostic wrapper (per generated game):
+  Simulated Player Agent → Gate 1 auto-checks
+  → Moment Extractor clips diagnostic moments
+  → Testing UI presents clips to Joe
+  → Joe rates (👎/👍/🔥) → Pattern Distiller processes
+  → Approved principles feed back into pipeline agents
+```
 
-Phase 1 constraints: NO AI calls, NO social system, NO save system, NO shaders, platformer only.
+## Generation Flow
+
+```
+Player prompt
+  → Skeleton (~10-15s): paradigm, CAS initial conditions, aesthetics,
+    narrative premises, social hooks, pressure ramp, catalysts
+  → Episode 1 generates (content agents + prompt-time character/environment sprites)
+  → Player plays Episode 1
+  → CAS ticks at episode boundary
+  → Between-episode window (triple duty):
+      1. Player social interaction surface
+      2. CAS narrative delivery (cutscenes, dialogue, reveals)
+      3. Generation masking (next episode content + new visual assets from CAS changes)
+  → Episode 2 generates incorporating CAS state + new visuals
+  → [repeat]
+```
+
+## What's Next
+
+### Immediate: Repo Sync
+1. Drop new docs into repo:
+   - `docs/design/diagnostic-framework.md`
+   - `docs/design/build-plan-v2.md`
+   - `docs/current-status.md` (this file)
+   - `docs/decisions-log.md`
+   - `claude-md-addition.md` (content to append to existing `claude.md`)
+2. Append session protocol + diagnostic summary + design philosophy sections to `claude.md`
+3. Commit and push
+
+### Then: Begin Phase 1 — Paradigm Engine (Sessions 2-8)
+
+**Phase 1 builds:**
+1. Core game loop + canvas rendering
+2. Entity system (player, enemies, items, environment)
+3. Input manager (keyboard, mobile future-proofed)
+4. Collision detection
+5. Physics parameter table with easing curves (JSON-driven)
+6. First rendering core: 2D tile-based with configurable camera
+7. JSON-to-game machine: load config → get playable level
+8. Simulated Player Agent (pathfinding + timeline recording)
+9. Moment Extractor v1 (clips for NC1, NC2, NC4)
+10. Testing UI v1 (card-based rating interface)
+11. Gate 1 auto-checks
+
+**First milestone:** A JSON config that produces a playable platformer level, auto-tested by Simulated Player, with diagnostic clips ready for Joe's review in the Testing UI.
+
+### Ingredient specification threads still recommended (can proceed in parallel with Phase 1):
+- Paradigm specs (all 13+ paradigms)
+- CAS engine parameters + behavioral legibility rules
+- Visual Manifestation Engine specification
+- Dramaturgical Agent ingredients + CAS initial conditions
 
 ---
 
-## Key Files
-
-| Path | Purpose |
-|------|---------|
-| `CLAUDE.md` | Master architectural blueprint (overrides everything) |
-| `data/schema.md` | Full game state schema (4 levels) |
-| `data/ground-truth/README.md` | Ground truth library documentation |
-| `data/ground-truth/physics/` | 55 physics JSON files |
-| `tools/ingestion/game-lists/` | Master game lists (NES/SNES/Genesis/PC) |
-| `tools/ingestion/batch-scraper.js` | URL → raw text |
-| `tools/ingestion/data-extractor.js` | Raw text → ground truth JSON via Claude |
-| `tools/ingestion/validator.js` | Validates extracted files |
-| `tools/ingestion/run-pipeline.sh` | Full pipeline orchestrator |
-| `docs/decisions-log.md` | All design decisions |
-
----
-
-## Known Issues / Open Questions
-
-- No web access for background Task agents in this environment — all research done in main session
-- PC games use different source key names (`pcgamingwiki`, `doomwiki`, `scummvm_wiki`) vs console games (`data_crystal`, `tasvideos`)
-- Sub-pixel system varies per game: SMB1/SMW use 16 sub-px/px; Mega Man 2/3 and Sonic use 256 sub-px (8.8 fixed-point) — generation pipeline must handle both
+## Key Open Questions
+1. Game state JSON schema — the exact contract between every system (must be specified before building)
+2. MVP definition — minimum compelling first level
+3. Granular constraint relationships between primitives (answers come from building/testing)
+4. Paradigm spec completion for all 13+ paradigms
+5. Visual Manifestation Engine specification
+6. Multi-paradigm shift mapping mechanics
