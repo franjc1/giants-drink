@@ -1,0 +1,175 @@
+{
+  "game_id": "spider-man-return-sinister-six-nes",
+  "game_name": "Spider-Man: Return of the Sinister Six",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Boss encounter setup",
+      "visual_form": "Level endpoint with enlarged villain sprite",
+      "meaning": "Player approaching mandatory combat with Sinister Six member; escalation of threat intensity"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Visual projectile sprites traveling across screen space",
+      "meaning": "Immediate danger requiring evasion; incoming damage threat"
+    },
+    {
+      "signal": "Energy/health depletion",
+      "visual_form": "Power bar reduction visible on HUD",
+      "meaning": "Player vulnerability increasing; critical state approaching"
+    },
+    {
+      "signal": "Level layout obstacles",
+      "visual_form": "Vertical wall sections, environmental hazards in platforming paths",
+      "meaning": "Mechanical danger requiring precise movement to avoid failure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Defeated enemies",
+      "visual_form": "Enemy sprite disappearance or collapse animation",
+      "meaning": "Threat neutralized; temporary safety window created"
+    },
+    {
+      "signal": "Energy restoration from defeated enemies",
+      "visual_form": "Power bar refill upon enemy defeat",
+      "meaning": "Health recovery opportunity; viable survival path demonstrated"
+    },
+    {
+      "signal": "Level progression",
+      "visual_form": "Forward movement through side-scrolling space",
+      "meaning": "Advancement toward objective; player agency and progress"
+    },
+    {
+      "signal": "Web fluid collection",
+      "visual_form": "Collectible items within level environment",
+      "meaning": "Resource availability; capability enhancement for combat readiness"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Spider-Man (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Spider emblem on suit; web-based visual effects",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spider-Man sprite color scheme distinguishes from enemies; web projectiles visually unique"
+    },
+    {
+      "faction": "Sinister Six (Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Individual villain visual identity per member (Electro, Sandman, Mysterio, Vulture, Hobgoblin, Doctor Octopus)",
+      "enemy_visual_variants": "Each boss has distinct sprite design, attack patterns, and behavioral animations reflecting comic-source characters",
+      "environmental_markers": "Boss encounters at level endpoints; villain-specific level theming (e.g., electrical effects for Electro, sand effects for Sandman)"
+    },
+    {
+      "faction": "Doctor Octopus (Leader/Final Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mechanical tentacle appendages; octopus visual motif",
+      "enemy_visual_variants": "Final boss with enhanced visual complexity; regenerating health bar (NES version shows multiple health segments vs. Master System single bar)",
+      "environmental_markers": "Level 6 endpoint; positioned as supreme threat in narrative hierarchy"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game - player vulnerability high",
+      "visual_manifestation": "Single life resource; basic enemy density; straightforward level design",
+      "behavioral_manifestation": "Enemies follow predictable patrol patterns; limited projectile complexity"
+    },
+    {
+      "world_state": "Mid-game - escalating challenge",
+      "visual_manifestation": "Increased enemy variety; environmental hazards introduce vertical complexity; bosses require pattern recognition",
+      "behavioral_manifestation": "Enemy attack frequency increases; boss regeneration mechanics introduce resource management pressure"
+    },
+    {
+      "world_state": "Final confrontation - Doctor Octopus as world threat",
+      "visual_manifestation": "Boss sprite dominates screen space; distinctive mechanical octopus design signals apex danger",
+      "behavioral_manifestation": "Multiple health phases (NES version); complex attack patterns requiring learned response sequences"
+    },
+    {
+      "world_state": "Master System port - reduced difficulty state",
+      "visual_manifestation": "Same visual assets but repositioned item placement; simplified enemy encounters; single health bar bosses",
+      "behavioral_manifestation": "Fewer enemy instances per level; easier platforming geometry; reduced regeneration mechanics"
+    },
+    {
+      "world_state": "Game Gear version - cramped visibility state",
+      "visual_manifestation": "Smaller viewport window showing reduced screen portion",
+      "behavioral_manifestation": "Reduced visual warning time for incoming projectiles; increased difficulty through information asymmetry rather than mechanical changes"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level-based villain assignment",
+      "example": "Each of six levels terminates with specific Sinister Six member boss fight, creating implicit narrative progression from minor to major threats"
+    },
+    {
+      "technique": "Thematic level design per villain",
+      "example": "Villain-specific environmental aesthetics (electrical hazards for Electro, sandstorm effects for Sandman, etc.) communicate threat identity without explicit exposition"
+    },
+    {
+      "technique": "Objective-based world state",
+      "example": "Intermediate objectives (key/detonator retrieval) signal plot progression and world-state changes through mechanical narrative requirements"
+    },
+    {
+      "technique": "Sprite-based character identity",
+      "example": "Each villain rendered with comic-accurate visual design, immediately communicating Marvel franchise authenticity and character role"
+    },
+    {
+      "technique": "Resource scarcity as narrative tension",
+      "example": "Single life with one continue creates implicit 'world is hostile' state; no health restoration items communicate unforgiving threat environment"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Spider-Man (Player)",
+      "state": "Healthy/operational",
+      "behavior": "Full movement capability (jump, punch, kick, duck, climb, web-shoot); responsive control"
+    },
+    {
+      "entity": "Spider-Man (Player)",
+      "state": "Damaged",
+      "behavior": "Power bar visually depletes; gameplay remains unchanged but visual feedback indicates vulnerability"
+    },
+    {
+      "entity": "Standard Enemies",
+      "state": "Unalerted",
+      "behavior": "Patrol movement patterns; predictable sprite animation cycles"
+    },
+    {
+      "entity": "Standard Enemies",
+      "state": "Engaged",
+      "behavior": "Projectile attack emission; sprite animation acceleration; movement toward/away from player based on AI routine"
+    },
+    {
+      "entity": "Boss - Electro",
+      "state": "Pre-defeat",
+      "behavior": "Multiple attack patterns; electrical projectile emission; complex movement behavior indicating high threat"
+    },
+    {
+      "entity": "Boss - Doctor Octopus",
+      "state": "Pre-defeat (NES version)",
+      "behavior": "Regenerating health bar (multiple segments); coordinated tentacle attack patterns; screen-dominant sprite positioning"
+    },
+    {
+      "entity": "Boss - Doctor Octopus",
+      "state": "Pre-defeat (Master System/Game Gear version)",
+      "behavior": "Single health bar; simplified attack pattern; reduced regeneration removes mechanical complexity"
+    }
+  ],
+  "notes": "Limited source documentation (T3 tier) constrains manifestation pattern extraction. Sources focus on development history (unused graphics) and port comparison mechanics rather than visual communication analysis. No explicit data on color schemes, HUD design, or subtle behavioral tells. Environmental storytelling inferred from gameplay structure rather than documented design intent. NES/Master System/Game Gear version differences reveal design-space decisions regarding difficulty communication through mechanic simplification rather than visual language changes. Spider-Man's unused ceiling-crawl mechanic suggests original design concept (potentially affecting environmental threat communication) was cut.",
+  "sources_used": [
+    "tcrf - Spider-Man: Return of the Sinister Six (NES) - The Cutting Room Floor",
+    "wikipedia - Spider-Man: Return of the Sinister Six"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:33:32.665Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4711,
+    "output_tokens": 2291,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

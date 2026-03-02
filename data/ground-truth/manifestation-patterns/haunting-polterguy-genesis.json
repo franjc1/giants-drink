@@ -1,0 +1,194 @@
+{
+  "game_id": "haunting-polterguy-genesis",
+  "game_name": "Haunting Starring Polterguy",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Ecto depletion",
+      "visual_form": "Ecto energy bar gradually depletes on HUD",
+      "meaning": "Player ghost losing power; imminent banishment to Underworld if fully depleted"
+    },
+    {
+      "signal": "Underworld hazards",
+      "visual_form": "Bats, bouncing skulls, disembodied hands, steam vents rendered as hostile entities",
+      "meaning": "Environmental threats that reduce Polterguy's health portrait in dungeon recovery stages"
+    },
+    {
+      "signal": "Health portrait shrinkage",
+      "visual_form": "Portrait in lower left corner visibly shrinks when damaged; reduces to eyes only near death",
+      "meaning": "Critical health status; further damage ends game"
+    },
+    {
+      "signal": "Ecto Beast appearance",
+      "visual_form": "Grotesque blob monster transformation of family chihuahua after each house cleared",
+      "meaning": "Boss encounter; significant threat requiring confrontation"
+    },
+    {
+      "signal": "Dog bark audio/visual",
+      "visual_form": "Family dog barks; decreases ecto tank",
+      "meaning": "Environmental opposition; Sardini family pet actively drains player resources"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fright 'em indicators",
+      "visual_form": "Shiny colored glowing indicators on interactive household objects (blue, orange, green)",
+      "meaning": "Safe interaction points; objects available to possess and weaponize for scares"
+    },
+    {
+      "signal": "Successful family member frightened",
+      "visual_form": "Family member flees room; ecto tank partially recovers",
+      "meaning": "Objective progress; player resource restoration"
+    },
+    {
+      "signal": "Ecto drops in Underworld",
+      "visual_form": "Glowing ecto drops appear; star-shaped variant fully restores health",
+      "meaning": "Resource recovery points; survival mechanics in dungeon stages"
+    },
+    {
+      "signal": "Exit location indicator",
+      "visual_form": "Arrow points to exit if off-screen in Underworld",
+      "meaning": "Navigation aid; path to safety and return to house"
+    },
+    {
+      "signal": "Spell availability",
+      "visual_form": "Special spell drops from Underworld roof (disappear quickly)",
+      "meaning": "Temporary power-ups; enhanced scare capability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Polterguy (Player/Ghost)",
+      "color_identity": "Blue, Orange, Green (Fright 'em colors player controls)",
+      "symbol_or_sigil": "Rebellious punk teenager ghost; skateboard accident victim",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spectral form; isometric 3/4 perspective avatar; portrait health indicator in lower left"
+    },
+    {
+      "faction": "Sardini Family (Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Yuppie Italian family; business mogul Vito Sardini as primary target",
+      "enemy_visual_variants": "Multiple family members with independent fear levels; family chihuahua transforms into Ecto Beast",
+      "environmental_markers": "Occupants of four progressively complex houses; dog present as active resource drain"
+    },
+    {
+      "faction": "Underworld (Environmental Opposition)",
+      "color_identity": "Dark dungeon aesthetic",
+      "symbol_or_sigil": "Supernatural hazard realm",
+      "enemy_visual_variants": "Bats, bouncing skulls, disembodied hands, steam vents as hostile entities",
+      "environmental_markers": "Twelve dungeon paths; recovery stage accessed when ecto depleted; repeating hazard cycles"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "House occupied by Sardini family (primary game state)",
+      "visual_manifestation": "Family members visible in rooms; household objects interactive with Fright 'em indicators; isometric home layout with multiple rooms and exits",
+      "behavioral_manifestation": "Family members patrol rooms; respond to scares by increasing fear level; flee house when fear reaches 'Very Scared'; dog barks to drain player ecto"
+    },
+    {
+      "world_state": "Player ecto depleted (transition state)",
+      "visual_manifestation": "Ecto energy bar empties; visual shift to Underworld dungeon aesthetic",
+      "behavioral_manifestation": "Polterguy transported to Underworld; must collect ecto drops to recover and return to house at exact departure point; hazards become active threats"
+    },
+    {
+      "world_state": "House cleared of all family members (completion state)",
+      "visual_manifestation": "Empty house; family chihuahua transforms into Ecto Beast visual",
+      "behavioral_manifestation": "Boss encounter triggered; Ecto Beast must be confronted; upon defeat, progression to next house"
+    },
+    {
+      "world_state": "Polterguy health critical (danger threshold)",
+      "visual_manifestation": "Portrait shrinks to eyes only; visual indicator of imminent death",
+      "behavioral_manifestation": "One additional hit from Underworld hazards ends game; player must immediately find ecto recovery"
+    },
+    {
+      "world_state": "Two-player mode active",
+      "visual_manifestation": "Turn-based house haunting; simultaneous Underworld stage competition",
+      "behavioral_manifestation": "Players alternate scare attempts until ecto depletion; head-to-head ecto collection race; first to finish gains next turn priority"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Object possession as narrative mechanic",
+      "example": "Household items (toy airplanes, severed hands, ghostly heads) reveal Polterguy's destructive haunting capability; ~400 possessible objects across four houses show escalating chaos"
+    },
+    {
+      "technique": "Spatial progression through four house iterations",
+      "example": "Four different Sardini family homes represent family relocation attempts to escape haunting; each house presumably more elaborate, showing escalation of both threat and player capability"
+    },
+    {
+      "technique": "Underworld as purgatory/consequence space",
+      "example": "Dungeon stages serve as resource recovery but also punishment; ecto depletion sends player to hostile supernatural realm, reinforcing ghost-human power economy"
+    },
+    {
+      "technique": "Fear meter as quantified emotional impact",
+      "example": "Family members' fear levels (rising to 'Very Scared') visualize Polterguy's psychological warfare effectiveness; meter communicates objective progress without dialogue"
+    },
+    {
+      "technique": "Ecto Beast transformation as story beat",
+      "example": "Family chihuahua grotesque mutation signals escalation; each house completion triggers new boss, suggesting supernatural corruption spreads"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sardini family member",
+      "state": "Normal patrolling",
+      "behavior": "Moves through rooms independently; maintains baseline presence"
+    },
+    {
+      "entity": "Sardini family member",
+      "state": "Scared (low fear)",
+      "behavior": "Reacts to scares; fear meter increases but doesn't flee"
+    },
+    {
+      "entity": "Sardini family member",
+      "state": "Very Scared (high fear)",
+      "behavior": "Flees house if in room with exit door; restores Polterguy ecto upon departure"
+    },
+    {
+      "entity": "Family chihuahua",
+      "state": "Normal",
+      "behavior": "Barks; actively drains Polterguy ecto as ambient threat"
+    },
+    {
+      "entity": "Family chihuahua",
+      "state": "Post-house-clearing",
+      "behavior": "Transforms into Ecto Beast; becomes confrontable boss entity"
+    },
+    {
+      "entity": "Polterguy",
+      "state": "Loaded Fright 'em (Blue automatic)",
+      "behavior": "Waits inside object; auto-activates scare when family member approaches"
+    },
+    {
+      "entity": "Polterguy",
+      "state": "Loaded Fright 'em (Orange manual)",
+      "behavior": "Remains in object until player button press; triggers on demand when family member near"
+    },
+    {
+      "entity": "Polterguy",
+      "state": "Green Fright 'em (control state)",
+      "behavior": "Pilots possessed objects (toy airplanes, floating heads, severed hands) via D-pad; can trigger added effects (projectiles, movement attacks)"
+    },
+    {
+      "entity": "Underworld hazard (bats, skulls, hands, steam)",
+      "state": "Active",
+      "behavior": "Autonomous movement patterns; collision damages Polterguy health; forces evasion gameplay"
+    }
+  ],
+  "notes": "Game communicates world-state primarily through visual depletion mechanics (ecto bar, health portrait) and spatial transitions (house-to-Underworld loop). Faction conflict is binary: punk ghost (player) vs. yuppie family (AI). Danger signals rely on environmental hazards and resource scarcity rather than explicit threat indicators. The Fright 'em color-coding system is core to visual communication of interaction types. Comedy-horror tone means danger signals are playful (possessed objects, family fleeing) rather than visceral. Two-player mode adds competitive resource-denial mechanic visualized through turn order. Narrative of revenge against business mogul expressed through environmental destruction rather than cutscenes.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:40:07.292Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3056,
+    "output_tokens": 2500,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

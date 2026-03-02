@@ -1,0 +1,193 @@
+{
+  "game_id": "duck-tales-2-nes",
+  "game_name": "DuckTales 2",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated sprite characters positioned in level geometry",
+      "meaning": "Collision hazard; damage on contact unless approached from above"
+    },
+    {
+      "signal": "Boss encounter initiation",
+      "visual_form": "Large enemy sprite with distinct animation patterns; health bar display (bossHP memory register 0xB9)",
+      "meaning": "Major danger threshold; requires pattern learning and multiple hits to defeat"
+    },
+    {
+      "signal": "Pit/fall hazards",
+      "visual_form": "Screen transition gaps; vertical drops in level geometry",
+      "meaning": "Instant death or level restart; avoidable through rope mechanics or precise jumping"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Static terrain features requiring cane interaction or alternate movement patterns",
+      "meaning": "Progression barriers; indicate areas requiring specific tools or upgrades from Gyro Gearloose"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Money/treasure pickup",
+      "visual_form": "Collectible sprite items scattered throughout levels",
+      "meaning": "Resource accumulation; enables purchases at stores for recovery items and upgrades"
+    },
+    {
+      "signal": "Gyro Gearloose store access",
+      "visual_form": "Character encounter point; NPC interaction zone",
+      "meaning": "Cane upgrade availability; grants access to new areas and hidden treasures via tool enhancement"
+    },
+    {
+      "signal": "Rope mechanics",
+      "visual_form": "Interactive rope sprites that Scrooge can grab and traverse",
+      "meaning": "Safe vertical traversal method; prevents fall damage and enables Y subpixel manipulation for sequence optimization"
+    },
+    {
+      "signal": "Map piece in treasure chest",
+      "visual_form": "Chest sprites containing optional collectibles",
+      "meaning": "Non-mandatory collection goal; six pieces unlock optional sixth stage with lost McDuck treasure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Scrooge McDuck (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Cane weapon; McDuck family lineage (Fergus McDuck connection via torn map piece)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Levels designed around Scrooge's travel itinerary; areas represent global expedition (Niagara Falls, Bermuda Triangle, Mu, Egypt, Scotland)"
+    },
+    {
+      "faction": "Flintheart Glomgold (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "D-1000 shapeshifting robot (final boss form); archenemy status established in narrative",
+      "enemy_visual_variants": "Robot transformation; appears as kidnapper NPC before revealing as D-1000 mechanical form",
+      "environmental_markers": "Pirate ship in Bermuda Triangle serves as final confrontation arena; treasure pursuit motivation creates competitive dynamic"
+    },
+    {
+      "faction": "McDuck Family allies",
+      "color_identity": null,
+      "symbol_or_sigil": "Huey (quest initiator with torn map), Webby (hostage), Launchpad (treasure recovery)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Family-centric narrative framing; treasure belongs to Fergus McDuck (father); safe endings prioritize family over wealth"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level not yet visited",
+      "visual_manifestation": "Level selection screen displays available stages with unique graphical identities per world (Egypt pyramids, Scotland terrain, water-based Bermuda Triangle aesthetic)",
+      "behavioral_manifestation": "Player can select levels in any order (non-linear progression); no level-gating except final optional sixth stage requiring all map pieces"
+    },
+    {
+      "world_state": "Level completed",
+      "visual_manifestation": "Level remains accessible with same visual appearance; treasure chest indicators persist if map pieces remain uncollected",
+      "behavioral_manifestation": "Player can revisit completed levels to collect additional money and items; cane upgrades from Gyro enable access to previously unreachable areas"
+    },
+    {
+      "world_state": "Boss defeated",
+      "visual_manifestation": "Boss enemy sprite despawns; arena becomes passable; bossHP register (0xB9) decrements with each hit; bossInv register (0xB8) tracks invulnerability frames during damage animation",
+      "behavioral_manifestation": "Boss can only take damage from above (collision glitch allows side damage with precise positioning); defeat triggers level completion state and stage exit availability"
+    },
+    {
+      "world_state": "All map pieces collected",
+      "visual_manifestation": "Sixth optional stage becomes available in level select menu; represents hidden treasure location",
+      "behavioral_manifestation": "Unlocks final dungeon progression; alternative ending path where Scrooge reveals treasure hidden under hat, avoiding Glomgold's theft"
+    },
+    {
+      "world_state": "Low/zero money condition",
+      "visual_manifestation": "Money counter in HUD reflects depletion during shop purchases",
+      "behavioral_manifestation": "Triggers bad ending if player reaches final boss with zero remaining funds; Glomgold finds treasure and becomes famous, infuriating Scrooge"
+    },
+    {
+      "world_state": "Webby kidnapped state (narrative trigger)",
+      "visual_manifestation": "Final stage environment transforms to pirate ship battle arena; Glomgold/D-1000 reveals transformation visually",
+      "behavioral_manifestation": "Forces confrontation with shapeshifter robot; creates time-pressure narrative (ransom condition); sinking ship sequence triggers escape segment"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geography-based world building",
+      "example": "Five explorable regions (Niagara Falls, Bermuda Triangle pirate ship, Mu, Egypt, Scotland) correspond to real-world and mythological locations, establishing Scrooge's globe-trotting adventurer identity established in animated series"
+    },
+    {
+      "technique": "Treasure uniqueness per stage",
+      "example": "Each level contains distinct treasure artifact appropriate to location (Egyptian artifacts in Egypt stage, underwater treasures in Bermuda Triangle); collected treasures become ransom payment in final confrontation, showing narrative consequence of exploration"
+    },
+    {
+      "technique": "Map piece collection arc",
+      "example": "Torn map piece from Huey initiates quest; five more pieces hidden in treasure chests throughout stages; collection requirement drives player toward optional sixth stage with McDuck family treasure, creating tangible progression reward tied to lore"
+    },
+    {
+      "technique": "NPC positioning and function",
+      "example": "Gyro Gearloose appears as upgrade vendor; enables cane modifications that unlock hidden areas; positions progress gating behind tool enhancement rather than level progression, matching game's exploration-focused design"
+    },
+    {
+      "technique": "Enemy thematic placement",
+      "example": "Boss encounters guardian-role enemies (e.g., stage-specific creatures) that represent obstacles to treasure collection; defeated bosses' removal opens stage completion, visually confirming obstacle clearance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Scrooge McDuck (player character)",
+      "state": "Moving horizontally",
+      "behavior": "Horizontal speed ~1.x pixels per frame; X subpixel advances 4/256ths per frame with rolling behavior; wall collision causes subpixel rollover without stopping movement (enables positioning exploits)"
+    },
+    {
+      "entity": "Scrooge McDuck (player character)",
+      "state": "Jumping/in air",
+      "behavior": "Cane jump action easier to perform than original; Y subpixel advances only while on rope or falling through screen transitions; jump cancellation possible by pressing B for 4 frames after landing, enabling instant forward movement"
+    },
+    {
+      "entity": "Scrooge McDuck (player character)",
+      "state": "Rope interaction",
+      "behavior": "Can hang from interactive hooks; Y subpixel manipulation occurs during rope traversal; enables vertical movement between platforms with safe damage avoidance"
+    },
+    {
+      "entity": "Enemy sprites (general)",
+      "state": "Active/patrolling",
+      "behavior": "Vulnerable only to damage from above (standard collision rule); can be damaged from side if positioned precisely relative to enemy movement (requires enemy positioning to enable collision glitch); damage via cane jump attack"
+    },
+    {
+      "entity": "Enemy sprites (general)",
+      "state": "Death/defeat",
+      "behavior": "Triggers RNG roll if enemy can drop items; RNG advances via GlobalTimer (0x8F) addition to RNG register (0x90) with increment; frame-precise enemy kill timing manipulates item drops"
+    },
+    {
+      "entity": "Boss (stage guardian)",
+      "state": "Combat active",
+      "behavior": "bossHP (0xB9) tracks health points; bossInv (0xB8) tracks invulnerability frames post-damage; X position factors into RNG mixing for attack pattern generation; multiple hits required; defeat removes boss sprite and enables stage exit"
+    },
+    {
+      "entity": "Glomgold/D-1000 (final boss)",
+      "state": "Shapeshifter reveal",
+      "behavior": "Appears as kidnapper NPC initially; transforms into mechanical robot form during final confrontation; signals narrative twist where ransom is false objective, true threat is destruction protocol"
+    },
+    {
+      "entity": "Interactive objects (levers, cannons, springs)",
+      "state": "Setup required",
+      "behavior": "Require running into object to initialize 'hockey hit'; alternative: move along same platform for 15 frames, insert blank frame at 16/32-frame intervals to enable immediate interaction upon reaching object"
+    },
+    {
+      "entity": "Hidden boxes (zipping mechanic)",
+      "state": "Spawned at precise position",
+      "behavior": "Facing backward for correct frame count triggers zip glitch; gains ~10 pixels forward traversal; demonstrates level geometry exploitability"
+    }
+  ],
+  "notes": "DuckTales 2 uses non-linear stage selection (Mega Man-style) with reversitable level design enabling resource grinding and cane upgrade integration. World-state communication relies on NPC interactions (Gyro shop unlocks), collectible status (map pieces), and narrative framing (family vs. treasure moral choice in endings). Danger signals are primarily enemy/boss presence with collision rules; safety is conveyed through rope mechanics, upgrade availability, and treasure/money pickup density. Faction identity is weak (no color-coded teams) but narrative-driven: McDuck family vs. Glomgold competition for Fergus McDuck's hidden treasure creates zero-sum ending condition where player choice (spending money vs. hoarding) determines good vs. bad ending. The torn map piece, Webby kidnapping, and pirate ship ransoming create political/dramatic stakes elevating simple platformer to quest narrative.",
+  "sources_used": [
+    "wikipedia",
+    "tasvideos",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:55:29.031Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 10811,
+    "output_tokens": 3112,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

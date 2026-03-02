@@ -1,0 +1,71 @@
+{
+  "game_id": "total-recall-nes",
+  "game_name": "Total Recall",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "hostile_vehicles",
+      "visual_form": "cars speeding across street at bottom of screen",
+      "meaning": "environmental hazard; player must avoid or be shot"
+    },
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "bullets fired from moving vehicles",
+      "meaning": "active threat; immediate danger of damage"
+    }
+  ],
+  "safety_signals": [],
+  "faction_indicators": [
+    {
+      "faction": "antagonist_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "hostile_vehicles_with_gun_turrets",
+      "environmental_markers": "street_level_patrol_zone"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "street_environment_active",
+      "visual_manifestation": "cars visible at bottom screen boundary, sprite partially clipped in some versions",
+      "behavioral_manifestation": "enemies continuously patrol and fire; player must navigate around moving hazards"
+    },
+    {
+      "world_state": "resolution_or_region_variant",
+      "visual_manifestation": "sprite rendering differs between North American version (clipped off-screen) and European version (full sprite visible against dark background)",
+      "behavioral_manifestation": "same enemy behavior; visual presentation affected by technical constraints"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "hazard_placement_at_screen_edge",
+      "example": "cars at bottom of screen establish street-level danger zone; suggests player is on urban Mars colony street under Recall Corporation surveillance"
+    },
+    {
+      "technique": "sprite_clipping_as_technical_artifact",
+      "example": "partial sprite visibility in NA version creates unintended visual effect; European version shows fuller hostile vehicle design against dark background, improving readability of threat"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "street_cars",
+      "state": "patrolling",
+      "behavior": "speed across screen in continuous motion; fire bullets at player; represent automated or controlled security presence"
+    }
+  ],
+  "notes": "Total Recall NES is noted as a poor adaptation of the 1990 film. Available source material focuses on development/production issues (unused movie theme music, missing composer tracks) rather than in-depth world-state communication mechanics. Visual communication of danger and faction identity inferred from documented sprite and hazard placement only. Game likely uses arcade-style hazard avoidance rather than deep narrative world-state signaling given platformer paradigm and era. Tier T3 data reflects limited documentary evidence.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:34:54.583Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1378,
+    "output_tokens": 893,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

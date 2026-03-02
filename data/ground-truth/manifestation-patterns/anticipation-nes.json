@@ -1,0 +1,171 @@
+{
+  "game_id": "anticipation-nes",
+  "game_name": "Anticipation",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Time pressure visualization",
+      "visual_form": "Die countdown from 6 to zero",
+      "meaning": "Player must solve puzzle before timer expires; running out of time locks player out of turn"
+    },
+    {
+      "signal": "Drop-Out Squares",
+      "visual_form": "Gaps/removed spaces on level 4 board",
+      "meaning": "Landing on these squares causes player token to fall back to level 3, losing board position progress"
+    },
+    {
+      "signal": "Incomplete drawing",
+      "visual_form": "Partial picture gradually revealed during drawing phase",
+      "meaning": "Player must guess before full picture appears; incomplete information creates puzzle difficulty and time pressure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Pattern dots (easier difficulty)",
+      "visual_form": "Connected dot pattern shown before full drawing",
+      "meaning": "Visual aid that reduces puzzle difficulty and provides player confidence on Easy/Medium modes"
+    },
+    {
+      "signal": "Category label display",
+      "visual_form": "On-screen text showing puzzle category",
+      "meaning": "Contextual hint that guides player toward correct answer on lower difficulty settings"
+    },
+    {
+      "signal": "Letter blanks string",
+      "visual_form": "Underscores indicating word/letter count",
+      "meaning": "Structural clue about answer length, reducing guessing uncertainty on easier difficulties"
+    },
+    {
+      "signal": "Feature Squares",
+      "visual_form": "Special board squares (gray colored)",
+      "meaning": "Opportunity for dynamic board traversal rather than linear progression; reduces monotony"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "High-heeled shoes",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Token position on game board"
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Bugle",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Token position on game board"
+    },
+    {
+      "faction": "Player 3",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Ice cream cone",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Token position on game board"
+    },
+    {
+      "faction": "Player 4",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Teddy bear",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Token position on game board"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Easy/Medium difficulty progression",
+      "visual_manifestation": "Pattern dots shown, category label visible, letter blanks displayed",
+      "behavioral_manifestation": "Game provides visual scaffolding; puzzle-solving aids reduce guessing time"
+    },
+    {
+      "world_state": "Hard/Very Hard difficulty progression",
+      "visual_manifestation": "No dots, no category label, no letter blanks; full drawing revealed gradually",
+      "behavioral_manifestation": "Player must rely on intuition and cultural knowledge; puzzle difficulty increases dramatically"
+    },
+    {
+      "world_state": "Level progression (1-3 or 1-4)",
+      "visual_manifestation": "Board layout changes; Feature Squares appear on level 3; Drop-Out Squares appear on level 4",
+      "behavioral_manifestation": "Player token moves upward on board; increased risk of falling backward on later levels"
+    },
+    {
+      "world_state": "Active turn state",
+      "visual_manifestation": "Die countdown active, drawing being revealed, player can buzz in",
+      "behavioral_manifestation": "Player attempts to identify image quickly; first to buzz gains solving opportunity"
+    },
+    {
+      "world_state": "Locked-out turn state",
+      "visual_manifestation": "Die and drawing freeze after two wrong answers or timeout",
+      "behavioral_manifestation": "Player cannot participate until next puzzle cycle; other players gain opportunity"
+    },
+    {
+      "world_state": "Color collection progress",
+      "visual_manifestation": "Board board shows four color zones; player token advances in color-specific path",
+      "behavioral_manifestation": "Completing all four colors advances player to next level; colors track progress visually"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Board spatial hierarchy",
+      "example": "Game board divided into color zones (blue, green, pink, yellow) that correspond to puzzle categories; player movement through colored spaces reinforces category association"
+    },
+    {
+      "technique": "Progressive board complexity",
+      "example": "Levels 1-2 are simple linear paths; level 3 introduces Feature Squares for dynamic movement; level 4 adds Drop-Out Squares creating risk/reward tension"
+    },
+    {
+      "technique": "Token identity differentiation",
+      "example": "Four unique game pieces (high-heeled shoes, bugle, ice cream cone, teddy bear) create distinct player visual identity and allow easy tracking of multiple players on shared board"
+    },
+    {
+      "technique": "Difficulty scaffolding visibility",
+      "example": "Visual aids (dots, labels, blanks) systematically disappear as difficulty increases, making player progression toward mastery visually apparent"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player token",
+      "state": "Solving puzzle correctly",
+      "behavior": "Moves forward on board by number shown on die; collects color credit toward level completion"
+    },
+    {
+      "entity": "Player token",
+      "state": "Landing on Feature Square",
+      "behavior": "Flies around board until button pressed; puzzle played in color where token lands"
+    },
+    {
+      "entity": "Player token",
+      "state": "Landing on Drop-Out Square (level 4 only)",
+      "behavior": "Falls back to corresponding position on level 3; previously collected level 4 colors retained"
+    },
+    {
+      "entity": "Drawing system",
+      "state": "Puzzle active",
+      "behavior": "Gradually reveals partial image while die counts down; freezes when player buzzes in"
+    },
+    {
+      "entity": "Drawing system",
+      "state": "Puzzle unsolved or player locked out",
+      "behavior": "Resumes countdown and continues revealing; allows other players to buzz in"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Active",
+      "behavior": "Buzzes in during countdown; attempts to solve puzzles based on difficulty setting"
+    }
+  ],
+  "notes": "Anticipation is a board game adaptation with minimal world-state complexity. Visual communication is primarily through token positioning, color-coded zones, and difficulty-level scaffolding rather than environmental or political signaling. The game uses color identity (pink, blue, green, yellow) to distinguish players and categories, creating a simple competitive hierarchy. Danger signals are mechanical (time pressure, board hazards) rather than thematic. The game lacks faction conflict, enemy NPCs, or environmental storytelling beyond board design. Visual manifestation is purely systemic and functional.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:43:57.613Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2890,
+    "output_tokens": 1880,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

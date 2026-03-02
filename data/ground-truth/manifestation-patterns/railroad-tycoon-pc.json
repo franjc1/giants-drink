@@ -1,0 +1,191 @@
+{
+  "game_id": "railroad-tycoon-pc",
+  "game_name": "Sid Meier's Railroad Tycoon",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Competitor railroad activity",
+      "visual_form": "Rival company track placement on map; competing trains on routes",
+      "meaning": "Economic threat; competitors attempting to undercut player's profitability and market share"
+    },
+    {
+      "signal": "Bandit activity (Deluxe version)",
+      "visual_form": "Bandits appearing on map; visual indicators on affected train routes",
+      "meaning": "Direct threat to cargo delivery; trains can be hijacked and cargo lost"
+    },
+    {
+      "signal": "Rate Wars",
+      "visual_form": "Pricing indicators; rival company price undercutting displayed in route information",
+      "meaning": "Economic competition threat; rivals reducing rates to capture cargo contracts"
+    },
+    {
+      "signal": "Loan interest accumulation",
+      "visual_form": "Financial display showing rising debt and interest rates",
+      "meaning": "Economic danger; growing financial burden from initial loan startup capital"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Established track network",
+      "visual_form": "Connected railroad lines on map; owned stations linked by player-laid track",
+      "meaning": "Operational security; reliable cargo transportation infrastructure in place"
+    },
+    {
+      "signal": "Sheriff presence (Deluxe version)",
+      "visual_form": "Sheriff units visible on map; stationed at stations or along routes",
+      "meaning": "Protection against bandit hijacking; active defense of cargo"
+    },
+    {
+      "signal": "Growing company equity",
+      "visual_form": "Financial display showing increasing equity vs. debt ratio",
+      "meaning": "Economic stability; company becoming self-sufficient and profitable"
+    },
+    {
+      "signal": "Diverse cargo routes",
+      "visual_form": "Multiple active train routes connecting different industries and destinations",
+      "meaning": "Market resilience; revenue diversification reduces dependency on single cargo type"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Railroad Company",
+      "color_identity": "Variable (player-selectable company color in various versions)",
+      "symbol_or_sigil": "Company name/logo displayed on owned track sections and stations",
+      "enemy_visual_variants": null,
+      "environmental_markers": "All track, stations, and trains bearing player's company color/name throughout map"
+    },
+    {
+      "faction": "Rival Railroad Companies",
+      "color_identity": "Distinct colors for each AI competitor (red, blue, green, etc.)",
+      "symbol_or_sigil": "Competitor company names displayed on their track and trains",
+      "enemy_visual_variants": "Competing track networks; different colored trains; rival stations",
+      "environmental_markers": "Separate track sections and station networks; presence on same routes indicates rate war competition"
+    },
+    {
+      "faction": "Bandits (Deluxe/Africa expansion)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bandit visual markers on map",
+      "enemy_visual_variants": "Mobile threat units that appear on routes and stations",
+      "environmental_markers": "Appear in specific regional content (Africa scenarios in Deluxe)"
+    },
+    {
+      "faction": "Law Enforcement (Deluxe/Africa expansion)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sheriff units visually distinguished from bandits",
+      "enemy_visual_variants": "Positioned to intercept and arrest bandits",
+      "environmental_markers": "Stationed at player-controlled stations or patrolling along routes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (low capital, limited network)",
+      "visual_manifestation": "Sparse track layout; few stations; small train roster; limited map coverage",
+      "behavioral_manifestation": "High vulnerability to competitor tactics; limited route options; slow cargo movement"
+    },
+    {
+      "world_state": "Mid-game (established network, growing profitability)",
+      "visual_manifestation": "Expanding connected track network; multiple stations across regions; increasing number of active trains",
+      "behavioral_manifestation": "Ability to engage in rate wars; competitive pricing responses; route diversification"
+    },
+    {
+      "world_state": "Late game (mature profitable monopoly)",
+      "visual_manifestation": "Dominant track network covering major regions; numerous stations; large fleet of trains; visual dominance on map",
+      "behavioral_manifestation": "Market control; ability to dictate cargo rates; competitors marginalized or eliminated"
+    },
+    {
+      "world_state": "Financial distress (high debt, low equity)",
+      "visual_manifestation": "Financial display showing red/negative numbers; potential reduction in active trains and routes",
+      "behavioral_manifestation": "Limited ability to expand; vulnerability to competitor pressure; potential bankruptcy threat"
+    },
+    {
+      "world_state": "Bandit-infested region (Deluxe Africa scenarios)",
+      "visual_manifestation": "Bandit markers appearing on map; affected routes show cargo loss indicators",
+      "behavioral_manifestation": "Cargo hijacking; need to deploy sheriffs; alternative routing becomes necessary"
+    },
+    {
+      "world_state": "Regional industrial development (map-specific)",
+      "visual_manifestation": "Industries visible on map (mines, farms, factories); cargo type availability indicated at stations",
+      "behavioral_manifestation": "Cargo demand and pricing varies by region; route profitability depends on connecting supply to demand"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic region mapping",
+      "example": "Different maps represent historical settings (U.S. West, Northeast, England, Europe, Africa, South America); each region has region-specific cargo types (troops for Africa) and industrial configurations that tell story of economic activity"
+    },
+    {
+      "technique": "Temporal scenarios",
+      "example": "First century vs. second century campaigns; expanded time ranges and locomotive types in later versions show technological progression of railroad industry; futuristic scenarios in Railroad Tycoon II show speculative world state (raised ocean levels)"
+    },
+    {
+      "technique": "Industrial placement narrative",
+      "example": "Placement of mines, farms, factories, and population centers on map implicitly communicates regional economy; player must identify profitable cargo connections based on this industrial geography"
+    },
+    {
+      "technique": "Competitor network visibility",
+      "example": "Rival railroad networks visible on map communicate competitive landscape; their expansion patterns and route choices show strategic competition for market dominance"
+    },
+    {
+      "technique": "Bandit/Sheriff presence",
+      "example": "Bandit and sheriff units in Deluxe version establish danger narrative in certain regions; their presence communicates lawlessness and need for active defense in frontier territories"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Rival Railroad Company",
+      "state": "Aggressive competitor (rate war initiated)",
+      "behavior": "Reduces cargo rates on overlapping routes; places trains on same lines; attempts stock manipulation"
+    },
+    {
+      "entity": "Rival Railroad Company",
+      "state": "Marginalized competitor (low profitability)",
+      "behavior": "Reduced train activity; limited track expansion; potential withdrawal from routes"
+    },
+    {
+      "entity": "Bandit unit (Deluxe)",
+      "state": "Active threat",
+      "behavior": "Appears on map; targets trains carrying cargo; hijacks shipments causing cargo loss"
+    },
+    {
+      "entity": "Sheriff unit (Deluxe)",
+      "state": "Active defense",
+      "behavior": "Patrols routes or stations; intercepts and arrests bandits; provides protection to assigned train routes"
+    },
+    {
+      "entity": "Player Train",
+      "state": "Profitable route",
+      "behavior": "Regular scheduled movement; consistent cargo delivery; revenue generation"
+    },
+    {
+      "entity": "Player Train",
+      "state": "Unprofitable route",
+      "behavior": "May be discontinued; resources redirected to better-performing routes; removal from schedule"
+    },
+    {
+      "entity": "Player company",
+      "state": "Strong financial position",
+      "behavior": "Aggressive track expansion; competitive rate responses; stock price appreciation"
+    },
+    {
+      "entity": "Player company",
+      "state": "Weak financial position",
+      "behavior": "Reduced expansion; defensive pricing; potential forced asset sales"
+    }
+  ],
+  "notes": "Railroad Tycoon is a business simulation with minimal real-time danger but significant economic threat systems. Manifestation of world-state occurs primarily through: (1) map visualization showing network expansion and competitor presence, (2) financial displays communicating economic health, (3) cargo and pricing systems indicating market conditions, and (4) in later versions (Deluxe onward), addition of tactical threats (bandits/sheriffs) adding direct danger signaling. The game communicates faction identity through track color coding and company name labeling rather than through visual stylization. Political/competitive situations manifest as visible rate wars, stock dealings, and spatial competition for market control via track placement. Wikipedia source provides overview of game features but lacks detailed visual communication specifics; extracted data based on documented game mechanics and their logical visual manifestations.",
+  "sources_used": [
+    "Wikipedia - Railroad Tycoon article"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:13:54.509Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2758,
+    "output_tokens": 2352,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

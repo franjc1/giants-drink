@@ -1,0 +1,190 @@
+{
+  "game_id": "operation-wolf-nes",
+  "game_name": "Operation Wolf",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldier presence",
+      "visual_form": "On-screen hostile figures with weapons in first-person view",
+      "meaning": "Active combat threat requiring player to shoot"
+    },
+    {
+      "signal": "Incoming projectiles",
+      "visual_form": "Visible bullets, grenades, mortar and bazooka rounds, missiles traveling toward player",
+      "meaning": "Immediate threat to player health; can be shot down defensively"
+    },
+    {
+      "signal": "Vehicle presence",
+      "visual_form": "Trucks, boats, helicopters, armored transports on-screen",
+      "meaning": "Stage-specific threat requiring destruction to complete objectives"
+    },
+    {
+      "signal": "Damage accumulation",
+      "visual_form": "On-screen damage bar filling due to enemy attacks or friendly fire",
+      "meaning": "Player health degradation; stage failure or game over risk"
+    },
+    {
+      "signal": "Dynamite bombs",
+      "visual_form": "Destructible explosive objects in environment",
+      "meaning": "Collateral hazard—destroys all targets on screen including friendlies"
+    },
+    {
+      "signal": "Enemy knife attacks",
+      "visual_form": "Close-range hostile figures with melee weapons",
+      "meaning": "Intimate threat during stage progression"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health power-ups",
+      "visual_form": "Collectible items on-screen",
+      "meaning": "Recovers player damage bar; indicates resource availability"
+    },
+    {
+      "signal": "Ammunition and grenades",
+      "visual_form": "Shootable objects that replenish player resources",
+      "meaning": "Sustains offensive capability; essential for stage progression"
+    },
+    {
+      "signal": "Special machine gun power-up",
+      "visual_form": "Temporary weapon enhancement pickup",
+      "meaning": "Unlimited ammunition and increased fire rate for 10 seconds; damage mitigation window"
+    },
+    {
+      "signal": "Friendly NPCs (nurses, boys, women, children)",
+      "visual_form": "Civilian figures distinct from soldiers",
+      "meaning": "Hostages to protect and rescue; damaging them increases player damage bar"
+    },
+    {
+      "signal": "Stage completion",
+      "visual_form": "Transition to interrogation sequence or next mission screen",
+      "meaning": "Successful progression; health recovery and narrative advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Forces (Special Forces)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Roy Adams (player character perspective); military operative",
+      "environmental_markers": "First-person weapon view; targeting reticle; gunfire and grenade launcher mechanics"
+    },
+    {
+      "faction": "Enemy Military (hostile soldiers)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Uniformed hostile figures; distinct from civilians by weapon presence and aggression",
+      "environmental_markers": "Jungle, Prison Camp, Village, Airport, Concentration Camp environments; armed patrols; vehicle support"
+    },
+    {
+      "faction": "Civilians (hostages)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Women, children, nurses, boys; regional variant: bikini babe (Japan only); visually distinct from soldiers",
+      "environmental_markers": "Village and Prison Camp stages; require protection during rescue operations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission (player preparing)",
+      "visual_manifestation": "Title screen with regional variations (Japan/US/Europe differ)",
+      "behavioral_manifestation": "Player selects mission order (Japanese version allows choice; US/EU linear)"
+    },
+    {
+      "world_state": "Active combat in Jungle stage",
+      "visual_manifestation": "Horizontal rail-scrolling through jungle terrain; enemy soldiers and vehicles appear",
+      "behavioral_manifestation": "Player shoots required number of enemies to progress; horizontal scrolling movement"
+    },
+    {
+      "world_state": "Enemy soldier interrogated and defeated",
+      "visual_manifestation": "Stage completion screen transitions to interrogation sequence",
+      "behavioral_manifestation": "Roy Adams learns location of next objective (concentration camp, airport); narrative advancement"
+    },
+    {
+      "world_state": "Hostage rescue in progress",
+      "visual_manifestation": "Civilian figures present on-screen alongside enemy forces",
+      "behavioral_manifestation": "Player must avoid shooting friendlies (increases damage bar); completion condition tracks rescued hostages"
+    },
+    {
+      "world_state": "Player death or hostage failure",
+      "visual_manifestation": "Game over screen with contextual message (death vs. rescue failure)",
+      "behavioral_manifestation": "Stage restart on continue; multiple ending variants depend on total hostages rescued"
+    },
+    {
+      "world_state": "Mission completion with varying success",
+      "visual_manifestation": "NES version displays multiple endings based on hostage count rescued",
+      "behavioral_manifestation": "Presidential satisfaction rating and bonus scaling by mission completion thoroughness"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-specific location design as narrative progression",
+      "example": "Jungle → Prison Camp → Village → Airport → Concentration Camp; each location represents escalating rescue operation complexity and reveals enemy infrastructure"
+    },
+    {
+      "technique": "NPC interrogation dialogue trees",
+      "example": "Defeated soldier reveals next objective location; connects stages narratively without cut-scenes"
+    },
+    {
+      "technique": "Hostage types as cultural/regional markers",
+      "example": "Women, children, nurses present in all versions; bikini babe civilian variant (Japan only) reflects regional content preferences; indicates location is civilian-inhabited settlement"
+    },
+    {
+      "technique": "Mission order flexibility as strategic narrative",
+      "example": "Japanese version allows mission selection; player can complete fewer missions for lower ending satisfaction, reflecting operational choice consequences"
+    },
+    {
+      "technique": "Vehicle types as faction military capability",
+      "example": "Trucks, boats, helicopters, armored transports indicate different terrain and operational domains; suggests enemy has logistics and air support"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy soldiers",
+      "state": "Active and unaware",
+      "behavior": "Patrol environments; attack with gunfire, grenades, mortars, bazookas, missiles; use knives at close range"
+    },
+    {
+      "entity": "Enemy soldiers",
+      "state": "Under fire",
+      "behavior": "Return gunfire; launch visible projectiles that can be shot down by player"
+    },
+    {
+      "entity": "Civilian hostages (women, children, nurses)",
+      "state": "Presence during combat",
+      "behavior": "Remain stationary or move within stage; cause player damage increase if shot; must be protected to complete stage"
+    },
+    {
+      "entity": "Player character (Roy Adams)",
+      "state": "Armed and attacking",
+      "behavior": "First-person perspective; fully automatic fire capability; grenade launcher function; health bar depletes on damage or friendly fire"
+    },
+    {
+      "entity": "Vehicles (trucks, helicopters, armored transports)",
+      "state": "In deployment",
+      "behavior": "Appear on-screen as required destruction targets; distinct from infantry threats; indicate enemy vehicle strength"
+    },
+    {
+      "entity": "Dynamite bombs",
+      "state": "Present in environment",
+      "behavior": "Destructible; indiscriminate explosion damages all entities including friendlies; player must strategically use or avoid"
+    }
+  ],
+  "notes": "Operation Wolf is a rail-shooter that communicates world-state primarily through horizontal scrolling progression and on-screen NPC presence. Danger is signaled by enemy soldier and vehicle visibility, projectile trajectories, and damage bar feedback. Safety is indicated through collectible power-ups and civilian protection mechanics. Faction identity is minimal (no faction colors/symbols documented) but is distinguished through soldier vs. civilian visual contrast and hostage rescue narrative. Regional differences (Japan allows mission selection, includes bikini babe civilian) suggest localized content adaptation but do not alter core manifestation systems. Multiple endings based on hostage count create variable world-state outcomes reflecting player operational success.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:10:47.065Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4173,
+    "output_tokens": 2177,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "game_id": "gyromite-nes",
+  "game_name": "Gyromite",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Obstacles and gates blocking forward progress",
+      "visual_form": "Physical barriers on playfield that must be navigated or cleared",
+      "meaning": "Impassable terrain requiring puzzle-solving or timing to bypass"
+    },
+    {
+      "signal": "Time pressure mechanics",
+      "visual_form": "Timed sequences requiring coordination with R.O.B. or Controller 2 player",
+      "meaning": "Risk of failure if actions are not synchronized or completed within window"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared pathways",
+      "visual_form": "Open routes on playfield after gates are moved",
+      "meaning": "Progress possible when obstacles removed by cooperative action"
+    },
+    {
+      "signal": "Successful synchronization",
+      "visual_form": "Coordinated movement between player avatar and R.O.B./second controller",
+      "meaning": "Safe progression when both actors move in harmony"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "On-screen avatar navigating playfield obstacles"
+    },
+    {
+      "faction": "R.O.B. (Robotic Operating Buddy)",
+      "color_identity": "NES color scheme (red and gray)",
+      "symbol_or_sigil": "Physical robot body with working arms",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Physical peripheral device; in-game representation controlling gate mechanisms"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Obstacle present - gates blocking paths",
+      "visual_manifestation": "Closed gates visible on playfield, creating impassable barriers",
+      "behavioral_manifestation": "Player must wait for R.O.B. or second controller to manipulate gate before advancing"
+    },
+    {
+      "world_state": "Cooperative mode active",
+      "visual_manifestation": "Dual-character coordination display showing both player and R.O.B. actions simultaneously",
+      "behavioral_manifestation": "Game requires synchronized timing between human player and robot (or two human players); failure occurs if coordination breaks"
+    },
+    {
+      "world_state": "Single-player mode (Controller 2 substitute)",
+      "visual_manifestation": "Same playfield but gate control delegated to second controller rather than physical robot",
+      "behavioral_manifestation": "Fast-paced gameplay due to immediate controller response versus R.O.B.'s noted slowness"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Mechanical obstacle design",
+      "example": "Gates that must be physically moved by R.O.B. arm mechanism tell story of automation and robotic assistance in puzzle-solving"
+    },
+    {
+      "technique": "Playset layout",
+      "example": "Custom playfield environment reinforces R.O.B.'s role as integral to progression rather than optional gimmick"
+    },
+    {
+      "technique": "Cooperative necessity",
+      "example": "Game structure (gates controlled separately from player movement) communicates interdependence between human and robot entities"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "R.O.B.",
+      "state": "Active",
+      "behavior": "Moves gates via mechanical arm manipulation; responds to on-screen flash signals from NES output; motion is notably slow and deliberate"
+    },
+    {
+      "entity": "R.O.B.",
+      "state": "Inactive/Malfunctioning",
+      "behavior": "Fails to respond to flash signals if optical alignment is poor or flashes are not clearly visible; creates unwinnable state requiring synchronization reset"
+    },
+    {
+      "entity": "Player Avatar",
+      "state": "Waiting for obstacle clearance",
+      "behavior": "Cannot advance beyond closed gates; movement is blocked until R.O.B. completes gate manipulation sequence"
+    },
+    {
+      "entity": "Player Avatar",
+      "state": "Path cleared",
+      "behavior": "Free to move forward; progression becomes possible after cooperative action sequence completes"
+    }
+  ],
+  "notes": "Gyromite is fundamentally a cooperative puzzle-action game that communicates world-state through physical obstacle presence and absence. The game's core visual language centers on the R.O.B. peripheral as a collaborative agent—gates and barriers visually encode the necessity of human-robot coordination. The playset environment itself becomes a manifestation of the game's core mechanic: dual-agent control. Notably, the sources emphasize that Gyromite could be played without R.O.B. by substituting Controller 2, revealing that the visual/mechanical communication system is robust enough to function in both contexts. The game's danger signals are largely temporal (time pressure) and spatial (obstacle placement) rather than aesthetic (no traditional enemy factions or threat visualization). This reflects the 1985 action-puzzle paradigm where danger emerges from puzzle complexity and coordination failure rather than hostile agents.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:20:06.272Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3921,
+    "output_tokens": 1337,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

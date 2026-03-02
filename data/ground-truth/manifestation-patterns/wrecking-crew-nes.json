@@ -1,0 +1,168 @@
+{
+  "game_id": "wrecking-crew-nes",
+  "game_name": "Wrecking Crew",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Spike character (construction foreman) sprite on screen",
+      "meaning": "Immediate threat to player; contact causes life loss"
+    },
+    {
+      "signal": "Fireball projectiles",
+      "visual_form": "Moving fireball sprites",
+      "meaning": "Hazard that destroys player on contact; life loss"
+    },
+    {
+      "signal": "Barrel obstacles",
+      "visual_form": "Indestructible barrel sprite",
+      "meaning": "Impassable obstruction; can trap player permanently if positioned poorly"
+    },
+    {
+      "signal": "Destructible structure collapse",
+      "visual_form": "Walls, pillars, ladders that disappear when hammered",
+      "meaning": "Risk of becoming trapped or unreachable; puzzle consequence"
+    },
+    {
+      "signal": "Falling hazard",
+      "visual_form": "Gap in platform structure after object destruction",
+      "meaning": "Player can fall to bottom of playfield and lose positioning"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ladder availability",
+      "visual_form": "Visible ladder sprite on screen",
+      "meaning": "Path to navigate vertical space; escape route from threats"
+    },
+    {
+      "signal": "Solid platform",
+      "visual_form": "Intact wall or pillar structure",
+      "meaning": "Safe standing surface; foundation for movement"
+    },
+    {
+      "signal": "Bomb chain activation",
+      "visual_form": "Bomb sprite connected to destructible objects",
+      "meaning": "Controlled destruction; can clear multiple threats simultaneously"
+    },
+    {
+      "signal": "Door mechanic",
+      "visual_form": "Door sprite on level",
+      "meaning": "Can redirect enemies harmlessly into background; temporary safety"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Mario/Luigi)",
+      "color_identity": "Red sprite (Mario) or Green sprite (Luigi)",
+      "symbol_or_sigil": "Hammer tool held by character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Levels designed with destructible puzzle elements; construction site aesthetic"
+    },
+    {
+      "faction": "Spike (Blackie)",
+      "color_identity": null,
+      "symbol_or_sigil": "Construction foreman character sprite",
+      "enemy_visual_variants": "Antagonist actively knocking down objects and disrupting player",
+      "environmental_markers": "Appears reactively in levels to cause chaos; represents construction site management as threat"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level incomplete (objects remain)",
+      "visual_manifestation": "Destructible walls, pillars, or objects visible on grid",
+      "behavioral_manifestation": "Enemies continue spawning; Mario can continue destroying objects"
+    },
+    {
+      "world_state": "Level complete (all target objects destroyed)",
+      "visual_manifestation": "All target destructible objects removed from visible grid",
+      "behavioral_manifestation": "Level progression allowed; transition to next stage"
+    },
+    {
+      "world_state": "Player trapped or stuck",
+      "visual_manifestation": "Mario surrounded by indestructible barrels or unreachable area",
+      "behavioral_manifestation": "Level must be aborted; game reset mechanic triggered"
+    },
+    {
+      "world_state": "Puzzle constraint active",
+      "visual_manifestation": "Invisible grid structure; positioning of destructible vs indestructible objects",
+      "behavioral_manifestation": "Player must plan destruction order; suboptimal destruction prevents level completion"
+    },
+    {
+      "world_state": "Bonus sequence triggered",
+      "visual_manifestation": "Bonus items appear on screen after chain destruction",
+      "behavioral_manifestation": "Extra points awarded for multi-object destruction chains"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Construction site setting",
+      "example": "Playfield filled with destructible walls, pillars, ladders, barrels—visual language communicates industrial work environment and demolition theme"
+    },
+    {
+      "technique": "Tool as character identity",
+      "example": "Mario cannot jump due to hammer weight; large hammer sprite defines gameplay constraint and world logic (realism of construction labor)"
+    },
+    {
+      "technique": "Grid-based structure",
+      "example": "Invisible grid organizing all objects; conveys systematic demolition task and puzzle-design approach to destruction"
+    },
+    {
+      "technique": "Enemy as foreman disruption",
+      "example": "Spike (Blackie) as construction foreman actively knocking down objects; visual character role communicates workplace chaos and management conflict"
+    },
+    {
+      "technique": "Object permanence and consequence",
+      "example": "Destroyed objects do not respawn; visual absence of object communicates permanent state change and puzzle irreversibility"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario",
+      "state": "Normal gameplay",
+      "behavior": "Walks horizontally, climbs ladders, swings hammer to destroy objects; cannot jump"
+    },
+    {
+      "entity": "Mario",
+      "state": "Threatened by enemy",
+      "behavior": "Avoided by player control; contact results in life loss and respawn"
+    },
+    {
+      "entity": "Spike (Blackie)",
+      "state": "Active in level",
+      "behavior": "Chases Mario; knocks down destructible objects to disrupt player progress and create falling hazards"
+    },
+    {
+      "entity": "Spike (Blackie)",
+      "state": "Door mechanic active",
+      "behavior": "Redirected harmlessly into background when door is opened; becomes non-threatening"
+    },
+    {
+      "entity": "Bombs",
+      "state": "Activated in chain",
+      "behavior": "Destroy all connected destructible objects simultaneously; visual cascade of destruction"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Spawning",
+      "behavior": "Appear in level to increase difficulty; patrol or chase based on proximity to Mario"
+    }
+  ],
+  "notes": "Wrecking Crew uses minimal visual factions (Player vs. Antagonist/Spike) with world-state communicated primarily through destructible object presence/absence and spatial puzzle configuration. The game's 'danger' is primarily puzzle-based (becoming trapped) rather than combat-heavy. The construction site aesthetic and tool-based mechanic (hammer weight preventing jumping) create environmental storytelling through gameplay constraint. No formal political or faction systems present; conflict is worker vs. foreman antagonism.",
+  "sources_used": [
+    "wikipedia",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:29:24.138Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4614,
+    "output_tokens": 1759,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "wikipedia"
+    ]
+  }
+}

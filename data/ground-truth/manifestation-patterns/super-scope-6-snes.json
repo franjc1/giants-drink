@@ -1,0 +1,214 @@
+{
+  "game_id": "super-scope-6-snes",
+  "game_name": "Super Scope 6",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Incoming missiles",
+      "visual_form": "Moving projectiles crossing screen from right to left",
+      "meaning": "Immediate threat requiring player intervention; missing five results in failure"
+    },
+    {
+      "signal": "Blue moles emerging from garden",
+      "visual_form": "Blue-colored hostile entities popping up in garden arena",
+      "meaning": "Enemy presence requiring rapid elimination before time expires"
+    },
+    {
+      "signal": "Red moles in Mole Patrol",
+      "visual_form": "Red-colored variant moles distinct from standard blue moles",
+      "meaning": "Escalation threat—shooting red moles accelerates clock, increasing difficulty and threat level"
+    },
+    {
+      "signal": "Blocks filling horizontal lines",
+      "visual_form": "Accumulating block structures reaching left edge of playing field",
+      "meaning": "Failure state imminent; game ends when any complete row reaches far left"
+    },
+    {
+      "signal": "Time counter in upper-right corner",
+      "visual_form": "Visual clock display in corner of Mole Patrol arena",
+      "meaning": "Time pressure indicator; running out of time triggers game over"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear playing field",
+      "visual_form": "Empty rows and columns in Blastris games",
+      "meaning": "Successful block elimination; progression toward next level"
+    },
+    {
+      "signal": "Cleared vertical lines disappearing",
+      "visual_form": "Lines of blocks vanishing, remaining blocks shifting right",
+      "meaning": "Successful completion of objective; blocks shifting indicates progress"
+    },
+    {
+      "signal": "All moles eliminated within time",
+      "visual_form": "Garden cleared of blue mole entities before timer expires",
+      "meaning": "Level completion; safe progression to next stage"
+    },
+    {
+      "signal": "Accurate crosshair alignment",
+      "visual_form": "Crosshair/gun sight position matching target location",
+      "meaning": "Ready state for action; proper aim before firing"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Defense Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Super Scope gun peripheral (targeting reticle)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Communication screen featuring instructional lady in LazerBlazer modes"
+    },
+    {
+      "faction": "Enemy Mole Colony",
+      "color_identity": "Blue (standard moles)",
+      "symbol_or_sigil": "Mole creature design",
+      "enemy_visual_variants": "Red moles (accelerator variant with distinct color coding)",
+      "environmental_markers": "Garden setting; moles emerge from holes in ground"
+    },
+    {
+      "faction": "Missile Threat (LazerBlazer Intercept)",
+      "color_identity": null,
+      "symbol_or_sigil": "Incoming missile projectile graphics",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Sky/space environment; missiles approach from right side of screen"
+    },
+    {
+      "faction": "Falling Block Entity (Blastris)",
+      "color_identity": "Multi-colored blocks (Blastris B); monochromatic blocks (Blastris A)",
+      "symbol_or_sigil": "Tetris-like block configurations",
+      "enemy_visual_variants": "Metallic-bordered unchangeable blocks (Blastris B) vs. standard blocks",
+      "environmental_markers": "Grid-based arena; blocks scroll left-to-right or drop vertically"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Calibration mode (system initialization)",
+      "visual_manifestation": "White bullseye target on blue background; diagram of Super Scope displayed",
+      "behavioral_manifestation": "Game requires accurate shooting at center target; failing or moving scope after calibration causes aim inaccuracy throughout gameplay"
+    },
+    {
+      "world_state": "Game selection active",
+      "visual_manifestation": "Two main menu boxes labeled 'Blastris' and 'LazerBlazer' displayed; sub-menus with three game options each",
+      "behavioral_manifestation": "Player selects via aiming and firing at desired game box"
+    },
+    {
+      "world_state": "Blastris A gameplay (block-matching mode)",
+      "visual_manifestation": "Seven-row, ten-column grid with darkened lights indicator; blocks scroll horizontally; status bar shows score, level, shots available",
+      "behavioral_manifestation": "Blocks stop upon hitting wall or other blocks; destroyed blocks trigger line-clearing cascades; progression requires clearing five lines per level"
+    },
+    {
+      "world_state": "Blastris B gameplay (color-matching mode)",
+      "visual_manifestation": "Grid arena with multi-colored single blocks; metallic-bordered unchangeable blocks visually distinct",
+      "behavioral_manifestation": "Blocks drop randomly; shooting blocks changes color (except metallic variants); metallic blocks produce distinct sound cue on impact"
+    },
+    {
+      "world_state": "Mole Patrol—Stage mode active",
+      "visual_manifestation": "Garden arena with emerging mole holes; blue and red moles; clock timer in upper-right corner",
+      "behavioral_manifestation": "Moles pop up unpredictably; red moles visibly accelerate clock when shot; occasional rocket-riding mole crossover from Intercept mode grants bonus points"
+    },
+    {
+      "world_state": "Mole Patrol—Score mode active",
+      "visual_manifestation": "Single-level garden arena; blue moles only; scoring displayed based on reaction time and accuracy",
+      "behavioral_manifestation": "Emphasis on speed and precision; moles continue spawning; no time limit visible"
+    },
+    {
+      "world_state": "LazerBlazer Intercept mode active",
+      "visual_manifestation": "Screen with incoming missiles at varying distances; missile counter shows remaining allowed misses",
+      "behavioral_manifestation": "Missiles approach from right side; player must judge depth and fire before missiles reach opposite edge; five misses = game over"
+    },
+    {
+      "world_state": "Increasing difficulty progression",
+      "visual_manifestation": "Visual escalation in speed, density, and complexity of threats across 30 levels per LazerBlazer game type",
+      "behavioral_manifestation": "Entity spawn rates increase; threat patterns become more complex; player must adapt aim and reaction timing"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Color-coding threat variants",
+      "example": "Blue moles vs. red moles in Mole Patrol; red variant visually signals escalation mechanic (clock acceleration) distinct from elimination-only blue moles"
+    },
+    {
+      "technique": "UI status indicators",
+      "example": "Score, level, and shots-available displays in Blastris communicate resource management state; darkened lights indicator shows progress toward next level completion"
+    },
+    {
+      "technique": "Metallic visual encoding",
+      "example": "Metallic-bordered blocks in Blastris B signal unchangeable game elements; matching sound cue (metallic clang) reinforces immutability"
+    },
+    {
+      "technique": "Cross-game visual references",
+      "example": "Rocket-riding mole appearing in Mole Patrol from LazerBlazer Intercept mode creates meta-narrative connection between game modes; bonus points reward player knowledge of game ecosystem"
+    },
+    {
+      "technique": "Spatial positioning as threat communication",
+      "example": "Block accumulation on left side of Blastris field signals failure state imminence; fill direction (left edge) communicates progression toward loss condition"
+    },
+    {
+      "technique": "Instruction avatar",
+      "example": "Communication screen lady in LazerBlazer provides instructional presence, humanizing threat briefing and creating narrative framing for gameplay objectives"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard block (Blastris A)",
+      "state": "Spawned",
+      "behavior": "Scrolls left-to-right until hitting wall or another block; stops upon collision"
+    },
+    {
+      "entity": "Standard block (Blastris A)",
+      "state": "Targeted by player fire",
+      "behavior": "Destroyed on hit; no state change before destruction"
+    },
+    {
+      "entity": "Metallic-bordered block (Blastris B)",
+      "state": "Targeted by player fire",
+      "behavior": "Produces metallic clang sound; color unchanged; visual metallic sheen persists, signaling indestructibility"
+    },
+    {
+      "entity": "Color-variable block (Blastris B)",
+      "state": "Targeted by player fire",
+      "behavior": "Changes color on impact; multiple color states possible; indicates multi-state entity"
+    },
+    {
+      "entity": "Blue mole (Mole Patrol)",
+      "state": "Spawned in garden",
+      "behavior": "Pops up from hole location; remains visible until shot; requires elimination for stage completion"
+    },
+    {
+      "entity": "Red mole (Mole Patrol)",
+      "state": "Spawned in garden",
+      "behavior": "Pops up like blue mole; visually distinct red coloring; when shot, causes visible clock acceleration instead of elimination-only outcome"
+    },
+    {
+      "entity": "Rocket-riding mole (Mole Patrol crossover)",
+      "state": "Rare spawn event",
+      "behavior": "Flies across sky (presumed from Intercept mode); shooting grants bonus points; signals inter-game narrative connection"
+    },
+    {
+      "entity": "Incoming missile (LazerBlazer Intercept)",
+      "state": "Approaching from right side",
+      "behavior": "Travels across screen at varying perceived distances; requires depth-judged shot timing; missing five causes game over"
+    },
+    {
+      "entity": "Horizontal block line (Blastris A)",
+      "state": "Complete (10 blocks across)",
+      "behavior": "Disappears; remaining blocks shift right one position; signals level progression mechanic"
+    }
+  ],
+  "notes": "Super Scope 6 is a light-gun shooter compilation that communicates game state primarily through visual block/entity rendering, color-coding threat variants, and UI status displays. The game employs minimal narrative framing except for the instructional avatar in LazerBlazer modes. Danger is communicated through accumulation (blocks filling grid), time pressure (clock display), and threat variant coloring (red vs. blue moles). Safety/progress is signaled through cleared lines, empty grids, and advancing level counts. The game's manifestation layer relies heavily on spatial positioning, color distinction, and sound cues (metallic clang) to communicate mechanical rules and entity properties. Cross-game references (rocket mole in Mole Patrol) create minimal narrative cohesion across the six-game collection.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:23:47.476Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2695,
+    "output_tokens": 2815,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

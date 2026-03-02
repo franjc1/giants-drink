@@ -1,0 +1,135 @@
+{
+  "game_id": "tom-and-jerry-nes",
+  "game_name": "Tom & Jerry: The Ultimate Game of Cat and Mouse!",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Tom character sprite approaching player (Jerry)",
+      "meaning": "Immediate threat requiring evasion or combat"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Stage-specific obstacles and traps",
+      "meaning": "Collision damage or stage progression barriers"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Heart containers in HUD decreasing (whole heart loss per hit)",
+      "meaning": "Cumulative damage from hits; game over when depleted"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item pickup",
+      "visual_form": "Collectible objects: throwing weapons (hammer, mothballs, jam), swinging weapons (meat cleaver), keys, fuses",
+      "meaning": "Temporary power-ups or stage progression items"
+    },
+    {
+      "signal": "Health recovery",
+      "visual_form": "Heart item collection; in Japanese version, health restores after sub-levels",
+      "meaning": "Damage mitigation or reset opportunity"
+    },
+    {
+      "signal": "Stage completion",
+      "visual_form": "Reaching exit points (e.g., key usage at stage 5-2, fuse box at stage 1-1)",
+      "meaning": "Safe progression to next challenge"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Jerry - Mouse)",
+      "color_identity": null,
+      "symbol_or_sigil": "Jerry sprite; mouse protagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Playable character; protagonist perspective"
+    },
+    {
+      "faction": "Antagonist (Tom - Cat)",
+      "color_identity": null,
+      "symbol_or_sigil": "Tom sprite; cat antagonist",
+      "enemy_visual_variants": "Primary enemy type; stage-dependent behavior and visual presentation",
+      "environmental_markers": "Boss encounters; recurring threat across stages"
+    },
+    {
+      "faction": "Allies (Tuffy - Mouse)",
+      "color_identity": null,
+      "symbol_or_sigil": "Tuffy character (referenced in title screen variant)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "NPC presence; non-player ally"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (5 stages, multiple sub-levels per stage)",
+      "visual_manifestation": "Environmental changes per stage: stage 1 has fuse box mechanics, stage 2 uses meat cleaver, stage 5 features keys; NES console Easter egg at Stage 4-1 (erased in Japanese version)",
+      "behavioral_manifestation": "Boss difficulty scales; Japanese version bosses require fewer hits; health restoration mechanic differs between Western and Japanese versions"
+    },
+    {
+      "world_state": "Difficulty scaling (Western: 3 continues × 3 lives; Japanese: unlimited continues × 5 lives)",
+      "visual_manifestation": "HUD display of remaining lives and continues",
+      "behavioral_manifestation": "Game over conditions vary by region; Japanese version restores health after sub-levels for ease"
+    },
+    {
+      "world_state": "Item availability per stage",
+      "visual_manifestation": "Stage-specific weapons: hammer (stage 1), plank (stage 2), mothballs (stage 5), invisible ink (stage 1), soap (stage 5); graphic bank conflicts limit visual representation",
+      "behavioral_manifestation": "Weapon effectiveness and animation vary by stage; unused items (jam, egg, fly-swatter, frying pan, bug sprayer, gold key) suggest scrapped mechanics"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage theming through hazards and items",
+      "example": "Fuse box in stage 1-1 requires fuse item completion; key usage in stage 5-2 signals final stage progression"
+    },
+    {
+      "technique": "Easter eggs and regional localization",
+      "example": "NES console background in Stage 4-1 (removed from Japanese release); title variations between regions signal market adaptation"
+    },
+    {
+      "technique": "Unused asset remnants",
+      "example": "Fractional health loss graphics (medium/small hearts) suggest original damage model; unused food items (jam, egg) and tools indicate cut content or thematic variety"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tom (antagonist)",
+      "state": "Active pursuit",
+      "behavior": "Sprite approaches and attacks player; stage-dependent AI; boss encounters with varying hit requirements"
+    },
+    {
+      "entity": "Jerry (player)",
+      "state": "Healthy",
+      "behavior": "Full mobility; weapon usage available; can absorb multiple hits"
+    },
+    {
+      "entity": "Jerry (player)",
+      "state": "Damaged",
+      "behavior": "Heart count decreases visually; reduced survival capacity; game over at 0 health"
+    },
+    {
+      "entity": "Stage environment",
+      "state": "Incomplete",
+      "behavior": "Hazards present; items scattered; boss/stage gates active"
+    },
+    {
+      "entity": "Stage environment",
+      "state": "Completed",
+      "behavior": "Exit accessible; progression enabled; item goals met (e.g., fuse placed, key used)"
+    }
+  ],
+  "notes": "Tom & Jerry NES uses a simple but effective visual language for a 1991 platformer. Danger is communicated through sprite proximity and environmental hazards; safety through collectibles and health restoration. The game lacks faction complexity—it is purely protagonist vs. antagonist with minor ally presence. Regional differences (Japanese unlimited continues, health restoration, easier bosses) suggest difficulty tuning rather than narrative shifts. Unused graphics (fractional hearts) and items (jam, egg, fly-swatter, frying pan, bug sprayer, gold key, soap) indicate significant cut content, likely due to graphic bank conflicts or development scope reduction. World state is expressed through stage progression, item availability, and environmental changes rather than dynamic faction territory or political shifts.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Tom & Jerry NES article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:35:54.385Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2697,
+    "output_tokens": 1637,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

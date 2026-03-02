@@ -1,0 +1,113 @@
+{
+  "game_id": "lode-runner-pc",
+  "game_name": "Lode Runner",
+  "platform": "pc",
+  "year": 1983,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system documentation available for 1983 PC version"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": false,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Hole Digging",
+      "description": "Player can dig holes into floors to temporarily trap guards. Holes fill in after a short delay. Player cannot climb out of holes and will be killed if hole fills before escape. Guards drop gold when falling into holes.",
+      "physics_values": {
+        "hole_fill_delay": "short duration (unspecified)",
+        "digging_constraints": "only adjacent sides, not directly beneath",
+        "multi_layer_digging": "requires gap width equal to number of layers to dig through"
+      }
+    },
+    {
+      "name": "Guard Interaction Physics",
+      "description": "Player can safely walk over guards trapped in holes via feet-to-head contact. Player falls faster than guards. Contact during free fall is possible. Downward movement initiated on guard's head is fatal.",
+      "physics_values": {
+        "player_fall_speed_relative": "faster than guards",
+        "player_run_speed_relative": "faster than guards",
+        "safe_contact_type": "feet-to-head from above only"
+      }
+    },
+    {
+      "name": "Fall Damage",
+      "description": "Player character can fall from arbitrary heights without injury.",
+      "physics_values": {
+        "fall_damage": "none"
+      }
+    },
+    {
+      "name": "No Jump Mechanic",
+      "description": "Player cannot jump. Movement is restricted to walking, climbing ladders, and using hand-to-hand bars.",
+      "physics_values": {
+        "jump_available": false
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "momentum-based",
+    "puzzle-platformer",
+    "deliberate",
+    "collision-dependent",
+    "positional-puzzle"
+  ],
+  "tier_notes": "Tier 2 - Empirical/Qualitative data only. Wikipedia source provides gameplay mechanics and physics interactions but no quantitative movement parameters (speeds, accelerations, gravity values). All documented values relate to mechanic descriptions rather than numerical physics values. Player movement characteristics inferred from gameplay descriptions (runs faster than guards, falls faster than guards) but exact values not provided.",
+  "sources_used": [
+    "wikipedia - Lode Runner article (Gameplay, Enemy AI, Permitted contact, Trapping and using guards sections)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T15:50:06.064Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3035,
+    "output_tokens": 987,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

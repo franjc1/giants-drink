@@ -1,0 +1,178 @@
+{
+  "game_id": "addams-family-snes",
+  "game_name": "The Addams Family",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Ghosts, mutants, monsters, bats, rabbits rendered as sprite enemies",
+      "meaning": "Hazards that damage Gomez; require avoidance or stomping to eliminate"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Stars, swinging clock pendulums, fire lakes rendered as stage obstacles",
+      "meaning": "Instant-damage zones that inflict harm regardless of enemy interaction"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large sprite-scaled enemies holding Addams family members (Judge as final boss, Old Tree Boss, huge bird in garden)",
+      "meaning": "Mandatory defeats required to rescue captive family members; gated progression"
+    },
+    {
+      "signal": "Captivity state",
+      "visual_form": "Family members trapped in themed locations (Wednesday in ice area, Granny in stove, Morticia in sealed underground chambers)",
+      "meaning": "World-state indicator of danger; establishes rescue motivation and level objectives"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Collectible items: sword, golf club, fezi-copter hat, speed shoes rendered as pickup objects",
+      "meaning": "Temporary combat or mobility enhancement; reduces danger from enemies/hazards"
+    },
+    {
+      "signal": "Health restoration",
+      "visual_form": "Heart containers (up to 5 max) and money ($25 per container fill) collectibles",
+      "meaning": "Damage mitigation system; signals player survivability status"
+    },
+    {
+      "signal": "Extra lives",
+      "visual_form": "1-UP items scattered throughout mansion, particularly in Pugsley's Den (5 visible, 27 in secret area)",
+      "meaning": "Death reprieve; indicates safe resource locations when discovered"
+    },
+    {
+      "signal": "Thing's hint boxes",
+      "visual_form": "Interactive dialogue boxes provided by Thing character",
+      "meaning": "Wayfinding aid; signals puzzle-solving guidance and directional safety"
+    },
+    {
+      "signal": "Invisible safe passage",
+      "visual_form": "Invisible door near front entrance leading to Pugsley's Den",
+      "meaning": "Hidden safe area with abundant resources; requires knowledge to access"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Addams Family (protagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Addams mansion interior aesthetic; character sprites of Gomez, Morticia, Pugsley, Wednesday, Granny, Uncle Fester, Lurch",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Gothic mansion setting; themed rooms (Music Room, Games Room, Portrait Gallery, Kitchen, outdoor garden); ice-themed freezing area (Wednesday's location); stove chamber (Granny's location); underground chambers (Morticia's location)"
+    },
+    {
+      "faction": "Antagonists (Abigail Craven, The Judge, Tully Alford)",
+      "color_identity": null,
+      "symbol_or_sigil": "The Judge rendered as final boss sprite; Tully Alford controls mansion (represented through locked doors and passages); Abigail Craven's brainwashing of Uncle Fester (narrative state rather than visual marker)",
+      "enemy_visual_variants": "Ghosts, mutants, monsters serving as Abigail's minions infesting the mansion",
+      "environmental_markers": "Locked chambers; puzzle-gated rooms (doors requiring keys in Amstrad CPC version); environmental hazards (stars, pendulums, fire lakes) as manifestations of hostile control; mansion corruption by infiltrating enemies"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Family members kidnapped / in captivity",
+      "visual_manifestation": "Wednesday trapped in ice-themed room; Granny trapped in stove; Morticia sealed in underground chambers; Pugsley, Morticia, Wednesday held hostage in themed boss locations",
+      "behavioral_manifestation": "Gomez must navigate and complete location-specific puzzles (deactivate stove, freeze-area navigation, activate underground chambers via Music Room tune); bosses act as captivity enforcers"
+    },
+    {
+      "world_state": "Mansion under hostile control",
+      "visual_manifestation": "Infestation of ghosts, mutants, monsters, bats, rabbits throughout all areas; hazard placement (swinging pendulums, fire lakes, stars); locked doors and sealed passages; corrupted safe spaces",
+      "behavioral_manifestation": "Free enemy movement and spawn patterns; hazards remain active regardless of player interaction; environmental objects trigger damage on contact"
+    },
+    {
+      "world_state": "Rescue progression",
+      "visual_manifestation": "Family members released from themed locations appear in Music Room; underground chambers accessible only after prerequisite rescues (Wednesday, Pugsley, Granny, Uncle Fester must meet Lurch to activate Morticia's chamber)",
+      "behavioral_manifestation": "Gomez gains access to previously locked areas; puzzle-gating removes; final Judge boss becomes accessible; narrative advancement signaled through location access changes"
+    },
+    {
+      "world_state": "Safe haven secured",
+      "visual_manifestation": "Pugsley's Den (invisible door discovery) contains abundant 1-UPs (5 visible, 27 in secret subsection) and money; non-secret location bonus spots scattered throughout mansion",
+      "behavioral_manifestation": "Players can return to safe zones for resource farming; invisible door discovery represents meta-knowledge of safety infrastructure"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Room thematic correlation to trapped character",
+      "example": "Wednesday located in ice-themed freezing area; Granny trapped in stove; Morticia sealed underground—each rescue zone visually communicates the captor's method of containment"
+    },
+    {
+      "technique": "Mansion architecture as non-linear narrative",
+      "example": "Hall of Stairs as hub with six doorways leading to distinct 40-50 screen areas (kitchen, games room, portrait gallery, etc.); Zelda/Metroid-inspired open exploration allows player to discover narrative sequence through environmental discovery rather than forced linearity"
+    },
+    {
+      "technique": "Hazard placement as antagonist presence",
+      "example": "Stars, swinging clock pendulums, fire lakes distributed throughout areas; visual manifestation of Abigail Craven's hostile control and The Judge's dominion over the mansion"
+    },
+    {
+      "technique": "Puzzle environment as narrative gating",
+      "example": "Stove switch that must be found to free Granny; Music Room tune activation required for underground chamber access—environmental interaction directly tied to story progression and family rescue"
+    },
+    {
+      "technique": "Hidden resource clustering",
+      "example": "Pugsley's Den (invisible door) and secret subsection (27 lives) signal safe family spaces untouched by antagonist corruption; thematic connection between Pugsley's presence and hidden abundance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Gomez Addams (player character)",
+      "state": "Normal exploration",
+      "behavior": "Runs, jumps, squats throughout mansion; can stomp enemies; collects power-ups and coins; navigates freely between unlocked areas"
+    },
+    {
+      "entity": "Gomez Addams (player character)",
+      "state": "Power-up active",
+      "behavior": "Sword grants melee combat; golf club shoots projectiles; fezi-copter enables flight (disintegrates upon door transition); speed shoes increase movement velocity"
+    },
+    {
+      "entity": "Gomez Addams (player character)",
+      "state": "Damage taken",
+      "behavior": "Health represented by heart containers (2-5 max); $25 collected restores one container; invulnerability frames on hit (game boy version: Frankie potion grants 10-hit invulnerability)"
+    },
+    {
+      "entity": "Enemy sprites (ghosts, mutants, monsters, bats, rabbits)",
+      "state": "Active threat",
+      "behavior": "Patrol and spawn throughout infested areas; require stomping or power-up interaction to eliminate; deal damage on contact"
+    },
+    {
+      "entity": "Boss entities (The Judge, Old Tree Boss, huge garden bird)",
+      "state": "Captivity enforcer",
+      "behavior": "Stationed in family member containment areas; must be defeated to free hostages; represent final obstacle before area progression"
+    },
+    {
+      "entity": "Lurch (NPC)",
+      "state": "Puzzle facilitator",
+      "behavior": "Plays specific tune in Music Room to activate underground chambers; presence indicates prerequisite completion (Wednesday, Pugsley, Granny, Uncle Fester must be rescued first)"
+    },
+    {
+      "entity": "Thing (NPC)",
+      "state": "Guidance provider",
+      "behavior": "Offers clues in hint boxes; explains room mechanics and directional guidance; scattered throughout mansion as wayfinding aid"
+    },
+    {
+      "entity": "Environmental hazards (stars, pendulums, fire lakes)",
+      "state": "Constant threat",
+      "behavior": "Remain active without player interaction; inflict damage on contact regardless of combat state; cannot be eliminated; signal hazard zones through placement pattern"
+    },
+    {
+      "entity": "Addams family members (captive state)",
+      "state": "Imprisoned",
+      "behavior": "Remain stationary in themed containment areas (Wednesday frozen, Granny in stove, Morticia underground); release upon boss defeat or puzzle completion; convergence in Music Room signals narrative progression"
+    }
+  ],
+  "notes": "The Addams Family (SNES 1992) uses thematic environmental design to communicate world-state. Danger is signaled through infestation (enemy types), hazard visibility (environmental obstacles), and captivity markers (themed imprisonment locations). Safety is indicated through resource clustering (hidden rooms, power-up concentration), puzzle completion (unlock progression), and NPC presence (guidance from Thing/Lurch). Faction identity relies on character sprites and mansion architecture rather than color-coding or symbolic sigils—the Addams family identity is communicated through the Gothic setting itself, while antagonist presence manifests through environmental corruption (enemies, hazards, locked passages). The game's non-linear structure (Zelda/Metroid-inspired) allows players to discover narrative through spatial exploration; family member locations serve as both story beats and area objectives. Political situation (hostile takeover by Abigail/Judge/Tully) is expressed through loss of access (locked doors, sealed areas) and environmental infestation rather than dialogue or cutscenes.",
+  "sources_used": [
+    "wikipedia - The Addams Family (video game) - Gameplay and plot section",
+    "tcrf - The Cutting Room Floor (Addams Family SNES) - Unused Graphics and general documentation"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:28:47.786Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4165,
+    "output_tokens": 2778,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

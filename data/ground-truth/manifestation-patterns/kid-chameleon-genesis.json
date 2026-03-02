@@ -1,0 +1,186 @@
+{
+  "game_id": "kid-chameleon-genesis",
+  "game_name": "Kid Chameleon",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile entities positioned in level paths",
+      "meaning": "Obstacles that deal damage on contact unless jumped on or avoided"
+    },
+    {
+      "signal": "Spike obstacles",
+      "visual_form": "Horizontal and vertical spike protrusions from blocks and cannon blocks",
+      "meaning": "Instant hazards that damage the player; MicroMax can fit between horizontal spikes"
+    },
+    {
+      "signal": "Bottomless pits",
+      "visual_form": "Screen edges and gaps in level geometry",
+      "meaning": "Fall damage or level reset; navigation challenge requiring precise platforming"
+    },
+    {
+      "signal": "Lava/hazardous terrain",
+      "visual_form": "Specialized ground tiles (inferred from level names: 'Under Skull Mountain,' 'The Black Pit')",
+      "meaning": "Environmental damage zones requiring specific forms or avoidance"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flag/goal marker",
+      "visual_form": "Flag object at level endpoint",
+      "meaning": "Safe destination; reaching it completes level and progresses narrative"
+    },
+    {
+      "signal": "Mask pickups",
+      "visual_form": "Collectible mask objects distributed throughout levels",
+      "meaning": "Safe transformation items granting new abilities and hit points; Kid Chameleon gains temporary invulnerability during form change"
+    },
+    {
+      "signal": "Diamond Power items",
+      "visual_form": "Diamond collectibles in levels",
+      "meaning": "Resource for special abilities; indicates capacity for offense/defense"
+    },
+    {
+      "signal": "Solid platforms",
+      "visual_form": "Stable ground and wall tiles (rubber blocks, ice blocks, normal terrain)",
+      "meaning": "Safe traversal surfaces; different surface types modify movement properties"
+    },
+    {
+      "signal": "Teleporters",
+      "visual_form": "Portal objects within levels",
+      "meaning": "Safe shortcuts to alternate areas or levels; provide strategic path choices"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kid Chameleon (player)",
+      "color_identity": "Chameleon-themed (base form inferred as neutral/adaptive)",
+      "symbol_or_sigil": "Mask transformation mechanic represents identity fluidity",
+      "enemy_visual_variants": "Not applicable; player is protagonist",
+      "environmental_markers": "Presence in standard platformer levels; ability to occupy any mask form"
+    },
+    {
+      "faction": "Rogue AI (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Virtual reality game containment; enemies serve as manifestation",
+      "enemy_visual_variants": "Various enemy types (Bagel Brothers, heads, flying entities) represent AI's generative hazards",
+      "environmental_markers": "100+ interconnected levels; teleporters and alternate paths suggest algorithmic maze structure"
+    },
+    {
+      "faction": "Peer/NPC characters (trapped in VR)",
+      "color_identity": null,
+      "symbol_or_sigil": "Implied through 'save his peers' narrative",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Presumably freed/saved upon reaching level endpoints or narrative checkpoints"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Virtual Reality Containment",
+      "visual_manifestation": "Level design spans 100+ discrete zones with non-linear teleporter connections; maze-like interconnected structure suggests digital space rather than physical geography",
+      "behavioral_manifestation": "No save/password system enforces single continuous run; restart on death resets progression, simulating 'trapped in game' state"
+    },
+    {
+      "world_state": "Form availability/equipped helmet",
+      "visual_manifestation": "Player character visual changes to match mask form: Kid Chameleon (base), SkyCutter (surfer board appearance), MicroMax (tiny fly), Maniaxe (axe-wielding), Red Stealth (samurai), Cyclone (flying form), Berzerker (aggressive stance), Juggernaut (armored/heavy), Eyeclops",
+      "behavioral_manifestation": "Movement speed, jump height, attack patterns, and physics properties shift dramatically per form; SkyCutter cannot stand still, MicroMax wall-climbs, Red Stealth strikes, Cyclone flies"
+    },
+    {
+      "world_state": "Surface material (ice, rubber, normal)",
+      "visual_manifestation": "Distinct ground tile textures and colors represent ice/rubber/normal terrain",
+      "behavioral_manifestation": "Ice accelerates movement (~0.4 pixels/frame); rubber reduces max speed; normal surfaces provide baseline physics"
+    },
+    {
+      "world_state": "Height/vertical positioning",
+      "visual_manifestation": "Level layouts with low ceilings, open spaces, and corridors of varying widths",
+      "behavioral_manifestation": "SkyCutter jumps reduce speed in low-ceiling areas; MicroMax zig-zags faster in 1-2 block width tunnels; ceiling height constrains viable form choices"
+    },
+    {
+      "world_state": "Enemy proximity/alert state",
+      "visual_manifestation": "Enemy animation frames and positioning relative to player",
+      "behavioral_manifestation": "Enemies patrol, follow player, and attack; Red Stealth can be repeatedly hit via directional strike bug; fast-striking bug enables continuous axe spam (18 frames → 5-8 frames per attack)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level naming/theming",
+      "example": "Levels named 'Under Skull Mountain,' 'The Black Pit,' 'Blizzard Mountain,' 'Caves of Ice,' 'Alien Isle,' 'Frosty Doom,' 'Beneath Twisted Hills,' 'Final Marathon' convey distinct biome/dungeon contexts within VR world"
+    },
+    {
+      "technique": "Terrain type as narrative beat",
+      "example": "Ice stages suggest environmental hazard escalation; lava/dark pit themes hint at descending into dangerous VR layers"
+    },
+    {
+      "technique": "Mask-gating level accessibility",
+      "example": "Specific forms required to access certain paths (e.g., MicroMax to fit through spike gaps, SkyCutter to cross wide gaps, Cyclone to reach high areas) shows world design responds to form availability"
+    },
+    {
+      "technique": "Teleporter network structure",
+      "example": "Non-linear teleporters between levels and alternate paths suggest VR reality is fragmented or player has multiple rescue/escape routes available"
+    },
+    {
+      "technique": "Enemy composition by level",
+      "example": "'Bagel Brothers' level features specific enemy type; varied boss/head enemies imply AI creates themed challengers per zone"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Kid Chameleon (base form)",
+      "state": "Default movement",
+      "behavior": "Crawl (1.0 px/s), Walk (2.0 px/s), Run (3.128 px/s); Jump height varies by speed; air drag of -0.1 px/frame until reaching 2.160 px/s minimum"
+    },
+    {
+      "entity": "SkyCutter",
+      "state": "In-flight with forward/jump input held",
+      "behavior": "Reduced gravity; cannot stand still; turns slowly; horizontal speed dependent only on run button; exhibits sine-wave drift due to triple-flip bug"
+    },
+    {
+      "entity": "MicroMax",
+      "state": "Wall-adjacent in narrow tunnels",
+      "behavior": "Zig-zags between walls for faster climb; can fit through horizontal cannon spikes; increased air control (hold B to lower jump height even after peak)"
+    },
+    {
+      "entity": "Red Stealth",
+      "state": "Engaging enemies",
+      "behavior": "Strike animation can be turned mid-swing to hit trailing enemies; jump mid-strike aborts animation but damage applies frames later; fast-strike bug enables attack every 5 frames vs. normal 13-frame cooldown"
+    },
+    {
+      "entity": "Cyclone",
+      "state": "Falling from ledge into flight",
+      "behavior": "Retains higher forward speed from ledge bounce/fall while flying; air drag still applies but maintains momentum advantage"
+    },
+    {
+      "entity": "Maniaxe",
+      "state": "In 2-block corridor",
+      "behavior": "Jump cancels throw animation; enables rapid axe spam (every 5 frames vs. 18 normal); alternative rubber block hop method achieves every 8 frames"
+    },
+    {
+      "entity": "Juggernaut",
+      "state": "General locomotion",
+      "behavior": "Walk speed 1.128 px/s, Run speed 3.0 px/s, Jump speed 2.128 px/s; slower than most forms but implied higher hit points"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Player jumping on them",
+      "behavior": "Bouncing off enemy grants speed boost; multiple bounces in succession compound boost; mechanic details marked for investigation in TASVideos data"
+    }
+  ],
+  "notes": "Kid Chameleon communicates world-state primarily through form-switching mechanics and level design interconnectivity. The virtual reality framing (rogue AI, 100+ levels, teleporter maze) is reinforced by level naming and non-linear layout rather than explicit visual storytelling. Danger signals rely on enemy placement, spike visual design, and pit geometry. Form variants act as faction-less identity markers showing player agency rather than allegiance. Physics properties (ice acceleration, rubber drag, wall-climbing) communicate environmental hazards through gameplay feel. The lack of save system and continuous-run structure is a meta-narrative signal of VR entrapment. No explicit faction warfare or political systems detected; world-state is conveyed through mechanical state (equipped form) and spatial navigation.",
+  "sources_used": [
+    "tasvideos",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:52:49.972Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5515,
+    "output_tokens": 2587,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

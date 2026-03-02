@@ -1,0 +1,200 @@
+{
+  "game_id": "jackie-chan-action-kung-fu-nes",
+  "game_name": "Jackie Chan's Action Kung Fu",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile NPCs positioned in player path",
+      "meaning": "Immediate combat threat; player must engage or avoid"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Unique large enemy at level conclusion",
+      "meaning": "Major progression gate; significant damage threat requiring skill"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Player character damage state (visual/HUD indicator)",
+      "meaning": "Imminent death risk; requires healing or defensive play"
+    },
+    {
+      "signal": "Orb loss on death",
+      "visual_form": "Collected green orbs disappear when player dies",
+      "meaning": "Resource loss penalty; failure has cumulative cost"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Frog entities",
+      "visual_form": "Small frog sprites distributed through levels",
+      "meaning": "Opportunity for resource acquisition; requires active engagement (hitting) to yield power-ups or rice bowls"
+    },
+    {
+      "signal": "Rice bowls",
+      "visual_form": "Item drops from defeated frog entities",
+      "meaning": "Health restoration available; safe resource for sustenance"
+    },
+    {
+      "signal": "Green orbs",
+      "visual_form": "Collectible spheres dropped by defeated enemies",
+      "meaning": "Progression resource; 30 orbs trigger life/shot replenishment"
+    },
+    {
+      "signal": "Bonus stage bells",
+      "visual_form": "Bell objects positioned in level geometry",
+      "meaning": "Optional safe progression path; triggers time-limited mini-game for point/continue acquisition"
+    },
+    {
+      "signal": "Cloud platforms in bonus stages",
+      "visual_form": "Aerial traversal elements in bonus level spaces",
+      "meaning": "Safe navigation opportunity; platforming skill reward space"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Jackie Chan)",
+      "color_identity": null,
+      "symbol_or_sigil": "Jackie Chan persona/martial arts stunt master identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Levels represent Jackie's quest spaces to rescue sister"
+    },
+    {
+      "faction": "Generic enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Unspecified hostile NPCs",
+      "enemy_visual_variants": "Various enemy types encountered across 5 levels with distinct boss variants",
+      "environmental_markers": "Enemy placement density increases toward level bosses"
+    },
+    {
+      "faction": "Neutral/Helper entities (Frogs)",
+      "color_identity": null,
+      "symbol_or_sigil": "Frog sprite identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Scattered throughout levels as optional interaction points"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player at full health and resources",
+      "visual_manifestation": "Jackie shown without visible damage; full orb/power-up inventory visible",
+      "behavioral_manifestation": "Player can engage enemies aggressively; can afford to experiment with tactics"
+    },
+    {
+      "world_state": "Player health critical",
+      "visual_manifestation": "Jackie character shows damage state (visual degradation or HUD health indicator red/low)",
+      "behavioral_manifestation": "Enemy avoidance prioritized; health restoration through rice bowls becomes urgent objective"
+    },
+    {
+      "world_state": "Orb accumulation progressing",
+      "visual_manifestation": "Green orb collection meter visible; counter approaching 30-orb threshold",
+      "behavioral_manifestation": "Player prioritizes defeating enemies over movement to maximize orb drops"
+    },
+    {
+      "world_state": "Power-up active",
+      "visual_manifestation": "Jackie displays special attack visual effect; temporary damage modifier active",
+      "behavioral_manifestation": "Player can deploy limited special attacks (single carry slot per power-up type)"
+    },
+    {
+      "world_state": "Death/Game Over state",
+      "visual_manifestation": "Level restart; all collected orbs and power-ups removed from inventory",
+      "behavioral_manifestation": "Resource reset forces re-accumulation; continue counter decrements (max 5 initially); player must recollect foundation resources"
+    },
+    {
+      "world_state": "Bonus stage active",
+      "visual_manifestation": "Level transition to cloud/statue environment; 30-second countdown timer displayed",
+      "behavioral_manifestation": "Time-pressure gameplay; platforming/hitting focused; point accumulation for continue/life purchases"
+    },
+    {
+      "world_state": "Boss encounter triggered",
+      "visual_manifestation": "Large unique enemy sprite at level conclusion; increased visual scale/complexity vs standard enemies",
+      "behavioral_manifestation": "Combat escalation; patterns and damage output exceed standard encounters; progression gate"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Rescue narrative framing",
+      "example": "Five-level progression structure represents Jackie's quest to save his sister; level completion signals advancement toward rescue objective"
+    },
+    {
+      "technique": "Resource scarcity design",
+      "example": "Single life with continue system communicates narrative stakes; death carries cumulative cost through orb/power-up loss, reinforcing danger of Jackie's mission"
+    },
+    {
+      "technique": "Enemy distribution density",
+      "example": "Enemy concentration increases toward level bosses, creating visual/mechanical escalation that communicates rising difficulty and approaching major confrontation"
+    },
+    {
+      "technique": "Martial arts identity through mechanics",
+      "example": "Beam attack charge system (max 5 uses) and special power-up moves communicate Jackie's martial arts mastery and signature stunt capabilities"
+    },
+    {
+      "technique": "Item ecology (frog/rice/orb system)",
+      "example": "Frog entities require active engagement (hitting) to yield healing items, communicating that sustenance is earned through combat involvement rather than passive discovery"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Jackie Chan (player character)",
+      "state": "Standard movement",
+      "behavior": "Platform traversal; collision with enemies initiates combat"
+    },
+    {
+      "entity": "Jackie Chan (player character)",
+      "state": "Combat-ready",
+      "behavior": "Can execute punch/kick attacks; charge beam attacks (up to 5 uses per session); deploy special power-up attacks (limited by single carry slot)"
+    },
+    {
+      "entity": "Jackie Chan (player character)",
+      "state": "Health critical",
+      "behavior": "Visual damage state active; defensive play required; prioritizes health restoration"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Active patrol",
+      "behavior": "Positioned in level geometry; engage player on proximity/contact"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Defeated",
+      "behavior": "Drop green orbs (except when killed by beam attack); orbs collected toward 30-unit threshold"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Encounter initiated",
+      "behavior": "Unique attack patterns; higher damage output and health than standard enemies; level completion gate"
+    },
+    {
+      "entity": "Frog entities",
+      "state": "Neutral state",
+      "behavior": "Stationary or passive; require player action (hitting) to activate"
+    },
+    {
+      "entity": "Frog entities",
+      "state": "Activated (after hitting)",
+      "behavior": "Yield power-ups or rice bowls (healing items); one-time activation per frog"
+    },
+    {
+      "entity": "Bonus stage bells",
+      "state": "Encountered",
+      "behavior": "Trigger transition to time-limited bonus stage (30-second cloud/statue platforming); points earned convert to continues/lives"
+    }
+  ],
+  "notes": "Jackie Chan's Action Kung Fu operates as a linear progression platformer with resource management mechanics. The game's world-state communication relies heavily on mechanical feedback (orb collection, health indicator, continue counter) rather than dynamic environmental shifts. Danger is primarily signaled through enemy encounters and boss positioning; safety through collectible resources (frog items, orbs, bonus stages). The narrative world-state (rescuing Jackie's sister) is implicit in level progression structure rather than visually manifested through environmental storytelling. The orb system and continue mechanics communicate resource scarcity and escalating stakes. Faction distinction is minimal—the game lacks formal faction systems or political complexity; instead, it presents a simple protagonist-vs-enemies dynamic aligned with martial arts action game convention.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:21:55.217Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3267,
+    "output_tokens": 2270,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "game_id": "castlequest-nes",
+  "game_name": "Castlequest",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Knights, Bishops, Wizards, Fire Spirits, Vikings, and Phantom Flowers as distinct sprite types",
+      "meaning": "Direct threat to player character; touching results in loss of life"
+    },
+    {
+      "signal": "Locked doors",
+      "visual_form": "Doors requiring color-matched keys; player must physically stand adjacent to door (not mid-air)",
+      "meaning": "Progression blocked; player unable to advance until key obtained and positioning requirement met"
+    },
+    {
+      "signal": "Puzzle hazards",
+      "visual_form": "Brick blocks, barrels, candles, and elevator controlling blocks that must be aligned",
+      "meaning": "Environmental puzzle state; incorrect arrangement prevents advancement and may trap player or cause damage"
+    },
+    {
+      "signal": "Enemy crush mechanic",
+      "visual_form": "Escalators with ceiling collision detection",
+      "meaning": "Spatial danger zone; enemies can be crushed but player also vulnerable if positioned incorrectly"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Map acquisition",
+      "visual_form": "Obtainable map from first room; 10x10 room matrix with princess location highlighted",
+      "meaning": "Navigation aid provides world-state information; princess location reduces uncertainty"
+    },
+    {
+      "signal": "Weapon availability",
+      "visual_form": "Sword/dagger equipped to player character; must dash to retrieve weapon",
+      "meaning": "Player offensive capability; close-range melee combat enables enemy elimination with proper timing"
+    },
+    {
+      "signal": "Multiple lives",
+      "visual_form": "Life counter; NES version starts with 50 lives (high abundance vs. Famicom's 4 lives)",
+      "meaning": "High resource pool reduces immediate threat severity; extended play window without restart"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Castle Inhabitants (Enemy)",
+      "color_identity": null,
+      "symbol_or_sigil": "Knights, Bishops, Wizards suggest hierarchical castle defense structure",
+      "enemy_visual_variants": "Knights, Bishops, Wizards, Fire Spirits, Vikings, Phantom Flowers—distinct sprite archetypes indicating different enemy classes",
+      "environmental_markers": "Groken Castle interior; castle layout and room structure implies fortified stronghold under hostile occupation"
+    },
+    {
+      "faction": "Player (Rescue Force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Prince character; rescue mission objective (Princess Margarita)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting room with map; progression through castle rooms from entry point toward princess tower"
+    },
+    {
+      "faction": "Neutral/Environmental",
+      "color_identity": null,
+      "symbol_or_sigil": "Inanimate puzzle objects (brick blocks, barrels, candles, elevators)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Room-specific object arrangements; environmental storytelling through spatial puzzle design"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Princess captured/imprisoned in castle",
+      "visual_manifestation": "Map shows princess location in specific room; castle depicted as fortified structure with locked doors",
+      "behavioral_manifestation": "Multiple enemy types patrol castle rooms; player must navigate through hostile territory with combat-avoidance or sword mechanics"
+    },
+    {
+      "world_state": "Castle under hostile control",
+      "visual_manifestation": "Enemy archetypes (Knights, Bishops, Wizards) indicate feudal/military hierarchy; Fire Spirits and Phantom Flowers suggest supernatural/magical occupation",
+      "behavioral_manifestation": "Enemies have distinct movement patterns and collision behaviors; some enemies can be trapped on escalators suggesting spatial AI limitations"
+    },
+    {
+      "world_state": "Progression blocked by puzzle mechanics",
+      "visual_manifestation": "Doors require color-matched keys; rooms display misaligned puzzle objects (blocks, barrels, candles)",
+      "behavioral_manifestation": "Player restricted to ground-level positioning for door interaction; cannot open doors mid-jump, enforcing careful movement planning"
+    },
+    {
+      "world_state": "Player resource abundance (NES version)",
+      "visual_manifestation": "High life count (50) displayed at game start; visual abundance suggests extended gameplay window",
+      "behavioral_manifestation": "Player encouraged to attempt dangerous maneuvers; loss of single life carries lower immediate consequence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural hierarchy",
+      "example": "Castle layout with rooms of varying difficulty implies progression from outer defenses toward inner sanctum where princess is held; map highlights destination creating narrative pull"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Knights and Bishops (high-status defenders) suggest military chain of command; Wizards and Fire Spirits (magical enemies) indicate supernatural corruption or magical defense; Phantom Flowers and Vikings (exotic/otherworldly enemies) suggest multifactional occupation"
+    },
+    {
+      "technique": "Puzzle object prevalence",
+      "example": "Repeated use of movable blocks, barrels, and elevators throughout castle suggests both structural puzzle design and environmental hazard narrative—castle infrastructure repurposed as defensive mechanisms"
+    },
+    {
+      "technique": "Regional visual polish differences",
+      "example": "Japanese version map includes detailed castle with background trees; US version simplified map suggests resource constraints but maintains core navigation function, indicating world-state remains constant across versions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player Character (Prince)",
+      "state": "Movement restricted by physics and interaction rules",
+      "behavior": "Can push objects, can only interact with doors while standing adjacent (not jumping), must acquire color-matched keys, uses sword at close range requiring precise timing"
+    },
+    {
+      "entity": "Knights, Bishops, Wizards",
+      "state": "Patrolling/hostile",
+      "behavior": "Touch-based damage interaction; can be eliminated by sword at close range or by forcing onto escalators for ceiling crush; distinct movement patterns imply different patrol AI"
+    },
+    {
+      "entity": "Fire Spirits, Phantom Flowers",
+      "state": "Supernatural/magical threat",
+      "behavior": "Distinct visual archetypes suggest different collision and movement behaviors; likely indicate magical/otherworldly nature of castle occupation"
+    },
+    {
+      "entity": "Vikings",
+      "state": "Exotic enemy faction",
+      "behavior": "Foreign enemy type suggests multifactional occupant forces; distinct visual identity implies behavioral difference from core castle garrison"
+    },
+    {
+      "entity": "Puzzle objects (blocks, barrels, candles, elevators)",
+      "state": "Static/environmental hazard",
+      "behavior": "Objects can be pushed by player; escalators move and can crush enemies; candles may have lighting properties; elevator blocks control vertical movement—environmental interaction critical for puzzle progression"
+    }
+  ],
+  "notes": "Castlequest communicates world-state primarily through spatial puzzle mechanics and enemy archetype distribution rather than narrative exposition. The castle architecture itself serves as the primary storytelling medium: locked doors establish political control, multiple enemy types suggest occupying forces, and puzzle object prevalence frames the environment as instrumentalized defensive space. The distinction between NES (50 lives) and Famicom (4 lives) versions represents difficulty/pacing world-state variance affecting player resource perception. Regional differences (detailed Japanese map vs. simplified US map) do not alter core communication mechanics but reflect localization constraints. The game operates in T3 data tier—specific visual pixel data and exact behavioral frame counts not documented in available sources, but qualitative patterns are clearly extractable.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Castlequest NES article)",
+    "wikipedia (Castlequest - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:31:01.225Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4028,
+    "output_tokens": 2009,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

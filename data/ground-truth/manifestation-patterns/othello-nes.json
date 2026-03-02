@@ -1,0 +1,142 @@
+{
+  "game_id": "othello-nes",
+  "game_name": "Othello",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "opponent_piece_advancement",
+      "visual_form": "opponent_colored_disks_moving_toward_player_territory",
+      "meaning": "threat_of_board_domination_and_piece_capture"
+    },
+    {
+      "signal": "surrounded_pieces",
+      "visual_form": "player_disks_flanked_by_opponent_colors_on_board",
+      "meaning": "imminent_capture_and_conversion_to_opponent_control"
+    },
+    {
+      "signal": "limited_move_options",
+      "visual_form": "few_empty_squares_available_for_legal_placement",
+      "meaning": "loss_of_agency_and_approaching_endgame_disadvantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "own_piece_majority",
+      "visual_form": "more_player_colored_disks_visible_on_board",
+      "meaning": "winning_position_and_board_control"
+    },
+    {
+      "signal": "connected_piece_formations",
+      "visual_form": "clusters_of_same_color_disks_occupying_board_regions",
+      "meaning": "stable_territory_control_and_defensive_strength"
+    },
+    {
+      "signal": "available_move_options",
+      "visual_form": "multiple_empty_squares_with_legal_placement_indicators",
+      "meaning": "strategic_flexibility_and_agency"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "light_player",
+      "color_identity": "light_color_disk_face",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "light_disks_shown_flipped_to_dark_when_captured",
+      "environmental_markers": "board_regions_dominated_by_light_colored_pieces"
+    },
+    {
+      "faction": "dark_player",
+      "color_identity": "dark_color_disk_face",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "dark_disks_shown_flipped_to_light_when_captured",
+      "environmental_markers": "board_regions_dominated_by_dark_colored_pieces"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_opening",
+      "visual_manifestation": "four_disks_arranged_in_center_square_in_diagonal_pattern_two_light_two_dark",
+      "behavioral_manifestation": "players_develop_positions_outward_from_center_with_minimal_captures"
+    },
+    {
+      "world_state": "midgame_positioning",
+      "visual_manifestation": "board_gradually_fills_with_mixed_color_distribution_regions_of_control_emerge",
+      "behavioral_manifestation": "players_strategically_place_pieces_to_maximize_capture_lines_and_limit_opponent_options"
+    },
+    {
+      "world_state": "endgame_dominance",
+      "visual_manifestation": "board_nearly_full_one_color_visibly_occupies_majority_of_squares",
+      "behavioral_manifestation": "limited_move_options_remaining_forced_placements_or_passes"
+    },
+    {
+      "world_state": "board_stalemate",
+      "visual_manifestation": "board_configuration_where_active_player_has_no_legal_moves",
+      "behavioral_manifestation": "active_player_forced_to_pass_turn_to_opponent"
+    },
+    {
+      "world_state": "game_conclusion",
+      "visual_manifestation": "board_full_or_no_legal_moves_available_clear_color_majority_evident",
+      "behavioral_manifestation": "game_ends_winner_determined_by_piece_count"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "board_occupation_as_narrative",
+      "example": "the_8x8_grid_itself_serves_as_contested_territory_with_visual_ownership_changing_through_disk_flipping_movements"
+    },
+    {
+      "technique": "color_distribution_as_power_balance",
+      "example": "the_relative_density_and_clustering_of_light_vs_dark_disks_communicates_the_balance_of_power_without_text"
+    },
+    {
+      "technique": "boundary_lines_as_conflict_zones",
+      "example": "the_edges_between_light_and_dark_territory_visually_represent_contested_frontiers_where_captures_occur"
+    },
+    {
+      "technique": "board_green_as_battlefield_metaphor",
+      "example": "the_green_board_color_inspired_by_general_othello_leading_battle_in_green_field_establishes_the_game_as_military_territorial_conflict"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "light_disk",
+      "state": "active_player_control",
+      "behavior": "placed_on_empty_square_with_light_face_up_triggers_flip_of_bounded_dark_pieces"
+    },
+    {
+      "entity": "dark_disk",
+      "state": "active_player_control",
+      "behavior": "placed_on_empty_square_with_dark_face_up_triggers_flip_of_bounded_light_pieces"
+    },
+    {
+      "entity": "any_disk",
+      "state": "captured_by_opponent",
+      "behavior": "flips_to_show_opposite_color_face_visually_converting_ownership"
+    },
+    {
+      "entity": "light_player",
+      "state": "no_legal_moves_available",
+      "behavior": "turn_passes_to_dark_player_without_placing_disk"
+    },
+    {
+      "entity": "dark_player",
+      "state": "no_legal_moves_available",
+      "behavior": "turn_passes_to_light_player_without_placing_disk"
+    }
+  ],
+  "notes": "Othello is a pure abstract strategy game with minimal visual complexity. All manifestation patterns emerge from the logical game state rather than thematic environmental design. The game communicates through: (1) disk color as faction identity, (2) disk count as power/winning state, (3) spatial distribution as territorial control, (4) available empty squares as strategic options, (5) the flipping mechanic as dramatic conversion/capture moment. The Shakespeare reference to Othello and Iago provides thematic color-based conflict metaphor (black/white, light/dark) that reinforces the visual opposition. The green board inspired by battlefield imagery supports the territorial conquest narrative. NES version likely implements these visual patterns through simple block graphics with color differentiation.",
+  "sources_used": [
+    "wikipedia_reversi_othello_article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:46:30.701Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2877,
+    "output_tokens": 1791,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

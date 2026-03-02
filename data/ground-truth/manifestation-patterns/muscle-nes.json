@@ -1,0 +1,138 @@
+{
+  "game_id": "muscle-nes",
+  "game_name": "Tag Team Match: M.U.S.C.L.E.",
+  "platform": "nes",
+  "paradigm": "beat-em-up / wrestling fighting game",
+  "danger_signals": [
+    {
+      "signal": "opponent proximity",
+      "visual_form": "character distance and animation frame changes",
+      "meaning": "threat of incoming attack; player must dodge or counter"
+    },
+    {
+      "signal": "energy ball appearance",
+      "visual_form": "randomly thrown object by trainer character",
+      "meaning": "resource spawning event; uncollected balls indicate opponent can activate special moves"
+    },
+    {
+      "signal": "special move activation",
+      "visual_form": "distinct attack animation performed after energy ball collection",
+      "meaning": "high-damage attack incoming; player is in danger state"
+    },
+    {
+      "signal": "round progression",
+      "visual_form": "round counter incrementing; speed increases after round 100",
+      "meaning": "escalating difficulty; match becomes more dangerous over time"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "distance from opponent",
+      "visual_form": "character separation on screen",
+      "meaning": "temporary safety window; time to recover or plan next move"
+    },
+    {
+      "signal": "energy ball collection",
+      "visual_form": "visual pickup/absorption of energy object",
+      "meaning": "player power-up; access to special move capabilities for offense"
+    },
+    {
+      "signal": "ropes positioning",
+      "visual_form": "wrestling ring ropes as environmental boundaries",
+      "meaning": "tactical geography; safe zones for positioning and setup moves"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player character",
+      "color_identity": null,
+      "symbol_or_sigil": "individual character design (one of eight playable wrestlers)",
+      "enemy_visual_variants": "opponent renders differently when controlled by AI vs. player 2",
+      "environmental_markers": "wrestling ring as neutral arena; no faction-specific environmental coloring documented"
+    },
+    {
+      "faction": "trainer",
+      "color_identity": null,
+      "symbol_or_sigil": "trainer character model; source of energy balls",
+      "enemy_visual_variants": null,
+      "environmental_markers": "ringside position; neutral arbiter role indicated by placement outside ring"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early rounds (rounds 1-99)",
+      "visual_manifestation": "standard match pacing and animation speed",
+      "behavioral_manifestation": "opponents follow baseline difficulty AI; 30:00 round timer"
+    },
+    {
+      "world_state": "high rounds (round 100+)",
+      "visual_manifestation": "increased animation speed; visual indication of escalating intensity",
+      "behavioral_manifestation": "match speed increases; round timer reduced to 10:00; AI aggression likely increases"
+    },
+    {
+      "world_state": "round 0 (post-255 endurance threshold)",
+      "visual_manifestation": "speed level resets; timer returns to 30:00",
+      "behavioral_manifestation": "difficulty loop resets; game can theoretically continue indefinitely via 8-bit variable overflow"
+    },
+    {
+      "world_state": "energy ball spawned",
+      "visual_manifestation": "energy object appears in ring space",
+      "behavioral_manifestation": "either player can collect it; holder gains access to special move capabilities"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "wrestling ring as stage of competition",
+      "example": "ropes serve as both mechanic (shove-into-ropes moves) and narrative element (formal combat arena signals legitimate sport)"
+    },
+    {
+      "technique": "trainer presence as authority figure",
+      "example": "ringside trainer character visually establishes wrestling match framing; energy ball distribution reinforces sport/match legitimacy"
+    },
+    {
+      "technique": "endless round counter",
+      "example": "game's capacity for 255 rounds + wraparound suggests endurance/marathon combat narrative; wrestlers must persist indefinitely"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player character",
+      "state": "has energy ball",
+      "behavior": "can execute special move (B button activation); gains offensive advantage"
+    },
+    {
+      "entity": "player character",
+      "state": "lacks energy ball",
+      "behavior": "limited to basic attacks (punch, jump, drop kick, clothesline, suplex); defensive positioning required"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "rounds 1-99",
+      "behavior": "standard difficulty baseline; fixed round timer of 30:00"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "rounds 100+",
+      "behavior": "increased speed and likely aggression; reduced round timer to 10:00"
+    },
+    {
+      "entity": "trainer",
+      "state": "active",
+      "behavior": "randomly throws energy balls into ring; neutral arbiter role"
+    }
+  ],
+  "notes": "M.U.S.C.L.E. is a simplified wrestling fighting game with minimal narrative world-state. Danger and safety are primarily mechanical (attack animations, distance, special move availability) rather than environmental or political. No faction conflict or political situation is present—the game is purely competitive sport simulation. World-state progression is tied to round number and difficulty scaling rather than narrative events. The game's visual communication relies on character animation frames, opponent positioning, and energy ball spawning as primary information channels. The rebranding from Kinnikuman (manga-based Japanese original) to M.U.S.C.L.E. (Mattel toy tie-in) for North America means visual design prioritizes generic wrestler archetypes over faction/character-specific storytelling.",
+  "sources_used": [
+    "Wikipedia: Tag Team Match: M.U.S.C.L.E. (primary source for gameplay mechanics, character count, mode structure, round system, and difficulty progression)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:45:22.513Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2811,
+    "output_tokens": 1659,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

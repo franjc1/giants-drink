@@ -1,0 +1,135 @@
+{
+  "game_id": "donkey-kong-nes",
+  "game_name": "Donkey Kong",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": 4,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Walking/horizontal movement",
+      "first_appears": "25m (Girder stage)",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns basic traversal on stable platforms"
+    },
+    {
+      "element": "Jumping",
+      "first_appears": "25m (Girder stage)",
+      "introduction_context": "safe",
+      "mastery_context": "Jumping over fixed barrels on predictable paths"
+    },
+    {
+      "element": "Barrels (static hazards)",
+      "first_appears": "25m (Girder stage)",
+      "introduction_context": "moderate",
+      "mastery_context": "Rolling barrels follow simple patterns; player learns avoidance through repetition"
+    },
+    {
+      "element": "Hammer (power-up)",
+      "first_appears": "25m (Girder stage)",
+      "introduction_context": "moderate",
+      "mastery_context": "Converts hazards into scoring opportunities; temporary invulnerability mechanic"
+    },
+    {
+      "element": "Climbing (ladders/vines)",
+      "first_appears": "50m (Cement Factory - missing in NES port)",
+      "introduction_context": "moderate",
+      "mastery_context": "Vertical movement introduces new traversal axis"
+    },
+    {
+      "element": "Conveyor belts",
+      "first_appears": "75m (Elevator stage)",
+      "introduction_context": "moderate",
+      "mastery_context": "Moving platforms require timing adjustment; introduces momentum concept"
+    },
+    {
+      "element": "Fireballs (advanced hazards)",
+      "first_appears": "100m (Rivets stage)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Faster, less predictable enemies; requires precision avoidance"
+    },
+    {
+      "element": "Rivets (destructible environment)",
+      "first_appears": "100m (Rivets stage)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Interactive level elements that collapse platforms when destroyed"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": 5,
+      "max": 30
+    },
+    "typical_relief_triggers": [
+      "Collecting hammer power-up",
+      "Reaching safe platform zones between barrel spawns",
+      "Reaching Pauline/goal at stage end",
+      "Nail/rivet destruction eliminating enemy spawn points"
+    ],
+    "typical_tension_triggers": [
+      "Barrel spawns from DK at top",
+      "Barrel collision with player",
+      "Hammer timer expiration",
+      "Fireballs patrolling narrowed paths",
+      "Multiple hazards converging on single platform"
+    ],
+    "pacing_descriptor": "Cyclical wave pattern: 25m introduces rhythm gently; difficulty escalates through 75m with conveyor timing; 100m combines all elements into sustained pressure. Stages repeat with increasing speed on loop."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Hammer power-ups placed in branching paths; optional risky routes reward higher scores",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "25m (Girder stage): Tutorial-like introduction. Simple barrel patterns, predictable trajectory, multiple safe platforms. Establishes core jump-and-dodge loop.",
+    "mid_game": "50m absent from NES port (memory limitation). 75m (Elevator): Introduces moving platform timing. Conveyor belts require different momentum management. Barrel patterns increase in complexity.",
+    "late_game": "100m (Rivets stage): Integrates all mechanics. Fireballs replace slow barrels. Rivets add environmental destruction mechanic. Sustained multi-hazard scenarios. Speed increases on successive loops.",
+    "notable_spikes": [
+      "Transition from 25m to 75m: Conveyor belt timing adds layer of complexity",
+      "Introduction of fireballs in 100m: Unpredictable movement breaks pattern reliance",
+      "Loop transitions: Each stage repeats with accelerated barrel/enemy speeds",
+      "Revision 0 oversight: Demo mode hammer-jumping extends tool use unpredictably"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Girder Gauntlet (25m)",
+      "description": "Horizontal platforms with predictable barrel spawning from top-center. Multiple safe zones between hazards. Hammer power-ups create score maximization opportunities. Establishes rhythm and reward structure.",
+      "example_level": "25m"
+    },
+    {
+      "pattern_name": "Elevator Timing (75m)",
+      "description": "Vertical conveyor belt movement forces player to adjust jump timing and platform tracking. Barrels interact with moving surfaces creating dynamic collision patterns. Tests rhythm adjustment.",
+      "example_level": "75m"
+    },
+    {
+      "pattern_name": "Rivet Destruction (100m)",
+      "description": "Platforms narrowing as rivets are destroyed. Fireballs patrol reduced space. Destruction becomes both goal and hazard amplifier. Final stage combines all prior mechanics under pressure.",
+      "example_level": "100m"
+    },
+    {
+      "pattern_name": "Arcade Loop Escalation",
+      "description": "After 100m completion, cycle repeats with increased speed. Barrel velocities increase. Enemy patterns accelerate. Creates sustained difficulty escalation without new mechanics—pure execution test.",
+      "example_level": "All stages in subsequent loops"
+    }
+  ],
+  "sources_used": [
+    "tcrf",
+    "speedrun"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:37:58.330Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 10441,
+    "output_tokens": 1745,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "game_id": "earthbound-snes",
+  "game_name": "EarthBound",
+  "platform": "snes",
+  "year": 1994,
+  "tier": 1,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": 256,
+    "format": "256_sub",
+    "notes": "Memory addresses document X/Y subposition as separate 2-byte values (7E9875/7E9879 for EarthBound US, 7E9B26/7E9B2A for Mother 2 JP). Subposition range suggests 256 sub-pixels per pixel."
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Stutter Walk",
+      "description": "Skip trigger spots by moving through them every other frame. Can skip enemy encounters or story triggers.",
+      "physics_values": {
+        "frame_interval": "every_other_frame"
+      }
+    },
+    {
+      "name": "Staircase Glitch / Walk Through Walls",
+      "description": "Interrupt staircase locking procedure via phone call or critical health warning to enable wall-walking. All game content exists on one continuous 10.2 MB map.",
+      "physics_values": {
+        "total_map_size_mb": 10.2,
+        "interrupt_methods": [
+          "phone_call",
+          "critical_health",
+          "poison_death",
+          "cold_death",
+          "sunstroke_death",
+          "sickness_death"
+        ]
+      }
+    },
+    {
+      "name": "Cliff Walking",
+      "description": "Pass through normally impassable blue spaces by exploiting diagonal positioning and push mechanics. Requires proper spacing with passable areas sandwiched between impassable spaces.",
+      "physics_values": {
+        "requires_skip_sandwich": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "seamless_world",
+    "no_random_encounters",
+    "oblique_projection_perspective"
+  ],
+  "tier_notes": "Tier 1 empirical data from ROM analysis. Memory addresses confirm 256-subpixel system with separate X/Y position and subposition tracking. No documented movement parameters (walk speed, acceleration, jump physics) in available sources. Game features seamless 2D world with overworld enemies visible on-screen. Sprite tables are 28 bytes with 14 slots. RNG system documented with flow of 14592 sequential values.",
+  "sources_used": [
+    "tasvideos - Memory addresses and position structure",
+    "tcrf - Development notes and sprite information",
+    "data_crystal - ROM specifications and technical details"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T23:55:30.530Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8684,
+    "output_tokens": 957,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

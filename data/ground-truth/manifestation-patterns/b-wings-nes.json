@@ -1,0 +1,189 @@
+{
+  "game_id": "b-wings-nes",
+  "game_name": "B-Wings",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Incoming bullet patterns from airborne and ground units",
+      "meaning": "Active threat to player ship; collision results in damage/loss"
+    },
+    {
+      "signal": "Ground obstacles",
+      "visual_form": "Static or moving environmental barriers on ground level",
+      "meaning": "Collision hazard; ship loss if struck while grounded"
+    },
+    {
+      "signal": "Boss encounter (Gobunasu)",
+      "visual_form": "Large enemy sprite at level end",
+      "meaning": "Mandatory combat checkpoint; level progression blocked until defeated"
+    },
+    {
+      "signal": "Airborne unit presence",
+      "visual_form": "Enemy sprites in upper air layer",
+      "meaning": "Danger while player is airborne; avoided by descending to ground"
+    },
+    {
+      "signal": "Ground unit presence",
+      "visual_form": "Enemy sprites on lower ground platform",
+      "meaning": "Danger while player is grounded; unavoidable threat on ground level"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ground platform",
+      "visual_form": "Lower level accessible via button press",
+      "meaning": "Temporary immunity from airborne attacks; tactical repositioning space"
+    },
+    {
+      "signal": "Weapon power-up (Wing)",
+      "visual_form": "Collectible wing-form power-up sprite",
+      "meaning": "Enhanced firepower and defensive capability; progression requirement"
+    },
+    {
+      "signal": "Hammer weapon (Famicom)",
+      "visual_form": "Rotating spherical shields attached to ship",
+      "meaning": "Partial damage reduction; active defense mechanism"
+    },
+    {
+      "signal": "Van weapon",
+      "visual_form": "Six radial projectiles forming close barrier",
+      "meaning": "Defensive formation; short-range protection layer"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (FX-1 robotic aircraft)",
+      "color_identity": null,
+      "symbol_or_sigil": "FX-1 ship sprite; winged configuration when armed",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in both air and ground layers; central screen position"
+    },
+    {
+      "faction": "Enemy forces (generic)",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied enemy sprite designs per level; Gobunasu boss forms",
+      "enemy_visual_variants": "Arcade vs. Famicom versions feature different enemy appearances and attack patterns",
+      "environmental_markers": "Distributed across air and ground layers; approaching from edges or below"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Wingless state (no weapon equipped)",
+      "visual_manifestation": "Ship sprite without wing attachments; single projectile fire",
+      "behavioral_manifestation": "Reduced offensive capability; baseline damage output only"
+    },
+    {
+      "world_state": "Armed state (weapon equipped)",
+      "visual_manifestation": "Wing power-up attached to ship sides; expanded sprite silhouette",
+      "behavioral_manifestation": "Enhanced firepower pattern based on equipped weapon type; improved progression capability"
+    },
+    {
+      "world_state": "Airborne position",
+      "visual_manifestation": "Ship in upper half of screen; unaffected by ground obstacles",
+      "behavioral_manifestation": "Immunity to ground unit attacks; vulnerable to airborne enemies; automatic height reset after duration"
+    },
+    {
+      "world_state": "Ground level position",
+      "visual_manifestation": "Ship descends to lower platform; dual-layer screen visible",
+      "behavioral_manifestation": "Immunity to airborne attacks; vulnerability to ground unit fire; can still collide with obstacles; time-limited stay before forced ascent"
+    },
+    {
+      "world_state": "Weapon damage state",
+      "visual_manifestation": "Equipped wing sprite shows deterioration/partial destruction",
+      "behavioral_manifestation": "Weapon auto-ejects upon sufficient damage; returns to wingless state; firepower reduced during degradation"
+    },
+    {
+      "world_state": "Boss encounter active",
+      "visual_manifestation": "Gobunasu boss sprite appears; level end zone reached",
+      "behavioral_manifestation": "Mandatory combat engagement; standard movement blocked; boss attack patterns differ per level"
+    },
+    {
+      "world_state": "Horizontal wrapping world",
+      "visual_manifestation": "Background image continues infinitely in horizontal directions",
+      "behavioral_manifestation": "Player can scroll left/right without boundary limits; maintains engagement area throughout traversal"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Layered gameplay environment (air/ground duality)",
+      "example": "Two distinct visual planes represent different tactical spaces; ground level provides visual evidence of escape mechanic and obstacle navigation challenge"
+    },
+    {
+      "technique": "Weapon system as progression narrative",
+      "example": "Wing-form power-ups communicate that player advancement is achieved through equipment collection; varied weapon designs suggest different strategic approaches available"
+    },
+    {
+      "technique": "Boss sprite variety per level",
+      "example": "Unique Gobunasu designs per level end communicate escalating threat and visual progression through game world"
+    },
+    {
+      "technique": "Obstacle density and placement",
+      "example": "Ground platform obstacles telegraph difficulty curve; increased concentration signals approaching challenge peaks"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "FX-1 Player Ship",
+      "state": "Wingless",
+      "behavior": "Fires single projectile; maximum vulnerability; baseline movement speed"
+    },
+    {
+      "entity": "FX-1 Player Ship",
+      "state": "Cannon-armed",
+      "behavior": "Fires three rapid projectiles; machine-gun effect; enhanced forward pressure"
+    },
+    {
+      "entity": "FX-1 Player Ship",
+      "state": "Wide-armed",
+      "behavior": "Fires five spreading projectiles; auto-despawn on hit; defensive spread formation"
+    },
+    {
+      "entity": "FX-1 Player Ship",
+      "state": "Airborne",
+      "behavior": "Ignores ground-level unit attacks; forced descent after time limit; optimal for airborne engagements"
+    },
+    {
+      "entity": "FX-1 Player Ship",
+      "state": "Grounded",
+      "behavior": "Immune to airborne attacks; vulnerable to ground units; collision hazard with obstacles present"
+    },
+    {
+      "entity": "Airborne enemies",
+      "state": "Active",
+      "behavior": "Attack player when airborne; ignored when player is grounded; approach from edges and above"
+    },
+    {
+      "entity": "Ground enemies",
+      "state": "Active",
+      "behavior": "Attack player regardless of position; ground-level threat persistent; melee or projectile attack patterns"
+    },
+    {
+      "entity": "Gobunasu boss",
+      "state": "Encounter initiated",
+      "behavior": "Unique attack pattern per level; mandatory defeat to progress; larger sprite indicates significance"
+    },
+    {
+      "entity": "Equipped weapon (all types)",
+      "state": "Damaged",
+      "behavior": "Degradation visible on sprite; auto-ejects upon critical damage; forces weapon re-acquisition"
+    }
+  ],
+  "notes": "B-Wings uses a dual-layer spatial design (air/ground) as its primary world-state communication mechanism. The game lacks narrative exposition or dialogue; all world-state understanding derives from mechanical feedback and visual form. Weapon systems function as both progression gates and visual identity markers. The Famicom version introduces additional visual complexity through new weapon types (Hammer shields, Dyna beam, Fire jet) not present in arcade, suggesting world-state divergence between versions. No faction narrative or political context is provided; enemies are generic threatening entities without allegiance or motivation storytelling. Environmental storytelling is minimal—the game prioritizes pure mechanical communication over narrative world-building.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:13:18.287Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3404,
+    "output_tokens": 2098,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

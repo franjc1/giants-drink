@@ -1,0 +1,174 @@
+{
+  "game_id": "cool-spot-genesis",
+  "game_name": "Cool Spot",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Unspecified enemy sprites in level design",
+      "meaning": "Threats that deal damage on contact; avoidance required"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Projectile sprites fired by enemies",
+      "meaning": "Ranged damage sources; dodging required"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Unspecified hazardous level geometry",
+      "meaning": "Damage-dealing environmental features; navigation hazard"
+    },
+    {
+      "signal": "Time limit pressure",
+      "visual_form": "Level countdown timer UI element",
+      "meaning": "Temporal constraint on level completion; failure if time expires"
+    },
+    {
+      "signal": "Health degradation",
+      "visual_form": "Spot face icon that bends forward progressively with damage",
+      "meaning": "Visual feedback for accumulated damage; face eventually falls off screen at critical health"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collected Spot currency",
+      "visual_form": "Spot collectible icons placed throughout level",
+      "meaning": "Progress toward level goal; required quantity accumulation unlocks caged Spots"
+    },
+    {
+      "signal": "Checkpoint flagpole",
+      "visual_form": "Flagpole visual marker in level",
+      "meaning": "Safe progression point; allows respawn at this location on life loss"
+    },
+    {
+      "signal": "Bonus stage letters",
+      "visual_form": "Hidden letters spelling 'UNCOLA' in bonus stages",
+      "meaning": "Collectible that grants Continue item for life restoration"
+    },
+    {
+      "signal": "Soda bubble attack",
+      "visual_form": "Bubble projectiles thrown by Spot in any direction",
+      "meaning": "Player offensive capability; method to neutralize enemies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Spot (player character)",
+      "color_identity": "Red circular mascot character",
+      "symbol_or_sigil": "7 Up brand mascot; soda bubble imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Soda bubble aesthetic throughout level design; branded soft drink theme"
+    },
+    {
+      "faction": "Imprisoned Spots",
+      "color_identity": "Identical red circular characters to player",
+      "symbol_or_sigil": "Caged or confined variants of player character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cages throughout levels that require collected Spots as payment to unlock"
+    },
+    {
+      "faction": "Enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Unspecified enemy designs",
+      "enemy_visual_variants": "Enemies distinguished from player Spot through contrasting sprite design",
+      "environmental_markers": "Distributed throughout levels as obstacles and combat encounters"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level progression stage",
+      "visual_manifestation": "Level layout design, enemy placement, collectible distribution density",
+      "behavioral_manifestation": "Increasing quantity requirements of collected Spots as game progresses; difficulty scaling through level design"
+    },
+    {
+      "world_state": "Player health status",
+      "visual_manifestation": "Spot face health indicator gradually bending forward; face falls off-screen when depleted",
+      "behavioral_manifestation": "Player control remains functional until health fully depletes; visual warning before imminent failure state"
+    },
+    {
+      "world_state": "Goal completion progress",
+      "visual_manifestation": "Collected Spot count versus required threshold; caged Spot visual state (locked/unlocked)",
+      "behavioral_manifestation": "Caged Spots remain imprisoned until collection target met; level completion triggered after all caged Spots freed"
+    },
+    {
+      "world_state": "Bonus stage access",
+      "visual_manifestation": "Bonus stage environment with hidden letter collectibles spelling 'UNCOLA'",
+      "behavioral_manifestation": "Bonus stage only accessible upon successful level completion with sufficient Spot collection; hidden letters restore Continue lives"
+    },
+    {
+      "world_state": "Time pressure status",
+      "visual_manifestation": "Level countdown timer UI display",
+      "behavioral_manifestation": "Failure condition if timer reaches zero; creates urgency in navigation and combat decisions"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Branded theming consistency",
+      "example": "7 Up soft drink aesthetic integrated throughout level design—soda bubbles as attack mechanic, UNCOLA slogan integrated into bonus stage letter collection system, red Spot character design matching brand identity"
+    },
+    {
+      "technique": "Cage as narrative device",
+      "example": "Imprisoned identical Spot characters in cages establish rescue mission narrative; cages serve as visual goal markers and require currency (collected Spots) to unlock, communicating both story context and mechanical progression"
+    },
+    {
+      "technique": "Character proliferation storytelling",
+      "example": "Multiple imprisoned Spots identical to player character suggest a population of Spot beings; rescue mechanic implies disaster/capture event that scattered them across levels"
+    },
+    {
+      "technique": "Visual health narrative",
+      "example": "Spot face health indicator's progressive deformation (bending forward, eventual fall) creates physical narrative of accumulating damage without dialogue; communicates stakes of enemy encounters"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Spot (player)",
+      "state": "Normal/active",
+      "behavior": "Can jump, climb surfaces by jumping in front of them, throw soda bubbles in any direction"
+    },
+    {
+      "entity": "Spot (player)",
+      "state": "Damaged",
+      "behavior": "Face health indicator bends forward; accumulates visual deformation with each hit"
+    },
+    {
+      "entity": "Spot (player)",
+      "state": "Critically injured",
+      "behavior": "Face falls off-screen; loss of life occurs; respawn at last flagpole checkpoint"
+    },
+    {
+      "entity": "Caged Spot",
+      "state": "Imprisoned",
+      "behavior": "Remains stationary in cage; no interaction until collection threshold met"
+    },
+    {
+      "entity": "Caged Spot",
+      "state": "Threshold met",
+      "behavior": "Becomes freeable; cage opens, allowing player to progress level exit"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Patrolling/active",
+      "behavior": "Distribute damage on contact; fire projectiles at player; can be defeated by soda bubble projectiles"
+    },
+    {
+      "entity": "Time limit",
+      "state": "Active countdown",
+      "behavior": "Visible countdown timer creates escalating pressure; failure state if reaches zero"
+    }
+  ],
+  "notes": "Cool Spot is a brand-integrated platformer where visual communication is tightly coupled with 7 Up marketing narrative. The game uses character duplication (multiple Spots), imprisonment metaphor (cages), and progressive visual degradation (health face) as primary storytelling tools. No faction conflict or political situation exists in traditional sense; instead, the narrative frames a rescue operation with branded mascot. World state changes are communicated through collectible counters, cage lock states, and visual damage accumulation rather than environmental transformation. The 'UNCOLA' bonus stage letter system directly integrates brand slogan into mechanical progression. Design relies on visual clarity of damage (health face), collectible feedback (Spot count), and goal visualization (caged prisoners) rather than complex state indicators.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:56:32.434Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3311,
+    "output_tokens": 1995,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

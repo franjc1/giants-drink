@@ -1,0 +1,122 @@
+{
+  "game_id": "super-sokoban-snes",
+  "game_name": "Super Sokoban",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Player avatar",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "4-directional movement on empty floor squares"
+    },
+    {
+      "element": "Boxes",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Push-only mechanic, understanding directional momentum"
+    },
+    {
+      "element": "Storage locations / goal targets",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Spatial planning to align boxes with targets"
+    },
+    {
+      "element": "Walls / level boundaries",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Navigation constraints and box blocking against walls"
+    },
+    {
+      "element": "Deadlock states",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Multi-move planning to avoid permanent traps; undo mechanic for recovery"
+    },
+    {
+      "element": "Dead-end scenarios",
+      "first_appears": "Mid-game progression",
+      "introduction_context": "dangerous",
+      "mastery_context": "Lookahead planning; spatial topology understanding"
+    },
+    {
+      "element": "Box stacking constraints",
+      "first_appears": "Later levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Complex sequencing across multiple interdependent boxes"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful box placement on storage location",
+      "Undo/restart mechanic to escape deadlock",
+      "Completing puzzle and advancing to next level"
+    ],
+    "typical_tension_triggers": [
+      "Pushing a box into corner or against wall",
+      "Careless moves creating potential deadlock",
+      "Spatial constraint realization mid-puzzle",
+      "Running out of viable move sequences"
+    ],
+    "pacing_descriptor": "Contemplative, self-paced; tension builds through planning depth rather than time pressure"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "frequent",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Simple 1-2 box puzzles teaching push mechanic and directional constraint",
+    "mid_game": "Deadlock avoidance becomes primary challenge; multi-box sequencing introduced",
+    "late_game": "Complex spatial topology with high consequence for incorrect moves; multiple interdependent boxes",
+    "notable_spikes": [
+      "Introduction of deadlock concept and consequence permanence",
+      "Transition from single-box to multi-box puzzles",
+      "Levels designed with dead ends as environmental features rather than careless player mistakes"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Tutorial-by-constraint",
+      "description": "Early levels (first 5-20) introduce mechanics through spatial simplicity: single or two boxes, wide open warehouse areas, minimal wall complexity. Forces mastery of push-only mechanic before deadlock risk.",
+      "example_level": "Level 1 of original Sokoban (NEC PC-8801 version)"
+    },
+    {
+      "pattern_name": "Deadlock introduction",
+      "description": "Transition levels deliberately create corner-trap and wall-pin scenarios. Player experiences deadlock, learns undo mechanic, then replays with foresight.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Spatial sequencing",
+      "description": "Mid-to-late game levels use corridor and chamber design to force specific box-pushing order. Player must recognize dependency chains across multiple boxes.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Consequence-dense design",
+      "description": "Late-game levels pack multiple boxes, storage locations, and walls such that almost any move has irreversible consequences. Requires extensive lookahead planning.",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:04:29.310Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3196,
+    "output_tokens": 1455,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

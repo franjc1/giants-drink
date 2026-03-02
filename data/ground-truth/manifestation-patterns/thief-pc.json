@@ -1,0 +1,210 @@
+{
+  "game_id": "thief-pc",
+  "game_name": "Thief: The Dark Project",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "NPC Alert State",
+      "visual_form": "Guard posture change, increased movement speed, weapon readiness",
+      "meaning": "Player has been detected or suspicious activity observed; imminent combat threat"
+    },
+    {
+      "signal": "Blood Stains",
+      "visual_form": "Red visual marks on environment surfaces",
+      "meaning": "Evidence of violence; alerts NPCs to potential danger or intrusion"
+    },
+    {
+      "signal": "Fallen Bodies",
+      "visual_form": "Corpse visibility in environment",
+      "meaning": "Visual evidence of death; triggers NPC search and alert responses"
+    },
+    {
+      "signal": "Opened Doors",
+      "visual_form": "Door state change from closed to open",
+      "meaning": "Environmental tampering; signals unauthorized access to NPCs"
+    },
+    {
+      "signal": "Bright Light Exposure",
+      "visual_form": "Character illumination in well-lit areas",
+      "meaning": "Visibility to NPCs increases; danger of detection rises"
+    },
+    {
+      "signal": "Loud Noise Events",
+      "visual_form": "Sound-producing activities (clashing swords, footsteps on metal)",
+      "meaning": "Acoustic signature alerts NPCs to player location and activity"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Darkness/Shadow",
+      "visual_form": "Dim lighting conditions, shadowed areas",
+      "meaning": "Concealment from NPC visual detection; primary stealth safety mechanism"
+    },
+    {
+      "signal": "Dim Visibility Gem",
+      "visual_form": "HUD gem indicator at low brightness",
+      "meaning": "Player is sufficiently hidden from NPC sight; safe from visual detection"
+    },
+    {
+      "signal": "Soft Surface Footsteps",
+      "visual_form": "Movement over carpets, grass, soft materials",
+      "meaning": "Quiet locomotion; acoustic safety from NPC detection"
+    },
+    {
+      "signal": "Distance from NPCs",
+      "visual_form": "Spatial separation, NPCs at far patrol positions",
+      "meaning": "Safety buffer from NPC awareness and confrontation"
+    },
+    {
+      "signal": "Hidden Bodies/Cleaned Evidence",
+      "visual_form": "Absence of corpses and blood stains in environment",
+      "meaning": "No visual alerts triggered; environment appears undisturbed"
+    },
+    {
+      "signal": "NPC Routine Patrol",
+      "visual_form": "NPCs following predictable movement patterns without alert behavior",
+      "meaning": "Normalized environmental state; no active threat response"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "City Guards",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Uniformed armed personnel with patrol routes and alert postures",
+      "environmental_markers": "Guard stations, patrol patterns, armored appearance"
+    },
+    {
+      "faction": "Servants/Civilians",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Unarmed NPCs who flee and seek help rather than engage",
+      "environmental_markers": "Non-combat attire, servant quarters, domestic spaces"
+    },
+    {
+      "faction": "Non-Human Entities",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Non-human creatures that pursue and attack on sight",
+      "environmental_markers": "Fantasy setting creatures, distinct biological appearance"
+    },
+    {
+      "faction": "Garrett's Circle (Secret Society)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Hidden training background, thief equipment and tools"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-Alert / Normal Operations",
+      "visual_manifestation": "NPCs in routine patrol, environment undisturbed, no visual evidence of intrusion",
+      "behavioral_manifestation": "NPCs walk stationary routes, perform regular tasks, minimal responsiveness"
+    },
+    {
+      "world_state": "Suspicious Activity Detected",
+      "visual_manifestation": "NPC posture shifts toward alertness, increased animation activity, weapon positioning",
+      "behavioral_manifestation": "NPCs begin searching area, heightened sensory awareness, investigation of anomalies"
+    },
+    {
+      "world_state": "Active Combat/Full Alert",
+      "visual_manifestation": "Guards with weapons drawn, aggressive movement patterns, visual focus on player position",
+      "behavioral_manifestation": "Guards call out alerts, attack player, attempt capture or elimination"
+    },
+    {
+      "world_state": "Environmental Evidence Presence",
+      "visual_manifestation": "Blood stains, open doors, fallen bodies visible in level geometry",
+      "behavioral_manifestation": "Increased NPC patrol intensity, expanded search radius, heightened suspicion state"
+    },
+    {
+      "world_state": "Escape/Evasion Success",
+      "visual_manifestation": "NPCs return to routine patrol patterns, environmental normalization, alert states decay",
+      "behavioral_manifestation": "Guards stand down, resume regular tasks, suspicion levels gradually reset"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Evidence-Based State Narrative",
+      "example": "Blood stains, opened doors, and fallen bodies communicate to NPCs (and player) that unauthorized intrusion and violence have occurred; these visual markers persist as environmental memory of player actions"
+    },
+    {
+      "technique": "NPC Reaction Chains",
+      "example": "Guards call out alerts when spotting player, which triggers servant NPCs to flee seeking help, which spreads awareness across faction networks; visual cascades show political/social response to security breach"
+    },
+    {
+      "technique": "Architectural Safety/Danger Mapping",
+      "visual_form": "Lighting design communicates safe vs. dangerous zones; dark areas are havens, well-lit areas are perilous"
+    },
+    {
+      "technique": "Acoustic Landscape Storytelling",
+      "example": "Sound from whistling/walking NPCs communicates their patrol positions and emotional states; player can infer guard intensity and alert level from acoustic cues"
+    },
+    {
+      "technique": "Surface Material Semantics",
+      "example": "Carpet vs. metal flooring communicates safe vs. risky movement routes; material choice tells story of consequence"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Guard NPC",
+      "state": "Routine Patrol",
+      "behavior": "Walks predictable routes, may whistle, minimal responsiveness to environment"
+    },
+    {
+      "entity": "Guard NPC",
+      "state": "Suspicious",
+      "behavior": "Pauses movement, increases alertness, begins searching area, checks anomalies"
+    },
+    {
+      "entity": "Guard NPC",
+      "state": "Fully Alert/Combat",
+      "behavior": "Calls out alerts, draws weapon, pursues player with intent to capture or eliminate"
+    },
+    {
+      "entity": "Guard NPC",
+      "state": "Significantly Injured",
+      "behavior": "Attempts to escape rather than continue engagement"
+    },
+    {
+      "entity": "Servant NPC",
+      "state": "Normal",
+      "behavior": "Performs domestic/service tasks, maintains stationary or routine movement"
+    },
+    {
+      "entity": "Servant NPC",
+      "state": "Player Spotted or Body Discovered",
+      "behavior": "Flees immediately to seek help; does not engage in combat"
+    },
+    {
+      "entity": "Non-Human Entity",
+      "state": "Player Detected",
+      "behavior": "Pursues and attacks with intent to eliminate; no flee or help-seeking behavior"
+    },
+    {
+      "entity": "Player Character (Visibility Gem)",
+      "state": "Hidden",
+      "behavior": "Gem indicator dims; player remains undetected by visual scanning"
+    },
+    {
+      "entity": "Player Character (Visibility Gem)",
+      "state": "Exposed",
+      "behavior": "Gem indicator brightens; player becomes visually vulnerable to NPC detection"
+    }
+  ],
+  "notes": "Thief: The Dark Project pioneered light and sound as primary game mechanics for communicating world-state and danger. The visibility gem HUD mechanic is a direct visual readout of concealment state. NPC categorization (guards/servants/non-human) creates faction-based behavioral variations that communicate political/social structure. Environmental evidence (blood, bodies, doors) persists as visual consequences of player actions, teaching emergent consequences. Acoustic landscape (footsteps, whistling, sword clashes) functions as a parallel communication channel to visual signals. The game's manifestation layer emphasizes environmental feedback loops where player actions create visual/acoustic markers that alter NPC behavioral states and world perception.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:14:38.143Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2690,
+    "output_tokens": 2333,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

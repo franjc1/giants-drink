@@ -1,0 +1,302 @@
+Puss n Boots: Pero's Great Adventure - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Puss n Boots: Pero's Great Adventure
+
+From The Cutting Room Floor
+
+(Redirected from  Puss &#039;n Boots: Pero&#039;s Great Adventure )
+
+Jump to navigation
+
+Jump to search
+
+Puss n Boots: Pero's Great Adventure
+
+Developers :
+
+Bear's
+
+&#91;1&#93;
+
+Publishers :
+
+Electro Brain
+
+&#91;2&#93;
+
+Platform :
+
+NES
+
+Released in US : June 1990  &#91;2&#93;
+
+This game has  uncompiled source code .
+
+This game has a prerelease article
+
+In case you were wondering what that one
+
+Captain N
+
+episode was about...
+
+Puss n Boots: Pero's Great Adventure
+
+is an action platformer starring Toei Animation's mascot Pero the Cat. It's based on the classic story
+
+Around the World in Eighty Days  . This particular game released four years after  Japan got its own game  based on the animated film.
+
+Contents
+
+1
+
+Sub-Pages
+
+2
+
+Hidden Text
+
+3
+
+Uncompiled Code
+
+4
+
+References
+
+Sub-Pages
+
+Prerelease Info
+
+Version Differences
+
+There's quite a bit.
+
+Hidden Text
+
+While not actually seen in-game, the string  MASAHIRO  is used as a RAM check to determine if the game has been soft-reset (with the  Reset  button) or hard-reset (by turning the power off and on again). Masahiro Yoshihara was a programmer on the game.
+
+Uncompiled Code
+
+The game features uncompiled code at
+
+D60
+
+in the ROM:
+
+NDC:
+	JSR	STEKA
+	LDA	#0
+	STA	NWK
+	JSR	RANDOM
+	AND	#11B
+	BNE	:NOTAI		; 3/4 not taikyaku
+	LDA	#1		; Taikyaku bit on (icchokusen ni mukau)
+:NOTAI:
+	ORA	TEKSTS,X
+	BNE	:JPCUT
+
+STSHIP:
+SMOGU:
+	JSR	STTEKY
+	JSR	X0orFF
+	JSR	RN3F20		; 20H..60H
+	STA	TEKTIM,X
+	JMP	:CNT3
+
+SHCATA:
+SHCATC:
+	JSR	STTEKY
+	LDA	#0FFH
+	STA	TEKXH,X
+	RTS
+
+STPLANE:
+STBALOON:
+STSENSUI:
+	JSR	STTEKY
+	JSR	X0orFF
+	ASL	TEKANG,X
+	ASL	TEKANG,X	; 0 or 4
+:CNT3:
+	LDA	#3-1
+	STA	TEKHIT,X	; 3 patsu de shinu&#160;!
+	RTS
+
+SHAMB:
+SUP1:
+SBOOTS:
+SD1000:
+SD2000:
+SD3000:
+	PROC
+	JSR	STTEKY
+	LDA	#0FFH
+	STA	TEKXH,X
+	LDA	TEKKND,X
+	SEC
+	SBC	#28
+	TAY
+
+; Y=0..5
+	LDA	:BOONO,Y
+	STA	TEKPNO,X	; Pattern number set
+	LDA	#0
+	STA	TEKCTL,X	; Control & color set
+	RTS
+:BOONO:
+	DB	19,11,16,18,18,18
+
+RN3F20:
+	JSR	RANDOM
+	AND	#3FH
+	ADC	#20H
+	RTS
+
+;@@@@@@@@ KOKOKARAHAJIME 04/27 @@@@@@@@@
+; 89/04/27 Tsuika
+STARU:		;40: Taru
+SSHA:		;41: Sharin
+SUMA:		;43: Uma&#160;!
+
+(Source:  evilhamwizard )
+
+References
+
+↑
+
+Bear's - GDRI&#160;:: Game Developer Research Institute
+
+↑
+
+2.0
+
+2.1
+
+NES Games
+
+Retrieved from " https://tcrf.net/index.php?title=Puss_n_Boots:_Pero%27s_Great_Adventure&oldid=1971748 "
+
+Categories :
+
+Games developed by Bear's
+
+Games published by Electro Brain
+
+NES games
+
+Games with uncompiled source code
+
+Games  >  Games by content  >  Games with uncompiled source code
+
+Games  >  Games by developer  >  Games developed by Bear&#039;s
+
+Games  >  Games by platform
+
+Games  >  Games by publisher  >  Games published by Electro Brain
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 24 November 2025, at 13:33.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

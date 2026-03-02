@@ -1,0 +1,157 @@
+{
+  "game_id": "thunder-spirits-snes",
+  "game_name": "Thunder Spirits",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "contrasting colored bullets and energy beams",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "large_enemy_sprites",
+      "visual_form": "detailed, oversized mechanical and organic enemy designs",
+      "meaning": "major threat; boss-class encounters or stage hazards"
+    },
+    {
+      "signal": "screen_scrolling_pace",
+      "visual_form": "accelerating horizontal scroll speed with increasing enemy density",
+      "meaning": "escalating difficulty and danger intensity"
+    },
+    {
+      "signal": "environmental_obstacles",
+      "visual_form": "terrain features, structures, and planetary formations blocking movement",
+      "meaning": "collision hazards requiring precision piloting"
+    },
+    {
+      "signal": "weapon_loss_indicator",
+      "visual_form": "visual disappearance of equipped weapon icon/HUD element",
+      "meaning": "ship destroyed; loss of equipped weapon (or all weapons on higher difficulty)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "weapon_pickups",
+      "visual_form": "distinct item sprites floating in stage space",
+      "meaning": "power-up acquisition; enhanced firepower or new weapon unlock"
+    },
+    {
+      "signal": "CLAW_items",
+      "visual_form": "special companion drone pickup icons",
+      "meaning": "automatic acquisition of two maximum CLAWs; support units that mirror player firepower"
+    },
+    {
+      "signal": "parallax_background_depth",
+      "visual_form": "multi-layered scrolling backgrounds with varied speeds",
+      "meaning": "environmental immersion and visual clarity aid; safer navigation zones"
+    },
+    {
+      "signal": "clear_stage_progression",
+      "visual_form": "boss defeat and stage transition visuals",
+      "meaning": "successful world-state transition; mission objective completed"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Galaxy Federation",
+      "color_identity": "typically blue/cyan (player ship Styx color scheme)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Federation-aligned spacecraft, clean technological design aesthetic"
+    },
+    {
+      "faction": "ORN Empire",
+      "color_identity": "red/orange (enemy visual dominant palette)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "heavily mechanized and bio-organic enemy designs across five planets; Cerberus defense system",
+      "environmental_markers": "hostile planetary installations, cloaking device infrastructure, ORN headquarters environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "ORN cloaking devices active (five planets concealed)",
+      "visual_manifestation": "obscured planetary environments with technological defense installations visible; stage design shows protected, fortified structures",
+      "behavioral_manifestation": "increased enemy density and aggressive patterns; stage hazards escalate as player progresses through each cloaking device destruction"
+    },
+    {
+      "world_state": "Cerberus defense system operational",
+      "visual_manifestation": "large-scale enemy sprites and complex attack patterns during stage progressions; visual indicators of remote defense systems",
+      "behavioral_manifestation": "larger enemy waves, complex projectile patterns, stage-wide hazards; difficulty spike reflecting Cerberus efficiency"
+    },
+    {
+      "world_state": "Post-cloaking device destruction (stages 6-8)",
+      "visual_manifestation": "ORN headquarters environment becomes visible; visual transition from planetary stages to empire core aesthetic",
+      "behavioral_manifestation": "enemy patterns and stage design shift from planetary defense to headquarters protection; final boss approach indicated"
+    },
+    {
+      "world_state": "ORN Emperor Cha Os encounter",
+      "visual_manifestation": "bio-computer entity visual design; final stage environment reflecting empire command center",
+      "behavioral_manifestation": "maximum difficulty enemy behavior; complex boss attack patterns; final mission objective manifestation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "planetary_stage_variety",
+      "example": "Five named planets (Hydra, Gorgon, Seiren, Haides, Ellis) each feature distinct visual environments and enemy types reflecting planet-specific ORN installations"
+    },
+    {
+      "technique": "technological_design_language",
+      "example": "ORN Empire environments feature heavy mechanization, bio-organic hybrid designs, and advanced fortification visuals communicating technologically superior but oppressive faction aesthetic"
+    },
+    {
+      "technique": "progression_visual_escalation",
+      "example": "Early stages show planetary surface installations; mid-stages reveal deeper infrastructure; final stages transition to headquarters core, visually narrating player penetration of ORN defenses"
+    },
+    {
+      "technique": "enemy_design_as_worldbuilding",
+      "example": "Large, detailed enemy sprites showcase ORN military capability and technological sophistication; variety across stages suggests empire-wide military deployment"
+    },
+    {
+      "technique": "background_parallax_storytelling",
+      "example": "Intricate, layered backgrounds communicate environmental depth and planetary characteristics; visual richness establishes stakes and scale of conflict"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player ship Styx",
+      "state": "normal operation",
+      "behavior": "responds to directional input; weapon fire synchronized with equipped tool; speed adjustable across four levels"
+    },
+    {
+      "entity": "Player ship Styx",
+      "state": "hit/destroyed",
+      "behavior": "removal of currently equipped weapon (or all weapons on higher difficulty); loss of CLAWs (if active); visual destruction animation; respawn or game over condition"
+    },
+    {
+      "entity": "CLAWs (companion drones)",
+      "state": "active",
+      "behavior": "mimic player ship positioning and fire equipped weapon; maximum two CLAWs operational; lost upon ship destruction"
+    },
+    {
+      "entity": "ORN enemies",
+      "state": "stage presence",
+      "behavior": "increasing density and aggression as stages progress; complex projectile patterns reflecting Cerberus defense system; stage-specific attack formations"
+    },
+    {
+      "entity": "Cloaking devices (5 planets)",
+      "state": "installed",
+      "behavior": "visual representation in stage environment; destruction triggers world-state transition toward headquarters infiltration"
+    }
+  ],
+  "notes": "Thunder Spirits (SNES port of Thunder Force III/AC) communicates faction conflict through visual contrast: Galaxy Federation represented by player's advanced but small Styx craft (blue aesthetic); ORN Empire manifested through dominant red/orange enemy palette, massive mechanized enemy designs, and progressively fortified environments. World-state progression follows three-act structure: (1) five planetary stages with cloaking device destruction, (2) escalating threat from Cerberus system, (3) headquarters infiltration toward bio-computer emperor. Visual manifestation relies heavily on enemy sprite detail, parallax backgrounds, and environmental variation to establish stakes. Danger communicated through enemy density, projectile complexity, and stage hazard escalation. The game removes level selection (vs. Thunder Force III), suggesting linear narrative progression toward defined climax. Weapon system and CLAW mechanics create resource-scarcity tension: loss of equipped weapon on destruction creates tactical pressure and reinforces vulnerability despite Styx's advanced design.",
+  "sources_used": [
+    "wikipedia: Thunder Force III article - gameplay mechanics, plot summary, ORN Empire faction context, Styx craft specifications, stage progression structure"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:13:59.455Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3266,
+    "output_tokens": 2066,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

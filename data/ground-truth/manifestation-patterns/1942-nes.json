@@ -1,0 +1,155 @@
+{
+  "game_id": "1942-nes",
+  "game_name": "1942",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft approach",
+      "visual_form": "Sprite animation of Japanese fighters (Kawasaki Ki-61, Mitsubishi A6M Zero, Kawasaki Ki-48) moving toward player vertically",
+      "meaning": "Imminent collision or projectile threat; requires evasion or destruction"
+    },
+    {
+      "signal": "Enemy projectile fire",
+      "visual_form": "Bullet sprites descending from enemy craft positions",
+      "meaning": "Direct damage risk; collision causes loss of one life"
+    },
+    {
+      "signal": "Boss aircraft (Nakajima G10N)",
+      "visual_form": "Larger sprite, distinct visual differentiation from standard enemies",
+      "meaning": "High-threat encounter; stage climax requiring sustained attack"
+    },
+    {
+      "signal": "Screen filling with enemies",
+      "visual_form": "Dense arrangement of aircraft sprites in play area",
+      "meaning": "Increased difficulty spike; reduced safe navigation space"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Dropped sprite items from destroyed enemies",
+      "meaning": "Temporary advantage; enables escort formation or weapon enhancement"
+    },
+    {
+      "signal": "Escort fighter formation (Tip Tow)",
+      "visual_form": "Two smaller fighter sprites flanking player aircraft",
+      "meaning": "Enhanced firepower and protection; increased damage output"
+    },
+    {
+      "signal": "Roll maneuver (loop out)",
+      "visual_form": "Player aircraft performs temporary out-of-screen looping animation",
+      "meaning": "Invulnerability window; allows avoidance of dangerous situations"
+    },
+    {
+      "signal": "Clear play area",
+      "visual_form": "Reduced enemy sprite density on screen",
+      "meaning": "Safe navigation window; opportunity to advance or recover"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Allied Forces)",
+      "color_identity": null,
+      "symbol_or_sigil": "Lockheed P-38 Lightning 'Super Ace' aircraft",
+      "enemy_visual_variants": "American fighter plane design; distinct from enemy silhouettes",
+      "environmental_markers": "Player sprite positioned at screen bottom, moving upward through Pacific Theater"
+    },
+    {
+      "faction": "Japanese Imperial Air Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Historical Japanese aircraft types (Ki-61, A6M Zero, Ki-48, G10N)",
+      "enemy_visual_variants": "Enemy sprites feature distinct aircraft silhouettes recognizable as Japanese military aircraft from WWII",
+      "environmental_markers": "Enemies descend from top of screen; positioned as obstacles blocking northward progression toward Tokyo"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pacific Theater - Battle of Midway context",
+      "visual_manifestation": "Vertical scrolling stage progression; naval/aerial combat environment; enemy aircraft types historically associated with Pacific War",
+      "behavioral_manifestation": "Player advances upward through increasingly dense enemy formations; goal framed as reaching Tokyo and destroying Japanese air fleet"
+    },
+    {
+      "world_state": "Allied advancement",
+      "visual_manifestation": "Successful enemy destruction removes threats from screen; cleared play space allows northward progression",
+      "behavioral_manifestation": "Destroyed enemies disappear; player advances; stage progresses toward final boss encounter"
+    },
+    {
+      "world_state": "Combat intensity escalation",
+      "visual_manifestation": "Increasing density of enemy sprites; larger enemies appear (Ki-48 bombers vs. Ki-61 fighters); boss aircraft introduction",
+      "behavioral_manifestation": "Enemy fire rate increases; patrol patterns become more aggressive; final stage features Nakajima G10N boss"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Historical aircraft authenticity",
+      "example": "Player controls authentic Lockheed P-38 Lightning; enemies are historically accurate Japanese fighters and bombers from WWII Pacific Theater, establishing authenticity of setting and stakes"
+    },
+    {
+      "technique": "Directional progression narrative",
+      "example": "Vertical scrolling upward toward Tokyo establishes direction of military campaign; enemy aircraft descending from north reinforces geographic context of advancing toward enemy homeland"
+    },
+    {
+      "technique": "Enemy aircraft variety signaling mission stages",
+      "example": "Introduction of different enemy types (Ki-61 interceptors, A6M Zeros, Ki-48 bombers) suggests progression through different combat zones and defensive layers; boss aircraft (G10N) signals final confrontation"
+    },
+    {
+      "technique": "Power-up visual differentiation",
+      "example": "Distinct sprite drops from destroyed enemies signal temporary gameplay rule changes (escort formation, weapon enhancement); visual separation from standard enemies indicates strategic value"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player aircraft (P-38 Lightning)",
+      "state": "Standard operation",
+      "behavior": "Moves left/right at screen bottom; fires continuously upward; responds to player input for evasion and positioning"
+    },
+    {
+      "entity": "Player aircraft (P-38 Lightning)",
+      "state": "Rolling/looping",
+      "behavior": "Temporarily exits play area in looping animation; becomes invulnerable; returns to standard position after maneuver completes"
+    },
+    {
+      "entity": "Kawasaki Ki-61 fighter",
+      "state": "Patrol/approach",
+      "behavior": "Descends from top of screen in formation; fires projectiles; follows predictable movement patterns"
+    },
+    {
+      "entity": "Mitsubishi A6M Zero",
+      "state": "Intercept",
+      "behavior": "Aggressive approach toward player; rapid descent; higher threat level than standard fighters"
+    },
+    {
+      "entity": "Kawasaki Ki-48 bomber",
+      "state": "Bombing run",
+      "behavior": "Slower descent; larger sprite; sustained fire pattern; signals escalating combat difficulty"
+    },
+    {
+      "entity": "Nakajima G10N (boss aircraft)",
+      "state": "Final confrontation",
+      "behavior": "Large sprite; sustained presence on screen; heavy projectile fire; requires multiple hits to defeat; stage climax encounter"
+    },
+    {
+      "entity": "Escort fighters (Tip Tow formation)",
+      "state": "Active escort",
+      "behavior": "Flank player aircraft left and right; mirror player movement; fire independently; visual manifestation of enhanced combat capability"
+    }
+  ],
+  "notes": "1942 uses minimal visual language characteristic of early 1980s arcade design. Danger communication relies on sprite density, enemy type variety (historically authentic aircraft), and projectile visibility. Safety signals manifest through power-up collection and roll mechanic. Faction identity is communicated entirely through aircraft authenticity and directional game flow (player ascending toward enemy territory). World-state changes are signaled by enemy composition shifts and stage progression. The game employs historical authenticity as its primary environmental storytelling method—aircraft types, ascending direction toward Tokyo, and WWII Pacific Theater context establish narrative without explicit story elements. Data sourced from Wikipedia gameplay and development sections; TCRF provided technical asset information.",
+  "sources_used": [
+    "wikipedia - 1942 (video game) - Gameplay section",
+    "wikipedia - 1942 (video game) - Development section",
+    "tcrf - 1942 (NES) - Technical/assets information"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:04:57.141Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4084,
+    "output_tokens": 1925,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

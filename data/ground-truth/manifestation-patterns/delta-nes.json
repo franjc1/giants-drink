@@ -1,0 +1,128 @@
+{
+  "game_id": "delta-nes",
+  "game_name": "Delta",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_formations",
+      "visual_form": "alien bandit ship patterns moving in coordinated waves across screen",
+      "meaning": "active hostile threat requiring player engagement or evasion"
+    },
+    {
+      "signal": "lost_ships",
+      "visual_form": "derelict or damaged spacecraft visuals in environment",
+      "meaning": "environmental hazard and cover for enemy forces; structural danger"
+    },
+    {
+      "signal": "destructive_forces",
+      "visual_form": "unspecified unknown destructive phenomena in Delta Sector space",
+      "meaning": "ambient environmental danger; world-state threat beyond faction conflict"
+    },
+    {
+      "signal": "gray_power_up_blocks",
+      "visual_form": "disabled/unavailable power-up containers rendered in gray coloration",
+      "meaning": "collision hazard; player death if contacted; visual distinction from active pickups"
+    },
+    {
+      "signal": "negative_point_formations",
+      "visual_form": "specific enemy formation visual patterns that subtract power-up points",
+      "meaning": "enemies that weaken player capability; tactical threat requiring identification"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "power_up_blocks",
+      "visual_form": "colored (non-gray) container blocks appearing periodically in play space",
+      "meaning": "safe to collect; provides temporary capability enhancement (speed, fire rate)"
+    },
+    {
+      "signal": "destroyed_wave_completion",
+      "visual_form": "entire enemy formation eliminated/screen cleared",
+      "meaning": "safe state achieved; credits earned; progression moment"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Delta Patrol",
+      "color_identity": null,
+      "symbol_or_sigil": "Delta Sector badge/insignia (not detailed in source)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player-controlled battle cruiser serves as faction visual representative; elite police squadron aesthetic"
+    },
+    {
+      "faction": "Alien Bandits",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "formation patterns distinguish positive-value enemies from negative-value enemies visually",
+      "environmental_markers": "use lost ships and environmental hazards as tactical cover/concealment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Delta Sector under threat",
+      "visual_manifestation": "continuous scrolling environment filled with enemy formations, lost ship debris, unknown destructive forces",
+      "behavioral_manifestation": "enemies spawn in coordinated waves requiring player destruction or evasion; hazards persist"
+    },
+    {
+      "world_state": "player capability degradation",
+      "visual_manifestation": "power-up effect timers expire; UI/gameplay feedback shows capability loss",
+      "behavioral_manifestation": "weapon fire rate and ship speed return to baseline; player must re-engage with power-up system"
+    },
+    {
+      "world_state": "successful player progression",
+      "visual_manifestation": "wave completion screen; credit accumulation display",
+      "behavioral_manifestation": "unlock access to weapon/ship modification menus; increased purchasing power for upgrades"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "lost_ship_placement",
+      "example": "derelict spacecraft scattered through Delta Sector serve as both environmental hazards and narrative evidence of prior conflict/catastrophe"
+    },
+    {
+      "technique": "faction_hiding_mechanics",
+      "example": "alien bandits use lost ships and unknown forces as tactical cover, visually communicating asymmetric warfare and adaptation to sector environment"
+    },
+    {
+      "technique": "power_system_narrative",
+      "example": "temporary power-up effects that degrade over time imply resource scarcity and survival pressure in Delta Sector operations"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "positive_point_formations",
+      "state": "active",
+      "behavior": "move in coordinated patterns; worth destroying for point accumulation"
+    },
+    {
+      "entity": "negative_point_formations",
+      "state": "active",
+      "behavior": "visually distinguishable from positive formations; destroying them penalizes player; requires tactical identification before engagement"
+    },
+    {
+      "entity": "alien_bandit_forces",
+      "state": "concealed",
+      "behavior": "utilize lost ships and environmental phenomena as concealment; ambush-oriented threat model"
+    },
+    {
+      "entity": "gray_power_ups",
+      "state": "unavailable",
+      "behavior": "remain in play space but kill player on contact; visual grayout signals danger rather than opportunity"
+    }
+  ],
+  "notes": "Delta (1987) uses minimal faction/political visual language. The core danger/safety communication occurs through enemy formation recognition and power-up coloration. World-state is primarily communicated through mission progression (wave completion = safety moment) and capability decay (temporary power-up duration). The 'Delta Patrol' vs 'alien bandits' conflict is thematic rather than visually complex; no detailed faction insignia, color schemes, or political symbolism documented. Environmental storytelling relies on lost ships as danger markers and narrative evidence. The game's visual communication strategy is functionally oriented toward moment-to-moment threat identification and resource management rather than world-state nuance.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:12:43.163Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2287,
+    "output_tokens": 1556,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

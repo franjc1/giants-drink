@@ -1,0 +1,158 @@
+{
+  "game_id": "axelay-snes",
+  "game_name": "Axelay",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_fire_patterns",
+      "visual_form": "dense bullet patterns that increase in complexity across loops",
+      "meaning": "escalating threat level; player must adapt defensive positioning"
+    },
+    {
+      "signal": "boss_appearance",
+      "visual_form": "large-scale enemy entities at stage conclusion",
+      "meaning": "mandatory engagement point; stage completion gate"
+    },
+    {
+      "signal": "collision_hazards",
+      "visual_form": "solid stage obstacles in scrolling environment",
+      "meaning": "instant ship destruction; navigation danger distinct from weapon fire"
+    },
+    {
+      "signal": "armada_invasion_aesthetic",
+      "visual_form": "alien-designed structures replacing peaceful planetary landscapes",
+      "meaning": "occupied territory; world-state under enemy control"
+    },
+    {
+      "signal": "weapon_degradation_feedback",
+      "visual_form": "visual weakening of equipped weapon when hit",
+      "meaning": "progressive vulnerability; two-hit vulnerability state before destruction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "weapon_recovery_points",
+      "visual_form": "defeated enemies and stage progression rewards",
+      "meaning": "player gains enhanced loadout capability; increased offensive capacity"
+    },
+    {
+      "signal": "stage_completion",
+      "visual_form": "boss defeat triggers advancement to next stage",
+      "meaning": "safe progression threshold; armory upgrade opportunity"
+    },
+    {
+      "signal": "respawn_mechanism",
+      "visual_form": "immediate reappearance at death location",
+      "meaning": "forgiving failure state; tactical repositioning allowed"
+    },
+    {
+      "signal": "weapon_shield_property",
+      "visual_form": "equipped weapons function as damage absorption",
+      "meaning": "graduated damage system reduces one-hit-kill threat; survivability buffer"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Armada of Annihilation",
+      "color_identity": null,
+      "symbol_or_sigil": "fortress stronghold architecture",
+      "enemy_visual_variants": "diverse alien enemy designs across six invaded planetary environments",
+      "environmental_markers": "fortress of Armada of Annihilation; occupies final stage; visually dominates Illis system planets"
+    },
+    {
+      "faction": "Illis System Allied Forces (implied)",
+      "color_identity": null,
+      "symbol_or_sigil": "D117B fighter craft designation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "peaceful planetary landscapes (before invasion); player operates as system defender"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "pre-invasion equilibrium",
+      "visual_manifestation": "peaceful cloud-covered Cumuluses, functioning space colony Tralieb, populated Urbanite, natural watery Cavern, geothermal Sector 3 Lava Planet",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "active invasion occupation",
+      "visual_manifestation": "alien aesthetic overlaid on planetary environments; enemy forces visible across all six stages; fortress stronghold dominates final stage",
+      "behavioral_manifestation": "dense enemy fire patterns; escalating difficulty across stage progression; boss entities guard stage transitions"
+    },
+    {
+      "world_state": "player mission progress",
+      "visual_manifestation": "recovered D117B weaponry loadout expands after each boss defeat; weapon selection UI reflects accumulated arsenal",
+      "behavioral_manifestation": "player gains three weapon types per stage; can modify fighter between stages based on level requirements"
+    },
+    {
+      "world_state": "post-completion loop",
+      "visual_manifestation": "cycle returns to first stage with visual/mechanical persistence",
+      "behavioral_manifestation": "enemy patterns intensify; bullet density increases; difficulty escalates without narrative reset"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "environmental design progression",
+      "example": "six distinct planetary environments (clouds, space colony, urban center, cavern, lava planet, fortress) communicate Illis system geography and invasion scope"
+    },
+    {
+      "technique": "visual occupation markers",
+      "example": "Armada-designed structures and aesthetic overlay on peaceful planetary landscapes show territorial conquest and destruction of pre-invasion civilization"
+    },
+    {
+      "technique": "pseudo-3D warping effect",
+      "example": "top-down stages use enemy and object warping on screen entry to create depth perception; communicates alien dimensional threat and environmental distortion"
+    },
+    {
+      "technique": "parallax scrolling",
+      "visual_form": "layered background movement in top-down stages",
+      "example": "communicates scale of environments and player traversal through large spaces; suggests vast invaded territory"
+    },
+    {
+      "technique": "fortress as narrative climax",
+      "example": "final stage stronghold visually dominates as enemy command center; architecture signals centralized invasion leadership and mission objective"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "D117B fighter",
+      "state": "armed",
+      "behavior": "fires equipped weapon type; can switch between three active weapon categories freely during levels"
+    },
+    {
+      "entity": "D117B fighter",
+      "state": "hit (weapon degraded)",
+      "behavior": "reduces to weak default weapon version; maintains flight capability; vulnerability increases to two-hit destruction threshold"
+    },
+    {
+      "entity": "D117B fighter",
+      "state": "destroyed",
+      "behavior": "respawns immediately at death location; respawn mechanic communicates non-permanent failure; allows tactical retry without stage restart"
+    },
+    {
+      "entity": "enemy forces",
+      "state": "stage progression",
+      "behavior": "bullet pattern density increases across game loops; communicates escalating threat without narrative reset"
+    },
+    {
+      "entity": "boss entities",
+      "state": "stage-end",
+      "behavior": "mandatory engagement required for stage completion; defeat triggers armory expansion and next stage access"
+    }
+  ],
+  "notes": "Axelay communicates world-state primarily through environmental design (peaceful vs. occupied planetary aesthetics) and mechanical progression (weapon loadout recovery). The faction dynamic is implicit rather than visually explicit—the Armada of Annihilation manifests through architectural style and enemy design rather than color-coding or sigils. Danger signals emphasize graduated vulnerability (weapon degradation) rather than instant-death mechanics, creating a damage-state communication system. The respawn mechanic and weapon-as-shield system visually communicate a forgiving failure model atypical for shmups. Difficulty escalation through bullet density increases communicates mounting threat without narrative justification, suggesting an endless conflict cycle.",
+  "sources_used": [
+    "wikipedia - Axelay (gameplay, plot, development sections)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:11:46.333Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3224,
+    "output_tokens": 1761,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

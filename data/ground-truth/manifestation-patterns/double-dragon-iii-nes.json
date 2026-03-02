@@ -1,0 +1,163 @@
+{
+  "game_id": "double-dragon-iii-nes",
+  "game_name": "Double Dragon III: The Sacred Stones",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence and attack patterns",
+      "visual_form": "Onscreen enemy sprites with distinct character models moving toward player",
+      "meaning": "Active threat requiring combat engagement or evasion"
+    },
+    {
+      "signal": "Health depletion visual indicator",
+      "visual_form": "Player character sprite damage state or HUD health bar reduction",
+      "meaning": "Accumulating damage from enemy attacks; risk of knockout if depleted"
+    },
+    {
+      "signal": "Enclosed stage environment",
+      "visual_form": "Limited lateral movement space, enemies approaching from both sides",
+      "meaning": "High-pressure combat scenario with limited escape routes"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item shop access",
+      "visual_form": "Stage transition screen displaying purchasable items (Energy, Power Up, Weapons, Extra Guys)",
+      "meaning": "Safe preparation period before combat; opportunity to increase survivability"
+    },
+    {
+      "signal": "Extra character availability",
+      "visual_form": "Character swap mechanic; visual replacement of active fighter with reserve fighter",
+      "meaning": "Health reset and tactical advantage through character rotation"
+    },
+    {
+      "signal": "Stage completion",
+      "visual_form": "Final enemy defeated; transition to next mission screen",
+      "meaning": "Temporary safety; progression milestone achieved"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lee Brothers (Billy and Jimmy Lee)",
+      "color_identity": "Blue and Red (traditional series color differentiation)",
+      "symbol_or_sigil": "Twin martial artists; iconic protagonists",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting position at stage entrance; player-controlled characters"
+    },
+    {
+      "faction": "Urquidez Brothers",
+      "color_identity": null,
+      "symbol_or_sigil": "Mixed martial arts champions; alternate playable team",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Available in Mission 1 and Mission 5"
+    },
+    {
+      "faction": "Chin Brothers",
+      "color_identity": null,
+      "symbol_or_sigil": "Tai chi experts; specialist fighting style",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Available in Mission 2"
+    },
+    {
+      "faction": "Ōyama Brothers",
+      "color_identity": null,
+      "symbol_or_sigil": "Karate masters; martial discipline specialists",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Available in Mission 3"
+    },
+    {
+      "faction": "Sonny (Third Lee Sibling)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Palette swap of Lee brothers; third player character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Three-player cabinet exclusive; integrated into player team"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission beginning",
+      "visual_manifestation": "Stage introduction screen showing geographic location (Egypt, etc.); enemy sprite patterns distributed across stage",
+      "behavioral_manifestation": "Enemies spawn in waves or patrol positions; players positioned at stage left entrance"
+    },
+    {
+      "world_state": "Combat engagement",
+      "visual_manifestation": "Multiple enemy sprites visible onscreen; collision detection active; visual feedback from hit interactions",
+      "behavioral_manifestation": "Enemies attack with directional movement; players execute punch/kick/special move animations"
+    },
+    {
+      "world_state": "Player health critical",
+      "visual_manifestation": "Health bar near depletion or character sprite shows damage state (visual wear/damage texture)",
+      "behavioral_manifestation": "Character vulnerability increases; knockback effect more pronounced; risk of stage restart"
+    },
+    {
+      "world_state": "Stage objective complete",
+      "visual_manifestation": "Final boss or enemy wave defeated; stage clear transition animation",
+      "behavioral_manifestation": "Enemies cease spawning; progression to next mission stage unlocked"
+    },
+    {
+      "world_state": "Rosetta Stone quest progression",
+      "visual_manifestation": "Mission structure changes (Mission 1-5); environmental theming shifts (Egypt setting implied through background art)",
+      "behavioral_manifestation": "Different enemy rosters per mission; weapon availability varies by mission (nunchaku in Mission 2, sword in Missions 3 and 5)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-gated character availability",
+      "example": "Urquidez brothers only purchasable/selectable in Missions 1 and 5; implies geographic or narrative availability tied to specific locations in worldwide journey"
+    },
+    {
+      "technique": "Mission-specific weapon distribution",
+      "example": "Nunchaku exclusive to Mission 2; sword appears in Missions 3 and 5; implies regional combat traditions or enemy equipment types"
+    },
+    {
+      "technique": "Character team composition",
+      "example": "Multiple brother-team fighters (Lee, Urquidez, Chin, Ōyama) suggest worldwide martial arts tournament or gathering; cultural representation through fighting style specialist teams"
+    },
+    {
+      "technique": "Item shop stage-gate positioning",
+      "example": "Item shops appear at mission start before combat; visual framing suggests safe harbor or preparation zone before entering hostile territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy combatant",
+      "state": "Alerted/engaged",
+      "behavior": "Moves toward player using joystick directional input; initiates attack animations (punch, kick, or martial arts-specific technique)"
+    },
+    {
+      "entity": "Player character (Lee brothers)",
+      "state": "Combat ready",
+      "behavior": "Can execute standard punch/kick, special moves (solo hurricane kick, jumping throw, running head-butt), coordinate multi-player moves (back-to-back hurricane kick, triangle jump kick)"
+    },
+    {
+      "entity": "Player character (Specialist fighters)",
+      "state": "Combat ready",
+      "behavior": "Execute martial art style-specific techniques; cannot use purchasable weapons (Urquidez, Chin, Ōyama exclusion); inherit special move purchases from previous character"
+    },
+    {
+      "entity": "Player character",
+      "state": "Health depleted",
+      "behavior": "Knockout animation; if extra fighters available, automatic character swap to next reserve fighter; if no reserves, stage restart"
+    },
+    {
+      "entity": "Item shop interface",
+      "state": "Active (stage beginning)",
+      "behavior": "Displays purchasable items; costs one credit per item; player can invest in Energy, Power Up, Tricks, Weapons, or Extra Guys"
+    }
+  ],
+  "notes": "Double Dragon III employs a progression-based visual communication system where mission-gated character availability and weapon types directly signal player capability expansion and world narrative (worldwide journey to collect Rosetta Stones). The item shop mechanic creates distinct 'safe preparation' vs 'active threat' visual states. Faction identity is communicated primarily through character team composition (sibling groups with martial art specialization) rather than visual colors or environmental markers. The NES version inherits these systems from the arcade original but adapts character selection mechanics.",
+  "sources_used": [
+    "wikipedia_double_dragon_3_rosetta_stone"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:38:54.379Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2677,
+    "output_tokens": 1929,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

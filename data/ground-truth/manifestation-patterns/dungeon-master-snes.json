@@ -1,0 +1,144 @@
+{
+  "game_id": "dungeon-master-snes",
+  "game_name": "Dungeon Master",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "creature_proximity_audio",
+      "visual_form": "sound effects indicating nearby enemies",
+      "meaning": "immediate threat presence; real-time danger state"
+    },
+    {
+      "signal": "screamer_enemy_type",
+      "visual_form": "distinct enemy sprite behavior and appearance in combat",
+      "meaning": "hostile entity encountered; battle state active"
+    },
+    {
+      "signal": "dynamic_lighting_reduction",
+      "visual_form": "primitive dynamic lighting changes in dungeon view",
+      "meaning": "environmental hazard or enemy-controlled zones"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "mirror_chamber_sanctuary",
+      "visual_form": "chamber with 24 mirrors containing frozen champions",
+      "meaning": "safe starting zone; recruitment/party selection area"
+    },
+    {
+      "signal": "first_section_containment",
+      "visual_form": "gated or sealed first dungeon section",
+      "meaning": "progression checkpoint; safe learning zone before deeper exploration"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "The Grey Lord (Librasulus)",
+      "color_identity": null,
+      "symbol_or_sigil": "firestaff artifact",
+      "enemy_visual_variants": null,
+      "environmental_markers": "dungeon architecture controlled/inhabited by Grey Lord; firestaff location as faction stronghold"
+    },
+    {
+      "faction": "Lord Chaos",
+      "color_identity": null,
+      "symbol_or_sigil": "antagonist entity",
+      "enemy_visual_variants": "combat encounters as manifestations of chaos corruption",
+      "environmental_markers": "deeper dungeon levels; final confrontation chamber"
+    },
+    {
+      "faction": "Champion Party (Player-controlled)",
+      "color_identity": null,
+      "symbol_or_sigil": "paper doll interface inventory/status representation",
+      "enemy_visual_variants": "party composition shown through selectable frozen champions with fantasy archetypes",
+      "environmental_markers": "party positioning in first-person view; character skill visualization through direct action"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "pre-game_setup",
+      "visual_manifestation": "frozen champions suspended in 24 mirrors; fantasy archetype character models visible as static portraits/forms",
+      "behavioral_manifestation": "player selection mode; champions immobilized, awaiting resurrection"
+    },
+    {
+      "world_state": "active_exploration",
+      "visual_manifestation": "first-person pseudo-3D dungeon view with real-time environmental rendering; characters visible in paper doll interface",
+      "behavioral_manifestation": "party movement through dungeon corridors; real-time encounter triggering; skill improvement through direct action use"
+    },
+    {
+      "world_state": "combat_active",
+      "visual_manifestation": "enlarged first-person combat view with creature sprites; screamer enemies visible with distinct appearance",
+      "behavioral_manifestation": "real-time Active Time Battle system; creatures attack and respond; dynamic lighting shift; audio proximity cues trigger"
+    },
+    {
+      "world_state": "lord_chaos_threat_imminent",
+      "visual_manifestation": "deeper dungeon sections; corruption visual markers; firestaff artifact visible or sought",
+      "behavioral_manifestation": "increased enemy encounters; alternative ending branch if firestaff obtained but player exits dungeon without confrontation"
+    },
+    {
+      "world_state": "firestaff_recovered",
+      "visual_manifestation": "artifact possession indicated in inventory/paper doll interface; visual confirmation of item acquisition",
+      "behavioral_manifestation": "branching narrative: can either confront Lord Chaos for true ending or leave dungeon for alternative ending"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "dungeon_architecture_progression",
+      "example": "first section is gated/contained, forcing player to complete setup before progression; deeper levels correlate with increased threat and lore significance"
+    },
+    {
+      "technique": "artifact_placement_narrative",
+      "example": "firestaff located in dungeon as central quest objective; its recovery directly enables confrontation with Lord Chaos, tying item significance to world-state change"
+    },
+    {
+      "technique": "champion_diversity_worldbuilding",
+      "example": "24 frozen champions based on fantasy archetypes (Barbarian 'Halk', Druid 'Syra Child of Nature', Mage 'Alex Ander', Prophet 'Nabi') convey lore of prior adventurers sent into dungeon; their statuses (frozen/dead) show dungeon's lethal history"
+    },
+    {
+      "technique": "audio_environmental_indicator",
+      "example": "sound effects indicating creature proximity without visual confirmation; creates tension and danger perception through auditory cues rather than visual alone"
+    },
+    {
+      "technique": "dynamic_lighting_state_indication",
+      "example": "primitive dynamic lighting changes suggest environmental hazards, enemy presence, or corrupted zones; light source manipulation communicates world threat level"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "screamers",
+      "state": "hostile_active",
+      "behavior": "engage in real-time combat; sprite animation and positioning indicate threat level; proximity triggers audio alert"
+    },
+    {
+      "entity": "frozen_champions",
+      "state": "dormant_awaiting_selection",
+      "behavior": "suspended in mirrors; immobile; visual archetype presentation (barbarian musculature, natural druid elements) communicates role/class without explicit labels"
+    },
+    {
+      "entity": "Lord_Chaos",
+      "state": "dormant_until_confrontation",
+      "behavior": "final encounter manifestation; firestaff presence/absence determines if player can reach and defeat it; branching behavior based on world-state (player possession of firestaff)"
+    },
+    {
+      "entity": "player_party",
+      "state": "exploring_dungeon",
+      "behavior": "skill improvement through direct action use; paper doll interface shows character status; first-person view reflects party health/capability state"
+    }
+  ],
+  "notes": "Dungeon Master (SNES 1993) communicates world-state primarily through: (1) Real-time audio proximity cues for danger sensing; (2) Paper doll interface showing party composition and status; (3) Dungeon architecture as gated progression system; (4) Artifact (firestaff) as state-change mechanic tied to narrative branches; (5) Champion archetype visuals providing implicit role/faction identity. The game lacks explicit faction color/sigil systems but uses artifact possession, dungeon depth, and encounter escalation to signal political/threat world-states. Dynamic lighting and sound design are primary danger manifestation methods rather than explicit visual warning systems.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:32:26.838Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3223,
+    "output_tokens": 1764,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

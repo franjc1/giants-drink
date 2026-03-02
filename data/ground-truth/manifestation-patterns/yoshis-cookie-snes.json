@@ -1,0 +1,124 @@
+{
+  "game_id": "yoshis-cookie-snes",
+  "game_name": "Yoshi's Cookie",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "grid_overflow",
+      "visual_form": "cookies accumulating from top and right edges of playing field",
+      "meaning": "impending game over state; world-state of failure approaching"
+    },
+    {
+      "signal": "grid_saturation",
+      "visual_form": "playing field population density increasing as new cookies enter",
+      "meaning": "player losing control of the puzzle space; danger escalates with level progression"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "row_column_match_clarity",
+      "visual_form": "same-colored cookies aligned in complete rows or columns visually distinct",
+      "meaning": "player has agency and can clear lines; world-state is manageable"
+    },
+    {
+      "signal": "wildcard_presence",
+      "visual_form": "Yoshi-head-shaped cookie appears on grid",
+      "meaning": "player has tool to force matches of any type; safety valve mechanic"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Yoshi",
+      "color_identity": null,
+      "symbol_or_sigil": "Yoshi-head-shaped cookie (wildcard piece)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Yoshi branding and character licensing in title screen and UI; Yoshi serves as thematic anchor for puzzle aesthetic"
+    },
+    {
+      "faction": "Mario_universe",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario characters in unused versus mode graphics (Mario, Bowser, Peach)",
+      "enemy_visual_variants": "Bowser depicted with surrender flag in unused cutscene; Peach shown as angry in early sprite variants",
+      "environmental_markers": "Nintendo licensing; character appearances in puzzle mode narrative (unused but present in VRAM)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "level_progression",
+      "visual_manifestation": "grid size increases progressively; cookie spawn rate escalates; visual complexity compounds",
+      "behavioral_manifestation": "player rotation mechanics remain constant but puzzle space becomes more constrained; cognitive difficulty rises"
+    },
+    {
+      "world_state": "puzzle_mode_discrete_challenge",
+      "visual_manifestation": "predefined static grid presented; limited number of moves displayed as constraint",
+      "behavioral_manifestation": "player forced to plan ahead; no continuous spawning pressure; tactical vs. reactive gameplay mode"
+    },
+    {
+      "world_state": "versus_mode_competitive",
+      "visual_manifestation": "split-screen layout showing two separate grids side-by-side; opposing player's grid visible",
+      "behavioral_manifestation": "player actions directly disrupt opponent grid; competitive pressure element manifests through visual parity and shared screen real estate"
+    },
+    {
+      "world_state": "game_over",
+      "visual_manifestation": "grid overflow; cookies exceed playfield boundaries; trophy/sad thought bubble graphics (unused but designed)",
+      "behavioral_manifestation": "loss state signaled through sprite expressions (sad thought bubble for loser); winner receives trophy visual"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "cutscene_narrative_framing",
+      "example": "round endings show Yoshi in VRAM; unused cutscenes with Mario obscured by foreground plane suggest narrative progression tied to puzzle rounds"
+    },
+    {
+      "technique": "regional_visual_identity",
+      "example": "BPS logo variants (ornate lion vs. blocky) and copyright screen differences establish regional market positioning; musical stings differ to reinforce regional identity"
+    },
+    {
+      "technique": "thematic_cookie_jar_aesthetic",
+      "example": "NES/Game Boy versions used cookie jar skit in intro; SNES version abandoned this; visual design language shifted between platforms to match hardware capabilities and market expectations"
+    },
+    {
+      "technique": "wildcard_symbolism",
+      "example": "Yoshi-head cookie as wildcard wild-card piece integrates character brand identity directly into puzzle mechanic; visual symbol = game affordance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "cookie_pieces",
+      "state": "matched_row_or_column",
+      "behavior": "pieces clear/disappear from grid; visual feedback confirms player action success"
+    },
+    {
+      "entity": "cookie_spawn_system",
+      "state": "increasing_difficulty",
+      "behavior": "cookies enter from top and right edges at accelerating rate; visual manifestation of escalating pressure"
+    },
+    {
+      "entity": "player_cursor",
+      "state": "active_manipulation",
+      "behavior": "rotates individual lines (Rubik's Cube-style); visual indicator of player agency on grid"
+    },
+    {
+      "entity": "computer_opponent",
+      "state": "versus_mode_active",
+      "behavior": "visible on split-screen competing for same objective; behavioral parity with player creates tension through visual mirroring"
+    }
+  ],
+  "notes": "Yoshi's Cookie is a minimalist puzzle game with limited world-state communication beyond grid saturation and match mechanics. Danger is purely systemic (overflow) rather than narrative/faction-based. The game contains unused character sprite assets suggesting planned versus-mode storytelling (Mario, Bowser, Peach victory/defeat states) that never manifested in final build. Regional visual differences (logo, copyright, intro animations) signal market-specific branding rather than world-state variation. No true faction conflict or political narrative present; game is mechanics-driven aesthetic-light puzzle experience. Wildcard cookie serves as primary non-grid visual communication of player advantage.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:40:21.022Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5261,
+    "output_tokens": 1486,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

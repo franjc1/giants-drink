@@ -1,0 +1,244 @@
+{
+  "game_id": "snow-bros-nes",
+  "game_name": "Snow Bros.: Nick & Tom",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Time pressure mechanic",
+      "visual_form": "Evil pumpkin head spawns when player takes too long to complete level",
+      "meaning": "Player is failing to progress efficiently; danger escalates with inaction"
+    },
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Visual collision with monster sprites",
+      "meaning": "Direct threat to player health; loss of life on contact"
+    },
+    {
+      "signal": "Ghost spawning",
+      "visual_form": "Ethereal ghost entities emerge from pumpkin head after prolonged level time",
+      "meaning": "Unavoidable threat; cannot be killed or stunned; signals critical time pressure failure"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Attacks fired by monsters toward player character",
+      "meaning": "Ranged damage source; loss of life and penalty on hit"
+    },
+    {
+      "signal": "Firepower/speed reduction visual state",
+      "visual_form": "Character animation/behavior change after being hit",
+      "meaning": "Cumulative damage penalty; weakened combat capability until next level"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Snowball encasement",
+      "visual_form": "Enemy covered completely in snow, transformed into immobile ball",
+      "meaning": "Threat neutralized; enemy cannot move or attack"
+    },
+    {
+      "signal": "Partial snow coverage stun",
+      "visual_form": "Enemy partially covered in snow with visible animation of struggling",
+      "meaning": "Temporary threat reduction; enemy immobilized but not eliminated"
+    },
+    {
+      "signal": "Potion items",
+      "visual_form": "Colored bottles dropping from defeated enemies (red, blue, yellow, green)",
+      "meaning": "Temporary power enhancement; increases offensive or defensive capability"
+    },
+    {
+      "signal": "Stage completion",
+      "visual_form": "All enemies eliminated; visual clearing of level",
+      "meaning": "Safety restored; progression to next stage"
+    },
+    {
+      "signal": "Respawn at stage start",
+      "visual_form": "Character teleports back to beginning location after being downed",
+      "meaning": "Second chance; vulnerability window during respawn but goal state unchanged"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player snowmen (Nick & Tom)",
+      "color_identity": "Nick: blue overalls; Tom: red overalls",
+      "symbol_or_sigil": "Snowman form; anthropomorphic snow creatures",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cursed into snowman form by King Scorch (NES version narrative)"
+    },
+    {
+      "faction": "Enemy creatures/monsters",
+      "color_identity": null,
+      "symbol_or_sigil": "Diverse monster sprite designs; distinct from player snowmen",
+      "enemy_visual_variants": "Various monster types with different behaviors and appearances",
+      "environmental_markers": "Populated across 50 stages; thematic progression"
+    },
+    {
+      "faction": "King Scorch (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Represents authoritarian threat; cause of player curse and princess captivity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "NES version: ultimate boss at end of stage progression; represents tyranny"
+    },
+    {
+      "faction": "Princesses Puripuri/Puchipuchi (or Teri/Tina in NES)",
+      "color_identity": null,
+      "symbol_or_sigil": "Objective markers; targets of rescue mission",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Goal entities; motivation for player progression through 50 stages"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal level progression (early/mid-stage)",
+      "visual_manifestation": "Standard enemy sprites; normal level layout; standard color palette",
+      "behavioral_manifestation": "Enemies patrol and attack normally; no time pressure threats visible"
+    },
+    {
+      "world_state": "Time pressure (too long in level)",
+      "visual_manifestation": "Evil pumpkin head appears visually in level space",
+      "behavioral_manifestation": "Pumpkin head hunts player; invincible but can be stunned with snowballs; spawns ghosts"
+    },
+    {
+      "world_state": "Critical time failure (pumpkin spawns ghosts)",
+      "visual_manifestation": "Ghost entities visible; ethereal sprite design contrasting normal enemies",
+      "behavioral_manifestation": "Ghosts travel freely, seek player actively; cannot be killed or stunned; only avoidance possible"
+    },
+    {
+      "world_state": "Boss encounter (every 10th stage)",
+      "visual_manifestation": "Unique boss sprite design distinct from standard enemies",
+      "behavioral_manifestation": "Boss must be defeated before progression; escalated difficulty challenge"
+    },
+    {
+      "world_state": "Enemy partially frozen",
+      "visual_manifestation": "Snow visible on enemy sprite; reduced animation frame rate or idle state",
+      "behavioral_manifestation": "Enemy cannot move; vulnerable to knockback or chain reactions; temporary stun state"
+    },
+    {
+      "world_state": "Enemy fully frozen to snowball",
+      "visual_manifestation": "Enemy sprite replaced with white spherical snowball object",
+      "behavioral_manifestation": "Becomes physics object; can be kicked/rolled; bounces off walls; eliminates other enemies on contact"
+    },
+    {
+      "world_state": "Power-up active (red/blue/yellow/green potion)",
+      "visual_manifestation": "Character sprite or particle effects change; visual indicator of enhancement",
+      "behavioral_manifestation": "Increased speed, snow volume, throwing distance, or flight capability; limited duration buff"
+    },
+    {
+      "world_state": "Player hit/damaged",
+      "visual_manifestation": "Character animation shows damage reaction; possible visual reduction in size or glow",
+      "behavioral_manifestation": "Firepower and speed reset to default; life counter decreases; temporary invincibility window"
+    },
+    {
+      "world_state": "All enemies cleared (one-snowball bonus)",
+      "visual_manifestation": "Money/bonus items fall from top of screen",
+      "behavioral_manifestation": "Scoring bonus triggered; visual reward for efficient play"
+    },
+    {
+      "world_state": "Game over condition",
+      "visual_manifestation": "All lives exhausted; game state transition screen",
+      "behavioral_manifestation": "Player cannot continue without inserting credits (arcade) or game reset"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Color-coded potion system",
+      "example": "Red potion = speed boost; blue = snow volume; yellow = throw distance; green = flight. Visual color immediately communicates power-up function without UI text."
+    },
+    {
+      "technique": "Character costume differentiation",
+      "example": "Nick wears blue overalls, Tom wears red. Visual distinction allows quick player identification in multiplayer and establishes character identity in intro/narrative."
+    },
+    {
+      "technique": "Escalating threat visualization",
+      "example": "Early stages show standard monsters; time pressure introduces pumpkin head; critical failure spawns ghosts. Visual threat complexity communicates stage progression and time state."
+    },
+    {
+      "technique": "Boss encounter visual design",
+      "example": "Every 10th stage features visually distinct boss sprite, signaling story beats and progression milestones without dialogue."
+    },
+    {
+      "technique": "Snowball mechanic as world state indicator",
+      "example": "Enemies transition from mobile threat → partially stunned (visual snow coverage) → immobile snowball (physics object). Visual transformation shows player agency and threat neutralization."
+    },
+    {
+      "technique": "Pumpkin head as time mechanic visualization",
+      "example": "Pumpkin head is tangible visual manifestation of abstract time pressure, making invisible timer visible and threatening."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nick & Tom (player snowmen)",
+      "state": "Normal state",
+      "behavior": "Can throw snow in arc trajectory; movement across platforms; responsive to input"
+    },
+    {
+      "entity": "Nick & Tom",
+      "state": "Powered by red potion",
+      "behavior": "Increased movement speed; faster response time"
+    },
+    {
+      "entity": "Nick & Tom",
+      "state": "Powered by blue potion",
+      "behavior": "Snow spray volume increased; easier enemy coverage; wider attack pattern"
+    },
+    {
+      "entity": "Nick & Tom",
+      "state": "Powered by yellow potion",
+      "behavior": "Snow throw distance increased; longer projectile range"
+    },
+    {
+      "entity": "Nick & Tom",
+      "state": "Powered by green potion",
+      "behavior": "Inflates like balloon; flight capability; can move freely across screen; knockdown attack on enemies"
+    },
+    {
+      "entity": "Nick & Tom",
+      "state": "Recently hit/damaged",
+      "behavior": "Speed reduced to baseline; firepower reduced to baseline; temporary invincibility flash"
+    },
+    {
+      "entity": "Generic monsters/enemies",
+      "state": "Unencumbered",
+      "behavior": "Patrol stage; attack player on proximity; follow programmed AI patterns"
+    },
+    {
+      "entity": "Generic monsters",
+      "state": "Partially covered in snow",
+      "behavior": "Frozen in place; cannot move or attack; animated struggling to shake off snow; vulnerable to knockback"
+    },
+    {
+      "entity": "Generic monsters",
+      "state": "Fully covered (snowball form)",
+      "behavior": "No autonomous movement; becomes physics object; rolls/bounces on impact; chain-reacts with other snowballs"
+    },
+    {
+      "entity": "Evil pumpkin head",
+      "state": "Spawned (time pressure triggered)",
+      "behavior": "Hunts player actively; invincible to normal attacks; can be stunned and repositioned via snowballs; threatens level completion"
+    },
+    {
+      "entity": "Ghosts (spawned by pumpkin)",
+      "state": "Active",
+      "behavior": "Travel freely through level terrain; seek player; cannot be stunned or killed; only avoidance possible; forces evasion gameplay"
+    },
+    {
+      "entity": "Boss monsters (every 10th stage)",
+      "state": "Boss encounter active",
+      "behavior": "Elevated difficulty; must be defeated to progress; likely enhanced damage output or armor vs. standard enemies"
+    }
+  ],
+  "notes": "Snow Bros. NES uses visual state transformation as primary danger/safety signaling system. Enemy transformation from mobile threat → partially frozen → snowball weapon creates cascading visual feedback of player agency. Color-coded potions eliminate need for text-based UI explanations in era-appropriate manner. Time pressure mechanic is uniquely visualized through pumpkin head and ghost spawning, making abstract timer into tangible visual threat. Multiplayer color differentiation (blue/red overalls) establishes character identity without narrative exposition. Boss encounter placement (every 10th stage) creates rhythmic visual story beats. Political narrative (King Scorch tyranny, princess rescue) is minimal in visual presentation but establishes rescue-quest framework.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:39:27.661Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3007,
+    "output_tokens": 2921,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

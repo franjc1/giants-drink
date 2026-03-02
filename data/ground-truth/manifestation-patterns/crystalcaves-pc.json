@@ -1,0 +1,181 @@
+{
+  "game_id": "crystalcaves-pc",
+  "game_name": "Crystal Caves",
+  "platform": "pc",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemies",
+      "visual_form": "Animated hostile entities within cave environments",
+      "meaning": "Threats that reduce player hit points; must be avoided or destroyed with rocket gun"
+    },
+    {
+      "signal": "Obstacles",
+      "visual_form": "Physical barriers and hazards activated by switches",
+      "meaning": "Environmental dangers that block progress or cause damage; can be deactivated via puzzle solving"
+    },
+    {
+      "signal": "Depleted health",
+      "visual_form": "Hit point counter at three maximum (visual representation not specified in source)",
+      "meaning": "Player vulnerability state; losing all hit points returns player to level start"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-ups (P-Pill)",
+      "visual_form": "Collectible item labeled P-Pill",
+      "meaning": "Supercharges rocket gun for one-shot enemy elimination; temporary offensive advantage"
+    },
+    {
+      "signal": "Power-ups (G-Pill)",
+      "visual_form": "Collectible item labeled G-Pill",
+      "meaning": "Reverses gravity; allows ceiling traversal for evasion and puzzle solving"
+    },
+    {
+      "signal": "Power-ups (Stop Signs)",
+      "visual_form": "Collectible item visualized as stop sign symbols",
+      "meaning": "Freezes all on-screen enemies; enables safe passage through danger zones"
+    },
+    {
+      "signal": "Ammunition (Rockets)",
+      "visual_form": "Collectible ammunition pickups",
+      "meaning": "Replenishes rocket gun capacity; player begins with five rockets"
+    },
+    {
+      "signal": "Complete health bonus",
+      "visual_form": "Score increment display (+$50,000)",
+      "meaning": "Finishing level with full hit points grants bonus; signals safe completion state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Character (Mylo Steamwitz)",
+      "color_identity": null,
+      "symbol_or_sigil": "Rocket gun; protagonist avatar",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Crystal collection objective; numbered caves (1-16) in hub level"
+    },
+    {
+      "faction": "Generic Enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Hostile animated sprites",
+      "enemy_visual_variants": "Multiple distinct enemy types implied by gameplay mechanics (some frozen by Stop Signs, all targetable by rockets)",
+      "environmental_markers": "Distributed throughout cave interiors; indicate cave danger level"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Cave accessible and unsolved",
+      "visual_manifestation": "Cave entrance visible in main hub level; entrance door representation",
+      "behavioral_manifestation": "Mylo can enter; level state is fresh with all enemies and obstacles active"
+    },
+    {
+      "world_state": "Cave in-progress (mid-level)",
+      "visual_manifestation": "Puzzle elements: colored doors corresponding to levers; active switches and deactivable obstacles",
+      "behavioral_manifestation": "Enemies patrol actively; obstacles block paths until switches trigger state changes"
+    },
+    {
+      "world_state": "Cave completed with full health",
+      "visual_manifestation": "Level exit reached; bonus score tally screen ($50,000 bonus display)",
+      "behavioral_manifestation": "Player returns to hub; cave remains in 'completed' state"
+    },
+    {
+      "world_state": "Cave abandoned mid-progress",
+      "visual_manifestation": "Level exit triggered without crystal collection; return to hub",
+      "behavioral_manifestation": "All progress in that cave negated; must restart if re-entered"
+    },
+    {
+      "world_state": "Player defeated (health depleted)",
+      "visual_manifestation": "Hit point counter reaches zero; death animation/screen transition",
+      "behavioral_manifestation": "Level restart; player reset to cave entrance with full health"
+    },
+    {
+      "world_state": "Gravity reversed (G-Pill active)",
+      "visual_manifestation": "Visual inversion of level geometry; Mylo sprite inverted/repositioned on ceiling",
+      "behavioral_manifestation": "Player walks on ceiling; gravity-dependent obstacles reverse behavior; temporary mechanic overlay"
+    },
+    {
+      "world_state": "All enemies frozen (Stop Sign active)",
+      "visual_manifestation": "Enemy sprites shift to frozen/stasis visual state (pause effect)",
+      "behavioral_manifestation": "All enemies cease movement; player can freely navigate through normally dangerous zones"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cave diversity and progression",
+      "example": "16 distinct caves in hub level with player freedom to choose order; visual design implies increasing difficulty/complexity as player advances"
+    },
+    {
+      "technique": "Puzzle-lock visual communication",
+      "example": "Colored doors matched to lever switches; visual consistency between lock color and switch output tells player puzzle dependency structure"
+    },
+    {
+      "technique": "Economic narrative framing",
+      "example": "Crystal collection as currency proxy; score display in dollars ($50,000 bonus) reinforces protagonist's get-rich-quick motivations across three volume plot"
+    },
+    {
+      "technique": "Spatial storytelling via hub design",
+      "example": "Main level layout presenting all 16 cave entrances simultaneously; visual scale and arrangement communicate scope of adventure"
+    },
+    {
+      "technique": "Power-up visual identity",
+      "example": "Distinct collectible labels (P-Pill, G-Pill, Stop Signs) function as visual language teaching players mechanic availability without text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mylo Steamwitz (Player)",
+      "state": "Normal movement",
+      "behavior": "Side-scrolling platformer locomotion; constrained by gravity and obstacles"
+    },
+    {
+      "entity": "Mylo Steamwitz (Player)",
+      "state": "Armed with rocket gun",
+      "behavior": "Can fire projectiles to destroy enemies and breakable obstacles; ammunition limited (starts with 5 rockets)"
+    },
+    {
+      "entity": "Mylo Steamwitz (Player)",
+      "state": "G-Pill active",
+      "behavior": "Gravity inverts; Mylo can walk on ceiling; enables alternative pathfinding and evasion"
+    },
+    {
+      "entity": "Mylo Steamwitz (Player)",
+      "state": "P-Pill active",
+      "behavior": "Rocket gun supercharged; single shot eliminates all enemy types; temporary offensive advantage"
+    },
+    {
+      "entity": "Enemies (Generic)",
+      "state": "Unaware/Active",
+      "behavior": "Patrol cave areas; approach and attack player; vulnerable to rocket fire"
+    },
+    {
+      "entity": "Enemies (Generic)",
+      "state": "Stop Sign active",
+      "behavior": "Freeze in place; cease all movement and aggression; become harmless obstacles"
+    },
+    {
+      "entity": "Obstacles (Switches/Doors)",
+      "state": "Inactive",
+      "behavior": "Block pathways; remain in default state until lever pulled"
+    },
+    {
+      "entity": "Obstacles (Switches/Doors)",
+      "state": "Activated",
+      "behavior": "State change triggered by matching lever; colored door opens; path clears or new hazard appears"
+    }
+  ],
+  "notes": "Crystal Caves employs a minimal visual language typical of 1991 MS-DOS platformers. The game communicates world-state primarily through: (1) spatial level design (hub model with 16 cave entrances), (2) visual state flags (locked/unlocked doors, enemy presence, collectible pickups), and (3) player avatar transformation (inverted sprite during G-Pill). Danger is signaled through enemy presence and active obstacles; safety through power-up availability and puzzle solutions. The three-episode narrative structure maps to distinct world-states in the plot, but these are communicated textually rather than visually within gameplay. No faction conflict or political situation is present; the game is a resource-collection adventure. Environmental storytelling relies on puzzle-lock visual consistency and economic metaphor (crystals as currency).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:41:16.615Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3032,
+    "output_tokens": 2141,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

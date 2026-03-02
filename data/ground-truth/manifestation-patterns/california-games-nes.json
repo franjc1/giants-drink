@@ -1,0 +1,137 @@
+{
+  "game_id": "california-games-nes",
+  "game_name": "California Games",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Course obstacles",
+      "visual_form": "Environmental hazards within each sport event (surfboard wipeouts, BMX crashes, footbag misses)",
+      "meaning": "Physical failure states; loss of performance score"
+    },
+    {
+      "signal": "Speed loss",
+      "visual_form": "Slowing animation in roller skating and BMX events",
+      "meaning": "Worsening performance state; risk of course timeout"
+    },
+    {
+      "signal": "Fall/collision animation",
+      "visual_form": "Character sprite tumbling or stopping abruptly",
+      "meaning": "Event failure or performance penalty"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear course path",
+      "visual_form": "Open skateable/rideable terrain with visible boundaries",
+      "meaning": "Safe progression; good performance conditions"
+    },
+    {
+      "signal": "Smooth terrain",
+      "visual_form": "Flat, unobstructed visual surface in skating/BMX sections",
+      "meaning": "Optimal performance opportunity"
+    },
+    {
+      "signal": "Wave presence (Surfing)",
+      "visual_form": "Visible incoming surf with clear rolling water animation",
+      "meaning": "Surfable opportunity; safe zone for the active event"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "California Sports Community (implicit)",
+      "color_identity": null,
+      "symbol_or_sigil": "Half-pipe symbol, surfboard icon, BMX bike icon, footbag icon, roller skates icon, flying disc icon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "California-themed locations: beach (surfing), skate parks (half-pipe, BMX), urban areas (roller skating), open fields (footbag, flying disc)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Event in progress",
+      "visual_manifestation": "Active sport scene with animated character, moving obstacles, scrolling/parallax background",
+      "behavioral_manifestation": "Player character continuously moving/performing; real-time score counter active; timer running"
+    },
+    {
+      "world_state": "Event completion",
+      "visual_manifestation": "Final score screen with player results, rankings comparison, hi-score table display",
+      "behavioral_manifestation": "Input acceptance for menu navigation; score locked; transition to next event or menu state"
+    },
+    {
+      "world_state": "High performance (good execution)",
+      "visual_manifestation": "Smooth animation, character maintaining stable position, positive visual feedback (score increments)",
+      "behavioral_manifestation": "Continued forward momentum; score accumulation; no collision states triggered"
+    },
+    {
+      "world_state": "Low performance (poor execution)",
+      "visual_manifestation": "Character animation showing strain or disruption; visual shake or stagger effect",
+      "behavioral_manifestation": "Reduced movement speed; score stagnation or penalty; collision/fall animation triggers"
+    },
+    {
+      "world_state": "Multiple event progression",
+      "visual_manifestation": "Event selection screen with 6 sport icons selectable; visual menu layout with California thematic elements",
+      "behavioral_manifestation": "Input acceptance for sport selection; transition between different event engines"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sport-specific location design",
+      "example": "Surfing event set on California beach with ocean background; half-pipe in concrete skate park with urban architecture; footbag in open outdoor plaza"
+    },
+    {
+      "technique": "Character name integration (Easter egg)",
+      "example": "Player name entry field allows custom identification; specific names (PAUL/RACHEL) trigger hidden developer message (PP & RME) on rollerskating course ground texture"
+    },
+    {
+      "technique": "Score persistence across sessions",
+      "example": "Hi-score table display with named entries; developer names (Paul Proctor, Rachel M. Edwards initials) embedded in default records communicates authorship and game persistence"
+    },
+    {
+      "technique": "Regional visual/audio variation",
+      "example": "European version removed developer name references from hi-score table and rollerskating ground text; surfing theme received new musical composition by David Wise, signaling content localization"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (all sports)",
+      "state": "Active performance",
+      "behavior": "Continuous animation cycle with directional response to input; physics-based movement (momentum, gravity in surfing/BMX)"
+    },
+    {
+      "entity": "Player character (collision)",
+      "state": "Failed action",
+      "behavior": "Immediate animation stop or fall frame; loss of forward momentum; temporary control lockout"
+    },
+    {
+      "entity": "Obstacles (BMX, half-pipe)",
+      "state": "Present on course",
+      "behavior": "Static or predictable movement patterns; visual contrast to safe terrain; collision detection triggers penalty"
+    },
+    {
+      "entity": "Wave (Surfing)",
+      "state": "Incoming",
+      "behavior": "Animated rolling motion; player must be positioned to ride it; missed waves trigger failure state"
+    },
+    {
+      "entity": "Score counter (all sports)",
+      "state": "During event",
+      "behavior": "Real-time increment on successful actions; visual prominence on screen; updates with each positive action execution"
+    }
+  ],
+  "notes": "California Games NES (1989, Rare) is a non-narrative sports collection game with minimal world-state complexity. Danger and safety signals are purely mechanical/performance-based rather than thematic. No faction warfare or political systems exist. Environmental storytelling relies primarily on location authenticity (California-specific sports venues) and subtle developer signatures. The game's primary manifestation system communicates player performance state through animation, collision, and score feedback rather than world narrative. Regional differences (music swap, text removal) indicate post-development content adaptation but no gameplay world-state changes. The paradigm is purely competitive sports mechanics with no emergent narrative or political simulation elements.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (California Games NES article)",
+    "wikipedia - California Games article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:23:26.588Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4547,
+    "output_tokens": 1604,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

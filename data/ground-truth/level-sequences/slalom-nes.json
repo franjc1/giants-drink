@@ -1,0 +1,139 @@
+{
+  "game_id": "slalom-nes",
+  "game_name": "Slalom",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "level_count": 24,
+  "world_count": 3,
+  "element_introduction_order": [
+    {
+      "element": "Basic downhill skiing mechanics",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "safe",
+      "mastery_context": "foundational control of descent and speed management"
+    },
+    {
+      "element": "Flag navigation (slalom gates)",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "safe",
+      "mastery_context": "penalty system: wrong side of flag causes snowplow/slowdown"
+    },
+    {
+      "element": "Static obstacles (trees, snowmen)",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "avoidance or jump-over mechanics introduced"
+    },
+    {
+      "element": "Moguls (terrain bumps)",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "airborne state triggers, enables freestyle trick opportunities"
+    },
+    {
+      "element": "Freestyle trick system",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "bonus points available; failed tricks cause tumble/time loss"
+    },
+    {
+      "element": "Dynamic obstacles (sledders, other skiers)",
+      "first_appears": "Snowy Hill (Mountain 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "unpredictable collision avoidance, increases spatial complexity"
+    },
+    {
+      "element": "Solo runs (qualifying-based)",
+      "first_appears": "After first mountain completion",
+      "introduction_context": "dangerous",
+      "mastery_context": "earned through qualifying points; higher difficulty, time pressure intensifies"
+    },
+    {
+      "element": "Steep Peak (intermediate mountain)",
+      "first_appears": "Mountain 2",
+      "introduction_context": "dangerous",
+      "mastery_context": "increased obstacle density and speed expectations"
+    },
+    {
+      "element": "Mount Nasty (expert mountain)",
+      "first_appears": "Mountain 3",
+      "introduction_context": "dangerous",
+      "mastery_context": "maximum difficulty; expert-only challenge"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "successful flag navigation without snowplow",
+      "clean obstacle avoidance",
+      "completing mogul jump without tumble",
+      "reaching finish line within time limit",
+      "accumulating points for solo run bonus time"
+    ],
+    "typical_tension_triggers": [
+      "approaching flags (need to navigate correct side)",
+      "encountering moguls (risk/reward of airborne tricks)",
+      "dynamic obstacles appearing (collision hazard)",
+      "time running low on timer",
+      "solo run mode (no qualifying crutch, pure skill test)"
+    ],
+    "pacing_descriptor": "wave-based: alternating between relaxed navigation zones and concentrated obstacle sequences; tension escalates across three difficulty-tiered mountains; solo runs break rhythm with high-stakes pressure segments"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "moguls and trick opportunities are optional skill expressions; player can choose safe descent vs. risky airborne maneuvers for bonus points",
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Snowy Hill: foundational obstacle types (static trees, basic flags, gentle moguls); establishes core mechanics without overwhelming density; linear introduction of mechanics across 8 runs",
+    "mid_game": "Steep Peak: intermediate challenge; increased obstacle density and collision frequency; moguls and dynamic obstacles appear more often; 8 runs with compounding complexity",
+    "late_game": "Mount Nasty: expert difficulty; maximum obstacle concentration and speed demands; solo run conversions become more frequent; 8 runs representing mastery test",
+    "notable_spikes": [
+      "first solo run after earning qualifying points (shift from guided to self-reliant pacing)",
+      "transition from Snowy Hill to Steep Peak (sudden density increase)",
+      "transition from Steep Peak to Mount Nasty (collision hazard maximization)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Qualifying Run → Solo Run Progression",
+      "description": "Qualifying runs feature other skiers and relaxed time limits; successful point accumulation unlocks solo runs where player races alone with converted points as bonus time. Creates rhythm shift and difficulty spike within same mountain.",
+      "example_level": "Any transition between runs within a mountain"
+    },
+    {
+      "pattern_name": "Three-Mountain Difficulty Tiering",
+      "description": "Game offers three selectable mountains (Snowy Hill, Steep Peak, Mount Nasty) allowing player choice of difficulty progression. Each mountain contains 8 runs with escalating complexity within its tier.",
+      "example_level": "Mountain 1-3 selection"
+    },
+    {
+      "pattern_name": "Obstacle Density Escalation",
+      "description": "Early runs use sparse, isolated obstacles; mid-runs cluster obstacles together; late-runs maximize collision hazards and require rapid decision-making. Static obstacles give way to dynamic obstacle mixing.",
+      "example_level": "Snowy Hill Run 1 vs. Mount Nasty Run 8"
+    },
+    {
+      "pattern_name": "Freestyle Trick Risk/Reward",
+      "description": "Moguls present optional airborne state where players can perform tricks for bonus points but risk tumbles if failed. Encourages replay and mastery-driven replayability within single runs.",
+      "example_level": "All runs containing moguls (all mountains)"
+    }
+  ],
+  "sources_used": [
+    "Wikipedia - Slalom (video game)",
+    "The Cutting Room Floor - Slalom (NES)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:21:00.562Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3775,
+    "output_tokens": 1603,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

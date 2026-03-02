@@ -1,0 +1,115 @@
+{
+  "game_id": "turbo-outrun-genesis",
+  "game_name": "Turbo OutRun",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Ferrari F40 vehicle control",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "basic acceleration and steering without obstacles"
+    },
+    {
+      "element": "Turbo boost mechanic",
+      "first_appears": "early race",
+      "introduction_context": "moderate",
+      "mastery_context": "managing engine temperature gauge to avoid overheating while maintaining speed advantage"
+    },
+    {
+      "element": "CPU opponent (Porsche 959)",
+      "first_appears": "race start",
+      "introduction_context": "moderate",
+      "mastery_context": "competing for position and sub-goal checkpoints; losing girlfriend if opponent reaches checkpoint first"
+    },
+    {
+      "element": "Police cars as obstacles",
+      "first_appears": "mid-race sequences",
+      "introduction_context": "dangerous",
+      "mastery_context": "either outrunning with turbo boost or ramming off-road into environmental objects"
+    },
+    {
+      "element": "Upgrade stations at sub-goals",
+      "first_appears": "after ~4 cities",
+      "introduction_context": "moderate",
+      "mastery_context": "strategic choice between Hi-Power Engine, Special Turbo, or Super Grip Tires to customize vehicle attributes"
+    },
+    {
+      "element": "Girlfriend system (relationship mechanic)",
+      "first_appears": "first sub-goal checkpoint",
+      "introduction_context": "moderate",
+      "mastery_context": "maintaining position advantage over CPU to keep girlfriend in player's car; bonus points and kiss animation if maintained through final checkpoint"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "reaching sub-goal checkpoint safely",
+      "turbo boost cooldown allowing speed recovery",
+      "outrunning police cars successfully",
+      "selecting vehicle upgrades at stations",
+      "opening distance from CPU opponent"
+    ],
+    "typical_tension_triggers": [
+      "engine temperature approaching OVERHEAT limit",
+      "police cars appearing on course",
+      "CPU opponent closing distance or reaching checkpoint first",
+      "girlfriend transferred to opponent's car",
+      "time pressure toward Los Angeles destination"
+    ],
+    "pacing_descriptor": "continuous escalating pressure: linear single-path race from NYC to LA with periodic relief at checkpoints but constant CPU rivalry and turbo management tension"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "introductory: basic vehicle control and turbo boost mechanics without significant obstacles",
+    "mid_game": "escalating: police cars introduced, CPU opponent becomes aggressive, upgrade choices provide strategic complexity",
+    "late_game": "climactic: sustained competition with CPU, continuous police interference, resource management (turbo temperature) becomes critical",
+    "notable_spikes": [
+      "first police car encounter requiring ramming or evasion",
+      "CPU opponent reaching sub-goal before player and taking girlfriend",
+      "final checkpoint approach with accumulated difficulty"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear checkpoint progression",
+      "description": "Game consists of single predetermined path from New York City to Los Angeles divided into segments of approximately 4 cities each, culminating in sub-goal checkpoints where upgrades are available. No branching routes.",
+      "example_level": "NYC to first checkpoint"
+    },
+    {
+      "pattern_name": "CPU rivalry interludes",
+      "description": "At each sub-goal checkpoint, CPU opponent's arrival order determines game state changes. If CPU reaches first, girlfriend transfers to opponent's car, raising stakes for next segment.",
+      "example_level": "any sub-goal checkpoint"
+    },
+    {
+      "pattern_name": "Police chase sequences",
+      "description": "Police cars periodically spawn during race segments and must be either outrun via turbo boost or physically rammed off-road into environmental obstacles to clear the path.",
+      "example_level": "mid-race segments after early checkpoints"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:33:54.846Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3393,
+    "output_tokens": 1288,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

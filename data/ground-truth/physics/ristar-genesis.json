@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "game": "Ristar: The Shooting Star",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Sega",
+    "developer": "Sonic Team",
+    "sources": [
+      {
+        "name": "TASVideos — Genesis / Ristar",
+        "url": "https://tasvideos.org/286G",
+        "notes": "Speedrun documentation. Grab-cancel trick, bounce-boost trick, pole swing acceleration, Shooting Star Mode (6+ revolutions)."
+      },
+      {
+        "name": "TASVideos submission — Genesis Ristar",
+        "url": "https://tasvideos.org/1078S",
+        "notes": "Technique explanations in submission notes."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DEFINING MECHANIC: Ristar does not have a standard attack — he extends his arms to GRAB enemies and objects, then headbutts them.",
+      "Ristar cannot damage enemies by contact — must grab and deliver the headbutt.",
+      "Pole swinging provides acceleration — multiple revolutions increase speed, eventually entering 'Shooting Star Mode' after 6 revolutions.",
+      "Physics are similar to Sonic 1 (same developer, same era) but the grab system creates completely different gameplay.",
+      "256 sub-pixel system likely (Sega Genesis Sonic Team standard), but Ristar-specific values not fully documented in reviewed sources.",
+      "Ristar is one of the most mechanically distinctive Sega Genesis platformers despite commercial underperformance."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    },
+    "subpixel_system": {
+      "description": "Likely 256 sub-pixels (Sega Genesis Sonic Team standard). Needs ROM-level verification specific to Ristar.",
+      "confidence": "low"
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Approximate from gameplay observation. Ristar is not a speed-focused character — movement is deliberate. VERIFY."
+    },
+    "notes": "Ristar's ground movement is less central to gameplay than the grab system. Most level interaction happens via grabbing."
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "notes": "Standard jump. Variable height. VERIFY exact values."
+  },
+
+  "grab_system": {
+    "_note": "THE CORE MECHANIC. Ristar's arms extend in the pressed direction to grab enemies and objects.",
+    "arm_extension": {
+      "directions": 4,
+      "available": ["up", "down", "left", "right"],
+      "extension_reach_approx_tiles": 1.5,
+      "confidence": "low",
+      "notes": "Ristar extends arms in the held direction. Arms pass through enemies until grabbing one."
+    },
+    "headbutt": {
+      "description": "After grabbing an enemy, pulling back and releasing swings Ristar forward into a headbutt.",
+      "damage": "primary attack method",
+      "notes": [
+        "The grab-and-headbutt is the ONLY standard attack.",
+        "Enemy contact without grabbing does not damage the enemy — Ristar takes damage instead.",
+        "This inverts the typical platformer hitbox relationship: contact = you get hurt, not them."
+      ]
+    },
+    "grab_cancel": {
+      "description": "Grab with no target available — allows positioning or momentum manipulation.",
+      "source": "TASVideos: 'Grab-cancel trick'",
+      "notes": "Used in speedruns for movement optimization."
+    },
+    "bounce_boost": {
+      "description": "Grab and bounce off an object diagonally behind you for a speed boost.",
+      "source": "TASVideos: 'Bounce-boost trick'",
+      "notes": "Exploits the grab's elastic momentum."
+    }
+  },
+
+  "pole_swinging": {
+    "description": "Ristar can grab poles and swing around them in revolutions.",
+    "acceleration": {
+      "description": "Each full revolution around a pole increases Ristar's speed.",
+      "shooting_star_mode": {
+        "trigger": "6+ full revolutions",
+        "description": "Ristar enters 'Shooting Star Mode' — arms glow, launches at high velocity upon release.",
+        "source": "TASVideos documentation",
+        "confidence": "high",
+        "notes": "Shooting Star Mode is the primary high-speed traversal technique in speedruns."
+      }
+    },
+    "notes": [
+      "Pole swing acceleration rewards patient, deliberate execution — the longer you spin, the faster you launch.",
+      "6.5 revolutions confirmed by TASVideos as the threshold for Shooting Star Mode.",
+      "Release angle from the pole determines launch direction."
+    ]
+  },
+
+  "hitboxes": {
+    "ristar_standing": {
+      "notes": "Ristar is a round star character — hitbox likely circular or nearly so. VERIFY.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The grab-and-headbutt system inverts the standard platformer combat model. Typically: player contact damages enemies. In Ristar: player contact damages you; you must grab, set up, and deliver the headbutt. This creates combat with a 'fishing' or 'wrestling' rhythm instead of the normal attack-and-dodge.",
+    "The pole swing acceleration mechanic creates a high-skill speedrun layer: patient players who spend extra time spinning poles can reach much higher launch velocities. This is 'windup' game design — the reward is proportional to the time invested in a single preparation action.",
+    "The grab arm's directionality (up/down/left/right) creates a combat vocabulary: horizontal grabs for most enemies, vertical grabs for elevated or low targets. Level design uses enemy placement to create situations where the grab direction is the key decision.",
+    "Ristar is a masterclass in using a single unique mechanic to differentiate a game. In 1995, the Genesis had many platformers — Ristar's grab system made it instantly distinct. The grab is used for combat, traversal (pole swinging), and puzzle solving.",
+    "The Shooting Star Mode (6 rotations → high-speed launch) gives skilled players a payoff that's both visually spectacular and mechanically rewarding. This is 'mastery payoff' design: the game rewards investment of setup time with a dramatic effect."
+  ]
+}

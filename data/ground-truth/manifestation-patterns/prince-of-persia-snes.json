@@ -1,0 +1,294 @@
+{
+  "game_id": "prince-of-persia-snes",
+  "game_name": "Prince of Persia",
+  "platform": "snes",
+  "paradigm": "cinematic platformer",
+  "danger_signals": [
+    {
+      "signal": "Spike traps",
+      "visual_form": "Protruding spikes from floor/walls, typically rendered as sharp geometric shapes",
+      "meaning": "Instant death hazard - player must avoid contact"
+    },
+    {
+      "signal": "Deep pits",
+      "visual_form": "Vertical drops of three or more story heights, visual discontinuity in level floor",
+      "meaning": "Instant death fall hazard - crossing or falling triggers death"
+    },
+    {
+      "signal": "Guillotines",
+      "visual_form": "Descending blade mechanisms, sharp metallic visual with temporal motion",
+      "meaning": "Timed instant-kill trap - player must time passage before blade descends"
+    },
+    {
+      "signal": "Blue potions/jars",
+      "visual_form": "Colored glass jars in blue hue, distinguished from red healing potions",
+      "meaning": "Poisonous consumable - reduces health by one unit if ingested"
+    },
+    {
+      "signal": "Enemy swordsmen",
+      "visual_form": "Animated guard characters with drawn swords, distinct from protagonist",
+      "meaning": "Combat threat - health reduction through melee attack or avoidable engagement"
+    },
+    {
+      "signal": "Skeletal swordsman (Level 3)",
+      "visual_form": "Undead animated skeleton sprite with sword, visually distinct bone-based appearance",
+      "meaning": "Unkillable by normal sword combat - requires environmental trap execution"
+    },
+    {
+      "signal": "Magic mirror manifestation",
+      "visual_form": "Reflective surface with ominous visual presentation, accompanied by distinct leitmotif",
+      "meaning": "Trap that creates doppelgänger - indicates loss of health to one unit and recurring hindrance"
+    },
+    {
+      "signal": "Shadow doppelgänger (Level 12)",
+      "visual_form": "Darkened mirror image of protagonist, visually synchronized movements",
+      "meaning": "Symbolic danger - shared health pool makes traditional combat ineffective, requires merger solution"
+    },
+    {
+      "signal": "Falling rocks",
+      "visual_form": "Descending stone projectiles from ceiling, visual impact animation",
+      "meaning": "Environmental damage - reduces health by one unit on contact"
+    },
+    {
+      "signal": "High falls (two+ stories)",
+      "visual_form": "Vertical descent across multiple level platforms",
+      "meaning": "Impact damage - reduces health by one unit per fall"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Red potions (small jars)",
+      "visual_form": "Small glass jars rendered in red color, scattered throughout levels",
+      "meaning": "Healing consumable - restores one health indicator unit"
+    },
+    {
+      "signal": "Large red potions",
+      "visual_form": "Oversized red potion jars, visually distinguished by scale from small potions",
+      "meaning": "Permanent health upgrade - increases maximum health indicator capacity by one"
+    },
+    {
+      "signal": "Green potions (standard)",
+      "visual_form": "Large jars rendered in green hue",
+      "meaning": "Hover ability grant - temporary protective flight capability"
+    },
+    {
+      "signal": "Green potions (display inversion)",
+      "visual_form": "Large green jars in specific levels (Level 9), identical visual form to standard green",
+      "meaning": "Display distortion effect - turns game screen upside-down (later reversed by restoration potion)"
+    },
+    {
+      "signal": "Gate activation triggers",
+      "visual_form": "Floor pressure plates or marked zones, visually distinct from regular floor",
+      "meaning": "Opens gates for limited duration - enables passage through barriers"
+    },
+    {
+      "signal": "Princess presence (Level 8)",
+      "visual_form": "White mouse visual manifestation sent by imprisoned princess",
+      "meaning": "Allied assistance - triggers gate opening, indicates narrative progression and non-hostile entity"
+    },
+    {
+      "signal": "Sword acquisition (Level 1)",
+      "visual_form": "Obtainable weapon sprite, visually distinct from environment",
+      "meaning": "Essential combat tool - enables player to fight swordsmen and progress"
+    },
+    {
+      "signal": "Invisible bridge (Level 12)",
+      "visual_form": "Visual absence/gap in environment, becomes traversable after doppelgänger merger",
+      "meaning": "Safe passage enabled by narrative progression - crossing reaches final confrontation area"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Protagonist (Prince)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sword as identifier of player agency",
+      "enemy_visual_variants": "Shadow doppelgänger (Level 12) and mirror doppelgänger (Level 4) serve as inverted visual echoes",
+      "environmental_markers": "Princess's white mouse ally indicates faction alignment; castle fortress setting represents objective territory"
+    },
+    {
+      "faction": "Jaffar (Grand Vizier/Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pentagram (removed in international versions due to censorship)",
+      "enemy_visual_variants": "Swordsman guards under Jaffar's command; skeletal swordsman as undead servant in Level 3",
+      "environmental_markers": "Final battle arena contains pentagram ground marking (Japan version); throne room pentagram on wall (Japan version); tower fortress as seat of power"
+    },
+    {
+      "faction": "Princess (Imprisoned)",
+      "color_identity": null,
+      "symbol_or_sigil": "White mouse as communication proxy",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Top floor of tower (mentioned in narrative); locked away state indicates captive status within Jaffar's domain"
+    },
+    {
+      "faction": "Guards/Swordsmen (Jaffar's forces)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Standard swordsmen with health indicators; skeletal variant in Level 3",
+      "environmental_markers": "Appear throughout dungeon levels; teleporter tile association (Level 15 glitch context)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Time pressure (60 minutes standard, 120 in SNES)",
+      "visual_manifestation": "On-screen timer countdown visible during gameplay; time penalty mechanic when respawning after death",
+      "behavioral_manifestation": "Enemy swordsmen aggression levels; NPC helper (white mouse) appearance triggered at specific narrative moments; final escape requirement before timer expiration"
+    },
+    {
+      "world_state": "Health degradation (player damage taken)",
+      "visual_manifestation": "Health indicator represented as series of small red triangles at bottom screen; reduction count displays damage accumulation; zero health triggers death state",
+      "behavioral_manifestation": "Protagonist movement becomes restricted; combat capability reduced; forced level restart with time penalty carries forward"
+    },
+    {
+      "world_state": "Doppelgänger emergence (Level 4 mirror trap)",
+      "visual_manifestation": "Mirror surface manifestation with ominous leitmotif audio cue; shadow figure sprite emerges mirroring protagonist appearance",
+      "behavioral_manifestation": "Doppelgänger applies health drain to protagonist (reduces to one unit); subsequent levels show doppelgänger stealing potions (Level 5), throwing protagonist into pit (Level 6-7); Level 12 requires merger rather than combat"
+    },
+    {
+      "world_state": "Locked gate state",
+      "visual_manifestation": "Barrier sprites blocking progression; gates rendered as metal or wooden barriers; locked state shows visual closure",
+      "behavioral_manifestation": "Player must locate and stand on activation trigger; gate opens temporarily; window closes if not crossed; Level 8 requires external assistance (white mouse) to open gate"
+    },
+    {
+      "world_state": "Princess imprisonment",
+      "visual_manifestation": "Tower fortress architecture; top-floor location inaccessible until final confrontation; pentagrams marking Jaffar's magical seal (Japan version)",
+      "behavioral_manifestation": "Princess sends white mouse in Level 8 as only communication; captive state maintained until Jaffar defeats; spell breaking enables rescue animation"
+    },
+    {
+      "world_state": "Jaffar's magical dominion",
+      "visual_manifestation": "Pentagrams on doors (Level 19), throne room walls, and final battle ground (all Japan version); removed in international versions indicating supernatural control",
+      "behavioral_manifestation": "Undead skeleton animation in Level 3; doppelgänger supernatural emergence; magic mirror trap mechanics; invisible bridge revelation only after doppelgänger merger"
+    },
+    {
+      "world_state": "Victory state (Jaffar defeated)",
+      "visual_manifestation": "Spell breaking animation; protagonist embraces princess in ending cutscene; timer stops and remaining time displays on high score screen",
+      "behavioral_manifestation": "Final gate passage becomes available; princess becomes interactive NPC; level completion triggers game-over protection even if time expires"
+    },
+    {
+      "world_state": "Display inversion (Level 9 green potion)",
+      "visual_manifestation": "Entire game screen renders upside-down; visual disorientation of level layout",
+      "behavioral_manifestation": "Player controls invert; navigation becomes challenging; reversal potion restores normal display"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural hierarchy and tower ascension",
+      "example": "Player progression from dungeons through levels toward tower fortress indicates spatial journey toward Jaffar and princess; vertical architecture communicates power structure with Jaffar at top"
+    },
+    {
+      "technique": "Pentagram environmental markers",
+      "example": "Pentagrams on doors, throne room, and final battle arena (Japan version) visually communicate supernatural dominion and Jaffar's dark magic influence; removal in international versions signals different narrative emphasis"
+    },
+    {
+      "technique": "Potion color coding",
+      "example": "Red potions = healing; blue potions = poison; green potions = special abilities; visual color distinction immediately communicates consumable function without text"
+    },
+    {
+      "technique": "Mirror trap and doppelgänger manifestation",
+      "example": "Magic mirror appearance with ominous leitmotif creates environmental narrative of self-conflict and magical curse; doppelgänger's subsequent hindrance tells story of personal struggle and lost agency"
+    },
+    {
+      "technique": "NPC helper appearance",
+      "example": "White mouse in Level 8 sent by princess communicates: princess awareness of protagonist's predicament, non-hostile faction support, narrative progression point, and hope within captivity"
+    },
+    {
+      "technique": "Skeleton animation in Level 3",
+      "example": "Undead enemy sprite communicates Jaffar's magical power to animate dead; indicates trap-based rather than combat-based solution required, teaching player that supernatural threats require special handling"
+    },
+    {
+      "technique": "Torture scene removal (regional difference)",
+      "example": "Japanese version shows protagonist beaten and dragged by guards during intro narrative; international removal alters power dynamic storytelling and reduces graphic violence, changing world-state narrative tone"
+    },
+    {
+      "technique": "Timer countdown mechanic",
+      "example": "60-minute (120 in SNES) time limit communicates urgency and Princess's danger; time penalty on death reinforces stakes; remaining time display on victory indicates efficiency reward"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Protagonist (Prince)",
+      "state": "Healthy",
+      "behavior": "Fluid animation movement using rotoscoped reference; sword combat maneuvers available (advance, back off, slash, parry, parry-then-slash); acrobatic platform traversal"
+    },
+    {
+      "entity": "Protagonist (Prince)",
+      "state": "Low health",
+      "behavior": "Same moveset available; visual indicator shows reduced health triangle count; heightened vulnerability to any additional damage"
+    },
+    {
+      "entity": "Protagonist (Prince)",
+      "state": "Dead",
+      "behavior": "Level restart from beginning; timer penalty carries forward (does not reset); unused beheaded and impaled death animations indicate original grimdark intent before censorship"
+    },
+    {
+      "entity": "Protagonist (Prince)",
+      "state": "Doppelgänger cursed (Levels 5-6)",
+      "behavior": "Shadow figure steals potions and creates obstruction; throws protagonist into pits; separate entity behavioral autonomy indicates magical curse rather than mechanical trap"
+    },
+    {
+      "entity": "Protagonist (Prince)",
+      "state": "Merged with doppelgänger (Level 12)",
+      "behavior": "Can traverse invisible bridge (only accessible after merger); shadow form integration enables new level area access; communicates narrative progression through mechanical enablement"
+    },
+    {
+      "entity": "Enemy swordsmen (Jaffar's guards)",
+      "state": "Patrolling/Idle",
+      "behavior": "Positioned at level entrances and corridors; animations indicate readiness stance; health indicators visible when engaged"
+    },
+    {
+      "entity": "Enemy swordsmen (Jaffar's guards)",
+      "state": "Combat engaged",
+      "behavior": "Responsive sword maneuvers (advance, slash, parry); health depletion tracking; can be eliminated by sword or environmental trap push; behavioral AI mirrors protagonist combat options"
+    },
+    {
+      "entity": "Skeletal swordsman (Level 3)",
+      "state": "Active",
+      "behavior": "Cannot be killed by sword despite health indicator; only defeats by pit-fall execution; communicates supernatural nature through mechanic difference"
+    },
+    {
+      "entity": "Jaffar (Grand Vizier)",
+      "state": "Imprisoned princess captor",
+      "behavior": "Present as final boss in tower; spelled doppelgänger creates multi-stage confrontation; victory breaks spell and enables rescue"
+    },
+    {
+      "entity": "Princess",
+      "state": "Imprisoned (Levels 1-11)",
+      "behavior": "Sends white mouse helper in Level 8; communicates through proxy; indicates awareness and agency despite captivity"
+    },
+    {
+      "entity": "Princess",
+      "state": "Rescued (Level 12 end)",
+      "behavior": "Interactive NPC in ending cutscene; embraces protagonist; presence ends game narrative"
+    },
+    {
+      "entity": "White mouse (Princess's proxy)",
+      "state": "Level 8 appearance",
+      "behavior": "Triggers gate opening; non-combat ally; movement pattern indicates directed purpose; visual distinction as small white sprite communicates benign faction"
+    },
+    {
+      "entity": "Magic mirror doppelgänger",
+      "state": "Level 4 manifestation",
+      "behavior": "Emerges from mirror surface; applies health drain to protagonist (reduces to one); becomes recurring obstacle; Level 12 version shares health pool making combat impossible"
+    },
+    {
+      "entity": "Environmental traps (spikes, guillotines, pits)",
+      "state": "Active/Waiting",
+      "behavior": "Stationary instant-kill mechanisms; temporal guillotine requires timing awareness; pit falls indicate level layout danger zones; behavior is pure mechanical without agency"
+    }
+  ],
+  "notes": "Prince of Persia (SNES 1992) is a port of the original 1989 Apple II game using rotoscoped animation for fluid character movement. Key manifestation patterns include: (1) Color-coded consumables for immediate visual communication of function; (2) Health indicator triangles at screen bottom providing persistent world-state feedback; (3) Pentagram imagery denoting Jaffar's supernatural control (censored in international versions); (4) Doppelgänger and mirror mechanics communicating internal conflict and magical curse; (5) Time-pressure timer creating urgency narrative; (6) Environmental architecture (dungeon-to-tower progression) reflecting faction dominance hierarchy; (7) Regional differences revealing narrative tone shifts (torture scene removal, pentagram censorship, vowel removal in passwords). The game communicates danger primarily through visual design (spike/pit/guillotine shapes) and color-coding, with world-state changes manifested through sprite animation changes (doppelgänger emergence), environmental modifications (gate states), and mechanical restrictions (health reduction, shared health mechanics). Faction identity relies on environmental placement and NPC helper presence rather than explicit color schemes.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Prince of Persia SNES)",
+    "wikipedia (Prince of Persia 1989 video game article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:35:42.714Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4713,
+    "output_tokens": 4210,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

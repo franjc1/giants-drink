@@ -1,0 +1,168 @@
+{
+  "_meta": {
+    "game": "Demon's Crest",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Demon's Crest",
+        "url": "https://en.wikipedia.org/wiki/Demon%27s_Crest",
+        "notes": "6 crest system, Metroidvania structure, Firebrand mechanics."
+      },
+      {
+        "name": "Speedrun.com — Demon's Crest",
+        "url": "https://www.speedrun.com/demonscrest",
+        "notes": "Speedrun community mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Demon's Crest is the third and final game in the Gargoyle's Quest series. Firebrand's ultimate game.",
+      "DEFINING MECHANIC: The Crest system — 6 crests that transform Firebrand's abilities. A Metroidvania built around form upgrades.",
+      "Retains wall cling and hover from Gargoyle's Quest II but dramatically expands with new forms.",
+      "The crests don't just give new attacks — they change Firebrand's physics and traversal capabilities.",
+      "True ending only accessible by collecting all 6 crests before facing the final boss.",
+      "Features a shop (Dr. Phibes) and multiple endings based on crest collection.",
+      "Considered an underrated SNES gem — commercially unsuccessful but critically acclaimed decades later."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "base_physics": {
+    "_note": "Firebrand's default (Fire Crest) physics. Foundation for all other crest variations.",
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Deliberate pace — Firebrand is powerful, not fast. VERIFY."
+    },
+    "jump": {
+      "height_px_approx": 40,
+      "variable_height": true,
+      "air_control": "full",
+      "confidence": "low"
+    },
+    "wall_cling": {
+      "description": "Grab vertical surfaces. Climb up, descend slowly, launch off.",
+      "notes": "Retained from Gargoyle's Quest II — same mechanic."
+    },
+    "hover": {
+      "description": "Press jump again in air — flap wings for limited hover.",
+      "stamina": "Wing stamina bar depletes during hover. Refills on ground or wall contact.",
+      "notes": "Retained and improved from Gargoyle's Quest II."
+    }
+  },
+
+  "crest_system": {
+    "_note": "THE DEFINING MECHANIC. 6 crests = 6 different Firebrand transformations. Metroidvania structure.",
+    "fire_crest": {
+      "tier": "Base",
+      "description": "Default form. Standard fireball attack, hover, wall cling.",
+      "notes": "Starting form. All other crests build on this."
+    },
+    "earth_crest": {
+      "tier": 1,
+      "description": "Firebrand in earth-element form.",
+      "new_capabilities": [
+        "Walk through spike traps without damage",
+        "Destroy cracked rock walls by charging into them",
+        "Fireball becomes earth-element"
+      ],
+      "notes": "Opens previously inaccessible areas with spike floors and rock walls."
+    },
+    "heaven_crest": {
+      "tier": 2,
+      "description": "Air/Heaven element form. Enhanced flight.",
+      "new_capabilities": [
+        "Enhanced hover — longer duration and more altitude control",
+        "Some sources describe this as enabling true flight rather than hover"
+      ],
+      "notes": "Dramatically expands vertical traversal. Some ceiling-areas only accessible in Heaven form.",
+      "confidence": "medium"
+    },
+    "time_crest": {
+      "tier": 3,
+      "description": "Time element form.",
+      "new_capabilities": [
+        "Slows time in the environment — Firebrand moves at normal speed, enemies move slower",
+        "Time-slowed sections become more manageable"
+      ],
+      "notes": "The time slowdown is a situational tool — activatable, not constant.",
+      "confidence": "medium"
+    },
+    "water_crest": {
+      "tier": 4,
+      "description": "Water element form.",
+      "new_capabilities": [
+        "Underwater traversal without penalty",
+        "Water-element fireball"
+      ],
+      "notes": "Opens underwater areas. VERIFY specific capabilities."
+    },
+    "infinity_crest": {
+      "tier": "Secret",
+      "description": "Found in a specific hidden location. Not required for standard ending.",
+      "new_capabilities": [
+        "Infinite fireball — massive projectile",
+        "Most powerful standard form"
+      ],
+      "notes": "Secret form for players who explore thoroughly."
+    },
+    "all_crests": {
+      "tier": "True form",
+      "description": "Collecting all 6 crests unlocks the true final form.",
+      "new_capabilities": [
+        "Combined abilities from all crests",
+        "Access to true final boss and true ending"
+      ],
+      "notes": "Required for the true ending. Multiple playthroughs may be needed to find all crests."
+    }
+  },
+
+  "combat": {
+    "fireball": {
+      "description": "Firebrand's primary projectile. Crest determines element and behavior.",
+      "notes": "Each crest changes the fireball's appearance, element, and potentially trajectory."
+    },
+    "buster": {
+      "description": "Close-range attack. Firebrand charges forward.",
+      "notes": "Melee range."
+    }
+  },
+
+  "shop": {
+    "proprietor": "Dr. Phibes",
+    "currency": "Vials (red and blue)",
+    "items": [
+      "Health upgrades",
+      "Magic point upgrades",
+      "Hints about crest locations",
+      "Various expendable items"
+    ],
+    "notes": "The shop enables persistent progression between stages — currency saved across play sessions."
+  },
+
+  "endings": {
+    "standard_ending": "Defeat final boss without all crests — reveals incomplete story.",
+    "true_ending": "Collect all 6 crests including Infinity Crest, then defeat true final boss — full story.",
+    "notes": "Multiple ending system incentivizes thorough exploration."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Demon's Crest is the pinnacle of the Gargoyle's Quest design language — the same wall-cling/hover foundation from GQ2 becomes a launchpad for six distinct physical identities. The 'which crest is best for this area?' question is the game's central puzzle, applied not to a puzzle switch but to Firebrand's own body.",
+    "The Earth Crest's ability to walk through spikes is a profound shift in threat perception: spike floors that previously defined an impassable boundary become walkable terrain. The player's mental map of 'danger zones' must be redrawn with each new crest. Environment meaning is crest-dependent.",
+    "Demon's Crest's commercial failure (despite critical appreciation) is a case study in timing and marketing: it released against Donkey Kong Country in holiday 1994 — one of the most technically impressive games of the era. The comparison was impossible to survive commercially.",
+    "The true ending requirement (collect all 6 crests first) respects the player who explores thoroughly. Casual players get a complete but lesser experience. Thorough players get the true story. This is depth rewarding depth — the game recognizes different engagement levels and gives proportional payoff.",
+    "Firebrand as protagonist across three games (GQ, GQ2, DC) represents Capcom's willingness to invest in a 'villain protagonist' franchise in the late 16-bit era. By Demon's Crest, Firebrand had more mechanical depth than most hero characters of his era."
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "game_id": "twinbee-nes",
+  "game_name": "TwinBee",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_bullets",
+      "visual_form": "projectiles fired by on-screen enemies",
+      "meaning": "direct threat to player; single hit causes loss of life unless ship has barrier protection"
+    },
+    {
+      "signal": "enemy_contact",
+      "visual_form": "collision with enemy aircraft or ground units",
+      "meaning": "immediate danger; results in arm loss or death depending on ship integrity"
+    },
+    {
+      "signal": "arm_loss",
+      "visual_form": "visible removal of ship's arms/weapon appendages",
+      "meaning": "degraded combat capability; loss of bomb-dropping ability; increased vulnerability"
+    },
+    {
+      "signal": "no_ambulance_arrival",
+      "visual_form": "absence of ambulance sprite after second arm loss",
+      "meaning": "permanent incapacitation; no repair available; critical game-over state imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "barrier_effect",
+      "visual_form": "red bell power-up; visual shield overlay around ship",
+      "meaning": "temporary invulnerability; absorbs additional damage; critical defensive state"
+    },
+    {
+      "signal": "ambulance_arrival",
+      "visual_form": "ambulance vehicle sprite descending into play area after first arm loss",
+      "meaning": "safe recovery opportunity; player can navigate to it to restore arm functionality"
+    },
+    {
+      "signal": "yellow_bell",
+      "visual_form": "yellow bell power-up from clouds",
+      "meaning": "bonus points only; safe to collect but no combat benefit"
+    },
+    {
+      "signal": "star_power_up",
+      "visual_form": "star sprite from ground enemies",
+      "meaning": "screen-clear effect; eliminates all on-screen threats; temporary safety surge"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player_Aircraft",
+      "color_identity": "cartoon-styled anthropomorphic spacecraft (visual identity varies by character: TwinBee vs WinBee)",
+      "symbol_or_sigil": "bell iconography (primary power-up system identity)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "clouds containing hidden bells; ambulance vehicles for player support"
+    },
+    {
+      "faction": "Enemy_Forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "air enemies (shoot bullets) vs ground enemies (drop bombs or release power-ups)",
+      "environmental_markers": "enemy aircraft patterns; ground-based defensive units"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "player_fully_armed",
+      "visual_manifestation": "ship displays both weapon arms; full bomb-dropping capability visible",
+      "behavioral_manifestation": "player can execute dual attacks (air and ground targets); cooperative dual-ship attacks available in two-player mode"
+    },
+    {
+      "world_state": "player_single_arm_loss",
+      "visual_manifestation": "one arm missing from ship sprite; asymmetrical appearance",
+      "behavioral_manifestation": "bomb-dropping disabled; ambulance appears on screen; player must navigate to ambulance for repair"
+    },
+    {
+      "world_state": "player_double_arm_loss",
+      "visual_manifestation": "both arms missing; ship appears armless/unarmed",
+      "behavioral_manifestation": "no bomb capability; no ambulance arrives second time; player movement only; high vulnerability state"
+    },
+    {
+      "world_state": "barrier_active",
+      "visual_manifestation": "shield overlay or barrier visual effect around ship (red bell state)",
+      "behavioral_manifestation": "player can absorb additional hits without arm loss; temporary invulnerability window"
+    },
+    {
+      "world_state": "powered_up_twin_cannon",
+      "visual_manifestation": "ship displays enhanced weapon configuration (white bell effect)",
+      "behavioral_manifestation": "increased firepower; dual bullet stream replaces single fire"
+    },
+    {
+      "world_state": "powered_up_speed",
+      "visual_manifestation": "ship may display visual speed indicator or increased animation frames (blue bell, up to 5 levels)",
+      "behavioral_manifestation": "enhanced ship mobility; navigation capability increases; dodge potential improves"
+    },
+    {
+      "world_state": "duplication_active",
+      "visual_manifestation": "image copies of ship visible alongside primary vessel (green bell effect)",
+      "behavioral_manifestation": "multiple firepower sources; coordinated attack pattern; significantly increased offensive capability"
+    },
+    {
+      "world_state": "screen_clear_active",
+      "visual_manifestation": "all on-screen enemies eliminated simultaneously; visual eruption or removal effect",
+      "behavioral_manifestation": "temporary threat elimination; brief safety window; enemy respawn follows"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "power_up_source_location",
+      "example": "bells hidden in floating clouds (sky territory); ground enemies drop alternate power-ups. Visually communicates resource scarcity and risk-reward (must shoot clouds to reveal bells, exposing ship to fire)"
+    },
+    {
+      "technique": "medical_support_integration",
+      "example": "ambulance sprite arrival after arm damage. Communicates game world acknowledges player vulnerability; repair services exist as in-world safety net; visual representation of game-world logic (medical response to injury)"
+    },
+    {
+      "technique": "dual_player_synchronization",
+      "example": "two-player vertical or horizontal alignment enables cooperative attacks. Visual togetherness signals enhanced power state; communicates teamwork mechanic through spatial relationship"
+    },
+    {
+      "technique": "arm_loss_degradation",
+      "example": "visible removal of ship appendages; loss of bomb functionality tied to physical appearance change. Visually maps damage to capability loss; clear cause-effect relationship"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "TwinBee_Ship",
+      "state": "fully_armed",
+      "behavior": "can fire air weapons and drop bombs; standard movement speed; participates in collaborative attacks in two-player mode"
+    },
+    {
+      "entity": "TwinBee_Ship",
+      "state": "single_arm_loss",
+      "behavior": "cannot drop bombs; can still fire air weapons; reduced offensive output; must seek ambulance sprite"
+    },
+    {
+      "entity": "TwinBee_Ship",
+      "state": "double_arm_loss",
+      "behavior": "cannot fire or drop bombs; movement only; vulnerable to all incoming fire; no repair option available"
+    },
+    {
+      "entity": "Enemy_Aircraft",
+      "state": "active",
+      "behavior": "scrolls down screen in attack patterns; fires projectiles at player ship; visible threat indicator"
+    },
+    {
+      "entity": "Ground_Enemies",
+      "state": "active",
+      "behavior": "stationary or defensive; drop bombs upward or release power-up items; indicate zone control"
+    },
+    {
+      "entity": "Ambulance",
+      "state": "summoned",
+      "behavior": "descends into play area after first arm loss; awaits player collision for repair; disappears if collected or round ends"
+    },
+    {
+      "entity": "Clouds",
+      "state": "hiding_power_ups",
+      "behavior": "initially inert; reveal bells only when shot; communicate hidden resource availability"
+    }
+  ],
+  "notes": "TwinBee uses visual damage degradation (arm loss) as core world-state communication mechanic. Power-up system (colored bells) directly maps to visual ship modifications and behavioral capability changes. The ambulance system is unique narrative element: failure to reach it communicates permanent incapacitation. Two-player cooperation mechanics are visually reinforced through synchronized positioning. No faction conflict narrative present; threat model is generic enemy forces vs player craft. Cute aesthetics mask harsh difficulty curve—power-up loss upon death creates visual/mechanical feedback loop. Environmental storytelling relies on cloud-concealment mechanic and medical-response system rather than narrative/political elements.",
+  "sources_used": [
+    "wikipedia: TwinBee gameplay section, power-up system documentation, ambulance mechanics, damage system, cooperative attack mechanics"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:06:46.503Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2901,
+    "output_tokens": 2118,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

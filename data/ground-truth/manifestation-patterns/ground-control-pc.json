@@ -1,0 +1,172 @@
+{
+  "game_id": "ground-control-pc",
+  "game_name": "Ground Control",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit presence",
+      "visual_form": "Unit sprites/models rendered in enemy faction colors and visual styles",
+      "meaning": "Active hostile threat requiring tactical response"
+    },
+    {
+      "signal": "Suppressive fire effect",
+      "visual_form": "Visual feedback on units being suppressed (reduced accuracy animation/effect)",
+      "meaning": "Unit is under fire and combat effectiveness is degraded"
+    },
+    {
+      "signal": "High ground enemy position",
+      "visual_form": "Enemy units positioned on elevated terrain with clear line-of-sight advantage",
+      "meaning": "Tactical vulnerability; enemy has accuracy/range advantage and can target weak points (topside) of armored units"
+    },
+    {
+      "signal": "Armor damage state",
+      "visual_form": "Visual degradation of unit models (damage indicators, visual wear)",
+      "meaning": "Unit integrity compromised; continued exposure increases elimination risk"
+    },
+    {
+      "signal": "Ambush opportunity",
+      "visual_form": "Enemy units concealed in shadows or foliage before engagement",
+      "meaning": "Undetected threat; scouting failure creates vulnerability to coordinated attack"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly unit clustering",
+      "visual_form": "Multiple units of same faction positioned in formation",
+      "meaning": "Mutual support available; reduced isolation vulnerability"
+    },
+    {
+      "signal": "High ground advantage",
+      "visual_form": "Player units positioned on elevated terrain",
+      "meaning": "Increased accuracy, sight range, and tactical vantage for topside armor strikes"
+    },
+    {
+      "signal": "Support unit proximity",
+      "visual_form": "Anti-air, repair, or medical units nearby primary combat units",
+      "meaning": "Specialized support available; role-specific vulnerabilities mitigated"
+    },
+    {
+      "signal": "Concealment in terrain",
+      "visual_form": "Infantry units positioned in shadows or foliage",
+      "meaning": "Unit camouflaged from enemy detection; reduced engagement risk before first strike"
+    },
+    {
+      "signal": "Flanking position",
+      "visual_form": "Units positioned to side/rear of enemy armored units rather than frontal",
+      "meaning": "Attack against weak points; armor less effective from these angles"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Crayven Corporation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Heavy armor aesthetic; traditional ballistics weaponry; ground-based movement; hardier unit construction; Jaeger Infantry (four-man sniper squads)",
+      "environmental_markers": "Unit visual language emphasizes durability and conventional military doctrine"
+    },
+    {
+      "faction": "Order of the New Dawn",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Hover propulsion system visual (floating stance); energy weaponry (distinct visual effects); faster/more mobile unit silhouettes; Templar Infantry (all-female anti-tank specialists with missile launchers)",
+      "environmental_markers": "Unit visual language emphasizes speed, energy technology, and specialized anti-armor capability"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission start - deployment phase",
+      "visual_manifestation": "Orbital dropships visible delivering units to battlefield; units emerging from dropship landing zones",
+      "behavioral_manifestation": "Units begin in staged deployment positions; no reinforcement mechanic available after initial drop"
+    },
+    {
+      "world_state": "Active combat - resource scarcity",
+      "visual_manifestation": "No resource gathering or base construction visible; only pre-loaded squad composition manifest",
+      "behavioral_manifestation": "Players must manage finite squad loadout; no economic expansion possible; limited special weapon uses (typically 2-3 per mission, single-use for high-impact abilities)"
+    },
+    {
+      "world_state": "Tactical advantage - terrain control",
+      "visual_manifestation": "High ground areas clearly distinguishable; shadow/foliage areas visually distinct for concealment potential",
+      "behavioral_manifestation": "Unit accuracy, sight range, and armor vulnerability change based on elevation and positioning"
+    },
+    {
+      "world_state": "Unit specialization - role differentiation",
+      "visual_manifestation": "Distinct visual models for vehicle, support, aircraft, and infantry categories; unique silhouettes per unit type; faction-specific unit variants visually distinct",
+      "behavioral_manifestation": "Each unit type exhibits unique strengths/weaknesses; players must coordinate multi-role squads to achieve objectives"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Faction aesthetic differentiation",
+      "example": "Crayven units display heavy armor, traditional ballistics, ground-based movement; Order of the New Dawn units display hover systems, energy weapons, increased speed — visual design communicates philosophical and technological differences without exposition"
+    },
+    {
+      "technique": "Terrain as tactical narrative",
+      "example": "High ground positions, shadows, foliage, and armor weak points (topside) are all visually presented as environmental storytelling elements that communicate optimal tactical positioning and vulnerability states"
+    },
+    {
+      "technique": "Unit composition visibility",
+      "example": "Squad loadout screen and pre-mission configuration show how player choices materialize on battlefield; special weapons and equipment choices are visually distinct on units"
+    },
+    {
+      "technique": "Spatial depth and camera control",
+      "example": "Bird's-eye to ground-level camera perspective allows players to perceive battlefield topology, concealment opportunities, and line-of-sight factors — visual communication of tactical possibilities"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Heavy armor units (tanks)",
+      "state": "Frontal engagement",
+      "behavior": "High armor effectiveness; resistant to damage from forward direction"
+    },
+    {
+      "entity": "Heavy armor units (tanks)",
+      "state": "Side/rear/topside attack",
+      "behavior": "Significantly reduced armor effectiveness; vulnerable to flanking and high-ground attacks"
+    },
+    {
+      "entity": "Infantry units (general)",
+      "state": "Suppressive fire received",
+      "behavior": "Reduced accuracy in return fire; visual degradation in attack effectiveness"
+    },
+    {
+      "entity": "Infantry units (concealed in foliage/shadow)",
+      "state": "Before detection",
+      "behavior": "Camouflaged; undetected by enemy until direct engagement or scout reconnaissance"
+    },
+    {
+      "entity": "Crayven Jaeger Infantry",
+      "state": "Scouting role",
+      "behavior": "Four-man sniper squad; effective for reconnaissance and target identification"
+    },
+    {
+      "entity": "Order of the New Dawn Templar Infantry",
+      "state": "Anti-tank role",
+      "behavior": "All-female squadron with powerful anti-tank missile launchers; cannot attack infantry targets; specialized anti-armor combat role"
+    },
+    {
+      "entity": "Support units (repair/medical)",
+      "state": "Proximity to damaged units",
+      "behavior": "Can restore unit integrity through repair kits or medkits; finite uses per mission"
+    },
+    {
+      "entity": "Anti-air units",
+      "state": "Aircraft threat present",
+      "behavior": "Provide protective fire against aerial units; role-specific counter to aircraft threats"
+    }
+  ],
+  "notes": "Ground Control communicates world-state primarily through asymmetric faction visual design and tactical terrain features rather than dynamic environmental changes. The absence of resource management and reinforcement mechanics is itself a visual/systemic communication: no base structures, no resource flows, no economic visualization. Faction identity is conveyed through unit aesthetic (armor vs. hover, ballistics vs. energy), specialist unit differences (snipers vs. anti-tank), and implied technological/philosophical differences. Danger is communicated through spatial positioning (high ground, concealment), armor weakness states, and suppression effects. The game emphasizes player perception of tactical opportunity rather than narrative environmental storytelling.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:05:37.763Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2405,
+    "output_tokens": 2084,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

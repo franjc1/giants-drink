@@ -1,0 +1,148 @@
+{
+  "game_id": "zanac-nes",
+  "game_name": "Zanac",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": 12,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Main cannon (rapid-fire)",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Player starts with basic rapid-fire; upgrades via blue box power-ups throughout all levels"
+    },
+    {
+      "element": "Blue box power-ups (main cannon upgrades)",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Periodically descend from top of screen; increase bullet count and speed with each collection"
+    },
+    {
+      "element": "Specialty weapons (8 types, numbered 1-8)",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Eight distinct weapons available from start; collected via numbered power-ups; range from directional bullets to shields to indestructible projectiles"
+    },
+    {
+      "element": "Enemy aircraft (bullet-shooting)",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "Basic enemies; difficulty scales via ALC system based on player skill"
+    },
+    {
+      "element": "Meteors and projectiles",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary collision hazards throughout all levels"
+    },
+    {
+      "element": "Ground turrets",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "Stationary threats; appear in fortress boss encounters"
+    },
+    {
+      "element": "Bullet-resistant disks",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Require sustained fire or specialty weapons to destroy"
+    },
+    {
+      "element": "Reconnaissance planes",
+      "first_appears": "Early-to-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Destroying these reduces ALC difficulty; incentivizes specific tactical choices"
+    },
+    {
+      "element": "Mini-bosses (large enemy ships)",
+      "first_appears": "Early levels (throughout game)",
+      "introduction_context": "dangerous",
+      "mastery_context": "More resistant to weaponry; bullets repelled; change color as damaged; appear throughout all levels with increasing frequency"
+    },
+    {
+      "element": "Fortress bosses (stationary, turret-based)",
+      "first_appears": "Level 1 (Area 1)",
+      "introduction_context": "dangerous",
+      "mastery_context": "One or more per stage; all turrets must be destroyed within time limit for bonus points; primary level-ending encounters"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Destroying fortress boss within time limit",
+      "Collecting power-up blue boxes",
+      "Destroying reconnaissance planes (reduces ALC)",
+      "Starting new level (resets ALC downward)",
+      "Temporary invincibility after respawn",
+      "Level completion"
+    ],
+    "typical_tension_triggers": [
+      "Frequent main cannon fire (increases ALC)",
+      "Collecting power-ups (increases ALC)",
+      "Failing to destroy fortress within time limit (increases ALC)",
+      "Mini-boss encounters",
+      "Fortress turret gauntlets",
+      "Enemy density increases (via ALC scaling)"
+    ],
+    "pacing_descriptor": "Fast-paced with adaptive difficulty scaling; tension continuously builds via ALC system that responds to player aggression and skill; fortress encounters serve as climactic tension peaks followed by relief at level transition"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": "Pressing A+B at game over or credits screen reveals hidden message ('SEE YOU AGAIN IN GUARDIC')",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Moderate initial challenge; ALC starts low for inexperienced players; basic enemy types and simple fortress patterns introduced",
+    "mid_game": "Escalating difficulty via ALC adaptive scaling; mini-bosses increase in frequency and resistance; fortress complexity grows; player skill directly determines enemy density",
+    "late_game": "Peak difficulty if player has performed well (high ALC); Areas 10-12 feature densest enemy patterns, most aggressive mini-bosses, and complex fortress designs; time-pressure on boss destruction intensifies",
+    "notable_spikes": [
+      "First fortress encounter (Area 1) - player learning curve",
+      "Area 10 (alternate music/secret mechanic available)",
+      "Final confrontation with the System (Area 12)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard Level Flow",
+      "description": "Vertical scrolling through planet/space station/outer space environments; continuous enemy waves; culminates in fortress boss with turret destruction objective and time bonus incentive",
+      "example_level": "Area 1-9"
+    },
+    {
+      "pattern_name": "Fortress Boss Encounter",
+      "description": "Stationary multi-turret structure; all turrets must be destroyed within specified time limit to earn bonus points; represents primary difficulty and point-scoring peak of each level",
+      "example_level": "All Areas (1-12)"
+    },
+    {
+      "pattern_name": "Mini-Boss Encounters",
+      "description": "Large enemy ships scattered throughout levels; highly resistant to fire; change color as health depletes; repel player bullets; more frequent in later levels as ALC escalates",
+      "example_level": "Throughout all Areas"
+    },
+    {
+      "pattern_name": "ALC-Responsive Scaling",
+      "description": "Enemy density and difficulty dynamically adjust based on: shooting frequency, power-up collection, boss time-limit success, life loss, level start, and reconnaissance plane destruction",
+      "example_level": "All Areas (system-wide mechanic)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:07:08.764Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5760,
+    "output_tokens": 1970,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

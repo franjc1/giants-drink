@@ -1,0 +1,203 @@
+{
+  "game_id": "zanac-nes",
+  "game_name": "Zanac",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft appearance",
+      "visual_form": "Bullet-shooting enemy spacecraft with distinct sprite designs",
+      "meaning": "Active threat requiring evasion and destruction"
+    },
+    {
+      "signal": "Stationary fortress turrets",
+      "visual_form": "Ground-based turret clusters forming boss arenas",
+      "meaning": "High-threat defensive position; requires sustained attack within time limit"
+    },
+    {
+      "signal": "Mini-boss capital ships",
+      "visual_form": "Large enemy vessels with color-state indicators (blue → gold → pale yellow with red lines)",
+      "meaning": "Heavily armored threat; damage state communicated through palette shifts"
+    },
+    {
+      "signal": "Reconnaissance planes",
+      "visual_form": "Specific aircraft type distinct from standard enemies",
+      "meaning": "Scout units; destroying them reduces game difficulty (ALC)"
+    },
+    {
+      "signal": "Bullet-resistant disks",
+      "visual_form": "Geometric disk-shaped enemies",
+      "meaning": "High defensive rating; standard weapons less effective"
+    },
+    {
+      "signal": "Meteors",
+      "visual_form": "Falling space debris",
+      "meaning": "Environmental hazard requiring avoidance"
+    },
+    {
+      "signal": "Increased enemy density",
+      "visual_form": "Screen crowding with more simultaneous enemy sprites",
+      "meaning": "Difficulty escalation triggered by player skill (ALC system)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up boxes (blue)",
+      "visual_form": "Blue-colored descending boxes",
+      "meaning": "Collectible benefit; grants weapon upgrades or specialty weapons"
+    },
+    {
+      "signal": "Main cannon upgrade collection",
+      "visual_form": "Blue power-up boxes with numbered/color-coded visual variants",
+      "meaning": "Weapon enhancement; increased firepower and bullet speed"
+    },
+    {
+      "signal": "Specialty weapon acquisition",
+      "visual_form": "Numbered power-up items (eight distinct types)",
+      "meaning": "Tactical options; grants shields, directional bullets, indestructible projectiles"
+    },
+    {
+      "signal": "1-up reward animation",
+      "visual_form": "Point score accumulation reaching threshold; audio jingle triggers",
+      "meaning": "Extra life gained; safety margin increased"
+    },
+    {
+      "signal": "Respawn invincibility",
+      "visual_form": "Player ship reappearing with temporary invulnerability period",
+      "meaning": "Grace period after life loss; brief safety window"
+    },
+    {
+      "signal": "Level start transition",
+      "visual_form": "Screen load with HUD display and area number indication",
+      "meaning": "Safe spawn point; new level checkpoint"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Humanity/Earth Defense)",
+      "color_identity": "Blue/cyan (player ship AFX-6502 Zanac)",
+      "symbol_or_sigil": "Starfighter silhouette; single advanced warship",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Space stations and planets defended; sole human presence on screen"
+    },
+    {
+      "faction": "The System (Antagonist/Alien Defense Grid)",
+      "color_identity": "Gold/yellow/red (mini-boss palette progression); varied enemy colorschemes",
+      "symbol_or_sigil": "Fortress structures; organized armada formations; part-organic/part-mechanical aesthetic",
+      "enemy_visual_variants": "Multiple enemy types (aircraft, turrets, disks, reconnaissance planes); color shifts indicate damage state",
+      "environmental_markers": "Fortified space stations, planetary defense installations, armada concentrations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player performing well (high skill, frequent shooting, power-up collection)",
+      "visual_manifestation": "Increased enemy density and sprite count on screen; more aggressive formations",
+      "behavioral_manifestation": "Enemy AI (ALC) escalates difficulty; tougher enemy types deploy more frequently"
+    },
+    {
+      "world_state": "Player performing poorly (lives lost, new level started, reconnaissance planes destroyed)",
+      "visual_manifestation": "Reduced enemy spawn rate; fewer simultaneous sprites on screen",
+      "behavioral_manifestation": "Enemy AI (ALC) decreases difficulty; less aggressive attack patterns"
+    },
+    {
+      "world_state": "Mini-boss taking damage",
+      "visual_manifestation": "Capital ship color transitions: blue → gold → pale yellow with red lines",
+      "behavioral_manifestation": "Visual health indicator; guides player perception of damage progression"
+    },
+    {
+      "world_state": "Fortress boss arena active",
+      "visual_manifestation": "Stationary turret cluster arrangement; time-limit counter appears in HUD",
+      "behavioral_manifestation": "Turrets maintain defensive positions; destruction bonus awarded for completion within time"
+    },
+    {
+      "world_state": "Game over state",
+      "visual_manifestation": "Screen transition to game over display; alternate audio cue (NES version with Select hold)",
+      "behavioral_manifestation": "Continue option available; player can restart from lost level"
+    },
+    {
+      "world_state": "Level progression",
+      "visual_manifestation": "Area number display on screen; themed environment change (planets, space stations, outer space)",
+      "behavioral_manifestation": "New enemy patterns; System defenses change per area"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic environment progression",
+      "example": "12 levels traverse various planets, space stations, and outer space—visual representation of player advancing deeper into System's territory"
+    },
+    {
+      "technique": "Fortress architecture as world-state",
+      "example": "Stationary turret fortresses indicate System's entrenched defensive positions; required time-limited destruction suggests urgency and stakes"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Meteors, reconnaissance planes, and turrets in early areas suggest outer defense layers; armored ships in later areas indicate core defenses"
+    },
+    {
+      "technique": "Palette shifts as narrative indicator",
+      "example": "Mini-boss color transitions (blue → gold → red) visually communicate progression toward System core destruction without dialogue"
+    },
+    {
+      "technique": "HUD/UI as world communication",
+      "example": "Area number display and time limits on fortress objectives communicate mission structure and System's organized defense hierarchy"
+    },
+    {
+      "technique": "Power-up box frequency as difficulty pacing",
+      "example": "Blue descending boxes appear more frequently in balanced difficulty zones; scarcity signals high-danger areas"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "AFX-6502 Zanac (player ship)",
+      "state": "Active combat",
+      "behavior": "Responsive to input; fires main cannon continuously; can change specialty weapons; accumulates power-ups"
+    },
+    {
+      "entity": "AFX-6502 Zanac (respawn)",
+      "state": "Life lost / reappearing",
+      "behavior": "Invincibility period active; all power-ups dropped; temporary evasion advantage"
+    },
+    {
+      "entity": "Enemy aircraft",
+      "state": "Standard patrol/attack",
+      "behavior": "Fires projectiles at player; moves in formations; requires destruction"
+    },
+    {
+      "entity": "Reconnaissance planes",
+      "state": "Active presence",
+      "behavior": "Destruction reduces ALC difficulty; acts as skill-check opponent"
+    },
+    {
+      "entity": "Mini-boss capital ships",
+      "state": "Engaging player",
+      "behavior": "Bullets ricochet off hull; color shifts with damage accumulation; high resilience"
+    },
+    {
+      "entity": "Stationary fortress turrets",
+      "state": "Boss phase active",
+      "behavior": "Defend fixed positions; fire in patterns; destruction required within time limit for bonus; indicates System's tactical organization"
+    },
+    {
+      "entity": "Game AI (ALC system)",
+      "state": "Difficulty adjustment active",
+      "behavior": "Monitors player actions (attack frequency, power-up collection, boss completion time); escalates/reduces enemy threat dynamically"
+    }
+  ],
+  "notes": "Zanac's manifestation layer centers on adaptive difficulty communicated through enemy density and type distribution rather than explicit world-state UI. The System is visualized as an organized, escalating defensive hierarchy across 12 levels. Mini-boss palette transitions (blue→gold→red) are the primary visual health indicator—a design pattern that influenced later NES shooters. The game's world-state (player skill level) is communicated implicitly through enemy behavior changes driven by the ALC system, making player agency feel mechanically responsive. Regional differences (NES vs FDS) include mini-boss color persistence changes, indicating different visual communication strategies between versions. The ending sequence contains a hidden message referencing related Compile titles, suggesting a larger narrative universe not directly manifested in gameplay visuals.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:05:42.093Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5683,
+    "output_tokens": 2352,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

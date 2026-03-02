@@ -1,0 +1,156 @@
+{
+  "game_id": "lemmings-2-genesis",
+  "game_name": "Lemmings 2: The Tribes",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "environmental_hazards",
+      "visual_form": "traps and obstacles placed throughout level terrain",
+      "meaning": "indicates paths that will harm or kill lemmings if traversed without skill intervention"
+    },
+    {
+      "signal": "level_time_limit",
+      "visual_form": "time counter UI element",
+      "meaning": "communicates urgency and constraint—lemmings must reach exit before time expires"
+    },
+    {
+      "signal": "lemming_death",
+      "visual_form": "lemmings failing to reach exit or falling into hazards",
+      "meaning": "visual feedback that current strategy is failing; world state degradation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "exit_location",
+      "visual_form": "designated exit point(s) visible on level map",
+      "meaning": "goal indicator—lemmings reaching this location survive and contribute to success"
+    },
+    {
+      "signal": "skill_availability",
+      "visual_form": "UI display of limited skill pool per level",
+      "meaning": "communicates available tools to overcome hazards and create safe passages"
+    },
+    {
+      "signal": "lemming_survival",
+      "visual_form": "lemmings reaching exit and being counted toward completion",
+      "meaning": "positive world state change—incremental progress toward level goal"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Highland",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "thematic world design specific to Highland tribe aesthetic"
+    },
+    {
+      "faction": "Cavelem",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "cave/underground-themed environmental design for Cavelem world"
+    },
+    {
+      "faction": "Circus",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "circus-themed visual environment and level design"
+    },
+    {
+      "faction": "Classic",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "preserves original lemming appearance and behavioral quirks from Lemmings 1",
+      "environmental_markers": "visual design echoing original Lemmings aesthetic"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "lemming_tribe_selection",
+      "visual_manifestation": "twelve distinct thematic worlds with visual variations in appearance and cultural design elements",
+      "behavioral_manifestation": "each tribe's lemmings exhibit cultural exuberance and varied appearances despite identical gameplay mechanics"
+    },
+    {
+      "world_state": "level_progression",
+      "visual_manifestation": "twelve worlds with ten levels each; completion marked by obtaining gold/silver/bronze medals",
+      "behavioral_manifestation": "player must replay earlier levels if insufficient lemmings survive to complete later levels; carries over remaining lemmings between levels"
+    },
+    {
+      "world_state": "prophecy_fulfillment",
+      "visual_manifestation": "golden talisman pieces collected from each world; twelve pieces required to complete game",
+      "behavioral_manifestation": "talisman pieces obtained only by achieving gold medal ranking on all ten levels of a world; represents progress toward escaping island doom"
+    },
+    {
+      "world_state": "danger_prophecy",
+      "visual_manifestation": "ancient prophecy of 'great darkness' covering island establishes thematic urgency for all level hazards",
+      "behavioral_manifestation": "all levels are framed as escape attempts under time pressure with increasing complexity"
+    },
+    {
+      "world_state": "skill_constraint",
+      "visual_manifestation": "limited pool of skills displayed per level; varied skill availability across different tribes' worlds",
+      "behavioral_manifestation": "player must strategically allocate scarce resources to guide lemmings safely; some skills more frequent in certain worlds"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "thematic_world_design",
+      "example": "Cavelem world uses underground/cave aesthetic to communicate tribe identity and environmental context"
+    },
+    {
+      "technique": "obstacle_variation_by_tribe",
+      "example": "each of twelve tribes inhabits thematically-distinct worlds with culturally-specific visual design, telling implicit stories of tribal identity"
+    },
+    {
+      "technique": "narrative_framing",
+      "example": "prophecy of darkness and island doom frames puzzle-solving as survival mechanism; talisman collection represents gathering power to escape catastrophe"
+    },
+    {
+      "technique": "skill_distribution_narrative",
+      "example": "certain skills more frequently available in specific tribal worlds implies each tribe has developed specialized survival techniques"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "lemmings",
+      "state": "unassigned_skill",
+      "behavior": "autonomous movement toward exit; vulnerable to hazards and obstacles"
+    },
+    {
+      "entity": "lemmings",
+      "state": "assigned_skill",
+      "behavior": "behavior altered based on skill type—mobility enhancement (Runner, Icarus Wings), terrain modification (Builder, Miner), behavior control (Blocker, Attractor)"
+    },
+    {
+      "entity": "lemmings",
+      "state": "hazard_encounter",
+      "behavior": "death or injury if skill protection not applied; triggers replay/reset incentive"
+    },
+    {
+      "entity": "fan_tool",
+      "state": "active",
+      "behavior": "player-controlled propulsion affecting lemmings with relevant skills (Ballooner, Surfer) and powering level mechanisms"
+    },
+    {
+      "entity": "Classic_tribe_lemmings",
+      "state": "active",
+      "behavior": "preserve original Blocker skill and behavioral quirks from first game; visual/mechanical callback to predecessor"
+    }
+  ],
+  "notes": "Lemmings 2 communicates world-state primarily through narrative framing (prophecy, talisman quest), tribe-specific environmental design, and skill-constraint mechanics. Danger is signaled through hazards and time limits; safety through exits and skill availability. Factions are distinguished by thematic world design rather than color/symbol systems. The game's manifestation layer emphasizes choice (twelve worlds can be tackled in any order) and consequence (lemming survival carries between levels, requiring strategic replay).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:36:26.890Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2587,
+    "output_tokens": 1728,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "game_id": "mendel-palace-nes",
+  "game_name": "Mendel Palace",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy doll proximity",
+      "visual_form": "Animated enemy doll sprites moving toward player character",
+      "meaning": "Immediate threat; touching enemy causes instant loss of life"
+    },
+    {
+      "signal": "Darkness/low visibility rooms",
+      "visual_form": "Dark or obscured level layouts requiring player anticipation",
+      "meaning": "Environmental hazard; players must predict tile and enemy positions in advance"
+    },
+    {
+      "signal": "Bolted metal tiles",
+      "visual_form": "Metallic, immovable floor tile pattern",
+      "meaning": "Impassable obstacle; cannot be flipped; enemy collision point"
+    },
+    {
+      "signal": "Graffiti tiles (Artist doll domain)",
+      "visual_form": "Graffiti-patterned floor tiles in House of Vinci",
+      "meaning": "Restricted/dangerous zone; unflippable tiles that can create stalemate conditions"
+    },
+    {
+      "signal": "Aggressive tile-flipper enemies",
+      "visual_form": "Enemy doll variant with same flip ability as player",
+      "meaning": "Advanced threat; enemy can manipulate terrain unpredictably"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Timer extension tile (五/5 kanji)",
+      "visual_form": "Floor tile with kanji 五 (go, meaning 'five') or time symbol",
+      "meaning": "Beneficial collectible; grants five extra seconds on timer"
+    },
+    {
+      "signal": "Multiple floor tile layers",
+      "visual_form": "Layered tiles revealed through repeated flipping",
+      "meaning": "Progression mechanic; hidden patterns provide strategic advantage"
+    },
+    {
+      "signal": "Spinner tiles",
+      "visual_form": "Rotating/spinning floor tile pattern",
+      "meaning": "Safe interaction point; allows player to slam into enemies without taking damage"
+    },
+    {
+      "signal": "Cleared boundary walls",
+      "visual_form": "Solid wall perimeter around 5x7 grid room",
+      "meaning": "Containment zone; safe barrier; enemies destroyed by flipping into walls"
+    },
+    {
+      "signal": "Star collection system",
+      "visual_form": "Star counter displayed on screen (tracked separately per player)",
+      "meaning": "Progress metric; visual feedback of level completion status"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player characters",
+      "color_identity": "Blue and green colored boys in vests and caps",
+      "symbol_or_sigil": "Distinguishable by primary color (blue player 1, green player 2)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Players occupy floor tiles; tracked separately on screen with individual star/life counters"
+    },
+    {
+      "faction": "Enemy dolls (generic)",
+      "color_identity": null,
+      "symbol_or_sigil": "Doll sprite design varying by world/palace",
+      "enemy_visual_variants": "Each palace contains different enemy doll types with unique behaviors (walking, swimming, flipping)",
+      "environmental_markers": "Level select screen displays each palace with occupying enemy doll types"
+    },
+    {
+      "faction": "Artist dolls (House of Vinci)",
+      "color_identity": null,
+      "symbol_or_sigil": "Artist-themed enemy variant; draws pictures as attack/environmental modification",
+      "enemy_visual_variants": "Regional difference: draws woman's face normally; under time pressure draws nude torso (JP) or sailor uniform (US)",
+      "environmental_markers": "House of Vinci palace; creates graffiti tiles that modify terrain"
+    },
+    {
+      "faction": "Boss entities",
+      "color_identity": null,
+      "symbol_or_sigil": "World-specific boss variant",
+      "enemy_visual_variants": "One boss per world; defeated to advance narrative",
+      "environmental_markers": "Each world completion scene shows girlfriend being transported to next palace location"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level incomplete (enemies remain)",
+      "visual_manifestation": "Enemy dolls visible on playfield grid; star counter below maximum",
+      "behavioral_manifestation": "Enemy dolls continue wandering and attempting to collide with player; player can flip tiles to propel enemies"
+    },
+    {
+      "world_state": "Level complete (all enemies destroyed)",
+      "visual_manifestation": "Empty playfield; full star counter; transition scene plays",
+      "behavioral_manifestation": "Progression to next level; narrative cutscene showing girlfriend relocation to next palace"
+    },
+    {
+      "world_state": "Stalemate condition",
+      "visual_manifestation": "Remaining enemies on board with all flippable tiles exhausted; bolted metal or graffiti tiles dominate",
+      "behavioral_manifestation": "Level completion without destroying all dolls; occurs when terrain becomes unflippable"
+    },
+    {
+      "world_state": "Player life loss",
+      "visual_manifestation": "Player life counter decrements on screen; character sprite vanishes or transitions",
+      "behavioral_manifestation": "If co-op: surviving player continues solo; if solo: level restart or game over"
+    },
+    {
+      "world_state": "Time pressure (low timer)",
+      "visual_manifestation": "Timer visibly depleting; some worlds (House of Vinci) show enemy behavior modification (Artist draws different picture)",
+      "behavioral_manifestation": "Enemy behavioral shifts; altered tile drawing patterns; increased urgency visual feedback"
+    },
+    {
+      "world_state": "Darkness/obscured visibility",
+      "visual_manifestation": "Limited visual range; hidden or dimmed tile/enemy positions",
+      "behavioral_manifestation": "Player must rely on memory and anticipation; blind positioning of flips"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Palace progression narrative",
+      "example": "Level select screen displays palace locations; cutscenes show girlfriend being transported deeper into realm with each world completion, creating spatial/narrative progression"
+    },
+    {
+      "technique": "Tile pattern layering",
+      "example": "Multiple hidden tile patterns under single floor position communicate progression through repeated interaction; reveals reward or obstacle through visual layer discovery"
+    },
+    {
+      "technique": "Doll type-to-palace association",
+      "example": "Each palace displays its unique enemy doll roster on level select screen; House of Vinci identified by Artist dolls; communicates world identity through enemy visual design"
+    },
+    {
+      "technique": "Boss as world climax",
+      "example": "Each of ten levels culminates in boss encounter; defeat triggers cutscene showing girlfriend relocation; boss serves as visual punctuation to world narrative"
+    },
+    {
+      "technique": "Regional visual censorship as narrative shift",
+      "example": "Artist doll drawing changes from nude (JP) to clothed sailor uniform (US) under time pressure; same mechanical trigger, different cultural narrative"
+    },
+    {
+      "technique": "Grid boundary as world containment",
+      "example": "5x7 floor tile grid surrounded by solid wall perimeter; communicates single-room contained challenge; wall serves both as narrative container and gameplay mechanic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Walking enemy doll",
+      "state": "Normal patrolling",
+      "behavior": "Wanders room attempting to collide with player; basic locomotion pattern"
+    },
+    {
+      "entity": "Swimming enemy doll",
+      "state": "In designated water/swimming world",
+      "behavior": "Modified movement pattern simulating aquatic motion; alternative threat approach"
+    },
+    {
+      "entity": "Aggressive tile-flipper doll",
+      "state": "Active threat",
+      "behavior": "Flips random tiles same as player; unpredictably modifies terrain; higher threat level than standard dolls"
+    },
+    {
+      "entity": "Artist doll",
+      "state": "Normal condition",
+      "behavior": "Draws woman's face on graffiti tiles; creates unflippable terrain modification"
+    },
+    {
+      "entity": "Artist doll",
+      "state": "Under time pressure",
+      "behavior": "Draws altered picture (nude torso/sailor uniform depending on region); signals desperation/theme shift"
+    },
+    {
+      "entity": "Boss doll",
+      "state": "World completion challenge",
+      "behavior": "Enhanced variant of standard doll; serves as culminating encounter; defeat unlocks world progression"
+    },
+    {
+      "entity": "Player character",
+      "state": "Active gameplay",
+      "behavior": "Stands on floor tiles; initiates tile flips; interacts with adjacent tiles; moves on grid"
+    },
+    {
+      "entity": "Player character",
+      "state": "Enemy contact",
+      "behavior": "Instant life loss; character sprite removal; immediate consequence"
+    }
+  ],
+  "notes": "Mendel Palace uses minimal but explicit visual language: color-coded players (blue/green), doll sprite variation per world, tile pattern layering, and numeric HUD feedback (lives/stars). Danger is communicated through proximity (enemies) and terrain type (bolted/graffiti tiles). Safety through collectibles (timer extension) and game mechanics (spinner tiles). The game's visual communication is primarily diegetic—enemy presence is constant visible threat, tile accessibility is visual, and world progression is communicated through cutscenes and enemy roster display. Regional differences (artist doll drawing content) show how same mechanical trigger carries cultural narrative weight. The game prioritizes clarity of threat/safety through sprite design and immediate visual feedback rather than complex environmental storytelling.",
+  "sources_used": [
+    "tcrf (Cutting Room Floor - Mendel Palace article)",
+    "wikipedia (Mendel Palace article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:36:02.670Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4715,
+    "output_tokens": 2492,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "game_id": "contra-iii-snes",
+  "game_name": "Contra III: The Alien Wars",
+  "platform": "snes",
+  "paradigm": "platformer (run and gun)",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Animated bullet sprites moving toward player",
+      "meaning": "Immediate threat; contact causes life loss"
+    },
+    {
+      "signal": "Alien creatures and invaders",
+      "visual_form": "Distinctly non-human sprite designs with aggressive animations",
+      "meaning": "Direct combat threat; stage hazards"
+    },
+    {
+      "signal": "Environmental pits and drops",
+      "visual_form": "Black or dark-shaded void areas at stage edges and floor gaps",
+      "meaning": "Instant death; fall damage hazards"
+    },
+    {
+      "signal": "Mid-stage and end-stage bosses",
+      "visual_form": "Significantly larger sprite entities with unique designs, placed at predetermined encounter points",
+      "meaning": "Major threat requiring sustained engagement and pattern recognition"
+    },
+    {
+      "signal": "Falling debris and stage hazards",
+      "visual_form": "Moving tiles and objects rendered via background layer or sprite animation",
+      "meaning": "Environmental danger requiring timing and navigation skill"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up drops",
+      "visual_form": "Flying pods descending with glowing weapon icons (homing missiles, torpedoes, flamethrower, laser, spread shot)",
+      "meaning": "Temporary weapon upgrade; increased firepower and tactical advantage"
+    },
+    {
+      "signal": "Barrier shield power-up",
+      "visual_form": "Temporary protective aura rendered around player character",
+      "meaning": "Damage mitigation; brief invulnerability window"
+    },
+    {
+      "signal": "Bomb power-up",
+      "visual_form": "Explosive ordnance icon dropped or collected",
+      "meaning": "Screen-wide damage capability; crowd control resource"
+    },
+    {
+      "signal": "Safe solid ground",
+      "visual_form": "Platform tiles with defined edges, clearly rendered surface geometry",
+      "meaning": "Traversable space; no immediate fall risk"
+    },
+    {
+      "signal": "Player character animation state",
+      "visual_form": "Upright stance, weapon readiness pose vs. falling or hit animation",
+      "meaning": "Health and operational status indicator"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Human Commandos (Protagonists)",
+      "color_identity": "Green and flesh tones (original sprite design)",
+      "symbol_or_sigil": "Military uniform silhouette; machine gun armaments",
+      "enemy_visual_variants": "Replaced with robot designs (RD-008, RC-011) in European 'Super Probotector' version to comply with German violence regulations",
+      "environmental_markers": "Military bases, urban environments, industrial settings as stages"
+    },
+    {
+      "faction": "Alien Invaders",
+      "color_identity": "Purple, pink, cyan non-natural color schemes contrasting with human environments",
+      "symbol_or_sigil": "Biomechanical and organic alien creature designs; distinctly extraterrestrial morphology",
+      "enemy_visual_variants": "Multiple creature types with unique silhouettes (flying pods, ground units, boss entities with distinct visual identities)",
+      "environmental_markers": "Alien structures, corrupted landscapes, invading mothership/brain entity appearances in cutscenes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Alien invasion in progress",
+      "visual_manifestation": "Stages feature integrated alien structures and corrupted Earth environments; sky and atmosphere show signs of extraterrestrial presence; intro cutscenes display battle scenarios with explosions and combat",
+      "behavioral_manifestation": "All enemies are hostile alien units; NPCs (in Japanese version) react with aggressive dialogue; player must defend against continuous alien assault across six themed stages"
+    },
+    {
+      "world_state": "Earth under occupation (stage progression)",
+      "visual_manifestation": "Early stages show urban and industrial Earth locations being invaded; later stages transition to alien territory and mothership interiors; visual contamination increases as player advances",
+      "behavioral_manifestation": "Enemy density and sophistication increases; boss encounters become more elaborate; narrative progression indicated through cutscene visuals showing escalating threat level"
+    },
+    {
+      "world_state": "Mission objective completion (end-of-stage)",
+      "visual_manifestation": "Boss defeat triggers visual feedback (explosion, dissolve, status change); stage clear screen with score and performance metrics; transition cutscene to next stage",
+      "behavioral_manifestation": "All stage enemies cease spawning; player gains temporary invulnerability during transition; difficulty and enemy composition changes for subsequent stage"
+    },
+    {
+      "world_state": "Game difficulty mode (Easy/Normal/Hard)",
+      "visual_manifestation": "End-game message screens differ by difficulty; Japanese version displays ending image montage timestamps; hard mode features enhanced celebration screen with bonus NPCs and environmental details",
+      "behavioral_manifestation": "Japanese version provides final boss access on Normal+ difficulty only; international versions restrict credits visibility; enemy AI aggression and projectile patterns scale with difficulty"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage theme progression",
+      "example": "Stages transition from Earth military/urban environments to alien mothership interiors, visually communicating player advancement from defending home territory to attacking enemy stronghold"
+    },
+    {
+      "technique": "Enemy and boss visual design hierarchy",
+      "example": "Small alien creatures appear in early/mid stages; mid-stage bosses are oversized variants; final boss (brain entity) is grotesquely alien and architecturally integrated into stage, signaling culmination of invasion threat"
+    },
+    {
+      "technique": "Cutscene visual language (localization)",
+      "example": "Japanese version: animated human characters with color-coded text and explicit aggressive dialogue; European version: robot replacements (Probotectors) with unanimated sprites, same spatial staging but altered narrative tone regarding violence"
+    },
+    {
+      "technique": "Power-up visual signaling",
+      "example": "Flying pods with weapon icons communicate tactical options without text; weapon variety (flamethrower, laser, spread shot) visually distinct allows player to anticipate combat capability changes"
+    },
+    {
+      "technique": "Overhead perspective stages",
+      "example": "Two stages use Mode 7 rendering with rotatable screen space; visual shift from side-view communicates environmental variety and stage design innovation, suggests non-linear navigation and target-finding objectives distinct from linear platforming"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (Bill Rizer/Lance Bean or Probotector)",
+      "state": "Armed and operational",
+      "behavior": "Upright stance with weapon readiness; dual machine gun configuration visible; responds to input with jumping and directional firing"
+    },
+    {
+      "entity": "Player character",
+      "state": "Damaged/hit",
+      "behavior": "Knockback animation; temporary invulnerability flash; weapon downgrade if power-up was equipped; life count decrements"
+    },
+    {
+      "entity": "Player character",
+      "state": "Performing special move (spinning jump)",
+      "behavior": "Aerial somersault with dual-gun fire in circular pattern; both weapons at risk of loss if damaged during move; visual spectacle communicating high-risk/high-reward action"
+    },
+    {
+      "entity": "Alien grunt enemies",
+      "state": "Idle/patrolling",
+      "behavior": "Static or looping movement pattern; positioned at stage waypoints; minimal projectile fire until player proximity"
+    },
+    {
+      "entity": "Alien grunt enemies",
+      "state": "Engaged/alerted",
+      "behavior": "Increased projectile rate; aggressive movement toward player; animation speed increases; visual warning signals imminent damage threat"
+    },
+    {
+      "entity": "Mid-stage and final bosses",
+      "state": "Active phase (low health)",
+      "behavior": "Animation speed increases; projectile patterns become denser or erratic; visual effects intensify (flashing, discoloration); arena may shift or transform"
+    },
+    {
+      "entity": "Power-up pods",
+      "state": "Descending",
+      "behavior": "Animated descent from top of screen; glowing icon visible; collision with player triggers weapon swap and automatic pickup"
+    },
+    {
+      "entity": "Barrier shield",
+      "state": "Active",
+      "behavior": "Transparent or semi-opaque protective aura rendered around player; visual distinctness from normal state signals temporary invulnerability window"
+    }
+  ],
+  "notes": "Contra III employs dual visual communication strategies: (1) direct threat signaling through enemy sprite design, projectile animations, and environmental hazards; (2) regional localization affecting narrative tone—human commandos in Japanese/US versions vs. robots in European version fundamentally alters character-to-player identification without changing mechanical danger communication. Overhead perspective stages (Mode 7) visually distinguish navigation objectives from combat-focused side-scrolling sections. Difficulty modes are communicated through end-game narrative messaging and hidden debug codes reflecting Japanese arcade tradition (Street Fighter button combinations). Power-up system uses icon-based visual language reducing text dependency. Boss design scales visually to suggest threat escalation and invasion progression.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor)",
+    "wikipedia (Contra III: The Alien Wars)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:58:05.138Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6083,
+    "output_tokens": 2377,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

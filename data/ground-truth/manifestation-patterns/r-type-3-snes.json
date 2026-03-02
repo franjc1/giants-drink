@@ -1,0 +1,163 @@
+{
+  "game_id": "r-type-3-snes",
+  "game_name": "R-Type III: The Third Lightning",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "contrasting colored bullets and energy waves filling screen space",
+      "meaning": "incoming damage threat requiring evasion"
+    },
+    {
+      "signal": "boss_appearance",
+      "visual_form": "large scale alien mechanical forms occupying significant screen real estate",
+      "meaning": "major combat encounter and difficulty spike ahead"
+    },
+    {
+      "signal": "screen_saturation",
+      "visual_form": "dense projectile patterns and obstacles crowding play space",
+      "meaning": "high-difficulty section requiring precision navigation"
+    },
+    {
+      "signal": "environmental_hazards",
+      "visual_form": "level geometry that constrains movement and creates collision zones",
+      "meaning": "stage-specific dangers beyond enemy fire"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "weapon_pickup",
+      "visual_form": "collectible items dropped by defeated enemies, distinct visual markers",
+      "meaning": "temporary power increase and tactical advantage gained"
+    },
+    {
+      "signal": "force_device_attachment",
+      "visual_form": "glowing energy sphere orbiting player ship with distinct visual state",
+      "meaning": "protective shield and weapon enhancement active"
+    },
+    {
+      "signal": "clear_screen_space",
+      "visual_form": "regions of lower projectile density and enemy count",
+      "meaning": "safe passage window available for movement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_force",
+      "color_identity": "red/blue/yellow (weapon system colors)",
+      "symbol_or_sigil": "R-90 Ragnark fighter ship design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player ship position screen-left, forward momentum orientation"
+    },
+    {
+      "faction": "alien_invaders",
+      "color_identity": null,
+      "symbol_or_sigil": "organic and mechanical hybrid aesthetic, insectoid/biomechanical forms",
+      "enemy_visual_variants": "varied enemy types with distinct silhouettes and attack patterns",
+      "environmental_markers": "right-to-left scrolling direction indicates enemy territory progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_stage",
+      "visual_manifestation": "moderate enemy density, simpler geometric level design, basic colored backgrounds",
+      "behavioral_manifestation": "enemy patrol patterns are predictable, projectile patterns follow regular rhythm"
+    },
+    {
+      "world_state": "mid_stage",
+      "visual_manifestation": "increased visual complexity in level geometry, more detailed enemy sprites, denser projectile patterns",
+      "behavioral_manifestation": "enemy formations become more coordinated, attack patterns accelerate"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "screen-filling enemy mechanical structure with distinct visual phases, intense particle effects from projectiles and explosions",
+      "behavioral_manifestation": "boss cycles through attack patterns with rising intensity, requires learning dodge sequences"
+    },
+    {
+      "world_state": "post_defeat",
+      "visual_manifestation": "explosion sequence with expanding visual effect, screen clearing of remaining enemy projectiles",
+      "behavioral_manifestation": "level progression transition, brief respite before next stage"
+    },
+    {
+      "world_state": "player_powered_up",
+      "visual_manifestation": "charged wave cannon displays expanding energy field, bits orbit with visible energy effect",
+      "behavioral_manifestation": "weapon fires with enhanced range and destructive power, temporary tactical advantage window"
+    },
+    {
+      "world_state": "player_overheated",
+      "visual_manifestation": "ship displays visual heat indicator or throttled effect when in Hyper mode excess",
+      "behavioral_manifestation": "wave cannon becomes temporarily inoperative during cooldown phase, vulnerability window created"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "level_geography_progression",
+      "example": "stages transition from space environments through mechanical alien structures to organic alien nests, showing deeper penetration into enemy territory"
+    },
+    {
+      "technique": "enemy_type_escalation",
+      "example": "early stages feature simple scout-class enemies; later stages introduce heavily armored mechanized forms and swarm tactics, suggesting organized enemy hierarchy"
+    },
+    {
+      "technique": "visual_stage_theming",
+      "example": "each stage has distinct color palette and structural aesthetic (metal corridors, crystalline formations, biomechanical hives), communicating environmental variety and alien world diversity"
+    },
+    {
+      "technique": "boss_design_narrative",
+      "example": "boss forms integrate stage environment visually (bosses emerge from or are composed of stage-specific materials), suggesting alien lifeforms evolved to their territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "enemy_fighter",
+      "state": "patrol",
+      "behavior": "moves in predictable horizontal or wave pattern, fires at regular intervals"
+    },
+    {
+      "entity": "enemy_fighter",
+      "state": "engaged",
+      "behavior": "adjusts trajectory toward player position, fires at increased rate with aim adjustment"
+    },
+    {
+      "entity": "boss",
+      "state": "phase_1",
+      "behavior": "established attack pattern with defined visual cues preceding projectile barrages"
+    },
+    {
+      "entity": "boss",
+      "state": "phase_2",
+      "behavior": "attack pattern becomes more erratic, projectile density increases, visual effects intensify indicating weakened state"
+    },
+    {
+      "entity": "player_ship",
+      "state": "standard_fire",
+      "behavior": "continuous forward projectile stream with regular cadence, can be charged for enhanced output"
+    },
+    {
+      "entity": "player_ship",
+      "state": "hyper_mode_active",
+      "behavior": "rapid-fire burst weapon with explosion effects on impact, energy visualization indicates active buffed state"
+    },
+    {
+      "entity": "force_device",
+      "state": "attached",
+      "behavior": "orbits player ship with glowing effect, absorbs incoming projectiles and provides shield layer"
+    }
+  ],
+  "notes": "R-Type III communicates game state primarily through visual density, color-coded weapon systems, and enemy scale/complexity. The three Force variants (Standard/Round, Shadow, Cyclone) provide visual differentiation in weapon appearance and attached device aesthetic. Danger escalates through projectile screen saturation and environmental constraint rather than explicit visual warnings. The world state (alien invasion scenario) is communicated through one-directional scrolling (left-to-right enemy advance) and organic-mechanical enemy design language suggesting non-human hostile intelligence. Boss encounters use dramatic scale increase and particle effect intensity to signal major difficulty transitions. The Hyper mode/cooldown mechanic creates visible resource management communication through weapon state changes.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:11:05.986Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3445,
+    "output_tokens": 1889,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

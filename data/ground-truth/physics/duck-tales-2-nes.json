@@ -1,0 +1,140 @@
+{
+  "game_id": "duck-tales-2-nes",
+  "game_name": "DuckTales 2",
+  "platform": "NES",
+  "year": 1993,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": 256,
+    "format": "256_sub",
+    "notes": "Each subpixel unit is 4/256ths of a pixel (1/64th of a pixel). X subpixel rolls each frame during movement and alters within 1/2 pixel per frame. Y subpixel advances only while on rope or falling through screen transition gaps. Subpixels carry between levels. X position resets to default on each level start."
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": 1.5,
+      "unit": "pixels per frame (with subpixel component)"
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Cane Jump",
+      "description": "Primary jumping mechanic using Scrooge's cane. Made easier to perform compared to DuckTales 1.",
+      "physics_values": {}
+    },
+    {
+      "name": "Cane Interaction",
+      "description": "Cane used to interact with environment: pull levers, fire cannons, use springy flowers to cross gaps.",
+      "physics_values": {}
+    },
+    {
+      "name": "Rope Mechanics",
+      "description": "Scrooge can hang from hooks. Y subpixel advances while on rope.",
+      "physics_values": {
+        "y_subpixel_advance": "occurs while on rope"
+      }
+    },
+    {
+      "name": "Raft Movement",
+      "description": "Rafts move Scrooge across water areas.",
+      "physics_values": {}
+    },
+    {
+      "name": "Screen Transition Gap Falling",
+      "description": "Y subpixel advances while falling through screen transition gaps, allowing subpixel manipulation.",
+      "physics_values": {
+        "y_subpixel_advance": "occurs while falling through gaps"
+      }
+    },
+    {
+      "name": "Collision Glitch",
+      "description": "Can damage enemies from side (normally only from above) if positioned precisely relative to enemy. Requires enemies to move for precise adjustment. Does not work on Boss 1 in upper corner.",
+      "physics_values": {}
+    },
+    {
+      "name": "Interactive Object Setup",
+      "description": "Running into interactive object sets up hit. Alternatively, moving along same platform before object for 15 frames, then adding blank frame 16 (or 32) frames back allows hit immediately upon reaching object.",
+      "physics_values": {
+        "setup_frames": 15,
+        "blank_frame_interval": 16
+      }
+    },
+    {
+      "name": "Jump Cancel Animation",
+      "description": "Jumping for 4 frames once pressing B cancels rest of hit animation on landing, allowing instant forward movement.",
+      "physics_values": {
+        "jump_frames_to_cancel": 4
+      }
+    },
+    {
+      "name": "Zipping",
+      "description": "Hidden boxes can be spawned at proper position; facing backwards on proper frame triggers zip through them, gaining approximately 10 pixels.",
+      "physics_values": {
+        "zip_distance_pixels": 10
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "momentum-based",
+    "platformer-standard",
+    "responsive cane jump",
+    "subpixel-aware movement"
+  ],
+  "tier_notes": "Tier 2: Movement parameters derived from TASVideos Lua script memory addresses and speedrun documentation. Exact ROM values not available in sources. Sub-pixel system precisely documented from TASVideos technical analysis. Most physics constants (gravity, acceleration, jump velocity) not explicitly documented in available sources.",
+  "sources_used": [
+    "tasvideos - DuckTales 2 Lua script with memory address tracking and subpixel documentation",
+    "tasvideos - Movement and collision mechanics documentation"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:37:33.882Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 11008,
+    "output_tokens": 1307,
+    "dimension": "physics",
+    "sources_available": [
+      "speedrun",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,512 @@
+Joe & Mac (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Joe & Mac (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Joe & Mac
+
+Also known as : Joe & Mac: Tatakae Genshijin (JP), Joe & Mac: Caveman Ninja (EU)  Developer :
+
+Data East
+
+Publishers :
+
+Data East
+
+(JP/US),
+
+Elite Systems
+
+(EU)  Platform :
+
+SNES
+
+Released in JP : December 6,&#160;1991  Released in US : January 1992  Released in EU :  1992
+
+This game has  unused code .
+
+This game has  unused graphics .
+
+This game has  debugging material .
+
+This game has a  hidden sound test .
+
+This game has  regional differences .
+
+This game has a notes page
+
+Joe & Mac
+
+is a reformulated SNES port of  the arcade game  where some cavemen fight dinosaurs using really nifty weapons.
+
+Contents
+
+1
+
+Sub-Page
+
+2
+
+Debug Mode
+
+$01
+
+3
+
+Debug Mode
+
+$02
+
+4
+
+Sound Test
+
+4.1
+
+Unused Sound Test Entry Point
+
+5
+
+Alternative Ending Sequence
+
+6
+
+Unused Graphics
+
+7
+
+Unknown Controller Check
+
+8
+
+Regional Differences
+
+8.1
+
+Opening Logo
+
+8.2
+
+Title Screen
+
+8.3
+
+Introduction
+
+8.4
+
+Gameplay Mechanics
+
+Sub-Page
+
+Notes
+
+Debug Mode
+
+$01
+
+This first debug mode sets all stages to cleared, all locks opened, red eggs are always available, and enemy collision is disabled. Use  Pro Action Replay  (PAR) code
+
+7E005F01
+
+or  Game Genie  codes
+
+DF6A-D40D
+
++
+
+3CE1-A704
+
++
+
+3CE1-A764
+
+to enable it.
+
+Debug Mode
+
+$02
+
+In this debug mode, Joe and Mac start a new game with 39 lives and 9 keys each, and all red stages are cleared. Unlike the first debug mode, the blue stages (which can only be played once) are still accessible.
+
+To enable it, on bootup enter Pro Action Replay (PAR) code
+
+00FB3200
+
+or Game Genie code
+
+DDE7-AD64  . Next, enter the sound test. Set  A  to
+
+78  ,  B  to
+
+79  ,  X  to
+
+73  , and press  Select  to exit.
+
+The secret combination suggests it was once intended to be a player accessible cheat, but in the final version the game skips over the programming that grants the bonuses. A  fragment from a prototype build  contains a copy of the programming before the debug mode was disabled.
+
+Sound Test
+
+This sound test is available in the Japanese and North American versions, but not the European version.
+
+On the title screen, move the cursor to Option. On controller 2, hold  Right  and  L . On controller 1, hold  Left  and  R , then press  Start .
+
+Use the D-Pad to change the index values (the exact purpose of each setting is not yet clear). Press  Start  to transfer sound data? The  A  /  B  /  X  /  Y  buttons are used for playing songs and sound effects. Press  Select  to exit the sound test.
+
+Also worth mentioning, the text string  SOUND TEST  located at SNES address
+
+$02E058
+
+(NA version) or
+
+$02E056
+
+(JP version) is loaded but doesn't appear on-screen.
+
+Unused Sound Test Entry Point
+
+Located at SNES address
+
+$02D025
+
+is the pointer
+
+#$DD7F
+
+(NA version) or
+
+#$DD7D
+
+(JP version), which also leads to the sound test. There is no programming that loads index
+
+#$08
+
+and jumps to
+
+$02D000
+
+(hex pattern
+
+A9 08 22 00 D0 02  ). This was likely a developer shortcut to access the sound test menu.
+
+Alternative Ending Sequence
+
+When the credits scroll pauses on "SOUND CREATOR ATOMIC HANADA" as pictured in the screenshot above, the game checks if  X  +  A  +  L  +  R  are held. If true, the game shows an alternative ending sequence of Joe and Mac being chased away by 4 ugly women:
+
+Original
+
+Alternative
+
+To skip instantly to the ending after the Data East logo in the NA version, use Pro Action Replay (PAR) code
+
+00FB0707
+
+or Game Genie code
+
+D5ED-AFA4  .
+
+Unused Graphics
+
+These icons (or versions thereof) can be found in the game's graphics shortly after where the ones used in the final are stored.
+
+A hammer, which is never found anywhere in the game.
+
+Due to the very subtle differences, the following icons include the finals (left) for comparison purposes.
+
+The boomerang, with slightly thinner outlining near the ends.
+
+The stone wheel, slightly more darkened-in than the one in the final.
+
+Unknown Controller Check
+
+Located at SNES address
+
+$08C609-08C614
+
+(NA and JP versions) is two checks for the controller 1  R  button being pressed or held while playing a level. However, the following branches have a distance of zero, meaning the alternative code paths were deleted.
+
+$08/C609 A5 54
+
+LDA $54
+
+[$00:0054]
+$08/C60B 89 10
+
+BIT #$10
+$08/C60D F0 00
+
+BEQ $00
+
+[$C60F]
+$08/C60F A5 50
+
+LDA $50
+
+[$00:0050]
+$08/C611 89 10
+
+BIT #$10
+$08/C613 F0 00
+
+BEQ $00
+
+[$C615]
+
+The L or R button depending on where Joe or Mac is facing, usually makes them run.
+
+Regional Differences
+
+Opening Logo
+
+Japan/US
+
+Europe
+
+As Elite Systems published the European version, the Data East logo was replaced with their logo. This also led to the "Data East" jingle being removed.
+
+Title Screen
+
+Japan
+
+US
+
+Europe
+
+The Japanese version has the subtitle of 戦え原始人 ( Tatakae Genshijin ), literally meaning "Fighting Cavemen". The US version dropped the subtitle completely, but the European version kept it in spirit with the subtitle "Caveman Ninja". The copyright info was also updated with each version, though the European version uniquely uses the same yellow palette as most other text in the game. Additionally, due to PAL timing differences, the scene of Joe & Mac clobbering each other doesn't properly end in time with the music in the European version.
+
+Introduction
+
+Japan
+
+International
+
+Due to Nintendo of America's censorship policies, the intro cutscene was significantly reworked between the Japanese and international versions. In the Japanese version, there's a scene of a few cavemen entering a tent at night, a female "yelp!" is heard, the tent rustles, and the cavemen promptly drag some cavewomen out while the opening credits scroll by. Since this could be interpreted as the beginning (or the aftermath) of sexual assault, the cutscene was truncated so that it ends after the yelp, and the credits were replaced with a totally radical (ergo:  aggressively  '90s) text crawl that implies that the cavewomen weren't kidnapped by the cavemen, but instead ran away due to their poor hygiene.
+
+Gameplay Mechanics
+
+Japan
+
+International
+
+In the two-player mode of the Japanese version, a player that has lost all their lives can steal one from the other player to continue (indicated by "PUSH BUTTON" in the HUD). This feature was removed from the international versions.
+
+The HUD was also moved down one tile in the international versions.
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Joe & Mac
+
+series
+
+Arcade
+
+Caveman Ninja
+
+NES
+
+Joe & Mac
+
+SNES
+
+Joe & Mac &#160;&#8226;
+
+Congo's Caper  ( Prototype )
+
+Genesis
+
+Joe & Mac
+
+Retrieved from " https://tcrf.net/index.php?title=Joe_%26_Mac_(SNES)&oldid=1909877 "
+
+Categories :
+
+Games developed by Data East
+
+Games published by Data East
+
+Games published by Elite Systems
+
+SNES games
+
+Games released in 1991
+
+Games released in December
+
+Games released on December 6
+
+Games with unused code
+
+Games with unused graphics
+
+Games with debugging functions
+
+Games with hidden sound tests
+
+Games with regional differences
+
+Joe & Mac series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden sound tests
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with unused code
+
+Games  >  Games by content  >  Games with unused graphics
+
+Games  >  Games by developer  >  Games developed by Data East
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Data East
+
+Games  >  Games by publisher  >  Games published by Elite Systems
+
+Games  >  Games by release date  >  Games released in 1991
+
+Games  >  Games by release date  >  Games released in December
+
+Games  >  Games by release date  >  Games released in December  >  Games released on December 6
+
+Games  >  Games by series  >  Joe & Mac series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 25 August 2025, at 21:51.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

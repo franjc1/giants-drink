@@ -1,0 +1,133 @@
+{
+  "game_id": "q-bert-nes",
+  "game_name": "Q*bert",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic cube color-changing mechanic",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns Q*bert hops diagonally on pyramid cubes to change their color; single hop per cube advances level"
+    },
+    {
+      "element": "Coily (purple snake enemy)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Starts as bouncing egg at pyramid bottom, transforms into chasing snake; primary threat and arch-nemesis; fatal on contact"
+    },
+    {
+      "element": "Ugg and Wrongway (flying/hopping enemies)",
+      "first_appears": "Later early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Purple creatures that traverse pyramid sides in Escheresque pattern; deadly on contact; approach from bottom corners toward top"
+    },
+    {
+      "element": "Slick and Sam (cube-reverting enemies)",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Green creatures that descend and revert cube colors to original state; non-lethal but mechanically obstructive; removed on contact"
+    },
+    {
+      "element": "Red and green bouncing balls",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Red balls appear at row 2, bounce downward, lethal on contact; green balls freeze all enemies temporarily"
+    },
+    {
+      "element": "Double-tap cube mechanic",
+      "first_appears": "Later stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Each cube must be hit twice to reach target color; increases complexity and required precision"
+    },
+    {
+      "element": "Cycling color cube mechanic",
+      "first_appears": "Later stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Cubes cycle through colors on each landing instead of holding target color; forces careful sequencing"
+    },
+    {
+      "element": "Multicolored floating discs",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "safe",
+      "mastery_context": "Escape mechanism on pyramid sides; transports Q*bert to pyramid top; lures Coily to his death for 500 bonus points"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Landing on floating disc (resets position to top, removes Coily temporarily)",
+      "Green ball contact (freezes all enemies)",
+      "Completing stage (all enemies/obstacles removed)",
+      "Safe zones at pyramid top"
+    ],
+    "typical_tension_triggers": [
+      "Coily transformation from egg to active snake",
+      "Ugg/Wrongway enemy approach from pyramid corners",
+      "Red ball appearance at row 2",
+      "Incomplete cube coloring with multiple enemies present",
+      "Cube color-reversion by Slick/Sam",
+      "Double-tap or cycling color cube requirements"
+    ],
+    "pacing_descriptor": "Cyclical tension escalation with enemy introduction progression; early stages safe with single-threat focus; mid-stages introduce multiple simultaneous threats requiring constant evasion and puzzle-solving; relief moments occur through disc escapes and power-ups; difficulty amplified through mechanical complexity rather than speed"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Floating discs on pyramid sides serve as optional escape/reward path rather than mandatory progression",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Single threat (Coily) introduced; basic cube-changing mechanic; one hop per cube sufficient; player learns core diagonal hop navigation",
+    "mid_game": "Multiple enemy types introduced sequentially (Ugg, Wrongway, Slick, Sam); bouncing balls added; floating disc escape mechanic introduced; cube interaction becomes more complex",
+    "late_game": "Double-tap cube requirement combined with cycling color mechanic; all enemy types present simultaneously; requires precise sequencing and constant threat awareness",
+    "notable_spikes": [
+      "Coily transformation from stationary egg to active pursuing snake",
+      "Introduction of Ugg/Wrongway with side-of-pyramid pathing",
+      "Transition to double-hit cube mechanic",
+      "Combination of double-hit AND cycling color mechanics in same stage"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Single-threat introduction",
+      "description": "Early stages introduce Coily as lone antagonist, allowing player to master evasion without mechanical puzzle complexity interference",
+      "example_level": "Stage 1"
+    },
+    {
+      "pattern_name": "Graduated enemy complexity",
+      "description": "Each new stage type introduces distinct enemy with unique behavioral pattern (bouncing egg > snake chase > side-traversal > color-reversion)",
+      "example_level": "Early through mid stages"
+    },
+    {
+      "pattern_name": "Mechanical puzzle escalation",
+      "description": "Cube interaction rules become progressively more complex: single-tap → double-tap → cycling colors → combinations thereof",
+      "example_level": "Mid to late stages"
+    },
+    {
+      "pattern_name": "Disc-based relief valve",
+      "description": "Optional floating discs on pyramid perimeter provide escape hatch; triggering Coily's death simultaneously removes all threats temporarily",
+      "example_level": "All stages post-disc introduction"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:52:56.596Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3952,
+    "output_tokens": 1655,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

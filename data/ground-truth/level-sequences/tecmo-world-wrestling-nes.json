@@ -1,0 +1,126 @@
+{
+  "game_id": "tecmo-world-wrestling-nes",
+  "game_name": "Tecmo World Wrestling",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic grappling mechanics",
+      "first_appears": "Tutorial/first match",
+      "introduction_context": "safe",
+      "mastery_context": "Players learn auto-grapple on contact; combinations of joypad and buttons unlock holds and slams"
+    },
+    {
+      "element": "Training system",
+      "first_appears": "Between matches (post-victory)",
+      "introduction_context": "safe",
+      "mastery_context": "Button-mashing exercises (squats, situps, push-ups) fill progress meter to increase move damage; seven sphere progression gates total power"
+    },
+    {
+      "element": "Situational move types",
+      "first_appears": "Early matches (progressive unlock)",
+      "introduction_context": "moderate",
+      "mastery_context": "Ground attacks, top-rope aerial attacks, running attacks introduced contextually during matches"
+    },
+    {
+      "element": "Action replay system",
+      "first_appears": "First signature move on weakened opponent",
+      "introduction_context": "moderate",
+      "mastery_context": "Game interrupts with TV-style close-up replays of finishers; rewards player understanding of move timing"
+    },
+    {
+      "element": "Win conditions",
+      "first_appears": "Tutorial/first match",
+      "introduction_context": "safe",
+      "mastery_context": "Three-count pinfall, submission, and count-out (20-second ring-out timer); mutual count-out counts as loss for player"
+    },
+    {
+      "element": "Momentum meter (2P only)",
+      "first_appears": "Two-player matches",
+      "introduction_context": "moderate",
+      "mastery_context": "Meter rapidly swings between players; determines grapple advantage; adds symmetrical competitive tension"
+    },
+    {
+      "element": "Wrestler roster selection",
+      "first_appears": "Mode select / character pick",
+      "introduction_context": "safe",
+      "mastery_context": "10 playable wrestlers with different heights, weights, and signature moves; specialties encourage move discovery"
+    },
+    {
+      "element": "Final boss encounter",
+      "first_appears": "After defeating all playable wrestlers",
+      "introduction_context": "dangerous",
+      "mastery_context": "Non-playable 'Blue King' (Earl of Doom) serves as climax fight with undocumented move set"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful pinfall or submission",
+      "Winning a training session (sphere fills)",
+      "Performing action replay on weakened opponent",
+      "Match victory advancing tournament bracket"
+    ],
+    "typical_tension_triggers": [
+      "Opponent knockdown/count-out threat (20-second timer)",
+      "Loss of training sphere after match defeat",
+      "Momentum meter swinging toward opponent (2P)",
+      "Final boss Blue King encounter",
+      "Weakened wrestler forced to retrain"
+    ],
+    "pacing_descriptor": "Match-based cycle with inter-match training cooldown; tension escalates through undefeated tournament run; momentum meter creates real-time oscillation in 2P mode"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Initial roster opponents with balanced stats; first sphere (power level) sufficient for early wins",
+    "mid_game": "Training becomes mandatory; loss of spheres on defeat creates progression gate; opponent strength increases with roster advancement",
+    "late_game": "Final boss Blue King presents skill wall; undocumented moveset requires mastery of all learned mechanics",
+    "notable_spikes": [
+      "First match loss (sphere penalty and retraining required)",
+      "Blue King final boss encounter (non-playable, unique moveset)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Tournament bracket single-elimination",
+      "description": "Single-player mode chains matches sequentially against all 10 playable wrestlers, culminating in final boss. Victory in each match unlocks next opponent; defeat costs training sphere and resets progression.",
+      "example_level": "Match 1 (weak opponent) → Match 10 (Blue King)"
+    },
+    {
+      "pattern_name": "Training interstitial",
+      "description": "Between each match, player enters training mode with three button-mashing options (squats, situps, push-ups) to fill progress meter and add training spheres. Maximum 7 spheres; loss during match reduces count.",
+      "example_level": "Post-victory training screen"
+    },
+    {
+      "pattern_name": "Action replay punctuation",
+      "description": "Signature moves executed on weakened opponents trigger cinematic replay, interrupting real-time gameplay with close-up television-style moment. First game feature of this type.",
+      "example_level": "Any match with successful finisher"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:06:12.421Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4958,
+    "output_tokens": 1606,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "game_id": "karateka-nes",
+  "game_name": "Karateka",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "Enemy appearance on screen",
+      "visual_form": "Foe enters from side, assumes fighting stance",
+      "meaning": "Combat encounter imminent; player must engage or take damage"
+    },
+    {
+      "signal": "Health bar depletion",
+      "visual_form": "Health bars at bottom of screen decrease with each hit",
+      "meaning": "Player or enemy taking damage; survival status visible in real-time"
+    },
+    {
+      "signal": "Akuma's hawk attack",
+      "visual_form": "Trained hawk projectile descending toward player",
+      "meaning": "Environmental threat requiring deflection; cannot be avoided passively"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Open cliffside, falling portcullis blocking passage",
+      "meaning": "Instant death zones; level design communicates lethal spatial traps"
+    },
+    {
+      "signal": "Fighting stance approach to Mariko",
+      "visual_form": "Player character in combat pose near princess sprite",
+      "meaning": "Incorrect interaction state; triggers instant death penalty"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Non-fighting stance approach",
+      "visual_form": "Player character lowered posture, non-aggressive animation near Mariko",
+      "meaning": "Correct interaction state; enables rescue and game completion"
+    },
+    {
+      "signal": "Health bar regeneration",
+      "visual_form": "Health bars slowly increase when avoiding combat for duration",
+      "meaning": "Safe period achieved; player can recover between encounters"
+    },
+    {
+      "signal": "Progression upward/rightward through fortress",
+      "visual_form": "Linear side-scrolling advancement through castle structure",
+      "meaning": "Forward momentum toward goal; navigation safety maintained in pathways"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Hero (Player Character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Unnamed martial artist in combat gi",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Ascends mountain into fortress; moves left-to-right through enemy territory"
+    },
+    {
+      "faction": "Akuma's Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Castle fortress as stronghold; Akuma as warlord/antagonist",
+      "enemy_visual_variants": "Multiple foe types appear sequentially; each with unique fighting stance and combat behavior",
+      "environmental_markers": "Fortress interior; throne room; Mariko's cell; castle gates as faction territory markers"
+    },
+    {
+      "faction": "Akuma (Antagonist Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Akuma appears in cutscenes ordering attacks; final boss encounter",
+      "enemy_visual_variants": "Akuma shown in cinematic frames; distinctive fighting stance in final confrontation",
+      "environmental_markers": "Castle fortress interior; appears at climactic moments to demonstrate authority over captive and guards"
+    },
+    {
+      "faction": "Princess Mariko (Objective/Ally)",
+      "color_identity": null,
+      "symbol_or_sigil": "Damsel sprite shown in cutscenes 'nervously awaiting her fate'",
+      "enemy_visual_variants": "Can attack player if approached in wrong stance; temporary hostile visual state",
+      "environmental_markers": "Confined to cell within fortress; presence marks rescue destination"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game approach to fortress",
+      "visual_manifestation": "Hero walks/runs left-to-right through mountain and outer castle areas; sparse enemy encounters",
+      "behavioral_manifestation": "Enemies appear one per screen; straightforward combat encounters; lower difficulty foes"
+    },
+    {
+      "world_state": "Mid-game progression deeper into fortress",
+      "visual_manifestation": "Castle interior environment; palace gates and structural elements visible; increased visual complexity",
+      "behavioral_manifestation": "Enemy frequency increases; varied foe types appear; hawk attacks begin"
+    },
+    {
+      "world_state": "Akuma's awareness/response",
+      "visual_manifestation": "Cinematic cutscenes show Akuma ordering men to attack; visual demonstration of command authority",
+      "behavioral_manifestation": "Enemy waves intensify as player advances; hawk sent as direct Akuma intervention"
+    },
+    {
+      "world_state": "Final confrontation imminent",
+      "visual_manifestation": "Approach to inner sanctum; Mariko shown in confinement cutscene; Akuma appears in visual frame",
+      "behavioral_manifestation": "Akuma engages directly; final boss fight mechanics activated; unique combat pattern"
+    },
+    {
+      "world_state": "Post-rescue/game completion",
+      "visual_manifestation": "Hero and Mariko depart fortress together; visual closure of rescue narrative",
+      "behavioral_manifestation": "Game ends successfully; no further enemy encounters; cinematic conclusion sequence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cinematic cutscenes",
+      "example": "Pre-encounter and mid-game cutscenes show Akuma ordering attacks and Mariko in distress, advancing narrative without dialogue"
+    },
+    {
+      "technique": "Linear fortress progression",
+      "example": "Player ascends mountain and moves through castle rooms left-to-right, visual geography communicates increasing depth into enemy stronghold"
+    },
+    {
+      "technique": "Environmental hazards as level design",
+      "example": "Open cliff edges and falling portcullis gates mark danger zones, teaching player spatial awareness of lethal areas"
+    },
+    {
+      "technique": "Enemy encounter spacing",
+      "example": "One-per-screen encounters with varying foe types communicate fortress defense structure; each guard represents Akuma's martial authority layer"
+    },
+    {
+      "technique": "Mariko's cell isolation",
+      "example": "Princess sprite shown confined within fortress interior; visual captivity state reinforces rescue mission objective"
+    },
+    {
+      "technique": "Stance-based interaction system",
+      "example": "Mariko delivers instant-death kick if approached in fighting stance; environmental consequence teaches non-violent interaction semantics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Healthy/combat-ready",
+      "behavior": "Maintains fighting stance; performs offensive and defensive karate animations"
+    },
+    {
+      "entity": "Player character",
+      "state": "Damaged but alive",
+      "behavior": "Health bar depletes visibly; character continues combat with reduced visual feedback"
+    },
+    {
+      "entity": "Player character",
+      "state": "Non-threatening approach",
+      "behavior": "Lowers stance; shifts to non-aggressive animation; enables safe Mariko interaction"
+    },
+    {
+      "entity": "Enemy foes",
+      "state": "Awaiting player",
+      "behavior": "Assume fighting stance on screen; signal readiness for combat encounter"
+    },
+    {
+      "entity": "Enemy foes",
+      "state": "Engaged in combat",
+      "behavior": "Execute punches, kicks, dodges with unique animation sets per foe type; health bar reflects damage taken"
+    },
+    {
+      "entity": "Enemy foes",
+      "state": "Defeated",
+      "behavior": "Health bar depleted; removal from screen; player advances to next encounter"
+    },
+    {
+      "entity": "Akuma's hawk",
+      "state": "Attack mode",
+      "behavior": "Descends as projectile; requires timed deflection; communicates Akuma's active intervention"
+    },
+    {
+      "entity": "Akuma",
+      "state": "Command authority",
+      "behavior": "Appears in cutscenes issuing orders; visual authority figure; demonstrates control over fortress and forces"
+    },
+    {
+      "entity": "Akuma",
+      "state": "Final boss encounter",
+      "behavior": "Unique fighting patterns; distinct combat stance; climactic one-on-one duel mechanics"
+    },
+    {
+      "entity": "Princess Mariko",
+      "state": "In distress",
+      "behavior": "Shown in cutscenes awaiting rescue; confined sprite in fortress cell; non-interactive until final approach"
+    },
+    {
+      "entity": "Princess Mariko",
+      "state": "Threatened approach (fighting stance)",
+      "behavior": "Executes instant-death kick; hostile response to aggressive interaction; behavioral penalty teaches correct interaction"
+    },
+    {
+      "entity": "Princess Mariko",
+      "state": "Safe approach (non-fighting stance)",
+      "behavior": "Accepts rescue; departs with hero; enables game completion sequence"
+    }
+  ],
+  "notes": "Karateka uses cinematic storytelling and visual design to communicate world state through: (1) health bar systems for danger feedback, (2) cutscene narrative framing showing antagonist authority and captive distress, (3) fortress geography as progression metric, (4) enemy encounter pacing reflecting defense depth, (5) environmental hazards as spatial storytelling, (6) stance-based interaction semantics (fighting vs. non-fighting posture producing different narrative outcomes). The game pioneered rotoscoped animation and cinematic screen wipes to enhance visual communication of martial arts action and narrative drama. The Mariko rescue mechanic uses stance visibility as a behavioral tell system—player's own body language determines NPC response state. This makes player agency visible through character animation rather than explicit UI prompts.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:47:14.335Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3017,
+    "output_tokens": 2454,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

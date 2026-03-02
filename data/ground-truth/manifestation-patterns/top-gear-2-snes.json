@@ -1,0 +1,166 @@
+{
+  "game_id": "top-gear-2-snes",
+  "game_name": "Top Gear 2",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Armor damage visualization",
+      "visual_form": "Damage diagram displayed on left side of screen showing affected armor sections",
+      "meaning": "Player vehicle integrity status; destroyed armor sections indicate vulnerability to spinout if further damage taken in that area"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Fuel gauge indicator (SNES version only; Genesis version lacks this)",
+      "meaning": "Risk of disqualification if fuel runs out before race completion; indicates need for gearbox upgrades to improve fuel economy"
+    },
+    {
+      "signal": "Weather conditions",
+      "visual_form": "Rain and snow overlaid on background layers; visual weather effects on track",
+      "meaning": "Environmental hazard requiring tire type switching from dry to wet; affects vehicle handling and grip"
+    },
+    {
+      "signal": "Opponent positioning",
+      "visual_form": "Map display showing positions of all racers and first-place car position reference",
+      "meaning": "Competitive threat assessment; visual aid for understanding race standing and gap to leaders"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Pickup availability",
+      "visual_form": "Road pickups rendered as '$' (cash), 'N' (nitro boost), 'S' (automatic nitro)",
+      "meaning": "Resource acquisition points; money for upgrades, speed boosts for competitive advantage or catch-up"
+    },
+    {
+      "signal": "Track layout information",
+      "visual_form": "Map display showing course layout available to player during races",
+      "meaning": "Navigation aid and strategic planning tool; reduces uncertainty about upcoming track geometry"
+    },
+    {
+      "signal": "Nitro boost availability",
+      "visual_form": "6 nitro boost allocation at race start; visual indicator of remaining boosts",
+      "meaning": "Temporary safety valve for speed; allows tactical acceleration for passing or escape from danger"
+    },
+    {
+      "signal": "Vehicle upgrade status",
+      "visual_form": "Car configuration accessible between races; visual representation of armor, engine, gearbox, tires, paint",
+      "meaning": "Player progression and preparedness signal; stronger upgrades indicate readiness for increasingly difficult tracks"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player vehicle",
+      "color_identity": "Customizable via paint shop (user-selectable color)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opponent vehicles appear as distinct racing entities with implied liveries (not documented as faction-specific)",
+      "environmental_markers": "Vehicle position shown on minimap; distinguishable from other racers through positioning and lap status"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early championship (Australia/New Zealand start)",
+      "visual_manifestation": "Initial track courses across 16 countries; lighter difficulty curve with more manageable opponent AI",
+      "behavioral_manifestation": "Opponents are slower and less aggressive than later championship stages; player has margin for error"
+    },
+    {
+      "world_state": "Mid-championship progression",
+      "visual_manifestation": "Continued track diversity across geographic regions (16 countries, 64 total tracks); visual environmental variety",
+      "behavioral_manifestation": "Opponents become faster and more competitive; damage and fuel management becomes critical"
+    },
+    {
+      "world_state": "Late championship (approaching United States final)",
+      "visual_manifestation": "Tracks become longer and more demanding; fuel economy becomes mandatory concern (gearbox upgrades required)",
+      "behavioral_manifestation": "Opponents are faster and tougher; vehicle mechanical limits (armor, acceleration, top speed) more visible to player through difficulty"
+    },
+    {
+      "world_state": "Wet weather conditions",
+      "visual_manifestation": "Rain/snow overlay on background layer 3; visual weather effects on track; nighttime city background visible if layers toggled",
+      "behavioral_manifestation": "Vehicle handling becomes more difficult; player must switch to wet tires to maintain grip; speed and turning affected negatively"
+    },
+    {
+      "world_state": "Dry weather conditions",
+      "visual_manifestation": "Clear visual track rendering without rain/snow overlay; standard background layers visible",
+      "behavioral_manifestation": "Vehicle handling at optimal; dry tire grip is maximized; higher speeds achievable"
+    },
+    {
+      "world_state": "Vehicle damage accumulation",
+      "visual_manifestation": "Armor damage diagram on left screen updates to show affected sections in red/damaged state",
+      "behavioral_manifestation": "Spinout risk increases if damaged armor sections take further impact; handling degrades with structural damage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic progression",
+      "example": "64 tracks spanning 16 countries create world-travel narrative; progression from Australasia to United States establishes implicit global championship tour"
+    },
+    {
+      "technique": "Track-specific visual theming",
+      "example": "Munich track and Egyptian location (renamed 'Hugh Sitton' due to naming rights) suggest regional culture represented through track design; visual distinctiveness per region"
+    },
+    {
+      "technique": "Weather system integration",
+      "example": "Dynamic weather effects (rain, snow) visible on layers 3+ create temporal progression within championship; player must adapt strategy to seasonal/climatic conditions"
+    },
+    {
+      "technique": "Unused/hidden environmental assets",
+      "example": "Nighttime city background on layer 3 (visible if layer 2 toggled off) suggests development world-building beyond visible races; implies urban night racing scenarios in design iteration"
+    },
+    {
+      "technique": "Password-based progression gates",
+      "example": "Password system after each country completion creates implicit checkpoint narrative; visual/mechanical confirmation of geographical advancement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Damaged armor",
+      "behavior": "Spinout risk on further damage to affected areas; reduced handling precision; visual indicator via damage diagram"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Low fuel",
+      "behavior": "Disqualification risk if fuel depletes before race finish; forces conservative speed management and pit strategy (mandatory gearbox upgrade for fuel economy)"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Upgraded engine/nitro/gearbox",
+      "behavior": "Faster acceleration, higher top speed, improved fuel economy; visual readiness for harder difficulty tracks; opponent competitiveness increases in response"
+    },
+    {
+      "entity": "Opponent vehicles",
+      "state": "Professional/Championship difficulty",
+      "behavior": "Faster lap times, more aggressive racing lines, higher-speed cornering; tougher competition requiring player armor/tire upgrades"
+    },
+    {
+      "entity": "Opponent vehicles",
+      "state": "Amateur/Easy difficulty",
+      "behavior": "Slower, less aggressive; player has wider skill margin; less punishing for damage/fuel management mistakes"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Wet weather active",
+      "behavior": "Reduced grip, increased slide risk, visual rain/snow overlay; player must switch to wet tires or face handling penalties"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Longer later-championship courses",
+      "behavior": "Fuel depletion becomes primary hazard; gearbox upgrade mandatory for survival; visual track length communicated through difficulty progression"
+    }
+  ],
+  "notes": "Top Gear 2 communicates world-state primarily through mechanical/simulation systems (damage, fuel, weather) rather than narrative factions. No political or faction-based communications exist in this racing paradigm. Visual storytelling relies on geographic progression (16-country tour), environmental variety, and vehicle upgrade visualization. The game's 'danger' and 'safety' systems are racing-specific: armor integrity, fuel management, weather adaptation, and vehicle upgrades. Unused nighttime city background suggests abandoned world-building asset; suggests development iteration around urban night racing scenarios not implemented in final build. Regional differences (US MPH vs. Japan/EU KM/H, 'AUSTRALASIA' vs. 'AUSTRALIA' localization error) indicate cultural adaptation but no faction-specific visual manifestations.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:47:41.338Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4567,
+    "output_tokens": 2121,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "game_id": "kirbys-adventure-nes",
+  "game_name": "Kirby's Adventure",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites (Hot Heads, Waddle Dees, Gordos, Cannons)",
+      "meaning": "Immediate threat requiring evasion or absorption"
+    },
+    {
+      "signal": "Health meter depletion",
+      "visual_form": "Visible damage counter that decreases on contact",
+      "meaning": "Cumulative danger state; loss of all health = game over"
+    },
+    {
+      "signal": "Pit/fall hazards",
+      "visual_form": "Screen-bottom abyss, visible gaps in platforms",
+      "meaning": "Instant death if Kirby falls; vertical level design emphasizes vulnerability"
+    },
+    {
+      "signal": "Miniboss arena transitions",
+      "visual_form": "Door leading to enclosed boss chamber",
+      "meaning": "Escalated threat; mandatory combat encounter"
+    },
+    {
+      "signal": "Invincibility loss",
+      "visual_form": "Temporary power-up icon disappears from UI",
+      "meaning": "Return to vulnerable state; window of danger reopens"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items on screen",
+      "visual_form": "Collectible objects (fruits, vegetables, other consumables)",
+      "meaning": "Health recovery opportunity; resource availability"
+    },
+    {
+      "signal": "Invincibility power-up active",
+      "visual_form": "Animated sprite effect surrounding Kirby; icon displayed in HUD",
+      "meaning": "Temporary immunity to damage; safe to engage enemies"
+    },
+    {
+      "signal": "Copy ability acquired",
+      "visual_form": "Icon displayed in ability HUD; visual transformation of Kirby (e.g., Fireball adds hat, Sword adds blade)",
+      "meaning": "Enhanced combat capability; expanded level traversal options"
+    },
+    {
+      "signal": "Warp Star door accessible",
+      "visual_form": "Distinct door graphics within world lobbies",
+      "meaning": "Safe retreat to previous worlds; checkpoint/navigation structure"
+    },
+    {
+      "signal": "Museum areas",
+      "visual_form": "Indoor room tileset distinct from outdoor levels",
+      "meaning": "Guaranteed power-up acquisition without combat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kirby (Player/Hero)",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "Star-shaped projectiles when spitting enemies",
+      "enemy_visual_variants": "Kirby depicted in various power-up forms (Fireball Kirby with crown, Sword Kirby with blade, UFO Kirby with disc, Wheel Kirby with spinning form)",
+      "environmental_markers": "Presence in dream-themed worlds; association with Fountain of Dreams restoration"
+    },
+    {
+      "faction": "King Dedede's Minions",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied enemy designs serving as Dedede's allies; minibosses include Poppy Bros. Sr., Mr. Frosty, Rolling Turtle",
+      "enemy_visual_variants": "Enemies appear in different power-up states (some grant copy abilities when consumed)",
+      "environmental_markers": "Scattered throughout seven worlds; miniboss arenas contain themed encounters; Star Rod pieces distributed among allies"
+    },
+    {
+      "faction": "Nightmare (Final antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Fountain of Dreams corruption; spatial separation (outer space final battle)",
+      "enemy_visual_variants": "Depicted as corrupting force; final boss battle distinct from miniboss encounters",
+      "environmental_markers": "Associated with fountain's corruption; manifests in cutscene triggering endgame sequence"
+    },
+    {
+      "faction": "Dream Land Inhabitants (Allied/Neutral)",
+      "color_identity": null,
+      "symbol_or_sigil": "Residents depend on Fountain of Dreams for restful sleep",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implied presence through narrative context; Kirby's motivation to restore Star Rod stems from protecting them"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Fountain of Dreams corrupted by Nightmare",
+      "visual_manifestation": "Intro cutscene depicting corruption; fountain inaccessible at game start",
+      "behavioral_manifestation": "King Dedede steals Star Rod and distributes pieces; minions occupy worlds; Kirby must travel across seven worlds to retrieve fragments"
+    },
+    {
+      "world_state": "Star Rod pieces recovered progressively",
+      "visual_manifestation": "Visual progression through world lobbies; completed worlds may show altered state",
+      "behavioral_manifestation": "Boss defeats result in piece acquisition; Warp Star doors enable backtracking"
+    },
+    {
+      "world_state": "Nightmare defeated, Fountain restored",
+      "visual_manifestation": "Final cutscene showing Kirby using Star Rod's power against Nightmare in outer space",
+      "behavioral_manifestation": "Endgame sequence; transition from terrestrial Dream Land to cosmic confrontation"
+    },
+    {
+      "world_state": "Power-up active vs. inactive",
+      "visual_manifestation": "Kirby's sprite transforms based on copy ability; HUD icon shows current power",
+      "behavioral_manifestation": "Different attack patterns, movement speeds, and level-traversal capabilities available per power-up"
+    },
+    {
+      "world_state": "Health critical vs. healthy",
+      "visual_manifestation": "Health meter visual representation; possibly visual cues on Kirby sprite when low",
+      "behavioral_manifestation": "Increased vulnerability; single hit may trigger game over; player behavior shifts toward caution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "World lobby structure",
+      "example": "Each of seven worlds contains 4-5 regular levels, boss arena, miniboss arena, museum, and minigame room—organizing narrative progression through spatial design"
+    },
+    {
+      "technique": "Level tileset theming",
+      "example": "Vegetable Valley uses agricultural graphics; later worlds employ different visual themes to signal progression through Dream Land geography"
+    },
+    {
+      "technique": "Enemy placement and type variety",
+      "example": "Different enemy distributions per level communicate environmental hazards; presence of specific minibosses signals world boss arenas"
+    },
+    {
+      "technique": "Power-up museum locations",
+      "example": "Guaranteed ability acquisition rooms provide safety zones separate from combat; signal player resource management opportunities"
+    },
+    {
+      "technique": "Fountain of Dreams visual state",
+      "example": "Opening cutscene depicts corruption; final confrontation in outer space represents escalation from terrestrial to cosmic stakes"
+    },
+    {
+      "technique": "Minigame arenas",
+      "example": "Crane game and other minigames provide narrative breaks and reward mechanics; spatial distinction from main levels signals optional challenge content"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Kirby",
+      "state": "Healthy, no power-up",
+      "behavior": "Normal walking/running speed; can inhale, spit, float, run, slide; base vulnerability to all damage"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Copy ability active (Fire Ball example)",
+      "behavior": "Enhanced attack patterns; different movement properties; sprite visually altered (crown appears); ability persists until damage or voluntary discard"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Invincible power-up active",
+      "behavior": "Immune to damage; can safely contact enemies; temporary state requiring re-acquisition after loss"
+    },
+    {
+      "entity": "King Dedede minions",
+      "state": "Patrolling/idle",
+      "behavior": "Animated movement patterns; some enemies fast/slow (e.g., 'extremely fast Waddle Dee' exists in unused form); attack on player proximity"
+    },
+    {
+      "entity": "Miniboss (e.g., Mr. Frosty)",
+      "state": "Combat engaged",
+      "behavior": "Advanced attack patterns (ice cube throws); arena-confined behavior; defeat triggers copy ability grant and boss door unlock"
+    },
+    {
+      "entity": "Nightmare",
+      "state": "Final boss battle",
+      "behavior": "Outer space confrontation; requires Star Rod power to defeat; conclusive endgame encounter"
+    },
+    {
+      "entity": "Kirby",
+      "state": "At world lobby",
+      "behavior": "Door selection available; choice paralysis mitigated by transparent progression structure (numbered doors, distinct room types)"
+    }
+  ],
+  "notes": "Kirby's Adventure employs clear visual hierarchy to communicate world state: protagonist color (pink) provides immediate identification; power-up visual transformations create readable mechanical differentiation; enemy sprite variety telegraphs encounter difficulty; UI elements (health meter, ability icon, world map progression) support state communication without diegetic interruption. The seven-world structure with internal room organization (4-5 levels + boss + miniboss + museum + minigame) creates predictable spatial communication patterns that guide player navigation and expectations. Environmental storytelling relies heavily on tileset theming and enemy placement rather than narrative text. Copy abilities function as both mechanical and visual communicators—transforming Kirby's sprite while expanding gameplay options, signaling both power progression and narrative advancement through puzzle-solving capability gates.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf",
+    "tasvideos",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:01:56.374Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9025,
+    "output_tokens": 2694,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

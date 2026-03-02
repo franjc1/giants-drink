@@ -1,0 +1,164 @@
+{
+  "game_id": "zoop-snes",
+  "game_name": "Zoop",
+  "platform": "SNES",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "piece proximity to center",
+      "visual_form": "pieces moving toward center triangle from screen edges",
+      "meaning": "immediate loss condition if piece reaches center square"
+    },
+    {
+      "signal": "playfield crowding",
+      "visual_form": "accumulation of pieces filling available rows/columns",
+      "meaning": "reduced reaction time and increased fail risk"
+    },
+    {
+      "signal": "game speed escalation",
+      "visual_form": "faster piece spawn rate and movement velocity",
+      "meaning": "difficulty increase after quota completion; cognitive load rising"
+    },
+    {
+      "signal": "background visual complexity (Opti-Challenge)",
+      "visual_form": "contrasting colors, intricate patterns, asymmetrical elements in background",
+      "meaning": "deliberate cognitive distraction to increase challenge difficulty"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "color match opportunity",
+      "visual_form": "incoming piece matches player triangle color",
+      "meaning": "safe shooting action; piece will be cleared without color swap"
+    },
+    {
+      "signal": "chain-clearing setup",
+      "visual_form": "multiple consecutive pieces of same color aligned in row/column",
+      "meaning": "high-value clearing action available; momentum toward level progression"
+    },
+    {
+      "signal": "special piece availability",
+      "visual_form": "proximity bomb (lightning bolt shape) or line bomb (gear shape) visible on playfield",
+      "meaning": "power action available to clear larger areas; tactical advantage"
+    },
+    {
+      "signal": "level progression completion",
+      "visual_form": "background change (before level 10) and music intensification",
+      "meaning": "quota met; advancement secured; brief respite before speed increase"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player",
+      "color_identity": "dynamic (swappable with incoming pieces)",
+      "symbol_or_sigil": "triangle in center of screen",
+      "enemy_visual_variants": null,
+      "environmental_markers": "center position; all incoming pieces are adversarial"
+    },
+    {
+      "faction": "incoming pieces (enemy force)",
+      "color_identity": "multi-color (red, blue, yellow, green palette inferred from puzzle mechanics)",
+      "symbol_or_sigil": "colored squares/blocks from screen edges",
+      "enemy_visual_variants": "standard pieces vs. special pieces (bomb variants)",
+      "environmental_markers": "spawn from four cardinal directions; constant forward pressure toward center"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early game (levels 1-9)",
+      "visual_manifestation": "simpler, less contrasting backgrounds; lower visual noise; clearer piece visibility",
+      "behavioral_manifestation": "slower piece spawn rate; more generous reaction time; background changes between levels"
+    },
+    {
+      "world_state": "mid-game (levels 10+)",
+      "visual_manifestation": "background changes cease; Opti-Challenge visual intensity maintained at high level",
+      "behavioral_manifestation": "continued acceleration of game speed; no environmental reset to mark progression"
+    },
+    {
+      "world_state": "high difficulty (advanced levels)",
+      "visual_manifestation": "Opti-Challenge backgrounds at maximum complexity with intricate color schemes and asymmetrical patterns",
+      "behavioral_manifestation": "near-constant piece incoming; spawn frequency increases; music becomes tense and fast-paced"
+    },
+    {
+      "world_state": "loss condition imminent",
+      "visual_manifestation": "pieces crowding near center square; narrow gaps between pieces",
+      "behavioral_manifestation": "player has minimal reaction window; one misjudgment ends game"
+    },
+    {
+      "world_state": "quota clearance (level up)",
+      "visual_manifestation": "visual confirmation through background shift; music evolution signals intensity increase",
+      "behavioral_manifestation": "brief gameplay pause implied by background change; immediate speed increase follows"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "background progression as difficulty escalation",
+      "example": "Backgrounds evolve from simple, clear visuals in early levels to intricate, contrasting Opti-Challenge patterns in later levels. This visual progression communicates to the player that the world is becoming hostile and demanding without explicit narrative."
+    },
+    {
+      "technique": "music evolution as emotional tone shift",
+      "example": "Music starts smooth and jazzy, then becomes more tense and fast-paced as levels advance. This audio progression mirrors the visual intensity, creating a unified sense of world pressure increasing."
+    },
+    {
+      "technique": "color scheme variation as level identity",
+      "example": "Each level features distinct background color palettes and patterns (referenced as 'fourth stage (Genesis)' visual variation), allowing players to develop spatial and visual memory of progression."
+    },
+    {
+      "technique": "piece movement direction as threat direction",
+      "example": "Pieces always advance from screen edges toward center, creating a consistent directional threat model. The four cardinal spawn points establish a 360-degree pressure environment."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "incoming piece",
+      "state": "spawning",
+      "behavior": "emerges from one of four screen edges; moves toward center at increasing velocity per level"
+    },
+    {
+      "entity": "incoming piece",
+      "state": "color-matching player",
+      "behavior": "when shot by player of same color, piece is cleared and chain-reaction clearing may occur"
+    },
+    {
+      "entity": "incoming piece",
+      "state": "color-mismatching player",
+      "behavior": "when shot by player of different color, piece swaps color with player triangle; no clearing occurs"
+    },
+    {
+      "entity": "proximity bomb piece",
+      "state": "targeted",
+      "behavior": "detonates in 3×3 area around target, clearing all pieces in blast radius regardless of color"
+    },
+    {
+      "entity": "line bomb piece",
+      "state": "targeted",
+      "behavior": "clears entire target row or column of pieces"
+    },
+    {
+      "entity": "player triangle",
+      "state": "active",
+      "behavior": "maintains center position; color shifts dynamically based on piece interactions; shooting initiates piece clearing or color swap"
+    },
+    {
+      "entity": "playfield",
+      "state": "quota progress",
+      "behavior": "visual/audio feedback (background change, music evolution) when clearance quota is met; immediate speed increase follows"
+    }
+  ],
+  "notes": "Zoop employs a dual-channel communication system: visual (color schemes, backgrounds, piece visibility) and audio (smooth jazz evolving to tense music). The 'Opti-Challenge' background technique is the primary world-state indicator, deliberately increasing cognitive load through visual distraction as difficulty escalates. No faction narrative exists; instead, the game communicates a pure player-vs-system dynamic where incoming pieces represent an advancing threat. The puzzle paradigm necessitates abstract symbolism: colors represent identity/affiliation, piece types (standard vs. bomb) communicate tactical options, and spatial positioning communicates immediacy of danger. World-state is communicated through environmental complexity (background) and temporal pressure (music and spawn rate), not through narrative or NPC behavior.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:45:57.015Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3765,
+    "output_tokens": 1881,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

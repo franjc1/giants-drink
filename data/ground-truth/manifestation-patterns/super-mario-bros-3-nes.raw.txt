@@ -1,0 +1,196 @@
+```json
+{
+  "game_id": "super-mario-bros-3-nes",
+  "game_name": "Super Mario Bros. 3",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Lava/bottomless pits",
+      "visual_form": "Red/orange glowing liquid or black void at bottom of screen",
+      "meaning": "Instant death hazard; falling into results in loss of life"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated sprites (Goombas, Koopa Troopas, Lakitus, etc.) with distinct colors and movement patterns",
+      "meaning": "Direct threat requiring stomping or power-up collision to neutralize"
+    },
+    {
+      "signal": "Time depletion",
+      "visual_form": "Numeric timer in HUD counting down, flashing when low",
+      "meaning": "Running out of time results in death if Mario is small or unpowered"
+    },
+    {
+      "signal": "Bowser/Koopalings presence",
+      "visual_form": "Large enemy sprite with crown/distinct silhouette, boss-arena visual framing",
+      "meaning": "Boss encounter; requires specific defeat strategy (typically ground-pound avoidance or projectile collision)"
+    },
+    {
+      "signal": "Small Mario state",
+      "visual_form": "Visually reduced Mario sprite size (1/2 scale)",
+      "meaning": "One-hit death state; taking damage results in immediate loss of life"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Glowing items emerging from bricks (Super Mushroom, Super Leaf, Tanooki Suit, Fire Flower, P-Wing, Goomba Shoe)",
+      "meaning": "Grants temporary invulnerability, flight, fire projectiles, or other protective/offensive abilities"
+    },
+    {
+      "signal": "Super/powered state",
+      "visual_form": "Enlarged Mario sprite (2x scale) with distinctive outfit coloring (red cape for Raccoon Mario, striped suit for Tanooki)",
+      "meaning": "One additional hit before reverting to Small Mario; can survive single enemy collision"
+    },
+    {
+      "signal": "1-Up mushroom",
+      "visual_form": "Green-spotted mushroom icon, typically hidden in breakable bricks",
+      "meaning": "Grants additional life; hidden in destructible blocks as reward for thorough exploration"
+    },
+    {
+      "signal": "Coins",
+      "visual_form": "Yellow circular icons scattered throughout levels",
+      "meaning": "Accumulating 100 coins grants 1-Up; represents progress toward survival resource"
+    },
+    {
+      "signal": "Toad Houses on map",
+      "visual_form": "Distinct mushroom-shaped structure on overworld map with Toad silhouette",
+      "meaning": "Mini-game access providing guaranteed power-up rewards without combat risk"
+    },
+    {
+      "signal": "Warp Whistle locations",
+      "visual_form": "Special map icons allowing world skipping",
+      "meaning": "Strategic safety option for progression when low on lives/resources"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario/Luigi (player forces)",
+      "color_identity": "Red tunic/overalls primary; can shift to white (Super Leaf/Tanooki) or yellow (Fire Flower)",
+      "symbol_or_sigil": "Jumping pose; distinctive cap with "M" or "L" letter marking",
+      "enemy_visual_variants": "No faction enemies; player maintains consistent visual identity across levels",
+      "environmental_markers": "Power-ups and coins indicate Mario-friendly resource zones; Toad Houses signal allied NPCs"
+    },
+    {
+      "faction": "Bowser's kingdom (antagonist forces)",
+      "color_identity": "Dark brown/black for Bowser; varied enemy palette (green Koopa Troopas, red Goombas, purple/orange Lakitus)",
+      "symbol_or_sigil": "Bowser's crown and spiked shell; Koopalings depicted with distinct crown designs in airship encounters",
+      "enemy_visual_variants": "Winged variants of standard enemies (Para-Goombas, Paratroopas); Dark/inverted colors indicate enhanced threat level",
+      "environmental_markers": "Castle architecture in World 8; Airships in Worlds 1-7 boss stages; lava and spikes dominate fortress aesthetics"
+    },
+    {
+      "faction": "Kingdom rulers/Toads (allied NPCs)",
+      "color_identity": "Light pink/white (Princess Peach); white/red (generic Toads); varied kingdom rulers with distinct coloration",
+      "symbol_or_sigil": "Crown icon (Princess); Toad mushroom head silhouette; throne room visual motif",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Throne rooms at end of each world; Toad Houses scattered on overworld map; peaceful architectural style contrasts with fortress/airship danger zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Incomplete world progression (fortresses/levels uncleared)",
+      "visual_manifestation": "Overworld map displays locked doors, impassable boulders, incomplete path connectivity; visual blockades prevent access to later stages",
+      "behavioral_manifestation": "Player cannot advance; attempting blocked paths results in audible 'deny' sound effect and no movement"
+    },
+    {
+      "world_state": "World completed (all fortresses cleared, boss defeated)",
+      "visual_manifestation": "Airship sprite visibly changes or disappears from map; path to castle becomes accessible; visual bridge/gate opens",
+      "behavioral_manifestation": "Player can now navigate to World N+1 entrance; map progression becomes visible and traversable"
+    },
+    {
+      "world_state": "Boss encounter active (Koopaling or Bowser)",
+      "visual_manifestation": "Screen transitions to isolated arena; HUD persists but level scrolling halts; boss sprite fills significant screen real estate with menacing animation",
+      "behavioral_manifestation": "Standard level navigation disabled; boss attack patterns cycle (ground-pound, projectile fire, charging); defeat triggers world completion state"
+    },
+    {
+      "world_state": "Low time remaining",
+      "visual_manifestation": "Timer on HUD transitions to flashing/pulsing visual state; color may shift to red; audible pitch-shifted timer sound intensifies",
+      "behavioral_manifestation": "Increased visual urgency; small Mario cannot recover from any damage; enemy behavior may appear more aggressive (perceptual due to time pressure)"
+    },
+    {
+      "world_state": "Mario powered-up (post power-up collection)",
+      "visual_manifestation": "Sprite visibly enlarges and recolors; distinctive power-up visual signature (cape for flying, striped suit for Tanooki, flame aura for Fire Mario)",
+      "behavioral_manifestation": "New movement capabilities unlock (flight, float); projectile attacks become available; damage threshold increases from 1-hit to 2-hit"
+    },
+    {
+      "world_state": "Game over (lives exhausted)",
+      "visual_manifestation": "Screen transitions to black; 'GAME OVER' text appears in center with specific font; music stops or transitions to game-over jingle",
+      "behavioral_manifestation": "All input disabled except Continue selection; player offered restart from last world checkpoint or title screen return"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "World visual theming as narrative context",
+      "example": "World 1 uses grass/plains aesthetics (safe, natural); World 2 'Desert Land' introduces pyramids and sand (exotic, hot climate); World 4 'Giant Land' doubles sprite size of all obstacles (indicates dimensional/magical anomaly); World 8 features volcanic lava and dark castle (Bowser's domain = evil/dangerous)"
+    },
+    {
+      "technique": "Architecture as faction identity",
+      "example": "Peaceful Toad Houses have mushroom-cap roofs and bright coloring; Fortresses feature stone/brick construction with spikes and narrow corridors; Airships display metallic platforms and cannon turrets; Castle in World 8 combines all menacing elements (spikes, lava moats, dark stone)"
+    },
+    {
+      "technique": "Destruction/decay as world-state indicator",
+      "example": "Breakable bricks throughout levels indicate Mario can interact with environment; destroyed/cleared sections remain cleared after level completion; locked doors persist until boss is defeated, signaling progression gating"
+    },
+    {
+      "technique": "Enemy placement density as difficulty gradient",
+      "example": "Early levels (World 1) space enemies widely with generous safe gaps; later levels (World 7-8) cluster enemies densely and introduce stacked threats; airship levels feature continuous scrolling and enemy swarms, indicating high-danger zone"
+    },
+    {
+      "technique": "Item distribution as reward/progression signal",
+      "example": "Hidden 1-Ups in easily-accessible bricks reward thoroughness; power-ups strategically positioned before dangerous sections signal incoming threat; Toad Houses offer guaranteed power-ups, marking them as safe resource zones on overworld"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goomba",
+      "state": "Patrolling",
+      "behavior": "Walks left-right in predictable loop; turns at level boundaries; collision defeats it if approached from above"
+    },
+    {
+      "entity": "Goomba",
+      "state": "Defeated",
+      "behavior": "Flips upside-down and disappears; no further threat"
+    },
+    {
+      "entity": "Koopa Troopa (green)",
+      "state": "Patrolling",
+      "behavior": "Walks left-right carrying shell; turns at boundaries like Goomba"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Shell-struck/retreating",
+      "behavior": "Retracts into shell (visual state change); shell becomes projectile hazard that bounces across level"
+    },
+    {
+      "entity": "Lakitu",
+      "state": "Active",
+      "behavior": "Hovers above player position, dropping Spinies in predictable patterns; moves horizontally following player; indicates aerial threat zone"
+    },
+    {
+      "entity": "Bowser/Koopaling",
+      "state": "Boss encounter",
+      "behavior": "Charges at player, attempts ground-pound attack (telegraphed by jump animation), fires projectiles; movement confined to boss arena; defeat requires specific strategy (avoid ground-pound, strike from specific direction)"
+    },
+    {
+      "entity": "Bowser/Koopaling",
+      "state": "Defeated",
+      "behavior": "Exits arena visually; music transitions; world completion triggered; path to next area opens"
+    },
+    {
+      "entity": "Power-up item",
+      "state": "In brick",
+      "behavior": "Invisible until brick struck from below; emerges from brick slot and moves horizontally"
+    },
+    {
+      "entity": "Power-up item",
+      "state": "Collected",
+      "behavior": "Item sprite travels to HUD reserve box (visual confirmation); player sprite may visually change if power-up is immediately equipped"
+    }
+  ],
+  "notes": "Super Mario Bros. 3 uses a two-layer world-state system: (1) Overworld map layer displays persistent progression (locked/unlocked paths, cleared fortresses), and (2) Level layer displays immediate moment-to-moment danger through enemy placement, hazards, and power-up availability. The game communicates political structure through kingdom-specific visual themes and NPC placement—each of 7 kingdoms has a ruler who is 'kidnapped' by Bowser, establishing clear narrative faction dynamics. Danger escalates visually through: enemy density increase, environmental hazard concentration, world-specific threats (deserts have fewer water hazards; giants are larger obstacles; airships have continuous scrolling danger). Power-up visual form directly signals mechanical capability (cape = flight, striped suit = hover, fire flower = projectile). No complex faction alignment system exists; binary good (Mario/Toads) vs. evil (Bowser) with no political nuance. Time pressure manifests as audio-visual urgency cue. The overworld map itself is a manifestation of political control—locked doors represent Bowser's occupying forces; clearing stages unlocks paths, representing liberation. Unused debug features and alternate sprites (Gold Cheep-Cheeps, Green Para-Beetles) found in ROM suggest iterative danger-signal design during development.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ]
+}
+```

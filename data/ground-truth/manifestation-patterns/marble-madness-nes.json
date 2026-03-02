@@ -1,0 +1,163 @@
+{
+  "game_id": "marble-madness-nes",
+  "game_name": "Marble Madness",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated obstacles and hostile entities on course",
+      "meaning": "Obstacles that block marble path and obstruct progress; increase in difficulty as game progresses"
+    },
+    {
+      "signal": "Difficult track surfaces",
+      "visual_form": "Visual texture/pattern variations in course floor (polka-dots, directional shifts)",
+      "meaning": "Surfaces that reduce marble control and grip; signal slipperiness and loss of agency"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Clock counter at top of screen; time depletes across races",
+      "meaning": "Visible countdown creates urgency; failure state if time expires"
+    },
+    {
+      "signal": "Course complexity increase",
+      "visual_form": "Progressive visual density; more obstacles and enemies in later races",
+      "meaning": "Escalating challenge; visual indicator of difficulty progression"
+    },
+    {
+      "signal": "Isometric maze structure",
+      "visual_form": "Elevated platforms, narrow passages, drop-offs in 3D-perspective layout",
+      "meaning": "Spatial danger; player must navigate precisely to avoid falling or losing control"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Simple practice course",
+      "visual_form": "First race ('Practice') presented as much shorter and visually basic",
+      "meaning": "Tutorial/safe learning space; lower obstacle density signals player safety and skill-building opportunity"
+    },
+    {
+      "signal": "Bonus time and carry-over mechanics",
+      "visual_form": "Clock display shows time accumulation across races",
+      "meaning": "Reward for performance; visual indication of progression and resource management safety"
+    },
+    {
+      "signal": "Distinct visual themes per course",
+      "visual_form": "Each race has unique visual aesthetic (polka-dots, orientation changes)",
+      "meaning": "Visual variety provides cognitive relief; signals game is structured and designed with player experience in mind"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player marble (protagonist)",
+      "color_identity": "Blue (as shown in gameplay description)",
+      "symbol_or_sigil": "Marble sphere as player avatar",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Marble position centered or left-of-center in isometric view; represents player agency"
+    },
+    {
+      "faction": "Hostile obstacles/enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy entities (type unspecified in sources)",
+      "enemy_visual_variants": "Increase in type and quantity as difficulty progresses through six courses",
+      "environmental_markers": "Distributed across course terrain; visually distinct from track surface to signal threat"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Practice/introductory)",
+      "visual_manifestation": "Simple, short course layout; minimal obstacles; basic visual theme; blue marble on clear track",
+      "behavioral_manifestation": "Marble moves freely with fewer obstructions; player learns controls with minimal punishment"
+    },
+    {
+      "world_state": "Mid-game progression",
+      "visual_manifestation": "Course complexity increases; more obstacles appear; distinct visual themes per race (e.g., 'Silly' with polka-dot patterns)",
+      "behavioral_manifestation": "Player encounters greater control challenges; marble responds more to track friction; enemies multiply and obstruct paths"
+    },
+    {
+      "world_state": "Late-game challenge",
+      "visual_manifestation": "Dense obstacle patterns; multiple enemies; complex isometric maze structure; potentially reversed course orientation",
+      "behavioral_manifestation": "Marble becomes increasingly difficult to control; time pressure intensifies; enemy density forces precise navigation"
+    },
+    {
+      "world_state": "Time depletion imminent",
+      "visual_manifestation": "Clock counter displays low/critical time remaining at screen top",
+      "behavioral_manifestation": "Player forced to rush; increased likelihood of collision with obstacles; failure is near"
+    },
+    {
+      "world_state": "Two-player competitive mode",
+      "visual_manifestation": "Dual marble avatars; dual clocks; visual separation of player territories or shared isometric space",
+      "behavioral_manifestation": "Competitive scoring; bonus time awarded to race winner; separate time tracking for each player"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Visual theme differentiation",
+      "example": "Each of six races has distinct visual aesthetics (Practice=simple; Silly=polka-dot pattern with reversed orientation). Visuals communicate progression narrative and difficulty escalation without explicit text."
+    },
+    {
+      "technique": "Isometric perspective as world-building",
+      "example": "The isometric grid and multi-level track design (inspired by M.C. Escher's art) communicate a fantastical, gravity-defying environment. Player can see entire course layout, creating sense of imposing challenge ahead."
+    },
+    {
+      "technique": "Obstacle density as difficulty narrative",
+      "example": "Early courses sparse with enemies/obstacles; later courses densely populated. Visual density increase tells story of world becoming more hostile and complex."
+    },
+    {
+      "technique": "Track surface variation as environmental narrative",
+      "example": "Different surface textures (polka-dots, directional shifts, slippery sections) communicate that world has distinct regions with different physical properties; marble behavior changes communicate environmental danger."
+    },
+    {
+      "technique": "Time clock as existential pressure",
+      "example": "Persistent on-screen clock that carries across races communicates finite resources and accumulating danger; visual countdown creates narrative tension without story text."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player marble",
+      "state": "Normal movement",
+      "behavior": "Responds to player input via trackball or directional pad; affected by track surface friction; rolls along isometric terrain following physics"
+    },
+    {
+      "entity": "Player marble",
+      "state": "On slippery/difficult surface",
+      "behavior": "Becomes harder to control; movement input less precise; signals danger through loss of player agency"
+    },
+    {
+      "entity": "Player marble",
+      "state": "Collision with obstacle/enemy",
+      "behavior": "Bounces or is deflected; loses time/progress; visual and mechanical feedback signals failure state"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Active on course",
+      "behavior": "Move to obstruct player path; increase in frequency and aggression in later races; designed to create collision hazards"
+    },
+    {
+      "entity": "Course environment",
+      "state": "Normal state",
+      "behavior": "Static obstacles, fixed track layout, consistent friction; environment is predictable hazard"
+    },
+    {
+      "entity": "Course environment",
+      "state": "Advanced difficulty",
+      "behavior": "More complex isometric paths, reversed orientations (Silly race), increased density of obstacles; environment becomes more labyrinthine and demanding"
+    }
+  ],
+  "notes": "Marble Madness (NES) is a port of the 1984 arcade original designed by Mark Cerny. The game uses minimalist visual design with an isometric perspective inspired by M.C. Escher's art. Core world-state communication relies on: (1) visual theme distinctiveness across six races, (2) obstacle/enemy density escalation, (3) persistent time-pressure visualization, (4) marble physics and control feedback as danger/safety indicators. No explicit faction narratives or political systems present; the game communicates challenge through environmental design and visual progression rather than narrative. The NES version maintains the core isometric perspective and course-based gameplay but adapts trackball controls to standard game controllers. Regional differences in high-score table names suggest localization, but sources do not detail visual changes between US and European versions.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:36:23.479Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3987,
+    "output_tokens": 2024,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

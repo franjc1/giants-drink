@@ -1,0 +1,173 @@
+{
+  "game_id": "wild-guns-snes",
+  "game_name": "Wild Guns",
+  "platform": "snes",
+  "paradigm": "shooting gallery / platformer hybrid",
+  "danger_signals": [
+    {
+      "signal": "Enemy robot appearance",
+      "visual_form": "Robotic enemies in background with mechanical silhouettes",
+      "meaning": "Immediate threat; player must shoot to eliminate"
+    },
+    {
+      "signal": "Incoming projectiles",
+      "visual_form": "Bullet trajectories visible in foreground space",
+      "meaning": "Active threat requiring evasion via jump/dive/roll"
+    },
+    {
+      "signal": "Dynamite sticks thrown by enemies",
+      "visual_form": "Animated explosive objects arcing toward player",
+      "meaning": "Area-of-effect threat; can be shot back or dodged"
+    },
+    {
+      "signal": "'Look Out!' text bubble",
+      "visual_form": "On-screen warning text near player character",
+      "meaning": "Critical dodge window indicator; bullet evasion required immediately"
+    },
+    {
+      "signal": "Screen shake and mirage effects",
+      "visual_form": "Post-explosion visual distortion (influenced by RoboCop 3)",
+      "meaning": "Environmental hazard aftermath; disorientation signal"
+    },
+    {
+      "signal": "Boss character appearance",
+      "visual_form": "Scaled-up robotic or human antagonist in background",
+      "meaning": "Stage-culminating threat with distinct attack patterns"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item boxes after enemy defeat",
+      "visual_form": "Glowing/highlighted boxes containing gold, silver, or bombs",
+      "meaning": "Reward for successful engagement; score increase or tactical advantage"
+    },
+    {
+      "signal": "Weapon upgrades",
+      "visual_form": "Visual variants of player weapons (shotgun, machine gun visual states)",
+      "meaning": "Temporary power increase; enhanced damage or fire rate capability"
+    },
+    {
+      "signal": "Vulcan gun acquisition (bullet-clash gauge full)",
+      "visual_form": "Distinctive high-powered weapon visual with invincibility aura",
+      "meaning": "Temporary invincibility state; complete damage immunity during gauge depletion"
+    },
+    {
+      "signal": "Player dodge animation (jump/dive/roll)",
+      "visual_form": "Character movement away from projectile paths",
+      "meaning": "Successful evasion; player health/status maintained"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kid Family (antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Implied through stage boss design and enemy robot customization",
+      "enemy_visual_variants": "Robots and henchmen deployed across six levels; boss encounters vary by stage",
+      "environmental_markers": "Stage progression shows increasing mechanical sophistication and Kid Family presence"
+    },
+    {
+      "faction": "Protagonist Alliance (Annie + Clint bounty hunter partnership)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Character clothing 'emblematic of American frontier period'; distinct silhouettes for Annie vs. Clint",
+      "environmental_markers": "Foreground positioning; player-controlled character design emphasizes period-appropriate Western aesthetic"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Wild West setting with steampunk/sci-fi overlay",
+      "visual_manifestation": "Stage environments blend Western landscape elements with mechanical robotic enemies and advanced weaponry",
+      "behavioral_manifestation": "Enemy types shift from biological-inspired to purely mechanical; technology level increases across level progression"
+    },
+    {
+      "world_state": "Active conflict (story: revenge mission against Kid Family)",
+      "visual_manifestation": "Continuous enemy deployment; stage bosses represent escalating Kid Family opposition; background shows stages of confrontation",
+      "behavioral_manifestation": "Enemy aggression patterns increase; boss encounters present distinct attack behaviors unique to each stage"
+    },
+    {
+      "world_state": "Player vulnerability (no weapon equipped)",
+      "visual_manifestation": "D-pad controls player movement; gun reticle holstered",
+      "behavioral_manifestation": "Player capable of jump, dive, roll evasion; full mobility for defensive positioning"
+    },
+    {
+      "world_state": "Player in combat stance (weapon equipped/aiming)",
+      "visual_manifestation": "D-pad controls reticle position instead of character movement; gun extended visually",
+      "behavioral_manifestation": "Player immobilized in position; movement trade-off for targeting accuracy; shooting mechanics active"
+    },
+    {
+      "world_state": "Power surge state (Vulcan gun active)",
+      "visual_manifestation": "Distinctive visual weapon appearance; invincibility indicator (likely glow or aura effect)",
+      "behavioral_manifestation": "Player immune to damage; visual gauge depletes over time indicating power duration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage progression as narrative escalation",
+      "example": "Six levels with two stages each plus mini-boss and final boss structure mirrors escalating confrontation with Kid Family; environmental complexity increases"
+    },
+    {
+      "technique": "Enemy robot design reflects world state",
+      "example": "Mechanical enemy silhouettes in background communicate steampunk/sci-fi contamination of Wild West setting; visual anachronism reinforces narrative conflict"
+    },
+    {
+      "technique": "Weapon availability as tactical world communication",
+      "example": "Shotguns and machine guns appear as stage-specific drops; weapon progression implies increasing enemy sophistication and player resource escalation"
+    },
+    {
+      "technique": "Screen distortion post-explosion",
+      "example": "Mirage effects and screen shake after major explosions (RoboCop 3 influence) communicate environmental trauma and hazard persistence"
+    },
+    {
+      "technique": "Character design as historical grounding",
+      "example": "Annie and Clint clothed in frontier-period appropriate attire despite sci-fi setting; visual design emphasizes human resistance within mechanized world"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard robot enemies",
+      "state": "Active/patrolling",
+      "behavior": "Spawn in background; fire projectiles toward player; positioned at varying depths to create aiming complexity"
+    },
+    {
+      "entity": "Dynamite-throwing enemies",
+      "state": "Engaged",
+      "behavior": "Arc explosive projectiles; projectiles can be shot down or caught (lasso stun) and redirected back to source"
+    },
+    {
+      "entity": "Boss enemies (stage-final)",
+      "state": "Hostile confrontation",
+      "behavior": "Unique attack patterns per boss; escalated projectile volume; represent culmination of stage threat"
+    },
+    {
+      "entity": "Defeated enemies",
+      "state": "Post-destruction",
+      "behavior": "Reveal item drops (gold, silver, bombs, weapon upgrades); visual loot boxes indicate reward availability"
+    },
+    {
+      "entity": "Player character (Annie/Clint)",
+      "state": "Defensive evasion mode",
+      "behavior": "'Look Out!' text appears before critical dodge windows; player must perform jump/dive/roll to avoid projectiles"
+    },
+    {
+      "entity": "Player character",
+      "state": "Offensive targeting mode",
+      "behavior": "D-pad shifts from movement control to reticle positioning; player trades mobility for aiming precision; fire button engages shooting"
+    }
+  ],
+  "notes": "Wild Guns uses layered depth (foreground player positioning vs. background enemy placement) as primary visual communication tool. The 'Look Out!' text bubble was explicitly added to compensate for difficulty judging bullet distances due to artificial 3D depth perception. Visual design intentionally blends Western frontier aesthetic with mechanical/sci-fi elements to communicate narrative conflict (human revenge against mechanized Kid Family). No faction color-coding or symbolic markers documented; factions differentiated primarily through character design (human protagonists) vs. robotic enemy silhouettes. World state communicated through gameplay mechanic shifts (movement vs. aiming control) rather than environmental transformation. Weapon visual variants serve as power-level communication without narrative diegetic explanation.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Wild Guns article)",
+    "wikipedia (Wild Guns - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:14:17.033Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4731,
+    "output_tokens": 2114,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

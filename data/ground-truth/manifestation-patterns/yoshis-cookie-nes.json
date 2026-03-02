@@ -1,0 +1,116 @@
+{
+  "game_id": "yoshis-cookie-nes",
+  "game_name": "Yoshi's Cookie",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Grid overflow",
+      "visual_form": "Cookies accumulating from top and right sides of playing field, filling grid beyond capacity",
+      "meaning": "Game over condition; player has failed to clear cookies fast enough"
+    },
+    {
+      "signal": "Rising cookie level",
+      "visual_form": "Progressive vertical fill of grid space as new cookies enter from top",
+      "meaning": "Increasing time pressure and difficulty; imminent failure if not cleared"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared row/column",
+      "visual_form": "Matching cookies of same type disappearing from horizontal or vertical line",
+      "meaning": "Successful puzzle solution; progress toward level completion"
+    },
+    {
+      "signal": "Available cursor movement",
+      "visual_form": "Active cursor on grid that can rotate lines of cookies",
+      "meaning": "Player agency and control; ability to manipulate board state"
+    },
+    {
+      "signal": "Yoshi wildcard cookie",
+      "visual_form": "Cookie shaped like Yoshi's head appearing occasionally on grid",
+      "meaning": "Helper mechanism; can match any cookie type to clear lines"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Yoshi brand identity",
+      "color_identity": null,
+      "symbol_or_sigil": "Yoshi head-shaped cookie; Yoshi character branding in logo and title screen",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Logo with Yoshi character; Japanese version includes two sets of eyes in cloud; international version replaces with Yoshi Egg in orange box"
+    },
+    {
+      "faction": "Mario universe affiliation",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario character licensing and branding",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Game developed as Hermetica arcade title, licensed and rebranded by Nintendo with Mario characters for NES/Game Boy versions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / low difficulty",
+      "visual_manifestation": "Grid partially filled with fewer cookie types; slower cookie descent speed",
+      "behavioral_manifestation": "Player completes successive levels with progressive complexity increase"
+    },
+    {
+      "world_state": "Advanced game / high difficulty",
+      "visual_manifestation": "Grid filling rapidly; more cookie types on screen simultaneously",
+      "behavioral_manifestation": "Faster cookie entry from top and right; increased pressure to clear matching lines quickly"
+    },
+    {
+      "world_state": "Multiplayer VS mode",
+      "visual_manifestation": "Split-screen display with two independent grids side-by-side",
+      "behavioral_manifestation": "Players compete; successful matches by one player can cause disruptions to opponent's grid (game mechanics enable player-to-player interference)"
+    },
+    {
+      "world_state": "Single puzzle level (SNES only)",
+      "visual_manifestation": "Predefined static grid layout rather than dynamically filling board",
+      "behavioral_manifestation": "Player must solve puzzle within maximum number of moves; no time pressure from cookie overflow"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Regional visual identity",
+      "example": "Japanese logo features Yoshi with expressive eyes in large cloud; international logo redesigned with Yoshi Egg in orange box, clouds redrawn—communicates localization and market-specific branding rather than narrative world-state"
+    },
+    {
+      "technique": "Cookie variety as complexity signal",
+      "example": "Multiple cookie types on grid (each type visually distinct) communicate difficulty progression; more types present = harder puzzle"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Cookie grid system",
+      "state": "Active/playable",
+      "behavior": "Continuously accepts new cookies from top and right edges; responds to player cursor rotations; clears matching rows/columns upon completion"
+    },
+    {
+      "entity": "Yoshi wildcard cookie",
+      "state": "Present on board",
+      "behavior": "Acts as universal match; player can use it to complete any row or column regardless of other cookie types"
+    },
+    {
+      "entity": "Player cursor",
+      "state": "Under player control",
+      "behavior": "Rotates individual lines of cookies (similar to Rubik's Cube mechanics); positions indicate available moves and strategic options"
+    }
+  ],
+  "notes": "Yoshi's Cookie is a tile-matching puzzle game with minimal narrative or faction conflict elements. World-state communication is entirely mechanical/gameplay-based: grid fill rate indicates difficulty progression; cookie overflow signals failure state. The game's visual identity derives from Mario/Yoshi IP branding rather than environmental storytelling. Development notes indicate the game originated as arcade title 'Hermetica' before being licensed and rebranded. No dynamic world states, political situations, or faction relationships beyond IP association. Manifestation layer is primarily about clarity of puzzle mechanics and difficulty signaling through visual density and accumulation.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor: Yoshi's Cookie (NES)",
+    "wikipedia - Yoshi's Cookie"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:43:09.649Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5291,
+    "output_tokens": 1361,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

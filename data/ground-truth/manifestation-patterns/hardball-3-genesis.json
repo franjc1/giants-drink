@@ -1,0 +1,149 @@
+{
+  "game_id": "hardball-3-genesis",
+  "game_name": "HardBall III",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Ball in play",
+      "visual_form": "Flashing highlight on defensive player closest to ball",
+      "meaning": "Active threat zone; player must respond to prevent scoring"
+    },
+    {
+      "signal": "Hit trajectory",
+      "visual_form": "Ball path from batter toward field",
+      "meaning": "Immediate danger to fielders; collision/miss risk"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Controlled possession",
+      "visual_form": "Player selection highlight; pitcher control during wind-up",
+      "meaning": "Player has agency and direction over action"
+    },
+    {
+      "signal": "Base occupancy",
+      "visual_form": "Runner position on bases (implied visual state)",
+      "meaning": "Safe staging area; strategic advancement opportunity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Pitcher's Team",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opposing batting team visually distinct on field",
+      "environmental_markers": "Pitcher's mound perspective; home plate frame of reference"
+    },
+    {
+      "faction": "Batter's Team",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Defensive positions oppose offensive setup",
+      "environmental_markers": "Batter's box; baseline positions"
+    },
+    {
+      "faction": "Field Defense",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Fielders distribute across outfield and infield zones",
+      "environmental_markers": "Standard baseball diamond layout with positional staging"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pitcher control phase",
+      "visual_manifestation": "Directional input options for pitch selection (four cardinal directions for type and location)",
+      "behavioral_manifestation": "Player cycles through pitch types; aim toward low/high/inside/outside targets"
+    },
+    {
+      "world_state": "Batter readiness phase",
+      "visual_manifestation": "Batter positioned in box; directional aim controls for swing contact",
+      "behavioral_manifestation": "Player timing swing and direction matching pitch trajectory"
+    },
+    {
+      "world_state": "Ball in flight (post-hit)",
+      "visual_manifestation": "Active fielder flashes/highlights to indicate control assignment",
+      "behavioral_manifestation": "Closest defensive player automatically selected; player uses four directions to throw to bases"
+    },
+    {
+      "world_state": "Managerial overlay active",
+      "visual_manifestation": "Team roster and statistics interface displayed",
+      "behavioral_manifestation": "Player rearranges lineup, selects pitcher from roster, manages substitutions based on individual player stats"
+    },
+    {
+      "world_state": "Game in progress",
+      "visual_manifestation": "Field perspective from pitcher's mound (broadcast-style camera angle)",
+      "behavioral_manifestation": "Continuous play cycle: pitch → hit/miss → field → throw → base advance"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Perspective anchoring",
+      "example": "Pitcher's mound view mirrors MLB broadcast standard, immediately communicates 'professional baseball' context through familiar camera angle"
+    },
+    {
+      "technique": "UI-as-world-state",
+      "example": "Flashing fielder indicator shows who 'owns' the ball without dialogue; visual feedback replaces text explanation"
+    },
+    {
+      "technique": "Statistical character differentiation",
+      "example": "Each team member has own stats affecting performance; managerial interface displays individual capability variance, signaling strategic depth"
+    },
+    {
+      "technique": "Directional input mapping",
+      "example": "Four-cardinal-direction control scheme maps to pitch location (low/high/inside/outside), creating intuitive spatial language for action intention"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pitcher",
+      "state": "Pre-delivery",
+      "behavior": "Player selects pitch type via directional input; wind-up animation prepares throw"
+    },
+    {
+      "entity": "Pitcher",
+      "state": "In control",
+      "behavior": "Accepts directional commands for aim adjustment before release"
+    },
+    {
+      "entity": "Batter",
+      "state": "Ready",
+      "behavior": "Stance in box; responds to incoming pitch with directional swing timing"
+    },
+    {
+      "entity": "Batter",
+      "state": "Post-contact",
+      "behavior": "Runs bases automatically if hit; visual trajectory determines success/failure"
+    },
+    {
+      "entity": "Fielder (closest to ball)",
+      "state": "Active",
+      "behavior": "Flashes/highlights to show current control; intercepts ball and throws to designated base"
+    },
+    {
+      "entity": "Fielder (inactive)",
+      "state": "Passive",
+      "behavior": "Holds position; awaits ball or throw assignment"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Decision-making",
+      "behavior": "Makes pitch/swing/field decisions autonomously; described as 'unrealistic' and 'low difficulty' in reviews, suggesting predictable patterns"
+    }
+  ],
+  "notes": "HardBall III (Genesis 1992) source data limited to Wikipedia entry describing original 1985 HardBall! series. No specific visual design documentation for Genesis iteration available. Manifestation patterns inferred from gameplay mechanics described: pitcher's mound perspective, flashing fielder indicator, four-directional control system, and managerial statistical overlay. Game communicates game-state primarily through control paradigm shifts (pitcher → batter → fielder phase transitions) and visual highlight feedback (flashing to indicate active entity). No faction colors/symbols documented; baseball inherently opposes pitcher vs. batter and defense vs. offense through positional field arrangement. World-state manifestation relies on UI integration (managerial overlay) and perspective anchoring (broadcast-style camera). Environmental storytelling achieved through perspective familiarity and behavioral UI rather than narrative diegesis.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:42:49.996Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3206,
+    "output_tokens": 1635,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "game": "Mega Man X3",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Mega Man X3",
+        "url": "https://en.wikipedia.org/wiki/Mega_Man_X3",
+        "notes": "Zero playability, Ride Armors, Doppler Stage mechanics."
+      },
+      {
+        "name": "TASVideos — SNES / Mega Man X3",
+        "url": "https://tasvideos.org/GameResources/SNES/MegaManX3",
+        "notes": "Physics documentation. Page availability not confirmed."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Mega Man X3 continues the same engine as X1/X2. Core physics constants assumed identical.",
+      "MAJOR ADDITION: Zero is PLAYABLE for the first time. Saber melee combat vs X's buster ranged.",
+      "MAJOR ADDITION: Ride Armors — large mech suits X or Zero can pilot.",
+      "Zero's gameplay adds a melee-focused variant within the same levels.",
+      "Doppler Stages: 4 bonus stages after the 8 Mavericks, creating a 12-stage structure.",
+      "If Zero is destroyed, he cannot be used for the rest of that playthrough — risk management around Zero's use.",
+      "Walk speed, dash, jump, gravity assumed same as X1/X2. VERIFY from ROM."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "x_physics": {
+    "_note": "Same engine as MMX and X2 — all base physics values inherited.",
+    "walk_speed": {
+      "px_per_frame": 1.5,
+      "confidence": "medium",
+      "source": "Assumed same as X1/X2. VERIFY."
+    },
+    "dash_speed": {
+      "px_per_frame": 3.5,
+      "confidence": "medium",
+      "source": "Assumed same as X1/X2. VERIFY."
+    },
+    "jump_velocity_initial": {
+      "px_per_frame": 5.0,
+      "confidence": "medium",
+      "source": "Assumed same as X1/X2. VERIFY."
+    },
+    "gravity": {
+      "px_per_frame_sq": 0.25,
+      "confidence": "medium",
+      "source": "Mega Man series constant. VERIFY."
+    },
+    "air_dash": {
+      "description": "Same as X2's Crystal Chip — dash in the air.",
+      "notes": "Air dash may be available from game start in X3 or require a specific upgrade. VERIFY availability."
+    },
+    "wall_kick": {
+      "description": "Same as X1/X2. Slide along wall, press jump to launch in opposite direction."
+    }
+  },
+
+  "zero_gameplay": {
+    "_note": "THE KEY ADDITION. Zero is playable for segments. Completely different combat style from X.",
+    "access": {
+      "description": "Zero can be called in to take over from X in certain stages. Press select-equivalent to switch.",
+      "risk": "If Zero is destroyed (health depleted to zero), he cannot be used again that playthrough.",
+      "notes": [
+        "The permadeath-per-run risk of using Zero creates genuine stakes around his deployment.",
+        "Expert players may deliberately avoid using Zero early to preserve him for harder sections.",
+        "Casual players may lose Zero early and never experience his capabilities."
+      ]
+    },
+    "z_saber": {
+      "description": "Zero's beam saber. Short range, high damage per hit. Completely different from X's buster.",
+      "notes": [
+        "Melee only — Zero has no charge shot, no buster equivalents.",
+        "Must close range on every enemy — higher risk, higher damage.",
+        "The Z-Saber's arc covers front and slightly above/below Zero."
+      ]
+    },
+    "zero_dash": {
+      "description": "Zero can dash similar to X — same button, same dash speed.",
+      "notes": "Zero uses the same movement engine as X — dash, wall kick all available."
+    },
+    "zero_vs_x": {
+      "comparison": "Zero: melee range, high damage, no charge, higher risk. X: ranged buster, charge shot, special weapons, lower risk.",
+      "notes": "The two characters present different risk profiles. Zero's melee demands positioning skill; X's ranged play allows more safety."
+    },
+    "confidence": "high"
+  },
+
+  "ride_armors": {
+    "_note": "Large mech suits that dramatically change movement and combat.",
+    "description": "Giant mech suits found in certain stages. X or Zero can pilot them.",
+    "capabilities": {
+      "punch": "Powerful melee attack — one-shots most regular enemies",
+      "jump": "Large jump — can reach areas normal X/Zero cannot",
+      "walk": "Slower ground movement than X/Zero on foot"
+    },
+    "durability": {
+      "description": "Ride Armors have their own health bar. When depleted, the mech is destroyed.",
+      "notes": "The pilot ejects when the armor is destroyed — X/Zero survives but loses the armor."
+    },
+    "notes": [
+      "Ride Armors create a power fantasy section — briefly overpowered and destroying everything.",
+      "The transition back to on-foot play after losing the armor creates a vulnerability moment.",
+      "Some stages have Ride Armor-specific routes (certain terrain only navigable in armor)."
+    ],
+    "confidence": "high"
+  },
+
+  "doppler_stages": {
+    "description": "4 extra stages (Doppler Stages) unlock after defeating all 8 Mavericks.",
+    "notes": [
+      "Extends the stage count beyond the standard 8-boss structure.",
+      "Dr. Doppler is the main antagonist — the Doppler Stages are his lair.",
+      "These stages use remixed Maverick abilities and tougher enemy configurations."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "Zero's playability with permadeath-per-run stakes is a brilliant risk-reward design. The player is CONSTANTLY deciding: 'Is this section worth using Zero for?' Using Zero is powerful but permanently reduces your options. The capability is valuable precisely because it's consumable.",
+    "The X vs Zero gameplay split (ranged vs melee) within the same levels creates two different movement grammars for the same space. X players approach enemies at buster range; Zero players approach to saber range. The level's spatial design must accommodate both distances.",
+    "Ride Armors create 'power fantasy interludes' — brief periods of massive power before returning to the core game. The contrast (invincible in armor → vulnerable on foot) makes the standard gameplay feel more intense after the armor moment. Power fantasy as pacing tool.",
+    "Mega Man X3 is the end of the SNES MMX trilogy. By the third iteration, the engine is deeply familiar and the additions (Zero, Ride Armors) are accumulated on a stable foundation. This is what mature engine development looks like: not replacement but careful accretion.",
+    "The Doppler Stage extension changes player expectations: after 8 bosses, the traditional 'Wily stages begin' phase arrives but with more stages than expected. The villain is Dr. Doppler, not Dr. Wily — but the structural pattern (boss rush → lair stages) is the series template."
+  ]
+}

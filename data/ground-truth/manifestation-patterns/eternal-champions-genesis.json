@@ -1,0 +1,174 @@
+{
+  "game_id": "eternal-champions-genesis",
+  "game_name": "Eternal Champions",
+  "platform": "genesis",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "Special Attack Meter Depletion",
+      "visual_form": "Decreasing meter indicator on HUD",
+      "meaning": "Loss of offensive capability; vulnerability to opponent pressure"
+    },
+    {
+      "signal": "Dizzy State",
+      "visual_form": "Character stagger animation with visual indicators",
+      "meaning": "Stunned condition allowing free opponent attacks; critical vulnerability window"
+    },
+    {
+      "signal": "Life Bar Reduction",
+      "visual_form": "Depleting health bar above character",
+      "meaning": "Proximity to knockout; escalating danger"
+    },
+    {
+      "signal": "Stage Hazards (Overkill Zones)",
+      "visual_form": "Specific ground areas with environmental features",
+      "meaning": "Environmental kill zones; defeat in certain locations triggers stage-specific finishing moves"
+    },
+    {
+      "signal": "Opponent Charging State",
+      "visual_form": "Character holding back/down position with visual stance change",
+      "meaning": "Opponent preparing special move or meter recovery; incoming threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Defensive Shell Position",
+      "visual_form": "Character retreating animation with defensive stance",
+      "meaning": "Active meter recharge mode; temporary reduced offensive threat but maintained positioning"
+    },
+    {
+      "signal": "Block Stance",
+      "visual_form": "Character facing opponent with guard raised",
+      "meaning": "Damage mitigation; pressing away (high blocks) or down-away (low blocks)"
+    },
+    {
+      "signal": "Distance/Spacing",
+      "visual_form": "Character positioned away from opponent on stage",
+      "meaning": "Safety from melee attacks; outside immediate threat range"
+    },
+    {
+      "signal": "Full Special Attack Meter",
+      "visual_form": "Maxed meter indicator on HUD",
+      "meaning": "Offensive capability available; readiness for special moves and taunt pressure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Time Period/Era Representation",
+      "color_identity": null,
+      "symbol_or_sigil": "Character costume and equipment reflecting historical period",
+      "enemy_visual_variants": "Same character sprites maintain consistent visual identity regardless of opponent matchup",
+      "environmental_markers": "Stage backgrounds reflect character's era (e.g., futuristic cityscapes for 2030 A.D. fighters, historical settings for 1899 A.D. characters)"
+    },
+    {
+      "faction": "Character Archetype (Weapon vs. Unarmed)",
+      "color_identity": null,
+      "symbol_or_sigil": "Visible weapons or martial arts stance",
+      "enemy_visual_variants": "Fighters carrying weapons display equipment in idle and attack animations; unarmed fighters use hand-to-hand combat poses",
+      "environmental_markers": "Character model variations indicate combat philosophy and historical role"
+    },
+    {
+      "faction": "Moral Alignment (Heroic/Redemption-Focused)",
+      "color_identity": null,
+      "symbol_or_sigil": "Character design emphasizes heroic qualities rather than villainous traits",
+      "enemy_visual_variants": "No visual distinction between 'good' and 'evil' factions—all characters are potential heroes",
+      "environmental_markers": "Character backstory (shown in endings) reflects positive historical impact rather than destructive outcomes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Tournament Active / Eternal Champion's Intervention",
+      "visual_manifestation": "Characters assembled in fighting arena stages; opponent selection screen shows bracket progression",
+      "behavioral_manifestation": "All fighters motivated by single resurrection opportunity; tournament rules enforce one-on-one combat; competitive stance and aggressive positioning"
+    },
+    {
+      "world_state": "Character at Risk of Historical Death",
+      "visual_manifestation": "Character epilogue text and ending sequence revealed upon victory; visual narrative of character's fate prevented",
+      "behavioral_manifestation": "Character fighting with heightened desperation; taunt animations suggest determination to survive"
+    },
+    {
+      "world_state": "Stage Environment Reflects Historical Context",
+      "visual_manifestation": "Stage backgrounds render period-appropriate architecture, technology, and setting details",
+      "behavioral_manifestation": "Overkill finishing moves utilize stage-specific hazards reflecting historical era's killing methods (environmental storytelling through lethality)"
+    },
+    {
+      "world_state": "Power Balance Shift (Special Attack Meter Dynamics)",
+      "visual_manifestation": "Meter depletion visible on HUD; character stance changes when meter exhausted vs. when full",
+      "behavioral_manifestation": "Defensive retreats when meter depleted; aggressive offensives when meter full; taunt execution drains opponent's meter, creating psychological pressure shifts"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-Specific Overkill Finishing Moves",
+      "example": "Background environmental elements kill defeated opponents based on stage location—reflects historical era's danger and setting lethality without impacting narrative (canonical deaths still occur per history)"
+    },
+    {
+      "technique": "Character Costume and Equipment Design",
+      "example": "Jonathan Blade wears 2030 A.D. futuristic tactical gear; Jetta Maxx displays 1899 A.D. Russian aristocratic styling—visual design communicates temporal displacement and character identity without dialogue"
+    },
+    {
+      "technique": "Background Setting Authenticity",
+      "example": "Stage environments render historically-appropriate architecture, technology levels, and aesthetic details; visual context reinforces character's temporal origin and historical significance"
+    },
+    {
+      "technique": "Victory Epilogues and Ending Animations",
+      "example": "Defeating arcade mode reveals epilogue showing character avoiding death and making positive historical impact; visual narrative resolution confirms character's redemption and world-state improvement"
+    },
+    {
+      "technique": "Weapon Visibility as Character Archetype Signal",
+      "example": "Some fighters carry visible weapons (swords, guns, tools) while others rely on martial arts; equipment presence communicates combat specialty and historical role without tutorial exposition"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player Character",
+      "state": "Normal Combat",
+      "behavior": "Responsive to input; directional movement (away/toward/jump/crouch); attack chains vary by button press (weak/medium/strong with speed-damage tradeoff)"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Dizzy",
+      "behavior": "Stagger animation; momentary vulnerability; opponent can land guaranteed free attack; visual disorientation signal"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Special Attack Meter Depleted",
+      "behavior": "Cannot execute special moves; reverts to basic attacks; can enter defensive shell to recharge; forced passive positioning"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Defensive Shell Active",
+      "behavior": "Retreating stance; meter recharging; reduced offensive capability; visual indicator of tactical reset"
+    },
+    {
+      "entity": "Opponent (AI)",
+      "state": "Tournament Mode",
+      "behavior": "Can execute special moves beyond meter zero (difficulty scaling); uses taunt to drain player meter; adapts pressure based on player spacing"
+    },
+    {
+      "entity": "Opponent (AI)",
+      "state": "Low Health",
+      "behavior": "May increase special move frequency; visual aggression escalation as defeat approaches"
+    },
+    {
+      "entity": "Stage Environment",
+      "state": "Overkill Zone Active",
+      "behavior": "Character defeat in specific ground location triggers background element animation; environmental hazard executes defeated opponent; visual finisher plays out regardless of narrative continuity"
+    }
+  ],
+  "notes": "Eternal Champions communicates world-state primarily through: (1) Character-era visual design establishing temporal faction; (2) Special Attack Meter as real-time resource pressure signal; (3) Stage-specific Overkills as environmental danger manifestation without narrative impact; (4) Dizzy state as visual vulnerability condition; (5) Victory epilogues as world-state resolution narrative. The game uniquely positions all fighters as morally heroic, eliminating traditional villain visual markers—faction identity is temporal rather than moral. Background authenticity and character costume design carry heavy environmental storytelling weight. The mechanic of computer opponents ignoring meter limits in tournament mode signals difficulty scaling rather than rule-breaking, communicated behaviorally rather than visually.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:56:51.758Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2821,
+    "output_tokens": 2182,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

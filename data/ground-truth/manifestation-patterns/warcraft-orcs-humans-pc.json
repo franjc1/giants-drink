@@ -1,0 +1,172 @@
+{
+  "game_id": "warcraft-orcs-humans-pc",
+  "game_name": "Warcraft: Orcs & Humans",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "building_damage_state",
+      "visual_form": "flaming/burning building sprite with darkened coloring",
+      "meaning": "structure under attack or severely damaged, imminent destruction risk"
+    },
+    {
+      "signal": "razed_terrain",
+      "visual_form": "burnt ground scorch marks where building previously stood",
+      "meaning": "area has been destroyed; enemy presence was here; loss of resource/defensive position"
+    },
+    {
+      "signal": "unit_visual_wear",
+      "visual_form": "darkened or damaged unit sprite appearance",
+      "meaning": "unit is injured or weakened; reduced combat effectiveness"
+    },
+    {
+      "signal": "enemy_force_proximity",
+      "visual_form": "red-colored units on screen approaching player settlements",
+      "meaning": "active threat; imminent combat engagement"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "intact_buildings",
+      "visual_form": "fully-colored, undamaged building sprite with standard appearance",
+      "meaning": "structure is functional and safe; defensive capability active"
+    },
+    {
+      "signal": "resource_availability_display",
+      "visual_form": "lumber and gold numbers displayed in top UI bar",
+      "meaning": "player has economic capacity; can continue production and expansion"
+    },
+    {
+      "signal": "farm_structures",
+      "visual_form": "agricultural buildings present in settlement",
+      "meaning": "food production capacity supports unit growth; economy stable"
+    },
+    {
+      "signal": "defensive_forest_walls",
+      "visual_form": "dense tree sprites surrounding settlement perimeter",
+      "meaning": "natural fortification in place; early-game defensive position secure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Humans",
+      "color_identity": "blue",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Orc units and buildings have distinctly different sprite designs (described as different sprites for functionally equivalent structures)",
+      "environmental_markers": "Human settlements with characteristic architecture; magical buildings include Cleric tower and Conjurer tower"
+    },
+    {
+      "faction": "Orcs",
+      "color_identity": "red",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Orc units and buildings have distinctly different sprite designs from Human counterparts",
+      "environmental_markers": "Orc settlements with barbaric/dark architectural style; magical buildings include Necrolyte tower and Warlock tower; skull/necromantic visual themes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_economic_phase",
+      "visual_manifestation": "forests retained as defensive walls; Town Center and Farms prominent; few military units visible",
+      "behavioral_manifestation": "builder units actively harvesting resources from forests and gold mines; minimal combat activity"
+    },
+    {
+      "world_state": "mid_game_military_buildup",
+      "visual_manifestation": "Barracks structures visible; multiple unit types present on map; some forest clearance for expansion",
+      "behavioral_manifestation": "resource gathering continues at accelerated pace; units begin patrol and skirmish missions"
+    },
+    {
+      "world_state": "active_conflict",
+      "visual_manifestation": "flaming buildings; razed terrain; opposing colored units (red vs blue) visible in proximity; damaged unit sprites",
+      "behavioral_manifestation": "units engaged in combat; defensive structures under fire; town under siege conditions"
+    },
+    {
+      "world_state": "resource_depletion",
+      "visual_manifestation": "exhausted mines and forests appear empty/depleted; low gold/lumber numbers in UI",
+      "behavioral_manifestation": "builder units must travel longer distances; economic pressure increases; expansion becomes necessary"
+    },
+    {
+      "world_state": "magical_threat_present",
+      "visual_manifestation": "spellcaster units visible near combat zones; magical building towers prominent in settlement",
+      "behavioral_manifestation": "Clerics/Necrolytes cast protective or summoning spells; summoned elementals or skeletal troops appear on battlefield"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "building_state_narrative",
+      "example": "progression from intact building → flaming building → burnt ground scorch mark tells story of settlement destruction without explicit narration"
+    },
+    {
+      "technique": "resource_landscape_storytelling",
+      "example": "depleted forests and exhausted gold mines signal passage of time and player pressure; deforestation shows expansion history"
+    },
+    {
+      "technique": "faction_architectural_identity",
+      "example": "distinct sprite sets for identical-function buildings (Human Town Hall vs Orc Town Hall) reinforce cultural/faction identity without UI labels"
+    },
+    {
+      "technique": "unit_presence_indication",
+      "example": "spellcaster tower locations visually indicate which magical capabilities are available in a settlement"
+    },
+    {
+      "technique": "fortification_state_communication",
+      "example": "retained forest density around settlements shows defensive preparation level; cleared forests indicate vulnerability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "builder_unit",
+      "state": "active_resource_gathering",
+      "behavior": "visible moving between forest/mine and Town Center; delivers resources that update UI counters"
+    },
+    {
+      "entity": "builder_unit",
+      "state": "construction_mode",
+      "behavior": "positioned at building site; structure gradually appears and becomes functional"
+    },
+    {
+      "entity": "combat_unit",
+      "state": "idle_defensive",
+      "behavior": "stationed near settlement; minimal movement"
+    },
+    {
+      "entity": "combat_unit",
+      "state": "engaged_in_combat",
+      "behavior": "attacking animation; opponent unit displays damage; visual clash on screen"
+    },
+    {
+      "entity": "spellcaster_unit",
+      "state": "casting_spell",
+      "behavior": "Cleric heals nearby damaged unit (visual repair); Necrolyte raises skeleton troops (new unit appears); Conjurer summons water elemental (summoned unit appears)"
+    },
+    {
+      "entity": "building",
+      "state": "under_attack",
+      "behavior": "sprite transitions to flaming appearance; health implied by visual intensity of flames"
+    },
+    {
+      "entity": "building",
+      "state": "destroyed",
+      "behavior": "replaced by burnt ground scorch mark; no longer occupies space; resource lost"
+    },
+    {
+      "entity": "farm_unit",
+      "state": "at_capacity",
+      "behavior": "visual presence indicates food supply; unit production restricted until additional farms built (behavioral gate)"
+    }
+  ],
+  "notes": "Warcraft: Orcs & Humans uses color-coding (blue vs red) as primary faction differentiation combined with distinct sprite work for all structures and units. Danger is communicated through building damage states (flames, char marks) and terrain scarring. Safety is signaled through intact structures, resource availability UI, and defensive forest retention. The game's manifestation layer is minimalist but effective: visual state of buildings communicates mission progression, resource UI numbers communicate economic health, and unit colors immediately identify allegiance. Spellcaster presence modifies both visual and behavioral signals—summoned units, healing animations, and skeletal troops add visual complexity to indicate magical threats. Early-game emphasis on forest retention as defense tells story of resource scarcity and vulnerability without explicit communication.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:55:17.627Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3323,
+    "output_tokens": 1955,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

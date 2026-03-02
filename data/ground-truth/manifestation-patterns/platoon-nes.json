@@ -1,0 +1,189 @@
+{
+  "game_id": "platoon-nes",
+  "game_name": "Platoon",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Enemy sprites appearing on-screen in jungle and tunnel stages",
+      "meaning": "Active combat threat requiring immediate player response"
+    },
+    {
+      "signal": "Explosive mines",
+      "visual_form": "Visible obstacles in jungle terrain during Stage 1",
+      "meaning": "Environmental hazard that damages player on contact"
+    },
+    {
+      "signal": "Booby traps",
+      "visual_form": "Unmarked hazards distributed throughout jungle",
+      "meaning": "Hidden dangers requiring cautious navigation"
+    },
+    {
+      "signal": "Sniper fire",
+      "visual_form": "Incoming projectiles in jungle Stage 4",
+      "meaning": "Long-range threat requiring evasion and cover awareness"
+    },
+    {
+      "signal": "Darkness in bunker",
+      "visual_form": "Limited visibility in Stage 3 bunker without flares",
+      "meaning": "Environmental obscuration prevents enemy detection; flares required to reveal threats"
+    },
+    {
+      "signal": "Enemy silhouettes",
+      "visual_form": "Dark shapes visible against background in bunker stage",
+      "meaning": "Skilled players can identify enemies through environmental contrast even without flares"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flares obtained",
+      "visual_form": "Collected items from tunnel system stage",
+      "meaning": "Resource enabling visibility and enemy detection in bunker"
+    },
+    {
+      "signal": "Map possession",
+      "visual_form": "Navigation tool obtained in Stage 1 town",
+      "meaning": "Reduces disorientation and guides player through tunnel system"
+    },
+    {
+      "signal": "Compass possession",
+      "visual_form": "Navigation item collected in Stage 2 tunnel system",
+      "meaning": "Orientation aid enabling navigation through jungle Stage 4"
+    },
+    {
+      "signal": "Bunker structure",
+      "visual_form": "Enclosed defensive position in Stage 3",
+      "meaning": "Shelter providing protection from siege; player must defend location"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player forces / American platoon",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player character sprite in jungle combat gear",
+      "environmental_markers": "Bunker positions, bridge locations serving as military objectives"
+    },
+    {
+      "faction": "Enemy forces / Viet Cong and North Vietnamese",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy soldier sprites throughout jungle and tunnel stages",
+      "environmental_markers": "Jungle terrain, tunnel system network, brick bunker positions (Sergeant Barnes stronghold)"
+    },
+    {
+      "faction": "Sergeant Barnes (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Boss character positioned in brick bunker fortification",
+      "environmental_markers": "Bunker at Stage 4 jungle endpoint; represents command authority of enemy forces"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active jungle operation - Stage 1",
+      "visual_manifestation": "Side-scrolling view with dense vegetation, visible mines, scattered booby traps; player navigates vertical and horizontal space",
+      "behavioral_manifestation": "Enemies engage player in jungle environment; player collects explosives and supplies before bridge assault"
+    },
+    {
+      "world_state": "Underground tunnel complex - Stage 2",
+      "visual_manifestation": "First-person perspective tunnel network; confined corridors requiring map navigation; reduced visibility without flares",
+      "behavioral_manifestation": "Continuous enemy spawns require rapid elimination; player collects navigation items (compass, flares) while advancing"
+    },
+    {
+      "world_state": "Bunker under siege - Stage 3",
+      "visual_manifestation": "First-person defensive position; darkness broken only by flare illumination; enemy silhouettes appear at perimeter",
+      "behavioral_manifestation": "Passive siege scenario where player must survive enemy assault; flare use reveals enemy positions outside bunker; siege ends when time expires"
+    },
+    {
+      "world_state": "Final jungle pursuit - Stage 4",
+      "visual_manifestation": "Third-person jungle view with 4-minute time limit indicator; compass visible as navigation aid; sniper fire incoming; brick bunker visible at stage endpoint",
+      "behavioral_manifestation": "Player pursues Sergeant Barnes through jungle under sniper threat; boss fight requires five grenade hits to defeat; compass usage enables efficient pathfinding"
+    },
+    {
+      "world_state": "Pre-mission preparation - Town stage",
+      "visual_manifestation": "Settlement environment transitioning from jungle Stage 1; torch and map items visible for collection",
+      "behavioral_manifestation": "Resource gathering phase; player acquires mission-critical equipment (torch, map) before tunnel system entry"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Explosive mines scattered in jungle terrain",
+      "example": "Stage 1 jungle littered with visible mine indicators communicating combat zone hazard level and enemy fortification strategy"
+    },
+    {
+      "technique": "Tunnel system complexity requiring collected map",
+      "example": "Underground passages communicate logistical challenge of moving through enemy-controlled territory; map is essential survival tool rather than convenience"
+    },
+    {
+      "technique": "Bunker siege scenario with visibility mechanics",
+      "example": "Stage 3 darkness and flare-dependent visibility conveys psychological pressure of defensive warfare and sensory deprivation under assault"
+    },
+    {
+      "technique": "Progressive view changes across stages",
+      "example": "Shift from side-scrolling to first-person to third-person perspective communicates different operational phases: infiltration, underground movement, defensive holdout, pursuit"
+    },
+    {
+      "technique": "Boss character fortification",
+      "example": "Sergeant Barnes positioned in brick bunker at jungle terminus signals final opposition and command structure of enemy forces"
+    },
+    {
+      "technique": "Time pressure indicator in Stage 4",
+      "example": "4-minute countdown communicates urgency of final mission phase and resource scarcity under combat conditions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy soldiers (jungle stages)",
+      "state": "Active engagement",
+      "behavior": "Appear on-screen and attack player; continuously spawn in tunnel system; must be eliminated quickly to advance"
+    },
+    {
+      "entity": "Enemy forces (bunker siege)",
+      "state": "Siege attack pattern",
+      "behavior": "Attack bunker from exterior; visible only as silhouettes in darkness; reveal positions when illuminated by flares; cease attack after time duration expires"
+    },
+    {
+      "entity": "Sergeant Barnes (boss)",
+      "state": "Fortified defensive position",
+      "behavior": "Remains in brick bunker; shoots at approaching player; requires five grenade hits to defeat; represents final enemy objective"
+    },
+    {
+      "entity": "Player character",
+      "state": "Infiltration mode (Stage 1)",
+      "behavior": "Navigates cautiously through mined jungle; collects explosives; plants charges on bridge objective"
+    },
+    {
+      "entity": "Player character",
+      "state": "Underground movement (Stage 2)",
+      "behavior": "Engages in continuous combat; collects navigation aids (flares, compass); uses map to navigate tunnel system"
+    },
+    {
+      "entity": "Player character",
+      "state": "Defensive siege (Stage 3)",
+      "behavior": "Remains stationary in bunker; uses flares to detect external threats; shoots incoming enemies; survives time-limited assault"
+    },
+    {
+      "entity": "Player character",
+      "state": "Final pursuit (Stage 4)",
+      "behavior": "Moves through jungle under time constraint; evades sniper fire; uses compass navigation; engages boss in final confrontation"
+    }
+  ],
+  "notes": "Platoon NES adapts 1986 war film through action gameplay with limited faction visual differentiation. Game communicates world state primarily through environmental hazard density, visibility mechanics (flares, darkness), and perspective shifts rather than faction colors or symbols. Danger signals emphasize environmental threats (mines, traps) and enemy presence density. Safety signals are functional items (map, compass, flares) enabling progression. World state transitions marked by distinct visual presentations and gameplay mechanics: jungle infiltration (side-scrolling), tunnel transit (first-person), bunker defense (first-person with light mechanics), pursuit (third-person). Film tie-in adaptation notes indicate developer prioritized varied gameplay over strict narrative consistency. Stage 3 bunker mechanics most effectively communicate danger through sensory deprivation (darkness requiring flares for enemy visibility). Enemy faction identity implicit through opposition role rather than explicit visual markers.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:10:24.638Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4127,
+    "output_tokens": 2285,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

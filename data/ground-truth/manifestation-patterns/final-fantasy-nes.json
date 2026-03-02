@@ -1,0 +1,148 @@
+{
+  "game_id": "final-fantasy-nes",
+  "game_name": "Final Fantasy",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Random enemy encounters",
+      "visual_form": "Battle screen transition; enemies appear on left side of screen in combat layout",
+      "meaning": "Danger present on current map; player must fight or flee"
+    },
+    {
+      "signal": "Darkened elemental crystals",
+      "visual_form": "Visual state of crystals in story/dialogue, implied through narrative and map areas",
+      "meaning": "World corruption by Elemental Fiends; danger to world stability"
+    },
+    {
+      "signal": "Dungeon environments",
+      "visual_form": "Distinct tileset areas: forests, caves, mountains, swamps, underwater caverns, buildings",
+      "meaning": "Hazardous locations containing enemies and treasures; progression-gated danger"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Preset battle locations with named enemies (e.g., Lich, Fiend of Earth)",
+      "meaning": "Major threat; story-critical danger requiring specific preparation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Towns",
+      "visual_form": "Safe map areas with NPCs, shops, and dialogue boxes",
+      "meaning": "No random encounters; player can rest, buy supplies, gather information"
+    },
+    {
+      "signal": "Menu screen access",
+      "visual_form": "Pause menu allowing inventory, equipment, magic, and level tracking",
+      "meaning": "Safe state; player can manage resources and review progression"
+    },
+    {
+      "signal": "Experience level and HP tracking",
+      "visual_form": "Character stats displayed in menu showing current health and level",
+      "meaning": "Player capability assessment; visual confirmation of party strength"
+    },
+    {
+      "signal": "Available transportation",
+      "visual_form": "Sprite-based ship, canoe, and airship on overworld map",
+      "meaning": "Progression unlocked; new safe routes and fast travel available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Warriors of Light",
+      "color_identity": null,
+      "symbol_or_sigil": "Four elemental crystals",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Crystal locations; dungeons containing elemental themes"
+    },
+    {
+      "faction": "Elemental Fiends",
+      "color_identity": null,
+      "symbol_or_sigil": "Darkened/corrupted elemental crystals",
+      "enemy_visual_variants": "Named boss enemies (Lich - Fiend of Earth; implied others for Fire, Water, Wind)",
+      "environmental_markers": "Corrupted dungeon areas; elemental-themed environments"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Crystals darkened by Fiends",
+      "visual_manifestation": "Story-referenced crystal corruption; world map shows dungeons with Fiend presence",
+      "behavioral_manifestation": "Increased random encounters; NPCs in towns express distress; dungeons become accessible as threats are confronted"
+    },
+    {
+      "world_state": "Player progression through game",
+      "visual_manifestation": "Character sprite portraits mature during class upgrades; new equipment and weapons appear visually on characters",
+      "behavioral_manifestation": "Stronger enemies encountered; new transportation options unlocked (ship, canoe, airship); previously inaccessible areas become traversable"
+    },
+    {
+      "world_state": "Party strength increases",
+      "visual_manifestation": "Menu screen shows rising experience levels (1-50 range); increased HP and stat values; upgraded weapons and armor equippable",
+      "behavioral_manifestation": "Battle outcomes shift in player favor; random encounters become less threatening; boss encounters become viable"
+    },
+    {
+      "world_state": "Party death",
+      "visual_manifestation": "All characters reach zero HP; game over screen appears",
+      "behavioral_manifestation": "Progress lost; return to last save; world state reverts"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dungeon variety and placement",
+      "example": "Different dungeon types (forests, caves, mountains, swamps, underwater, buildings) reflect elemental/thematic narrative; placement on overworld reveals story progression path"
+    },
+    {
+      "technique": "NPC dialogue",
+      "example": "Town citizens offer helpful information and hints about dungeon locations, enemy types, and story progression; dialogue conveys world state anxiety about Fiends"
+    },
+    {
+      "technique": "Shop inventory variation",
+      "example": "Different shops in different towns offer progressive equipment tiers; availability reflects player advancement and dungeon completion"
+    },
+    {
+      "technique": "Treasure distribution",
+      "example": "Rare items found only in dungeon chests, not in shops; signals dungeon importance and rewards exploration"
+    },
+    {
+      "technique": "Transportation availability",
+      "visual_form": "Ship, canoe, airship unlock sequentially on overworld map",
+      "example": "Progressive unlocking of travel methods (foot → ship → canoe → airship) visualizes world opening and narrative progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Random enemies",
+      "state": "Encountered on map",
+      "behavior": "Initiate turn-based combat; can be fought or fled from; yield experience and Gil on defeat"
+    },
+    {
+      "entity": "Boss enemies (Elemental Fiends)",
+      "state": "Story-critical encounters",
+      "behavior": "Preset battle locations; require specific preparation; upon defeat, contribute to crystal restoration narrative"
+    },
+    {
+      "entity": "NPCs in towns",
+      "state": "Story progression dependent",
+      "behavior": "Offer dialogue hints and information; shopkeepers provide buy/sell transactions; behavior varies based on story state"
+    },
+    {
+      "entity": "Party characters",
+      "state": "Based on class and level",
+      "behavior": "Combat actions vary by class (Fighter attacks, Mages cast spells, Thief uses special abilities); visual maturation during class upgrade reflects capability increase"
+    }
+  ],
+  "notes": "Final Fantasy (1987) uses a simplified but effective visual communication system for an 8-bit RPG. The four-youth Warriors of Light quest structure against four Elemental Fiends creates a symmetrical narrative framework. Visual communication relies heavily on menu/stat displays, dungeon environment variety, and overworld map design rather than detailed sprite work. Elemental crystal corruption serves as both mechanical goal indicator and thematic centerpiece. The game pioneered several visual conventions: left-side enemy placement in combat, character sprite side on right, level-based stat progression visualization. Transportation unlocks (ship → canoe → airship) create clear visual milestones of world state change and player capability progression.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:49:36.659Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4761,
+    "output_tokens": 1757,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "wikipedia"
+    ]
+  }
+}

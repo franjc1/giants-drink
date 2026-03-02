@@ -1,0 +1,159 @@
+{
+  "game_id": "rad-racer-nes",
+  "game_name": "Rad Racer",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Obstacle collision",
+      "visual_form": "Vehicle flipping and crash animation",
+      "meaning": "Failed to avoid hazard; loss of control; race failure imminent"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Countdown timer on dashboard HUD; depleting time remaining indicator",
+      "meaning": "Approaching checkpoint deadline; failure state approaching if checkpoint not reached"
+    },
+    {
+      "signal": "Competitor proximity",
+      "visual_form": "Other racing vehicles visible on track; increasing vehicle variety and speed as stages progress",
+      "meaning": "Active racing threat; increasing difficulty and competitive pressure"
+    },
+    {
+      "signal": "Loss of momentum",
+      "visual_form": "Vehicle coasting and decelerating after time runs out; gradual speed reduction to 0 km/h",
+      "meaning": "Race termination sequence; game-over state in progress"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Checkpoint reached",
+      "visual_form": "Checkered flag visual marker on track",
+      "meaning": "Stage progression confirmed; time bonus awarded; forward progress secured"
+    },
+    {
+      "signal": "Clear road ahead",
+      "visual_form": "Empty driving surface; no obstacles or competing vehicles in immediate path",
+      "meaning": "Safe driving conditions; opportunity to accelerate and gain speed"
+    },
+    {
+      "signal": "Turbo availability",
+      "visual_form": "Speedometer and tachometer on dashboard HUD showing acceleration capacity",
+      "meaning": "Player has power reserve available; can exceed standard speed limits for tactical advantage"
+    },
+    {
+      "signal": "Time buffer",
+      "visual_form": "Progress bar showing distance to next checkpoint; time remaining indicator above zero",
+      "meaning": "Adequate temporal margin to reach next objective; race status stable"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (racer)",
+      "color_identity": null,
+      "symbol_or_sigil": "Selected vehicle type (Ferrari 328 Twin Turbo or F1 Machine); 'HS' logo on vehicle select screen",
+      "enemy_visual_variants": "Competitor vehicles including Volkswagen Beetles and Ferrari Testarossas; vehicle types escalate in speed/threat through stages",
+      "environmental_markers": "Player's vehicle sprite positioned in center-rear of screen; always in foreground perspective control"
+    },
+    {
+      "faction": "Competitor racers",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple distinct vehicle models visible on track; visual differentiation by vehicle type; speed and aggression increase across stage progression",
+      "environmental_markers": "Appear ahead and alongside on race track; occupy road lanes in middle-distance and background layers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage location shift (Sunset Coastline, San Francisco Highway, Grand Canyon, Ruins of Athens, Los Angeles Night Way, Snow White Line, Seaway in Typhoon, Last Seaside Running)",
+      "visual_manifestation": "Distinct skyline and environmental backdrops unique to each stage; varying landscape features rendered as scrolling background elements; palette and architectural styles reflect real-world locations",
+      "behavioral_manifestation": "Competitor vehicle speed and performance scales upward as player progresses through stages; track difficulty increases; road layout complexity varies by location"
+    },
+    {
+      "world_state": "Time progression within race",
+      "visual_manifestation": "Dashboard timer counts down; progress bar advances toward next checkpoint; speedometer and tachometer needles respond to current velocity state",
+      "behavioral_manifestation": "Vehicle automatically decelerates and coasts for five to ten seconds after time runs out before complete halt (unlike Out Run instant termination)"
+    },
+    {
+      "world_state": "3D mode activation (regional variant)",
+      "visual_manifestation": "Visual depth effect toggle via Select button press; JP version uses active shutter glasses (Famicom 3D System); US/EU versions use anaglyphic red/cyan glasses with rapid flicker effect to simulate per-eye imagery",
+      "behavioral_manifestation": "No behavioral change; visual presentation mode only"
+    },
+    {
+      "world_state": "Vehicle performance state",
+      "visual_manifestation": "Speedometer displays current velocity (0-100 km/h normal, 100-255 km/h with turbo activated); tachometer indicates engine state; visual speed lines in background intensify with velocity increase",
+      "behavioral_manifestation": "Player can toggle turbo acceleration; background scrolling speed increases with velocity; handling responsiveness varies by speed state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Skyline and architectural progression",
+      "example": "Eight distinct course locations (Los Angeles, San Francisco, Grand Canyon, Athens, etc.) visually communicate a narrative journey from West Coast to East Coast across America ('Transamerica' race concept); environmental distinctiveness establishes place identity and progression momentum"
+    },
+    {
+      "technique": "Competitor vehicle escalation",
+      "example": "Rival vehicles progress from basic models (Volkswagen Beetles) to luxury racing cars (Ferrari Testarossas) across stages, visually indicating increasing difficulty and world-state stakes"
+    },
+    {
+      "technique": "Dashboard instrumentation literacy",
+      "example": "Player dashboard contains progress bar, speedometer, tachometer, score, and time remaining—all visual language communicating precise state metrics and pressure indicators without diegetic text"
+    },
+    {
+      "technique": "Road rendering via scanline scrolling",
+      "example": "Individual scanline scrolling technique (line-by-line pixel-level drawing) creates visual illusion of 3D perspective and road turning on 2D CRT displays; road curvature and lane positioning communicate track geometry and navigation demands"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Normal acceleration",
+      "behavior": "Sprite moves forward on screen; speedometer needle advances; background scrolls at corresponding speed; vehicle responds to steering input"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Turbo activated",
+      "behavior": "Speedometer maxes out at 255 km/h; background scrolls at maximum rate; visual speed lines intensify in background; vehicle handling maintained at high velocity"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Collision with obstacle or competitor",
+      "behavior": "Vehicle flips; crash animation plays; control lost; race failure state triggers"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Time expired",
+      "behavior": "Vehicle automatically coasts and decelerates; velocity gradient from current speed to 0 km/h over five to ten seconds; player maintains steering control during coast but cannot accelerate; game-over screen appears after complete deceleration"
+    },
+    {
+      "entity": "Competitor vehicles",
+      "state": "Active racing (early stages)",
+      "behavior": "Visible on track; maintain relative position; present overtaking challenge; recognizable vehicle models (Beetles, entry-level racers)"
+    },
+    {
+      "entity": "Competitor vehicles",
+      "state": "Active racing (late stages)",
+      "behavior": "Visible on track; increased speed and aggression; high-performance vehicle models (Ferraris); more challenging to overtake; greater threat presence"
+    },
+    {
+      "entity": "Checkered flag",
+      "state": "Visible on track",
+      "behavior": "Static visual marker indicating checkpoint location; appears as sprite object in road ahead; crossing flag triggers time bonus or stage completion"
+    }
+  ],
+  "notes": "Rad Racer is a sprite-based racing game with minimal narrative or faction-based worldbuilding. Communication of world-state relies almost entirely on visual environmental design (location skylines), performance metrics (dashboard instrumentation), and mechanical feedback (vehicle behavior, collision states). The game lacks dialogue, text storytelling, or faction allegiances. Political situation communication is absent. Danger/safety signals are primarily mechanical rather than narrative—driven by time pressure, collision physics, and competitor presence. The 3D mode (both active-shutter JP version and anaglyphic US/EU version) represents a regional manifestation difference but conveys no world-state information. The game communicates progression and difficulty escalation through visual vehicle variety upgrade and environmental diversity across eight courses.",
+  "sources_used": [
+    "tcrf (Cutting Room Floor - Rad Racer article)",
+    "wikipedia (Rad Racer article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:19:06.346Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4595,
+    "output_tokens": 2175,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

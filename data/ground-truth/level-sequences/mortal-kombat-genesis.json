@@ -1,0 +1,151 @@
+{
+  "game_id": "mortal-kombat-genesis",
+  "game_name": "Mortal Kombat",
+  "platform": "genesis",
+  "paradigm": "fighting",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic punch/kick attacks",
+      "first_appears": "Match 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns directional attacks and distance-dependent move variations"
+    },
+    {
+      "element": "Blocking mechanic",
+      "first_appears": "Match 1-2",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns block reduces damage and enables easier counterattacks"
+    },
+    {
+      "element": "Special moves (joystick + button combinations)",
+      "first_appears": "Match 2-3",
+      "introduction_context": "moderate",
+      "mastery_context": "Player experiments with character-specific special move inputs"
+    },
+    {
+      "element": "Juggling (launcher into air combo)",
+      "first_appears": "Match 3-4",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns uppercut knockup enables extended airborne combos"
+    },
+    {
+      "element": "Test Your Might minigame (wood material)",
+      "first_appears": "Between early matches",
+      "introduction_context": "safe",
+      "mastery_context": "Meter-fill mechanic for bonus points; wood is easiest threshold"
+    },
+    {
+      "element": "Mirror Match",
+      "first_appears": "After 7 single matches",
+      "introduction_context": "moderate",
+      "mastery_context": "Player faces duplicate of chosen character; tests mastery of moveset"
+    },
+    {
+      "element": "Endurance matches (2v1, health does not regenerate)",
+      "first_appears": "Post-mirror match",
+      "introduction_context": "dangerous",
+      "mastery_context": "Player must manage cumulative damage across consecutive opponents"
+    },
+    {
+      "element": "Test Your Might harder materials (stone, steel, ruby, diamond)",
+      "first_appears": "Between later matches / two-player mode",
+      "introduction_context": "dangerous",
+      "mastery_context": "Progressive difficulty scaling; diamond only in two-player"
+    },
+    {
+      "element": "Goro sub-boss",
+      "first_appears": "After third endurance match",
+      "introduction_context": "dangerous",
+      "mastery_context": "Monstrous opponent; undefeated for 500 years in lore"
+    },
+    {
+      "element": "Fatality finishing move",
+      "first_appears": "Available from Match 1 (post-victory)",
+      "introduction_context": "moderate",
+      "mastery_context": "Brutal execution move performed after opponent defeat; character-specific inputs"
+    },
+    {
+      "element": "Shang Tsung final boss",
+      "first_appears": "Final match after Goro",
+      "introduction_context": "dangerous",
+      "mastery_context": "Final antagonist; controls tournament and threatens Earthrealm"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Opponent defeated",
+      "Round won (2 rounds = match victory)",
+      "Test Your Might bonus points earned",
+      "Successful block-counterattack sequence"
+    ],
+    "typical_tension_triggers": [
+      "Health bar depletes",
+      "Opponent lands juggle combo",
+      "Timer approaching expiration with low health differential",
+      "Endurance match begins with cumulative damage",
+      "Goro or Shang Tsung match starts",
+      "Special move startup lag leaves player vulnerable"
+    ],
+    "pacing_descriptor": "Match-based structure with discrete tension peaks (per-round); tension builds within round as health depletes, relieved upon round/match completion. Endurance matches sustain tension across multiple opponents without regeneration. Test Your Might interludes provide brief mechanical respite."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Two-player mode unlocks harder Test Your Might materials (ruby, diamond) not accessible in single-player",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of core mechanics (punch, kick, block, special moves) against basic AI opponents in matches 1-3",
+    "mid_game": "Special move mastery and juggling optimization across matches 4-6; introduction of endurance format and cumulative damage management",
+    "late_game": "Goro sub-boss encounter requires advanced block-counterattack and juggle execution; Shang Tsung final boss fight combines all prior mechanics against tournament antagonist",
+    "notable_spikes": [
+      "Mirror Match after 7 standard matches (player versus self-clone)",
+      "First endurance match (3v1 without health regeneration)",
+      "Goro encounter (500-year undefeated lore, monstrous frame data)",
+      "Shang Tsung final battle (final antagonist, tournament control)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear tournament bracket structure",
+      "description": "Single-player campaign follows rigid sequence: 7 character matches → mirror match → 3 endurance matches → Goro → Shang Tsung. No branching; predetermined opponent order.",
+      "example_level": "Tournament progression"
+    },
+    {
+      "pattern_name": "Endurance match escalation",
+      "description": "Three consecutive 2v1 battles with shared health bar (no regeneration between opponents). Forces resource (health) management and cumulative damage awareness.",
+      "example_level": "Endurance matches post-mirror"
+    },
+    {
+      "pattern_name": "Test Your Might material progression",
+      "description": "Minigame interludes with material difficulty scaling (wood → stone → steel → ruby → diamond). Meter-fill mechanic with increasing point rewards; later materials require longer button-mashing.",
+      "example_level": "Between tournament matches"
+    },
+    {
+      "pattern_name": "Sub-boss / final boss gatekeeping",
+      "description": "Goro positioned as mandatory skill-check before final match against Shang Tsung. Two-stage endgame climax with distinct opponent types.",
+      "example_level": "Post-endurance → Goro → Shang Tsung"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:40:47.972Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3250,
+    "output_tokens": 1987,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

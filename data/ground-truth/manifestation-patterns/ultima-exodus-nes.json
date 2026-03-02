@@ -1,0 +1,186 @@
+{
+  "game_id": "ultima-exodus-nes",
+  "game_name": "Ultima: Exodus",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy visibility on overworld",
+      "visual_form": "Sprite representation of monsters on the overland map",
+      "meaning": "Threats can be seen and temporarily avoided; danger is telegraphed"
+    },
+    {
+      "signal": "Dungeon depth progression",
+      "visual_form": "Descending through 8-level dungeon floors with increasingly dense/detailed enemy sprites",
+      "meaning": "Deeper levels = exponentially greater danger; visual complexity indicates threat escalation"
+    },
+    {
+      "signal": "Guard patrols",
+      "visual_form": "Guard sprites appear when player commits crimes (theft, murder)",
+      "meaning": "Legal consequences; guards spawn in parties of 8 and are visually intimidating"
+    },
+    {
+      "signal": "Trapped chests",
+      "visual_form": "Indistinguishable chests in dungeon environments",
+      "meaning": "Hidden danger; player must assess risk vs. reward in treasure acquisition"
+    },
+    {
+      "signal": "Pirate ships",
+      "visual_form": "Hostile ship sprites on water before player obtains a boat",
+      "meaning": "Water-based threat; must be defeated to progress and gain naval access"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town/settlement presence",
+      "visual_form": "Clustered building sprites with NPC characters and Lord British",
+      "meaning": "Safe zones for trading, leveling, and information gathering"
+    },
+    {
+      "signal": "Lord British location",
+      "visual_form": "Central castle sprite with recognizable architectural design",
+      "meaning": "Ultimate safe zone; provides leveling services and cannot be defeated in normal combat"
+    },
+    {
+      "signal": "Healing fountains in dungeons",
+      "visual_form": "Fountain sprites within dungeon chambers",
+      "meaning": "Resource nodes for recovery; some heal, some cure status, indicating safe restorative points"
+    },
+    {
+      "signal": "Light and visibility",
+      "visual_form": "Torch sprites or illuminated areas in dark dungeon environments",
+      "meaning": "Ability to see = reduced ambush danger; darkness indicates navigation hazard"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Party (custom composition)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Party members represented as single icon during overworld travel; split into four distinct character sprites during tactical combat",
+      "environmental_markers": "Party icon moves across overland map; appears in towns and dungeons"
+    },
+    {
+      "faction": "Lord British/Kingdom Authority",
+      "color_identity": null,
+      "symbol_or_sigil": "Castle architecture; Lord British sprite",
+      "enemy_visual_variants": "Guards appear as uniformed sprites spawned when crimes committed; cannot be bribed once combat starts",
+      "environmental_markers": "Castle location; guards stationed at posts; guard parties consist of 8 sprites"
+    },
+    {
+      "faction": "Pirates/Chaos Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Pirate ship sprites",
+      "enemy_visual_variants": "Pirate ships patrol water regions; become player-controllable vessel once defeated",
+      "environmental_markers": "Water-based encounters; naval presence indicates anarchic/hostile territory"
+    },
+    {
+      "faction": "Exodus/Spawn of Darkness",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Final boss requiring all four marks and prayer cards to defeat; represents culmination of 'Age of Darkness' narrative",
+      "environmental_markers": "Accessible only by boat; island of Ambrosia serves as gateway; requires complete ritual preparation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low character level",
+      "visual_manifestation": "Overland monster encounters are avoidable; dungeon enemy density is light in upper levels; towns are primary interaction hubs",
+      "behavioral_manifestation": "Monsters on overworld can be outrun on foot; deeper dungeons are impassable without stronger equipment and levels"
+    },
+    {
+      "world_state": "Mid-game / Moderate level progression",
+      "visual_manifestation": "Horse travel becomes available (faster sprite movement); more weapon/armor variety visible in NPC inventories; dungeon navigation becomes safer",
+      "behavioral_manifestation": "Player can engage in more criminal actions (bribery, stealing) as power increases; guards remain threats but battles are winnable"
+    },
+    {
+      "world_state": "Late game / High level threshold",
+      "visual_manifestation": "Boat becomes accessible; naval sprite appears; final dungeon/island becomes visually distinct; marks and prayer cards are acquired through visual dungeon rewards",
+      "behavioral_manifestation": "Player can engage Exodus; world-state progression becomes linear toward final confrontation"
+    },
+    {
+      "world_state": "Criminal status / Law enforcement active",
+      "visual_manifestation": "Guard sprites spawn in response to theft or violence; visual party composition shifts as player may be hunted",
+      "behavioral_manifestation": "8-guard parties pursue player; extended combat sequences; cannot rest safely in towns"
+    },
+    {
+      "world_state": "Dungeon exploration / Resource gathering",
+      "visual_manifestation": "Dense enemy sprites at depth; treasure chest visual indicators; trapped chest indistinguishability; fountain sprites signal restorative stations",
+      "behavioral_manifestation": "Random enemy encounters; risk/reward assessment for chest opening; mandatory torch/light usage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dungeon depth as narrative progression",
+      "example": "Eight-level dungeons with increasing visual enemy density and complexity communicate the escalating danger and importance of mark acquisition"
+    },
+    {
+      "technique": "Geography as world-state indicator",
+      "visual_technique": "Mountain peaks, forests, and walls obscure hidden content; overland map design deliberately hides treasures, secret paths, and NPCs to create exploration incentive"
+    },
+    {
+      "technique": "NPC dialogue choice consequences",
+      "example": "Bribe, steal, and fight commands on townspeople have immediate visual consequences (guard spawning, combat initiation) that communicate social order and legal framework"
+    },
+    {
+      "technique": "Equipment visual differentiation",
+      "example": "Character armor and weapon sprites change appearance based on inventory; visual upgrades communicate progression and class identity"
+    },
+    {
+      "technique": "Transportation accessibility",
+      "example": "Progression from foot → horse → boat as sprite-based travel speed increase; unlocking boat requires defeating pirate ships, visually marking naval dominance"
+    },
+    {
+      "technique": "Mark and prayer card acquisition",
+      "example": "Dungeon completion yields visible mark sprites; collection of all four marks visualized in inventory, building toward final confrontation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Overworld monsters",
+      "state": "Patrolling/hunting",
+      "behavior": "Visible on map; can be avoided with faster travel (horse); will pursue if engaged; behavior changes based on character level vs. monster power"
+    },
+    {
+      "entity": "Dungeon monsters",
+      "state": "Territorial/spawning",
+      "behavior": "Random encounter generation; density increases with depth; behavior determined by dungeon level rather than party level; serve as gate-keepers for marks"
+    },
+    {
+      "entity": "Guards",
+      "state": "Patrol/response",
+      "behavior": "Stationed at posts; spawn in parties of 8 when crimes committed; always prioritize player party; cannot be bribed once combat initiated"
+    },
+    {
+      "entity": "Lord British",
+      "state": "Immobile/invulnerable",
+      "behavior": "Stationed in castle; provides leveling service; cannot be killed by conventional combat (can only be temporarily disabled by cannon from ship); restores upon location re-entry"
+    },
+    {
+      "entity": "Pirates/Pirate ships",
+      "state": "Hostile/patrolling",
+      "behavior": "Appear on water before player boat acquisition; must be defeated for naval travel; sprite behavior indicates territorial water control"
+    },
+    {
+      "entity": "Player party",
+      "state": "Unified during travel / Tactical during combat",
+      "behavior": "Single icon overworld; four separate sprites in battle mode; individual character turns in tactical sequence; behavioral split communicates mode transition"
+    }
+  ],
+  "notes": "Ultima: Exodus (NES) is a loose port/remake of Ultima III with completely redesigned graphics and music tailored to NES hardware. The game communicates world-state primarily through enemy visibility on overworld maps, dungeon depth progression, character progression visualization (equipment sprites), and availability of transportation methods. Faction identity is weak in NES port; primary antagonistic force is Exodus and chaos-aligned pirates. Safety is indicated by proximity to towns and Lord British. The visual design emphasizes exploration through deliberate map obscuration (mountains, forests, walls hiding content) and dungeon danger through sprite density escalation. The party mechanic (single icon → four sprites in combat) creates visual mode differentiation. Criminal consequences are immediately manifested through guard spawning, communicating a functional legal system. Trap chests and fountain effects communicate risk assessment mechanics through visual indistinguishability and beneficial sprite placement.",
+  "sources_used": [
+    "tcrf - Ultima: Exodus (NES) - The Cutting Room Floor",
+    "wikipedia - Ultima III: Exodus"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:55:16.189Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3894,
+    "output_tokens": 2434,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

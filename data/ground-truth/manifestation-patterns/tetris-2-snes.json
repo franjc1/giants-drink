@@ -1,0 +1,137 @@
+{
+  "game_id": "tetris-2-snes",
+  "game_name": "Tetris 2",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Anti-piracy detection",
+      "visual_form": "Error message display on boot",
+      "meaning": "Game running on unauthorized cartridge copier hardware"
+    },
+    {
+      "signal": "Region mismatch",
+      "visual_form": "Region error message on boot (NTSC vs PAL incompatibility)",
+      "meaning": "Game cartridge region incompatible with console hardware"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful SRAM write block",
+      "visual_form": "Game proceeds past boot check to main menu",
+      "meaning": "Running on official Nintendo cartridge with no SRAM present"
+    },
+    {
+      "signal": "Correct region match",
+      "visual_form": "Game boots normally without error messages",
+      "meaning": "Game cartridge region compatible with console hardware"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nintendo (Publisher/Official)",
+      "color_identity": null,
+      "symbol_or_sigil": "Nintendo copyright and licensing marks",
+      "enemy_visual_variants": "Bullet-Proof Software branding (replaced in later versions)",
+      "environmental_markers": "Copyright screen displays licensing authority; BPS logo removed in international rerelease"
+    },
+    {
+      "faction": "Bullet-Proof Software (Original Licensor)",
+      "color_identity": null,
+      "symbol_or_sigil": "BPS logo",
+      "enemy_visual_variants": "Removed from international versions post-1996",
+      "environmental_markers": "Appears in Japanese version and original release copyright screens; absent in later Nintendo-managed versions"
+    },
+    {
+      "faction": "The Tetris Company (Post-1996 Rights Manager)",
+      "color_identity": null,
+      "symbol_or_sigil": "Updated legal copyright information",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Updated copyright screen in rerelease versions reflects transfer of Tetris licensing authority"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game running on legitimate official cartridge",
+      "visual_manifestation": "No error message; game proceeds to title screen",
+      "behavioral_manifestation": "Anti-piracy SRAM write attempt fails silently, allowing normal game flow"
+    },
+    {
+      "world_state": "Game running on pirated/copied cartridge",
+      "visual_manifestation": "Anti-piracy error message displayed on boot",
+      "behavioral_manifestation": "SRAM write succeeds (cartridge copier has SRAM), triggering error display and game halt"
+    },
+    {
+      "world_state": "NTSC cartridge on PAL console (or vice versa)",
+      "visual_manifestation": "Region error message displayed on boot",
+      "behavioral_manifestation": "Game halts and does not proceed to menu"
+    },
+    {
+      "world_state": "Correct region match",
+      "visual_manifestation": "Title screen displays with appropriate regional variant (JP: blue background with animation; International: black background static)",
+      "behavioral_manifestation": "Game proceeds normally to main menu"
+    },
+    {
+      "world_state": "Original release (1994-1996 licensing era)",
+      "visual_manifestation": "BPS logo visible on copyright screen; Bullet-Proof Software credited as Tetris licensor",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Post-1996 rerelease (after Tetris Company establishment)",
+      "visual_manifestation": "Copyright screen updated to reflect new licensing authority; BPS logo removed",
+      "behavioral_manifestation": null
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Copyright screen evolution",
+      "example": "Rerelease removed BPS logo and updated legal text to reflect The Tetris Company's establishment in 1996, visually communicating shift in licensing authority and corporate governance"
+    },
+    {
+      "technique": "Regional title screen variants",
+      "example": "Japanese version displays animated blue-background title sequence; international versions use static black background, signaling localization level and regional branding priority"
+    },
+    {
+      "technique": "Boot sequence messaging",
+      "example": "Anti-piracy and region-check error messages communicate hardware authentication state and technical compatibility without gameplay context"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Game cartridge",
+      "state": "Legitimate official",
+      "behavior": "SRAM write attempt fails; game proceeds normally"
+    },
+    {
+      "entity": "Game cartridge",
+      "state": "Pirated/counterfeit",
+      "behavior": "SRAM write succeeds; anti-piracy error triggered; game halts"
+    },
+    {
+      "entity": "Console hardware",
+      "state": "Correct region match",
+      "behavior": "Game boots and displays region-appropriate title screen"
+    },
+    {
+      "entity": "Console hardware",
+      "state": "Region mismatch",
+      "behavior": "Game halts at boot with region error message"
+    }
+  ],
+  "notes": "Tetris 2 (SNES 1993) is a puzzle game with gameplay mechanics similar to Dr. Mario but using tetrominoes. The game's visual communication of world-state is minimal and focused on hardware authentication and regional compatibility rather than narrative or environmental storytelling. No faction dynamics, danger/safety signals, or political themes exist within the game world itself. All manifestation patterns relate to anti-piracy/DRM systems and regional localization. Debug menu content (accessible via Pro Action Replay) reveals unused cutscenes (Baking/Boxing) and references to animal-based opponent selection (Turtle, Dog, Rabbit) suggesting earlier development direction. Regional differences are primarily cosmetic (title screen animation, logo presence). This analysis reflects the puzzle game paradigm with minimal world-state complexity.",
+  "sources_used": [
+    "tcrf - Tetris 2 (SNES) - The Cutting Room Floor",
+    "wikipedia - Tetris 2 disambiguation page"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:43:10.921Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4058,
+    "output_tokens": 1745,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,240 @@
+GameResources/NES/Bomberman - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Bomberman
+
+This page documents information about
+
+Bomberman
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+RNG
+
+Bomberman has a very complex random function. This may be necessary so as
+to avoid any noticeable patterns in the randomly generated level contents.
+
+PermutateRandomCtrlVars
+
+$D668  A5 54:
+
+lda RandomCtrl1
+
+$D66A  2A:
+
+rol a
+
+$D66B  2A:
+
+rol a
+
+$D66C  49 41:
+
+eor #$41
+
+$D66E  2A:
+
+rol a
+
+$D66F  2A:
+
+rol a
+
+$D670  49 93:
+
+eor #$93
+
+$D672  65 55:
+
+adc RandomCtrl2
+
+$D674  85 54:
+
+sta RandomCtrl1
+
+$D676  2A:
+
+rol a
+
+$D677  2A:
+
+rol a
+
+$D678  49 12:
+
+eor #$12
+
+$D67A  2A:
+
+rol a
+
+$D67B  2A:
+
+rol a
+
+$D67C  65 56:
+
+adc RandomCtrl3
+
+$D67E  85 55:
+
+sta RandomCtrl2
+
+$D680  65 54:
+
+adc RandomCtrl1
+
+$D682  E6 56:
+
+inc RandomCtrl3
+
+$D684  D0 09:
+
+bne +
+
+; $D68F
+
+$D686  48:
+
+pha
+
+$D687  A5 57:
+
+lda RandomCtrl4
+
+$D689  18:
+
+clc
+
+$D68A  69 1D:
+
+adc #$1D
+
+$D68C  85 57:
+
+sta RandomCtrl4
+
+$D68E  68:
+
+pla
++
+
+$D68F  45 57:
+
+eor RandomCtrl4
+
+$D691  60:
+
+rts
+
+This function is called whenever randomness is needed, and often, the
+resulting value is even further permutated, for example, by executing "ror a" twice.
+The function is also called once every frame on the title screen. 
+Translated to C++, it becomes:
+
+unsigned char PermutateRandomVars(unsigned char random[3], bool carry)
+{
+
+unsigned tmpval = carry << 8;
+
+tmpval = ((random[0] << 4) | ((tmpval & 0x100) >> 5) | (random[0] >> 5)) ^ 0x87;
+
+tmpval = (tmpval & 0xFF) + ((tmpval & 0x100) >> 8) + random[1];
+
+random[0] = tmpval;
+
+tmpval = ((random[0] << 4) | ((tmpval & 0x100) >> 5) | (random[0] >> 5)) ^ 0x48;
+
+random[0] = tmpval;
+
+tmpval = (tmpval & 0xFF) + ((tmpval & 0x100) >> 8) + random[2];
+
+random[1] = tmpval;
+
+tmpval = (tmpval & 0xFF) + ((tmpval & 0x100) >> 8) + random[0];
+
+if(!++random[2])
+
+{
+
+random[3] += 29;
+
+}
+
+return tmpval ^ random[3];
+}
+
+It does such a meticulous job that I think that it may be based on some standard cryptographical function such as CRC32... But I don't know.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/Bomberman last edited by Randomno  on 7/3/2023 1:41 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

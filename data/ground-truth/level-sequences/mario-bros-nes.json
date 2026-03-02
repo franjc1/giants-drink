@@ -1,0 +1,140 @@
+{
+  "game_id": "mario-bros-nes",
+  "game_name": "Mario Bros.",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Shellcreeper (turtle enemy)",
+      "first_appears": "Early phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Must hit platform beneath to flip, then kick before recovery"
+    },
+    {
+      "element": "Basic platforming (running, jumping)",
+      "first_appears": "Phase 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core movement mechanic across all phases"
+    },
+    {
+      "element": "POW block (platform flip mechanic)",
+      "first_appears": "Phase 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Limited uses (3x); flips all enemies on contact"
+    },
+    {
+      "element": "Sidestepper (crab enemy)",
+      "first_appears": "Later phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Same flip-then-kick mechanic as Shellcreeper"
+    },
+    {
+      "element": "Fighter Fly (jumping enemy)",
+      "first_appears": "Later phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Can only be flipped when touching platform"
+    },
+    {
+      "element": "Slipice (ice platform enemy)",
+      "first_appears": "Later phase",
+      "introduction_context": "dangerous",
+      "mastery_context": "Converts platforms to slippery ice when present"
+    },
+    {
+      "element": "Fireballs (floating hazard)",
+      "first_appears": "Later phase",
+      "introduction_context": "dangerous",
+      "mastery_context": "Roam screen freely; cannot be flipped; instant death on contact"
+    },
+    {
+      "element": "Icicles (falling hazard)",
+      "first_appears": "Later rounds",
+      "introduction_context": "dangerous",
+      "mastery_context": "Form on platform undersides; fully formed icicles cause instant death"
+    },
+    {
+      "element": "Bonus coins",
+      "first_appears": "After enemy defeat",
+      "introduction_context": "safe",
+      "mastery_context": "Emerge from pipes after defeating enemies; collectible for points"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Defeating all enemies in phase",
+      "Collecting bonus coins from defeated enemies",
+      "Successfully flipping enemy before recovery",
+      "Using POW block to flip multiple enemies"
+    ],
+    "typical_tension_triggers": [
+      "Enemies emerging from corner pipes",
+      "Fireballs spawning on screen",
+      "Icicles forming and falling",
+      "Enemy recovery after flipping (time pressure)",
+      "POW block depletion (limited to 3 uses)",
+      "Slipice presence increasing platform hazard"
+    ],
+    "pacing_descriptor": "Escalating difficulty: early phases introduce single enemy types with manageable POW block usage; later phases stack hazards (multiple enemy types + icicles + fireballs) creating compound tension"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Bonus coins appear conditionally after enemy defeat; collection optional but incentivized for score",
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduces Shellcreeper and basic flip-then-kick mechanic with POW block support; manageable pacing with clear enemy spawn from pipes",
+    "mid_game": "Introduces Sidestepper and Fighter Fly variants; increases enemy spawn rate and diversifies enemy behavior (jump patterns); POW block remains valuable defensive tool",
+    "late_game": "Stacks multiple hazard types: Fireballs (free-roaming, unflippable), Icicles (environmental hazard), Slipice (platform modifier) alongside standard enemies; compressed decision space and heightened time pressure",
+    "notable_spikes": [
+      "Introduction of Fireballs (roaming, unflippable hazard breaks previous containment patterns)",
+      "Icicle formation in later rounds (environmental penalty not tied to enemy defeat)",
+      "Slipice presence (adds hazard layer to platform mechanics)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Multi-platform container structure",
+      "description": "Each phase uses series of horizontal platforms with pipes at screen corners; wraparound screen allows horizontal escape routes; POW block anchors center positioning strategy",
+      "example_level": "Generic phase structure applies across all phases"
+    },
+    {
+      "pattern_name": "Enemy type introduction + hazard layering",
+      "description": "New enemy type introduced, then subsequent phase adds environmental hazard (icicles, fire) while maintaining enemy complexity; creates cumulative difficulty without single-mechanic bottleneck",
+      "example_level": "Early phases introduce one enemy type; later phases combine Shellcreeper + Sidestepper + Fireballs + Icicles"
+    },
+    {
+      "pattern_name": "POW block scarcity",
+      "description": "Limited to 3 uses per phase; forces strategic timing—use early for safety vs. reserve for emergencies; depletion forces pure enemy-handling skill",
+      "example_level": "Applies across all phases"
+    },
+    {
+      "pattern_name": "Time-pressure flip-recovery cycle",
+      "description": "Enemy flipped → time window to kick before recovery → failure resets to unflipped state; penalizes hesitation and creates micro-tension spikes",
+      "example_level": "Core loop for all four base enemy types"
+    }
+  ],
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:38:48.710Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6174,
+    "output_tokens": 1776,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

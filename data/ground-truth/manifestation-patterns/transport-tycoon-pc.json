@@ -1,0 +1,205 @@
+{
+  "game_id": "transport-tycoon-pc",
+  "game_name": "Transport Tycoon",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "vehicle_breakdown",
+      "visual_form": "vehicle sprite changes appearance or stops moving on track",
+      "meaning": "aging or unreliable vehicle needs maintenance or replacement"
+    },
+    {
+      "signal": "financial_loss",
+      "visual_form": "negative balance display in company finances UI, red text",
+      "meaning": "company operating at a loss; bankruptcy risk if sustained"
+    },
+    {
+      "signal": "disaster_occurrence",
+      "visual_form": "environmental destruction or vehicle collision animation on map",
+      "meaning": "random catastrophic event damaging infrastructure or vehicles"
+    },
+    {
+      "signal": "station_decay",
+      "visual_form": "station rating drops visually in UI, efficiency indicator lowers",
+      "meaning": "poor service quality; station attracting less cargo"
+    },
+    {
+      "signal": "competitor_expansion",
+      "visual_form": "rival company vehicles and stations appear in their faction color on isometric map",
+      "meaning": "competitive threat; rival capturing market share in region"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "profitable_route",
+      "visual_form": "positive revenue display in company accounts, green text or upward graph",
+      "meaning": "transport route successfully moving cargo; steady income"
+    },
+    {
+      "signal": "high_station_rating",
+      "visual_form": "station rating UI indicator shows high efficiency, visual highlight",
+      "meaning": "station is well-serviced and attracts more cargo"
+    },
+    {
+      "signal": "reliable_vehicle",
+      "visual_form": "vehicle sprite continues moving smoothly; no breakdown alerts",
+      "meaning": "vehicle operating within reliability parameters; minimal maintenance needed"
+    },
+    {
+      "signal": "loan_repayment",
+      "visual_form": "loan balance decreases in company finances, interest charges lower",
+      "meaning": "financial health improving; reduced debt burden"
+    },
+    {
+      "signal": "network_expansion",
+      "visual_form": "new stations, tracks, and vehicles visible on isometric map in player's faction color",
+      "meaning": "company growing infrastructure; market presence strengthening"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_company",
+      "color_identity": "player-selected primary color (assigned at game start; customizable per session)",
+      "symbol_or_sigil": "company name and logo in UI; vehicles and stations display company color",
+      "enemy_visual_variants": "rival companies appear in distinct colors; up to 7 AI competitors each with unique faction color",
+      "environmental_markers": "all player-owned stations, tracks, vehicles, and depots rendered in player's faction color on isometric map"
+    },
+    {
+      "faction": "rival_company_1_to_7",
+      "color_identity": "each AI competitor assigned distinct color from palette at game initialization",
+      "symbol_or_sigil": "rival company name visible in company league; vehicles/stations show rival color",
+      "enemy_visual_variants": "rival vehicles use same sprite base as player vehicles but rendered in rival's color",
+      "environmental_markers": "rival stations, tracks, vehicles appear scattered across map; color-coded for identification"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_1930s",
+      "visual_manifestation": "limited technology: only steam trains and horse-drawn road vehicles available; maps show sparse towns and industries; starting loan displayed prominently",
+      "behavioral_manifestation": "player begins with limited capital; must construct basic rail/road network; vehicles move slowly; economic growth is gradual"
+    },
+    {
+      "world_state": "mid_game_1950s_1980s",
+      "visual_manifestation": "diesel and electric engines introduced; modern trucks and buses appear; airport infrastructure becomes viable; more towns and industries visible; company balance becomes positive for successful players",
+      "behavioral_manifestation": "players expand networks aggressively; competitor presence increases; route optimization becomes critical; vehicle replacement cycles accelerate"
+    },
+    {
+      "world_state": "late_game_1990s_2030",
+      "visual_manifestation": "monorail technology appears (1999); modern aircraft and ships visible; established infrastructure dense across map; mature company finances show substantial assets or accumulated debt",
+      "behavioral_manifestation": "network consolidation or aggressive expansion; rival companies entrenched; competition for remaining market opportunities; long-term profitability determines survival"
+    },
+    {
+      "world_state": "economic_boom",
+      "visual_manifestation": "town growth visible (towns expand on map); increased cargo demand shown in station notifications; high-value goods flowing; general positive financial indicators",
+      "behavioral_manifestation": "new routes become profitable; vehicle demand high; expansion feasible; competitors also aggressive; subsidy opportunities increase"
+    },
+    {
+      "world_state": "economic_recession",
+      "visual_manifestation": "cargo demand decreases; station activity lowers; unprofitable routes show red losses; vehicle prices may adjust; subsidy values reduce if cyclical economy enabled",
+      "behavioral_manifestation": "profitability margins shrink; players forced to optimize or consolidate routes; competitor retrenchment occurs; risk of bankruptcy increases"
+    },
+    {
+      "world_state": "disaster_event_active",
+      "visual_manifestation": "environmental destruction animation on isometric tiles; vehicle crash sprites; infrastructure damage visible as broken/missing stations or tracks",
+      "behavioral_manifestation": "affected player loses revenue temporarily; vehicle repair costs spike; competitors may lose vehicles/infrastructure; route disruption forces rerouting"
+    },
+    {
+      "world_state": "terrain_modified",
+      "visual_manifestation": "terraformed tiles show altered height/slope on isometric map; player-constructed canals visible as water paths; leveled ground for station placement",
+      "behavioral_manifestation": "route optimization possible through environmental modification; construction costs increase; alternative network layouts become viable"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "industry_cluster_distribution",
+      "example": "coal mines visually cluster in certain map regions; steel mills positioned near coal; farms scattered; oil refineries remote; players learn economic geography by observing industry placement and inferring commodity flow"
+    },
+    {
+      "technique": "town_density_signaling",
+      "example": "dense town clusters on isometric map indicate high-value passenger markets; sparse towns indicate agricultural regions; town size correlates to revenue potential; player learns priorities by visual inspection"
+    },
+    {
+      "technique": "technology_progression_visual",
+      "example": "steam engine sprites (early 1930s) visually primitive; diesel engines appear more modern (1950s); electric trains sleek (1970s); monorail futuristic (1999+); vehicle appearance teaches historical timeline"
+    },
+    {
+      "technique": "competitor_network_visibility",
+      "example": "rival company tracks and stations visible on shared map; player observes competitor route choices, station placement, vehicle types; can infer rival strategy and competitive pressure from spatial layout"
+    },
+    {
+      "technique": "infrastructure_age_indication",
+      "example": "older vehicles visually degrade or are replaced by newer models; older track technology (rails) eventually supplemented by monorail; visual obsolescence tells player about vehicle/infrastructure lifecycle"
+    },
+    {
+      "technique": "profitability_spatial_pattern",
+      "example": "successful high-revenue routes visualized by dense vehicle traffic and multiple stations; failing routes show sparse vehicle movement; player learns profitability by observing network activity density"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "train_vehicle",
+      "state": "new_reliable",
+      "behavior": "moves smoothly along tracks without stopping; no maintenance alerts; sprite renders cleanly"
+    },
+    {
+      "entity": "train_vehicle",
+      "state": "aging_unreliable",
+      "behavior": "frequent stops for breakdown; sprite may flicker or change appearance; maintenance costs display in UI; eventually must be replaced"
+    },
+    {
+      "entity": "truck_vehicle",
+      "state": "active_profitable",
+      "behavior": "continuous movement between stations; carries full cargo; generates revenue per delivery"
+    },
+    {
+      "entity": "truck_vehicle",
+      "state": "broken_down",
+      "behavior": "stops on road network; no cargo movement; repair costs incurred; blocks other vehicles from using road tile"
+    },
+    {
+      "entity": "station_hub",
+      "state": "well_serviced",
+      "behavior": "accepts large cargo volumes; rating high; attracts more goods from nearby industries/towns; visual indicator shows efficiency"
+    },
+    {
+      "entity": "station_hub",
+      "state": "poorly_serviced",
+      "behavior": "low cargo acceptance; rating drops; industries avoid sending goods there; visual indicator shows poor efficiency"
+    },
+    {
+      "entity": "rival_company_network",
+      "state": "expanding_aggressive",
+      "behavior": "new stations and vehicles appear frequently in rival color; network grows across map; competitive pressure visible"
+    },
+    {
+      "entity": "rival_company_network",
+      "state": "stagnant_or_declining",
+      "behavior": "no new infrastructure visible; existing vehicles remain unchanged; network shrinks; financial distress implied"
+    },
+    {
+      "entity": "economy_system",
+      "state": "boom_cycle",
+      "behavior": "town growth visible; cargo demand high; route profitability increases; subsidy values higher"
+    },
+    {
+      "entity": "economy_system",
+      "state": "recession_cycle",
+      "behavior": "cargo demand decreases; station activity lowers; route profitability marginal; subsidy values lower"
+    }
+  ],
+  "notes": "Transport Tycoon uses isometric 2D graphics and real-time simulation to communicate world-state primarily through visual density, color-coding, and UI numerical indicators. The game lacks explicit narrative or political factions but communicates competitive pressure and economic health through infrastructure visibility and financial displays. Danger and safety signals are primarily quantitative (profit/loss, reliability ratings) made visible through UI elements and behavioral manifestations (vehicle movement, cargo flow). Environmental storytelling relies on industry placement patterns and town distribution to communicate economic geography. Faction identity is player-company-specific, assigned via color selection at game start; rival companies are differentiated only by color, not by thematic or political distinction.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:14:26.151Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2889,
+    "output_tokens": 2622,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

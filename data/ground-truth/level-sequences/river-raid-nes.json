@@ -1,0 +1,137 @@
+{
+  "game_id": "river-raid-nes",
+  "game_name": "River Raid",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "player jet (B1 StratoWing)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "lateral movement left/right control established immediately"
+    },
+    {
+      "element": "forward/backward speed control",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "acceleration and deceleration via joystick before combat pressure"
+    },
+    {
+      "element": "missiles/shooting",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "button press available from beginning, no delay before first enemies"
+    },
+    {
+      "element": "river banks/collision hazards",
+      "first_appears": "game start",
+      "introduction_context": "moderate",
+      "mastery_context": "spatial boundaries define playable area; mirrored islands in center create tunnel vision"
+    },
+    {
+      "element": "fuel depots",
+      "first_appears": "early gameplay",
+      "introduction_context": "moderate",
+      "mastery_context": "dual-action objects: fly over to refuel or destroy for points; fuel gauge pressure increases gameplay tension"
+    },
+    {
+      "element": "enemy tankers",
+      "first_appears": "early gameplay",
+      "introduction_context": "moderate",
+      "mastery_context": "stationary or slowly moving targets establish basic combat"
+    },
+    {
+      "element": "helicopters",
+      "first_appears": "early-to-mid gameplay",
+      "introduction_context": "moderate",
+      "mastery_context": "faster/more mobile enemy type; Atari 8-bit version has helicopters that fire back"
+    },
+    {
+      "element": "bridges",
+      "first_appears": "mid-gameplay",
+      "introduction_context": "dangerous",
+      "mastery_context": "destructible checkpoint structures that segment the river; destroying a bridge creates a spawn restart point"
+    },
+    {
+      "element": "fuel scarcity escalation",
+      "first_appears": "progression-based",
+      "introduction_context": "dangerous",
+      "mastery_context": "as river progresses, fewer fuel tanks force player to manage risk/reward of destruction vs. refueling"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "successfully flying over a fuel depot to refill gauge",
+      "destroying a bridge and establishing new checkpoint",
+      "clearing a section of enemies without collision",
+      "reaching a fuel-rich early section after fuel scarcity"
+    ],
+    "typical_tension_triggers": [
+      "fuel gauge dropping visually toward empty",
+      "approaching river banks while maneuvering laterally",
+      "fuel depot scarcity as progression increases",
+      "klaxon-styled warning sound when fuel runs low",
+      "dense enemy cluster forcing evasion and collision avoidance",
+      "approaching a bridge that must be destroyed to progress"
+    ],
+    "pacing_descriptor": "escalating fuel pressure creates rising tension curve; infinite scrolling river provides no end-state relief, forcing sustained attention; early game offers fuel abundance and gentle pacing, mid-to-late game creates scarcity-driven decision pressure"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "fuel depots and enemy clusters vary in frequency and positioning; destroying optional fuel depots trades immediate points for future fuel risk",
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "abundant fuel supply, sparse enemies, gentle pacing establishes jet control and shooting mechanics",
+    "mid_game": "fuel depots begin spacing further apart, enemy variety increases (tankers, helicopters), bridge checkpoints introduce tactical navigation",
+    "late_game": "fuel scarcity forces aggressive risk-taking; fewer safe zones; helicopter density increases; Atari 8-bit version adds return fire hazard",
+    "notable_spikes": [
+      "transition from fuel abundance to scarcity creates psychological tension spike",
+      "first encounter with bridges introduces checkpoint-dependent navigation",
+      "late-game helicopter density and enemy clustering increase reaction demands"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "infinite vertical scrolling river",
+      "description": "river has no actual ending and scrolls infinitely downward (player perspective: forward); creates endless progression without win-state, only score maximization and survival duration",
+      "example_level": "entire game structure"
+    },
+    {
+      "pattern_name": "bridge-based segmentation",
+      "description": "bridges serve as both destructible objectives and checkpoint restart points; destroying a bridge resets player spawn location at that bridge, creating natural level divisions within continuous scroll",
+      "example_level": "each section between bridges"
+    },
+    {
+      "pattern_name": "fuel management gauntlet",
+      "description": "fuel depot positioning and frequency varies by progression; fuel depletion creates mounting time pressure and forces tactical decisions (destroy for points vs. collect for survival)",
+      "example_level": "mid-to-late game sections"
+    },
+    {
+      "pattern_name": "mirrored island river geometry",
+      "description": "river design mirrors left and right banks with island in center; creates tunnel-like navigation corridor and visual centering cue; based on Shaw's graph paper doodling approach",
+      "example_level": "entire game playfield"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:11:23.842Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2912,
+    "output_tokens": 1623,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

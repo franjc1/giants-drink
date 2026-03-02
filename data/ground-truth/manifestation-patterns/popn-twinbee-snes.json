@@ -1,0 +1,129 @@
+{
+  "game_id": "popn-twinbee-snes",
+  "game_name": "Pop'n TwinBee: Rainbow Bell Adventures",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "hostile creatures in level spaces",
+      "meaning": "threat requiring combat engagement or evasion"
+    },
+    {
+      "signal": "charged_enemy_attack",
+      "visual_form": "visual charging animation on enemy sprite",
+      "meaning": "incoming projectile or melee attack requiring dodge"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "bell_power_up",
+      "visual_form": "colored bell item dropped from defeated enemies",
+      "meaning": "temporary power enhancement available; defeat enemies to access"
+    },
+    {
+      "signal": "level_progression_exit",
+      "visual_form": "stage clear zones or alternate exit pathways (JP version only)",
+      "meaning": "safe completion point; multiple exits indicate player agency and safety routes"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_heroes",
+      "color_identity": null,
+      "symbol_or_sigil": "TwinBee, WinBee, GwinBee character designs (distinct silhouettes)",
+      "enemy_visual_variants": "playable characters differentiated by weapon sets: TwinBee (hammer), WinBee (lasso), GwinBee (throwing rattles)",
+      "environmental_markers": "rocket pack propulsion visual (eight-directional flight indicator)"
+    },
+    {
+      "faction": "authority_command",
+      "color_identity": null,
+      "symbol_or_sigil": "Dr. Cinnamon character (removed in European version)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "level select screen dialogue and mission briefing presence (Japanese version only)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "game_progression_jp_version",
+      "visual_manifestation": "quadrilateral level map with interconnected stages; alternate exits visible on stage select",
+      "behavioral_manifestation": "player can access stages non-linearly; multiple paths to boss encounter; performance-based ending variation"
+    },
+    {
+      "world_state": "game_progression_eu_version",
+      "visual_manifestation": "strictly linear level order on map screen; sequential stage layout",
+      "behavioral_manifestation": "mandatory level completion order; no branching pathways; single ending regardless of performance"
+    },
+    {
+      "world_state": "character_charging_state",
+      "visual_manifestation": "rocket pack glow/accumulation animation; punch wave buildup visual",
+      "behavioral_manifestation": "TwinBee (balanced charge time), WinBee (fast propeller/slow punch), GwinBee (fast punch/slow propeller) — mechanical differentiation reflects visual charging speed"
+    },
+    {
+      "world_state": "power_system_active",
+      "visual_manifestation": "colored bells appear after enemy defeat; visual distinction by color indicates power type",
+      "behavioral_manifestation": "weapons change (gun, melee weapon sets), speed boost, options (satellite units), invincibility frames"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "character_differentiation_via_loadout_visual",
+      "example": "Three playable characters each carry visually distinct primary weapons (hammer/lasso/rattles) and share gun option; loadout indicates combat role and playstyle"
+    },
+    {
+      "technique": "regional_narrative_removal",
+      "example": "Japanese version includes Dr. Cinnamon and pilot dialogue at level select (narrative world-building); European version strips this, removing character-driven mission context and reducing world narrative presence"
+    },
+    {
+      "technique": "level_map_as_world_structure",
+      "example": "Japanese quadrilateral map with stage interconnections visually communicates open world design; European linear order communicates restricted, progression-gated world"
+    },
+    {
+      "technique": "save_system_cultural_adaptation",
+      "example": "Japanese battery backup vs. European password system suggests different technological/infrastructure contexts (implicit world-state difference)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "TwinBee_character",
+      "state": "neutral_ready",
+      "behavior": "standard punch attack; average charge times for both punch wave and rocket propeller"
+    },
+    {
+      "entity": "WinBee_character",
+      "state": "neutral_ready",
+      "behavior": "lasso melee weapon; fastest rocket propeller charge; slowest punch wave charge (specialized for mobility over melee damage)"
+    },
+    {
+      "entity": "GwinBee_character",
+      "state": "neutral_ready",
+      "behavior": "throwing rattle weapon; fastest punch wave charge; slowest rocket propeller charge (specialized for direct combat over mobility)"
+    },
+    {
+      "entity": "generic_enemy",
+      "state": "active_threat",
+      "behavior": "defeated by player attacks; drops bell power-up upon defeat (only method to obtain power-ups in this game)"
+    },
+    {
+      "entity": "boss_entity",
+      "state": "final_encounter",
+      "behavior": "accessibility varies by performance in Japanese version (affects multiple endings); single ending in European version (performance-independent)"
+    }
+  ],
+  "notes": "Pop'n TwinBee is a significant paradigm shift within the TwinBee franchise — the first side-scrolling platformer replacing the series' traditional vertical scrolling shooter formula. Visual communication centers on character silhouette differentiation, colored power-up system (bells), and regional level design philosophy (open vs. linear). The game demonstrates how regional localization fundamentally alters world-state communication: Japanese version uses narrative dialogue and non-linear map design to create a multi-outcome world; European version uses linear progression and single ending to simplify world complexity. Manifestation patterns are primarily mechanical (charging animations, weapon types) rather than environmental storytelling. The absence of explicit faction conflict or political narrative suggests a lighter, more whimsical tone compared to other Konami action titles.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor)",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:32:55.901Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5065,
+    "output_tokens": 1580,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

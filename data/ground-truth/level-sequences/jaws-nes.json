@@ -1,0 +1,150 @@
+{
+  "game_id": "jaws-nes",
+  "game_name": "Jaws",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic boat navigation (overhead map)",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns overhead perspective and basic movement before any combat"
+    },
+    {
+      "element": "Conch shells (currency)",
+      "first_appears": "Early gameplay encounters",
+      "introduction_context": "safe",
+      "mastery_context": "Collected passively during normal exploration; foundation for upgrade system"
+    },
+    {
+      "element": "Small hostile sea creatures (jellyfish, rays, small sharks)",
+      "first_appears": "First side-view diving encounter",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns side-view combat mechanics in relatively low-threat encounters"
+    },
+    {
+      "element": "Diver combat (depth charges, torpedoes)",
+      "first_appears": "First diving encounter",
+      "introduction_context": "moderate",
+      "mastery_context": "Basic weapon system introduced through forced diving sequence"
+    },
+    {
+      "element": "Port system and equipment upgrades",
+      "first_appears": "Early gameplay (first port visit)",
+      "introduction_context": "safe",
+      "mastery_context": "Receiver device unlocks proximity tracking; subsequent visits increase attack power"
+    },
+    {
+      "element": "Tracking receiver (beeping proximity indicator)",
+      "first_appears": "First port visit",
+      "introduction_context": "moderate",
+      "mastery_context": "Critical tool for locating Jaws; beep frequency indicates distance"
+    },
+    {
+      "element": "Jaws encounters (dorsal fin on map)",
+      "first_appears": "Mid-game, after initial upgrades",
+      "introduction_context": "dangerous",
+      "mastery_context": "First Jaws collision triggers side-view combat with multiple phases"
+    },
+    {
+      "element": "Submarine pickup (rare spawn)",
+      "first_appears": "Mid-game random encounters",
+      "introduction_context": "moderate",
+      "mastery_context": "Temporary upgrade with torpedoes and depth charges; fragile but powerful"
+    },
+    {
+      "element": "Bonus airplane minigame",
+      "first_appears": "After killing specific number of smaller sharks",
+      "introduction_context": "moderate",
+      "mastery_context": "Reward sequence with Galaga-like mechanics; conch shell rewards"
+    },
+    {
+      "element": "Jaws depth-charge combat phase (side-view)",
+      "first_appears": "Jaws encounter",
+      "introduction_context": "dangerous",
+      "mastery_context": "Player attacks Jaws with depth charges; diver combat variant"
+    },
+    {
+      "element": "First-person strobe/ramming finale",
+      "first_appears": "Final Jaws encounter phase",
+      "introduction_context": "dangerous",
+      "mastery_context": "Timing-critical final mechanic; player must breach Jaws and ram at correct moment"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Returning to port for upgrades",
+      "Bonus airplane minigame sequence",
+      "Killing small sharks without Jaws intervention",
+      "Accumulating conch shells safely"
+    ],
+    "typical_tension_triggers": [
+      "Tracking receiver begins beeping (Jaws approaching)",
+      "Collision with boat on overhead map (forced into side-view)",
+      "Encountering hostile sea creatures during diving",
+      "Jaws appears on map/collides with boat",
+      "Health/power level penalties after death"
+    ],
+    "pacing_descriptor": "Cyclical tension builds through proximity detection (beeping intensity), escalates during forced encounters, releases through safe port visits and minigame rewards. Late game frontloads difficulty with final three-phase Jaws encounter requiring timing mastery."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Submarine pickups appear at random locations on map; players may never encounter them without deliberate exploration",
+    "secret_convention": "Beeping proximity device provides subtle audio cue for danger direction; faster beep = closer threat",
+    "dead_end_frequency": "rare",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Safe overhead navigation with introduction to conch collection and port system. First diving encounters feature weak creatures (jellyfish, rays) that teach combat basics without lethal threat",
+    "mid_game": "Increased frequency of small shark encounters and boat collisions. Jaws begins appearing with receiver device installed. Player must balance resource gathering (conch shells) with upgrade progression. Random submarine pickups provide brief power spikes",
+    "late_game": "Jaws dominates encounters. Players face mandatory side-view combat with significant power drain on death (lose tracking device, lose half conch shells, lose power level). Final sequence shifts to first-person perspective with strict timing requirements for boat ramming",
+    "notable_spikes": [
+      "First Jaws encounter (immediate difficulty spike from small creatures)",
+      "Loss of tracking device after death (removes safety information)",
+      "Final first-person ramming phase (requires precision timing; described as 'quite difficult' by sources)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Safe-to-Dangerous Transition",
+      "description": "Overhead map navigation (safe) → boat collision (transition) → side-view diving (moderate danger) → Jaws appearance (high danger). Each zone shift increases threat level and changes perspective/mechanics",
+      "example_level": "Any Jaws encounter sequence"
+    },
+    {
+      "pattern_name": "Grinding Loop",
+      "description": "Navigate overhead map to collect conch shells → encounter small creatures → return to port → upgrade → repeat. Loop continues until sufficient power to face Jaws",
+      "example_level": "Early to mid-game progression"
+    },
+    {
+      "pattern_name": "Minigame Reward Punctuation",
+      "description": "After killing specific shark count threshold, bonus airplane stage plays (Galaga-style jellyfish encounter). Provides relief from tension and conch shell rewards without risk of resource loss",
+      "example_level": "Triggered between Jaws encounters"
+    },
+    {
+      "pattern_name": "Multi-Phase Boss Encounter",
+      "description": "Jaws battle splits into three distinct phases: (1) Side-view depth charge combat, (2) Health recovery, (3) First-person strobe-and-ram finale. Each phase requires different mechanic mastery and offers multiple failure points",
+      "example_level": "Final Jaws encounter"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:45:25.515Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4204,
+    "output_tokens": 1787,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

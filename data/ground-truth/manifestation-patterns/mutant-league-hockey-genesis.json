@@ -1,0 +1,178 @@
+{
+  "game_id": "mutant-league-hockey-genesis",
+  "game_name": "Mutant League Hockey",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Land mines on ice",
+      "visual_form": "Mine objects placed on playing surface",
+      "meaning": "Environmental hazard that threatens player safety; collision triggers danger"
+    },
+    {
+      "signal": "Holes in ice",
+      "visual_form": "Openings/gaps in skating surface",
+      "meaning": "Fall/elimination hazard; traversable danger zones"
+    },
+    {
+      "signal": "Exploding puck",
+      "visual_form": "Puck detonates upon opponent contact",
+      "meaning": "Weaponized game object; danger increases when opposing team gains possession"
+    },
+    {
+      "signal": "Player death and corpses",
+      "visual_form": "Dead player bodies remain visible on ice",
+      "meaning": "Lethal hazard environment; corpses become obstacles and visual markers of danger zones"
+    },
+    {
+      "signal": "Crowd weapon throws",
+      "visual_form": "Weapons and objects falling onto ice from crowd",
+      "meaning": "Unpredictable environmental threat; ambient danger from spectators"
+    },
+    {
+      "signal": "Demon goalie",
+      "visual_form": "Large demon head replacing standard net; explodes on goal",
+      "meaning": "High-danger scoring condition; visual aggression indicator"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Crowd-dropped powerups",
+      "visual_form": "Beneficial items scattered on ice by spectators",
+      "meaning": "Opportunity for player advantage; collectible safety resources"
+    },
+    {
+      "signal": "Penalty box access",
+      "visual_form": "Designated penalty zone area",
+      "meaning": "Temporary safety from hazards; consequence space but protective removal from active play"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Robots",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Mechanical/artificial appearance; distinct from organic mutants",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Undead Skeletons",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Skeletal, bone-based visual design; recognizable as undead mutant species",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Trolls",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Creature-based mutant design; distinct morphology from robots and skeletons",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active gameplay",
+      "visual_manifestation": "Hazards (mines, holes) visible on ice; corpses accumulating; crowd throwing weapons",
+      "behavioral_manifestation": "Players navigate around obstacles; frequent player elimination; combat engagement"
+    },
+    {
+      "world_state": "Between-period intermission",
+      "visual_manifestation": "Giant slug ice resurfacer appears; debris and corpses removed from playing surface",
+      "behavioral_manifestation": "Arena reset; environmental cleansing; preparation for next period"
+    },
+    {
+      "world_state": "Combat/fight state",
+      "visual_manifestation": "Fight minigame initiated; one-on-one combat presentation",
+      "behavioral_manifestation": "Knockout objective; penalty box assignment for loser; winner gains advantage"
+    },
+    {
+      "world_state": "Scoring attempt on demon goal",
+      "visual_manifestation": "Demon head explodes upon goal contact",
+      "behavioral_manifestation": "Defensive mechanism activation; high visual feedback for successful scoring"
+    },
+    {
+      "world_state": "Team strength/ranking",
+      "visual_manifestation": "Skull rating system (0-6 skulls) displays team tier",
+      "behavioral_manifestation": "Higher skull teams presumed more dangerous/capable; visual hierarchy of opponent threat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Persistent corpses as environmental markers",
+      "example": "Dead player bodies remain on ice surface until slug resurfacer removes them, creating visual narrative of danger and showing accumulation of casualties during play"
+    },
+    {
+      "technique": "Hazard field density communication",
+      "example": "Mine and hole placement on ice visually conveys lethality of arena; denser hazard distribution signals more dangerous match conditions"
+    },
+    {
+      "technique": "Crowd participation as world state indicator",
+      "example": "Spectators throwing weapons and powerups communicates living, chaotic arena environment; spectator behavior reflects game intensity"
+    },
+    {
+      "technique": "Demon goalie as boss-like threat",
+      "example": "Substituting standard goalie for large demon head creates visual escalation; explosion animation signals consequence and danger amplification"
+    },
+    {
+      "technique": "Slug resurfacer as world-building element",
+      "example": "Giant slug performing ice maintenance between periods reinforces mutant-filled grimdark setting and explains debris cleanup through in-world mechanics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Normal skating",
+      "behavior": "Standard movement; collision-based interaction with hazards"
+    },
+    {
+      "entity": "Player character",
+      "state": "Holding puck",
+      "behavior": "Increased danger if puck is weaponized (exploding variant); strategic objective"
+    },
+    {
+      "entity": "Player character",
+      "state": "Engaged in fight",
+      "behavior": "Minigame combat mode; knockout objective; loser takes double penalty"
+    },
+    {
+      "entity": "Player character",
+      "state": "Dead",
+      "behavior": "Remains as corpse obstacle on ice; creates tripping hazard for other players"
+    },
+    {
+      "entity": "Demon goalie",
+      "state": "Active goal defense",
+      "behavior": "Blocks net; explodes when goal is scored on it; high visual aggression"
+    },
+    {
+      "entity": "Crowd/Spectators",
+      "state": "Active audience",
+      "behavior": "Throws weapons and powerups onto ice unpredictably; influences game state through environmental items"
+    },
+    {
+      "entity": "Slug ice resurfacer",
+      "state": "Between periods",
+      "behavior": "Moves across ice consuming corpses and debris; resets environmental state"
+    },
+    {
+      "entity": "Referee",
+      "state": "Bribeable",
+      "behavior": "Can be influenced to call fake penalties against opposing team; corruption mechanic communicates rule malleability"
+    }
+  ],
+  "notes": "Mutant League Hockey uses visual degradation and violence as core world-state communication. The game's manifestation layer relies heavily on: (1) persistent environmental hazards that remain visible to telegraph danger, (2) faction differentiation through three distinct mutant species with inherent visual distinction, (3) corpse persistence as both mechanical hazard and narrative element showing lethality, (4) crowd interaction as dynamic world-state element, (5) dramatic visual events (explosions, slug appearance, demon goalie) to mark state transitions. The skull ranking system (0-6) provides abstract threat visualization for opponent teams. The game communicates a chaotic, violent, unpredictable arena environment through visual noise (scattered weapons, hazards, corpses) and behavior volatility (crowd interference, referee bribery).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:49:11.470Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2341,
+    "output_tokens": 1969,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

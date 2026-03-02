@@ -1,0 +1,186 @@
+{
+  "game_id": "rock-n-roll-racing-snes",
+  "game_name": "Rock n' Roll Racing",
+  "platform": "snes",
+  "paradigm": "vehicular combat racing",
+  "danger_signals": [
+    {
+      "signal": "Vehicle destruction",
+      "visual_form": "Car explodes into debris, respawns seconds later",
+      "meaning": "Immediate threat from opponent weapons; player falls behind in race position"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Vehicle health bar depletes visually as damage accumulates",
+      "meaning": "Vehicle vulnerability increases; one more hit risks race disadvantage"
+    },
+    {
+      "signal": "Track hazards",
+      "visual_form": "Oil slicks, snow drifts, lava pools rendered on isometric tracks",
+      "meaning": "Environmental threats that cause vehicle loss of control or damage"
+    },
+    {
+      "signal": "Mines on track",
+      "visual_form": "Explosive mines scattered across racing surface",
+      "meaning": "Collision damage from both player-placed and environmental ordnance"
+    },
+    {
+      "signal": "Falling off track edge",
+      "visual_form": "Guard rails at track boundaries; vehicle goes off-screen if breached",
+      "meaning": "Catastrophic race failure; instant loss of position advantage"
+    },
+    {
+      "signal": "Opponent proximity",
+      "visual_form": "Other racers visible on isometric track, commentary from 'Loudmouth Larry'",
+      "meaning": "Imminent threat of attack or being struck by competitor weapons"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health power-ups",
+      "visual_form": "Pickup items scattered on track restoring vehicle health",
+      "meaning": "Safe recovery opportunity; reduces vulnerability window"
+    },
+    {
+      "signal": "Money power-ups",
+      "visual_form": "Currency pickups on track during races",
+      "meaning": "Economic opportunity enabling equipment upgrades for future safety"
+    },
+    {
+      "signal": "Weapon/turbo replenishment",
+      "visual_form": "Automatic charge restoration after completing each lap",
+      "meaning": "Guaranteed offensive capability refresh; safety through continued firepower"
+    },
+    {
+      "signal": "Vehicle spacing",
+      "visual_form": "Distance between racers on isometric track",
+      "meaning": "Temporal safety; far ahead racers have reduced immediate attack threat"
+    },
+    {
+      "signal": "Track clear zones",
+      "visual_form": "Sections without mines, hazards, or lava",
+      "meaning": "Safe passage corridors; reduced environmental danger"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character pool",
+      "color_identity": null,
+      "symbol_or_sigil": "Comic-book inspired human and alien character designs",
+      "enemy_visual_variants": "AI opponents 'Rip' and 'Shred' appear with distinct vehicle silhouettes; unique third character per planet/level",
+      "environmental_markers": "Character selection screen provides comic-style visual differentiation"
+    },
+    {
+      "faction": "Racing divisions by planet",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct planet/world themes (implied by track environment hazards: lava, snow, oil)",
+      "enemy_visual_variants": "Each planet hosts unique opponent character; division-based progression suggests regional identity",
+      "environmental_markers": "Hazard types signal planetary location: lava tracks, snow drifts, oil slicks create faction environmental identity"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early career (Division 1 progression)",
+      "visual_manifestation": "Weaker vehicles, basic weapon/turbo capacity; limited equipment upgrades available",
+      "behavioral_manifestation": "AI opponents have reduced aggression; easier track conditions"
+    },
+    {
+      "world_state": "Mid-career (Planet advancement)",
+      "visual_manifestation": "Enhanced vehicle models become purchasable; track hazards intensify (environmental complexity increases)",
+      "behavioral_manifestation": "Opponent AI becomes more aggressive; money rewards increase proportionally"
+    },
+    {
+      "world_state": "Race in progress - player leading",
+      "visual_manifestation": "Player vehicle position at screen center; lapping bonus system activates visually through commentary",
+      "behavioral_manifestation": "Opponents cluster together chasing leader; increased attack frequency from trailing vehicles"
+    },
+    {
+      "world_state": "Race in progress - vehicle damaged",
+      "visual_manifestation": "Health bar depletes; vehicle sprite may show visual damage states; commentator announces vulnerability ('about to blow!')",
+      "behavioral_manifestation": "Reduced acceleration/maneuverability; prioritize health pickups; defensive positioning"
+    },
+    {
+      "world_state": "Vehicle destroyed mid-race",
+      "visual_manifestation": "Explosion effect; brief respawn animation; vehicle re-enters track at reduced position",
+      "behavioral_manifestation": "Temporary invulnerability frames; opponent gains race advantage; player must recover through weapon attacks for 'attack bonus' income"
+    },
+    {
+      "world_state": "End of season - progression decision",
+      "visual_manifestation": "Points tally screen; password generation for checkpoint save",
+      "behavioral_manifestation": "Two-player mode: leading player can drop loser, signaling competitive hierarchy"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hazard-based planetary identity",
+      "example": "Lava tracks signal volcanic planets; snow drifts indicate ice worlds; oil slicks suggest industrial/swamp environments. Each planet visually distinct through track hazards rather than explicit narrative."
+    },
+    {
+      "technique": "Isometric perspective depth cueing",
+      "example": "Track slopes and elevation changes rendered through isometric view enable players to read terrain threats (hills, dips, guard rail proximity) before collision, communicating world topology"
+    },
+    {
+      "technique": "Commentary as world narrator",
+      "example": "'Loudmouth Larry' announces race state changes ('carnage begin!', 'about to blow!'), reinforcing combat intensity and world drama without explicit cutscenes"
+    },
+    {
+      "technique": "Vehicle/character selection screens",
+      "example": "Comic-book art style for racers establishes pulp sci-fi aesthetic; human/alien diversity suggests galactic racing circuit setting"
+    },
+    {
+      "technique": "Economic progression through visual upgrades",
+      "example": "Vehicle models advance visually as player purchases new cars; weapon/turbo capacity numbers reflect equipment loadout state, visualizing progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Healthy (full health bar)",
+      "behavior": "Accelerates normally; can engage offensive weapons freely; positioned center-screen during races"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Damaged (health depleted 50%+)",
+      "behavior": "Movement may show visual lag; collision impact more severe; vulnerable to one-hit destruction; avoids hazards more conservatively"
+    },
+    {
+      "entity": "AI opponent 'Rip' / 'Shred'",
+      "state": "During race start",
+      "behavior": "Accelerates aggressively from line; attempts to claim early race position; engages weapons if player nearby"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "Trailing player (lapped)",
+      "behavior": "Increases attack frequency; focuses weapon fire on leader; demonstrates aggressive catch-up behavior"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "Destroyed vehicle",
+      "behavior": "Explosion occurs; immediate respawn; re-enters track at loss position; reduced threat temporarily until health recovers"
+    },
+    {
+      "entity": "Commentator 'Loudmouth Larry'",
+      "state": "Race events occurring",
+      "behavior": "Provides real-time narration of critical moments; announces player names before destruction ('X is about to blow!'); reinforces game state changes through audio cues"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Hazard zones (lava, oil, snow)",
+      "behavior": "Causes vehicle damage/loss of control on contact; hazards persist throughout race; forces player navigation skill demonstration"
+    }
+  ],
+  "notes": "Rock n' Roll Racing uses minimalist faction signaling (distinct character designs, AI opponent naming) rather than explicit faction visuals. World-state communication relies heavily on environmental hazards and isometric perspective depth cues. The game's primary manifestation layer involves vehicle health states, track hazard placement, and commentator audio feedback. Political/faction systems are absent; instead, competitive hierarchy emerges through race position and weapon-based dominance. The game communicates stakes through visual destruction mechanics and monetary progression (upgrades tied to earned currency).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:47:02.959Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2736,
+    "output_tokens": 2250,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

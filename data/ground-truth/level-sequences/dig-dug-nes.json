@@ -1,0 +1,124 @@
+{
+  "game_id": "dig-dug-nes",
+  "game_name": "Dig Dug",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": 255,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Dig Dug protagonist and digging mechanic",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns tunnel creation and navigation through dirt tiles"
+    },
+    {
+      "element": "Air pump inflation mechanic",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core combat system; requires timing to connect with enemies and repeated button presses to inflate"
+    },
+    {
+      "element": "Pookas (red spherical enemies with goggles)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary threat; move through tiles as ghostly eyes when invulnerable, become solid in empty spaces"
+    },
+    {
+      "element": "Falling rocks mechanic",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Environmental hazard and secondary combat tool; rocks fall after tile beneath them is removed, destroy enemies on impact"
+    },
+    {
+      "element": "Fygars (draconic enemies with fire breath)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Secondary enemy type; presents fire attack threat in addition to touch damage"
+    },
+    {
+      "element": "Bonus items and scoring multipliers",
+      "first_appears": "Early stages",
+      "introduction_context": "safe",
+      "mastery_context": "Reward for dropping rock pairs; point values increase as player progresses"
+    },
+    {
+      "element": "Enemy escape behavior",
+      "first_appears": "Mid-game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Last enemy moves upward through tiles and escapes off top of screen; increases time pressure"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful enemy inflation and defeat",
+      "Rock crush eliminating multiple enemies at once",
+      "Collecting bonus items",
+      "Clearing all enemies from stage"
+    ],
+    "typical_tension_triggers": [
+      "Enemy proximity to player",
+      "Fygar fire breath attack",
+      "Last enemy escape sequence initiating",
+      "Rocks falling in confined tunnel spaces",
+      "Player caught between enemy and falling rock"
+    ],
+    "pacing_descriptor": "Cyclical: exploration and setup phase followed by combat encounters; pacing intensifies as enemies become faster and more aggressive in later stages; final enemy escape creates acute time pressure"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Bonus items appear in specific spatial configurations (rock pair drops); player can create varied tunnel networks to access different enemy positions",
+    "secret_convention": "Enemies move through tiles as ghostly eyes when unable to reach player directly, suggesting hidden pathways and vulnerable moments",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of basic digging and air pump inflation against Pookas and Fygars; manageable enemy counts and speeds",
+    "mid_game": "Increased enemy counts and speeds; players develop proficiency with rock crushing multi-kill bonuses; stage-to-stage dirt color variations",
+    "late_game": "Significantly faster and more aggressive enemies; complex stage layouts requiring strategic tunnel planning; stage 256 causes kill screen (integer overflow bug in most versions)",
+    "notable_spikes": [
+      "Stage 256 (kill screen): unwinnable state with inescapable Pooka spawn",
+      "Progression into mid-stage territory: noticeable jump in enemy speed and aggression",
+      "Late stages with maximum enemy density: requires optimal tunnel planning and multi-kill execution"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard maze layout",
+      "description": "Predefined underground tunnel network with distributed enemy spawn points; player carves additional tunnels through dirt to access enemies or escape threats",
+      "example_level": "Stage 1 (representative of early game structure)"
+    },
+    {
+      "pattern_name": "Progressive enemy intensification",
+      "description": "Successive stages maintain core mechanics while systematically increasing enemy count and speed until escape behavior becomes necessary",
+      "example_level": "Stages 1-50 (demonstrating gradual difficulty escalation)"
+    },
+    {
+      "pattern_name": "Color variation stages",
+      "description": "Later stages introduce visual dirt color changes without mechanical alterations; cosmetic progression signal",
+      "example_level": "Mid to late game stages (visual progression marker)"
+    },
+    {
+      "pattern_name": "Kill screen (Stage 256)",
+      "description": "Integer overflow bug creates unwinnable scenario with inescapable Pooka spawn; functions as hard ending for most versions",
+      "example_level": "Stage 256"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:51:38.466Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3190,
+    "output_tokens": 1374,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

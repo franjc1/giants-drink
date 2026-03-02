@@ -1,0 +1,145 @@
+{
+  "game_id": "steel-empire-genesis",
+  "game_name": "Steel Empire",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bright contrasting colors (typically yellow, red, or white) against darker backgrounds",
+      "meaning": "Immediate threat requiring evasion"
+    },
+    {
+      "signal": "Enemy aircraft approach",
+      "visual_form": "Sprites moving toward player from edges of screen, growing larger",
+      "meaning": "Combat engagement imminent"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large distinctive sprite, often with multiple animated components",
+      "meaning": "Major threat requiring sustained engagement"
+    },
+    {
+      "signal": "Screen scroll acceleration",
+      "visual_form": "Faster background movement",
+      "meaning": "Increased enemy density or difficulty escalation ahead"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear airspace",
+      "visual_form": "Minimal enemy sprites on screen, open sky areas",
+      "meaning": "Safe passage available"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Distinctive glowing or pulsing items (weapon upgrades, shields)",
+      "meaning": "Opportunity for player strengthening"
+    },
+    {
+      "signal": "Between-stage areas",
+      "visual_form": "Transition screens with reduced sprite activity",
+      "meaning": "Temporary reprieve and player status display"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Allied air force)",
+      "color_identity": "Blue/cyan",
+      "symbol_or_sigil": "Player aircraft design with allied markings",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Allied airbase environments, friendly terrain"
+    },
+    {
+      "faction": "Enemy faction (Imperial/authoritarian regime)",
+      "color_identity": "Red/brown/dark colors",
+      "symbol_or_sigil": "Enemy aircraft with distinct design language, ground-based military structures",
+      "enemy_visual_variants": "Multiple enemy aircraft types with varying silhouettes and attack patterns",
+      "environmental_markers": "Fortified enemy installations, industrial/military landscape, urban centers under occupation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early campaign - enemy territory gradually encroached",
+      "visual_manifestation": "Skyline features increasing industrial/military structures; more organized enemy formations",
+      "behavioral_manifestation": "Enemy spawn patterns become more dense and coordinated; boss frequency increases"
+    },
+    {
+      "world_state": "Mid-campaign - active conflict",
+      "visual_manifestation": "Background shows active combat zones, smoke plumes, damaged structures",
+      "behavioral_manifestation": "Enemies attack in waves; multiple simultaneous threats; power-ups become strategically placed"
+    },
+    {
+      "world_state": "Late campaign - pushing toward enemy stronghold",
+      "visual_manifestation": "Enemy command structures visible; heavily fortified installations; ominous architectural designs",
+      "behavioral_manifestation": "Boss encounters more frequent; enemies more aggressive; screen scrolling faster"
+    },
+    {
+      "world_state": "Stage completion",
+      "visual_manifestation": "Victory animation; stage transition screen with campaign progress indicator",
+      "behavioral_manifestation": "Player aircraft returns to safe flight; music changes to transition theme"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Background progression",
+      "example": "Transition from rural/coastal terrain to industrial/urban enemy-controlled zones communicates territorial progression"
+    },
+    {
+      "technique": "Architecture as faction indicator",
+      "example": "Enemy bases feature distinctive blocky, militaristic design versus implied allied structures"
+    },
+    {
+      "technique": "Damage states in environment",
+      "example": "Burning structures and smoke plumes indicate ongoing conflict and destruction"
+    },
+    {
+      "technique": "Sprite density and formation",
+      "example": "Organized enemy formations suggest command hierarchy; disorganized spawns suggest desperation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy aircraft",
+      "state": "Idle/patrol",
+      "behavior": "Fly in predictable patterns; minimal evasion"
+    },
+    {
+      "entity": "Standard enemy aircraft",
+      "state": "Alert/engaged",
+      "behavior": "Fire projectiles; attempt to intercept player; coordinated with nearby enemies"
+    },
+    {
+      "entity": "Boss aircraft",
+      "state": "Pre-engagement",
+      "behavior": "Dramatic entrance animation; distinctive movement pattern"
+    },
+    {
+      "entity": "Boss aircraft",
+      "state": "Combat",
+      "behavior": "Multi-phase attack patterns; telegraphed special attacks; larger sprite visible across screen"
+    },
+    {
+      "entity": "Player aircraft",
+      "state": "Powered-up",
+      "behavior": "Weapon output visibly enhanced (larger projectiles, more fire rate); movement speed increased"
+    },
+    {
+      "entity": "Player aircraft",
+      "state": "Damaged/weakened",
+      "behavior": "Slower response; visual sprite may show damage state (depending on implementation)"
+    }
+  ],
+  "notes": "Steel Empire is a horizontally-scrolling shooter with minimal narrative exposition. World-state communication relies entirely on visual and mechanical progression. The game uses standard shmup visual language: player sprite in blue/cool tones, enemy sprite in red/warm tones, projectiles in contrasting bright colors. Environmental scrolling serves dual purpose of aesthetic storytelling and difficulty escalation. No dialogue or text-based faction communication present; all faction identity conveyed through visual design language of aircraft, installations, and environment. Campaign structure (8 stages) implies linear territorial progression from player-controlled to enemy-held airspace.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:40:24.426Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 911,
+    "output_tokens": 1604,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

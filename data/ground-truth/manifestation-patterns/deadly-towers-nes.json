@@ -1,0 +1,175 @@
+{
+  "game_id": "deadly-towers-nes",
+  "game_name": "Deadly Towers",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster presence",
+      "visual_form": "Enemy sprites in palace and tower rooms",
+      "meaning": "Active threats; area requires combat engagement"
+    },
+    {
+      "signal": "Bell tower structure",
+      "visual_form": "Vertical scrolling tower rooms with boss chambers",
+      "meaning": "High-danger zones; boss encounter ahead"
+    },
+    {
+      "signal": "Invisible dungeon entrances",
+      "visual_form": "Hidden portal locations throughout palace perimeter",
+      "meaning": "Concealed danger; exploration risk of unknown encounters"
+    },
+    {
+      "signal": "Rubas's palace labyrinth",
+      "visual_form": "Complex multi-room structure in oblique perspective",
+      "meaning": "Primary danger zone; main antagonist domain"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Shop locations",
+      "visual_form": "Fixed interior rooms within dungeons and palace",
+      "meaning": "Safe trading zones; equipment upgrade available"
+    },
+    {
+      "signal": "Sacred flame chamber",
+      "visual_form": "Horizontally scrolling room with central flame feature",
+      "meaning": "Safe sanctuary; mission objective location; ritual site"
+    },
+    {
+      "signal": "Exit rooms in dungeons",
+      "visual_form": "Specific discovery rooms within maze structures",
+      "meaning": "Safe passage; progression checkpoint"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Prince Myer (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sword-throwing protagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting position outside palace; upgradeable equipment reflects progression"
+    },
+    {
+      "faction": "Khan (Divine Kami)",
+      "color_identity": null,
+      "symbol_or_sigil": "Shadowy water spirit; divine authority figure",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Lake origin; mission-giver; represents kingdom protection"
+    },
+    {
+      "faction": "Rubas (Devil of Darkness)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dark antagonist; seven magic bells as power conduits",
+      "enemy_visual_variants": "Boss encounters in each of seven bell towers; final form in sanctum",
+      "environmental_markers": "Palace structure; tower dominance; bell artifact placement"
+    },
+    {
+      "faction": "Willner Kingdom",
+      "color_identity": null,
+      "symbol_or_sigil": "Prince Myer's coronation ceremony (narrative framing)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Palace geography; threatened by Rubas's monster summoning army"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-bell destruction",
+      "visual_manifestation": "Seven intact bell towers visible in palace; Rubas's power active",
+      "behavioral_manifestation": "Monsters populate all areas; boss entities occupy tower summits; passage to Rubas blocked"
+    },
+    {
+      "world_state": "Progressive bell burning",
+      "visual_manifestation": "Destroyed towers become inaccessible; sacred flame serves as state-change trigger",
+      "behavioral_manifestation": "Each destroyed bell removes one tower from the palace; decreases total monster density"
+    },
+    {
+      "world_state": "All seven bells destroyed",
+      "visual_manifestation": "Final door opens revealing path to Rubas's sanctum",
+      "behavioral_manifestation": "Final boss encounter becomes accessible; climactic confrontation enabled"
+    },
+    {
+      "world_state": "Kingdom under threat (opening narrative)",
+      "visual_manifestation": "Labyrinth state; chaotic palace structure; no safe zones except shops",
+      "behavioral_manifestation": "Prince Myer weak at start; enemies numerous; resource scarcity (limited ludder drops)"
+    },
+    {
+      "world_state": "Player power progression",
+      "visual_manifestation": "Equipment upgrades manifest as visual changes to prince's offensive capabilities",
+      "behavioral_manifestation": "Sword-throwing evolves from single projectile to multiple; enemy defeat speed increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial progression hierarchy",
+      "example": "10 hidden dungeons → Palace exterior → 7 bell towers → Sacred flame → Final Rubas sanctum; communicates narrative escalation through geography"
+    },
+    {
+      "technique": "Architecture as faction identity",
+      "example": "Rubas's palace labyrinth design signals evil dominance; sacred flame chamber opposes it as light/order counterpoint"
+    },
+    {
+      "technique": "Invisible portal concealment",
+      "example": "Hidden dungeon entrances and secret parallel zones suggest Rubas's palace contains hidden corruption and alternate dark mirrors"
+    },
+    {
+      "technique": "Bell tower verticality",
+      "example": "Vertical scrolling in towers vs. horizontal scrolling in palace and sacred flame room; distinguishes threat zones by movement axis"
+    },
+    {
+      "technique": "Shop placement as world-building",
+      "example": "Fixed shop locations in dungeons suggest merchant networks within/against the corrupted kingdom; ludder currency shows economic resistance to Rubas"
+    },
+    {
+      "technique": "Nonlinear exploration",
+      "example": "Zelda-like gameplay requires backtracking through known areas as player grows stronger; world becomes re-readable as power increases"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Prince Myer",
+      "state": "Initial state",
+      "behavior": "Throws single sword; enemies take 8+ hits to defeat; slow combat effectiveness"
+    },
+    {
+      "entity": "Prince Myer",
+      "state": "Equipped state",
+      "behavior": "Multiple projectile throwing; faster enemy defeat; indicates equipment acquisition"
+    },
+    {
+      "entity": "Monsters",
+      "state": "Active",
+      "behavior": "Populate all non-shop rooms; attack on contact; respawn behavior suggested by continuous population"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Pre-defeat",
+      "behavior": "Occupy tower summits; serve as progression gates; defeat required to collect bells"
+    },
+    {
+      "entity": "Sacred flame",
+      "state": "Active ritual site",
+      "behavior": "Accepts collected bells; consumes them to destroy towers; opens final passage when all seven processed"
+    },
+    {
+      "entity": "Rubas",
+      "state": "Pre-confrontation",
+      "behavior": "Absent from palace; presence inferred through monster summoning and tower guardianship; final encounter requires all bell destruction"
+    }
+  ],
+  "notes": "Deadly Towers communicates world-state primarily through spatial design and architectural progression rather than dynamic environmental changes. The game uses a rigid progression lock (bells → sacred flame → final boss door) that is purely visual/mechanical rather than state-based. The Japanese original 'Mashō' (Evil Bell) title and red LED cartridge feature reinforced the evil-bell danger signal. World-state is largely binary (bells intact vs. destroyed) with cumulative progression. Faction identity is minimal—primarily antagonist (Rubas) vs. player (Prince Myer) with no visible faction armies or territorial markers. The oblique isometric perspective provides consistent visual language for palace geography. Danger/safety distinction relies on room type and merchant presence rather than dynamic visual warnings.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:59:44.615Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3394,
+    "output_tokens": 1950,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "wikipedia"
+    ]
+  }
+}

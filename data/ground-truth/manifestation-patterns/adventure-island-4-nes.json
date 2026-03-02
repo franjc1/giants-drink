@@ -1,0 +1,144 @@
+{
+  "game_id": "adventure-island-4-nes",
+  "game_name": "Adventure Island IV",
+  "platform": "nes",
+  "paradigm": "platformer/metroidvania",
+  "danger_signals": [
+    {
+      "signal": "Boss enemies",
+      "visual_form": "Distinct enemy sprites blocking progress or occupying defined arena spaces",
+      "meaning": "Hostile forces that must be defeated to progress and rescue dinosaur companions"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Interactive environmental elements (implied by water gun puzzle-solving mechanic)",
+      "meaning": "Obstacles that require specific items or tools to overcome safely"
+    },
+    {
+      "signal": "Locked pathways/doors",
+      "visual_form": "Closed or blocked passages visible on the connected scrolling map",
+      "meaning": "Areas temporarily inaccessible until specific boss defeated or item acquired"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible fruits and hearts",
+      "visual_form": "Scattered items visible in explorable areas",
+      "meaning": "Life restoration resources; collecting fruit restores health gauge portions"
+    },
+    {
+      "signal": "Heart container fragments",
+      "visual_form": "Paired fragments found throughout game world",
+      "meaning": "Permanent health capacity expansion when two are collected"
+    },
+    {
+      "signal": "Faeries",
+      "visual_form": "Special collectible entities scattered in environment",
+      "meaning": "Beneficial pickups that provide temporary or permanent advantage"
+    },
+    {
+      "signal": "Doors and interior spaces",
+      "visual_form": "Climbable trees, enterable doors, interior environment transitions",
+      "meaning": "Safe zones for exploration, puzzle-solving, and item discovery"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Takahashi Meijin (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dinosaur companions (recurring character assets)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Areas unlocked after rescuing specific dinosaur companion; progression tied to dinosaur rescue objectives"
+    },
+    {
+      "faction": "Mysterious entity (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Kidnapped dinosaur companions serve as visual markers of antagonist's power",
+      "enemy_visual_variants": "Boss enemies encountered in each area; defeating each boss frees one dinosaur",
+      "environmental_markers": "Locked pathways that open only after boss defeat; visual gates controlled by unknown force"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Dinosaur companion kidnapped/captured",
+      "visual_manifestation": "Locked pathways visible on map but inaccessible; boss enemy occupying specific arena",
+      "behavioral_manifestation": "Boss enemies block forward progression; new areas remain sealed"
+    },
+    {
+      "world_state": "Dinosaur companion rescued",
+      "visual_manifestation": "Previously locked passages open; cleared area becomes passable",
+      "behavioral_manifestation": "Player gains access to new connected map zones; progression to next area unlocked"
+    },
+    {
+      "world_state": "Health depleted",
+      "visual_manifestation": "Life gauge at bottom of screen empties visually",
+      "behavioral_manifestation": "Game over condition triggered; player returns to checkpoint or restart"
+    },
+    {
+      "world_state": "Specific item acquired",
+      "visual_manifestation": "Item select screen displays newly acquired tool (e.g., water gun, compass)",
+      "behavioral_manifestation": "Item enables new environmental interactions; previously blocked puzzle areas become solvable"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Interconnected non-linear map",
+      "example": "Complex scrolling map connecting various levels without explicit stage separation creates sense of cohesive world where dinosaur rescues directly impact accessible geography"
+    },
+    {
+      "technique": "Item-gated progression",
+      "example": "Water gun used for both combat and puzzle-solving; compass reveals 3D map of world layout; tools serve dual narrative and mechanical purpose"
+    },
+    {
+      "technique": "Rescue-based narrative markers",
+      "example": "Each defeated boss directly corresponds to rescuing one of five kidnapped dinosaur companions; visual clearing of bosses is narrative progression"
+    },
+    {
+      "technique": "Life gauge UI as state indicator",
+      "example": "Bottom-screen life gauge replaces old hunger meter mechanic; displays current vitality and narrative vulnerability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Takahashi Meijin (player character)",
+      "state": "Healthy (full life gauge)",
+      "behavior": "Can engage enemies; maintains normal movement speed and interaction capabilities"
+    },
+    {
+      "entity": "Takahashi Meijin (player character)",
+      "state": "Damaged (depleted life gauge)",
+      "behavior": "Reduced resilience; additional hits cause game-over condition"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Active/encountered",
+      "behavior": "Block pathways; must be defeated in combat to unlock progression and rescue dinosaur"
+    },
+    {
+      "entity": "Locked pathways/doors",
+      "state": "Boss not defeated",
+      "behavior": "Visually present but impassable; prevent access to new map areas"
+    },
+    {
+      "entity": "Locked pathways/doors",
+      "state": "Boss defeated",
+      "behavior": "Become open/passable; allow navigation to previously inaccessible zones"
+    }
+  ],
+  "notes": "Adventure Island IV marks significant departure from previous series entries through non-linear metroidvania-style map structure and elimination of hunger meter in favor of standard life gauge. Danger/safety visual language relies primarily on collectibles (fruits/hearts/faeries) for recovery and item-based puzzle solving for progression. Faction identity is minimal—protagonist identity tied to dinosaur rescue mission, antagonist presence communicated through locked areas and boss encounters rather than visual faction markers. Game heavily emphasizes environmental interaction and item discovery as primary world-state communication method. Limited faction visual indicators suggest focus on individual character agency rather than larger political conflict.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:07:08.633Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4324,
+    "output_tokens": 1603,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

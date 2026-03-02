@@ -1,0 +1,120 @@
+{
+  "game_id": "messiah-pc",
+  "game_name": "MDK 2",
+  "platform": "pc",
+  "year": 2000,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in source"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Kurt Hectic - Ribbon Chute (Parachute)",
+      "description": "Parachute contained within Kurt's outfit that deploys immediately and retracts automatically when not being used. Allows Kurt to make long jumps, survive long falls, and utilize updrafts. Can be used indefinitely.",
+      "physics_values": {
+        "deploy_type": "immediate",
+        "retract_type": "automatic",
+        "uses": "unlimited",
+        "enables": [
+          "long_jumps",
+          "fall_survival",
+          "updraft_usage"
+        ]
+      }
+    },
+    {
+      "name": "Max - Jet Pack (Standard)",
+      "description": "Uses fuel that must be refuelled at fuelling pumps. No specific thrust values documented.",
+      "physics_values": {
+        "fuel_type": "limited_consumable",
+        "refuel_mechanic": "fuelling_pump_required"
+      }
+    },
+    {
+      "name": "Max - Atomic Jet Pack",
+      "description": "Does not use fuel; instead refills automatically when not in use.",
+      "physics_values": {
+        "fuel_type": "none",
+        "refill_mechanic": "automatic_when_idle"
+      }
+    },
+    {
+      "name": "Kurt Hectic - Sniper Mode Locomotion Restriction",
+      "description": "When in sniper mode, Kurt can only strafe. He cannot move forwards or backwards, making him easily targetable by enemies.",
+      "physics_values": {
+        "allowed_movement": "strafe_only",
+        "restricted_movement": [
+          "forward",
+          "backward"
+        ]
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "platforming-focused",
+    "varied_gameplay",
+    "commitment-based_parachute_mechanics"
+  ],
+  "tier_notes": "T2 empirical/qualitative data. Wikipedia source provides character abilities and mechanical descriptions but no quantitative physics parameters (velocities, accelerations, gravity values). Documentation emphasizes gameplay variety across three characters with distinct mechanics rather than specific movement parameters.",
+  "sources_used": [
+    "Wikipedia - MDK2"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T15:47:46.285Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3144,
+    "output_tokens": 948,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

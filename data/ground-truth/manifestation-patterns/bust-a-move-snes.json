@@ -1,0 +1,144 @@
+{
+  "game_id": "bust-a-move-snes",
+  "game_name": "Bust-A-Move / Puzzle Bobble",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "ceiling descent",
+      "visual_form": "playing arena boundary drops downward, bubbles move closer to bottom line",
+      "meaning": "increasing time pressure; game over condition approaches"
+    },
+    {
+      "signal": "music acceleration",
+      "visual_form": "tempo increase in background music as bubbles near bottom",
+      "meaning": "critical danger state; player failure imminent if bubbles cross bottom line"
+    },
+    {
+      "signal": "bubble crossing bottom line",
+      "visual_form": "any bubble reaches or passes the bottom boundary of playing arena",
+      "meaning": "immediate game over; failure state reached"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "matching group formation",
+      "visual_form": "three or more identically colored bubbles cluster together",
+      "meaning": "player can eliminate bubbles; clearing arena progress"
+    },
+    {
+      "signal": "bubble removal",
+      "visual_form": "matched bubbles and dependent bubbles vanish from screen; points awarded",
+      "meaning": "successful action; arena space freed; progress toward level completion"
+    },
+    {
+      "signal": "arena clearance",
+      "visual_form": "all bubbles removed from playing field",
+      "meaning": "level complete; advance to next round with new bubble pattern"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player agency",
+      "color_identity": null,
+      "symbol_or_sigil": "pointer device at bottom of screen",
+      "enemy_visual_variants": null,
+      "environmental_markers": "firing mechanism; player-controlled bubble launcher"
+    },
+    {
+      "faction": "game system/opposition",
+      "color_identity": "multi-colored (varied bubble colors)",
+      "symbol_or_sigil": "bubble formations in prearranged patterns",
+      "enemy_visual_variants": null,
+      "environmental_markers": "descending ceiling; randomly generated bubble colors; level-specific bubble layouts"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early round (bubbles far from bottom)",
+      "visual_manifestation": "relaxed spacing; bubbles distributed across upper arena; slow/normal music tempo",
+      "behavioral_manifestation": "player has time to make strategic decisions; automatic firing does not activate immediately"
+    },
+    {
+      "world_state": "mid-round pressure (ceiling descending, bubbles approaching middle)",
+      "visual_manifestation": "ceiling visibly lower; bubbles compressed vertically; music tempo increases noticeably",
+      "behavioral_manifestation": "player must act more quickly; fewer safe positions remain; cascade effects from matches become more consequential"
+    },
+    {
+      "world_state": "critical danger (bubbles near bottom line)",
+      "visual_manifestation": "bubbles clustered near bottom boundary; music tempo fast/intense; visual proximity signals threat",
+      "behavioral_manifestation": "automated bubble fire activates if player idle; single mistake causes failure; all actions high-consequence"
+    },
+    {
+      "world_state": "level cleared",
+      "visual_manifestation": "arena emptied; all bubbles removed; transition to next level screen",
+      "behavioral_manifestation": "new bubble pattern loads; ceiling resets to top; music returns to baseline tempo"
+    },
+    {
+      "world_state": "game over",
+      "visual_manifestation": "bubble crosses bottom line; arena frozen; failure state display",
+      "behavioral_manifestation": "player loses; input disabled; game reset or continue option presented"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "spatial constraint signaling",
+      "example": "rectangular arena with clear top/bottom boundaries; bottom line serves as visual threshold for failure; sidewalls indicate bounce surfaces for physics behavior"
+    },
+    {
+      "technique": "color-based puzzle grammar",
+      "example": "bubbles of identical color must cluster to be removed; color distribution visible at round start tells experienced players difficulty/strategy requirements"
+    },
+    {
+      "technique": "progressive pressure visualization",
+      "example": "ceiling descent creates descending visual threat; player watches safe space diminish; music acceleration correlates with visual compression"
+    },
+    {
+      "technique": "mechanical feedback loop",
+      "example": "match success removes bubbles (visual relief); ceiling drops regularly (visual threat); music tempo responds to state (audio-visual correlation)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "bubbles (matched group)",
+      "state": "three or more same-color adjacent",
+      "behavior": "removal from field; dependent/hanging bubbles also removed; points awarded; ceiling does not drop during this action"
+    },
+    {
+      "entity": "ceiling",
+      "state": "every few shots completed",
+      "behavior": "descends one increment downward; all attached bubbles move down proportionally; descent speed/frequency influenced by remaining color count"
+    },
+    {
+      "entity": "player pointer/launcher",
+      "state": "idle (no input)",
+      "behavior": "automatic bubble fire triggers; selected bubble fires up arena in straight line"
+    },
+    {
+      "entity": "fired bubble",
+      "state": "traveling upward",
+      "behavior": "travels in straight line; bounces off sidewalls; stops when touching other bubbles or reaching arena top"
+    },
+    {
+      "entity": "music",
+      "state": "bubbles approaching danger zone",
+      "behavior": "tempo accelerates; intensity increases; signals critical time pressure without text"
+    }
+  ],
+  "notes": "Bust-A-Move uses pure mechanical/visual communication for world-state. No faction narrative, dialogue, or political systems exist. Danger/safety entirely conveyed through spatial positioning (bubble proximity to bottom line), temporal pressure (ceiling descent rate, music speed), and color matching mechanics. The game relies on abstract puzzle grammar: color identity = match target; bottom line = absolute failure boundary; ceiling descent = automated difficulty escalation. Environmental storytelling is minimal but functional: the arena itself is a closed system that communicates all necessary state information. Behavioral tells are deterministic/rule-based rather than character-driven. This is a pure puzzle paradigm with no world-state beyond arena configuration.",
+  "sources_used": [
+    "tcrf - Bust-A-Move (SNES) - The Cutting Room Floor",
+    "wikipedia - Puzzle Bobble"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:41:42.855Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5693,
+    "output_tokens": 1920,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

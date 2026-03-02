@@ -1,0 +1,157 @@
+{
+  "game_id": "puyo-puyo-2-snes",
+  "game_name": "Puyo Puyo Tsuu",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Third column fill to top",
+      "visual_form": "Puyos stacking upward in central column reaching play area ceiling",
+      "meaning": "Imminent game over condition; player losing state"
+    },
+    {
+      "signal": "Garbage Puyo arrival",
+      "visual_form": "Ojama (obstacle) pieces descending from top after opponent chain",
+      "meaning": "Opponent has successfully chained; incoming threat to board space"
+    },
+    {
+      "signal": "Hard Puyos (Steelies)",
+      "visual_form": "Visually distinct garbage blocks harder to erase than standard puyos",
+      "meaning": "Increased board difficulty; harder-to-clear obstruction"
+    },
+    {
+      "signal": "Board crowding/rising stack",
+      "visual_form": "Puyo pieces accumulating toward top of play field",
+      "meaning": "Escalating pressure; reduced maneuvering space"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Point Puyos erased in chain",
+      "visual_form": "Special point-awarding puyos disappear with adjacent group matches",
+      "meaning": "Positive scoring event; short-term chain power boost"
+    },
+    {
+      "signal": "Successful chain/cascade",
+      "visual_form": "Multiple puyos cleared simultaneously; cascading elimination visual",
+      "meaning": "Player advantage; damage dealt to opponent via garbage send"
+    },
+    {
+      "signal": "Empty board space",
+      "visual_form": "Clear play field with minimal puyos present",
+      "meaning": "Safety; breathing room for new piece placement"
+    },
+    {
+      "signal": "Offsetting mechanic activation",
+      "visual_form": "Garbage blocks negated/cancelled by player's own chain",
+      "meaning": "Successful defense; damage mitigation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Arle Nadja (Player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Carbuncle (companion creature being contested)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Battle Tower setting; climbing progression through tower floors"
+    },
+    {
+      "faction": "Dark Prince (Antagonist/Opposition)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dark Prince character representing opposition faction",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Tower constructor; initiates battle tower structure as antagonistic setup"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player story mode active",
+      "visual_manifestation": "Battle Tower structure visible; climbing progression through sequential floors",
+      "behavioral_manifestation": "Arle advances up tower by defeating opponents on each floor; bonus points accumulate as 'Experience'"
+    },
+    {
+      "world_state": "Competitive/versus mode",
+      "visual_manifestation": "Dual play fields side-by-side; garbage blocks transfer between players",
+      "behavioral_manifestation": "Garbage Puyos sent from opponent to player; offsetting mechanic allows counter-sends"
+    },
+    {
+      "world_state": "Multiplayer mode (4-player)",
+      "visual_manifestation": "Four simultaneous play fields visible; multitap required (Super Famicom version) or CPU fill-in (Remix)",
+      "behavioral_manifestation": "All players competing simultaneously; cascading garbage sends to multiple opponents"
+    },
+    {
+      "world_state": "Increased difficulty phase",
+      "visual_manifestation": "Hard Puyos (Steelies) introduced to play field; visual distinction from standard garbage",
+      "behavioral_manifestation": "Board becomes harder to clear; standard removal tactics less effective"
+    },
+    {
+      "world_state": "Player gaining advantage",
+      "visual_manifestation": "Extended chain cascade; Point Puyos cleared adding visual confirmation",
+      "behavioral_manifestation": "High-value garbage dump to opponent; opponent board pressure increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Battle Tower narrative framing",
+      "example": "Dark Prince constructs tower as romantic competition mechanism (steal Arle's heart AND Carbuncle); tower climbing represents escalating challenge and narrative progression"
+    },
+    {
+      "technique": "Opponent character positioning",
+      "example": "Each tower floor contains a unique opponent character Arle must defeat; visual/mechanical progression mirrors narrative escalation"
+    },
+    {
+      "technique": "Bonus/Experience accumulation",
+      "example": "Victory bonuses convert to 'Experience' points; quantified progression communicates player advancement through story"
+    },
+    {
+      "technique": "Garbage type visual differentiation",
+      "example": "Ojama, Point Puyos, and Hard Puyos each have distinct visual appearance; enables quick danger assessment without text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Falling Puyo pairs",
+      "state": "Standard drop",
+      "behavior": "Descend from top at consistent rate; player rotates/positions before landing"
+    },
+    {
+      "entity": "Garbage Puyos (Ojama)",
+      "state": "Opponent chain success",
+      "behavior": "Spawn at top of opponent's field; descend as obstruction after opponent damage dealt"
+    },
+    {
+      "entity": "Point Puyos",
+      "state": "Group erasure context",
+      "behavior": "Award bonus points when cleared with adjacent puyos; enhance short-term chain power"
+    },
+    {
+      "entity": "Hard Puyos (Steelies)",
+      "state": "Elevated difficulty state",
+      "behavior": "Resist erasure; require higher match counts or offsetting to remove; increase board constraint"
+    },
+    {
+      "entity": "Arle Nadja (Player character)",
+      "state": "Tower progression",
+      "behavior": "Climbs tower floors sequentially; gains bonus points per victory; narrative motivation to reach Dark Prince"
+    },
+    {
+      "entity": "Dark Prince (Antagonist NPC)",
+      "state": "Opposition throughout story",
+      "behavior": "Constructs tower; serves as final boss; antagonistic motivation (romance + Carbuncle theft)"
+    }
+  ],
+  "notes": "Puyo Puyo 2 uses minimal narrative/world-state communication compared to story-driven games. Visual differentiation primarily focuses on game mechanic clarity (garbage types, chain states) rather than environmental narrative. The battle tower and character opponent sequencing provide lightweight narrative framing. The offsetting mechanic and garbage overflow system create dynamic visual board-state communication of tactical pressure/advantage shifts. Faction identity is minimal—primarily antagonist (Dark Prince) vs. protagonist (Arle). World state manifests almost entirely through rule-set enforcement (offsetting rules, chain multipliers, custom rule variations) visible in board mechanics rather than environmental changes.",
+  "sources_used": [
+    "wikipedia:Puyo Puyo 2"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:42:52.385Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3154,
+    "output_tokens": 1836,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

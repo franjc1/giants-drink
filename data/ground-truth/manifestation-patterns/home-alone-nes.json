@@ -1,0 +1,119 @@
+{
+  "game_id": "home-alone-nes",
+  "game_name": "Home Alone",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Harry and Marv sprites on-screen",
+      "meaning": "Immediate threat to player; capture results in game over"
+    },
+    {
+      "signal": "Caught state transition",
+      "visual_form": "Revision 0: Kevin scream pose; Revision 1: puff of smoke with 'oh no!' text",
+      "meaning": "Game over condition; player has failed to evade bandits"
+    },
+    {
+      "signal": "Real-time pressure",
+      "visual_form": "20-minute countdown timer (implied through game design)",
+      "meaning": "Persistent threat; player must survive duration without capture"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Hiding locations",
+      "visual_form": "Designated hideout spaces within level environment",
+      "meaning": "Temporary refuge from enemy detection; strategic evasion points"
+    },
+    {
+      "signal": "Trap placement",
+      "visual_form": "Laid traps positioned in environment",
+      "meaning": "Player agency in creating danger zones for enemies; obstacle mitigation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kevin McCallister (player)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Scream pose (Revision 0) vs. smoke/text (Revision 1) on capture",
+      "environmental_markers": "Player-controlled character sprite; hideout locations"
+    },
+    {
+      "faction": "Wet Bandits (Harry and Marv)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Two distinct enemy sprites with pursuit behavior",
+      "environmental_markers": "Patrol patterns through level; capture-on-contact collision state"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-capture (player safe)",
+      "visual_manifestation": "Kevin sprite visible in level; enemies patrolling; hideouts and trap locations accessible",
+      "behavioral_manifestation": "Player can move freely, lay traps, enter hideouts; enemies pursue but haven't caught player"
+    },
+    {
+      "world_state": "Capture (game over)",
+      "visual_manifestation": "Capture screen with Kevin scream (v0) or smoke/text 'oh no!' (v1); picture frames repositioned (v1)",
+      "behavioral_manifestation": "Game halts; level restarts from beginning; one-life mechanic enforces consequence"
+    },
+    {
+      "world_state": "Time-based threat escalation",
+      "visual_manifestation": "Real-time 20-minute survival window; implicit through continuous gameplay pressure",
+      "behavioral_manifestation": "Player must maintain evasion throughout duration; no pause or reset available during countdown"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hideout placement",
+      "example": "Designated safe zones within the house communicate to player which locations provide temporary refuge from bandits"
+    },
+    {
+      "technique": "Trap mechanics",
+      "example": "Kevin's ability to lay various traps reinforces his ingenuity and establishes the house as a weapon in his defense strategy"
+    },
+    {
+      "technique": "One-life system",
+      "example": "Permanent failure on capture communicates high stakes and danger; loss of progress underscores threat severity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Kevin McCallister",
+      "state": "Active/evasion",
+      "behavior": "Moves freely, enters hideouts, deploys traps; responsive to player input"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Captured",
+      "behavior": "Triggers game-over screen; displays scream or smoke reaction; returns to level start"
+    },
+    {
+      "entity": "Harry and Marv (Wet Bandits)",
+      "state": "Patrol/pursue",
+      "behavior": "Active on-screen; pursue player character; collision triggers capture state"
+    },
+    {
+      "entity": "Harry and Marv",
+      "state": "Trap-affected",
+      "visual_form": "Implied through trap mechanic; player can hinder their movement",
+      "behavior": "Can be temporarily blocked or slowed by deployed traps"
+    }
+  ],
+  "notes": "Home Alone NES communicates world-state and danger primarily through binary states: safe (evasion mode) vs. danger (capture). The game uses a real-time 20-minute survival window as its core pressure mechanism. Visual language is minimal due to NES hardware constraints, relying on sprite collision, hideout locations, and trap placement to convey strategic options. The two-revision capture screen (scream vs. smoke) represents developer refinement in communicating failure state. No faction color-coding or complex political systems exist; the conflict is purely binary (player vs. bandits). Environmental storytelling emerges through the house layout itself—hideouts and trap positions teach player where safety and strategy converge.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:25:29.742Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1834,
+    "output_tokens": 1360,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

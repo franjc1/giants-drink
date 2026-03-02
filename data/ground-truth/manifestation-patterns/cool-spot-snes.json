@@ -1,0 +1,168 @@
+{
+  "game_id": "cool-spot-snes",
+  "game_name": "Cool Spot",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Undefined enemies (not detailed in sources)",
+      "meaning": "Damage taken upon touching enemies or their projectiles"
+    },
+    {
+      "signal": "Obstacle contact",
+      "visual_form": "Environmental hazards (not detailed in sources)",
+      "meaning": "Damage taken from certain obstacles in level environment"
+    },
+    {
+      "signal": "Health degradation visual",
+      "visual_form": "Spot face icon that gradually bends forward",
+      "meaning": "Cumulative damage indicator; face eventually falls from position indicating near-death"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Time limit counter per level",
+      "meaning": "Failure condition if timer reaches zero before level completion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health recovery item",
+      "visual_form": "7 Up logo pickup (NA version) or white V on red circle (EU version) or TOP logo (JP version)",
+      "meaning": "Restores player health when collected"
+    },
+    {
+      "signal": "Extra life",
+      "visual_form": "1-Up item displaying 7 Up logo variant (design differs by region)",
+      "meaning": "Grants additional life/continue for player"
+    },
+    {
+      "signal": "Checkpoint flag",
+      "visual_form": "Flagpole markers in level",
+      "meaning": "Safe restart point; allows respawn at checkpoint on death"
+    },
+    {
+      "signal": "Rescue objective indicator",
+      "visual_form": "Caged Spot characters (identical-looking to player character)",
+      "meaning": "Safe state to unlock once collection quota met; frees rescued spots"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "7 Up Brand (Player Faction)",
+      "color_identity": "Red circle with white/red design (NA/JP variants)",
+      "symbol_or_sigil": "7 Up logo (NA); TOP triangle logo (JP); Virgin Games V in red circle (EU)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Logo appears on health pickups, 1-Up items, intro sequence bottle; Spot character itself is brand mascot with red spot marking"
+    },
+    {
+      "faction": "Generic Antagonists",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemies throw projectiles that damage player",
+      "environmental_markers": "Positioned throughout levels as obstacles to overcome"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-level state",
+      "visual_manifestation": "Intro sequence shows Spot surfing on 7 Up bottle (NA: jumps off logo onto bottle; EU/JP: already on bottle); branded aesthetic establishes 7 Up world",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Active level gameplay",
+      "visual_manifestation": "Platforming environment with scattered collectible 'spots' throughout level; caged Spot characters at strategic locations",
+      "behavioral_manifestation": "Player must navigate hazards, collect quota of spots, defeat/avoid enemies, reach objective before time expires"
+    },
+    {
+      "world_state": "Objective completion",
+      "visual_manifestation": "Rescued Spot characters freed from cages upon collection quota met",
+      "behavioral_manifestation": "Progression to next level or bonus stage unlocked"
+    },
+    {
+      "world_state": "Bonus stage unlocked",
+      "visual_manifestation": "Bonus stage with different background (visual variants by region); hidden continue letters spelling 'UNCOLA' dispersed throughout",
+      "behavioral_manifestation": "Player can collect letters to gain continues; restarts from last level on death with point reset"
+    },
+    {
+      "world_state": "Critical health",
+      "visual_manifestation": "Spot face health indicator bent forward at extreme angle",
+      "behavioral_manifestation": "One additional hit will cause game over; player vulnerability state"
+    },
+    {
+      "world_state": "Game over",
+      "visual_manifestation": "Spot face health indicator falls from position",
+      "behavioral_manifestation": "Life lost; restart from checkpoint or lose continue"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Brand integration as world setting",
+      "example": "Entire game world themed around 7 Up brand; levels contain branded pickups, intro features branded bottle, rescue mission contextualizes collecting 'spots' as part of brand narrative"
+    },
+    {
+      "technique": "Regional visual adaptation for narrative consistency",
+      "example": "EU version replaces 7 Up logo with S.O.S. bottle and Virgin Games V-branding to reflect Fido Dido as local mascot; JP version substitutes TOP brand triangle; maintains gameplay while respecting regional licensing context"
+    },
+    {
+      "technique": "Mascot character as visual anchor",
+      "example": "Spot's distinctive red spot marking and consistent character design across all collectibles and UI elements; reinforces brand identity and player character recognition"
+    },
+    {
+      "technique": "Collectible placement storytelling",
+      "example": "Scattered 'spots' throughout levels suggest rescue mission context; caged identical Spot characters waiting to be freed creates narrative purpose for collection mechanics"
+    },
+    {
+      "technique": "Health UI as character expression",
+      "example": "Spot face health indicator shows emotional/physical degradation (bending forward) providing visual narrative of damage accumulation and approaching defeat"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Spot (player character)",
+      "state": "Normal movement",
+      "behavior": "Can jump in all directions; can attack by throwing soda bubbles in any direction; can cling to and climb by jumping in front of climbable surfaces"
+    },
+    {
+      "entity": "Spot (player character)",
+      "state": "Damaged",
+      "behavior": "Takes damage from enemy contact, enemy projectiles, and certain obstacles; health face indicator bends forward with each hit"
+    },
+    {
+      "entity": "Spot (player character)",
+      "state": "At collection objective",
+      "behavior": "Must gather specified quota of 'spots' (quota increases as game progresses) to unlock caged Spot characters for rescue"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Active in level",
+      "behavior": "Throw projectiles at player; can be avoided or potentially attacked with soda bubbles (attack mechanic not fully detailed in sources)"
+    },
+    {
+      "entity": "Caged Spot characters",
+      "state": "Awaiting rescue",
+      "behavior": "Remain stationary in cages until collection quota is met; then freed, indicating level objective completion"
+    },
+    {
+      "entity": "Time limit",
+      "state": "Active during level",
+      "behavior": "Countdown forces player to complete level before expiration; failure condition if timer reaches zero"
+    }
+  ],
+  "notes": "Cool Spot is a branded platformer with limited traditional world-state complexity. Primary visual communication focuses on brand identity integration (7 Up/regional variants), health status feedback through character UI, and objective-driven level design. No faction conflicts or political situations present; world-state changes primarily driven by level progression and health mechanics. Regional adaptations demonstrate how visual manifestation adjusts to maintain brand consistency while respecting local licensing and market conditions. Danger/safety signals rely heavily on branded collectible items and enemy/obstacle avoidance patterns typical of platformer genre.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Cool Spot SNES)",
+    "wikipedia (Cool Spot - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:07:01.263Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5099,
+    "output_tokens": 1990,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

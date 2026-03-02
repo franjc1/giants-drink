@@ -1,0 +1,164 @@
+{
+  "game_id": "to-the-earth-nes",
+  "game_name": "To the Earth",
+  "platform": "nes",
+  "paradigm": "light gun shooter",
+  "danger_signals": [
+    {
+      "signal": "enemy_spacecraft_incoming",
+      "visual_form": "fast-moving enemy ship sprites on screen",
+      "meaning": "active threat requiring immediate player targeting and destruction"
+    },
+    {
+      "signal": "asteroid_field",
+      "visual_form": "asteroid sprites scattered across play area",
+      "meaning": "environmental hazard that damages shield on collision or failed shot"
+    },
+    {
+      "signal": "bomb_projectiles",
+      "visual_form": "bomb sprite objects moving toward player position",
+      "meaning": "incoming attack that must be destroyed before impact"
+    },
+    {
+      "signal": "missile_attack",
+      "visual_form": "missile sprite trajectories",
+      "meaning": "guided or ballistic threat requiring rapid targeting"
+    },
+    {
+      "signal": "shield_depletion",
+      "visual_form": "shield meter visual degradation (inferred from mechanic description)",
+      "meaning": "player vulnerability increasing with each missed shot; visual indicator of mounting danger"
+    },
+    {
+      "signal": "nemesis_appearance",
+      "visual_form": "final boss alien entity sprite at Earth level",
+      "meaning": "ultimate existential threat; alien antagonist attempting planetary invasion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "friendly_spacecraft",
+      "visual_form": "allied ship sprite distinct from enemy vessels",
+      "meaning": "non-target entity; must avoid destruction; delivers power-up items"
+    },
+    {
+      "signal": "shield_repair_drop",
+      "visual_form": "power-up item sprite from friendly craft",
+      "meaning": "restorative resource that restores player shield integrity"
+    },
+    {
+      "signal": "comet_protection_power_up",
+      "visual_form": "special power-up sprite with comet visual motif",
+      "meaning": "temporary invulnerability granting limited-hit protection"
+    },
+    {
+      "signal": "screen_clear_bomb",
+      "visual_form": "powerful bomb power-up sprite",
+      "meaning": "emergency defensive capability eliminating all current threats on screen"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Neptune-Terrestrial Allied Force (player-affiliated)",
+      "color_identity": null,
+      "symbol_or_sigil": "Triton base identifier (location-based faction marker)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Triton base on Neptune serves as launch point; represents human military alliance"
+    },
+    {
+      "faction": "Ragossians (enemy faction)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "spacecraft design distinct from friendly vessels; final boss Nemesis is Ragossian alien entity",
+      "environmental_markers": "enemy ships establish visual 'cordon' between player and Earth; invasive presence throughout solar system levels"
+    },
+    {
+      "faction": "Terrestrial Federation (human government)",
+      "color_identity": null,
+      "symbol_or_sigil": "Nester (federation president) appears in conclusion",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Earth as objective/destination; represents human civilization and political authority requiring defense"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "bacteriological_invasion_crisis",
+      "visual_manifestation": "enemy Ragossian spacecraft saturating solar system levels (Uranus, Saturn, Jupiter progressions)",
+      "behavioral_manifestation": "increasing enemy density and difficulty scaling through level progression toward Earth; final boss confrontation represents invasion apex"
+    },
+    {
+      "world_state": "medicine_retrieval_mission",
+      "visual_manifestation": "player spacecraft positioned between Triton base and Earth; medicine vials as objective collectable (inferred)",
+      "behavioral_manifestation": "player progression through sequential planets represents courier mission execution; delivery objective drives spatial-temporal narrative"
+    },
+    {
+      "world_state": "threat_to_earth_atmosphere",
+      "visual_manifestation": "Earth level as final stage; Nemesis positioned at planetary boundary",
+      "behavioral_manifestation": "boss battle at atmosphere represents last defensive line; player must prevent alien penetration of final sanctuary"
+    },
+    {
+      "world_state": "time_pressure_constraint",
+      "visual_manifestation": "shield degradation through gameplay (missed shots); constant resource management visual feedback",
+      "behavioral_manifestation": "time-limited mission context creates escalating tension; shield depletion mechanic forces aggressive engagement and rapid decision-making"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "planetary_progression_narrative",
+      "example": "level sequence (Uranus → Saturn → Jupiter → Earth) traces courier mission path from Triton base toward destination, visualizing spatial journey through solar system"
+    },
+    {
+      "technique": "boss_escalation_worldbuilding",
+      "example": "end-of-level boss fights at each planet represent Ragossian military hierarchy; final Nemesis encounter at Earth demonstrates invasion command structure"
+    },
+    {
+      "technique": "objective_marker_communication",
+      "example": "medicine vial delivery goal embedded in level design; retrieval from Triton and delivery to Earth frames entire game spatially"
+    },
+    {
+      "technique": "threat_density_visualization",
+      "example": "increasing enemy spacecraft, asteroid, and projectile volume through progression levels visualizes Ragossian invasion intensity scaling toward planetary core"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "enemy_spacecraft",
+      "state": "active_attack",
+      "behavior": "fast movement patterns requiring quick player reflexes; continuous firing/projectile generation toward player"
+    },
+    {
+      "entity": "friendly_spacecraft",
+      "state": "support_mode",
+      "behavior": "delivers power-up drops (shield repair, protection comet, screen-clear bomb) to player; avoidance of destruction necessary"
+    },
+    {
+      "entity": "asteroid_field",
+      "state": "environmental_hazard",
+      "behavior": "static or drifting threat; damages player shield on failed targeting; no active aggression but passive obstruction"
+    },
+    {
+      "entity": "nemesis_final_boss",
+      "state": "invasion_climax",
+      "behavior": "attempts penetration of Earth atmosphere; represents culmination of Ragossian invasion force; requires defeat to save human civilization"
+    },
+    {
+      "entity": "player_shield",
+      "state": "resource_degradation",
+      "behavior": "continuously depletes with each missed shot; visual indicator of mounting vulnerability; restoration via friendly power-up drops"
+    }
+  ],
+  "notes": "To the Earth uses light gun paradigm to communicate world-state primarily through enemy encounter density, spatial progression, and resource management feedback. Faction identity relies on spacecraft visual distinction rather than color-coding; enemy Ragossians identified through opposition role and alien boss entity. World-state (bacteriological invasion crisis, time pressure, final Earth defense) manifests through level progression structure, enemy escalation, and shield depletion mechanic. Environmental storytelling achieved through planetary journey sequence and boss encounters representing invasion hierarchy. The game communicates danger through enemy speed/density and safety through friendly power-up deliveries and defensive items. Political context (Terrestrial Federation vs. Ragossian invaders) implicit in narrative framing rather than explicit visual faction markers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:51:30.336Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2197,
+    "output_tokens": 1913,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "game_id": "rygar-nes",
+  "game_name": "Rygar",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Time limit expiration",
+      "visual_form": "Fire monster spawns on-screen",
+      "meaning": "Imminent death if player doesn't escape; escalating threat with acceleration"
+    },
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Sprite collision with enemy or projectile",
+      "meaning": "Instant death (one-hit-kill mechanic unless jumping on enemy head)"
+    },
+    {
+      "signal": "Platform edges",
+      "visual_form": "Screen boundaries and pit gaps",
+      "meaning": "Fall damage = instant death; spatial danger from level geometry"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bullets/attacks fired by enemy sprites",
+      "meaning": "Ranged danger; same lethality as melee contact"
+    },
+    {
+      "signal": "Shadow monster appearance",
+      "visual_form": "Solid-color silhouette enemies in Ligar's Castle final area",
+      "meaning": "Visual obscuring of enemy form increases threat perception; harder to distinguish attack patterns"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Safe zones",
+      "visual_form": "End-of-level designated areas",
+      "meaning": "Score tallying and checkpoint; temporary respite from danger"
+    },
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Stones spawning from ground; dropped items with distinct icons",
+      "meaning": "Temporary ability enhancement: Sun Power (overhead attack), Crown Power (multi-kill), Cross Power (invincibility), Tiger Power (jump-kill), Star Power (range extension)"
+    },
+    {
+      "signal": "Extra lives",
+      "visual_form": "Life item pickup",
+      "meaning": "Death deferral; extends survival capacity"
+    },
+    {
+      "signal": "Time extension items",
+      "visual_form": "Time bonus pickups",
+      "meaning": "Delay fire monster spawn; prevents forced-failure state"
+    },
+    {
+      "signal": "Screen bombs",
+      "visual_form": "Destructive area effect item",
+      "meaning": "Temporary zone control; clears all on-screen enemies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Rygar, Legendary Warrior)",
+      "color_identity": null,
+      "symbol_or_sigil": "Diskarmor (chain-attached razor shield)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Safe zones at level ends; progression through distinct themed regions (Suero Mountain, Gran Mountains, Indora, Den of Sagila, Palace of Dorago)"
+    },
+    {
+      "faction": "Ligar (Evil Dominator, antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dorago (boss entity); Palace of Dorago as seat of power",
+      "enemy_visual_variants": "Dorago appears as shadow version in Ligar's Castle; shadow rendering obscures true form",
+      "environmental_markers": "Palace of Dorago as final area; presence of shadow monsters indicates faction territory"
+    },
+    {
+      "faction": "Generic enemy forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied sprite designs across level types",
+      "enemy_visual_variants": "Unused dragon enemy, butterfly, robot, and spider enemies indicate faction diversity; shadow palette applied to Ligar's Castle enemies for visual unity",
+      "environmental_markers": "Enemy density and type vary by region; final palace contains shadow-rendered variants"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game progression (Levels 1-20)",
+      "visual_manifestation": "Standard colored enemy sprites; accessible level geometry; generous continue-on-death mechanics",
+      "behavioral_manifestation": "Player can lose all lives and insert coins to continue from furthest point; lower skill requirement"
+    },
+    {
+      "world_state": "Late game progression (Levels 21-27)",
+      "visual_manifestation": "Ligar's Castle introduces shadow-rendered enemies (single-color silhouettes); more complex level layouts",
+      "behavioral_manifestation": "Game-over is permanent—no continue option; forces skill mastery; palette obscuring increases difficulty perception"
+    },
+    {
+      "world_state": "Time pressure active",
+      "visual_manifestation": "Fire monster spawns; on-screen presence grows more aggressive",
+      "behavioral_manifestation": "Monster accelerates toward player over time; forces constant movement and evasion; signals failure state imminent"
+    },
+    {
+      "world_state": "Power-up active",
+      "visual_manifestation": "Temporary ability enhancement; visual changes to attack patterns (Sun Power overhead swing replaces circular attack)",
+      "behavioral_manifestation": "Extended combat range, multi-enemy kills, invincibility, or jump-kill capability; loss on death signals power expiration"
+    },
+    {
+      "world_state": "Regional variation (European version)",
+      "visual_manifestation": "Same sprite/level layout as other regions",
+      "behavioral_manifestation": "Programming error caps max Tone/Last at 1023 and max hitpoints at 8 (vs. 4095/12 in other versions); final areas become exponentially harder; mechanical difficulty increase without visual signaling"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Regional level naming and theming",
+      "example": "Suero Mountain (Primeval Mountain in JP), Gran Mountains (Valley of Rosa), Indora god rooms, Den of Sagila, Palace of Dorago—progressive geography from wilderness to evil stronghold signals narrative escalation toward final confrontation"
+    },
+    {
+      "technique": "Enemy sprite design and palette variety",
+      "example": "Early levels feature colored, distinguishable enemies; Ligar's Castle uses uniform shadow palette to indicate faction territory and create visual confusion (obscuring enemy form to increase threat perception)"
+    },
+    {
+      "technique": "Final area architectural motif",
+      "example": "Palace of Dorago uses shadow-rendered enemies and distinct visual style to signal villain's inner sanctum; unused dragon and boss-variant enemy designs reinforce oppressive atmosphere"
+    },
+    {
+      "technique": "Safe zone placement",
+      "example": "End-of-level safe zones create breathing points in otherwise lethal environment; their presence and structure reinforce progression milestones"
+    },
+    {
+      "technique": "Item spawning from earth",
+      "example": "Power-ups emerging from stones and defeated enemies signals world-state rewards; frequency and type of items vary by region and progression stage"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fire monster (time limit enforcer)",
+      "state": "Spawned after time expires",
+      "behavior": "Aggressively pursues player; accelerates over time; forces evasion and signals imminent failure state"
+    },
+    {
+      "entity": "Enemy sprites (generic)",
+      "state": "Active on screen",
+      "behavior": "One-hit-kill on contact; exceptions: jumpable for stun effect; defeat drops power-ups or bonus items"
+    },
+    {
+      "entity": "Dorago (final boss)",
+      "state": "Shadow-rendered in Ligar's Castle",
+      "behavior": "Appears as silhouette; true form hidden by palette; fight mechanics obscured by visual effect"
+    },
+    {
+      "entity": "Rygar (player character)",
+      "state": "Standard play",
+      "behavior": "Immediate death on enemy contact; can attack with Diskarmor (yo-yo mechanic); can jump on enemy heads for stun; climbing ropes available in some areas"
+    },
+    {
+      "entity": "Rygar (power-up active)",
+      "state": "Cross Power (invincibility) active",
+      "behavior": "Temporary immunity to all damage; visual change likely present but not documented"
+    },
+    {
+      "entity": "Unused enemies (dragon, robot, spider)",
+      "state": "Removed from final build",
+      "behavior": "Data suggests dragon would sit in pit and rise with mouth open; robot and spider intended for late-game areas"
+    }
+  ],
+  "notes": "Rygar NES manifests world-state primarily through level progression architecture and enemy density escalation rather than explicit visual UI systems. Danger communication relies on high-difficulty spike mechanics (one-hit-kill, time pressure, permanent death in late game) rather than visual warnings. The shadow-rendering technique in Ligar's Castle is the most deliberate world-state visualization, using palette obscuring to create psychological threat escalation. Regional programming differences (European version cap at 1023 Tone/8 HP) represent invisible mechanical difficulty that contradicts visual parity—a failure to communicate altered world-state to player. Power-up system provides temporary safety through gameplay mechanic enhancement, not sustained worldbuilding. Faction identity is minimal: Rygar vs. Ligar opposition is narrative-thin in NES version, relying on final palace architectural distinction rather than visual faction markers throughout the game.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:17:36.666Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5625,
+    "output_tokens": 2317,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

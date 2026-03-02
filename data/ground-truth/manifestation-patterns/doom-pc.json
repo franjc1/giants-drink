@@ -1,0 +1,203 @@
+{
+  "game_id": "doom-pc",
+  "game_name": "Doom",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "2D sprite demons and possessed undead humans rendered at fixed angles",
+      "meaning": "Immediate threat to player safety; enemies move toward player when they see or hear them"
+    },
+    {
+      "signal": "Toxic waste hazard",
+      "visual_form": "Pits of colored liquid/waste terrain",
+      "meaning": "Environmental danger requiring radiation suit or avoidance"
+    },
+    {
+      "signal": "Crushing ceiling trap",
+      "visual_form": "Lowering ceiling geometry",
+      "meaning": "Mechanical environmental hazard that causes damage or death"
+    },
+    {
+      "signal": "Locked doors",
+      "visual_form": "Door barriers requiring keycard or switch activation",
+      "meaning": "Progression blocked; may indicate restricted or dangerous areas ahead"
+    },
+    {
+      "signal": "Large enemy groups",
+      "visual_form": "Multiple sprite entities clustered in space",
+      "meaning": "Overwhelming threat density; difficulty scales with group size"
+    },
+    {
+      "signal": "Armed enemy variants",
+      "visual_form": "Undead soldiers with shotguns (distinct from unarmed demons)",
+      "meaning": "Ranged threat; higher damage potential than melee-only enemies"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health pickups",
+      "visual_form": "Collectable items placed in environment",
+      "meaning": "Replenishment of player vitality; indicates safe zone or resource availability"
+    },
+    {
+      "signal": "Armor pickups",
+      "visual_form": "Collectable defensive items",
+      "meaning": "Damage mitigation available; player can increase survivability"
+    },
+    {
+      "signal": "Weapon availability",
+      "visual_form": "Weapon sprites and ammunition scattered throughout levels",
+      "meaning": "Player can upgrade firepower; progression enables higher threat handling"
+    },
+    {
+      "signal": "Power-ups",
+      "visual_form": "Special items (invulnerability sphere, radiation suit, berserker pack)",
+      "meaning": "Temporary or sustained advantage; safety multiplier against threats"
+    },
+    {
+      "signal": "Exit room/marked exits",
+      "visual_form": "Designated end-of-level location",
+      "meaning": "Safe progression point; completion of current danger zone"
+    },
+    {
+      "signal": "Map computer",
+      "visual_form": "Collectable mapping utility",
+      "meaning": "Information advantage; reduces navigation danger and disorientation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Space Marine / Doomguy)",
+      "color_identity": null,
+      "symbol_or_sigil": "Military/science fiction aesthetic (later called Doomguy)",
+      "enemy_visual_variants": "Armed undead soldiers (possessed humans with weapons)",
+      "environmental_markers": "Military bases on moons of Mars; technology-based environments"
+    },
+    {
+      "faction": "Demons/Hell faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Demonic entity sprites; supernatural aesthetic",
+      "enemy_visual_variants": "Pure demons (unarmed magical attackers) vs. possessed undead humans (hybrid threat)",
+      "environmental_markers": "Hell environments; transition from Mars bases to infernal settings; demonic architecture"
+    },
+    {
+      "faction": "Undead/Possessed faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Human soldiers corrupted by demonic possession",
+      "enemy_visual_variants": "Armed variants (shotgun-wielding) vs. basic possessed soldiers",
+      "environmental_markers": "Military base interiors; hybrid human-demonic contamination"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level initiation (Knee-Deep in the Dead - Mars base)",
+      "visual_manifestation": "Military industrial architecture; chemical waste storage; organized base structure",
+      "behavioral_manifestation": "Demons and possessed soldiers patrol or respond to player presence; lower enemy density in early stages"
+    },
+    {
+      "world_state": "Demonic invasion/contamination",
+      "visual_manifestation": "Transition from human military bases to hellish environments; demonic sprite presence increases",
+      "behavioral_manifestation": "More demons spawn; enemy aggression escalates; toxic hazards become more prevalent"
+    },
+    {
+      "world_state": "Hell (final levels)",
+      "visual_manifestation": "Infernal architecture replaces human military bases; hellish color palette and environment design",
+      "behavioral_manifestation": "Boss fights at episode climax; maximum enemy density; pure demonic threats dominate"
+    },
+    {
+      "world_state": "Resource scarcity",
+      "visual_manifestation": "Fewer visible weapon and health pickups in environment",
+      "behavioral_manifestation": "Player must scavenge from defeated enemies; management of ammunition and health becomes critical"
+    },
+    {
+      "world_state": "Difficulty scaling",
+      "visual_manifestation": "Same sprite assets and environment layout; enemy quantity/placement differs",
+      "behavioral_manifestation": "Enemies move faster, attack faster, and appear in larger groups at higher difficulties"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression from human to demonic",
+      "example": "Episodes begin in organized Mars military bases; end in hellish infernal environments; communicates invasion narrative through setting evolution"
+    },
+    {
+      "technique": "Enemy type stratification by location",
+      "example": "Military bases contain more possessed humans with weapons; pure demons dominate Hell levels; visual tells player about environmental corruption"
+    },
+    {
+      "technique": "Hazard type indicating location state",
+      "example": "Toxic waste pits signal industrial/chemical contamination in military areas; demonic hazards signal hellish environments"
+    },
+    {
+      "technique": "Resource placement as narrative hint",
+      "example": "Weapon caches in military bases suggest human preparation; sparse resources in hell suggest desperate survival scenario"
+    },
+    {
+      "technique": "Named episode titles + visual environments",
+      "example": "'Knee-Deep in the Dead' - visual shows bridge over chemical waste and soldier enemies, establishing immediate narrative context"
+    },
+    {
+      "technique": "Boss encounters as environmental climax",
+      "example": "Final level of each episode features boss fight in thematically appropriate location; marks major narrative progression point"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Demons (generic)",
+      "state": "Idle/unaware",
+      "behavior": "Stationary or passive movement; become active when player is seen or heard"
+    },
+    {
+      "entity": "Demons (generic)",
+      "state": "Aware/engaged",
+      "behavior": "Move toward player; attack via melee biting/clawing or magical fireballs"
+    },
+    {
+      "entity": "Possessed undead soldiers",
+      "state": "Idle/unaware",
+      "behavior": "Patrol or stand guard in military base areas"
+    },
+    {
+      "entity": "Possessed undead soldiers",
+      "state": "Armed and engaged",
+      "behavior": "Use shotguns or other weapons; ranged attack pattern indicates higher tactical threat than unarmed demons"
+    },
+    {
+      "entity": "Enemy groups",
+      "state": "Multiple threats present",
+      "behavior": "Coordinate movement toward player; overwhelming force mechanic; difficulty scales with group density"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Level finale state",
+      "behavior": "Unique encounter patterns; single powerful entity replaces normal group-based threat model"
+    },
+    {
+      "entity": "Player (space marine)",
+      "state": "Low resources",
+      "behavior": "Movement slowed by resource management; weapon choice becomes strategic; risk-reward for damage trade-offs"
+    },
+    {
+      "entity": "Player (space marine)",
+      "state": "Powered up (invulnerability/berserker)",
+      "behavior": "Visual and mechanical invincibility; enables aggressive enemy engagement without normal danger"
+    }
+  ],
+  "notes": "Doom (1993) communicates world-state primarily through environmental architecture and enemy type placement rather than explicit UI markers. The game uses sprite-based 2D enemies against 3D environments (2.5D graphics) to create visual hierarchy: players are pseudo-3D agents navigating a world where threats are rendered as distinct 2D entities. Faction identity is implicit: the player represents human/military order, demons/possessed represent chaos/invasion. The progression from Mars military bases to Hell serves as both narrative arc and visual manifestation of world-state escalation. Danger signals are predominantly entity-based (enemy sprites, hazards) rather than color-coded or symbolic. Safety is communicated through resource availability and environmental design (exit rooms, safe zones implied by resource clustering). The game lacks explicit faction banners or sigils; faction identity emerges from enemy type, location architecture, and encounter design patterns.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:36:39.314Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3294,
+    "output_tokens": 2538,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

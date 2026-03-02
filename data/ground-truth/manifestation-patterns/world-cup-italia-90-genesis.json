@@ -1,0 +1,137 @@
+{
+  "game_id": "world-cup-italia-90-genesis",
+  "game_name": "World Cup Italia '90",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "opponent_team_aggression",
+      "visual_form": "opposing player positioning and tackling animations",
+      "meaning": "active threat to player possession and scoring capability"
+    },
+    {
+      "signal": "score_deficit",
+      "visual_form": "scoreboard display showing higher opponent score",
+      "meaning": "losing match state—increased pressure to score"
+    },
+    {
+      "signal": "time_pressure",
+      "visual_form": "match timer countdown in HUD",
+      "meaning": "diminishing window for recovery or goal-scoring"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "possession_control",
+      "visual_form": "player character highlighted/controlled on-field with ball at feet",
+      "meaning": "active agency over play progression"
+    },
+    {
+      "signal": "goal_proximity",
+      "visual_form": "player positioning near opponent goal zone on bird's-eye view",
+      "meaning": "favorable positioning for scoring opportunity"
+    },
+    {
+      "signal": "lead_scoreline",
+      "visual_form": "scoreboard showing player team ahead",
+      "meaning": "favorable match state reducing urgency"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_selected_nation",
+      "color_identity": "nation-specific team jersey colors (inferred from real-world football uniforms)",
+      "symbol_or_sigil": "national flag or team emblem on jersey/HUD",
+      "enemy_visual_variants": "opposing selected nation rendered with different jersey color/emblem",
+      "environmental_markers": "stadium association with host nation (Italia '90 set in Italy)"
+    },
+    {
+      "faction": "opposing_team",
+      "color_identity": "contrasting team jersey from selected nation",
+      "symbol_or_sigil": "opposing nation emblem/flag",
+      "enemy_visual_variants": "all 24 playable nations feature distinct visual team identity",
+      "environmental_markers": "opponent bench positioning on opposite side of pitch"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "match_in_progress",
+      "visual_manifestation": "live scoreboard, player positioning on pitch, ball location, stadium environment active",
+      "behavioral_manifestation": "continuous player movement, tackling attempts, ball possession transitions"
+    },
+    {
+      "world_state": "player_possession",
+      "visual_manifestation": "player character highlighted/controllable with ball proximity indicator",
+      "behavioral_manifestation": "responsive directional control, passing/shooting action availability"
+    },
+    {
+      "world_state": "opponent_possession",
+      "visual_manifestation": "opponent team player highlighted with ball, player team rendering defensive stance",
+      "behavioral_manifestation": "opponent AI executes passing patterns, attempts to advance toward player goal"
+    },
+    {
+      "world_state": "goal_scored",
+      "visual_manifestation": "scoreboard increments, possible celebration animation, match pause",
+      "behavioral_manifestation": "ball reset to center, play resumes from kick-off"
+    },
+    {
+      "world_state": "tournament_progression",
+      "visual_manifestation": "group stage match display indicates opponent nation and stage (implied by available 24 nations and master system official groups)",
+      "behavioral_manifestation": "match results contribute to advancement through tournament bracket"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stadium_authenticity",
+      "example": "game set in Italy (Italia '90) with visual stadium environment evoking 1990 tournament context"
+    },
+    {
+      "technique": "nation_representation_through_selection",
+      "example": "24 playable nations (including non-qualifiers like China, Japan) communicate global football participation scope; exclusion of Republic of Ireland indicates licensing/political constraints"
+    },
+    {
+      "technique": "official_branding",
+      "example": "FIFA World Cup official logo and mascot presence signals tournament legitimacy and real-world connection"
+    },
+    {
+      "technique": "bird's_eye_view_perspective",
+      "example": "overhead tactical view communicates strategic team positioning and field control dynamics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_controlled_character",
+      "state": "active_turn",
+      "behavior": "responds to input commands for movement, passing, shooting; highlighted/marked for control"
+    },
+    {
+      "entity": "opponent_ai_players",
+      "state": "offensive_phase",
+      "behavior": "advance toward player goal, execute coordinated passing sequences"
+    },
+    {
+      "entity": "opponent_ai_players",
+      "state": "defensive_phase",
+      "behavior": "position between player and goal, attempt tackles to dispossess"
+    },
+    {
+      "entity": "referee_presence",
+      "state": "goal_judgment",
+      "behavior": "goal/no-goal decision triggers scoreboard update or play continuation"
+    }
+  ],
+  "notes": "World Cup Italia '90 is a minimal sports simulation on Genesis/Master System with limited visual complexity typical of early 1990s hardware. World-state communication relies heavily on scoreboard numerics, team jersey differentiation, and positional player rendering rather than sophisticated environmental or narrative signals. The bird's-eye view constrains ability to render detailed danger/safety visual language—safety/danger are primarily implicit in possession state and scoreline. Faction identity is communicated exclusively through national team colors and emblems. Political dimensions (nation selection, exclusion of Ireland) are meta-game rather than in-engine manifestations. Game lacks narrative or faction conflict beyond competitive match structure.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:44:05.388Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2604,
+    "output_tokens": 1474,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

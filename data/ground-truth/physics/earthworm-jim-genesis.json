@@ -1,0 +1,134 @@
+{
+  "_meta": {
+    "game": "Earthworm Jim",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Playmates Interactive Entertainment",
+    "developer": "Shiny Entertainment",
+    "sources": [
+      {
+        "name": "Wikipedia — Earthworm Jim",
+        "url": "https://en.wikipedia.org/wiki/Earthworm_Jim_(video_game)",
+        "notes": "Genesis is the primary version. Confirms whip mechanic, plasma gun, level variety."
+      },
+      {
+        "name": "Earthworm Jim Wiki — Game",
+        "url": "https://earthwormjim.fandom.com/wiki/Earthworm_Jim_(Game)",
+        "notes": "Mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Earthworm Jim was developed simultaneously for Genesis and SNES using a custom heterogeneous programming language.",
+      "Genesis is the primary reference platform — physics originated on Genesis, then ported to SNES.",
+      "Jim is a regular earthworm who found an ultra-high-tech indestructible super suit.",
+      "DEFINING COMBAT: Plasma gun (main ranged weapon) + worm-head whip (melee/grapple).",
+      "DEFINING TRAVERSAL: Worm head as grappling hook on certain hooks — Jim grabs and swings.",
+      "Multiple distinct level types: platformer, underwater, asteroid-dodging, escort mission.",
+      "Walk speed, jump values not precisely documented — estimated from gameplay observation."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.5,
+      "confidence": "low",
+      "notes": "Approximate. Jim runs in his suit. VERIFY."
+    },
+    "notes": "Jim moves at a consistent speed in his suit."
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": "Standard variable-height jump with air control. VERIFY."
+  },
+
+  "plasma_gun": {
+    "description": "Jim's primary weapon. Fires plasma bolts that bounce off walls.",
+    "trajectory": "bouncing",
+    "fire_rate": "rapid (auto-fire with button hold)",
+    "notes": [
+      "Plasma bolts bounce off surfaces, allowing indirect hits around corners.",
+      "Unlimited ammo for standard plasma bolts.",
+      "Super Plasma: charged shot that deals more damage. VERIFY charge time.",
+      "The bouncing trajectory creates environmental interaction — use walls for indirect hits."
+    ]
+  },
+
+  "worm_whip": {
+    "description": "Jim uses his own worm head/body as a whip attack. Press B to extend head for melee.",
+    "range_tiles_approx": 1.5,
+    "direction": "primarily horizontal (both directions)",
+    "use_cases": [
+      "Melee attack against nearby enemies",
+      "Hit objects Jim's gun can't reach",
+      "Grapple point interaction (grab hooks to swing)"
+    ]
+  },
+
+  "grapple_hook": {
+    "description": "On designated hook points in levels, Jim can grab with his worm head and swing in a pendulum arc.",
+    "type": "pendulum_swing",
+    "notes": [
+      "Similar to Bionic Commando's grappling arm but not the primary movement mode.",
+      "Jim extends his head upward to grab the hook.",
+      "Swings on an arc and releases at desired point.",
+      "Used in specific level sections for crossing gaps."
+    ]
+  },
+
+  "level_types": {
+    "_note": "Earthworm Jim has several distinct level modes that use different physics/mechanics.",
+    "standard_platformer": {
+      "levels": ["New Junk City", "What the Heck?", "Intestinal Distress", "Down the Tubes"],
+      "notes": "Standard run-and-gun platformer sections."
+    },
+    "for_pete_sake": {
+      "type": "escort_mission",
+      "description": "Jim must escort Major Mucus through a level. If Mucus hits an enemy or falls too far behind, he panics.",
+      "notes": "Escort mission creates stress through protection of a pathfinding NPC."
+    },
+    "andy_asteroids": {
+      "type": "shoot_em_up",
+      "description": "Jim rides a hamster (Snot) in an asteroid field dodging obstacles.",
+      "notes": "Completely different physics — free-flying in an asteroid field."
+    },
+    "level_5": {
+      "type": "bungee_jumping_minigame",
+      "notes": "Unique one-off mechanic — not representative of overall game physics."
+    }
+  },
+
+  "suit_mechanics": {
+    "description": "Jim's suit provides his strength, jump capability, and weapon holster.",
+    "notes": "The suit is 'indestructible' — damage is absorbed but Jim can still be knocked around."
+  },
+
+  "hitboxes": {
+    "jim_standing": {
+      "notes": "Jim is tall (about 2.5 tiles) but his hitbox is relatively narrow. VERIFY.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Earthworm Jim's level variety (platformer → escort → asteroid dodge) across a single game predates the 'genre-shifting' design that would become common later. Each mode uses the same character but different physics contexts.",
+    "The bouncing plasma gun creates indirect combat opportunities not available in straight-line projectile games. Players learn to use room geometry as part of their attack strategy — 'bounce this shot off that wall to hit the enemy behind cover.'",
+    "The worm whip as both melee and grapple uses a single mechanic for two purposes — the grapple is a situational upgrade of the melee (same button, different context). This single-mechanic depth avoids controller complexity.",
+    "The escort mission (For Pete's Sake) is philosophically opposite to the rest of the game: instead of 'survive yourself,' you must 'keep someone else alive.' The stress shifts from personal survival to responsibility. This is a fundamentally different emotional register.",
+    "Jim's visual comedy (earthworm in robot suit) creates a tonal framework where absurdity is expected. The level design leans into this: enemies include Evil Queen Slug-For-A-Butt, Professor Monkey-For-A-Head, and Bob the Killer Goldfish. Design and tone are unified."
+  ]
+}

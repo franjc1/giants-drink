@@ -1,0 +1,123 @@
+{
+  "game_id": "magmax-nes",
+  "game_name": "Mag Max",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "onscreen obstacles and enemy fire in 3D field",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "enemy_presence",
+      "visual_form": "hostile entities appearing during horizontal scroll",
+      "meaning": "combat engagement required or avoidance necessary"
+    },
+    {
+      "signal": "boss_encounter",
+      "visual_form": "three-headed mechanical dragon (Babylon)",
+      "meaning": "major threat requiring sustained engagement; progression gate"
+    },
+    {
+      "signal": "environmental_obstacles",
+      "visual_form": "scrolling terrain and barriers in 3D field",
+      "meaning": "navigation hazard during pre-transformation phase"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "robot_transformation",
+      "visual_form": "spaceship converts into giant robot form",
+      "meaning": "power increase and state change; reduced vulnerability through enhanced mobility"
+    },
+    {
+      "signal": "successful_construction",
+      "visual_form": "ship components fully assembled into robot",
+      "meaning": "progression milestone; world state transition to mechanized combat mode"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_entity",
+      "color_identity": null,
+      "symbol_or_sigil": "spaceship/giant robot hybrid",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player-controlled construct occupies center screen during horizontal scroll"
+    },
+    {
+      "faction": "hostile_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "generic enemy ships and Babylon (mecha-dragon)",
+      "enemy_visual_variants": "various enemy types attempting to stop ship construction",
+      "environmental_markers": "distributed across scrolling battlefield"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "pre_transformation",
+      "visual_manifestation": "spaceship configuration with partial assembly; 3D field perspective during scroll",
+      "behavioral_manifestation": "reduced mobility; avoidance-focused gameplay; ship must complete construction while dodging obstacles"
+    },
+    {
+      "world_state": "post_transformation",
+      "visual_manifestation": "fully assembled giant robot form replaces spaceship visually",
+      "behavioral_manifestation": "increased mobility; gameplay shifts to typical horizontal scrolling shooter mechanics; offensive capability enhanced"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "Babylon three-headed mechanical dragon dominates screen space",
+      "behavioral_manifestation": "combat intensity escalates; player must sustain damage output against resilient enemy; progression requires victory"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "mechanical_progression_narrative",
+      "example": "spaceship assembly into giant robot signals technological/military escalation; visual transformation communicates power fantasy and narrative progression"
+    },
+    {
+      "technique": "boss_design_reference",
+      "example": "Babylon's resemblance to Mecha-King Ghidorah establishes tone as sci-fi/mecha; signals player confronting massive mechanical threat"
+    },
+    {
+      "technique": "scrolling_field_geography",
+      "example": "3D field during scroll establishes spatial depth; obstacle placement communicates level design difficulty and environmental hazards"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_spaceship",
+      "state": "pre_transformation",
+      "behavior": "cautious movement; prioritizes obstacle avoidance; limited offensive capability"
+    },
+    {
+      "entity": "player_spaceship",
+      "state": "post_transformation",
+      "behavior": "increased speed and maneuverability; offensive-focused; sustained horizontal scroll engagement"
+    },
+    {
+      "entity": "enemy_forces",
+      "state": "active",
+      "behavior": "attack patterns designed to interrupt ship construction; projectile fire and movement obstruction"
+    },
+    {
+      "entity": "Babylon_boss",
+      "state": "encounter",
+      "behavior": "sustained threat requiring prolonged engagement; three-headed design suggests multiple attack vectors and resilience"
+    }
+  ],
+  "notes": "MagMax communicates world-state primarily through mechanical transformation (spaceship → robot) as visual/behavioral inflection point. The two-phase gameplay structure (construction/evasion vs. robot/combat) is signaled through entity form change rather than environmental recoloring or faction symbols. Danger is conveyed through obstacle density and enemy presence in scrolling field. Safety emerges from successful transformation, indicating progression and power gain. Limited faction identity differentiation; conflict is player vs. generic hostile force rather than faction-vs-faction. Babylon boss design (Ghidorah homage) establishes boss-encounter danger through iconic mecha imagery.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:13:31.703Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2806,
+    "output_tokens": 1286,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

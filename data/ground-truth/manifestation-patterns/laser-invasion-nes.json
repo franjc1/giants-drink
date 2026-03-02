@@ -1,0 +1,248 @@
+{
+  "game_id": "laser-invasion-nes",
+  "game_name": "Laser Invasion",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Danger lamp activation",
+      "visual_form": "Warning light indicator on helicopter cockpit display",
+      "meaning": "Enemy aircraft approaching from behind; immediate threat to helicopter"
+    },
+    {
+      "signal": "Damage indicator degradation",
+      "visual_form": "Cockpit display showing damage condition decreasing",
+      "meaning": "Helicopter structural integrity compromised; loss imminent if not repaired"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Fuel gauge on cockpit display dropping toward empty",
+      "meaning": "Helicopter will crash if fuel reaches zero; mission failure state"
+    },
+    {
+      "signal": "Enemy missile trajectory",
+      "visual_form": "Incoming projectile visible on flight-path viewport",
+      "meaning": "Direct threat requiring evasion or chaff countermeasure"
+    },
+    {
+      "signal": "Defense walls proximity warning",
+      "visual_form": "On-screen text alert ('DEFENSE WALL' or equivalent localized text)",
+      "meaning": "Environmental hazard approaching; collision will damage helicopter"
+    },
+    {
+      "signal": "Enemy soldier emergence",
+      "visual_form": "Hostile figures appearing on-screen during ground infiltration segments",
+      "meaning": "Direct combat threat; player health depletes on contact"
+    },
+    {
+      "signal": "Health depletion bar",
+      "visual_form": "Bottom-screen health indicator during gun-shooting mode",
+      "meaning": "Player character taking damage; life loss imminent if bar empties"
+    },
+    {
+      "signal": "Ammunition scarcity",
+      "visual_form": "Ammunition counter at bottom of screen showing low rounds",
+      "meaning": "Depleted offensive capability; inability to eliminate threats"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Allied heliport landing",
+      "visual_form": "Designated heliport structure visible on flight-path viewport with distinct landing marker",
+      "meaning": "Safe zone; helicopter repairs, refueling, and equipment change available"
+    },
+    {
+      "signal": "Successful helicopter hover/alignment",
+      "visual_form": "Gun sight centered on heliport landing spot; helicopter velocity reduced to zero",
+      "meaning": "Stable landing approach; safe descent possible"
+    },
+    {
+      "signal": "Chaff grenade activation",
+      "visual_form": "Visual effect or indicator showing chaff deployment",
+      "meaning": "Temporary invulnerability to missile attacks; brief safety window"
+    },
+    {
+      "signal": "Power-up item collection",
+      "visual_form": "Glowing or distinctly colored items appearing from weapon crates during infiltration",
+      "meaning": "Health or ammunition restoration; increased survivability"
+    },
+    {
+      "signal": "Oil drum destruction",
+      "visual_form": "Destructible environmental object that explodes when shot",
+      "meaning": "Eliminates all on-screen enemies simultaneously; clears immediate threat"
+    },
+    {
+      "signal": "Allied NPC presence (Spider)",
+      "visual_form": "Character model appearing in maze/infiltration segments",
+      "meaning": "Mission-critical ally; provides intelligence and strategic information"
+    },
+    {
+      "signal": "Wide Area Radar clarity",
+      "visual_form": "Radar display showing minimal enemy contacts relative to player position",
+      "meaning": "Current flight corridor has reduced hostile density; relative safety"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player military force",
+      "color_identity": null,
+      "symbol_or_sigil": "Apache helicopter (AH-64) and military insignia",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Home heliport (allied base); allied heliports throughout mission areas marked for safe landing and resupply"
+    },
+    {
+      "faction": "Hostile enemy nation",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy soldier uniforms and hostile military installations",
+      "enemy_visual_variants": "Multiple enemy soldier types (machine gun operators, turret positions); varying equipment and positioning strategies",
+      "environmental_markers": "Enemy heliports (infiltration objectives); enemy base interior corridors and detention facilities; defense walls; fortified positions"
+    },
+    {
+      "faction": "Special operations ally",
+      "color_identity": null,
+      "symbol_or_sigil": "Character 'Spider' - covert agent codenamed designation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spider appears in maze/base interior segments; rescued from enemy captivity within base structure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission preparation",
+      "visual_manifestation": "Mission briefing screen with commanding officer providing tactical overview; options menu displaying equipment choices (missile types, optional gear)",
+      "behavioral_manifestation": "Player selects ordnance configuration (40 small/20 medium/10 large missiles) and chooses supplementary equipment (fuel, chaff, ground missiles) before departure"
+    },
+    {
+      "world_state": "Active hostile airspace transit",
+      "visual_manifestation": "Helicopter cockpit view with gun sight overlay; immediate range radar showing approaching enemies; wide area radar indicating heliport and target positions; danger lamp illuminating when threats approach from rear",
+      "behavioral_manifestation": "Helicopter maintains forward momentum; player must navigate between heliports while managing fuel and damage; enemies attack with missiles requiring evasion or chaff deployment"
+    },
+    {
+      "world_state": "Ground infiltration underway",
+      "visual_manifestation": "Transition from helicopter cockpit to first-person ground view; automatically scrolling screen showing enemy soldiers and environmental hazards; health bar and ammunition counter at screen bottom",
+      "behavioral_manifestation": "Player character advances through enemy base perimeter on foot; must eliminate all hostile soldiers appearing on-screen; collects power-ups from weapon crates"
+    },
+    {
+      "world_state": "Base interior reconnaissance/objective completion",
+      "visual_manifestation": "First-person maze exploration view showing corridor interiors; items visible in environment (rations, ammunition, vital intelligence objects); ally NPC may appear",
+      "behavioral_manifestation": "Player navigates three-dimensional base structure seeking objective items and intelligence; avoids traps; may encounter Spider providing mission-critical information"
+    },
+    {
+      "world_state": "Helicopter damaged/compromised",
+      "visual_manifestation": "Damage indicator on cockpit display showing degraded condition; visual effects on viewport showing helicopter strain; danger lamp frequently activating",
+      "behavioral_manifestation": "Helicopter responsiveness decreases; player must reach allied heliport for repairs or continue mission with reduced defensive capability"
+    },
+    {
+      "world_state": "Fuel critical",
+      "visual_manifestation": "Fuel gauge on cockpit display approaching empty; red warning coloration on fuel indicator",
+      "behavioral_manifestation": "Player must immediately navigate to allied heliport for refueling or helicopter will crash, ending mission"
+    },
+    {
+      "world_state": "Mission objective secured",
+      "visual_manifestation": "Clear screen displaying mission success message; mission helmet icon; regional variants show password (Japanese) or no password (US version)",
+      "behavioral_manifestation": "Level progression occurs; player advances to next mission with optional continue feature if lives depleted"
+    },
+    {
+      "world_state": "All lives exhausted",
+      "visual_manifestation": "Game over state with continue prompt; player shown number of remaining continues (up to 5 in NES version, 3 in Famicom version)",
+      "behavioral_manifestation": "NES version forces restart of current mission; Famicom version restarts from last checkpoint; score resets to zero"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cockpit instrumentation narrative",
+      "example": "Helicopter dashboard displays (wide area radar, immediate range radar, fuel, damage, ammunition counters, danger lamp) communicate operational status and strategic information simultaneously; military readout aesthetic reinforces military simulation tone"
+    },
+    {
+      "technique": "Heliport type differentiation",
+      "example": "Allied heliports visually distinct from enemy heliports; landing at allied bases triggers repair/refuel/equipment change sequences; landing at enemy bases forces immediate dismount and ground infiltration"
+    },
+    {
+      "technique": "Interior base architecture",
+      "example": "Maze-mode corridor design shows detention/containment facilities where Spider is held; ration/ammunition crate placement suggests military supply infrastructure"
+    },
+    {
+      "technique": "Damage visualization progression",
+      "example": "Helicopter damage indicator provides continuous feedback on structural integrity; visual degradation signals approaching failure state without explicit text warning"
+    },
+    {
+      "technique": "Enemy soldier variety",
+      "example": "Multiple enemy types (machine gunners, turret operators) with different equipment suggest escalating defensive postures within base; positioning near objectives indicates priority threat assessment"
+    },
+    {
+      "technique": "Defense wall warnings",
+      "example": "Localized on-screen text alert ('DEFENSE WALL' in US, regional equivalent in Japanese) warns of environmental hazard; placement at stage endings suggests fortified base perimeters"
+    },
+    {
+      "technique": "Power-up concealment",
+      "example": "Ammunition and health items hidden in weapon crates; discovery requires active exploration; crate placement near high-threat areas suggests military storage protocols"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player helicopter",
+      "state": "Normal operational status",
+      "behavior": "Maintains forward flight velocity; responds to pilot control input for speed adjustment, missile/cannon selection, equipment deployment"
+    },
+    {
+      "entity": "Player helicopter",
+      "state": "Approaching landing zone",
+      "behavior": "Velocity must reduce to zero; must achieve hover state; must align gun sight with heliport landing marker; must account for wind conditions during descent"
+    },
+    {
+      "entity": "Player helicopter",
+      "state": "Under missile attack",
+      "behavior": "Can deploy chaff grenades for brief invulnerability window; danger lamp activates as audio-visual warning; helicopter takes damage if struck directly"
+    },
+    {
+      "entity": "Enemy aircraft",
+      "state": "Patrol/intercept",
+      "behavior": "Approaches helicopter from rear; triggers danger lamp warning; fires missiles requiring evasion; appears on immediate range radar before visual contact"
+    },
+    {
+      "entity": "Enemy soldier (ground infiltration)",
+      "state": "Alert/combat",
+      "behavior": "Appears on-screen during automatic scrolling segments; fires weapons at player; requires elimination via player gunfire; takes variable hits to destroy (1 HP in Famicom, 2 HP in NES version for machine gunners)"
+    },
+    {
+      "entity": "Enemy turret",
+      "state": "Active defense",
+      "behavior": "Stationary position on screen; fires projectiles at player; requires multiple hits to destroy (2 HP in Famicom, 5 HP in NES version); can be destroyed to clear threat area"
+    },
+    {
+      "entity": "Oil drum",
+      "state": "Undestroyed",
+      "behavior": "Environmental destructible object; appears on screen during ground infiltration; can be shot by player"
+    },
+    {
+      "entity": "Oil drum",
+      "state": "Destroyed",
+      "behavior": "Explodes with area-of-effect damage; eliminates all on-screen enemies simultaneously; provides tactical advantage in crowded combat scenarios"
+    },
+    {
+      "entity": "Ally NPC (Spider)",
+      "state": "Encountered in base interior",
+      "behavior": "Provides mission-critical intelligence and strategic information; appears in maze-mode segments; signals mission progression"
+    },
+    {
+      "entity": "Defense wall",
+      "state": "Approaching helicopter flightpath",
+      "behavior": "Warns player with on-screen text alert; collision causes helicopter damage; indicates fortified base perimeter boundaries"
+    }
+  ],
+  "notes": "Laser Invasion communicates world-state primarily through dual-layer visualization: helicopter cockpit instrumentation (upper-screen tactical overlay) during flight phases provides continuous strategic feedback (radar, damage, fuel), while ground infiltration uses first-person perspective with automatic scrolling to emphasize forward momentum and time pressure. The game's three-mode structure (helicopter/gunplay/maze) transitions through visual paradigm shifts that signal narrative progression. Regional differences (Japan vs. US versions) affect difficulty through enemy HP scaling and continue mechanics, but do not substantially alter manifestation layer design. The military simulation aesthetic is consistently reinforced through technical instrumentation language, hierarchical threat visualization (danger lamp, radar proximity), and objective-based mission structure. Anti-piracy implementation (CHR bank verification) is transparent to player experience and does not affect visual communication systems documented here.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:52:44.064Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4567,
+    "output_tokens": 3239,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

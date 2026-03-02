@@ -1,0 +1,214 @@
+{
+  "_meta": {
+    "game": "Sonic the Hedgehog 3 & Knuckles",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Sega",
+    "developer": "Sega Technical Institute / Sonic Team",
+    "sources": [
+      {
+        "name": "Sonic Physics Guide (SPG) — Jumping",
+        "url": "https://info.sonicretro.org/SPG:Jumping",
+        "notes": "Jump force values: Sonic/Tails 6.5 px/f (1664 sub-px), Knuckles 6.0 px/f. Gravity 0.21875 px/f². Variable height: release caps Y at -4. SPG treats S1-S3K as unified physics."
+      },
+      {
+        "name": "Sonic Physics Guide (SPG) — Running",
+        "url": "https://info.sonicretro.org/SPG:Running",
+        "notes": "Core running constants confirmed identical to Sonic 1 and 2."
+      },
+      {
+        "name": "Sonic Retro SPG — Characters",
+        "url": "https://info.sonicretro.org/Sonic_Physics_Guide",
+        "notes": "Character-specific mechanics: Knuckles glide, Tails flight, Sonic insta-shield."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "Sonic 3 & Knuckles is the combined locked-on version of Sonic 3 (1994) and Sonic & Knuckles (1994).",
+      "Core physics engine is IDENTICAL to Sonic 1 and 2 (same acc/dec/friction/top_speed/gravity/jump constants).",
+      "Key additions over Sonic 2: Knuckles as fully playable character with glide and wall climb, improved Tails flight, Insta-Shield for Sonic, Super/Hyper forms.",
+      "Knuckles has a lower jump force (6.0 px/f vs 6.5) compensated by glide.",
+      "All 256-subpixel hex values are inherited from Sonic 1 documentation (SPG unified)."
+    ],
+    "release_note": "Sonic 3 (Feb 1994) and Sonic & Knuckles (Oct 1994) are separate cartridges. The 'Lock-On Technology' connects them into S3&K — a single unified game with all zones and all characters. This entry documents the combined S3&K form."
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point",
+      "description": "Identical to Sonic 1 and 2."
+    },
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "_source_note": "All core constants identical to Sonic 1 and 2.",
+    "acceleration": {
+      "hex": "0x000C",
+      "px_per_frame_sq": 0.046875,
+      "source": "SPG:Running",
+      "confidence": "high"
+    },
+    "deceleration": {
+      "hex": "0x0080",
+      "px_per_frame_sq": 0.5,
+      "source": "SPG:Running",
+      "confidence": "high"
+    },
+    "friction": {
+      "hex": "0x0018",
+      "px_per_frame_sq": 0.046875,
+      "source": "SPG:Running",
+      "confidence": "high"
+    },
+    "top_speed": {
+      "hex": "0x0600",
+      "px_per_frame": 6.0,
+      "source": "SPG:Running",
+      "confidence": "high"
+    }
+  },
+
+  "spin_dash": {
+    "available": true,
+    "inherited_from": "Sonic 2",
+    "notes": "Spin Dash mechanics unchanged from Sonic 2."
+  },
+
+  "jump": {
+    "sonic_and_tails": {
+      "jump_force_hex": "0x0680",
+      "jump_force_px_per_frame": 6.5,
+      "source": "SPG:Jumping",
+      "confidence": "high"
+    },
+    "knuckles": {
+      "jump_force_hex": "0x0600",
+      "jump_force_px_per_frame": 6.0,
+      "source": "SPG:Jumping",
+      "confidence": "high",
+      "notes": "Knuckles jumps slightly lower than Sonic. Compensated by glide and wall climb."
+    },
+    "variable_jump_cap": {
+      "y_speed_cap_on_release": -4.0,
+      "unit": "px/frame",
+      "source": "SPG:Jumping",
+      "confidence": "high"
+    }
+  },
+
+  "gravity": {
+    "hex": "0x0038",
+    "px_per_frame_sq": 0.21875,
+    "source": "SPG:Jumping",
+    "confidence": "high"
+  },
+
+  "air_drag": {
+    "condition": "Y Speed < 0 (ascending) AND |X Speed| > 0.125",
+    "formula": "X Speed -= (X Speed / 0.125) / 256",
+    "source": "SPG",
+    "confidence": "high"
+  },
+
+  "characters": {
+    "sonic": {
+      "jump_force_px_per_frame": 6.5,
+      "unique_mechanics": {
+        "insta_shield": {
+          "description": "Press jump while airborne to create a brief invincible shield flash that expands Sonic's hitbox.",
+          "notes": [
+            "Insta-Shield is NEW in Sonic 3 — not in Sonic 1 or 2.",
+            "Destroys certain enemies and deflects projectiles on activation.",
+            "Resets after landing — one use per jump.",
+            "Changes approach to aerial combat: players can press jump mid-air offensively."
+          ]
+        },
+        "super_sonic": {
+          "requires": "7 Chaos Emeralds + 50 rings",
+          "speed_multiplier_approx": 2.0,
+          "notes": "Same mechanics as Sonic 2 Super Sonic."
+        },
+        "hyper_sonic": {
+          "requires": "7 Super Emeralds (upgraded Chaos Emeralds) + 50 rings",
+          "availability": "S3&K locked-on version only",
+          "notes": "Hyper Sonic: even faster than Super Sonic, leaves afterimage, Insta-Shield becomes a full-screen flash that destroys all on-screen enemies."
+        }
+      }
+    },
+    "tails": {
+      "jump_force_px_per_frame": 6.5,
+      "unique_mechanics": {
+        "flight": {
+          "description": "Tails can fly by pressing jump while airborne. Twin tails spin to generate lift.",
+          "duration_approx_frames": 480,
+          "confidence": "medium",
+          "notes": "In S3&K, Tails has extended flight duration compared to Sonic 2. Can fly indefinitely until he gets tired, then slowly descends."
+        },
+        "super_tails": {
+          "requires": "7 Chaos Emeralds + 50 rings",
+          "notes": "Super Tails is invincible. Uniquely, Super Tails has Flicky bird helpers that automatically defeat nearby enemies."
+        },
+        "hyper_tails": {
+          "requires": "7 Super Emeralds",
+          "notes": "Hyper Tails: same as Super Tails but with more Flicky companions."
+        }
+      }
+    },
+    "knuckles": {
+      "jump_force_px_per_frame": 6.0,
+      "unique_mechanics": {
+        "glide": {
+          "description": "Press jump while airborne to initiate a glide. Knuckles descends slowly while maintaining horizontal speed.",
+          "horizontal_speed_during_glide": "maintains speed from before glide activation",
+          "descent_rate_approx_px_per_frame": 0.5,
+          "confidence": "medium",
+          "notes": [
+            "Glide allows crossing very large horizontal gaps — Knuckles can cover more horizontal distance than any other character on a single jump.",
+            "Can be steered left/right during glide.",
+            "Landing from glide at high speed causes Knuckles to stumble briefly.",
+            "Glide replaces the Insta-Shield (Knuckles cannot use Insta-Shield)."
+          ]
+        },
+        "wall_climb": {
+          "description": "Knuckles can grab vertical walls and climb them by pressing up. Also slides down walls slowly without input.",
+          "climb_speed_px_per_frame_approx": 1.5,
+          "slide_speed_px_per_frame_approx": 0.5,
+          "confidence": "medium",
+          "notes": [
+            "Wall climb gives Knuckles access to areas completely inaccessible to Sonic or Tails.",
+            "The combination of low jump + glide + wall climb gives Knuckles a distinct movement vocabulary: horizontal first, vertical second.",
+            "Knuckles' route through stages is intentionally different from Sonic's — same geometry, different traversal."
+          ]
+        },
+        "punch": {
+          "description": "Knuckles can punch forward to attack and break certain blocks.",
+          "notes": "Punch replaces Sonic's homing attack (not yet in S3K — introduced later in SA1)."
+        },
+        "super_knuckles": {
+          "requires": "7 Chaos Emeralds",
+          "notes": "Pink Super Knuckles — same speed boost and invincibility pattern."
+        },
+        "hyper_knuckles": {
+          "requires": "7 Super Emeralds",
+          "notes": "Hyper Knuckles: glide slam creates a screen flash and earthquake effect."
+        }
+      }
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The three-character system in S3&K (Sonic, Tails, Knuckles) is the clearest example of 'same level geometry, radically different traversal.' Knuckles' route through every stage is specifically designed for his glide+climb combination. This is a masterclass in level reuse through movement vocabulary differences.",
+    "Knuckles' lower jump (6.0 vs 6.5) + glide + wall climb creates a horizontal-biased movement style. He trades vertical reach for horizontal range. Level design for Knuckles should have wide gaps, climbable walls, and areas accessible only from the sides.",
+    "Sonic's Insta-Shield adds an aggressive aerial dimension. Sonic players in S3K develop a jumping offense — pressing jump at enemy hitboxes is now a viable attack, not just accidental.",
+    "The Super/Hyper forms introduce a power scaling that turns the endgame into a different game. Collecting the emeralds is a meta-challenge that rewards thorough players with a mode where the normal challenge becomes trivial.",
+    "S3&K's level design is the most complex in the classic Genesis series — zones have three branching routes (upper/mid/lower) that separate based on the character's movement capabilities. This zone architecture is the gold standard for 'depth through movement.'"
+  ]
+}

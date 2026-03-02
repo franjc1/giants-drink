@@ -1,0 +1,144 @@
+{
+  "game_id": "alpha-mission-nes",
+  "game_name": "Alpha Mission",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_waves",
+      "visual_form": "formations of enemy aircraft and ground installations moving toward player",
+      "meaning": "active combat threat; progression through level stages"
+    },
+    {
+      "signal": "boss_entity_appearance",
+      "visual_form": "larger, distinct enemy unit at level conclusion",
+      "meaning": "critical danger checkpoint; must be defeated to progress"
+    },
+    {
+      "signal": "weapon_loss_on_death",
+      "visual_form": "player craft reverts to base weapon set after hit",
+      "meaning": "vulnerability state; temporary power reduction after damage"
+    },
+    {
+      "signal": "ground_installations",
+      "visual_form": "stationary defensive structures on terrain below",
+      "meaning": "area-denial hazards requiring ground-targeted missiles"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "power_up_pickups",
+      "visual_form": "collectible items scattered throughout level",
+      "meaning": "weapon upgrade availability; temporary safety enhancement"
+    },
+    {
+      "signal": "space_station_targets",
+      "visual_form": "designated structures to protect within level space",
+      "meaning": "safe zone objectives; mission-critical assets"
+    },
+    {
+      "signal": "respawn_point",
+      "visual_form": "player repositioned slightly before death point",
+      "meaning": "second-chance mechanic; progression recovery"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "single player-controlled aircraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "space stations designated for protection"
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "wave formations of distinct enemy aircraft types",
+      "enemy_visual_variants": "aerial opponents vs ground-based installations",
+      "environmental_markers": "terrain-based defensive structures and installations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "level_progression",
+      "visual_manifestation": "scrolling environment revealing new enemy formations and space station positions",
+      "behavioral_manifestation": "wave-based enemy spawning intensifies; boss appears at level conclusion"
+    },
+    {
+      "world_state": "player_vulnerability",
+      "visual_manifestation": "weapon downgrade to base laser/missile when hit; craft appears in reduced power state",
+      "behavioral_manifestation": "reduced offensive capability until power-ups collected"
+    },
+    {
+      "world_state": "armed_combat_active",
+      "visual_manifestation": "enemy aircraft formations visible on screen; ground defenses active",
+      "behavioral_manifestation": "enemies move in coordinated patterns; projectiles fired at player; space stations under threat"
+    },
+    {
+      "world_state": "power_augmentation",
+      "visual_manifestation": "power-up items appear in environment; visual weapon enhancement on collection",
+      "behavioral_manifestation": "player craft gains upgraded weapons (stronger missiles, enhanced lasers)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "spatial_layout_threat_assessment",
+      "example": "space stations positioned in vulnerable locations indicate where player must defend; their placement signals level difficulty zones"
+    },
+    {
+      "technique": "enemy_type_distribution",
+      "example": "air-to-air enemies indicate aerial combat zone; ground installations below indicate need for missile weaponry—environmental design communicates tactical requirements"
+    },
+    {
+      "technique": "vertical_scrolling_progression",
+      "example": "continuous upward scroll reveals new threats, establishing temporal progression and spatial scope of conflict across multiple defensive positions"
+    },
+    {
+      "technique": "boss_as_climax_marker",
+      "example": "larger, distinct enemy unit at level end visually signals mission culmination and highest danger point"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_aircraft",
+      "state": "powered_up",
+      "behavior": "fires enhanced missiles and lasers; improved offensive capability visible in weapon projectile patterns"
+    },
+    {
+      "entity": "player_aircraft",
+      "state": "damaged_vulnerable",
+      "behavior": "reverts to base weapon loadout; slower/weaker fire pattern; repositioned to earlier level point"
+    },
+    {
+      "entity": "enemy_aircraft",
+      "state": "active_combat",
+      "behavior": "moves in coordinated wave formations; fires projectiles at player; advances toward space stations"
+    },
+    {
+      "entity": "ground_installation",
+      "state": "defending",
+      "behavior": "stationary; fires at approaching player; requires ground-targeted weaponry to destroy"
+    },
+    {
+      "entity": "boss_enemy",
+      "state": "final_threat",
+      "behavior": "distinct movement pattern; sustained offensive fire; requires multiple hits to defeat; signals level completion upon destruction"
+    }
+  ],
+  "notes": "Alpha Mission (ASO: Armored Scrum Object in Japan) is a vertically scrolling shooter with clear air-to-air/air-to-ground weapon segregation. Visual communication relies heavily on enemy type differentiation (aerial vs. ground-based), power-up visibility, and boss distinctiveness. The game uses spatial positioning and wave patterns to communicate threat escalation. Limited documentary evidence exists on specific color coding or faction symbology; communication appears primarily through entity type, positioning, and behavioral manifestation rather than faction coloration.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:10:39.257Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4158,
+    "output_tokens": 1464,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

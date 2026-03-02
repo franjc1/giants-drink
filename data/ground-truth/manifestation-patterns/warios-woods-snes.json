@@ -1,0 +1,144 @@
+{
+  "game_id": "warios-woods-snes",
+  "game_name": "Wario's Woods",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "playfield overflow",
+      "visual_form": "game pieces accumulating toward top of screen, eventually trapping Toad",
+      "meaning": "imminent failure/game over state — player has insufficient time to clear field"
+    },
+    {
+      "signal": "Thwomp descent",
+      "visual_form": "ceiling-disguised Thwomp descending rows, compressing play space",
+      "meaning": "increasing difficulty and spatial pressure — play field becoming more constrained"
+    },
+    {
+      "signal": "monster accumulation",
+      "visual_form": "increasing number and density of colored monsters in play field across rounds",
+      "meaning": "escalating challenge intensity — progression to harder levels"
+    },
+    {
+      "signal": "enemy presence (monsters)",
+      "visual_form": "colored monster sprites scattered throughout play field",
+      "meaning": "objects requiring destruction; obstacles to clearing the level"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "bomb availability",
+      "visual_form": "colored bombs falling from top of screen, sprite dropping them into field",
+      "meaning": "player has tools to make matches and destroy monsters — agency and progress"
+    },
+    {
+      "signal": "cleared play field",
+      "visual_form": "empty or nearly empty game grid",
+      "meaning": "level completion; advancement to next round with increased challenge"
+    },
+    {
+      "signal": "Toad mobility",
+      "visual_form": "player character Toad able to move freely within field, pick up and position objects",
+      "meaning": "player control and manipulation power — ability to rearrange and strategize"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Peaceful Woods sprites/creatures",
+      "color_identity": null,
+      "symbol_or_sigil": "Toad (player character, representative of peaceful faction)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "The 'Peaceful Woods' setting — once a peaceful area for sprites and gentle creatures, now invaded and 'turned upside-down' by Wario's occupation"
+    },
+    {
+      "faction": "Wario's monster army",
+      "color_identity": "color-coded monsters (red, blue, yellow, green variants implied by matching mechanic)",
+      "symbol_or_sigil": "Wario as antagonist/faction leader; diverse monster types (unnamed variants requiring different destruction methods)",
+      "enemy_visual_variants": "different monster types with distinct destruction requirements (e.g., some requiring two matches in succession, others diagonal matches)",
+      "environmental_markers": "monsters invading and dominating the Peaceful Woods; Wario has taken control of the forest"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Peaceful Woods occupied by Wario and monsters",
+      "visual_manifestation": "play field filled with colored monsters representing Wario's invading force",
+      "behavioral_manifestation": "Toad must clear monsters by matching them with bombs to restore peace and return forest to sprites"
+    },
+    {
+      "world_state": "Player progressing through rounds (increasing difficulty)",
+      "visual_manifestation": "initial monster count increases with each round; Thwomp may descend to compress play space",
+      "behavioral_manifestation": "player must work faster and more strategically to clear expanding monster populations"
+    },
+    {
+      "world_state": "Imminent player failure",
+      "visual_manifestation": "play field filling to brim with uncleared objects, Toad becoming trapped",
+      "behavioral_manifestation": "game over; level must be restarted"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "play field cleared of all monsters",
+      "behavioral_manifestation": "advancement to next round; restoration of small portion of forest to peaceful state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "setting invasion narrative",
+      "example": "The Peaceful Woods, once safe for sprites and gentle creatures, has been 'turned upside-down' by Wario's invasion — visual domination of play field by Wario's monsters communicates occupation and displacement"
+    },
+    {
+      "technique": "object-based conflict representation",
+      "example": "Colored monsters and bombs serve as visual proxies for the ideological conflict — player must match bombs with monsters to 'destroy' the invading force and restore peace"
+    },
+    {
+      "technique": "escalation through environmental pressure",
+      "example": "Thwomp descending and monster count increasing across rounds visually communicates the worsening situation — Wario's control tightening, stakes rising"
+    },
+    {
+      "technique": "player character positioning",
+      "example": "Toad physically inside the play field (not manipulating from outside like Tetris) conveys direct, personal engagement in reclaiming the forest — Toad as active resistance to occupation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Toad (player character)",
+      "state": "active/engaged in field",
+      "behavior": "moves within play field, picks up individual objects or stacks, places them elsewhere, kicks objects across field, climbs stacks to reach specific objects — full agency in spatial manipulation"
+    },
+    {
+      "entity": "Monsters (various colored types)",
+      "state": "present in play field",
+      "behavior": "stationary until matched with bombs; different types require specific destruction methods (some requiring rapid successive matches, others diagonal placement) — implies varied threat levels and tactical complexity"
+    },
+    {
+      "entity": "Bombs (colored, matching monsters)",
+      "state": "falling from top, available for placement",
+      "behavior": "fall into field from above via sprite; must be positioned to form matches with three or more objects (at least one bomb) in rows — represent player's tools for progress"
+    },
+    {
+      "entity": "Thwomp",
+      "state": "descending when triggered",
+      "behavior": "moves downward, compressing available play space; disguises itself as ceiling to create surprise pressure — represents environmental hazard/difficulty escalation"
+    },
+    {
+      "entity": "Wario",
+      "state": "antagonist/absent from direct play field",
+      "behavior": "implied presence through monster army and forest occupation; defeated through clearing all monsters in progression — represents meta-antagonist of narrative"
+    }
+  ],
+  "notes": "Wario's Woods uses color-matching puzzle mechanics as a visual language for conflict resolution. The faction divide (Peaceful Woods sprites vs. Wario's monster army) is communicated entirely through play field composition and object types. Danger manifests as spatial constraint (overflow) and increasing density of threats (monsters, Thwomp). Safety/progress manifests as cleared space and bomb availability. The narrative of forest occupation and liberation is thin but conveyed through setting description and objective framing — the gameplay itself *is* the story of resistance. Multiplayer mode ('VS') adds social/competitive dimension where players weaponize matches to stack enemies on opponent's field, extending conflict metaphor to player-vs-player domain.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:40:40.186Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4471,
+    "output_tokens": 1823,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

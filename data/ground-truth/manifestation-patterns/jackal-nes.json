@@ -1,0 +1,158 @@
+{
+  "game_id": "jackal-nes",
+  "game_name": "Jackal",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy vehicles and artillery",
+      "visual_form": "Distinct vehicle sprites with enemy faction markings",
+      "meaning": "Active threats that destroy player jeep on contact or projectile hit"
+    },
+    {
+      "signal": "Enemy foot soldiers",
+      "visual_form": "Small humanoid sprites scattered in terrain",
+      "meaning": "Low-threat obstacles; jeep can run over them but indicate occupied territory"
+    },
+    {
+      "signal": "Fortified gates",
+      "visual_form": "Colored barriers (red in JP version, green in US version) blocking passages",
+      "meaning": "Territorial boundaries; require missile/grenade fire to penetrate"
+    },
+    {
+      "signal": "Missile-spitting statues and fortifications",
+      "visual_form": "NES-exclusive architectural structures with projectile effects",
+      "meaning": "High-priority threats in specific territorial zones"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large enemy vehicles/structures at stage checkpoints (battleship, tank with flamethrower)",
+      "meaning": "Zone culmination threats; guard strategic positions"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Heliport/extraction points",
+      "visual_form": "Landing zone markers awaiting extraction choppers",
+      "meaning": "Safe delivery point for POW cargo; triggers rescue sequence"
+    },
+    {
+      "signal": "Friendly helicopter arrival",
+      "visual_form": "Transport helicopters dropping player jeeps at mission start",
+      "meaning": "Allied insertion point; beginning of safe operational zone"
+    },
+    {
+      "signal": "Prisoner camps",
+      "visual_form": "NES-exclusive structures containing POW groups",
+      "meaning": "Objective locations; rescuing prisoners upgrades jeep capability"
+    },
+    {
+      "signal": "Power-up collectibles",
+      "visual_form": "Upgradeable grenade/missile launcher tiers",
+      "meaning": "Increased capability and survival potential"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player unit (Jackal)",
+      "color_identity": "Green (Player 1 jeep) and Brown (Player 2 jeep, NES version only)",
+      "symbol_or_sigil": "Numbered jeep hoods (1, 2) indicating player control; US version uses yellow/blue flags replaced by U.S. flags in Top Gunner arcade variant",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Allied helicopter insertion points; heliport extraction zones; POW camps await rescue"
+    },
+    {
+      "faction": "Enemy forces (hostile territory occupiers)",
+      "color_identity": "Distinct from player jeeps; Vietnamese flags adorned enemy camps in Top Gunner arcade variant",
+      "symbol_or_sigil": "Enemy vehicle markings; fortified gate colorization (red JP / green US) signals territorial control",
+      "enemy_visual_variants": "Multiple vehicle types (tanks, artillery), statues, battleship, flamethrower-equipped tank final boss",
+      "environmental_markers": "Internment camps, fortified positions, headquarters base, gates blocking passage"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Enemy territory occupation",
+      "visual_manifestation": "Gates, fortifications, enemy vehicles, camps positioned throughout level progression; color-coded barriers (red/green) mark territorial boundaries",
+      "behavioral_manifestation": "Enemy patrols and stationary turrets actively engage player; prisoners remain confined in camps waiting extraction"
+    },
+    {
+      "world_state": "Mission progression/player advance",
+      "visual_manifestation": "NES version shows checkpoint structure (Alpha, Baker, Charlie, Delta, Tango, Zulu); final base changed from red to brownish in US version, indicating shift toward enemy command center",
+      "behavioral_manifestation": "Map screen displays jeep progress through territory; background music changes further into mission; boss difficulty escalates"
+    },
+    {
+      "world_state": "POW rescue success",
+      "visual_manifestation": "Prisoners freed from camps; extraction helicopter arrives at heliport when jeep reaches capacity (up to 8 POWs in NES version)",
+      "behavioral_manifestation": "Successful extraction grants sustained missile launcher upgrades; visual end-screen variation (three tier system in NES) reflects powerup collection efficiency"
+    },
+    {
+      "world_state": "Jeep destruction/mission setback",
+      "visual_manifestation": "Replacement jeep appears; if carrying POWs, survivors spread visually from wreckage location",
+      "behavioral_manifestation": "Missile launcher downgrades to initial grenade launcher (NES-specific change from arcade); jeep must be resupplied before continuing"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Territorial escalation through geography",
+      "example": "Level progression moves through distinct biomes (jungle, water, hills, mountain, ancient ruins) toward enemy headquarters; each zone guards specific strategic assets"
+    },
+    {
+      "technique": "Fortification density as danger indicator",
+      "example": "Final level expanded more than doubled in length (US version); increased gate count, added jets in background, and new prisoner camps signal proximity to command center"
+    },
+    {
+      "technique": "POW camp placement as mission objective markers",
+      "example": "Solitary camps positioned throughout levels; rescuing prisoners from camps directly upgrades jeep missile launcher, mechanically rewarding exploration"
+    },
+    {
+      "technique": "Boss architecture as faction power projection",
+      "example": "NES-exclusive bosses (battleship, flamethrower tank) demonstrate enemy military capability; final boss flamethrower-equipped tank showcases ultimate weapon development"
+    },
+    {
+      "technique": "Helicopter delivery/extraction ritual",
+      "example": "Mission opens with transport helicopter dropping player jeeps into coast; mission structure cycles between POW rescue in camps and extraction chopper retrieval, establishing supply-line narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy foot soldiers",
+      "state": "Occupied territory patrol",
+      "behavior": "Scattered throughout terrain; can be run over without damage to jeep; indicate garrison presence"
+    },
+    {
+      "entity": "Enemy vehicles and artillery",
+      "state": "Active defense",
+      "behavior": "Fire projectiles at player; destroy jeep on collision; positioned at strategic chokepoints and camp perimeters"
+    },
+    {
+      "entity": "Prisoners of war",
+      "state": "Confined in camps",
+      "behavior": "Stationary until jeep approaches; once rescued, must be transported to heliport; if jeep destroyed, scatter from wreckage and wait for re-pickup"
+    },
+    {
+      "entity": "Boss structures (battleship, flamethrower tank)",
+      "state": "Zone guardian",
+      "behavior": "Appear at stage checkpoints; fire multiple projectiles/flames; require sustained missile/grenade fire or sustained machine gun fire (flamethrower tank weakness) to destroy"
+    },
+    {
+      "entity": "Extraction helicopter",
+      "state": "Awaiting POW delivery",
+      "behavior": "Arrives at heliport when jeep reaches it with prisoners; triggers successful rescue sequence; awards points for consecutive extractions"
+    }
+  ],
+  "notes": "Jackal uses jeep vehicle color-coding and gate coloration as primary faction/territorial signals. The NES version's expansion from vertical (arcade) to horizontal scrolling and checkpoint structure (Alpha-Zulu) creates stronger territorial segmentation than arcade original. Regional variants (JP red gates vs. US green gates, Japanese version flag removals, Top Gunner US flag substitution) show geopolitical localization: US version emphasizes American intervention narrative through flag imagery and name changes. POW rescue mechanics directly integrate narrative (soldier unit rescuing allies) with mechanical progression (weapon upgrades). Boss escalation and environmental density signal approaching enemy command (final base visual redesign, flamethrower tank as ultimate weapon). Map screen progression displays real-time territorial advance, reinforcing continuous mission narrative across checkpoints.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Jackal NES/FDS regional differences and technical changes)",
+    "wikipedia (Wikipedia Jackal video game - plot, gameplay mechanics, version differences, control schemes)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:09:36.204Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4553,
+    "output_tokens": 2114,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

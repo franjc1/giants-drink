@@ -1,0 +1,138 @@
+{
+  "game_id": "george-foreman-boxing-genesis",
+  "game_name": "George Foreman's KO Boxing",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "opponent_damage_accumulation",
+      "visual_form": "portrait becomes progressively battered and bloody",
+      "meaning": "visual indicator of opponent health state and danger level to player"
+    },
+    {
+      "signal": "player_damage_accumulation",
+      "visual_form": "george_foreman portrait becomes progressively battered and bloody",
+      "meaning": "visual indicator of player health state; increased damage means higher risk of knockout"
+    },
+    {
+      "signal": "knockdown_state",
+      "visual_form": "opponent knocked to canvas, referee begins 10-count",
+      "meaning": "critical danger to opponent; accumulation of knockdowns triggers round/match loss conditions"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "successful_block",
+      "visual_form": "blocking animation plays when player executes defensive maneuver",
+      "meaning": "mitigation of incoming damage; indicates safe defensive positioning"
+    },
+    {
+      "signal": "successful_evasion",
+      "visual_form": "character dodge animation in two directions",
+      "meaning": "avoidance of damage; safe positioning relative to opponent"
+    },
+    {
+      "signal": "clean_punch_landing",
+      "visual_form": "impact animation when player's punch connects",
+      "meaning": "offensive control; player maintaining safe pressure on opponent"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_character",
+      "color_identity": null,
+      "symbol_or_sigil": "george_foreman_likeness",
+      "enemy_visual_variants": null,
+      "environmental_markers": "boxing ring; player occupies left/center position by convention"
+    },
+    {
+      "faction": "opponent",
+      "color_identity": null,
+      "symbol_or_sigil": "individual_boxer_portrait",
+      "enemy_visual_variants": "different opponent portraits per match in career mode",
+      "environmental_markers": "boxing ring; opponent occupies right/center position by convention"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_match_unopened",
+      "visual_manifestation": "both fighters shown in portraits with clean/undamaged appearance",
+      "behavioral_manifestation": "both boxers at full energy; opponent movement patterns normal"
+    },
+    {
+      "world_state": "mid_match_damage_accumulation",
+      "visual_manifestation": "portraits show progressive bruising, swelling, blood; visible damage increases with each round",
+      "behavioral_manifestation": "opponent movement may become erratic; player must manage stamina"
+    },
+    {
+      "world_state": "critical_knockdown_threshold",
+      "visual_manifestation": "severe facial damage on portrait; opponent on canvas during 10-count sequence",
+      "behavioral_manifestation": "opponent immobilized; referee counting; if reaches fourth knockdown or third in single round, match ends"
+    },
+    {
+      "world_state": "match_decision_scenario",
+      "visual_manifestation": "both fighters standing; judge decision screen displays punch statistics, knockdowns, damage metrics",
+      "behavioral_manifestation": "match ends by decision; winner determined by aggregate stats"
+    },
+    {
+      "world_state": "career_progression",
+      "visual_manifestation": "portrait gallery of opponents increases; circuit titles accumulate visually",
+      "behavioral_manifestation": "opponent difficulty escalates; more complex attack patterns; harder to evade"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "portrait_damage_progression",
+      "example": "boxer's face shifts from clean to bruised to heavily battered across rounds, telling story of combat intensity without exposition"
+    },
+    {
+      "technique": "title_belt_acquisition",
+      "example": "career mode structure of uniting three fictional circuit belts creates narrative arc of progression toward undisputed heavyweight championship"
+    },
+    {
+      "technique": "opponent_roster_escalation",
+      "example": "sequence of increasingly tough opponents tells story of rising challenge and player skill acquisition"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "opponent_boxer",
+      "state": "healthy_opening_round",
+      "behavior": "standard attack pattern; predictable punch sequences; normal evasion responses"
+    },
+    {
+      "entity": "opponent_boxer",
+      "state": "damaged_mid_match",
+      "behavior": "movement becomes less predictable; erratic attack timing; defensive patterns weaken"
+    },
+    {
+      "entity": "opponent_boxer",
+      "state": "knockdown_recovered",
+      "behavior": "brief stagger animation before resuming combat; momentary vulnerability window"
+    },
+    {
+      "entity": "player_character_george_foreman",
+      "state": "high_damage_received",
+      "behavior": "limited mobility increases; dodge range may diminish; punch recovery time lengthens"
+    },
+    {
+      "entity": "referee",
+      "state": "knockdown_triggered",
+      "behavior": "enters ring; begins audible/visible 10-count sequence; halts opponent action"
+    }
+  ],
+  "notes": "George Foreman's KO Boxing uses minimal visual language typical of early 1990s Genesis boxing games. The primary manifestation system is the progressive portrait damage mechanic, which communicates world-state through facial injury accumulation rather than elaborate animation. The game lacks faction complexity (single-player vs. opponent structure) and environmental sophistication. World-state communication is almost entirely reliant on: (1) health/portrait damage visualization, (2) knockdown status, (3) victory condition displays (KO/TKO/decision). No faction signaling, color identity, or political narrative exists. The game is mechanically deterministic with limited emergent storytelling—danger and safety are purely mechanical (damage values, knockdown counters) rendered through sprite-based portraiture.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:46:19.895Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3131,
+    "output_tokens": 1536,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "game_id": "fantasy-zone-nes",
+  "game_name": "Fantasy Zone",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy bases",
+      "visual_form": "Stationary structures scattered across levels that must be destroyed",
+      "meaning": "Primary threat targets; player must eliminate all bases to progress and spawn boss"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Unique large enemy entity that appears after all bases destroyed",
+      "meaning": "Stage completion gate; represents escalated danger requiring defeat to advance"
+    },
+    {
+      "signal": "Enemy projectiles and collision",
+      "visual_form": "Incoming fire from bases and enemies during stage navigation",
+      "meaning": "Immediate threat to player ship; avoidance required to maintain lives"
+    },
+    {
+      "signal": "Life loss mechanic",
+      "visual_form": "Death of Opa-Opa ship results in loss of all equipped upgrades",
+      "meaning": "Permanent consequence indicating danger state; forces gear reset on respawn"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Money drops",
+      "visual_form": "Currency items dropped by defeated enemies, bases, and bosses",
+      "meaning": "Resource accumulation signal; indicates opportunity for progression investment"
+    },
+    {
+      "signal": "Shop balloon markers",
+      "visual_form": "Marked balloons that trigger shop access when touched",
+      "meaning": "Safe upgrade opportunity; designated safe zones for equipment exchange"
+    },
+    {
+      "signal": "Weapon and bomb upgrades",
+      "visual_form": "Purchasable equipment modifications in shop interface",
+      "meaning": "Power progression indicators; visible safety buffer through gear enhancement"
+    },
+    {
+      "signal": "Engine speed upgrades",
+      "visual_form": "Permanent flying speed enhancements purchased from shop",
+      "meaning": "Accumulated safety; faster movement reduces vulnerability window"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Opa-Opa (Player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sentient spaceship character design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled entity distinct from all enemy bases and bosses"
+    },
+    {
+      "faction": "Enemy invasion force",
+      "color_identity": null,
+      "symbol_or_sigil": "Bases and boss entities across Fantasy Zone planets",
+      "enemy_visual_variants": "Multiple boss designs per stage; replaced bosses in Master System version indicate faction variation",
+      "environmental_markers": "Bases populate each stage level; visual stage identity determined by boss and base placement patterns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage incomplete (bases remain)",
+      "visual_manifestation": "Bases visible across level; scrolling camera movable left/right; stage loops",
+      "behavioral_manifestation": "Player can navigate freely; no boss present; enemies spawn from bases"
+    },
+    {
+      "world_state": "All bases destroyed",
+      "visual_manifestation": "Boss entity appears on screen",
+      "behavioral_manifestation": "Boss must be defeated to advance; stage progression gate activated"
+    },
+    {
+      "world_state": "Boss defeated",
+      "visual_manifestation": "Boss entity removed; money drops; stage transition occurs",
+      "behavioral_manifestation": "Player advances to next stage; new level layout appears"
+    },
+    {
+      "world_state": "Final stage (boss rush)",
+      "visual_manifestation": "Fixed camera; sequential rematch against all previous bosses before final boss",
+      "behavioral_manifestation": "No base destruction phase; immediate boss succession; escalating challenge state"
+    },
+    {
+      "world_state": "Shop accessed",
+      "visual_manifestation": "Shop interface overlays gameplay; upgrade menu displayed with pricing",
+      "behavioral_manifestation": "Time-limited shopping; prices escalate with each purchase; single equipment type at a time"
+    },
+    {
+      "world_state": "Life lost",
+      "visual_manifestation": "Opa-Opa death animation; respawn occurs",
+      "behavioral_manifestation": "All equipped upgrades permanently lost; player returns to base ship configuration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage progression through planetary bases",
+      "example": "Eight distinct stages represent invasion across Fantasy Zone planet group; each stage has unique base and boss configuration"
+    },
+    {
+      "technique": "Boss design differentiation",
+      "example": "Each stage boss has unique visual design indicating different enemy faction units; boss rush finale shows progression from early to late-game threats"
+    },
+    {
+      "technique": "Upgrade system as narrative progression",
+      "example": "Player must spend earned money to enhance weapons and speed; mechanical progression mirrors survival adaptation to escalating enemy threat"
+    },
+    {
+      "technique": "Consequence visualization through equipment loss",
+      "example": "Permanent upgrade loss on death creates visual stakes; empty shop screen on respawn indicates setback state"
+    },
+    {
+      "technique": "Looping stage layout",
+      "example": "Non-final stages loop horizontally, indicating containment zones within invaded planets; player navigation freedom within constrained space"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Opa-Opa (player ship)",
+      "state": "Normal flight",
+      "behavior": "Can move left/right freely; fires standard weapon; deploys bombs; navigates stage"
+    },
+    {
+      "entity": "Opa-Opa (grounded)",
+      "state": "Landed on ground",
+      "behavior": "Sprouts feet and walks; can re-engage flight; indicates movement mode variation"
+    },
+    {
+      "entity": "Enemy bases",
+      "state": "Active/present",
+      "behavior": "Fire projectiles; indicate stage incompleteness; spawn enemies"
+    },
+    {
+      "entity": "Enemy bases",
+      "state": "Destroyed",
+      "behavior": "Cease firing; drop money; trigger boss appearance when all eliminated"
+    },
+    {
+      "entity": "Stage boss",
+      "state": "Active",
+      "behavior": "Appears only after base destruction; must be defeated to progress; represents stage gatekeeper"
+    },
+    {
+      "entity": "Stage boss",
+      "state": "Defeated",
+      "behavior": "Releases money; stage advances; disappears from level"
+    },
+    {
+      "entity": "Radar (Master System version absent)",
+      "state": "Present (arcade/NES)",
+      "behavior": "Indicates base locations; provides strategic information; reduces uncertainty state"
+    }
+  ],
+  "notes": "Fantasy Zone is a 'cute 'em up' horizontally scrolling shooter with atypical shmup design. Key world-state communication occurs through base presence/absence as stage completion indicator, boss appearance as threat escalation, and equipment loss on death as consequence visualization. The shop system creates safe zones where upgrade state is visually managed. Stage looping in non-final levels suggests contained invasion scenarios. Boss rush finale (stage 8) communicates culmination through sequential rematch mechanic. Limited source documentation on specific visual details; analysis based on gameplay mechanics and structural design patterns described in Wikipedia article.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:11:38.550Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2895,
+    "output_tokens": 1859,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

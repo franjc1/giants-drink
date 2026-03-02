@@ -1,0 +1,249 @@
+{
+  "game_id": "sim-ant-pc",
+  "game_name": "SimAnt: The Electronic Ant Colony",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Red ant presence",
+      "visual_form": "Red-colored enemy ants in colony view and underground tunnels",
+      "meaning": "Active threat faction; direct combat enemy to player's black ant colony"
+    },
+    {
+      "signal": "Human footsteps",
+      "visual_form": "Large descending objects or tremors in yard view",
+      "meaning": "Environmental hazard; uncontrollable destructive force threatening colony"
+    },
+    {
+      "signal": "Bug spray application",
+      "visual_form": "Toxic cloud or spray visual effect in affected areas",
+      "meaning": "Chemical hazard; lethal environmental threat to all ants"
+    },
+    {
+      "signal": "Lawnmower presence",
+      "visual_form": "Large mechanical equipment crossing yard surface",
+      "meaning": "Catastrophic environmental destruction; eliminates surface terrain"
+    },
+    {
+      "signal": "Spider or antlion appearance",
+      "visual_form": "Larger predatory creatures rendered in yard/tunnel views",
+      "meaning": "Predator threat; requires group tactics or avoidance"
+    },
+    {
+      "signal": "Electrical outlet exposure",
+      "visual_form": "Hazard visual marker in underground or surface areas",
+      "meaning": "Environmental electrocution risk; lethal contact hazard"
+    },
+    {
+      "signal": "Rain/flooding",
+      "visual_form": "Water effects cascading through tunnels; pheromone trails disappearing",
+      "meaning": "Communication and navigation disruption; potential drowning hazard"
+    },
+    {
+      "signal": "Yellow ant isolation",
+      "visual_form": "Player-controlled ant separated from colony groups",
+      "meaning": "Vulnerability state; isolated ant at increased combat risk"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Black ant clustering",
+      "visual_form": "Multiple black ants grouped together in same location",
+      "meaning": "Strength in numbers; colony coordination and mutual defense"
+    },
+    {
+      "signal": "Pheromone trail presence",
+      "visual_form": "Visual marking/trail connecting ant locations to resources",
+      "meaning": "Active communication network; safe navigation pathway established"
+    },
+    {
+      "signal": "Food source proximity",
+      "visual_form": "Visible food particles or pheromone trails leading to food",
+      "meaning": "Resource security; colony survival ensured"
+    },
+    {
+      "signal": "Expanded tunnel network",
+      "visual_form": "Complex underground chamber system with multiple passages",
+      "meaning": "Colony establishment; distributed safe havens and growth"
+    },
+    {
+      "signal": "Queen presence in chamber",
+      "visual_form": "Queen ant visible in central breeding chamber",
+      "meaning": "Reproductive capacity; colony continuity and expansion potential"
+    },
+    {
+      "signal": "Enclosed underground chambers",
+      "visual_form": "Side-view depiction of secure underground rooms away from surface",
+      "meaning": "Protected from surface hazards; sheltered breeding and storage areas"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Black Ant Colony (Player)",
+      "color_identity": "Black",
+      "symbol_or_sigil": "Yellow-highlighted ant (player's controlled ant)",
+      "enemy_visual_variants": "Red ant colony serves as primary antagonist faction",
+      "environmental_markers": "Black ant pheromone trails; underground chambers with black ant presence; surface territory marked by black ant activity"
+    },
+    {
+      "faction": "Red Ant Colony (Enemy AI)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Red-colored ants; distinct visual rendering from black ants",
+      "enemy_visual_variants": "Visually distinguished from player ants; appears in SNES scenarios in 'various locales'",
+      "environmental_markers": "Red ant pheromone trails in competing territories; rival underground colonies; territorial control indicators"
+    },
+    {
+      "faction": "Human Occupants (Environmental Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "House structure; suburban home backdrop",
+      "enemy_visual_variants": "Not directly controllable; represented through environmental hazards (footsteps, bug spray, lawnmower)",
+      "environmental_markers": "House interior and exterior; yard boundaries; hazard sources (electrical outlets, pesticide application zones)"
+    },
+    {
+      "faction": "Natural Predators (Environmental Threats)",
+      "color_identity": null,
+      "symbol_or_sigil": "Spider, caterpillar, antlion visual models",
+      "enemy_visual_variants": "Distinct creature types; larger scale than individual ants",
+      "environmental_markers": "Predator dens or locations; patrol paths visible through creature behavior"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early colony establishment (Quick Game start)",
+      "visual_manifestation": "Small patch of yard with minimal black ant presence; sparse underground tunnel network; top-down perspective with clear surface terrain",
+      "behavioral_manifestation": "Ants foraging for initial food sources; establishing first pheromone trails; limited defensive capability"
+    },
+    {
+      "world_state": "Active territorial conflict (black vs red ants)",
+      "visual_manifestation": "Overlapping pheromone trails of both colors; ants clustered in border areas; combat activity animations",
+      "behavioral_manifestation": "Worker ants following opposing pheromone trails; combat encounters at territorial boundaries; groups organizing against enemy"
+    },
+    {
+      "world_state": "Colony expansion phase (Full Game progression)",
+      "visual_manifestation": "Overhead map grid expanding with new colony squares; multiple distinct ant nests visible; young queens and drones visible in breeding chambers",
+      "behavioral_manifestation": "Production of reproductive castes; colonization of new yard sectors; territorial claims on unexplored map areas"
+    },
+    {
+      "world_state": "Threat imminent (human activity or predator presence)",
+      "visual_manifestation": "Large hazard objects descending on surface; predator creature models visible; spray or electrical hazard visual markers appear",
+      "behavioral_manifestation": "Ants flee toward underground; defensive clustering; disrupted pheromone following patterns; chaos in ant movement"
+    },
+    {
+      "world_state": "Pheromone disruption (rain event)",
+      "visual_manifestation": "Water cascading through tunnels; visual fading/dissolution of pheromone trail markers; flooding in low-lying chambers",
+      "behavioral_manifestation": "Ants lose navigation orientation; increased random wandering; communication network temporarily severed"
+    },
+    {
+      "world_state": "Colony dominance (red ant elimination achieved)",
+      "visual_manifestation": "Absence of red ants from contested territories; black ant pheromone trails dominant across map; visual clearing of enemy colony markers",
+      "behavioral_manifestation": "Unrestricted expansion; ant foraging extends into previously contested areas; reduced defensive clustering; focus shifts to resource gathering"
+    },
+    {
+      "world_state": "Human house infiltration (Full Game objective phase)",
+      "visual_manifestation": "Map expands to include house structure; interior spaces become accessible; new environmental hazards appear indoors",
+      "behavioral_manifestation": "Colony spreads into house sections; foraging for new food sources indoors; defensive operations against human removal attempts"
+    },
+    {
+      "world_state": "Colony near elimination (losing state)",
+      "visual_manifestation": "Drastically reduced ant population visible; empty or sparsely populated chambers; minimal pheromone trail activity",
+      "behavioral_manifestation": "Remaining ants in survival mode; reduced organizational efficiency; queen potentially isolated or eliminated"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dual perspective rendering (surface/underground cross-section)",
+      "example": "Yard view with surface view underneath showing simultaneous surface threats (human footsteps, lawnmower) and underground colony response (ants retreating into chambers)"
+    },
+    {
+      "technique": "Pheromone trail as narrative breadcrumb",
+      "example": "Visual trails connecting ant locations to food sources, enemy colonies, or hazards; show implicit story of where colony has explored and what threats/resources exist"
+    },
+    {
+      "technique": "Hazard placement as environmental narrative",
+      "example": "Spider dens, antlion pits, electrical outlets, and pesticide zones positioned throughout yard tell implicit story of suburban dangers requiring strategic navigation"
+    },
+    {
+      "technique": "Caste visualization for colony maturity",
+      "example": "Presence/absence of queens, drones, and workers in chambers shows colony lifecycle progression and reproductive success story"
+    },
+    {
+      "technique": "Territorial geography as conflict narrative",
+      "example": "Map layout with red ant colony in opposing territory; visual proximity and overlap of pheromone trails show implicit territorial dispute story"
+    },
+    {
+      "technique": "Scale contrast (ant vs human artifacts)",
+      "example": "House structure, yard boundaries, and hazard objects rendered at massive scale relative to ants; communicates human world dominance and environmental pressure"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Yellow ant (player-controlled)",
+      "state": "Active command state",
+      "behavior": "Responds to player input; leaves pheromone trails when directed; other ants follow its pheromone markers"
+    },
+    {
+      "entity": "Yellow ant (isolated state)",
+      "state": "Vulnerable",
+      "behavior": "Susceptible to predator attacks; cannot command group support; pheromone trails weaker or ignored by distant ants"
+    },
+    {
+      "entity": "Black worker ants (following pheromone)",
+      "state": "Organized foraging",
+      "behavior": "Move in coordinated patterns along yellow ant's trails; cluster toward food sources; exhibit organized group behavior"
+    },
+    {
+      "entity": "Black worker ants (threat response)",
+      "state": "Defensive/alarmed",
+      "behavior": "Cluster together when predators or red ants present; converge on threat location; attempt group attack strategies"
+    },
+    {
+      "entity": "Red ant colony",
+      "state": "Territorial expansion",
+      "behavior": "Red ants follow their own pheromone trails expanding territory; engage in combat with black ants at borders; claim new ground"
+    },
+    {
+      "entity": "Red ant colony (weakening)",
+      "state": "Defensive retreat",
+      "behavior": "Red ants concentrate in remaining territory; reduced territorial reach; pheromone trails contract; visible population decline"
+    },
+    {
+      "entity": "Spider or antlion",
+      "state": "Passive hunting",
+      "behavior": "Stationary or slow movement in predefined territory; becomes visually distinct threat; requires group ant response or avoidance"
+    },
+    {
+      "entity": "Spider or antlion (active hunting)",
+      "state": "Aggressive threat",
+      "behavior": "Rapid movement toward ant clusters; kills individual or small groups; triggers immediate colony alarm behavior"
+    },
+    {
+      "entity": "Queen in chamber",
+      "state": "Reproductive active",
+      "behavior": "Stationary in central chamber; surrounded by workers; produces drones and new queens; visible indicator of colony health"
+    },
+    {
+      "entity": "Queen (endangered)",
+      "state": "Critical threat state",
+      "behavior": "Potential isolation if colony walls breach; loss of queen triggers loss condition; protection becomes visible priority for workers"
+    },
+    {
+      "entity": "General ant population (post-rain event)",
+      "state": "Disoriented",
+      "behavior": "Random wandering; pheromone trails washed away; coordination breaks down temporarily; visible colony confusion"
+    }
+  ],
+  "notes": "SimAnt uses color differentiation (black vs red) as primary faction identification. The dual perspective (top-down yard view with side-view underground chambers) is central to communicating spatial world-state. Pheromone trails serve as both mechanical system and visual narrative device—they show colony organization, threat awareness, and resource discovery. The game communicates danger primarily through environmental hazards (human-caused and natural) rather than dramatic visual effects, reflecting the game's design philosophy of being 'non-intimidating' and 'lighthearted.' Yellow ant highlighting provides clear player agency signal. The progression from Quick Game (single patch conflict) to Full Game (map-based expansion toward house infiltration) uses spatial expansion as visual victory narrative. Environmental storytelling relies heavily on implicit hazard placement and hazard avoidance patterns rather than explicit narrative elements.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:08:47.102Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2747,
+    "output_tokens": 3200,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "game_id": "tom-and-jerry-snes",
+  "game_name": "Tom & Jerry",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Tom (cat antagonist)",
+      "visual_form": "Animated cat character sprite pursuing player",
+      "meaning": "Primary threat; collision causes damage or stage failure"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Stage-specific obstacles in Theater, Junk Yard, Toy Store, House locations",
+      "meaning": "Platformer-standard dangers; context-dependent threat from setting"
+    },
+    {
+      "signal": "Heart loss indicator",
+      "visual_form": "Health resource depletion (99 hearts max per cheat)",
+      "meaning": "Cumulative damage state; visual feedback of approaching failure state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cheese bits collectible",
+      "visual_form": "Collectable items scattered through stages",
+      "meaning": "Resource accumulation; progression marker and stage completion tracker"
+    },
+    {
+      "signal": "Lives system",
+      "visual_form": "Life counter (99 lives max per cheat)",
+      "meaning": "Buffer against failure; continued engagement opportunity"
+    },
+    {
+      "signal": "Stage clear completion",
+      "visual_form": "Level progression through Theater → Junk Yard → Toy Store → House zones",
+      "meaning": "Safe progression; established checkpoint system"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Jerry (Player Character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mouse protagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spaces within Theater, Junk Yard, Toy Store, House settings associated with small character navigation"
+    },
+    {
+      "faction": "Tom (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Cat character sprite",
+      "enemy_visual_variants": "Visual manifestation changes by stage context (Theater cat, Junk Yard cat, Toy Store cat, House cat)",
+      "environmental_markers": "Cat-scaled environmental interactions; pursuit behavior tied to stage layout"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Theater Stage Active",
+      "visual_manifestation": "Performance venue setting with stage elements",
+      "behavioral_manifestation": "Tom pursues through theater-specific obstacles; platforming challenges themed to stage environment"
+    },
+    {
+      "world_state": "Junk Yard Stage Active",
+      "visual_manifestation": "Junk/debris-based environment with industrial hazards",
+      "behavioral_manifestation": "Navigation through junk obstacles; Tom pursuit adapted to cluttered space"
+    },
+    {
+      "world_state": "Toy Store Stage Active",
+      "visual_manifestation": "Indoor retail environment with toy-themed platforming elements",
+      "behavioral_manifestation": "Toy-scaled hazards; Tom behavior modified by toy store spatial constraints"
+    },
+    {
+      "world_state": "House Stage Active",
+      "visual_manifestation": "Domestic interior setting; most complex stage layout before boss encounter",
+      "behavioral_manifestation": "Home environment hazards; Tom pursuit through household spaces"
+    },
+    {
+      "world_state": "Boss Encounter (Stage 4 House)",
+      "visual_manifestation": "Climactic confrontation arena within house setting",
+      "behavioral_manifestation": "Tom behavior pattern escalation; final test before ending"
+    },
+    {
+      "world_state": "Game Over (USA/EU)",
+      "visual_manifestation": "Static game over screen without continuation option",
+      "behavioral_manifestation": "Hard termination state; restart required"
+    },
+    {
+      "world_state": "Game Over (Japan)",
+      "visual_manifestation": "Game over screen with continue option displayed",
+      "behavioral_manifestation": "Soft failure state; continuation possible without full restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-based progression",
+      "example": "Stage sequence (Theater 1-3 → Junk Yard 1-3 → Toy Store 1-3 → House 1-2 + Boss) establishes narrative setting without dialogue; implies chase across distinct locations"
+    },
+    {
+      "technique": "Environmental thematic consistency",
+      "example": "Each zone (Theater, Junk Yard, Toy Store, House) presents contextually appropriate hazards and platform layouts that reflect real-world properties of those spaces"
+    },
+    {
+      "technique": "Escalation through environment",
+      "example": "House stage placement at end with dedicated Boss 4 encounter signals climactic confrontation; setting matches cartoon series indoor chase tropes"
+    },
+    {
+      "technique": "Regional adaptation signaling",
+      "example": "Japan version Game Over screen with continue option vs. USA/EU hard reset communicates different player retention strategies tied to regional market expectations"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Jerry (Player)",
+      "state": "Normal platforming",
+      "behavior": "Movement through stage environments; collision-based interaction with world"
+    },
+    {
+      "entity": "Jerry (Player)",
+      "state": "Threatened by Tom",
+      "behavior": "Evasion platforming; avoidance of cat sprite contact"
+    },
+    {
+      "entity": "Jerry (Player)",
+      "state": "Collecting resources",
+      "behavior": "Cheese bit accumulation signals progression toward stage completion and warp eligibility"
+    },
+    {
+      "entity": "Tom (Antagonist)",
+      "state": "Idle/searching",
+      "visual_manifestation": "Sprite visible within stage space",
+      "behavior": "Patrol or pursuit initiation when player proximity detected"
+    },
+    {
+      "entity": "Tom (Antagonist)",
+      "state": "Pursuing Jerry",
+      "behavior": "Active chase behavior; collision causes player damage or failure"
+    },
+    {
+      "entity": "Tom (Antagonist)",
+      "state": "Boss Encounter",
+      "behavior": "Pattern-based attack behavior; escalated threat level signaling final confrontation"
+    }
+  ],
+  "notes": "Tom & Jerry (SNES) uses standard licensed platformer visual communication. World state manifests primarily through location-based settings with Tom as the consistent visual antagonist across all environments. Danger signals are minimalist (cat sprite = threat). Safety signals rely on collectibles and lives system typical of early 90s platformers. Faction distinction is simple binary (Jerry vs. Tom). Regional differences in Game Over screen represent mechanical communication variance. Source material (TCRF) focuses on development/prototype data rather than in-depth gameplay analysis, limiting detailed manifestation layer documentation. Game mechanics suggest implicit chase narrative through environmental progression without explicit HUD storytelling.",
+  "sources_used": [
+    "tcrf - Tom & Jerry (SNES) - The Cutting Room Floor"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:30:42.577Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2938,
+    "output_tokens": 1769,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

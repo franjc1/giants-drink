@@ -1,0 +1,214 @@
+{
+  "game_id": "dragon-warrior-iii-nes",
+  "game_name": "Dragon Warrior III",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy encounter",
+      "visual_form": "Transition to battle screen with enemy sprites",
+      "meaning": "Random combat initiated; player in danger zone"
+    },
+    {
+      "signal": "Deceased party member",
+      "visual_form": "Ghost sprite (NA version) or coffin with cross (JP version)",
+      "meaning": "Character is dead and unable to fight; party strength reduced"
+    },
+    {
+      "signal": "Low HP status",
+      "visual_form": "Character status display in red/critical color",
+      "meaning": "Character vulnerable to knockout; healing needed"
+    },
+    {
+      "signal": "Dungeon/cave environment",
+      "visual_form": "Dark tile sets, cramped corridors, absence of NPCs",
+      "meaning": "High encounter rate; dangerous territory with monsters"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town/settlement",
+      "visual_form": "Buildings, NPCs present, lit environment",
+      "meaning": "Safe zone; no random encounters; access to shops and inns"
+    },
+    {
+      "signal": "Inn location",
+      "visual_form": "Building sprite marked as inn in dialogue",
+      "meaning": "Full party healing available; save point; rest mechanic"
+    },
+    {
+      "signal": "Church/shrine",
+      "visual_form": "Religious building with cross (JP) or pentagram icon (NA version)",
+      "meaning": "Healing and resurrection services available; spiritual sanctuary"
+    },
+    {
+      "signal": "Tavern",
+      "visual_form": "Building sprite marked as tavern",
+      "meaning": "Party recruitment hub; safe space for character acquisition"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Hero/Player faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Erdrick legacy; sword and shield iconography",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Shrine of Ortega; temples dedicated to hero's legacy"
+    },
+    {
+      "faction": "Demon Lord Baramos (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragon imagery; demonic architecture",
+      "enemy_visual_variants": "Monster sprites vary by region/version; demon enemies",
+      "environmental_markers": "Necrogond dungeon; volcanic mountain terrain; dark/corrupted zones"
+    },
+    {
+      "faction": "Religious order (Clerics/Pilgrims)",
+      "color_identity": null,
+      "symbol_or_sigil": "Cross symbol (JP version); pentagram replacement (NA version)",
+      "enemy_visual_variants": "Pilgrim class sprite (JP: Priest with cross); redesigned in NA to remove religious imagery",
+      "environmental_markers": "Churches, shrines, temples; Dharma Temple (class change location)"
+    },
+    {
+      "faction": "Royal authority",
+      "color_identity": null,
+      "symbol_or_sigil": "King's court; royal clothing (cross removed in NA)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle starting location; throne room; royal guards"
+    },
+    {
+      "faction": "Mercenary/Arena culture",
+      "color_identity": null,
+      "symbol_or_sigil": "Monster fighting arena; betting system",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Monster fighting arena location; merchant class presence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Day time",
+      "visual_manifestation": "Brighter overworld palette; specific NPCs available",
+      "behavioral_manifestation": "Certain characters and quests only accessible during day; different shop inventories"
+    },
+    {
+      "world_state": "Night time",
+      "visual_manifestation": "Darker overworld palette; modified lighting",
+      "behavioral_manifestation": "Different NPCs appear; alternative quest paths open; character availability changes"
+    },
+    {
+      "world_state": "Post-narrative event",
+      "visual_manifestation": "Ortega boss battle sprite unique redesign in NA version; death animation frame added",
+      "behavioral_manifestation": "Scripted battle occurs; story progression marker; world state shifts after defeat"
+    },
+    {
+      "world_state": "Character death",
+      "visual_manifestation": "Party member replaced by ghost sprite (NA) or coffin sprite (JP); status window shows deceased",
+      "behavioral_manifestation": "Dead character cannot fight; follows party as ghost; temporary until resurrection achieved"
+    },
+    {
+      "world_state": "Demon Lord approaching/world degrading",
+      "visual_manifestation": "Corrupted terrain; demonic architecture visible; environmental decay in certain regions",
+      "behavioral_manifestation": "Increased monster encounters in affected areas; NPC dialogue references threat; world map shows danger zones"
+    },
+    {
+      "world_state": "Player progression (class change unlocked)",
+      "visual_manifestation": "Dharma Temple becomes accessible; temple sprite becomes interactive",
+      "behavioral_manifestation": "Characters can now change classes; stat resets; experience level drops to 1; spell retention enables hybrid builds"
+    },
+    {
+      "world_state": "Equipment/status progression",
+      "visual_manifestation": "Character sprite equipment visualization changes based on equipped items (armor/weapons visible)",
+      "behavioral_manifestation": "Starting gear differs by region (JP: Wayfarer's Clothes; NA: Leather Armor); stat bonuses applied"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Religious iconography removal (regional censorship)",
+      "example": "JP version: crosses on Priest clothes, shrines, grave markers, church floors; NA version: same locations use pentagrams, tombstones, and redesigned sprites. Communicates cultural/political difference in world acceptance of religion."
+    },
+    {
+      "technique": "Sprite redesign as narrative marker",
+      "example": "Ortega receives unique sprite and death animation only in NA version; reflects importance of this character to story progression and world state transition"
+    },
+    {
+      "technique": "Architectural style as faction identifier",
+      "example": "Religious buildings (churches/shrines) use distinct tile sets; royal castle uses different architecture; dungeon environments use dark/corrupted palette to signal demon lord territory"
+    },
+    {
+      "technique": "NPC presence/absence as safety indicator",
+      "example": "Towns filled with NPCs signal safety; dungeons devoid of NPCs signal danger; day/night NPC changes show temporal world state"
+    },
+    {
+      "technique": "Terrain color/palette as danger gradient",
+      "example": "Lit towns (safe); dark caves/dungeons (dangerous); volcanic/corrupted zones (high threat areas controlled by antagonist)"
+    },
+    {
+      "technique": "Intro sequence establishing threat",
+      "example": "NA version adds opening cinematic: Ortega vs. dragon battle on volcano. Visually establishes world danger and hero legacy without dialogue; communicates stakes"
+    },
+    {
+      "technique": "Class visual representation",
+      "example": "Soldier/Warrior wears armor; Wizard wears robes; Merchant carries goods. Visual class identity communicates party composition and faction loyalty at glance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Hero character",
+      "state": "Starting state",
+      "behavior": "Equipped with basic gear (JP: Wayfarer's Clothes + low equipment; NA: Leather Armor for higher defense). Symbolizes humble/poor origin in JP, better prepared in NA—communicates regional difficulty balance"
+    },
+    {
+      "entity": "Deceased party member",
+      "state": "Dead",
+      "behavior": "Follows party as ghost sprite; cannot participate in battle; takes up party roster slot; requires resurrection service at church"
+    },
+    {
+      "entity": "Tavern recruits",
+      "state": "Available for hire",
+      "behavior": "Appear in tavern with selectable personality traits affecting stat growth; can be benched in tavern storage; visual class icon indicates role"
+    },
+    {
+      "entity": "Monster arena participants",
+      "state": "Betting system active",
+      "behavior": "Players place bets (2x party level in JP; 10x in NA); betting odds communicate NPC/monster win probability to player through dialogue"
+    },
+    {
+      "entity": "NPCs in safe zones",
+      "state": "Day/night cycle",
+      "behavior": "Change location/availability by time of day; some NPCs only visible at night; some quests only triggerable during specific time windows. Communicates temporal world state"
+    },
+    {
+      "entity": "Enemy monsters",
+      "state": "Random encounter",
+      "behavior": "Battle screen transition; visual sprite represents enemy type; behavior determined by enemy AI; weak enemies show minimal threat animation; boss monsters (like Baramos) show unique/menacing sprites"
+    },
+    {
+      "entity": "Baramos (Demon Lord)",
+      "state": "World threat",
+      "behavior": "Lair located in Necrogond (dark mountain region); final boss battle with unique sprite and attack animations; represents culmination of danger signals throughout game"
+    },
+    {
+      "entity": "Ortega (story character)",
+      "state": "Deceased/legendary figure",
+      "behavior": "Appears in scripted battle; unique sprite redesign in NA version; death animation emphasizes story importance; referenced in dialogue as tragic hero; battle window palette change (JP white to NA blue) emphasizes emotional significance"
+    }
+  ],
+  "notes": "Dragon Warrior III uses primarily sprite-based visual communication for world state due to NES hardware constraints. Regional differences (JP vs. NA) are critical to understanding manifestation systems: the removal of crosses and religious imagery in NA version fundamentally changes how safety (church/shrine) locations are visually communicated. Day/night cycle is notable innovation for showing temporal world state progression. Class system visual indicators (armor, robes, equipment) communicate party composition without text. The game's popularity (1.1M copies sold in Japan in one day) suggests the visual manifestation system effectively communicated danger/safety/progression to players of the era. Environmental storytelling relies heavily on tile palette changes and building sprite recognition rather than detailed graphics.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:51:05.442Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7055,
+    "output_tokens": 2625,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

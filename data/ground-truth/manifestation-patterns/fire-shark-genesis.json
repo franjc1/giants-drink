@@ -1,0 +1,157 @@
+{
+  "game_id": "fire-shark-genesis",
+  "game_name": "Fire Shark",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectile fire",
+      "visual_form": "Bullet patterns emanating from enemy units; density increases with stage progression",
+      "meaning": "Direct threat to player; denser patterns indicate higher difficulty/danger zones"
+    },
+    {
+      "signal": "Enemy unit presence",
+      "visual_form": "Tanks, battleships, kamikaze monoplanes, artillery, zeppelins rendered on scrolling battlefield",
+      "meaning": "Armed hostiles requiring destruction or evasion"
+    },
+    {
+      "signal": "Loss of firepower visual",
+      "visual_form": "Player ship sprite reverts to basic weapon configuration after hit",
+      "meaning": "Vulnerability state—player has taken damage and lost upgraded weapons"
+    },
+    {
+      "signal": "Life/ship loss animation",
+      "visual_form": "Player craft disappears from screen; life counter decrements",
+      "meaning": "Permanent failure state if all lives exhausted; signals game-over risk"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Airport checkpoint/stage clear",
+      "visual_form": "Aircraft landing zone at end of scrolling sequence; stage transition",
+      "meaning": "Safe zone; progression milestone; respawn point (checkpoint) in arcade version"
+    },
+    {
+      "signal": "Weapon pickup icons",
+      "visual_form": "Colored icon drops from destroyed zeppelins (wide shot, laser, flamethrower)",
+      "meaning": "Upgrades to offensive capability; enhance safety through firepower"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "'P' icons (firepower), 'S' icons (speed), 'B' icons (bombs), 1UPs, medal containers",
+      "meaning": "Enhancement resources; increased survivability and scoring"
+    },
+    {
+      "signal": "Constantly scrolling background motion",
+      "visual_form": "Terrain/water layers scroll downward; player always progresses forward",
+      "meaning": "Forward momentum = progress toward safety; stalled motion = danger"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Allied Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Fire Shark biplane (protagonist aircraft)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Airport/runway locations; safe zones at stage endpoints"
+    },
+    {
+      "faction": "Strange Fleet (Arcade) / S Corps (Genesis)",
+      "color_identity": null,
+      "symbol_or_sigil": "Military hardware aesthetic: tanks, battleships, monoplanes, artillery, zeppelins",
+      "enemy_visual_variants": "Unit type variation (ground vehicles, naval, air); kamikaze monoplanes indicate fanatical enemy doctrine",
+      "environmental_markers": "Island base in Mediterranean (arcade); industrial/military terrain in Genesis version"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Global threat emerging (arcade: Strange Fleet arrival; Genesis: S Corps invasion)",
+      "visual_manifestation": "Increasingly dense enemy spawns across ten stages; military infrastructure dominates landscape",
+      "behavioral_manifestation": "Enemy fire patterns intensify; unit density increases per stage; respawn rates accelerate"
+    },
+    {
+      "world_state": "Player in combat zone",
+      "visual_manifestation": "Scrolling battlefield with active enemy units and projectiles; no safe terrain until airport",
+      "behavioral_manifestation": "Constant forward motion; unavoidable enemy encounters; must destroy or evade"
+    },
+    {
+      "world_state": "Stage completion / temporary peace",
+      "visual_manifestation": "Airport/runway appears; scrolling halts; stage transition screen",
+      "behavioral_manifestation": "Player can land safely; firepower/speed reset occurs if damaged; loop begins next stage"
+    },
+    {
+      "world_state": "Increasing threat level per loop",
+      "visual_manifestation": "Same ten stages repeat but with denser enemy fire patterns and unit placement",
+      "behavioral_manifestation": "Enemy bullets increase in volume and complexity; difficulty curve visible in sprite/projectile density"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Military hardware as world-state indicator",
+      "example": "Progression through landscape filled with tanks, battleships, kamikaze aircraft tells story of organized military invasion without dialogue"
+    },
+    {
+      "technique": "Terrain type variation",
+      "example": "Scrolling reveals different combat zones (island, industrial areas, water) implying geographic scope of conflict"
+    },
+    {
+      "technique": "Opening crowd animation",
+      "example": "Takeoff sequence with drawn crowd establishes civilian stakes and public support for player's mission"
+    },
+    {
+      "technique": "Safe zone juxtaposition",
+      "example": "Airports as islands of respite within hostile territory reinforce 'resistance base' narrative"
+    },
+    {
+      "technique": "Weapon origin storytelling",
+      "example": "Zeppelin destruction yielding upgraded weapons (laser, flamethrower) implies enemy tech repurposing by player faction"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy units (tanks, artillery)",
+      "state": "Spawned and active",
+      "behavior": "Fire projectiles in fixed patterns; move predictably on terrain; destroyed by player fire"
+    },
+    {
+      "entity": "Kamikaze monoplanes",
+      "state": "Engaged",
+      "behavior": "Aggressive flight patterns; suggest fanatical enemy doctrine; high threat value"
+    },
+    {
+      "entity": "Battleships",
+      "state": "Area control",
+      "behavior": "Stationary or slow-moving; high firepower output; dense projectile patterns indicate major threat"
+    },
+    {
+      "entity": "Zeppelins",
+      "state": "Active",
+      "behavior": "Spawn weapon pickups when destroyed; prioritized targets for power progression"
+    },
+    {
+      "entity": "Player biplane",
+      "state": "Powered-up (3 'P' icons collected)",
+      "behavior": "Maximum firepower output; widest weapon spread; highest survivability; icon grabs yield points instead"
+    },
+    {
+      "entity": "Player biplane",
+      "state": "Hit/damaged",
+      "behavior": "Firepower and speed reset to base; visual downgrade (sprite reverts); vulnerability window until re-powered"
+    }
+  ],
+  "notes": "Fire Shark uses minimal narrative exposition, relying heavily on visual language to communicate world-state. The arcade version establishes a mysterious armada threat through environmental density and progression, while the Genesis port reframes the conflict as corporate/industrial domination (S Corps). Both versions use scrolling-shooter conventions: safe zones (airports) contrast with hostile terrain, weapon pickup colors indicate upgrade type, and enemy variety signals faction identity and threat level. The game communicates difficulty increase purely through visual density (enemy count, projectile volume) rather than dialogue or text—a hallmark of arcade shmup design. Stage looping with increased difficulty is communicated through identical terrain with denser hazards, creating a 'rising tide' world-state narrative.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:29:12.354Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3178,
+    "output_tokens": 1855,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

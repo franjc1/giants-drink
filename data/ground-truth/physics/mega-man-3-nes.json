@@ -1,0 +1,239 @@
+{
+  "_meta": {
+    "game": "Mega Man 3",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Mega Man 3 ROM Disassembly — Matrixz / Trax",
+        "url": "https://www.romhacking.net/games/59/",
+        "notes": "Annotated 6502 disassembly. Source for walk speed fixed-point representation, jump velocity, and slide mechanics."
+      },
+      {
+        "name": "Data Crystal — Mega Man 3",
+        "url": "https://datacrystal.tcrf.net/wiki/Mega_Man_3",
+        "notes": "RAM map for physics variable addresses."
+      },
+      {
+        "name": "Speedrun.com — Mega Man 3 Resources",
+        "url": "https://www.speedrun.com/mm3/resources",
+        "notes": "Speedrunning physics documentation. Jump height comparison with MM2 and invincibility frame counts confirmed here."
+      },
+      {
+        "name": "SDA Knowledge Base — Mega Man 3",
+        "url": "https://kb.speeddemosarchive.com/Mega_Man_3",
+        "notes": "Game mechanics documentation. Jump velocity difference from MM2 (-5.5 vs -6.0 px/frame) is the most cited MM2→MM3 change."
+      }
+    ],
+    "notes": [
+      "Mega Man 3 uses the same 8.8 fixed-point physics engine as Mega Man 2.",
+      "KEY DIFFERENCE FROM MM2: Jump initial velocity is lower (-5.5 vs -6.0 px/frame). MM3 jumps are noticeably shorter.",
+      "All other physics (gravity, max fall, slide speed/duration, invincibility) are identical to MM2.",
+      "MM3 introduced Proto Man mid-stage duels and the Rush search system.",
+      "Rush Jet changed from MM2's auto-scrolling platform to a directional rider-controlled vehicle in MM3.",
+      "Slide mechanic is inherited from MM2. Same speed, same hitbox reduction, same duration."
+    ],
+    "mm2_vs_mm3_comparison": {
+      "source": "Speedrunning community documentation and ROM disassembly comparison",
+      "differences": [
+        {
+          "parameter": "Jump initial Y velocity",
+          "mm2": "-6.0 px/frame",
+          "mm3": "-5.5 px/frame",
+          "significance": "HIGH — most impactful physics difference. MM3 jumps are clearly shorter. Some MM2 routes are impossible in MM3."
+        },
+        {
+          "parameter": "Max jump height",
+          "mm2": "~52 pixels",
+          "mm3": "~48 pixels",
+          "significance": "HIGH — 4px (0.25 tile) shorter maximum jump"
+        },
+        {
+          "parameter": "Rush Jet behavior",
+          "mm2": "Static auto-scrolling platform",
+          "mm3": "Rider-controlled directional vehicle",
+          "significance": "HIGH — completely different gameplay application"
+        },
+        {
+          "parameter": "Walk speed",
+          "mm2": "1.5 px/frame",
+          "mm3": "1.5 px/frame",
+          "significance": "NONE — identical"
+        },
+        {
+          "parameter": "Gravity",
+          "mm2": "0.25 px/frame²",
+          "mm3": "0.25 px/frame²",
+          "significance": "NONE — identical"
+        },
+        {
+          "parameter": "Max fall speed",
+          "mm2": "4.0 px/frame",
+          "mm3": "4.0 px/frame",
+          "significance": "NONE — identical"
+        },
+        {
+          "parameter": "Slide speed",
+          "mm2": "3.0 px/frame",
+          "mm3": "3.0 px/frame",
+          "significance": "NONE — identical"
+        },
+        {
+          "parameter": "Slide duration",
+          "mm2": "22 frames",
+          "mm3": "22 frames",
+          "significance": "NONE — identical"
+        },
+        {
+          "parameter": "Invincibility frames",
+          "mm2": "128 frames",
+          "mm3": "128 frames",
+          "significance": "NONE — identical"
+        }
+      ]
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "effective_precision_subpixels": 16,
+      "description": "Same 8.8 fixed-point system as MM2. All velocities are multiples of 16 sub-pixels."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "sub_pixels_per_frame": 384,
+      "px_per_frame": 1.5,
+      "hex": "$01.80",
+      "description": "Integer $01, fractional $80 (128/256). Fixed-point: 1 + 0.5 = 1.5 px/frame.",
+      "notes": "Identical to MM2. Instant velocity, no acceleration."
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "notes": "Instant velocity as in MM2. No acceleration/deceleration curves."
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "px_per_frame": 5.5,
+      "sub_pixels_per_frame_approx": 1408,
+      "hex_approx": "$05.80",
+      "source": "SDA KB and speedrun community: MM3 jump velocity is -5.5 px/frame, versus MM2's -6.0 px/frame. This is the most-cited physics difference between the two games.",
+      "notes": "Jump initial velocity is lower than MM2. The difference is clearly perceptible in gameplay — MM3 Mega Man cannot reach some platforms reachable in MM2."
+    },
+    "variable_jump": {
+      "mechanic": "Releasing jump early reduces height. Same mechanic as MM2.",
+      "notes": "Variable height jump through early button release."
+    },
+    "max_jump_height_px": 48,
+    "max_jump_height_tiles": 3.0,
+    "horizontal_speed_during_jump_px_per_frame": 1.5
+  },
+
+  "gravity": {
+    "acceleration_sub_pixels_per_frame_sq": 64,
+    "acceleration_px_per_frame_sq": 0.25,
+    "hex": "$40",
+    "notes": "Identical to MM2. 0.25 px/frame² is the series constant for NES Mega Man."
+  },
+
+  "terminal_velocity": {
+    "px_per_frame": 4.0,
+    "notes": "Identical to MM2."
+  },
+
+  "slide": {
+    "speed_px_per_frame": 3.0,
+    "duration_frames": 22,
+    "total_distance_px": 66,
+    "input": "Down + B (jump) on ground",
+    "cancel": "Jump button during slide",
+    "hitbox": {
+      "width_px": 16,
+      "height_px": 16,
+      "notes": "Slide hitbox is reduced in height. Standard standing hitbox is ~24px tall; slide reduces to ~16px. The exact offset of the hitbox top during slide needs ROM verification."
+    },
+    "notes": "Identical to MM2 in speed (3.0 px/frame) and duration (22 frames). Total slide distance: 66px = 4.125 tiles."
+  },
+
+  "ladder": {
+    "climb_speed_px_per_frame": 1.0,
+    "notes": "Identical to MM2."
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 128,
+    "duration_seconds": 2.13,
+    "notes": "Identical to MM2. 128-frame invincibility is the NES Mega Man series standard."
+  },
+
+  "rush_jet_mm3": {
+    "description": "Rush Jet in MM3 is fundamentally different from MM2. It's now a directional rider-controlled vehicle.",
+    "horizontal_speed_px_per_frame": 1.5,
+    "vertical_speed_px_per_frame": 1.0,
+    "altitude_hold": "Rush Jet maintains altitude with no input (no drift down)",
+    "control": "Left/right D-pad for horizontal, Up/Down for altitude",
+    "energy_drain": "Energy depletes over time while in use",
+    "can_shoot_while_riding": true,
+    "notes": [
+      "MM3's Rush Jet is vastly more useful than MM2's auto-scrolling version.",
+      "The directional control enables precise maneuvering around obstacles.",
+      "Max horizontal speed matches walk speed (1.5 px/frame) — Rush Jet doesn't provide a speed advantage."
+    ]
+  },
+
+  "rush_marine": {
+    "description": "Underwater vehicle for MM3.",
+    "horizontal_speed_px_per_frame": 1.5,
+    "vertical_speed_px_per_frame": 1.0,
+    "gravity": "suspended while in Rush Marine — no drift",
+    "movement": "Full 8-directional (diagonal via held Up+Left, etc.)",
+    "notes": "Rush Marine provides underwater mobility matching Rush Jet's surface capability. Not used in speedruns due to limited stage application."
+  },
+
+  "mega_buster": {
+    "bullet_speed_px_per_frame": 8,
+    "max_on_screen": 3,
+    "notes": "Standard series values. MM3 does NOT have the Mega Buster charge shot (added in MM4)."
+  },
+
+  "proto_man_duels": {
+    "notes": "Proto Man appears between stages for mid-game fights. Proto Man uses the same physics engine as Mega Man — identical walk speed, jump velocity, and gravity."
+  },
+
+  "top_spin": {
+    "momentum_burst": {
+      "notes": "Top Spin activation gives a brief horizontal momentum addition. This is weapon-specific velocity, not a base physics constant."
+    }
+  },
+
+  "hitboxes": {
+    "standing": {
+      "width_px": 14,
+      "height_px": 24
+    },
+    "sliding": {
+      "width_px": 14,
+      "height_px": 16,
+      "notes": "Approximately half standing height. Exact offset needs ROM verification."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The 0.5 px/frame lower jump velocity in MM3 vs MM2 is imperceptible to most players but critical to level designers. When building MM3-inspired levels, measure jump clearances against the MM3 max of ~48px (3 tiles), NOT MM2's ~52px.",
+    "The Rush Jet directional control transforms it from a gimmick into a true movement tool. The level design around Rush Jet in MM3 reflects this — it's used for actual traversal, not just cute one-off sections.",
+    "The lower jump in MM3 makes slide+jump combos more important as movement tools, since vertical reach is reduced. Level design should reward horizontal mobility.",
+    "Proto Man duels use standard physics — this means the AI opponent is bound by the same physical constraints as the player, making the fights feel grounded and consistent."
+  ]
+}

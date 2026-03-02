@@ -1,0 +1,174 @@
+{
+  "game_id": "heroes-might-magic-2-pc",
+  "game_name": "Heroes of Might and Magic II",
+  "platform": "pc",
+  "paradigm": "strategy-rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy castle presence",
+      "visual_form": "Opposing faction town structures on adventure map",
+      "meaning": "Active threat requiring military engagement or avoidance"
+    },
+    {
+      "signal": "Enemy hero armies",
+      "visual_form": "Stacks of enemy units visible on adventure map",
+      "meaning": "Mobile threat that can initiate combat"
+    },
+    {
+      "signal": "Hostile terrain/monster lairs",
+      "visual_form": "Neutral creature dwellings and resource guardians on map",
+      "meaning": "Environmental hazards blocking progression or draining resources"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Own castle control",
+      "visual_form": "Player-colored town structure with upgraded buildings",
+      "meaning": "Safe haven for hero recovery and resource generation"
+    },
+    {
+      "signal": "Allied faction presence",
+      "visual_form": "Same-alignment town colors and structures",
+      "meaning": "Faction partner in campaign; non-hostile in multi-faction good/evil scenarios"
+    },
+    {
+      "signal": "Resource sites",
+      "visual_form": "Mine, forest, and artifact locations on adventure map",
+      "meaning": "Strategic positions for economic power; accessible without combat threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Knight",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Royal heraldry, castle aesthetic",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Medieval castle towns with towers and fortifications"
+    },
+    {
+      "faction": "Barbarian",
+      "color_identity": "Red/Orange",
+      "symbol_or_sigil": "Tribal iconography, axe motifs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rugged, fortress-like settlements with war-camp aesthetics"
+    },
+    {
+      "faction": "Sorceress",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Magical sigils, elven themes",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Natural, mystical architecture integrated with forests"
+    },
+    {
+      "faction": "Warlock",
+      "color_identity": "Purple/Dark",
+      "symbol_or_sigil": "Demonic runes, infernal imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dark, corrupted settlements with arcane structures"
+    },
+    {
+      "faction": "Necromancer",
+      "color_identity": "Black/Gray",
+      "symbol_or_sigil": "Skull, bones, death motifs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Graveyards, crypts, desolate undead-themed towns"
+    },
+    {
+      "faction": "Wizard",
+      "color_identity": "Cyan/Light Blue",
+      "symbol_or_sigil": "Arcane circles, spell book imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Towers and magical academies with ethereal aesthetics"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Good faction dominance (Roland's campaign)",
+      "visual_manifestation": "Knight, Sorceress, and Wizard town colors and structures predominate on map",
+      "behavioral_manifestation": "Player controls three aligned factions; AI behavior follows good-aligned strategy"
+    },
+    {
+      "world_state": "Evil faction dominance (Archibald's campaign)",
+      "visual_manifestation": "Barbarian, Warlock, and Necromancer town colors and dark aesthetics predominate",
+      "behavioral_manifestation": "Player controls three evil-aligned factions; darker narrative tone and enemy behaviors"
+    },
+    {
+      "world_state": "Political succession conflict",
+      "visual_manifestation": "Divided castle ownership between Archibald and Roland forces; map shows contested territories",
+      "behavioral_manifestation": "Campaign missions require conquest of enemy strongholds; hero armies clash over strategic points"
+    },
+    {
+      "world_state": "Castle upgrade status",
+      "visual_manifestation": "Town structures expand from basic castle to fully upgraded castle with visible building additions",
+      "behavioral_manifestation": "Upgraded castles produce stronger unit stacks and grant access to higher-tier creatures"
+    },
+    {
+      "world_state": "Hero power level progression",
+      "visual_manifestation": "Hero unit sprite and accompanying army stack size grow visually with experience and gathered forces",
+      "behavioral_manifestation": "Veterans can engage multiple enemies; strength visually represented by army diversity and number"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Faction-specific architecture and settlement design",
+      "example": "Knight towns feature orderly, fortified medieval castles; Necromancer towns display graveyards and ruins; Wizard towers show arcane aesthetics. This communicates faction identity and alignment without explicit labels."
+    },
+    {
+      "technique": "Campaign map narrative structure",
+      "example": "Scenarios progress through territorial control, showing how Archibald and Roland's conflict unfolds across Enroth. Map state at scenario start and victory conditions tell the story of succession war."
+    },
+    {
+      "technique": "Resource and monster lair distribution",
+      "example": "Placement of gold mines, forests, and creature dwellings creates natural chokepoints and strategic corridors, implying contested lands and valuable territories worth fighting over."
+    },
+    {
+      "technique": "Hero unit visual distinction",
+      "example": "Different hero sprites represent class and faction; secondary skills gained over time are tracked in UI, showing hero growth and specialization narrative."
+    },
+    {
+      "technique": "Color-coded allegiance system",
+      "example": "Town colors immediately signal faction identity and player vs. enemy ownership. Map readability depends on consistent color-to-faction mapping."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy hero",
+      "state": "Patrolling on adventure map",
+      "behavior": "Moves predictably; indicates mobile threat that will engage if path crosses player hero"
+    },
+    {
+      "entity": "Neutral creature stack",
+      "state": "Guarding resource or artifact",
+      "behavior": "Initiates combat if player attempts to claim guarded object; strength scales with strategic importance of resource"
+    },
+    {
+      "entity": "Player castle",
+      "state": "Captured from enemy",
+      "behavior": "Immediately switches color to player faction; begins generating resources and recruitable units for player side"
+    },
+    {
+      "entity": "Hero army composition",
+      "state": "Upgraded vs. basic units",
+      "behavior": "Visual stack representation grows more diverse and visually impressive with better troops; signals combat power without explicit stats shown"
+    },
+    {
+      "entity": "Campaign map",
+      "state": "Victory conditions met",
+      "behavior": "Scenario transitions to next map; narrative progresses based on good/evil campaign branch taken"
+    }
+  ],
+  "notes": "Heroes II uses color-coded faction identity and town architecture as primary visual communication tools. The good/evil alignment split (3 good factions: Knight, Sorceress, Wizard; 3 evil factions: Barbarian, Warlock, Necromancer) is reinforced through campaign structure, map control, and architectural theme. World state is communicated through adventure map composition—which factions control which territories, resource distribution, and hero positioning. Political succession narrative (Archibald vs. Roland) is embedded in scenario progression rather than explicit visual markers. Environmental storytelling relies heavily on faction-specific aesthetic themes and strategic map layout.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:51:47.934Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2740,
+    "output_tokens": 2006,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,948 @@
+GameResources/NES/NinjaGaiden - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Ninja Gaiden
+
+This page documents information about
+
+Ninja Gaiden
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Table of contents
+
+RAM Map
+
+Lua Scripts
+
+Symbolic Namelists
+
+Table of contents
+
+Movement
+
+Horizontal Movement
+
+Preserving speed
+
+Sticky Floors
+
+Vertical Movement
+
+Recovery Walljump
+
+Wall-Climbing
+
+Attacking
+
+Randomness and manipulation
+
+Knife tossers
+
+Tysons
+
+Birds
+
+Bats
+
+Cheetahs
+
+Inherited Sub-Pixels (and manipulation)
+
+Spawns, their delays and cancellations
+
+Interrupts
+
+Level Timer
+
+Glitches with no known application
+
+Taking damage at the same time a boss is killed
+
+Vertical screen-wrapping
+
+Making Enemies Fall from Platforms
+
+that one thing where you pass through an enemy or grab a power-up and graphics glitch out for a frame
+
+Address  Description
+
+0060 0061  Score, little endian. Game can only display 4 digits; "00" on the right of score display is static.
+
+0062  Timer fractions. Cycles 60-0, normally decrementing once per frame during game play.
+
+0063  Level Timer. Decrements when $0062 = 60.
+
+0064  Ninpo (Points used for special attacks)
+
+0065  Ryu's Hit Points
+
+0066  Enemy HP Display (separate from actual enemy HP, stored at $0490-0497)
+
+0067-006C  Level Scrolling
+
+006D 006E  Current Stage
+
+006F  Related to stage transitions
+
+0075  TODO: explain this
+
+0076  Ryu's Lives
+
+0080-0083  Ryu's Animations
+
+0084  Ryu's facing and state (standing/jumping/clinging to wall/etc.)
+
+0085  Ryu's x position, fractions
+
+0086  Ryu's x position, pixels
+
+0087  Ryu's y speed, fractions
+
+0089  Ryu's y speed, pixels
+
+008A  Ryu's y position
+
+0092  0x00 until Ryu uses his sword, after which it is 0x10, meaning the first sword attack after the game starts is always ineffective. First jumping slash after having used Spin Slash also affected.
+
+0095  Invulnerability timer, runs 60-0 starting when Ryu takes damage.
+
+0096-009F  pointers
+
+00A2  Screen position, fractions
+
+00A3  Screen position, pixels
+
+00AC  Ryu's x speed, fractions
+
+00AD  Ryu's x speed, pixels
+
+00B5  Object spawn iterator (increments 8 times a frame)
+
+00BF  Global Timer
+
+00C9  Current Special Weapon. $00=None $80=Art of the Fire Wheel $81=Throwing Star $82=Windmill Star $84=Invincible Fire Wheel $85=Jump and Slash
+
+02xx  Sprite Data
+
+03xx  Background Data
+
+0400-0407  Enemy ID
+
+0408-040F  Frames until enemy action (changing direction, throwing/shooting stuff)
+
+0438-043F  Enemy movement
+
+0440-0447  Enemy facing (left/right)
+
+0448-044F  Enemy x speed, fractions
+
+0450-0457  Enemy x speed, pixels
+
+0458-045F  Enemy x position, fractions
+
+0460-0467  Enemy x position, pixels
+
+0468-046F  Enemy y speed, fractions
+
+0470-0477  Enemy y speed, pixels
+
+0478-047F  Enemy y position, fractions
+
+0480-0487  Enemy y position, pixels
+
+0490-0497  Enemy hit points (only non-zero for bosses and those grey disc-tossers)
+
+04B8-04BA  Boss Explosion Animations
+
+04BB  Spec. Weapon C x position
+
+04BC  Spec. Weapon B x position
+
+04BD  Spec. Weapon A x position
+
+04BE  Spec. Weapon C y position
+
+04BF  Spec. Weapon B y position
+
+04C0  Spec. Weapon A y position
+
+04C1-04C6  Spec. Weapon Speed (used differently for each weapon)
+
+04C7  Spec. Weapon time-out, fractions (hourglass, invincible fire wheel)
+
+04C8  Spec. Weapon time-out (hourglass, invincible fire wheel)
+
+04D0-04D7  Lantern(or bug or bird)/Power-Up x position, fractions
+
+04D8-04DF  Lantern/PU x position, pixels
+
+04E0-04E7  Lantern/PU y position, pixels (no fractions for this)
+
+04E8-04EF  Frames until power-up vanishes
+
+05xx  Unused
+
+06xx  Sound
+
+--Displays most of the RAM addresses relevant to making a TAS over or around the game's info display.
+local function NGRAMview()
+
+yspd = memory.readbytesigned(0x89) + (memory.readbyte(0x87)/256)
+
+xpos = memory.readbyte(0x86) + (memory.readbyte(0x85)/256)
+
+ypos = memory.readbyte(0x8A)
+
+scrnpos = memory.readbyte(0xA3); scrnsub = memory.readbyte(0xA2)
+
+timerf = memory.readbyte(0x62); timer = memory.readbyte(0x63)
+
+rnga = memory.readbyte(0xB5); rngb = memory.readbyte(0xBF)
+
+ninpo = memory.readbyte(0x64)
+
+bosshp = memory.readbyte(0x497); abosshp = memory.readbyte(0x496)
+
+inv = memory.readbyte(0x95)
+
+gui.text(25,9,string.format("Y-Spd:%6.3f",yspd))
+
+gui.text(25,17,string.format("Position: %5.1f, %3d",scrnpos+xpos+(scrnsub/256),ypos))
+
+gui.text(129,17,string.format("[%05.1f+%02X,%02X]",xpos,scrnpos,scrnsub))
+
+gui.text(73,33,string.format("%3d:%02d",timer,timerf))
+
+if bosshp > 0 then
+
+if bosshp > 16 then gui.text(177,41,string.format("%02d",abosshp))
+
+else gui.text(177,41,string.format("%02d",bosshp)); end; end
+
+if inv > 0 then
+
+gui.text(229,33,string.format("%02d",inv));end
+
+gui.text(208,17,string.format("B5:%3d ",rnga))
+
+gui.text(208,25,string.format("BF:%3d ",rngb))
+
+gui.text(81,41,string.format("[%02d]",ninpo))
+end
+gui.register(NGRAMview)
+emu.frameadvance()
+
+--Accurately tracks the game's inaccurate conception of time, displaying how many "seconds" elapse over the course of a game session.
+--Obviously, it is not smart enough to account for save states, but here it is in case somebody finds this interesting.
+local minutes=0;seconds=0;frames=0
+while true do
+ prevt = memory.readbyte(0x62)
+ emu.frameadvance()
+ currt = memory.readbyte(0x62)
+ if prevt ~= currt then
+
+frames=frames+1;end
+ if frames == 61 then
+
+seconds=seconds+1;frames=0;end
+ if seconds == 60 then
+
+minutes=minutes+1;seconds=0;end
+ gui.text(199,9,string.format("%02d:%02d:%02d",minutes,seconds,frames))
+end
+
+curves = {}
+function PredictBird()
+	-- feos, 2014
+	-- draws birds trajectories
+	-- color marks direction
+	for slot = 0, 7 do
+
+if (memory.readbyte(0x400 + slot) ~= 11) or (memory.readbyte(0x498 + slot) == 0) then
+
+curves.slot = nil
+
+else
+
+if (curves.slot == nil) then curves.slot = {} end
+
+local ryuY
+
+= memory.readbyte(0x8A)
+
+local ryuX
+
+= memory.readbyte(0x86)
+
+local birdY
+
+= memory.readbyte(0x480 + slot)
+
+local birdX
+
+= memory.readbyte(0x460 + slot)
+
++ memory.readbyte(0x458 + slot)/256
+
+local birdSpeed = memory.readbytesigned(0x450 + slot) + memory.readbyte(0x448 + slot)/256
+
+local newY = 0
+
+local newX = 0
+
+local newSpeed = 0
+
+while (#curves.slot <= 200) do
+
+if (#curves.slot == 0) then
+
+if (birdY > ryuY)
+
+then newY = birdY - 1
+
+else newY = birdY + 1
+
+end
+
+if (birdX > ryuX)
+
+then newSpeed = birdSpeed - 16/256
+
+else newSpeed = birdSpeed + 16/256
+
+end
+
+newX = birdX + newSpeed
+
+else
+
+local index = #curves.slot
+
+local tempY = curves.slot[index].oldY
+
+local tempX = curves.slot[index].oldX
+
+local tempSpeed = curves.slot[index].oldSpeed
+
+if (tempY > ryuY)
+
+then newY = tempY - 1
+
+else newY = tempY + 1
+
+end
+
+if (tempX > ryuX)
+
+then newSpeed = tempSpeed - 16/256
+
+else newSpeed = tempSpeed + 16/256
+
+end
+
+newX = tempX + newSpeed
+
+end
+
+table.insert(curves.slot, {oldY = newY, oldX = newX, oldSpeed = newSpeed})
+
+end
+
+if (#curves.slot == 200) then table.remove(curves.slot, 1) end
+
+for index = 1, #curves.slot do
+
+local color = nil
+
+if (curves.slot[index].oldSpeed < 0) then color = "#008800" else color = "#0000ff" end
+
+gui.box  (curves.slot[index].oldX - 1, curves.slot[index].oldY - 1,
+
+curves.slot[index].oldX + 1, curves.slot[index].oldY + 1, color)
+
+end
+
+for index = 1, #curves.slot do
+
+gui.pixel(curves.slot[index].oldX, curves.slot[index].oldY, "white")
+
+end
+
+end
+	end
+end
+
+function GetCell(X,Y)
+	local temp = memory.readbyte(0xE7CC+SHIFT(X,4))+memory.readbyte(0x5F)
+	if (temp >= 0xC0) then temp = temp-0xC0 end
+	Y = Y-0x40
+	if (Y < 0) then Y = 0 end
+	temp = SHIFT(Y,5)+temp
+	return temp
+end
+
+function DrawBG(arg,offset,x,y)
+	local color2 = "#00ff00ff"
+	local function box(color,text)
+
+gui.box(x,y+offset,x+16,y+offset+16,color)
+
+if (text == 1) then
+
+gui.text(x+1,y+offset+1,string.format("%d",arg))
+
+end
+	end
+	local function line(up,down,left,right)
+
+if (up
+
+== 1) then gui.line(x
+
+,y+offset
+
+,x+16,y+offset
+
+,color2) end
+
+if (down  == 1) then gui.line(x
+
+,y+offset+16,x+16,y+offset
+
+,color2) end
+
+if (left  == 1) then gui.line(x
+
+,y+offset
+
+,x
+
+,y+offset+16,color2) end
+
+if (right == 1) then gui.line(x+16,y+offset
+
+,x+16,y+offset+16,color2) end
+	end
+	if (arg ~= 0) then
+
+if
+
+(arg == 1) then line(0,0,0,1) -- right wall
+
+elseif (arg == 2) then line(0,0,1,0) -- left wall
+
+elseif (arg == 3) then line(0,0,1,1) -- two-sided wall
+
+elseif (arg == 4) then line(1,0,0,1) -- right corner
+
+elseif (arg == 5) then line(1,0,1,0) -- left corner
+
+elseif (arg == 6) then line(1,0,1,1) -- two-sided corner
+
+elseif (arg == 7) then line(1,0,0,0) -- floor
+
+elseif (arg == 8) then box("#ff000066",0) -- ejecting block
+
+elseif (arg == 9) then box("#00ff0066",0) -- ladder
+
+elseif (arg >= 12) and (arg <= 15)
+
+then box("#ffffff66",0) -- exits
+
+else box("#00ff0066",1)
+
+end
+	end
+end
+
+function ViewBG(style)
+	-- feos, 2014
+	-- style: 0=none, 1=new, 2=old, 3=both
+	local base = 0x300
+	local RyuX = memory.readbyte(0x86)
+	local RyuY = memory.readbyte(0x8A)
+	local RyuYspeed = memory.readbytesigned(0x89)
+	local RyuXspeed = memory.readbytesigned(0xAD)+memory.readbyte(0xAC)/256
+	if (AND(memory.readbyte(0x84),4) == 0) then RyuYspeed = 0 end
+	local RyuCell = GetCell(RyuX, RyuY+RyuYspeed)
+	local RyuRow = math.floor(RyuCell/6)
+	local Screen = memory.readwordsigned(0x51)
+	if (AND(style,1) == 1)
+	and (memory.readbyte(0x1FC) == 0x87)
+	or  (memory.readbyte(0x1F3) == 0xD8) then
+
+for tRow = RyuRow-14, RyuRow+14 do
+
+for tLine = 0,5 do
+
+local address = base+((tRow*6+tLine)%0xC0)
+
+local hi = SHIFT(memory.readbyte(address),  4)
+
+local lo =
+
+AND(memory.readbyte(address),0xF)
+
+local x = (tRow-RyuRow)*16+RyuX-RyuX%0x10-Screen%0x10
+
+local y = tLine*32+64
+
+DrawBG(hi, 0,x,y)
+
+DrawBG(lo,16,x,y)
+
+end
+
+end
+
+gui.box(xpos-9,ypos+RyuYspeed-1,xpos+5,ypos+RyuYspeed-5,"#0000ff66")
+	end
+	if (AND(style,2) == 2) then
+
+for cell = 0,191 do
+
+local hi = SHIFT(memory.readbyte(base+cell),  4)
+
+local lo =
+
+AND(memory.readbyte(base+cell),0xF)
+
+local bX = math.floor(cell/6)
+
+local bY = cell%6
+
+local rX = (RyuRow%32)*6-1
+
+local rY = math.floor(RyuY/16)*8-32
+
+if (hi == 0) then hi = " " else hi = string.format("%X",hi) end
+
+if (lo == 0) then lo = " " else lo = string.format("%X",lo) end
+
+gui.text(bX*6,bY*16+9,hi.."\n"..lo)
+
+gui.box(rX,rY,rX+6,rY+8,"#00ff0000")
+
+end
+	end
+end
+
+function Spawns()
+	-- feos, 2014
+	-- uncovers which spawns will occur per frame
+	local SubCur= memory.readbyte(0x50)/25.6
+	local PosCur= AND(memory.readbyte(0x51),0xF)
+	local BlCur = memory.readbyte(0x4E)
+	local Blptr = memory.readword(0x96)
+	local Yptr  = memory.readword(0x98)
+	local IDptr = memory.readword(0x9A)
+	local Count = memory.readbyte(0xB4)
+	local Iterator = memory.readbyte(0xB5)-8
+	local IteratorLast = memory.readbyte(0xB5)-1
+	if (Blptr == 0) then return end
+	while (Iterator < 0) do Iterator = Count+Iterator end
+	if (IteratorLast < 0) then IteratorLast = Count+IteratorLast end
+
+local Interrupt = AND(memory.readbyte(0x4C),0x40)
+	local forward = memory.readbyte(0x3D)
+	if (memory.readbyte(0x1FC) == 0x87)
+	or (memory.readbyte(0x1F3) == 0xD8) then
+
+for i = 0,Count-1 do
+
+local color1 = "white"
+
+local block = memory.readbyte(Blptr+i)
+
+local ypos  = memory.readbyte(Yptr +i)
+
+local id
+
+= memory.readbyte(IDptr+i)
+
+local x = i*16%256+1
+
+local y = 57+math.floor(i/16)*30
+
+if (block == BlCur) then gui.box(x-1,y-1,x+12,y+23,"#00ff0088") end
+
+if (forward == 0) then backspawn = -0xD else backspawn = 0xE end
+
+if (block == (BlCur+backspawn)) then gui.box(x-1,y-1,x+12,y+23,"#ff00ff88") end
+
+if (i+1 >= Iterator) and (i+1 < Iterator+8)
+
+or (i+1 < Iterator+8-Count) then color1 = "#ffccaaff" end
+
+if (Interrupt > 0) then color2 = "red" else color2 = "#44ffffff" end
+
+gui.text(x,y,string.format("%X\n%X\n%X",block,ypos,id),color1)
+
+gui.text(108,41,string.format("Block: %X.%02d.%d\nIterator: %02d-%02d/%d",
+
+BlCur,PosCur,SubCur,Iterator,IteratorLast,Count),color2,"#000000ff")
+
+end
+	end
+end
+
+Ninja Gaiden (U)
+
+[!]  .nes.ram.nl
+
+$003D#Whichwayisforward#
+$004C#DrawingInterrupt#
+$004E#CurrentSpawnBlock#
+$0050#temp XposSub#
+$0051#temp Xpos#
+$0052#temp XposHi#
+$005D#NewBlockLo#
+$005E#NewBlockHi#
+$0060#ScoreLo#
+$0061#ScoreHi#
+$0062#Timer_frames#
+$0063#Timer_seconds#
+$0064#ninpo#
+$0065#RyuHP#
+$0067#ScrollBlockSubS#
+$0068#ScrollBlockS#
+$0069#ScrollPosSub#
+$006A#ScrollPos#
+$006B#ScrollBlock#
+$006C#ScrollArea#
+$006D#Current_stage#
+$006E#Current_room#
+$0070#ProcLo#
+$0071#ProcHi#
+$0073#Busy Slots#
+$0074#Current Slot#
+$0079#temp State#
+$007A#temp Facing#
+$0084#Ryu state#
+$0085#Ryu XposSub#
+$0086#Ryu Xpos#
+$0087#Ryu YspeedSub#
+$0089#Ryu Yspeed#
+$008A#Ryu Ypos#
+$008C#Ryu BGcollision#
+$008E#Ryu BGcollisionX#
+$008F#Ryu BGcollisionY#
+$0095#Inv. Timer#
+$0098#YpointerLo#
+$0099#YpointerHi#
+$009A#IDpointerLo#
+$009B#IDpointerHi#
+$0096#BlockPtrLo#
+$0097#BlockPtrHi#
+$00A2#ScreenPosSub#
+$00A3#ScreenPos#
+$00AC#Ryu XspeedSub#
+$00AD#Ryu Xspeed#
+$00B4#SpawnCount#
+$00B5#SpawnIterator#
+$00BF#Global Timer#
+$0300#LevelBlocks#
+$0400#ID#
+$0408#Timeout#
+$0410#Action#
+$0438#Movement#
+$0440#Facing#
+$0448#XspeedSub#
+$0450#Xspeed#
+$0458#XposSub#
+$0460#Xpos#
+$0468#YspeedSub#
+$0470#Yspeed#
+$0478#YposSub#
+$0480#Ypos#
+$0488#BGcollision#
+$0490#HP#
+$0498#State#
+$0600#Sound#
+
+Ninja Gaiden (U)
+
+[!]  .nes.7.nl
+
+$DD4D#Slot: BusyCheck#
+$DD57#Object: Next#
+$DD5A#Slot: ScanLoop#
+$DD63#Slot: First#
+$DD6C#Object: Handle#
+$E024#Object: Positioning#
+$E243#Object: Common#
+$E2E5#Object: Init#
+$E66F#Slot: BusyMask#
+$F1AC#Object: HandleTemp#
+$E677#Collisions: DoAll#
+$E67E#Collisions: LowEnough#
+$E691#Collisions: UpperRight#
+$E6B0#Collisions: LowerRight#
+$E6C3#Collisions: UpperLeft#
+$E6DD#Collisions: LowerLeft#
+$E782#Collisions: Flags#
+$E792#Collisions: FindBlockType#
+$E7BA#Collisions: CheckBlockHalf#
+$E7C0#Collisions: ReadHighNibble#
+$E7C7#Collisions: ReadLowNibble#
+$EB81#InAir#
+$F603#Load New Block#
+$F5FB#Six Blocks#
+$C195#ProcsLo#
+$C196#ProcsHi#
+$C21D#Object: Tyson#
+$C75D#Object: Bird#
+$DFBD#IsRyuAround?#
+$C227#Walk (sleep)#
+$C29D#Attack!!!#
+$C253#Jump (seek)#
+$C232#Midair#
+$C234#OnGround#
+$C264#Aim#
+$C276#GetReady#
+$DFAB#CheckDistance#
+$C259#RyuIsHere!#
+$C22D#Act#
+$E5D3#ReadPos#
+$E5D5#Spawns: GetX#
+$E5D9#Spawns: GetSide#
+$E5E7#Spawns: GetY#
+$E5EE#Spawns: GetID#
+$E595#Spawns: CheckNewSpawn#
+$E5A6#Spawns: NextUnit#
+$E5A7#Spawns: CapTheIterator#
+$E144#DmgCollisions#
+$E122#CollisionMasks#
+$E578#BackSpawn: LeftScroller#
+$E581#BackSpawn: RightScroller#
+$DDEB#slashing?#
+$DDEF#or duckslashing?#
+$DECF#SlashCollision#
+$DF1F#Damage enemy#
+$DF3A#Enemy dead#
+$DF3D#Branch if not a boss#
+
+Ninja Gaiden (U)
+
+[!]  .nes.0.nl
+
+$B300#Xhitboxes#
+$B400#Yhitboxes#
+$B500#Points table#
+$B530#HP table#
+$B560#Damage table#
+
+Movement
+
+Horizontal Movement
+
+Ryu has only three possible horizontal speeds: 1.5, 1, and 0.5 pixels per frame.
+
+1.5 p/f: when running either direction or pressing forward while airborne.
+
+0.5 p/f: when pressing back while airborne.
+
+1 p/f: when bouncing after taking damage from an enemy, until contact with a wall or platform. (the player has no control over Ryu's movement during this)
+
+Preserving speed
+
+Use of ↔, ← + ↕ or ← or → + B or A (←/→ + B/A only applicable when airborne, and if used for more than one from B and A must alternate every frame)
+serves to prevent a new speed value from being written, thereby preserving speed when transitioning from one type of movement to another. This is primarily useful for full-speed backwards air movement, but can alsobe used for more precise adjustments to Ryu's position.
+
+Example: ↔ on the frame control is regained after 
+taking damage, then releasing ← and continuing on holding → puts Ryu a half-pixel behind where he'd be if only → had been held, which can actually be favorable in some instances. Care must also be taken to avoid this happening where it would be undesirable, such as pressing ← for one frame mid-jump to trigger an enemy spawn, then pressing →+B on the following frame. This would leave Ryu one pixel behind where he would have been if the attack had come one frame later, after resuming normal forward movement.
+
+Sticky Floors
+
+Landing on certain tiles (mostly found at platform edges, but not always or exclusively) will stop Ryu's forward movement for one frame. Usually this is
+avoidable, but in cases where it is not, and it is possible to jump on the following frame, it provides an opportunity to execute a special attack without losing time.
+
+Vertical Movement
+
+Ryu move upwards in four ways: jumping from a floor or platform, jumping from a wall, being hit by an enemy, or climbing ladders.
+Each of these has its own rules, detailed below.
+
+standing jump: rises 48 pixels, peaks 19-24 frames after jumping.
+
+pattern: -4,-4,-4,-4,-4,-3,-3,-3,-3,-3,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,0,0,0,1...
+
+wall jump: rises 15 pixels, peaks 10-14 frames after jumping.
+
+pattern: -2,-2,-2,-2,-2,-1,-1,-1,-1,-1,0,0,0,0,0,1...
+
+damage boost: rises 29 pixels, peaks 14-19 frames after hit.
+
+pattern: -3,-3,-3,-3,-3,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,0,0,0,1...
+
+climbing a ladder moves Ryu 1 pixel per frame.
+
+Recovery Walljump
+
+When you hit by an enemy, you have no control until Ryu contact with a wall. So the fastest way to reduce 1.0px/f speed and "uncontrollness" length, is jumping into an enemy next to a wall while staying "between" the wall's climbable part and the enemy.
+This obviously requires enemy position manipulation and Ryu's X and Y positioning.
+
+A perfect Recovery Walljump is possible to carry out with only 1 frame of negative direction (for example a wall-Ryu-enemy situation in 3 frames: →, being hit (-0.5px ~ -1.5px), → + A)
+
+Wall-Climbing
+
+TODO:  what do we need to document about this?
+
+Attacking
+
+If you want to know the first frame a given enemy can be hit with the sword from a given jump without many tedious re-records, toggling a cheat that sets $82=2 will keep the sword in the attack state for the rest of a jump after B is pressed. Additionally you can poke some greater value to the enemy's HP to see a range of frames Ryu can attack it. Adjust by one frame for down+B if necessary.
+
+Randomness and manipulation
+
+Knife tossers
+
+From power on, $BF (Global Timer) increments once every frame, from 0 to 255. It is used to determine the delay (in frames) between tosses and the speed of the tossed objects for the four different object-tossing enemies (actually all the same enemy, just with variant sprites). A logical shift right is performed on the value of $BF for the toss-delay (so, 128 possible values). $BF is directly copied to the X and Y sub-pixel speeds and an AND #$01 sets the x speed. The Y speed is simply set to -3.
+
+$BF is also used similarly for the final boss and the 'shrimp' it spews, but with two shift-rights for the spew-timer and a few more steps for the X speed to get possible values between -3 and 3.
+
+Tysons
+
+Tysons constantly do 10-frame jumps, checking if Ryu is around each time they touch the ground. When Ryu is within 32 pixels, they change their action ($410) to "ready" as they land, after the next jump they go "steady", the next jump they attack. It sounds consistent, but in fact it has a lot of randomness.
+
+Inherited Y sub-pixels (see below) make them land sooner or later by 1 frame
+
+Graphical interrupts (occuring every 10 frames as you run) freeze them for 1 frame.
+
+If those interrupts occur right when Tyson is on the ground and is about to change his action, he will fail to do it this time, which means his attack may be delayed by ~10 frames, allowing you to pass.
+
+Birds
+
+Birds look so smart only because their AI is so simple. Each frame they are below Ryu, their Y pos increments, otherwise it decrements. Each frame they are to the right from Ryu, their X speed fractions decrease, otherwise they increase. Use the trajectory script to predict them.
+
+Bats
+
+They spawn at certain Y position which is read from configs, but then gets overwritten. BatSpawnYpos = RyuYpos - 0x10. You would want to manipulate their height if you are going to damage boost from them and land as soon as possible.
+
+Cheetahs
+
+They use to run in one direction all the time, but sometimes they turn around. It happens when they touch the ground and hit the red (sticky) block, first half, that thing that freezes Ryu too if he does it.
+
+Inherited Sub-Pixels (and manipulation)
+
+New enemy sub-pixel position gets added to the subpixel of the previous enemy in this slot that he had while disappearing. If the previous enemy disappeared at 0x07.00, the new one will have position 0xEF.80 (previous 0x08.80 => new 0xF0.00).
+
+There's also a 1 frame window to manipulate this: 1 frame before they would spawn, you remove the direction frame. Obviously this only saves time, if you already need to sacrifice 1.5px.
+
+Spawns, their delays and cancellations
+
+The game divides levels into blocks of ~16 pixels. For each block, level configs are read on which object must spawn. The object limit per room is stored in $B4. $B5 iterates through all possible spawns for a given room, and picks up those whose block matches the current level block. It iterates by 8 units per frame, and the game can spawn up to 30 units per room. The game can't read through all units every frame, if there are more of them than 8, so some spawns get delayed, if the block already requires the spawn, but the iterator isn't at that unit yet.
+
+Objects configs consist of 4 things: target level block, X position, Y position, and ID. X position can only be either 0x10, or 0xF0, putting it on one of the two screen sides. This way, by delaying the spawn of the object relatively to your own progression, you can affect their positions in the level. Screen-wise, it will spawn at the same place, but in the level it will be different. Just track which bunch of units was iterated through this frame, and delay the moment when it matches the current block. Use the Spawns lua function for that.
+
+Another trick is delaying and even cancelling spawns by moving backwards for 1 frame when the iterator runs through the particular spawn unit. If there are many enemies to spawn in the room, it will read that unit only once per 3-4 frames. So during a jump, you can press the opposite direction during these few frames, moving back only by half a pixel, and then again moving forward by 1.5 pixel per frame. But the fewer enemies the room has, the more frames you need to press backward, because iterator would hit the unit in question more often. Sometimes it doesn't even work because of that.
+
+Interrupts
+
+Every ~16 pixels (10-11 frames as you run) occurs and interrupt that loads the new graphics block into video memory. It takes so much time that the frame it occurs most calculations except for Ryu positioning are omitted. If you catch that frame and twitch left-right at 1.5 speed (or just a half pixel, depending on your position), the enemies will freeze. Interrupt is detected by looking at address $4C, which is 0xC1 or 0x80 during those frames.
+
+Level Timer
+
+Every second remaining on the level timer will take three frames to be converted to points and added to the score after a boss is killed—a fact that would seem to be at odds with doing things as fast as possible. But since the timer fractions, the "subtimer", carry over between stage transitions, there will be an optimal range of initial values for the subtimer to have when entering the boss stage so that a second that would otherwise remain on the clock will tick off during the boss fight. A way to find the maximum (the minimum is 0) desired subtimer value for a given, otherwise optimized, boss fight is to compare the 61 frames it takes the subtimer to tick a second off with (F) how many frames it will decrement during the fight (starting at either the first frame of input or the frame after and ending on the frame the boss dies or the frame after). F modulo 61 = max desired subtimer value. With that it can then be determined if the existing subtimer value is optimal or if it will be feasible to manipulate a value within that range.
+
+Glitches with no known application
+
+Taking damage at the same time a boss is killed
+
+TODO: haha, 3-3 actually does this
+
+Vertical screen-wrapping
+
+That happens when taking a hit from a vertical position of 4, 5, 14, 15, 16, 25, 26, 35, 36, 45, 46, 55, 56, 65, 66, 75, 84, 93, 102, or 111 or jumping from a wall with a vertical position of 73, 82, or 91, because there is no cap on falling speed and because the game only checks if Ryu is in the eight pixel death zone at the bottom of the screen, but doesn't care if he passes it, so falling from the right position will just make him wrap around to the top of the screen.
+
+Making Enemies Fall from Platforms
+
+TODO:  Spawn position dependent. Anything need to say?
+
+that one thing where you pass through an enemy or grab a power-up and graphics glitch out for a frame
+
+That's a lag frame. The only place where it's not a lag frame is the end of 4-1.
+
+TODO:  The block config iterator is not a constant number. 8 for 1-1, 1 for 1-2, 3 for 2-1 etc. It's probably $C1-10 (18 == 8, 13 == 3, 1 == 1 <-- yeah... probably)
+
+TODO:  reword prespawn manipulation
+
+TODO:  write down enemy slot system ("It's the highest spare slot. Which means if you make it busy yourself, the object will just spawn in the next "highest spare slot".)
+
+TODO:  solve the "how to monitor birdy" problem, I think using the speed as a counter MIGHT be enough
+
+TODO:  fill in all the gaps
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/NinjaGaiden last edited by
+
+on 1/1/2022 6:13 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

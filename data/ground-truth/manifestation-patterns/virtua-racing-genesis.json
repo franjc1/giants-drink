@@ -1,0 +1,133 @@
+{
+  "game_id": "virtua-racing-genesis",
+  "game_name": "Virtua Racing",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "track_boundary_markers",
+      "visual_form": "roadside barriers, walls, and environmental boundaries at circuit edges",
+      "meaning": "collision hazard; crossing boundary results in crash/loss of control"
+    },
+    {
+      "signal": "tight_corners",
+      "visual_form": "hairpin turns and sharp road geometry (especially in Acropolis circuit)",
+      "meaning": "high-speed danger zone requiring precise steering; collision risk"
+    },
+    {
+      "signal": "opponent_proximity",
+      "visual_form": "rival vehicles close to player car on track",
+      "meaning": "risk of collision or being overtaken; competitive threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open_track_sections",
+      "visual_form": "wide, straight racing lines with clear road ahead",
+      "meaning": "safe acceleration zone; low collision risk"
+    },
+    {
+      "signal": "environmental_landmarks",
+      "visual_form": "amusement park structures (Big Forest), bridge infrastructure (Bay Bridge), architectural features (Acropolis)",
+      "meaning": "visual waypoints and track identity; safe reference points for navigation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_vehicle",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "opponent cars rendered in distinct 3D polygon models and potentially different colors/designs",
+      "environmental_markers": null
+    },
+    {
+      "faction": "competitor_ai",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "multiple opponent vehicles with distinct 3D geometry and visual differentiation from player car",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "difficulty_level_beginner",
+      "visual_manifestation": "Big Forest circuit with amusement park theme and wider track sections",
+      "behavioral_manifestation": "reduced opponent AI aggression and slower lap times; more forgiving track design"
+    },
+    {
+      "world_state": "difficulty_level_intermediate",
+      "visual_manifestation": "Bay Bridge circuit featuring the bridge structure as dominant environmental feature",
+      "behavioral_manifestation": "moderate opponent difficulty; bridge crossing introduces elevation changes and technical driving requirement"
+    },
+    {
+      "world_state": "difficulty_level_expert",
+      "visual_manifestation": "Acropolis circuit with tight hairpin turns and complex road geometry",
+      "behavioral_manifestation": "aggressive opponent AI; high precision required; multiple sharp turns create execution difficulty"
+    },
+    {
+      "world_state": "player_in_lead",
+      "visual_manifestation": "opponent vehicles recede in distance on-screen",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "player_under_threat",
+      "visual_manifestation": "opponent vehicles visible in close proximity in rear-view perspective or side-by-side racing",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "vehicle_selection_screen",
+      "visual_manifestation": "transmission type options displayed; different car models shown in 3D",
+      "behavioral_manifestation": "player agency to customize vehicle handling characteristics before race"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "circuit_theming",
+      "example": "Big Forest features amusement park structures (roller coaster, attractions) to establish leisure/family context"
+    },
+    {
+      "technique": "landmark_identity",
+      "example": "Bay Bridge circuit uses the iconic bridge structure itself as the primary visual and navigational landmark"
+    },
+    {
+      "technique": "track_difficulty_through_geometry",
+      "example": "Acropolis uses tight hairpin turns as visual manifestation of expert-level challenge; Beginner uses wider, more forgiving topology"
+    },
+    {
+      "technique": "3d_polygon_spectacle",
+      "example": "Circuit environments rendered in 3D polygonal graphics to convey cutting-edge technology and sense of immersion"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "opponent_vehicle",
+      "state": "in_race_competition",
+      "behavior": "follows racing line; attempts to maintain or improve position relative to player; responds to player vehicle proximity"
+    },
+    {
+      "entity": "player_vehicle",
+      "state": "normal_operation",
+      "behavior": "responds to steering input; accelerates/brakes based on player controls; collision results in loss of control/crash"
+    },
+    {
+      "entity": "player_camera",
+      "state": "active_race",
+      "behavior": "supports four selectable viewpoints (V.R. View System) to accommodate different player preferences and driving styles"
+    }
+  ],
+  "notes": "Virtua Racing (Genesis 1994) is a racing simulation with minimal narrative or faction-based storytelling. World state is communicated entirely through track design, circuit difficulty presentation, and environmental theming. Danger is signaled through track geometry and boundary markers. No political or faction systems present. The game's core communication is through racing circuit identity and visual representation of difficulty progression (Beginner → Intermediate → Expert).",
+  "sources_used": [
+    "wikipedia_virtua_racing"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:36:45.147Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3234,
+    "output_tokens": 1395,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

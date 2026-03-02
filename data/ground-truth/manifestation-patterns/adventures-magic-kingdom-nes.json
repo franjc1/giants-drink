@@ -1,0 +1,187 @@
+{
+  "game_id": "adventures-magic-kingdom-nes",
+  "game_name": "Adventures in the Magic Kingdom",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Ghosts in Haunted Mansion stage; Pirates in Pirates of the Caribbean stage; Enemy ships in Space Mountain stage",
+      "meaning": "Immediate threat requiring combat or evasion"
+    },
+    {
+      "signal": "Obstacle hazards",
+      "visual_form": "Asteroids in Space Mountain; Track obstacles in Big Thunder Mountain; Road obstacles in Autopia",
+      "meaning": "Environmental danger requiring player skill to navigate safely"
+    },
+    {
+      "signal": "Villain presence",
+      "visual_form": "Panhandle Pete in Autopia race stage; Ghosts and pirates as stage bosses",
+      "meaning": "Major threat requiring defeat or avoidance to progress"
+    },
+    {
+      "signal": "Projectile attacks",
+      "visual_form": "Pirates throwing cannonballs; Ghost attacks; Enemy ship fire",
+      "meaning": "Ranged danger requiring defensive action"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Key acquisition",
+      "visual_form": "Silver keys obtained upon stage completion",
+      "meaning": "Progress toward goal; visible measure of advancement"
+    },
+    {
+      "signal": "NPC presence in overworld",
+      "visual_form": "Children positioned around park offering trivia questions",
+      "meaning": "Safe interaction zones; knowledge-based progression opportunities"
+    },
+    {
+      "signal": "Goofy and Mickey presence",
+      "visual_form": "Disney character sprites in overworld hub",
+      "meaning": "Quest authority figures; narrative safety and legitimacy"
+    },
+    {
+      "signal": "Cinderella Castle",
+      "visual_form": "Central locked gate structure in overworld",
+      "meaning": "Final objective location; visual anchor for quest completion"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Disney Authority (Mickey/Goofy)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mickey Mouse character sprite; Cinderella Castle gate",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Disneyland-style theme park setting; parade preparation atmosphere"
+    },
+    {
+      "faction": "Pirates",
+      "color_identity": null,
+      "symbol_or_sigil": "Pirate character sprites with distinctive attack animations",
+      "enemy_visual_variants": "Multiple pirate types with different attack patterns (cannonball throwing, barrel dropping)",
+      "environmental_markers": "Pirates of the Caribbean themed island stage; tropical/shipwreck aesthetics"
+    },
+    {
+      "faction": "Supernatural (Ghosts/Haunting)",
+      "color_identity": null,
+      "symbol_or_sigil": "Ghost sprites; spooky visual effects",
+      "enemy_visual_variants": "Haunted dishes and silverware; evil-looking faces; cats in graveyard",
+      "environmental_markers": "Haunted Mansion stage; gothic architecture; graveyard elements"
+    },
+    {
+      "faction": "Cosmic/Space Threats",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy spaceship sprites; asteroids",
+      "enemy_visual_variants": "Multiple enemy ship types in Space Mountain stage",
+      "environmental_markers": "First-person spaceship interior; asteroid field; space setting"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Quest incomplete (before key acquisition)",
+      "visual_manifestation": "Cinderella Castle gate locked; six silver keys shown as unobtained; park in pre-parade state",
+      "behavioral_manifestation": "Mickey requests help; children offer trivia; stages remain accessible for completion"
+    },
+    {
+      "world_state": "Keys being acquired",
+      "visual_manifestation": "Silver key obtained as stage reward; inventory reflects collected keys; progressive gate unlock anticipated",
+      "behavioral_manifestation": "Players defeat stage enemies and bosses; navigate obstacles; answer trivia for final key"
+    },
+    {
+      "world_state": "Quest complete (all keys obtained)",
+      "visual_manifestation": "Cinderella Castle gate opens; Disney parade begins as finale",
+      "behavioral_manifestation": "Mickey congratulates player; parade animation triggers; game concludes"
+    },
+    {
+      "world_state": "Overworld hub state",
+      "visual_manifestation": "Top-down perspective of Disneyland-style park; visible stage entrances; NPCs stationed throughout",
+      "behavioral_manifestation": "Free navigation between stages; NPC interaction available; stage selection at player discretion"
+    },
+    {
+      "world_state": "Stage interior state",
+      "visual_manifestation": "Perspective shifts based on stage type: side-scrolling (Haunted Mansion, Pirates), top-down vehicle (Autopia, Big Thunder Mountain), first-person (Space Mountain)",
+      "behavioral_manifestation": "Combat, platforming, racing, or navigation mechanics activate; enemies actively threaten; stage-specific hazards manifest"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic stage design",
+      "example": "Each Disney ride attraction (Haunted Mansion, Pirates of the Caribbean, Space Mountain, Autopia, Big Thunder Mountain) is rendered as a distinct gameplay environment with matching visual aesthetics and enemy types that reinforce attraction theme"
+    },
+    {
+      "technique": "Progression through lock-and-key structure",
+      "example": "Silver keys as literal quest objects; Cinderella Castle gate as visual embodiment of final objective; six keys needed creates clear progression narrative"
+    },
+    {
+      "technique": "Character-driven narrative framing",
+      "example": "Mickey and Goofy serve as quest-givers and authority figures; Panhandle Pete and pirates are named antagonists; NPCs positioned to offer knowledge rewards, establishing social hierarchy"
+    },
+    {
+      "technique": "Aesthetic faction differentiation",
+      "example": "Pirates visually distinct from ghosts; cosmic enemies separate from terrestrial threats; environmental color and sprite design communicates which faction inhabits each stage"
+    },
+    {
+      "technique": "Unused asset hints at abandoned mechanics",
+      "example": "Unused 'ITEM' and 'PLESENT' graphics suggest original design included item rewards beyond keys; seventh key sprite indicates expanded key collection system was planned but cut"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pirate (cannonball thrower)",
+      "state": "Idle/Lookout",
+      "behavior": "Turns head side to side in watchful animation; maintains position"
+    },
+    {
+      "entity": "Pirate (cannonball thrower)",
+      "state": "Threat",
+      "behavior": "Holds cannonball overhead; throws when player approaches"
+    },
+    {
+      "entity": "Pirate (window variant)",
+      "state": "Threat",
+      "behavior": "Pops out of window; holds barrel overhead; throws downward"
+    },
+    {
+      "entity": "Pirate (walker variant)",
+      "state": "Patrol",
+      "behavior": "Two-frame walking animation; two actions only—standing still or charging forward (aggressive)"
+    },
+    {
+      "entity": "Ghost (Haunted Mansion)",
+      "state": "Threat",
+      "behavior": "Can be defeated by candle projectiles; requires player offensive action"
+    },
+    {
+      "entity": "Enemy spaceship (Space Mountain)",
+      "state": "Threat",
+      "behavior": "Fires phaser fire at player; requires dodging and counter-attack"
+    },
+    {
+      "entity": "NPCs (trivia children)",
+      "state": "Safe interaction",
+      "behavior": "Remain stationary; ask Disney trivia questions; reveal key location if answered correctly"
+    },
+    {
+      "entity": "Mickey Mouse",
+      "state": "Authority/Guide",
+      "behavior": "Requests help; offers quest framing; congratulates upon completion"
+    }
+  ],
+  "notes": "This game uses a hub-and-spoke structure with thematic stage differentiation to create distinct gameplay and visual environments. The Disneyland/Magic Kingdom setting establishes a unified world-state frame. Danger is communicated through enemy sprite design and behavioral animations (head-turning lookout, throwing motions, charging attacks). Safety is indicated through NPC presence, key acquisition visuals, and the stable castle structure. Faction identity relies on visual theming (pirates in Caribbean stage, ghosts in mansion, aliens in space) rather than explicit color-coding or sigil systems. The game's unused assets (seventh key, item/present graphics) suggest an abandoned mechanic that would have created additional world-state complexity through alternative reward paths.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:32:50.316Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5253,
+    "output_tokens": 2238,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

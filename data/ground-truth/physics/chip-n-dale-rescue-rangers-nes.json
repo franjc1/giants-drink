@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "game": "Chip 'n Dale Rescue Rangers",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Chip 'n Dale Rescue Rangers (video game)",
+        "url": "https://en.wikipedia.org/wiki/Chip_%27n_Dale_Rescue_Rangers_(video_game)",
+        "notes": "Box-throwing mechanics, 2-player co-op, character physics overview."
+      },
+      {
+        "name": "TASVideos — NES / Chip 'n Dale Rescue Rangers",
+        "url": "https://tasvideos.org/GameResources/NES/ChipNDaleRescueRangers",
+        "notes": "Physics documentation from TAS community."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Chip 'n Dale Rescue Rangers is a Capcom NES platformer based on the Disney animated series.",
+      "DEFINING MECHANIC: Pick up and throw boxes (crates, cans, etc.) — both as weapons and as platforms.",
+      "The box-throw system makes the environment interactive: boxes become projectiles or stepping stones.",
+      "2-player co-op: Player 2 can be picked up and thrown by Player 1 (or vice versa) — a cooperative traversal tool.",
+      "Chip and Dale have identical physics — no character differentiation.",
+      "Uses the same Capcom NES engine as DuckTales and other Disney Capcom games.",
+      "Walk speed approximately 1.5 px/f — Capcom NES standard."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Capcom NES standard movement. VERIFY."
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 40,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": "Standard Capcom NES jump. VERIFY."
+  },
+
+  "box_throw_system": {
+    "_note": "THE DEFINING MECHANIC. Environment is filled with objects (crates, flower pots, cans) that can be picked up and thrown.",
+    "pickup": {
+      "description": "Stand near an object and press action — Chip or Dale holds it above their head.",
+      "notes": "Cannot attack while holding — holding state is a committed choice."
+    },
+    "throw": {
+      "description": "Press action again to throw the held object forward.",
+      "trajectory": "Low arc — rolls/slides forward at height",
+      "notes": [
+        "Throws travel roughly 4-5 tiles before stopping or falling off edge.",
+        "Throw can bounce off walls in some sections.",
+        "Hitting enemies with thrown objects damages or defeats them."
+      ]
+    },
+    "as_platform": {
+      "description": "Held boxes provide a protective 'shell' — enemies that contact the held box are blocked. Can be placed and used as a temporary platform.",
+      "notes": [
+        "Standing on a box instead of throwing it creates a height boost.",
+        "Stack boxes to reach elevated areas (limited by supply)."
+      ]
+    },
+    "box_supply": {
+      "description": "Boxes are found in the environment at fixed positions. Limited supply per screen.",
+      "notes": "Running out of throwable objects forces melee or evasion strategies."
+    },
+    "confidence": "high"
+  },
+
+  "co_op_mechanics": {
+    "_note": "The co-op system creates unique 2-player traversal options not available in solo play.",
+    "throw_partner": {
+      "description": "When close to the other player, one can pick up and throw the other — same mechanic as box throw.",
+      "uses": [
+        "Launch partner to elevated platform",
+        "Throw partner across a gap",
+        "Rescue a partner from a pit (throw from safe ground)",
+        "Use as a projectile against enemies"
+      ],
+      "notes": [
+        "The partner-as-thrown-object is one of the more creative co-op mechanics in NES games.",
+        "The thrown partner can attack enemies in their flight path."
+      ]
+    },
+    "cooperative_stacking": {
+      "description": "One player can stand on the other's head (same as many 2-player NES games) to reach elevated areas.",
+      "notes": "Classic co-op vertical boost."
+    },
+    "confidence": "high"
+  },
+
+  "world_themes": {
+    "worlds": [
+      "Construction site",
+      "Toy factory",
+      "Carnival/amusement park",
+      "Fat Cat's mansion",
+      "Final stage"
+    ],
+    "notes": "Classic themed-world structure. Each world has different environmental box types (construction boxes vs toy blocks vs carnival objects)."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Chip 'n Dale's box-throw system makes the environment a weapon inventory. Every crate, flower pot, and can the player sees is a potential projectile. This creates environmental awareness: players scan for throwable objects before engaging enemies, not just for platforming purposes.",
+    "The partner-throw in co-op (same mechanic as box-throw) is a masterpiece of mechanical consistency. One system — pick up and throw — handles boxes, enemies (sometimes), and your partner. The co-op interaction emerges from the single-player mechanic, not from a separate multiplayer system.",
+    "The box-as-platform option creates a tactical split: throw it now (defeat the immediate threat) or place it here (access the elevated area). This is a resource-use decision disguised as a simple pickup mechanic.",
+    "Chip 'n Dale's simplicity (2 actions: jump and throw/interact) produces surprising depth through environmental diversity. The same two buttons work differently in every context because the context changes. This is the 'simple systems, complex outcomes' design philosophy at its finest.",
+    "The co-op design creates a unique failure mode: friendly fire (throwing your partner into a pit) and unique success mode (using your partner as a projectile). The cooperative throw adds social risk-reward: trust your partner to aim correctly, or refuse to be picked up."
+  ]
+}

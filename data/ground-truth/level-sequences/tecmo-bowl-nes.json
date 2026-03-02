@@ -1,0 +1,121 @@
+{
+  "game_id": "tecmo-bowl-nes",
+  "game_name": "Tecmo Bowl",
+  "platform": "nes",
+  "paradigm": "sports",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Team Selection",
+      "first_appears": "Game Start",
+      "introduction_context": "safe",
+      "mastery_context": "Player chooses from 12 NFL-licensed teams with different roster strengths"
+    },
+    {
+      "element": "Play Selection (Offensive)",
+      "first_appears": "First Drive",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns 4-play offensive playbook; most teams have 2 running + 2 passing plays"
+    },
+    {
+      "element": "Play Selection (Defensive)",
+      "first_appears": "First Drive",
+      "introduction_context": "moderate",
+      "mastery_context": "Player must anticipate opponent's play choice; correct prediction collapses line and covers receivers"
+    },
+    {
+      "element": "Tackle Mechanics",
+      "first_appears": "First Defensive Play",
+      "introduction_context": "moderate",
+      "mastery_context": "Defense avoids blockers or tackles ball carrier directly"
+    },
+    {
+      "element": "Pass Interception",
+      "first_appears": "Early Game",
+      "introduction_context": "moderate",
+      "mastery_context": "Result of correctly anticipating opponent's passing play"
+    },
+    {
+      "element": "Team-Specific Strategy",
+      "first_appears": "Mid-Game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Teams like San Francisco and Miami have 3 passing plays vs 1 running play; requires adaptation"
+    },
+    {
+      "element": "Password Progression System",
+      "first_appears": "After First Victory",
+      "introduction_context": "safe",
+      "mastery_context": "One-player mode awards password after each championship win; enables campaign continuation"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful tackle",
+      "Completed pass",
+      "Interception",
+      "End of down",
+      "Victory screen"
+    ],
+    "typical_tension_triggers": [
+      "Play selection mismatch (wrong defensive call)",
+      "Open receiver downfield",
+      "Broken tackle",
+      "Opponent advancing toward goal line",
+      "Championship game progression"
+    ],
+    "pacing_descriptor": "Turn-based play selection creates rhythmic tension peaks around each snap; intensity builds toward goal line; series of consecutive wins escalates championship difficulty"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Initial team selection determines baseline difficulty; player learns 4-play playbook depth",
+    "mid_game": "Computer opponent adaptability increases; player faces varied team-specific strategies (San Francisco/Miami 3-pass formations)",
+    "late_game": "Championship progression requires consecutive victories; each win triggers stronger computer opponent selection",
+    "notable_spikes": [
+      "San Francisco and Miami teams with asymmetric play distributions (3 passing vs 1 running)",
+      "Championship game series requiring multiple consecutive victories"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Single Game Match",
+      "description": "Each game is self-contained; player selects play, computer selects play, collision resolution determines outcome",
+      "example_level": "Any individual game in one-player or two-player mode"
+    },
+    {
+      "pattern_name": "Championship Campaign",
+      "description": "One-player mode sequences victories into campaign; password system enables progression tracking across play sessions",
+      "example_level": "One-player tournament mode"
+    },
+    {
+      "pattern_name": "Play Anticipation Duel",
+      "description": "Core mechanic: player predicts opponent's play; correct prediction = defensive advantage (sack/interception potential); incorrect = offensive success",
+      "example_level": "Any offensive/defensive sequence"
+    }
+  ],
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (Tecmo Bowl NES)",
+    "wikipedia - Tecmo Bowl"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:16:58.181Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4219,
+    "output_tokens": 1311,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

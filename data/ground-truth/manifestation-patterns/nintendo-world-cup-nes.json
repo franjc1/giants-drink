@@ -1,0 +1,230 @@
+{
+  "game_id": "nintendo-world-cup-nes",
+  "game_name": "Nintendo World Cup",
+  "platform": "nes",
+  "paradigm": "beat-em-up sports (soccer)",
+  "danger_signals": [
+    {
+      "signal": "Player knockdown",
+      "visual_form": "Character sprite falls to ground and remains prone",
+      "meaning": "Player eliminated from play for remainder of half; repeated tackling causes this state"
+    },
+    {
+      "signal": "Opposing team possession",
+      "visual_form": "Ball sprite control shifts to CPU-controlled players",
+      "meaning": "Immediate threat to goal; opponent can execute super shots"
+    },
+    {
+      "signal": "Super shot charge",
+      "visual_form": "Bicycle kick animation or diving header animation triggers",
+      "meaning": "High-damage attack incoming; team-specific super shots vary in trajectory and power"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Player standing upright",
+      "visual_form": "Character sprite in active playing pose",
+      "meaning": "Player available for control and tactical positioning"
+    },
+    {
+      "signal": "Ball possession by player team",
+      "visual_form": "Ball sprite near player-controlled character",
+      "meaning": "Offensive opportunity; can execute pass/shoot commands"
+    },
+    {
+      "signal": "Goalkeeper positioning",
+      "visual_form": "Goalkeeper sprite occupies goal area",
+      "meaning": "Defensive protection active; last barrier against scoring"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Argentina",
+      "color_identity": "Palette-swapped team coloring (specific hue varies by port)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player sprites recolored to represent national team; same base character models as other teams",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Brazil",
+      "color_identity": "Distinct palette swap identifying national team",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Sprite palette differentiation from other teams",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Cameroon",
+      "color_identity": "Unique team palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Palette-swapped player sprites",
+      "environmental_markers": null
+    },
+    {
+      "faction": "England",
+      "color_identity": "Team-specific color scheme",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Recolored sprites matching national identity",
+      "environmental_markers": null
+    },
+    {
+      "faction": "France",
+      "color_identity": "Palette-based team identity",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Sprite palette differentiation",
+      "environmental_markers": null
+    },
+    {
+      "faction": "West Germany",
+      "color_identity": "National team palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Color-swapped player sprites",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Italy",
+      "color_identity": "Team color identity via palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Sprite recoloring",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Japan (Kunio team)",
+      "color_identity": "Sprite palette for Japanese national team",
+      "symbol_or_sigil": "Kunio character reused from Downtown Nekketsu Story/River City Ransom",
+      "enemy_visual_variants": "Shared sprite assets with Kunio-kun series; recognizable character faces from series canon",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Mexico",
+      "color_identity": "National team palette swap",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Palette-differentiated sprites",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Netherlands",
+      "color_identity": "Team-specific color scheme",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Sprite palette variation",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Soviet Union",
+      "color_identity": "Palette-based team identity",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Color-swapped player sprites",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Spain",
+      "color_identity": "Team palette identity",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Sprite recoloring",
+      "environmental_markers": null
+    },
+    {
+      "faction": "United States",
+      "color_identity": "National team color scheme",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Palette-swapped sprites",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Ice field conditions",
+      "visual_manifestation": "Playing field rendered with ice texture; white/crystalline ground appearance",
+      "behavioral_manifestation": "Player and ball movement physics altered; reduced traction creates sliding, slower acceleration, altered ball bounce"
+    },
+    {
+      "world_state": "Sand field conditions",
+      "visual_manifestation": "Sand texture applied to playing field; tan/brown ground material",
+      "behavioral_manifestation": "Movement physics adjusted to sand resistance; affects player speed and ball control"
+    },
+    {
+      "world_state": "Dirt field conditions",
+      "visual_manifestation": "Dirt texture on playing field; earthy brown ground appearance",
+      "behavioral_manifestation": "Standard movement physics with terrain-specific ball behavior"
+    },
+    {
+      "world_state": "Half completion",
+      "visual_manifestation": "Super shot count resets from five to five; knocked-down players reset to standing",
+      "behavioral_manifestation": "Eliminated players return to field; team recovers one-half resource pool"
+    },
+    {
+      "world_state": "Tournament progression",
+      "visual_manifestation": "Team palette and super shot animation changes reflect advancing opponent nationalities",
+      "behavioral_manifestation": "CPU opponent difficulty/behavior patterns shift based on tournament stage; different super shot characteristics encountered"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Field material variation",
+      "example": "Ice, sand, and dirt fields serve as mechanical storytelling—environmental context defines play challenge without narrative exposition"
+    },
+    {
+      "technique": "Sprite character design",
+      "example": "Kunio and Japanese team reuse sprites from Downtown Nekketsu Story series, embedding narrative continuity through visual recognition; short-legged big-headed character archetype signals Kunio-kun series identity"
+    },
+    {
+      "technique": "National team palette identity",
+      "example": "Thirteen distinct national teams communicated entirely through sprite color differentiation and super shot animation variations; no text-based faction markers required"
+    },
+    {
+      "technique": "Super shot visual differentiation",
+      "example": "Each team's unique super shot animation style communicates national character and playstyle without mechanical explanation; visual signature of team identity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goalkeeper",
+      "state": "Active",
+      "behavior": "Positioned in goal area; intercepts shots; default defensive stance"
+    },
+    {
+      "entity": "Outfield player",
+      "state": "Knockdown",
+      "behavior": "Falls prone after repeated tackles; remains inactive for remainder of half; does not participate in play"
+    },
+    {
+      "entity": "Outfield player",
+      "state": "Super shot charge",
+      "behavior": "Executes bicycle kick or diving header animation; generates high-powered shot with team-specific trajectory"
+    },
+    {
+      "entity": "Ball",
+      "state": "In transit on standard field",
+      "behavior": "Rolls/bounces with standard physics"
+    },
+    {
+      "entity": "Ball",
+      "state": "In transit on ice field",
+      "behavior": "Slides with reduced friction; travels farther; maintains momentum longer"
+    },
+    {
+      "entity": "Player team",
+      "state": "Possession",
+      "behavior": "Receives pass/shoot command input; can execute five super shots per half"
+    },
+    {
+      "entity": "CPU opponent team",
+      "state": "Active tournament opponent",
+      "behavior": "Executes team-specific super shot patterns; varies difficulty based on tournament progression"
+    }
+  ],
+  "notes": "Nintendo World Cup (1990) communicates world-state and faction identity primarily through visual palette swapping and environmental ground textures. The game lacks explicit narrative text or symbolic markers; all faction differentiation derives from sprite color recoloring. The Japanese version (Nekketsu High School Dodgeball Club: Soccer Story) centers on intra-school competition and reuses character assets from the Kunio-kun series, embedding narrative continuity through sprite recognition. The international NES localization transforms this into a 13-nation world cup by palette-swapping identical base player models. Field material (ice/sand/dirt) serves dual function: mechanical differentiation affecting gameplay physics and environmental storytelling establishing context. Super shot animations provide team-specific visual signatures communicating playstyle identity without text exposition. No explicit danger/safety UI elements documented; gameplay threats communicated through sprite state changes (knockdown, possession shift) and animation triggers (super shot charge).",
+  "sources_used": [
+    "wikipedia:Nintendo World Cup"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:43:08.518Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3237,
+    "output_tokens": 2453,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

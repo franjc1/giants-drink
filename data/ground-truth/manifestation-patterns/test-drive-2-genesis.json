@@ -1,0 +1,220 @@
+{
+  "game_id": "test-drive-2-genesis",
+  "game_name": "The Duel: Test Drive II",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Police car presence",
+      "visual_form": "Police vehicle appearing on roadway",
+      "meaning": "Legal authority enforcement; player speeding triggers pursuit"
+    },
+    {
+      "signal": "Speed limit violation",
+      "visual_form": "Radar detector alerts (standard in all vehicles)",
+      "meaning": "Approaching or exceeding legal speed threshold; police will pursue"
+    },
+    {
+      "signal": "Oncoming traffic",
+      "visual_form": "Other vehicles on multi-lane highways",
+      "meaning": "Collision hazard; crash costs life and 30 seconds"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Cacti (desert), rock walls, cliffs (mountain), trees (grassy areas)",
+      "meaning": "Off-road collision/damage; crash costs life"
+    },
+    {
+      "signal": "Cliff edges",
+      "visual_form": "Sheer drop visible on mountain courses with cliff on roadside",
+      "meaning": "Falling off results in immediate crash/life loss"
+    },
+    {
+      "signal": "Engine redline (manual transmission)",
+      "visual_form": "Manual transmission overrevving",
+      "meaning": "Engine blow-up; results in life loss"
+    },
+    {
+      "signal": "Empty fuel tank",
+      "visual_form": "Fuel depletion after passing gas station",
+      "meaning": "Running out of gas before reaching next station results in life loss"
+    },
+    {
+      "signal": "Tunnel sections",
+      "visual_form": "Mountain tunnel passages",
+      "meaning": "Confined space increases collision risk with traffic"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Gas station location",
+      "visual_form": "Gas station at end of each course level",
+      "meaning": "Mandatory stop point to refuel; safe destination"
+    },
+    {
+      "signal": "Radar detector equipped",
+      "visual_form": "Standard equipment on all selectable vehicles",
+      "meaning": "Advance warning of police presence; allows speed adjustment to avoid pursuit"
+    },
+    {
+      "signal": "Reduced speed",
+      "visual_form": "Slowing before police encounter",
+      "meaning": "Staying under speed limit prevents police pursuit initiation"
+    },
+    {
+      "signal": "Bonus life award",
+      "visual_form": "Extra life granted for clean level completion",
+      "meaning": "Successfully avoiding crashes and fuel depletion provides safety buffer"
+    },
+    {
+      "signal": "Wide open highway sections",
+      "visual_form": "Desert and grassy areas with clear sightlines",
+      "meaning": "Lower collision density; safer driving terrain"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Law Enforcement / Police",
+      "color_identity": null,
+      "symbol_or_sigil": "Police car vehicle model",
+      "enemy_visual_variants": "Female police officer character (arrests vs. smiles based on evasion success)",
+      "environmental_markers": "Police cars stationed along course routes; appear when speed limit exceeded"
+    },
+    {
+      "faction": "Player (Racer)",
+      "color_identity": null,
+      "symbol_or_sigil": "Selectable exotic car (Porsche 959, Ferrari F40, Lamborghini Diablo in console)",
+      "enemy_visual_variants": "Player character shown in end sequence (smiling if evaded police, arrested if caught)",
+      "environmental_markers": "Player vehicle starting position on roadway; racing against clock or AI opponent"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player exceeding speed limit",
+      "visual_manifestation": "Police car begins pursuit; radar detector signals alert",
+      "behavioral_manifestation": "Police AI pathfinds toward player vehicle; pursues if player maintains high speed"
+    },
+    {
+      "world_state": "Player maintains legal speed near police",
+      "visual_manifestation": "Police car remains stationary or passes without engagement",
+      "behavioral_manifestation": "Police ignore player; no pursuit initiated"
+    },
+    {
+      "world_state": "Police overtakes player during pursuit",
+      "visual_manifestation": "Police car pulls ahead of player on roadway",
+      "behavioral_manifestation": "Player forced to pull over; receives ticket; time penalty applied"
+    },
+    {
+      "world_state": "Player collision with police car",
+      "visual_manifestation": "Impact animation between player and police vehicle",
+      "behavioral_manifestation": "Game instantly ends; all lives forfeited regardless of remaining count"
+    },
+    {
+      "world_state": "Course completion without law enforcement contact",
+      "visual_manifestation": "Female police officer and player character on screen together, both smiling",
+      "behavioral_manifestation": "Victory sequence; game won"
+    },
+    {
+      "world_state": "Course completion with police apprehension",
+      "visual_manifestation": "Female police officer placing player character under arrest",
+      "behavioral_manifestation": "Arrest sequence; game lost"
+    },
+    {
+      "world_state": "Desert terrain",
+      "visual_manifestation": "Cacti along roadside; sandy environment; clear visibility",
+      "behavioral_manifestation": "Easy difficulty; lower traffic density; straightforward navigation"
+    },
+    {
+      "world_state": "Mountain terrain",
+      "visual_manifestation": "Sheer rock wall on one side; cliff drop on other; tunnel passages",
+      "behavioral_manifestation": "High collision risk; reduced driving options; tunnel sections increase danger"
+    },
+    {
+      "world_state": "Grassy terrain",
+      "visual_manifestation": "Trees scattered along roadway; flat landscape; multiple lane highway",
+      "behavioral_manifestation": "Medium difficulty; tree collision hazard; off-road driving damage accumulation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Landmark visibility",
+      "example": "Mount Rushmore visible in 'City Bound' course establishes Midwest location; Seattle skyline and Space Needle in 'West Coast' course confirms West Coast setting"
+    },
+    {
+      "technique": "Terrain-specific obstacles",
+      "example": "Desert has cacti; mountains have cliff edges and rock walls; grassy areas have trees — each creates location-specific danger context"
+    },
+    {
+      "technique": "Course difficulty progression",
+      "example": "Courses named 'Desert Blast (Easy)' through 'West Coast (Hardest)' with increasing length and complexity; establishes geographic progression across continental USA"
+    },
+    {
+      "technique": "Traffic density variation",
+      "example": "Different courses feature varying amounts of oncoming traffic; creates environmental storytelling of road congestion in different regions"
+    },
+    {
+      "technique": "Law enforcement presence",
+      "example": "Police stationed throughout each course; reinforces theme of highway authority and legal risk in public road racing scenario"
+    },
+    {
+      "technique": "Vehicle selection specifications",
+      "example": "Presenting Porsche 959, Ferrari F40, and Lamborghini Diablo with technical specs (top speed, torque, acceleration) establishes high-performance racing context and player capability choice"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Police car",
+      "state": "Idle/Patrolling",
+      "behavior": "Stationed on roadway; no movement until player speed violation detected"
+    },
+    {
+      "entity": "Police car",
+      "state": "Activated (player speeding)",
+      "behavior": "Initiates pursuit; follows player vehicle; attempts to overtake"
+    },
+    {
+      "entity": "Police car",
+      "state": "Successful intercept",
+      "behavior": "Overtakes player; forces pull-over; triggers ticket issuance and time penalty"
+    },
+    {
+      "entity": "Police officer (female character)",
+      "state": "Course completion without evasion",
+      "behavior": "Smiles at player character; indicates successful outcome"
+    },
+    {
+      "entity": "Police officer (female character)",
+      "state": "Course completion with evasion/apprehension",
+      "behavior": "Places player character under arrest; indicates game loss"
+    },
+    {
+      "entity": "Traffic vehicles (AI)",
+      "state": "Normal driving",
+      "behavior": "Move predictably on multi-lane highways; present static collision hazards"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "High speed",
+      "behavior": "Consumes fuel rapidly; triggers police pursuit if exceeding limits; risks redline engine damage on manual transmission"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Off-road/collision",
+      "behavior": "Takes damage; crash adds 30-second penalty; sustains damage over time on flatland; life lost on contact with cliffs or obstacles"
+    }
+  ],
+  "notes": "Test Drive II: The Duel establishes a highway law enforcement dynamic as its primary world-state manifestation. The game's visual communication centers on the binary relationship between racer and police authority. Danger signals are primarily environmental (obstacles, terrain) and procedural (police presence). The female police officer serves as the key narrative entity whose behavior changes based on player evasion success — this creates a dramatic tension between achievement (speed racing) and consequence (legal authority). Console versions add geographic location storytelling through landmark visibility. The game's world-state is fundamentally driven by speed regulation mechanics: exceeding speed limits is mechanically required to win (courses are 'virtually impossible' to complete without police confrontation) yet visually dangerous, creating thematic irony between the racing objective and law enforcement consequence.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:37:24.448Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2683,
+    "output_tokens": 2476,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "game_id": "ms-pac-man-nes",
+  "game_name": "Ms. Pac-Man",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Basic pellet consumption",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Immediate tutorial via gameplay; player learns to navigate and collect"
+    },
+    {
+      "element": "Ghost avoidance (Blinky, Pinky, Inky, Sue)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Ghosts introduce semi-random movement patterns; players learn evasion through trial"
+    },
+    {
+      "element": "Power pellets (energizers)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Reversal mechanic; ghosts turn blue and become vulnerable; eating them grants points"
+    },
+    {
+      "element": "Bonus fruits (with trajectory)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Fruits bounce through maze and exit via warp tunnels; up to twice per round"
+    },
+    {
+      "element": "Warp tunnels (dual-set mazes)",
+      "first_appears": "Level 1 (Pink maze)",
+      "introduction_context": "moderate",
+      "mastery_context": "Spatial escape mechanic; allows repositioning and fruit pursuit; ghost slowdown applies"
+    },
+    {
+      "element": "Speed increase",
+      "first_appears": "Level 2+",
+      "introduction_context": "dangerous",
+      "mastery_context": "Difficulty scaling; ghost behavior accelerates, reaction demands tighten"
+    },
+    {
+      "element": "Energizer duration reduction",
+      "first_appears": "Level 2+",
+      "introduction_context": "dangerous",
+      "mastery_context": "Power pellet invulnerability window shrinks; eventually disappears entirely"
+    },
+    {
+      "element": "Maze color variant (Light Blue maze)",
+      "first_appears": "Level 3",
+      "introduction_context": "moderate",
+      "mastery_context": "Visual refresh; spatial layout identical, visual clarity maintained"
+    },
+    {
+      "element": "Maze color variant (Brown maze)",
+      "first_appears": "Level 6",
+      "introduction_context": "moderate",
+      "mastery_context": "Mid-game transition; establishes four-maze rotation system"
+    },
+    {
+      "element": "Maze color variant (Dark Blue maze)",
+      "first_appears": "Level 10",
+      "introduction_context": "moderate",
+      "mastery_context": "Late-game cycle; final unique maze; alternates every fourth level thereafter"
+    },
+    {
+      "element": "Random fruit sequences",
+      "first_appears": "Level 8+",
+      "introduction_context": "dangerous",
+      "mastery_context": "Fruit point values become unpredictable; strategic planning disrupted"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting power pellet and ghosts becoming vulnerable (blue state)",
+      "Eating ghosts during invulnerability window",
+      "Reaching warp tunnel to escape ghost pursuit",
+      "Clearing entire maze (pellets consumed, round complete)",
+      "Bonus fruit collection (brief reprieve window)"
+    ],
+    "typical_tension_triggers": [
+      "Ghost proximity and semi-random movement patterns",
+      "Speed increases per level",
+      "Decreasing energizer invulnerability duration",
+      "Open maze space with multiple ghost vectors",
+      "Fruit exiting maze via warp tunnel (missed points)"
+    ],
+    "pacing_descriptor": "Escalating tension cycle: baseline evasion → accelerating ghost speed → diminishing power pellet protection. Relief obtained through strategic consumption (pellets, ghosts, fruit) and spatial escape (warp tunnels). By late game, safety windows collapse and tension becomes near-constant."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Fruits bouncing and exiting through warp tunnels; bonus fruits appear twice per round but disappear if not pursued, creating optional high-value collection challenges",
+    "secret_convention": "Warp tunnel positioning enables predictable ghost slowdown and repositioning; skilled players exploit tunnel timing to reset threat vectors",
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Levels 1-2 (Pink maze): Foundational skill-building. Ghost behavior semi-random but slower. Power pellets remain effective. Single maze layout familiarization.",
+    "mid_game": "Levels 3-9 (Light Blue and Brown mazes): Incremental speed scaling. Energizer duration shortens. Two new maze variants introduce spatial variety and pattern disruption. Fruit randomization begins.",
+    "late_game": "Levels 10-13+ (Dark Blue maze alternation): Maximum speed and minimal power pellet protection. Unpredictable fruit sequences. Maze patterns repeat but difficulty remains escalated. Ghost behavior fully semi-random.",
+    "notable_spikes": [
+      "Level 2-3 transition: First speed increase + maze color change",
+      "Level 6+ transition: Brown maze introduction + continued acceleration",
+      "Level 8+: Random fruit sequences eliminate point prediction",
+      "Level 13+ transition: Power pellets may cease functioning; pure evasion-based gameplay"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Four-Maze Color Rotation System",
+      "description": "Pink (Levels 1-2) → Light Blue (Levels 3-5) → Brown (Levels 6-9) → Dark Blue (Level 10+, alternating every 4 levels). Spatial layout identical across variants; color differentiation aids novice visual clarity. Solid-color walls replace outlines for legibility.",
+      "example_level": "Transitions at Levels 1, 3, 6, 10"
+    },
+    {
+      "pattern_name": "Dual Warp Tunnel Sets per Maze",
+      "description": "All four mazes contain two sets of warp tunnels (vs. original Pac-Man's single set). Enables strategic repositioning, fruit pursuit through tunnels, and ghost slowdown exploitation. Fruit trajectory-based design creates spatial tension.",
+      "example_level": "All levels, all mazes"
+    },
+    {
+      "pattern_name": "Escalating Ghost Vulnerability Collapse",
+      "description": "Power pellet invulnerability window progressively shortens across levels. By late game, energizers may cease functioning entirely, forcing pure avoidance-based play. Removes safety-valve mechanic, intensifies tension.",
+      "example_level": "Levels 1-13+"
+    },
+    {
+      "pattern_name": "Fruit Behavioral Shift at Level 8",
+      "description": "Levels 1-7: Fruits appear in fixed sequence, predictable point values (cherry, strawberry, orange, etc.). Level 8+: Fruit order randomizes. A 5000-point banana can follow a 100-point cherry pair, eliminating strategic planning.",
+      "example_level": "Level 8 pivot point"
+    }
+  ],
+  "sources_used": [
+    "wikipedia - Ms. Pac-Man gameplay mechanics, ghost behavior differences, four-maze system, energizer duration changes, fruit randomization"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:52:40.370Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3471,
+    "output_tokens": 1960,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

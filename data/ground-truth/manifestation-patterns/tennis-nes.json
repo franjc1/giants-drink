@@ -1,0 +1,142 @@
+{
+  "game_id": "tennis-nes",
+  "game_name": "Tennis",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "point loss / game progression against player",
+      "visual_form": "score counter on screen displaying opponent's advancing score",
+      "meaning": "opponent gaining advantage; match state deteriorating for player"
+    },
+    {
+      "signal": "ball trajectory toward player court",
+      "visual_form": "ball sprite moving toward bottom of screen (player side)",
+      "meaning": "immediate defensive action required; failure to return results in point loss"
+    },
+    {
+      "signal": "net position disadvantage",
+      "visual_form": "player character positioned far from net while opponent is at net",
+      "meaning": "vulnerable position; opponent can execute winning shots"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "successful ball return",
+      "visual_form": "ball sprite returning to opponent's side after player racket contact",
+      "meaning": "player maintains rally; point remains in play"
+    },
+    {
+      "signal": "player at net",
+      "visual_form": "player character sprite positioned near net line",
+      "meaning": "offensive advantage; ability to execute winning shots"
+    },
+    {
+      "signal": "score lead",
+      "visual_form": "player score counter higher than opponent's on screen display",
+      "meaning": "match state favorable; progress toward game/set victory"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "opponent character sprite (AI-controlled or second human player)",
+      "environmental_markers": "player positioned on bottom half of court; player 1 side in versus modes"
+    },
+    {
+      "faction": "opponent",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "distinct character sprite from player; may include Mario as referee (official)",
+      "environmental_markers": "opponent positioned on top half of court; player 2 side in versus modes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "singles match active",
+      "visual_manifestation": "single player character on court; AI opponent on opposite side; net dividing court vertically",
+      "behavioral_manifestation": "AI opponent follows difficulty-level-dependent movement and shot selection patterns"
+    },
+    {
+      "world_state": "doubles match active",
+      "visual_manifestation": "two player characters on one side; two AI opponent characters on opposite side; court layout displays four player positions",
+      "behavioral_manifestation": "two human players cooperate against two AI opponents; coordinated court positioning required"
+    },
+    {
+      "world_state": "rally in progress",
+      "visual_manifestation": "ball sprite moving between court halves; both players animated in ready/swing poses",
+      "behavioral_manifestation": "real-time input controls racket position and swing timing to return incoming ball"
+    },
+    {
+      "world_state": "point awarded",
+      "visual_manifestation": "score counter increments; ball resets to serve position; players return to baseline",
+      "behavioral_manifestation": "serve phase begins; player regains initiative or opponent executes serve"
+    },
+    {
+      "world_state": "difficulty adjustment (1-5 levels)",
+      "visual_manifestation": "no visual change on court; difficulty setting only accessible in menu",
+      "behavioral_manifestation": "opponent AI reaction speed, shot placement accuracy, and net aggression varies inversely with difficulty level"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "court layout visualization",
+      "example": "rectangular court with net as central divider communicates symmetric competition structure; baseline and service box markings establish spatial rules"
+    },
+    {
+      "technique": "character positioning as narrative",
+      "example": "player characters positioned on opposite baselines indicates formal competitive setup; net presence indicates offensive/defensive posture"
+    },
+    {
+      "technique": "score display as match progression",
+      "example": "on-screen score counter serves as explicit world-state indicator; rising numbers communicate tension and stakes escalation"
+    },
+    {
+      "technique": "referee presence",
+      "example": "Mario character serves as official; his presence legitimizes match structure and reinforces Nintendo branding within game world"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player character",
+      "state": "rally active",
+      "behavior": "responds to input commands; racket swings to intercept ball; moves laterally along baseline"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "difficulty level 1 (easiest)",
+      "behavior": "slow reaction time; predictable shot placement; minimal net rushing; frequent unforced errors"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "difficulty level 5 (hardest)",
+      "behavior": "rapid reaction; varied shot placement; aggressive net play; optimal court positioning; reduced error rate"
+    },
+    {
+      "entity": "ball",
+      "state": "in play",
+      "behavior": "follows arc trajectory; bounces on court; collision detection with rackets triggers return shots"
+    },
+    {
+      "entity": "ball",
+      "state": "out of play / point lost",
+      "behavior": "disappears from court; resets to serve position; triggers score increment and behavioral reset of all players"
+    }
+  ],
+  "notes": "Tennis (1984) is a foundational sports simulation with minimal narrative context. World-state communication relies entirely on mechanical/spatial visualization rather than environmental storytelling or faction systems. The game presents pure sport simulation where visual manifestation is determined by match mechanics (score, ball position, player position, serve/rally/point states). No danger/safety signals exist in a narrative sense—only game-mechanical advantage/disadvantage states. Faction distinction is purely functional (player vs. opponent) rather than ideological or visual-identity based. Mario's inclusion as referee is a character cameo without narrative function.",
+  "sources_used": [
+    "Wikipedia - Tennis (1984 video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:20:33.573Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3341,
+    "output_tokens": 1552,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

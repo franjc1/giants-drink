@@ -1,0 +1,193 @@
+{
+  "game_id": "magical-quest-3-snes",
+  "game_name": "Disney's Magical Quest 3 Starring Mickey & Donald",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Character sprites of hostile creatures throughout levels",
+      "meaning": "Direct threat requiring combat or avoidance"
+    },
+    {
+      "signal": "Boss encounter - Emperor Pete",
+      "visual_form": "Enlarged antagonist sprite, distinct from standard enemies",
+      "meaning": "Critical danger point; defeating Pete is required to progress and rescue Pluto"
+    },
+    {
+      "signal": "Falling hazards",
+      "visual_form": "Cliff edges, pit bottomless sections in level design",
+      "meaning": "Environmental threat requiring platforming precision"
+    },
+    {
+      "signal": "Fire hazards",
+      "visual_form": "Visual flame effects in environment",
+      "meaning": "Damage source; requires firefighter outfit with water spray to traverse safely"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Outfit acquisition",
+      "visual_form": "Collectible outfit items placed at level start/progression points",
+      "meaning": "Empowerment state; each outfit grants unique abilities for surviving upcoming challenges"
+    },
+    {
+      "signal": "Shop locations",
+      "visual_form": "Designated store areas throughout levels",
+      "meaning": "Safe zones where player can spend coins to upgrade outfits and purchase items"
+    },
+    {
+      "signal": "Health heart collection",
+      "visual_form": "Special heart items scattered in levels",
+      "meaning": "Expansion of player health meter; increases survivability"
+    },
+    {
+      "signal": "Coin collection",
+      "visual_form": "Currency items throughout environment",
+      "meaning": "Resource accumulation for purchasing safety upgrades and outfit improvements"
+    },
+    {
+      "signal": "Magical lamps (magician outfit)",
+      "visual_form": "Collectible lamp sprites",
+      "meaning": "Magical meter replenishment; sustains offensive capability"
+    },
+    {
+      "signal": "Fire hydrants (firefighter outfit)",
+      "visual_form": "Hydrant sprites",
+      "meaning": "Water meter replenishment; sustains environmental hazard mitigation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Mickey/Donald)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mickey Mouse character identity; Donald Duck in MQ3 variant",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting position; rescued Pluto at journey's end"
+    },
+    {
+      "faction": "Emperor Pete (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pete character sprite; ruler of magical land",
+      "enemy_visual_variants": "Boss-form Pete with enlarged/distinct sprite presentation",
+      "environmental_markers": "Pete's domain; the magical land where Pluto is held captive"
+    },
+    {
+      "faction": "Allied NPCs (Goofy, old wizard)",
+      "color_identity": null,
+      "symbol_or_sigil": "Goofy sprite (provides mountain-climbing gear); Old wizard sprite (provides quest context)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appear at specific progression points; Goofy in level 4"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal exploration state",
+      "visual_manifestation": "Standard platforming environment with scattered enemies, coins, and obstacles",
+      "behavioral_manifestation": "Player freely moves through levels; enemies patrol or attack on contact"
+    },
+    {
+      "world_state": "Fire hazard present",
+      "visual_manifestation": "Flame effects visible in environment sections; visual barrier of fire",
+      "behavioral_manifestation": "Player must equip firefighter outfit to spray water and extinguish flames; alternative paths blocked"
+    },
+    {
+      "world_state": "Magic required state",
+      "visual_manifestation": "Magical enemies or magical environmental puzzles requiring charged magic blasts",
+      "behavioral_manifestation": "Player must equip magician outfit; charging system for power escalation"
+    },
+    {
+      "world_state": "Vertical climb required",
+      "visual_manifestation": "Tall structures, cliff faces, or elevated platforms",
+      "behavioral_manifestation": "Player must equip mountain-climbing gear with grappling hook to progress upward"
+    },
+    {
+      "world_state": "Underwater section",
+      "visual_manifestation": "Water-filled areas in level design",
+      "behavioral_manifestation": "Player can breathe and move freely underwater only with magician outfit equipped"
+    },
+    {
+      "world_state": "Boss encounter - Emperor Pete",
+      "visual_manifestation": "Transition to enlarged boss arena; Pete sprite dominates visual space",
+      "behavioral_manifestation": "Combat-locked state; Pete presents complex attack patterns requiring equipped outfit abilities"
+    },
+    {
+      "world_state": "Quest completion - Pluto rescued",
+      "visual_manifestation": "Dream sequence ends; return to normal bedroom setting",
+      "behavioral_manifestation": "State transition to happy ending; Mickey wakes, friends present"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative frame device",
+      "example": "Game begins with innocent catch game in park; Mickey falls into magical land; ends with dream revelation. The entire adventure is contextualized as a dream, creating temporal and reality narrative markers."
+    },
+    {
+      "technique": "Outfit placement as progression gate",
+      "example": "Magician outfit awarded in level 2, firefighter uniform found in level 3, mountain-climbing gear given by Goofy in level 4. Outfit availability signals which level introduces which environmental challenge type."
+    },
+    {
+      "technique": "NPC visual introduction",
+      "example": "Old wizard appears to explain Pete's threat and Pluto's capture. Goofy appears in level 4 to provide climbing gear. NPCs visually signal ally relationships and provide mechanical/narrative context."
+    },
+    {
+      "technique": "Hazard-outfit pairing",
+      "example": "Fire hazards visually present in level 3, immediately followed by firefighter outfit acquisition. Visual environmental threat directly prompts mechanical solution visibility."
+    },
+    {
+      "technique": "Resource scatter storytelling",
+      "example": "Coins, hearts, and magical lamps distributed throughout levels communicate game progression philosophy: persistent resource collection enables persistent advancement and survivability."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mickey Mouse (default state)",
+      "state": "Unarmed/Base outfit",
+      "behavior": "Can grab and spin-throw blocks at enemies; basic platforming mobility"
+    },
+    {
+      "entity": "Mickey Mouse (magician outfit)",
+      "state": "Magic-equipped",
+      "behavior": "Fires charged magic blasts; larger blasts with longer charge; drains magic meter; can breathe underwater; can control magic carpets"
+    },
+    {
+      "entity": "Mickey Mouse (firefighter uniform)",
+      "state": "Water-equipped",
+      "behavior": "Sprays water streams at enemies; extinguishes fires; pushes blocks; forms icicles; drains water meter on use"
+    },
+    {
+      "entity": "Mickey Mouse (mountain-climbing gear)",
+      "state": "Grappling-equipped",
+      "behavior": "Uses grappling hook to attach to objects; hoists/swings upward; grabs items and enemies; serves as weapon for spin-throw"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Patrol/aggro",
+      "behavior": "Patrol level areas; attack on player contact; defeatable by jumping or block-throw"
+    },
+    {
+      "entity": "Emperor Pete",
+      "state": "Boss encounter",
+      "behavior": "Complex attack patterns; requires outfit-specific abilities to defeat; represents culminating challenge"
+    },
+    {
+      "entity": "Pluto (kidnapped state)",
+      "state": "Captive",
+      "behavior": "Remains static in Pete's domain; visual goal marker; rescue triggers ending sequence"
+    }
+  ],
+  "notes": "Disney's Magical Quest 3 uses a costume/outfit system as primary mechanic for world-state communication. Each outfit not only grants distinct abilities but visually signals to player which environmental challenges are ahead. The game communicates danger through enemy presence and environmental hazards (fire, water, height), while safety is signaled through resource collection (coins, hearts, magical items) and shop locations. Pete serves as the central antagonist faction marker. The dream-frame narrative creates a meta-level world-state communication: the entire adventure's reality is contextual. Environmental storytelling relies heavily on outfit placement timing and NPC appearance sequencing rather than detailed environmental dressing. The simple SNES graphical style limits visual complexity, so communication relies on sprite distinctiveness, color coding of items, and level design spatial clarity.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:22:50.307Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3007,
+    "output_tokens": 2287,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

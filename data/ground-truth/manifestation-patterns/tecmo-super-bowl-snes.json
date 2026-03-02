@@ -1,0 +1,158 @@
+{
+  "game_id": "tecmo-super-bowl-snes",
+  "game_name": "Tecmo Super Bowl",
+  "platform": "snes",
+  "paradigm": "sports (american football)",
+  "danger_signals": [
+    {
+      "signal": "opposing_team_formation",
+      "visual_form": "player sprite arrangement and color differentiation on field",
+      "meaning": "tactical threat; indicates opponent positioning and play direction"
+    },
+    {
+      "signal": "defensive_player_proximity",
+      "visual_form": "sprites moving toward ball carrier with collision detection",
+      "meaning": "immediate physical danger to player with ball; tackle imminent"
+    },
+    {
+      "signal": "weather_conditions",
+      "visual_form": "rain or snow visual overlay on playing field",
+      "meaning": "reduced traction and visibility; affects gameplay difficulty and ball control"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open_field_space",
+      "visual_form": "large unoccupied grid areas on screen between ball carrier and defenders",
+      "meaning": "running room available; low immediate threat"
+    },
+    {
+      "signal": "team_color_dominance",
+      "visual_form": "own team sprites clustered near ball position",
+      "meaning": "offensive line protection; safe pocket for quarterback operations"
+    },
+    {
+      "signal": "clear_weather",
+      "visual_form": "sunny visual presentation without precipitation overlay",
+      "meaning": "optimal playing conditions; standard ball physics apply"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team (Player-controlled)",
+      "color_identity": "primary team color palette (varies by NFL team: Cowboys blue, 49ers red, etc.)",
+      "symbol_or_sigil": "official NFL team logo displayed in end zones (16-bit versions)",
+      "enemy_visual_variants": "Opposing team rendered in contrasting color scheme; distinct jersey and helmet colors",
+      "environmental_markers": "team colors dominate scoreboard and UI elements; home field advantage implicit in presentation"
+    },
+    {
+      "faction": "Away Team (CPU or Player 2)",
+      "color_identity": "secondary/alternate team color palette (away jersey colors)",
+      "symbol_or_sigil": "opposing NFL team logo in opposite end zone",
+      "enemy_visual_variants": "sprite palette swaps distinguish from home team; uniform color differentiation",
+      "environmental_markers": "secondary color scheme in opposing score display; visual separation from home team presentation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "regular_season_match",
+      "visual_manifestation": "standard field layout with team logos, scoreboard displaying quarter and time, stat tracking for player performance",
+      "behavioral_manifestation": "standard AI difficulty; full playbook options available; statistical records accumulate across game"
+    },
+    {
+      "world_state": "pro_bowl_exhibition",
+      "visual_manifestation": "enhanced visual presentation; all-star roster composition reflected in player sprite selection",
+      "behavioral_manifestation": "accelerated quarter options (15-min, 10-min); modified AI to reflect elite player skill levels"
+    },
+    {
+      "world_state": "multi_season_progression",
+      "visual_manifestation": "rosters update year-to-year (16-bit versions support 1991-1993 seasons); player attributes visually reflected in performance metrics",
+      "behavioral_manifestation": "no rookies from next draft cycle appear; player team changes persist; statistical achievements accumulate seasonally"
+    },
+    {
+      "world_state": "adverse_weather",
+      "visual_manifestation": "rain or snow overlay on field; reduced visibility; wet surface appearance",
+      "behavioral_manifestation": "ball physics altered; player movement slowed; pass accuracy reduced; random weather occurrence in season mode"
+    },
+    {
+      "world_state": "score_differential_extreme",
+      "visual_manifestation": "scoreboard clearly displays point gap between teams",
+      "behavioral_manifestation": "CPU AI adjusts playcalling based on game state (implied); player behavioral urgency tied to visual score display"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "team_logo_placement",
+      "example": "official NFL team logos in end zones (16-bit versions) establish geographic identity and league legitimacy; real team branding communicates professional context"
+    },
+    {
+      "technique": "roster_composition_as_narrative",
+      "example": "real NFL players with accurate attributes (Bo Jackson carrying ball) tell story of actual 1990-91 season; missing NFLPA non-members (Jim Kelly as generic QB) signal licensing boundaries"
+    },
+    {
+      "technique": "scoreboard_information_hierarchy",
+      "example": "quarter display, time remaining, score, and statistical tracking create temporal and competitive narrative; visible progression from game start to conclusion"
+    },
+    {
+      "technique": "weather_environmental_context",
+      "example": "three weather conditions (sunny, rain, snow) establish stadium location and seasonal context; impacts gameplay difficulty and visual atmosphere"
+    },
+    {
+      "technique": "field_layout_standardization",
+      "example": "consistent NFL field markings and dimensions communicate sport authenticity; yard line markers and end zone boundaries establish spatial reference"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "ball_carrier",
+      "state": "under_pressure",
+      "behavior": "sprite movement becomes erratic when defensive player proximity triggers; evasion animations activate; ball vulnerability increases to interception"
+    },
+    {
+      "entity": "quarterback",
+      "state": "protected",
+      "behavior": "offensive line sprite positioning creates visual buffer; longer play execution window; pass completion probability higher"
+    },
+    {
+      "entity": "quarterback",
+      "state": "exposed",
+      "behavior": "defensive player penetration visible through line gaps; rapid sack potential; sprint animations activate for escape attempts"
+    },
+    {
+      "entity": "defensive_unit",
+      "state": "formation_ready",
+      "behavior": "coordinated sprite arrangement across field; gap coverage displayed through positioning; play read communication implicit in formation structure"
+    },
+    {
+      "entity": "receiver",
+      "state": "covered",
+      "behavior": "defensive back sprite proximity to receiver; visual occlusion or tight marking; interception risk increases"
+    },
+    {
+      "entity": "receiver",
+      "state": "open",
+      "behavior": "separation distance from defenders; clear line of sight to ball; catch probability enhanced"
+    },
+    {
+      "entity": "game_state",
+      "state": "turnover_imminent",
+      "behavior": "visual indicators of ball carrier vulnerability; defensive clustering around ball position; flash or pulse animation on contested ball"
+    }
+  ],
+  "notes": "Tecmo Super Bowl communicates game state primarily through team color differentiation, field positioning of sprites, scoreboard data, and environmental overlays (weather). The game employs minimal HUD abstraction, instead embedding tactical information in player formation visibility and spatial relationships. The 16-bit versions enhance this communication through official NFL logos and improved visual fidelity. Political/faction dimensions are implicit in real team/player licensing rather than explicit antagonism narratives. The paradigm note 'racing' in source metadata appears erroneous; game is sports/football simulation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": "verification of exact pixel-based visual signaling requires gameplay footage analysis; danger_signals could expand to include play-call preview systems if documented; faction_indicators could map all 28 NFL teams individually if required; behavioral_tells incomplete without frame-by-frame animation documentation",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:51:08.415Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3225,
+    "output_tokens": 1883,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

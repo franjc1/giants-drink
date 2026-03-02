@@ -1,0 +1,155 @@
+{
+  "game_id": "fifa-soccer-96-genesis",
+  "game_name": "FIFA Soccer 96",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Opposing player positioning",
+      "visual_form": "Player sprite placement on field relative to ball carrier",
+      "meaning": "Proximity of defenders indicates imminent tackle threat"
+    },
+    {
+      "signal": "Goalkeeper readiness",
+      "visual_form": "Goalkeeper animation stance and positioning in goal box",
+      "meaning": "Shot accuracy is threatened; danger to scoring opportunity"
+    },
+    {
+      "signal": "Ball possession loss",
+      "visual_form": "Ball transfers from player control to opponent team",
+      "meaning": "Shift from offensive to defensive world-state; immediate counter-attack risk"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open field space",
+      "visual_form": "Vacant grid areas between player and goal, minimal opponent sprites",
+      "meaning": "Safe passing lane or clear scoring opportunity"
+    },
+    {
+      "signal": "Teammate proximity",
+      "visual_form": "Allied player sprites positioned near ball carrier",
+      "meaning": "Available pass targets reduce interception risk"
+    },
+    {
+      "signal": "Goalkeeper positioning",
+      "visual_form": "Goalkeeper sprite far from ball in defensive alignment",
+      "meaning": "Safe possession; low immediate shot threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team",
+      "color_identity": "Primary jersey color (varies by real-world team affiliation)",
+      "symbol_or_sigil": "Team crest/logo displayed on jersey and in UI",
+      "enemy_visual_variants": "Away team uses contrasting jersey colors to distinguish allegiance",
+      "environmental_markers": "Home team bench and substitutes positioned on designated sideline; home crowd audio cues"
+    },
+    {
+      "faction": "Away Team",
+      "color_identity": "Secondary/alternate jersey color (white or contrasting to home)",
+      "symbol_or_sigil": "Team crest/logo on away jersey",
+      "enemy_visual_variants": "Visually distinct from home team through color differentiation",
+      "environmental_markers": "Away team bench on opposite sideline; audio commentary distinguishes away team allegiance"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match in progress (active play)",
+      "visual_manifestation": "All 22 player sprites visible on field; ball sprite active; scoreboard displays current time/score",
+      "behavioral_manifestation": "Players move in response to ball position and tactical AI; continuous animation cycles for running, passing, shooting"
+    },
+    {
+      "world_state": "Set piece (free kick, corner, throw-in)",
+      "visual_manifestation": "Player sprites freeze in formation; ball positioned at designated set piece location; UI may highlight available actions",
+      "behavioral_manifestation": "Animation paused pending player input; AI determines formation and player positioning for defensive wall or set piece execution"
+    },
+    {
+      "world_state": "Goal scored",
+      "visual_manifestation": "Ball enters goal frame; scoreboard increments; celebration animations triggered; possible crowd reaction audio",
+      "behavioral_manifestation": "Scoring team players trigger celebration animations; match temporarily halts; ball reset to center field"
+    },
+    {
+      "world_state": "Foul committed",
+      "visual_manifestation": "Referee sprite animation or visual feedback; ball stops; yellow/red card UI may display",
+      "behavioral_manifestation": "Player animation freezes at foul location; set piece awarded to opposing team"
+    },
+    {
+      "world_state": "Halftime/Full-time",
+      "visual_manifestation": "Field cleared of players; scoreboard shows final/interim score; UI displays match statistics",
+      "behavioral_manifestation": "All player animations cease; transition to menu or next match state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Real player names and positions",
+      "example": "Each of 3000+ real players has documented position, transfer history, and ranking visible in roster—communicates competitive hierarchy and team composition authenticity"
+    },
+    {
+      "technique": "Real-world team and league representation",
+      "example": "Inclusion of authentic leagues and teams with correct crests and colors tells player they are simulating actual professional soccer ecosystem"
+    },
+    {
+      "technique": "Multiple camera angles",
+      "example": "Available viewing perspectives (standard, side, overhead, tactical) allow players to observe tactical field geography; different angles reveal different information about positioning and spacing"
+    },
+    {
+      "technique": "Crowd audio and stadium ambiance",
+      "example": "Crowd noise volume and intensity varies with match momentum, goal scoring, and crowd proximity to action—communicates emotional stakes and home field advantage"
+    },
+    {
+      "technique": "Play-by-play commentary",
+      "example": "Audio commentary describes player actions, names, and match events, reinforcing real-world player identity and tactical narrative"
+    },
+    {
+      "technique": "Team customization and transfer tools",
+      "example": "UI systems for roster management visually represent squad composition changes, communicating squad depth and strategic player allocation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Attacking player (ball carrier)",
+      "state": "Offensive push toward goal",
+      "behavior": "Sprite animates forward sprint; can execute passing, shooting, or dribbling actions; movement speed increases when sprinting"
+    },
+    {
+      "entity": "Defensive player (non-ball carrier)",
+      "state": "Defensive tracking",
+      "behavior": "Sprite orients toward ball carrier; moves to intercept or shadow; AI attempts to close distance and force turnover"
+    },
+    {
+      "entity": "Goalkeeper",
+      "state": "Passive (ball distant)",
+      "behavior": "Stands in neutral ready position; positioned in goal box"
+    },
+    {
+      "entity": "Goalkeeper",
+      "state": "Active threat (shot incoming)",
+      "behavior": "Animation responds to incoming ball; extends limbs to block/catch; movement becomes reactive and dynamic"
+    },
+    {
+      "entity": "Midfielder",
+      "state": "Possession transition",
+      "behavior": "Repositions between defense and attack; available as pass target; behavior shifts based on ball location and match phase"
+    },
+    {
+      "entity": "Forward",
+      "state": "Marking opponent",
+      "behavior": "Maintains proximity to assigned defender; restricts movement and passing lanes; animation shows pressuring stance"
+    }
+  ],
+  "notes": "FIFA Soccer 96 is a sports simulation with limited narrative world-state complexity compared to action/adventure paradigms. Manifestation systems focus on: (1) Real-world team/player identity as visual-behavioral anchors (jersey colors, names, crests); (2) Match state transitions (active play → set piece → goal → halftime) communicated through sprite freezing, scoreboard updates, and animation cycles; (3) Tactical positioning as danger/safety cue (defensive clustering = danger; open field = safety); (4) Audio-visual synergy (crowd, commentary) reinforces authentic match narrative. The 'world-state' is primarily match progress and ball possession, not political/faction conflict. Visual communication is deterministic rather than emergent—sprites reflect AI-driven tactical formation rather than dynamic faction interaction.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:43:49.413Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2859,
+    "output_tokens": 1855,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

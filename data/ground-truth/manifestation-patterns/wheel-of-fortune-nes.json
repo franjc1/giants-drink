@@ -1,0 +1,71 @@
+{
+  "game_id": "wheel-of-fortune-nes",
+  "game_name": "Wheel of Fortune",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [],
+  "safety_signals": [],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game setup/initialization",
+      "visual_manifestation": "Puzzle board display text ('WHEEL OF FORTUNE') shown during game setup phase",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Round progression",
+      "visual_manifestation": "Wheel wedge values displayed on spinning wheel; different monetary values ($1,000 max in standard game) indicate round tier",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Licensed advertisement presence",
+      "visual_manifestation": "Coca-Cola logo intended for title screen scrolling text (unused in final build); palette allocation suggests formal brand integration",
+      "behavioral_manifestation": null
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Wheel wedge value hierarchy",
+      "example": "Top dollar amount of $1,000 establishes economic scope and reward tier expectations; unused higher values ($2,000-$10,000) indicate development-stage iteration on show authenticity"
+    },
+    {
+      "technique": "Puzzle selection and content curation",
+      "example": "Puzzle 'FIRST DAY ON THE JOB' unreachable in final rotation suggests backend logic constraints; puzzle content (Bob Dylan lyric vs. Dangerfield catchphrase) changed between revisions reflecting cultural reference updates"
+    },
+    {
+      "technique": "Brand placement integration",
+      "example": "Coca-Cola logo graphical assets embedded in VRAM for title and copyright screens; removal between revisions correlates with MGE acquisition timeline (1988 Columbia Pictures sale)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wheel",
+      "state": "Active spin",
+      "behavior": "Displays monetary wedges; values from supported range (IDs 0C-35, B4-B5); glitched rendering on certain high-value spaces lacking proper digit graphics"
+    },
+    {
+      "entity": "Puzzle board",
+      "state": "Setup phase",
+      "behavior": "Displays setup text; transitions to active puzzle state"
+    },
+    {
+      "entity": "Game state machine",
+      "state": "Revision differences",
+      "behavior": "Puzzle content swapped between Rev 0 and Rev 1 (Dylan reference → Dangerfield catchphrase); suggests content refresh cycle"
+    }
+  ],
+  "notes": "Wheel of Fortune (NES, 1988) is a faithful adaptation of the television game show with minimal environmental world-state complexity. The game communicates primarily through game-show mechanical elements (wheel values, puzzle categories) rather than faction dynamics or danger states. Notable manifestation patterns: (1) Wheel wedges encode monetary reward hierarchy visually; (2) Unused wedge IDs indicate development-stage feature parity attempts with daytime/nighttime TV show variants; (3) Coca-Cola branding removal reflects real-world corporate event (MGE acquisition), showing how external world-state affected game manifestation; (4) Puzzle content revision suggests iterative refinement of cultural relevance. No danger/safety signals, faction systems, or political states documented—appropriate for puzzle-game paradigm. Data heavily weighted toward technical/asset layer rather than experiential manifestation.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:46:08.691Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2537,
+    "output_tokens": 1127,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

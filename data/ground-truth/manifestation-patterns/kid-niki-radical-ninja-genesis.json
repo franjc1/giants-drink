@@ -1,0 +1,127 @@
+{
+  "game_id": "kid-niki-radical-ninja-genesis",
+  "game_name": "Rad Mobile",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Police cars",
+      "visual_form": "Distinct vehicle sprites rendered as law enforcement vehicles on road",
+      "meaning": "Active threat to player during race; must be avoided to progress safely"
+    },
+    {
+      "signal": "Weather changes",
+      "visual_form": "Rain precipitation overlay and darkened visual state on screen",
+      "meaning": "Environmental hazard requiring interaction (windshield wipers activation) to maintain visibility and safety"
+    },
+    {
+      "signal": "Night time",
+      "visual_form": "Darkened color palette and reduced visibility on track",
+      "meaning": "Reduced visibility hazard requiring player to activate headlights for safe driving"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear daytime road",
+      "visual_form": "Bright, well-lit road environment with normal visibility",
+      "meaning": "Safe driving conditions; no immediate environmental hazards present"
+    },
+    {
+      "signal": "Road forks/branching paths",
+      "visual_form": "Visual split in racing track at designated points",
+      "meaning": "Opportunity for player agency; ability to skip stages and choose safer/faster routes"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Racer)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Police vehicles distinguish antagonist faction through standard law enforcement vehicle design",
+      "environmental_markers": "Player vehicle is the primary perspective; Sonic ornament hanging from rearview mirror serves as player identity marker"
+    },
+    {
+      "faction": "Law Enforcement (Police)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Police car sprites visually distinct from civilian racing vehicles",
+      "environmental_markers": "Present on road as obstacles; represent authority pursuing the racer"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Daytime clear weather",
+      "visual_manifestation": "Bright color palette, clear visibility of road and surroundings, normal lighting conditions",
+      "behavioral_manifestation": "Player can drive normally; no special actions required; standard racing conditions"
+    },
+    {
+      "world_state": "Nighttime",
+      "visual_manifestation": "Darkened screen with reduced visibility; night environment rendering",
+      "behavioral_manifestation": "Player must activate headlights to maintain safe driving visibility; increased difficulty/hazard state"
+    },
+    {
+      "world_state": "Rainy weather",
+      "visual_manifestation": "Rain precipitation overlay on screen; visual rain effects on windshield",
+      "behavioral_manifestation": "Player must activate windshield wipers; visibility compromised without action; adaptive UI response to environmental state"
+    },
+    {
+      "world_state": "Police pursuit active",
+      "visual_manifestation": "Police vehicle sprites present on track; distinct from civilian vehicles",
+      "behavioral_manifestation": "Avoidance required; player must navigate around police cars; threat state increases tension and difficulty"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Weather and time-of-day cycling",
+      "example": "Dynamically changing visual and mechanical conditions (rain requiring wipers, night requiring headlights) communicate passage of time and real-world driving conditions across continental race"
+    },
+    {
+      "technique": "Rearview mirror perspective with decorative element",
+      "example": "Sonic the Hedgehog ornament hanging from rearview mirror serves as visual anchor to player identity and provides diegetic world-building (first appearance of character in Sega canon)"
+    },
+    {
+      "technique": "Road fork branching",
+      "example": "Visual splitting of race path allows player to skip stages, communicating spatial navigation choices and progression agency within open-ended racing structure"
+    },
+    {
+      "technique": "Vehicle sprite variation",
+      "example": "Police cars rendered distinctly from racing vehicles, establishing faction identity and threat hierarchy without dialogue or explicit labeling"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Active racing",
+      "behavior": "Maintains forward momentum; responds to steering input; interacts with environmental controls (wipers, headlights) in response to world-state changes"
+    },
+    {
+      "entity": "Police vehicles",
+      "state": "Pursuit/obstacle",
+      "behavior": "Present on road as stationary or moving obstacles; require active avoidance; signal consequence for player failure to navigate safely"
+    },
+    {
+      "entity": "Windshield wipers",
+      "state": "Rain active",
+      "behavior": "Become necessary interaction point; visual feedback confirms player adaptation to environmental hazard"
+    },
+    {
+      "entity": "Headlights",
+      "state": "Night mode active",
+      "behavior": "Become necessary interaction point; visual feedback communicates player response to darkness hazard"
+    }
+  ],
+  "notes": "Rad Mobile is a sprite-based racing game that communicates world-state primarily through dynamic environmental rendering (weather, time-of-day) and mechanical feedback systems. Danger is signaled through environmental hazards (police cars, reduced visibility) that require player adaptation. The game lacks explicit faction-based narrative structure but establishes implicit antagonism through police presence. Visual communication prioritizes environmental storytelling over character/faction identity markers. The iconic Sonic ornament serves dual purposes: diegetic decoration and meta-reference to player identity within Sega canon. Gameplay mechanics (wipers, headlights) are tightly coupled to visual world-state changes, creating integrated communication system between appearance and required player actions.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:54:02.533Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2998,
+    "output_tokens": 1481,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

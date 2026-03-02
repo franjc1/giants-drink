@@ -1,0 +1,171 @@
+{
+  "game_id": "aladdin-genesis",
+  "game_name": "Disney's Aladdin",
+  "platform": "Sega Genesis",
+  "paradigm": "side-scrolling platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Palace guards, Iago's cousins, environmental hazards (pots, rocks, fish)",
+      "meaning": "Direct threat to Aladdin's health; collision causes damage"
+    },
+    {
+      "signal": "Smoke trail from Genie's lamp",
+      "visual_form": "Visual indicator on HUD (top-left corner) that shortens progressively",
+      "meaning": "Health depletion; longer trail = safer, shorter trail = critical danger"
+    },
+    {
+      "signal": "Jafar's lamp (smart bomb item)",
+      "visual_form": "Collectible object appearing in levels",
+      "meaning": "Inverted signal: appears as item but represents Jafar's threat; triggering it eliminates all on-screen enemies, suggesting Jafar's power as antagonist"
+    },
+    {
+      "signal": "Jafar imagery in Genie's Bonus Machine",
+      "visual_form": "Picture of Jafar among reward tiles",
+      "meaning": "Landing on Jafar ends the bonus minigame; visual representation of the primary antagonist as game-ending threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Blue Genie Hearts",
+      "visual_form": "Collectible objects scattered throughout levels",
+      "meaning": "Health restoration; collecting restores Aladdin's health (extends smoke trail)"
+    },
+    {
+      "signal": "Blue vases (checkpoints)",
+      "visual_form": "Environmental objects positioned in levels",
+      "meaning": "Safe revival points; passing through grants continued play after losing a life"
+    },
+    {
+      "signal": "Golden Aladdin head icons",
+      "visual_form": "Collectible icons hidden in levels shaped like Aladdin's head",
+      "meaning": "Extra lives; provides safety buffer against game over"
+    },
+    {
+      "signal": "Genie's Bonus Machine access",
+      "visual_form": "Minigame environment with reward tiles and Genie imagery",
+      "meaning": "Opportunity for resource acquisition (gems, apples, lives); progression reward for collecting Genie Tokens"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Aladdin (protagonist/player character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Golden head icon (represents Aladdin); Genie's lamp smoke trail (associated with Aladdin's status)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Scimitar as signature weapon; apples as ammunition (thematic to street urchin background)"
+    },
+    {
+      "faction": "Genie (ally)",
+      "color_identity": "Blue (Genie Hearts are blue; Genie's lamp smoke indicator is blue-associated)",
+      "symbol_or_sigil": "Genie's lamp; Genie Tokens; Genie's Bonus Machine imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Checkpoint vases; health/reward distribution mechanics"
+    },
+    {
+      "faction": "Jafar (antagonist/villain)",
+      "color_identity": null,
+      "symbol_or_sigil": "Jafar's lamp (smart bomb item); Jafar portrait in Genie's Bonus Machine",
+      "enemy_visual_variants": "Jafar's lamp appears as collectible but represents his power; landing on Jafar's picture ends bonus rounds",
+      "environmental_markers": "Palace guards (Jafar's forces); represented as primary threat in minigame conclusion"
+    },
+    {
+      "faction": "Abu (ally/playable in bonus levels)",
+      "color_identity": null,
+      "symbol_or_sigil": "Abu Token (collectible that unlocks bonus levels)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Bonus levels feature Abu as player character; separate hazard set (rocks, pots, Iago's cousins) reflects different context"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal progression through level",
+      "visual_manifestation": "Standard platformer environment with palace/street settings from film; enemies actively patrol or attack; collectibles scattered naturally",
+      "behavioral_manifestation": "Aladdin moves left-right, engages enemies with scimitar or apples; guards pursue; standard hazard avoidance"
+    },
+    {
+      "world_state": "Level completion achieved",
+      "visual_manifestation": "Transition to Genie's Bonus Machine environment; visual shift to minigame interface with reward tiles and Genie imagery",
+      "behavioral_manifestation": "Player shifts from combat/platforming to luck-based minigame; button-pressing interaction replaces movement"
+    },
+    {
+      "world_state": "Health critical (low smoke trail)",
+      "visual_manifestation": "Smoke trail from Genie's lamp visibly shortened on HUD; visual warning of imminent game-over state",
+      "behavioral_manifestation": "Player must prioritize finding blue Genie Hearts; heightened threat perception from enemies and hazards"
+    },
+    {
+      "world_state": "Abu bonus level triggered",
+      "visual_manifestation": "Environmental shift to Abu-specific level design; visual presentation of falling collectibles and different hazard types (pots, rocks, fish, Iago's cousins)",
+      "behavioral_manifestation": "Abu character replaces Aladdin; gameplay shifts from combat to dodging falling hazards while collecting resources"
+    },
+    {
+      "world_state": "Jafar's lamp (smart bomb) collected and triggered",
+      "visual_manifestation": "Visual elimination effect of all on-screen enemies; Jafar's power manifested as weapon against his own minions",
+      "behavioral_manifestation": "All enemies disappear momentarily; temporary reprieve from threat; Jafar's antagonistic presence inverted into player advantage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Weapon choice as character identity",
+      "example": "Aladdin uses a scimitar (close-range) and apples (long-range ammunition), thematically tied to street urchin background and resourcefulness rather than royal weaponry"
+    },
+    {
+      "technique": "Setting/hazard variation reflecting character perspective",
+      "example": "Abu's bonus levels feature different hazards (pots, rocks, fish) compared to Aladdin's levels, showing how the same palace/environment is experienced differently by different characters"
+    },
+    {
+      "technique": "Item placement as narrative reinforcement",
+      "example": "Genie Hearts and Genie's lamp imagery throughout levels reinforce Genie as Aladdin's magical ally; Jafar's lamp as smart bomb inverts his threat into a tool, reflecting his status as antagonist but also his magical power"
+    },
+    {
+      "technique": "Checkpoint design (blue vases)",
+      "example": "Vases as checkpoint markers integrate Islamic/Arabian architectural elements into the mechanical systems, grounding game progression in world setting"
+    },
+    {
+      "technique": "Visual level progression",
+      "example": "Palace guards appear as recurring enemy type, visually reinforcing the political/social conflict of the film narrative (street urchin vs. palace authority)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Palace guards",
+      "state": "Active/patrolling",
+      "behavior": "Pursue Aladdin when detected; represent Jafar's authority and institutional threat"
+    },
+    {
+      "entity": "Iago's cousins",
+      "state": "Active/hostile",
+      "behavior": "Attack in both main levels and Abu's bonus levels; represent Jafar's minions across contexts"
+    },
+    {
+      "entity": "Environmental hazards (pots, rocks, fish)",
+      "state": "Passive but dangerous",
+      "behavior": "In Abu's bonus level, fall from above; in main levels, present static obstacles; world-state dependent threat presentation"
+    },
+    {
+      "entity": "Genie's lamp (health indicator)",
+      "state": "Dynamic/responsive",
+      "behavior": "Smoke trail shortens with damage, lengthens with healing; continuously communicates player vulnerability state"
+    },
+    {
+      "entity": "Jafar (via his lamp smart bomb)",
+      "state": "Dormant threat/usable resource",
+      "behavior": "When collected and triggered, eliminates all on-screen enemies; Jafar's power weaponized against his own minions, reflecting antagonist role"
+    }
+  ],
+  "notes": "Disney's Aladdin uses visual communication primarily through health/status indicators (Genie lamp smoke trail), faction representation (Genie Hearts = ally; palace guards = Jafar's authority), and item iconography (Jafar's lamp inverts his threat into a tool). The game relies on film-faithful animation and character recognition rather than complex world-state visualization. Checkpoint vases and bonus machine access communicate progression safety. Enemy types (guards, Iago's cousins) and hazard variation between Aladdin and Abu levels show how the same world is experienced differently by different entities. The visual language is primarily reward-based (blue = safe/healing; gold = bonus; Jafar's portrait = danger) rather than complex environmental storytelling.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:48:23.857Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3107,
+    "output_tokens": 2433,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

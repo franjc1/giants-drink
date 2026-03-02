@@ -1,0 +1,185 @@
+{
+  "game_id": "legend-of-kage-nes",
+  "game_name": "The Legend of Kage",
+  "platform": "nes",
+  "paradigm": "beat-em-up / hack-and-slash platform",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile samurai and ninja sprites occupying screen space",
+      "meaning": "Direct combat threat; player must engage or evade"
+    },
+    {
+      "signal": "Enemy attack animations",
+      "visual_form": "Sprite-based slash and projectile movements from adversaries",
+      "meaning": "Imminent damage; player must respond with blocking/dodging or counterattack"
+    },
+    {
+      "signal": "Fortress and castle architecture",
+      "visual_form": "Increasingly fortified environmental layouts across five stages",
+      "meaning": "Escalating difficulty and enemy density; political/military power concentration"
+    },
+    {
+      "signal": "Boss character appearances",
+      "visual_form": "Warlord Yoshi and samurai Yuki as distinct, larger sprite entities",
+      "meaning": "Major threat encounter; story-critical antagonist confrontation"
+    },
+    {
+      "signal": "Health/damage state",
+      "visual_form": "Sprite color reversion from powered-up states (green/orange) back to red clothes",
+      "meaning": "Player vulnerability increased; loss of temporary stat advantages"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Crystal ball power-ups",
+      "visual_form": "Collectible item that changes player clothing color (red → green → orange progression)",
+      "meaning": "Temporary invulnerability or stat boost; progression marker and risk mitigation"
+    },
+    {
+      "signal": "Princess rescue milestone",
+      "visual_form": "NPC character acquisition and stage progression (rescues occur 2-3 times across game)",
+      "meaning": "Story progression; safe checkpoint equivalent in rescue narrative structure"
+    },
+    {
+      "signal": "Seasonal progression visual",
+      "visual_form": "Background/environment palette shifts from summer → fall → winter → summer cycle",
+      "meaning": "Level completion; natural cycle reset and safe state transition"
+    },
+    {
+      "signal": "Empty screen space",
+      "visual_form": "Cleared platforms and pathways with no active enemies",
+      "meaning": "Temporary safety window; opportunity for resource gathering or positioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Iga Ninja (Player Character)",
+      "color_identity": "Red (base clothing color), upgradeable to Green or Orange",
+      "symbol_or_sigil": "Kodachi shortsword and unlimited shuriken as class weapons",
+      "enemy_visual_variants": "Player sprite uses ninja silhouette; contrasts with samurai enemy designs",
+      "environmental_markers": "Forest and secret passageway stages align with ninja stealth traditions; lighter, mobile aesthetic"
+    },
+    {
+      "faction": "Shogunate (Allied Power)",
+      "color_identity": null,
+      "symbol_or_sigil": "Princess Kirihime as symbolic objective; rescue mission defines faction loyalty",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Fortress wall and castle environments represent Shogun's seat of power; fortification density increases as player approaches"
+    },
+    {
+      "faction": "Enemy Warlords and Samurai",
+      "color_identity": null,
+      "symbol_or_sigil": "Warlord Yoshi and samurai Yuki as named antagonists; samurai armor/weapon sprites differentiate from ninja",
+      "enemy_visual_variants": "Red ninja enemies (distinct from player), monks with fire-breathing abilities, generic samurai soldiers",
+      "environmental_markers": "Castle and fortress ownership; concentration of armed forces in late-game stages signals faction control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Forest stage)",
+      "visual_manifestation": "Open terrain with sparse platforms; natural background elements; lighter enemy density",
+      "behavioral_manifestation": "Lower enemy spawn rate; combat encounters are manageable; tutorial-like pacing"
+    },
+    {
+      "world_state": "Mid-game (Secret passageway and fortress wall)",
+      "visual_manifestation": "Enclosed, vertical architecture; walls and narrow passages dominate composition; environmental hazards implied",
+      "behavioral_manifestation": "Increased enemy frequency; more aggressive multi-directional attacks; platforming complexity rises"
+    },
+    {
+      "world_state": "Late-game (Castle stages)",
+      "visual_manifestation": "Heavily fortified interior spaces; ornate architecture; dense sprite clustering on screen",
+      "behavioral_manifestation": "Maximum enemy density; boss encounters; mandatory rescue sequences; heightened difficulty and visual clutter"
+    },
+    {
+      "world_state": "Princess rescue (2-3 occurrences)",
+      "visual_manifestation": "Seasonal palette shift (summer → fall → winter → summer cycle reset); stage restart with visual differentiation",
+      "behavioral_manifestation": "Level replay with difficulty scaling; enemy placement variations; narrative loop indicates continued threat"
+    },
+    {
+      "world_state": "Power-up acquisition (crystal ball)",
+      "visual_manifestation": "Player clothing color change (red → green → orange); visual stat/ability upgrade indicator",
+      "behavioral_manifestation": "Temporary enhanced attack or speed; invulnerability during powered-up state; reversion to base state on damage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sequential stage geography",
+      "example": "Progression from forest → secret passageway → fortress wall → castle interior narratively encodes player penetration into enemy territory and movement toward power concentration"
+    },
+    {
+      "technique": "Architectural escalation",
+      "example": "Open natural terrain evolves into fortified military architecture, visually conveying the warlord's defensive posture and political dominance over the region"
+    },
+    {
+      "technique": "Seasonal cycle signification",
+      "example": "Summer-to-winter-to-summer loops suggest time passage, multiple rescue attempts, and cyclical nature of the conflict; reinforces narrative stakes through environmental change"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Red ninja, samurai soldiers, and fire-breathing monks scattered across stages suggest heterogeneous enemy faction composition; diversified military forces indicate warlord's resources and organization"
+    },
+    {
+      "technique": "Princess placement as goal marker",
+      "example": "Princess Kirihime's capture location (castle depths) visually encodes narrative priority and spatial hierarchy; rescue acts as environmental milestone achieving victory state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Kage (Player Character)",
+      "state": "Normal (red clothes)",
+      "behavior": "Standard attack speed and shuriken size; baseline combat capability; vulnerability to damage"
+    },
+    {
+      "entity": "Kage (Player Character)",
+      "state": "Powered-up (green or orange clothes)",
+      "behavior": "Enhanced attack speed or larger projectiles; invulnerability or damage reduction; color change signals enhanced state to player"
+    },
+    {
+      "entity": "Kage (Player Character)",
+      "state": "Damaged while powered-up",
+      "behavior": "Revert to red clothes; lose stat bonuses; survive the hit rather than lose life; signals temporary protection mechanic exhaustion"
+    },
+    {
+      "entity": "Enemy samurai and ninja",
+      "state": "Idle/patrolling",
+      "behavior": "Sprite animations suggest ready combat stance; jump and slash patterns indicate aggressive patrol behavior"
+    },
+    {
+      "entity": "Enemy samurai and ninja",
+      "state": "Engaged with player",
+      "behavior": "Synchronized attack animations; multi-directional strikes; crowd behavior shows coordinated pressure tactics"
+    },
+    {
+      "entity": "Boss characters (Yoshi, Yuki)",
+      "state": "Combat encounter",
+      "behavior": "Larger sprite scaling; distinct attack patterns; positioned as narrative encounter rather than generic enemy; behavior complexity suggests tactical opponent"
+    },
+    {
+      "entity": "Princess Kirihime",
+      "state": "Captured",
+      "behavior": "Static positioning in stage end-point; no independent movement; visual marker for stage completion objective"
+    },
+    {
+      "entity": "Princess Kirihime",
+      "state": "Rescued",
+      "behavior": "Removal from screen; trigger stage progression and seasonal palette shift; behavioral change indicates world-state transition"
+    }
+  ],
+  "notes": "The Legend of Kage communicates world-state primarily through environmental architecture escalation and seasonal cycling rather than explicit UI elements. Danger is signaled through enemy density and sprite positioning. Faction identity relies on character sprite differentiation (ninja vs. samurai aesthetics) and stage geography (natural vs. fortified spaces). The game lacks explicit political narrative elements; world-state communication is implicit through mission structure (princess rescue) and enemy hierarchy (generic soldiers → named bosses). Power-up color changes serve dual function as gameplay mechanic and visual feedback system. NES version maintains arcade design philosophy of visual clarity within technical constraints.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:46:28.765Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3780,
+    "output_tokens": 2306,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

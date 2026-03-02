@@ -1,0 +1,126 @@
+{
+  "game_id": "indianapolis-500-genesis",
+  "game_name": "Indianapolis 500: The Simulation",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Car selection and setup",
+      "first_appears": "Main menu",
+      "introduction_context": "safe",
+      "mastery_context": "Practice mode with real-time feedback; changes to suspension, turbo, anti-roll bars directly affect handling"
+    },
+    {
+      "element": "Practice session",
+      "first_appears": "After car selection",
+      "introduction_context": "safe",
+      "mastery_context": "No car damage; unlimited testing laps with timing; learn track layout and optimal setup configuration"
+    },
+    {
+      "element": "Qualifying session",
+      "first_appears": "Optional before race start",
+      "introduction_context": "moderate",
+      "mastery_context": "Car damage enabled; 4-lap session with mean time determining grid position; introduces time pressure and mechanical consequences"
+    },
+    {
+      "element": "Short race format (10-lap)",
+      "first_appears": "Race mode selection",
+      "introduction_context": "moderate",
+      "mastery_context": "No car damage; no yellow flags; full-speed racing with 32 AI competitors; learn racing lines and positioning"
+    },
+    {
+      "element": "Yellow flag system",
+      "first_appears": "30-lap race or longer",
+      "introduction_context": "moderate",
+      "mastery_context": "Speed restrictions (~90 mph); no passing allowed until incident cleared; introduces traffic management and patience"
+    },
+    {
+      "element": "Car damage system",
+      "first_appears": "30-lap race and longer",
+      "introduction_context": "dangerous",
+      "mastery_context": "Wheel damage reduces control; engine damage is unrecoverable; impacts pit strategy and risk management"
+    },
+    {
+      "element": "Full 200-lap race (authentic distance)",
+      "first_appears": "Race mode selection",
+      "introduction_context": "dangerous",
+      "mastery_context": "All mechanical systems active; AI retirements from failures; fuel/pit strategy; endurance management"
+    },
+    {
+      "element": "Replay analysis",
+      "first_appears": "After race completion",
+      "introduction_context": "safe",
+      "mastery_context": "6 camera angles including crash replay; review previous 20 seconds; post-race learning tool"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Completion of practice lap with improved setup",
+      "Successful pit stop without damage",
+      "Yellow flag period (forced safety reprieve at reduced speed)",
+      "Finishing position confirmed at race end"
+    ],
+    "typical_tension_triggers": [
+      "Qualifying session begins (damage now enabled)",
+      "AI car crashes on track (debris hazard, yellow flag)",
+      "Entering turn with traffic ahead at high speed",
+      "Vehicle sustains wheel damage (control degradation)",
+      "Approaching pit sequence in close race",
+      "Approaching final laps of 200-lap race"
+    ],
+    "pacing_descriptor": "Graduated difficulty curve: safe practice environment builds to qualifying pressure, then race tension scales with distance (10→30→60→200 laps). Tension modulated by yellow flag periods and pit stop mechanics. Long-format races sustain tension across extended time periods with mechanical attrition threatening retirement."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Practice mode establishes safe learning environment; unlimited time to optimize car setup with immediate feedback. First-person perspective only. No consequences for mistakes.",
+    "mid_game": "Qualifying introduces car damage and time pressure; player must balance aggressive performance against mechanical durability. Short race formats (10-30 laps) reduce commitment while maintaining stakes.",
+    "late_game": "60-lap and 200-lap races demand sustained performance with mechanical attrition. Full damage model requires pit strategy. AI cars exhibit retirements from random failures, creating dynamic field compression. Yellow flag management becomes critical. Winning requires endurance pacing rather than pure speed.",
+    "notable_spikes": [
+      "Transition from practice to qualifying (damage enabled first time)",
+      "30-lap race introduction (yellow flag system and damage persist)",
+      "200-lap race (full mechanical failures on AI; extends tension across 60+ minutes of gameplay)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Tutorial-to-Challenge Progression",
+      "description": "Structured sequence: car setup freedom in practice → competitive pressure in qualifying → graduated race distances (10/30/60/200 laps) with progressively enabled systems. Each step introduces one new constraint or consequence.",
+      "example_level": "Practice→Qualifying→10-lap (no damage)→30-lap (damage on) progression"
+    },
+    {
+      "pattern_name": "Mechanical Consequence Staging",
+      "description": "Car damage system introduced only after player demonstrates competency in shorter races. Damage types escalate: single wheel (recoverable)→multiple wheels (difficult)→engine (terminal). Random AI mechanical failures add unpredictability only in longer formats.",
+      "example_level": "10-lap race (no damage) → 60-lap race (wheel/engine damage enabled)"
+    },
+    {
+      "pattern_name": "Traffic and Safety Management",
+      "description": "Short races skip yellow flag logic entirely; intermediate races introduce yellow flags with traffic management; full 200-lap race combines yellow flags with mechanical attrition requiring dynamic race reading.",
+      "example_level": "10-lap (no flags) → 30-lap (flags introduced) → 200-lap (flags + AI failures)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:35:24.291Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2715,
+    "output_tokens": 1543,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

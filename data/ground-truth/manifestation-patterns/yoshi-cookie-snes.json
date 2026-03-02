@@ -1,0 +1,139 @@
+{
+  "game_id": "yoshi-cookie-snes",
+  "game_name": "Yoshi's Cookie",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Grid overflow",
+      "visual_form": "Cookies accumulating from top and right edges of playing field, grid expansion",
+      "meaning": "Imminent game over condition; player failing to clear lines fast enough"
+    },
+    {
+      "signal": "Increasing grid complexity",
+      "visual_form": "Progressive level advancement with more cookie types and denser arrangements",
+      "meaning": "Escalating difficulty; higher cognitive demand and time pressure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successfully cleared row/column",
+      "visual_form": "Matching cookies of same type disappearing from grid, visual feedback of removal",
+      "meaning": "Player action achieving objective; progress toward level completion"
+    },
+    {
+      "signal": "Yoshi head wild card availability",
+      "visual_form": "Yoshi-shaped cookie token appearing occasionally on grid",
+      "meaning": "Player resource for flexible line completion; safety valve for difficult board states"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (Yoshi)",
+      "color_identity": null,
+      "symbol_or_sigil": "Yoshi head-shaped cookie token",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Yoshi branding on title screen; Mario series IP integration"
+    },
+    {
+      "faction": "Computer opponent (VS Mode)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "CPU-controlled cursor on split-screen in multiplayer VS",
+      "environmental_markers": "Separate grid pane in split-screen layout; opponent side of interface"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / lower difficulty",
+      "visual_manifestation": "Smaller grid size; fewer cookie types in rotation; slower spawn rate from edges",
+      "behavioral_manifestation": "AI opponent (if present) plays with reduced efficiency; more time available per action"
+    },
+    {
+      "world_state": "Mid-game / escalating difficulty",
+      "visual_manifestation": "Grid expands; additional cookie types introduced; denser arrangements",
+      "behavioral_manifestation": "Increased spawn velocity; tighter time windows for line matching"
+    },
+    {
+      "world_state": "Late game / high difficulty",
+      "visual_manifestation": "Nearly full grid; maximum cookie type variety; complex pre-arranged patterns in Puzzle Mode",
+      "behavioral_manifestation": "Rapid grid accumulation; critical time pressure; one mistake leads to overflow"
+    },
+    {
+      "world_state": "Puzzle Mode (predefined challenge)",
+      "visual_manifestation": "Fixed grid layout with specific cookie configuration; move counter displayed",
+      "behavioral_manifestation": "Player must solve within maximum move limit; no spawn from edges; static board state"
+    },
+    {
+      "world_state": "Versus competition active",
+      "visual_manifestation": "Split-screen layout; two independent grids side-by-side; opponent cursor visible",
+      "behavioral_manifestation": "Player actions trigger disruption mechanics affecting opponent grid; simultaneous play"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "IP integration via visual theming",
+      "example": "Mario universe characters (Mario, Yoshi, Peach, Bowser) in cutscenes and sprite assets; Yoshi head as wild card token establishes diegetic connection"
+    },
+    {
+      "technique": "Title screen narrative framing",
+      "example": "Cookie jar skit visual setup (NES/Game Boy versions, also attempted in SNES via unused assets) contextualizes cookie-clearing as thematic activity"
+    },
+    {
+      "technique": "Regional identity markers",
+      "example": "BPS logo prominently displayed in intro sequence; different logo designs and musical stings between Japanese and international versions communicate publisher/developer identity"
+    },
+    {
+      "technique": "UI progression indication",
+      "example": "Grid size growth, cookie type proliferation, and move counter visibility (Puzzle Mode) signal escalating world complexity without narrative dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Cookie tokens",
+      "state": "Unmatched",
+      "behavior": "Remain static on grid; accumulate from top/right edges in Action Mode"
+    },
+    {
+      "entity": "Cookie tokens",
+      "state": "Line-matched (all same type in row/column)",
+      "behavior": "Visually disappear; trigger cascading board update"
+    },
+    {
+      "entity": "Yoshi head token",
+      "state": "Spawned",
+      "behavior": "Functions as wild card; matches any cookie type in line completion"
+    },
+    {
+      "entity": "Player cursor",
+      "state": "Active control",
+      "behavior": "Rotates individual grid lines (rows/columns) like Rubik's Cube mechanic; visually highlights selected line"
+    },
+    {
+      "entity": "CPU opponent (VS Mode)",
+      "state": "Playing",
+      "behavior": "Cursor moves autonomously on opponent grid; disruption effects applied to player grid when opponent completes lines"
+    },
+    {
+      "entity": "Grid boundary",
+      "state": "Pre-overflow",
+      "behavior": "Visual warning zone as cookies approach top edge; no explicit alert animation documented"
+    }
+  ],
+  "notes": "Yoshi's Cookie is a tile-matching puzzle game with minimal narrative world-state. Communication occurs primarily through grid mechanics, visual spawn rates, and difficulty progression. The game lacks traditional danger/safety signaling; instead, grid pressure (overflow threat) functions as implicit danger. Cutscenes feature Mario universe characters but appear minimal in final SNES release (unused assets suggest more elaborate opening was cut). The paradigm is pure mechanical puzzle with competitive VS dimension. No faction conflict, political situation, or morality system present. Visual communication is almost entirely UI/mechanic-driven rather than narrative-driven.",
+  "sources_used": [
+    "tcrf - Yoshi's Cookie (SNES) article",
+    "wikipedia - Yoshi's Cookie article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:37:53.798Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5261,
+    "output_tokens": 1583,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

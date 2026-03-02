@@ -1,0 +1,178 @@
+{
+  "game_id": "homeworld-pc",
+  "game_name": "Homeworld",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Enemy vessel approach",
+      "visual_form": "Red/hostile ship markers on sensors manager display; visual designs distinctly different from player faction",
+      "meaning": "Active threat requiring defensive action or retreat"
+    },
+    {
+      "signal": "Mothership under attack",
+      "visual_form": "Fire and smoke visual effects on mothership model; health bar depletion; active beam/missile impact animations",
+      "meaning": "Critical mission failure imminent; player base is vulnerable"
+    },
+    {
+      "signal": "Ship damage accumulation",
+      "visual_form": "Progressive fire and smoke effects added to ship models as health depletes; visual degradation of hull integrity",
+      "meaning": "Entity approaching destruction; imminent loss if not repaired or withdrawn"
+    },
+    {
+      "signal": "Resource scarcity",
+      "visual_form": "Limited visible stationary rocks, gas clouds, or dust clouds in level sphere; harvester ships unable to locate mining sites",
+      "meaning": "Economic constraint; fleet expansion limited; vulnerability to prolonged engagement"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Resource harvesting active",
+      "visual_form": "Resource collector ships actively extracting from visible clouds/rocks; material transfer animations to mothership",
+      "meaning": "Economic stability; fleet growth capacity maintained"
+    },
+    {
+      "signal": "Mothership integrity maintained",
+      "visual_form": "Absence of fire/smoke effects on mothership; full health bar; stationary, operational stance",
+      "meaning": "Base secure; production capability intact; mission continuation viable"
+    },
+    {
+      "signal": "Fleet formation integrity",
+      "visual_form": "Ships organized in tactical formations (wedges, spheres); grouped visual clustering in 3D space",
+      "meaning": "Combat readiness; tactical advantage; coordinated defensive/offensive posture"
+    },
+    {
+      "signal": "Mission objective completion indicators",
+      "visual_form": "Narrative cutscenes between levels; objective markers fulfilled in level progression",
+      "meaning": "Strategic progress; pathway to homeworld reclamation advancing"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kushan (Player-aligned exile)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinctive ship hull designs specific to Kushan fleet configuration",
+      "enemy_visual_variants": "Taiidan Empire ships have visually distinct design language; mothership and escort vessels use alternative aesthetic",
+      "environmental_markers": "Mothership serves as faction base; ship construction queue reflects Kushan technological lineage; salvaged enemy vessels visually contrast with native fleet"
+    },
+    {
+      "faction": "Taiidan Empire (Primary antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Visually distinct warship designs; empire vessels display different hull profiles from Kushan alternatives",
+      "enemy_visual_variants": "Player can select Taiidan fleet control at campaign start, changing all ship designs while maintaining gameplay mechanics",
+      "environmental_markers": "Enemy fleet composition in levels reflects Taiidan military doctrine; encountered vessels appear throughout campaign as primary hostile force"
+    },
+    {
+      "faction": "Pirates, mercenaries, traders, and rebels (Encountered factions)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct from both Kushan and Taiidan; specialized ship types indicate faction role (trader vs. combatant)",
+      "environmental_markers": "Appear throughout campaign journey; visual differentiation marks them as neutral or conditional threats"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Kharak destroyed; Kushan exiles displaced",
+      "visual_manifestation": "Campaign narrative frames destruction through hand-drawn, black-and-white cutscenes with voiceovers; mothership presented as sole surviving mobile base",
+      "behavioral_manifestation": "Mothership unable to move during single-player campaign; stationary defensive posture reflects refugee/survivor status; dependence on fleet for protection"
+    },
+    {
+      "world_state": "Active hostility from Taiidan Empire",
+      "visual_manifestation": "Enemy vessels present in level spheres; attack patterns against mothership and fleet; beam and missile weapon impact visual effects",
+      "behavioral_manifestation": "Continuous combat engagement required; enemy fleet composition varies by mission; must defend mothership while pursuing objectives"
+    },
+    {
+      "world_state": "Resource abundance in region",
+      "visual_manifestation": "High density of stationary rocks, gas clouds, and dust clouds visible in level environment; accessible harvesting sites distributed through 3D space",
+      "behavioral_manifestation": "Resource collectors actively harvest; mothership constructs new ships at accelerated pace; economic expansion cycle enabled"
+    },
+    {
+      "world_state": "Journey toward Hiigara (ancient homeworld)",
+      "visual_manifestation": "Hyperspace jump sequences initiate level transitions; fighters and corvettes dock with mothership; larger ships line up for departure",
+      "behavioral_manifestation": "Multi-level campaign progression; fleet carries over between levels; cumulative ship acquisition demonstrates journey advancement"
+    },
+    {
+      "world_state": "New ship technology unlocked",
+      "visual_manifestation": "Novel ship types appear in buildable options; captured enemy vessels introduce alternative designs; research vessel facilitates visual fleet diversification",
+      "behavioral_manifestation": "Expanded combat and support capabilities; new specialized functions (repair corvettes, non-combat research vessels); tactical flexibility increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hand-drawn narrative cutscenes",
+      "example": "Black-and-white animated sequences between 16 campaign levels with voiceover narration establish plot developments, faction motivations, and story context without in-engine cinematics"
+    },
+    {
+      "technique": "Ship design lineage visual communication",
+      "example": "Kushan vs. Taiidan fleet aesthetics differentiate factions through hull profiles, engine configurations, and weapon placements; visual language communicates technological heritage and empire identity"
+    },
+    {
+      "technique": "Mothership vulnerability staging",
+      "example": "In-game screenshot depicts mothership under active attack with visible fire and smoke; stationary position and defensive role communicate survivor/base status; inability to relocate establishes narrative stakes"
+    },
+    {
+      "technique": "Resource scarcity as world-state indicator",
+      "example": "Level design varies cloud/rock density; environmental mining availability directly reflects regional resource conditions and mission urgency"
+    },
+    {
+      "technique": "Fleet accumulation as progress indicator",
+      "example": "Ship persistence across levels; visual fleet growth demonstrates journey progression toward homeworld reclamation; salvaged enemy vessels represent territorial gains"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mothership",
+      "state": "Operational/Safe",
+      "behavior": "Stationary; constructs new ships; accepts harvested resources; provides docking points for fighter/corvette refueling"
+    },
+    {
+      "entity": "Mothership",
+      "state": "Under attack/Threatened",
+      "behavior": "Displays fire and smoke visual effects; health bar depletes; becomes mission failure condition if destroyed; cannot move to escape"
+    },
+    {
+      "entity": "Resource collector",
+      "state": "Harvesting",
+      "behavior": "Mines stationary clouds/rocks; transports material to mothership; indicates economic stability and fleet expansion capacity"
+    },
+    {
+      "entity": "Fighter/Corvette",
+      "state": "Combat ready",
+      "behavior": "Grouped in tactical formations (wedges, spheres); responsive to player commands; requires periodic docking for refuel; rapid mobility in 3D space"
+    },
+    {
+      "entity": "Fighter/Corvette",
+      "state": "Low fuel/Damaged",
+      "behavior": "Returns to mothership or support vessel for docking; visual damage effects accumulate; combat effectiveness diminishes"
+    },
+    {
+      "entity": "Enemy vessel (Taiidan/hostile faction)",
+      "state": "Hostile approach",
+      "behavior": "Visible on sensors manager with distinct hostile markers; fires beam weapons and missiles; attempts mothership/fleet destruction"
+    },
+    {
+      "entity": "Enemy vessel",
+      "state": "Damaged/Weakened",
+      "behavior": "Health bar depletes; fire and smoke effects accumulate; becomes target for salvage corvette capture; visual degradation signals vulnerability"
+    },
+    {
+      "entity": "Salvage corvette",
+      "state": "Capture mode",
+      "behavior": "Tows damaged enemy ships to mothership; converts captured vessels into player fleet assets; visual tether shows active capture state"
+    }
+  ],
+  "notes": "Homeworld's manifestation layer relies heavily on 3D spatial visualization and persistent fleet state communication. Faction identity is primarily conveyed through ship design aesthetics rather than color coding, a significant departure from 2D RTS conventions. The stationary mothership creates narrative vulnerability and establishes geographic anchor for world-state perception. Resource scarcity and abundance are communicated through environmental density variation. Damage progression uses cumulative visual effects (fire/smoke) rather than discrete state changes. Hyperspace jump mechanics serve dual narrative/gameplay purpose: advancing story while making fleet composition visually explicit through docking animations.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:58:40.380Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2630,
+    "output_tokens": 2364,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

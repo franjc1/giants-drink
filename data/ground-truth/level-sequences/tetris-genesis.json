@@ -1,0 +1,116 @@
+{
+  "game_id": "tetris-genesis",
+  "game_name": "Tetris",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "I-piece (straight line tetromino)",
+      "first_appears": "Game start / Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Foundation piece, teaches rotation and line clears"
+    },
+    {
+      "element": "O-piece (square tetromino)",
+      "first_appears": "Game start / Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Stable placement, no rotation benefit"
+    },
+    {
+      "element": "T-piece (T-shaped tetromino)",
+      "first_appears": "Game start / Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Teaches rotation mechanics"
+    },
+    {
+      "element": "S/Z-pieces (zigzag tetrominoes)",
+      "first_appears": "Game start / Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Introduces interlocking placement patterns"
+    },
+    {
+      "element": "L/J-pieces (corner tetrominoes)",
+      "first_appears": "Game start / Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Teaches edge placement and rotation utility"
+    },
+    {
+      "element": "Increasing fall speed",
+      "first_appears": "Level progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Escalates time pressure as player advances"
+    },
+    {
+      "element": "Line clear mechanics",
+      "first_appears": "First completed line",
+      "introduction_context": "moderate",
+      "mastery_context": "Core feedback loop and scoring"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful line clear",
+      "Piece placement without stack reaching top",
+      "Completing multiple lines simultaneously"
+    ],
+    "typical_tension_triggers": [
+      "Piece approaching bottom of playfield",
+      "Stack height increasing toward danger zone",
+      "Awkward piece (I-piece) unavailable when needed",
+      "Fall speed increase at level advancement",
+      "Incoming piece type unknown"
+    ],
+    "pacing_descriptor": "Exponential tension escalation with level progression; breathing room abundant early, compressed dramatically in late game"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Permissive; pieces fall slowly, ample time for placement decisions, learning tetrominoes and basic strategies",
+    "mid_game": "Steady acceleration; fall speed increases, player must optimize placement, line-clear combos become important",
+    "late_game": "Extreme pressure; fall speed near-instantaneous, single mistakes cascade into stack collapse, requires expert-level reflexes and prediction",
+    "notable_spikes": [
+      "Level 10+ where fall speed transitions from manageable to punishing",
+      "Each subsequent level multiplies difficulty exponentially"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Continuous Difficulty Scaling",
+      "description": "No discrete level reset or relief; difficulty increases monotonically via fall-speed acceleration and gravity intensification",
+      "example_level": "Levels 1-29 (standard progression)"
+    },
+    {
+      "pattern_name": "Randomized Piece Sequence",
+      "description": "Tetromino delivery unpredictable but seeded; player cannot rely on memorization, must adapt to incoming pieces",
+      "example_level": "All levels"
+    },
+    {
+      "pattern_name": "Height Penalty Architecture",
+      "description": "Playfield height (20 rows) acts as implicit timer; stack approaching top forces escalating decision speed",
+      "example_level": "All levels"
+    }
+  ],
+  "sources_used": [],
+  "note": "Available source (TCRF) does not contain actionable game design data for Tetris Genesis. Design patterns inferred from core Tetris mechanics (universal across ports). No specific Genesis version design documentation provided.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:48:33.750Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 986,
+    "output_tokens": 1241,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

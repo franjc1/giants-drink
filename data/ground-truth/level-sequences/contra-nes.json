@@ -1,0 +1,197 @@
+{
+  "game_id": "contra-nes",
+  "game_name": "Contra",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": 8,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Default rifle (unlimited ammo)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Primary weapon throughout game; always available after weapon loss"
+    },
+    {
+      "element": "Machine Gun (rapid fire)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Obtained from pill box sensors or red-clad guards in bases"
+    },
+    {
+      "element": "Spread Gun (5-direction burst)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Critical for horizontal level optimization; requires pattern management"
+    },
+    {
+      "element": "Laser Gun (powerful beam)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "High-damage single-target weapon"
+    },
+    {
+      "element": "Fireball Gun (corkscrew pattern)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Unique trajectory for specialized enemy patterns"
+    },
+    {
+      "element": "Rapid-bullets power-up",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Increases firing speed; area-specific availability"
+    },
+    {
+      "element": "Barrier power-up (invulnerability)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Limited-duration protection; area-specific"
+    },
+    {
+      "element": "Crouching mechanic (lying prone)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Essential for avoiding fire and hitting low targets; immediately practiced"
+    },
+    {
+      "element": "8-directional aiming system",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core control; includes downward aiming while jumping"
+    },
+    {
+      "element": "Side-scrolling horizontal combat",
+      "first_appears": "Stage 1 (Jungle)",
+      "introduction_context": "safe",
+      "mastery_context": "Foundation perspective; introduces basic enemy patterns"
+    },
+    {
+      "element": "3D isometric base navigation",
+      "first_appears": "Stage 2 (Base 1)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Pseudo-3D perspective; requires shooting generators to deactivate electric barriers; introduces time pressure"
+    },
+    {
+      "element": "Fixed-screen upward-aimed combat",
+      "first_appears": "Stage 3 (Base 1 Core)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Gun defaults upward; focus on destroying defense system before exposing boss"
+    },
+    {
+      "element": "Vertical-scrolling level (ascending)",
+      "first_appears": "Stage 4 (Waterfall)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Changes from horizontal to vertical movement patterns"
+    },
+    {
+      "element": "Boss pattern: Gromaides (segmented arm boss)",
+      "first_appears": "Stage 3",
+      "introduction_context": "dangerous",
+      "mastery_context": "Complex multi-segment enemy; HP drops 1 per frame max; segment spawning staggered"
+    },
+    {
+      "element": "Time limit pressure (base stages)",
+      "first_appears": "Stage 2",
+      "introduction_context": "dangerous",
+      "mastery_context": "Map display shows time remaining; forces speed and routing decisions"
+    },
+    {
+      "element": "Platform heights and drop mechanics",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Downward input drops from higher platforms; jump glitch available in Stage 3"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Defeating stage boss",
+      "Reaching checkpoint/entering new area",
+      "Collecting weapon power-up",
+      "Time pressure lifted in narrative transition",
+      "Fixed-screen boss completion revealing next path"
+    ],
+    "typical_tension_triggers": [
+      "Entering 3D base stage with active time limit",
+      "Generator sequences requiring precision under fire",
+      "Boss phase transitions with new attack patterns",
+      "Weapon loss after death (revert to default rifle)",
+      "Gromaides arm extension sequences spawning segments",
+      "Electric barriers blocking passage in base corridors",
+      "Bottomless pit visibility at stage boundaries"
+    ],
+    "pacing_descriptor": "Escalating intensity: jungle infiltration intro → base penetration with time pressure → boss gauntlets → vertical navigation challenges → final stronghold assault. Each stage perspective shift resets player comfort level, forcing tactical readjustment."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Pill box sensors and flying capsules contain weapons; destruction optional but strategically valuable",
+    "secret_convention": "Destroying red-clad guards in bases yields weapon drops; hidden level select and sound test accessible via cheat code",
+    "dead_end_frequency": "rare",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Jungle stage establishes baseline enemy patterns and weapon types; introduces crouching and multi-directional aiming in safe context",
+    "mid_game": "Base 1 (Stages 2-3) introduces time pressure, 3D perspective navigation, and first major boss (Gromaides); fixed-screen stage forces tactical position management",
+    "late_game": "Stages 4-8 escalate enemy density and boss complexity; vertical-scrolling stage (Waterfall) introduces new spatial challenge; final stronghold stage with progressive defense system destruction",
+    "notable_spikes": [
+      "Stage 2 entry: sudden introduction of time limit and 3D perspective shift",
+      "Stage 3: Gromaides boss complexity (multi-segment linked-list behavior; staggered spawn timing)",
+      "Stage 4: perspective shift to vertical scrolling after horizontal/3D stages",
+      "Final stage: accumulated enemy types and boss pattern variety"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Jungle Infiltration (Horizontal Side-Scroll)",
+      "description": "Stage 1 establishes foundational mechanics: side-scrolling perspective, enemy encounters, weapon pick-ups, reaching base entrance via sensor destruction. Safe introduction context allows weapon type exploration.",
+      "example_level": "Stage 1"
+    },
+    {
+      "pattern_name": "Base Interior 3D Navigation with Time Pressure",
+      "description": "Stage 2 switches to pseudo-3D isometric view where player shoots and moves toward background. Generator destruction in each passageway deactivates electric barriers. Time display at top creates tension. Requires route optimization.",
+      "example_level": "Stage 2 (Base 1)"
+    },
+    {
+      "pattern_name": "Fixed-Screen Boss Arena with Upward Default Aim",
+      "description": "Stage 3 core uses fixed-screen perspective with gun defaulting upward. Player must destroy defense system (eyeball boss shooting fireballs) to expose final target. Gromaides boss: 10-segment arms in linked-list structure; segments spawn staggered every 16 frames.",
+      "example_level": "Stage 3 (Base 1 Core)"
+    },
+    {
+      "pattern_name": "Vertical Scrolling Ascent Level",
+      "description": "Stage 4 inverts spatial expectation with vertical upward scrolling (waterfall/cliff setting). Introduces bottom-to-top movement mechanics after horizontal/3D stages. Enemy placement patterns adapted for vertical navigation.",
+      "example_level": "Stage 4 (Waterfall)"
+    },
+    {
+      "pattern_name": "Weapon Type Optimization Zones",
+      "description": "Certain level types favor specific weapons: Spread Gun optimized for horizontal levels (5-direction coverage); single-target weapons (Laser) for 3D corridor navigation. RNG-dependent random enemy spawns require adaptive weapon selection.",
+      "example_level": "Varies by stage"
+    },
+    {
+      "pattern_name": "Boss HP Damage Gating (1 HP per Frame Max)",
+      "description": "All bosses limited to 1 HP loss per frame regardless of bullet volume. Strategy shifts from DPS maximization to consistent damage-per-frame delivery. Gromaides requires continuous arm segment targeting.",
+      "example_level": "All boss stages (3, 6, 8)"
+    }
+  ],
+  "sources_used": [
+    "tasvideos",
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:36:31.239Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9211,
+    "output_tokens": 2347,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

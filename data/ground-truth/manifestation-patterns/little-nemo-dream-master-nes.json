@@ -1,0 +1,155 @@
+{
+  "game_id": "little-nemo-dream-master-nes",
+  "game_name": "Little Nemo: The Dream Master",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures throughout levels",
+      "meaning": "Threat to player; collision causes damage or death"
+    },
+    {
+      "signal": "Instant death traps",
+      "visual_form": "Environmental hazards (spikes, bottomless pits, falling platforms)",
+      "meaning": "Sudden lethal obstacles requiring precise platforming; high danger state"
+    },
+    {
+      "signal": "Nightmare King's realm",
+      "visual_form": "Darker, more menacing visual design in later levels leading to final boss",
+      "meaning": "Escalating danger; player approaching most dangerous zone"
+    },
+    {
+      "signal": "Loss of animal companion",
+      "visual_form": "Animal sprite disappears; Nemo reverts to base form",
+      "meaning": "Loss of protective ability; increased vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Animal companion acquisition",
+      "visual_form": "Fed animal (frog, gorilla, mole, etc.) becomes rideable; distinctive sprite change",
+      "meaning": "Temporary protection and enhanced abilities active"
+    },
+    {
+      "signal": "Pastel-colored dream environment",
+      "visual_form": "Bright, colorful, cartoonish visual palette throughout most levels",
+      "meaning": "Whimsical dream world; contextually safe despite platforming hazards"
+    },
+    {
+      "signal": "Slumberland regions",
+      "visual_form": "Early/mid-game levels with lighter aesthetic and fewer hostile elements",
+      "meaning": "Progression through safer dream areas before approaching Nightmare Land"
+    },
+    {
+      "signal": "Key collection progress",
+      "visual_form": "Keys scattered and collected throughout level",
+      "meaning": "Clear objective completion; advancing safely toward exit"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Slumberland (Morpheus/Good)",
+      "color_identity": "Pastel colors: pinks, blues, yellows, greens",
+      "symbol_or_sigil": "Morpheus (king figure); animal companions as allies",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dreamy, whimsical level design; candy rewards; friendly animals; bright architectural elements"
+    },
+    {
+      "faction": "Nightmare Land (Nightmare King/Evil)",
+      "color_identity": "Darker palette; increased use of reds, blacks, purples",
+      "symbol_or_sigil": "Nightmare King as final boss; menacing creature design",
+      "enemy_visual_variants": "Enemies become more grotesque and aggressive in appearance as player approaches Nightmare Land",
+      "environmental_markers": "Later levels feature darker, more hostile visual design; architecture becomes more ominous; increased enemy density"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early progression (Slumberland proper)",
+      "visual_manifestation": "Bright pastel colors, whimsical sprite design, cartoonish enemies, friendly animals available",
+      "behavioral_manifestation": "Animals willing to be fed and ridden; enemies present but manageable; level design encourages exploration"
+    },
+    {
+      "world_state": "Mid-progression (approaching danger)",
+      "visual_manifestation": "Colors remain vibrant but architectural elements become more complex; hazards increase on-screen",
+      "behavioral_manifestation": "Difficulty curve increases; more instant-death traps introduced; enemy spawning intensifies"
+    },
+    {
+      "world_state": "Advanced progression (Nightmare Land)",
+      "visual_manifestation": "Darker color palette dominates; visual design shifts toward menace; boss encounters indicated by distinct sprite/arena design",
+      "behavioral_manifestation": "Enemies become more aggressive; less reliance on animal companions due to puzzle-like level design; Nightmare King controls realm"
+    },
+    {
+      "world_state": "Final confrontation (Nightmare King's chamber)",
+      "visual_manifestation": "Darkest, most visually distinct environment; Nightmare King sprite represents ultimate antagonist",
+      "behavioral_manifestation": "Boss battle with pattern-based attacks (Manta Ray boss noted with region-specific pattern variation); rescue of Morpheus imminent upon victory"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Animal companionship mechanic",
+      "example": "Nemo must feed animals candy to gain their unique abilities (frog's jumping, gorilla's strength, mole's digging). This visually communicates symbiosis and the dream world's logic where befriending creatures grants power."
+    },
+    {
+      "technique": "Color and architectural shift",
+      "example": "Transition from pastel Slumberland to darker Nightmare Land visually tells the story of progression toward danger and the Nightmare King's influence over the dream realm."
+    },
+    {
+      "technique": "Key-hunting objective",
+      "example": "Keys scattered throughout levels and locked exits communicate a contained journey; the unknown lock count at exit creates tension and encourages thorough exploration."
+    },
+    {
+      "technique": "Character design removal (regional censorship tells)",
+      "example": "Removal of Flip's cigar and smoking gorilla in US/EU versions demonstrates content adaptation; sprite mouth positioning in smoking gorilla reveals censorship without full redesign, telling a meta-narrative about regional expectations."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nemo (player character)",
+      "state": "Base form",
+      "behavior": "Standard jumping and movement; vulnerable to single hit; primary platforming mechanic"
+    },
+    {
+      "entity": "Nemo (animal-mounted form)",
+      "state": "Companion active",
+      "behavior": "Enhanced abilities based on animal type; altered health pool; different movement patterns; temporary invulnerability window"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Standard patrol",
+      "behavior": "Predictable movement patterns; infinite spawn behavior; collision triggers damage"
+    },
+    {
+      "entity": "Boss entities (Manta Ray, Nightmare King)",
+      "state": "Combat-engaged",
+      "behavior": "Pattern-based attack sequences; region-specific variations indicate adaptive design; defeat signals progression milestone"
+    },
+    {
+      "entity": "Animal companions (frog, gorilla, mole, etc.)",
+      "state": "Available (unfed)",
+      "behavior": "Static or wandering; can be fed candy to activate"
+    },
+    {
+      "entity": "Animal companions",
+      "state": "Activated (fed)",
+      "behavior": "Rideable; execute specialized abilities; provide visual/behavioral feedback when damaged or defeated"
+    }
+  ],
+  "notes": "Little Nemo communicates world-state primarily through visual aesthetic shift and mechanical progression. The dream/nightmare dichotomy structures the entire game's manifestation layer: Slumberland uses bright, friendly visuals and rewarding animal mechanics to signal safety and progression, while Nightmare Land uses darker colors and increased hazard density to signal danger and escalating threat. The game's difficulty (noted as 'punishingly difficult' by retrospective critics) is visually reinforced through instant-death trap placement and enemy abundance rather than explicit danger telegraphing. Regional differences (cigar removal, title screen redesign) demonstrate how even visual communication can be culturally mediated. The key-hunting mechanic creates uncertainty about completion, which is narratively tied to the unknown lock count at each exit—a visual communication of puzzle state. Animal companions function as faction indicators of Slumberland's benevolent influence, while their absence or defeat signals vulnerability and Nightmare influence.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:04:20.388Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5161,
+    "output_tokens": 1964,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

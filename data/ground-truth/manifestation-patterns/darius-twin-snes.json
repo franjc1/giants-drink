@@ -1,0 +1,144 @@
+{
+  "game_id": "darius-twin-snes",
+  "game_name": "Darius Twin",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_approach",
+      "visual_form": "square-shaped enemies approaching from front and behind",
+      "meaning": "imminent collision threat; enemy fire incoming"
+    },
+    {
+      "signal": "shield_depletion",
+      "visual_form": "force shield visual reduction or flickering",
+      "meaning": "player vulnerability increasing; one hit away from destruction"
+    },
+    {
+      "signal": "projectile_density",
+      "visual_form": "increased bullet/enemy projectile screen coverage",
+      "meaning": "high-danger zone; evasion difficulty escalating"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "power_up_spawn",
+      "visual_form": "colored square-shaped items appearing from defeated enemies",
+      "meaning": "opportunity to strengthen weapon, shield, or gain lives"
+    },
+    {
+      "signal": "clear_screen",
+      "visual_form": "yellow power-up destruction effect clearing all visible enemies",
+      "meaning": "temporary respite; brief window of safety"
+    },
+    {
+      "signal": "extra_life_available",
+      "visual_form": "orange power-up icon",
+      "meaning": "death resilience increased; risk tolerance expanded"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_force",
+      "color_identity": null,
+      "symbol_or_sigil": "Silver Hawk spacecraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player ship design remains consistent; no faction-specific environmental markers documented"
+    },
+    {
+      "faction": "enemy_collective",
+      "color_identity": null,
+      "symbol_or_sigil": "generic enemy sprites (largely non-descript mechanical/organic designs)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "enemies spawn continuously from screen edges; no persistent territorial markers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_stage",
+      "visual_manifestation": "sparse enemy density; manageable projectile patterns",
+      "behavioral_manifestation": "enemies move in predictable formations; slower approach speed"
+    },
+    {
+      "world_state": "mid_stage",
+      "visual_manifestation": "moderate enemy density increase; denser bullet patterns",
+      "behavioral_manifestation": "enemies employ more complex approach vectors; increased fire rate"
+    },
+    {
+      "world_state": "late_stage_escalation",
+      "visual_manifestation": "heavy screen coverage of projectiles; rapid enemy spawning",
+      "behavioral_manifestation": "enemies exhibit aggressive clustering; minimal safe zones on screen"
+    },
+    {
+      "world_state": "power_up_advantage",
+      "visual_manifestation": "player weapon visuals intensify (wider spread, larger projectiles); shield glow effect",
+      "behavioral_manifestation": "player can sustain more aggressive forward positioning; reduced evasion necessity"
+    },
+    {
+      "world_state": "power_up_disadvantage",
+      "visual_manifestation": "player projectile spread diminishes; shield glow fades or absent",
+      "behavioral_manifestation": "player forced into defensive posture; requires constant evasion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "color_coded_loot_system",
+      "example": "pink power-ups = main weapon upgrade; green = side weapons; blue = shield recovery; orange = extra life; yellow = screen clear. Visual encoding removes need for text; player learns through play iteration."
+    },
+    {
+      "technique": "progressive_difficulty_scaling",
+      "example": "enemy formation density and projectile patterns increase across five-stage progression. Visual screen fill gradually escalates, communicating escalating threat without narrative exposition."
+    },
+    {
+      "technique": "weapon_state_visibility",
+      "example": "red power-up visually switches between Darius I and Darius II shot styles. Player immediately recognizes weapon state change through projectile visual patterns."
+    },
+    {
+      "technique": "lives_as_visual_capital",
+      "example": "orange power-ups grant extra Silver Hawk ships. Multiple ship losses visible through HUD tracking. Loss of final ship = loss condition communicated through absence."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "square_shaped_enemy",
+      "state": "approach_active",
+      "behavior": "moves toward player from front or behind; drops power-up loot on defeat; exhibits no avoidance behavior"
+    },
+    {
+      "entity": "player_silver_hawk",
+      "state": "powered_up",
+      "behavior": "projectile spread widens; weapon fire rate increases; evasion capability improves through visual feedback"
+    },
+    {
+      "entity": "player_silver_hawk",
+      "state": "powered_down",
+      "behavior": "single-stream projectiles; slow fire rate; high evasion demand signals vulnerability"
+    },
+    {
+      "entity": "force_shield",
+      "state": "active",
+      "behavior": "glow effect around player ship; absorbs one additional hit before destruction"
+    },
+    {
+      "entity": "force_shield",
+      "state": "depleted",
+      "behavior": "glow effect absent; next hit triggers ship destruction; visual absence signals critical vulnerability"
+    }
+  ],
+  "notes": "Darius Twin employs pure mechanical manifestation rather than narrative or political world-state communication. All danger/safety signals, faction identity, and world-state changes are expressed through visual game object presentation and behavioral response systems. The game communicates exclusively through symbol and mechanic; no explicit narrative or faction lore elements documented. Power-up color-coding is the primary linguistic system. Enemy design lacks faction identity markers, suggesting monolithic threat rather than multi-faction conflict.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:13:06.513Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4246,
+    "output_tokens": 1723,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

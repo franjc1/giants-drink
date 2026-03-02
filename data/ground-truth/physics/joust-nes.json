@@ -1,0 +1,114 @@
+{
+  "game_id": "joust-nes",
+  "game_name": "Joust",
+  "platform": "nes",
+  "year": 1988,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel data documented for NES version"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": false,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Flight/Wing Flapping",
+      "description": "Player controls ostrich flight by pressing button to flap wings. Rate of button presses determines ascension: rapid presses fly upward, moderate presses hover, minimal presses slowly descend. Continuous control over vertical movement without discrete jump states.",
+      "physics_values": {
+        "vertical_control": "button_press_dependent",
+        "ascension_type": "continuous_variable"
+      }
+    },
+    {
+      "name": "Joust Combat",
+      "description": "Collision-based combat where higher lance position wins. Equal height collisions repel both characters apart horizontally. Victory converts enemy into egg that falls to bottom of screen.",
+      "physics_values": {
+        "collision_type": "height_dependent",
+        "equal_collision_result": "mutual_repel"
+      }
+    },
+    {
+      "name": "Screen Wrapping",
+      "description": "Character traveling off-screen to either side reappears from opposite side, maintaining trajectory.",
+      "physics_values": {
+        "horizontal_wrapping": true
+      }
+    },
+    {
+      "name": "Lava Hazard",
+      "description": "Indestructible Lava Troll grabs characters flying too low over lava, dragging them into lava and causing loss of life.",
+      "physics_values": {
+        "hazard_type": "contact_based",
+        "consequence": "instant_death"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "responsive",
+    "momentum-based",
+    "floaty",
+    "precision-required",
+    "skill-based_collision_timing"
+  ],
+  "tier_notes": "Tier 3 - Empirical/Qualitative. No specific physics values documented in available sources. Game mechanics are described qualitatively emphasizing button-press-based flight control and collision-based combat. NES version is a port of 1982 arcade original programmed by HAL Laboratory (notable for being early work by Satoru Iwata). Technical specifications based on arcade hardware reuse (Defender hardware) rather than NES-specific implementation details.",
+  "sources_used": [
+    "The Cutting Room Floor - Joust (NES)",
+    "Wikipedia - Joust (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:28:01.573Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4401,
+    "output_tokens": 985,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "game_id": "lemmings-pc",
+  "game_name": "Lemmings",
+  "platform": "pc",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Lava pools, fire traps, large drops rendered in landscape",
+      "meaning": "Instant death zones; lemmings drown, burn, or fall fatally"
+    },
+    {
+      "signal": "Height danger",
+      "visual_form": "Tall cliffs and elevated terrain edges",
+      "meaning": "Falling from excessive height causes lemming death"
+    },
+    {
+      "signal": "Booby traps",
+      "visual_form": "Trap mechanisms embedded in terrain",
+      "meaning": "Contact triggers instant lemming capture/death"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Countdown timer displayed on UI",
+      "meaning": "Expiration causes all lemmings to explode regardless of state"
+    },
+    {
+      "signal": "Screen edge",
+      "visual_form": "Bottom boundary of visible play area",
+      "meaning": "Falling off bottom kills lemmings"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit portal",
+      "visual_form": "Designated exit location marked on terrain",
+      "meaning": "Target destination; reaching this saves lemmings"
+    },
+    {
+      "signal": "Solid ground",
+      "visual_form": "Stable terrain blocks and platforms",
+      "meaning": "Safe walkable surface; lemmings traverse safely"
+    },
+    {
+      "signal": "Constructible paths",
+      "visual_form": "Empty space where Builder skill creates stairways",
+      "meaning": "Player-created safe passage through landscape"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lemmings (player-controlled group)",
+      "color_identity": "Green hair, blue robes",
+      "symbol_or_sigil": "Anthropomorphic lemming sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Entrance trap doors release steady stream from above"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Safe passage available",
+      "visual_manifestation": "Clear, unobstructed terrain path rendered with accessible platforms",
+      "behavioral_manifestation": "Lemmings walk forward in line, following predecessors"
+    },
+    {
+      "world_state": "Obstacle present",
+      "visual_manifestation": "Terrain blocks, walls, drops, or hazards rendered as solid geometry",
+      "behavioral_manifestation": "Lemmings reverse direction upon contact (unless assigned skill), attempt to traverse around obstacle"
+    },
+    {
+      "world_state": "Lemming death triggered",
+      "visual_manifestation": "Hazard contact (lava, fire, trap, excessive fall) shown visually",
+      "behavioral_manifestation": "Lemming sprite disappears; death count incremented"
+    },
+    {
+      "world_state": "Time running out",
+      "visual_manifestation": "Timer visibly counting down on UI; visual distress may escalate",
+      "behavioral_manifestation": "If timer expires, all lemmings detonate regardless of location/status"
+    },
+    {
+      "world_state": "Skill assigned to lemming",
+      "visual_manifestation": "Lemming sprite or animation changes to reflect skill state (climber stance, bomber timer, parachute deployment, etc.)",
+      "behavioral_manifestation": "Lemming behavior alters: climbs walls, digs terrain, builds stairs, blocks others, explodes, etc."
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hazard placement as level design language",
+      "example": "Lava pools, fire traps, and drops positioned to require specific skill combinations; visual layout communicates puzzle intent"
+    },
+    {
+      "technique": "Progressive difficulty through terrain complexity",
+      "example": "Early levels use simple obstacles (isolated drops); later levels layer multiple hazards (bridges over lava, narrow pathways with traps) to increase visual/mechanical challenge"
+    },
+    {
+      "technique": "Landscape geometry as skill requirement signpost",
+      "example": "Vertical cliffs visually suggest Climber skill needed; horizontal barriers suggest Basher; downward slopes suggest Digger use"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Lemming (unassigned)",
+      "state": "Walking normally",
+      "behavior": "Follows other lemmings in line, ignores collisions (except Blockers), turns around when hitting impassable obstacle, falls off edges"
+    },
+    {
+      "entity": "Lemming (Climber)",
+      "state": "Climbing assigned",
+      "behavior": "Scales vertical surfaces; falls if encountering overhang"
+    },
+    {
+      "entity": "Lemming (Floater)",
+      "state": "Falling",
+      "behavior": "Deploys parachute; descends safely from any height"
+    },
+    {
+      "entity": "Lemming (Bomber)",
+      "state": "Active",
+      "behavior": "Explodes after 5-second timer; destroys destructible landscape in proximity; does not harm other lemmings or traps"
+    },
+    {
+      "entity": "Lemming (Blocker)",
+      "state": "Positioned",
+      "behavior": "Stands still; reverses direction of any lemming hitting it"
+    },
+    {
+      "entity": "Lemming (Builder)",
+      "state": "Building",
+      "behavior": "Constructs 12-step stairway; stops on collision with head, depletion of bricks, or solid object"
+    },
+    {
+      "entity": "Lemming (Basher/Miner/Digger)",
+      "state": "Tunneling",
+      "behavior": "Basher tunnels horizontally; Miner diagonally downward; Digger directly downward; all cannot breach steel barriers"
+    }
+  ],
+  "notes": "Lemmings uses non-violent visual communication—danger is signaled through environmental hazards and physics, not faction conflict. The game's world-state manifestation is entirely mechanical: visuals show terrain, hazards, and skill effects; behavior emerges from lemming AI and player-assigned abilities. No political or faction systems present; the game is a pure resource-management puzzle where lemmings are guided entities, not autonomous agents with agency. Visual design relies on immediate environmental legibility—hazards, safe zones, and skill affordances must be instantly recognizable for effective puzzle-solving.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:42:08.611Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3457,
+    "output_tokens": 1695,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

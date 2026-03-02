@@ -1,0 +1,179 @@
+{
+  "game_id": "street-fighter-2-snes",
+  "game_name": "Street Fighter II: The World Warrior",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "opponent_health_depletion",
+      "visual_form": "health bar reduction (visual meter above character)",
+      "meaning": "active threat level decreasing; opponent approaching defeat"
+    },
+    {
+      "signal": "special_move_activation",
+      "visual_form": "character stance change, visual effect burst, screen flash",
+      "meaning": "high-damage attack incoming; immediate danger window"
+    },
+    {
+      "signal": "timer_pressure",
+      "visual_form": "countdown clock display in match UI",
+      "meaning": "temporal threat; match outcome hanging in balance when time expires"
+    },
+    {
+      "signal": "blocking_state",
+      "visual_form": "character stance shift, visual guard animation",
+      "meaning": "opponent defensive posture; reduced damage vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "distance_management",
+      "visual_form": "character spacing on screen, walking backward animation",
+      "meaning": "player creating attack reaction time; reducing immediate threat"
+    },
+    {
+      "signal": "successful_block",
+      "visual_form": "blocking animation, guard sparks visual effect",
+      "meaning": "damage negated; temporary safety window restored"
+    },
+    {
+      "signal": "opponent_recovery_gap",
+      "visual_form": "opponent knockdown animation, recovery frames visible",
+      "meaning": "safe opening for offensive action; reduced incoming threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "World Warrior Tournament Participants",
+      "color_identity": null,
+      "symbol_or_sigil": "character-specific fighting style and visual presentation",
+      "enemy_visual_variants": "all characters are tournament competitors; no inherent faction enemies (mechanical system neutral)",
+      "environmental_markers": "world map stage locations tied to character origin countries (Ryu-Japan, Guile-USA, Dhalsim-India, etc.)"
+    },
+    {
+      "faction": "Shadolou (narrative antagonist organization)",
+      "color_identity": null,
+      "symbol_or_sigil": "M. Bison/Vega visual design (final boss aesthetic distinction)",
+      "enemy_visual_variants": "Bison design carries authority/threat visuals; Vega/Balrog as subordinate henchmen",
+      "environmental_markers": "narrative-only; no explicit stage environmental faction markers in tournament structure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "tournament_active",
+      "visual_manifestation": "world map display showing progression through regional stages; character portraits appear as next opponents",
+      "behavioral_manifestation": "player advances through stages sequentially; defeated opponents are replaced on map"
+    },
+    {
+      "world_state": "match_in_progress",
+      "visual_manifestation": "stage-specific background imagery (Brazil jungle for Blanka, Japan temple for E. Honda, Russia frozen landscape for Zangief); opponent character model displays with idle stance",
+      "behavioral_manifestation": "opponent AI executes fighting patterns; health bars present and active"
+    },
+    {
+      "world_state": "character_defeated",
+      "visual_manifestation": "knockout animation; opponent falls to ground or stumbles; stage returns to idle state",
+      "behavioral_manifestation": "opponent ceases action; next map selection screen appears"
+    },
+    {
+      "world_state": "bonus_stage_triggered",
+      "visual_manifestation": "scene transitions to unique environment (car lot, barrel yard, oil drum facility); destructible objects render as targets",
+      "behavioral_manifestation": "player performs attack combo against static environment; scoring mechanic replaces opponent combat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stage_setting_as_character_identity",
+      "example": "E. Honda fights in traditional Japanese sumo wrestling dojo setting; Dhalsim's stage displays yoga temple environment; Guile's stage shows USA military barracks aesthetic — each stage visually reinforces character national/cultural origin"
+    },
+    {
+      "technique": "background_spectator_presence",
+      "example": "crowd visible in background of each stage; reactive crowd animations (cheering, reacting to knockdowns) creates sense of tournament legitimacy and social stakes"
+    },
+    {
+      "technique": "character_victory_animations",
+      "example": "character-specific win poses and taunts communicate personality and fighting philosophy (Ryu meditative calm vs. Ken arrogant swagger) independent of narrative text"
+    },
+    {
+      "technique": "world_map_narrative_structure",
+      "example": "visual map progression from character's home country outward to global tournament venues implies increasing competitive prestige; final Bison stage positioned as narrative culmination"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ryu",
+      "state": "neutral_stance",
+      "behavior": "standing ready pose; meditative demeanor reflected in idle animation; communicates discipline and focus"
+    },
+    {
+      "entity": "Ken",
+      "state": "neutral_stance",
+      "behavior": "confident smirk animation; more animated idle movements than Ryu; conveys arrogance and showmanship"
+    },
+    {
+      "entity": "Blanka",
+      "state": "neutral_stance",
+      "behavior": "wild-man posturing; erratic movement patterns; snarling animations communicate feral aggression"
+    },
+    {
+      "entity": "E. Honda",
+      "state": "neutral_stance",
+      "behavior": "sumo wrestling crouch positioning; methodical stance communicates grounded, immovable quality"
+    },
+    {
+      "entity": "Chun-Li",
+      "state": "neutral_stance",
+      "behavior": "poised, martial arts formal stance; controlled animation conveys professional discipline"
+    },
+    {
+      "entity": "Guile",
+      "state": "neutral_stance",
+      "behavior": "military-correct posture; rigid stance animations communicate military training and order"
+    },
+    {
+      "entity": "Dhalsim",
+      "state": "neutral_stance",
+      "behavior": "floating/levitation stance (visual); serene animation; fire breath effects communicate spiritual/mystical power"
+    },
+    {
+      "entity": "Zangief",
+      "state": "neutral_stance",
+      "behavior": "wrestler power stance; imposing physical presence; taunting animations communicate dominance"
+    },
+    {
+      "entity": "M. Bison",
+      "state": "boss_encounter",
+      "behavior": "authoritative stance; aggressive animation patterns; psycho power visual effects (purple aura) communicate supernatural threat level above normal fighters"
+    },
+    {
+      "entity": "any_character",
+      "state": "blocking",
+      "behavior": "character pose shifts to guard animation; visual reduction in action range signals defensive mode"
+    },
+    {
+      "entity": "any_character",
+      "state": "special_move_execution",
+      "behavior": "character performs unique special move animation sequence (Ryu Shoryuken rising uppercut, Guile Sonic Boom projectile, etc.); high-impact visual effects and sound design signal significant damage potential"
+    },
+    {
+      "entity": "any_character",
+      "state": "low_health",
+      "behavior": "character damage animation frequency increases; knockback response amplified; visual signaling of vulnerability"
+    }
+  ],
+  "notes": "Street Fighter II SNES operates primarily through direct mechanical manifestation rather than complex world-state systems. Visual communication centers on character individuality (fighting style, national origin, personality), match progression (health bars, round counters), and environmental stage identity. Faction systems are minimal — the game presents a tournament structure where all playable characters compete neutrally, with narrative faction (Shadolou) existing only in final-boss context with minimal visual distinction beyond character design. Regional differences in Japanese version include detailed character profiles with likes/dislikes and expanded win quotes that add personality context not visible in international builds. The game communicates danger primarily through health bar depletion and opponent animation states rather than environmental hazards or faction alignment mechanics.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:25:09.273Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6488,
+    "output_tokens": 2087,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

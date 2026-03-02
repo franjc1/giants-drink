@@ -1,0 +1,119 @@
+{
+  "game_id": "nhlpa-hockey-93-genesis",
+  "game_name": "NHLPA Hockey '93",
+  "platform": "Genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Player injury",
+      "visual_form": "Player animation change, possible removal from ice",
+      "meaning": "Character incapacity; reduces team effectiveness"
+    },
+    {
+      "signal": "Shattering glass",
+      "visual_form": "Breaking pane animation on boards/glass",
+      "meaning": "High-impact collision; physical consequence of aggressive play"
+    },
+    {
+      "signal": "Puck possession loss",
+      "visual_form": "Puck control indicator transition",
+      "meaning": "Vulnerability to opponent scoring opportunity"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Team possession control",
+      "visual_form": "Puck control UI indicator, player highlight",
+      "meaning": "Offensive advantage; ability to threaten goal"
+    },
+    {
+      "signal": "Goaltender positioning",
+      "visual_form": "Goalie on ice, ready stance animation",
+      "meaning": "Defensive readiness; reduced goal vulnerability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team (by city)",
+      "color_identity": "Primary jersey color (varies by NHL city)",
+      "symbol_or_sigil": "City name only (no NHL team logos due to NHLPA licensing limitation)",
+      "enemy_visual_variants": "Away team rendered in contrasting jersey color",
+      "environmental_markers": "Home arena ice with city-specific visual identity elements"
+    },
+    {
+      "faction": "Away Team (by city)",
+      "color_identity": "Secondary/white jersey color",
+      "symbol_or_sigil": "City name only (generic presentation)",
+      "enemy_visual_variants": "Away players rendered in lighter jersey",
+      "environmental_markers": "Foreign arena; subtle visual distinction from home environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Exhibition game mode",
+      "visual_manifestation": "Single-game match setup; neutral playoff-style presentation",
+      "behavioral_manifestation": "No cumulative game state; each match independent"
+    },
+    {
+      "world_state": "Playoff mode (single-elimination or best-of-7)",
+      "visual_manifestation": "Trophy presentation (Stanley Cup analogue) upon series victory",
+      "behavioral_manifestation": "Cumulative series tracking; elimination or advancement based on match outcomes"
+    },
+    {
+      "world_state": "Ongoing roster/line customization",
+      "visual_manifestation": "Lineup adjustments persist between matches (Genesis EEPROM save)",
+      "behavioral_manifestation": "Team composition affects player statistics and on-ice performance"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Arena identity through visual design",
+      "example": "Each of 24 NHL cities represented with distinct arena aesthetics; home/away jersey contrast establishes territorial identity"
+    },
+    {
+      "technique": "Roster authenticity",
+      "example": "Real NHL player names and 1991–92 season rosters create historical continuity and recognizable team composition"
+    },
+    {
+      "technique": "Physical consequence visualization",
+      "example": "Shattering glass on high-impact plays demonstrates realism; injury animations show tangible game consequences"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Active/healthy",
+      "behavior": "Responds to input; engages in skating, passing, shooting, checking"
+    },
+    {
+      "entity": "Player character",
+      "state": "Injured",
+      "behavior": "Removed from play or reduced performance capacity; visual/animation change indicates incapacity"
+    },
+    {
+      "entity": "Goaltender",
+      "state": "Ready",
+      "behavior": "Positioned in crease; responds to incoming shots with save animations"
+    },
+    {
+      "entity": "AI opponent team",
+      "state": "Active",
+      "behavior": "Pursues puck possession; attempts scoring; applies defensive pressure"
+    }
+  ],
+  "notes": "NHLPA Hockey '93 operates within constraints of NHLPA-only licensing (not NHL-licensed). This manifests in faction identity through city names rather than team logos/nicknames. The game communicates world-state through possession UI, score tracking, and playoff progression. Danger is signaled primarily through injury mechanics and glass-breaking collisions. The 24-team roster and real player names constitute environmental storytelling of the 1991–92 NHL season. No faction conflict or political narrative exists—the paradigm is competitive sport rather than world-building. Behavioral tells focus on player state (healthy/injured) and goaltender readiness rather than faction-specific traits.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:42:01.614Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3437,
+    "output_tokens": 1254,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

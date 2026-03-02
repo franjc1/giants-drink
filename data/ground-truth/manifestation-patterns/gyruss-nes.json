@@ -1,0 +1,173 @@
+{
+  "game_id": "gyruss-nes",
+  "game_name": "Gyruss",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spaceship appearance",
+      "visual_form": "Hostile craft emerging from center vanishing point or screen edges in swirling patterns",
+      "meaning": "Immediate threat requiring destruction to progress"
+    },
+    {
+      "signal": "Laser beam generators",
+      "visual_form": "Two generator segments with visible laser beam between them",
+      "meaning": "Destructive environmental hazard; contact causes ship destruction"
+    },
+    {
+      "signal": "Asteroids trajectory",
+      "visual_form": "Rocks flying straight outward from screen center at regular intervals",
+      "meaning": "Unavoidable obstacle; cannot be destroyed, but collision damage implied"
+    },
+    {
+      "signal": "Satellite swarm deployment",
+      "visual_form": "Group of three satellites materializing in small gyrating circles near player position",
+      "meaning": "Concentrated threat formation with offensive capability"
+    },
+    {
+      "signal": "Boss encounter arrival",
+      "visual_form": "Planet-specific boss ship appears at stage completion",
+      "meaning": "Escalated difficulty; major threat to progression"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Bonus stage environment",
+      "visual_form": "Screen transitions to bonus round after planet arrival cutscene",
+      "meaning": "Temporary safe zone where player cannot be destroyed; enemy ships present for points only"
+    },
+    {
+      "signal": "Weapon upgrade satellites",
+      "visual_form": "Middle satellite appears as sun-like object (distinct visual variant)",
+      "meaning": "Beneficial pickup; destroying grants enhanced weapon capability"
+    },
+    {
+      "signal": "Stage 1 and every 10th stage enemy behavior",
+      "visual_form": "Enemies deploy without firing during entrance sequence",
+      "meaning": "Brief window of reduced danger during initial enemy appearance"
+    },
+    {
+      "signal": "Extra life pickups",
+      "visual_form": "Satellite drops or special pickup from destroyed enemies",
+      "meaning": "Extended survival capacity granted"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Space Defense Force Gyruss / Rudolf's resistance)",
+      "color_identity": null,
+      "symbol_or_sigil": "Single player-controlled ship on perimeter circumference",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Ship represents lone hero opposing tyranny; positioned at edge of circular play field, shooting inward toward center"
+    },
+    {
+      "faction": "Federation/Domesu tyranny (antagonist force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Multiple enemy spaceship types with varying behaviors; boss encounters per planet",
+      "enemy_visual_variants": "Standard enemy ships vs. planet-specific boss variants; satellite formations represent organized military presence",
+      "environmental_markers": "Enemies emerge from center vanishing point (authoritarian power emanating from solar system core); occupy spatial center of play field"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game progression through solar system stages",
+      "visual_manifestation": "Sequential planetary travel: 2 warps to Neptune → Uranus → Saturn → Jupiter → Mars → Earth (arcade); NES adds Pluto, Venus, Mercury, Sun for 39 total stages",
+      "behavioral_manifestation": "Enemy difficulty increases with each planet; boss encounters trigger at planet arrivals; bonus stages provide reprieve after major threats"
+    },
+    {
+      "world_state": "Tyrannical Federation rule (introductory story state - FDS/JP version)",
+      "visual_manifestation": "Text scroll intro showing oppressive labor conditions; military oversight imagery",
+      "behavioral_manifestation": "Player narrative begins in subjugation; rebellion formation (Gyruss) occurs after 10-year exile sentence completion"
+    },
+    {
+      "world_state": "Evil leader's invasion campaign (story escalation point)",
+      "visual_manifestation": "Leader Domesu directs invasion command; visual shift to hostile space encounters",
+      "behavioral_manifestation": "Enemies become more aggressive; player forced into direct confrontation across solar system"
+    },
+    {
+      "world_state": "Victory/liberation state (ending condition - NES version)",
+      "visual_manifestation": "Brief text: 'THE UNIVERSE IS AT PEACE' after final boss defeat; ship returns to sun and back to Earth",
+      "behavioral_manifestation": "Game resets for another cycle; NES version minimizes narrative resolution compared to FDS epilogue"
+    },
+    {
+      "world_state": "Post-victory peace (FDS epilogue state)",
+      "visual_manifestation": "Extended ending sequence with ship landing at base; full staff roll displayed",
+      "behavioral_manifestation": "Rudolf launches successful revolution on Earth, defeats father Domesu, ushers new era"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial narrative through one-point perspective",
+      "example": "Player ship confined to circular perimeter while enemies emerge from center vanishing point; visual metaphor for single hero confronting centralized power structure"
+    },
+    {
+      "technique": "Planetary progression as liberation arc",
+      "example": "Journey from outer planets (Neptune, Uranus) toward inner system (Earth) mirrors approach to power center; each planet defeat represents reclaiming territory from oppressive regime"
+    },
+    {
+      "technique": "Bonus stage as sanctuary visualization",
+      "example": "Distinct visual transition to bonus round after each planet; enemies present but non-threatening; represents moments of military rest/regime vulnerability"
+    },
+    {
+      "technique": "Enemy formation patterns as military organization",
+      "example": "Satellites deploy in rigid groups of three; swirling patterns suggest coordinated Federation forces; destruction of leader satellite (sun-like center) grants weapon upgrade"
+    },
+    {
+      "technique": "Vanishing point as power origin",
+      "example": "All enemy emergence and player shots converge at screen center; visual reinforcement that conflict originates from centralized authority"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy spaceship",
+      "state": "Initial deployment",
+      "behavior": "Swirling pattern movement from center or edges; completes deployment pattern then hovers near center screen"
+    },
+    {
+      "entity": "Standard enemy spaceship",
+      "state": "Post-deployment (stages 2-9, 11-19, etc.)",
+      "behavior": "Occasional offensive fly-outs toward player perimeter with projectile fire; gradual retreat if not destroyed"
+    },
+    {
+      "entity": "Standard enemy spaceship",
+      "state": "Stages 1, 11, 21, 31+ (every 10th)",
+      "behavior": "Deploy without firing; reduced initial threat allowing safe weapon/power gathering"
+    },
+    {
+      "entity": "Satellite formation",
+      "state": "Active",
+      "behavior": "Gyrate in small circles after deployment; fire at player continuously; center satellite (when basic weapon equipped) appears as distinctive sun-like object"
+    },
+    {
+      "entity": "Boss spaceship",
+      "state": "Planet-arrival encounter",
+      "behavior": "Enhanced attack patterns; greater resilience; represents escalated military opposition specific to each conquered world"
+    },
+    {
+      "entity": "Laser beam generator",
+      "state": "Active",
+      "behavior": "Flies straight outward from center; emits destructive beam between two segments; persists until either segment destroyed"
+    },
+    {
+      "entity": "Asteroids",
+      "state": "Traversal",
+      "behavior": "Fly straight outward at regular intervals; indestructible; provide point bonus on hit (no tactical threat despite collision hazard)"
+    }
+  ],
+  "notes": "Gyruss employs circular one-point perspective to communicate political hierarchy: player as lone resistance fighter occupies defensive perimeter position while Federation forces emerge from centralized vanishing point. NES version significantly reduces narrative context (removes intro text explaining tyranny, eliminates epilogue showing post-war revolution) compared to FDS, weakening world-state communication. Bonus stages function as both mechanical reprieve and narrative respite from oppressive enemy presence. Enemy behavior variance (firing/non-firing on specific stages) creates punctuated difficulty rhythm implying military deployment cycles. Satellite formations and boss encounters escalate visual/behavioral threat intensity as player approaches solar system core (metaphorically approaching Domesu's seat of power).",
+  "sources_used": [
+    "tcrf_gyruss_nes_famicom_disk_system",
+    "wikipedia_gyruss"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:11:01.788Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5338,
+    "output_tokens": 2178,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

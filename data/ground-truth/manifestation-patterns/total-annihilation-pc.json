@@ -1,0 +1,206 @@
+{
+  "game_id": "total-annihilation-pc",
+  "game_name": "Total Annihilation",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit proximity",
+      "visual_form": "Minimap indicators and unit sprites approaching player base",
+      "meaning": "Direct threat to player forces or structures; requires defensive response"
+    },
+    {
+      "signal": "Resource depletion",
+      "visual_form": "Energy/Metal indicators dropping into red zone on HUD",
+      "meaning": "Economic collapse imminent; production and defensive systems will fail (nanostalling effect)"
+    },
+    {
+      "signal": "Power failure",
+      "visual_form": "Radar towers, metal extractors, and laser towers cease visual operation/glow",
+      "meaning": "Loss of reconnaissance capability and defensive firepower; critical vulnerability state"
+    },
+    {
+      "signal": "Fog of war obscurity",
+      "visual_form": "Darkened/greyed areas on minimap and main view without radar coverage",
+      "meaning": "Unknown enemy activity; reconnaissance gap presents strategic risk"
+    },
+    {
+      "signal": "Advanced enemy units",
+      "visual_form": "Large, high-tech unit models (nuclear launchers, artillery, Core Krogoth mecha)",
+      "meaning": "Opponent has achieved tech advantage; escalated threat level"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Resource surplus",
+      "visual_form": "Energy/Metal indicators in green/positive range on HUD",
+      "meaning": "Economy is stable; production can continue without slowdown"
+    },
+    {
+      "signal": "Active radar coverage",
+      "visual_form": "Illuminated radar structures and visible minimap scout circles",
+      "meaning": "Reconnaissance active; enemy approach will be detected"
+    },
+    {
+      "signal": "Defensive structure density",
+      "visual_form": "High concentration of laser towers and fortifications around player base",
+      "meaning": "Area is heavily defended; incoming attacks will face resistance"
+    },
+    {
+      "signal": "Commander presence",
+      "visual_form": "Yellow backpack-equipped unit visible near base construction",
+      "meaning": "Central irreplaceable unit is safe and assisting production; forces remain under direct control"
+    },
+    {
+      "signal": "Tech level progression visible",
+      "visual_form": "Increasingly advanced unit models in construction queues and on field",
+      "meaning": "Player is advancing technologically; capability advantage emerging"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Core",
+      "color_identity": "Blue/dark metallic (inferred from RTS convention and base screenshot reference)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Giant mecha unit 'Core Krogoth' serves as faction-specific superweapon signature",
+      "environmental_markers": "Base structures and defensive installations with Core architectural style visible in screenshot"
+    },
+    {
+      "faction": "Arm",
+      "color_identity": "Gold/light contrasting (inferred from opposition to Core; Commander described with 'yellow backpack')",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Commander unit with distinctive yellow visual backpack marking serves as faction identifier",
+      "environmental_markers": "Player faction base layout and construction unit designs reflect Arm technology aesthetic"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (limited resources, basic units)",
+      "visual_manifestation": "Single Commander unit visible on map; small number of basic structures; limited unit variety in construction queues",
+      "behavioral_manifestation": "Commander performs construction duties; slow tech progression; focus on defensive positioning"
+    },
+    {
+      "world_state": "Mid-game escalation (resource flow stable, tech advancement)",
+      "visual_manifestation": "Multiple unit types visible; upgraded structures; radar coverage expanding; tech-level indicators showing progression",
+      "behavioral_manifestation": "Production accelerates; offensive unit deployment begins; scouting and reconnaissance intensify"
+    },
+    {
+      "world_state": "Economic crisis (resources exceeding production)",
+      "visual_manifestation": "HUD shows red resource meters; production UI displays nanostalling indicator; structures glow dimly or cease operations",
+      "behavioral_manifestation": "All construction and unit movement slows proportionally; power-dependent defenses fail; player forced into reactive survival mode"
+    },
+    {
+      "world_state": "Power loss (energy reserves depleted)",
+      "visual_manifestation": "Radar towers and laser towers become visually inactive/dark; energy meter at zero on HUD",
+      "behavioral_manifestation": "Radar reconnaissance ceases; defensive turrets stop firing; visibility collapses to immediate vicinity only"
+    },
+    {
+      "world_state": "Late-game saturation (advanced units deployed)",
+      "visual_manifestation": "High-tier units filling minimap (nuclear launchers, artillery, mecha); dense base infrastructure; tech level indicators maxed",
+      "behavioral_manifestation": "Long-range bombardment visible across map; strategic positioning over raw unit count; attrition warfare dominates"
+    },
+    {
+      "world_state": "Opponent eliminated",
+      "visual_manifestation": "Enemy base structures disappear from minimap and main view; wreckage clusters visible where base was; no enemy unit sprites remaining",
+      "behavioral_manifestation": "Victory condition met; game concludes or player transitions to new objective"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Wreckage fields as battle memory",
+      "example": "Destroyed unit and structure remnants left behind accumulate on map, creating visual history of combat encounters; wreckage can be reclaimed for metal, incentivizing players to move through battle zones"
+    },
+    {
+      "technique": "Terrain resource clustering",
+      "example": "Metal deposits and energy-producing organic structures scattered across map geography; distribution tells story of resource scarcity and strategic chokepoints where control is critical"
+    },
+    {
+      "technique": "Radar coverage as light/shadow",
+      "example": "Fog of war creates visual darkness in unexplored areas; radar towers illuminate strategic regions; contrast between visible and hidden space communicates information advantage"
+    },
+    {
+      "technique": "Base density as narrative of escalation",
+      "example": "Player base grows from single Commander to sprawling industrial complex; visual expansion of defensive infrastructure and construction facilities mirrors the narrative progression from survival to dominance"
+    },
+    {
+      "technique": "Unit scale and positioning",
+      "example": "Relative size of advanced units (Core Krogoth, nuclear launchers) compared to basic infantry communicates technological hierarchy and power differential; their positioning on map indicates threat concentration"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Commander",
+      "state": "Engaged in construction",
+      "behavior": "Visible near structures being built; moves to new construction sites in queue; presence signals active production and base development"
+    },
+    {
+      "entity": "Commander",
+      "state": "Using cloaking ability",
+      "behavior": "Becomes invisible to enemy scouts; tactical repositioning or escaping threat; when cloaked, absence from minimap indicates evasion strategy"
+    },
+    {
+      "entity": "Radar tower",
+      "state": "Powered and operational",
+      "behavior": "Emits visual glow/activation indicator; minimap shows active coverage radius; enemy units within range trigger detection alerts"
+    },
+    {
+      "entity": "Radar tower",
+      "state": "Power loss",
+      "behavior": "Glow extinguishes; coverage disappears from minimap; reconnaissance blind spot created; strategic vulnerability exposed"
+    },
+    {
+      "entity": "Metal extractor",
+      "state": "Powered and operational",
+      "behavior": "Continuously harvests nearby metal deposits; visible animation; resource stream flows to player reserves"
+    },
+    {
+      "entity": "Metal extractor",
+      "state": "Power loss",
+      "behavior": "Animation stops; no resource accumulation despite proximity to deposits; player forced to rely on wreckage reclamation"
+    },
+    {
+      "entity": "Laser tower",
+      "state": "Powered and operational",
+      "behavior": "Tracks and fires on approaching enemy units; visible beam effects; active defense posture"
+    },
+    {
+      "entity": "Laser tower",
+      "state": "Power loss",
+      "behavior": "Ceases tracking and firing; stands inert; defensive capability nullified; base becomes vulnerable"
+    },
+    {
+      "entity": "Construction factory",
+      "state": "Active production",
+      "behavior": "Completes units in queue; new unit sprites spawn from factory; production UI shows build progress animation"
+    },
+    {
+      "entity": "Construction factory",
+      "state": "Nanostalling (resource shortage)",
+      "behavior": "Build progress slows visibly; unit completion takes extended time; factory operations visibly stutter/hesitate in animation"
+    },
+    {
+      "entity": "Any combat unit",
+      "state": "Moving to patrol waypoint",
+      "behavior": "Executes queued movement commands automatically; patrol routes visible through movement trails; minimizes player micromanagement load"
+    },
+    {
+      "entity": "Advanced unit (nuclear launcher, Core Krogoth)",
+      "state": "Deployed on map",
+      "behavior": "Massive visual presence; distinctive silhouette; long build times reflected in late-game appearance; signals opponent tech dominance if enemy-controlled"
+    }
+  ],
+  "notes": "Total Annihilation's visual communication relies heavily on economic state translation to defensive/offensive capability shifts. The game's streaming resource model means danger and safety are directly tied to HUD meter positions rather than discrete events. Faction distinction appears minimal in available source material; both Core and Arm likely use standard RTS color opposition (Blue vs. Yellow/Gold). The Commander's yellow backpack serves as player faction identifier. Minimap fog of war and radar coverage create spatial storytelling about information advantage. Unit scale (basic infantry vs. Krogoth mecha) communicates tech progression visually. Environmental wreckage accumulation creates visual palimpsest of prior battles, reinforcing RTS resource-scarcity gameplay through aesthetic persistence.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:58:15.816Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2602,
+    "output_tokens": 2551,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "game_id": "descent-2-pc",
+  "game_name": "Descent II",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Robot presence",
+      "visual_form": "Enemy robot models with distinct silhouettes and movement patterns",
+      "meaning": "Active threat requiring evasion or destruction; infected robots attempt to destroy player ship"
+    },
+    {
+      "signal": "Reactor status",
+      "visual_form": "Reactor entity in level, countdown timer after activation",
+      "meaning": "Level self-destruct imminent after reactor destruction; time pressure increases danger"
+    },
+    {
+      "signal": "Boss robot appearance",
+      "visual_form": "Larger, distinctly designed robot entity replacing reactor on every fourth level",
+      "meaning": "Escalated threat level; boss encounters mark level progression checkpoints"
+    },
+    {
+      "signal": "Mine structural darkness",
+      "visual_form": "Unlit passages and caverns; areas without active lighting",
+      "meaning": "Navigation hazard; disorientation risk; player must use flares or headlight to navigate safely"
+    },
+    {
+      "signal": "Robot generators",
+      "visual_form": "Generator entities spawning continuous robot waves",
+      "meaning": "Persistent threat source; disabling generators reduces enemy pressure"
+    },
+    {
+      "signal": "Locked doors (colored)",
+      "visual_form": "Blue, yellow, or red colored door barriers",
+      "meaning": "Access restriction; requires corresponding key item to progress; gates dangerous areas"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Guide-Bot presence",
+      "visual_form": "Commandable scouting robot model that can be freed and follows player",
+      "meaning": "Navigation assistance; helps locate objectives and power-ups; reduces disorientation danger"
+    },
+    {
+      "signal": "Energy stations",
+      "visual_form": "Recharge stations positioned throughout mines",
+      "meaning": "Resource recovery points; safe zones for ship energy restoration"
+    },
+    {
+      "signal": "Exit door activation",
+      "visual_form": "Open exit portal appearing after reactor destruction",
+      "meaning": "Escape route available; indicates safe passage out of level before self-destruct"
+    },
+    {
+      "signal": "Automap documentation",
+      "visual_form": "Wireframe map showing explored areas and markers",
+      "meaning": "Spatial safety; knowledge of layout reduces disorientation and navigation hazards"
+    },
+    {
+      "signal": "Human hostages",
+      "visual_form": "NPC characters present in levels",
+      "meaning": "Optional rescue objectives; indicate human-controlled areas within mines"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Collectible items scattered throughout mines or dropped by destroyed robots",
+      "meaning": "Resource availability; expanded weaponry and capability increases player safety margin"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Human pilots)",
+      "color_identity": null,
+      "symbol_or_sigil": "Fighter spaceship (player-controlled vessel)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Exit doors; human hostages; control panels"
+    },
+    {
+      "faction": "Infected robots (antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct robot model designs varying by level and system",
+      "enemy_visual_variants": "Different robot types by themed star system; boss variants on fourth levels",
+      "environmental_markers": "Robot generators; robot corpses; destroyed enemy remains"
+    },
+    {
+      "faction": "Guide-Bot (allied entity)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinctive scouting robot model with assist behavior",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Can be freed and commanded; leads to objectives"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-reactor destruction",
+      "visual_manifestation": "Mine operates normally; doors may be locked; generators actively spawning robots",
+      "behavioral_manifestation": "Robots patrol and attack; generators produce continuous enemy waves; players navigate to reactor"
+    },
+    {
+      "world_state": "Post-reactor destruction",
+      "visual_manifestation": "Countdown timer visible; exit door opens and becomes accessible",
+      "behavioral_manifestation": "Mine self-destruct sequence initiated; time pressure forces immediate escape; robots continue attacking"
+    },
+    {
+      "world_state": "Darkness/low visibility",
+      "visual_manifestation": "Unlit passages; shadowed caverns; limited sight lines without headlight or flares",
+      "behavioral_manifestation": "Player must use flares to navigate; disorientation increases; hazard avoidance becomes difficult"
+    },
+    {
+      "world_state": "Secret level discovered",
+      "visual_manifestation": "Hidden teleporter behind secret door; access to alternate level space",
+      "behavioral_manifestation": "Player cannot save in secret levels; must teleport back to regular level to save progress"
+    },
+    {
+      "world_state": "Different themed star systems",
+      "visual_manifestation": "Six differently themed mine environments; unique visual aesthetics per system",
+      "behavioral_manifestation": "Different robot types per system; varying level layouts and difficulty progression"
+    },
+    {
+      "world_state": "Boss level (every fourth level)",
+      "visual_manifestation": "Boss robot replaces standard reactor; larger, distinct visual design",
+      "behavioral_manifestation": "Boss combat encounter replaces reactor destruction objective; escalated threat intensity"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Themed mine systems",
+      "example": "Six distinct star systems with unique visual aesthetics communicate different underground environments and mining operations"
+    },
+    {
+      "technique": "Human hostages as environmental markers",
+      "example": "Presence of human NPCs indicates human-controlled areas and mining colony presence within mines"
+    },
+    {
+      "technique": "Structural progression",
+      "example": "Room-based level design with locked doors and key-gated passages communicate mine layout hierarchy and access restrictions"
+    },
+    {
+      "technique": "Generator placement",
+      "visual_communication": "Robot generators positioned throughout mines visually indicate threat production sources and strategic objective points"
+    },
+    {
+      "technique": "Control panel visual language",
+      "example": "Shootable control panels that trigger doors, wall removal, and force field deactivation communicate environmental manipulation systems"
+    },
+    {
+      "technique": "Reactor as narrative anchor",
+      "example": "Central reactor objective with self-destruct mechanic creates narrative urgency and visual focal point for level progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Infected robots",
+      "state": "Active/patrolling",
+      "behavior": "Attempt to destroy player ship; engage in combat; movement patterns vary by robot type"
+    },
+    {
+      "entity": "Robot generators",
+      "state": "Active",
+      "behavior": "Continuously spawn robot waves; persist until destroyed or disabled"
+    },
+    {
+      "entity": "Guide-Bot",
+      "state": "Freed and commanded",
+      "behavior": "Leads player to specified objectives; guides to power-ups; provides navigation assistance"
+    },
+    {
+      "entity": "Reactor",
+      "state": "Pre-destruction",
+      "behavior": "Stationary objective; upon destruction triggers countdown timer and self-destruct sequence"
+    },
+    {
+      "entity": "Boss robot",
+      "state": "Combat encounter",
+      "behavior": "Replaces reactor on fourth levels; represents escalated threat requiring defeat to progress"
+    },
+    {
+      "entity": "Energy stations",
+      "state": "Available",
+      "behavior": "Allow ship energy regeneration upon contact; function as safe resource zones"
+    }
+  ],
+  "notes": "Descent II uses environmental design and entity behavior to communicate danger through robot presence, mine self-destruct mechanics, and darkness as navigation hazard. Safety is signaled through guide-bots, energy stations, and automap systems. Faction identity is communicated primarily through robot distinct designs per star system rather than color coding. World-state changes are manifested through visible countdown timers, exit door appearance, and generator activity. The game does not appear to feature political faction systems or complex political scenarios in available source material.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:11:19.048Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2767,
+    "output_tokens": 2133,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

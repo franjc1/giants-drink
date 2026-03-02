@@ -1,0 +1,216 @@
+{
+  "game_id": "bubble-bobble-nes",
+  "game_name": "Bubble Bobble",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Distinct enemy sprite types with animated movement patterns",
+      "meaning": "Immediate threat requiring bubble-trapping mechanic"
+    },
+    {
+      "signal": "Level progression difficulty",
+      "visual_form": "Increasing enemy density and speed as levels advance toward level 100",
+      "meaning": "Escalating danger; player must adapt strategy"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Larger enemy sprites with distinct visual characteristics (e.g., floating skull in Part 2)",
+      "meaning": "Peak danger state; major threat requiring special tactics"
+    },
+    {
+      "signal": "Bubble trap",
+      "visual_form": "Spherical bubble enclosing enemy sprite",
+      "meaning": "Temporary neutralization; vulnerability window for pop mechanic"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Level-end visual or behavior change signaling stage completion requirement",
+      "meaning": "Failure state if level objectives not met in time"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Bonus item drops",
+      "visual_form": "Collectible sprites falling from popped bubble (fruit, power-ups, point icons)",
+      "meaning": "Successful enemy defeat; rewards and score advancement"
+    },
+    {
+      "signal": "Empty level state",
+      "visual_form": "Stage with no visible enemies; cleared space",
+      "meaning": "Level completion; progression to next challenge"
+    },
+    {
+      "signal": "Two-player proximity",
+      "visual_form": "Both Bub (green) and Bob (blue) dragons visible and controllable on same screen",
+      "meaning": "Cooperative safety; shared threat mitigation"
+    },
+    {
+      "signal": "Platform stability",
+      "visual_form": "Static level geometry; solid floor and wall placement",
+      "meaning": "Movement foundation; safe traversal pathways"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Bub (Player 1 Dragon)",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Dragon sprite with bubble-blowing animation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spawns at designated player 1 starting position; leads level progression narrative"
+    },
+    {
+      "faction": "Bob (Player 2 Dragon)",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Dragon sprite with bubble-blowing animation (color-swapped)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spawns at designated player 2 starting position; secondary/cooperative role in single-player"
+    },
+    {
+      "faction": "Girlfriends/Captives",
+      "color_identity": null,
+      "symbol_or_sigil": "Female character sprites (narrative goal)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appear in intro narrative; rescue objective drives story"
+    },
+    {
+      "faction": "Monster/Enemy faction",
+      "color_identity": "Varied enemy sprite colors (typically contrasting to player dragons)",
+      "symbol_or_sigil": "Distinct animated enemy sprites unique per enemy type",
+      "enemy_visual_variants": "Each enemy type has unique visual design; behavioral and coloration differences signal distinct threat profiles",
+      "environmental_markers": "Distributed throughout Cave of Monsters levels; density increases with progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Cave of Monsters - Active Combat Zone",
+      "visual_manifestation": "Level background and tileset depicting cave environment; enemies spawning and patrolling visible space",
+      "behavioral_manifestation": "Enemy sprites animate movement patterns; Bub and Bob must actively bubble-trap and pop to clear stage"
+    },
+    {
+      "world_state": "Level Progression (1-100 scale)",
+      "visual_manifestation": "Visual complexity increases; enemy count rises; screen layout becomes more intricate",
+      "behavioral_manifestation": "Enemies move faster and more unpredictably; player must use advanced bubble tactics; two-player coordination becomes critical"
+    },
+    {
+      "world_state": "Boss Battle State",
+      "visual_manifestation": "Larger, visually distinct boss sprite (e.g., floating skull in Bubble Bobble Part 2); specialized arena layout",
+      "behavioral_manifestation": "Boss exhibits unique attack patterns; standard bubble-trap may require charge mechanic or multi-hit strategy; strategic positioning essential"
+    },
+    {
+      "world_state": "Level Cleared / Victory",
+      "visual_manifestation": "All enemies defeated; empty stage; visual transition cue (screen flash or fade)",
+      "behavioral_manifestation": "Stage exit becomes available; bonus item spawning ceases; level progression counter advances"
+    },
+    {
+      "world_state": "Game Over / Mission Failure",
+      "visual_manifestation": "Game Over screen with password or save state display (varies by regional version: FDS vs NES)",
+      "behavioral_manifestation": "Player control disabled; stage music ends; selection screen or password entry required to continue"
+    },
+    {
+      "world_state": "Narrative Intro State",
+      "visual_manifestation": "Title screen with Bub and Bob dragon sprites; girlfriends depicted as captives; 'Cave of Monsters' setting visually established",
+      "behavioral_manifestation": "Static narrative presentation; player awaits input to begin game"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Color-based faction identification",
+      "example": "Bub is green dragon, Bob is blue dragon—colors remain consistent across all levels, establishing immediate player identity and cooperative partnership visual language"
+    },
+    {
+      "technique": "Enemy design as threat taxonomy",
+      "example": "Each enemy type features distinct sprite design, coloration, and movement speed, allowing player to visually categorize threats without explicit text"
+    },
+    {
+      "technique": "Level architecture progression",
+      "example": "Level 1-100 structure conveys 'story of escalating danger'; later levels show more complex cave geometry, denser enemy placement, and harder-to-navigate platforms"
+    },
+    {
+      "technique": "Bubble mechanic as world rule",
+      "example": "Bubbles visually manifest as spherical prison; enemies cannot escape once trapped; this visual establishes game's core combat rule and player agency"
+    },
+    {
+      "technique": "Bonus item semiotics",
+      "example": "Fruit and collectible sprites signal successful combat completion; their appearance and animation style conveys reward and progression value"
+    },
+    {
+      "technique": "Screen-based spatial storytelling",
+      "example": "Single-screen level design creates intimate arena; two-player visibility on same screen reinforces cooperative rescue narrative"
+    },
+    {
+      "technique": "Regional visual adjustment as world-state indicator",
+      "example": "FDS version's red tint vs. NES neutral palette represents localization/platform difference, not narrative world-state change, but demonstrates visual communication flexibility"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bub (Green Dragon)",
+      "state": "Active / Ready",
+      "behavior": "Animates running/walking; bubble-blowing animation triggers on input; responds to platform collision"
+    },
+    {
+      "entity": "Bub (Green Dragon)",
+      "state": "Bubbled / Trapped",
+      "behavior": "Encased in bubble sprite; bounces with bubble physics; trapped until bubble pops"
+    },
+    {
+      "entity": "Bob (Blue Dragon)",
+      "state": "Active / Ready",
+      "behavior": "Mirrors Bub behavior with blue color variant; in NES Part 2, alternates level participation (turn-based rather than cooperative)"
+    },
+    {
+      "entity": "Enemy Unit (Generic)",
+      "state": "Patrolling / Hunting",
+      "behavior": "Animates continuous movement across level; changes direction at walls; approaches player dragons when in proximity"
+    },
+    {
+      "entity": "Enemy Unit (Generic)",
+      "state": "Bubbled / Trapped",
+      "behavior": "Stops movement; encased in bubble sprite; floats upward briefly before gravity resets; vulnerable to pop mechanic"
+    },
+    {
+      "entity": "Enemy Unit (Generic)",
+      "state": "Defeated / Popped",
+      "behavior": "Bubble pops with visual effect; enemy sprite disappears; bonus item sprite spawns and falls"
+    },
+    {
+      "entity": "Boss (Floating Skull - Part 2)",
+      "state": "Active Combat",
+      "behavior": "Larger sprite with distinct animation cycle; moves in predictable but complex pattern; may dive or attack with special visual telegraph"
+    },
+    {
+      "entity": "Bonus Item Sprite",
+      "state": "Falling / Collectible",
+      "behavior": "Animated sprite with falling physics; responds to player contact by adding score/power and playing collection sound/visual effect"
+    },
+    {
+      "entity": "Level / Stage",
+      "state": "Active",
+      "behavior": "All enemies animated and responsive; level timer (if present) counts down; platform collision active"
+    },
+    {
+      "entity": "Level / Stage",
+      "state": "Cleared / Completed",
+      "behavior": "All enemies despawn or frozen; exit trigger becomes active; score and level progression visual displays update"
+    }
+  ],
+  "notes": "Bubble Bobble NES (1988) is a platformer with minimal narrative complexity but strong visual communication through color, sprite design, and behavioral animation. The game lacks explicit faction conflict; instead, danger is communicated through enemy presence and level design escalation. Safety is conveyed through visual emptiness (cleared levels) and collectible spawning (successful combat). Regional differences (FDS red tint vs. NES neutral palette) do not affect game-state communication. The two-player cooperative mechanic is visually reinforced through simultaneous on-screen dragon visibility. Boss encounters introduce visual distinctness that signals increased threat. No explicit political situation is present; the 'Cave of Monsters' setting is backdrop for mechanical threat progression. Environmental storytelling relies entirely on sprite design, color identity, and behavioral animation rather than environmental props or narrative text.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:38:59.833Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6346,
+    "output_tokens": 2629,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

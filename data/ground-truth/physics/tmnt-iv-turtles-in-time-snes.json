@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "game": "Teenage Mutant Ninja Turtles IV: Turtles in Time",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1992,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "Wikipedia — TMNT: Turtles in Time",
+        "url": "https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles:_Turtles_in_Time",
+        "notes": "Character differences, mechanics overview, SNES vs arcade comparison."
+      },
+      {
+        "name": "TASVideos — SNES / TMNT IV Turtles in Time",
+        "url": "https://tasvideos.org/Forum/Topics/2879",
+        "notes": "TASVideos run documentation. Character analysis: Raphael walks faster up/down, all turtles same horizontal run speed."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "TMNT IV is a beat-em-up (not a platformer), but included here for its jump + combat physics which overlap with platformer paradigms.",
+      "DEFINING MECHANIC: Throw enemies INTO THE SCREEN — enemies fly at the player/camera.",
+      "4 playable characters: Leonardo, Donatello, Raphael, Michelangelo. All have same horizontal run speed but different stats.",
+      "Raphael is slightly faster at up/down maneuvering. Donatello has the longest weapon reach.",
+      "Time travel theme: stages set in ancient Rome, pirate era, prehistoric era, and futuristic Technodrome.",
+      "Based on arcade version but SNES adds additional content not in the arcade."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "characters": {
+    "leonardo": {
+      "weapons": "Dual katana",
+      "range": "Medium",
+      "speed": "Medium",
+      "power": "Medium",
+      "notes": "Balanced character. Dual swords allow slightly wider hit arc."
+    },
+    "donatello": {
+      "weapons": "Bo staff",
+      "range": "Long (longest of all turtles)",
+      "speed": "Medium-slow",
+      "power": "High",
+      "notes": "Best range in the game. Staff hits enemies slightly farther away than other weapons. Recommended for beginners (confirmed TASVideos)."
+    },
+    "raphael": {
+      "weapons": "Dual sai",
+      "range": "Short",
+      "speed": "Fast",
+      "power": "High per hit",
+      "notes": [
+        "Fastest character — particularly faster at up/down maneuvering (confirmed TASVideos).",
+        "Short range compensated by attack speed.",
+        "Best for aggressive players comfortable with close-range combat."
+      ]
+    },
+    "michelangelo": {
+      "weapons": "Nunchaku",
+      "range": "Short-medium",
+      "speed": "Fast",
+      "power": "Medium",
+      "notes": "Attack animation whips in an arc — slightly different hitbox profile than staff or katana."
+    }
+  },
+
+  "movement": {
+    "_note": "Turtles in Time is a belt-scroller — movement is in 2D scrolling space with up/down depth axis.",
+    "horizontal_run_speed": {
+      "notes": "All four turtles have the same horizontal run speed. Raphael's advantage is specifically up/down (depth) movement.",
+      "confidence": "high",
+      "source": "TASVideos community documentation"
+    },
+    "vertical_depth_speed": {
+      "raphael_advantage": "Raphael moves faster up/down in the belt-scroller depth axis.",
+      "notes": "Useful for repositioning to target enemies at different depths or avoiding attacks.",
+      "confidence": "high",
+      "source": "TASVideos"
+    },
+    "dash": {
+      "description": "Double-tap direction OR set to 'Manual' mode in options.",
+      "notes": [
+        "Manual dash mode is faster for speedruns — allows sprinting from any position in only a few frames.",
+        "Running attacks are significantly more powerful than standing attacks.",
+        "Setting to Manual in options is the standard speedrun setup."
+      ],
+      "confidence": "high",
+      "source": "TASVideos"
+    },
+    "jump": {
+      "description": "Standard jump. Air control available.",
+      "notes": "Jumping into enemies deals contact damage. Jump attacks are different from ground attacks."
+    }
+  },
+
+  "combat": {
+    "basic_attack": {
+      "description": "Press Y for basic attack combo. Each turtle has a 3-4 hit combo string.",
+      "notes": "Attack animations are weapon-specific — staff has different arc than sai."
+    },
+    "jump_attack": {
+      "description": "Attack while airborne. Typically a downward or horizontal swing.",
+      "notes": "Jump attacks hit airborne enemies more reliably."
+    },
+    "super_attack": {
+      "description": "Full-screen special attack. Costs health to execute.",
+      "notes": "Emergency crowd-clear. Expensive — trades HP for damage output."
+    },
+    "throw_into_screen": {
+      "_note": "THE DEFINING MECHANIC of Turtles in Time.",
+      "description": "Grab an enemy and throw them toward the screen (at the player/camera). The enemy flies toward the viewer and hits the edge of the screen.",
+      "effect": "Instant defeat of the thrown enemy. Can hit other enemies in its path.",
+      "activation": "Grab enemy, then press toward screen (down+Y or specific input — VERIFY exact input)",
+      "notes": [
+        "The screen-throw is visually striking — enemies fly toward the camera and hit the 'glass.'",
+        "This technique was unique to Turtles in Time and became one of the game's signature mechanics.",
+        "Different from a standard throw which tosses enemies in-plane.",
+        "Some boss enemies cannot be screen-thrown."
+      ],
+      "confidence": "high"
+    }
+  },
+
+  "level_design": {
+    "_note": "Time travel theme creates diverse historical/futuristic environments within one game.",
+    "stages": [
+      "1990 New York — Present day, Foot Clan assault",
+      "1530 AD Pirate period — Slash as boss",
+      "2300 BC — Ancient Egypt/prehistoric",
+      "100 Million BC — Prehistoric (Antrax boss)",
+      "1885 — American Old West",
+      "Future City / Technodrome — Future TMNT setting"
+    ],
+    "notes": "Each stage uses the same physics engine with different visual themes. The variety is aesthetic, not mechanical — unlike Battletoads which changed gameplay modes."
+  },
+
+  "design_notes_for_giants_drink": [
+    "The screen-throw mechanic breaks the fourth wall in a physical sense — the enemy trajectory implies the camera is a real surface. It makes the player feel like they're in the world rather than watching through a window. This is a rare example of physics-based fourth-wall interaction.",
+    "Character differentiation in Turtles in Time is minimal by design — all turtles play similarly with minor stat differences. This is appropriate for a co-op game: meaningful choices without forcing one player to pick a 'bad' character. The differences are style preferences, not power rankings.",
+    "Donatello's reach advantage is exactly the kind of single-stat difference that creates meaningful diversity without unbalancing: range matters most at the edge of engagement. In a crowd, it's irrelevant. Against a single enemy, it's decisive. Context-dependent advantage.",
+    "Turtles in Time demonstrates that the same physics engine can serve radically different aesthetics (1530 pirate era vs 100 million BC prehistoric) without any changes. The mechanics stay constant; only the visual theme changes. This validates Giants Drink's world-theming approach.",
+    "The time travel premise creates natural player expectations: each new stage will feel different visually while playing identically. This is explicit in the design — the variety is a promise to the player that each stage will have new visual stimulus even if the mechanics are familiar."
+  ]
+}

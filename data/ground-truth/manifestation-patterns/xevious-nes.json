@@ -1,0 +1,158 @@
+{
+  "game_id": "xevious-nes",
+  "game_name": "Xevious",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Flying enemies",
+      "visual_form": "Animated sprites moving toward player in formation",
+      "meaning": "Active threat requiring zapper weapon response"
+    },
+    {
+      "signal": "Ground installations and vehicles",
+      "visual_form": "Stationary or slow-moving sprites on terrain",
+      "meaning": "Target requiring blaster weapon response"
+    },
+    {
+      "signal": "Andor Genesis mothership",
+      "visual_form": "Large boss sprite with multiple visual receptacles",
+      "meaning": "Extreme danger state; spawns projectiles and Zakatos (black explosive spheres)"
+    },
+    {
+      "signal": "Zakatos (black spheres)",
+      "visual_form": "Black explosive projectiles launched from mothership",
+      "meaning": "High-damage hazard requiring evasion"
+    },
+    {
+      "signal": "Progressive enemy difficulty increase",
+      "visual_form": "Sprite replacement—advanced enemy type replaces basic variant",
+      "meaning": "World state escalation: game dynamically increases threat based on player skill"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Zolback radar (flashing red on ground)",
+      "visual_form": "Red-flashing ground installation",
+      "meaning": "Destruction reverts game to easier enemy variants; player can manage difficulty"
+    },
+    {
+      "signal": "Special Flags (yellow)",
+      "visual_form": "Yellow collectible sprite (from Rally-X franchise)",
+      "meaning": "Extra life reward; safety/progression resource"
+    },
+    {
+      "signal": "Sol Citadels (hidden towers)",
+      "visual_form": "Bomb reticle flashes red when positioned over hidden location",
+      "meaning": "Hidden defensive/resource structure; discoverable through environmental interaction"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Solvalou (player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Solvalou starship sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Reticle indicator showing bomb landing zones; two-weapon system (zapper, blaster)"
+    },
+    {
+      "faction": "Xevious forces (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Andor Genesis mothership as faction centerpiece",
+      "enemy_visual_variants": "Flying craft variants; ground installations; Zakatos; basic and advanced enemy types",
+      "environmental_markers": "Ground targets, aerial formations, mechanical structures"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal difficulty progression",
+      "visual_manifestation": "Standard enemy sprite types visible in formation; terrain features distinct (forests, roads, rivers, mechanical structures)",
+      "behavioral_manifestation": "Enemies follow predictable patterns; player-paced engagement"
+    },
+    {
+      "world_state": "Player performing well (skill escalation)",
+      "visual_manifestation": "Advanced enemy sprite variants replace basic types in active spawning",
+      "behavioral_manifestation": "Increased enemy density, attack frequency, and unpredictability; world becomes more hostile"
+    },
+    {
+      "world_state": "Radar destruction (difficulty deescalation)",
+      "visual_manifestation": "Zolback radar (red-flashing) destroyed on ground",
+      "behavioral_manifestation": "Enemy roster reverts to easier variants; world threat level resets downward"
+    },
+    {
+      "world_state": "Mothership encounter (faction confrontation)",
+      "visual_manifestation": "Andor Genesis sprite dominates screen; four blaster receptacles visible; projectile and Zakato spawn animations",
+      "behavioral_manifestation": "Endless projectile streams; black sphere explosions; player must coordinate destruction of receptacles or core"
+    },
+    {
+      "world_state": "Level completion (geographic progression)",
+      "visual_manifestation": "16 connected areas loop; terrain transitions (forests → roads → rivers → mechanical zones); Nazca lines on ground",
+      "behavioral_manifestation": "Checkpoint system: dying ~70% through area restarts at next area; continuous world cycle"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographically distinct terrain features",
+      "example": "Forests, roads, rivers, and mechanical structures serve as visual markers of world variety and establish narrative context (Earth invasion by alien Xevious forces)"
+    },
+    {
+      "technique": "Nazca-inspired ground designs",
+      "example": "'Condor' designs placed on ground terrain; references real-world archaeology, establishing a sci-fi overlay on recognizable Earth geography"
+    },
+    {
+      "technique": "Hidden structures (Sol Citadels)",
+      "example": "Discoverable through strategic bombing; reticle flashes red when over hidden location, rewarding exploration and environmental interaction"
+    },
+    {
+      "technique": "Boss sprite scale and visual complexity",
+      "example": "Andor Genesis mothership dominates screen with multiple receptacles and projectile patterns; visual complexity signals faction power and danger"
+    },
+    {
+      "technique": "Sprite quality and shading",
+      "example": "High-quality, detailed sprites with grayscale shading technique expand perceived color palette; creates immersive sci-fi aesthetic for alien forces vs. human defense"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Flying enemies",
+      "state": "Active patrol",
+      "behavior": "Move in formation toward player; become more erratic and aggressive as player skill increases"
+    },
+    {
+      "entity": "Ground installations",
+      "state": "Dormant threat",
+      "behavior": "Stationary or slow-moving; activate as targets when player approaches with blaster weapon"
+    },
+    {
+      "entity": "Andor Genesis mothership",
+      "state": "Combat encounter",
+      "behavior": "Launches endless projectile streams and Zakatos; requires destruction of four receptacles OR core to defeat; visual and behavioral intensity increases threat perception"
+    },
+    {
+      "entity": "Zolback radar",
+      "state": "Difficulty control",
+      "behavior": "Flashes red; destruction resets enemy difficulty downward, signaling player agency over challenge"
+    },
+    {
+      "entity": "Special Flags",
+      "state": "Semi-random reward",
+      "behavior": "Appear in predictable area; collection grants extra life; visual distinctiveness (yellow) aids identification"
+    }
+  ],
+  "notes": "Xevious uses dynamic difficulty scaling as a core world-state mechanic: the game visually manifests threat escalation by replacing enemy sprite variants rather than spawning new entity types. This creates a seamless difficulty curve. The game's visual communication strategy relies heavily on sprite animation, color flashing (red for danger/radar, yellow for rewards), and scale differentiation (mothership dominance). The environmental storytelling is subdued but effective: Nazca lines and diverse terrain types ground the alien invasion narrative in recognizable Earth geography, creating cognitive friction that reinforces the sci-fi premise. Original design (by Masanobu Endō) explicitly prioritized detailed, integral storytelling and welcoming progressive difficulty—this manifests in visual clarity and behavioral predictability at baseline difficulty, with escalation tied to player performance rather than arbitrary checkpoints.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:07:05.345Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5251,
+    "output_tokens": 1888,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

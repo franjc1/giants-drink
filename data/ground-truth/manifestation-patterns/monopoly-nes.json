@@ -1,0 +1,146 @@
+{
+  "game_id": "monopoly-nes",
+  "game_name": "Monopoly",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Jail State",
+      "visual_form": "Jail UI element in player status display",
+      "meaning": "Player movement restricted; financial penalty or strategic disadvantage"
+    },
+    {
+      "signal": "Bankruptcy Condition",
+      "visual_form": "Currency depletion display; player elimination from game",
+      "meaning": "Player financial failure; loss of property and game elimination"
+    },
+    {
+      "signal": "Property Ownership Indicator",
+      "visual_form": "Color-coded property squares on board; ownership markers",
+      "meaning": "Territory control by opponents; financial liability (rent payments)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Owned Property",
+      "visual_form": "Color-matched property display indicating player ownership",
+      "meaning": "Secure asset; income generation; territorial control"
+    },
+    {
+      "signal": "Cash Reserve Display",
+      "visual_form": "Currency value shown in player status/bank display",
+      "meaning": "Financial stability; ability to pay obligations and acquire properties"
+    },
+    {
+      "signal": "Free Parking/Safe Squares",
+      "visual_form": "Non-rent-generating board spaces",
+      "meaning": "No financial threat; temporary reprieve from economic pressure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Characters (8 Computer + Human)",
+      "color_identity": "Distinct color palette per player (e.g., red, blue, yellow, green, etc.)",
+      "symbol_or_sigil": "Character tokens/avatars (Rich Uncle Pennybags portrait for human player)",
+      "enemy_visual_variants": "Trade Screen character portraits with three emotional states: neutral, happy, angry face animations (Japanese version feature)",
+      "environmental_markers": "Property color groups matching player ownership; board position indicator"
+    },
+    {
+      "faction": "Rich Uncle Pennybags (Game Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Portrait with white outline (tweaked in Japanese version)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Title screen presence; represents game rules enforcement and economic system"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early Game (Property Acquisition Phase)",
+      "visual_manifestation": "Board shows empty/neutral properties; multiple color groups unclaimed",
+      "behavioral_manifestation": "Players actively bidding and purchasing; frequent property transactions"
+    },
+    {
+      "world_state": "Mid Game (Territory Control)",
+      "visual_manifestation": "Board displays color-grouped properties increasingly consolidated by players; property color patterns emerge",
+      "behavioral_manifestation": "Rent collection events; trading negotiations between players"
+    },
+    {
+      "world_state": "Late Game (Economic Pressure)",
+      "visual_manifestation": "Few unclaimed properties; most board spaces display ownership; visual concentration of color groups",
+      "behavioral_manifestation": "Increased bankruptcy risk; higher rent payments; player elimination"
+    },
+    {
+      "world_state": "Jail Incarceration",
+      "visual_manifestation": "UI displays 'IN JAIL' status; inverse of 'YOU'RE NOT IN JAIL' message",
+      "behavioral_manifestation": "Restricted movement; strategic decision to remain in jail vs. pay bail"
+    },
+    {
+      "world_state": "Currency Localization (Regional)",
+      "visual_manifestation": "German version: Deutsche mark symbol, values multiplied by 20; French version: franc symbol, values multiplied by 100; Large coin pile on victory screen replaces dollar sign",
+      "behavioral_manifestation": "AI trading behavior affected (German version oversight: AI uses original English prices creating exploitable trades)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Board Space Ownership Coloring",
+      "example": "Property squares display player-matched colors, creating visual narrative of territorial expansion and monopoly formation"
+    },
+    {
+      "technique": "Economic Hierarchy Visualization",
+      "example": "Player status displays (cash reserve, properties owned) communicate relative economic power and survival probability"
+    },
+    {
+      "technique": "Character Portraiture (Japanese Version)",
+      "example": "Trade screen animated portraits showing emotional states (neutral/happy/angry) reflect NPC attitude toward proposed trades, indicating AI valuation sentiment"
+    },
+    {
+      "technique": "Victory Screen Currency Transformation",
+      "example": "Regional currency symbols and coin pile aesthetic communicate localized economic identity and player achievement within cultural context"
+    },
+    {
+      "technique": "Jail UI State Change",
+      "example": "Transition from accessible 'GET OUT OF JAIL' menu option to invisible/unavailable state when player is free communicates legal status change"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Computer Player (NPC)",
+      "state": "Considering Trade (Japanese version)",
+      "behavior": "Portrait animates between neutral, happy, and angry faces on Trade screen; visual expression indicates acceptance likelihood and property valuation"
+    },
+    {
+      "entity": "Computer Player (NPC)",
+      "state": "Bankrupt",
+      "behavior": "Player eliminated from game display; properties revert to available/bank; visual removal from turn order"
+    },
+    {
+      "entity": "Player Character",
+      "state": "In Jail",
+      "behavior": "Menu displays 'GET OUT OF JAIL' option; movement restricted to jail square position; unique voice clip plays (regional variant: 'Don't be coming back, now' vs Japanese 'Whew, I finally got out')"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Bankrupt",
+      "behavior": "Cash display reaches zero; properties transferred; character eliminated from board visibility and turn sequence"
+    },
+    {
+      "entity": "AI (German Version Localization)",
+      "state": "Trading",
+      "behavior": "Uses original English price values despite 20x visual multiplier; creates exploitable trade imbalance where AI significantly undervalues properties"
+    }
+  ],
+  "notes": "Monopoly NES uses abstract representation model typical of board game digitization. World-state communication relies on property ownership coloring, cash display numerics, and UI status indicators rather than environmental hazards. The game's political/economic dimension manifests through resource scarcity visualization and player elimination mechanics. Regional localization includes significant UI/behavioral changes (Japanese animated NPC portraits, currency multipliers affecting AI trading logic). Voice acting localization reinforces cultural identity and emotional state communication. The 'YOU'RE NOT IN JAIL' unused text suggests comprehensive state tracking infrastructure even for edge cases.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:47:43.918Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2702,
+    "output_tokens": 1712,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

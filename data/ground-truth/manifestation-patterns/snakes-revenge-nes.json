@@ -1,0 +1,199 @@
+{
+  "game_id": "snakes-revenge-nes",
+  "game_name": "Snake's Revenge",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Alert mode activation",
+      "visual_form": "Red exclamation mark (!) or double exclamation marks (!!) appearing over enemy soldier's head",
+      "meaning": "Player has been detected; single mark = low alert (escapable), double mark = full alert (combat phase initiated)"
+    },
+    {
+      "signal": "Enemy soldier presence",
+      "visual_form": "Guard sprites on screen, varying by area theme",
+      "meaning": "Active threat requiring stealth avoidance or combat engagement"
+    },
+    {
+      "signal": "Surveillance devices",
+      "visual_form": "Static placement in rooms (cameras/sensors implied through gameplay mechanics)",
+      "meaning": "Detection hazard that triggers alert if player enters detection radius"
+    },
+    {
+      "signal": "Gas-filled rooms",
+      "visual_form": "Environmental hazard zones with visual gas indicator",
+      "meaning": "Health damage threat; unused gas mask asset indicates this was intended as danger telegraph"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Unique enemy sprite designs (impostor John, cybernetic Big Boss)",
+      "meaning": "Major threat requiring defeat to progress; narrative-critical confrontations"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Infiltration phase (non-alert)",
+      "visual_form": "Absence of exclamation marks; normal enemy patrol behavior",
+      "meaning": "Player is undetected and can move freely without combat"
+    },
+    {
+      "signal": "Item pickups",
+      "visual_form": "Ammo boxes, ration units left by defeated guards",
+      "meaning": "Resource availability; defeating guards with punches vs. other methods yields supplies"
+    },
+    {
+      "signal": "Equipment acquisition",
+      "visual_form": "Collected weapons, explosives, card keys, oxygen tanks appearing in inventory",
+      "meaning": "Player readiness for specific area hazards and locked doors"
+    },
+    {
+      "signal": "Radar activation",
+      "visual_form": "Transceiver radar display when tracking signal detected",
+      "meaning": "Navigation aid and indirect threat warning system"
+    },
+    {
+      "signal": "Hostage rescue completion",
+      "visual_form": "Rescued hostage count in status; promotion rank increase (up to 6 stars)",
+      "meaning": "Progress toward mission objectives and capability enhancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "FOXHOUND (player's allied unit)",
+      "color_identity": null,
+      "symbol_or_sigil": "FOXHOUND codename; Operation 747 designation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Military-grade equipment (knife, handgun, explosives, card keys); modern tactical gear"
+    },
+    {
+      "faction": "Hostile Middle Eastern nation",
+      "color_identity": null,
+      "symbol_or_sigil": "Metal Gear construction; cybernetic Big Boss authority figure",
+      "enemy_visual_variants": "Guard soldier sprites; commander/impostor variants",
+      "environmental_markers": "Jungle base, warehouse, cargo ship, train transport; mass-produced Metal Gear tanks; nuke launch capability"
+    },
+    {
+      "faction": "Double agent network (Jennifer, John Turner)",
+      "color_identity": null,
+      "symbol_or_sigil": "Transceiver contact list (John, Nick, Jennifer codenames)",
+      "enemy_visual_variants": "Impostor John (disguised enemy); Jennifer in captivity state",
+      "environmental_markers": "Interior base locations; commander's lair; Metal Gear 2 storage facility"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-alert stealth phase",
+      "visual_manifestation": "Clear screen without exclamation marks; enemy patrols moving in predictable patterns",
+      "behavioral_manifestation": "Guards follow patrol routes; player can move freely; transceiver communications available"
+    },
+    {
+      "world_state": "Single-alert phase (low detection)",
+      "visual_manifestation": "Single red exclamation mark (!) over guard's head",
+      "behavioral_manifestation": "Player can escape alert by moving to adjacent screen; guard suspicious but not fully engaged"
+    },
+    {
+      "world_state": "Full-alert combat phase",
+      "visual_manifestation": "Double exclamation marks (!!) and multiple enemy soldiers entering screen",
+      "behavioral_manifestation": "Enemies attack player; transceiver disabled; must defeat sufficient enemies to return to infiltration phase"
+    },
+    {
+      "world_state": "Area progression (jungle → warehouse → cargo ship → train → main base)",
+      "visual_manifestation": "Distinct tileset and enemy placement changes per environment",
+      "behavioral_manifestation": "Different hazards per area (gas rooms, underwater sections, side-view combat zones); boss encounters at key locations"
+    },
+    {
+      "world_state": "Hostage rescue active",
+      "visual_manifestation": "Hostage NPC presence in specific rooms; visual count in status display",
+      "behavioral_manifestation": "Successful rescue triggers promotion when threshold met; interrogation with truth gas yields intel"
+    },
+    {
+      "world_state": "Equipment availability state",
+      "visual_manifestation": "Card keys color-coded or visually distinct; weapons/tanks in inventory UI",
+      "behavioral_manifestation": "Card key possession determines accessible doors; oxygen tanks auto-consume in underwater sections; carrying capacity limited by rank"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architecture and area progression narrative",
+      "example": "Jungle base → warehouse → cargo ship → train → main commander's lair progression mirrors escalation of threat and reveals enemy manufacturing/deployment pipeline"
+    },
+    {
+      "technique": "Enemy equipment variety",
+      "example": "Standard guards vs. officer variants signal faction organization hierarchy; impostor John indicates enemy intelligence capability and deception tactics"
+    },
+    {
+      "technique": "Hazard type communication",
+      "example": "Gas-filled rooms establish chemical/WMD threat; underwater sections imply strategic base location; Metal Gear presence indicates mechanical super-weapon"
+    },
+    {
+      "technique": "Mission objective telegraphing",
+      "example": "Radar tracking signal appearance indicates enemy surveillance countermeasures; nuke launch countdown reveals existential stakes"
+    },
+    {
+      "technique": "Faction capability display",
+      "example": "Mass-produced Metal Gear tanks on cargo ship show industrialized weapon production; cybernetic Big Boss reveals biotechnical enhancement capability"
+    },
+    {
+      "technique": "Visual side-view area design",
+      "example": "Rush 'n Attack-style sections represent confined infiltration points (corridors, external cliffs) requiring different tactical approach than top-down stealth"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Guard soldier (standard)",
+      "state": "Patrol mode",
+      "behavior": "Moves in predictable pattern; exclamation mark triggers if player detected; defeated guards may drop ammo or ration"
+    },
+    {
+      "entity": "Guard soldier (standard)",
+      "state": "Alert engaged",
+      "behavior": "Attacks player; pursues; part of multi-enemy wave during alert phase"
+    },
+    {
+      "entity": "Enemy officer",
+      "state": "Encounter",
+      "behavior": "Can be interrogated with truth gas to extract intelligence; counts toward promotion alongside hostage rescues"
+    },
+    {
+      "entity": "John Turner (ally/impostor)",
+      "state": "Infiltration phase",
+      "behavior": "Acts as decoy by allowing himself to be captured; provides tactical support via transceiver"
+    },
+    {
+      "entity": "John Turner (impostor enemy)",
+      "state": "Boss encounter",
+      "behavior": "Disguised enemy variant; must be defeated to progress; reveals enemy intelligence operations"
+    },
+    {
+      "entity": "Jennifer (double agent)",
+      "state": "Captured/exposed",
+      "behavior": "Initially hidden inside enemy base; transmits intel via transceiver; exposed as spy during final base infiltration; requires rescue"
+    },
+    {
+      "entity": "Big Boss (cybernetically enhanced)",
+      "state": "Final confrontation",
+      "behavior": "Commander of hostile nation; boss encounter; reveals survival from original Metal Gear; must be defeated; final threat requiring full combat capability"
+    },
+    {
+      "entity": "Hostage NPCs",
+      "state": "Captive",
+      "behavior": "Scattered in various base locations; rescue triggers promotion when quota met; presence indicates civilian stakes in conflict"
+    }
+  ],
+  "notes": "Snake's Revenge uses classic NES-era stealth-action visual language. The exclamation mark alert system is its primary danger telegraph—a simple but effective binary (single/double) indicator of threat escalation. Environmental variety (jungle, warehouse, ship, train, base interior) communicates faction capabilities and mission progression. Side-view sections break up top-down stealth with action-platformer mechanics, visually signaling confined or elevated terrain. The game lacks the cardboard box stealth mechanic present in later MGS titles (unused asset in this version), relying instead on guard patrol patterns and alert phase avoidance. Faction identity is communicated through enemy soldier presence, base architecture, and the iconic Metal Gear tank as a super-weapon visual. World state shifts are driven by alert status (three phases: infiltration, single-alert, full-alert) with clear visual markers. The double-agent network (Jennifer, John, Nick) is communicated via transceiver interface rather than environmental presence until key story beats.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:30:32.552Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4741,
+    "output_tokens": 2456,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

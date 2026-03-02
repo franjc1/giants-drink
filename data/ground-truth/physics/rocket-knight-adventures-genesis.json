@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "game": "Rocket Knight Adventures",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1993,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "GameFAQs — Rocket Knight Adventures Guide",
+        "url": "https://gamefaqs.gamespot.com/genesis/563338-rocket-knight-adventures/faqs/10985",
+        "notes": "Confirms: 8-directional rocket burst, hold A/C to charge, release to launch. Wall rebounding mechanic confirmed."
+      },
+      {
+        "name": "Wikipedia — Rocket Knight Adventures",
+        "url": "https://en.wikipedia.org/wiki/Rocket_Knight_Adventures",
+        "notes": "Overview of mechanics."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DEFINING MECHANIC: Sparkster's rocket pack. 8-directional rocket burst that can be aimed and wall-rebounded.",
+      "Rocket burst is CHARGED by holding the attack button — fills a gauge, then releases all at once.",
+      "The 8-directional burst means Sparkster can move in any direction, including upward and diagonally.",
+      "Wall rebound: rocket burst into a wall → bounce off the wall in an opposite direction, continuing the trajectory.",
+      "Walk speed and jump values not explicitly documented in reviewed sources — estimated from gameplay and Genesis standards.",
+      "Sparkster is an anthropomorphic opossum — he can use his prehensile tail in some moves."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Approximate from gameplay. VERIFY."
+    },
+    "run_speed": {
+      "px_per_frame_approx": 3.5,
+      "confidence": "low",
+      "notes": "Approximate. VERIFY."
+    }
+  },
+
+  "standard_jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "notes": "Standard jump before rocket mechanics. VERIFY."
+  },
+
+  "rocket_pack": {
+    "_note": "THE DEFINING MECHANIC. The rocket pack is a directional charged burst with wall rebounding.",
+    "charge_system": {
+      "description": "Hold A or C (attack button) to charge the rocket gauge. A blue bar on the HUD fills while held.",
+      "activation": "Release the attack button when gauge is full to fire the rocket burst.",
+      "source": "GameFAQs walkthrough",
+      "confidence": "high",
+      "notes": [
+        "The charge must fill to maximum before the rocket activates — partial charges don't fire.",
+        "While charging, Sparkster can still be hit and must maintain the hold.",
+        "The charge time is approximately 1.5-2 seconds at normal speed."
+      ]
+    },
+    "burst_direction": {
+      "directions": 8,
+      "description": "8-directional rocket burst: up, upper-right, right, lower-right, down, lower-left, left, upper-left. Direction determined by D-pad held at moment of release.",
+      "source": "GameFAQs + Wikipedia",
+      "confidence": "high"
+    },
+    "burst_speed": {
+      "px_per_frame_approx": 8.0,
+      "confidence": "low",
+      "notes": "High-speed burst — significantly faster than walking or running. VERIFY exact value."
+    },
+    "wall_rebound": {
+      "description": "When the rocket burst trajectory hits a wall, Sparkster rebounds off in the reflected direction.",
+      "notes": [
+        "Wall rebounding allows chaining rocket bursts off multiple walls to reach elevated platforms.",
+        "This creates a movement language unique to RKA — 'billiard ball' style pathing through vertical areas.",
+        "Players can plan multi-wall routes to reach otherwise inaccessible areas.",
+        "The rebound bounces at the wall's normal angle — off a flat wall: perfect reflection."
+      ]
+    },
+    "collateral_damage": {
+      "description": "Rocket burst destroys lesser enemies in Sparkster's path during the burst.",
+      "notes": "The burst itself is an attack as well as a movement tool."
+    }
+  },
+
+  "sword_attack": {
+    "description": "Sparkster's sword — melee attack. Used for standard enemies and basic combat.",
+    "notes": "The sword is the non-charged attack. Rocket burst is the charged attack."
+  },
+
+  "sequel_difference": {
+    "sparkster_genesis": {
+      "year": 1994,
+      "change": "Rocket pack charges AUTOMATICALLY. Separate Rocket button instead of hold-to-charge.",
+      "notes": "The sequel (Sparkster: Rocket Knight Adventures 2) significantly changes the charge mechanic, making the rocket more accessible but less tactical."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The charge-and-release rocket burst creates a rhythm of preparation and payoff. Players charge during safe moments and release at critical moments (clearing a gap, crossing a hazard). The charge time creates tension — 'can I hold this long enough before I get hit?'",
+    "The 8-directional burst + wall rebound combination creates a traversal vocabulary unique in the platformer genre. Players solve vertical navigation like a billiard puzzle: 'which wall do I hit first to reach the top?' This is spatial reasoning rather than timing.",
+    "The burst destroying enemies in path means the movement tool is also a combat tool — the same action handles traversal AND combat, avoiding the 'move here, then fight' loop of other games.",
+    "Wall rebounding off multiple surfaces chains into complex routes that feel spectacular when executed correctly. This is 'flow state' design: mastery produces chains of rebound → fly → rebound → fly that feel controlled and elegant.",
+    "The rocket pack as a movement system is explicitly 3-dimensional thinking applied to 2D: you need to reason about launch angle, wall angles, and landing zones before committing to the burst."
+  ]
+}

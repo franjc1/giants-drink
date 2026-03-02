@@ -1,0 +1,177 @@
+{
+  "game_id": "wolfenstein-3d-genesis",
+  "game_name": "Wolfenstein 3D",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Nazi Guard Presence",
+      "visual_form": "2D sprite of uniformed soldier with weapon, distinctive Nazi military silhouette",
+      "meaning": "Direct combat threat; player must engage or avoid"
+    },
+    {
+      "signal": "Guard Alert State",
+      "visual_form": "Guard sprite orientation and movement speed changes, animated firing stance",
+      "meaning": "Enemy has detected player; combat imminent"
+    },
+    {
+      "signal": "Dog Enemies",
+      "visual_form": "2D sprite of aggressive canine, animated lunging behavior",
+      "meaning": "Fast melee threat, unpredictable movement pattern"
+    },
+    {
+      "signal": "Locked Doors",
+      "visual_form": "Wall texture with door frame but no passage, grid-based barrier",
+      "meaning": "Progression blocked; key required or alternate route needed"
+    },
+    {
+      "signal": "Health Depletion UI",
+      "visual_form": "Health percentage readout at HUD, decreases when shot",
+      "meaning": "Damage taken; continued exposure leads to death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health Pickups",
+      "visual_form": "Item sprites scattered in levels, collectible objects",
+      "meaning": "Recovery available; restore player vitality"
+    },
+    {
+      "signal": "Ammunition Caches",
+      "visual_form": "Weapon and ammo sprite pickups, visible on level ground",
+      "meaning": "Resource availability; player can sustain offensive capability"
+    },
+    {
+      "signal": "Secret Rooms",
+      "visual_form": "Wall tiles that slide back when activated, hidden chambers revealed",
+      "meaning": "Safe spaces containing treasure, ammo, or health; rewards exploration"
+    },
+    {
+      "signal": "Elevator (Level Exit)",
+      "visual_form": "Distinctive elevator sprite or door at end of level",
+      "meaning": "Safe progression; reaching this completes level and removes current threats"
+    },
+    {
+      "signal": "Extra-Life Tokens",
+      "visual_form": "Special collectible sprites, distinct visual markers",
+      "meaning": "Increased survivability; gain additional life reserve"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nazi German Military",
+      "color_identity": null,
+      "symbol_or_sigil": "Nazi insignia on uniforms, swastika references in environment (thematic to setting)",
+      "enemy_visual_variants": "Guards in military uniform sprites; dogs as handler animals; implied boss enemies in finale levels",
+      "environmental_markers": "Castle Wolfenstein interior architecture; Nazi bunker aesthetics; military infrastructure theming per level"
+    },
+    {
+      "faction": "Allied Forces (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "William 'B.J.' Blazkowicz as Allied spy protagonist",
+      "enemy_visual_variants": "Player character sprite holding various weapons (knife, pistol, submachine gun, chain gun)",
+      "environmental_markers": "First-person perspective represents Allied infiltration; objective is escape and sabotage missions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Peaceful/Unalert (Level Start)",
+      "visual_manifestation": "Guards patrol in patterns, standing or walking slowly, no active engagement animations",
+      "behavioral_manifestation": "Enemies maintain routine movement; do not attack until player detected or attacked"
+    },
+    {
+      "world_state": "Combat Active (Player Detected)",
+      "visual_manifestation": "Guard sprites orient toward player, animate firing stance, visible projectile effects",
+      "behavioral_manifestation": "Enemies rapidly engage; move toward player; continuous fire pattern; movement becomes erratic"
+    },
+    {
+      "world_state": "Enemy Defeated",
+      "visual_manifestation": "Enemy sprite disappears or collapses; replaced by collectible items (ammo, health, treasure)",
+      "behavioral_manifestation": "Threat removed; area becomes temporarily safe; loot becomes available"
+    },
+    {
+      "world_state": "Level Progression Locked",
+      "visual_manifestation": "Grid-based locked doors; wall textures block passage; elevator inaccessible",
+      "behavioral_manifestation": "Player must find keys or alternate routes; backtracking required; exploration incentivized"
+    },
+    {
+      "world_state": "Boss Level (Episode Finale)",
+      "visual_manifestation": "Final large enemy sprite; enhanced animation frames; positioned at level end near elevator",
+      "behavioral_manifestation": "Boss engages in complex attack pattern; higher health; more aggressive behavior; defeat required to progress"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural Theming",
+      "example": "Castle Wolfenstein interior design; Nazi bunker layouts; military infrastructure conveys setting as enemy stronghold"
+    },
+    {
+      "technique": "Enemy Placement Strategy",
+      "example": "Guard distribution throughout levels suggests patrol patterns and defensive positions; dogs as breach hazards indicate security measures"
+    },
+    {
+      "technique": "Treasure and Loot Placement",
+      "example": "Scattered valuables throughout levels imply wealth/resources seized by Nazis; collection rewards exploration and communicates player objective (espionage/sabotage)"
+    },
+    {
+      "technique": "Secret Room Design",
+      "example": "Hidden chambers containing concentrated resources; activated by wall tiles; suggests clandestine supply caches within Nazi structure"
+    },
+    {
+      "technique": "Episode Naming and Progression",
+      "example": "Episode titles ('Escape from Castle Wolfenstein', 'Operation: Eisenfaust', 'Die, Führer, Die!') establish narrative of escalating Allied operations against Nazi leadership"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nazi Guard",
+      "state": "Idle/Patrolling",
+      "behavior": "Static or slow movement in set patterns; no attack animation; weapon held but not aimed"
+    },
+    {
+      "entity": "Nazi Guard",
+      "state": "Alert/Detecting Player",
+      "behavior": "Rapid sprite orientation toward player; movement acceleration; animated firing stance activation"
+    },
+    {
+      "entity": "Nazi Guard",
+      "state": "Engaged in Combat",
+      "behavior": "Continuous firing animation; projectile emission; erratic movement attempting to close or maintain distance"
+    },
+    {
+      "entity": "Guard Dog",
+      "state": "Idle",
+      "behavior": "Stationary or slow patrol; less structured movement than guards"
+    },
+    {
+      "entity": "Guard Dog",
+      "state": "Attacking",
+      "behavior": "Rapid lunging animation; fast movement toward player; unpredictable trajectory"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Armed with Weapon",
+      "behavior": "First-person view; weapon sprite displayed in firing stance; can initiate combat"
+    },
+    {
+      "entity": "Boss Enemy (Episode Finale)",
+      "state": "Combat",
+      "behavior": "Enhanced sprite size; more animation frames; complex firing pattern; higher resilience to player attacks"
+    }
+  ],
+  "notes": "Wolfenstein 3D (Genesis 1994) uses rudimentary 2.5D graphics—3D environments with 2D sprite enemies—to communicate faction identity and world state. Nazi faction is established through visual theming (Castle Wolfenstein architecture, military uniform sprites) and implicit narrative (player as Allied spy). Danger is signaled through enemy presence, alert animations, and health depletion. Safety signals include health/ammo pickups and secret rooms rewarding exploration. World state changes are primarily conveyed through enemy behavior animations (idle vs. alert vs. combat) and environmental barriers (locked doors). The Genesis port maintains the original DOS visual language within technical constraints of the platform.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:52:27.191Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3146,
+    "output_tokens": 2033,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

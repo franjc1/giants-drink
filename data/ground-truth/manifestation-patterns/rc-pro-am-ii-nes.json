@@ -1,0 +1,193 @@
+{
+  "game_id": "rc-pro-am-ii-nes",
+  "game_name": "R.C. Pro-Am II",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Oil slicks",
+      "visual_form": "Visual hazard on track (dark liquid pools)",
+      "meaning": "Causes loss of vehicle control and spin-out; immediate danger to forward momentum"
+    },
+    {
+      "signal": "Water puddles and rain squalls",
+      "visual_form": "Water elements visible on track",
+      "meaning": "Slows vehicle speed; temporary performance degradation"
+    },
+    {
+      "signal": "Pop-up barriers",
+      "visual_form": "Obstacle elements that appear on track",
+      "meaning": "Collision hazard; causes crash damage and position loss"
+    },
+    {
+      "signal": "Skull collectibles",
+      "visual_form": "Skull icon on track",
+      "meaning": "Ammunition penalty; decreases player's weapon supply"
+    },
+    {
+      "signal": "Yellow car acceleration",
+      "visual_form": "Yellow opponent vehicle moving at extreme speed (127 mph visual indicator)",
+      "meaning": "Indicates player has overused weapons; opponent AI is now unbeatable"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Roll cages",
+      "visual_form": "Protective cage collectible on track",
+      "meaning": "Grants temporary crash damage immunity; protective world-state"
+    },
+    {
+      "signal": "Tune-up items (turbo, engine, tires)",
+      "visual_form": "Performance upgrade collectibles on track",
+      "meaning": "Enhances vehicle capability; displayed on 'track conditions' screen between races"
+    },
+    {
+      "signal": "Stationary zippers",
+      "visual_form": "Speed boost track element",
+      "meaning": "Grants temporary acceleration advantage"
+    },
+    {
+      "signal": "Bonus letters",
+      "visual_form": "Collectible letters spelling 'NINTENDO' or 'CHAMPION'",
+      "meaning": "Points and vehicle upgrades available; progression opportunity"
+    },
+    {
+      "signal": "Top-3 placement visual feedback",
+      "visual_form": "Trophy awarded after each race",
+      "meaning": "Player maintains progression; world-state allows continuation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player vehicle",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Truck initially, upgrades to 4-Wheeler then Off Roader",
+      "enemy_visual_variants": "Three opponent vehicles in distinct colors (implicitly non-red)",
+      "environmental_markers": "Center position in isometric view; tracked throughout race"
+    },
+    {
+      "faction": "Opponent 1 (Yellow car)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Standard vehicle form",
+      "enemy_visual_variants": "Becomes visually dangerous at track 32 (maximum speed variant)",
+      "environmental_markers": "Appears in race grid; becomes hyperaccelerated when player overuses weapons"
+    },
+    {
+      "faction": "Generic opponents (other vehicles)",
+      "color_identity": "Multiple distinct colors (non-red, non-yellow)",
+      "symbol_or_sigil": "Standard vehicle forms",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Positioned in race grid; must be beaten for top-3 placement"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (tracks 1-23)",
+      "visual_manifestation": "Standard track layouts with baseline hazards and collectibles",
+      "behavioral_manifestation": "Opponents race at normal speed; player weapons are effective"
+    },
+    {
+      "world_state": "Mid-game progression (tracks 24+)",
+      "visual_manifestation": "Tracks repeat with additional features layered on",
+      "behavioral_manifestation": "Track complexity increases; environmental hazards become more prevalent"
+    },
+    {
+      "world_state": "Player overuses weapons",
+      "visual_manifestation": "Yellow car becomes visually dominant at extreme speed",
+      "behavioral_manifestation": "Yellow opponent accelerates to 127 mph; cannot be caught without weapons; game becomes unwinnable"
+    },
+    {
+      "world_state": "Track 32 (maximum difficulty)",
+      "visual_manifestation": "All visual hazards and opponent vehicles present",
+      "behavioral_manifestation": "All computer opponents run at maximum speed; player elimination imminent without weapon management"
+    },
+    {
+      "world_state": "Player places outside top-3",
+      "visual_manifestation": "No trophy awarded; continue prompt appears",
+      "behavioral_manifestation": "Game over state; player loses all points; two continues available"
+    },
+    {
+      "world_state": "Vehicle upgrade achieved",
+      "visual_manifestation": "Player vehicle model changes on-screen (truck → 4-Wheeler → Off Roader)",
+      "behavioral_manifestation": "Vehicle performance increases; speed and handling improve visually"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Track complexity escalation",
+      "example": "Tracks 1-23 use 12 unique configurations; tracks 24+ repeat these layouts but add additional hazards and features, creating narrative of environmental difficulty increase"
+    },
+    {
+      "technique": "Vehicle upgrade progression",
+      "example": "Player truck → 4-Wheeler → Off Roader visual progression tells story of mechanical improvement and capability expansion through race series"
+    },
+    {
+      "technique": "Hazard placement storytelling",
+      "example": "Oil slicks, water puddles, and barriers are positioned to create 'natural' environmental obstacles; rain squalls add weather narrative without explicit story text"
+    },
+    {
+      "technique": "Opponent AI escalation",
+      "example": "Yellow car acceleration to 127 mph after weapon overuse tells cautionary narrative: excessive violence triggers system-level consequence"
+    },
+    {
+      "technique": "Collectible letter narrative",
+      "example": "Spelling 'NINTENDO' or 'CHAMPION' across races creates underlying progression story; completion yields vehicle upgrade"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle (red truck/4-Wheeler/Off Roader)",
+      "state": "Normal racing",
+      "behavior": "Responds to player input; collects power-ups; fires weapons; accumulates points and trophies"
+    },
+    {
+      "entity": "Opponent vehicles (yellow, other colors)",
+      "state": "Standard race mode",
+      "behavior": "Follow track routes; maintain competitive positioning; dodge obstacles; respond to weapon fire with temporary disable"
+    },
+    {
+      "entity": "Yellow opponent vehicle",
+      "state": "Weapon overuse threshold crossed",
+      "behavior": "Accelerates to 127 mph (unmatched by player); becomes visually dominant; essentially unbeatable without weapons"
+    },
+    {
+      "entity": "All opponents",
+      "state": "Track 32 (maximum speed configuration)",
+      "behavior": "Run at maximum speed simultaneously; player is systematically eliminated through speed superiority"
+    },
+    {
+      "entity": "Missiles (player weapon)",
+      "state": "Fired",
+      "behavior": "Disable opponent vehicles from the front; temporary stoppage"
+    },
+    {
+      "entity": "Bombs (player weapon)",
+      "state": "Fired",
+      "behavior": "Disable opponent vehicles from the rear; temporary stoppage"
+    },
+    {
+      "entity": "Oil slicks (hazard)",
+      "state": "Vehicle contact",
+      "behavior": "Cause uncontrolled spin-out; momentum loss"
+    },
+    {
+      "entity": "Water/rain (hazard)",
+      "state": "Vehicle contact",
+      "behavior": "Reduce vehicle speed; temporary performance degradation"
+    }
+  ],
+  "notes": "R.C. Pro-Am II is a top-down isometric racing game with minimal narrative framing but strong mechanical world-state communication. Danger and safety are conveyed entirely through visual collectibles and hazard placement. Factions are implicit (player vs. opponents) with color-coding providing primary identification. World-state transitions are expressed through: (1) visual track complexity escalation, (2) vehicle upgrade manifestation, (3) opponent behavior intensification, and (4) consequence for player actions (weapon overuse triggering AI escalation). No explicit political or faction narrative exists; meaning emerges from mechanical systems and visual design. The game communicates challenge progression through environmental hazard density rather than diegetic storytelling.",
+  "sources_used": [
+    "wikipedia: R.C. Pro-Am article (covers Pro-Am series including R.C. Pro-Am II mechanics, gameplay, vehicle types, hazards, collectibles, and track progression)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:27:11.111Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2936,
+    "output_tokens": 2232,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "game_id": "bomberman-nes",
+  "game_name": "Bomberman",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": 50,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Player character (Bomberman)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic movement and bomb placement in enclosed arena"
+    },
+    {
+      "element": "Destructible walls",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Strategic destruction to access power-ups and create escape routes"
+    },
+    {
+      "element": "Fixed walls (maze structure)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Navigation topology and bomb blast containment"
+    },
+    {
+      "element": "Enemy creatures",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Avoidance and elimination through bomb placement timing"
+    },
+    {
+      "element": "Bomb mechanics (blast radius, timer)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Spatial prediction of blast propagation"
+    },
+    {
+      "element": "Level exit/door",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Revealed after all enemies eliminated; goal object"
+    },
+    {
+      "element": "Power-up items (hidden under walls)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Risk-reward of destruction and collection"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Eliminating all enemies in stage",
+      "Reaching and entering exit door",
+      "Collecting power-up items"
+    ],
+    "typical_tension_triggers": [
+      "Enemy spawning from exit door",
+      "Confined arena with moving threats",
+      "Limited bomb placement options",
+      "Blast radius calculations under time pressure"
+    ],
+    "pacing_descriptor": "Wave-based tension: players navigate to destroy walls and eliminate enemies, then relief upon stage completion. Repeating cycle across 50 stages with gradual difficulty escalation."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Destroyable walls conceal power-up items; players must choose which walls to break for strategic advantage",
+    "secret_convention": "Bonus items accessible through obscure stage-specific conditions (e.g., Goddess Mask requires circling outer ring after all enemies killed; Cola Bottle requires standing on exit for ~15 seconds; Nakamoto-san requires destroying no walls)",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Stages 1-16: Introduction to bomb placement, enemy avoidance, and power-up collection in relatively open arenas with predictable enemy patterns",
+    "mid_game": "Stages 17-34: Tighter maze layouts, faster enemy behavior, more complex wall configurations requiring strategic destruction sequencing",
+    "late_game": "Stages 35-50: Densely packed mazes, aggressive enemy AI, limited safe spaces, high risk from power-up placement locations",
+    "notable_spikes": [
+      "Stage 2 (Nakamoto-san bonus condition: destroy zero walls)",
+      "Stages in 30+ range (increased enemy speed and maze complexity)",
+      "Stage 50 (final challenge with maximum complexity)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Bonus Target Stages",
+      "description": "Stages 6, 8, 14, 16, 22, 24, 30, 32, 38, 40, 46, 48 feature 10,000 point bonus requiring revealing exit and walking over it before killing any enemies",
+      "example_level": "Stage 6"
+    },
+    {
+      "pattern_name": "Goddess Mask Stages",
+      "description": "Stages 1, 7, 9, 15, 17, 23, 25, 31, 33, 39, 41, 47, 49 feature 20,000 point bonus requiring circling outer ring after all enemies eliminated",
+      "example_level": "Stage 1"
+    },
+    {
+      "pattern_name": "Cola Bottle Stages",
+      "description": "Stages 4, 12, 20, 28, 36, 44 feature 30,000 point bonus requiring exit reveal, walking over it, and continuous D-Pad holding for ~15 seconds before killing enemies",
+      "example_level": "Stage 4"
+    },
+    {
+      "pattern_name": "Famicom Bonus Stages",
+      "description": "Stages 3, 11, 19, 27, 35, 43 feature 500,000 point bonus requiring killing all enemies and creating 248 chain reactions (incompatible with Detonator power-up)",
+      "example_level": "Stage 3"
+    },
+    {
+      "pattern_name": "Nakamoto-san Stages",
+      "description": "Stages 2, 10, 18, 26, 34, 42, 50 feature 10,000,000 point bonus requiring killing all enemies without destroying any walls—highest score reward",
+      "example_level": "Stage 50"
+    },
+    {
+      "pattern_name": "Dezeniman-san Stages",
+      "description": "Stages 5, 13, 21, 29, 37, 45 feature 20,000,000 point bonus requiring destroying every wall and bombing exit three times without killing any enemies",
+      "example_level": "Stage 5"
+    },
+    {
+      "pattern_name": "Standard Progression Stages",
+      "description": "Remaining stages follow standard elimination objective: destroy destructible walls, eliminate all enemies, reach and enter exit door",
+      "example_level": "Stages 7, 8, 9 (between bonus condition stages)"
+    }
+  ],
+  "sources_used": [
+    "tcrf",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:48:30.960Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6096,
+    "output_tokens": 1921,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

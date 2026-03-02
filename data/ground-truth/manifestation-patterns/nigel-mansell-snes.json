@@ -1,0 +1,167 @@
+{
+  "game_id": "nigel-mansell-snes",
+  "game_name": "Nigel Mansell's World Championship Racing",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Weather conditions",
+      "visual_form": "Dynamic track and sky rendering changes (implied by weather system)",
+      "meaning": "Rain or adverse weather increases difficulty and requires tire strategy changes; visual shift signals hazardous track conditions"
+    },
+    {
+      "signal": "Pit lane requirement",
+      "visual_form": "Pit lane zone marker on track (implied mandatory pit stops)",
+      "meaning": "Mid-race tire change mandate signals critical decision point; failure to pit signals mechanical danger/race loss"
+    },
+    {
+      "signal": "Rival car positions",
+      "visual_form": "Competitor vehicle sprites on track and HUD positioning",
+      "meaning": "Proximity of other drivers signals collision risk and competitive threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Pit lane availability",
+      "visual_form": "Designated pit zone with lane markers",
+      "meaning": "Safe zone for mandatory tire changes and vehicle adjustments; temporary refuge from race competition"
+    },
+    {
+      "signal": "Practice mode",
+      "visual_form": "Menu selection option",
+      "meaning": "Risk-free environment to learn tracks and develop skills without competitive consequences"
+    },
+    {
+      "signal": "Single race vs. season mode",
+      "visual_form": "Menu structure differentiation",
+      "meaning": "Single race mode offers low-stake competition; season mode escalates accumulated risk and pressure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nigel Mansell (Player character)",
+      "color_identity": "Blue (team color)",
+      "symbol_or_sigil": "Signature mustache and cap (unique sprite distinguisher)",
+      "enemy_visual_variants": "All rival drivers rendered in yellow racing suits with generic sprite",
+      "environmental_markers": "Podium anthem plays for player victory in player's selected country; national anthem represents player identity"
+    },
+    {
+      "faction": "Rival drivers (11 competitors)",
+      "color_identity": "Constructor team colors (approximating 1992 F1 teams)",
+      "symbol_or_sigil": "Individual driver identity implicit through team color association only",
+      "enemy_visual_variants": "All rivals use identical yellow suit sprite regardless of actual team affiliation",
+      "environmental_markers": "Each rival associated with specific team constructor; national anthem plays if rival wins race"
+    },
+    {
+      "faction": "Team constructors",
+      "color_identity": "Historical 1992 F1 constructor colors (approximate in-game)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Car paint schemes differentiate teams; Mansell's car maintains blue team identity",
+      "environmental_markers": "Constructor identity communicates through rival car color schemes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-race: Normal conditions",
+      "visual_manifestation": "Clear sky, dry track visible, standard car sprite rendering",
+      "behavioral_manifestation": "Standard tire selection (hard or soft); normal acceleration and handling physics"
+    },
+    {
+      "world_state": "Pre-race: Wet conditions",
+      "visual_manifestation": "Dark sky, track surface wetness visual indicator (implied)",
+      "behavioral_manifestation": "Forced rain tire selection in pit strategy; vehicle handling degradation; reduced grip and cornering speed"
+    },
+    {
+      "world_state": "Mid-race: Pit stop mandatory window",
+      "visual_manifestation": "Pit lane zone highlighted on track; HUD indicators signal pit requirement",
+      "behavioral_manifestation": "Player vehicle slows if pit stop ignored; tire wear increases penalty; loss of race position risk"
+    },
+    {
+      "world_state": "Post-race: Victory",
+      "visual_manifestation": "Podium ceremony scene; national anthem display tied to winning driver nationality",
+      "behavioral_manifestation": "Character celebration animations; national anthem plays (Mansell's selected country if player wins; rival's country if rival wins)"
+    },
+    {
+      "world_state": "Post-race: Second or third place",
+      "visual_manifestation": "Podium shown with rival winner in first position; national anthem displays rival's home country",
+      "behavioral_manifestation": "Player character positioned lower on podium; visual hierarchy emphasizes rival victory"
+    },
+    {
+      "world_state": "Season progression",
+      "visual_manifestation": "Track selection menu cycles through 1992 F1 season calendar locations",
+      "behavioral_manifestation": "Cumulative points affect season standings; championship progression creates escalating narrative tension"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Authentic 1992 F1 season licensing",
+      "example": "Game follows Nigel Mansell's actual 1992 championship-winning season; real drivers and teams provide historical context and legitimacy"
+    },
+    {
+      "technique": "National anthem integration",
+      "example": "Podium ceremony plays winner's home country anthem; creates cultural and political identity signaling for each competing nation"
+    },
+    {
+      "technique": "Character sprite differentiation",
+      "example": "Only Mansell wears team-color suit and has distinctive mustache/cap sprite; rivals use generic yellow suits, creating protagonist visual hierarchy"
+    },
+    {
+      "technique": "Constructor color coding",
+      "example": "Rival car paint schemes approximate historical 1992 F1 team colors; visual identification allows player to recognize competitors without labels"
+    },
+    {
+      "technique": "Weather-driven track narrative",
+      "example": "Dynamic weather system forces strategic decisions on tire selection; rain or dry conditions create gameplay stakes and historical race realism"
+    },
+    {
+      "technique": "Track location calendar",
+      "example": "Season mode progresses through 1992 F1 circuit; real-world venue progression creates temporal narrative of championship campaign"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player car (Mansell)",
+      "state": "Normal race condition",
+      "behavior": "Standard acceleration, braking, and cornering response; blue team color maintained throughout"
+    },
+    {
+      "entity": "Player car (Mansell)",
+      "state": "Approaching pit window",
+      "behavior": "Vehicle performance degradation signals tire wear; mandatory pit stop becomes critical strategy point"
+    },
+    {
+      "entity": "Rival drivers",
+      "state": "Normal race condition",
+      "behavior": "AI-controlled vehicles maintain competitive pace; yellow suit sprite visible regardless of team affiliation"
+    },
+    {
+      "entity": "Rival drivers",
+      "state": "Victory condition",
+      "behavior": "Rival car reaches finish line first; podium ceremony displays rival in primary position with national anthem"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Dry conditions",
+      "behavior": "Standard grip and track physics; hard or soft tire options available"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Wet/rain conditions",
+      "behavior": "Reduced grip, vehicle handling degradation, rain tire requirement; visual sky/track wetness cues signal hazard"
+    }
+  ],
+  "notes": "Nigel Mansell's World Championship Racing (SNES 1993) communicates world-state primarily through: (1) Character visual differentiation—Mansell's unique blue-suited sprite with mustache/cap vs. generic yellow rival sprites; (2) Constructor color identity—approximated 1992 F1 team colors on competing vehicles; (3) Weather-driven mechanics—visual sky/track changes signal tire strategy shifts; (4) Podium nationalism—national anthem selection based on winner identity creates geopolitical framing; (5) Pit-stop urgency—mandatory mid-race tire changes signal temporal and mechanical pressure. The game lacks explicit danger/safety UI indicators but communicates stakes through gameplay mechanics (pit requirements, weather changes, performance degradation). Faction identity is weak—rivals are homogenized with identical sprites, reducing individual driver distinction. The licensed 1992 season provides historical context but the SNES version's graphical limitations constrain visual communication sophistication. Limited data available on specific HUD designs, exact color values, or detailed sprite variations.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:49:18.129Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3137,
+    "output_tokens": 2092,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

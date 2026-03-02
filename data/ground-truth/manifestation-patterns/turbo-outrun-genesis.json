@@ -1,0 +1,179 @@
+{
+  "game_id": "turbo-outrun-genesis",
+  "game_name": "Turbo OutRun",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Police cars",
+      "visual_form": "Silver/contrasting colored vehicles appearing on-road",
+      "meaning": "Obstacle/threat to player progress; must be outrun or rammed off-road"
+    },
+    {
+      "signal": "Engine temperature gauge rising",
+      "visual_form": "On-screen gauge visual indicator moving toward 'OVERHEAT!' state",
+      "meaning": "Turbo boost overuse; player loses turbo capability temporarily if gauge maxes"
+    },
+    {
+      "signal": "CPU opponent vehicle",
+      "visual_form": "Silver Porsche 959 traveling ahead on race route",
+      "meaning": "Competitive threat; if opponent reaches sub-goal first, girlfriend character transfers to opponent's vehicle"
+    },
+    {
+      "signal": "Off-road terrain and roadside objects",
+      "visual_form": "Environmental boundaries and collision targets visible along race path",
+      "meaning": "Ramming targets for police; environmental hazards that slow/damage player"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Upgrade stations at sub-goals",
+      "visual_form": "Checkpoint locations after approximately four cities traversed",
+      "meaning": "Opportunity to improve vehicle attributes (Hi-Power Engine, Special Turbo, Super Grip Tires)"
+    },
+    {
+      "signal": "Forward progress on route",
+      "visual_form": "Vehicle advancing from New York City toward Los Angeles on predefined single path",
+      "meaning": "Successful navigation; linear route provides clear direction"
+    },
+    {
+      "signal": "Time remaining",
+      "visual_form": "On-screen time limit counter",
+      "meaning": "Safety window for race completion; players aware of progress toward deadline"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Ferrari F40 vehicle",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Male driver with girlfriend passenger; racing from NYC to LA"
+    },
+    {
+      "faction": "CPU opponent faction",
+      "color_identity": "Silver",
+      "symbol_or_sigil": "Porsche 959 vehicle",
+      "enemy_visual_variants": "Carries girlfriend passenger when winning against player",
+      "environmental_markers": "Travels same NYC-to-LA route; reaches sub-goals in competition"
+    },
+    {
+      "faction": "Police/Law enforcement",
+      "color_identity": null,
+      "symbol_or_sigil": "Police cars",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spawn periodically during race; attempt to stop player progress"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player ahead of CPU opponent",
+      "visual_manifestation": "Girlfriend remains in player's Ferrari F40; visual confirmation of lead",
+      "behavioral_manifestation": "CPU opponent operates at reduced threat level; girlfriend does not transfer"
+    },
+    {
+      "world_state": "CPU opponent ahead of player",
+      "visual_manifestation": "Girlfriend character moves to opponent's Porsche 959; visual transfer of passenger",
+      "behavioral_manifestation": "Player must catch opponent at next sub-goal checkpoint to reclaim girlfriend and bonus (1,000,000 points)"
+    },
+    {
+      "world_state": "Player catches opponent with girlfriend",
+      "visual_manifestation": "Girlfriend kisses driver in front of CPU opponent; visual celebration of victory",
+      "behavioral_manifestation": "1,000,000 point bonus awarded; final checkpoint reached triggers ending sequence"
+    },
+    {
+      "world_state": "Turbo boost active",
+      "visual_manifestation": "Engine temperature gauge fills toward OVERHEAT; player speed increases visually",
+      "behavioral_manifestation": "Vehicle acceleration; gauge management required to avoid overheating penalty"
+    },
+    {
+      "world_state": "Engine overheating",
+      "visual_manifestation": "Temperature gauge reaches 'OVERHEAT!' state",
+      "behavioral_manifestation": "Turbo boost becomes unavailable until temperature decreases; forced speed reduction"
+    },
+    {
+      "world_state": "Approaching sub-goal checkpoint",
+      "visual_manifestation": "Checkpoint location appears after traversing approximately four cities",
+      "behavioral_manifestation": "Player stops; upgrade menu presents three vehicle attribute options (Hi-Power Engine, Special Turbo, Super Grip Tires)"
+    },
+    {
+      "world_state": "Police encounter",
+      "visual_manifestation": "Police vehicles appear on racing path",
+      "behavioral_manifestation": "Player must either outrun using turbo boost or ram police vehicles off-road into environmental objects"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Route progression visualization",
+      "example": "Linear path from New York City to Los Angeles with intermediate city checkpoints; shows player journey across continental United States"
+    },
+    {
+      "technique": "Vehicle choice as character identity",
+      "example": "Player drives Ferrari F40 (luxury/performance); CPU opponent drives Porsche 959 (silver, rival identity); visual differentiation of competing factions"
+    },
+    {
+      "technique": "Passenger character as narrative element",
+      "example": "Girlfriend presence in car serves dual purpose: romantic subplot (can be 'won' or 'lost' to CPU opponent) and visual indicator of competitive standing"
+    },
+    {
+      "technique": "Upgrade selection as progression gating",
+      "example": "At sub-goals, player chooses vehicle improvements; visual representation of strategic choices affecting race capability"
+    },
+    {
+      "technique": "Police presence as law enforcement context",
+      "example": "Occasional police cars suggest hazardous racing activity in public roads; world state where law enforcement opposes player activity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "CPU opponent (Porsche 959)",
+      "state": "Ahead of player at sub-goal",
+      "behavior": "Receives girlfriend passenger; gains visual confidence indicator; threat level increases"
+    },
+    {
+      "entity": "CPU opponent (Porsche 959)",
+      "state": "Behind player at sub-goal",
+      "behavior": "Loses girlfriend passenger to player; visual disadvantage; continues race but with diminished narrative status"
+    },
+    {
+      "entity": "Police cars",
+      "state": "Spawned on race path",
+      "behavior": "Attempt to intercept and stop player; pursue on-road or force off-road; can be rammed into obstacles"
+    },
+    {
+      "entity": "Player vehicle (Ferrari F40)",
+      "state": "Turbo boost active",
+      "behavior": "Speed increase; engine temperature gauge rises; visual acceleration on screen"
+    },
+    {
+      "entity": "Player vehicle (Ferrari F40)",
+      "state": "Engine overheating",
+      "behavior": "Turbo boost disabled; speed limited to normal; visual gauge warning state; forced cooldown period"
+    },
+    {
+      "entity": "Girlfriend character",
+      "state": "In player vehicle",
+      "behavior": "Sits alongside driver; represents winning status; transfers to opponent if CPU reaches sub-goal first"
+    },
+    {
+      "entity": "Girlfriend character",
+      "state": "In opponent vehicle",
+      "behavior": "Visual indicator of player's competitive loss; creates incentive for player to catch opponent at next checkpoint"
+    }
+  ],
+  "notes": "Turbo OutRun uses a racing paradigm with competitive opponent AI as primary world-state communicator. The girlfriend character functions as a dynamic narrative element that visually represents competitive standing. Danger signals are primarily mechanical (turbo overheat) and competitive (CPU opponent advancement). The game communicates faction identity through vehicle choice (Ferrari vs. Porsche) and color differentiation. Police presence suggests illicit street racing context. World state changes manifest through passenger location, vehicle positioning, and gauge states. Linear single-path route removes choice-based world-state branching present in original Out Run.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:35:43.886Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3316,
+    "output_tokens": 2068,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

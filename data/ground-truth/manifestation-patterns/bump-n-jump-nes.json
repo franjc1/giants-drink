@@ -1,0 +1,109 @@
+{
+  "game_id": "bump-n-jump-nes",
+  "game_name": "Bump 'N' Jump",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "opponent_vehicles",
+      "visual_form": "hostile buggy sprites on track",
+      "meaning": "collision hazard; bumping opponent causes them to crash"
+    },
+    {
+      "signal": "track_boundaries",
+      "visual_form": "screen edges and terrain walls",
+      "meaning": "impassable barriers; driving off-track results in crash/death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "player_vehicle_intact",
+      "visual_form": "buggy sprite on-screen with normal appearance",
+      "meaning": "vehicle operational; no damage accumulated"
+    },
+    {
+      "signal": "forward_track_clear",
+      "visual_form": "empty road ahead with no opponent vehicles",
+      "meaning": "safe passage; no immediate collision risk"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "opponent buggies rendered as distinct sprite variations",
+      "environmental_markers": null
+    },
+    {
+      "faction": "cpu_opponents",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "multiple buggy sprite designs distinguish different opponent vehicles",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "race_in_progress",
+      "visual_manifestation": "scrolling track with player and opponent vehicles visible; HUD shows racing position/score",
+      "behavioral_manifestation": "buggies move forward; collision detection active; opponent AI drives toward finish"
+    },
+    {
+      "world_state": "player_collision_with_opponent",
+      "visual_manifestation": "opponent buggy sprite flashes or deforms; vehicle may leave track or flip",
+      "behavioral_manifestation": "opponent vehicle crashes; player gains positioning advantage or points"
+    },
+    {
+      "world_state": "player_off_track",
+      "visual_manifestation": "buggy moves into wall/boundary sprite; potential visual deformation or screen shake",
+      "behavioral_manifestation": "loss of control; possible race reset or vehicle damage state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "track_scrolling_backdrop",
+      "example": "continuous scrolling road environment communicates active racing progression and speed sensation"
+    },
+    {
+      "technique": "sprite_positioning_hierarchy",
+      "example": "opponent buggy placement on track conveys relative race position and threat proximity"
+    },
+    {
+      "technique": "collision_visual_feedback",
+      "example": "sprite distortion or flash on impact provides immediate communication that bumping is core mechanic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_buggy",
+      "state": "accelerating",
+      "behavior": "moves forward along scrolling track; responds to input controls"
+    },
+    {
+      "entity": "opponent_buggy",
+      "state": "racing",
+      "behavior": "autonomous forward movement on track; collision triggers crash behavior"
+    },
+    {
+      "entity": "opponent_buggy",
+      "state": "crashed",
+      "behavior": "sprite leaves track; vehicle becomes non-threat; visual indication opponent is disabled"
+    }
+  ],
+  "notes": "Bump 'N' Jump is a combat-racing game where bumping opponents off-road is primary gameplay mechanic. Visual communication centers on: (1) track as threat boundary, (2) opponent vehicles as targets/obstacles, (3) collision as success state. Game uses minimal color and detail; communication relies on sprite placement, scrolling motion, and collision reactions. No documented faction alignment systems or political narrative elements. Regional differences noted (Japan vs US logo/text changes) are cosmetic only and do not affect world-state manifestation.",
+  "sources_used": [
+    "tcrf - Bump 'n' Jump (NES) article"
+  ],
+  "TODO": "Additional visual analysis would benefit from: arcade cabinet footage, in-game screenshot analysis, mechanics deep-dive on bump damage/scoring visual feedback, power-up visual indicators if present, track environment variation visual differences across stages",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:23:41.292Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1426,
+    "output_tokens": 1328,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

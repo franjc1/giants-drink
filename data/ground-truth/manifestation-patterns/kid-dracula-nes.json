@@ -1,0 +1,154 @@
+{
+  "game_id": "kid-dracula-nes",
+  "game_name": "Kid Dracula",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy respawn mechanics",
+      "visual_form": "Enemies reappearing on screen after moving away",
+      "meaning": "US version increases threat density; enemies persist as danger when player retreats"
+    },
+    {
+      "signal": "Boss health increase",
+      "visual_form": "Extended visual presence of boss character before defeat",
+      "meaning": "Boss encounters represent elevated danger state requiring extended engagement"
+    },
+    {
+      "signal": "Life count reduction",
+      "visual_form": "Fewer visible life indicators in HUD",
+      "meaning": "US version signals higher lethality; player vulnerability is more acute"
+    },
+    {
+      "signal": "Environmental hazards (inferred from music)",
+      "visual_form": "Hot/dangerous themed environments ('Ouch! Hot!!' - BGM7)",
+      "meaning": "World state indicates hazardous terrain requiring caution"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Heart power-ups",
+      "visual_form": "Big heart collectible (Japanese version level 1-3)",
+      "meaning": "Health restoration; safe resource availability"
+    },
+    {
+      "signal": "Starting resources",
+      "visual_form": "Initial coin allocation (4 lives + 20 coins in Japanese version)",
+      "meaning": "Player security state; more resources = safer beginning"
+    },
+    {
+      "signal": "Enemy persistence (Japanese version)",
+      "visual_form": "Dead enemies remain off-screen after defeat",
+      "meaning": "Safe passage through cleared areas; progressive world security"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kid Dracula (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dracula's cloak (title screen redesign in US version)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle setting; association with night/darkness theme"
+    },
+    {
+      "faction": "Garamoth (recurring boss threat)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Appears in multiple level boss contexts (BGM12, BGM19, BGM10 suggest escalating threat)",
+      "environmental_markers": "Associate with pirate ship environments ('A Pirate Ship's Arrived!' - BGM5)"
+    },
+    {
+      "faction": "Ghost enemies (Level 1 Boss)",
+      "color_identity": null,
+      "symbol_or_sigil": "Forehead symbols (removed in US version for cultural sensitivity)",
+      "enemy_visual_variants": "Three distinct ghost boss characters with rounded heads in US version",
+      "environmental_markers": "Church/bell tower setting in Japanese version (removed in US)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Japanese cultural context (original design)",
+      "visual_manifestation": "Church bell tower intro scene; symbols on boss foreheads; castle-themed title screen with Kid Dracula atop structure",
+      "behavioral_manifestation": "Dead enemies remain dead; generous starting resources (4 lives, 20 coins); bigger heart pickups available"
+    },
+    {
+      "world_state": "US market localization (censored/adjusted version)",
+      "visual_manifestation": "Generic castle spire replaces bell tower; boss head symbols removed; Kid Dracula's head repositioned and redrawn smaller; cloak repositioned into title design",
+      "behavioral_manifestation": "Enemy respawn mechanic activated; life count halved; coins removed from starting inventory; heart pickups reduced; boss health increased"
+    },
+    {
+      "world_state": "Escalating danger progression",
+      "visual_manifestation": "Music themes transition from casual ('Dracula-chan in a Panic,' 'Feeling Like a Monkey') to threat-focused ('Die, Garamoth!' 'Garamoth is Coming!' 'Wait, Garamoth!')",
+      "behavioral_manifestation": "Boss encounters grow in difficulty and health; pirate-themed levels introduce new enemy archetypes; hot/dangerous environments present"
+    },
+    {
+      "world_state": "Safe/exploration zones",
+      "visual_manifestation": "Whimsical environmental themes ('Picnic in the Sky,' 'I'm Rich,' 'Take Me With You,' 'Tan-Tan Tango')",
+      "behavioral_manifestation": "Heart pickups available; non-lethal obstacle sequences; casual music accompaniment"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architecture as faction identity",
+      "example": "Castle setting (Japanese: atop castle in title screen; US: generic castle spire) signals Dracula kingdom control; contrasts with pirate ship environments indicating invaded/contested spaces"
+    },
+    {
+      "technique": "Music title narratives",
+      "example": "BGM progression tells implicit story: 'Go-Getter Samba' and 'Picnic in the Sky' suggest exploration/joy, while 'Garamoth is Coming' and 'Die, Garamoth!' signal escalating threat; 'Bye-Bye, Dracula-chan' suggests conclusion"
+    },
+    {
+      "technique": "Religious iconography as cultural marker",
+      "example": "Church bell tower (Japanese) communicates European gothic setting; removal in US version signals content sensitivity and market-specific world interpretation"
+    },
+    {
+      "technique": "Enemy design as environmental hazard signaling",
+      "example": "Ghost bosses with symbolic markings (Japanese) communicate supernatural/spiritual danger; rounded-head variants (US) remove cultural-specific threat signaling"
+    },
+    {
+      "technique": "Resource scarcity as world state",
+      "example": "Starting inventory differences (4 lives + coins vs. 2 lives, no coins) communicate whether the world is abundant or hostile without dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemies",
+      "state": "Japanese version - defeated",
+      "behavior": "Remain dead; do not respawn until level reload"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "US version - defeated",
+      "behavior": "Respawn when player moves half-screen distance away; signal persistent threat"
+    },
+    {
+      "entity": "Level 1 Boss (Ghost trio)",
+      "state": "Encountered",
+      "behavior": "Japanese: standard health; US: increased health pool; visual design altered to remove symbol markings"
+    },
+    {
+      "entity": "Garamoth (recurring boss)",
+      "state": "Threat escalation",
+      "behavior": "Introduced in early themes; gains narrative prominence through multiple BGM references; appears to grow as persistent antagonist across level progression"
+    },
+    {
+      "entity": "Kid Dracula (player character)",
+      "state": "Starting vulnerable",
+      "behavior": "Japanese: begins with safety margin (4 lives, coins); US: begins in higher-risk state (2 lives, no coins)"
+    }
+  ],
+  "notes": "Kid Dracula exemplifies how manifestation layer differs across regional versions. The Japanese version uses visual iconography (bell tower, symbolic markings, castle architecture) to communicate dark fantasy atmosphere and European gothic setting. The US version strips away religious imagery and removes cultural symbols from boss designs, simultaneously increasing game difficulty through respawn mechanics and resource reduction. This creates two distinct world-state presentations of the same narrative: Japanese version is comedic/whimsical (reflected in music titles like 'Feeling Like a Monkey' and 'Picnic in the Sky') with generous progression, while US version emphasizes challenge and removes potentially offensive visual elements. The enemy behavior shift (respawn vs. permanent death) is the most significant mechanical manifestation of world-state difference, communicating whether the player's cleared space remains safe or remains threatened. Garamoth functions as primary antagonist force across both versions, identified through music cues rather than explicit visual faction markers.",
+  "sources_used": [
+    "tcrf - Kid Dracula (Game Boy) - The Cutting Room Floor"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:20:36.983Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3736,
+    "output_tokens": 2045,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

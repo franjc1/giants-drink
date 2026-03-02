@@ -1,0 +1,686 @@
+Dragon Warrior IV (NES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Dragon Warrior IV (NES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Dragon Warrior IV
+
+Also known as : Dragon Quest IV Michibikareshi Monotachi (JP)  Developer :
+
+Chunsoft
+
+Publisher :
+
+Enix
+
+Platform :
+
+NES
+
+Released in JP : February 11,&#160;1990  Released in US : October 1992
+
+This game has  hidden developer credits .
+
+This game has  unused enemies .
+
+This game has  unused graphics .
+
+This game has  unused abilities .
+
+This game has  debugging material .
+
+This game has  regional differences .
+
+This game has  revisional differences .
+
+This game has a Data Crystal page
+
+Dragon Warrior IV
+
+was phenomenally popular in Japan as  Dragon Quest IV , but wasn't released in the west until late in the NES' lifespan, when most non-Japanese gamers were already occupied with 16-bit platforms.
+
+Nevertheless,  IV  featured an innovative (for its time) chapter-based story system and continued the series' tradition of solid gameplay, eye-catching monster designs, and a memorable soundtrack. It was later remade for the PlayStation in Japan only, but that version was later  ported to the DS  and released internationally.
+
+Contents
+
+1
+
+Sub-Page
+
+2
+
+Debug Features
+
+3
+
+Unused Text
+
+4
+
+Unused Abilities
+
+5
+
+Unused Enemies
+
+5.1
+
+Troubadour
+
+5.2
+
+Unused Sea Enemies
+
+5.2.1
+
+Necrodon
+
+5.2.2
+
+Rabid Roover
+
+5.2.3
+
+Sealion
+
+5.2.4
+
+Seaworm
+
+5.2.5
+
+Zapangler
+
+5.3
+
+Rare Sea Enemies
+
+5.3.1
+
+Batoidei
+
+5.3.2
+
+Giant Octopod
+
+5.3.3
+
+Infsnip
+
+5.3.4
+
+Piranian
+
+6
+
+Revisional Differences
+
+6.1
+
+Dialogue Differences
+
+6.2
+
+Casino Text Color
+
+6.3
+
+Party AI Improvement
+
+7
+
+Hidden Developer Credit
+
+Sub-Page
+
+Regional Differences
+
+Not quite as many as the previous games in the series.
+
+Debug Features
+
+A debug mode can be accessed with  Game Genie  code
+
+ATEGAENY  . When you start a new game, you will be given a chapter selection menu. If you press  B  at this menu, you will start at Chapter 5 with a full LV1 party, and the hero gets 65535 HP and MP, all spells available, and all return destinations available. If the hero is healed, he will lose the 65535 HP.
+
+Otherwise, if you get to Chapter 5 and skipped earlier chapters, the characters from the previous chapters will join the party with 0 for all stats, including HP and Max HP, making them useless.
+
+While using the debug code, you can also hold  B  to walk through walls, and the Return list is in a different order and has additional destinations.
+
+(Source:  GameFAQs )
+
+Unused Text
+
+The name of Hometown in Chapter 5 is only shown with debug mode turned on.
+
+Unused Abilities
+
+Dragon Warrior 2 and 3 had an "Open" spell to unlock doors, learned at an extremely high level but obviating the need for keys. While none of the heroes in DW4 learns this spell, it does exist in the ROM and is fully functional, although its name is a blank space in the US version. In the Japanese version the spell has the same name as it did in the previous games, アバカム. The Game Genie code
+
+PLNOGPIU
+
+for the US version, or
+
+PUUPLPIU
+
+for the Japanese version, will replace Brey's Outside with Open (note that this code will only work if Brey has already learned Outside--changing the spells a character  learns  requires more invasive surgery than a single GG code).
+
+Presumably the spell was disabled (and never brought back in any subsequent main-sequence DQ game) because being able to open any door just by gaining enough levels would play havoc with the storyline.
+
+Unused Enemies
+
+To do:  Find out more about the enemies' stats and actions during battle. Also figure out where on the ocean each is actually supposed to appear after the bug is fixed.
+
+Six entirely unused enemies are hidden away in the code, along with four enemies that can only be encountered under very specific circumstances.
+
+Troubadour
+
+A palette swap of Roric, minus the boomerang (it's hidden by using an all-black palette). His battle stats (at
+
+61094
+
+in the ROM) are clearly incomplete: nine zero bytes (giving him zero HP, MP, attack, defense, agility, experience and gold) followed by "(193)" and eight spaces in ASCII (most likely some kind of placeholder, although he's actually enemy number 189 in decimal).
+
+For the record, he's one of the few human opponents in the  Dragon Quest / Warrior  series, despite never being used in a final product.
+
+Unused Sea Enemies
+
+The following five enemies have complete stats, but don't appear anywhere in the game. All of them were intended to be encountered at sea, and do appear there in the PS1 and DS versions.
+
+Necrodon
+
+A palette swap of Pteranodon and Chillanodon.
+
+Rabid Roover
+
+A palette swap of Poison Lizard and Baby Salamand.
+
+Sealion
+
+A palette swap of Great Ohrus and Sealthrope.
+
+Seaworm
+
+A palette swap of Giant Worm and Sand Master.
+
+Zapangler
+
+A palette swap of Bangler.
+
+Rare Sea Enemies
+
+The following four enemies can be encountered, but only when a random encounter occurs on the exact step you transition from the Shrine of Breaking Waves to your ship on the world map. Like the above five, they all appear normally in the remakes.
+
+Batoidei
+
+A palette swap of Guzzle Ray and Raygarth.
+
+Giant Octopod
+
+A palette swap of Elefrover and Tentagor.
+
+Infsnip
+
+A palette swap of Armor Scorpion and Metal Scorpion.
+
+Piranian
+
+Another palette swap of Bangler.
+
+The reason so many sea enemies don't appear anywhere, while others only appear under specific and strange conditions is, not surprisingly, because of a bug in the code that calculates what encounter zone you're in. The encounter zones for each roughly screen-sized section of world map (16 by 16 squares) are packed into a single byte, with the land encounter table index in the lower 6 bits and the sea encounter table index in the upper 2 bits. The bugged code starts in bank
+
+18  , address
+
+9C5A
+
+(offset
+
+61C6A
+
+in a headered .nes ROM image):
+
+18/9C5A: AD 45 A2
+
+lda $A245&#160;; lo byte of ptr to world map encounter table
+18/9C5D: 85 00
+
+sta $00
+18/9C5F: AD 46 A2
+
+lda $A246&#160;; hi byte of ptr to world map encounter table
+18/9C62: 85 01
+
+sta $01
+18/9C64: A5 42
+
+lda $42&#160;; player's X position in map squares
+18/9C66: 4A
+
+lsr
+18/9C67: 4A
+
+lsr
+18/9C68: 4A
+
+lsr
+18/9C69: 4A
+
+lsr
+18/9C6A: 85 06
+
+sta $06
+18/9C6C: A5 43
+
+lda $43&#160;; player's Y position in map squares
+18/9C6E: 29 F0
+
+and #$F0
+18/9C70: 05 06
+
+ora $06
+18/9C72: A8
+
+tay
+18/9C73: B1 00
+
+lda ($00),y&#160;; read packed encounter table indexes
+18/9C75: AE 15 05
+
+ldx $0515&#160;; current vehicle (0 = on foot, 1 = ship, 2 = balloon)
+18/9C78: E0 01
+
+cpx #$01
+18/9C7A: F0 05
+
+beq ship
+18/9C7C: 29 3F
+
+and #$3F&#160;; the land encounter table is in the lower 6 bits
+18/9C7E: 4C 88 9C
+
+jmp storeit
+ship:
+18/9C81: A5 07
+
+lda $07&#160;; bug! this variable hasn't been initialized yet
+18/9C83: 0A
+
+asl
+18/9C84: 2A
+
+rol
+18/9C85: 2A
+
+rol
+18/9C86: 29 03
+
+and #$03&#160;; the sea encounter table is in the upper 2 bits
+storeit:
+18/9C88: 85 07
+
+sta $07
+
+The uninitialized variable $07 contains the index of the encounter table that was checked on the  previous  step. So each step you take on the ocean, the game uses the index of the previous encounter table divided by 64 as the current encounter table. As a result, the only time a table other than table 00 gets used is when you have an encounter immediately upon moving from an area with an encounter table index of 64 or greater. The only such area that you can move directly into the sea from is the Shrine of Breaking Waves.
+
+The four enemies that you can encounter via the Shrine of Breaking Waves method are in encounter table 01. If there were a dungeon with an encounter table index of 128 or greater that was accessible by ship, you could encounter the remaining five enemies (all of which are in encounter table 02), but the encounter tables used by the game don't go that high.
+
+To fix the bug, change the byte at ROM offset
+
+61C8B
+
+from 05 to 07 (i.e. change the destination of the beq so it skips over the bogus
+
+lda $07  ). A Game Genie code for the bug fix is
+
+YANOUGIA  .
+
+Revisional Differences
+
+Dialogue Differences
+
+The speech of this soldier in Chapter 5 was changed between the first and second Japanese revisions:
+
+Japan PRG0
+
+Japan PRG1
+
+US
+
+His line in the US version is a direct translation of the PRG1 line. The PRG0 line translates to "Please tell Ryan [Ragnar] to come back to the castle once in a while."
+
+In all versions, he only says this line if Ragnar/Ryan is not in the active party; if he is, the soldier greets him instead.
+
+Casino Text Color
+
+Like the other Dragon Quest/Warrior games, the color of the text windows changes if you have a party member who is severely wounded or dead (in this game, to green or red respectively). In the first Japanese revision, the text windows change color no matter where you are. In the second Japanese revision and the US version, when you're in the Casino in Endor, the text windows remain white regardless of the status of your party members.
+
+Japan PRG0
+
+Japan PRG1
+
+US
+
+Party AI Improvement
+
+To do:  There are other differences in the battle/AI code between the two Japanese revisions; figure out what they mean.
+
+In the first Japanese revision, the party AI in Chapter 5 evaluates damage-dealing spells based on the  average  damage dealt by each spell. In the second revision and the US version, it was changed to use the  minimum  damage instead. This change ensures the AI does not choose a spell too weak to finish off an enemy when a stronger spell is available.
+
+Hidden Developer Credit
+
+MANABU YAMANAMANABU YAMANA
+
+At $0BBF in the save RAM, the name of the Chief Programmer appears twice in a row.
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Dragon Quest / Dragon Warrior
+
+series
+
+NES
+
+Dragon Warrior &#160;&#8226;
+
+Dragon Warrior II &#160;&#8226;
+
+Dragon Warrior III &#160;&#8226;
+
+Dragon Warrior IV
+
+MSX
+
+Dragon Quest &#160;&#8226;
+
+Dragon Quest II
+
+MSX2
+
+Dragon Quest
+
+SNES
+
+Dragon Quest I & II &#160;&#8226;
+
+Dragon Quest III &#160;&#8226;
+
+Dragon Quest V &#160;&#8226;
+
+Dragon Quest VI &#160;&#8226;
+
+Torneko no Daibouken: Fushigi no Dungeon
+
+Game Boy (Color)
+
+Dragon Warrior I & II &#160;&#8226;
+
+Dragon Warrior III &#160;&#8226;
+
+Dragon Warrior Monsters &#160;&#8226;
+
+Dragon Warrior Monsters 2
+
+PlayStation
+
+Dragon Warrior VII
+
+PlayStation 2
+
+Dragon Quest V &#160;&#8226;
+
+Dragon Quest VIII
+
+Game Boy Advance
+
+Dragon Quest Monsters: Caravan Heart
+
+Nintendo DS
+
+Dragon Quest IV &#160;&#8226;
+
+Dragon Quest V &#160;&#8226;
+
+Dragon Quest VI &#160;&#8226;
+
+Dragon Quest IX &#160;&#8226;
+
+Dragon Quest Monsters: Joker
+
+Wii
+
+Fortune Street
+
+Nintendo 3DS
+
+Theatrhythm Dragon Quest &#160;&#8226;
+
+Dragon Quest VII &#160;&#8226;  Slime Mori Mori Dragon Quest 3 &#160;&#8226;
+
+Dragon Quest XI
+
+PlayStation 4, Windows
+
+Dragon Quest Builders  &#160;&#8226;
+
+Dragon Quest Builders 2  ( Demos )&#160;&#8226;  Dragon Quest XI  ( Definitive Edition )
+
+Xbox One, Stadia
+
+Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition
+
+Nintendo Switch
+
+Dragon Quest Builders  &#160;&#8226;
+
+Dragon Quest Builders 2  ( Demos )&#160;&#8226;
+
+Dragon Quest XI S: Echoes of an Elusive Age - Definitive Edition
+
+Retrieved from " https://tcrf.net/index.php?title=Dragon_Warrior_IV_(NES)&oldid=1544357 "
+
+Categories :
+
+Games developed by Chunsoft
+
+Games published by Enix
+
+NES games
+
+Games released in 1990
+
+Games released in February
+
+Games released on February 11
+
+Games with hidden developer credits
+
+Games with unused enemies
+
+Games with unused graphics
+
+Games with unused abilities
+
+Games with debugging functions
+
+Games with regional differences
+
+Games with revisional differences
+
+Pages with a Data Crystal link
+
+To do
+
+Dragon Quest series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden developer credits
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with revisional differences
+
+Games  >  Games by content  >  Games with unused abilities
+
+Games  >  Games by content  >  Games with unused enemies
+
+Games  >  Games by content  >  Games with unused graphics
+
+Games  >  Games by content  >  Pages with a Data Crystal link
+
+Games  >  Games by developer  >  Games developed by Spike Chunsoft  >  Games developed by Chunsoft
+
+Games  >  Games by platform
+
+Games  >  Games by publisher  >  Games published by Square Enix  >  Games published by Enix
+
+Games  >  Games by release date  >  Games released in 1990
+
+Games  >  Games by release date  >  Games released in February
+
+Games  >  Games by release date  >  Games released in February  >  Games released on February 11
+
+Games  >  Games by series  >  Dragon Quest series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 30 January 2024, at 22:15.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

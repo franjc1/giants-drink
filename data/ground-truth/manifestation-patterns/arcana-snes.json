@@ -1,0 +1,181 @@
+{
+  "game_id": "arcana-snes",
+  "game_name": "Arcana",
+  "platform": "snes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Sudden tile transition; no forewarning in dungeon layout",
+      "meaning": "Immediate high-difficulty combat; often results in character death"
+    },
+    {
+      "signal": "Convoluted dungeon passages",
+      "visual_form": "Labyrinthine tile-based design with dead ends and hidden paths",
+      "meaning": "Player disorientation; risk of sudden monster encounters; danger of becoming trapped"
+    },
+    {
+      "signal": "Limited save point access",
+      "visual_form": "Save functionality only available in town areas",
+      "meaning": "Player vulnerability between towns; resource depletion risk in dungeons"
+    },
+    {
+      "signal": "Torn card visual state",
+      "visual_form": "Character card displayed as damaged/torn",
+      "meaning": "Character death or incapacitation; immediate game over if protagonist Rooks"
+    },
+    {
+      "signal": "Low inventory capacity",
+      "visual_form": "42-item non-stacking inventory limit displayed in UI",
+      "meaning": "Resource scarcity; inability to carry restorative items; tactical vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town presence",
+      "visual_form": "Transition from dungeon tile-view to town area",
+      "meaning": "Save point availability; NPC healing services; respite from combat"
+    },
+    {
+      "signal": "Spirit healer NPC",
+      "visual_form": "NPC present in each town offering resurrection service",
+      "meaning": "Fallen elemental spirits can be revived for fee; party recovery possible"
+    },
+    {
+      "signal": "Experience/gold reward display",
+      "visual_form": "Text summary after battle completion",
+      "meaning": "Successful combat; progression toward character advancement"
+    },
+    {
+      "signal": "Elemental spirit availability",
+      "visual_form": "Four distinct elemental cards (Sylph, Efrite, Dao, Marid) in party rotation",
+      "meaning": "Tactical flexibility; ability to swap elemental types; redundancy for dead spirits"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Card Masters",
+      "color_identity": null,
+      "symbol_or_sigil": "Card representation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Persecuted group hunted across Elemen; presence in towns as NPCs or mentors"
+    },
+    {
+      "faction": "Galneon's Oppressive Authority",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Minions and monsters encountered in dungeons under Galneon's control",
+      "environmental_markers": "Dungeons progressively controlled by Galneon; increasing monster difficulty; towns under regime authority"
+    },
+    {
+      "faction": "Knights of Lexford",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dissolved faction; Rooks's father was member; historical faction referenced in narrative"
+    },
+    {
+      "faction": "Rimsala's Legacy",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Ancient evil manifestations; corrupted creatures; chaos-aligned monsters",
+      "environmental_markers": "Mysterious events across land; sealed dungeons; cataclysmic environmental signs"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-war peace (historical)",
+      "visual_manifestation": "Card Masters active; Rimsala sealed; stable kingdoms",
+      "behavioral_manifestation": "NPCs reference historical stability; Card Master lineage respected"
+    },
+    {
+      "world_state": "Civil war period (10 years prior to game start)",
+      "visual_manifestation": "Kingdom conflict; armies engaged; Card Masters hunted",
+      "behavioral_manifestation": "NPCs recall war trauma; death of Rooks's father; Knights of Lexford dissolution"
+    },
+    {
+      "world_state": "Galneon's oppressive rule (current game state)",
+      "visual_manifestation": "Dungeons filled with minions; monsters increase in strength; towns under regime control",
+      "behavioral_manifestation": "NPCs fearful; Card Masters hunted; Rooks must hide/develop abilities; mysterious cataclysmic events occurring"
+    },
+    {
+      "world_state": "Impending Rimsala resurrection",
+      "visual_manifestation": "Mysterious events across land; increased monster activity; environmental corruption signs",
+      "behavioral_manifestation": "Urgent NPC dialogue; escalating danger; time pressure on player to prevent awakening"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Card metaphor for character state",
+      "example": "Living characters represented as intact cards; death/incapacity shown as torn cards; visual representation reinforces card game theme and character fragility"
+    },
+    {
+      "technique": "Dungeon layout design as narrative hazard",
+      "example": "Labyrinthine passages with dead ends and hidden dangers reflect state of chaos in Elemen; player disorientation mirrors Rooks's uncertain journey"
+    },
+    {
+      "technique": "NPC healer presence as faction safety marker",
+      "example": "Spirit healer in each town signals Card Master infrastructure and knowledge; NPC presence indicates settled areas versus hostile dungeons"
+    },
+    {
+      "technique": "Monster escalation as world-state progression",
+      "example": "Monster difficulty increases as player advances through dungeons; reflects Galneon's growing power and approaching cataclysm"
+    },
+    {
+      "technique": "Save point restriction as world hostility",
+      "example": "Save functionality limited to towns only; reflects dangerous world outside civilization; visual isolation of safety zones"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Rooks (protagonist)",
+      "state": "Active in party",
+      "behavior": "Can switch elemental spirits; cast powerful but expensive spell cards; flee battles; essential for party survival"
+    },
+    {
+      "entity": "Rooks (incapacitated)",
+      "state": "Defeated/torn card",
+      "behavior": "Entire party crippled; immediate game over condition; highest stakes for player"
+    },
+    {
+      "entity": "Elemental spirits (Sylph, Efrite, Dao, Marid)",
+      "state": "Active",
+      "behavior": "Rotate through same party slot; occupy one of four party positions; provide elemental tactical options"
+    },
+    {
+      "entity": "Elemental spirit (incapacitated)",
+      "state": "Torn card/dead",
+      "behavior": "Can be rotated out for living elemental; can be resurrected by spirit healer for fee; game continues (unlike human character death)"
+    },
+    {
+      "entity": "Non-elemental party members",
+      "state": "Incapacitated",
+      "behavior": "Results in immediate game over; higher stakes than elemental death"
+    },
+    {
+      "entity": "Boss character",
+      "state": "Encountered",
+      "behavior": "Often appears without forewarning; triggered by tile movement; high damage output; frequently causes player character death"
+    },
+    {
+      "entity": "Monsters (standard)",
+      "state": "In dungeon",
+      "behavior": "Turn-based combat; variable damage; defeat yields experience and gold; difficulty increases in deeper dungeons"
+    }
+  ],
+  "notes": "Arcana communicates world-state primarily through narrative context and gameplay mechanics rather than direct visual representation. The 'card' metaphor serves dual purpose: narrative (Card Masters as faction) and mechanical (character death as torn cards). The game emphasizes danger through systematic constraints (limited saves, instant game-overs, inventory caps) rather than explicit visual warnings. Political situation (Galneon's oppression, impending Rimsala resurrection) is conveyed through NPC dialogue and quest context. Visual communication is minimal due to SNES technical constraints; meaning derives from mechanical consequences and tile-based level design. First-person perspective and labyrinthine dungeons reinforce player vulnerability and world hostility.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:47:35.725Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2914,
+    "output_tokens": 2141,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

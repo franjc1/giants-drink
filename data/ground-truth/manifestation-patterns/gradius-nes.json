@@ -1,0 +1,155 @@
+{
+  "game_id": "gradius-nes",
+  "game_name": "Gradius",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy waves approaching",
+      "visual_form": "Alien sprite formations moving across screen from right edge",
+      "meaning": "Active threat requiring evasion and counterattack"
+    },
+    {
+      "signal": "Boss core visibility",
+      "visual_form": "Blue-colored sphere(s) centered in large enemy craft body",
+      "meaning": "Primary danger and critical weak point; core changes from blue to red when critically damaged"
+    },
+    {
+      "signal": "Destructible wall barriers",
+      "visual_form": "Small blocking structures positioned between player fire and boss core",
+      "meaning": "Impediment to victory; must be worn down through sustained fire before core becomes vulnerable"
+    },
+    {
+      "signal": "Slow player movement at game start",
+      "visual_form": "Vic Viper sprite with limited firing range and speed",
+      "meaning": "Vulnerable state; insufficient capability for most combat engagements"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up capsule collection",
+      "visual_form": "Capsule items appearing on screen after enemy defeat",
+      "meaning": "Advancement toward greater capability; player selects from power-up menu to gain weapons and attributes"
+    },
+    {
+      "signal": "Power meter highlighted selection",
+      "visual_form": "Power-up menu at bottom of screen with highlighted desired upgrade",
+      "meaning": "Player has secured capability increase when button pressed; menu resets after power-up activation"
+    },
+    {
+      "signal": "Core color transition to red",
+      "visual_form": "Boss core changes from blue to red visual state",
+      "meaning": "Boss entering critical condition; destruction is imminent after sustained damage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Human/Vic Viper)",
+      "color_identity": null,
+      "symbol_or_sigil": "Vic Viper spacecraft",
+      "enemy_visual_variants": "Single distinctive player-controlled vessel contrasted against multiple alien enemy types",
+      "environmental_markers": "Player positioned on left side of horizontally-scrolling screen; occupies lower screen area during gameplay"
+    },
+    {
+      "faction": "Alien antagonists",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied alien creature designs across stages (including Moai statue enemies in stage 3)",
+      "enemy_visual_variants": "Multiple distinct enemy types with unique sprite designs per stage; boss crafts feature blue core spheres as faction identifier",
+      "environmental_markers": "Emerge from right screen edge; occupy various environmental niches including organic and mechanical terrain"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game start / weak player state",
+      "visual_manifestation": "Vic Viper displayed with minimal sprite size; limited weapon fire pattern visible on screen",
+      "behavioral_manifestation": "Player moves slowly; weak single-shot or narrow firing pattern; vulnerable to basic enemy contact"
+    },
+    {
+      "world_state": "Power-up acquired",
+      "visual_manifestation": "Capsule item appears after enemy defeat; power-up menu illuminates at screen bottom with new selection highlighted",
+      "behavioral_manifestation": "Vic Viper gains additional weapon types, speed enhancement, shield capability (Options), or improved firing rate depending on menu selection"
+    },
+    {
+      "world_state": "Boss encounter initiated",
+      "visual_manifestation": "Large alien craft fills screen; multiple blue core spheres visible within craft body; destructible wall barriers positioned between craft exterior and cores",
+      "behavioral_manifestation": "Boss performs weapon attack patterns from body emplacements; player must navigate projectiles while targeting specific passage leading to core; walls regenerate on some bosses"
+    },
+    {
+      "world_state": "Boss critical damage state",
+      "visual_manifestation": "Boss core changes color from blue to red; craft body may show damage effects",
+      "behavioral_manifestation": "Boss nearing destruction; one final core hit typically results in craft explosion and stage completion"
+    },
+    {
+      "world_state": "Stage progression through environment",
+      "visual_manifestation": "Horizontally-scrolling backgrounds showing distinct visual themes per stage (organic, mechanical, monument-based); environmental features change with each stage",
+      "behavioral_manifestation": "Enemy types and patterns shift with environment; player encounters stage-specific threats and visual obstacles"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-specific visual themes and enemy types",
+      "example": "Stage 3 features Moai statue enemies, establishing a monument/organic environment distinct from mechanical stages; each stage has unique background scrolling and enemy configurations that communicate world progression"
+    },
+    {
+      "technique": "Boss craft design as faction architecture",
+      "example": "Blue-cored boss crafts establish alien mechanical aesthetic; craft design and weapon placement communicate threat level and combat structure"
+    },
+    {
+      "technique": "Power-up menu as world-state indicator",
+      "visual_manifestation": "Menu position at screen bottom provides persistent visual reference to player upgrade state; advancement through menu options shows progression toward greater combat capability"
+    },
+    {
+      "technique": "Destructible barriers as environmental puzzle",
+      "example": "Small walls between player fire and boss core represent environmental impediment that must be systematically destroyed, creating visual evidence of progress toward core vulnerability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Vic Viper (player ship)",
+      "state": "Unpowered",
+      "behavior": "Slow movement speed; weak single-fire gun; vulnerable collision state"
+    },
+    {
+      "entity": "Vic Viper (player ship)",
+      "state": "Power-up acquired",
+      "behavior": "Increased movement speed; enhanced weapon fire (spread shots, rapid fire, or doubled output); option satellites added for enhanced coverage"
+    },
+    {
+      "entity": "Boss craft",
+      "state": "Active combat",
+      "behavior": "Fires projectiles from weapon emplacements; maintains position; wall barriers remain intact between craft exterior and core"
+    },
+    {
+      "entity": "Boss craft",
+      "state": "Core sustaining damage",
+      "behavior": "Core color remains blue; craft continues attack patterns; walls may regenerate if damaged"
+    },
+    {
+      "entity": "Boss craft",
+      "state": "Critical condition",
+      "behavior": "Core color changes to red; one additional hit triggers destruction sequence and boss explosion"
+    },
+    {
+      "entity": "Enemy waves",
+      "state": "Standard engagement",
+      "behavior": "Approach from right screen edge in formation; attack player position; defeated enemies drop power-up capsules"
+    }
+  ],
+  "notes": "Gradius (1986 NES) uses a horizontally-scrolling shmup paradigm with world-state communication primarily through: (1) power-meter menu system that visually tracks capability progression, (2) boss core color-coding (blue=vulnerable state progression, red=critical), (3) stage-specific visual theming that establishes environmental context, (4) contrasting player/enemy sprite design that clearly delineates faction boundaries. The game lacks explicit political or narrative faction systems; instead, communication is fundamentally mechanical: visual signals indicate game-state through sprite condition, menu state, and environmental presence. Core danger signals are color-coded (blue cores) and positioned as clear weak points. Safety progression is tied to power-up acquisition and menu advancement. The two-fires manifestation pattern is implicit rather than explicit—world-state is communicated through gameplay mechanics (movement speed, fire rate, core color) rather than diegetic narrative elements.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:04:15.054Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5899,
+    "output_tokens": 2124,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

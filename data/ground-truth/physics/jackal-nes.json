@@ -1,0 +1,109 @@
+{
+  "game_id": "jackal-nes",
+  "game_name": "Jackal",
+  "platform": "nes",
+  "year": 1988,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Jeep Vehicle Controls",
+      "description": "Player controls an armed jeep with eight-way movement joystick. Two attack buttons: one for machine gun turret (fires upward), another for grenades/missiles fired in direction jeep faces",
+      "physics_values": {
+        "movement_type": "vehicle_overhead",
+        "directions": 8,
+        "jeep_collision": "destroyed_by_enemy_projectiles_or_vehicle_collision",
+        "prisoner_mechanics": "can_carry_up_to_8_POWs_per_stage"
+      }
+    },
+    {
+      "name": "Weapon Upgrade System",
+      "description": "Grenade launcher upgradeable up to 3 times (NES version). Upgrades reach longer range then shrapnel rounds spreading 2-4 directions. Machine gun has faster rate but lower power",
+      "physics_values": {
+        "grenade_launcher_max_upgrades": 3,
+        "shrapnel_spread_directions": "2_or_4",
+        "downgrade_on_jeep_loss": "reverts_to_initial_grenade_launcher"
+      }
+    },
+    {
+      "name": "Jeep Destruction Mechanics",
+      "description": "When jeep destroyed, replacement jeep appears with weapon downgraded. Prisoners carried spread out from wreckage awaiting pickup",
+      "physics_values": {
+        "replacement_jeep_spawn": "automatic",
+        "weapon_level_on_respawn": "reverts_one_level"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "vehicular_arcade",
+    "responsive_controls",
+    "overhead_perspective",
+    "momentum_based_vehicle"
+  ],
+  "tier_notes": "Tier 2: Empirical/Qualitative data only. Game is vehicle-focused top-down run-and-gun with no traditional character jump or gravity mechanics. Sources document game structure, controls, and level design changes in NES port but contain no quantitative physics parameters. Player character physics not applicable to jeep vehicle gameplay.",
+  "sources_used": [
+    "The Cutting Room Floor - Jackal (NES, Famicom Disk System)",
+    "Wikipedia - Jackal (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:22:17.195Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4750,
+    "output_tokens": 982,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

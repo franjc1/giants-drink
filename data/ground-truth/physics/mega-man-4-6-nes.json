@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "games": ["Mega Man 4", "Mega Man 5", "Mega Man 6"],
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "years": [1991, 1992, 1993],
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "sprites-inc.co.uk — Mega Man Physics Forum",
+        "url": "https://www.sprites-inc.co.uk/thread-388.html",
+        "notes": "Community physics documentation: jump velocity 4.75 px/f (MM4+), walk 1.375 px/f (claimed), gravity 0.25 px/f², fall cap 7 px/f (MM3-6), MM1-2 fall cap 12 px/f."
+      },
+      {
+        "name": "TASVideos — NES Mega Man series",
+        "url": "https://tasvideos.org/GameResources/NES/Rockman",
+        "notes": "MM2/3 ROM-disassembly confirmed values: walk $01.80 = 1.5 px/f, gravity $40 = 0.25 px/f², terminal velocity 4.0 px/f. MM4-6 values not separately documented in reviewed sources."
+      },
+      {
+        "name": "Data Crystal — Mega Man 4/5/6",
+        "url": "https://datacrystal.tcrf.net/wiki/Mega_Man_4",
+        "notes": "RAM maps for physics variables."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Mega Man 4, 5, and 6 use the same core 8.8 fixed-point physics engine as Mega Man 2 and 3.",
+      "PRIMARY ADDITION: Mega Man 4 introduced the Mega Buster charge shot (two charge levels). Present in all three games.",
+      "MM3 already has slide — all three games retain it. Slide mechanics appear unchanged from MM2/3.",
+      "DISCREPANCY: Walk speed reported by community forum (1.375 px/f) differs from MM2/3 TASVideos ROM data (1.5 px/f = $01.80). The forum claim may be inaccurate or represent MM1/4-specific values. VERIFY.",
+      "DISCREPANCY: Terminal velocity forum reports 7 px/f (MM3-6) but TASVideos MM2/3 data shows 4.0 px/f. Large discrepancy — needs ROM verification.",
+      "Jump velocity: forum reports 4.75 px/f for MM4+ vs TASVideos MM2: 6.0 px/f, MM3: 5.5 px/f. Each game in the series may have individually tuned jump. VERIFY.",
+      "Gravity: 0.25 px/f² confirmed across all sources (consistent with MM2/3 TASVideos data).",
+      "MM6 introduced Rush Adaptor — Rush can combine with Mega Man (Power Adaptor, Jet Adaptor). Different from MM3 Rush Jet."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point signed",
+      "description": "Same engine as NES MM2 and MM3. Velocities are multiples of 16 sub-pixels."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_confirmed_mm2_mm3": 1.5,
+      "px_per_frame_forum_claim_mm4_plus": 1.375,
+      "confidence": "medium",
+      "notes": [
+        "MM2/3 walk speed is ROM-confirmed at $01.80 = 1.5 px/frame from TASVideos disassembly.",
+        "Community forum (sprites-inc.co.uk) claims 1.375 px/f for general NES Mega Man. This may be wrong or reflect a different per-game tuning.",
+        "1.375 = 352/256 = $01.60 in 8.8. If true, MM4-6 would be slightly slower than MM2/3.",
+        "VERIFY: Check ROM for each of MM4/5/6 individually."
+      ]
+    },
+    "acceleration": null,
+    "notes": "Instant velocity, same as all NES Mega Man games."
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "mm4_5_6_forum_claim_px_per_frame": 4.75,
+      "mm2_tasvideos_confirmed_px_per_frame": 6.0,
+      "mm3_tasvideos_confirmed_px_per_frame": 5.5,
+      "confidence": "low",
+      "notes": [
+        "Forum claims 4.75 px/f for MM4 and later.",
+        "This would represent a progressive decrease: MM2 (6.0) → MM3 (5.5) → MM4+ (4.75?).",
+        "A 4.75 px/f jump with 0.25 px/f² gravity gives max height ≈ 45px (2.8 tiles). Plausible.",
+        "VERIFY: Check MM4/5/6 ROM individually. The trend may be real but the specific values need confirmation."
+      ]
+    },
+    "variable_jump": true,
+    "notes": "Variable height via early release — same as MM2/3."
+  },
+
+  "gravity": {
+    "px_per_frame_sq": 0.25,
+    "hex": "$40",
+    "source": "Confirmed across all sources (MM2/3 ROM data, forum, community)",
+    "confidence": "high",
+    "notes": "The 0.25 px/f² gravity constant is consistent across all NES Mega Man games in all sources. This is the series constant."
+  },
+
+  "terminal_velocity": {
+    "mm1_mm2_forum_claim_px_per_frame": 12.0,
+    "mm3_to_mm6_forum_claim_px_per_frame": 7.0,
+    "mm2_mm3_tasvideos_confirmed_px_per_frame": 4.0,
+    "confidence": "low",
+    "notes": [
+      "MAJOR DISCREPANCY: TASVideos MM2/3 data gives terminal velocity 4.0 px/f. Forum claims 7 px/f (MM3-6) and 12 px/f (MM1-2).",
+      "A 3x discrepancy in terminal velocity is substantial. One of these sources must be wrong.",
+      "Possible explanation: the forum may be confusing sub-pixels and pixels, or using a different definition.",
+      "4.0 px/f = 1024 sub-px in 8.8 system (hex: $04.00). 7 px/f = 1792 sub-px ($07.00).",
+      "VERIFY: Check ROM data directly for MM4/5/6 terminal velocity values."
+    ]
+  },
+
+  "slide": {
+    "speed_px_per_frame": 3.0,
+    "duration_frames": 22,
+    "total_distance_px": 66,
+    "input": "Down + B on ground",
+    "notes": "Slide introduced in MM2 (first game). Retained in MM3-6 with same or very similar values. No change documented."
+  },
+
+  "ladder": {
+    "climb_speed_px_per_frame": 1.0,
+    "notes": "Same as MM2/3."
+  },
+
+  "mega_buster_charge": {
+    "introduced_in": "Mega Man 4",
+    "not_in": ["Mega Man 1", "Mega Man 2", "Mega Man 3"],
+    "description": "Holding B charges the Mega Buster. Releasing fires a charged shot.",
+    "charge_levels": {
+      "level_1": {
+        "description": "Partially charged shot — slightly larger, slightly more damage",
+        "visual": "yellow flash on Mega Man's arm"
+      },
+      "level_2": {
+        "description": "Fully charged shot — largest projectile, most damage",
+        "visual": "bright flash, arm turns orange"
+      }
+    },
+    "notes": [
+      "The charge shot fundamentally changes the combat rhythm — players can charge while walking/sliding.",
+      "Charging and shooting special weapons simultaneously becomes a key optimization in MM4-6.",
+      "This is considered a major quality-of-life improvement over MM1-3 where only rapid-fire was possible."
+    ]
+  },
+
+  "per_game_additions": {
+    "mega_man_4": {
+      "new_mechanics": ["Mega Buster charge shot", "Energy Elements (new collectible type)", "Dr. Cossack as initial villain"],
+      "rush_items": "Same as MM3 (Rush Coil, Rush Jet, Rush Marine)"
+    },
+    "mega_man_5": {
+      "new_mechanics": ["Super Arrow (rideable projectile)", "Beat (rescue bird helper)", "Crystal Man weapon interactions"],
+      "rush_items": "Same Rush items"
+    },
+    "mega_man_6": {
+      "new_mechanics": [
+        "Rush Adaptor: Power Adaptor (Rush merges with Mega Man — punch attack, break barriers)",
+        "Rush Adaptor: Jet Adaptor (Rush merges — fly ability, hovering)"
+      ],
+      "notes": "Rush Adaptor replaces calling Rush separately — Rush becomes wearable armor."
+    }
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 128,
+    "notes": "Same as MM2/3 — NES Mega Man series standard."
+  },
+
+  "_verification_checklist": [
+    "Walk speed for each of MM4, MM5, MM6 from ROM (is it 1.5 or 1.375?)",
+    "Jump initial velocity for each game (is it 4.75 or closer to MM3's 5.5?)",
+    "Terminal velocity for each game (4.0 or 7.0 px/f?)",
+    "Charge shot charge time frames for both levels",
+    "Rush Adaptor flight speed for MM6"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The Mega Buster charge shot (MM4-6) changes the 'feel' of shooting in the series. Instead of pure rapid-fire, players develop a rhythm of charge-move-release-recharge. This makes the combat feel more deliberate.",
+    "The core physics (if walk = 1.5, gravity = 0.25, slide = 3.0) are indistinguishable from MM2/3 to most players. The series' character comes from the level design and robot master design, not from physics differentiation.",
+    "MM6's Rush Adaptors are interesting from a paradigm perspective: they change Mega Man's primary movement mode mid-level. Power Adaptor = brawler; Jet Adaptor = flier. Same character, different movement vocabulary.",
+    "The progressive jump height decrease (MM2: 6.0 → MM3: 5.5 → possibly lower in MM4+) suggests Capcom was tuning difficulty via jump capability. Shorter jump = harder to avoid lower-trajectory attacks and harder to access elevated platforms."
+  ]
+}

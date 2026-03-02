@@ -1,0 +1,128 @@
+{
+  "game_id": "steel-talons-genesis",
+  "game_name": "Steel Talons",
+  "platform": "genesis",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "enemy_fire_impact",
+      "visual_form": "speaker feedback/haptic thumping when helicopter is hit",
+      "meaning": "player helicopter taking damage; immediate threat feedback"
+    },
+    {
+      "signal": "missile_lock",
+      "visual_form": "targeting reticle behavior (inferred from guided missile mechanics)",
+      "meaning": "enemy acquisition of player position; imminent attack danger"
+    },
+    {
+      "signal": "flight_instability",
+      "visual_form": "helicopter altitude/pitch deviation (affected by altitude control lever)",
+      "meaning": "loss of flight control; environmental or combat hazard"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "altitude_control_responsive",
+      "visual_form": "helicopter responds smoothly to analog collective lever input",
+      "meaning": "stable flight achieved; safe operational control"
+    },
+    {
+      "signal": "weapon_availability",
+      "visual_form": "machine gun, rockets, and guided missiles visibly available in loadout",
+      "meaning": "player capability to neutralize threats; tactical safety margin"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_helicopter_force",
+      "color_identity": null,
+      "symbol_or_sigil": "AT1196 Steel Talons combat helicopter designation",
+      "enemy_visual_variants": "competitive mode shows opponent helicopter as distinct entity to destroy",
+      "environmental_markers": null
+    },
+    {
+      "faction": "ground_opposition",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "air-to-surface guided missile targets; ground installations inferred from 19 mission structure",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "single_player_cooperative_engagement",
+      "visual_manifestation": "shared battlefield with 19 sequential missions; ground targets and air opposition visible",
+      "behavioral_manifestation": "helicopter maintains flight integrity; enemy AI responds to player proximity and weapon targeting"
+    },
+    {
+      "world_state": "competitive_multiplayer_engagement",
+      "visual_manifestation": "two helicopters visible in same airspace; opponent helicopter rendered as distinct adversary entity",
+      "behavioral_manifestation": "opponent helicopter actively maneuvering to attack player; mutual threat avoidance and weapon deployment"
+    },
+    {
+      "world_state": "real_heli_mode_active",
+      "visual_manifestation": "flight model becomes more complex; rudder pedals and analog control have amplified effect on helicopter behavior",
+      "behavioral_manifestation": "player loses assisted flight stability; pitch, roll, and yaw become more demanding; greater freedom of movement enables tactical advantage"
+    },
+    {
+      "world_state": "weapon_depletion",
+      "visual_manifestation": "guided missile count decreases visibly; machine gun and rockets remain unlimited",
+      "behavioral_manifestation": "player must rely on basic armament; tactical options reduce as mission progresses"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "mission_progression_structure",
+      "example": "19 sequential missions in cooperative mode establish escalating conflict; early missions likely easier, suggesting military campaign narrative arc"
+    },
+    {
+      "technique": "terrain_rendering",
+      "example": "flat-shaded polygon 3D terrain provides visual geography of combat zones; targets positioned in landscape convey operation area and objective locations"
+    },
+    {
+      "technique": "weapon_loadout_availability",
+      "example": "machine gun (unlimited), rockets (limited), and air-to-surface guided missiles (very limited) suggest resource scarcity and tactical decision-making about engagement priority"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_helicopter",
+      "state": "normal_flight",
+      "behavior": "responds to joystick input, analog altitude lever, and rudder pedals; maintains 3D position in polygon-rendered airspace"
+    },
+    {
+      "entity": "player_helicopter",
+      "state": "taking_damage",
+      "behavior": "speaker emits thumping feedback; visual frame integrity potentially affected (inferred)"
+    },
+    {
+      "entity": "player_helicopter",
+      "state": "real_heli_mode_active",
+      "behavior": "loses assisted flight stability; control inputs produce more dramatic pitch, roll, and yaw changes; greater maneuverability possible"
+    },
+    {
+      "entity": "opponent_helicopter",
+      "state": "competitive_engagement",
+      "behavior": "actively maneuvers in 3D space; deploys weapons against player; avoids incoming fire"
+    },
+    {
+      "entity": "ground_opposition",
+      "state": "mission_target",
+      "behavior": "stationary or moving targets; respond to player weapons with destruction or evasion patterns"
+    }
+  ],
+  "notes": "Steel Talons is a 1991 combat flight simulator with limited narrative world-state documentation in available sources. Visual communication relies primarily on 3D polygon rendering, physical feedback (arcade seat speaker), and control responsiveness to convey helicopter status and threat conditions. Faction distinctions are minimal; the game presents a binary threat model (player vs. environment/opponents) rather than complex political situations. Genesis port maintains core mechanics but may reduce visual fidelity relative to arcade original.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:41:14.434Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3357,
+    "output_tokens": 1542,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "game_id": "burai-fighter-nes",
+  "game_name": "Burai Fighter",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": 7,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic cannon (8-directional fire)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns directional fire control immediately; holding fire button locks direction"
+    },
+    {
+      "element": "Screen-relative movement (8 directions)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Decoupled from fire direction; fundamental to combat positioning"
+    },
+    {
+      "element": "Automatic sidescroll in cardinal directions",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Screen moves left-to-right initially; teaches screen boundary constraint mechanic"
+    },
+    {
+      "element": "Ring weapon (power-up)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "First weapon upgrade; more powerful than basic cannon"
+    },
+    {
+      "element": "Laser weapon (power-up)",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Mid-tier weapon upgrade with increased damage radius"
+    },
+    {
+      "element": "Missile weapon (power-up)",
+      "first_appears": "Late-game stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Most powerful weapon; highest damage output"
+    },
+    {
+      "element": "Secret rooms with directional screen gaps",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Requires precise timing to enter; optional high-risk, high-reward resource gathering"
+    },
+    {
+      "element": "Path forks (left/right branching)",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Some branches more challenging; introduces routing decisions within linear progression"
+    },
+    {
+      "element": "Boss encounters",
+      "first_appears": "End of Stage 1",
+      "introduction_context": "dangerous",
+      "mastery_context": "Gate progression to next level; escalate challenge beyond standard enemy patterns"
+    },
+    {
+      "element": "Directional screen scrolling changes (cardinal)",
+      "first_appears": "Varies by stage",
+      "introduction_context": "dangerous",
+      "mastery_context": "Screen can move in any cardinal direction; requires continuous spatial reorientation"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Clearing enemy clusters",
+      "Reaching secret room (optional detour)",
+      "Boss defeat",
+      "Safe zones with sparse enemies"
+    ],
+    "typical_tension_triggers": [
+      "Screen boundary approach (death zone)",
+      "Boss entrance",
+      "High enemy density on-screen",
+      "Screen direction changes mid-level",
+      "Approaching fork decision point"
+    ],
+    "pacing_descriptor": "Frantic with variable intensity; tension builds through enemy accumulation and environmental threat (screen edges), relieved by power-up acquisition and enemy clearance. Boss gates create escalating challenge rhythms across seven levels."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Gaps at screen edges with correct timing entry trigger secret rooms containing power-ups",
+    "secret_convention": "Precisely-timed entry into side-screen gaps reveals off-axis secret rooms; higher difficulty levels require tighter timing and offer fewer secrets",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Basic cannon baseline; Stage 1 teaches screen boundary constraint and 8-directional fire mechanics",
+    "mid_game": "Path forks introduce routing complexity; weapon upgrades available; screen direction changes increase spatial disorientation",
+    "late_game": "Multiple weapon upgrades active; screen direction changes more frequent; boss difficulty escalates toward final Burai base",
+    "notable_spikes": [
+      "Each boss encounter (stage-ending gates)",
+      "Mid-level screen direction changes",
+      "Path fork selection on harder difficulties"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear progression with optional branching",
+      "description": "Primarily linear sidescroll within each stage, but forks allow left/right path selection for short segments; one path typically more challenging than the other",
+      "example_level": "Stages 2-7"
+    },
+    {
+      "pattern_name": "Screen-edge death boundary",
+      "description": "Player must keep pace with auto-scrolling screen; falling off leading edge results in death; creates persistent spatial threat independent of enemy placement",
+      "example_level": "All stages"
+    },
+    {
+      "pattern_name": "Secret room interruption",
+      "description": "Gaps at screen edges allow player to enter perpendicular secret rooms if timed correctly; optional power-up rewards at cost of momentary exposure",
+      "example_level": "Varies by difficulty; fewer on Ace/Ultimate"
+    },
+    {
+      "pattern_name": "Boss gate",
+      "description": "Each stage concludes with mandatory boss fight before progression to next level",
+      "example_level": "Stages 1-7 endings"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:09:31.920Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2922,
+    "output_tokens": 1483,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

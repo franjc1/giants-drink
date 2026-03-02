@@ -1,0 +1,191 @@
+{
+  "game_id": "castlevania-nes",
+  "game_name": "Castlevania",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy spawn from screen edges",
+      "visual_form": "Bats and medusa heads appear from left or right edge of screen",
+      "meaning": "Imminent threat; enemy orientation and player Y position determine spawn location and height"
+    },
+    {
+      "signal": "Hanging bat detection",
+      "visual_form": "Bats hanging from walls in stages 4 and 6; visible but dormant until player enters detection corridor",
+      "meaning": "Proximity-based danger; entering specific Y-height range triggers attack"
+    },
+    {
+      "signal": "Hunchback chasing behavior",
+      "visual_form": "Hunchbacks follow Simon with rapid short jumps or slower high jumps depending on frame-locked orientation check",
+      "meaning": "Aggressive pursuit; different jump patterns indicate threat level and escape window"
+    },
+    {
+      "signal": "Damage knockback effect",
+      "visual_form": "Simon launched upward and horizontally away from damage source; rises 14 Y-coordinates before falling",
+      "meaning": "Immediate threat confirmation; directional knockback from attack source indicates attack vector"
+    },
+    {
+      "signal": "Invincibility timer expiration",
+      "visual_form": "After taking damage, Simon has temporary invincibility window (tracked at RAM 005B); when expired, vulnerability returns",
+      "meaning": "Window of protection closing; player becomes vulnerable again to next hit"
+    },
+    {
+      "signal": "Boss HP depletion",
+      "visual_form": "Boss health meter tracked at RAM 01A9 decreases visually; dual-entity bosses (mummies) have individual HP bars (058B, 058C each at 32 HP max)",
+      "meaning": "Boss threat level changing; at low HP, boss becomes more dangerous or enters final phase"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Platform solidity",
+      "visual_form": "Solid ground tiles allow Simon to stand and move; jumping up resets fall state and prevents crouch lag",
+      "meaning": "Safe zone; player can regain mobility and control"
+    },
+    {
+      "signal": "Whip timing on landing",
+      "visual_form": "If whip attack animation ends exactly when landing from high jump, Simon regains control immediately without crouch delay",
+      "meaning": "Skilled mechanic for maintaining momentum in safe spaces; indicates skill-based safety window"
+    },
+    {
+      "signal": "Moving platform traversal",
+      "visual_form": "In stages 4, 5, 10: platforms move but don't affect Simon's horizontal walking speed (one pixel per frame constant)",
+      "meaning": "Movement predictability; Simon's speed is decoupled from platform motion, ensuring safety for timing"
+    },
+    {
+      "signal": "Staircase availability",
+      "visual_form": "Visible staircase sprites allow ascent/descent; slower than walking (two times slower) but provides vertical access",
+      "meaning": "Deliberate safe route; slower but guaranteed progression upward without enemy interaction"
+    },
+    {
+      "signal": "Candle breakage",
+      "visual_form": "Candelabra sprite destroyed by whip; drops hearts, subweapons, or bonus items",
+      "meaning": "Resource availability; breaking candles in safe spaces refills health and provides tactical items"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dracula's Castle / Evil Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Gothic castle architecture; gargoyles and stone masonry; demonic bat motif on title screen (animated bat flies from castle menacingly)",
+      "enemy_visual_variants": "Enemies include: bats (flying), medusa heads (floating), hunchbacks (ground-based jumpers), mummies (boss), fishmen (aquatic), Frankenstein's monster (stage 4 boss). Each enemy has distinctive sprite design telegraphing its threat pattern.",
+      "environmental_markers": "Stages 1-18 progressively ascend into castle interior; stage 4 features clockwork gears (background detail includes unused Bible graphics repurposed); stage 6 contains hanging bats; stage 18 is Dracula's throne room. Environmental hazards (pits, moving platforms) intensify difficulty toward final confrontation."
+    },
+    {
+      "faction": "Simon Belmont / Belmont Legacy",
+      "color_identity": null,
+      "symbol_or_sigil": "Whip weapon (primary tool); crucifix motif (unused cross graphics in code suggest intended item); clothing suggests medieval vampire hunter aesthetic",
+      "enemy_visual_variants": "Simon's sprite shows directional facing (left/right orientation determines which side enemies spawn from). Damage knockback reveals attack vector. Unused Bible and cross items hint at religious faction identity.",
+      "environmental_markers": "Starting position is castle entrance; progression is vertical ascent through stages. Simon's HP starts at 64 (RAM 0045). File select screen (FDS version) presents save files with Zelda-esque UI, establishing Belmont as player-controlled hero."
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage (low threat)",
+      "visual_manifestation": "Sparse enemy placement; candles available for resource gathering; wider platforming gaps solvable with basic jumps",
+      "behavioral_manifestation": "Enemies spawn at manageable intervals; bats and medusa heads appear from screen edges but at predictable Y-heights correlated to Simon's current Y position"
+    },
+    {
+      "world_state": "Mid-stage progression (escalating threat)",
+      "visual_manifestation": "Enemy density increases; moving platforms appear (stages 4, 5, 10); background architecture becomes more complex",
+      "behavioral_manifestation": "Hunchbacks begin chasing; multiple enemies on screen simultaneously; frame-locked enemy AI allows manipulation of jump patterns via 6-frame orientation checks"
+    },
+    {
+      "world_state": "Boss encounter (high threat, climactic)",
+      "visual_manifestation": "Single large enemy sprite dominates screen; boss occupies defined arena; HP meter visible at top or tracked via RAM (01A9 for main boss, 058B/058C for dual mummies)",
+      "behavioral_manifestation": "Boss engages in multi-phase attack pattern; dual-entity bosses (mummies at stage 12) have coordinated movements; defeat requires sustained whip attacks to deplete HP from start value (32 for mummies) to 0"
+    },
+    {
+      "world_state": "Post-damage invincibility window",
+      "visual_manifestation": "Visual flashing or sprite transparency effect (standard NES invincibility); Simon's position shifts horizontally and upward from damage source",
+      "behavioral_manifestation": "Temporary invincibility (RAM 005B tracks duration); Simon cannot take additional damage; knockback effect can be exploited to reach otherwise unreachable platforms (33-pixel height advantage)"
+    },
+    {
+      "world_state": "Item/subweapon acquired",
+      "visual_manifestation": "Dropped item sprite (crown, chest, moai head as bonus items; hearts as healing; subweapon icons in status bar - alternate colored axes, rosary, stopwatch variants visible in code)",
+      "behavioral_manifestation": "Rosary subweapon clears all on-screen enemies (excluding bosses); stopwatch subweapon halts enemy spawning temporarily; unused subweapon code (0A, 0C, 0E variants) suggests developmental design for expanded arsenal"
+    },
+    {
+      "world_state": "File save/progress checkpoint (FDS/Famicom version only)",
+      "visual_manifestation": "Save screen with player name entry (three save slots); cast credits display player name as 'Simon Belmont' in ending; unused file select music (dubbed 'Underground') plays during selection",
+      "behavioral_manifestation": "Game tracks current stage completion; game-overs counted; players can resume at saved stage checkpoint rather than restarting entire castle"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression through castle",
+      "example": "Stages 1-18 traverse literal ascent through Dracula's castle: from entrance through chambers, clocktower (stage 4 with gear-based background), aquatic section (fishmen encounters), finally to Dracula's throne room. Visual complexity and enemy type escalation mirrors architectural penetration deeper into evil stronghold."
+    },
+    {
+      "technique": "Enemy placement as environmental hint",
+      "example": "Hanging bats in stages 4 and 6 suspend from visible ceiling architecture, indicating environmental hazards are integrated into level design rather than purely abstract spawning. Hunchback presence signals perilous jumps requiring speed optimization."
+    },
+    {
+      "technique": "Background detail storytelling",
+      "example": "Stage 4 features working gears in background (repurposed from unused Bible graphics), suggesting mechanical/alchemical nature of castle engineering. This detail without narrative text establishes world-building through pure visual design."
+    },
+    {
+      "technique": "Subweapon resource economy",
+      "example": "Candles as breakable environmental objects that drop hearts, subweapons (axes, rosaries, stopwatches), and bonus items (crowns, chests, moai heads) communicate that castle contains remnants of civilization—religious/alchemical artifacts mixed with treasure—indicating Dracula's hoarding and corruption of human culture."
+    },
+    {
+      "technique": "Title screen threat signaling",
+      "example": "Animated bat flies from castle and flaps menacingly at player on title screen (NES version, replaced in FDS by static scrolling). This kinetic threat display establishes Dracula's castle as active, aggressive force even before gameplay begins."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bat / Medusa Head",
+      "state": "Spawning phase",
+      "behavior": "Appears from left or right screen edge; spawn height determined by Simon's current Y position; Simon's facing direction influences which side enemy emerges from. Entry vector varies based on player state."
+    },
+    {
+      "entity": "Hanging Bat (stages 4, 6 only)",
+      "state": "Dormant / Detection",
+      "behavior": "Remains stationary on ceiling until Simon enters Y-height corridor (close enough distance). Detection requires proximity check; can be delayed or triggered via well-timed jumps that keep Simon above detection band. Attack initiates after corridor entry confirmed."
+    },
+    {
+      "entity": "Hunchback",
+      "state": "Pursuit mode",
+      "behavior": "Follows Simon with frame-locked decision logic: checks Simon's orientation on frame 7 after landing. If facing Hunchback, performs high jump (slower than player walk speed, allowing escape). If facing away, performs short jump (faster than walk, forcing player into sprint/jump). Can be manipulated by turning toward/away at precise frame intervals (turn on frame 6, resume direction on frame 1 of next cycle)."
+    },
+    {
+      "entity": "Mummy Boss (stage 12, dual entity)",
+      "state": "Combat engagement",
+      "behavior": "Each mummy occupies separate sprite (left/right positioning); individual HP tracked at RAM 058B and 058C (32 HP each). Coordinated attack pattern with both entities attacking simultaneously. Defeat requires depleting both HP pools to 0 simultaneously or sequentially."
+    },
+    {
+      "entity": "Simon Belmont (player character)",
+      "state": "Post-damage invincibility",
+      "behavior": "Upon taking damage, Simon launches upward (14 Y-pixels peak) and horizontally away from damage source. Invincibility window active (RAM 005B countdown). During invincibility, can collide with platforms above current position, enabling upward progression through damage-knockback abuse. Double-jump achievable by timing damage during first jump ascent."
+    },
+    {
+      "entity": "Simon Belmont",
+      "state": "Landing from high fall",
+      "behavior": "If landing too far below starting point, Simon enters crouch animation and loses control temporarily. Whip attack timing can cancel crouch: if attack animation ends exactly on landing frame, control regains immediately without delay, preserving momentum for speedrun optimization."
+    },
+    {
+      "entity": "Platform (moving, stages 4, 5, 10)",
+      "state": "Active movement",
+      "behavior": "Platform moves horizontally independent of Simon's standing position; movement speed is erratic and unpredictable. Simon's horizontal walk speed (one pixel/frame) decouples from platform velocity—walking against platform motion does not slow Simon relative to background, only relative to platform itself."
+    }
+  ],
+  "notes": "Castlevania (1986) uses minimal explicit narrative; world-state and faction identity are communicated entirely through visual design, enemy behavior, and environmental progression. The castle ascent structure (stages 1-18) serves as physical manifestation of story progression toward Dracula confrontation. Enemy AI is deterministic and frame-locked, allowing skilled players to manipulate behavior through precise timing. Damage knockback mechanic becomes strategic tool for reaching unreachable areas, blurring danger signal into safety signal in expert play. Subweapon system (unused cross/Bible variants in code suggest expanded design in development) indicates religious/alchemical faction struggle embedded in game mechanics. File save feature (FDS/Famicom only) adds narrative identity by naming player as 'Simon Belmont' in cast credits, personalizing hero status. NES cartridge removal of save feature strips this personalization, suggesting hardware-driven design decisions affected narrative communication.",
+  "sources_used": [
+    "tcrf",
+    "tasvideos",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:16:34.087Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6855,
+    "output_tokens": 3730,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

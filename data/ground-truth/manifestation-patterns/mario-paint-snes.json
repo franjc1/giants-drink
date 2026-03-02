@@ -1,0 +1,168 @@
+{
+  "game_id": "mario-paint-snes",
+  "game_name": "Mario Paint",
+  "platform": "snes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Enemy swarm acceleration",
+      "visual_form": "Flying insects (gnats) moving faster across screen, increasing density",
+      "meaning": "Progression through difficulty levels in Gnat Attack minigame; escalating challenge state"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "King Watinga character model appears after defeating wave of enemies",
+      "meaning": "High-stakes confrontation state; transition to climactic challenge"
+    },
+    {
+      "signal": "DATA OVERFLOW error animation",
+      "visual_form": "Save Robot character with smoke pouring from ears, looping explosion sound effect",
+      "meaning": "System memory limit exceeded; data loss imminent; critical state warning"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Saved data confirmation",
+      "visual_form": "Display of successfully saved drawing, animation, and music on screen via Controller 2 code",
+      "meaning": "Data persistence achieved; safe storage state"
+    },
+    {
+      "signal": "Title screen interactivity",
+      "visual_form": "Clickable letters and UI elements with easter egg responses (laughing sound from R)",
+      "meaning": "System ready state; user control established; safe exploration mode"
+    },
+    {
+      "signal": "Undo functionality availability",
+      "visual_form": "Undodog character appears on right-click (after code unlock)",
+      "meaning": "Recovery action available; creative safety net; error mitigation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario franchise/Nintendo",
+      "color_identity": "Red, blue, yellow (Mario's iconic palette)",
+      "symbol_or_sigil": "Mario head sprite (represents piano in music composer), Power Star icon, Fire Flower, Super Mushroom stamps",
+      "enemy_visual_variants": "King Watinga boss (Gnat Attack level antagonist)",
+      "environmental_markers": "Yoshi character in coloring book; Super Mario World sprites and sound effects integrated throughout toolset"
+    },
+    {
+      "faction": "Insects/Natural world",
+      "color_identity": null,
+      "symbol_or_sigil": "Flying gnat enemies in minigame",
+      "enemy_visual_variants": "Gnats scale in speed and aggression across three difficulty cycles",
+      "environmental_markers": "Underwater scene in coloring book; animal drawings; nature-themed stamps"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Creative/Safe mode (Drawing board, Animation Land, Music Composer active)",
+      "visual_manifestation": "Full-color palette (15 colors), diverse stamp library (120 stamps), blank canvas presentation, organized toolbar with drawing tools (pen, airbrush, fill, shape tools)",
+      "behavioral_manifestation": "User can freely create, edit, copy, paste, rotate, erase; no time pressure; infinite undo available after code unlock"
+    },
+    {
+      "world_state": "Challenge/Danger mode (Gnat Attack minigame active)",
+      "visual_manifestation": "Real-time swarm of flying insects increasing in speed and density; Boss character (King Watinga) appears after wave completion; visual feedback of swats landing",
+      "behavioral_manifestation": "Timed pressure; enemies attack faster across three escalating cycles; player must swat 100+ insects before boss encounter; no save progress available—Game Over resets to Level 1"
+    },
+    {
+      "world_state": "Memory critical (32KB SRAM limit approached)",
+      "visual_manifestation": "DATA OVERFLOW error screen; Save Robot with smoke animation and explosion looping sound",
+      "behavioral_manifestation": "Save function disabled; user cannot persist additional creations; requires simplification or deletion of existing drawings/animations"
+    },
+    {
+      "world_state": "Tutorial/Familiarization (Title screen)",
+      "visual_manifestation": "Interactive Mario Paint logo with clickable letters; easter egg responses (baby laugh sound from R); multiple UI elements prompt interaction",
+      "behavioral_manifestation": "User learns mouse control through exploration; clicking different elements triggers sound/visual feedback; establishes mouse comfort before main tools"
+    },
+    {
+      "world_state": "Hidden power unlocked (Right mouse button active)",
+      "visual_manifestation": "Four new rotation options visible in stamp/drawing menus; color sampling cursor appears on right-click in Stamp Editor",
+      "behavioral_manifestation": "Code entry (staff roll sequence + right-click during programmer credit) unlocks expanded functionality; advanced creative capabilities become available"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tool iconography as narrative",
+      "example": "Music composer instruments represented by Mario universe objects: piano = Mario's head, trumpet = Fire Flower, bass drum = Super Mushroom, guitar = airliner, organ = car. Establishes tone of playful irreverence and Mario-universe integration"
+    },
+    {
+      "technique": "Preset artwork as world-building",
+      "example": "Four coloring book scenes (Mario and Yoshi, animals, greeting card, underwater) establish environmental variety and Mario universe settings without explicit narrative"
+    },
+    {
+      "technique": "Minigame narrative through visual escalation",
+      "example": "Gnat Attack progresses through three difficulty cycles with same enemies returning faster, implying persistent challenge and cyclical threat; King Watinga serves as climactic encounter, suggesting final confrontation before reset"
+    },
+    {
+      "technique": "Error state as anthropomorphized character",
+      "example": "Save Robot performs distressed animation (smoke from ears) during DATA OVERFLOW—humanizes system limitation and creates memorable, humorous failure state rather than abstract error message"
+    },
+    {
+      "technique": "Easter egg interactivity as world-details",
+      "example": "Clickable title screen elements (each letter, R logo) trigger hidden sounds/staff roll, rewarding exploration and suggesting hidden complexity beneath simple creative toolset facade"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Gnat enemies (Gnat Attack)",
+      "state": "Level 1 (initial)",
+      "behavior": "Slow movement across screen; predictable flight paths; player has reaction time to swat"
+    },
+    {
+      "entity": "Gnat enemies (Gnat Attack)",
+      "state": "Level 2-3 (escalated)",
+      "behavior": "Accelerated movement; erratic swarming patterns; increased aggression; harder to target accurately"
+    },
+    {
+      "entity": "Gnat enemies (Gnat Attack)",
+      "state": "Post-boss (cycle reset)",
+      "behavior": "Return with higher baseline speed; same visual form but heightened threat intensity; no progression save—implies infinite escalation"
+    },
+    {
+      "entity": "King Watinga (Boss)",
+      "state": "Encountered",
+      "behavior": "Appears after 100 gnats defeated; final confrontation; distinct visual form from common enemy; triggers completion state if defeated"
+    },
+    {
+      "entity": "Save Robot",
+      "state": "Normal save",
+      "behavior": "Accepts and stores user creations; provides confirmation display of saved data"
+    },
+    {
+      "entity": "Save Robot",
+      "state": "Memory overflow",
+      "behavior": "Performs distressed animation with smoke and explosion sound; blocks further saves; communicates system failure state visually and aurally"
+    },
+    {
+      "entity": "Undodog",
+      "state": "Unlocked (after code entry)",
+      "behavior": "Appears on right-click to undo actions; provides recovery mechanism; reduces consequence severity of creative errors"
+    },
+    {
+      "entity": "Mario Paint UI",
+      "state": "Locked (default)",
+      "behavior": "Right mouse button disabled; limited rotation options; standard functionality only; staff roll inaccessible"
+    },
+    {
+      "entity": "Mario Paint UI",
+      "state": "Unlocked (after code sequence)",
+      "behavior": "Right mouse button enables undo and color sampling; four additional rotation options available; staff roll accessible; expanded creative capability"
+    }
+  ],
+  "notes": "Mario Paint is fundamentally a creative tool rather than a narrative game, so traditional danger/faction/political world-state frameworks have limited applicability. Visual communication focuses on: (1) creative state feedback (tool availability, canvas state, saved data confirmation), (2) challenge escalation in the singular minigame (Gnat Attack), and (3) system state warnings (DATA OVERFLOW). The game uses anthropomorphic characters (Save Robot, Undodog, King Watinga) to communicate mechanical concepts, and Mario franchise iconography as visual identity. Easter eggs and hidden features reward exploration and suggest layered depth. Memory constraints are communicated through error animation rather than abstract messaging.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Mario Paint article)",
+    "wikipedia (Mario Paint - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:37:36.757Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5422,
+    "output_tokens": 2245,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

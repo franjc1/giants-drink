@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "game": "Comix Zone",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Sega",
+    "developer": "Sega Technical Institute",
+    "sources": [
+      {
+        "name": "Wikipedia — Comix Zone",
+        "url": "https://en.wikipedia.org/wiki/Comix_Zone",
+        "notes": "Mechanics overview. Comic panel traversal, cell-to-cell navigation, paper plane weapon."
+      },
+      {
+        "name": "Speedrun.com — Comix Zone",
+        "url": "https://www.speedrun.com/comix_zone",
+        "notes": "Speedrun community documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Comix Zone is a beat-em-up by Sega Technical Institute with a unique comic book panel navigation system.",
+      "DEFINING MECHANIC: The game takes place INSIDE a comic book. The player moves between panels of the comic.",
+      "The 'level' is a comic book page. Each panel is a gameplay section. Transitioning between panels is part of the navigation.",
+      "UNIQUE HAZARD: Taking damage causes Sketch Turner (the player character) to bleed — the blood costs health AND is visible on the comic page.",
+      "Paper airplane: Sketch can tear a piece of the comic page and fold it into a paper airplane as a ranged weapon.",
+      "Extremely difficult — one of the hardest Genesis games. Only 6 episodes, no continues.",
+      "Walk and jump values not precisely documented from ROM — estimated from gameplay."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "panel_system": {
+    "_note": "THE DEFINING MECHANIC. The game world is organized as comic book panels on a page.",
+    "description": "Each 'level' is a comic book page containing multiple panels arranged in comic layout. The player navigates through panels by punching through panel borders or finding the direction of transition.",
+    "panel_transitions": {
+      "standard": "Walk or jump to the edge of the panel — transition happens automatically or after action",
+      "punch_through": "Punch through the panel border to break into the next panel faster",
+      "notes": [
+        "Panel transitions are directional — the comic layout determines which direction leads where.",
+        "Some panels have multiple adjacent panels — choice of direction matters.",
+        "The panel system makes every room its own contained environment with defined boundaries."
+      ]
+    },
+    "panel_hazards": {
+      "description": "The comic page itself can be hazardous. Some panel borders have spiked or dangerous edges.",
+      "notes": "The meta-structure of the medium becomes gameplay. The panel border is both navigation tool and hazard."
+    },
+    "confidence": "high"
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Beat-em-up movement speed. VERIFY."
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 40,
+    "confidence": "low",
+    "variable_height": false,
+    "air_control": "partial",
+    "notes": "Standard beat-em-up jump. Jump attacks are a key combat tool."
+  },
+
+  "combat": {
+    "_note": "Comix Zone is a beat-em-up — fist combat is the primary system.",
+    "punch": {
+      "description": "Sketch's primary attack. Punch combos deal progressive damage.",
+      "notes": "Punching through panel borders uses the same animation as punching enemies."
+    },
+    "kick": {
+      "description": "Kick combo. Different hit area than punch.",
+      "notes": "Kick reaches different zones than punch — enemy heights matter."
+    },
+    "super_move": {
+      "description": "Screen-clear special attack. Costs health to use.",
+      "notes": "Emergency crowd clear at cost of HP. Same tradeoff as other beat-em-up supers."
+    },
+    "paper_airplane": {
+      "_note": "Unique ranged weapon — Sketch tears a piece of the comic page itself.",
+      "description": "Sketch rips a small piece of the comic page and folds it into a paper airplane projectile.",
+      "trajectory": "Forward horizontal flight",
+      "cost": "Uses a limited supply of paper from the current page — the page literally has less material after use",
+      "notes": [
+        "Limited use per panel — the physical comic page is being consumed.",
+        "The paper airplane is slower than typical projectiles — enemies can potentially dodge it.",
+        "Thematically brilliant: the character is aware he's in a comic and uses the medium as a weapon."
+      ],
+      "confidence": "high"
+    },
+    "rat_hatchet": {
+      "description": "Sketch has a small rat companion (Roadkill) and some level-specific items found in panels.",
+      "notes": "Roadkill can be sent to attack or explore — limited use."
+    }
+  },
+
+  "health_system": {
+    "damage_visible": {
+      "description": "When Sketch takes damage, his wounds are shown as blood on the comic panel art.",
+      "notes": [
+        "The damage visualization is meta — the comic page shows Sketch's injuries.",
+        "This creates a visceral presentation of damage that most games don't attempt.",
+        "It also reinforces the 'you are IN a comic' premise."
+      ]
+    },
+    "no_continues": {
+      "description": "Comix Zone has no continues. One run, no second chances.",
+      "notes": "Contributes heavily to the game's notorious difficulty. Six episodes with no safety net."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Comix Zone is the most explicit example of 'the player is inside the medium.' The comic panel system makes every rule of the medium into gameplay: panel borders are walls and navigation tools, the page material is a weapon resource, the comic's visual language (action lines, speech bubbles) is the game's visual language.",
+    "The paper airplane weapon is the most elegant meta-mechanic in the game — tearing a piece of the comic page to throw at enemies literally consumes the world to create a weapon. The player reduces the world's material substrate to gain a combat advantage. No other 16-bit game attempts this.",
+    "Comix Zone's no-continues design creates a high-stakes single-run experience — the entire game must be completed from start to finish without error. This was considered reasonable in 1995 (arcade cabinet legacy thinking) but was punishing for home players. It creates a sense of precious progress.",
+    "The beat-em-up genre in panel-by-panel navigation creates contained arena fights. Each panel is a self-contained encounter — you can't back out or run away once you've entered. The comic medium's naturally finite panel becomes a game design constraint: each panel is a fight you must win.",
+    "The blood-on-page health visualization is a design statement about violence in comics vs. games. Comics show violence as part of the medium; Comix Zone brings that presentation convention directly into the game. When Sketch bleeds, the art changes. Damage = artistic consequence."
+  ]
+}

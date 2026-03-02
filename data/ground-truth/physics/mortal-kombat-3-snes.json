@@ -1,0 +1,114 @@
+{
+  "game_id": "mortal-kombat-3-snes",
+  "game_name": "Mortal Kombat 3",
+  "platform": "snes",
+  "year": 1995,
+  "tier": 1,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Run",
+      "description": "Run button with meter that drains during running and combo execution. Character cannot run backward, only forward. Introduced to address balance concerns from previous games favoring the defending player.",
+      "physics_values": {
+        "has_meter": true,
+        "direction_restricted": "forward_only",
+        "meter_drain_sources": [
+          "running",
+          "combo_execution"
+        ]
+      }
+    },
+    {
+      "name": "Chain Combos (Dial-a-Combos)",
+      "description": "Pre-programmed button sequences that cannot be interrupted once one hit connects. Some combos end with uppercut or knockup enabling juggle combos.",
+      "physics_values": {
+        "type": "non_interruptible_sequence",
+        "can_chain_to_juggle": true
+      }
+    },
+    {
+      "name": "Level Transition via Uppercut",
+      "description": "Both normal uppercuts and uppercuts in ground combos trigger level changes. Character continues battle in different stage. Kung Lao's Whirl Wind Spin has same effect. No level change if defeated by uppercut.",
+      "physics_values": {
+        "trigger_types": [
+          "normal_uppercut",
+          "ground_combo_uppercut",
+          "kung_lao_whirl_wind_spin"
+        ],
+        "occurs_on_defeat": false
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "momentum-based",
+    "run-focused",
+    "combo-heavy",
+    "responsive"
+  ],
+  "tier_notes": "Tier 1 classification based on available sources being qualitative/design documentation rather than quantitative empirical measurements. No ROM hex values or precise physics constants documented in provided sources. Sources contain development build strings (0x00F77A US, 0x00F78B EU) and sound driver locations but no movement physics data.",
+  "sources_used": [
+    "The Cutting Room Floor (TCRF) - Mortal Kombat 3 SNES article",
+    "Wikipedia - Mortal Kombat 3 article (Gameplay section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T23:51:05.312Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5113,
+    "output_tokens": 963,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

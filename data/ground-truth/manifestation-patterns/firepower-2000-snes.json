@@ -1,0 +1,124 @@
+{
+  "game_id": "firepower-2000-snes",
+  "game_name": "Firepower 2000 / Super SWIV",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "incoming bullet/missile patterns from top of screen",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "boss_appearance",
+      "visual_form": "large enemy unit entering arena, distinct from standard enemies",
+      "meaning": "escalated danger, major combat encounter ahead"
+    },
+    {
+      "signal": "enemy_density_increase",
+      "visual_form": "visual clustering and screen saturation with hostile units",
+      "meaning": "heightened difficulty phase, resource pressure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "shield_powerup_drop",
+      "visual_form": "dropped item from defeated enemies, distinct visual signature",
+      "meaning": "temporary invincibility available, window of safety"
+    },
+    {
+      "signal": "clear_screen",
+      "visual_form": "absence of enemy units in immediate vicinity",
+      "meaning": "brief reprieve between combat waves"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "helicopter vs. armored jeep as selectable player vehicles",
+      "environmental_markers": "player weapon effects, forward-firing gun upgrades"
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "standardized hostile units with distinct boss variants",
+      "environmental_markers": "SWIV missile carriers (named in manual lore), varying enemy silhouettes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "combat_active",
+      "visual_manifestation": "constant enemy spawn from top of scrolling level, projectile streams",
+      "behavioral_manifestation": "player vehicle moves defensively, enemies advance downscreen"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "large distinct enemy unit replacing standard enemy waves",
+      "behavioral_manifestation": "boss-specific attack patterns, strategic positioning required"
+    },
+    {
+      "world_state": "power_available",
+      "visual_manifestation": "shield pickup item visible on screen",
+      "behavioral_manifestation": "player actively pursues powerup, temporary invincibility granted upon contact"
+    },
+    {
+      "world_state": "progression",
+      "visual_manifestation": "scrolling environment changes indicating level advancement",
+      "behavioral_manifestation": "enemy difficulty and variety escalates across levels"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "vehicle_duality",
+      "example": "helicopter and armored jeep represent dual-specialization approach; game design reflects Silkworm heritage of mixed unit types"
+    },
+    {
+      "technique": "enemy_design_hierarchy",
+      "example": "boss enemies visually distinct and scaled larger than standard units, communicating threat escalation"
+    },
+    {
+      "technique": "weapon_progression_feedback",
+      "visual_form": "boss destruction yields visible gun upgrades to player's forward-firing weapon"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "standard_enemy",
+      "state": "active",
+      "behavior": "descends from top, fires projectiles on predictable intervals"
+    },
+    {
+      "entity": "boss_enemy",
+      "state": "engaged",
+      "behavior": "occupies significant screen space, executes complex attack patterns distinct from standard enemies"
+    },
+    {
+      "entity": "player_vehicle",
+      "state": "shielded",
+      "behavior": "can collide with enemies without taking damage after shield pickup"
+    },
+    {
+      "entity": "player_vehicle",
+      "state": "upgraded",
+      "behavior": "forward-firing gun displays increased visual intensity or rate after boss defeat"
+    }
+  ],
+  "notes": "Firepower 2000 (SNES port of SWIV) relies on core shmup visual language: scrolling threat, projectile avoidance, power escalation through pickups. Limited faction complexity — binary player vs. enemy structure. Visual storytelling embedded in vehicle selection mechanic (helicopter vs. jeep duality) and boss design hierarchy. The SWIV acronym in-world refers to a missile type, adding minimal lore layer. Manifestation primarily mechanical rather than narrative-driven.",
+  "sources_used": [
+    "wikipedia_swiv_article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:16:37.640Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2590,
+    "output_tokens": 1220,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

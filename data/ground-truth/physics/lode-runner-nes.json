@@ -1,0 +1,121 @@
+{
+  "game_id": "lode-runner-nes",
+  "game_name": "Lode Runner",
+  "platform": "nes",
+  "year": 1984,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": false,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "No Jump",
+      "description": "Player character cannot jump at all; movement is restricted to walking, climbing ladders, and hanging from hand-to-hand bars",
+      "physics_values": {}
+    },
+    {
+      "name": "Ladder Climbing",
+      "description": "Player can climb vertical ladders for multi-story traversal",
+      "physics_values": {}
+    },
+    {
+      "name": "Hand-to-Hand Bars",
+      "description": "Suspended horizontal bars that allow traversal and enable special digging mechanics from hanging position",
+      "physics_values": {}
+    },
+    {
+      "name": "Fall Mechanics",
+      "description": "Player can fall from arbitrary heights without injury. Falls faster than guards, enabling tactical positioning",
+      "physics_values": {
+        "fall_damage": "none",
+        "relative_fall_speed": "faster than guards"
+      }
+    },
+    {
+      "name": "Hole Digging",
+      "description": "Player can dig holes in adjacent floor tiles to trap guards. Holes fill after short delay. Player cannot climb out of holes and dies if filled before escape",
+      "physics_values": {
+        "dig_directions": "adjacent sides only, not directly beneath",
+        "multi_layer_requirement": "gap width must equal number of layers",
+        "hole_fill_delay": "short (unquantified)"
+      }
+    },
+    {
+      "name": "Guard Collision - Feet-to-Head Contact",
+      "description": "Player can safely walk over guards' heads when guards are trapped in holes or falling. Contact from above is safe; downward movement initiating contact is fatal",
+      "physics_values": {}
+    }
+  ],
+  "feel_descriptors": [
+    "puzzle-focused",
+    "deliberate",
+    "no-jump design",
+    "momentum-independent",
+    "collision-sensitive",
+    "predictability-based"
+  ],
+  "tier_notes": "Tier 2: Empirical/Qualitative data only. No numerical physics parameters documented in available sources. Game mechanics are well-described qualitatively but contain no quantified movement values, gravity constants, or sub-pixel precision data.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (Lode Runner NES page)",
+    "wikipedia - Lode Runner article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:48:07.619Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4230,
+    "output_tokens": 997,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

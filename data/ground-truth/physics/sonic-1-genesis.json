@@ -1,0 +1,403 @@
+{
+  "_meta": {
+    "game": "Sonic the Hedgehog",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1991,
+    "publisher": "Sega",
+    "developer": "Sonic Team",
+    "tier": 1,
+    "sources": [
+      {
+        "name": "Sonic Physics Guide — Sonic Retro Wiki",
+        "url": "https://info.sonicretro.org/Sonic_Physics_Guide",
+        "notes": "Primary source. Community-maintained documentation derived from full ROM disassembly. Covers Sonic 1, 2, CD, 3&K with exact hex values."
+      },
+      {
+        "name": "Sonic the Hedgehog Disassembly (Git / Hivebrain)",
+        "url": "https://github.com/sonicretro/s1disasm",
+        "notes": "Full annotated 68000 assembly disassembly of the ROM. All constants verifiable here."
+      },
+      {
+        "name": "Sonic Retro — Sonic 1 Technical Notes",
+        "url": "https://info.sonicretro.org/Sonic_the_Hedgehog_(16-bit)",
+        "notes": "Platform-level technical notes: display timing, tile format, region differences."
+      },
+      {
+        "name": "Sonic Retro — SPG: Moving",
+        "url": "https://info.sonicretro.org/SPG:Moving",
+        "notes": "Detailed breakdown of ground movement mechanics and constants."
+      },
+      {
+        "name": "Sonic Retro — SPG: Jumping",
+        "url": "https://info.sonicretro.org/SPG:Jumping",
+        "notes": "Jump force, gravity, air drag, variable jump height."
+      },
+      {
+        "name": "Sonic Retro — SPG: Falling",
+        "url": "https://info.sonicretro.org/SPG:Falling",
+        "notes": "Gravity acceleration, terminal velocity."
+      },
+      {
+        "name": "Sonic Retro — SPG: Rolling",
+        "url": "https://info.sonicretro.org/SPG:Rolling",
+        "notes": "Roll physics, slope-modified friction."
+      },
+      {
+        "name": "Sonic Retro — SPG: Slope Physics",
+        "url": "https://info.sonicretro.org/SPG:Slope_Physics",
+        "notes": "Slope factor constants for floor, ceiling, and walls."
+      },
+      {
+        "name": "Sonic Retro — SPG: Underwater",
+        "url": "https://info.sonicretro.org/SPG:Underwater",
+        "notes": "Labyrinth Zone water physics multipliers."
+      }
+    ],
+    "notes": [
+      "All speed/position values use a 16.16 fixed-point system on 32-bit registers.",
+      "The fractional byte (lowest 8 bits of the 16-bit speed word in the SPG documentation) gives sub-pixel precision.",
+      "In the disassembly, Sonic's ground speed is stored as a signed 16-bit integer where the low byte is the fractional part (i.e. effectively a 8.8 fixed-point for speed).",
+      "The SPG documents speeds in units where 1 = 1 pixel/frame at the integer level, fractions expressed as decimal.",
+      "Positive X = right, positive Y = down (standard screen coordinates).",
+      "NTSC Genesis runs at exactly 60 frames per second (59.94 Hz composite, treated as 60 in game logic).",
+      "PAL Genesis runs at 50fps; PAL versions of Sonic 1 do NOT compensate the physics constants, making PAL Sonic noticeably slower and the game harder."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "frame_rate_pal_hz": 50,
+    "fixed_point": {
+      "description": "Sonic uses a 16-bit fixed-point representation for speed values. The high byte is the integer pixel value, the low byte is the sub-pixel fractional part (1/256 pixel units). Position is a full 32-bit value giving effectively pixel + 1/65536 precision, but speed accumulates into the low 16 bits of position.",
+      "integer_bits": 8,
+      "fractional_bits": 8,
+      "fractional_unit": 0.00390625,
+      "fractional_unit_note": "1/256 pixel. One sub-pixel unit = 0.00390625 pixels.",
+      "speed_representation": "Speeds are documented in the SPG as decimal fractions (e.g. 0.046875). To convert to the raw 8.8 fixed value: multiply by 256. Example: 0.046875 * 256 = 12, so acc = 0x000C."
+    },
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16,
+      "tiles_per_screen_w": 20,
+      "tiles_per_screen_h": 14,
+      "notes": "Screen is 320x224 pixels. Tiles are 16x16. The playfield is built from 16x16 tiles arranged in 128x128-pixel 'chunks'. The level map is composed of these chunks."
+    }
+  },
+
+  "ground_movement": {
+    "_source": "https://info.sonicretro.org/SPG:Moving",
+    "acceleration": {
+      "label": "acc",
+      "hex": "0x0047",
+      "decimal_fixed": 71,
+      "pixels_per_frame_squared": 0.046875,
+      "notes": "Added to ground speed every frame the player holds a direction. 0x0047 in the 8.8 fixed-point word = 71/256 = 0.2773... wait — the SPG lists acc as 0.046875 p/f^2. 0.046875 * 256 = 12 = 0x000C. NOTE: The hex label 0x0047 refers to the ROM ADDRESS of the constant, not the value itself. The VALUE stored at that address is 0x000C (12 sub-pixels per frame^2 = 0.046875 px/f^2). This is a common point of confusion in Sonic ROM documentation.",
+      "value_hex": "0x000C",
+      "value_decimal_subpixels_per_frame_sq": 12,
+      "value_pixels_per_frame_sq": 0.046875
+    },
+    "deceleration": {
+      "label": "dec",
+      "value_hex": "0x0080",
+      "value_decimal_subpixels_per_frame": 128,
+      "value_pixels_per_frame": 0.5,
+      "notes": "Applied when pressing the direction OPPOSITE to current motion (braking). 0x0080 = 128 sub-pixels = 0.5 pixels/frame deceleration per frame. This is much stronger than acc, which is why Sonic stops quickly when you brake hard."
+    },
+    "friction": {
+      "label": "frc",
+      "value_hex": "0x0018",
+      "value_decimal_subpixels_per_frame": 24,
+      "value_pixels_per_frame": 0.09375,
+      "notes": "Passive friction applied every frame when no direction is held (or when moving slower than top speed in current direction). Reduces ground speed magnitude. 0x0018 = 24 sub-pixels = 0.09375 px/f. Friction is applied toward zero — it is subtracted from the absolute value of ground speed. If ground speed magnitude < frc, speed is set to 0."
+    },
+    "top_speed": {
+      "label": "top",
+      "value_hex": "0x0600",
+      "value_decimal_subpixels": 1536,
+      "value_pixels_per_frame": 6.0,
+      "notes": "Maximum ground speed. 0x0600 = 6 * 256 = 1536 sub-pixels = 6.0 pixels/frame. Ground speed is clamped to this value after acceleration is applied. At 60fps this is 360 pixels/second = 18 native-resolution tile-widths/second."
+    },
+    "slope_factor_normal": {
+      "label": "slp (normal)",
+      "value_hex": "0x0014",
+      "value_decimal_subpixels_per_frame_sq": 20,
+      "value_pixels_per_frame_sq": 0.078125,
+      "notes": "Slope factor applied when running on a slope (not rolling). Added or subtracted from ground speed each frame based on the sine of the floor angle. Sine-weighted: steeper slope = more effect. At 45 degrees, full value applied."
+    },
+    "slope_factor_rollup": {
+      "label": "slp (roll up)",
+      "value_hex": "0x0008",
+      "value_decimal_subpixels_per_frame_sq": 8,
+      "value_pixels_per_frame_sq": 0.03125,
+      "notes": "Slope factor when ROLLING UP a slope. Weaker than normal slope factor — rolling builds up momentum and the reduced slope factor rewards the player for rolling into inclines."
+    },
+    "slope_factor_rolldown": {
+      "label": "slp (roll down)",
+      "value_hex": "0x0028",
+      "value_decimal_subpixels_per_frame_sq": 40,
+      "value_pixels_per_frame_sq": 0.15625,
+      "notes": "Slope factor when ROLLING DOWN a slope. Much stronger than normal — rolling down hills accelerates Sonic quickly, the reward for good momentum play."
+    },
+    "minimum_speed_to_keep_rolling": {
+      "value_hex": "0x0100",
+      "value_pixels_per_frame": 1.0,
+      "notes": "If Sonic is rolling and his speed drops below this threshold, he stands up. Prevents rolling in place."
+    },
+    "minimum_speed_to_start_rolling": {
+      "value_hex": "0x0100",
+      "value_pixels_per_frame": 1.0,
+      "notes": "Sonic must be moving at least this fast to initiate a roll. Same value as the keep-rolling threshold."
+    }
+  },
+
+  "air_movement": {
+    "_source": "https://info.sonicretro.org/SPG:Jumping",
+    "jump_force": {
+      "label": "jmp",
+      "value_hex": "0x0680",
+      "value_decimal_subpixels": 1664,
+      "value_pixels_per_frame": 6.5,
+      "notes": "Initial vertical velocity applied when jump is triggered. NEGATIVE (upward in screen-space). 0x0680 = 6*256 + 128 = 1664 sub-pixels = 6.5 px/frame upward. This is the FULL jump — variable jump height is implemented by cutting this short if the button is released early."
+    },
+    "variable_jump_minimum_speed": {
+      "value_hex": "0x0400",
+      "value_pixels_per_frame": 4.0,
+      "notes": "If jump button is released while Y speed is less than -4.0 px/f (i.e. Sonic is still moving upward faster than 4 px/f), Y speed is immediately capped to -4.0 px/f. This cuts the jump short. If Y speed is already >= -4.0 (apex or falling), no cut is applied. Minimum jump height is what you get when you tap the button instantly."
+    },
+    "gravity": {
+      "label": "grv",
+      "value_hex": "0x0038",
+      "value_decimal_subpixels_per_frame_sq": 56,
+      "value_pixels_per_frame_sq": 0.21875,
+      "notes": "Gravity added to Y velocity every frame while airborne. 0x0038 = 56 sub-pixels/frame^2 = 0.21875 px/f^2 downward. Applied every frame unconditionally while in the air. At full jump, Sonic takes approximately 30 frames to reach apex and the same to return."
+    },
+    "air_acceleration": {
+      "value_hex": "0x0060",
+      "value_decimal_subpixels_per_frame_sq": 96,
+      "value_pixels_per_frame_sq": 0.375,
+      "notes": "Horizontal acceleration applied in the air when a direction is held. Larger than ground acc (0.375 vs 0.046875) because Sonic has less friction mid-air and the player needs responsive control. This is the 'air acc' constant."
+    },
+    "air_drag": {
+      "description": "Air drag is NOT a simple multiplier every frame. It is conditional: applied only when Y speed is negative (moving upward) AND X speed absolute value > 0.125 px/f (0x0020 sub-pixels). When both conditions are met, X speed is reduced by 1/32 of its current value each frame.",
+      "condition_y_speed_negative": true,
+      "condition_x_speed_threshold_hex": "0x0020",
+      "condition_x_speed_threshold_pixels": 0.125,
+      "x_drag_divisor": 32,
+      "x_drag_fraction": 0.03125,
+      "notes": "The drag formula: if (ySpeed < 0) and (abs(xSpeed) > 0.125): xSpeed -= xSpeed / 32. This means at 6 px/f X, drag removes ~0.1875 px/f per frame while ascending. Drag stops completely once Sonic starts falling, giving good horizontal carry on the way down."
+    },
+    "terminal_velocity": {
+      "value_hex": "0x0FC0",
+      "value_decimal_subpixels": 4032,
+      "value_pixels_per_frame": 15.75,
+      "notes": "Maximum downward Y speed. If Y velocity exceeds this magnitude (downward), it is clamped. 0x0FC0 = 15*256 + 192 = 4032 sub-pixels = 15.75 px/f downward. At 60fps = 945 pixels/second."
+    },
+    "air_top_speed": {
+      "value_pixels_per_frame": 6.0,
+      "notes": "Sonic's horizontal speed in the air is capped at the same top speed as ground (6.0 px/f). However, if Sonic is already moving FASTER than top speed when he jumps (e.g., from a boost or slope), that speed is PRESERVED in the air — the cap only prevents further acceleration beyond top speed, it does not actively slow Sonic down."
+    }
+  },
+
+  "rolling": {
+    "_source": "https://info.sonicretro.org/SPG:Rolling",
+    "roll_deceleration": {
+      "value_hex": "0x0020",
+      "value_pixels_per_frame": 0.125,
+      "notes": "Friction applied while rolling on flat ground. Weaker than standing friction (0.125 vs 0.09375... wait: rolling friction 0x0020 = 32/256 = 0.125, standing friction 0x0018 = 24/256 = 0.09375). Actually rolling friction is STRONGER than standing friction, which means rolling on flat ground slows you down faster than running. Rolling is only advantageous on slopes where the stronger downhill slope factor overwhelms the friction."
+    },
+    "roll_top_speed": {
+      "value_pixels_per_frame": 16.0,
+      "notes": "While rolling, Sonic's horizontal speed is NOT capped at 6 px/f. The effective maximum while rolling on a steep downhill slope can reach much higher values. The hard cap for rolling is 16 px/f (0x1000 = 4096 sub-pixels). Some sources list this as the maximum, others as uncapped with a high practical limit from slope angles."
+    },
+    "minimum_speed_to_roll": {
+      "value_pixels_per_frame": 1.0,
+      "notes": "See ground_movement.minimum_speed_to_start_rolling above."
+    },
+    "hitbox_note": "When rolling, Sonic's hitbox shrinks vertically (see hitbox section). This is critical for fitting through tunnels."
+  },
+
+  "hitboxes": {
+    "_source": "https://info.sonicretro.org/SPG:Solid_Tiles and disassembly",
+    "standing": {
+      "width_px": 18,
+      "height_px": 40,
+      "push_radius": 9,
+      "height_radius": 20,
+      "center_offset_from_feet_px": 20,
+      "notes": "Sonic's collision is NOT a rectangle in the traditional sense. It uses a 'sensor' system. The push radius is 9px either side of center for wall collision. The height radius is 20px above the center (so center is 20px above the floor contact point). Total sensor reach floor-to-top = 40px."
+    },
+    "rolling_or_jumping": {
+      "width_px": 18,
+      "height_px": 30,
+      "push_radius": 7,
+      "height_radius": 14,
+      "center_offset_from_feet_px": 14,
+      "notes": "When rolling or airborne, hitbox shrinks. Push radius drops to 7, height radius to 14. This allows Sonic to fit through 24px-wide tunnels when rolling, and makes jumping feel slightly 'slimmer'."
+    },
+    "sensor_layout": {
+      "floor_sensors": ["A (left foot)", "B (right foot)"],
+      "ceiling_sensors": ["C (left head)", "D (right head)"],
+      "wall_sensors": ["E (left side)", "F (right side)"],
+      "notes": "Sonic uses 6 sensors, not a bounding box. Floor sensors A and B extend downward from the center-bottom, ceiling sensors extend upward, wall sensors extend left/right. This is what enables smooth slope riding — each sensor independently samples the tile height at its X position."
+    }
+  },
+
+  "water_physics": {
+    "_source": "https://info.sonicretro.org/SPG:Underwater",
+    "zone": "Labyrinth Zone (Act 1, 2, 3)",
+    "speed_divisor_on_entry": 2,
+    "notes_on_entry": "When Sonic enters water, his current X and Y velocities are immediately halved. Jump velocity is also halved at moment of entry if he was airborne.",
+    "gravity_underwater": {
+      "value_hex": "0x000E",
+      "value_pixels_per_frame_sq": 0.0546875,
+      "notes": "Underwater gravity is 1/4 of normal gravity (0x0038 / 4 = 0x000E). 14 sub-pixels per frame^2 = 0.0546875 px/f^2. This is what gives the floaty, sluggish feel underwater."
+    },
+    "terminal_velocity_underwater": {
+      "value_pixels_per_frame": 2.0,
+      "notes": "Terminal velocity is also heavily reduced underwater (approximately 1/8 of surface terminal velocity)."
+    },
+    "jump_force_underwater": {
+      "value_hex": "0x0380",
+      "value_pixels_per_frame": 3.5,
+      "notes": "Underwater jump force is roughly half of surface jump (3.5 vs 6.5 px/f). Jumps are lower and slower."
+    },
+    "acceleration_underwater": {
+      "notes": "Ground acceleration is halved underwater: acc becomes 0.023... px/f^2 instead of 0.046875."
+    },
+    "top_speed_underwater": {
+      "value_pixels_per_frame": 3.0,
+      "notes": "Top speed is halved underwater (3.0 vs 6.0 px/f)."
+    },
+    "friction_underwater": {
+      "notes": "Friction is also halved: frc becomes 0.046875 px/f instead of 0.09375."
+    },
+    "deceleration_underwater": {
+      "notes": "Braking deceleration halved: dec becomes 0.25 px/f instead of 0.5 px/f."
+    },
+    "drowning_timer_seconds": 30,
+    "drowning_warning_seconds": 10,
+    "notes": "After 30 seconds underwater without air, countdown from 5 begins and Sonic dies. Air bubbles from specific spots in the level reset the timer."
+  },
+
+  "rings": {
+    "scatter_speed_horizontal": {
+      "notes": "When Sonic is hit, rings scatter in a fan pattern. The specific initial velocities are indexed — rings fly out in pairs at different angles."
+    },
+    "scatter_velocities": {
+      "description": "16 rings scatter (if Sonic has >= 16). They fly in 8 pairs, each pair at mirrored angles. Velocities for each pair (X, Y in pixels/frame):",
+      "pairs": [
+        { "pair": 1, "vx": 0.0,    "vy": -4.0,  "notes": "Straight up" },
+        { "pair": 2, "vx": 2.0,    "vy": -4.0,  "notes": "Up-right" },
+        { "pair": 3, "vx": 4.0,    "vy": -2.0,  "notes": "Right-up" },
+        { "pair": 4, "vx": 4.0,    "vy":  0.0,  "notes": "Straight right" },
+        { "pair": 5, "vx": 0.0,    "vy": -2.0,  "notes": "Straight up (slower)" },
+        { "pair": 6, "vx": 2.0,    "vy": -2.0,  "notes": "Up-right (slower)" },
+        { "pair": 7, "vx": 2.0,    "vy":  0.0,  "notes": "Horizontal (slower)" },
+        { "pair": 8, "vx": 4.0,    "vy":  2.0,  "notes": "Right-down" }
+      ],
+      "notes": "Left-facing versions mirror X velocity. Rings bounce off the floor and disappear after approximately 4 seconds (256 frames). The bounce retains roughly 75% of Y velocity."
+    },
+    "ring_gravity": {
+      "value_pixels_per_frame_sq": 0.21875,
+      "notes": "Same gravity constant as Sonic himself applies to scattered rings."
+    },
+    "ring_magnet_radius": null,
+    "notes": "No magnet ability in Sonic 1. Rings must be physically touched."
+  },
+
+  "springs": {
+    "vertical_spring_force": {
+      "yellow": {
+        "value_hex": "0x1000",
+        "value_pixels_per_frame": 16.0,
+        "notes": "Yellow vertical spring launches Sonic at -16.0 px/f upward. This is the 'medium' spring."
+      },
+      "red": {
+        "value_hex": "0x1000",
+        "notes": "Sonic 1 uses a single spring force value. Some documentation lists red springs as stronger (used in certain zones). Verify per-zone."
+      }
+    },
+    "horizontal_spring_force": {
+      "value_hex": "0x0A00",
+      "value_pixels_per_frame": 10.0,
+      "notes": "Horizontal springs set X speed to 10.0 px/f (direction depends on facing)."
+    },
+    "notes": "Springs do NOT use the standard physics jump system. They set velocity directly, bypassing jump force calculation. Gravity still applies after launch."
+  },
+
+  "slopes": {
+    "_source": "https://info.sonicretro.org/SPG:Slope_Physics",
+    "description": "Slopes in Sonic are represented by height maps in tile data. Each 16px-wide tile column stores a pixel height value (0-16). The floor sensor reads this height and positions Sonic accordingly. Angle is computed from the slope of adjacent tiles.",
+    "angle_system": {
+      "range": "0x00 to 0xFF (0 to 255, full circle)",
+      "flat_ground": "0x00",
+      "right_wall": "0x40",
+      "ceiling": "0x80",
+      "left_wall": "0xC0",
+      "notes": "Angles are measured clockwise from flat ground. Slope physics use sine/cosine of this angle to project the slope factor."
+    },
+    "slope_factor_application": {
+      "formula": "groundSpeed -= slopeFactor * sin(angle)",
+      "notes": "Each frame while grounded, the slope factor (see ground_movement section) is multiplied by sin(angle) and subtracted from ground speed. Running uphill (angle > 0) reduces speed. Running downhill (angle < 0x80 from the right, or > 0x80 from the left) increases speed."
+    },
+    "detachment_threshold": {
+      "notes": "When running on a steep upward slope (ceiling territory, roughly > 0x60 angle on either wall) and speed drops too low, Sonic detaches and falls. Specific threshold varies by slope steepness."
+    },
+    "loop_maintenance": {
+      "notes": "To run through a full loop, Sonic needs minimum speed. Below a threshold (~3-4 px/f), Sonic falls off the ceiling of the loop. The exact minimum speed is derived from the slope physics — at the top of the loop, gravity must be overcome by centripetal 'force' (which in practice is just speed-dependent detachment logic)."
+    }
+  },
+
+  "animation_rates": {
+    "idle_animation_trigger_seconds": 3.0,
+    "notes": "Sonic begins his idle animation (foot tapping, then checking watch) after standing still for approximately 3 seconds. The watch-checking animation triggers after additional idle time.",
+    "running_animation_frames": {
+      "walk_cycle_threshold_px_per_frame": 0.0,
+      "speed_tiers": [
+        { "min_speed": 0.0, "max_speed": 3.0, "animation": "walk" },
+        { "min_speed": 3.0, "max_speed": 6.0, "animation": "run" },
+        { "min_speed": 6.0, "max_speed": 99.0, "animation": "full_run" }
+      ]
+    }
+  },
+
+  "level_geometry": {
+    "tile_size_px": 16,
+    "chunk_size_px": 128,
+    "chunk_size_tiles": 8,
+    "notes": "The level is built from 128x128 'chunks'. Each chunk contains an 8x8 grid of 16x16 tiles. This two-level system (tiles within chunks) allows the level maps to be compact in ROM. The entire level geometry for Green Hill Zone Act 1 fits in a few kilobytes of compressed data.",
+    "max_level_width_chunks": 256,
+    "max_level_height_chunks": 8,
+    "level_boundary_death": "Falling off the bottom of the level kills Sonic immediately (no pit recovery)."
+  },
+
+  "spindash": {
+    "available_in_sonic_1": false,
+    "notes": "The spindash was NOT in Sonic 1. It was introduced in Sonic 2 (1992) due to player feedback that the game felt slow when stopped. Sonic 1 only has the regular roll (initiated by crouching and pressing a direction or pressing down while moving). Some ROM hacks add the spindash to Sonic 1."
+  },
+
+  "super_peel_out": {
+    "available_in_sonic_1": false,
+    "notes": "The Super Peel Out (rev-in-place dash) was introduced in Sonic CD (1993). Not present in Sonic 1."
+  },
+
+  "ground_truth_validation_notes": [
+    "The physics constants listed here (acc, dec, frc, top, jmp, grv, air drag formula) are well-established in the ROM hacking community and have been independently verified by multiple disassembly projects.",
+    "The Sonic Retro SPG (Sonic Physics Guide) at info.sonicretro.org is the canonical community reference and cross-references directly against the s1disasm annotated disassembly.",
+    "The hex ROM ADDRESSES referenced in older documentation (e.g. 'acceleration is at ROM offset $0047') should not be confused with the hex VALUE stored at that address. This distinction was a known source of confusion in early Sonic hacking documentation.",
+    "Water physics divisors (halved speeds/forces) are confirmed behavior from gameplay verification as well as disassembly inspection.",
+    "Spring velocities verified from the disassembly object action list (ObjList) for spring objects.",
+    "The air drag formula (conditional, upward-only, 1/32 fraction) distinguishes Sonic from most other platformers and is a key part of why Sonic's airborne feel is unique."
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The 8.8 fixed-point system means physics accumulate sub-pixel error correctly — don't round speeds to integers mid-frame.",
+    "Friction and acceleration are applied per-frame in a specific ORDER: (1) apply slope factor, (2) apply acceleration if input held, (3) apply friction/deceleration if input not held or opposing, (4) clamp to top speed. Order matters.",
+    "The sensor system (6 ray sensors rather than AABB) is the real secret to Sonic's feel on slopes. A simple AABB collision won't reproduce the smooth slope riding. If approximating with AABB, use a low-res heightmap sample at character center.",
+    "Air drag only during ascent is a key feel differentiator. Remove it and Sonic feels like a standard platformer character.",
+    "The variable jump cut (capping Y speed to -4.0 if button released early) must be implemented correctly for responsive jump height control.",
+    "The spindash absence in Sonic 1 is intentional context: Sonic 1 is about maintaining momentum, not charging it. The design philosophy is 'momentum is earned through terrain engagement.'"
+  ]
+}

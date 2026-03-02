@@ -1,0 +1,149 @@
+{
+  "game_id": "hexen-1995-pc",
+  "game_name": "Hexen: Beyond Heretic",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Creature sprites and attack animations in first-person view",
+      "meaning": "Active threat requiring evasion or combat"
+    },
+    {
+      "signal": "Hazardous environment",
+      "visual_form": "Dungeon geometry, dark atmospheric areas, elemental visual themes (fire, water, ice)",
+      "meaning": "Environmental damage or trap zones"
+    },
+    {
+      "signal": "Boss arena",
+      "visual_form": "Large ornate chamber with Korax (the Serpent Rider) visible, distinctive architecture",
+      "meaning": "Major danger threshold; significant combat encounter ahead"
+    },
+    {
+      "signal": "Low health state",
+      "visual_form": "UI health indicator depletion, character visual damage feedback",
+      "meaning": "Player vulnerability; need for healing items"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Hub level",
+      "visual_form": "Central area with multiple doorways/exits to side levels, generally calmer architecture",
+      "meaning": "Safe zone for puzzle progression and item gathering"
+    },
+    {
+      "signal": "Item pickup",
+      "visual_form": "Glowing inventory items (flechette, Disc of Repulsion, Icon of the Defender), visual sparkle effects",
+      "meaning": "Resource acquisition; capability enhancement"
+    },
+    {
+      "signal": "Cleared area",
+      "visual_form": "Empty rooms after enemy defeat, doors now open",
+      "meaning": "Temporary safety; passage enabled"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Korax and servants",
+      "color_identity": null,
+      "symbol_or_sigil": "Demonic/dark magic aesthetic; Serpent Rider imagery",
+      "enemy_visual_variants": "Various creature types with dark, corrupted visual design",
+      "environmental_markers": "Necropolis (final area); dark dungeons; elemental corruption zones"
+    },
+    {
+      "faction": "Three Heroes (Player-aligned)",
+      "color_identity": null,
+      "symbol_or_sigil": "Class-specific weapon and armor designs (Fighter/Cleric/Mage distinct gear)",
+      "enemy_visual_variants": "Not applicable; player faction",
+      "environmental_markers": "Mountainside seminary; sanctuary spaces within dungeons"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Korax invasion of Cronos realm",
+      "visual_manifestation": "Overrun dungeons, corrupted elemental zones, necropolis dominance, dark atmospheric rendering",
+      "behavioral_manifestation": "Enemies actively patrol and attack; environmental hazards present"
+    },
+    {
+      "world_state": "Puzzle progression (hub system)",
+      "visual_manifestation": "Multiple doorways in hub areas; item placements indicate solution paths; polyobject (moving wall) animations when activated",
+      "behavioral_manifestation": "Hub doors remain sealed until items/switches activated; side levels open as prerequisites met"
+    },
+    {
+      "world_state": "Character class selection",
+      "visual_manifestation": "Fighter (armored, physical), Cleric (robed, balanced), Mage (mystical, fragile) visual distinctions in weapon design and spell effects",
+      "behavioral_manifestation": "Fighter fast/tough melee; Mage slow/fragile ranged spells; Cleric hybrid combat style"
+    },
+    {
+      "world_state": "Progression through elemental dungeons → wilderness → seminary → castle → necropolis",
+      "visual_manifestation": "Environment shifts from elemental (fire/ice/water themes) through natural landscape to structured architecture to death imagery",
+      "behavioral_manifestation": "Enemy variety and difficulty increases; hazard complexity escalates"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression",
+      "example": "Player moves from elemental dungeons (primal corruption) through wilderness (reclaimed land) to monastery (civilization) to dark castle (Korax's stronghold) to necropolis (death realm), showing invasion scope"
+    },
+    {
+      "technique": "Item placement and design",
+      "example": "Magical artifacts (Disc of Repulsion, Icon of the Defender) scattered throughout world suggest civilization's last defense efforts against Korax"
+    },
+    {
+      "technique": "Hub-and-spoke connectivity",
+      "example": "Central hub areas with locked exits requiring items from side quests communicate puzzle dependencies and world-scale threat requiring coordinated hero action"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Creature variety and placement in elemental vs. structural zones communicates different aspects of Korax's corruption influence across the realm"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fighter (Baratus)",
+      "state": "Active combat",
+      "behavior": "Fast movement, melee weapon attacks, higher durability; visual priority is forward momentum and sword/axe swing animations"
+    },
+    {
+      "entity": "Cleric (Parias)",
+      "state": "Active combat",
+      "behavior": "Balanced speed, melee + ranged attacks, medium durability; visual blend of close-combat and spell-casting animations"
+    },
+    {
+      "entity": "Mage (Daedolon)",
+      "state": "Active combat",
+      "behavior": "Slow movement, long-range spell projectiles, low durability; visual focus on magical effect animations and spell impact"
+    },
+    {
+      "entity": "Korax (Serpent Rider)",
+      "state": "Final boss encounter",
+      "behavior": "Commanding presence in ornate necropolis arena; attacks from elevated position; visual demonic power manifestation"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Patrol/Alerted",
+      "behavior": "Wander until player detected; activate attack sequences; visual tells: movement toward player, attack animation initiation"
+    },
+    {
+      "entity": "Polyobject walls",
+      "state": "Puzzle activation",
+      "behavior": "Translate, rotate, or move when script/switch activated; visual movement indicates puzzle progress or path opening"
+    }
+  ],
+  "notes": "Hexen uses a modified Doom engine with Action Code Script (ACS) for complex environmental changes and state communication. The three-character system creates distinct visual/behavioral communication of player capability. Hub-level design allows temporal world-state changes: locked areas become accessible, enemy placement may change, environmental effects (earthquakes) manipulate visibility. The progression from elemental dungeons through structured civilization to necropolis creates visual narrative of escalating invasion. Class-specific item behavior (e.g., flechette poison gas) means identical pickups communicate differently based on player state. Polyobjects enable moving wall visual feedback for puzzle progression without traditional door sprites.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:02:05.500Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3171,
+    "output_tokens": 1964,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

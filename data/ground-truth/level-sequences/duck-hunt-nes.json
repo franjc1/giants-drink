@@ -1,0 +1,128 @@
+{
+  "game_id": "duck-hunt-nes",
+  "game_name": "Duck Hunt",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Single duck target",
+      "first_appears": "Game A - Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic aiming and trigger timing with stationary or slow-moving target"
+    },
+    {
+      "element": "Dual duck targets",
+      "first_appears": "Game B - Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Divided attention between two targets, prioritization of aim"
+    },
+    {
+      "element": "Clay pigeons (distance targets)",
+      "first_appears": "Game C - Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Leading moving targets at distance, timing prediction"
+    },
+    {
+      "element": "Speed increase",
+      "first_appears": "Progressive across rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "Reaction time development, sustained accuracy under pressure"
+    },
+    {
+      "element": "Increased minimum hit threshold",
+      "first_appears": "Progressive across rounds",
+      "introduction_context": "dangerous",
+      "mastery_context": "Maintaining consistency and accuracy as stakes increase"
+    },
+    {
+      "element": "Bonus stage (hunting dog distraction)",
+      "first_appears": "Vs. Duck Hunt arcade - after every second round",
+      "introduction_context": "dangerous",
+      "mastery_context": "Impulse control and target discrimination under duress"
+    },
+    {
+      "element": "Triple simultaneous targets",
+      "first_appears": "Vs. Duck Hunt arcade - variable rounds",
+      "introduction_context": "dangerous",
+      "mastery_context": "Extreme attention division and rapid decision-making"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully hitting all 10 targets in a round (bonus points awarded)",
+      "Meeting minimum hit requirement to advance",
+      "Targets disappearing after 3 attempts"
+    ],
+    "typical_tension_triggers": [
+      "Targets appearing on screen",
+      "Each missed shot (depletes the three-attempt budget)",
+      "Speed increase as rounds progress",
+      "Raised minimum hit threshold",
+      "Multiple simultaneous targets",
+      "Arcade mode: life loss on missed targets"
+    ],
+    "pacing_descriptor": "Cyclical tension-relief: each round presents escalating difficulty within discrete target cycles; player tension builds during the three-attempt window, releases upon round completion or failure; arcade version amplifies tension through cumulative life loss"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Game mode selection (A/B/C) determines difficulty and target presentation; Game A single-duck mode is accessible entry point",
+    "secret_convention": "Shooting the hunting dog in arcade bonus stages reveals Easter egg (dog scolds player); impossible to shoot on console (developer stated as intentional family-friendly design choice)",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Game A (single duck) presents minimal challenge; targets move predictably; player has three attempts per appearance to build confidence",
+    "mid_game": "Game B (dual ducks) and Game C (clay pigeons) introduce spatial complexity and prediction; progressive speed increases require sustained accuracy; minimum hit thresholds rise incrementally",
+    "late_game": "Rounds 50+ feature very rapid targets and high minimum hit requirements; Round 99 completion triggers kill screen (Round 0) with erratic/nonexistent targets, ending progress indefinitely",
+    "notable_spikes": [
+      "Transition from Game A to Game B (dual-target mental load)",
+      "Round 10-15 (notable speed increase begins)",
+      "Mid-game rounds where minimum hit threshold jumps significantly",
+      "Vs. Duck Hunt arcade: every second round bonus stage (distraction mechanic)",
+      "Vs. Duck Hunt arcade: shift to 12-target rounds with occasional triple targets"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Round-based progression",
+      "description": "Each round consists of 10 targets (12 in arcade) presented sequentially; player must hit minimum number to advance; failure triggers game over. Difficulty scales within round sequence, not spatial design.",
+      "example_level": "Game A Round 1-5 (gentle), Game A Round 15+ (challenging)"
+    },
+    {
+      "pattern_name": "Game mode modulation",
+      "description": "Three core game modes (A: single duck; B: dual ducks; C: clay pigeons) offer different difficulty and spatial challenge profiles without map changes; arcade alternates B and C with bonus stages",
+      "example_level": "Game A vs Game B vs Game C"
+    },
+    {
+      "pattern_name": "Bonus stage distraction",
+      "description": "Arcade-exclusive pattern: after every second round, ducks fly from grass while hunting dog occasionally jumps into line of fire as intentional distraction. Reward for accuracy, penalty for impulsive shooting.",
+      "example_level": "Vs. Duck Hunt arcade - between rounds 2-3, 4-5, 6-7, etc."
+    },
+    {
+      "pattern_name": "Kill screen terminal state",
+      "description": "Reaching Round 99/100 in Game A triggers Round 0 (kill screen) with erratic behavior, impossible targets, and game progression halt; parallels classic arcade kill screen design",
+      "example_level": "Game A Round 99→0"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:47:33.745Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4119,
+    "output_tokens": 1516,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "game_id": "sqoon-nes",
+  "game_name": "Sqoon",
+  "platform": "nes",
+  "paradigm": "adventure/shoot-em-up",
+  "danger_signals": [
+    {
+      "signal": "Enemy aliens",
+      "visual_form": "Hostile extraterrestrial creatures (Neptunians/Ottoto aliens)",
+      "meaning": "Direct threat to player; collision causes damage/death"
+    },
+    {
+      "signal": "Flooded environment",
+      "visual_form": "Underwater setting with submerged continents and ocean landscape",
+      "meaning": "World state catastrophe—polar ice caps melted; indicates invasion success and environmental collapse"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Fuel meter depletion over 60-second intervals",
+      "meaning": "Mechanical danger—running out of fuel results in loss of life"
+    },
+    {
+      "signal": "Captured humans",
+      "visual_form": "Human prisoners held in alien facilities requiring rescue",
+      "meaning": "Stakes indicator; humans are under threat from alien 'man-ham livestock' farming"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Islands",
+      "visual_form": "Land masses where Sqoon submarine docks",
+      "meaning": "Safe zones for discharging rescued humans; triggers power-up and fuel replenishment"
+    },
+    {
+      "signal": "Mermaids",
+      "visual_form": "Aquatic female entities encountered during levels",
+      "meaning": "Non-hostile NPCs; collision triggers hidden bonus messages indicating positive world-state outcome"
+    },
+    {
+      "signal": "Destroyed alien bases",
+      "visual_form": "End-of-level facilities destroyed by ice ball bombs",
+      "meaning": "Mission progress; destroying all bases leads to alien surrender (victory state)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Earth Defense Army",
+      "color_identity": null,
+      "symbol_or_sigil": "Pentagon (mentioned in Japanese version distress signal)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Military authority requesting aid via distress signal"
+    },
+    {
+      "faction": "Neptunian/Ottoto Aliens",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Blue-screen message appearance in Japanese version vs. threat message in US version",
+      "environmental_markers": "Underwater alien bases; facilities housing captured humans; banners carried by aliens during level transitions"
+    },
+    {
+      "faction": "Pirate Narikeen",
+      "color_identity": null,
+      "symbol_or_sigil": "Sqoon submarine (pink vessel)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled submarine as faction representative; reluctant hero character"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-invasion equilibrium",
+      "visual_manifestation": "Not directly shown; implied through distress signal context",
+      "behavioral_manifestation": "General of Earth Defense Army is desperate enough to beg a pirate for aid"
+    },
+    {
+      "world_state": "Mid-invasion/catastrophe",
+      "visual_manifestation": "Entire world submerged underwater; polar ice caps melted; continents sunk",
+      "behavioral_manifestation": "Humans captured in alien facilities; submarine warfare becomes necessary survival mechanism"
+    },
+    {
+      "world_state": "Alien dominance (non-destroyed bases)",
+      "visual_manifestation": "Alien facilities intact; banners carried by aliens indicating control",
+      "behavioral_manifestation": "Aliens continue offensive operations; humans remain imprisoned"
+    },
+    {
+      "world_state": "Player victory (bases destroyed, all loops completed)",
+      "visual_manifestation": "Banner message showing alien surrender; blue-screen message (Japanese: 'We give up... We surrender. You're GREAT. Ottoto')",
+      "behavioral_manifestation": "Aliens cease hostile operations; prisoners freed; faction surrender"
+    },
+    {
+      "world_state": "Partial victory (bases destroyed, incomplete loops)",
+      "visual_manifestation": "Blue-screen threat message appears regardless in US version despite alien concession",
+      "behavioral_manifestation": "Ambiguous ending; aliens surrender but threat persists (regional difference design)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic transformation",
+      "example": "Entire visible game world is underwater—visually communicates that Earth has been catastrophically altered by alien attack (melted polar ice caps, sunken continents)"
+    },
+    {
+      "technique": "Facility design as narrative",
+      "example": "Alien bases contain captured humans; destroying these bases through gameplay reveals both enemy infrastructure and stakes (human liberation)"
+    },
+    {
+      "technique": "Mermaid encounters as tonal shift",
+      "example": "Non-hostile mermaids and hidden bonus messages suggest mythological/fantastical elements coexisting with sci-fi invasion narrative; indicate hope and ally presence"
+    },
+    {
+      "technique": "Distress signal framing",
+      "example": "Japanese version specifies Pentagon as distress origin, establishing geopolitical context; US version removes this specificity (regional localization choice)"
+    },
+    {
+      "technique": "Loop structure as escalation",
+      "example": "Game contains three distinct loops; completing all loops with all bases destroyed triggers ultimate victory state, suggesting ongoing alien threat that requires sustained player effort"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sqoon submarine",
+      "state": "Normal operation",
+      "behavior": "Navigates underwater environment, fires missiles at enemies, deploys ice ball bombs against facilities"
+    },
+    {
+      "entity": "Sqoon submarine",
+      "state": "Fuel critical",
+      "behavior": "Must reach island within 60 seconds or player loses life; creates tension-driven navigation"
+    },
+    {
+      "entity": "Sqoon submarine",
+      "state": "Human capacity reached",
+      "behavior": "Must discharge rescued humans at island to continue rescue operations; enforces strategic gameplay loop"
+    },
+    {
+      "entity": "Neptunian/Ottoto aliens",
+      "state": "Bases intact",
+      "behavior": "Continue offensive operations; carry banners signaling dominance; maintain captured human facilities"
+    },
+    {
+      "entity": "Neptunian/Ottoto aliens",
+      "state": "All bases destroyed",
+      "behavior": "Japanese version: surrender explicitly via blue-screen message; US version: issue threat despite surrender (design inconsistency)"
+    },
+    {
+      "entity": "Captured humans",
+      "state": "In facilities",
+      "behavior": "Imprisoned; require ice ball bomb destruction to release"
+    },
+    {
+      "entity": "Captured humans",
+      "state": "Rescued and in Sqoon",
+      "behavior": "Remain inert until discharged at island; trigger power-ups and fuel restoration upon discharge"
+    },
+    {
+      "entity": "Mermaids",
+      "state": "Encountered during level",
+      "behavior": "Non-hostile; collision triggers hidden bonus messages revealing positive world-state outcome (alien surrender admission)"
+    }
+  ],
+  "notes": "Sqoon communicates world-state primarily through environmental submersion (flooded world = alien victory condition met) and through end-level narrative messages. Danger is signaled through fuel mechanics (time pressure) and enemy encounters. Factions are communicated implicitly through setting and explicit through distress signals and surrender messages. Regional differences in ending messages ('Ottoto' aliens in Japan vs. 'Neptunians' in US) reflect localization choices that affect political framing. The mermaid bonus messages serve as hidden world-state indicators. Victory condition requires both base destruction AND loop completion in US version, creating escalating difficulty manifestation. Game uses minimal text and relies heavily on visual/mechanical storytelling.",
+  "sources_used": [
+    "tcrf - Sqoon regional differences, ending conditions, hidden messages",
+    "wikipedia - Sqoon plot (alien motivation, environmental catastrophe, character context)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:37:04.441Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3080,
+    "output_tokens": 2050,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

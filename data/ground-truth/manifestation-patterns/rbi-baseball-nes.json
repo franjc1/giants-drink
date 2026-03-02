@@ -1,0 +1,144 @@
+{
+  "game_id": "rbi-baseball-nes",
+  "game_name": "R.B.I. Baseball",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "pitcher_fatigue",
+      "visual_form": "ball speed reduction and reduced steering control on-screen",
+      "meaning": "pitcher weakening, vulnerability to hits increases"
+    },
+    {
+      "signal": "trailing_score_display",
+      "visual_form": "numerical scoreboard showing deficit",
+      "meaning": "team disadvantage; pressure situation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "lead_score_display",
+      "visual_form": "numerical scoreboard showing runs ahead",
+      "meaning": "team advantage; mercy rule (10+ run lead) triggers game end"
+    },
+    {
+      "signal": "fresh_pitcher_entry",
+      "visual_form": "pitcher substitution with full stamina visual state",
+      "meaning": "restored pitching capability; reduced vulnerability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "location_based_teams",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "8 teams differentiated by location name only (Boston, California, Detroit, Houston, Minnesota, New York, St. Louis, San Francisco)",
+      "environmental_markers": "scoreboard displays competing team location; roster composition reflects real 1986-1987 playoff teams"
+    },
+    {
+      "faction": "american_league_all_stars",
+      "color_identity": null,
+      "symbol_or_sigil": "AL designation",
+      "enemy_visual_variants": "distinct roster from individual teams",
+      "environmental_markers": "all-star team selection screen"
+    },
+    {
+      "faction": "national_league_all_stars",
+      "color_identity": null,
+      "symbol_or_sigil": "NL designation",
+      "enemy_visual_variants": "distinct roster from individual teams",
+      "environmental_markers": "all-star team selection screen"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "game_in_progress",
+      "visual_manifestation": "live scoreboard with running score, inning counter, runner positions on base paths",
+      "behavioral_manifestation": "players animate batting, pitching, fielding; score updates in real-time"
+    },
+    {
+      "world_state": "pitcher_stamina_depleted",
+      "visual_manifestation": "visual slowdown of pitch speed; reduced ball trajectory control indicators",
+      "behavioral_manifestation": "pitcher performance degrades; reliever substitution becomes necessary"
+    },
+    {
+      "world_state": "pitcher_fresh",
+      "visual_manifestation": "full stamina visual state; sharp ball movement control",
+      "behavioral_manifestation": "high pitch velocity; precise steering response"
+    },
+    {
+      "world_state": "mercy_rule_threshold",
+      "visual_manifestation": "10+ run lead displayed on scoreboard",
+      "behavioral_manifestation": "game ends immediately; victory declared"
+    },
+    {
+      "world_state": "base_runners_present",
+      "visual_manifestation": "visual representation of occupied bases on field display",
+      "behavioral_manifestation": "runner behavior changes (stealing attempts, advancement risk)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "roster_composition_as_historical_marker",
+      "example": "each location-team reflects actual 1986-1987 playoff rosters; player names and abilities encode real-world baseball context"
+    },
+    {
+      "technique": "player_attribute_differentiation",
+      "example": "Vince Coleman shown as fastest (difficult to catch stealing), Nolan Ryan and Roger Clemens as fastest pitchers, Fernando Valenzuela with pitch movement instead of speed—player identity communicated through gameplay stats"
+    },
+    {
+      "technique": "all_star_team_distinction",
+      "example": "American League and National League all-star rosters feature established veterans and up-and-coming stars; roster cross-section communicates competitive tier and era context"
+    },
+    {
+      "technique": "box_score_visual_feedback",
+      "example": "rudimentary box score displayed during and after game showing composite statistics per team; quantitative visual summary of match state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "pitcher",
+      "state": "fresh",
+      "behavior": "high pitch speed, full steering control, high stamina available"
+    },
+    {
+      "entity": "pitcher",
+      "state": "fatigued",
+      "behavior": "reduced pitch speed, reduced steering control, low stamina"
+    },
+    {
+      "entity": "vince_coleman",
+      "state": "on_base",
+      "behavior": "very high base-running speed; difficult to catch stealing second base"
+    },
+    {
+      "entity": "slow_base_runner",
+      "state": "on_base",
+      "behavior": "reduced advancement speed; easier to throw out attempting extra bases"
+    },
+    {
+      "entity": "power_hitter",
+      "state": "at_bat",
+      "behavior": "high ability for solid contact; high power output when contact made"
+    },
+    {
+      "entity": "contact_hitter",
+      "state": "at_bat",
+      "behavior": "high ability to make contact; variable power output"
+    }
+  ],
+  "notes": "R.B.I. Baseball (1988 NES) uses minimal visual differentiation between factions due to lack of MLB licensing; teams identified purely by location name. World state communication relies heavily on: (1) scoreboard numerics and inning display, (2) stamina/fatigue visual feedback on pitchers, (3) base runner positioning, and (4) box score statistics. No team colors, logos, or symbolic markers present. Player identity communicated through name display and gameplay stat differences (speed, power, pitch movement). The mercy rule (10+ run lead) is a key world-state threshold that immediately ends game. Environmental storytelling achieved through roster accuracy and player attribute matching (e.g., Vince Coleman's speed). Faction distinction is minimal and functional rather than aesthetic.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:21:22.296Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2763,
+    "output_tokens": 1589,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

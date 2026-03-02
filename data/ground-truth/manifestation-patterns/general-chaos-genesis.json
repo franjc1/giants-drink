@@ -1,0 +1,187 @@
+{
+  "game_id": "general-chaos-genesis",
+  "game_name": "General Chaos",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldier proximity",
+      "visual_form": "Cartoon soldiers closing distance on isometric battlefield",
+      "meaning": "Close combat about to initiate; immediate threat"
+    },
+    {
+      "signal": "Soldier health depletion",
+      "visual_form": "Soldier falls to ground",
+      "meaning": "Unit incapacitated; requires medic intervention or will be lost"
+    },
+    {
+      "signal": "Weapon jam (Gunner class)",
+      "visual_form": "Gunner disabled for several seconds during attack",
+      "meaning": "Loss of firepower capability; vulnerability window"
+    },
+    {
+      "signal": "Scorcher positioning",
+      "visual_form": "Flamethrower unit on top of another unit",
+      "meaning": "High danger; difficult to survive this engagement"
+    },
+    {
+      "signal": "Instant death outcome",
+      "visual_form": "Enemy reduced to skeleton, ash pile, or remains",
+      "meaning": "Unit permanently eliminated; medic cannot revive"
+    },
+    {
+      "signal": "Water hazard for Scorcher",
+      "visual_form": "Bubbles instead of flame when Scorcher enters water",
+      "meaning": "Temporary weapon disability; tactical vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Medic proximity and activation",
+      "visual_form": "Another soldier moving close to fallen unit and calling medic",
+      "meaning": "Fallen soldier can be revived; unit recovery possible"
+    },
+    {
+      "signal": "Cover availability",
+      "visual_form": "Environmental obstacles on isometric battlefield",
+      "meaning": "Protection from certain weapon types (Launcher attacks can be blocked)"
+    },
+    {
+      "signal": "Bonus item collection",
+      "visual_form": "Items visible on battlefield to pick up",
+      "meaning": "Point accumulation; medic use replenishment at thresholds"
+    },
+    {
+      "signal": "Distance from enemy",
+      "visual_form": "Separation maintained on isometric grid",
+      "meaning": "Avoidance of close combat; ranged attack advantage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "General Chaos (Moronica)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player 1 team soldiers vs. General Havoc team soldiers",
+      "environmental_markers": "Capital city as objective location; dynamic campaign map shows territorial control"
+    },
+    {
+      "faction": "General Havoc (Viceria)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opposing team soldiers distinguished in multiplayer/campaign",
+      "environmental_markers": "Capital city as opposing objective; decades of territorial war shown through campaign progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active battlefield engagement",
+      "visual_manifestation": "Isometric perspective view of cartoon soldiers in combat formation; real-time action on battlefield",
+      "behavioral_manifestation": "Soldiers move, attack, take cover; medics called; units fall and revive"
+    },
+    {
+      "world_state": "Campaign mode strategic layer",
+      "visual_manifestation": "Dynamic strategic map showing territorial control between Moronica and Viceria",
+      "behavioral_manifestation": "Series of battles fought over map; objectives shift based on territorial gains"
+    },
+    {
+      "world_state": "Unit incapacitation",
+      "visual_manifestation": "Soldier falls to ground (visual collapse animation)",
+      "behavioral_manifestation": "Unit becomes immobile; cannot act until revived or battle ends; medic intervention required"
+    },
+    {
+      "world_state": "Permanent unit loss",
+      "visual_manifestation": "Enemy reduced to skeleton (Launcher/Blaster) or ash pile (Scorcher); remains on battlefield",
+      "behavioral_manifestation": "Unit removed from game; no medic revival possible; team strength diminished"
+    },
+    {
+      "world_state": "Medic availability exhausted",
+      "visual_manifestation": "No visual indicator described; mechanical limit reached",
+      "behavioral_manifestation": "Fallen soldiers cannot be revived; must be replenished through point threshold achievements"
+    },
+    {
+      "world_state": "Victory condition approaching",
+      "visual_manifestation": "Capital city siege in campaign mode",
+      "behavioral_manifestation": "Final objective requires capture of enemy capital; determines campaign winner"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Isometric battlefield layout",
+      "example": "Cartoon-style battlefield viewed from angled perspective communicates satirical tone and arcade nature of conflict"
+    },
+    {
+      "technique": "Dynamic campaign map",
+      "example": "Territorial changes between Moronica and Viceria show progression of decades-long war and stakes of individual battles"
+    },
+    {
+      "technique": "Capital city location",
+      "example": "Objective placement on map conveys political significance; capture determines overall victory"
+    },
+    {
+      "technique": "Bonus items on battlefield",
+      "example": "Point-yielding objects suggest looting/salvage from conflict; medic replenishment through threshold achievement ties resource scarcity to battle progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Gunner (submachine gun user)",
+      "state": "Normal combat",
+      "behavior": "Medium-range attacks with high rate of fire; well-rounded tactical unit; can jam temporarily"
+    },
+    {
+      "entity": "Launcher (rocket launcher user)",
+      "state": "Normal combat",
+      "behavior": "Long-range, powerful, slow-firing; attacks blocked by cover; can cause instant death; can destroy bonus objectives"
+    },
+    {
+      "entity": "Chucker (grenade user)",
+      "state": "Normal combat",
+      "behavior": "Low rate of fire; grenades arc over cover; damage multiple units; good range; can destroy objectives"
+    },
+    {
+      "entity": "Scorcher (flamethrower user)",
+      "state": "Normal combat",
+      "behavior": "Shortest range but highest threat; hits multiple soldiers; fastest-firing; excellent for flanking; deadly when on top of enemy unit"
+    },
+    {
+      "entity": "Scorcher (flamethrower user)",
+      "state": "In water",
+      "behavior": "Weapon disabled; shoots bubbles instead of fire; tactical vulnerability"
+    },
+    {
+      "entity": "Blaster (dynamite thrower)",
+      "state": "Normal combat",
+      "behavior": "Heavy area damage; extremely slow rate of fire; second-shortest range; low tactical effectiveness; can destroy objectives; can cause instant death"
+    },
+    {
+      "entity": "Commando team",
+      "state": "Active",
+      "behavior": "2-unit team with different control system; greater individual unit control compared to standard 5-soldier teams"
+    },
+    {
+      "entity": "Fallen soldier",
+      "state": "Incapacitated",
+      "behavior": "Immobile on ground; requires medic proximity and call to revive; cannot act until restored"
+    },
+    {
+      "entity": "Enemy soldier",
+      "state": "Instant death condition triggered",
+      "behavior": "Reduced to skeleton or ash; permanently removed from battlefield; cannot be revived by medic"
+    }
+  ],
+  "notes": "General Chaos uses visual class distinction (buzz cut, helmet, headband, dark glasses, eye patch/beard) to communicate unit roles through appearance. The satirical cartoon aesthetic communicates the humorous nature of the fictional conflict between brothers Chaos and Havoc. The game's visual communication relies heavily on unit proximity mechanics (close combat triggers) and status visualization (fallen soldiers, instant death effects). The two fictional nations (Moronica and Viceria) are distinguished primarily through campaign map control rather than distinct visual faction markers, though multiplayer/campaign mechanics imply opposing visual team representation not detailed in source.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:50:38.039Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2647,
+    "output_tokens": 2078,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

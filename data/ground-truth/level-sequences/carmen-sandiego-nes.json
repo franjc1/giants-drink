@@ -1,0 +1,157 @@
+{
+  "game_id": "carmen-sandiego-nes",
+  "game_name": "Where in the World Is Carmen Sandiego?",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "level_count": null,
+  "world_count": 30,
+  "element_introduction_order": [
+    {
+      "element": "ACME Detective Agency role",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "player establishes identity as rookie detective"
+    },
+    {
+      "element": "Crime alert notification",
+      "first_appears": "case begin",
+      "introduction_context": "moderate",
+      "mastery_context": "player learns that a theft has occurred and receives initial suspect gender"
+    },
+    {
+      "element": "Investigation at crime scene",
+      "first_appears": "early case",
+      "introduction_context": "safe",
+      "mastery_context": "player learns three witness locations and begins interviewing for clues"
+    },
+    {
+      "element": "Geographic clues and destinations",
+      "first_appears": "early case",
+      "introduction_context": "moderate",
+      "mastery_context": "player uses clues combined with reference almanac to determine next travel location"
+    },
+    {
+      "element": "Interpol database system",
+      "first_appears": "early case",
+      "introduction_context": "moderate",
+      "mastery_context": "player enters suspect details to narrow field and obtain arrest warrant"
+    },
+    {
+      "element": "Time pressure mechanic",
+      "first_appears": "early case",
+      "introduction_context": "moderate",
+      "mastery_context": "player manages in-game clock; thief escapes if deadline is exceeded"
+    },
+    {
+      "element": "False locations and backtracking",
+      "first_appears": "early case",
+      "introduction_context": "moderate",
+      "mastery_context": "player learns incorrect destinations yield no witness clues; requires revisiting"
+    },
+    {
+      "element": "Correct location confirmation",
+      "first_appears": "early case",
+      "introduction_context": "moderate",
+      "mastery_context": "brief animation of V.I.L.E. henchman confirms player is tracking correct target"
+    },
+    {
+      "element": "Thief's final location danger",
+      "first_appears": "late case",
+      "introduction_context": "dangerous",
+      "mastery_context": "investigative animations turn hostile (knife throws, gunfire); witnesses warn to be careful"
+    },
+    {
+      "element": "Apprehension and arrest",
+      "first_appears": "late case",
+      "introduction_context": "dangerous",
+      "mastery_context": "player selects correct location with valid warrant; police chase and apprehend thief"
+    },
+    {
+      "element": "Rank promotion",
+      "first_appears": "mid-game",
+      "introduction_context": "safe",
+      "mastery_context": "player answers geography question using almanac to advance rank and unlock harder cases"
+    },
+    {
+      "element": "Carmen Sandiego as final boss",
+      "first_appears": "endgame",
+      "introduction_context": "dangerous",
+      "mastery_context": "final case requires catching Carmen herself; success grants Hall of Fame entry"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "successful witness interview yielding new clue",
+      "Interpol database confirmation of suspect match",
+      "arrival at correct location with henchman animation",
+      "case solved with apprehension",
+      "rank promotion granted"
+    ],
+    "typical_tension_triggers": [
+      "crime alert with deadline imposed",
+      "arrival at wrong location (no clues, time wasted)",
+      "each action consuming in-game time",
+      "clock approaching end of day (forced sleep)",
+      "thief deadline approaching",
+      "final location reached with hostile animations",
+      "investigation without valid warrant (failure condition)"
+    ],
+    "pacing_descriptor": "iterative search with accumulating pressure; each case cycles between investigation (safe), travel decision (moderate tension), confirmation/denial feedback (relief or frustration), and deadline awareness (mounting pressure)"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "frequent",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "rookie cases with fewer potential locations and more accessible clues",
+    "mid_game": "intermediate cases with expanded location pool; rank promotion gates advancement requiring geography knowledge via almanac",
+    "late_game": "senior cases with maximum location complexity; Carmen Sandiego final case represents ultimate challenge",
+    "notable_spikes": [
+      "first case introduces all core mechanics simultaneously",
+      "each rank promotion adds significant location options and clue ambiguity",
+      "Carmen Sandiego final case combines full world map with hostile final location dynamics"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "case structure",
+      "description": "each case follows: alert → crime scene investigation → clue collection → Interpol narrowing → destination selection → travel → repeat until final location → apprehension with warrant",
+      "example_level": "any case (v.i.l.e. henchman case)"
+    },
+    {
+      "pattern_name": "three-location investigation",
+      "description": "player selects from three available locations in each city; interviews yield witness clues or confirm suspect presence via animation",
+      "example_level": "any city node"
+    },
+    {
+      "pattern_name": "decision tree branching",
+      "description": "player must use reference book knowledge combined with witness clues to select next city; incorrect selection forces backtracking with time penalty",
+      "example_level": "mid-case navigation"
+    },
+    {
+      "pattern_name": "escalation through rank",
+      "description": "promotion gates lock cases behind geography questions; each rank increase adds location complexity and case difficulty",
+      "example_level": "rank 1 to rank 2 transition"
+    }
+  ],
+  "sources_used": [
+    "wikipedia: Where in the World Is Carmen Sandiego? (1985 video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:57:39.337Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2623,
+    "output_tokens": 1615,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,201 @@
+GameResources/NES/KidIcarus - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Kid Icarus
+
+This page documents information about
+
+Kid Icarus
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+The purpose of this page is to document tricks, strategies and RAM addresses for the game Kid Icarus for NES.
+
+Terminology
+
+I will refer to the value of a RAM address using by their 4 digit hexadecimal value. So if I say "when 001C>0" I mean when RAM address 001C is >0.
+
+Horizontal speed analysis
+
+On ground
+
+Pit's X speed is stored in RAM address 001C. This value should be treated as a signed 8 bit value.
+
+When standing still this has value 0 if you are facing right, and 0 if you are facing left. If you start moving to the right, it will increase by 1 per frame, up to 8. Releasing right, or pressing left, will decrease your speed by 1 per frame after 1 frame, until it hits 0 again.
+
+You move 1 pixel whenever 001C>0. There are no subpixels in this game. This means that if you have moved 8 pixels to the right and then release right, it will take 9 frames for you to stop moving (1 initial frame where speed does not decrease, and then it will decrease by 1 per frame).
+
+Moving to the left works the same way.
+
+Ice physics
+
+On ice, your top X speed is 64, meaning that in this case it will take 65 frames for you to come to a complete halt when letting go of the right button, or when pressing left.
+
+In air
+
+Here things become more interesting. Let's look at the case when moving right, as moving left works in the same way.
+
+When 001C=9 you will move at 1 pixel per frame. When it is somewhere between 2 and 7 you will move 1 pixel every other frame, when 0014 is odd.
+
+Just like on ground, pressing left will decrease your speed by 1 per frame.
+
+Vertical speed analysis
+
+Pit's Y speed is stored in RAM address 001D. This value should be treated as a signed 8 bit value.
+
+Pit's Y speed can range between -3 pixels per frame (moving up) and 3 pixels per frames (moving down). This corresponds to 001D ranging from -27 (moving up) to 128.
+
+Just like the X speed, it's a bit tricky to convert this speed into pixels per frame. The conversion method is:
+
+if 001D<-18 then
+
+yspeed=-3
+elseif 001D>23 then
+
+yspeed=3
+else
+
+yspeed = round( (001D-6)/8 + 0.5)
+end
+
+When you make a jump, your Y speed will start out at -27. It will then slowly increase, corresponding to you starting to fall down. How fast it increases per frame depends on several factors:
+
+If you do not hold down A, it will increase by 2.
+
+If you hold down A, it will increase by 1.
+
+Bumping into a ceiling will set your Y speed to 0.
+
+Let's say that you make a jump and don't hold down anythning during the jump. Your Y speed will change like this: -27,-25,-23,-21,... until you hit the ground. If you hold down A the entire way it will look like this: -27,-26,-25,-24,...
+
+Here comes the interesting part: you can hold down A for individual frames during a jump, making the speed increase by 1 for these frames. For example, if you press A every other frame, your Y speed will change like this: -27,-26,-24,-23,-21,-20,-18,... Because you can for each frame in a jump decide if you want to hold down A or not, you can fine tune a jump quite precisely.
+
+Damage boosting
+
+Most enemies will give you a slight push to the left if you take a hit from them. To be exact, you get pushed 5 pixels to the left when you take a hit, and compare that to your normal 1 pixel/frame speed, you see that it saves 4 frames each time it is used. Some enemies give you a 5 pixel push to the right, but this is more rare.
+
+Example:  In this TAS  around frame 925.
+
+Rapid firing trick
+
+This was found by Celeri. By ducking after firing an arrow, you can fire again instantly. However, you can only have 2 arrows on screen at any time, so you're still somewhat restricted.
+
+Example:  In this TAS  on the first boss fight, frames 19200 to 19600.
+
+0 health death trick
+
+This trick was found by Kyrsimys. The core of the trick is that, when you have 1 health left, if you enter a door or finish a boss fight at the same time as you take damage, you will still beat the level, but you'll start the next level with 0 health. If you take 1 damage when you have 0 health, you will get full health again.
+
+Example:  In this TAS  around frame 51670.
+
+Horizontal platform wall wrap
+
+This was found by Sleepz. This trick has been present in all current Kid Icarus TASes. The only current known use of it is on level 2-3. By making the platform appear at the very edge of the screen, the right half of the platform will appear on the left side of the screen. If you jump up on the platform on the left side of the screen and ride it until it gets below ground level, the boundary that stops you from moving outside the screen to the left disappears, and you move to the very right of the screen (your X pixel is decreased when it is 0, so it goes to 255, which is the right side of the screen).
+
+Example:  In this TAS  around frame 38000.
+
+Snake urn wall wrap
+
+This was found by Jorf. On horisontal scroller levels, by duck jumping into a snake urn on the far left of the screen, you will wrap around to the right of the screen, similar to the horizontal platform wall wrap explained above.
+
+Input file showing this trick
+
+RAM addresses
+
+RAM Address  Comment
+
+0723  Pit's X pixel position on screen
+
+00FE  Screen X pixel position
+
+001B  Screen X 256 pixel position
+
+001C  Pit's X speed. See section above for details
+
+001D  Pit's Y speed. See section above for details
+
+00FE  Screen Y pixel position
+
+001A  Screen Y 240 pixel position
+
+Sprite related RAM addresses
+
+These RAM addresses store information about loaded enemies and other sprites, such as platforms.
+
+0760,0770,0780 and 0790 = Sprite Y position on screen
+0761,0771,0781 and 0791 = Sprite Y speed
+0763,0773,0783 and 0793 = Sprite X position on screen
+0764,0774,0784 and 0794 = Sprite X speed
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/KidIcarus last edited by Randil  on 7/10/2013 4:57 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

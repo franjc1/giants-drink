@@ -1,0 +1,152 @@
+{
+  "game_id": "chase-hq-genesis",
+  "game_name": "Chase H.Q.",
+  "platform": "genesis",
+  "paradigm": "racing/vehicular combat",
+  "danger_signals": [
+    {
+      "signal": "Criminal vehicle ahead",
+      "visual_form": "On-screen arrow marking fleeing suspect's car position",
+      "meaning": "Target location and direction; active threat requiring pursuit"
+    },
+    {
+      "signal": "Time pressure indicator",
+      "visual_form": "Countdown timer (60-70 seconds per phase)",
+      "meaning": "Imminent failure state; criminal escape risk escalating"
+    },
+    {
+      "signal": "Vehicle color variance",
+      "visual_form": "Suspect vehicles in distinct colors (white, yellow, silver, blue, red) vs. player's black Porsche",
+      "meaning": "Visual differentiation of enemy/threat; high-speed evasion target"
+    },
+    {
+      "signal": "Crash/collision state",
+      "visual_form": "Repeated vehicle impacts and damage",
+      "meaning": "Performance degradation; increases criminal escape risk"
+    },
+    {
+      "signal": "Road split uncertainty",
+      "visual_form": "Branching paths requiring correct navigation choice",
+      "meaning": "Wrong turn extends pursuit distance; tactical decision failure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Time extension acquisition",
+      "visual_form": "Reaching suspect vehicle triggers timer reset (60-70 additional seconds)",
+      "meaning": "Progression checkpoint; pursuit sustainability confirmed"
+    },
+    {
+      "signal": "Police authority",
+      "visual_form": "Player drives black Porsche 928; HQ radio contact from Nancy",
+      "meaning": "Institutional legitimacy; law enforcement role established"
+    },
+    {
+      "signal": "Level completion",
+      "visual_form": "Criminal apprehension animation; arrest sequence",
+      "meaning": "Safe state transition; mission objective achieved"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Chase H.Q. Police (Player side)",
+      "color_identity": "Black",
+      "symbol_or_sigil": "Porsche 928 police vehicle",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Radio communications from Nancy at HQ; official pursuit authorization"
+    },
+    {
+      "faction": "Criminals (Enemy side)",
+      "color_identity": "Multiple: white, yellow, silver, blue, red per suspect",
+      "symbol_or_sigil": "High-performance sports cars (Lotus Esprit, Lamborghini Countach, Porsche 911, Ferrari 288 GTO, Porsche 928)",
+      "enemy_visual_variants": "Each level features distinct criminal archetype with vehicle color-coding",
+      "environmental_markers": "Fleeing behavior; distance separation on track; evasion patterns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active pursuit phase",
+      "visual_manifestation": "Criminal vehicle visible ahead with directional arrow; on-screen distance marker; speedometer showing high velocity (300+ km/h)",
+      "behavioral_manifestation": "Criminal vehicle maintains constant forward motion away from player; attempts to maximize separation"
+    },
+    {
+      "world_state": "Vehicle engagement/ramming",
+      "visual_manifestation": "Suspect car physically reachable on-screen; collision damage visible; vehicle performance degradation",
+      "behavioral_manifestation": "Criminal vehicle slows or stops after repeated ramming; arrest animation triggers upon sufficient impact damage"
+    },
+    {
+      "world_state": "Time pressure critical",
+      "visual_manifestation": "Timer visibly depleting; countdown acceleration visual/audio cues",
+      "behavioral_manifestation": "Player must increase speed; wrong turns become catastrophic; criminal escape becomes probable"
+    },
+    {
+      "world_state": "Criminal escape (failure)",
+      "visual_manifestation": "Time expires; criminal vehicle exits screen boundary",
+      "behavioral_manifestation": "Level restart; loss of mission objective; score penalty"
+    },
+    {
+      "world_state": "Mission complete",
+      "visual_manifestation": "Suspect arrested; transition to next level scenario; briefing from Nancy on new criminal",
+      "behavioral_manifestation": "Time resets; new criminal profile introduced; new vehicle color and geographic location established"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character briefing via radio",
+      "example": "Nancy at Chase HQ provides criminal profile, vehicle description, and geographic location at level start; establishes institutional context and mission legitimacy"
+    },
+    {
+      "technique": "Vehicle color as identity",
+      "example": "Each criminal archetype assigned distinct vehicle color (Ralph=white Lotus, Carlos=yellow Lamborghini, etc.); visual taxonomy aids quick threat recognition"
+    },
+    {
+      "technique": "Geographic progression",
+      "example": "Levels named after cities with associated criminal stereotypes (Idaho Slasher, New York armed robber, Chicago pushers, L.A. kidnapper, Eastern Bloc Spy); establishes implicit crime landscape"
+    },
+    {
+      "technique": "Vehicle specification storytelling",
+      "example": "Suspect vehicles are high-performance sports cars; establishes criminals as wealthy/sophisticated; escalates from Lotus to Ferrari to Porsche in power hierarchy"
+    },
+    {
+      "technique": "Time pressure as narrative urgency",
+      "example": "60-70 second windows communicate imminent danger; criminals are active threats requiring immediate apprehension, not passive targets"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Criminal vehicles",
+      "state": "Unengaged (pursuit phase)",
+      "behavior": "Constant forward acceleration away from player; maintains maximum distance; exploits road forks to extend pursuit"
+    },
+    {
+      "entity": "Criminal vehicles",
+      "state": "Engaged (ramming phase)",
+      "behavior": "Visible slowing after repeated collisions; reduced evasion efficiency; eventual halt upon sufficient damage accumulation"
+    },
+    {
+      "entity": "Player vehicle (Porsche 928)",
+      "state": "Pursuit mode",
+      "behavior": "Accelerates to chase; follows criminal; capable of ramming; responds to player steering input at high speed"
+    },
+    {
+      "entity": "Nancy (HQ dispatcher)",
+      "state": "Level initiation",
+      "behavior": "Radio communication; provides criminal briefing; establishes pursuit objectives via ham radio frequencies (144-148 MHz authentic detail)"
+    }
+  ],
+  "notes": "Chase H.Q. communicates world-state primarily through temporal pressure (timer mechanics) and visual differentiation (vehicle colors, on-screen positioning). The game operates within a police procedural framework where institutional authority (Chase H.Q., Nancy, police radio) legitimizes player actions. Criminal profiles are stereotyped by geography and vehicle class, creating a loose narrative taxonomy. The black vs. colored vehicle distinction is the primary safety/danger signal. Genesis version release (1992-1993) post-dates original arcade but maintains core visual language. Limited environmental storytelling; world-state conveyed through mission briefings and chase mechanics rather than world-building details.",
+  "sources_used": [
+    "wikipedia - Chase H.Q."
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:38:05.042Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3528,
+    "output_tokens": 1806,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

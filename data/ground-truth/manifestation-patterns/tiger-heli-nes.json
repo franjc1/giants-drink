@@ -1,0 +1,172 @@
+{
+  "game_id": "tiger-heli-nes",
+  "game_name": "Tiger-Heli",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bullets fired by tanks, gunboats, aircraft, and artillery",
+      "meaning": "Active threat requiring evasion or interception; collision causes damage/death"
+    },
+    {
+      "signal": "Enemy formations",
+      "visual_form": "Ground and air enemies (tanks, gunboats, aircraft) positioned across terrain",
+      "meaning": "Concentrated danger zones; multiple simultaneous threats requiring tactical positioning"
+    },
+    {
+      "signal": "Bomb detonation trigger",
+      "visual_form": "Enemy bullets hitting carried bombs automatically detonate them",
+      "meaning": "Double-edged mechanic—protective but risky if positioned near enemies"
+    },
+    {
+      "signal": "Checkpoint respawn",
+      "visual_form": "Player death resets to last checkpoint after losing a life",
+      "meaning": "Progress loss; danger of cascading failures if multiple lives lost in sequence"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Bomb acquisition",
+      "visual_form": "Green-colored cross-shaped bunkers spawn 'B' icon pickup",
+      "meaning": "Short-range defensive/offensive capability; area-denial tool for bullet clearing"
+    },
+    {
+      "signal": "Wingman recruitment",
+      "visual_form": "Red or gray-colored bunker pickups spawn smaller helicopters to join formation",
+      "meaning": "Additional firepower; enhanced survivability through formation support"
+    },
+    {
+      "signal": "Score thresholds & diamond blocks",
+      "visual_form": "Accumulated points and destruction of ten diamond-shaped blocks award extra lives",
+      "meaning": "Extended survival capacity; buffer against attrition"
+    },
+    {
+      "signal": "Helipad arrival",
+      "visual_form": "Level completion landmark where player lands after each stage",
+      "meaning": "Safe zone transition; bonus points awarded for unused ordnance (bombs, wingmen)"
+    },
+    {
+      "signal": "Slow craft speed",
+      "visual_form": "Helicopter movement is deliberately slower than alternative aircraft",
+      "meaning": "Improved bullet visibility and strategic route planning; reduced stress for beginners"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Tiger Helicopter)",
+      "color_identity": null,
+      "symbol_or_sigil": "Attack helicopter as primary avatar",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starts missions from unspecified origin; returns to helipad after each stage"
+    },
+    {
+      "faction": "Enemy Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Militaristic hardware: tanks, gunboats, artillery, aircraft",
+      "enemy_visual_variants": "Multiple enemy types (air vs. ground) with distinct silhouettes and attack patterns",
+      "environmental_markers": "Scattered across diverse terrains: buildings, level crossings, fuel depots, tents, mine carts"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage (low difficulty)",
+      "visual_manifestation": "Sparse enemy density; slower projectile patterns; bunkers with power-up items visible",
+      "behavioral_manifestation": "Enemies present predictable attack patterns; beginners can identify bullet trajectories more easily"
+    },
+    {
+      "world_state": "Mid-stage (escalating threat)",
+      "visual_manifestation": "Increased enemy formations; coordinated air and ground threats; bunker items may be harder to access safely",
+      "behavioral_manifestation": "Enemy concentration forces player into tighter tactical routes; bomb detonation becomes critical defense"
+    },
+    {
+      "world_state": "Stage completion",
+      "visual_manifestation": "Helipad landmark appears; arena clears of active threats",
+      "behavioral_manifestation": "Safe transition zone; bonus scoring phase for ordnance retention"
+    },
+    {
+      "world_state": "Loop progression (post-final stage)",
+      "visual_manifestation": "Game returns to stage 2 with higher difficulty visual density",
+      "behavioral_manifestation": "Enemy spawn rates and projectile speed increase; terrain remains consistent but threat escalates"
+    },
+    {
+      "world_state": "Life loss",
+      "visual_manifestation": "Player death animation; checkpoint reset visual cue",
+      "behavioral_manifestation": "Mission resets to last checkpoint; tactical regrouping required; stress/tension conveyed through restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain variety across stages",
+      "example": "Four distinct stages with different environments (implied by level progression structure) communicate military campaign across varied operational areas"
+    },
+    {
+      "technique": "Infrastructure destruction",
+      "example": "Targetable buildings, fuel depots, tents, mine carts, and level crossings suggest supply line disruption mission; destroying civilian/logistical infrastructure indicates war scenario"
+    },
+    {
+      "technique": "Enemy hardware placement",
+      "example": "Tanks, gunboats, artillery scattered across terrain suggest entrenched defensive positions; air threats indicate air superiority contest"
+    },
+    {
+      "technique": "Helipad as narrative anchor",
+      "example": "Return to helipad after each stage suggests forward operating base/staging area; implies ongoing campaign with resupply points"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tiger Helicopter (Player)",
+      "state": "Normal flight",
+      "behavior": "Vertical scroll following with responsive lateral and vertical maneuvering; slower speed allows deliberate positioning"
+    },
+    {
+      "entity": "Tiger Helicopter (Player)",
+      "state": "Armed with bombs",
+      "behavior": "Defensive posture; area-denial capability; risk of collision-triggered detonation increases threat awareness"
+    },
+    {
+      "entity": "Tiger Helicopter (Player)",
+      "state": "Accompanied by wingmen",
+      "behavior": "Formation geometry changes (left/right variants with lateral or forward firing); additional firepower reduces individual risk exposure"
+    },
+    {
+      "entity": "Tanks",
+      "state": "Deployed",
+      "behavior": "Ground-based stationary or slow-moving threat; fires upward at helicopter; targetable from distance"
+    },
+    {
+      "entity": "Aircraft (Enemy)",
+      "state": "Active",
+      "behavior": "Air-to-air threat; matches vertical scroll speed; requires missile interception or evasion"
+    },
+    {
+      "entity": "Gunboats",
+      "state": "Stationary",
+      "behavior": "Water-based threat; fires projectiles; indicates coastal/river operations"
+    },
+    {
+      "entity": "Bunkers (Green/Red/Gray)",
+      "state": "Intact",
+      "behavior": "Destructible objective; color state determines reward type (bomb vs. wingmen); visual toggle conveys switching reward availability"
+    },
+    {
+      "entity": "Bullets (Enemy)",
+      "state": "In flight",
+      "behavior": "Slower projectile speed (design feature for visibility); destroyable by bombs; collision hazard with helicopter or carried ordnance"
+    }
+  ],
+  "notes": "Tiger-Heli employs military hardware iconography and combat mission framing (supply destruction, entrenched positions) without explicit faction narrative. World-state communication relies on enemy density escalation, environmental variety (suggesting strategic locations), and checkpoint/helipad structures implying campaign progression. Visual design prioritizes clarity for beginners through slower craft speed and bullet visibility—danger is communicated through projectile patterns rather than visual grotesquerie or color saturation shifts. Safety signals operate mechanically (bunker items, wingmen) rather than narratively. The game's minimalist visual narrative—helicopter vs. generic enemy forces across diverse military infrastructure—positions it as abstract tactical conflict rather than specific geopolitical scenario.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:07:45.479Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3200,
+    "output_tokens": 2026,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

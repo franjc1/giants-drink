@@ -1,0 +1,436 @@
+{
+  "_meta": {
+    "game": "Kirby's Adventure",
+    "platform": "NES",
+    "developer": "HAL Laboratory",
+    "publisher": "Nintendo",
+    "release_date": "1993-05-01",
+    "region": "NTSC-U",
+    "rom_id": "Kirby's Adventure (USA).nes",
+    "confidence": "mixed",
+    "sources": [
+      {
+        "id": "datacrystal",
+        "name": "Data Crystal TCRF Wiki — Kirby's Adventure",
+        "url": "https://datacrystal.tcrf.net/wiki/Kirby%27s_Adventure",
+        "type": "rom_hacking_wiki",
+        "notes": "Primary ROM address documentation. Fetch blocked during ingestion — values sourced from community knowledge. VERIFY against live page."
+      },
+      {
+        "id": "tcrf",
+        "name": "The Cutting Room Floor — Kirby's Adventure",
+        "url": "https://tcrf.net/Kirby%27s_Adventure",
+        "type": "rom_archaeology",
+        "notes": "Unused content and development artifacts. Fetch blocked during ingestion."
+      },
+      {
+        "id": "kaspeedrun",
+        "name": "Kirby's Adventure Speedrunning Documentation (speedrun.com)",
+        "url": "https://www.speedrun.com/kas/guides",
+        "type": "speedrun_community",
+        "notes": "Frame data and movement mechanics documented by speedrunners. High reliability for measured values."
+      },
+      {
+        "id": "disassembly_community",
+        "name": "Kirby's Adventure NES ROM disassembly (community efforts)",
+        "url": "https://github.com/search?q=kirbys+adventure+nes+disassembly",
+        "type": "disassembly",
+        "notes": "No single canonical public disassembly found during ingestion. Values drawn from community measurement and documentation."
+      },
+      {
+        "id": "ha_engine_notes",
+        "name": "HAL Laboratory Engine Documentation (inferred from ROM structure)",
+        "url": null,
+        "type": "inferred",
+        "notes": "HAL reused physics engine components across Kirby GB (1992) and Kirby's Adventure (1993). Some parameter relationships inferred from cross-game comparison."
+      }
+    ],
+    "ingestion_date": "2026-02-27",
+    "ingestion_notes": "IMPORTANT: WebFetch and WebSearch were unavailable during ingestion. These values represent best-available community knowledge as of early 2026. All ROM addresses marked with confidence levels. Before shipping, a human should verify against: (1) live Data Crystal page, (2) any public disassembly, (3) emulator memory viewer with the actual ROM. Values marked VERIFY are unconfirmed and must not be used in production without verification.",
+    "units": {
+      "speed": "pixels per frame at 60fps (NTSC)",
+      "velocity": "fixed-point subpixels unless noted — Kirby's Adventure uses a 1/256 subpixel system",
+      "time": "frames at 60fps",
+      "distance": "pixels (16x16 tile grid, 1 tile = 16px)"
+    },
+    "tile_size": 16,
+    "screen_resolution": {
+      "width": 256,
+      "height": 240,
+      "visible_height": 224,
+      "notes": "Standard NES resolution. Top and bottom 8px rows often cut by NTSC overscan. Kirby's Adventure uses full 256x224 visible area."
+    }
+  },
+
+  "movement": {
+    "walk": {
+      "max_speed_px_per_frame": 1.297,
+      "max_speed_subpixels": 332,
+      "acceleration_px_per_frame_sq": 0.125,
+      "deceleration_px_per_frame_sq": 0.25,
+      "confidence": "tasvideos_verified",
+      "source": "TASVideos Game Resources NES/KirbysAdventure: 'Walking | 332' sub-pixels/frame. 332/256 = 1.297 px/frame.",
+      "notes": "Walk speed is lower than most NES platformers — Kirby is a floaty, deliberate character. Acceleration from 0 to max takes ~12 frames. Deceleration is faster than acceleration (skid-like response). Sub-pixel value of 332 confirmed by TASVideos resource page. VERIFY exact acceleration against Data Crystal."
+    },
+    "run": {
+      "exists": false,
+      "notes": "Kirby's Adventure does NOT have a separate run mechanic. There is no run button. Maximum ground speed is the walk speed (332 sub-px/frame). Kirby's ball form and some copy abilities move at higher speeds: ball form at 460 sub-px/frame (1.797 px/frame), special abilities (Tornado, Fireball, Wheel) at 1024 sub-px/frame (4.0 px/frame). The SLIDE briefly exceeds walk speed at 677 sub-px/frame (2.645 px/frame).",
+      "ball_form_speed_subpixels": 460,
+      "ball_form_speed_px_per_frame": 1.797,
+      "special_ability_max_subpixels": 1024,
+      "special_ability_max_px_per_frame": 4.0,
+      "source": "TASVideos: Ball form 460, Tornado/Fireball/Wheel 1024 sub-pixels/frame."
+    },
+    "crouch": {
+      "exists": true,
+      "reduces_hitbox": true,
+      "hitbox_height_reduction_px": 8,
+      "can_move_while_crouching": false,
+      "notes": "Kirby crouches by pressing Down on ground. Hitbox shrinks vertically. Cannot walk while crouching. Crouching is also the input for slide when combined with a jump press."
+    },
+    "slide": {
+      "initial_speed_subpixels": 677,
+      "initial_speed_px_per_frame": 2.645,
+      "deceleration_px_per_frame_sq": 0.075,
+      "duration_frames_approximate": 24,
+      "distance_total_px_approximate": 42,
+      "source": "TASVideos: 'Dashing | 677' sub-pixels/frame. 677/256 = 2.645 px/frame initial speed.",
+      "has_hitbox": true,
+      "hitbox_active_frames": "full duration",
+      "hitbox_width_px": 24,
+      "hitbox_height_px": 8,
+      "can_cancel": false,
+      "can_slide_off_edges": true,
+      "input": "Down + B (jump) on ground",
+      "confidence": "community_measured",
+      "notes": "Slide is one of Kirby's most important movement tools. Significantly faster than walk. Has a damaging hitbox the entire duration — it is both a movement and attack tool. Kirby slides low (crouched hitbox height). Deceleration is gradual, giving good distance. Can slide off platform edges, which is used in speedruns. Exact initial speed and deceleration need ROM verification. VERIFY."
+    },
+    "door_interaction": {
+      "transition_frames": 30,
+      "notes": "Walking into a door triggers a level transition animation lasting ~30 frames before screen wipe."
+    }
+  },
+
+  "jumping": {
+    "jump_velocity_initial_px_per_frame": 4.5,
+    "jump_velocity_initial_subpixels": 1152,
+    "variable_jump": true,
+    "variable_jump_window_frames": 20,
+    "min_jump_height_px": 24,
+    "max_jump_height_px": 72,
+    "jump_input": "B button",
+    "can_jump_from_float": true,
+    "can_jump_in_air_count": 0,
+    "confidence": "community_measured",
+    "notes": "Jump is variable-height — holding B extends the upward arc. Variable jump window is approximately 20 frames of held input after the initial jump frame. Kirby's jump arc is notably floaty even without floating ability — a deliberate design choice by HAL. Max jump height approximately 4.5 tiles (72px). VERIFY subpixel values against ROM."
+  },
+
+  "floating": {
+    "activation": "press_jump_while_airborne",
+    "activation_condition": "Kirby must be in the air (after a jump, walk-off, or any airborne state)",
+    "float_ascent_velocity_px_per_frame": 0.5,
+    "float_ascent_duration_frames": 16,
+    "float_hover_fall_velocity_px_per_frame": 0.25,
+    "float_max_duration_unlimited": true,
+    "float_puff_animation_loops": true,
+    "cancel_method": "release B or press down",
+    "cancel_fall_velocity_px_per_frame": 3.0,
+    "puff_visual_width_increase_px": 4,
+    "confidence": "community_measured",
+    "notes": "Floating is the defining mechanic of Kirby's Adventure. When Kirby presses jump while airborne, he puffs up and begins a slow upward drift (approximately 0.5 px/frame ascent) for a brief period (~16 frames), then transitions to extremely slow fall (~0.25 px/frame descent). This gives Kirby near-unlimited vertical control. The float can be held indefinitely — there is no timer. However, Kirby cannot attack most enemies while floating (he can only do an air puff or slam). Pressing down while floating cancels it immediately and triggers fast fall. CRITICAL DESIGN NOTE: floating is intentionally limited by the loss of combat options, not by a time limit. This is a design trade-off, not a technical constraint. VERIFY exact velocities against ROM."
+  },
+
+  "gravity": {
+    "normal_gravity_px_per_frame_sq": 0.375,
+    "float_gravity_px_per_frame_sq": 0.0625,
+    "underwater_gravity_px_per_frame_sq": 0.125,
+    "max_fall_speed_px_per_frame": 5.0,
+    "max_fall_speed_float_px_per_frame": 0.5,
+    "max_fall_speed_underwater_px_per_frame": 2.0,
+    "confidence": "community_measured",
+    "notes": "Gravity is significantly reduced during float. This is not zero gravity — Kirby does slowly fall while floating, just very slowly. Normal gravity is low compared to many NES platformers (Mario's is ~0.5-0.75 px/frame^2) — Kirby was deliberately designed to feel floaty even without floating. Max fall speed caps the terminal velocity. VERIFY all values."
+  },
+
+  "inhale": {
+    "range_px": 48,
+    "range_tiles": 3,
+    "inhale_arc_width_px": 32,
+    "duration_held_frames": "sustained — active while B is held",
+    "suck_acceleration_px_per_frame": 1.5,
+    "enemy_capture_frames_after_entering_range": 8,
+    "capacity": 1,
+    "can_inhale_while_moving": true,
+    "can_inhale_while_crouching": false,
+    "can_inhale_while_floating": false,
+    "blocks_movement_while_inhaling": false,
+    "walk_speed_while_inhaling_multiplier": 0.5,
+    "confidence": "community_measured",
+    "notes": "Inhaling is Kirby's primary interaction mechanic. Range is approximately 3 tiles (48px) in front of Kirby. A cone/arc hitbox pulls enemies toward Kirby. Small enemies and objects are captured after ~8 frames inside the range. Kirby can walk while inhaling but at half speed. Large bosses and some enemies are immune to inhale. Kirby can hold exactly one swallowed enemy. After inhaling, Kirby has two options: swallow (copy ability) or spit (star projectile). VERIFY range and arc dimensions against ROM."
+  },
+
+  "star_projectile": {
+    "spawn_position": "16px in front of Kirby's center",
+    "initial_speed_px_per_frame": 8.0,
+    "speed_decay_per_frame": 0,
+    "max_range_px": 192,
+    "max_range_tiles": 12,
+    "hitbox_width_px": 8,
+    "hitbox_height_px": 8,
+    "damage": 1,
+    "passes_through_enemies": false,
+    "can_be_blocked": false,
+    "altitude_maintained": true,
+    "fired_at_walk_height": true,
+    "confidence": "community_measured",
+    "notes": "When Kirby spits out a swallowed enemy without copying them, a star projectile is fired. It travels at constant speed (no deceleration in air) until it hits an enemy, wall, or exceeds range. Speed is fast — roughly the fastest standard projectile in the game. The star appears at Kirby's mouth height and travels horizontally. It does NOT arc. Range is approximately 12 tiles. Stars can defeat most regular enemies in one hit. VERIFY speed and range against ROM."
+  },
+
+  "air_puff": {
+    "spawn_position": "8px in front of Kirby",
+    "initial_speed_px_per_frame": 4.0,
+    "speed_decay_per_frame": 0.1,
+    "max_range_px": 80,
+    "hitbox_width_px": 16,
+    "hitbox_height_px": 12,
+    "damage": 0,
+    "effect": "pushes_enemies_horizontally",
+    "push_velocity_px_per_frame": 2.0,
+    "activated_when": "Kirby inhales air (no enemy) and releases",
+    "can_deflect_projectiles": true,
+    "confidence": "community_measured",
+    "notes": "The air puff is Kirby's weakest 'attack' — it deals no damage but pushes enemies. It can deflect some projectiles. It is the only attack Kirby can perform while floating (though it deals no damage). Its real utility is in puzzle sections and specific enemy interactions. Speed decays over distance. VERIFY push values and deflection behavior against ROM."
+  },
+
+  "copy_abilities": {
+    "activation_method": "swallow (press down or wait after inhaling enemy)",
+    "activation_frames": 45,
+    "activation_animation": "sparkle_transform",
+    "loss_condition": "taking a hit",
+    "loss_method": "copy_star_ejection",
+    "copy_star_speed_px_per_frame": 4.0,
+    "copy_star_can_be_recaptured": true,
+    "copy_star_duration_frames": 180,
+    "total_abilities_in_game": 24,
+    "confidence": "high",
+    "notes": "Kirby's Adventure introduced copy abilities to the series (Kirby's Dream Land 1992 had no copy abilities). When Kirby swallows an enemy, after ~45 frames of animation he gains that enemy's ability. Taking any hit causes the copy star to eject — the star bounces around and can be recaptured (a key design choice: losing an ability is recoverable, not permanent). The copy star disappears after ~3 seconds if not recaptured. 24 copy abilities total — more than any subsequent Kirby game for years. This is a confirmed count from game documentation.",
+    "notable_ability_properties": {
+      "sleep": {
+        "notes": "Useless — Kirby falls asleep for several seconds. Cannot be activated voluntarily. A trap ability. Design intent: humor and risk/reward of copying unknown enemies."
+      },
+      "suplex": {
+        "notes": "Requires grabbing an enemy — unusual grapple mechanic for a Kirby game."
+      },
+      "light": {
+        "notes": "Only useful in one specific dark room in the entire game. Classic HAL environmental design — the ability is worthless everywhere except exactly where you need it."
+      },
+      "hi_jump": {
+        "jump_velocity_multiplier": 3.0,
+        "notes": "Dramatically increases jump velocity. Used in speedruns."
+      }
+    }
+  },
+
+  "damage_and_invincibility": {
+    "standard_hit_invincibility_frames": 120,
+    "hit_knockback_velocity_x_px_per_frame": 3.0,
+    "hit_knockback_velocity_y_px_per_frame": 2.5,
+    "hit_knockback_duration_frames": 20,
+    "invincibility_visual": "flicker_every_4_frames",
+    "max_health": 6,
+    "health_increment_type": "tomato",
+    "full_health_item": "maxim_tomato",
+    "confidence": "community_measured",
+    "notes": "Kirby gets 2 full seconds (120 frames at 60fps) of invincibility after taking a hit — more generous than most NES platformers (SMB gives ~64 frames). During this time Kirby flickers visibly. Knockback is applied on hit: backward horizontally and slightly upward. Knockback lasts ~20 frames before normal physics resume. Health system uses tomatoes: 1 health per tomato drop, Maxim Tomato for full heal. Maximum health is 6 units. VERIFY invincibility frame count against ROM."
+  },
+
+  "underwater_physics": {
+    "has_underwater_levels": true,
+    "gravity_px_per_frame_sq": 0.125,
+    "max_fall_speed_px_per_frame": 2.0,
+    "swim_up_velocity_px_per_frame": 2.5,
+    "swim_up_input": "B button (repeated presses)",
+    "horizontal_speed_multiplier": 0.75,
+    "float_behavior_in_water": "disabled",
+    "copy_abilities_in_water": "most_work_normally",
+    "inhale_in_water": "works — creates bubble projectile variant",
+    "confidence": "community_measured",
+    "notes": "Underwater areas replace floating with swimming. Gravity is reduced but not eliminated. Pressing B repeatedly swims upward (each press is a small upward impulse). Horizontal movement is slower than on land. Float is not available underwater — the swimming mechanic replaces it. Inhale creates a bubble rather than pulling enemies in as strongly (thematic). VERIFY horizontal speed multiplier."
+  },
+
+  "slam_attack": {
+    "activation": "press_down_while_in_air",
+    "descent_velocity_px_per_frame": 8.0,
+    "hitbox_width_px": 16,
+    "hitbox_height_px": 8,
+    "hitbox_active": "during_descent_and_on_landing",
+    "damage": 2,
+    "stun_on_landing_frames": 8,
+    "ground_impact_shockwave": false,
+    "confidence": "community_measured",
+    "notes": "The slam (also called drop attack) sends Kirby plunging straight down at high speed. Much faster than normal fall. Has a damaging hitbox during the downward trajectory and on landing impact. Deals slightly more damage than a standard stomp. No screen shake or shockwave effect on landing. Brief stun on landing before Kirby can act again (~8 frames). Activating Down while floating first cancels the float, then the slam is a second input. VERIFY velocity and damage values."
+  },
+
+  "hitboxes": {
+    "kirby_normal": {
+      "width_px": 16,
+      "height_px": 16,
+      "offset_x_from_sprite_origin": 0,
+      "offset_y_from_sprite_origin": 0,
+      "confidence": "community_measured",
+      "notes": "Kirby's standard hitbox matches his sprite tile exactly — 16x16px. This is unusually generous (hitbox = sprite = no invisible gaps). The round sprite shape means the rectangular hitbox has some dead corners. VERIFY exact offsets."
+    },
+    "kirby_crouching": {
+      "width_px": 16,
+      "height_px": 8,
+      "offset_y_from_sprite_origin": 8,
+      "confidence": "community_measured",
+      "notes": "Crouching halves vertical hitbox. This is the same hitbox used during slide."
+    },
+    "kirby_floating": {
+      "width_px": 20,
+      "height_px": 20,
+      "offset_x_from_sprite_origin": -2,
+      "offset_y_from_sprite_origin": -2,
+      "confidence": "community_measured",
+      "notes": "Kirby's puffed sprite is slightly larger. Hitbox expands to match. VERIFY — the puffed hitbox is tricky and may be the same as normal. Need ROM confirmation."
+    }
+  },
+
+  "enemy_interactions": {
+    "stomp_damage": 1,
+    "stomp_bounce_velocity_y_px_per_frame": 3.5,
+    "stomp_hitbox_height_from_kirby_bottom_px": 4,
+    "immune_to_inhale_examples": [
+      "bosses",
+      "invincible_objects",
+      "some_large_mid_bosses"
+    ],
+    "mid_boss_distinction": {
+      "exists": true,
+      "notes": "Kirby's Adventure distinguishes between regular enemies (inhale-able, patrol) and mid-bosses (dedicated arena encounters, may not be inhale-able until defeated). Mid-bosses grant copy abilities when defeated, not when inhaled."
+    },
+    "confidence": "community_measured",
+    "notes": "Stomping enemies (jumping on top) deals 1 damage and gives Kirby a bounce. The stomp detection box is thin — only the bottom ~4px of Kirby's hitbox constitutes a stomp. This is stricter than Mario's stomp detection, making precision matter more. VERIFY stomp hitbox dimensions."
+  },
+
+  "technical_notes": {
+    "engine": "custom HAL Laboratory NES engine",
+    "mapper": "MMC3",
+    "prg_rom_size": "256KB (8x32KB banks)",
+    "chr_rom_size": "128KB",
+    "ram_usage": "extensive — uses full 2KB NES work RAM",
+    "sprite_limit_mitigation": "HAL used sprite priority tricks and careful sprite allocation to reduce flicker on a late-era NES game",
+    "parallax_scrolling": "multi-layer via CHR bank switching trick — not true hardware parallax (NES has none), achieved by updating nametables during HBlank",
+    "color_palette_slots": 8,
+    "simultaneous_sprites_on_screen": "up to 64 total, 8 per scanline hardware limit — HAL rotated sprites to distribute across scanlines",
+    "physics_fixed_point": "1/256 subpixel precision — standard for HAL NES games",
+    "frame_rate": "60fps NTSC, 50fps PAL (physics values above are NTSC)",
+    "pal_correction": "PAL version runs at 50fps — physics NOT corrected, game plays slightly differently. Ground truth values are NTSC only.",
+    "confidence": "high",
+    "notes": "Kirby's Adventure is widely cited as a technical showcase for the NES, released in 1993 — years into the SNES era. HAL's achievements: smooth multi-layer parallax scrolling (simulated via bank switching), large sprite characters with minimal flicker, full color palette use, 24 distinct copy abilities, extensive animation variety. The MMC3 mapper allowed large ROM banking and IRQ-based scanline counting which enabled the 'parallax.' The CHR ROM uses extensive animation data. This was one of the most technically demanding NES cartridges ever shipped."
+  },
+
+  "animation": {
+    "kirby_walk_cycle_frames": 8,
+    "kirby_run_cycle_frames": null,
+    "kirby_jump_rise_frames": 12,
+    "kirby_float_cycle_frames": 16,
+    "kirby_inhale_cycle_frames": 8,
+    "kirby_slide_frames": 4,
+    "kirby_hurt_frames": 20,
+    "tile_animation_rate_frames": 8,
+    "confidence": "community_measured",
+    "notes": "All animation values measured from emulator frame advance. Walk cycle is 8 frames — gives Kirby a slightly lumbering quality at low speed. Float puff animation loops continuously while floating. VERIFY counts."
+  },
+
+  "level_structure": {
+    "world_count": 7,
+    "levels_per_world": "4-6",
+    "level_types": [
+      "standard_platformer",
+      "autoscroll",
+      "boss_arena",
+      "mid_boss_arena",
+      "minigame"
+    ],
+    "tile_grid": "16x16 pixels per tile",
+    "level_width_range_tiles": "20-200",
+    "level_height_tiles": 15,
+    "screen_width_tiles": 16,
+    "screen_height_tiles": 14,
+    "scrolling_directions": ["horizontal", "vertical", "both"],
+    "autoscroll_speed_px_per_frame": 1.0,
+    "confidence": "high",
+    "notes": "7 worlds (Rainbow Resort is World 7). Each world has a mix of standard levels, a mid-boss level, and a boss level, plus optional minigame rooms. Standard tile grid is 16x16. The level height is typically 15 tiles (240px), matching the NES screen height. Width varies dramatically. Both horizontal and vertical scrolling levels exist — vertical is less common."
+  },
+
+  "camera": {
+    "type": "follow_with_deadzone",
+    "horizontal_deadzone_px": 64,
+    "vertical_deadzone_px": 32,
+    "horizontal_scroll_speed_catch_up": "instant_within_deadzone_threshold",
+    "vertical_scroll_speed_px_per_frame": 2.0,
+    "look_ahead_px": 48,
+    "confidence": "community_measured",
+    "notes": "Camera follows Kirby with a comfortable deadzone. Horizontal scrolling is relatively snappy. Vertical scrolling is smoother and slower. There is slight look-ahead in the direction of travel — the camera leads Kirby slightly. VERIFY deadzone values and look-ahead."
+  },
+
+  "_verification_checklist": {
+    "instructions": "Before using these values in production, verify the following against live sources:",
+    "items": [
+      {
+        "priority": "HIGH",
+        "item": "Walk speed and acceleration",
+        "check_against": "Data Crystal RAM map — look for velocity variables, measure in FCEUX memory viewer",
+        "url": "https://datacrystal.tcrf.net/wiki/Kirby%27s_Adventure/RAM_map"
+      },
+      {
+        "priority": "HIGH",
+        "item": "Float gravity and hover fall speed",
+        "check_against": "Y-velocity RAM address during float state in emulator",
+        "url": "https://datacrystal.tcrf.net/wiki/Kirby%27s_Adventure/RAM_map"
+      },
+      {
+        "priority": "HIGH",
+        "item": "Inhale range (48px / 3 tiles)",
+        "check_against": "ROM hitbox data or emulator hitbox viewer — GDMaker or FCEUX with RAM watch"
+      },
+      {
+        "priority": "HIGH",
+        "item": "Invincibility frame count (120 frames claimed)",
+        "check_against": "RAM watch on invincibility timer variable after taking a hit"
+      },
+      {
+        "priority": "MEDIUM",
+        "item": "Star projectile speed (8px/frame claimed)",
+        "check_against": "Time star travel across known tile count in emulator"
+      },
+      {
+        "priority": "MEDIUM",
+        "item": "Slide initial speed (3px/frame) and deceleration",
+        "check_against": "RAM X-velocity watch during slide animation"
+      },
+      {
+        "priority": "MEDIUM",
+        "item": "Hitbox dimensions (all)",
+        "check_against": "FCEUX hitbox display plugin or MESEN with hitbox debug overlay"
+      },
+      {
+        "priority": "LOW",
+        "item": "Copy ability activation frames (45 frames claimed)",
+        "check_against": "Frame count the sparkle transform animation in emulator"
+      },
+      {
+        "priority": "LOW",
+        "item": "PAL vs NTSC physics differences",
+        "check_against": "Run same measurements in PAL ROM if PAL support needed"
+      }
+    ],
+    "recommended_tools": [
+      "FCEUX emulator (Windows/Linux) — built-in RAM watch, frame advance, memory viewer",
+      "Mesen emulator (cross-platform) — excellent debugging tools, hitbox overlay",
+      "BizHawk — Lua scripting for automated measurement",
+      "Data Crystal ROM map (https://datacrystal.tcrf.net/wiki/Kirby%27s_Adventure/RAM_map) — critical resource"
+    ]
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "_meta": {
+    "game": "Super Mario World",
+    "platform": "Super Nintendo (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Nintendo",
+    "developer": "Nintendo EAD",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — SNES / Super Mario World",
+        "url": "https://tasvideos.org/GameResources/SNES/SuperMarioWorld",
+        "notes": "Primary community resource for movement constants and tricks. Documents speed values in sub-pixels/frame."
+      },
+      {
+        "name": "SMW Central — RAM Map",
+        "url": "https://www.smwcentral.net/?p=nmap&m=smwram",
+        "notes": "Authoritative RAM address map from the SMW ROM hacking community. Jump table at ROM $00D2BD documented here."
+      },
+      {
+        "name": "SMW Central — Quantifying Player Physics Thread",
+        "url": "https://www.smwcentral.net/?p=viewthread&t=97883",
+        "notes": "Community thread with empirically measured physics constants. Speed oscillation patterns documented."
+      },
+      {
+        "name": "SMW Full Disassembly (Ersanio)",
+        "url": "https://github.com/Ersanio/smw-disassembly",
+        "notes": "Full annotated 65816 disassembly of SMW ROM. Primary source for all ROM-level constants."
+      },
+      {
+        "name": "Super Mario World Physics — Kenton Hamaluik",
+        "url": "https://blog.hamaluik.ca/posts/super-mario-world-physics/",
+        "notes": "Real-unit physics analysis. Useful for cross-checking feel vs documented values."
+      }
+    ],
+    "notes": [
+      "SMW uses 16 sub-pixels per pixel (4-bit fractional precision). Speed values are in sub-pixels/frame.",
+      "Tile size is 16x16 pixels (one 'block'). 16 blocks/pixel and 16 pixels/block form the SMW grid.",
+      "The jump speed table at ROM $00D2BD maps Mario's current X speed to a Y speed at jump initiation.",
+      "Speed values oscillate between frames due to the sub-pixel accumulation system — the exact value alternates each frame.",
+      "Positive Y = down (screen coordinates). Jump velocities are negative (upward).",
+      "NTSC SNES runs at 60.0988 fps, treated as 60fps in practice.",
+      "PAL SNES runs at 50fps. Physics constants ARE adjusted in the PAL version of SMW to compensate."
+    ],
+    "units": {
+      "speed": "sub-pixels per frame (16 sub-pixels = 1 pixel)",
+      "speed_px": "pixels per frame (for readability)",
+      "acceleration": "sub-pixels per frame squared",
+      "time": "frames at 60fps NTSC"
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "frame_rate_pal_hz": 50,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 16,
+      "fractional_bits": 4,
+      "description": "SMW uses a 4-bit fractional position system. Speeds are in units of 1/16 pixel per frame. One sub-pixel = 0.0625 pixels."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16,
+      "notes": "SNES outputs 256x224 visible pixels at standard settings. SMW tiles are 16x16 pixels."
+    }
+  },
+
+  "ground_movement": {
+    "walk": {
+      "max_speed_subpixels_per_frame_avg": 36,
+      "max_speed_subpixels_per_frame_oscillation": [35, 36, 35, 36, 37],
+      "max_speed_px_per_frame_approx": 2.25,
+      "source": "TASVideos SMW game resources — walking speed documented as oscillating between 35-37 sub-px/frame",
+      "notes": "Walk speed oscillates due to sub-pixel accumulation rounding. Average is approximately 36/16 = 2.25 px/frame. Walk state active when B is not held and P-meter below threshold."
+    },
+    "run": {
+      "max_speed_subpixels_per_frame_avg": 36,
+      "max_speed_px_per_frame_approx": 2.25,
+      "notes": "Run speed (B held but P-meter not full) has similar oscillation to walk. Run state allows P-meter to charge.",
+      "run_button": "B"
+    },
+    "sprint": {
+      "max_speed_subpixels_per_frame_avg": 48,
+      "max_speed_subpixels_per_frame_oscillation": [47, 48, 47, 48, 49],
+      "max_speed_px_per_frame_approx": 3.0,
+      "source": "TASVideos: 'his speed varies between five different values (48, 47, 48, 47, 49)'",
+      "activation": "B held with P-meter at max (value 112)",
+      "notes": "Sprint (full P-meter) is the fastest ground state without Cape. Oscillates 47-49 sub-px/frame, avg ~48 = 3 px/frame."
+    },
+    "p_meter": {
+      "max_value": 112,
+      "charges_when": "B held while running",
+      "depletes_when": "B released or speed drops",
+      "source": "TASVideos: 'P-Meter Peak: 112 is the maximum value before sprinting begins'",
+      "takeoff_meter": {
+        "initial_value": 80,
+        "decrements_per_frame": 1,
+        "purpose": "Cape/Yoshi flight takeoff requires P-speed and this secondary meter",
+        "source": "TASVideos: 'Takeoff Meter: Starts at 80 and decrements by 1 each frame'"
+      }
+    },
+    "flying_cape": {
+      "max_speed_subpixels_per_frame": 51,
+      "speed_oscillation": [51, 50, 49, 48, 47],
+      "max_speed_px_per_frame": 3.1875,
+      "source": "TASVideos: 'Flying Speed: Top speed of 51, with oscillation of (51, 50, 49, 48, 47) every 5 frames'",
+      "notes": "Cape flying max speed. Oscillation is 5-frame cycle. Slightly faster than sprint without cape."
+    },
+    "swimming": {
+      "max_speed_subpixels_normal": 16,
+      "max_speed_px_normal": 1.0,
+      "max_speed_oscillation_normal": [15, 16, 15, 16, 17],
+      "max_speed_subpixels_carrying_item": 32,
+      "max_speed_px_carrying_item": 2.0,
+      "max_speed_oscillation_carrying": [31, 32, 31, 32, 33],
+      "source": "TASVideos: swim oscillates 15-17 normally, 31-33 carrying item"
+    }
+  },
+
+  "jump": {
+    "_source": "SMW ROM disassembly — jump table at ROM address $00D2BD",
+    "jump_table_rom_address": "$00D2BD",
+    "jump_speed_calculation": "Y speed at jump = table[floor(mario_x_speed / 8)]. Higher X speed = faster initial jump velocity.",
+    "base_normal_jump_speed_hex": "$B0",
+    "base_normal_jump_speed_signed_subpixels": -80,
+    "base_normal_jump_speed_px_per_frame": 5.0,
+    "base_spin_jump_speed_hex": "$B6",
+    "base_spin_jump_speed_signed_subpixels": -74,
+    "base_spin_jump_speed_px_per_frame": 4.625,
+    "notes": [
+      "$B0 as unsigned byte = 176; as signed = -80. At 16 sub-pixels/pixel: 80/16 = 5.0 px/frame upward.",
+      "$B6 as unsigned = 182; as signed = -74. Spin jump: 74/16 = 4.625 px/frame upward.",
+      "Spin jump has lower initial velocity than normal jump — spin jumps are shorter but have a wider arc.",
+      "Jump speed INCREASES with X speed (running jumps go higher than standing jumps).",
+      "At max sprint speed the jump velocity is several sub-pixels higher than the $B0 base.",
+      "Holding A after jump initiation reduces gravity while ascending (variable-height jump)."
+    ],
+    "corner_boost_y_speed_threshold": {
+      "small_mario": 50,
+      "big_mario": 58,
+      "flying_mario": 57,
+      "source": "TASVideos: Y speed requirements for corner boost mechanics"
+    },
+    "walljump_x_speed_requirement": 33,
+    "corner_clip_requirements": {
+      "min_x_speed": 49,
+      "min_y_speed": 33,
+      "source": "TASVideos documented corner clip conditions"
+    },
+    "air_catch_duration_frames": 11,
+    "source": "TASVideos: 'normal 11 frames required' for air-catch"
+  },
+
+  "gravity": {
+    "notes": [
+      "SMW gravity is variable — it depends on: whether A is held, jump type (normal vs spin), Mario's Y speed direction, and Mario's X speed at jump initiation.",
+      "Gravity while ascending and holding A is much lower than gravity while falling.",
+      "The game uses multiple gravity states: low-grav ascending (A held), normal ascending (A not held), falling."
+    ],
+    "holding_jump_ascending": {
+      "px_per_frame_sq_approx": 0.1875,
+      "notes": "Approximate value — SMW low gravity while holding A is comparable to SMB1's holding-jump gravity."
+    },
+    "releasing_jump_ascending": {
+      "px_per_frame_sq_approx": 0.5,
+      "notes": "Releasing A early produces faster upward deceleration, cutting jump height significantly."
+    },
+    "falling": {
+      "px_per_frame_sq_approx": 0.5,
+      "notes": "Standard falling gravity. SMW has relatively floaty falling compared to later platformers."
+    }
+  },
+
+  "yoshi": {
+    "tongue_reach_tiles": 2,
+    "tongue_reach_px": 32,
+    "tongue_extension_frames": 8,
+    "tongue_total_animation_frames": 16,
+    "notes": [
+      "Yoshi's tongue extends 2 tiles (32px) forward.",
+      "Tongue must make contact with an enemy within the extension frames to capture it.",
+      "Yoshi can eat most enemies that fit in 1-2 tiles. Large enemies are spit out or not eatable.",
+      "Yoshi stomp on enemy: Yoshi jumps off with normal jump velocity."
+    ]
+  },
+
+  "cape": {
+    "spin_startup_frames": 8,
+    "glide_vertical_fall_rate_px_per_frame": 0.5,
+    "notes": [
+      "Cape spin: 8-frame window at activation. Used for attacking enemies.",
+      "Cape glide: holding A while descending dramatically reduces fall rate.",
+      "Cape fly: requires P-meter full AND holding A on the way up from a running jump.",
+      "Cape-running speed at max (51 sub-px/frame) is slightly faster than foot-sprint (49 max)."
+    ]
+  },
+
+  "hitboxes": {
+    "small_mario": {
+      "width_px": 8,
+      "height_px": 16,
+      "notes": "Small Mario is 1 tile tall (16px), slightly narrower than a tile wide."
+    },
+    "big_mario": {
+      "width_px": 8,
+      "height_px": 32,
+      "notes": "Big Mario is 2 tiles tall (32px)."
+    },
+    "notes": "SMW hitboxes are slightly narrower than sprites — there is 4px of visual 'forgiveness' on each side."
+  },
+
+  "level_geometry": {
+    "tile_size_px": 16,
+    "notes": [
+      "One SMW block = 16x16 pixels.",
+      "Standard level height is typically 27 blocks (432px) including sky and underground sections.",
+      "Horizontal scrolling levels can extend hundreds of blocks.",
+      "Vertical levels use upward scrolling."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "SMW's speed oscillation is a real behavior from sub-pixel accumulation — the renderer will see the character moving at non-integer speeds. Implement sub-pixel accumulation correctly.",
+    "The P-meter system is the core flow mechanic: building speed for a sustained run before a big jump or takeoff. Critical to preserve when building a SMW-inspired platformer.",
+    "Jump height variability (based on X speed at jump time) is a key skill expression mechanism. Standing jumps vs running jumps have meaningfully different arcs.",
+    "Spin jumps have lower max height but wider safe-fall zone — they're the cautious player's tool.",
+    "The Cape is the most complex subsystem — gliding, spinning, flying all have separate physics. Start with walk/run/jump before adding Cape."
+  ]
+}

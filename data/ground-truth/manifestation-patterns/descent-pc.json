@@ -1,0 +1,189 @@
+{
+  "game_id": "descent-pc",
+  "game_name": "Descent",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Robot presence",
+      "visual_form": "Virus-infected hostile robots with distinct mechanical appearances in mine spaces",
+      "meaning": "Active threat requiring combat engagement; robots patrol and pursue player"
+    },
+    {
+      "signal": "Reactor core location",
+      "visual_form": "Central power reactor structure in each mine level",
+      "meaning": "Critical objective and danger point; destroying it triggers mine self-destruction countdown"
+    },
+    {
+      "signal": "Mine meltdown countdown",
+      "visual_form": "Visual/audio countdown timer after reactor destruction",
+      "meaning": "Immediate environmental hazard requiring escape; failure to exit results in death and loss of progress"
+    },
+    {
+      "signal": "Enemy missile lock",
+      "visual_form": "Colored lock indicator displayed in HUD (top-right area)",
+      "meaning": "Incoming projectile threat from enemy robots; requires evasion or shield management"
+    },
+    {
+      "signal": "Shield depletion",
+      "visual_form": "Shield bar in HUD (bottom-left) decreasing with damage taken",
+      "meaning": "Approaching ship destruction; zero shields = immediate loss of life and hostages"
+    },
+    {
+      "signal": "Labyrinthine mine architecture",
+      "visual_form": "Complex 3D tunnel networks with multiple corridors and chambers",
+      "meaning": "Navigation hazard creating disorientation; environmental threat alongside combat threats"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Energy centers",
+      "visual_form": "Permanent stationary recharge stations within mines",
+      "meaning": "Safe resupply locations; energy recharges to 100 units for weapons use"
+    },
+    {
+      "signal": "Blue shield orbs",
+      "visual_form": "Collectible power-up items (blue colored)",
+      "meaning": "Health recovery mechanic; only method to restore shield capacity"
+    },
+    {
+      "signal": "Exit door",
+      "visual_form": "Door structure that opens after reactor core destruction",
+      "meaning": "Safe escape route; reaching it before meltdown completes level successfully"
+    },
+    {
+      "signal": "Invulnerability power-up",
+      "visual_form": "Temporary status modifier collectible",
+      "meaning": "Temporary immunity from damage; provides brief combat advantage and safety window"
+    },
+    {
+      "signal": "Cloaking device",
+      "visual_form": "Temporary invisibility power-up",
+      "meaning": "Evasion tool; renders player ship invisible to enemy detection"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player-controlled mercenary force",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player ship with cockpit perspective HUD; distinct from hostile robots",
+      "environmental_markers": "Mine exit doors and reactor cores represent player-aligned objectives"
+    },
+    {
+      "faction": "PTMC (Post Terran Mining Corporation)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Hostage workers (non-hostile) within mines; visually distinct from combat robots",
+      "environmental_markers": "Rescue objectives integrated into level design; scattered throughout mine locations"
+    },
+    {
+      "faction": "Virus-infected robot forces (hostile)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple robot types with varied mechanical designs; all infected by extraterrestrial computer virus",
+      "environmental_markers": "Robot generators (spawning points) throughout mines; robot-controlled mine systems"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-reactor-destruction (normal mine operations)",
+      "visual_manifestation": "Mines in standard operational state with active lighting and functional systems; robots patrol normally",
+      "behavioral_manifestation": "Robots actively hunt player; mine systems operate normally; escape route (exit door) remains sealed"
+    },
+    {
+      "world_state": "Post-reactor-destruction (mine self-destruct initiated)",
+      "visual_manifestation": "Visual countdown timer displayed; environmental stress indicators (lighting changes, potential visual distortion)",
+      "behavioral_manifestation": "Exit door opens automatically; meltdown countdown creates time pressure; robots continue pursuit"
+    },
+    {
+      "world_state": "Player ship destroyed (life loss)",
+      "visual_manifestation": "Weapons scattered at destruction point as collectible power-ups; ship respawns at level start",
+      "behavioral_manifestation": "All rescued hostages are killed; player resets with baseline equipment; level progress continues but without accumulated bonuses"
+    },
+    {
+      "world_state": "Hostages rescued aboard ship",
+      "visual_manifestation": "Hostage status tracked in player inventory/HUD; visual representation of carried NPCs",
+      "behavioral_manifestation": "Hostages lost if player dies before level completion; rescue provides score bonus for escape"
+    },
+    {
+      "world_state": "Robot generator active",
+      "visual_manifestation": "Spawning structures visible within mine architecture",
+      "behavioral_manifestation": "Continuous robot generation from these structures; destroyable in advanced difficulty modes"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial narrative through mining infrastructure",
+      "example": "Mine architecture across Solar System locations (various planets/moons) communicates world-state of extraterrestrial industrial expansion; player moves through PTMC mining operations to understand scope of viral infection"
+    },
+    {
+      "technique": "Objective-based world state communication",
+      "example": "Reactor cores represent command centers of each mine; their destruction signals player agency in combating the infection; escape sequences communicate urgency and environmental destruction"
+    },
+    {
+      "technique": "Hostage presence as narrative element",
+      "example": "Trapped PTMC workers within infected mines establish stakes; their rescue or death communicates player choices and consequence"
+    },
+    {
+      "technique": "Viral infection manifestation through robot behavior",
+      "example": "Hostile robot behavior indicates successful viral corruption; robots attack instead of performing normal mining operations, visually demonstrating world-state corruption"
+    },
+    {
+      "technique": "Three-colored key system",
+      "example": "Colored access keys (red, blue, yellow inventory display) create progression gating; their collection communicates access to deeper mine sections and escalating danger"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Virus-infected robots",
+      "state": "Patrolling/hunting",
+      "behavior": "Active pursuit of player; attacks using various weapons; congregate near key objectives"
+    },
+    {
+      "entity": "Virus-infected robots",
+      "state": "Spawning (from robot generators)",
+      "behavior": "Continuous generation from fixed points; behavior indicates difficulty scaling and reinforcement mechanics"
+    },
+    {
+      "entity": "PTMC hostages",
+      "state": "Trapped/rescuable",
+      "behavior": "Non-hostile, stationary or limited movement; vulnerable to robot attacks; indicate secondary objectives"
+    },
+    {
+      "entity": "Player spaceship",
+      "state": "Combat-active",
+      "behavior": "Six-degree-of-freedom movement; weapon firing; shield management; evasion of incoming projectiles"
+    },
+    {
+      "entity": "Player spaceship",
+      "state": "Post-reactor-destruction",
+      "behavior": "Escape-focused behavior required; time-limited movement through mine to exit before meltdown"
+    },
+    {
+      "entity": "Reactor core",
+      "state": "Pre-destruction",
+      "behavior": "Stationary, heavily defended by surrounding robots; represents goal state"
+    },
+    {
+      "entity": "Reactor core",
+      "state": "Post-destruction",
+      "behavior": "Triggers environmental meltdown cascade; initiates countdown timer; opens exit pathway"
+    }
+  ],
+  "notes": "Descent uses a pioneering six-degree-of-freedom movement system combined with true-3D graphics to create spatial danger communication unique among 1995 FPS titles. World-state changes are primarily driven by reactor destruction triggering mine self-destruction—a binary narrative toggle with clear visual and mechanical consequences. Faction distinction relies heavily on behavioral differentiation (hostile robots vs. friendly hostages vs. player agent) rather than visual color-coding. The game's disorientation potential (noted as causing motion sickness in some players) is itself a manifestation of world-state complexity—the labyrinthine 3D environments communicate danger through spatial confusion. Danger signals emphasize environmental hazards (time pressure, navigation complexity) equally with combat threats (robot enemies, incoming missiles).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:10:58.291Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3080,
+    "output_tokens": 2239,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

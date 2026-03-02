@@ -1,0 +1,178 @@
+{
+  "game_id": "slalom-nes",
+  "game_name": "Slalom",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "obstacles_in_path",
+      "visual_form": "trees, flags, snowmen, sledders, other skiers rendered on downhill slope",
+      "meaning": "collision hazards that cause tumble/fall and time loss"
+    },
+    {
+      "signal": "mogul_terrain",
+      "visual_form": "bumps/elevated terrain on ski slope",
+      "meaning": "collision object that launches player airborne and causes speed reduction"
+    },
+    {
+      "signal": "wrong_flag_side",
+      "visual_form": "flag positioning relative to player trajectory",
+      "meaning": "passing on incorrect side triggers snowplow animation and forced deceleration"
+    },
+    {
+      "signal": "time_pressure",
+      "visual_form": "countdown timer display during run",
+      "meaning": "must reach finish line before expiration or fail run"
+    },
+    {
+      "signal": "failed_trick_animation",
+      "visual_form": "player character tumbling/falling during airborne freestyle attempt",
+      "meaning": "botched aerial maneuver results in crash and time loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "clear_path_ahead",
+      "visual_form": "open slope space without obstacles",
+      "meaning": "safe to accelerate and maintain speed"
+    },
+    {
+      "signal": "correct_flag_passage",
+      "visual_form": "player passing flag on correct side",
+      "meaning": "maintains momentum and speed; prevents snowplow penalty"
+    },
+    {
+      "signal": "momentum_preservation",
+      "visual_form": "smooth downhill scrolling and sprite animation flow",
+      "meaning": "player is on optimal path and avoiding speed-reducing collisions"
+    },
+    {
+      "signal": "successful_trick_execution",
+      "visual_form": "completed aerial freestyle maneuver animation",
+      "meaning": "bonus points earned without tumble penalty"
+    },
+    {
+      "signal": "time_remaining_buffer",
+      "visual_form": "timer display showing generous seconds remaining",
+      "meaning": "adequate cushion to reach finish line safely"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_racer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "competing skiers and sledders on slope act as moving obstacles but not faction antagonists",
+      "environmental_markers": "player character sprite with ski equipment; animated skiing stance"
+    },
+    {
+      "faction": "mountain_difficulty_levels",
+      "color_identity": null,
+      "symbol_or_sigil": "Snowy Hill, Steep Peak, Mount Nasty named designations",
+      "enemy_visual_variants": null,
+      "environmental_markers": "three distinct mountain environments with progressively hazardous layouts and obstacle density"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "beginner_difficulty_selected",
+      "visual_manifestation": "Snowy Hill environment with sparse obstacle distribution and gentle slope angle",
+      "behavioral_manifestation": "slower animation speed; fewer competing skiers onscreen; wider safe passages between flags"
+    },
+    {
+      "world_state": "intermediate_difficulty_selected",
+      "visual_manifestation": "Steep Peak environment with moderate obstacle density and steeper visual perspective",
+      "behavioral_manifestation": "increased animation speed; more competing skiers; tighter flag spacing"
+    },
+    {
+      "world_state": "expert_difficulty_selected",
+      "visual_manifestation": "Mount Nasty environment with dense obstacles and extreme slope perspective",
+      "behavioral_manifestation": "rapid animation; maximum competitor skiers; minimal safe passages; aggressive mogul placement"
+    },
+    {
+      "world_state": "player_earned_qualifying_points",
+      "visual_manifestation": "transition to solo run segments with cleared competitor sprites",
+      "behavioral_manifestation": "solo runs feature only player character against clock; points convert to bonus timer seconds"
+    },
+    {
+      "world_state": "collision_with_obstacle",
+      "visual_manifestation": "player sprite animation shifts to tumble/fall frames",
+      "behavioral_manifestation": "immediate speed loss; temporary animation lock; time penalty applied; return to upright skiing posture"
+    },
+    {
+      "world_state": "high_speed_maintained",
+      "visual_manifestation": "scrolling speed of background and slope increases; sprite animation frame rate accelerates",
+      "behavioral_manifestation": "player sprite leans forward in skiing posture; smoother downslope progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "mountain_selection_difficulty_gating",
+      "example": "Three named mountains (Snowy Hill, Steep Peak, Mount Nasty) communicate skill progression through environmental naming and visual density escalation"
+    },
+    {
+      "technique": "obstacle_type_narrative",
+      "example": "Trees, snowmen, sledders, and competing skiers populate slopes naturally; recreate real ski resort hazard environment without explicit text"
+    },
+    {
+      "technique": "perspective_and_animation_speed_as_state",
+      "example": "Scrolling perspective angle, animation frame rate, and sprite scaling communicate descent speed and mountain steepness; faster scrolling = steeper terrain = higher danger"
+    },
+    {
+      "technique": "mogul_field_distribution",
+      "example": "Mogul placement density increases across mountain difficulty levels; visually signals terrain roughness and skill requirement without text"
+    },
+    {
+      "technique": "flag_gate_visual_layout",
+      "example": "Flag spacing and angling on slope create visual 'puzzle' path; player must visually parse correct trajectory before committing to movement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_skier",
+      "state": "maintaining_speed",
+      "behavior": "upright skiing posture; steady animation frame cadence; forward lean in sprite art"
+    },
+    {
+      "entity": "player_skier",
+      "state": "collision_impact",
+      "behavior": "tumble/fall animation; temporary loss of control; animation lock until recovery"
+    },
+    {
+      "entity": "player_skier",
+      "state": "airborne_freestyle",
+      "behavior": "sprite launches vertically on mogul impact; performs trick animation during flight; vulnerable to botched landing"
+    },
+    {
+      "entity": "player_skier",
+      "state": "wrong_flag_passage",
+      "behavior": "snowplow animation trigger; visible deceleration in scrolling speed; forced slowdown penalty"
+    },
+    {
+      "entity": "competitor_skier",
+      "state": "active_on_slope",
+      "behavior": "downslope movement; collision hazard role; animation matches player skiing style"
+    },
+    {
+      "entity": "sledder_npc",
+      "state": "obstacle_presence",
+      "behavior": "stationary or slow-moving hazard; requires evasion or jump clearance"
+    }
+  ],
+  "notes": "Slalom is a single-player sports racing game with no faction conflict or political dimension. World-state communication relies entirely on environmental design (mountain difficulty levels), animation speed modulation, and perspective shifts to convey speed, danger, and terrain hazard. The game communicates through kinetic/visual means rather than narrative or symbolic systems. Danger and safety signals are entirely performance-based: collisions, timing pressure, and obstacle avoidance mechanics. No explicit color-coded faction systems or political alignment markers exist. The three mountains serve as progression/difficulty stages rather than rival factions.",
+  "sources_used": [
+    "wikipedia_slalom_video_game",
+    "tcrf_slalom_nes"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:22:48.760Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3698,
+    "output_tokens": 1983,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

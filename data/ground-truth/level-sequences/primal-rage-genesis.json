@@ -1,0 +1,129 @@
+{
+  "game_id": "primal-rage-genesis",
+  "game_name": "Primal Rage",
+  "platform": "genesis",
+  "paradigm": "fighting",
+  "level_count": null,
+  "world_count": 7,
+  "element_introduction_order": [
+    {
+      "element": "Basic 2D Fighting Mechanics",
+      "first_appears": "Tutorial/Early Matches",
+      "introduction_context": "safe",
+      "mastery_context": "Health depletion system, basic attacks"
+    },
+    {
+      "element": "Character-Specific Special Moves",
+      "first_appears": "Early Campaign Fights",
+      "introduction_context": "moderate",
+      "mastery_context": "Button-hold then joystick motion (or reverse in later arcade revisions)"
+    },
+    {
+      "element": "Worshipper Mechanics (Health/Score)",
+      "first_appears": "Early to Mid Campaign",
+      "introduction_context": "moderate",
+      "mastery_context": "Eating enemy worshippers grants health bonus and score; eating own worshippers penalizes"
+    },
+    {
+      "element": "Finishing Moves (Fatalities/Humorous Finishers)",
+      "first_appears": "Post-Victory Sequence",
+      "introduction_context": "moderate",
+      "mastery_context": "Performed after opponent defeat using similar input method to special moves"
+    },
+    {
+      "element": "Difficulty Scaling (CPU Opponent Power)",
+      "first_appears": "Mid Campaign",
+      "introduction_context": "moderate",
+      "mastery_context": "Increasing difficulty across campaign progression"
+    },
+    {
+      "element": "Final Battle Endurance Round",
+      "first_appears": "Late Game (Difficulty 10+)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Fight all seven monsters sequentially with enhanced power bar from minigame"
+    },
+    {
+      "element": "Worshipper Minigame (Health Buildup)",
+      "first_appears": "Pre-Final Battle",
+      "introduction_context": "dangerous",
+      "mastery_context": "Eat worshippers to maximize health before endurance match"
+    },
+    {
+      "element": "Easter Egg Minigames (Volleyball/Bowling)",
+      "first_appears": "Variable (Hidden)",
+      "introduction_context": "safe",
+      "mastery_context": "Triggered by specific human player actions; optional content"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Opponent defeated",
+      "Finishing move successfully performed",
+      "Health restored via worshipper consumption",
+      "Difficulty plateau between matches"
+    ],
+    "typical_tension_triggers": [
+      "CPU opponent health bar depleted",
+      "Player health bar critically low",
+      "Special move inputs required under pressure",
+      "Final battle endurance round begins",
+      "Opponent uses character-specific special moves"
+    ],
+    "pacing_descriptor": "Match-based tension cycles with escalating difficulty in campaign mode. Single matches progress from opening neutral state to climactic finishing move. Campaign rhythm builds through increasing opponent difficulty, punctuated by minigame breaks (worshipper eating pre-final battle). Victory/defeat binary creates sharp relief or restart tension."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Easter egg minigames triggered by human player interaction rather than explicit UI prompts",
+    "secret_convention": "Human volleyball and bowling minigames activated through specific character/crowd interactions",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introductory CPU opponents with basic attack patterns; player learns special move inputs and worshipper mechanics",
+    "mid_game": "Incremental difficulty scaling; CPU opponents demonstrate specialized character abilities and increased AI aggression",
+    "late_game": "Final boss fights available only at difficulty level 10 or higher; character-specific domain stages reflect narrative stakes",
+    "notable_spikes": [
+      "Final endurance battle (fight all 7 monsters sequentially) accessible only at difficulty 10+, with power bar mitigation via worshipper minigame",
+      "First match against each new character introduces their unique move set and fighting style"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Character Domain Stages",
+      "description": "Seven unique background stages, each representing one playable character's innate domain (Cliff/Blizzard, Hollows/Armadon, Strip/Talon, Cove/Sauron, Ruins/Chaos, Tomb/Vertigo, Inferno/Diablo). Background reflects thematic relationship to character mythology.",
+      "example_level": "The Inferno (Diablo's domain)"
+    },
+    {
+      "pattern_name": "Campaign Progression Structure",
+      "description": "Single-player mode presents sequential 1v1 matches against CPU opponents with increasing difficulty. Campaign culminates in optional endurance round (difficulty 10+) where player fights all monsters sequentially with power boost from preceding minigame.",
+      "example_level": "Final Boss: Endurance Round (all 7 monsters)"
+    },
+    {
+      "pattern_name": "Worshipper Resource Management",
+      "description": "During fights, human tribesmen appear as interactive environmental elements. Player can consume enemy worshippers for health/score bonus or own worshippers for score penalty. Creates risk/reward decision-making during matches.",
+      "example_level": "All campaign matches"
+    },
+    {
+      "pattern_name": "Minigame Breaks",
+      "description": "Worshipper eating minigame preceding final endurance battle functions as tension relief valve and strategic preparation phase. Hidden easter egg minigames (volleyball, bowling) activated through crowd/character interaction.",
+      "example_level": "Pre-Final Battle Worshipper Minigame"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:43:47.436Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2867,
+    "output_tokens": 1784,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "game_id": "fifa-international-soccer-genesis",
+  "game_name": "FIFA International Soccer",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Goalkeeper possession in penalty area",
+      "visual_form": "Goalkeeper animated holding ball with player approaching",
+      "meaning": "Imminent scoring opportunity; goalkeeper vulnerability state"
+    },
+    {
+      "signal": "Opposing team formation proximity",
+      "visual_form": "Clustering of player sprites near own goal",
+      "meaning": "Defensive pressure; risk of conceding goal"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ball possession by own team",
+      "visual_form": "Ball sprite attached to controlled player",
+      "meaning": "Offensive control; reduced immediate threat"
+    },
+    {
+      "signal": "Distance from opponent goal",
+      "visual_form": "Isometric spatial positioning on field grid",
+      "meaning": "Safe distance; low immediate threat to own goal"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "National teams (48 total)",
+      "color_identity": "Team-specific kit colors (primary visual differentiation)",
+      "symbol_or_sigil": "National flags displayed for team identification",
+      "enemy_visual_variants": "Opposing team rendered in contrasting kit colors; skin tone variation indicates regional confederation membership",
+      "environmental_markers": "Stadium environment same for all teams; national identity signaled purely through player sprite appearance and flags"
+    },
+    {
+      "faction": "AFC (Asian Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied through team selection menus)",
+      "enemy_visual_variants": "Teams: China, Hong Kong, Iraq, Israel, Japan, Qatar, Turkey",
+      "environmental_markers": "Player skin tone darker for certain AFC teams; no environmental differentiation"
+    },
+    {
+      "faction": "CAF (African Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied)",
+      "enemy_visual_variants": "Teams: Algeria, Cameroon, Ivory Coast, Morocco, Nigeria",
+      "environmental_markers": "Player sprite skin tone significantly darker; uniform visual distinction from other confederations"
+    },
+    {
+      "faction": "UEFA (European Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied)",
+      "enemy_visual_variants": "Teams: England, France, Germany, Italy, Spain, etc. (22 teams total)",
+      "environmental_markers": "Player sprites with lighter skin tone; largest faction group with 24 national teams"
+    },
+    {
+      "faction": "CONMEBOL (South American Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied)",
+      "enemy_visual_variants": "Teams: Argentina, Brazil, Chile, Colombia, Uruguay",
+      "environmental_markers": "Geographic region indicated through team selection only; no environmental visual cues"
+    },
+    {
+      "faction": "CONCACAF (North American/Central American Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied)",
+      "enemy_visual_variants": "Teams: Canada, Mexico, United States",
+      "environmental_markers": "Limited regional representation (3 teams); no environmental differentiation"
+    },
+    {
+      "faction": "OFC (Oceania Football Confederation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Regional confederation badge (implied)",
+      "enemy_visual_variants": "Teams: Australia, New Zealand",
+      "environmental_markers": "Minimal representation (2 teams); no environmental visual distinction"
+    },
+    {
+      "faction": "EA All Stars",
+      "color_identity": "Custom EA Sports branding colors",
+      "symbol_or_sigil": "EA Sports logo/identity",
+      "enemy_visual_variants": "Fictional team with generic player appearance",
+      "environmental_markers": "No geographic or political affiliation; purely corporate entity"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match in progress - offensive phase",
+      "visual_manifestation": "Attacking team players animated in forward motion; ball sprite moving toward opponent goal; isometric camera tracks ball position",
+      "behavioral_manifestation": "Controlled player passes/shoots; AI teammates move into attacking positions; defenders retreat"
+    },
+    {
+      "world_state": "Match in progress - defensive phase",
+      "visual_manifestation": "Defending team players clustered near own goal; ball sprite in opponent possession; goal and goalkeeper prominently displayed on screen",
+      "behavioral_manifestation": "Controlled defender moves to intercept; AI teammates form defensive wall; goalkeeper repositions"
+    },
+    {
+      "world_state": "Goalkeeper vulnerable (holding cleared ball)",
+      "visual_manifestation": "Goalkeeper sprite animated in specific pose holding ball; player sprite positioned in immediate proximity in penalty area",
+      "behavioral_manifestation": "AI goalkeeper automatically kicks ball to nearest opponent; easy goal-scoring opportunity emerges (design oversight)"
+    },
+    {
+      "world_state": "Tournament progression - advancing vs. eliminating",
+      "visual_manifestation": "Menu-based state change; visual feedback through tournament bracket display showing team progression or elimination",
+      "behavioral_manifestation": "Eliminated teams greyed out or removed from bracket; advancing teams highlight; group stage transitions to knockout stage"
+    },
+    {
+      "world_state": "Match conclusion - victory/defeat",
+      "visual_manifestation": "Score display prominently shown; crowd celebration/disappointment animations; team kit colors associated with winning/losing state",
+      "behavioral_manifestation": "Crowd sound effects reflect outcome; player animation loops change (celebration vs. dejection poses)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "National flag display",
+      "example": "Each team identified by their national flag in team selection screens and match interface; flags communicate political/geographic identity without explicit text"
+    },
+    {
+      "technique": "Player kit color differentiation",
+      "example": "Home vs. away kits in contrasting colors signal team identity and opposition; primary visual method of faction recognition during isometric match play"
+    },
+    {
+      "technique": "Skin tone variation as regional marker",
+      "example": "African confederation (CAF) teams rendered with darker player skin tones; Asian, European, South American teams with lighter tones; crude but intentional regional visual classification"
+    },
+    {
+      "technique": "Crowd sound design",
+      "example": "Ambient crowd reactions communicate match excitement and outcome significance; audio world-state indicator without visual representation"
+    },
+    {
+      "technique": "Championship format progression",
+      "example": "Tournament mode mimics FIFA World Cup structure with group stages and knockout rounds; bracket progression visually communicates escalating stakes and match importance"
+    },
+    {
+      "technique": "Isometric viewpoint consistency",
+      "example": "Standardized stadium environment for all nations; no environmental customization; visual statement that all teams compete on equal footing despite geopolitical differences"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goalkeeper",
+      "state": "Holding ball in hands (prepared to clear)",
+      "behavior": "Automatically kicks ball to nearest player (often opposing player if one positioned nearby); exposes team to immediate goal danger"
+    },
+    {
+      "entity": "Goalkeeper",
+      "state": "Normal play",
+      "behavior": "Repositions based on ball location; animates catching/throwing motions; reactive to attacking pressure"
+    },
+    {
+      "entity": "Controlled player",
+      "state": "Possession",
+      "behavior": "Responds to player input commands; passes, shoots, moves with direct responsiveness (noted as slower than ideal by critics)"
+    },
+    {
+      "entity": "AI-controlled teammate",
+      "state": "Offensive phase",
+      "behavior": "Moves into attacking positions; makes runs toward opponent goal; attempts to receive passes"
+    },
+    {
+      "entity": "AI-controlled opponent",
+      "state": "Defensive phase",
+      "behavior": "Moves to block passes and shots; clusters near own goal; attempts to intercept ball"
+    },
+    {
+      "entity": "Crowd",
+      "state": "Match ongoing",
+      "behavior": "Generates ambient noise; reacts audibly to goals and significant plays; sound design conveys match energy and stakes"
+    }
+  ],
+  "notes": "FIFA International Soccer uses minimal visual signaling for world-state and faction communication, relying primarily on team kit colors and national flags for identity. The game contains no explicit danger/safety UI indicators; world-state communication is behavioral (through player animation and positioning) rather than symbolic. The isometric viewpoint and standardized stadium environment create a politically neutral presentation despite featuring 48 national teams across multiple confederations. Skin tone variation in player sprites is the only visual technique differentiating regional confederations, reflecting 1993 game design conventions. The game's manifestation layer is sparse compared to modern standards—world-state and faction identity are communicated through diegetic elements (player appearance, ball position, crowd audio) rather than explicit HUD systems.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:43:13.927Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3090,
+    "output_tokens": 2303,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "game_id": "robin-hood-prince-thieves-nes",
+  "game_name": "Robin Hood: Prince of Thieves",
+  "platform": "nes",
+  "paradigm": "platformer/action-adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Guard sprites, boar sprite, Celtic enemy sprites",
+      "meaning": "Combat engagement imminent; player must fight or evade"
+    },
+    {
+      "signal": "Sheriff's castle environment",
+      "visual_form": "Castle interior palette (pal.duel.castle), fortress architecture",
+      "meaning": "High-danger zone; primary antagonist stronghold"
+    },
+    {
+      "signal": "Locked chest",
+      "visual_form": "Chest sprite requiring Chest Key item",
+      "meaning": "Resource barrier; progression gated by inventory management"
+    },
+    {
+      "signal": "Weight/inventory burden",
+      "visual_form": "Menu weight counter; heavy items (Locked Chest: 229 units, Empty Chest: 185 units)",
+      "meaning": "Encumbrance mechanic creates vulnerability; player mobility restricted"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Locksley location",
+      "visual_form": "Locksley Castle environment (pal.loxley.dark), Locksley-branded equipment",
+      "meaning": "Home base/friendly territory; associated with hero identity"
+    },
+    {
+      "signal": "Sherwood Village",
+      "visual_form": "Village environment palette (pal.melee.sherwood), accessible via password",
+      "meaning": "Safe haven; location of defensive/allied mission"
+    },
+    {
+      "signal": "Healing water",
+      "visual_form": "Haunted well location (searchable area)",
+      "meaning": "Health recovery point; resource for sustenance"
+    },
+    {
+      "signal": "Will Scarlet presence",
+      "visual_form": "Will sprite (sprite.will.chr)",
+      "meaning": "Allied companion; support character"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Robin Hood/Outlaws",
+      "color_identity": "Locksley palette (pal.loxley.dark) suggests darker, forest-associated aesthetic",
+      "symbol_or_sigil": "Locksley brand (appears on Locksley Sword, Locksley Armor, Locksley Bow, implied Locksley Shield)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Sherwood Village, Sherwood forests, Locksley Castle, outlaws' hideouts"
+    },
+    {
+      "faction": "Sheriff/Authority",
+      "color_identity": "Castle palette (pal.duel.castle), fortress aesthetics",
+      "symbol_or_sigil": "Sheriff's castle as main stronghold; guard uniformity",
+      "enemy_visual_variants": "Guard sprites (sprite.face.guard.chr) with shields (sprite.shield.chr, sprite.weapon.shield.chr)",
+      "environmental_markers": "Sheriff's castle interior, town gallows, Arab jail (catacombs), tax wagon routes"
+    },
+    {
+      "faction": "Celts",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Celtic enemy sprite set",
+      "environmental_markers": "Celts battle location (password: CELTS); external/foreign threat"
+    },
+    {
+      "faction": "Church/Religious Authority",
+      "color_identity": "Church palette (pal.melee.church, charset.melee.church.chr)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Church-specific encounter sprites",
+      "environmental_markers": "Chapel (meeting point with Marian); cathedral (rescue maiden location)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-game (title screen)",
+      "visual_manifestation": "Title screen with regional differences: US vs EU/German border styling, font variations",
+      "behavioral_manifestation": "Password system allows non-linear world access; debug mode reveals all locations as navigable states"
+    },
+    {
+      "world_state": "Robin captured/imprisoned",
+      "visual_manifestation": "Arab jail (catacombs) environment; confined spaces",
+      "behavioral_manifestation": "Player must escape; progression gated by location"
+    },
+    {
+      "world_state": "Sheriff threatens Marian",
+      "visual_manifestation": "Cathedral/chapel environments become active; Marian character becomes visible/interactable",
+      "behavioral_manifestation": "Wedding/chapel conclusion triggered; final story beat"
+    },
+    {
+      "world_state": "Tax collection threat",
+      "visual_manifestation": "Gold wagon routes become visible/accessible on map",
+      "behavioral_manifestation": "Combat encounters against tax collectors; resource interception gameplay"
+    },
+    {
+      "world_state": "Sherwood under attack",
+      "visual_manifestation": "Sherwood village palette activates; defense structures implied",
+      "behavioral_manifestation": "Village defense mission; player protects home location"
+    },
+    {
+      "world_state": "Hunt for Master Trainer",
+      "visual_manifestation": "Exploration state; multiple location palettes become relevant",
+      "behavioral_manifestation": "Open search mechanic; non-linear traversal"
+    },
+    {
+      "world_state": "Final duel with Sheriff",
+      "visual_manifestation": "Castle interior duel palette (pal.duel.castle) activates; confined arena",
+      "behavioral_manifestation": "Scripted duel encounter; boss-level combat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Palette-based location identity",
+      "example": "Unique palettes for Sherwood (pal.sherwood), Locksley dark (pal.loxley.dark), Church (pal.melee.church), Castle duel arena (pal.duel.castle), Dubois exterior (pal.duboisout), Hut (pal.hut) communicate distinct narrative spaces and faction control"
+    },
+    {
+      "technique": "Equipment loadout as story progression",
+      "example": "Locksley-branded equipment set (Locksley Sword, Armor, Bow) represents hero's identity; Shield variants (Locksley Shield) signify upgrade paths tied to locations"
+    },
+    {
+      "technique": "Locked/gated resource access",
+      "example": "Chest Key requirement for Locked Chests establishes inventory puzzle mechanic; weight system forces strategic loadout decisions reflecting desperation/preparedness"
+    },
+    {
+      "technique": "Character sprite appearance",
+      "example": "Guard sprites (sprite.face.guard.chr), Tuck sprite (sprite.face.tuck.chr), Will sprite (sprite.will.chr), Boar sprite (sprite.bigboar.chr) establish faction/ally/enemy visual hierarchy"
+    },
+    {
+      "technique": "Location-specific narrative gates",
+      "example": "Hadrian's Wall, Dubois Manor, Horse race chase, Haunted well, Gold wagon routes, Town gallows create narrative beats tied to geography"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Guard",
+      "state": "Patrolling",
+      "behavior": "Presence in Sheriff-controlled locations (castle, jail, town); blocks passage; aggresses on proximity"
+    },
+    {
+      "entity": "Boar",
+      "state": "Boss encounter",
+      "behavior": "Aggressive; requires specific combat sequence; location: forest/hunting ground"
+    },
+    {
+      "entity": "Marian",
+      "state": "Captured/in danger",
+      "behavior": "Appears in cathedral/chapel locations; triggers story conclusion; rescue is narrative objective"
+    },
+    {
+      "entity": "Sheriff",
+      "state": "Final antagonist",
+      "behavior": "Duel encounter in castle interior (pal.duel.castle); scripted boss battle; represents authority threat"
+    },
+    {
+      "entity": "Will Scarlet",
+      "state": "Ally/companion",
+      "behavior": "Appears in outlaw locations; supports player progression; allied sprite"
+    },
+    {
+      "entity": "Tuck",
+      "state": "NPC/church ally",
+      "behavior": "Church-associated sprite; appears in chapel/cathedral contexts; narrative facilitator"
+    },
+    {
+      "entity": "Celtic warriors",
+      "state": "Foreign threat",
+      "behavior": "Combat encounter; faction-specific enemy set; external invasion narrative"
+    }
+  ],
+  "notes": "Robin Hood: Prince of Thieves (NES) is a Zelda-like action-adventure using palette-swapping and sprite sets to communicate faction control and narrative progression. The game uses location-specific color schemes (palettes) to establish narrative geography: Sherwood (outlaw territory), Locksley (home base), Castle/Church (authority locations), and Dubois Manor (external mission). Danger is communicated through enemy sprite presence and confined interior palettes (castle duel arena). Safety is signaled via Locksley/Sherwood aesthetics and healing locations. The inventory weight system creates a secondary danger state through encumbrance. Story progression is tied to location access and character encounters rather than explicit world-state visual changes. Password system reveals that all narrative locations are abstract game states rather than a unified world representation.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Robin Hood: Prince of Thieves NES article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:25:55.855Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2931,
+    "output_tokens": 2671,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

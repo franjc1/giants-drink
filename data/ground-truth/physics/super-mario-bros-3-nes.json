@@ -1,0 +1,222 @@
+{
+  "_meta": {
+    "game": "Super Mario Bros. 3",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D4",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Super Mario Bros 3",
+        "url": "https://tasvideos.org/GameResources/NES/SuperMarioBros3",
+        "notes": "Primary source for all speed values (sub-pixel table), downhill bonus, and movement state documentation."
+      },
+      {
+        "name": "Captain Southbird SMB3 Disassembly",
+        "url": "https://github.com/captainsouthbird/smb3",
+        "notes": "Full annotated 6502 disassembly of SMB3. Authoritative source for ROM constants."
+      },
+      {
+        "name": "esc0rtd3w NES ROM Tools — SMB3 Hacking Notes",
+        "url": "https://github.com/esc0rtd3w/nes-rom-tools/blob/master/super-mario-bros-3/docs/hacking_notes.txt",
+        "notes": "Physics hacking documentation including speed tables and P-meter mechanics."
+      }
+    ],
+    "notes": [
+      "SMB3 uses a 16-sub-pixel system for speeds. Position is 8.8 fixed-point (256 sub-pixels/pixel), but all speed changes occur in increments of 16 sub-pixels.",
+      "The P-meter (P-speed) system is one of the most complex in any NES game — 8 stages of acceleration.",
+      "Running downhill adds 3 sub-pixels/frame bonus to effective speed.",
+      "Multiple suit mechanics add different physics states: Tanooki, Frog, Kuribo's Shoe all have distinct physics.",
+      "NES NTSC: 60fps. Tile size: 16x16 pixels."
+    ],
+    "units": {
+      "speed": "sub-pixels per frame (16 sub-px increments; 16 sub-px = 1 pixel)",
+      "speed_px": "pixels per frame for readability"
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 16,
+      "effective_precision": "1/16 pixel",
+      "source": "TASVideos: 'SMB3 has a subpixel precision of 16'"
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "_source": "TASVideos SMB3 game resources — movement speed table",
+    "speed_table": {
+      "description": "Maximum speeds for each movement state (sub-pixels/frame and px/frame equivalent)",
+      "states": [
+        {
+          "state": "wall_ejecting",
+          "max_sub_pixels_per_frame": 16,
+          "max_px_per_frame": 1.0
+        },
+        {
+          "state": "walking_or_swimming",
+          "max_sub_pixels_per_frame": 24,
+          "max_px_per_frame": 1.5,
+          "notes": "Standard walk with no P-meter. Same as run speed until P-button held."
+        },
+        {
+          "state": "running_no_p_button",
+          "max_sub_pixels_per_frame": 40,
+          "max_px_per_frame": 2.5,
+          "notes": "Running with B held but without P-button full. Equivalent to SMB1 run max."
+        },
+        {
+          "state": "p_speed",
+          "max_sub_pixels_per_frame": 56,
+          "max_px_per_frame": 3.5,
+          "notes": "Maximum P-speed. P-meter must be fully charged. Mario can fly (with Raccoon/Tanooki suit) at this speed."
+        },
+        {
+          "state": "sliding",
+          "max_sub_pixels_per_frame": 63,
+          "max_px_per_frame": 3.9375,
+          "notes": "Sliding down slopes. Slightly faster than full P-speed."
+        }
+      ]
+    },
+    "downhill_bonus": {
+      "additional_sub_pixels_per_frame": 3,
+      "additional_px_per_frame": 0.1875,
+      "source": "TASVideos: 'Running downhill causes Mario to travel 3 subpixels per frame faster than his reported speed'",
+      "notes": "Running downhill provides a +3 sub-px/frame bonus over the stated max speed. At P-speed: 56 + 3 = 59 effective sub-px/frame = 3.6875 px/frame."
+    },
+    "p_meter": {
+      "stages": 8,
+      "charges_when": "B held while running",
+      "depletes_when": "B released, speed drops, or Mario takes a hit",
+      "required_for_flight": true,
+      "flight_also_requires": "Raccoon or Tanooki suit",
+      "notes": "P-meter has 8 visible segments that fill progressively as Mario runs with B held. Full P-meter enables P-speed and flight (with appropriate suit)."
+    }
+  },
+
+  "jump": {
+    "notes": [
+      "SMB3 uses the same gravity/jump system as SMB1 with the 4-state gravity (standing, walking, running, swimming).",
+      "Initial Y velocity is approximately -5 to -5.5 px/frame (varies with X speed at jump time).",
+      "Holding A while ascending reduces gravity (variable jump height).",
+      "Tail whack and flight are separate mechanics layered over the base jump system."
+    ],
+    "initial_y_velocity_approx": {
+      "px_per_frame_standing": 5.0,
+      "px_per_frame_running": 5.5,
+      "notes": "Approximate values derived from gameplay. ROM-exact values require disassembly verification."
+    },
+    "variable_jump": {
+      "mechanic": "Holding A reduces gravity while ascending. Releasing A early = short hop.",
+      "notes": "Same mechanic as SMB1. Short hops are possible and important for precision platforming."
+    }
+  },
+
+  "raccoon_tanooki_suit": {
+    "tail_whack": {
+      "reach_tiles": 1,
+      "duration_frames": 8,
+      "notes": "Tail whack can destroy certain blocks and stun enemies."
+    },
+    "glide": {
+      "activation": "Hold A while descending after a jump or while airborne",
+      "fall_rate_reduction": "dramatically reduced — approximately 0.3-0.5 px/frame descent instead of normal fall",
+      "notes": "Holding A slows descent. Not powered hovering — Mario still falls but very slowly."
+    },
+    "flight": {
+      "requirements": ["P-meter fully charged", "Running at P-speed (56 sub-px/frame)", "Raccoon or Tanooki suit equipped"],
+      "takeoff": "Jump while at P-speed with A held",
+      "flight_speed": {
+        "horizontal_max_sub_pixels": 56,
+        "horizontal_max_px_per_frame": 3.5,
+        "notes": "Flight maintains P-speed horizontal velocity."
+      },
+      "vertical_control": "Hold A to ascend, release to descend. Full 2D flight.",
+      "p_meter_depletion": "P-meter depletes slowly during flight. When empty, Mario begins descending.",
+      "notes": "True powered flight — Mario can gain altitude and maintain horizontal speed indefinitely while P-meter lasts."
+    },
+    "tanooki_statue": {
+      "invincibility": true,
+      "duration_frames": "player-controlled",
+      "notes": "Tanooki-only. Mario turns into a statue, becoming temporarily invincible. Cannot move during statue form."
+    }
+  },
+
+  "frog_suit": {
+    "walk_speed_multiplier": 0.67,
+    "notes": "Frog suit reduces land walk speed but dramatically improves underwater movement.",
+    "underwater_speed": {
+      "sub_pixels_per_frame": 40,
+      "px_per_frame": 2.5,
+      "notes": "Underwater with Frog suit = running speed in water. Without Frog suit, water movement is much slower."
+    },
+    "jump_height_bonus": "Frog suit increases jump height above normal Mario.",
+    "high_jump": {
+      "notes": "Frog suit allows higher than normal jumps by holding jump longer than typical. Useful for certain level transitions."
+    }
+  },
+
+  "kuribo_shoe": {
+    "speed": "Same as normal Mario walk/run",
+    "stomp_immunity": "Can stomp Spinies and other enemies that normally damage Mario from above",
+    "duration": "Only available during specific sections of specific levels. Lost when hit or leaving the shoe.",
+    "notes": "Kuribo's Shoe is found in only one level (World 5-3). It provides stomp immunity to normally dangerous enemies."
+  },
+
+  "gravity": {
+    "notes": "SMB3 uses the same 4-state gravity system as SMB1. State determined at jump time based on X speed.",
+    "holding_jump_approx_px_per_frame_sq": 0.1875,
+    "falling_approx_px_per_frame_sq": 0.65
+  },
+
+  "underwater_physics": {
+    "speed_without_frog_suit": {
+      "sub_pixels_per_frame": 24,
+      "px_per_frame": 1.5,
+      "notes": "Same speed table entry as walk. Underwater without Frog suit = walking speed."
+    },
+    "speed_with_frog_suit": {
+      "sub_pixels_per_frame": 40,
+      "px_per_frame": 2.5
+    },
+    "swimming_mechanic": "Pressing A repeatedly gives upward impulse. Gravity is reduced underwater."
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 64,
+    "notes": "After taking damage (suit removal or death if small), Mario has ~64 frames of invincibility. Shorter than Kirby (120) and Mega Man (128), reflecting the suit-loss-as-damage-absorber design."
+  },
+
+  "hitboxes": {
+    "small_mario": {
+      "width_px": 8,
+      "height_px": 16
+    },
+    "big_mario": {
+      "width_px": 8,
+      "height_px": 32
+    },
+    "raccoon_mario": {
+      "width_px": 8,
+      "height_px": 32,
+      "tail_hitbox_width_px": 16,
+      "notes": "Same body as big Mario, plus tail hitbox extending behind when spinning."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "SMB3's P-meter creates a pacing rhythm unique to this game: the player must sustain high-speed running for several seconds before unlocking the fastest movement and flight. This creates 'run-up opportunities' as a level design primitive.",
+    "The downhill +3 sub-pixel bonus is a subtle momentum-preservation mechanic — running down slopes doesn't slow the player down, it actively accelerates them.",
+    "The suit system represents a significant complexity layer. Each suit changes the physics model substantially. When generating SMB3-inspired levels, specify which suit the player has — it changes what challenges are possible.",
+    "P-speed at 56 sub-px/frame vs SMB1 run at 40 sub-px/frame: SMB3 at full P-speed is 40% faster than SMB1 running. This is a large speed increase that requires proportionally larger platforms and longer approach runs.",
+    "The 8-level P-meter is a visible affordance teaching the player that sustained running pays off. Use this in game design: visible charge meters create clear cause-and-effect."
+  ]
+}

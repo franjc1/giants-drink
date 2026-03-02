@@ -1,0 +1,169 @@
+{
+  "game_id": "quake-3-arena-pc",
+  "game_name": "Quake III Arena",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy bot presence and aggression",
+      "visual_form": "Player model rendering with weapon equipped; bot movement patterns and firing animations",
+      "meaning": "Active threat in arena space; difficulty tier increases visual complexity and bot responsiveness"
+    },
+    {
+      "signal": "Weapon spawning and availability",
+      "visual_form": "Weapons as level items appearing in set spawn locations; visual distinction by weapon type (railgun, rocket launcher, BFG, lightning gun)",
+      "meaning": "Resource scarcity creates threat context—controlling weapon spawns is tactical survival"
+    },
+    {
+      "signal": "Health and armor depletion",
+      "visual_form": "HUD feedback (health/armor meters); player model visual wear states",
+      "meaning": "Cumulative damage warning; death imminent without healing items"
+    },
+    {
+      "signal": "Environmental hazard presence",
+      "visual_form": "Gothic and technological map architecture featuring areas of implied danger (lava, pits, destructible geometry suggested by level design)",
+      "meaning": "Map layout itself communicates arena-based danger zones"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item pickup availability",
+      "visual_form": "Health packs, armor, and power-ups (Quad Damage) rendered as collectible objects in accessible locations",
+      "meaning": "Restoration points; temporary invulnerability or damage boost provides reprieve windows"
+    },
+    {
+      "signal": "Spawn point return",
+      "visual_form": "Player respawn at map spawn location; default weapon set (gauntlet, machine gun) granted on spawn",
+      "meaning": "Death is not permanent; immediate reinstatement with baseline survivability"
+    },
+    {
+      "signal": "Map architecture accessibility",
+      "visual_form": "Multiple traversal paths and cover positions visible in level design",
+      "meaning": "Player agency in navigation and evasion; complexity increases survival options"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (fraggers)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Customizable player models with visual differentiation; bot characters (Crash, Xaero, etc.) rendered with distinct appearances representing progression tiers",
+      "environmental_markers": "Weapons on ground drop when player killed; spawn location returns player to map origin"
+    },
+    {
+      "faction": "Team Deathmatch (two opposing teams)",
+      "color_identity": "Team-based color coding typically employed in HUD and model distinctions (not explicitly documented in source but standard FPS convention)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Team uniforms/model skins differentiate opposing sides; same model base with color/texture variance",
+      "environmental_markers": "Flag locations in Capture the Flag mode mark team territories; symmetrical map design reinforces faction opposition"
+    },
+    {
+      "faction": "Vadrigar (narrative faction—story background only)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Not visually manifested in gameplay; exists as lore context only",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player progression (bot tournament tiers 0-7)",
+      "visual_manifestation": "Map complexity escalation; bot opponent visual variety increases; arena environments become more intricate and challenging",
+      "behavioral_manifestation": "Bot difficulty ramping—Crash (tier 0) exhibits basic pathfinding; Xaero (tier 7) demonstrates advanced AI, weapon mastery, and tactical positioning"
+    },
+    {
+      "world_state": "Multiplayer arena active (Free for All or Team Deathmatch)",
+      "visual_manifestation": "Multiple player models rendered simultaneously; weapon availability and item spawns reset on cycle timers",
+      "behavioral_manifestation": "Real-time player input controls character movement, aiming, and firing; competitive kill/death scoring displayed in HUD"
+    },
+    {
+      "world_state": "Tournament duel mode (1v1 boss battle equivalent)",
+      "visual_manifestation": "Two-player arena focus; typically smaller, symmetrical map design; isolated combat space",
+      "behavioral_manifestation": "Extended engagement duration; winner determined by time limit or score threshold; high mechanical skill expression"
+    },
+    {
+      "world_state": "Capture the Flag territorial control",
+      "visual_manifestation": "Two team bases with flag objects; symmetrical map layout; team color coding on environmental assets",
+      "behavioral_manifestation": "Team coordination required; flag capture and defense mechanics reward grouped player behavior; respawn waves may synchronize team positioning"
+    },
+    {
+      "world_state": "Player death and respawn",
+      "visual_manifestation": "Character model disappears from arena; brief delay; character reappears at spawn point with fresh health/armor and baseline weapons",
+      "behavioral_manifestation": "Weapon drop left at death location; respawned player retains kill/death ratio but loses prior equipment; 'reset' state for next engagement"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural hybrid (Gothic + Technological)",
+      "example": "Level design mixes demonic/medieval aesthetics with futuristic machinery; visual language establishes Arena Eternal as timeless, cross-dimensional space where all warriors converge"
+    },
+    {
+      "technique": "Bot character lineage and biographical markers",
+      "visual_form": "Player models and names reference prior Quake/Doom series characters (Sarge, etc.); continuity markers establish Arena as collection point of legendary fighters",
+      "example": "Inclusion of character skins from predecessor games creates narrative meta-layer: arena resurrects/captures famous warriors"
+    },
+    {
+      "technique": "Weapon placement and rarity signaling",
+      "example": "BFG super-weapon appears only in hard-to-reach arena locations; visual inaccessibility (height, platform placement) communicates power tier without stat readout"
+    },
+    {
+      "technique": "Map symmetry in Capture the Flag",
+      "example": "Identical base layouts, mirrored terrain, and balanced resource distribution visually communicate 'fair competition' ethos and balanced faction power"
+    },
+    {
+      "technique": "Arena environmental hazards (implied)",
+      "example": "Level geometry includes pits, elevated platforms, and bottleneck passages; layout storytelling suggests arenas designed as gladiatorial tests of tactical movement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bot character (AI opponent)",
+      "state": "Idle/Patrolling",
+      "behavior": "Navigates map predictably; maintains weapon readiness; awaits player detection"
+    },
+    {
+      "entity": "Bot character (AI opponent)",
+      "state": "Engaged/Combat",
+      "behavior": "Uses strafe-jumping and advanced movement; weapon selection changes based on distance/situation; demonstrates difficulty-tier-appropriate skill; uses cover and item spawns tactically"
+    },
+    {
+      "entity": "Bot character (AI opponent)",
+      "state": "Damaged/Low health",
+      "behavior": "Increased retreat behavior; prioritizes healing item pickup; may employ distance-increasing movement patterns"
+    },
+    {
+      "entity": "Player character",
+      "state": "Spawned/Fresh",
+      "behavior": "Starts with gauntlet and machine gun; full health/armor; immediate mobility options (strafe-jumping available)"
+    },
+    {
+      "entity": "Weapon item",
+      "state": "Available spawn",
+      "behavior": "Visible at set map location; despawns and respawns on fixed timer; provides tactical objective draw for players"
+    },
+    {
+      "entity": "Player corpse/dropped weapon",
+      "state": "Post-death",
+      "behavior": "Last equipped weapon remains at death location temporarily; signals resource availability for survivors; visual marker of prior engagement hotspot"
+    },
+    {
+      "entity": "Team flag (CTF mode)",
+      "state": "Captured/Held",
+      "behavior": "Flag location moves with capturing player; team HUD updates reflect flag position and carrier; visual indicator (flag model or team-color aura) shows ownership state"
+    }
+  ],
+  "notes": "Quake III Arena is a purely multiplayer-focused arena shooter with minimalist narrative. Visual communication relies on: (1) bot character differentiation and progression tiers to signal difficulty escalation; (2) weapon variety and spawn mechanics for resource scarcity; (3) environmental architecture (Gothic/Technological hybrid) to establish timeless, cross-dimensional setting; (4) team color coding and symmetrical map design for faction distinction; (5) customizable player models for identity expression. Danger/safety signals are primarily mechanical (health/armor HUD, respawn mechanics) rather than narrative-driven. The game uses visual complexity escalation and AI behavioral sophistication as primary world-state communicators. No explicit faction conflict narrative exists in gameplay—competition is abstracted as 'Arena Eternal' gladiatorial test. Customization options (field of view, model choice, texture detail) suggest world-state flexibility but are meta-game mechanics, not diegetic storytelling.",
+  "sources_used": [
+    "wikipedia—Quake III Arena"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:10:34.532Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2901,
+    "output_tokens": 2354,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

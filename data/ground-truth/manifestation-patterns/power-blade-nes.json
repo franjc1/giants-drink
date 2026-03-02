@@ -1,0 +1,185 @@
+{
+  "game_id": "power-blade-nes",
+  "game_name": "Power Blade",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Alien sprite designs in sector environments",
+      "meaning": "Combat threat; areas heavily guarded by hostile forces"
+    },
+    {
+      "signal": "Pit hazards",
+      "visual_form": "Screen-bottom void/falling mechanic",
+      "meaning": "Instant death threat; unique to Power Blade (player dies if falls off screen)"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Security guard/alien overlord sprite in designated security rooms",
+      "meaning": "High-threat confrontation; barrier to sector progression"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Timer mechanic (inferred from loss condition)",
+      "meaning": "Resource scarcity; failure state if time runs out"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Life meter visual decrease on HUD",
+      "meaning": "Damage accumulation; loss condition when meter reaches zero"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Agent contact points",
+      "visual_form": "NPC character sprites within sectors",
+      "meaning": "Safe interaction; provides ID card access to restricted areas"
+    },
+    {
+      "signal": "Power-ups and upgrades",
+      "visual_form": "Collectible items (boomerang power, range, quantity enhancements; Power Suit helmet)",
+      "meaning": "Player empowerment; capability increase reduces danger"
+    },
+    {
+      "signal": "Data tape collection",
+      "visual_form": "Sector tape units obtained after boss defeat",
+      "meaning": "Progress marker; completion of sector objectives"
+    },
+    {
+      "signal": "Password/Continue system",
+      "visual_form": "Menu-accessible checkpoint restart feature",
+      "meaning": "Progress preservation; ability to resume at specific checkpoints mitigates failure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Master Computer (Human Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Master Computer control center; data tapes as authority tokens",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Six sectors arranged around central control center; database security rooms; Control Center as final hub"
+    },
+    {
+      "faction": "Aliens (Hostile Force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Alien sprite designs; final boss (alien overlord/David Uncle transformed)",
+      "enemy_visual_variants": "Multiple alien enemy types per sector; regional gameplay differences suggest enemy variety",
+      "environmental_markers": "Heavy guard presence throughout all six sectors; hostile occupation of databases"
+    },
+    {
+      "faction": "NOVA (Human Agent/Security)",
+      "color_identity": null,
+      "symbol_or_sigil": "Power Blade (energy boomerang weapon); Power Suit armor; NOVA protagonist sprite (buff soldier aesthetic)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player equipment progression; visual transformation when Power Suit equipped"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-invasion (baseline colony state)",
+      "visual_manifestation": "Master Computer operational; sectors functioning normally with minimal visible damage",
+      "behavioral_manifestation": "NPCs present in sectors; routine database operations; agents available for contact"
+    },
+    {
+      "world_state": "Alien invasion/Master Computer offline",
+      "visual_manifestation": "Sector environments occupied by alien forces; security systems activated; hostile presence throughout",
+      "behavioral_manifestation": "Enemies patrol sectors; security guards defend database rooms; agents in hiding requiring discovery"
+    },
+    {
+      "world_state": "Sector disarmed (post-boss defeat)",
+      "visual_manifestation": "Sector-specific visual change after tape retrieval; new cutscene with 'Sector Disarmed' music (BGM0A)",
+      "behavioral_manifestation": "Reduced or eliminated enemy presence; sector marked as cleared; progress toward Control Center access"
+    },
+    {
+      "world_state": "All six sectors disarmed",
+      "visual_manifestation": "Map screen shows all sectors cleared; access to Master Computer Control Center unlocked",
+      "behavioral_manifestation": "Final boss encounter available; alien overlord transformation sequence triggers"
+    },
+    {
+      "world_state": "Final boss defeated/Master Computer restored",
+      "visual_manifestation": "Control center secured; epilogue cutscene plays (BGM10 in US/EU version)",
+      "behavioral_manifestation": "Game completion state; order restored to New Earth colony"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sector thematic naming and music",
+      "example": "Six sectors identified by function: Rocket (Space Development BGM05), Energy (Energy Development BGM06), Bio (Life Research BGM03), Military Base (BASE BGM04), Weather Control (THESKY BGM09), Residential Area (LIFE BGM08), Central Control Center (CENTER BGM02). Each music piece reinforces sector identity and infrastructure purpose."
+    },
+    {
+      "technique": "Level architecture reflecting occupation",
+      "example": "Alien guard placement and security room design communicate hostile control; database locations require navigation through alien-occupied territory; agent hiding spots suggest resistance/evasion tactics"
+    },
+    {
+      "technique": "NPC dialogue and interaction sequences",
+      "example": "Power Blade (US/EU) expanded in-game storytelling significantly versus Power Blazer (JP). Agents must be located to grant ID card access, visually communicating that sectors are locked down and requiring authorization."
+    },
+    {
+      "technique": "Title screen and intro cinematics",
+      "example": "Power Blade added new title intro story sequence absent from Power Blazer. Story elaboration in-game through cutscenes (stage intro, title demo) establishes narrative context of alien invasion and Nova's mission."
+    },
+    {
+      "technique": "Character design as faction identity",
+      "example": "NOVA redesigned from cartoon robot to Arnold Schwarzenegger-like soldier aesthetic in Western localization. Visual shift communicates shift from sci-fi comedic tone to serious military/action narrative; protagonist appearance signals human resistance against alien threat."
+    },
+    {
+      "technique": "Map screen redesign",
+      "example": "Power Blade completely overhauled map screen versus Power Blazer. Hexagonal/circular sector layout with rectangular reticle cursor (vs. player sprite cursor) provides clear hierarchical view of colony structure and stage progression state."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "NOVA (Player Character)",
+      "state": "Normal/Baseline",
+      "behavior": "Boomerang-armed movement through sectors; eight-directional attack capability; health meter decreases on hit"
+    },
+    {
+      "entity": "NOVA (Power Suit Equipped)",
+      "state": "Enhanced/Powered-up",
+      "behavior": "Energy blast attacks in eight directions; increased damage output; visual transformation (helmet/armor equipped)"
+    },
+    {
+      "entity": "Alien Enemies",
+      "state": "Patrolling/Guarding",
+      "behavior": "Sector occupation; attack on player contact; varied sprite designs per sector indicating enemy variety"
+    },
+    {
+      "entity": "Security Guard Boss",
+      "state": "Terminal defensive",
+      "behavior": "High-health confrontation in database security rooms; defeat grants sector tape access; visual boss sprite indicates significant threat"
+    },
+    {
+      "entity": "Alien Overlord/David Uncle",
+      "state": "Transformed/Final threat",
+      "behavior": "Final boss encounter in Control Center; transformation sequence (BGM0C final boss music); defeat triggers colony restoration"
+    },
+    {
+      "entity": "Agent NPC",
+      "state": "In-hiding/Discovered",
+      "behavior": "Located within sectors via exploration; provides ID card upon contact; communication indicates resistance element"
+    },
+    {
+      "entity": "Master Computer",
+      "state": "Offline/Malfunctioning",
+      "behavior": "Control program disabled; requires sector tape collection to restore; serves as narrative objective and world-state anchor"
+    }
+  ],
+  "notes": "Power Blade represents a Mega Man-style level-select platformer with heavy alien invasion narrative. Primary danger communication through enemy presence and environmental hazards (pits); primary safety communication through power-up acquisition and NPC agent contact. Faction conflict centers on human colony (NOVA/Master Computer) versus alien occupation. World-state progression visually marked through sector clearing (data tapes) and map screen updates. US/EU localization (Power Blade) significantly enhanced narrative-through-visuals compared to JP original (Power Blazer) via expanded cutscenes, character redesign, and in-game dialogue. Regional music differences reinforce tonal shift from comedic to serious military action narrative.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:15:32.134Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6049,
+    "output_tokens": 2281,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

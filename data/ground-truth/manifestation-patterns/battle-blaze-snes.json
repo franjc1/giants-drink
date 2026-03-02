@@ -1,0 +1,113 @@
+{
+  "game_id": "battle-blaze-snes",
+  "game_name": "Battle Blaze",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "opponent_attack_animation",
+      "visual_form": "character_movement_and_weapon_extension",
+      "meaning": "incoming damage threat during 1v1 combat"
+    },
+    {
+      "signal": "ranged_attack_projectile",
+      "visual_form": "chain_mace_projectile_from_gustoff_ai",
+      "meaning": "distance threat; only AI-controlled Lord Gustoff manifests this danger signal"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "idle_stance",
+      "visual_form": "character_in_neutral_stance_kamae",
+      "meaning": "no immediate threat; opponent in passive defensive posture"
+    },
+    {
+      "signal": "distance_separation",
+      "visual_form": "spatial_gap_between_fighters",
+      "meaning": "temporary reprieve from melee engagement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "character_model_and_costume_unique_to_each_fighter",
+      "environmental_markers": null
+    },
+    {
+      "faction": "ai_opponent",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "visual_palette_swap_or_character_variant_to_distinguish_from_player",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "combat_active",
+      "visual_manifestation": "fighters_positioned_on_arena_floor_in_stances",
+      "behavioral_manifestation": "characters_execute_move_sequences_including_jumps_kicks_punches_throws"
+    },
+    {
+      "world_state": "player_health_critical",
+      "visual_manifestation": "health_bar_depleted_on_ui",
+      "behavioral_manifestation": "player_character_at_risk_of_defeat"
+    },
+    {
+      "world_state": "victory_achieved",
+      "visual_manifestation": "opponent_defeated_animation",
+      "behavioral_manifestation": "combat_sequence_terminates_match_ends"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "character_costume_differentiation",
+      "example": "each of seven fighters has medieval_themed_unique_outfit_signaling_distinct_background_or_role"
+    },
+    {
+      "technique": "regional_localization_visual_changes",
+      "example": "filea_tesya_given_tights_in_north_american_version_vs_japanese_original_reflecting_cultural_content_standards"
+    },
+    {
+      "technique": "character_name_variance",
+      "example": "japanese_names_faud_rangle_filea_shazzer_werleck_gliformoth_vs_north_american_kerrel_lang_tesya_shnouzer_adrick_autarch_suggesting_localized_fantasy_world_building"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "lord_gustoff",
+      "state": "ai_controlled",
+      "behavior": "capable_of_ranged_chain_mace_attack_not_available_to_player_suggesting_ai_advantage_or_special_boss_status"
+    },
+    {
+      "entity": "shazzer_shnouzer",
+      "state": "ai_controlled",
+      "behavior": "capable_of_ranged_attack_per_manual_but_move_unavailable_in_player_control_indicating_ai_exclusive_capability"
+    },
+    {
+      "entity": "player_character",
+      "state": "combat_idle",
+      "behavior": "enters_kamae_stance_foundation_position_for_move_chains"
+    },
+    {
+      "entity": "all_characters",
+      "state": "movement_active",
+      "behavior": "execute_jump_variants_forward_backward_vertical_with_attack_combinations_indicating_dynamic_combat_engagement"
+    }
+  ],
+  "notes": "Battle Blaze is a medieval-themed one-on-one fighting game with minimal documented visual communication of world-state or political faction systems. The game lacks faction identity systems typical of narrative-driven fighters. Visual communication is primarily via character model differentiation, costume design (including cultural localization through leg coverage changes), and combat animation states. The asymmetry between player and AI capabilities (ranged attacks available only to AI Gustoff and Shazzer) represents a mechanical manifestation of threat hierarchy rather than world-state communication. Medieval aesthetic provides implicit context but no explicit environmental storytelling of political situation. Development text reveals extensive move system architecture (stances, jumps, kicks, throws, timing-based attacks, counters) but no world-building context. Game exists at intersection of fighting game mechanics and undefined medieval narrative.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:34:10.360Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2715,
+    "output_tokens": 1315,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

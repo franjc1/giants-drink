@@ -1,0 +1,154 @@
+{
+  "game_id": "rad-racer-ii-nes",
+  "game_name": "Rad Racer II",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Obstacle collision",
+      "visual_form": "Vehicle sprite interaction with roadside objects or other cars",
+      "meaning": "Immediate hazard requiring avoidance; collision causes vehicle flip and crash"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Dashboard time remaining indicator depleting",
+      "meaning": "Checkpoint deadline approaching; failure to reach checkered flag before time expires ends stage"
+    },
+    {
+      "signal": "Competitor aggression",
+      "visual_form": "Opposing vehicle sprites scaling up and moving toward player lane",
+      "meaning": "Increasing difficulty; rival cars become faster and more challenging as stages progress"
+    },
+    {
+      "signal": "Speed depletion",
+      "visual_form": "Speedometer needle dropping below optimal racing speed",
+      "meaning": "Loss of momentum; inability to maintain pace risks missing checkpoints within time limit"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Checkered flag",
+      "visual_form": "Checkered flag sprite appearing on road ahead",
+      "meaning": "Checkpoint reached; adds time and progression marker; visible navigation goal"
+    },
+    {
+      "signal": "Clear road ahead",
+      "visual_form": "Unobstructed sprite-based road environment with minimal traffic",
+      "meaning": "Safe passage available; opportunity to accelerate and build speed"
+    },
+    {
+      "signal": "Turbo activation",
+      "visual_form": "Speed transition from normal (100 km/h) to turbo mode (up to 255 km/h)",
+      "meaning": "Enhanced capability state; acceleration boost enables faster stage completion"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player vehicle",
+      "color_identity": null,
+      "symbol_or_sigil": "Selectable car sprite (328 Twin Turbo or F1 Machine)",
+      "enemy_visual_variants": "Both vehicle options perform identically; no competitive differentiation through car type",
+      "environmental_markers": "Always viewed from behind-vehicle perspective; centered in screen frame"
+    },
+    {
+      "faction": "Competitor vehicles",
+      "color_identity": null,
+      "symbol_or_sigil": "Multiple opponent car sprites (Volkswagen Beetles to Ferrari Testarossas) scaling in visual size and speed",
+      "enemy_visual_variants": "Diverse vehicle types represent increasing difficulty tiers across stage progression",
+      "environmental_markers": "Appear in traffic lanes ahead of player; sprite scaling indicates relative distance and threat level"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage location transition",
+      "visual_manifestation": "Distinct skyline and environment graphics for each of eight stages (Key West, Big Apple, Gettysburg, Monument Valley, Las Vegas Blvd., Rocky Mountains, Twilight California, Bay Bridge)",
+      "behavioral_manifestation": "Road layout, obstacle placement, and competitor density vary by stage; difficulty escalates progressively"
+    },
+    {
+      "world_state": "Time remaining critical",
+      "visual_manifestation": "Dashboard time indicator visually depletes; coasting and deceleration sequence triggers when time expires",
+      "behavioral_manifestation": "Unlike Out Run's immediate game-end, player vehicle decelerates gradually (5-10 second buffer), extending stage window"
+    },
+    {
+      "world_state": "Competitor difficulty scaling",
+      "visual_manifestation": "Opponent vehicle sprites appear with increasing fidelity and speed as stages advance",
+      "behavioral_manifestation": "Vehicle performance tiers escalate from early-stage rivals to high-performance competitors; speed delta increases challenge"
+    },
+    {
+      "world_state": "3D mode active",
+      "visual_manifestation": "Stereoscopic 3D effect available via anaglyph glasses or Famicom 3D shutter glasses; scanline-based road perspective enhances depth",
+      "behavioral_manifestation": "Optional enhancement; gameplay mechanics remain identical; provides immersive sense of speed and forward momentum"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Billboard signage",
+      "example": "Roadside billboards designed by developer Takashi Tokita convey location context and sponsorship atmosphere within each stage environment"
+    },
+    {
+      "technique": "Skyline and landmark variation",
+      "example": "Distinct visual backdrops for eight stages (Los Angeles, San Francisco, Athens referenced) establish geographic progression of 'Transamerica' race from West Coast to East Coast"
+    },
+    {
+      "technique": "Traffic density and composition",
+      "example": "Vehicle type variety (from Volkswagen Beetles to Ferrari Testarossas) reflects stage-specific economic and geographic character"
+    },
+    {
+      "technique": "Road design and obstacles",
+      "visual_form": "Stage-specific obstacle placement and road curvature communicate environmental hazards and navigation challenge"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Normal acceleration",
+      "behavior": "Accelerates to maximum 100 km/h; controllable via brake, steer, and turbo activation"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Turbo activated",
+      "behavior": "Accelerates to maximum 255 km/h; dramatically increases pace and stage completion capability"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Collision impact",
+      "behavior": "Vehicle flips and crashes; stage progression interrupted"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Time expired",
+      "behavior": "Coasts and decelerates from current speed to 0 km/h over 5-10 second window; allows brief additional checkpoint pursuit opportunity"
+    },
+    {
+      "entity": "Competitor vehicles",
+      "state": "Early stages",
+      "behavior": "Slower performance; manageable threat level; Volkswagen Beetles and lower-tier vehicles"
+    },
+    {
+      "entity": "Competitor vehicles",
+      "state": "Late stages",
+      "behavior": "Increased speed; Ferrari Testarossas and high-performance rivals; heightened traffic density and collision risk"
+    },
+    {
+      "entity": "Checkered flag",
+      "state": "Visible on road",
+      "behavior": "Marks checkpoint or stage completion; interaction triggers time addition or stage end event"
+    }
+  ],
+  "notes": "Rad Racer II is a sprite-based racing game with limited faction complexity; danger and safety signals are primarily mechanical rather than narrative. Visual communication relies heavily on dashboard instrumentation (speedometer, tachometer, time remaining, progress bar) and environmental contrast. The game's primary world-state manifestation is geographic progression across eight distinct stages, each with unique skyline and obstacle characteristics. No explicit political or factional systems documented. The 3D stereoscopic mode represents an optional environmental enhancement rather than a world-state mechanic. Vehicle selection (328 Twin Turbo vs. F1 Machine) is cosmetic, offering no gameplay differentiation.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:19:24.882Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4111,
+    "output_tokens": 1838,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

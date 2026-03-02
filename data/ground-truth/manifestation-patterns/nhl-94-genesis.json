@@ -1,0 +1,154 @@
+{
+  "game_id": "nhl-94-genesis",
+  "game_name": "NHL '94",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "opposing_team_proximity",
+      "visual_form": "player sprite color contrast (opposing team color)",
+      "meaning": "threat to ball control / scoring opportunity vulnerability"
+    },
+    {
+      "signal": "goalie_positioning",
+      "visual_form": "goalie sprite depth in goal crease",
+      "meaning": "defensive readiness / shooting danger level"
+    },
+    {
+      "signal": "player_speed_animation",
+      "visual_form": "sprite animation frame rate increase",
+      "meaning": "aggressive opponent movement / imminent check/collision"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "own_team_control",
+      "visual_form": "puck possession highlight / selected player sprite emphasis",
+      "meaning": "control state / safe ball position"
+    },
+    {
+      "signal": "open_ice_space",
+      "visual_form": "empty rink area with no opposing player sprites",
+      "meaning": "opportunity for safe passing / movement corridor"
+    },
+    {
+      "signal": "friendly_goalie_readiness",
+      "visual_form": "goalie sprite active animation in crease",
+      "meaning": "defensive coverage / shot prevention capability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "home_team",
+      "color_identity": "primary jersey color (varies by team)",
+      "symbol_or_sigil": "team logo on jersey sprites",
+      "enemy_visual_variants": "opposing team uses distinct contrasting jersey color",
+      "environmental_markers": "crowd coloration / rink board advertising reflects home team"
+    },
+    {
+      "faction": "away_team",
+      "color_identity": "secondary/white jersey color",
+      "symbol_or_sigil": "team logo on away jersey sprites",
+      "enemy_visual_variants": "visually distinct from home team through color separation",
+      "environmental_markers": "same rink environment but crowd context shifts based on game mode"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "period_start",
+      "visual_manifestation": "team-specific organ music visual cue / scoreboard reset display",
+      "behavioral_manifestation": "players spawn in center ice formation; gameplay reset to neutral position"
+    },
+    {
+      "world_state": "goal_scored",
+      "visual_manifestation": "scoreboard updates; goal horn/celebration animation trigger",
+      "behavioral_manifestation": "celebrating team player sprite animations; crowd meter response; team-specific organ song plays (e.g. 'Brass Bonanza' for Hartford Whalers)"
+    },
+    {
+      "world_state": "penalty_called",
+      "visual_manifestation": "penalized player sprite isolation / visual highlighting",
+      "behavioral_manifestation": "player removed to penalty box; team plays with reduced player count; power play/penalty kill state established"
+    },
+    {
+      "world_state": "shootout_mode",
+      "visual_manifestation": "camera/view emphasis on goalie and single attacker sprite",
+      "behavioral_manifestation": "one-on-one player control; goalie manual control engaged; reduced ice participation"
+    },
+    {
+      "world_state": "playoffs_bracket",
+      "visual_manifestation": "bracket display in menu; game series counter (Best of Seven indicator)",
+      "behavioral_manifestation": "cumulative win tracking across multiple games; series elimination mechanics enforced"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "team_anthem_audio_branding",
+      "example": "Montreal Canadiens play 'Halte-là! Les Canadiens sont là!' at period start; Chicago Blackhawks play 'Here Come the Hawks'; St. Louis Blues play 'When the Saints Go Marching In' — creates faction identity through licensed authentic arena music"
+    },
+    {
+      "technique": "roster_reflection_of_league_state",
+      "example": "rosters reflect 1992-93 NHL season; includes new expansion teams (Mighty Ducks of Anaheim, Florida Panthers) — communicates real-world league composition and timeline authenticity"
+    },
+    {
+      "technique": "vertical_camera_perspective",
+      "visual_form": "overhead/top-down view of rink",
+      "example": "maintains distinct strategic visual language from side-view hockey games; communicates authentic broadcast perspective"
+    },
+    {
+      "technique": "sprite_animation_authenticity",
+      "example": "one-timer move animation (player shoots directly off pass) — visual communication of authentic hockey mechanics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_sprite",
+      "state": "possession",
+      "behavior": "animation emphasizes control; movement speed reflects player attribute values (speed stat)"
+    },
+    {
+      "entity": "player_sprite",
+      "state": "checking",
+      "behavior": "collision animation triggers; sprite interaction animation shows physical contact"
+    },
+    {
+      "entity": "goalie_sprite",
+      "state": "active_defense",
+      "behavior": "animation shows save motion; positioning in crease; manual control responsiveness"
+    },
+    {
+      "entity": "goalie_sprite",
+      "state": "vulnerable",
+      "behavior": "displaced from crease position; animation shows out-of-position state"
+    },
+    {
+      "entity": "puck_sprite",
+      "state": "live_play",
+      "behavior": "sprite velocity animation reflects pass/shot force; physical interaction with player sticks"
+    },
+    {
+      "entity": "crowd_meter",
+      "state": "goal_scored",
+      "behavior": "visual feedback escalates; audio intensity increases"
+    },
+    {
+      "entity": "penalized_player",
+      "state": "penalty_box",
+      "behavior": "sprite isolated from play area; visual removal communicates reduced team capacity"
+    }
+  ],
+  "notes": "NHL '94 uses vertical camera perspective for authentic broadcast simulation. Visual communication emphasizes team differentiation through jersey color contrast, authentic league rosters (1992-93 season), and team-specific audio branding through licensed organ songs. Danger/safety signals primarily manifest through sprite positioning, animation frames, and possession states rather than explicit HUD warnings. World-state changes communicated through scoreboard updates, goal animations, and arena audio cues. The game's visual language prioritizes authenticity to televised NHL broadcasts and real player attributes (reflected in animation speed/style variation). Manual goalie control introduced new visual communication channel for defensive state. Faction identity relies heavily on jersey color and authentic team rosters rather than symbolic visual markers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:42:19.097Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3212,
+    "output_tokens": 1701,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

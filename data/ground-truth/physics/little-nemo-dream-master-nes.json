@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "game": "Little Nemo: The Dream Master",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Little Nemo: The Dream Master",
+        "url": "https://en.wikipedia.org/wiki/Little_Nemo:_The_Dream_Master",
+        "notes": "Animal possession mechanic confirmed. 7 creatures with different abilities."
+      },
+      {
+        "name": "Speedrun.com — Little Nemo: The Dream Master",
+        "url": "https://www.speedrun.com/little_nemo_the_dream_master",
+        "notes": "Speedrun community mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Little Nemo is based on Winsor McCay's 'Little Nemo in Slumberland' comic strip.",
+      "DEFINING MECHANIC: Nemo feeds candy to animals, then climbs inside them to use their unique abilities.",
+      "Each creature gives completely different movement and combat capabilities — the game is essentially 7 games in one body.",
+      "Nemo alone is fragile with limited attacks (wand). The animal possession is the primary survival and traversal strategy.",
+      "7 possessable animals: Frog, Bee, Gorilla, Lizard, Mole, Mouse, and a few others depending on level."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "nemo_base_physics": {
+    "_note": "Nemo without an animal host. Fragile and limited.",
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Capcom NES standard movement. VERIFY."
+    },
+    "jump": {
+      "height_px_approx": 40,
+      "variable_height": true,
+      "air_control": "full",
+      "confidence": "low",
+      "notes": "Standard Capcom NES jump feel. VERIFY."
+    },
+    "wand_attack": {
+      "description": "Nemo's pajama wand. Short-range stun — temporarily freezes enemies.",
+      "effect": "Stun only — does not kill. Stunned enemies can be climbed on.",
+      "notes": "The wand creates opportunities to possess animals (must feed candy to approach)."
+    },
+    "candy_throw": {
+      "description": "Nemo can toss candy toward animals. The animal approaches and eats it.",
+      "notes": "Candy must be collected from the environment. Limited supply."
+    }
+  },
+
+  "animal_possession": {
+    "_note": "The core game mechanic. Each animal fundamentally changes Nemo's capabilities.",
+    "mechanic": "Approach an animal and press action. Nemo climbs inside. To exit, press action again — Nemo pops out.",
+    "animals": {
+      "frog": {
+        "ability": "Wall cling. Can stick to vertical surfaces and jump off.",
+        "movement": "Standard hop movement",
+        "special": "Wall cling enables vertical traversal and ceiling access",
+        "notes": "Wall cling creates access to areas Nemo can't reach alone."
+      },
+      "bee": {
+        "ability": "Short-range flight. Press and hold jump to fly temporarily.",
+        "movement": "Hovering with limited fuel",
+        "special": "Can reach heights inaccessible to ground-based movement",
+        "notes": "Flight duration is limited — not infinite hover. Must land and wait or land to recharge."
+      },
+      "gorilla": {
+        "ability": "Throw Nemo at enemies or to reach distant platforms.",
+        "movement": "Slower but stronger",
+        "special": "Self-throw mechanic — Nemo can be launched by the gorilla to reach far platforms",
+        "notes": "The gorilla is a combat powerhouse and long-range launcher."
+      },
+      "lizard": {
+        "ability": "Wall and ceiling climbing. Slower but accesses surfaces others can't.",
+        "movement": "Slower run speed",
+        "special": "Can traverse walls and ceilings — similar to Nemo's wand victim state",
+        "notes": "The lizard makes the entire level navigable in ways standard movement doesn't allow."
+      },
+      "mole": {
+        "ability": "Dig through soft earth/ground. Access underground passages.",
+        "movement": "Slow surface movement",
+        "special": "Digging through certain floor tiles creates passages",
+        "notes": "Enables subterranean routing not available to surface characters."
+      },
+      "mouse": {
+        "ability": "Small hitbox. Can fit through tight passages.",
+        "movement": "Very fast run speed",
+        "special": "Access passages other animals can't fit through",
+        "notes": "The mouse's small size makes many tight-squeeze sections trivial."
+      }
+    }
+  },
+
+  "candy_system": {
+    "description": "Candy is the resource for animal possession. Collect candy from environment, use to bait animals.",
+    "supply": "Limited — found in specific locations in each level",
+    "notes": [
+      "Running out of candy means no animal possession until more is found.",
+      "Some levels require using the right animal at the right time — candy management is strategic.",
+      "Candy can also be thrown at enemies to distract them (VERIFY)."
+    ]
+  },
+
+  "level_structure": {
+    "worlds": [
+      "Slumberland (tutorial area)",
+      "Mushroom Forest",
+      "Flower Garden",
+      "Nemo's House",
+      "Nightmare Land (final world)",
+      "Several others"
+    ],
+    "notes": [
+      "Each world emphasizes different animals. Bee levels have lots of vertical challenges. Mole levels have underground paths.",
+      "The level design telegraphs which animal will be useful through the environmental obstacles present."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "Little Nemo's animal possession is one of the earliest 'character switching' systems in platformers, predating modern implementations by decades. The key design insight: possession is temporary and costly (requires candy), so it's a resource decision rather than a permanent mode. Players choose WHEN to possess, not just WHICH animal.",
+    "Each animal represents a different traversal philosophy: Bee = vertical access. Frog = wall access. Lizard = surface inversion. Mole = underground. Mouse = size-based access. These are five distinct spatial solutions to obstacle design — a complete taxonomy of movement types from 1990.",
+    "The wand's stun (not kill) mechanic creates interesting geometry: stunned enemies are temporary platforms. An enemy Nemo can't safely engage becomes furniture if she stuns it. This is 'environmental conversion' — obstacles become tools.",
+    "The candy economy ties the possession system to resource scarcity. Even if a perfect animal is available, possession costs candy that might be needed later. This forces players to think ahead about resource consumption — a form of soft-limited inventory management in a simple platformer.",
+    "Nemo alone is intentionally weak — her survival depends on possession or avoidance. This framing (the protagonist is fragile; animals are the power) creates a different relationship to combat than 'get stronger weapon.' Instead: 'find the right friend.'"
+  ]
+}

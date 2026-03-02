@@ -1,0 +1,142 @@
+{
+  "game_id": "panel-de-pon-snes",
+  "game_name": "Panel de Pon / Tetris Attack",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising block stack",
+      "visual_form": "Colored blocks ascending toward top of playfield",
+      "meaning": "Increasing pressure; blocks touching top = game over"
+    },
+    {
+      "signal": "Accelerating block rise speed",
+      "visual_form": "Faster upward movement of block stacks over time",
+      "meaning": "Difficulty escalation; player losing control of pace"
+    },
+    {
+      "signal": "Filled playfield",
+      "visual_form": "Dense concentration of uncleared blocks occupying most screen space",
+      "meaning": "Imminent loss state; player has limited moves remaining"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared rows",
+      "visual_form": "Blocks disappearing when three or more same-color blocks align",
+      "meaning": "Successful action; player maintaining board control"
+    },
+    {
+      "signal": "Chain reactions",
+      "visual_form": "Cascading blocks falling and creating secondary matches",
+      "meaning": "Strategic success; player leveraging game physics effectively"
+    },
+    {
+      "signal": "Empty playfield space",
+      "visual_form": "Large clear areas with few blocks on screen",
+      "meaning": "Player safety margin; breathing room to make next move"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Character (Story Mode context)",
+      "color_identity": "Varies by character/region (Fairies in JP Panel de Pon; Yoshi/Mario cast in NA Tetris Attack)",
+      "symbol_or_sigil": "Character portrait/avatar displayed during Story Mode matchups",
+      "enemy_visual_variants": "Opponent character portraits shown as adversaries in Story Mode battles",
+      "environmental_markers": "Character-specific background themes (Windy's background in JP version becomes Lakitu's background in NA version)"
+    },
+    {
+      "faction": "Regional Identity Markers",
+      "color_identity": null,
+      "symbol_or_sigil": "Fantasy fairy aesthetic (JP Panel de Pon) vs. Mario/Yoshi branding (NA Tetris Attack)",
+      "enemy_visual_variants": "No direct enemy faction; opponents are alternative characters from same cast",
+      "environmental_markers": "Background art styles reflect either fantasy setting (JP) or Mushroom Kingdom locale (NA)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low difficulty",
+      "visual_manifestation": "Slower block rise speed; blocks generated at lower frequency; simpler color palettes on screen",
+      "behavioral_manifestation": "Opponent AI makes slower/less effective moves; player has more time between block additions"
+    },
+    {
+      "world_state": "Mid game / Escalating challenge",
+      "visual_manifestation": "Moderate block rise acceleration; more complex block patterns appearing; board fills progressively",
+      "behavioral_manifestation": "Opponent AI becomes more aggressive; block generation increases in pace"
+    },
+    {
+      "world_state": "Late game / High difficulty",
+      "visual_manifestation": "Rapid block rise; dense block concentration; visual feedback becomes more intense",
+      "behavioral_manifestation": "Opponent delivers large combos; player forced into reactive rather than proactive play; screen nearly full of blocks"
+    },
+    {
+      "world_state": "Victory state (Story Mode)",
+      "visual_manifestation": "All blocks cleared; opponent character defeated; transition animation to next stage background",
+      "behavioral_manifestation": "Progression to next opponent; environmental background changes signaling story advance"
+    },
+    {
+      "world_state": "Loss state",
+      "visual_manifestation": "Blocks reach top of playfield; game-over screen displays",
+      "behavioral_manifestation": "Game halts; player cannot place further moves; match ends"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character-specific background environments",
+      "example": "Each Story Mode opponent has unique background art that reflects their character identity (Windy fairy character has distinct background in JP version; replaced with Lakitu background in NA version)"
+    },
+    {
+      "technique": "Progressive background transitions",
+      "visual_form": "Backgrounds change as player advances through Puzzle or Stage Clear modes, signaling progression through game world"
+    },
+    {
+      "technique": "Regional aesthetic localization",
+      "example": "Fantasy fairy mythology setting (JP Panel de Pon) replaced with Mushroom Kingdom visual language (NA Tetris Attack) to communicate setting shift to international audiences"
+    },
+    {
+      "technique": "Block color coding",
+      "example": "Different colored blocks serve as primary visual language; matching same colors creates narrative of order/harmony through alignment"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Block stack",
+      "state": "Rising",
+      "behavior": "Continuous upward movement accelerates over time; indicates time pressure increasing on player"
+    },
+    {
+      "entity": "Player cursor",
+      "state": "Active",
+      "behavior": "Selectable position moves across playfield; player can swap adjacent blocks to form matches"
+    },
+    {
+      "entity": "Matched blocks",
+      "state": "Cleared",
+      "behavior": "Disappear from screen when three or more align horizontally or vertically; blocks above fall downward"
+    },
+    {
+      "entity": "Opponent (Story Mode)",
+      "state": "Active",
+      "behavior": "Executes block clearances on parallel playfield; displays portrait/character visual during battle sequences"
+    },
+    {
+      "entity": "Blocks",
+      "state": "Cascading",
+      "behavior": "Fall after matches clear; can trigger chain reactions if new matches form from falling blocks"
+    }
+  ],
+  "notes": "Panel de Pon communicates world-state and difficulty primarily through mechanical/temporal means (block rise speed, generation rate) rather than narrative systems. The game uses minimal faction complexity—characters function as cosmetic story mode opponents rather than representing opposing factions with distinct visual identities or political stakes. Environmental storytelling is limited to background art changes. Danger is communicated exclusively through board fill state and temporal pressure. No political or diplomatic communication systems exist; conflict is purely competitive (puzzle-solving race). Regional localization (JP fantasy vs. NA Mario universe) represents the only significant world-state communication through setting aesthetics.",
+  "sources_used": [
+    "wikipedia: Tetris Attack - Wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:42:18.081Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2853,
+    "output_tokens": 1664,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

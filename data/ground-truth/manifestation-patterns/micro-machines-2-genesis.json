@@ -1,0 +1,133 @@
+{
+  "game_id": "micro-machines-2-genesis",
+  "game_name": "Micro Machines 2: Turbo Tournament",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Off-screen boundary",
+      "visual_form": "Vehicle exits visible play area on screen edges",
+      "meaning": "Elimination from race or loss of position; vehicle out of bounds"
+    },
+    {
+      "signal": "Household obstacles",
+      "visual_form": "Common objects (furniture, bath items, pool table elements) blocking track",
+      "meaning": "Collision hazards; track difficulty and environmental danger"
+    },
+    {
+      "signal": "Distance separation in Single Race/Tournament",
+      "visual_form": "Opponent vehicles disappearing off-screen due to lead distance",
+      "meaning": "Losing position; opponent gaining competitive advantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "On-screen presence",
+      "visual_form": "All player vehicles visible within screen bounds",
+      "meaning": "Active in race; safe from elimination"
+    },
+    {
+      "signal": "Proximity to other racers",
+      "visual_form": "Vehicles visible together on same screen",
+      "meaning": "In competitive range; not eliminated or left behind"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player teams (Share Games mode)",
+      "color_identity": "Team-based color coding of vehicles",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Vehicles colored differently per team affiliation",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Individual player identification",
+      "color_identity": "Colored lights on screen (one light per player, up to eight)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Light color represents player/character identity in Head-to-Head and multiplayer modes",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early race (vehicles centered on screen)",
+      "visual_manifestation": "All vehicles start at center of play area",
+      "behavioral_manifestation": "Vehicles positioned closely together; high collision potential"
+    },
+    {
+      "world_state": "Progression through race (vehicles spread apart)",
+      "visual_manifestation": "Vehicles spread further apart as race progresses; screen positioning changes",
+      "behavioral_manifestation": "Leading vehicle gains distance; separation increases between racers"
+    },
+    {
+      "world_state": "League promotion/relegation season end",
+      "visual_manifestation": "Division rankings displayed based on point accumulation",
+      "behavioral_manifestation": "Top performers advance divisions; lowest performers relegated"
+    },
+    {
+      "world_state": "Head-to-Head competitive lead",
+      "visual_manifestation": "Colored light indicator changes to match leading player's color",
+      "behavioral_manifestation": "Player achieving sufficient distance from opponents becomes only visible racer"
+    },
+    {
+      "world_state": "Tournament/Knockout elimination",
+      "visual_manifestation": "Loser vehicles disappear from subsequent races",
+      "behavioral_manifestation": "Eliminated players do not progress to next round"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Household environment as racetrack setting",
+      "example": "Bathrooms and pool tables serve as racing venues with thematic obstacles (bath items, pool balls, furniture) embedded in track design"
+    },
+    {
+      "technique": "Miniaturized scale narrative",
+      "example": "Top-down perspective and toy vehicle theming (powerboats, helicopters as racing vehicles) communicate game world as miniature/toy scale"
+    },
+    {
+      "technique": "Obstacle placement storytelling",
+      "example": "Common household objects arranged as track hazards communicate domestic interior settings and constraint-based world design"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Computer-controlled opponents",
+      "state": "Active in challenge mode",
+      "behavior": "Compete for first/second placement; character stats affect their performance"
+    },
+    {
+      "entity": "Shadow Racer (Time Trial mode)",
+      "state": "Reference competitor present",
+      "behavior": "Represents best lap time; ghost competitor for player comparison"
+    },
+    {
+      "entity": "Player character selection",
+      "state": "Pre-race",
+      "behavior": "Selected character stats only affect computer opponent performance, not player vehicle"
+    },
+    {
+      "entity": "Vehicle positioning",
+      "state": "Single Race/Tournament start",
+      "behavior": "Vehicles begin at screen center, progressively separate as race continues"
+    },
+    {
+      "entity": "Off-screen vehicles",
+      "state": "Out of bounds (Single Race only)",
+      "behavior": "Eliminated from race unless they have traveled furthest; otherwise out of competition"
+    }
+  ],
+  "notes": "Micro Machines 2 uses primarily positional and color-coded visual communication rather than narrative or symbolic faction systems. The game world is communicated through environmental theming (household/toy scale settings) rather than political or factional conflict. Danger and safety are expressed through screen-space mechanics: on-screen = safe/active, off-screen = danger/elimination. Team identification in Share Games uses simple color-coding. The game's world-state transitions are mechanically driven (race progression, league promotion) rather than environmentally signaled.",
+  "sources_used": [
+    "wikipedia - Micro Machines 2: Turbo Tournament gameplay and mechanics sections"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:39:51.087Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2699,
+    "output_tokens": 1414,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

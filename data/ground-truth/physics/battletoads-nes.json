@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "game": "Battletoads",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1991,
+    "publisher": "Tradewest",
+    "developer": "Rare",
+    "sources": [
+      {
+        "name": "Wikipedia — Battletoads",
+        "url": "https://en.wikipedia.org/wiki/Battletoads",
+        "notes": "Character differences, level structure, mechanics overview."
+      },
+      {
+        "name": "Speedrun.com — Battletoads (NES)",
+        "url": "https://www.speedrun.com/battletoads_nes",
+        "notes": "Speedrun community mechanics documentation including dash jump technique."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Battletoads is a Rare action game notorious for extreme difficulty, especially Turbo Tunnel (Level 3).",
+      "DEFINING FEATURE: Multiple radically different gameplay modes within a single game — the paradigm shifts mid-game.",
+      "Players: Rash and Zitz (2-player co-op). Pimple is kidnapped and is the rescue target.",
+      "The toad bodies are comedically transformed during attacks — arms become hammers, feet become blades, etc.",
+      "Dash Jump: frame-perfect technique — sprint + jump on same frame. Enables faster traversal.",
+      "Most walk/jump values not precisely documented from ROM sources — estimated from gameplay."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "characters": {
+    "rash": {
+      "description": "One of two default playable toads. Nimble, smaller frame.",
+      "fighting_style": "Kick-based attacks",
+      "notes": "Player 1 character."
+    },
+    "zitz": {
+      "description": "Second playable toad. Slightly different attack animations.",
+      "fighting_style": "Mixed punch/kick",
+      "notes": "Player 2 character in co-op."
+    },
+    "pimple": {
+      "description": "The third toad — kidnapped at the game's start. Not playable in standard NES version.",
+      "notes": "Pimple is the rescue objective, not a player character in the original NES game."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Estimate. VERIFY from ROM."
+    },
+    "sprint": {
+      "description": "Double-tap direction to sprint. Faster than walk.",
+      "px_per_frame_approx": 3.0,
+      "confidence": "low",
+      "notes": "Estimate. Sprint enables the strongest attack animations."
+    },
+    "dash_jump": {
+      "description": "Frame-perfect technique: press jump on the exact same frame as the second tap of a sprint input.",
+      "effect": "Allows sprinting while airborne — faster horizontal traversal than walk-jumping.",
+      "source": "Speedrun.com community documentation",
+      "confidence": "high",
+      "notes": "Frame-perfect execution. Standard technique in speedruns."
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": false,
+    "air_control": "partial",
+    "notes": "Standard NES-era jump feel. VERIFY."
+  },
+
+  "combat": {
+    "_note": "The toad bodies comically transform during attack animations — the defining visual hook of the game.",
+    "basic_punch": {
+      "description": "Standard punch. Transforms arm into enlarged fist.",
+      "notes": "Short range."
+    },
+    "kick": {
+      "description": "Kick attack. Transforms foot into large boot.",
+      "notes": "Different toad characters use kicks as primary vs secondary."
+    },
+    "running_attacks": {
+      "description": "Special attacks only available while sprinting. Include body slams, headbutts, and spinning attacks.",
+      "notes": "Running attacks are more powerful than standing attacks. Setting 'manual dash' in options allows faster access."
+    },
+    "throws": {
+      "description": "Grab and throw enemies. Grabs are context-dependent.",
+      "notes": "Throwing enemies into other enemies is efficient crowd control."
+    },
+    "wall_smash": {
+      "description": "Slam enemies into walls for additional damage.",
+      "notes": "Environmental combat — positional awareness matters."
+    }
+  },
+
+  "level_modes": {
+    "_note": "Battletoads' defining design choice: multiple completely different gameplay modes across 12 levels. THE PARADIGM SHIFTS CONSTANTLY.",
+    "beat_em_up_standard": {
+      "levels": ["Level 1: Ragnarok's Canyon", "Level 9: Rat Race (partial)", "Level 12: Revolution"],
+      "description": "Standard side-scrolling beat-em-up. Fight through enemies with melee combat.",
+      "physics": "Standard ground + jump physics"
+    },
+    "turbo_tunnel": {
+      "level": "Level 3",
+      "type": "hoverbike_racing",
+      "description": "Auto-scrolling hoverbike section. Player must dodge walls at high speed. Infamously difficult.",
+      "physics": "Left/right dodge only. No standard jump physics. Instant response required.",
+      "notes": [
+        "Considered one of the most difficult sections in NES history.",
+        "Requires precise memorization of wall patterns.",
+        "Auto-scroll speed increases as the level progresses.",
+        "A significant portion of players who attempt the game never pass this stage."
+      ]
+    },
+    "terra_tubes": {
+      "level": "Level 5",
+      "type": "swimming",
+      "description": "Underwater swimming section with tube-navigation puzzles.",
+      "physics": "8-directional swimming. No gravity. Air meter present (must surface periodically).",
+      "notes": "Drowning mechanics add urgency to navigation."
+    },
+    "surf_city": {
+      "level": "Level 7",
+      "type": "surfboard_racing",
+      "description": "Toads surf on boards down a river, dodging obstacles.",
+      "physics": "Constant forward scroll. Jump/duck to dodge overhead/ground obstacles.",
+      "notes": "Similar auto-scroll pattern to Turbo Tunnel but on water."
+    },
+    "snake_pit": {
+      "level": "Level 8",
+      "type": "pole_climbing",
+      "description": "Toads climb poles that connect platforms. Enemies attack while climbing.",
+      "physics": "Pole climbing physics — up/down speed, dismount timing.",
+      "notes": "Spatial orientation challenge — attacked from multiple levels simultaneously."
+    },
+    "clinger_winger": {
+      "level": "Level 11",
+      "type": "electric_wire_racing",
+      "description": "Toads grip an electric wire and pull themselves along a circuit while being chased.",
+      "physics": "Wire-gripping movement. Must stay ahead of the chaser.",
+      "notes": "Another memorization-heavy auto-scroll with instant death penalty."
+    },
+    "volkmires_inferno": {
+      "level": "Level 10",
+      "type": "flying_vehicle",
+      "description": "Toads fly a jet over an obstacle field.",
+      "physics": "8-directional flight. Ground hazards below, aerial obstacles above.",
+      "notes": "Flying physics — free movement in 8 directions at constant altitude range."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Battletoads is a textbook case of 'genre shifting within a single game.' Each level mode demands completely different skills: the player who mastered the beat-em-up sections must learn scrolling-obstacle physics from scratch for Turbo Tunnel. The game does not apologize for this — it demands mastery of each mode.",
+    "Turbo Tunnel's infamy reveals something interesting about difficulty spikes: a hard section early in a game acts as a filter, not just a challenge. Players either invest in mastering it or they don't. This creates a dedicated player base that shares a common credential (beating level 3).",
+    "The body transformation during combat is purely visual — the actual hitboxes are conventional. But the visual comedy reframes the violence: it's cartoonish, exaggerated, impossible. This tonal choice (violence as slapstick) makes the game's intensity feel playful rather than grim.",
+    "Battletoads' multiplayer creates a notorious problem: the game has friendly fire, and the second player can accidentally (or intentionally) kill the first. This created genuine social conflict between co-op partners and is a famous example of unintended emergent behavior in multiplayer design.",
+    "The multiple level modes are also a pacing tool: the transitions between modes break up the rhythm and prevent fatigue. After intense beat-em-up, a racing section feels like variety. After the racing section, the next combat section feels like relief. Variety as tension management."
+  ]
+}

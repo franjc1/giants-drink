@@ -1,0 +1,134 @@
+{
+  "game_id": "bases-loaded-nes",
+  "game_name": "Bases Loaded",
+  "platform": "nes",
+  "paradigm": "sports-baseball",
+  "danger_signals": [
+    {
+      "signal": "opposing_pitcher_stance",
+      "visual_form": "pitcher_animation_on_mound",
+      "meaning": "active threat to batter; incoming pitch danger"
+    },
+    {
+      "signal": "ball_trajectory",
+      "visual_form": "ball_sprite_motion_toward_batter",
+      "meaning": "immediate danger window; must respond or strike"
+    },
+    {
+      "signal": "fielder_positioning",
+      "visual_form": "defensive_player_sprites_in_field_locations",
+      "meaning": "zone control; risk of out if ball hit to that area"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "bases_empty",
+      "visual_form": "base_graphic_unoccupied",
+      "meaning": "low-pressure situation; minimal runner risk"
+    },
+    {
+      "signal": "favorable_count",
+      "visual_form": "scoreboard_display_balls_strikes",
+      "meaning": "batter advantage; safer to take risks"
+    },
+    {
+      "signal": "runner_on_base",
+      "visual_form": "player_sprite_positioned_on_base_graphic",
+      "meaning": "scoring opportunity available; offensive advantage state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "home_team",
+      "color_identity": "primary_uniform_color_varies_by_team_selection",
+      "symbol_or_sigil": "team_letter_abbreviation_on_uniform",
+      "enemy_visual_variants": "away_team_uses_alternate_uniform_palette",
+      "environmental_markers": "scoreboard_shows_home_team_on_left_side"
+    },
+    {
+      "faction": "away_team",
+      "color_identity": "secondary_uniform_color_contrasts_home",
+      "symbol_or_sigil": "team_letter_abbreviation_displayed_on_scoreboard",
+      "enemy_visual_variants": "lighter_or_inverted_color_scheme_from_home",
+      "environmental_markers": "scoreboard_right_side_tracks_away_team_score"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_inning_low_score",
+      "visual_manifestation": "scoreboard_displays_zeros_or_low_single_digits",
+      "behavioral_manifestation": "both_teams_aggressive_batting_approach_high_risk_tolerance"
+    },
+    {
+      "world_state": "late_inning_leading_team",
+      "visual_manifestation": "scoreboard_gap_widens_visually_through_number_size_or_color",
+      "behavioral_manifestation": "leading_team_defensive_positioning_tightens_trailing_team_pitcher_velocity_increases"
+    },
+    {
+      "world_state": "bases_loaded_high_pressure",
+      "visual_manifestation": "all_three_bases_show_occupied_player_sprites_simultaneously",
+      "behavioral_manifestation": "pitcher_animation_becomes_more_deliberate_batter_input_window_tightens"
+    },
+    {
+      "world_state": "two_outs_endgame_tension",
+      "visual_manifestation": "scoreboard_out_counter_displays_two_markers_final_strike_count_visible",
+      "behavioral_manifestation": "fielder_sprites_move_closer_inward_batter_swing_speed_increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "scoreboard_real_time_state_display",
+      "example": "inning_number_runs_hits_errors_balls_strikes_outs_all_visible_simultaneously_communicating_game_progress_and_pressure"
+    },
+    {
+      "technique": "team_roster_naming_integration",
+      "example": "original_japanese_version_displays_developer_staff_names_tanaka_hayashi_murata_ohta_as_roster_creating_meta_connection_between_player_and_game_creator"
+    },
+    {
+      "technique": "uniform_and_letter_differentiation",
+      "example": "team_selection_screen_shows_distinct_letter_abbreviations_and_colors_allowing_player_to_understand_team_identity_before_play_begins"
+    },
+    {
+      "technique": "regional_visual_adaptation",
+      "example": "usa_version_removes_animated_flags_from_team_select_screen_japanese_version_includes_them_showing_how_cultural_context_affects_visual_communication"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "pitcher",
+      "state": "ready_to_throw",
+      "behavior": "animation_frames_show_wind_up_then_release_signaling_incoming_pitch_to_player"
+    },
+    {
+      "entity": "batter",
+      "state": "focused_at_plate",
+      "behavior": "idle_stance_sprite_waits_for_pitch_animation_ready_to_transition_to_swing_or_avoid"
+    },
+    {
+      "entity": "runner_on_base",
+      "state": "lead_off_ready",
+      "behavior": "sprite_position_inches_away_from_base_small_offset_shows_readiness_to_run"
+    },
+    {
+      "entity": "fielder",
+      "state": "defensive_alert",
+      "behavior": "sprite_positioning_adjusts_based_on_batter_handedness_and_pitch_type_showing_anticipatory_response"
+    }
+  ],
+  "notes": "Bases Loaded uses minimalist NES-era visual language to communicate game state. The primary manifestation layer relies on scoreboard data display and sprite positioning within the baseball diamond grid. Regional differences between Japanese (Moero!! Pro Yakyuu) and US versions show how visual identity is culturally adapted: animated flag removal, logo redesign, and team letter changes all affect faction identity communication. The game lacks complex danger/safety gradient systems; instead uses binary state communication (runner present/absent, strike/ball count, out count). World state pressure increases through proximity of fielders to batter and base-runner animation intensity rather than color shifts or environmental hazards.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:21:40.051Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2437,
+    "output_tokens": 1833,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

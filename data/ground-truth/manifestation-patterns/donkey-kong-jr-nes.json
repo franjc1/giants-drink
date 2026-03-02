@@ -1,0 +1,204 @@
+{
+  "game_id": "donkey-kong-jr-nes",
+  "game_name": "Donkey Kong Jr.",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Animated sprites: Snapjaws (bear-trap eyes), Nitpickers (bird-like creatures), Sparks (electrical hazards on wiring)",
+      "meaning": "Immediate collision threat; touching enemies causes life loss"
+    },
+    {
+      "signal": "Falling distance",
+      "visual_form": "Vertical screen space below character; gravity-affected movement",
+      "meaning": "Excessive fall distance causes automatic life loss"
+    },
+    {
+      "signal": "Water hazard",
+      "visual_form": "Stage 1 environment includes water/liquid at bottom sections",
+      "meaning": "Contact with water results in life loss"
+    },
+    {
+      "signal": "Bonus timer depletion",
+      "visual_form": "On-screen numeric countdown timer (points remaining)",
+      "meaning": "Timer reaching zero ends stage with life loss"
+    },
+    {
+      "signal": "Projectile attack (Nitpickers)",
+      "visual_form": "Dropped egg sprites from bird enemies in Stage 2",
+      "meaning": "Contact with projectiles causes immediate damage/life loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Vine/chain/rope contact",
+      "visual_form": "Vertical climbing structures in distinct visual color; characters transition to climbing animation",
+      "meaning": "Safe traversal path; allows vertical movement and enemy avoidance"
+    },
+    {
+      "signal": "Platform solidity",
+      "visual_form": "Horizontal surface sprites with collision detection",
+      "meaning": "Safe standing surface; allows movement and jumping"
+    },
+    {
+      "signal": "Fruit power-ups",
+      "visual_form": "Colored fruit sprites (apples, grapes, etc.) that fall when knocked down",
+      "meaning": "Destroys all enemies in contact path before disappearing; provides tactical safety"
+    },
+    {
+      "signal": "Bonus points available",
+      "visual_form": "Active countdown timer with positive score values",
+      "meaning": "Stage progression safe; time remains before penalty"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Donkey Kong (protagonist ally)",
+      "color_identity": "Brown/tan character sprite",
+      "symbol_or_sigil": "Caged sprite in enclosure; visual identity as captive father figure",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cage structure at top of stage; chains securing the cage; stage progression goal"
+    },
+    {
+      "faction": "Mario (antagonist)",
+      "color_identity": "Red/blue character sprite",
+      "symbol_or_sigil": "Character flees when objective reached; represents authority/captor role",
+      "enemy_visual_variants": "Static or active sprite depending on stage phase",
+      "environmental_markers": "Hideout location (Stage 4); helicopter transport visual; key placement around building"
+    },
+    {
+      "faction": "Donkey Kong Jr. (player character)",
+      "color_identity": "Smaller brown variant of Donkey Kong",
+      "symbol_or_sigil": "Climbing and traversal focus; rescue mission identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting position; responds to player input; climbs toward caged father"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage 1: Forest/outdoor environment",
+      "visual_manifestation": "Natural environment with vines, platforms, water hazards; brown/green color palette",
+      "behavioral_manifestation": "Snapjaws and Nitpickers spawn; fruit available for knockdown; water at stage bottom"
+    },
+    {
+      "world_state": "Stage 2: Continuation of rescue attempt",
+      "visual_manifestation": "Mid-level environment with chains; Nitpicker enemies deployed with egg-dropping attacks",
+      "behavioral_manifestation": "Stage 2-specific enemy behavior; louder Nitpicker audio (Revision 0); fruit knockdown mechanics"
+    },
+    {
+      "world_state": "Stage 3: Further progression toward hideout",
+      "visual_manifestation": "Environmental transition; logical progression toward Mario's hideout",
+      "behavioral_manifestation": "Increased difficulty; modified enemy spawn rates on higher difficulties"
+    },
+    {
+      "world_state": "Stage 4: Mario's Hideout/building interior",
+      "visual_manifestation": "Interior structure; wiring visible; electrical sparks as environmental hazard; locked containers for keys",
+      "behavioral_manifestation": "Sparks roam wiring paths; six key locks visible; different goal (push keys into locks vs. reach hanging key)"
+    },
+    {
+      "world_state": "Objective completion (first 3 stages)",
+      "visual_manifestation": "Mario sprite animates fleeing; cage pushed off-screen; visual confirmation of success",
+      "behavioral_manifestation": "Cutscene trigger; transition to next stage at increased difficulty"
+    },
+    {
+      "world_state": "Stage 4 objective completion",
+      "visual_manifestation": "Donkey Kong freed from cage; brief cutscene plays",
+      "behavioral_manifestation": "Game loops back to Stage 1 at increased difficulty; permanent world-state progression"
+    },
+    {
+      "world_state": "Difficulty increase (multiple loop cycles)",
+      "visual_manifestation": "Enemy spawn rate changes; unused code suggests increased targeting behavior toward player at high difficulty",
+      "behavioral_manifestation": "Enemies more aggressive in seeking Junior's position when near top of stage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial narrative - vertical rescue journey",
+      "example": "Player climbs upward through four distinct stage environments toward caged father at top of screen; visual height progression communicates narrative advancement"
+    },
+    {
+      "technique": "Enemy type distribution by location",
+      "example": "Snapjaws in forest (Stage 1), Nitpickers with eggs in vines (Stage 2), Sparks on electrical wiring (Stage 4); enemy variety reflects environmental hazards of each location"
+    },
+    {
+      "technique": "Objective marker visibility",
+      "example": "Hanging key next to father's cage remains visible throughout stages 1-3; creates persistent visual goal for player navigation"
+    },
+    {
+      "technique": "Environmental constraint communication",
+      "example": "Water hazard at stage bottom; fruit that destroys enemies; chain/vine climbing mechanics—all visually integrated to suggest traversal rules"
+    },
+    {
+      "technique": "Antagonist presence signaling",
+      "example": "Mario's sprite animates fleeing when objective reached; cage removed from stage; visual confirmation of antagonist defeat"
+    },
+    {
+      "technique": "Stage-specific hazard visualization",
+      "example": "Stage 4 interior features visible electrical wiring with animated Sparks; communicates different mechanical threat than earlier nature-based stages"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Donkey Kong Jr. (player)",
+      "state": "Active climbing",
+      "behavior": "Animation changes to climbing; collision with vine/chain/rope enables upward traversal"
+    },
+    {
+      "entity": "Donkey Kong Jr. (player)",
+      "state": "Jumping",
+      "behavior": "Brief arc animation; enables platform-to-platform traversal and enemy dodging"
+    },
+    {
+      "entity": "Donkey Kong Jr. (player)",
+      "state": "Fruit knockdown interaction",
+      "behavior": "Proximity-triggered; fruit falls and destroys enemy sprites in contact path"
+    },
+    {
+      "entity": "Mario",
+      "state": "Objective incomplete",
+      "behavior": "Static or minimal animation; cage remains on-screen"
+    },
+    {
+      "entity": "Mario",
+      "state": "Objective reached (Stages 1-3)",
+      "behavior": "Animated flee action; cage pushes off-screen; triggers stage transition"
+    },
+    {
+      "entity": "Snapjaws",
+      "state": "Hunting",
+      "behavior": "Patrol behavior; collision with Junior causes life loss"
+    },
+    {
+      "entity": "Nitpickers",
+      "state": "Hunting (Stage 2)",
+      "behavior": "Bird-like movement; egg projectile drops when in proximity to Junior"
+    },
+    {
+      "entity": "Sparks",
+      "state": "Patrolling (Stage 4 wiring)",
+      "behavior": "Linear roaming on electrical wiring paths; collision-based threat"
+    },
+    {
+      "entity": "Enemies (difficulty scaling)",
+      "state": "High difficulty/late levels",
+      "behavior": "Increased spawn frequency; unused code suggests higher targeting probability toward Junior when near top of stage (0x513 behavior parameter, set at 0xB0 = 68.75% normal rate)"
+    }
+  ],
+  "notes": "Donkey Kong Jr. communicates world-state primarily through vertical spatial progression and environmental hazard placement rather than complex political systems. The narrative is simple: Mario (villain) has caged Donkey Kong (victim); Junior (hero) climbs toward rescue. Visual communication relies on sprite-based character identification, stage-specific enemy/hazard pairing, and objective-marker visibility (the hanging key). The game lacks faction complexity but uses color identity (red Mario vs. brown Kong) for quick antagonist recognition. Behavioral tells are straightforward: fruit knockdown = safety tool, touching enemy = danger, timer depletion = penalty. No faction politics or nuanced world-state representation exists; this is a T2 qualitative analysis of a simple arcade platformer's manifestation layer.",
+  "sources_used": [
+    "tcrf (Cutting Room Floor: Donkey Kong Jr. NES)",
+    "wikipedia (Donkey Kong Jr. article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:28:21.571Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5486,
+    "output_tokens": 2507,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

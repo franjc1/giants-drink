@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "game": "Castle of Illusion Starring Mickey Mouse",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Sega",
+    "developer": "Sega",
+    "sources": [
+      {
+        "name": "TASVideos — Genesis / Castle of Illusion",
+        "url": "https://tasvideos.org/GameResources/Genesis/CastleOfIllusion",
+        "notes": "Mechanics documentation."
+      },
+      {
+        "name": "Data Crystal — Castle of Illusion",
+        "url": "https://datacrystal.tcrf.net/wiki/Castle_of_Illusion_Starring_Mickey_Mouse",
+        "notes": "RAM map supplemental."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Castle of Illusion is Sega's flagship platformer for the Genesis launch era — widely regarded as one of the best Genesis platformers.",
+      "Mickey Mouse game with polished, fluid physics distinct from the NES era.",
+      "COMBAT MECHANIC: Bounce-stomp (jump on enemy from above). Mickey bounces back up off the enemy.",
+      "PROJECTILE MECHANIC: Mickey can carry apples, marbles, and stars and throw them horizontally.",
+      "Mickey cannot harm enemies from the side — must bounce from above or throw projectiles.",
+      "Limited projectiles — must find them in the level."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.5,
+      "confidence": "low",
+      "notes": "Approximate from gameplay. Mickey feels fluid and responsive — faster than NES-era standards. VERIFY."
+    },
+    "run_speed": {
+      "notes": "Mickey doesn't have a separate run — consistent movement speed.",
+      "confidence": "low"
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": "Full air control, variable height. The jump feel is lighter and more floaty than Mega Man but more controlled than Mario's early NES games.",
+    "bounce_jump": {
+      "description": "When Mickey lands on an enemy from above (butt-stomp or downward jump), he bounces back up to jump height.",
+      "notes": [
+        "The bounce restores full jump height — enemies are essentially trampolines.",
+        "Chaining bounces off multiple enemies maintains momentum and height.",
+        "This is mechanically similar to Mario's stomp but the bounce-back height is more generous."
+      ]
+    }
+  },
+
+  "combat": {
+    "butt_stomp": {
+      "description": "Primary attack: jump above an enemy and land on them from above. Defeats the enemy and bounces Mickey upward.",
+      "notes": [
+        "Standard traversal combat in platformers from this era, but the bounce-back is particularly generous in CofI.",
+        "Cannot harm enemies from the side — the hitbox only activates from above.",
+        "This forces players to always approach from above, creating aerial puzzle-solving."
+      ]
+    },
+    "projectile_throw": {
+      "description": "Mickey can pick up apples, marbles, or stars from the environment and throw them horizontally.",
+      "trajectory": "straight horizontal",
+      "limited_ammo": true,
+      "notes": [
+        "Projectile supply is limited — found in specific spots in the level.",
+        "Projectiles hit enemies Mickey can't reach with the stomp (some enemies require standing attacks).",
+        "Different projectile types may have different speeds or damage. VERIFY."
+      ]
+    }
+  },
+
+  "gem_collecting": {
+    "description": "Mickey collects gems throughout stages. 100 gems = extra life.",
+    "notes": "Classic platformer collectible bonus life system."
+  },
+
+  "world_themes": {
+    "world_1": "Forest / Nature",
+    "world_2": "Toy World",
+    "world_3": "Storm / Water World",
+    "world_4": "Library / Books World",
+    "world_5": "Candy Land / Sweet World",
+    "boss_levels": "Each world ends with a boss fight",
+    "notes": "The castle interior is divided into themed wings — each wing is a different themed world Mickey must traverse to free Minnie."
+  },
+
+  "hitboxes": {
+    "mickey_standing": {
+      "notes": "Mickey's hitbox is friendly to the player — narrower than the sprite. VERIFY exact dimensions.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Castle of Illusion's 'approach from above' combat requirement forces the player to always think 3-dimensionally: 'where am I relative to this enemy's head?' This is different from Mario (stomp is casual) because in CofI you MUST achieve the height advantage or switch to limited projectiles.",
+    "The bounce-back mechanic from enemy stomps makes enemy encounters into aerial opportunities — skilled players maintain momentum by chaining stomps. Enemies become platforms AND obstacles.",
+    "The themed world design (forest → toys → storm → library → candy) shows how varied visual themes can use the same physics engine. Giants Drink's world generation should similarly be able to apply different aesthetic themes to the same physics.",
+    "The limited projectile supply creates resource scarcity in combat. Players must decide when projectiles are worth using — this creates tactical decision-making in what would otherwise be purely reactive combat.",
+    "CofI represents the Genesis's early best-foot-forward: fluid animation, responsive controls, consistent frame rate, varied visual themes. It established what Genesis platformers could aspire to."
+  ]
+}

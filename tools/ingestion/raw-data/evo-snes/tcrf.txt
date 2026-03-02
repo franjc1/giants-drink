@@ -1,0 +1,493 @@
+E.V.O.: Search for Eden - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+E.V.O.: Search for Eden
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+E.V.O.: Search for Eden
+
+Also known as : 46 Okunen Monogatari - Harukanaru Eden (JP)  Developer :
+
+Almanic
+
+Publisher :
+
+Enix
+
+Platform :
+
+SNES
+
+Released in JP : December 21,&#160;1992  Released in US : July 15,&#160;1993
+
+This game has  unused music .
+
+This game has  debugging material .
+
+This game has a  hidden sound test .
+
+This game has  regional differences .
+
+This game has a Data Crystal page
+
+E.V.O.
+
+is a unique side-scrolling pseudo-Action-RPG where you help direct the evolution of life on Earth. You start as a fish, and progress all the way up to a human by spending experience (EVO) points to upgrade your body.
+
+Contents
+
+1
+
+Debug Mode
+
+2
+
+Debug Flags and Unknown Addresses
+
+2.1
+
+7E0758
+
+2.2
+
+7E0759
+
+2.3
+
+7E075A
+
+2.4
+
+7E075B
+
+2.5
+
+7E075C
+
+2.6
+
+7E075D
+
+3
+
+Sound Test
+
+4
+
+Unused Music
+
+5
+
+Unused Programming Leftovers
+
+6
+
+SRAM String
+
+7
+
+Regional Differences
+
+7.1
+
+Title Screen
+
+7.2
+
+Evolution Menu
+
+7.3
+
+Mammal Intro
+
+7.4
+
+Domain of Brosasaurus
+
+Debug Mode
+
+Use  Game Genie  code
+
+1261-64A7
+
+or  Pro Action Replay  code
+
+008E6B6D
+
+to enable debug mode. During gameplay, Controller 2 allows the following:
+
+Select : Add 1000 EVO points.
+
+Start : Freeze enemy behavior.
+
+L : Infinite health (counter will reach 0, but no game over).
+
+R : Instantly advance to the next chapter.
+
+B : Evolve into a bird.
+
+(Source: JLukas)
+
+Debug Flags and Unknown Addresses
+
+Shortly after bootup, the programming at SNES address
+
+$008184-008195
+
+initializes a set of six memory addresses to the value
+
+$00  .
+
+7E0758
+
+Unused. No programming reads this address.
+
+7E0759
+
+Unused. No programming reads this address.
+
+7E075A
+
+Set this memory address to a non-zero value to enable what appears to be a debug map viewer type mode.
+
+7E075B
+
+This holds the debug flag to freeze enemy behavior described in the previous section above.
+
+7E075C
+
+A debug flag to skip areas on the overworld map when set to a non-zero value. Use Pro Action Replay code
+
+7E075C01
+
+or
+
+01912080  , or Game Genie code
+
+6DB4-0DD0  .
+
+7E075D
+
+Holds the infinite health debug flag described in the previous section above.
+
+Sound Test
+
+Located after the title screen, but the only way to access it is through game enhancer codes: at the title screen, enable Game Genie codes
+
+14A4-6578 A3A4-6558
+
+or Pro Action Replay codes
+
+1ECE2C62 1ECE2DCE  .
+
+To correctly switch between songs, use Stop Music, change the Music Code, then use Data Transfer and finally Music Start.
+
+Don't use Command Init. or select a Music Code index higher than 28, as the game will crash.
+
+(Source: JLukas)
+
+Unused Music
+
+To do:  What are the codes for the rest of the jingles?
+
+There are two songs and four jingles that can be heard via the above sound test, but do not appear anywhere in the game.
+
+Music Code:
+
+$01
+
+The music from the prologue of  46 Okunen Monogatari ~The Shinka Ron~ , the PC-98 JRPG  E.V.O.  is based on.
+
+Music Code:
+
+$0E
+
+The ending music known as "To a New Evolution" from  46 Okunen Monogatari .  Oddly enough, this track appears on the Symphonic Synth Suite album that coincided with the game's release.
+
+Music Code:
+
+$1A
+
+This could have been intended as an alternate "Evolution" fanfare.
+
+Music Code:
+
+$1B
+
+No clue where this jingle could have been used. It most resembles "Whispers from Above", the short jingle that plays when you overhear "mysterious voices".
+
+Music Code:
+
+$1D
+
+This doesn't sound like anything else in the game, although it actually brings to mind an RPG "Inn" jingle. Unlikely to have been used for such a purpose, however.
+
+Music Code:
+
+$22
+
+Possibly intended as an item jingle, although there are no items to collect in this game.
+
+Unused Programming Leftovers
+
+On the overworld map, the programming at SNES address
+
+$009949
+
+checks if  L  is pressed on Controller 2. If so, it loads value
+
+$01  . At one time, this was followed by a
+
+STA $075C
+
+operation to enable the debug feature to skip areas, but it was removed for the final build.
+
+On the title screen, the programming at SNES address
+
+$1ECDDF
+
+checks if  Select  is pressed on Controller 1. However, it doesn't do anything further with it. This is located pretty close to the sound test entry point, and was probably the method used to access it.
+
+SRAM String
+
+The string  FURUTA  (for programmer Tetsuya Furuta) is written to save files and evolution records. When loading a save file, or using Review of Evolution, the game looks for the string to determine if data exists in that slot.
+
+Regional Differences
+
+Title Screen
+
+Japan
+
+US
+
+Different title graphic, font and copyright text.
+
+Evolution Menu
+
+Japan
+
+US
+
+Mammal Intro
+
+Japan
+
+US
+
+The Japanese text was removed and replaced with a small rock in the North American version.
+
+Domain of Brosasaurus
+
+Japan
+
+US
+
+A bunch of crap was removed from the American version...literally. These steaming piles were taken out of the Chapter 3 area  Domain of Brosasaurus . The actual graphics weren't deleted; the area data was just changed to not include them.
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+E.V.O.
+
+series
+
+PC-98
+
+46 Okunen Monogatari - The Shinkaron
+
+SNES
+
+E.V.O.: Search for Eden
+
+Retrieved from " https://tcrf.net/index.php?title=E.V.O.:_Search_for_Eden&oldid=1657951 "
+
+Categories :
+
+Games developed by Almanic
+
+Games published by Enix
+
+SNES games
+
+Games released in 1992
+
+Games released in December
+
+Games released on December 21
+
+Games with unused music
+
+Games with debugging functions
+
+Games with hidden sound tests
+
+Games with regional differences
+
+Pages with a Data Crystal link
+
+To do
+
+E.V.O. series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden sound tests
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with unused music
+
+Games  >  Games by content  >  Pages with a Data Crystal link
+
+Games  >  Games by developer  >  Games developed by Givro  >  Games developed by Almanic
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Square Enix  >  Games published by Enix
+
+Games  >  Games by release date  >  Games released in 1992
+
+Games  >  Games by release date  >  Games released in December
+
+Games  >  Games by release date  >  Games released in December  >  Games released on December 21
+
+Games  >  Games by series  >  E.V.O. series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 22 August 2024, at 14:47.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

@@ -1,0 +1,152 @@
+{
+  "game_id": "home-alone-genesis",
+  "game_name": "Home Alone",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Wet Bandits presence",
+      "visual_form": "Harry and Marv character sprites in side-scrolling sections",
+      "meaning": "Active threat requiring combat engagement; triggers pain meter challenge"
+    },
+    {
+      "signal": "Van arrival in neighborhood",
+      "visual_form": "Undistinguished van visible in top-down neighborhood view",
+      "meaning": "Imminent house robbery; player must travel to intercept before bandits enter"
+    },
+    {
+      "signal": "House flooding/water damage",
+      "visual_form": "Visual indication of house becoming 'flooded' after successful bandit robbery",
+      "meaning": "Permanent loss of that house; failure state for that location"
+    },
+    {
+      "signal": "Empty Pain Meter",
+      "visual_form": "Unfilled meter during platformer combat sections",
+      "meaning": "Kevin has not yet dealt sufficient damage; bandits will complete robbery"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Protected houses",
+      "visual_form": "Houses in neighborhood view that remain dry/unflooded",
+      "meaning": "Successfully defended location; bandits have retreated"
+    },
+    {
+      "signal": "Filled Pain Meter",
+      "visual_form": "Completed meter during platformer combat",
+      "meaning": "Sufficient damage dealt; bandits forced to retreat from that house"
+    },
+    {
+      "signal": "Weapon acquisition",
+      "visual_form": "Items scattered in environment that combine into crafted weapons",
+      "meaning": "Resource availability for defense; increased combat capability"
+    },
+    {
+      "signal": "Time remaining",
+      "visual_form": "20-minute countdown timer (40 on higher difficulties)",
+      "meaning": "Police arrival imminent; endurance near completion; safety approaching"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kevin McCallister (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "BB gun starting weapon; makeshift crafted weapons",
+      "enemy_visual_variants": "Kevin vs. Harry and Marv in side-scrolling combat sections",
+      "environmental_markers": "Traversal between houses via sled in top-down view; presence in houses during defense phases"
+    },
+    {
+      "faction": "Wet Bandits (Harry and Marv)",
+      "color_identity": null,
+      "symbol_or_sigil": "Undistinguished van; water left running as calling card (visual flooding effect)",
+      "enemy_visual_variants": "Two distinct bandit sprites in platformer sections; van sprite in top-down neighborhood view",
+      "environmental_markers": "Flooded houses indicate their successful robberies; presence in houses triggers combat mode"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Neighborhood patrol phase",
+      "visual_manifestation": "Top-down view of neighborhood with multiple houses; van moving through streets",
+      "behavioral_manifestation": "Kevin travels via sled; Wet Bandits drive van and select houses to rob"
+    },
+    {
+      "world_state": "Active house robbery in progress",
+      "visual_manifestation": "Shift to 2D side-scrolling platformer perspective; Kevin and Bandits visible in house interior",
+      "behavioral_manifestation": "Combat engagement with pain meter; bandits proceed to rob while Kevin damages them"
+    },
+    {
+      "world_state": "House successfully defended",
+      "visual_manifestation": "House remains unflooded in neighborhood view; visual distinction from compromised locations",
+      "behavioral_manifestation": "Bandits retreat; van departs to find new target"
+    },
+    {
+      "world_state": "House compromised by robbery",
+      "visual_manifestation": "House shows flooding/water damage effect in neighborhood view",
+      "behavioral_manifestation": "House becomes inaccessible; cannot be re-entered; counts toward game over condition"
+    },
+    {
+      "world_state": "Game completion near (police arrival)",
+      "visual_manifestation": "Timer approaching 20 minutes (or 40 on harder difficulty)",
+      "behavioral_manifestation": "Increased urgency; continued defense attempts until time expires and police arrive"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Calling card mechanic",
+      "example": "Marv leaves water running in robbed houses; visual flooding becomes signature of bandit success and player failure in that location"
+    },
+    {
+      "technique": "Resource scattering",
+      "example": "Various items scattered throughout houses that can be combined into crafted weapons; communicates that household objects are defense tools"
+    },
+    {
+      "technique": "Neighborhood geography",
+      "example": "Multiple houses in neighborhood view establish stakes—each location is a potential loss; spatial layout communicates scope of protection responsibility"
+    },
+    {
+      "technique": "Van presence in top-down view",
+      "example": "Undistinguished van driving through neighborhood; visual representation of threat movement and unpredictability of bandit target selection"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wet Bandits (Harry and Marv)",
+      "state": "Patrolling/hunting",
+      "behavior": "Van travels through neighborhood; periodically select houses to enter for robbery"
+    },
+    {
+      "entity": "Wet Bandits (Harry and Marv)",
+      "state": "Actively robbing",
+      "behavior": "Enter side-scrolling house interior; proceed through space while accumulating robbery meter; respond to Kevin's damage with knockback"
+    },
+    {
+      "entity": "Wet Bandits (Harry and Marv)",
+      "state": "Defeated/pain threshold reached",
+      "behavior": "Retreat from house; van returns to neighborhood patrol"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Defending",
+      "behavior": "Engages in platformer combat; uses weapons to fill pain meter; must fill it before robbery meter completes"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Traveling between houses",
+      "behavior": "Sled traversal in top-down neighborhood view; responds to van presence by moving toward threatened houses"
+    }
+  ],
+  "notes": "Home Alone Genesis features a dual-view system communicating world state through perspective shifts: top-down neighborhood patrolling represents macro-level threat distribution, while side-scrolling house interiors represent localized combat intensity. The Pain Meter vs. Robbery Meter dynamic creates visual tension between player success (filling pain meter) and failure condition (robbery meter completion). Flooded houses serve as persistent visual failure markers, escalating pressure as more locations become inaccessible. The timer countdown is the primary meta-signal for approaching safety (police arrival). Weapon crafting from scattered items establishes environmental agency and resource management as core mechanical-narrative elements.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:06:45.291Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2810,
+    "output_tokens": 1787,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

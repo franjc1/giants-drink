@@ -1,0 +1,118 @@
+{
+  "game_id": "double-dribble-nes",
+  "game_name": "Double Dribble",
+  "platform": "nes",
+  "year": 1987,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system documentation available for NES sports game"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Dunking",
+      "description": "When player character in lane moves toward basket and presses shot button, screen changes to focus on character attempting dunk. Player must hold button until character reaches top of jump, then release. Timing affects success - incorrect timing causes ball to bounce off rim requiring rebound.",
+      "physics_values": {
+        "requires_button_hold": true,
+        "requires_timing": true,
+        "jump_height_variable": true,
+        "character_dependent": true
+      }
+    },
+    {
+      "name": "Shooting",
+      "description": "Player must press and hold shoot button until character reaches top of their jump, then release at correct timing. Success depends on jump height and timing coordination.",
+      "physics_values": {
+        "button_hold_mechanic": true,
+        "apex_timing_required": true
+      }
+    },
+    {
+      "name": "Jumping/Blocking",
+      "description": "When opposing team shoots and player character is near, pressing shot button causes player character to jump and attempt to block shot. Each character has different jump heights and jump speeds.",
+      "physics_values": {
+        "character_variable_jump_height": true,
+        "character_variable_jump_speed": true
+      }
+    },
+    {
+      "name": "Character Movement Variation",
+      "description": "Each character moves at slightly different speeds and is capable of jumping to different heights at different speeds. Learning character differences is important for jump shots, dunks, and rebounds.",
+      "physics_values": {
+        "speed_variation_per_character": true,
+        "jump_height_variation_per_character": true,
+        "jump_speed_variation_per_character": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "character-dependent",
+    "timing-based",
+    "arcade-style",
+    "variable-jump-height",
+    "momentum-aware"
+  ],
+  "tier_notes": "Tier 3 empirical/qualitative data. No precise physics parameters documented in available sources. Game emphasizes character-specific movement variation and timing-based mechanics rather than fixed numerical values. Movement and jump physics vary per basketball player character.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (Double Dribble NES/FDS article)",
+    "wikipedia - Double Dribble video game article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:05:06.875Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4477,
+    "output_tokens": 1004,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

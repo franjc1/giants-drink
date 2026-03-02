@@ -1,0 +1,185 @@
+{
+  "game_id": "rescue-embassy-mission-nes",
+  "game_name": "Rescue: The Embassy Mission",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Searchlight sweeps",
+      "visual_form": "Animated light beams scanning the street in side-scroller sections",
+      "meaning": "Active enemy detection; immediate threat if operative is caught in beam"
+    },
+    {
+      "signal": "Terrorist silhouettes in windows",
+      "visual_form": "Dark figure outlines visible through embassy windows during sniper scope view",
+      "meaning": "Enemy positions; targets for sniper fire to clear operative descent routes"
+    },
+    {
+      "signal": "Hostile fire",
+      "visual_form": "Projectiles and muzzle flashes from terrorists during hallway/room sections",
+      "meaning": "Active combat engagement; operative health threat"
+    },
+    {
+      "signal": "Enemy presence on floor map",
+      "visual_form": "Map markers indicating terrorist locations within embassy floors",
+      "meaning": "Proximity danger; alerts player to incoming threats in adjacent rooms"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Designated vantage points reached",
+      "visual_form": "Buildings marked as sniper positions across from embassy (in side-scroller layout)",
+      "meaning": "Safe zone for sniper operatives; progression indicator"
+    },
+    {
+      "signal": "Cover objects",
+      "visual_form": "Fences and building structures in street traversal sections",
+      "meaning": "Shelter from searchlight detection and terrorist fire"
+    },
+    {
+      "signal": "Secured hostages",
+      "visual_form": "Hostages following operative character in third-person view; visual grouping",
+      "meaning": "Mission objective progress; civilians in protective state"
+    },
+    {
+      "signal": "Safe rooms",
+      "visual_form": "Designated secure locations within embassy (in some port versions)",
+      "meaning": "Final hostage containment; mission completion staging area"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "GIGN Counterterrorist Team (Player-controlled)",
+      "color_identity": null,
+      "symbol_or_sigil": "Military operatives with tactical equipment (snipers, submachine guns, rappelling gear)",
+      "enemy_visual_variants": "Distinct from terrorists through equipment and positioning (external vantage points, helicopter insertion)",
+      "environmental_markers": "Sniper nests in buildings across street; helicopter insertion point at embassy roof"
+    },
+    {
+      "faction": "Terrorists (Hostage-takers)",
+      "color_identity": null,
+      "symbol_or_sigil": "Armed figures within embassy; control searchlight apparatus; take hostages",
+      "enemy_visual_variants": "Visible as dark silhouettes in windows; armed figures in hallways and rooms; searchlight operators",
+      "environmental_markers": "Interior embassy positions; searchlight placement on perimeter; hostage holding areas within building"
+    },
+    {
+      "faction": "Hostages (Non-combatants)",
+      "color_identity": null,
+      "symbol_or_sigil": "Civilian figures requiring rescue; distinct character model from operatives and terrorists",
+      "enemy_visual_variants": "Unarmed; follow operative when rescued; must be protected from crossfire",
+      "environmental_markers": "Located throughout embassy interior; some designated safe rooms for containment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-assault (sniper setup phase)",
+      "visual_manifestation": "Street side-scroller view with searchlight sweeps, buildings with vantage point entries, quiet embassy exterior",
+      "behavioral_manifestation": "Operatives move cautiously, avoid searchlights through timing and cover; no active gunfire; stealth-focused progression"
+    },
+    {
+      "world_state": "Sniper support active (suppression phase)",
+      "visual_manifestation": "Split-screen or alternating scope view showing embassy windows with terrorist silhouettes; sniper crosshair targeting interface",
+      "behavioral_manifestation": "Snipers shoot to clear windows; rappelling operative descends alongside building; synchronized multi-operative action"
+    },
+    {
+      "world_state": "Interior assault (hostage rescue phase)",
+      "visual_manifestation": "First-person hallway perspective with doors and intersections; third-person room views showing terrorist positions, hostages, environmental detail",
+      "behavioral_manifestation": "Active combat; operative searches rooms systematically; hostages follow when rescued; snipers support via window fire if visible"
+    },
+    {
+      "world_state": "Mission complete (evaluation state)",
+      "visual_manifestation": "Newspaper-style report display detailing operation results and casualty counts",
+      "behavioral_manifestation": "No player control; automatic evaluation of speed, accuracy, hostages rescued, operative safety; generates quality-tiered success messaging"
+    },
+    {
+      "world_state": "Perfect victory (zero casualties)",
+      "visual_manifestation": "Positive newspaper headline; celebratory language in report",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Partial success (some hostage/operative casualties)",
+      "visual_manifestation": "Critical or qualified newspaper language; casualty details in report",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Failed mission (excessive casualties)",
+      "visual_manifestation": "Negative headline; condemnatory report tone; mission failure text",
+      "behavioral_manifestation": null
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Structural layout as tactical narrative",
+      "example": "Embassy building design reveals sniper lines of sight, terrorist positions in windows, hostage locations through floor-by-floor traversal"
+    },
+    {
+      "technique": "Searchlight placement as defensive posture indicator",
+      "example": "Street-side searchlights demonstrate terrorist awareness of external threat; their coverage patterns show which approaches are fortified"
+    },
+    {
+      "technique": "Casualty outcome as political consequence",
+      "example": "Ending newspaper reports grade mission success by hostage/operative survival rates, implying diplomatic and PR fallout from casualties"
+    },
+    {
+      "technique": "Operative entry method as mission phase clarity",
+      "example": "Three distinct gameplay sections (sniper setup, external support, interior assault) visually separate tactical stages of counterterrorism operation"
+    },
+    {
+      "technique": "Hostage visual state as objective status",
+      "example": "Hostages follow operative after rescue, visually confirming mission progress; grouped hostages in safe rooms show containment success"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Searchlight",
+      "state": "Scanning",
+      "behavior": "Automated sweeping motion across street; triggers if operative detected within beam"
+    },
+    {
+      "entity": "Terrorist in window",
+      "state": "Unaware/concealed",
+      "behavior": "Silhouette visible but stationary; becomes actionable target for sniper fire"
+    },
+    {
+      "entity": "Terrorist in hallway/room",
+      "state": "Aware/hostile",
+      "behavior": "Opens fire on operative; requires evasion, cover use, or return fire"
+    },
+    {
+      "entity": "Hostage",
+      "state": "Rescued",
+      "behavior": "Follows operative character; must be guided to safe room or extraction point"
+    },
+    {
+      "entity": "Operative (sniper)",
+      "state": "Positioned",
+      "behavior": "Takes scope view; fires to clear windows and support rappelling teammate descent"
+    },
+    {
+      "entity": "Operative (rappelling)",
+      "state": "Descending",
+      "behavior": "Lowers down embassy wall; can select entry floor/window based on sniper coverage of windows"
+    },
+    {
+      "entity": "Operative (assault)",
+      "state": "Clearing floor",
+      "behavior": "Searches rooms systematically using map; encounters and defeats terrorists; protects rescued hostages from crossfire"
+    }
+  ],
+  "notes": "This tactical shooter communicates a structured counterterrorism operation through three distinct gameplay phases, each with specific visual and behavioral language. Danger is primarily signaled through active detection systems (searchlights), enemy silhouettes, and hostile fire. Safety manifests through spatial positioning (vantage points, cover, safe rooms) and objective completion (hostage acquisition). The faction division is clear: external military force vs. internal hostage-takers vs. protected civilians. World state transitions are marked by gameplay perspective shifts (side-scroller → scope view → first/third-person), creating a visual grammar of mission phases. The ending system uses newspaper-style reporting to communicate political/diplomatic consequences of casualty counts, implying that mission success is measured not just by tactical completion but by collateral damage minimization. NES version uses militarized difficulty names rather than numerical ranks, reinforcing military hierarchy framing.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:32:13.421Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4834,
+    "output_tokens": 2270,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

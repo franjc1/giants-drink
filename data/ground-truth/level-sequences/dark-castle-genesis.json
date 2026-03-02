@@ -1,0 +1,144 @@
+{
+  "game_id": "dark-castle-genesis",
+  "game_name": "Dark Castle",
+  "platform": "genesis",
+  "paradigm": "platform",
+  "level_count": 14,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement (run, jump, duck)",
+      "first_appears": "Great Hall / Level start",
+      "introduction_context": "safe",
+      "mastery_context": "Established immediately in opening vista"
+    },
+    {
+      "element": "Rock throwing (limited supply)",
+      "first_appears": "Early levels",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns projectile aiming with mouse; rock bags found throughout"
+    },
+    {
+      "element": "Rats and bats (enemy encounters)",
+      "first_appears": "Throughout castle",
+      "introduction_context": "moderate",
+      "mastery_context": "Elixir bottles provide one-time antidote to bites; enemy pressure increases with difficulty"
+    },
+    {
+      "element": "Climbable ropes and walkable ledges",
+      "first_appears": "Early exploration",
+      "introduction_context": "moderate",
+      "mastery_context": "Vertical navigation mechanic for accessing different castle areas"
+    },
+    {
+      "element": "Magic Shield power-up",
+      "first_appears": "Shield door sequence (optional path)",
+      "introduction_context": "moderate",
+      "mastery_context": "Marked door signals location; required for Black Knight encounter"
+    },
+    {
+      "element": "Fireball ability",
+      "first_appears": "Fireball door sequence (optional path)",
+      "introduction_context": "moderate",
+      "mastery_context": "Powerful projectile weapon; required for Black Knight encounter"
+    },
+    {
+      "element": "Lever puzzles",
+      "first_appears": "Black Knight 1-3 sequence",
+      "introduction_context": "dangerous",
+      "mastery_context": "Multiple levers must be pulled to topple Black Knight throne; final puzzle mechanic"
+    },
+    {
+      "element": "Disorientation mechanic (wall collision / short falls)",
+      "first_appears": "Any collision event",
+      "introduction_context": "moderate",
+      "mastery_context": "Duncan circles and mumbles incoherently, creating vulnerability window"
+    },
+    {
+      "element": "Dungeon trap (floor holes)",
+      "first_appears": "Throughout castle",
+      "introduction_context": "moderate",
+      "mastery_context": "Falling into holes leads to Trouble 3; strategic on harder difficulties for resource gathering"
+    },
+    {
+      "element": "Black Knight final boss",
+      "first_appears": "Black Knight 3",
+      "introduction_context": "dangerous",
+      "mastery_context": "Requires collected Shield and Fireball; ends with gargoyle carrying Duncan away"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting rock bags (ammunition resupply)",
+      "Finding elixir bottles (health/bite antidote)",
+      "Reaching rest areas between enemy clusters",
+      "Successful lever puzzle completion",
+      "Door selection creating safe navigation paths"
+    ],
+    "typical_tension_triggers": [
+      "Rat and bat encounters without ammunition",
+      "Wall collision causing disorientation vulnerability",
+      "Floor hole proximity (falling to Trouble 3 dungeon)",
+      "Approaching Black Knight encounters",
+      "Random door assignment (unpredictability)"
+    ],
+    "pacing_descriptor": "Cyclical exploration-based pacing with optional branching paths creating player-controlled tension management; difficulty scaling across three skill levels maintains rhythm control"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Four doors in Great Hall marked with visual indicators (shield icon, fireball icon); center door leads directly to Black Knight; side doors randomize between Trouble and Fireball sequences, creating optional/alternate pathways",
+    "secret_convention": "Falling into floor holes strategically leads to Trouble 3 dungeon for resource gathering; this serves as hidden optional content on harder difficulties",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Great Hall door selection establishes low-pressure entry point with safe movement tutorial; initial enemy encounters introduce bat/rat threats gradually",
+    "mid_game": "Fireball and Shield sequences present moderate intensity with puzzle-solving and enemy density increase; Trouble path creates escalating hazard complexity",
+    "late_game": "Black Knight sequence concentrates all mechanics (lever puzzles, boss encounters, max enemy pressure); Advanced skill level adds surprise enemy placements",
+    "notable_spikes": [
+      "First rat/bat encounter without elixir knowledge",
+      "Black Knight 1-3 lever puzzle sequence under enemy pressure",
+      "Advanced skill level surprise enemy additions",
+      "Final Black Knight throne toppling with multiple lever coordination"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Optional Power-Up Gating",
+      "description": "Shield and Fireball are located behind dedicated optional door sequences; player must complete these paths to gain required items before Black Knight encounter. Creates strategic routing choice.",
+      "example_level": "Shield 1-4 sequence; Fireball 1-4 sequence"
+    },
+    {
+      "pattern_name": "Punishment-as-Resource Trap",
+      "description": "Falling into floor holes leads to Trouble 3 dungeon (negative on easier difficulties, but creates rock/elixir gathering opportunity on harder difficulties). Inverts traditional failure consequence.",
+      "example_level": "Trouble 3 (accessed via floor holes)"
+    },
+    {
+      "pattern_name": "Randomized Path Selection",
+      "description": "Two of the four Great Hall doors randomize their destinations (Trouble vs Fireball), creating variance in session progression and exploration discovery",
+      "example_level": "Great Hall door choice mechanic"
+    },
+    {
+      "pattern_name": "Multi-Lever Boss Gate",
+      "description": "Black Knight defeat requires pulling multiple levers distributed across Black Knight 1-3 levels; enforces sequential progression and adds spatial puzzle component to boss encounter",
+      "example_level": "Black Knight 1, Black Knight 2, Black Knight 3"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:25:49.066Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2761,
+    "output_tokens": 1648,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

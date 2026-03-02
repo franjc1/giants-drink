@@ -1,0 +1,119 @@
+{
+  "game_id": "fire-emblem-thracia-snes",
+  "game_name": "Fire Emblem: Thracia 776",
+  "platform": "snes",
+  "year": 1999,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Tactical grid-based RPG; sub-pixel precision not applicable to turn-based gameplay"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Grid-Based Movement",
+      "description": "Turn-based tactical movement on grid-based maps. Each unit class has assigned movement range and speed determined by their class. Terrain affects movement capabilities.",
+      "physics_values": {
+        "movement_determined_by": "character_class_and_terrain",
+        "system_type": "turn_based_grid"
+      }
+    },
+    {
+      "name": "Mounted Unit Mechanics",
+      "description": "Mounted units can dismount to fight on-foot. Dismounting occurs automatically inside buildings. Dismounted units receive stat penalties and weapon swaps from lances/axes to swords.",
+      "physics_values": {
+        "mounted_mobility": "higher",
+        "dismounted_stat_penalty": "applies",
+        "forced_dismount": "in_buildings"
+      }
+    },
+    {
+      "name": "Fatigue System",
+      "description": "Characters accumulate fatigue with each action (attacking, opening chests, etc.). Exceeding fatigue threshold makes character unplayable in following chapter.",
+      "physics_values": {
+        "fatigue_accumulation": "per_action",
+        "threshold_effect": "character_unavailable_next_chapter"
+      }
+    },
+    {
+      "name": "Terrain Interaction",
+      "description": "Maps contain varied terrain (plains, mountains, etc.). Environment combined with unit abilities affects movement range and capabilities.",
+      "physics_values": {
+        "terrain_types": [
+          "flat_plains",
+          "mountains",
+          "towns",
+          "churches"
+        ],
+        "terrain_effect": "modifies_movement"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "turn-based",
+    "tactical",
+    "grid-based",
+    "strategic-commitment"
+  ],
+  "tier_notes": "Tier 2 - Tactical RPG with grid-based movement. Physical platformer mechanics (jump, gravity, acceleration) are not applicable. Movement parameters are class-based and terrain-dependent rather than frame-by-frame physics. No sub-pixel rendering relevant to game design.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T00:20:27.916Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3265,
+    "output_tokens": 1117,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

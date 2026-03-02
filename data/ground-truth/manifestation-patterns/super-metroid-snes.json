@@ -1,0 +1,253 @@
+{
+  "game_id": "super-metroid-snes",
+  "game_name": "Super Metroid",
+  "platform": "snes",
+  "paradigm": "platformer / action-adventure / metroidvania",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites with distinct color palettes; sprite tile variations for different enemy types",
+      "meaning": "Active threat requiring combat or evasion"
+    },
+    {
+      "signal": "Obstacle hazards",
+      "visual_form": "Lava, acid, and quicksand depicted through environmental tileset changes; water/fog visual layers",
+      "meaning": "Environmental damage; navigable only with specific suit upgrades or abilities"
+    },
+    {
+      "signal": "Boss encounter setup",
+      "visual_form": "Unique room architecture; large sprite allocations; specific enemy set loading",
+      "meaning": "Major combat challenge ahead"
+    },
+    {
+      "signal": "Restricted access",
+      "visual_form": "Sealed doors, barriers, crumble blocks, Zebetite barriers (pink/purple geometric patterns)",
+      "meaning": "Area inaccessible without specific power-up or weapon combination"
+    },
+    {
+      "signal": "Low health state",
+      "visual_form": "HUD health bar visually depletes; Samus animation changes to hunched/damaged pose",
+      "meaning": "Critical danger; player death imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Save station",
+      "visual_form": "Fixed architectural structure; glowing visual indicator; specific room design",
+      "meaning": "Safe point; progression checkpoint; health/ammo restoration"
+    },
+    {
+      "signal": "Samus's gunship",
+      "visual_form": "Large metallic vessel sprite at predefined locations; distinctive yellow/orange hull",
+      "meaning": "Safe zone; save/restore point; narrative anchor"
+    },
+    {
+      "signal": "Item acquisition",
+      "visual_form": "Floating power-up sprites with glow effect; inventory screen visual confirmation",
+      "meaning": "Capability expansion; new traversal or combat option unlocked"
+    },
+    {
+      "signal": "Healing item",
+      "visual_form": "Small floating orbs (green for energy, red for missiles); visual absorption animation",
+      "meaning": "Health/ammo restoration; safety achieved through collection"
+    },
+    {
+      "signal": "Reserve Tank auto-trigger",
+      "visual_form": "Visual flash/glow effect when Reserve Tank activates; HUD indicator change",
+      "meaning": "Secondary safety net; health replenishment from backup system"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Space Pirates",
+      "color_identity": "Purple/dark teal palette for enemy sprites and associated rooms",
+      "symbol_or_sigil": "Enemy sprite designs; architectural style of pirate-controlled areas",
+      "enemy_visual_variants": "Multiple enemy types with pirate-associated appearance; upgraded variants (e.g., Torizo variants)",
+      "environmental_markers": "Crashed Ship tileset; specific room layouts; purple/dark atmospheric coloring in Space Pirate territory"
+    },
+    {
+      "faction": "Chozo (Ancient Builders)",
+      "color_identity": "Gold/yellow; ornate architectural style",
+      "symbol_or_sigil": "Chozo Statues as environmental fixtures; Chozo iconography in room design",
+      "enemy_visual_variants": "Torizo bosses (golden armored Chozo); statue-based enemies",
+      "environmental_markers": "Brinstar tileset; gold/blue color scheme; temple-like architecture; Chozo artifact rooms with distinct visual presentation"
+    },
+    {
+      "faction": "Metroid Threat",
+      "color_identity": "Red/orange danger coloring; alien biomorphic aesthetics",
+      "symbol_or_sigil": "Metroid creature sprite; larva form; mature Super Metroid form",
+      "enemy_visual_variants": "Larval Metroid (small); mature Super Metroid (large, powerful); Metroid Prime (regional boss variant visual)",
+      "environmental_markers": "Tourian tileset; red/organic coloring; breeding chamber aesthetics; Metroid hive areas"
+    },
+    {
+      "faction": "Ridley (Space Pirate Leader)",
+      "color_identity": "Purple-red; dragon-like creature coloring",
+      "symbol_or_sigil": "Ridley boss sprite; unique animation set distinguishing from generic pirates",
+      "enemy_visual_variants": "Standard Ridley form; Golden Torizo as parallel threat; Ridley appears across multiple boss encounters",
+      "environmental_markers": "Crateria leadership areas; Ridley's lair aesthetics; boss room distinctive architecture"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Wrecked Ship offline (initial state)",
+      "visual_manifestation": "Darkened tileset; inactive machinery sprites; collapsed structural elements; dim lighting palette",
+      "behavioral_manifestation": "Reduced enemy spawning; environmental hazards inactive; rooms inaccessible due to collapsed passages"
+    },
+    {
+      "world_state": "Wrecked Ship powered (after activation)",
+      "visual_manifestation": "Brightened tileset; active machinery animation; restored structural integrity visuals; elevated lighting",
+      "behavioral_manifestation": "Full enemy encounters enabled; environmental hazards active; previously blocked passages open"
+    },
+    {
+      "world_state": "Area explored/mapped",
+      "visual_manifestation": "Automap reveals room layout; map display updates HUD; unexplored areas show as blank/unknown",
+      "behavioral_manifestation": "Navigation clarity increases; minimap provides tactical information; saves persist map discovery"
+    },
+    {
+      "world_state": "Boss defeated",
+      "visual_manifestation": "Boss sprite removal; environmental state change (e.g., barriers dissolve, pathways open); visual confirmation animation",
+      "behavioral_manifestation": "Doors unlock; new areas become accessible; enemy spawning patterns change; progression enables"
+    },
+    {
+      "world_state": "Final confrontation (Mother Brain battle)",
+      "visual_manifestation": "Unique tileset; organic alien architecture; pulsating environmental color shifts; Metroid transformation sequence",
+      "behavioral_manifestation": "Hyper Beam acquisition triggers visual/gameplay transformation; post-game ending state locked"
+    },
+    {
+      "world_state": "Speedrun completion (sub-3 hours)",
+      "visual_manifestation": "Ending slide shows Samus unarmored/posed differently; visual reward variation based on time",
+      "behavioral_manifestation": "Multiple ending states; post-game cutscene variant; Dachora/Etecoon rescue rescue state affects ending visuals"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tileset color and architectural style",
+      "example": "Crateria (orange/tan, rocky terrain) vs. Norfair (red/lava, volcanic) vs. Brinstar (blue/overgrown, jungle) communicate distinct planetary regions and ecological zones without explicit narration"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Aquatic enemies in flooded areas; fire-resistant creatures in lava zones; Chozo-affiliated enemies in temple areas; pirate-aligned enemies in industrial/crashed ship zones"
+    },
+    {
+      "technique": "Power-up placement narrative",
+      "example": "High-tier items placed in dangerous boss rooms or well-guarded vaults suggest scarcity and value; redundant power-ups in accessible areas suggest abundance"
+    },
+    {
+      "technique": "Architectural decay and damage",
+      "example": "Wrecked Ship's deterioration (offline state) visually communicates abandonment; Crateria's ruined structures suggest ancient conflict"
+    },
+    {
+      "technique": "Statue and monument design",
+      "example": "Chozo statues as navigational landmarks and lore anchors; golden statues indicate Chozo presence; broken/damaged statues suggest fallen civilization"
+    },
+    {
+      "technique": "Hazard visualization",
+      "example": "Lava/acid tileset visual distinction; water overlay effects; quicksand animation; each hazard's appearance communicates traversal requirements"
+    },
+    {
+      "technique": "Save/Restore station aesthetic",
+      "example": "Futuristic save station design vs. organic Chozo architecture communicates technological layering of world; placement near danger suggests intentional strategic positioning"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Samus Aran",
+      "state": "Normal movement",
+      "behavior": "Sprite orientation follows input direction; running animation; jumping animation with apex control"
+    },
+    {
+      "entity": "Samus Aran",
+      "state": "Aiming down (aimed-down posture)",
+      "behavior": "Sprite crouches; vertical hitbox reduced; enables corner-hugging; visual signal of precise positioning mode"
+    },
+    {
+      "entity": "Samus Aran",
+      "state": "Morph Ball mode",
+      "behavior": "Sprite transforms into ball; enables bomb jumps; visual state change signals new capability set"
+    },
+    {
+      "entity": "Samus Aran",
+      "state": "Charging beam",
+      "behavior": "Visual energy buildup animation; weapon sprite glows intensifying; audio cue accompanies"
+    },
+    {
+      "entity": "Samus Aran",
+      "state": "Grapple Beam engaged",
+      "behavior": "Sprite swings on beam line; momentum-based animation; visual rope/beam connection"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Idle/patrolling",
+      "behavior": "Looping patrol pattern; sprite animation looped; predictable positioning"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Aware of Samus",
+      "behavior": "Animation speed increases; sprite orientation focuses on player; attack pattern initiates"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Defeated",
+      "behavior": "Sprite removes from screen; death animation plays; item drop animation if applicable; enemy RAM slot freed"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Phase one (high health)",
+      "behavior": "Predictable attack patterns; sprite size larger; room-dominating presence; limited special moves"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Phase two (low health)",
+      "behavior": "Attack frequency increases; new attack patterns unlock; sprite color shift or damage animation intensifies; desperation behavior"
+    },
+    {
+      "entity": "Torizo (Chozo Boss)",
+      "state": "Golden Torizo variant",
+      "behavior": "Golden sprite coloration; enhanced durability; new attack patterns; indicates upgraded threat level"
+    },
+    {
+      "entity": "Door mechanism",
+      "state": "Sealed (unopened)",
+      "behavior": "Sprite blocks passage; no interaction possible; visual barrier indicates progression requirement"
+    },
+    {
+      "entity": "Door mechanism",
+      "state": "Unlocked",
+      "behavior": "Sprite opens/becomes passable; interaction enabled; visual state change communicates progression"
+    },
+    {
+      "entity": "Save station",
+      "state": "Activated",
+      "behavior": "Visual glow/activation animation; Samus enters interaction state; save menu appears"
+    },
+    {
+      "entity": "Power-up item",
+      "state": "Floating uncollected",
+      "behavior": "Sprite floats with bobbing animation; glow effect; visual draw communicates value"
+    },
+    {
+      "entity": "Power-up item",
+      "state": "Collected",
+      "behavior": "Absorption animation; sprite vanishes; inventory HUD updates; visual feedback confirms acquisition"
+    }
+  ],
+  "notes": "Super Metroid establishes manifestation patterns primarily through tileset-based environmental communication, sprite-color faction marking, and behavioral animation tells. The game lacks explicit UI for faction relationships but communicates world state through architecture, enemy type placement, and hazard visualization. The automap system provides meta-layer world-state communication. No explicit political system exists; world state is communicated through area accessibility (locked by power-ups) and enemy spawn behavior (tied to regional control). Samus's animation hitbox variations enable advanced traversal mechanics but remain transparent to casual players—a foundational design principle for the metroidvania genre.",
+  "sources_used": [
+    "tcrf",
+    "tasvideos",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:09:46.435Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8923,
+    "output_tokens": 3165,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

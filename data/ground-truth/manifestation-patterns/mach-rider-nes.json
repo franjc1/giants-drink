@@ -1,0 +1,149 @@
+{
+  "game_id": "mach-rider-nes",
+  "game_name": "Mach Rider",
+  "platform": "nes",
+  "paradigm": "vehicular combat / racing puzzle",
+  "danger_signals": [
+    {
+      "signal": "Quadrunner vehicles",
+      "visual_form": "Enemy vehicle sprites on roadway",
+      "meaning": "Active threat; destroyable enemies that attack player"
+    },
+    {
+      "signal": "Oil drums and obstacles",
+      "visual_form": "Static hazard objects scattered on track",
+      "meaning": "Environmental hazards that damage bike and block progress"
+    },
+    {
+      "signal": "Collision with enemies/obstacles",
+      "visual_form": "Bike sprite breaks apart into fragments",
+      "meaning": "Damage taken; loss of energy/lives if health depleted"
+    },
+    {
+      "signal": "Sector progression",
+      "visual_form": "Transition between 10 sectors with increasing difficulty",
+      "meaning": "Escalating threat intensity as player advances through story"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ammunition replenishment",
+      "visual_form": "Bullets restored when ramming enemy into hazard",
+      "meaning": "Player agency mechanic; successful tactical play rewards resources"
+    },
+    {
+      "signal": "Bike reformation",
+      "visual_form": "Fragments reassemble after collision",
+      "meaning": "Player survives damage; indicates health/energy system active"
+    },
+    {
+      "signal": "Track choice (A or B)",
+      "visual_form": "Route branching at sector transitions",
+      "meaning": "Player agency and path variation reduce monotony/predictability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mach Rider (player)",
+      "color_identity": null,
+      "symbol_or_sigil": "High-powered superbike",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled bike sprite; travels across sectors rescuing survivors"
+    },
+    {
+      "faction": "Quadrunners (antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Evil vehicle sprites",
+      "enemy_visual_variants": "Destroyable enemy vehicles; different types award different point values",
+      "environmental_markers": "Invading forces; represent alien/evil occupation of Earth sectors"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Year 2112; Earth invaded by evil forces",
+      "visual_manifestation": "Post-apocalyptic vehicular combat setting; destroyed sectors implied by progression narrative",
+      "behavioral_manifestation": "Mach Rider must travel sector-to-sector searching for survivors while destroying Quadrunner occupation forces"
+    },
+    {
+      "world_state": "Sector difficulty escalation",
+      "visual_manifestation": "Increased density and variety of enemy/obstacle sprites per sector; track layout complexity increases",
+      "behavioral_manifestation": "Enemies become more aggressive; more hazards block optimal pathways; player must manage resources (ammo, gear shifting) more carefully"
+    },
+    {
+      "world_state": "Combat engagement",
+      "visual_manifestation": "Mach Rider's machine gun fires; enemies and obstacles destroyed visually; collision effects displayed",
+      "behavioral_manifestation": "Player scores points based on enemy/obstacle type destroyed; tactical ramming against hazards replenishes ammo"
+    },
+    {
+      "world_state": "Story completion (quest cycles)",
+      "visual_manifestation": "Sectors 1-10 complete, story restarts with new sector layouts; after sector 20, original sectors replay with added difficulty",
+      "behavioral_manifestation": "Endless progression mechanic; no definitive ending; difficulty curve resets but intensifies across cycles"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sector-based narrative progression",
+      "example": "Player travels through 10 distinct sectors per quest; rescue mission framing establishes world in crisis state"
+    },
+    {
+      "technique": "Track branching (A/B routes)",
+      "example": "Each sector offers two different track layouts; implies varied geography and multiple survival paths through occupied territory"
+    },
+    {
+      "technique": "Gameplay mode variety as world state",
+      "example": "Fighting Course = combat narrative; Endurance Course = time-pressure survival; Solo Course = peaceful scouting; Design Mode = player world-building"
+    },
+    {
+      "technique": "Quadrunner presence as occupation indicator",
+      "example": "Enemy vehicles block roadways and attack; visual density communicates degree of hostile control per sector"
+    },
+    {
+      "technique": "Arcade sequel narrative reveal (VS. Mach Rider)",
+      "example": "Progressively revealed image of woman with dagger; hints at story depth and rescue mission stakes beyond base NES gameplay"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mach Rider (player bike)",
+      "state": "Normal movement",
+      "behavior": "Responds to steering (left/right), acceleration (A button), gear shifting (up/down); speed increases with higher gears; fourth gear grants speed boost"
+    },
+    {
+      "entity": "Mach Rider (player bike)",
+      "state": "Damaged",
+      "behavior": "Sprite fragments visually; reforms if energy/lives remain; indicates temporary vulnerability window"
+    },
+    {
+      "entity": "Quadrunner enemies",
+      "state": "Active patrol/attack",
+      "behavior": "Move on roadway; attack player; can be destroyed by gunfire or rammed into obstacles; point values vary by type"
+    },
+    {
+      "entity": "Oil drums and obstacles",
+      "state": "Placed on track",
+      "behavior": "Static hazards; damage player on collision; can be destroyed for points; serve as tactical ramming targets for ammo replenishment"
+    },
+    {
+      "entity": "Ammunition pool",
+      "state": "Depleting",
+      "behavior": "Gun fires until depleted; can only be replenished by ramming enemies into hazards; creates resource management tension"
+    }
+  ],
+  "notes": "Mach Rider uses minimalist NES-era visuals to communicate post-apocalyptic invasion scenario. World-state is expressed through: (1) sector progression narrative framing (rescue mission against Quadrunner occupation), (2) escalating enemy/obstacle density as danger signal, (3) resource scarcity (ammunition) forcing tactical play, (4) branching track layouts suggesting varied geography under hostile control. The game lacks traditional HUD storytelling; danger and safety are conveyed through collision mechanics and visual feedback (sprite fragmentation, point popups). Faction identity is purely functional—player bike vs. enemy vehicles—with minimal visual differentiation beyond behavior. The arcade sequel's progressive image reveal suggests deeper narrative existed but was simplified for NES release. Design Mode hints at meta-narrative where player becomes world-builder, inverting the occupation scenario.",
+  "sources_used": [
+    "wikipedia - Mach Rider gameplay section",
+    "wikipedia - world setting and narrative context",
+    "tcrf - VS Mach Rider arcade variant details"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:49:18.763Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3785,
+    "output_tokens": 1798,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

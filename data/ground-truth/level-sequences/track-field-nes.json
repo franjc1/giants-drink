@@ -1,0 +1,120 @@
+{
+  "game_id": "track-field-nes",
+  "game_name": "Track & Field",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "level_count": 6,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "100 meter dash",
+      "first_appears": "Event 1",
+      "introduction_context": "safe",
+      "mastery_context": "Button alternation mechanic foundation; no timing complexity"
+    },
+    {
+      "element": "Long jump",
+      "first_appears": "Event 2",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces timing gate for jump; angle optimization (42° optimal)"
+    },
+    {
+      "element": "Javelin throw",
+      "first_appears": "Event 3",
+      "introduction_context": "moderate",
+      "mastery_context": "Combines running + action button + angle timing (43° optimal)"
+    },
+    {
+      "element": "110 meter hurdles",
+      "first_appears": "Event 4",
+      "introduction_context": "dangerous",
+      "mastery_context": "Rhythm-based timing: must alternate buttons while jumping on beat"
+    },
+    {
+      "element": "Hammer throw",
+      "first_appears": "Event 5",
+      "introduction_context": "dangerous",
+      "mastery_context": "Single-press spin initiation; precise angle timing (45° optimal); discrete input window"
+    },
+    {
+      "element": "High jump",
+      "first_appears": "Event 6",
+      "introduction_context": "dangerous",
+      "mastery_context": "Computer-controlled speed; air control via rapid button pressing; angle hold-based launch"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Qualifying time achieved in heat",
+      "Advancing to next event",
+      "Extra life earned at 100k points",
+      "Successful angle optimization"
+    ],
+    "typical_tension_triggers": [
+      "Qualifying time not met",
+      "Loss of life on failed heat",
+      "Escalating difficulty rounds (higher qualifying levels each cycle)",
+      "Three-attempt limit for non-running events",
+      "Precise timing requirements increase per event"
+    ],
+    "pacing_descriptor": "Escalating difficulty structure: early events teach core mechanics with forgiving windows; mid-events layer timing precision; final events demand complex multi-input coordination under strict time constraints. Completion triggers harder round with raised qualifying bars."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "frequent",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "100m dash introduces button-mashing without timing complexity; establishes baseline skill gate",
+    "mid_game": "Long jump and javelin layer angle optimization onto running; hurdles require rhythmic jumping integration; precision windows tighten",
+    "late_game": "Hammer throw demands discrete spin-initiation timing; high jump combines computer-paced movement with player air control and button-press height modulation",
+    "notable_spikes": [
+      "Transition to hurdles: first event requiring synchronized action-button timing during running rhythm",
+      "Hammer throw: discrete input model (single-press spin) breaks continuous alternation pattern",
+      "Post-completion rounds: qualifying times reset higher, compressing acceptable performance windows"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Sequential Mechanic Introduction",
+      "description": "Events 1–6 form a curriculum: pure speed (dash) → speed + timing (long jump) → speed + timing + angle (javelin) → speed + rhythm + timing (hurdles) → discrete control + angle (hammer) → speed management + air control (high jump). No event repeats; knowledge compounds forward.",
+      "example_level": "Events 1-6 progression"
+    },
+    {
+      "pattern_name": "Qualifying Gate / Lives System",
+      "description": "Each event enforces a minimum threshold (running: one heat; field: three attempts). Failure costs one life. Exhausting lives ends session. This creates discrete pass/fail moments rather than continuous skill curve.",
+      "example_level": "All events"
+    },
+    {
+      "pattern_name": "Cyclical Difficulty Escalation",
+      "description": "Completing all six events loops back to event one with raised qualifying times. No new mechanics introduced; existing mechanics are time-compressed, increasing precision demand.",
+      "example_level": "Rounds 2+ (configuration-dependent)"
+    },
+    {
+      "pattern_name": "Horizontal Side-Scrolling Display",
+      "description": "Each event displays one or two horizontal tracks with large scoreboard (world records vs. current attempt) and background audience. Horizontally scrolling areas (5 independent zones in code) create visual continuity but de-emphasize spatial navigation.",
+      "example_level": "All events"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Track & Field NES article)",
+    "wikipedia (Track & Field video game article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:18:17.953Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4342,
+    "output_tokens": 1501,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

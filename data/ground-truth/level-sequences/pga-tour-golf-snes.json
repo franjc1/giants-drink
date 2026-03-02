@@ -1,0 +1,105 @@
+{
+  "game_id": "pga-tour-golf-snes",
+  "game_name": "PGA Tour Golf",
+  "platform": "snes",
+  "paradigm": "sports",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Course selection / hole overview",
+      "first_appears": "Before each hole",
+      "introduction_context": "safe",
+      "mastery_context": "3D camera pan from hole to starting position; overhead map provided"
+    },
+    {
+      "element": "Wind conditions",
+      "first_appears": "During hole play",
+      "introduction_context": "moderate",
+      "mastery_context": "Variable wind affects ball trajectory; player must adjust strategy per shot"
+    },
+    {
+      "element": "Fairway / approach shots",
+      "first_appears": "Mid-hole progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Distance and accuracy control; overhead map updates after each shot"
+    },
+    {
+      "element": "Green / putting",
+      "first_appears": "End of hole sequence",
+      "introduction_context": "moderate",
+      "mastery_context": "3D contoured grid view reveals terrain variation for reading slopes"
+    },
+    {
+      "element": "Tournament scoring / competition",
+      "first_appears": "Tournament mode",
+      "introduction_context": "moderate",
+      "mastery_context": "Player competes against 60 unseen opponents; scoreboard displays relative standings"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Shot replay (automatic for good shots)",
+      "Course overview between holes",
+      "Overhead map display after each shot"
+    ],
+    "typical_tension_triggers": [
+      "Wind condition variability",
+      "Green terrain complexity",
+      "Opponent scoreboard visibility",
+      "Putting accuracy requirement"
+    ],
+    "pacing_descriptor": "Turn-based / self-paced; tension builds during shot execution, releases via replay and map refresh"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Practice and Driving modes available alongside Tournament",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introductory holes on fictional Sterling Shores or real courses with baseline wind",
+    "mid_game": "Wind variance increases; green complexity heightens with course progression",
+    "late_game": "Tournament scoring pressure; cumulative performance tracking across 60 opponents",
+    "notable_spikes": [
+      "Transition from fairway to green (perspective/control shift)",
+      "High-difficulty real courses (PGA West, TPC Sawgrass) vs. Sterling Shores"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Course introduction structure",
+      "description": "Each course/hole begins with 3D camera pan overview, progresses through fairway play with map support, culminates in contoured green view",
+      "example_level": "PGA West, TPC Avenel, TPC Sawgrass, Sterling Shores"
+    },
+    {
+      "pattern_name": "Information scaffolding",
+      "description": "Pre-hole 3D overview → overhead map during play → grid contour on green; progressively detailed spatial data as player approaches critical zone",
+      "example_level": "All holes"
+    },
+    {
+      "pattern_name": "Feedback via replay",
+      "description": "Good shots automatically replayed; player can manually review any shot; reduces frustration and provides learning opportunity",
+      "example_level": "All tournament holes"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:11:00.938Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3955,
+    "output_tokens": 1151,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

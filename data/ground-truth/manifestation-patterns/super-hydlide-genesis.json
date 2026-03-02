@@ -1,0 +1,175 @@
+{
+  "game_id": "super-hydlide-genesis",
+  "game_name": "Super Hydlide",
+  "platform": "genesis",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Evil monsters",
+      "visual_form": "Monster sprites with hostile appearance (distinct from good monsters)",
+      "meaning": "Immediate threat - will attack player on sight"
+    },
+    {
+      "signal": "Moral Fiber depletion",
+      "visual_form": "MF stat at zero or near-zero on character screen",
+      "meaning": "World state danger - frequent traps spawn across the map"
+    },
+    {
+      "signal": "Lowered HP/attack power",
+      "visual_form": "Degraded character stats visible on status screen; slower combat animations",
+      "meaning": "Consequence of failing to eat or sleep - character in weakened state"
+    },
+    {
+      "signal": "Encumbrance",
+      "visual_form": "Character movement speed noticeably reduced when Load Capacity exceeded",
+      "meaning": "Mechanical danger - slower movement makes player vulnerable to enemy encounters"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Good monsters",
+      "visual_form": "Monster sprites with passive or benign appearance (visually distinct from evil variants)",
+      "meaning": "Non-threatening unless attacked first - safe to avoid combat"
+    },
+    {
+      "signal": "High Moral Fiber",
+      "visual_form": "MF stat above 100 on character screen",
+      "meaning": "World blessing state - random beneficial items appear in the environment"
+    },
+    {
+      "signal": "Rested/Fed character",
+      "visual_form": "Full HP bar, normal stat values, character moves at normal speed",
+      "meaning": "Character is in optimal operational state"
+    },
+    {
+      "signal": "Towns/NPCs",
+      "visual_form": "Settlements with townspeople sprites visible",
+      "meaning": "Safe zones for rest, trading, and information gathering"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Justice/Good alignment",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Good monsters (passive appearance until provoked)",
+      "environmental_markers": "Beneficial items appear when MF is above 100; rewards for moral choices"
+    },
+    {
+      "faction": "Evil alignment",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Evil monsters (hostile appearance, attack on sight)",
+      "environmental_markers": "Traps spawn when MF drops to zero; punitive environmental changes"
+    },
+    {
+      "faction": "Normal/Neutral alignment",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Mixed monster encounters; balanced threat/reward",
+      "environmental_markers": "Standard environmental hazards and encounters"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Post-catastrophe (game opening)",
+      "visual_manifestation": "Explosion of flames near City of the Woods; monsters spread throughout world",
+      "behavioral_manifestation": "Increased hostile monster encounters; general world instability"
+    },
+    {
+      "world_state": "High Moral Fiber (justice-aligned player)",
+      "visual_manifestation": "Random beneficial items appear in environment/world exploration",
+      "behavioral_manifestation": "Good monsters remain passive; fewer traps; world feels rewarding"
+    },
+    {
+      "world_state": "Zero/Low Moral Fiber (evil-aligned or amoral player)",
+      "visual_manifestation": "Frequent visible trap markers/hazards appearing across map",
+      "behavioral_manifestation": "Increased environmental dangers; world becomes actively hostile"
+    },
+    {
+      "world_state": "Night time (day-night cycle)",
+      "visual_manifestation": "Screen darkens; visual distinction from daytime areas",
+      "behavioral_manifestation": "Character must seek shelter/sleep; fatigue mechanics activate; different monster activity patterns possible"
+    },
+    {
+      "world_state": "Hunger/Fatigue",
+      "visual_manifestation": "Character sprite may show degraded animation; stat screen shows reduced HP/attack",
+      "behavioral_manifestation": "Movement is slower; attack power reduced; increased vulnerability to damage"
+    },
+    {
+      "world_state": "Encumbered (over Load Capacity)",
+      "visual_manifestation": "Character sprite moves visibly slower; visual 'weighted down' movement animation",
+      "behavioral_manifestation": "Reduced movement speed; tactical vulnerability during encounters"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Monster alignment as world narrative",
+      "example": "Good vs evil monsters visually encoded; their presence tells story of moral corruption spreading post-explosion"
+    },
+    {
+      "technique": "Environmental hazards as karma reflection",
+      "example": "Trap density increases based on player's moral choices (MF stat); world physically responds to morality"
+    },
+    {
+      "technique": "Survival mechanics as world context",
+      "example": "Day-night cycles, hunger, sleep requirements communicate a living, demanding world rather than abstract game space"
+    },
+    {
+      "technique": "Item weight and encumbrance",
+      "example": "Every item having physical weight tells story that this is a grounded, realistic world with physical consequences"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Good monster",
+      "state": "Player has not attacked",
+      "behavior": "Remains passive; does not engage player"
+    },
+    {
+      "entity": "Good monster",
+      "state": "Player attacks first",
+      "behavior": "Becomes hostile; engages in combat; player loses Moral Fiber on kill"
+    },
+    {
+      "entity": "Evil monster",
+      "state": "Encounters player",
+      "behavior": "Immediately attacks on sight; no negotiation possible"
+    },
+    {
+      "entity": "Player character",
+      "state": "Hungry or sleep-deprived",
+      "behavior": "HP and attack power gradually decrease; movement may become sluggish"
+    },
+    {
+      "entity": "Player character",
+      "state": "Over Load Capacity weight limit",
+      "behavior": "Movement speed visibly reduced; tactical disadvantage in combat"
+    },
+    {
+      "entity": "World/Environment",
+      "state": "Player MF at 0",
+      "behavior": "Traps spawn frequently across map; punitive world transformation"
+    },
+    {
+      "entity": "World/Environment",
+      "state": "Player MF above 100",
+      "behavior": "Beneficial items randomly appear; rewarding world transformation"
+    }
+  ],
+  "notes": "Super Hydlide uses a sophisticated morality system as its primary world-state communication mechanism. Unlike Hydlide II, NPC reactions are no longer affected by alignment, but instead the physical environment responds (traps vs rewards). The game employs a dual-layer danger system: (1) monster-level threats (good vs evil designation), and (2) environmental hazards triggered by player behavior. Survival mechanics (hunger, fatigue, encumbrance) serve as constant visual/behavioral world-state indicators. The visual distinction between good and evil monsters is critical but not fully detailed in available sources. The game's innovative Moral Fiber system creates emergent environmental storytelling where the world literally changes based on cumulative player choices.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:20:53.458Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3470,
+    "output_tokens": 1900,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

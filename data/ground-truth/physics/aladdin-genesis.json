@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "game": "Disney's Aladdin",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1993,
+    "publisher": "Sega",
+    "developer": "Virgin Interactive / Sega",
+    "sources": [
+      {
+        "name": "Speedrun.com — Disney's Aladdin (Genesis) / Guides",
+        "url": "https://www.speedrun.com/aladdin_genesis/guides/im7or",
+        "notes": "Confirms: skid boost mechanic (restart run during skidding = brief speed boost). Sword swing bug after landing from certain sections."
+      },
+      {
+        "name": "Speed Demos Archive — Disney's Aladdin Genesis",
+        "url": "https://speeddemosarchive.com/DisneysAladdinGenesis.html",
+        "notes": "Movement mechanics documentation."
+      },
+      {
+        "name": "Wikipedia — Disney's Aladdin (Genesis)",
+        "url": "https://en.wikipedia.org/wiki/Disney's_Aladdin_(Sega_Genesis_video_game)",
+        "notes": "Mechanics and platform differences."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "NOT THE SAME AS SNES ALADDIN — the Genesis version (Virgin/Sega) and SNES version (Capcom) are completely different games.",
+      "Genesis version uses authentic Disney film frames rotoscoped into sprites — noted for animation quality.",
+      "SKID BOOST: Running, stopping, then immediately restarting during the skidding animation gives a brief speed boost.",
+      "SUPER JUMP: Unique to Genesis version — Aladdin can perform an extra-high jump (not present in Amiga/PC versions).",
+      "Sword swing has a long wind-up animation — sluggish for combat.",
+      "Apple throwing: the primary ranged attack, thrown horizontally to stun enemies.",
+      "Walk/run speed and jump values not precisely documented. Estimated from gameplay."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "run_speed": {
+      "px_per_frame_approx": 3.0,
+      "confidence": "low",
+      "notes": "Approximate. Aladdin runs quickly. VERIFY."
+    },
+    "skid_boost": {
+      "description": "When running and stopping, Aladdin enters a skidding animation. If the run button is pressed again immediately during the skid, a brief speed boost is gained.",
+      "source": "Speedrun.com guides",
+      "confidence": "high",
+      "notes": "Used in speedruns for faster horizontal traversal. The skid animation's early frames have a speed exploitation window."
+    }
+  },
+
+  "jump": {
+    "standard_jump": {
+      "height_px_approx": 48,
+      "confidence": "low",
+      "variable_height": true,
+      "air_control": "full"
+    },
+    "super_jump": {
+      "description": "Extra-high jump — Aladdin can jump significantly higher than the standard jump height.",
+      "availability": "Genesis version only (not in Amiga/PC ports)",
+      "source": "Wikipedia: 'Both the Amiga and IBM PC versions lack a super jump that originally allowed Aladdin to leap extra high'",
+      "confidence": "high",
+      "notes": [
+        "The super jump allows reaching items and platforms out of reach of the standard jump.",
+        "It's unclear if this is a charged jump or a button-combo jump. VERIFY activation."
+      ]
+    }
+  },
+
+  "combat": {
+    "sword": {
+      "description": "Aladdin's scimitar. Primary melee weapon.",
+      "animation_frames_approx": 20,
+      "confidence": "low",
+      "notes": [
+        "Sword swing has a 'strangely long wind-up animation that's extremely sluggish' — community consensus.",
+        "In guard encounters, often better to take damage than wait for the sword animation.",
+        "Bug: after landing from certain height sections, the sword temporarily stops working. Fix: jump or throw apple.",
+        "Source: speedrun community documentation."
+      ]
+    },
+    "apple": {
+      "description": "Throwable projectile that stuns enemies on contact.",
+      "trajectory": "straight horizontal",
+      "supply": "limited — collect from the environment",
+      "notes": "Faster to stun with apple than to wait for sword animation. Preferred for most enemy encounters."
+    }
+  },
+
+  "magic_carpet": {
+    "available_in": "certain sections",
+    "description": "Aladdin rides the magic carpet in specific sections for aerial traversal.",
+    "notes": "Carpet sections have different physics — flying at controlled speed above the standard terrain."
+  },
+
+  "platform_differences": {
+    "genesis_vs_snes": {
+      "developer": "Genesis: Virgin Interactive/Sega. SNES: Capcom",
+      "art_style": "Genesis: rotoscoped Disney film animation. SNES: hand-drawn sprites (different art style)",
+      "mechanics": "Completely different game designs despite same source material",
+      "super_jump": "Genesis only",
+      "notes": "These are two completely different games that happen to share the same IP and basic premise."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The Genesis Aladdin is the canonical example of 'rotoscoped animation in games' — actual Disney film frames converted to sprites. The animation quality is exceptional for 1993 but the gameplay consequence is that the animations are long (the sword wind-up) and can't be cancelled.",
+    "The skid boost is an unintentional mechanic discovered by speedrunners — the game's animation system creates a speed window in the transition between running and stopping. This is a great example of emergent physics from animation state machines.",
+    "The sword's sluggish wind-up creates a risk-reward decision in combat: wait for the animation to complete (time-costly) or use apples (resource-costly). This forces resource management even in a simple platformer context.",
+    "The Genesis/SNES split is a famous example of licensed game bifurcation — same IP, two completely different teams, two completely different games. The Genesis version is generally considered more polished while the SNES version is more action-game-like."
+  ]
+}

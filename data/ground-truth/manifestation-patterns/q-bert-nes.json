@@ -1,0 +1,166 @@
+{
+  "game_id": "q-bert-nes",
+  "game_name": "Q*bert",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Purple enemy appearance",
+      "visual_form": "Purple-colored antagonists (Coily snake, Ugg, Wrongway)",
+      "meaning": "Lethal threat; collision results in immediate death/life loss"
+    },
+    {
+      "signal": "Red bouncing ball",
+      "visual_form": "Red spherical projectile descending the pyramid",
+      "meaning": "Lethal obstacle; contact causes death"
+    },
+    {
+      "signal": "Coily egg transformation",
+      "visual_form": "Purple egg bouncing toward pyramid base, morphing into pursuing snake",
+      "meaning": "Escalating threat level; transformation marks shift from passive to active pursuit"
+    },
+    {
+      "signal": "Pyramid edge proximity",
+      "visual_form": "Character approaching outer boundary of cube structure",
+      "meaning": "Fatal fall risk; jumping off results in death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Green bouncing ball",
+      "visual_form": "Green spherical projectile",
+      "meaning": "Temporary invulnerability; immobilizes all enemies for limited duration"
+    },
+    {
+      "signal": "Multicolored escape discs",
+      "visual_form": "Floating colored discs positioned on either side of pyramid",
+      "meaning": "Emergency teleport to pyramid top; safe passage if Coily pursues (he will fall to death)"
+    },
+    {
+      "signal": "Cube color change (target reached)",
+      "visual_form": "Cube shifts to designated goal color after landing",
+      "meaning": "Progress toward level completion; safe interaction"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Q*bert (Player/Protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Anthropomorphic character hopping diagonally",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Controls cube coloration; moves diagonally through isometric space"
+    },
+    {
+      "faction": "Purple Antagonists",
+      "color_identity": "Purple",
+      "symbol_or_sigil": "Coily (snake), Ugg, Wrongway (flying creatures)",
+      "enemy_visual_variants": "Coily: egg → snake transformation; Ugg/Wrongway: distinct flying patterns along pyramid edges",
+      "environmental_markers": "Traverse pyramid structure in opposition to Q*bert's path; introduce chase mechanics"
+    },
+    {
+      "faction": "Green Nuisance Enemies",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Slick and Sam creatures",
+      "enemy_visual_variants": "Descend pyramid independently; non-lethal but obstructive",
+      "environmental_markers": "Revert cube colors to original/former states, creating puzzle obstruction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level progression (early stages)",
+      "visual_manifestation": "Single-pass cube coloration requirement; fewer enemies present",
+      "behavioral_manifestation": "Enemies introduced gradually; basic threat patterns"
+    },
+    {
+      "world_state": "Level progression (mid-to-late stages)",
+      "visual_manifestation": "Cubes require multiple touches to reach target color; color-cycling mechanics activate",
+      "behavioral_manifestation": "Increased enemy density and complexity; Slick/Sam actively revert progress"
+    },
+    {
+      "world_state": "Coily pursuit activated",
+      "visual_manifestation": "Purple snake actively chases Q*bert down pyramid structure",
+      "behavioral_manifestation": "Threat escalates from passive to aggressive; player forced into evasive patterns"
+    },
+    {
+      "world_state": "Escape disc triggered",
+      "visual_manifestation": "Multicolored floating discs become interactive; pyramid resets to top",
+      "behavioral_manifestation": "Coily follows and falls to death; all enemies removed temporarily; bonus points awarded"
+    },
+    {
+      "world_state": "Level complete",
+      "visual_manifestation": "All cubes reach target color simultaneously",
+      "behavioral_manifestation": "Progression to next stage; difficulty increase (additional cube-touch requirements)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Isometric pyramid structure",
+      "example": "28-cube pyramid serves as both game board and world boundary; physical limits reinforce danger of falling off edges"
+    },
+    {
+      "technique": "Color-coding enemies and hazards",
+      "example": "Purple = lethal (Coily, Ugg, Wrongway); Green = obstructive but harmless (Slick, Sam); Red ball = lethal projectile; Green ball = temporary safety"
+    },
+    {
+      "technique": "Enemy behavior patterns as environmental clues",
+      "example": "Coily's egg-to-snake transformation signals escalating threat; Ugg/Wrongway's Escher-like side traversal indicates unpredictable pathways; Slick/Sam's downward descent shows cube-reversion mechanics"
+    },
+    {
+      "technique": "Spatial design as puzzle language",
+      "example": "Diagonal movement constraints and pyramid geometry impose puzzle logic; escape discs positioned symmetrically on sides as visual 'safe zones'"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Coily",
+      "state": "Egg form",
+      "behavior": "Bounces passively toward pyramid bottom; no active threat"
+    },
+    {
+      "entity": "Coily",
+      "state": "Snake form (activated)",
+      "behavior": "Pursues Q*bert actively; relentless chase until Q*bert escapes or uses disc"
+    },
+    {
+      "entity": "Coily",
+      "state": "Disc-triggered fall",
+      "behavior": "Follows Q*bert onto escape disc and falls to death, removing all active threats"
+    },
+    {
+      "entity": "Ugg/Wrongway",
+      "state": "Active",
+      "behavior": "Fly or hop along pyramid edges in Escher-like patterns from bottom corners toward top; leave when reaching edge"
+    },
+    {
+      "entity": "Slick/Sam",
+      "state": "Active",
+      "behavior": "Descend pyramid; revert touched cubes to previous colors, undoing player progress"
+    },
+    {
+      "entity": "Green ball",
+      "state": "Contact with Q*bert",
+      "behavior": "All enemies freeze temporarily; immobilization lasts limited duration before enemies resume"
+    },
+    {
+      "entity": "Red ball",
+      "state": "Contact with Q*bert",
+      "behavior": "Instant death; no recovery or temporary effect"
+    }
+  ],
+  "notes": "Q*bert (NES 1989) uses a minimalist visual language where color and movement pattern are primary communicators of threat hierarchy. The isometric perspective creates pseudo-3D spatial boundaries that define the playable world and enforce puzzle constraints. No faction-based political conflict exists; instead, the game uses enemy archetype coloring (purple=lethal, green=obstructive) to communicate danger levels. World-state transitions are signaled primarily through enemy introduction sequences and cube-coloration requirement changes. The game lacks environmental narrative—danger and safety are entirely abstract and mechanical.",
+  "sources_used": [
+    "wikipedia:Q*bert",
+    "tcrf:Q*bert (NES)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:26:32.719Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3875,
+    "output_tokens": 1918,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

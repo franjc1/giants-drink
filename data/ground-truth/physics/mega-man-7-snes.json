@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "game": "Mega Man 7",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Mega Man 7",
+        "url": "https://en.wikipedia.org/wiki/Mega_Man_7",
+        "notes": "First Mega Man on SNES. Physics overview, Rush Search, Beat, and Tango confirmed."
+      },
+      {
+        "name": "TASVideos — SNES / Mega Man 7",
+        "url": "https://tasvideos.org/GameResources/SNES/MegaMan7",
+        "notes": "TASVideos page — physics documentation. Confirm walk/jump values if accessible."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Mega Man 7 is the first mainline Mega Man game on SNES (1995). The series had been NES-exclusive for 6 games.",
+      "PHYSICS NOTE: The SNES version has slightly different physics feel from NES entries — sprites are larger (32x32 vs 16x16 area).",
+      "Walk speed, slide, charge shot all present — consistent with MM4-6 NES series.",
+      "NEW ADDITIONS: Rush Search (Roll's robot explores for items), Tango (cat robot as attack helper), Beat (bird robot for aerial assist).",
+      "4 intro stages, then 4 bosses unlocked — then last 4 bosses. Non-standard 4+4 structure vs the usual 8.",
+      "Proto Man appears as a recurring character who provides hints and items.",
+      "Bass appears as a major antagonist — prototype for MM8/MM&B (Mega Man & Bass) character."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "mega_man_physics": {
+    "_note": "Same base mechanics as NES MM series, scaled to SNES hardware. Sprites are larger.",
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "medium",
+      "notes": "Consistent with NES series. SNES sprites are larger but physics feel similar. VERIFY from ROM."
+    },
+    "slide": {
+      "description": "Down + jump while grounded. Same as MM3+ NES.",
+      "invincibility_frames": true,
+      "notes": "Slide provides brief invincibility during frames. Can slide under certain attacks."
+    },
+    "jump_height": {
+      "px_approx": 48,
+      "confidence": "low",
+      "notes": "Approximate. SNES display at 224h vs NES 240h — same relative screen proportion. VERIFY."
+    },
+    "gravity": {
+      "px_per_frame_sq_approx": 0.25,
+      "confidence": "medium",
+      "notes": "Mega Man series constant. VERIFY."
+    },
+    "charge_shot": {
+      "description": "Hold fire button — Mega Man charges buster. Release to fire powered shot.",
+      "charge_levels": {
+        "level_1": "Short charge (partial). Slightly larger shot.",
+        "level_2": "Full charge (longer). Large devastating shot. Distinctive visual and audio cue when ready."
+      },
+      "notes": "Charge shot from MM4 — present in all MM7 versions."
+    }
+  },
+
+  "support_robots": {
+    "_note": "MM7 features three support robots: Rush, Beat, and Tango.",
+    "rush_coil": {
+      "description": "Rush crouches, Mega Man jumps on him for a spring boost to higher platforms.",
+      "notes": "Classic MM3+ support. Available from early in the game."
+    },
+    "rush_jet": {
+      "description": "Rush becomes a jet platform Mega Man can ride horizontally.",
+      "notes": "Available after unlocking. Time-limited jet duration."
+    },
+    "rush_search": {
+      "description": "NEW in MM7. Rush digs in the current area to find hidden items.",
+      "notes": [
+        "Rush Search finds bolts and power-ups hidden in the environment.",
+        "Passive exploration tool — point Rush at a promising location.",
+        "Creates incentive to examine environments for hidden item spots."
+      ]
+    },
+    "beat": {
+      "description": "The bird robot. Acts as a shield — will intercept one attack if Mega Man is hit.",
+      "activation": "Purchased with bolts in the shop",
+      "notes": "Beat-as-shield creates a one-hit safety net for precise sections."
+    },
+    "tango": {
+      "description": "New in MM7. Cat robot that attacks enemies when released.",
+      "activation": "Purchased with bolts",
+      "notes": "Tango attacks nearby enemies automatically — offensive support tool."
+    }
+  },
+
+  "shop_system": {
+    "description": "Mega Man 7 features a shop (accessed via Dr. Light's lab between stages).",
+    "currency": "Bolts — collected from defeated enemies and hidden in levels.",
+    "items": [
+      "Beat (bird shield)",
+      "Tango (cat attacker)",
+      "Energy balancer",
+      "Various energy tanks and power-ups"
+    ],
+    "notes": "Shop economy adds a meta-resource management layer to stage replays — grind bolts for upgrades."
+  },
+
+  "bass": {
+    "description": "Bass is a new antagonist — a robot built by Dr. Wily who claims to want to help Mega Man.",
+    "fighting_style": "Bass Buster — rapid-fire multi-directional shots vs Mega Man's single charge shot",
+    "notes": [
+      "Bass's multi-directional rapid fire vs Mega Man's charge shot creates a design contrast: rate vs power.",
+      "Bass becomes the recurring rival in MM8 and Mega Man & Bass.",
+      "The player fights Bass as a boss multiple times — each encounter is a callback to the rivalry."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "Mega Man 7's 4+4 stage unlock structure (start with 4 bosses, 4 more unlock after defeating them) is a variant on the usual 8-boss free-choice structure. It gates the content behind progress — first half must be cleared before second half unlocks. A pacing tool hiding as a structural choice.",
+    "The Rush Search exploration tool adds a meta-game to stage design: environments contain hidden items that require bringing the right tool. The same stage played with Rush Search is a different experience from the same stage without — the tool reveals a hidden layer.",
+    "Bass's rapid-fire multi-directional weapon vs Mega Man's single powerful charge shot is a deliberate design contrast. The rival's weapon is philosophically opposite to the protagonist's. More shots, less power vs fewer shots, more power. This framing makes their conflict feel mechanical, not just narrative.",
+    "The shop system creates a bolts-as-meta-currency economy across all stages. Players who replay stages (for bolts) are rewarded with upgrades that make new stages easier. This is a designed feedback loop between content and reward.",
+    "Mega Man 7's jump to SNES hardware presented a challenge: the series identity (precise platforming, tight hitboxes) depended on the NES pixel grid. On SNES with larger sprites and higher resolution, Capcom had to rebalance the physics feeling while preserving the 'Mega Man' feel. The results were controversial but competent."
+  ]
+}

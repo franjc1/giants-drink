@@ -1,0 +1,162 @@
+{
+  "game_id": "warcraft-2-pc",
+  "game_name": "Warcraft II: Tides of Darkness",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit visibility",
+      "visual_form": "Enemy units appear on screen within visual radius of friendly units; disappear from view when outside radius",
+      "meaning": "Immediate combat threat; proximity to enemy forces"
+    },
+    {
+      "signal": "Fog of war",
+      "visual_form": "Black/unexplored territory appears completely obscured on map",
+      "meaning": "Unknown danger; potential enemy presence in unscouted areas"
+    },
+    {
+      "signal": "Building damage state",
+      "visual_form": "Visual degradation of building sprites when damaged (last-seen state)",
+      "meaning": "Ongoing attack or loss of structural integrity; strategic vulnerability"
+    },
+    {
+      "signal": "Resource depletion",
+      "visual_form": "Gold mines and forests visually diminish or disappear as harvested",
+      "meaning": "Economic pressure; limited time before economic collapse"
+    },
+    {
+      "signal": "Unit production limitation",
+      "visual_form": "UI feedback when insufficient farms/food available for unit production",
+      "meaning": "Economic constraint; inability to expand military"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Explored territory",
+      "visual_form": "Previously explored areas remain visible in gray tones even without current unit presence",
+      "meaning": "Known safe passage; mapped territory free from fog of war"
+    },
+    {
+      "signal": "Worker activity",
+      "visual_form": "Workers harvesting resources visibly moving between resource nodes and halls",
+      "meaning": "Active economy; stable resource generation"
+    },
+    {
+      "signal": "Building completion",
+      "visual_form": "Structures fully rendered and operational on screen",
+      "meaning": "Functional infrastructure; tech advancement unlocked"
+    },
+    {
+      "signal": "Owned building presence",
+      "visual_form": "Faction-colored structures visible on map and minimap",
+      "meaning": "Territory control; strategic position security"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Humans (Lordaeron and allies)",
+      "color_identity": "Blue/human faction colors (presumed from RTS convention)",
+      "symbol_or_sigil": "Town Hall as primary economic structure; human-styled architecture",
+      "enemy_visual_variants": "Orcs appear as distinctly alien/green-skinned invaders with crude structures",
+      "environmental_markers": "Medieval human settlements; human-proportioned buildings; organized town layouts"
+    },
+    {
+      "faction": "Orcs (Invaders and allied races)",
+      "color_identity": "Red/orc faction colors (presumed from RTS convention)",
+      "symbol_or_sigil": "Great Hall as primary economic structure; tribal/organic architecture",
+      "enemy_visual_variants": "Humans appear as organized defenders with structured fortifications",
+      "environmental_markers": "Tribal encampments; crude/organic building designs; less refined settlements"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game/economy building",
+      "visual_manifestation": "Workers actively harvesting; basic structures (Town Hall/Great Hall, Barracks) visible; minimal unit presence on map",
+      "behavioral_manifestation": "Slow unit production; focus on resource gathering; limited military activity"
+    },
+    {
+      "world_state": "Mid game/tech advancement",
+      "visual_manifestation": "Advanced buildings constructed (shipyards, tech buildings); diverse unit types present; expanded territory control",
+      "behavioral_manifestation": "Increased unit production rates; unlocked advanced unit types; faction-specific strategic advantages emerge (Orc ground superiority, Human naval/spellcaster advantage)"
+    },
+    {
+      "world_state": "Late game/all-out war",
+      "visual_manifestation": "Maximum unit diversity visible; heavy building damage; contested territory; naval units on shorelines",
+      "behavioral_manifestation": "Continuous combat; resource scarcity visible; advanced spell usage; strategic unit positioning"
+    },
+    {
+      "world_state": "Invasion/conquest state",
+      "visual_manifestation": "Orc units deep in Human territory; Human defensive structures (farms used as walls) prominent; mixed faction buildings visible",
+      "behavioral_manifestation": "Active enemy unit presence in explored areas; defensive positioning; battle formations"
+    },
+    {
+      "world_state": "Economic collapse",
+      "visual_manifestation": "Empty resource nodes; no visible worker activity; stalled building construction",
+      "behavioral_manifestation": "No new unit production possible; infrastructure deterioration visible; military inactivity"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Resource node depletion",
+      "example": "Gold mines and forests become visually depleted or removed from map, showing battle impact on land and economic desperation"
+    },
+    {
+      "technique": "Building persistence states",
+      "example": "Buildings display last-seen state (damaged/undamaged) even when unobserved, creating narrative of ongoing unseen conflict"
+    },
+    {
+      "technique": "Faction-specific architecture",
+      "example": "Human organized settlements vs. Orc tribal encampments communicate the civilized vs. invasion narrative through building style and layout"
+    },
+    {
+      "technique": "Territory control visualization",
+      "example": "Minimap and main view show faction-colored structures indicating who controls which regions; no-man's-lands appear as contested space"
+    },
+    {
+      "technique": "Fog of war as narrative",
+      "example": "Black unexplored areas represent fear of the unknown; grayed-out explored areas represent hope of controlled space"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Worker units (Human/Orc)",
+      "state": "Active harvesting",
+      "behavior": "Visible continuous movement between resource nodes and halls; indicates economic stability and opponent capability"
+    },
+    {
+      "entity": "Combat units (Human/Orc)",
+      "state": "Positioned near enemy territory",
+      "behavior": "Visible on minimap; represents imminent threat; triggers defensive response"
+    },
+    {
+      "entity": "Advanced units (Knights/Paladins vs. Ogres/Demons)",
+      "state": "Present on battlefield",
+      "behavior": "Indicates tech progression reached; reveals faction's current military strength tier"
+    },
+    {
+      "entity": "Buildings",
+      "state": "Under construction",
+      "behavior": "Partial sprite rendering; indicates future capability unlock; communicates strategic planning"
+    },
+    {
+      "entity": "Spellcasters (Human Mages/Sorceresses vs. Orc Warlocks)",
+      "state": "Active in battle",
+      "behavior": "Visual spell effects; indicates advanced tech reached; asymmetric advantage for Humans in magic capability"
+    }
+  ],
+  "notes": "Warcraft II uses classic RTS visibility mechanics (fog of war, unit visual radius) as core world-state communication systems. Faction differentiation is primarily architectural and structural rather than color-coded in early RTS tradition. The game communicates danger through presence/absence of units in explored space and safety through resource availability and building integrity. Political situation (invasion narrative) is communicated through faction presence in territory and building type distribution across the map. The persistent building last-seen-state mechanic creates narrative tension about unseen enemy activity.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:55:36.468Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3192,
+    "output_tokens": 1900,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

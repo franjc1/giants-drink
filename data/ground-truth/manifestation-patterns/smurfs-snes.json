@@ -1,0 +1,144 @@
+{
+  "game_id": "smurfs-snes",
+  "game_name": "The Smurfs",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Named antagonists (Snake, Gargamel) appear as stage hazards",
+      "meaning": "Life-threatening obstacle requiring combat or evasion"
+    },
+    {
+      "signal": "Stage hazard environment types",
+      "visual_form": "Ground type variations: 'plat' (flat/safe), 'glissant plat' (slippery/dangerous), 'mur' (wall/obstacle)",
+      "meaning": "Environmental friction and traversal difficulty indicate danger zones"
+    },
+    {
+      "signal": "Brainy Smurf level shadow layer",
+      "visual_form": "Shadow overlay rendering on specific character stages",
+      "meaning": "Visual distinction of heightened difficulty or threat in particular Smurf's domain"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flat ground designation",
+      "visual_form": "'Plat' ground type in side-scrolling platform stages",
+      "meaning": "Standard traversable, non-hazardous terrain"
+    },
+    {
+      "signal": "Bonus stage access",
+      "visual_form": "Named bonus stages (Cicogne/Stork, Riviere/River) with 'vide' (empty) ground type",
+      "meaning": "Optional safe collection areas outside main threat progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "The Smurfs (player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Character-specific Smurf variants (named types: Brainy, Luge, generic Smurf)",
+      "enemy_visual_variants": "Smurf type system suggests visual differentiation between controllable Smurfs",
+      "environmental_markers": "Stage assignment by Smurf type indicates territorial/thematic domain control"
+    },
+    {
+      "faction": "Antagonists (Gargamel, Snake)",
+      "color_identity": null,
+      "symbol_or_sigil": "Named boss entities represent opposing force",
+      "enemy_visual_variants": "Different boss types (Gargamel vs Snake) have distinct visual presence and combat mechanics",
+      "environmental_markers": "Boss encounters occur at stage conclusions, marking territorial incursion points"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal stage progression",
+      "visual_manifestation": "Standard platformer level layout with ground type 'plat', sprite rendering with correct palettes",
+      "behavioral_manifestation": "Player-controlled Smurf navigates terrain, encounters enemies, progresses toward boss"
+    },
+    {
+      "world_state": "Minecart/Chariot stage active",
+      "visual_manifestation": "Ground type changes to 'glissant plat' (slippery flat), indicating physics state change",
+      "behavioral_manifestation": "Player movement mechanics altered; reduced traction requires adapted traversal strategy"
+    },
+    {
+      "world_state": "Snowsled/Luge stage active",
+      "visual_manifestation": "Ground type 'mur' (wall), Smurf type display shows 'Luge', shadow layer removed",
+      "behavioral_manifestation": "Vertical or wall-based navigation required; distinct physics from standard platforming"
+    },
+    {
+      "world_state": "Brainy Smurf levels active",
+      "visual_manifestation": "Shadow overlay layer rendered on environment, creating visual darkening effect",
+      "behavioral_manifestation": "Increased visual difficulty feedback; possible heightened enemy aggression or puzzle complexity"
+    },
+    {
+      "world_state": "Bonus stage access",
+      "visual_manifestation": "Ground type 'vide' (empty), no Smurf type name displayed, isolated stage environment",
+      "behavioral_manifestation": "Collection-focused gameplay without standard combat progression"
+    },
+    {
+      "world_state": "Boss encounter initiated",
+      "visual_manifestation": "Named antagonist sprite appears (Gargamel or Snake), stage environment isolates combat zone",
+      "behavioral_manifestation": "Combat mode engaged; boss entity becomes primary threat; standard navigation halted"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Ground type nomenclature system",
+      "example": "Stage ground types ('plat', 'glissant plat', 'mur', 'vide') communicate physical properties and gameplay mode without explicit HUD labels; French terminology suggests European origin and cultural localization depth"
+    },
+    {
+      "technique": "Character-stage assignment mapping",
+      "example": "Specific Smurf types tied to specific stages (Brainy to shadow levels, Luge to snowsled stage) creates implicit narrative of character specialization and environmental domain ownership"
+    },
+    {
+      "technique": "World map structure with camera limitation",
+      "visual_form": "Map design deliberately hides full scope via camera panning, requiring navigation discovery rather than overview",
+      "example": "Southeast corner unrevealed during normal play; world-state obscured to enforce exploration narrative"
+    },
+    {
+      "technique": "Between-level scene transitions",
+      "example": "Cutscenes and narrative transitions (accessible via debug mode Language Test) mark story progression and faction conflict escalation between boss encounters"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Boss: Gargamel",
+      "state": "Normal encounter",
+      "behavior": "Requires multiple hits to defeat; can damage player on contact; represents primary antagonist threat"
+    },
+    {
+      "entity": "Boss: Snake",
+      "state": "Normal encounter",
+      "behavior": "Requires multiple hits to defeat; can damage player on contact; distinct from Gargamel threat pattern"
+    },
+    {
+      "entity": "Player Smurf (generic)",
+      "state": "Standard platforming",
+      "behavior": "Navigates flat terrain, avoids ground hazards, progresses toward stage exit"
+    },
+    {
+      "entity": "Player Smurf (Brainy variant)",
+      "state": "Brainy-specific levels",
+      "behavior": "Encounters shadow-rendered environment; likely puzzle or specialized challenge mechanics"
+    },
+    {
+      "entity": "Player Smurf (Luge variant)",
+      "state": "Snowsled stage",
+      "behavior": "Wall-based or vertical traversal; physics altered from standard platforming (wall/mur ground type)"
+    }
+  ],
+  "notes": "Source material provides debug interface documentation but minimal in-game visual communication details. Manifestation analysis derived from ground type system, stage variant naming, and character-stage assignment logic. No explicit color palette, faction symbols, or HUD documentation available. The game's visual communication relies on implicit environmental state coding (ground types) rather than explicit danger indicators. World map design deliberately obscures full state via camera mechanics, enforcing discovery-based narrative progression.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - The Smurfs SNES)"
+  ],
+  "TODO": "Requires gameplay footage or ROM asset analysis to document: exact color schemes for Smurf characters, visual appearance of Gargamel vs antagonists, sprite animation tells for danger states, HUD visual design, cutscene visual language, environmental palette shifts for danger zones, faction color coding (if any), shadow layer visual effect specifics on Brainy stages, minecart/luge visual differentiation from base platformer",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:37:38.630Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2528,
+    "output_tokens": 1900,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "game_id": "phalanx-snes",
+  "game_name": "Phalanx: The Enforce Fighter A-144",
+  "platform": "snes",
+  "paradigm": "horizontal scrolling shooter",
+  "danger_signals": [
+    {
+      "signal": "Enemy fire patterns",
+      "visual_form": "Bullet streams with varying density and trajectory; difficulty settings escalate bullet count visually",
+      "meaning": "Identifies threat intensity and required evasion complexity"
+    },
+    {
+      "signal": "Alien bioship manifestations",
+      "visual_form": "Possessed space fighters with distinct visual distortion or corruption appearance",
+      "meaning": "Marks hostile entities as anomalous/possessed rather than standard military threats"
+    },
+    {
+      "signal": "Ship health depletion",
+      "visual_form": "Three hit-point health system with visual degradation across hits",
+      "meaning": "Communicates remaining resilience; persistent health between levels raises stakes"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Walls and obstacles that require navigation via speed-switching mechanic",
+      "meaning": "Indicates collision danger requiring active player response"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-Capsule items",
+      "visual_form": "Dropped by defeated enemies; distinct collectible sprite",
+      "meaning": "Offers healing (restores 1 HP) and weapon system upgrades simultaneously"
+    },
+    {
+      "signal": "Speed level switching",
+      "visual_form": "Player-controlled speed states (fast/medium/slow) affecting visual movement rate",
+      "meaning": "Enables reactive safety through evasion or defensive positioning"
+    },
+    {
+      "signal": "Smart Bomb mechanic",
+      "visual_form": "Weapon sacrifice triggers weapon-specific invulnerability or area-denial effects",
+      "meaning": "Provides tactical escape/reset under pressure"
+    },
+    {
+      "signal": "Weapon variety availability",
+      "visual_form": "Up to three stored weapons (L, H, E, R, A, B, C) with distinct visual firing patterns",
+      "meaning": "Multiple tactical approaches reduce forced vulnerability to single threat type"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Security Force/A-144 Phalanx pilot)",
+      "color_identity": null,
+      "symbol_or_sigil": "A-144 Phalanx experimental space fighter",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Orbiting security force base; research stations on planet Delia"
+    },
+    {
+      "faction": "Alien bioship squadron (invading force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Possessed fighter visual corruption; unknown origin bioship signature",
+      "enemy_visual_variants": "Possessed planetary fighters (colonist technology) vs. organic alien bioships",
+      "environmental_markers": "Emanate from Delia's atmosphere; hazardous breach origin"
+    },
+    {
+      "faction": "Delia colonists (compromised/threatened)",
+      "color_identity": null,
+      "symbol_or_sigil": "Planetary research project infrastructure",
+      "enemy_visual_variants": "Possessed fighters appear as corrupted versions of standard colonial defense craft",
+      "environmental_markers": "Research stations and colonized areas as stage environments"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-invasion stability",
+      "visual_manifestation": "Delia colony and orbiting security force infrastructure intact",
+      "behavioral_manifestation": "Standard patrol patterns; organized defense response available"
+    },
+    {
+      "world_state": "Active bioship invasion/possession event",
+      "visual_manifestation": "Possessed fighters with anomalous behavior; emergency conditions broadcast",
+      "behavioral_manifestation": "Transformed allied fighters become hostile; alien bioships operate in coordinated assault patterns"
+    },
+    {
+      "world_state": "Escalating threat under difficulty settings",
+      "visual_manifestation": "Enemy bullet density increases proportionally; screen density reflects threat level",
+      "behavioral_manifestation": "Higher difficulty ('Funny' mode) dramatically escalates enemy firing rate and pattern complexity"
+    },
+    {
+      "world_state": "Player ship damage accumulation",
+      "visual_manifestation": "Health indicator (3 HP maximum) degrades visually with each hit",
+      "behavioral_manifestation": "Persistent health between levels means damaged ship carries vulnerability forward; creates mounting tension"
+    },
+    {
+      "world_state": "Weapon system operational status",
+      "visual_manifestation": "Current equipped weapons display distinct firing patterns (laser beams, homing projectiles, spiraling attacks, etc.)",
+      "behavioral_manifestation": "Smart Bomb sacrifice transitions weapon slots; strategic choice between offense and inventory space"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting narrative via stage progression",
+      "example": "Player investigates disaster on Delia (2279 setting); environments transition from space to colony to alien-affected zones, visualizing scope of invasion"
+    },
+    {
+      "technique": "Enemy type as lore carrier",
+      "example": "Possessed fighters vs. native bioships visually distinguish between compromised allied forces and true invaders, telling story of infiltration"
+    },
+    {
+      "technique": "Persistent health mechanic as narrative anchor",
+      "example": "Ship carries damage between levels, communicating 'Operation Climax' as continuous dangerous mission rather than discrete challenges"
+    },
+    {
+      "technique": "Item scarcity and weapon variety",
+      "example": "Enemies drop power-ups selectively; forces player to adapt tactics to available loadouts, reflecting improvisation under crisis conditions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "A-144 Phalanx (player ship)",
+      "state": "Normal operation",
+      "behavior": "Responsive to speed-switching input; maintains directional control; fires selected weapon continuously"
+    },
+    {
+      "entity": "A-144 Phalanx (taking damage)",
+      "state": "Hit but operational",
+      "behavior": "Health depletes by one point; ship remains functional but vulnerability increases; visual feedback signals damage received"
+    },
+    {
+      "entity": "A-144 Phalanx (Smart Bomb activated)",
+      "state": "Temporary invulnerability/area denial",
+      "behavior": "Weapon is sacrificed; weapon-specific effect triggers (laser spin, homing field, antimatter reaction, melee drone, etc.); invulnerability window active (except for Ricochet drone variant)"
+    },
+    {
+      "entity": "Possessed colonial fighters",
+      "state": "Enemy antagonist",
+      "behavior": "Fire projectiles in escalating patterns; patrol and intercept; visual corruption distinguishes from uninfected craft"
+    },
+    {
+      "entity": "Alien bioships",
+      "state": "Primary invasion threat",
+      "behavior": "Coordinate attacks; possess unique firing patterns; boss-level variants demonstrate coordinated tactical organization"
+    },
+    {
+      "entity": "Power-Capsule drops",
+      "state": "Item spawned after enemy defeat",
+      "behavior": "Remains stationary until collected; provides dual benefit (heal + upgrade); incentivizes enemy engagement"
+    }
+  ],
+  "notes": "Phalanx communicates world-state primarily through enemy behavior escalation and visual density rather than explicit UI narrative. The persistent health system is a core manifestation mechanic—damage carries forward between levels, creating a tension arc that accumulates danger. The faction conflict (security force vs. bioship invasion) is communicated through possessed fighter visual corruption and environmental context (colony under attack). The game uses speed-switching and weapon selection as player-agency signals: slow speed for precision safety, fast speed for aggressive evasion; weapon choice reflects tactical stance. Difficulty modes (standard vs. 'Funny' mode) are visible through bullet density and firing rate, creating graduated threat manifestation. The setting (year 2279, planet Delia, research colony) provides narrative context but minimal on-screen political situation detail; focus remains on immediate tactical survival.",
+  "sources_used": [
+    "wikipedia - Phalanx (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:12:26.575Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3012,
+    "output_tokens": 2063,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

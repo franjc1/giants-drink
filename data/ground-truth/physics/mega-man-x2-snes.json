@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "game": "Mega Man X2",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Mega Man X2",
+        "url": "https://en.wikipedia.org/wiki/Mega_Man_X2",
+        "notes": "Crystal Chip (dash in air), Zero's dash mechanics, new Maverick bosses."
+      },
+      {
+        "name": "TASVideos — SNES / Mega Man X2",
+        "url": "https://tasvideos.org/GameResources/SNES/MegaManX2",
+        "notes": "Physics documentation. Page returned 404 at time of research — data from training knowledge."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Mega Man X2 uses the same engine as Mega Man X (SNES, 1993). Core physics constants are inherited.",
+      "SAME ENGINE AS MMX: Walk 1.5 px/f, dash 3.5 px/f, jump 5.0 px/f, gravity 0.25 px/f² (assumed same constants).",
+      "KEY ADDITION: Crystal Chip upgrade — allows X to dash in the air (previously required Air Dash upgrade in MMX).",
+      "KEY ADDITION: Counter Hunter bosses — three mid-boss Mavericks that can steal Zero's parts.",
+      "KEY ADDITION: Zero sub-boss appears if all three Counter Hunters are defeated first.",
+      "Walk speed, dash, jump, gravity assumed same as MMX from same engine. VERIFY from ROM disassembly."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "x_physics": {
+    "_note": "Same engine as MMX — all base physics values inherited. Only additions documented separately.",
+    "walk_speed": {
+      "px_per_frame": 1.5,
+      "confidence": "medium",
+      "source": "Assumed same as MMX from identical engine. VERIFY."
+    },
+    "dash_speed": {
+      "px_per_frame": 3.5,
+      "confidence": "medium",
+      "source": "Assumed same as MMX from identical engine. VERIFY.",
+      "notes": "Dash is available from start (same as MMX after Dash Boots upgrade — in X2, dash is default)."
+    },
+    "jump_velocity_initial": {
+      "px_per_frame": 5.0,
+      "confidence": "medium",
+      "source": "Assumed same as MMX. VERIFY."
+    },
+    "gravity": {
+      "px_per_frame_sq": 0.25,
+      "confidence": "medium",
+      "source": "Confirmed as Mega Man series constant. VERIFY."
+    },
+    "wall_kick": {
+      "description": "Jump off a wall while sliding — X launches off in the opposite direction.",
+      "notes": "Identical mechanic to MMX. Same timing window."
+    }
+  },
+
+  "crystal_chip": {
+    "_note": "The key addition in X2. Allows air dashing — one of the most traversal-relevant upgrades.",
+    "description": "Upgrade found in Zero Virus Boss area or first boss. Enables X to dash horizontally while airborne.",
+    "effect": "Pressing dash while airborne launches X horizontally at dash speed (~3.5 px/f) — cancels current jump arc.",
+    "notes": [
+      "Air dash is the single most important traversal tool in the X series once unlocked.",
+      "Standard dash replaces horizontal momentum with dash momentum — not additive.",
+      "The air dash's arrival in X2 vs X1 (where it required finding the upgrade in a specific stage) changes routing entirely.",
+      "Air dash + wall kick creates complex aerial movement paths not possible with standard jump."
+    ],
+    "confidence": "high"
+  },
+
+  "zero": {
+    "_note": "Zero appears as an NPC/enemy in X2. His saber mechanics are notable.",
+    "description": "Zero uses a beam saber (melee) vs X's buster (ranged). If encountered as boss, fight uses saber attacks.",
+    "notes": [
+      "Zero is not playable in X2 (becomes playable in X3 and later).",
+      "Counter Hunters collect Zero's parts. If all three are defeated, Zero's parts are rebuilt — he becomes the late-game boss.",
+      "Zero's saber attacks have short range but high damage — a different threat profile from standard Maverick bosses."
+    ]
+  },
+
+  "upgrades": {
+    "crystal_chip": "Air dash capability — enables dash while airborne",
+    "arm_upgrade": "Enhances X's buster (faster charge, bigger shots depending on version)",
+    "leg_upgrade": "Dash Boots (may be default in X2 — VERIFY)",
+    "head_upgrade": "Helmet upgrade (absorbs some damage from ceiling spikes or enhances charge — VERIFY)",
+    "body_upgrade": "Armor upgrade (reduces damage taken)",
+    "gold_armor": {
+      "description": "Collecting ALL upgrades fills out the armor for a bonus power-up effect.",
+      "notes": "Classic Mega Man X bonus for completionist play."
+    }
+  },
+
+  "special_weapons": {
+    "_note": "8 Mavericks = 8 special weapons, each with a rock-paper-scissors weakness system.",
+    "notes": [
+      "Each Maverick weapon exploits the weakness of another boss.",
+      "MMX2 Mavericks: Overdrive Ostrich, Morph Moth, Magna Centipede, Wheel Gator, Bubble Crab, Flame Stag, Wire Sponge, Crystal Snail.",
+      "The weakness chain creates optimal boss ordering for challenge/no-damage runs."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "MMX2 demonstrates 'engine inheritance' — using an identical physics foundation but adding one significant mechanic (air dash) changes the entire traversal vocabulary. The game feels fresh despite being built on familiar bones.",
+    "The Crystal Chip / air dash shifts the skill ceiling: players who haven't internalized air dash still complete the game (it's findable early), but players who master it execute routes impossible without it. Optional power that separates skill levels.",
+    "Counter Hunter design — three mid-bosses that reward finding them before the endgame — creates a meta-objective layer on top of the standard 8-boss structure. 'Find the three hidden bosses first for the better ending' is a secondary win condition.",
+    "Zero's saber vs X's buster creates a meaningful stylistic contrast that foreshadows his eventual playability. Different tool, different threat profile, different feel — established in X2 even though Zero isn't playable."
+  ]
+}

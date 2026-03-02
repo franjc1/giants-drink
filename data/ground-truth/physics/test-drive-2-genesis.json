@@ -1,0 +1,117 @@
+{
+  "game_id": "test-drive-2-genesis",
+  "game_name": "Test Drive II: The Duel",
+  "platform": "genesis",
+  "year": 1992,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Racing game; sub-pixel movement system not documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Vehicle Physics",
+      "description": "Game features multiple exotic vehicles (Porsche 959, Ferrari F40, Lamborghini Diablo in console versions) with distinct acceleration and top speed characteristics. Technical specifications for vehicles are presented including top speed, torque, and acceleration rates.",
+      "physics_values": {
+        "vehicle_dependent": true,
+        "transmission_types": [
+          "automatic",
+          "manual"
+        ],
+        "redline_mechanic": "Manual transmission vehicles can blow engine if overrevved, resulting in loss of life"
+      }
+    },
+    {
+      "name": "Police Pursuit System",
+      "description": "Police cars engage in pursuit if player exceeds speed limit. If police car passes player, player receives ticket and time penalty rather than life loss.",
+      "physics_values": {
+        "speed_limit_enforcement": true,
+        "radar_detector_available": true
+      }
+    },
+    {
+      "name": "Collision and Damage System",
+      "description": "Collisions with traffic, obstacles (trees, cliffs), and police cars result in consequences. Crashing adds 30 seconds to time and costs one life. Hitting police car ends game immediately. Off-road damage accumulates on flatland levels.",
+      "physics_values": {
+        "crash_time_penalty_seconds": 30,
+        "collision_fatal_with_police": true
+      }
+    },
+    {
+      "name": "Fuel Management",
+      "description": "Players must reach gas station before running out of fuel. Failure to refuel results in loss of life.",
+      "physics_values": {
+        "fuel_system": true,
+        "mandatory_refueling": false
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "arcade-style",
+    "high-speed",
+    "vehicle-momentum-based",
+    "consequence-driven",
+    "pursuit-evasion"
+  ],
+  "tier_notes": "Tier 3 (empirical/qualitative). This is a racing game, not a platformer or action game with character jump/gravity physics. The available Wikipedia source documents gameplay mechanics, vehicle specifications, and level design but does not provide precise numerical physics parameters. Movement is vehicle-based with manufacturer-specific attributes (top speed, torque, acceleration) rather than player character physics.",
+  "sources_used": [
+    "Wikipedia - The Duel: Test Drive II"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T09:31:01.536Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2880,
+    "output_tokens": 1093,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

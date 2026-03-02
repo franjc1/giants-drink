@@ -1,0 +1,193 @@
+{
+  "game_id": "burger-time-nes",
+  "game_name": "BurgerTime",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Anthropomorphic food creatures (Mr. Hot Dog, Mr. Pickle, Mr. Egg) moving through maze",
+      "meaning": "Immediate threat to player; contact causes loss of life"
+    },
+    {
+      "signal": "Enemy on same platform",
+      "visual_form": "Enemy food item positioned on player's current ingredient or level",
+      "meaning": "Collision imminent; player must flee or use pepper defense"
+    },
+    {
+      "signal": "Pepper depletion",
+      "visual_form": "Limited pepper shots available (starts with five)",
+      "meaning": "Defensive resource scarcity; increased vulnerability to enemy contact"
+    },
+    {
+      "signal": "Falling ingredient with enemy on it",
+      "visual_form": "Ingredient dropping while enemy stands upon it",
+      "meaning": "High-risk scenario; crushing enemy awards points but ingredient falls further"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ladder availability",
+      "visual_form": "Vertical ladder paths connecting platform levels",
+      "meaning": "Escape route; allows Peter to move vertically away from threats"
+    },
+    {
+      "signal": "Stunned enemy",
+      "visual_form": "Enemy in pepper cloud animation, briefly immobilized",
+      "meaning": "Safe passage guaranteed; Peter can move through without collision"
+    },
+    {
+      "signal": "Bonus item spawn",
+      "visual_form": "Food items (ice cream, coffee, fries) appearing in maze after ingredient drops",
+      "meaning": "Safe to collect; awards points and restores pepper ammunition"
+    },
+    {
+      "signal": "Completed burger on plate",
+      "visual_form": "Fully stacked burger ingredients resting on waiting plate below maze",
+      "meaning": "Progress toward level completion; one objective secured"
+    },
+    {
+      "signal": "Distance from enemies",
+      "visual_form": "Spatial separation between Peter and all three enemy types",
+      "meaning": "Temporary safety window; opportunity to advance objectives"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Peter Pepper - Chef)",
+      "color_identity": null,
+      "symbol_or_sigil": "Chef character sprite; controlled by player input",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Position on platforms and ladders; pepper cloud when weapon deployed"
+    },
+    {
+      "faction": "Enemy Foods (Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Three distinct enemy types: Mr. Hot Dog, Mr. Pickle, Mr. Egg",
+      "enemy_visual_variants": "Each enemy has unique visual form reflecting food type; all pursue player through maze",
+      "environmental_markers": "Wander maze paths; respawn at edges when crushed or at drop points when falling; climb back up if necessary"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Boards 1-2)",
+      "visual_manifestation": "Fewer burgers/ingredients displayed; simpler platform maze layout; three enemies present but sparse",
+      "behavioral_manifestation": "Enemies move at predictable pace; Peter has more escape routes; pepper shots sufficient for early threat management"
+    },
+    {
+      "world_state": "Mid game (Boards 3-4)",
+      "visual_manifestation": "Increased burger count; more complex labyrinthine platform arrangement; three enemies still pursuing",
+      "behavioral_manifestation": "Enemies more coordinated; Peter increasingly cornered; tactical pepper use becomes critical"
+    },
+    {
+      "world_state": "Late game (Boards 5-6)",
+      "visual_manifestation": "Maximum burger ingredients; maze designed to trap Peter; all three enemies actively hunting",
+      "behavioral_manifestation": "Enemies coordinate paths to block escape; Peter must use complex dropping strategies and enemy-crushing mechanics; significantly higher difficulty"
+    },
+    {
+      "world_state": "Ingredient falling",
+      "visual_manifestation": "Burger component drops visually through levels; collision with enemies or other ingredients on impact",
+      "behavioral_manifestation": "Enemies crushed under falling ingredient respawn at edges; if dropped with enemies on them, fall additional two levels per enemy, awarding bonus points"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "All burger ingredients stacked on waiting plate; maze clears or transitions",
+      "behavioral_manifestation": "Board advances; cycle repeats with increased difficulty; six boards form one complete cycle"
+    },
+    {
+      "world_state": "Pepper deployed",
+      "visual_manifestation": "Cloud effect emerges from Peter in facing direction",
+      "behavioral_manifestation": "Any enemy in cloud animation is stunned and immobilized; Peter gains brief safe passage window; pepper count decreases"
+    },
+    {
+      "world_state": "Game Over state",
+      "visual_manifestation": "All lives exhausted after repeated enemy contact",
+      "behavioral_manifestation": "Game ends; restart required; one life lost per undefended enemy collision"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Ingredient-as-platform mechanics",
+      "example": "Oversized burger components (bun, meat patty, tomato, lettuce, cheese) arranged vertically communicate food construction theme; player physically assembles burgers through gravity and platforming"
+    },
+    {
+      "technique": "Anthropomorphic enemy design",
+      "example": "Mr. Hot Dog, Mr. Pickle, Mr. Egg as sentient food antagonists establish whimsical food-vs-chef conflict; visual distinctness aids player threat recognition"
+    },
+    {
+      "technique": "Maze progression difficulty",
+      "example": "Platform layout becomes increasingly complex across six boards; visual density increases, trap opportunities for Peter multiply; environmental design communicates escalating challenge"
+    },
+    {
+      "technique": "Bonus food spawning",
+      "example": "Ice cream, coffee, fries appear after ingredient drop milestones; visual pop-in signals reward opportunity and resource restoration (pepper shots)"
+    },
+    {
+      "technique": "Resource depletion visualization",
+      "example": "Pepper count displayed as limited ammunition; visual feedback on each shot use; forces player to manage defensive resource strategically"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mr. Hot Dog",
+      "state": "Active pursuit",
+      "behavior": "Wanders maze autonomously; pursues Peter when proximity allows; collision causes loss of life if Peter undefended"
+    },
+    {
+      "entity": "Mr. Pickle",
+      "state": "Active pursuit",
+      "behavior": "Wanders maze autonomously; pursues Peter when proximity allows; collision causes loss of life if Peter undefended"
+    },
+    {
+      "entity": "Mr. Egg",
+      "state": "Active pursuit",
+      "behavior": "Wanders maze autonomously; pursues Peter when proximity allows; collision causes loss of life if Peter undefended"
+    },
+    {
+      "entity": "Enemy (all types)",
+      "state": "Crushed by falling ingredient",
+      "behavior": "Returns to maze after short delay; respawns at maze edges; does not climb immediately"
+    },
+    {
+      "entity": "Enemy (all types)",
+      "state": "Dropped with falling ingredient",
+      "behavior": "Falls additional two levels per enemy on ingredient; respawns at landing point; climbs back up into maze if necessary; awards bonus points"
+    },
+    {
+      "entity": "Enemy (all types)",
+      "state": "Stunned by pepper cloud",
+      "behavior": "Briefly immobilized; cannot collide with Peter; effect is temporary; resumes pursuit after stun animation ends"
+    },
+    {
+      "entity": "Peter Pepper",
+      "state": "Undefended collision",
+      "behavior": "Loses one life; respawns at starting position; game ends when all lives exhausted"
+    },
+    {
+      "entity": "Peter Pepper",
+      "state": "On falling ingredient",
+      "behavior": "Remains on ingredient as it drops; falls with component to level below"
+    },
+    {
+      "entity": "Bonus food items",
+      "state": "Spawned after ingredient milestones",
+      "behavior": "Appear in maze; grant points and extra pepper shot when collected; award bonus points to incentivize pickup"
+    }
+  ],
+  "notes": "BurgerTime employs simple but effective visual language for a 1987 NES port. The game communicates danger primarily through enemy proximity and scarcity of defensive resources (pepper). Safety signals are spatial (ladder access, distance from enemies) and temporary (stunned enemy windows). The world-state is conveyed through maze complexity increase and ingredient density rather than environmental narrative. Faction dynamics are minimal—a simple chef vs. sentient food opposition with no political dimension. Visual manifestation of game state relies heavily on sprite positioning, ingredient arrangement, and enemy behavior patterns. The paradigm is purely mechanical/ludic rather than narrative or political.",
+  "sources_used": [
+    "wikipedia - BurgerTime gameplay section",
+    "tcrf - BurgerTime NES/Famicom Disk System page"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:27:26.902Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4129,
+    "output_tokens": 2345,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

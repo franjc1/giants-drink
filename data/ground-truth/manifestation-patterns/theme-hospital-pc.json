@@ -1,0 +1,254 @@
+{
+  "game_id": "theme-hospital-pc",
+  "game_name": "Theme Hospital",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Machine malfunction/explosion",
+      "visual_form": "Equipment in specialized rooms (e.g., Inflator) becomes visually damaged or emits warning indicators when unmaintained",
+      "meaning": "Neglected maintenance creates immediate hazard; room occupants can be killed if not addressed"
+    },
+    {
+      "signal": "Patient mortality",
+      "visual_form": "Patient removal from hospital or death notification during emergency events",
+      "meaning": "Failed treatment or expired emergency time limit results in patient death, reputation damage"
+    },
+    {
+      "signal": "Epidemic outbreak",
+      "visual_form": "Rapid disease spread visualized through increasing affected patient count and potential health inspector arrival",
+      "meaning": "Uncontrolled epidemic threatens hospital reputation and financial viability; can result in fines if exposed"
+    },
+    {
+      "signal": "Rat infestation",
+      "visual_form": "Rats appear in hospital corridors and rooms, interactable by player cursor",
+      "meaning": "Environmental contamination; player must actively eliminate rats to maintain facility cleanliness"
+    },
+    {
+      "signal": "Staff dissatisfaction",
+      "visual_form": "Staff members display complaint behavior or argument indicators",
+      "meaning": "Unpaid or overworked staff will leave hospital, reducing operational capacity"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Properly maintained equipment",
+      "visual_form": "Medical machinery in rooms remains operational and functional",
+      "meaning": "Regular handyman maintenance ensures safe patient treatment and prevents explosions"
+    },
+    {
+      "signal": "Adequate facility amenities",
+      "visual_form": "Benches, fire extinguishers, plants, and staff rooms present in corridors and designated areas",
+      "meaning": "Player-provided comfort and safety infrastructure supports patient satisfaction and staff morale"
+    },
+    {
+      "signal": "Successful diagnosis/treatment completion",
+      "visual_form": "Patient progression through GP office → specialist diagnosis → treatment room → discharge",
+      "meaning": "Proper workflow and equipped rooms indicate healthy hospital operations"
+    },
+    {
+      "signal": "High reputation status",
+      "visual_form": "Reputation metric displayed and influenced by successful treatment and VIP visits",
+      "meaning": "Hospital standing affects patient flow and revenue; VIP satisfaction grants bonuses"
+    },
+    {
+      "signal": "Staff competence indicators",
+      "visual_form": "Doctor statistics visible; trained specialists assigned to appropriate rooms",
+      "meaning": "Skilled staff with proper specialization ensures quality treatment and reduces treatment failures"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Hospital",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Computer rival hospitals operated by AI opponents (named after fictional/real computers: Holly, Deep Thought, etc.)",
+      "environmental_markers": "Hospital layout, room types, and patient flow patterns reflect player design choices and operational philosophy"
+    },
+    {
+      "faction": "Healthcare Authority/Regulatory Body",
+      "color_identity": null,
+      "symbol_or_sigil": "Health Inspector",
+      "enemy_visual_variants": "Inspector appears during epidemics if disease is not contained; represents external oversight",
+      "environmental_markers": "Epidemic visible in hospital; inspector arrival signals regulatory failure and impending fines"
+    },
+    {
+      "faction": "Patient Demographics/Disease Types",
+      "color_identity": null,
+      "symbol_or_sigil": "Disease affliction visual representation (e.g., swollen head for Bloaty Head, alien appearance for Alien DNA)",
+      "enemy_visual_variants": "Comical disease manifestations distinguish patient types; some diseases represent pop culture references",
+      "environmental_markers": "Different patient types queue for different specialized rooms; visual symptoms communicate diagnostic needs"
+    },
+    {
+      "faction": "VIP/Dignitaries",
+      "color_identity": null,
+      "symbol_or_sigil": "VIP visitor designation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "VIP tour events occur; successful impression grants cash bonus or reputation increase; failed tour damages hospital standing"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game/hospital startup",
+      "visual_manifestation": "Empty hospital with basic blueprint placement; limited room types available; minimal staff and patient presence",
+      "behavioral_manifestation": "Player given time to construct facility before patient influx; basic hiring and room setup required"
+    },
+    {
+      "world_state": "Normal operations/stable conditions",
+      "visual_manifestation": "Populated hospital with functioning rooms; patient queues at GPs and treatment facilities; staff distributed across departments",
+      "behavioral_manifestation": "Patients follow diagnostic and treatment workflows; staff perform assigned duties; hospital generates revenue"
+    },
+    {
+      "world_state": "Emergency event",
+      "visual_manifestation": "Sudden influx of patients requiring immediate treatment; time-limited objective displayed; critical care demand spike",
+      "behavioral_manifestation": "Patients must be cured within deadline or die; emergency management becomes primary focus; reputation at risk"
+    },
+    {
+      "world_state": "Epidemic outbreak",
+      "visual_manifestation": "Rapid spread of single disease type throughout hospital; multiple infected patients visible; epidemic counter displayed",
+      "behavioral_manifestation": "Player can attempt to conceal outbreak by rapid treatment; health inspector arrival imminent if disease not contained; fines and reputation damage if exposed"
+    },
+    {
+      "world_state": "Maintenance neglect",
+      "visual_manifestation": "Medical equipment in specialized rooms shows damage or degradation; visual indicators of poor upkeep",
+      "behavioral_manifestation": "Unmaintained machines malfunction and explode; room occupants killed; handyman intervention required; player-controllable repair"
+    },
+    {
+      "world_state": "Low hospital reputation",
+      "visual_manifestation": "Reputation metric displays declining status; fewer patients attract to hospital; competitor hospitals gain advantage",
+      "behavioral_manifestation": "Patient flow decreases; revenue drops; recovery requires successful operations and positive events (VIP visits)"
+    },
+    {
+      "world_state": "Staff dissatisfaction/fatigue",
+      "visual_manifestation": "Staff members display argument or complaint indicators; visual indicators of low morale",
+      "behavioral_manifestation": "Staff demand pay increases; overworked staff leave hospital; reduced operational capacity without replacement hiring"
+    },
+    {
+      "world_state": "VIP visit event",
+      "visual_manifestation": "Distinguished visitor appears in hospital; tour route through facilities highlighted",
+      "behavioral_manifestation": "Player attempts to showcase hospital quality; successful impression grants bonuses; failed impression damages reputation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Disease visual manifestation as narrative",
+      "example": "Patient with 'Bloaty Head' displays visually swollen cranium; 'King Complex' patient imitates Elvis; 'Alien DNA' patient transformed into alien appearance—diseases communicate condition severity and treatment requirements through visual symptoms"
+    },
+    {
+      "technique": "Facility layout as operational philosophy",
+      "example": "Hospital layout reflects player design choices; professional vs. neglectful hospitals reveal different architectural standards and maintenance priorities through room arrangement and equipment states"
+    },
+    {
+      "technique": "Machine condition as maintenance narrative",
+      "example": "Inflator room machines deteriorate visually when unmaintained; explosion aftermath in room indicates previous neglect; visual damage progression communicates consequence of inattention"
+    },
+    {
+      "technique": "Queue behavior as system health indicator",
+      "example": "Long patient queues in corridors and at reception indicate bottlenecks in diagnosis/treatment; queue length visually communicates operational efficiency or failure"
+    },
+    {
+      "technique": "Rat presence as cleanliness/sanitation narrative",
+      "example": "Visible rat infestation in corridors represents poor facility sanitation; active rat elimination required; pest presence communicates environmental neglect"
+    },
+    {
+      "technique": "Staff positioning as workload distribution",
+      "example": "Staff visible in rooms or corridors; concentration of staff in particular areas indicates workload focus; empty rooms suggest abandonment or understaffing"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Patient",
+      "state": "Healthy/cured",
+      "behavior": "Exits hospital; contributes to satisfaction and hospital reputation; positive financial transaction"
+    },
+    {
+      "entity": "Patient",
+      "state": "Diseased/requiring diagnosis",
+      "behavior": "Queues at GP office; seeks specialized diagnosis based on suspected condition; waits for treatment assignment"
+    },
+    {
+      "entity": "Patient",
+      "state": "In treatment",
+      "behavior": "Occupies specialized treatment room; undergoes cure procedure; either recovers or dies if treatment fails or timeout expires"
+    },
+    {
+      "entity": "Patient",
+      "state": "Emergency arrival",
+      "behavior": "Appears during emergency event with time limit; must be cured before deadline or dies; increases hospital pressure"
+    },
+    {
+      "entity": "Doctor",
+      "state": "Trained/specialized",
+      "behavior": "Can operate in specialized rooms (Research, Operating Theatre); higher competency improves treatment success"
+    },
+    {
+      "entity": "Doctor",
+      "state": "Untrained/generalist",
+      "behavior": "Limited to GP office; cannot perform specialized procedures; requires training to unlock advanced rooms"
+    },
+    {
+      "entity": "Staff member (general)",
+      "state": "Satisfied/paid well",
+      "behavior": "Performs assigned duties; remains in hospital; maintains productivity"
+    },
+    {
+      "entity": "Staff member (general)",
+      "state": "Dissatisfied/underpaid",
+      "behavior": "Argues about pay; threatens to leave hospital; reduced work efficiency; leaves if demands not met"
+    },
+    {
+      "entity": "Staff member (general)",
+      "state": "Fatigued/overworked",
+      "behavior": "Takes breaks; may leave room without permission if policy allows; productivity declines"
+    },
+    {
+      "entity": "Handyman",
+      "state": "Assigned to maintenance",
+      "behavior": "Repairs and maintains medical equipment; prevents machine deterioration and explosions"
+    },
+    {
+      "entity": "Handyman",
+      "state": "Neglectful/reassigned",
+      "behavior": "Equipment in rooms deteriorates; machines malfunction and explode; room occupants killed"
+    },
+    {
+      "entity": "Receptionist",
+      "state": "Assigned to reception",
+      "behavior": "Manages patient intake; processes patient registrations; affects queue flow"
+    },
+    {
+      "entity": "Rat",
+      "state": "Infesting hospital",
+      "behavior": "Visible in corridors and rooms; actively avoids/attacks player cursor; represents sanitation failure"
+    },
+    {
+      "entity": "Health Inspector",
+      "state": "Triggered during epidemic",
+      "behavior": "Arrives if epidemic not contained; assesses hospital conditions; issues fines and reputation penalties if outbreak discovered"
+    },
+    {
+      "entity": "VIP Visitor",
+      "state": "On tour",
+      "behavior": "Tours hospital; evaluates facility quality; grants cash/reputation bonuses if impressed; damages reputation if disappointed"
+    },
+    {
+      "entity": "Computer rival hospital",
+      "state": "Competing",
+      "behavior": "Operates as independent hospital entity; competes for reputation and patients; visual indicator of competitive landscape"
+    }
+  ],
+  "notes": "Theme Hospital's manifestation layer relies heavily on visual disease representations and facility condition indicators to communicate world state. The game uses comical disease manifestations as both gameplay mechanics and narrative devices—diseases like 'Bloaty Head' are immediately recognizable through visual deformation, creating intuitive diagnostic cues. The manifestation of danger is primarily indirect: through machine degradation (visual wear), patient mortality indicators, and epidemic spread visualization. Safety is communicated through facility completeness (proper rooms, amenities, maintenance) and successful patient workflow progression. The competitive multiplayer aspect creates implicit faction dynamics through hospital rivalry, though no explicit visual faction markers exist. Environmental storytelling is achieved through queue behavior, machine condition, staff distribution, and room layout—all reflecting player decisions and operational state. The game's dark humor is evident in disease treatments and patient outcomes, which further communicates the game's satirical approach to healthcare simulation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:03:50.550Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2733,
+    "output_tokens": 3134,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

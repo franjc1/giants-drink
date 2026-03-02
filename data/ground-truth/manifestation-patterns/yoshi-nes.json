@@ -1,0 +1,177 @@
+{
+  "game_id": "yoshi-nes",
+  "game_name": "Yoshi",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Stack overflow",
+      "visual_form": "Blocks rising above black threshold line at top of play field",
+      "meaning": "Imminent game over if any stack crosses the boundary"
+    },
+    {
+      "signal": "Unmatched monster accumulation",
+      "visual_form": "Growing vertical stacks of enemy sprites in columns",
+      "meaning": "Player is losing control of field state; danger of stack overflow"
+    },
+    {
+      "signal": "Falling enemy types",
+      "visual_form": "Mario enemy sprites (Goomba, etc.) descending into columns",
+      "meaning": "Hazards entering play field that must be matched to eliminate"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Matched monster elimination",
+      "visual_form": "Two identical monster blocks colliding and disappearing",
+      "meaning": "Successful match; stack reduction and points awarded"
+    },
+    {
+      "signal": "Yoshi hatching",
+      "visual_form": "Yoshi eggshell halves joining and a Yoshi character emerging",
+      "meaning": "Safe zone creation; bonus points; larger Yoshi = more monsters encased"
+    },
+    {
+      "signal": "Cleared play field",
+      "visual_form": "Empty columns in B-Type mode after all blocks removed",
+      "meaning": "Level completion; safe progression state"
+    },
+    {
+      "signal": "Below threshold line",
+      "visual_form": "All stacks remaining below the black boundary marker",
+      "meaning": "Game state is stable; player has time to strategize"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario character sprite at bottom of play field",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Positioned below play field; controls stack swapping mechanics"
+    },
+    {
+      "faction": "Luigi (Player 2)",
+      "color_identity": null,
+      "symbol_or_sigil": "Luigi character sprite in multiplayer mode",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Operates separate play field in competitive matches"
+    },
+    {
+      "faction": "Mario Enemies (Hazards)",
+      "color_identity": null,
+      "symbol_or_sigil": "Goomba and other Mario series enemy types as falling blocks",
+      "enemy_visual_variants": "Multiple enemy types visible as distinct block sprites",
+      "environmental_markers": "Descend from top; represent uncontrolled world state"
+    },
+    {
+      "faction": "Yoshi (Ally/Reward)",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Yoshi eggshell halves; hatched Yoshi sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appear as falling collectible pieces; larger variants signal greater success"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Safe play state",
+      "visual_manifestation": "Stacks below threshold line; empty columns visible; minimal block accumulation",
+      "behavioral_manifestation": "Player has time to plan moves; falling monsters arrive at standard rate"
+    },
+    {
+      "world_state": "Escalating pressure",
+      "visual_manifestation": "Stacks growing taller; approaching black threshold line; column density increasing",
+      "behavioral_manifestation": "Block fall speed or spawn rate increases; player must act faster"
+    },
+    {
+      "world_state": "Critical state",
+      "visual_manifestation": "Multiple stacks near or at threshold line; play field filling rapidly",
+      "behavioral_manifestation": "Game over imminent; no margin for error; limited strategic options"
+    },
+    {
+      "world_state": "Match success (elimination)",
+      "visual_manifestation": "Blocks flash/disappear on collision; stacks reduce in height; points appear on screen",
+      "behavioral_manifestation": "Field pressure momentarily decreases; player gains breathing room"
+    },
+    {
+      "world_state": "Yoshi hatching (bonus state)",
+      "visual_manifestation": "Eggshell halves join together; Yoshi sprite emerges; size varies by encased monsters",
+      "behavioral_manifestation": "Large bonus point multiplier applied; psychological reward for successful play"
+    },
+    {
+      "world_state": "Level completion (B-Type)",
+      "visual_manifestation": "All columns empty; play field clear; transition to next level screen",
+      "behavioral_manifestation": "Progression unlocked; initial block count increases in subsequent level"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Threshold boundary (black line)",
+      "example": "The horizontal line at top of play field serves as visual defeat condition marker; no narrative needed—the line IS the danger"
+    },
+    {
+      "technique": "Enemy type as resource signal",
+      "example": "Specific Mario enemy sprites signal which blocks are needed for matching; visual language allows instant puzzle recognition without UI text"
+    },
+    {
+      "technique": "Stack height as difficulty feedback",
+      "example": "Visual tower growth communicates player performance; tall stacks = poor management; shrinking stacks = recovery"
+    },
+    {
+      "technique": "Yoshi size variance",
+      "example": "Hatched Yoshi sprite size increases with number of monsters encased; visual reward scales with skill/success"
+    },
+    {
+      "technique": "Column separation",
+      "example": "Four distinct columns visualize puzzle constraint; player must mentally model state of each column independently"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Falling monster blocks",
+      "state": "Descending",
+      "behavior": "Move downward continuously; land in assigned column; convert to static block on contact with stack"
+    },
+    {
+      "entity": "Yoshi eggshell halves",
+      "state": "Incomplete",
+      "behavior": "Bottom half acts like matching block (disappears on contact with identical half); top half seeks bottom half"
+    },
+    {
+      "entity": "Yoshi eggshell halves",
+      "state": "Complete (joined)",
+      "behavior": "Hatches into Yoshi; encases all monsters between halves; disappears from field; generates bonus"
+    },
+    {
+      "entity": "Mario (player controller)",
+      "state": "Active",
+      "behavior": "Swaps adjacent stacks horizontally; responds to player input; position below field indicates control authority"
+    },
+    {
+      "entity": "Stack blocks",
+      "state": "Matched",
+      "behavior": "Vanish on collision with falling identical block; trigger cascade if gravity rules apply"
+    },
+    {
+      "entity": "Stack blocks",
+      "state": "Unmatched",
+      "behavior": "Persist in place; accumulate height; contribute to overflow risk"
+    }
+  ],
+  "notes": "Yoshi (NES, 1992) is a falling-block puzzle game with minimal narrative framing. All world-state communication occurs through block mechanics, visual stacking, and threshold-based danger signaling. The game uses pure abstraction—enemy sprites represent abstract blocks that must match. Yoshi hatching is the sole 'reward' visual distinct from elimination. No faction narrative exists; the game is mechanically rather than narratively driven. Regional title variations (Yoshi no Tamago / Yoshi / Mario & Yoshi) suggest emphasis shifts in localization but do not reflect in-game world-state manifestation. Unused graphics suggest shadow effects were considered for menu clarity but removed.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:42:54.948Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4406,
+    "output_tokens": 1990,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

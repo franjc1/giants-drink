@@ -1,0 +1,133 @@
+{
+  "game_id": "paperboy-nes",
+  "game_name": "Paperboy",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": 7,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Bicycle control & paper throwing",
+      "first_appears": "Training Course (intro)",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns steering and aim before live delivery route"
+    },
+    {
+      "element": "Subscriber houses (marked bright colors)",
+      "first_appears": "Monday route",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary objective; 10 of 20 houses are subscribers at start"
+    },
+    {
+      "element": "Non-subscriber houses",
+      "first_appears": "Monday route",
+      "introduction_context": "moderate",
+      "mastery_context": "Bonus points for property damage; optional destructive play"
+    },
+    {
+      "element": "Moving obstacles (cars, skateboarders)",
+      "first_appears": "Monday route",
+      "introduction_context": "dangerous",
+      "mastery_context": "Collision causes life loss; requires evasive steering"
+    },
+    {
+      "element": "Rolling tires & environmental hazards",
+      "first_appears": "Monday route",
+      "introduction_context": "dangerous",
+      "mastery_context": "Additional obstacles increasing route complexity"
+    },
+    {
+      "element": "Paper bundle pickups",
+      "first_appears": "Monday route",
+      "introduction_context": "moderate",
+      "mastery_context": "Resource management; must restock limited paper supply mid-route"
+    },
+    {
+      "element": "Training course (post-route)",
+      "first_appears": "After Monday delivery",
+      "introduction_context": "moderate",
+      "mastery_context": "Unlimited papers; targets and ramps for skill-based bonus points"
+    },
+    {
+      "element": "Subscription system (gain/loss)",
+      "first_appears": "End of Monday",
+      "introduction_context": "moderate",
+      "mastery_context": "Perfect deliveries add subscribers; damage/misses cancel subscriptions"
+    },
+    {
+      "element": "Progressive difficulty (Monday-Sunday)",
+      "first_appears": "Level progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Sunday papers are heavier, throw slower; increased obstacle density"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Completing delivery to subscriber house",
+      "Entering training course (safe zone, unlimited papers)",
+      "Advancing to next day/level",
+      "Picking up paper bundle to restore ammo"
+    ],
+    "typical_tension_triggers": [
+      "Approaching moving obstacle (car, skateboarder)",
+      "Running low on paper supply",
+      "Missed subscriber delivery (subscription loss)",
+      "Multiple obstacles in tight sequence",
+      "Sunday level (heavier papers, slower throws)"
+    ],
+    "pacing_descriptor": "Rhythmic stop-and-go: tension builds through obstacle-laden route delivery, releases during training course bonus phase; cycle repeats daily with increasing difficulty"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Non-subscriber houses marked with duller colors; optional destruction for bonus points signals alternative play style",
+    "secret_convention": "Press B while throwing newspaper (Japanese version memo); effect unclear but suggests hidden bonus mechanic",
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Monday-Tuesday: sparse obstacles, manageable subscriber count (10 houses), high paper availability; player learns core rhythm",
+    "mid_game": "Wednesday-Friday: increased obstacle density, traffic patterns become unpredictable, subscriber loss risk rises; mastery of steering required",
+    "late_game": "Saturday-Sunday: maximum obstacles, heavier papers reduce throw speed/distance, minimal margin for error; endurance test"
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Daily Route + Training Course Duality",
+      "description": "Each level (Monday-Sunday) consists of two phases: dangerous delivery route (tension) followed by safe training course with targets/ramps (relief). Training course provides skill expression and bonus economy separate from delivery stress.",
+      "example_level": "Monday (tutorial difficulty establishes pattern for all 7 days)"
+    },
+    {
+      "pattern_name": "Subscription Economy Gate",
+      "description": "Subscriber count caps at 10 and can only decrease or increase by 1 per level. This creates a feedback loop: early perfection adds subscribers, increasing future route complexity; failures cascade into subscription loss and game-over condition.",
+      "example_level": "Across all levels"
+    },
+    {
+      "pattern_name": "Progressive Weight Mechanic (Sunday Specificity)",
+      "description": "Only Sunday introduces mechanical change (heavier papers = slower throws). This single late-game twist recontextualizes all prior skill mastery, forcing timing adjustment in final route.",
+      "example_level": "Sunday (Day 7)"
+    },
+    {
+      "pattern_name": "Oblique Projection Navigation",
+      "description": "Isometric-style view creates depth ambiguity; steering must account for forward/backward and left/right simultaneously. Spatial grammar reinforces that collision avoidance requires 2D thinking, not purely lateral dodge patterns.",
+      "example_level": "All routes"
+    }
+  ],
+  "sources_used": [
+    "The Cutting Room Floor - Paperboy (NES)",
+    "Wikipedia - Paperboy (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:51:24.331Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4928,
+    "output_tokens": 1614,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

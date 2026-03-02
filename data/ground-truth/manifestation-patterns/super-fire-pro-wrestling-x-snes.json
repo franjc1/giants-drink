@@ -1,0 +1,151 @@
+{
+  "game_id": "super-fire-pro-wrestling-x-snes",
+  "game_name": "Super Fire Pro Wrestling X Premium",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Opponent damage state",
+      "visual_form": "Sprite animation changes, knockdown states, visual impact effects",
+      "meaning": "Opponent is taking damage and losing match advantage"
+    },
+    {
+      "signal": "Match hazard activation",
+      "visual_form": "Environmental changes in hardcore match types (cage appearance, barbed wire visuals, electrical effects)",
+      "meaning": "Match conditions have become more dangerous; standard wrestling rules suspended"
+    },
+    {
+      "signal": "Wrestler vulnerability window",
+      "visual_form": "Opponent in downed or stunned animation state",
+      "meaning": "Player has opportunity to execute damaging move; window-based danger for opponent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Match control",
+      "visual_form": "Player character standing, opponent knocked down or in recovery animation",
+      "meaning": "Player has tactical advantage and can dictate match pace"
+    },
+    {
+      "signal": "Referee presence",
+      "visual_form": "Referee visible in ring during standard match types",
+      "meaning": "Match rules are being enforced; extreme tactics penalized"
+    },
+    {
+      "signal": "Recovery animation",
+      "visual_form": "Opponent rising from canvas, regaining stance",
+      "meaning": "Opponent is recovering; window of vulnerability closing"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Wrestling Style (North American WWE-style)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Character move-set and wrestler likenesses differentiate style; strong-style wrestlers use different animation sets than sports-entertainment wrestlers",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Wrestling Style (Mexican Lucha Libre)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "High-flying move animations, mask designs, agility-focused sprite behavior differentiate from other styles",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Wrestling Style (Japanese Puroresu - Strong Style)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Stiff strike animations, submission hold emphasis, realistic damage accumulation in CPU behavior",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Wrestling Style (Hardcore/Extreme)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Brawling animations, use of foreign objects, high-impact move sets visually distinct from technical wrestlers",
+      "environmental_markers": "Match environment includes hazards (cages, barbed wire, electrical effects)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Standard Wrestling Match",
+      "visual_manifestation": "Ring with standard ropes and padded corners; referee present in neutral position; clean canvas",
+      "behavioral_manifestation": "Wrestlers follow technical grappling rules; referee enforces regulations; count-outs and disqualifications possible"
+    },
+    {
+      "world_state": "Hardcore Match (Landmine Death Match, Electric Barbed Wire Cage)",
+      "visual_manifestation": "Ring enclosed or modified with visible hazards; cage structures, barbed wire, or electrical effects rendered; referee may be absent or non-intervening",
+      "behavioral_manifestation": "Extreme moves enabled; standard rules suspended; wrestlers use environment as weapon; no disqualifications"
+    },
+    {
+      "world_state": "Tag Team Match",
+      "visual_manifestation": "Two wrestlers per team positioned at corners; tag rope visible; corner posts may be color-coded or otherwise distinguished",
+      "behavioral_manifestation": "Tag mechanics enforced; legal wrestler restricted; partners wait outside ring; tag rules affect match flow"
+    },
+    {
+      "world_state": "Combat Sports Match (non-wrestling)",
+      "visual_manifestation": "Different ring/arena setup; combat-specific visual styling",
+      "behavioral_manifestation": "Combat sports rules override wrestling rules; move-sets emphasize striking or alternative grappling"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Wrestler likenesses and naming conventions",
+      "example": "Real-life wrestlers represented under different names due to licensing constraints; visual character design communicates wrestler identity to knowledgeable players despite name changes"
+    },
+    {
+      "technique": "Attire and aesthetic customization",
+      "example": "Ring attire, costume design, and physical characteristics convey wrestler character and promotion affiliation through visual design rather than explicit labels"
+    },
+    {
+      "technique": "Match type environmental design",
+      "example": "Hardcore match environments (cages, barbed wire, electrical hazards) communicate that standard wrestling rules have been abandoned without explicit UI notification"
+    },
+    {
+      "technique": "Move-set animation as characterization",
+      "example": "Signature move animations and wrestling style visual differences communicate wrestler nationality/promotion style (lucha-libre high-flying vs. Japanese strong-style stiff strikes)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Opponent wrestler (CPU-controlled)",
+      "state": "Healthy/match control",
+      "behavior": "Aggressive move execution, varied move-set usage, strategic positioning"
+    },
+    {
+      "entity": "Opponent wrestler (CPU-controlled)",
+      "state": "Damaged/losing",
+      "behavior": "Limited move-set, reactive rather than initiative-taking, extended recovery times, defensive posturing"
+    },
+    {
+      "entity": "Opponent wrestler (CPU-controlled)",
+      "state": "Near-defeat",
+      "behavior": "Desperation moves, high-risk tactics, animation sequences indicating fatigue"
+    },
+    {
+      "entity": "Referee",
+      "state": "Active (standard match)",
+      "behavior": "Visible in ring, enforces rules, counts knockdowns, initiates disqualifications"
+    },
+    {
+      "entity": "Referee",
+      "state": "Inactive/absent (hardcore match)",
+      "behavior": "Removed from match area or non-intervening; rule enforcement disabled"
+    }
+  ],
+  "notes": "Super Fire Pro Wrestling X Premium (1996) communicates world-state primarily through match-type environmental design and wrestler behavioral/aesthetic differentiation rather than explicit UI elements. The game's political/factional landscape is represented implicitly through wrestling style variations (North American, Mexican, Japanese strong-style, hardcore) without explicit faction labeling. Danger and match control are communicated through sprite animation states (knockdown, recovery, stunning), opponent positioning, and CPU behavior intensity. The absence of licensed promotion names creates a 'nameless world' where visual design and move-set become the primary communication vectors for character identity and wrestling style affiliation. Wikipedia source provided limited specific visual detail for SNES iteration; analysis based on series-level documentation of Fire Pro Wrestling design philosophy applied to this title.",
+  "sources_used": [
+    "wikipedia - Fire Pro Wrestling (series overview, design features, match types, edit mode documentation)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:16:48.537Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2415,
+    "output_tokens": 1915,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

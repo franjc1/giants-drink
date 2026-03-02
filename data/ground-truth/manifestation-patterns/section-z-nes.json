@@ -1,0 +1,178 @@
+{
+  "game_id": "section-z-nes",
+  "game_name": "Section Z",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy fire",
+      "visual_form": "Projectiles from alien entities",
+      "meaning": "Immediate threat to player; causes damage and energy depletion"
+    },
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Collision with alien creatures/robots",
+      "meaning": "Direct damage; loss of life if energy is depleted"
+    },
+    {
+      "signal": "Sealed transporters",
+      "visual_form": "Transporter doors that cannot be opened",
+      "meaning": "Blocked paths; attempting entry kills the player until condition is met"
+    },
+    {
+      "signal": "Energy depletion visual indicator",
+      "visual_form": "Numeral energy indicator decreasing",
+      "meaning": "Progressive danger state; when depleted fully, player reset to stage start"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large enemy entities at end of stages",
+      "meaning": "Critical threat; major challenge requiring weapons/items to defeat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up items (S, P, B letters)",
+      "visual_form": "Dome-shaped containers with letter designations",
+      "meaning": "Beneficial pickups; S increases mobility, P increases firing power, B gives bonus points"
+    },
+    {
+      "signal": "Weapon upgrades",
+      "visual_form": "Flash Buster, Megasmasher, Mega Buster variants",
+      "meaning": "Enhanced offensive capability; progression through weapon tiers"
+    },
+    {
+      "signal": "Barrier Shield",
+      "visual_form": "Protective item pickup",
+      "meaning": "Temporary invulnerability; absorbs 32 shots before depleting"
+    },
+    {
+      "signal": "Available transporters",
+      "visual_form": "Open transporter doors",
+      "meaning": "Safe passage; allows navigation to different sections"
+    },
+    {
+      "signal": "Special transmission shells",
+      "visual_form": "Mega Missile, Flash Bomb, Crush Ball items",
+      "meaning": "Tactical advantage; activated by pressing both buttons simultaneously at cost of 4 energy points"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Human Astronaut/Captain Commando)",
+      "color_identity": null,
+      "symbol_or_sigil": "Space ranger character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Laser rifle and weapon upgrades; appears within space station corridors"
+    },
+    {
+      "faction": "Balangool (Alien Empire)",
+      "color_identity": null,
+      "symbol_or_sigil": "L Brain final boss; various alien creature designs",
+      "enemy_visual_variants": "Multiple enemy types throughout space station; boss entities at stage conclusions",
+      "environmental_markers": "Space station structure itself as base of operations; alien architecture; dome-shaped power generators"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (Stage 1, 2, 3)",
+      "visual_manifestation": "Section numbering (00-19, 20-39, 40-59); environmental design changes between sections",
+      "behavioral_manifestation": "Difficulty escalation; new enemy types; boss patterns intensify across stages"
+    },
+    {
+      "world_state": "Power generators active",
+      "visual_manifestation": "Generators present in specific sections; likely visually distinct mechanical structures",
+      "behavioral_manifestation": "Blocking access to final section; must be destroyed to open path; destroying them increases max energy"
+    },
+    {
+      "world_state": "Power generators destroyed",
+      "visual_manifestation": "Generator sections transformed after destruction",
+      "behavioral_manifestation": "Path to final boss section (19, 39, 59) opens; player energy capacity increases"
+    },
+    {
+      "world_state": "Player low energy",
+      "visual_manifestation": "Energy indicator numeral showing depletion",
+      "behavioral_manifestation": "Higher death risk; one-hit death without energy buffer; visual tension indicator"
+    },
+    {
+      "world_state": "Energy fully depleted",
+      "visual_manifestation": "Energy counter at zero",
+      "behavioral_manifestation": "Automatic stage reset; player returns to beginning of current stage with full energy"
+    },
+    {
+      "world_state": "Outer perimeter vs. interior base",
+      "visual_manifestation": "Section 00 (perimeter) distinct from Section 01+ (interior corridors)",
+      "behavioral_manifestation": "Gameplay progression from outside to inside space station; narrative space infiltration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Space station architecture as faction identity",
+      "example": "Alien-designed corridors, sections labeled numerically, dome-shaped power generators reflect Balangool technological aesthetic"
+    },
+    {
+      "technique": "Transporter network as world logic",
+      "example": "Two transporter choices per section create branching paths; some transporters blocked until conditions met—implies base control systems and locked areas"
+    },
+    {
+      "technique": "Mission objective communication",
+      "example": "Destruction of power generators per stage communicates sabotage mission structure; final boss 'L Brain' implies central command entity"
+    },
+    {
+      "technique": "Progressive infiltration through section design",
+      "example": "Starting at Section 00 (outside), progressing inward to Section 01+ communicates deep infiltration of enemy base; spatial progression mirrors narrative progress"
+    },
+    {
+      "technique": "Energy system as resource scarcity worldbuilding",
+      "example": "Gradual energy depletion from combat and damage reflects hostile environment; energy recovery through safe item pickups implies resource management tension"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Alien enemies",
+      "state": "Active/patrolling",
+      "behavior": "Fire projectiles at player; varied movement patterns; present threat throughout sections"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Confrontation",
+      "behavior": "Appear at end of each stage; employ distinct attack patterns; require upgraded weapons to defeat efficiently"
+    },
+    {
+      "entity": "Power generators",
+      "state": "Operational/Intact",
+      "behavior": "Block access to final stage section; remain stationary targets; can be destroyed by player fire"
+    },
+    {
+      "entity": "Sealed transporters",
+      "state": "Locked",
+      "behavior": "Cannot be entered; kill player on contact; become accessible after specific condition fulfillment"
+    },
+    {
+      "entity": "Player character",
+      "state": "Healthy (high energy)",
+      "behavior": "Full mobility; can sustain multiple hits; can engage enemies aggressively"
+    },
+    {
+      "entity": "Player character",
+      "state": "Damaged (low energy)",
+      "behavior": "Increased vulnerability; one-hit-death risk; behavioral necessity for caution and avoidance"
+    }
+  ],
+  "notes": "Section Z NES uses spatial infiltration narrative (astronaut destroying alien space station). Danger/safety signals rely heavily on resource management (energy depletion mechanic) and enemy encounter design rather than environmental hazards. World-state communication is minimal in available sources but inferred from gameplay structure (stage progression, power generator objectives, transporter logic). Faction distinction is asymmetric: player is solo infiltrator vs. distributed Balangool empire (multiple enemy types, centralized L Brain boss). Visual communication appears sprite-based and minimal per NES technical constraints; meaning conveyed through mechanic-to-visual mapping (generator destruction = path opening) rather than detailed environmental storytelling.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:20:25.669Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4366,
+    "output_tokens": 2008,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "game_id": "formation-z-nes",
+  "game_name": "Formation Z",
+  "platform": "nes",
+  "year": 1985,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented for NES port"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Robot-to-Jet Transformation",
+      "description": "Player controls robot Ixpel that can transform into jet fighter. Robot can move forwards, backwards, and jump on ground. Jet can travel anywhere on screen with limited fuel consumption.",
+      "physics_values": {
+        "fuel_capacity": "100 units",
+        "fuel_consumption_rate": "decreases while in jet mode",
+        "jet_altitude_restrictions": "cannot revert to robot when flying too high; must be within allowed altitude zone"
+      }
+    },
+    {
+      "name": "Jump Mechanics",
+      "description": "Jump button pressed while moving joystick up initiates transformation from robot to jet. Robot can jump to transition between ground and air states.",
+      "physics_values": {
+        "transformation_input": "jump button + up joystick",
+        "reversion_input": "jump button + down joystick during flight",
+        "vulnerability_during_transformation": "player cannot shoot while transforming"
+      }
+    },
+    {
+      "name": "Jet Flight Physics",
+      "description": "Jet consumes fuel to stay airborne. Fuel must be constantly replenished by collecting white electric spheres. Jet crashes if fuel depletes and altitude is too low over ground or over water.",
+      "physics_values": {
+        "crash_condition_land": "fuel depletion at low altitude over ground",
+        "crash_condition_water": "any altitude over ocean when fuel depleted or forced descent",
+        "fuel_restoration": "collect ground-based fuel items",
+        "directional_fire": "can shoot front, diagonal up and down in direction jet moves"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "mode-switching",
+    "resource-management",
+    "commitment-based",
+    "spatial-puzzle"
+  ],
+  "tier_notes": "Tier 3: Empirical/Qualitative. Source is Wikipedia gameplay description with no quantitative physics values provided. Game is primarily a horizontal scrolling shooter (shmup) with unusual dual-mode mechanics. Specific movement speeds, gravity values, and sub-pixel data not documented in available source.",
+  "sources_used": [
+    "Wikipedia - Formation Z article (Gameplay section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:02:37.854Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3060,
+    "output_tokens": 966,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

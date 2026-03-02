@@ -1,0 +1,156 @@
+{
+  "game_id": "clu-clu-land-nes",
+  "game_name": "Clu Clu Land",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Unira enemy presence",
+      "visual_form": "Blue sea urchin sprite with spiky appearance",
+      "meaning": "Immediate threat to player; contact causes damage and loss of life"
+    },
+    {
+      "signal": "Black Holes",
+      "visual_form": "Dark vortex/void spatial anomalies in maze",
+      "meaning": "Environmental hazard; falling into black holes results in instant life loss"
+    },
+    {
+      "signal": "Time depletion",
+      "visual_form": "Countdown timer visual element",
+      "meaning": "Temporal pressure; running out of time ends the stage and causes life loss"
+    },
+    {
+      "signal": "Stunned Unira color change",
+      "visual_form": "Unira sprite undergoes visual state change after Sound Wave attack",
+      "meaning": "Brief vulnerability window; stunned enemies can be pushed into walls for points"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Turning Posts",
+      "visual_form": "Pole/post markers distributed throughout maze layout",
+      "meaning": "Navigation anchor points; only mechanism for Bubbles to change direction safely"
+    },
+    {
+      "signal": "Golden Ingots (uncovered)",
+      "visual_form": "Shiny golden treasure shapes (heart or mushroom silhouettes)",
+      "meaning": "Objective completion; revealed ingots represent progress and safe puzzle solution"
+    },
+    {
+      "signal": "Sound Wave activation",
+      "visual_form": "Wave effect emanating from Bubbles character",
+      "meaning": "Temporary protection mechanic; stuns enemies and enables offensive repositioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Bubbles (Player)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Balloonfish/female character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in all maze stages; player-controlled protagonist seeking treasure recovery"
+    },
+    {
+      "faction": "Unira (Antagonist)",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Sea urchin spike pattern; distinctive spiky silhouette",
+      "enemy_visual_variants": "Boss Unira variant exists in arcade expanded edition (VS. Clu Clu Land)",
+      "environmental_markers": "Roaming patrol entities within maze; narrative role as treasure thief"
+    },
+    {
+      "faction": "Clu Clu Land Kingdom (Setting)",
+      "color_identity": null,
+      "symbol_or_sigil": "Golden ingots shaped as hearts and mushrooms",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Underwater kingdom aesthetic; maze-enclosed arenas; treasure distribution patterns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Ingot uncovered state (odd pass threshold not met)",
+      "visual_manifestation": "Ingots display dull/obscured appearance; appear as puzzle outline",
+      "behavioral_manifestation": "Player must traverse over ingots multiple times (odd number) to toggle reveal state; mechanical puzzle tension"
+    },
+    {
+      "world_state": "Ingot fully revealed",
+      "visual_manifestation": "Golden ingot transforms to bright, shiny appearance",
+      "behavioral_manifestation": "Stage progress indicator; contributes to level completion condition"
+    },
+    {
+      "world_state": "Enemy defeated/removed",
+      "visual_manifestation": "Unira disappears from maze after wall collision",
+      "behavioral_manifestation": "Threat eliminated from current arena; point reward granted to player"
+    },
+    {
+      "world_state": "Stage cleared",
+      "visual_manifestation": "Flashing effect occurs (later Switch Online version slows this effect)",
+      "behavioral_manifestation": "Transition trigger; advances to next puzzle level"
+    },
+    {
+      "world_state": "Game Over condition",
+      "visual_manifestation": "All lives depleted visual feedback",
+      "behavioral_manifestation": "Game loop reset; player returns to stage selection or restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Treasure shape narrative",
+      "example": "Golden ingots form recognizable shapes (hearts, mushrooms) that reveal progressive picture patterns, embedding puzzle solution within environmental visual design"
+    },
+    {
+      "technique": "Maze architecture as constraint",
+      "example": "Turning Posts force specific navigation paths, encoding the puzzle logic into physical maze layout rather than explicit instructions"
+    },
+    {
+      "technique": "Color-coded threat identification",
+      "example": "Blue Unira visually distinct from red Bubbles and golden treasures; establishes visual hierarchy of threat vs. objective"
+    },
+    {
+      "technique": "Underwater kingdom aesthetic",
+      "example": "Balloonfish protagonist and sea urchin antagonist establish cohesive aquatic setting; environmental theme reinforces narrative context of undersea treasure theft"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bubbles",
+      "state": "Normal movement",
+      "behavior": "Continuous rotation around turning posts; momentum-based navigation requiring player input at specific pole locations"
+    },
+    {
+      "entity": "Bubbles",
+      "state": "Damaged",
+      "behavior": "Life counter decrements; visual feedback (sprite disruption) indicates collision with Unira or Black Hole"
+    },
+    {
+      "entity": "Unira",
+      "state": "Patrolling",
+      "behavior": "Active movement through maze; poses constant threat; forces player evasion routing"
+    },
+    {
+      "entity": "Unira",
+      "state": "Stunned (post-Sound Wave)",
+      "behavior": "Temporary immobilization; becomes pushable into walls by Bubbles; visual state change indicates vulnerability window"
+    },
+    {
+      "entity": "Unira",
+      "state": "Defeated",
+      "behavior": "Removed from play space; point reward triggers; reduces active threats in arena"
+    }
+  ],
+  "notes": "Clu Clu Land employs minimal but effective visual communication suited to puzzle paradigm. Primary danger signal is enemy color contrast (blue vs. red); safety derives from structural navigation anchors (posts). World state transitions are marked by visual effects (flashing on clear, ingot appearance toggle). The game lacks traditional faction politics but establishes clear antagonism through character roles and narrative framing (Unira as thief, Bubbles as hero). Environmental storytelling is subtle—embedded in maze structure and treasure shape progression rather than explicit environmental markers. Boss Unira variant in arcade edition provides difficulty scaling visual indicator.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Clu Clu Land NES article)",
+    "wikipedia (Clu Clu Land - Gameplay and Ports sections)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:48:59.899Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4279,
+    "output_tokens": 1787,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

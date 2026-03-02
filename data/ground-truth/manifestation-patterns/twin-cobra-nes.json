@@ -1,0 +1,154 @@
+{
+  "game_id": "twin-cobra-nes",
+  "game_name": "Twin Cobra",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bullet patterns fired from tanks, battleships, artillery, and aircraft",
+      "meaning": "Immediate threat requiring evasion; denser patterns indicate higher difficulty/danger state"
+    },
+    {
+      "signal": "Enemy vehicle presence",
+      "visual_form": "Military vehicles (tanks, battleships, artillery) scrolling toward player",
+      "meaning": "Active combat zone; collision or proximity indicates danger"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large, distinct military unit appearing at stage end; unique visual design vs. regular enemies",
+      "meaning": "Critical threat requiring focused engagement; stage-gating hazard"
+    },
+    {
+      "signal": "Firepower reduction",
+      "visual_form": "Visual downgrade of weapon capability after player hit",
+      "meaning": "Vulnerability state; player has diminished combat capacity"
+    },
+    {
+      "signal": "Life loss",
+      "visual_form": "Helicopter explosion animation",
+      "meaning": "Failure state; resource depletion toward game over"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Helipad",
+      "visual_form": "Landing zone marking end of scrolling segment",
+      "meaning": "Safe checkpoint; level progression milestone; momentary pause in threat"
+    },
+    {
+      "signal": "Power-up icons",
+      "visual_form": "Color-changing items (red, blue, green, yellow), 'S' icons, 'B' icons, gold star medals",
+      "meaning": "Resource restoration; weapon enhancement; capability increase; score bonus"
+    },
+    {
+      "signal": "1-up items",
+      "visual_form": "Extra life pickup scattered through levels",
+      "meaning": "Life restoration; extended survival capacity; buffer against failure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Allied/Protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Attack helicopter",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled aircraft at bottom of screen; helipad landing zones"
+    },
+    {
+      "faction": "Enemy Military Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Military vehicles (tanks, battleships, artillery, aircraft)",
+      "enemy_visual_variants": "Multiple vehicle types with distinct silhouettes; boss units with unique, larger designs",
+      "environmental_markers": "Scrolling terrain with military infrastructure; deployment positions throughout vertical space"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage (low difficulty)",
+      "visual_manifestation": "Sparse enemy deployment; standard bullet patterns; basic military vehicles",
+      "behavioral_manifestation": "Enemies fire predictable, widely-spaced projectiles; lower density of threats"
+    },
+    {
+      "world_state": "Late stage (high difficulty)",
+      "visual_manifestation": "Dense enemy concentration; complex bullet patterns; advanced military units",
+      "behavioral_manifestation": "Enemies fire denser bullet patterns; increased firepower and aggression"
+    },
+    {
+      "world_state": "Second loop (repeat playthrough)",
+      "visual_manifestation": "Same stage structure but intensified visual density of enemies and projectiles",
+      "behavioral_manifestation": "Enemies fire significantly denser bullet patterns; heightened difficulty scaling"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Large, distinct military unit with unique visual design; screen-filling presence",
+      "behavioral_manifestation": "Boss-specific attack patterns; stage-gating behavior requiring defeat to progress"
+    },
+    {
+      "world_state": "Post-hit vulnerability",
+      "visual_manifestation": "Downgraded weapon appearance (reduced visual weapon effect/scope)",
+      "behavioral_manifestation": "Player firepower reset to base level; reduced damage output against enemies"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Military vehicle progression",
+      "example": "Early stages feature tanks and light vehicles; later stages introduce battleships and advanced artillery, establishing escalation of enemy capability and world-state danger"
+    },
+    {
+      "technique": "Terrain variation",
+      "example": "Scrolling backgrounds feature different landscape types (land, water, structures) associated with each of ten stages, visually contextualizing military campaign progression"
+    },
+    {
+      "technique": "Boss unit design",
+      "example": "Each stage boss has distinct, oversized visual design compared to regular enemies, signaling narrative/mechanical importance and difficulty spike"
+    },
+    {
+      "technique": "Checkpoint/respawn mechanic differences",
+      "visual_manifestation": "Regional versions manifest player death recovery differently; Japanese version respawns ahead, US version respawns at death location—communicating different design intent for risk/recovery tension"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player helicopter",
+      "state": "Hit during boss fight (Japanese version)",
+      "behavior": "Aircraft moves forward during explosion animation, respawning slightly ahead of death location"
+    },
+    {
+      "entity": "Player helicopter",
+      "state": "Hit during boss fight (US version)",
+      "behavior": "Aircraft stays in place during explosion, respawning at exact death location"
+    },
+    {
+      "entity": "Enemy vehicles (generic)",
+      "state": "Active deployment",
+      "behavior": "Scroll toward player while firing projectiles in patterns; destroyed when struck by player weapons"
+    },
+    {
+      "entity": "Boss units",
+      "state": "Encountered at stage end",
+      "behavior": "Engage in sustained combat with unique attack patterns; must be defeated to unlock helipad and stage progression"
+    },
+    {
+      "entity": "Weapon power-ups",
+      "state": "Deployed from enemy carriers",
+      "behavior": "Appear as color-coded items (red, blue, green, yellow); collected to switch between four distinct weapon types"
+    }
+  ],
+  "notes": "Twin Cobra is a military-themed vertical shooter with minimal narrative; world-state is communicated entirely through enemy density, bullet patterns, environmental scrolling, and mechanical difficulty scaling. No faction politics or ideological conflict is present—the game is purely combat-focused. Regional differences (Japanese checkpoint vs. US respawn system) represent design philosophy variance in difficulty/pacing rather than thematic differences. The game lacks dialogue, text narrative, or explicit world-building beyond the military setting. Power-up color-coding (red, blue, green, yellow weapons) provides mechanical communication of upgrades but no faction or political signification.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Twin Cobra NES)",
+    "wikipedia (Twin Cobra)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:15:21.333Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4110,
+    "output_tokens": 1743,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

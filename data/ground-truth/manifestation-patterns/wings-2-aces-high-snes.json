@@ -1,0 +1,131 @@
+{
+  "game_id": "wings-2-aces-high-snes",
+  "game_name": "Wings 2: Aces High",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft approach",
+      "visual_form": "Sprites moving toward player from screen edges",
+      "meaning": "Combat threat; evasion or engagement required"
+    },
+    {
+      "signal": "Red/orange explosions",
+      "visual_form": "Sprite-based explosion animations",
+      "meaning": "Collision damage or enemy destruction"
+    },
+    {
+      "signal": "Flak bursts",
+      "visual_form": "Anti-aircraft projectile patterns filling airspace",
+      "meaning": "Environmental hazard from ground defenses"
+    },
+    {
+      "signal": "Screen shake on impact",
+      "visual_form": "Brief camera displacement during collision",
+      "meaning": "Player aircraft damage or near-miss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear airspace",
+      "visual_form": "Empty sky with no enemy sprites or projectiles",
+      "meaning": "Safe zone; opportunity to recover or reposition"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Distinct collectible sprites (likely colored differently than threats)",
+      "meaning": "Enhancement opportunity; safe to approach"
+    },
+    {
+      "signal": "Friendly airfield/base visual",
+      "visual_form": "Terrain or structure markers on ground layer",
+      "meaning": "Objective location or safe zone boundary"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Allied/Western forces)",
+      "color_identity": null,
+      "symbol_or_sigil": "Player aircraft sprite design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Airfield structures, friendly runway graphics"
+    },
+    {
+      "faction": "Enemy faction (opposing air force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct enemy aircraft sprite designs differentiated from player plane",
+      "enemy_visual_variants": "Multiple enemy aircraft types with different silhouettes and behavior patterns",
+      "environmental_markers": "Enemy airbases or ground installations as level objectives"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active combat zone",
+      "visual_manifestation": "Dense enemy sprite spawning, heavy flak patterns, terrain features indicating militarized area",
+      "behavioral_manifestation": "Enemies actively pursue and attack; projectile density increases"
+    },
+    {
+      "world_state": "Contested airspace",
+      "visual_manifestation": "Medium enemy density, selective flak bursts, mixed terrain types",
+      "behavioral_manifestation": "Enemies patrol or patrol with intermittent engagement"
+    },
+    {
+      "world_state": "Objective approach",
+      "visual_manifestation": "Enemy concentration increases toward level goal; environmental markers intensify",
+      "behavioral_manifestation": "Defender density ramps; stronger enemy variants appear"
+    },
+    {
+      "world_state": "Mission success",
+      "visual_manifestation": "Objective structure destroyed or reached; screen transitions to next level",
+      "behavioral_manifestation": "Enemy spawning ceases; remaining threats flee or are eliminated"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain progression",
+      "example": "Level backgrounds shift from friendly territory (clear skies, sparse ground features) to contested zones (burning buildings, active flak) to enemy heartland (dense defensive installations)"
+    },
+    {
+      "technique": "Enemy aircraft variety",
+      "example": "Different enemy plane sprites suggest opponent's air force composition and technological capabilities relative to player faction"
+    },
+    {
+      "technique": "Ground installation markers",
+      "example": "Visual distinction between airfields, radar sites, industrial targets, and defensive positions communicate mission context without text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy fighter aircraft",
+      "state": "Hunting/engaged",
+      "behavior": "Direct pursuit of player; coordinated attack patterns; aggressive sprite animations"
+    },
+    {
+      "entity": "Anti-aircraft flak",
+      "state": "Active defense",
+      "behavior": "Projectile bursts intensify as player approaches target; density increases with proximity to objectives"
+    },
+    {
+      "entity": "Player aircraft",
+      "state": "Damaged",
+      "behavior": "Visual tilt or sprite color change (if implemented); reduced maneuverability perception; increased vulnerability to further hits"
+    },
+    {
+      "entity": "Level objective structure",
+      "state": "Under attack",
+      "behavior": "Sprite animation loops for destruction; explosions cascade; visual collapse indicates progress toward mission goal"
+    }
+  ],
+  "notes": "Wings 2: Aces High is a horizontally-scrolling shoot-em-up with WW2-inspired aerial combat setting. Visual communication relies heavily on sprite differentiation (player vs. enemy aircraft), projectile density as danger indicator, and environmental features (terrain, installations) to signal world state progression. The shmup paradigm emphasizes immediate visual feedback for threats and opportunities. Faction identity is implied through aircraft design rather than explicit heraldry.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:17:31.404Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 924,
+    "output_tokens": 1450,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

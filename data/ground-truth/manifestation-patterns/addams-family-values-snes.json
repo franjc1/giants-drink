@@ -1,0 +1,154 @@
+{
+  "game_id": "addams-family-values-snes",
+  "game_name": "Addams Family Values",
+  "platform": "snes",
+  "paradigm": "action-adventure platformer",
+  "danger_signals": [
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Unique enemy sprites with larger scale, distinct animation patterns",
+      "meaning": "Significant threat requiring combat engagement; progression gate"
+    },
+    {
+      "signal": "Regular enemies",
+      "visual_form": "Smaller hostile sprites distinct from NPCs",
+      "meaning": "Hazards to navigate or defeat; encounter-based danger"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Dungeon-specific obstacles and traps",
+      "meaning": "Puzzle-based or collision-based danger requiring spatial awareness"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "HP meter in UI; visual feedback when taking damage",
+      "meaning": "Cumulative danger state leading to game-over condition"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Addams Family members",
+      "visual_form": "Friendly NPC sprites with distinctive character designs",
+      "meaning": "Quest givers, helpers, and narrative anchors; safe interaction zones"
+    },
+    {
+      "signal": "Puzzle solutions",
+      "visual_form": "Interactive objects and environmental clues",
+      "meaning": "Safe progression pathways distinct from combat encounters"
+    },
+    {
+      "signal": "Inventory system",
+      "visual_form": "Item collection and equipment UI",
+      "meaning": "Resource management and preparation for known threats ahead"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Addams Family (protagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Addams Family visual aesthetic - gothic, macabre character designs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Addams mansion and connected dungeon environments with family-themed architecture"
+    },
+    {
+      "faction": "Antagonists/Kidnappers",
+      "color_identity": null,
+      "symbol_or_sigil": "Regular enemy sprite types distinct from family characters",
+      "enemy_visual_variants": "Multiple enemy types across eight dungeons; Morobe present in final dungeon",
+      "environmental_markers": "Dungeon environments; final boss arena"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Quest progression - Pubert kidnapped",
+      "visual_manifestation": "Eight sequential dungeons unlock and become visually distinct environments",
+      "behavioral_manifestation": "Fester moves through escalating dungeon complexity; NPC dialogue references kidnapping status"
+    },
+    {
+      "world_state": "Story flags engaged",
+      "visual_manifestation": "Cutscenes trigger at narrative beats (front gate, bookcase, pumpkin, wilderness, swamp, mansion, sewer, final confrontation)",
+      "behavioral_manifestation": "Character interactions change; new areas open; dialogue updates reflect story progression"
+    },
+    {
+      "world_state": "Inventory acquisition",
+      "visual_manifestation": "Equipment and items visible in UI; character appearance may reflect equipped items",
+      "behavioral_manifestation": "Player gains new movement or combat capabilities; puzzle-solving options expand"
+    },
+    {
+      "world_state": "Health critical",
+      "visual_manifestation": "HP meter visibly low; possible screen color shift or visual warning",
+      "behavioral_manifestation": "Single hit defeats player; heightened danger state clear to player"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dungeon thematic design",
+      "example": "Eight distinct dungeon environments (petrified wilderness, swamp, mansion, sewage) each establish location identity through visual architecture and enemy type population"
+    },
+    {
+      "technique": "Character presence as world state",
+      "example": "Morobe appears in final room before boss; black egg item presence signals trap or challenge ahead"
+    },
+    {
+      "technique": "Cutscene environmental context",
+      "example": "Debug cutscenes reference specific locations (gargoyle, burst pipe, vine escape) connecting narrative to world geography"
+    },
+    {
+      "technique": "NPC dialogue and positioning",
+      "example": "Family members and quest givers located in thematic spaces; dialogue explains kidnapping plot and guides player through dungeon progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Uncle Fester (player character)",
+      "state": "Normal exploration",
+      "behavior": "Standard movement and interaction; NPCs respond positively"
+    },
+    {
+      "entity": "Uncle Fester (player character)",
+      "state": "In combat",
+      "behavior": "Attack animation; damage knockback; health depletion visual feedback"
+    },
+    {
+      "entity": "Regular enemies",
+      "state": "Active",
+      "behavior": "Patrol or pursue; engage in combat with distinct attack patterns"
+    },
+    {
+      "entity": "Regular enemies",
+      "state": "Defeated",
+      "behavior": "Disappear from world; item drops or XP-equivalent rewards"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Active",
+      "behavior": "Unique multi-phase combat patterns; larger sprite scale; distinctive attack telegraphs"
+    },
+    {
+      "entity": "Addams Family members",
+      "state": "Encountered",
+      "behavior": "Dialogue interaction; provide quests, hints, or equipment; remain in place unless escorted"
+    },
+    {
+      "entity": "Morobe (final dungeon NPC)",
+      "state": "Pre-boss",
+      "behavior": "Offers black egg item; dialogue suggests trap mechanic"
+    }
+  ],
+  "notes": "Addams Family Values uses a Zelda-like overhead action-adventure structure with clear environmental and narrative progression markers. World state is communicated primarily through dungeon unlocking, cutscene triggers, and NPC dialogue rather than dynamic environmental changes. Danger is signaled through enemy encounter design and boss encounters. The game uses character recognition (Addams Family visual identity) as primary faction indicator rather than abstract symbols. Cutscenes serve as major world-state transition markers. Item system (Black Egg, potions, equipment) tied to progression and difficulty modulation.",
+  "sources_used": [
+    "tcrf - Addams Family Values (SNES) technical breakdown including debug features and level design",
+    "wikipedia - Plot, gameplay mechanics, character role (Fester as protagonist)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:29:04.991Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5671,
+    "output_tokens": 1670,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

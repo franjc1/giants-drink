@@ -1,0 +1,155 @@
+{
+  "game_id": "excitebike-nes",
+  "game_name": "Excitebike",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Engine overheat",
+      "visual_form": "Temperature gauge in HUD; bike visual feedback during turbo abuse",
+      "meaning": "Turbo boost overuse causes immobile cooldown period — player must manage thermal resource"
+    },
+    {
+      "signal": "Rough track patches",
+      "visual_form": "Textured/discolored track terrain tiles",
+      "meaning": "Collision with rough surfaces causes speed loss or crash — environmental hazard"
+    },
+    {
+      "signal": "Track gaps and obstacles",
+      "visual_form": "Breaks in the track; bottlenecks reducing lane count from 4 to 2",
+      "meaning": "Spatial hazards requiring precise jump timing and lane positioning to avoid failure"
+    },
+    {
+      "signal": "Uneven landing angle",
+      "visual_form": "Bike orientation mid-air relative to landing surface",
+      "meaning": "Poor landing geometry results in speed loss or crash — rewards skill in balance management"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Temperature reset arrows",
+      "visual_form": "Arrow graphics placed along the course",
+      "meaning": "Driving over arrows resets engine temperature — safe points for thermal management"
+    },
+    {
+      "signal": "Even landing surface",
+      "visual_form": "Flat track terrain and aligned wheels on landing",
+      "meaning": "Successful balanced landing maintains momentum — skill reward"
+    },
+    {
+      "signal": "Multiple lane availability",
+      "visual_form": "Four-lane track sections vs. two-lane bottlenecks",
+      "meaning": "Wider track sections offer more routing flexibility and evasion options"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player racer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Computer-controlled opponent bikes rendered in distinct visual style from player bike",
+      "environmental_markers": "Player occupies foreground/center lane; opponents distributed across track lanes"
+    },
+    {
+      "faction": "Computer racers",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple distinct opponent bike designs; visually differentiated from player",
+      "environmental_markers": "Occupy competing lanes; ahead/behind player depending on race progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Race qualification phase (preliminary race)",
+      "visual_manifestation": "Course layout displayed; opponent position indicators; finish line marker",
+      "behavioral_manifestation": "Computer racers actively compete; player must achieve third place or higher to advance to championship"
+    },
+    {
+      "world_state": "Championship race phase",
+      "visual_manifestation": "Enhanced track difficulty; additional obstacles; bottleneck sections reduce lane count",
+      "behavioral_manifestation": "Computer opponents more aggressive; greater environmental hazards; higher skill requirement"
+    },
+    {
+      "world_state": "Track design mode (custom course creation)",
+      "visual_manifestation": "Grid-based editor interface; 19 types of hurdles selectable and placeable",
+      "behavioral_manifestation": "No racing occurs; gameplay shifts to creative/construction mode; save/load functionality (Famicom only)"
+    },
+    {
+      "world_state": "Engine overheating state",
+      "visual_manifestation": "Temperature gauge visual fills; bike rendering may show heat effect",
+      "behavioral_manifestation": "Bike becomes immobilized until cooldown completes; player movement halted until thermal recovery"
+    },
+    {
+      "world_state": "High-speed momentum state",
+      "visual_manifestation": "Visual scroll speed increases; bike rendering shows forward lean/acceleration pose",
+      "behavioral_manifestation": "Turbo boost active; enhanced velocity; increased difficulty managing landing angles and obstacle avoidance"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Track progression difficulty escalation",
+      "example": "Early races feature simple layouts; qualification requires third-place finish; championship races add gaps, rough patches, and bottlenecks progressively"
+    },
+    {
+      "technique": "Spatial lane management narrative",
+      "example": "Four-lane sections offer freedom; two-lane bottlenecks force tactical positioning — visual communication of pressure/constraint states"
+    },
+    {
+      "technique": "Resource placement as guide",
+      "example": "Temperature reset arrows distributed along course indicate safe recovery points; their positioning suggests intended thermal management rhythm"
+    },
+    {
+      "technique": "Competitor visual differentiation",
+      "example": "Each opponent bike rendered distinctly; visual variety communicates multiple rival personalities without explicit character development"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player bike",
+      "state": "Acceleration",
+      "behavior": "A button input increases speed; B button activates turbo (with thermal cost)"
+    },
+    {
+      "entity": "Player bike",
+      "state": "Airborne",
+      "behavior": "D-pad controls mid-air balance; landing alignment directly affects post-jump speed and stability"
+    },
+    {
+      "entity": "Player bike",
+      "state": "Engine overheat",
+      "behavior": "Immobilized cooldown period; forward movement halted until temperature resets via arrow collision or time passage"
+    },
+    {
+      "entity": "Computer racer bikes",
+      "state": "Active competition",
+      "behavior": "Move along track lanes; maintain position ahead/behind player; responsive to course hazards; accelerate and decelerate based on track conditions"
+    },
+    {
+      "entity": "Rough track patch",
+      "state": "Collision",
+      "behavior": "Upon contact: speed reduction or crash; visual feedback communicates hazard severity through momentum loss"
+    },
+    {
+      "entity": "Track gap/bottleneck",
+      "state": "Approach",
+      "behavior": "Requires precise timing and lane selection; failed execution results in crash; successful navigation maintains momentum"
+    }
+  ],
+  "notes": "Excitebike is a mechanically-driven communication system. Visual world-state is primarily conveyed through track layout, obstacle placement, and HUD temperature feedback rather than narrative or faction signaling. The game has minimal storytelling infrastructure; instead, manifestation patterns operate through spatial design and physics feedback. The player's bike and opponent bikes serve as primary visual faction markers—differentiation through rendering style communicates competitive relationship. In Design Mode, the game shifts paradigm entirely: the track-building mechanic becomes the primary world-state communicator, with 19 hurdle types functioning as a visual vocabulary for course difficulty and theme. The game lacks explicit political, narrative, or faction-based world-state systems; all manifestations are mechanical/environmental.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:17:49.853Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5681,
+    "output_tokens": 1756,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "game_id": "wrecking-crew-98-snes",
+  "game_name": "Wrecking Crew '98",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Spike/Blackie character approaching player grid position",
+      "meaning": "Imminent collision; loss of life if contact occurs"
+    },
+    {
+      "signal": "Fireball projectiles",
+      "visual_form": "Moving projectile objects on playfield",
+      "meaning": "Instant death hazard; must avoid or door-trap enemy"
+    },
+    {
+      "signal": "Falling objects",
+      "visual_form": "Destructible walls/pillars collapsing after hammer strikes",
+      "meaning": "Player can be knocked to bottom of playfield if struck by falling debris"
+    },
+    {
+      "signal": "Barrel entrapment",
+      "visual_form": "Indestructible barrel blocking grid spaces",
+      "meaning": "Potential trap state; level must be aborted if Mario becomes trapped"
+    },
+    {
+      "signal": "Unreachable objects",
+      "visual_form": "Isolated destructible walls after premature destruction of access ladders",
+      "meaning": "Level failure state; game progression blocked"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open doors",
+      "visual_form": "Doors transitioning to open state",
+      "meaning": "Enemy redirect mechanism; opens pathway for harmless enemy routing into background"
+    },
+    {
+      "signal": "Cleared grid spaces",
+      "visual_form": "Empty spaces where destructible objects previously existed",
+      "meaning": "Progress toward level completion; safe movement corridors expanding"
+    },
+    {
+      "signal": "Bonus items",
+      "visual_form": "Collectible objects appearing on playfield",
+      "meaning": "Score multiplier; indicates successful destruction chain strategy"
+    },
+    {
+      "signal": "Remaining lives display",
+      "visual_form": "Life counter UI element",
+      "meaning": "Safety margin; player starts with five lives buffer"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Mario/Luigi)",
+      "color_identity": null,
+      "symbol_or_sigil": "Hammer-wielding character sprite",
+      "enemy_visual_variants": "Mario (single-player) vs. Luigi (two-player alternate)",
+      "environmental_markers": "Occupies center of grid-based playfield; active destruction agent"
+    },
+    {
+      "faction": "Antagonist (Spike/Blackie)",
+      "color_identity": null,
+      "symbol_or_sigil": "Construction foreman character sprite; identified as opponent in original arcade",
+      "enemy_visual_variants": "Single named antagonist; appears as mobile threat across levels",
+      "environmental_markers": "Spawns from enemy doors; moves across playfield attempting to disrupt player; knocks down objects and forces falls"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level initialization",
+      "visual_manifestation": "Full playfield grid populated with destructible walls, pillars, ladders, indestructible barrels, bombs, and enemy spawn doors",
+      "behavioral_manifestation": "Mario positioned at safe starting location; enemies contained behind doors awaiting activation"
+    },
+    {
+      "world_state": "Active gameplay",
+      "visual_manifestation": "Real-time destruction of target objects via hammer strikes; falling debris animation; enemy movement across grid",
+      "behavioral_manifestation": "Spike pursues Mario; player must optimize destruction order; chain-destruction combinations trigger bonus scoring"
+    },
+    {
+      "world_state": "Enemy chase state",
+      "visual_manifestation": "Spike sprite actively moving toward Mario's position; fireballs spawning from antagonist",
+      "behavioral_manifestation": "Player forced into evasion priority over object destruction; strategic door usage required to redirect enemy into background"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "All required destructible objects removed from playfield; remaining grid shows empty spaces and indestructible elements only",
+      "behavioral_manifestation": "Player advances to next level; life counter preserved or incremented based on bonus points"
+    },
+    {
+      "world_state": "Trap/stalemate condition",
+      "visual_manifestation": "Mario surrounded by indestructible barrels or unreachable destructible objectives; no ladder access visible",
+      "behavioral_manifestation": "Level must be aborted; game respawns at level start or life counter decrements"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Grid-based spatial constraint narrative",
+      "example": "Invisible grid dividing playfield communicates puzzle logic: each space holds one object type, constraining player movement and destruction sequencing; reinforces 'construction site demolition' theme through structured environment"
+    },
+    {
+      "technique": "Object type hierarchy storytelling",
+      "example": "Destructible walls vs. indestructible barrels vs. bombs vs. ladders establish role-based ecosystem: walls = targets, barrels = obstacles, bombs = chain-reaction tools, ladders = access. Visual distinction teaches systemic rules through environment design"
+    },
+    {
+      "technique": "Enemy door mechanic as spatial control",
+      "example": "Doors opening to release enemies, then closing to route them 'harmlessly into background,' communicates containment/control narrative: player is construction worker managing hazardous environment through smart positioning"
+    },
+    {
+      "technique": "Gravity-based environmental consequence",
+      "example": "Mario unable to jump due to hammer weight; falling objects endanger player; destruction order determines safe movement paths. Communicates 'weight and consequence' theme: every action has spatial ripple effects"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario",
+      "state": "Idle/Safe",
+      "behavior": "Positioned on stable ladder or platform; awaits player input; no animation"
+    },
+    {
+      "entity": "Mario",
+      "state": "Destroying",
+      "behavior": "Hammer raised; destruction animation plays on target object; momentary freeze before next action"
+    },
+    {
+      "entity": "Mario",
+      "state": "Falling",
+      "behavior": "Gravity animation; character descends to bottom of playfield when support removed; loss of life if enemy contact occurs during fall"
+    },
+    {
+      "entity": "Spike/Blackie",
+      "state": "Patrolling",
+      "behavior": "Moves systematically across grid toward player position; destroys objects in path to disrupt navigation"
+    },
+    {
+      "entity": "Spike/Blackie",
+      "state": "Chasing",
+      "behavior": "Accelerates pursuit when player is in line of sight; prioritizes close-quarters engagement; knocks Mario downward"
+    },
+    {
+      "entity": "Spike/Blackie",
+      "state": "Contained",
+      "behavior": "Exits through open door; moves into background layer (visual depth cue indicating removal from active threat space)"
+    },
+    {
+      "entity": "Destructible walls/pillars",
+      "state": "Struck",
+      "behavior": "Flash animation; crumble and disappear; adjacent objects may fall if support removed"
+    },
+    {
+      "entity": "Indestructible barrels",
+      "state": "Present",
+      "behavior": "Static obstacle; never destroyed; visual marker for permanent playfield constraints"
+    },
+    {
+      "entity": "Bombs",
+      "state": "Detonated",
+      "behavior": "Chain-reaction; destroys all connected destructible objects in visual area; bonus point multiplier triggers"
+    }
+  ],
+  "notes": "Wrecking Crew '98 is a competitive sequel to the 1985 original, shifting from single-player demolition puzzles to multiplayer block-based competition. The Wikipedia source focuses primarily on the original 1984/1985 game; specific visual communication details for the '98 SNES sequel are limited. The manifestation patterns extracted apply primarily to the original's grid-based puzzle architecture, which likely carries forward to '98 with competitive gameplay overlays. Key world-state communication relies on spatial (grid position), object-type (destructible vs. indestructible), and behavioral (enemy proximity, falling physics) visual cues rather than narrative exposition. The game communicates danger through immediate threat proximity and mechanical consequence rather than abstract indicators.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:45:15.236Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3032,
+    "output_tokens": 2404,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

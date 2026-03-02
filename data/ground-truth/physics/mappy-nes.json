@@ -1,0 +1,114 @@
+{
+  "game_id": "mappy-nes",
+  "game_name": "Mappy",
+  "platform": "nes",
+  "year": 1988,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Trampoline Bouncing",
+      "description": "Player bounces on trampolines in vertical passages. Trampolines break after 4 consecutive bounces by Mappy, indicated by color changes. Revert to original state once player lands on platform.",
+      "physics_values": {
+        "bounces_until_break": 4,
+        "player_immune_while_bouncing": true,
+        "enemies_do_not_break_trampolines": true
+      }
+    },
+    {
+      "name": "Platform Veering",
+      "description": "Player can veer left or right while traveling upward on platforms or bouncing. Cannot change direction while falling.",
+      "physics_values": {
+        "can_veer_while_ascending": true,
+        "can_veer_while_falling": false
+      }
+    },
+    {
+      "name": "Fall Mechanics",
+      "description": "Running off platform edge causes fall into gap. Player bounces on trampoline if present below. Falling to bottom of screen without hitting trampoline results in death.",
+      "physics_values": {
+        "gap_traversal": "trampoline_required",
+        "death_on_screen_bottom": true
+      }
+    },
+    {
+      "name": "Microwave Door Burst",
+      "description": "Flashing doors release horizontal microwave burst when opened by Mappy. Stuns and sweeps away cats. Only Mappy can open microwave doors.",
+      "physics_values": {
+        "effect": "horizontal_sweep",
+        "player_exclusive": true,
+        "reverts_to_normal_door": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "platformer-focused",
+    "gravity-based",
+    "momentum-driven",
+    "directional-commitment"
+  ],
+  "tier_notes": "Tier 3 - Qualitative data only. Wikipedia source provides gameplay mechanics but lacks precise physics parameters (velocities, acceleration values, gravity constants). Movement described through level design interactions: trampoline bouncing, directional veering, falling behavior, and platform navigation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:28:30.342Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3181,
+    "output_tokens": 953,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

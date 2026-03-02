@@ -1,0 +1,138 @@
+{
+  "_meta": {
+    "game": "Strider",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1990,
+    "publisher": "Sega / Capcom",
+    "developer": "Capcom / Sega",
+    "sources": [
+      {
+        "name": "Wikipedia — Strider (1989 video game)",
+        "url": "https://en.wikipedia.org/wiki/Strider_(1989_video_game)",
+        "notes": "Genesis port of the 1989 Capcom arcade game. Mechanics confirmation: wall cling, slide, Cypher saber."
+      },
+      {
+        "name": "Speedrun.com — Strider (Genesis)",
+        "url": "https://www.speedrun.com/strider_genesis",
+        "notes": "Speedrun community documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Strider is a port of Capcom's 1989 arcade game. The Genesis version is considered one of the best home versions.",
+      "DEFINING MECHANIC: Hiryu is an acrobatic agent — wall cling, slide, and powerful plasma saber.",
+      "Hiryu's movement is among the most fluid and acrobatic of the 16-bit era.",
+      "The Cypher saber swings in a wide arc — hits enemies both in front of and above/below Hiryu depending on jump state.",
+      "No projectile weapon by default — all combat is melee saber range.",
+      "Walk and jump values not precisely documented from ROM — estimated from gameplay."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.5,
+      "confidence": "low",
+      "notes": "Hiryu is fast — among the faster 16-bit protagonists. VERIFY from ROM."
+    },
+    "slide": {
+      "description": "Down + attack. Hiryu slides forward at high speed, damaging enemies hit during the slide.",
+      "notes": [
+        "Slide is a primary traversal and combat tool — simultaneously fast movement and hitbox-lowering attack.",
+        "The slide hitbox is very low — passes under most projectiles.",
+        "Key speedrun technique — slide-cancel allows maintaining slide momentum."
+      ],
+      "confidence": "high"
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 56,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": "Hiryu has generous air control. Jump + saber attack creates aerial combat capability."
+  },
+
+  "wall_cling": {
+    "_note": "Core traversal mechanic. Hiryu can cling to walls and jump off them.",
+    "description": "Press Hiryu against a wall while jumping — he clings to it. Press jump to launch off the wall.",
+    "types": {
+      "wall_cling": "Static attachment to vertical surface",
+      "ceiling_cling": "Hiryu can also cling to ceilings in some sections (VERIFY)",
+      "wall_jump": "Launch from wall in opposite direction"
+    },
+    "notes": [
+      "Wall cling allows Hiryu to traverse vertical walls and reach elevated platforms.",
+      "Combined with the saber, Hiryu can attack from a wall-cling position.",
+      "Wall cling → jump creates the same alternating-wall traversal as Ninja Gaiden's wall jump."
+    ],
+    "confidence": "high"
+  },
+
+  "cypher_saber": {
+    "_note": "Hiryu's primary and only standard weapon. Plasma saber that swings in an arc.",
+    "description": "Wide-arc plasma blade. Swings in a large arc covering front and above/below Hiryu.",
+    "attack_arc": "Wide semi-circle in front of Hiryu — hits enemies at multiple heights",
+    "notes": [
+      "No long-range projectiles by default — forces close engagement with all enemies.",
+      "The wide arc compensates for the lack of range — multiple enemies can be hit per swing.",
+      "Aerial saber swings during jumps change the arc orientation.",
+      "Slide + saber combo hits the low zone efficiently."
+    ],
+    "upgrades": {
+      "cypher_a": "Base saber",
+      "cypher_b": "Upgraded width or damage (VERIFY specific upgrade details)",
+      "cypher_c": "Final upgrade — larger arc, more damage (VERIFY)"
+    },
+    "confidence": "high"
+  },
+
+  "robot_companions": {
+    "_note": "Hiryu collects robotic animals during the game. They follow and assist in combat.",
+    "description": "Small robot animals join Hiryu and attack nearby enemies automatically.",
+    "examples": [
+      "Robot monkey — climbs to elevated positions and attacks",
+      "Robot hawk — aerial attacks",
+      "Robot panther — ground attacks"
+    ],
+    "notes": [
+      "Companions are passive — they follow and attack autonomously.",
+      "Multiple companions can be active simultaneously.",
+      "Companions die if hit by enemy attacks — they're temporary allies."
+    ],
+    "confidence": "medium"
+  },
+
+  "level_structure": {
+    "stages": [
+      "Stage 1: Kazakhstan (Soviet fortress)",
+      "Stage 2: Siberia",
+      "Stage 3: Amazon jungle",
+      "Stage 4: Antarctica",
+      "Stage 5: Final fortress"
+    ],
+    "notes": [
+      "Non-linear stage order — after the first stage, can approach remaining stages in different orders (VERIFY).",
+      "Each stage has diverse vertical and horizontal traversal challenges requiring wall cling and saber.",
+      "Boss fights require pattern recognition for close-range saber combat."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "Strider's acrobatic movement system (slide, wall cling, full air control, wide-arc saber) creates a high skill ceiling where mastery looks and feels dramatically different from basic play. A new player shuffles around enemies. A skilled player glides, slides, and slashes with almost no wasted motion.",
+    "The wide-arc Cypher saber compensates for the lack of ranged attacks by making melee safer — the arc is wide enough that Hiryu doesn't need to be precisely positioned. This is an elegant solution to the 'close-range only' constraint: if melee has enough range and arc, it approximates 'short-range ranged.'",
+    "The robot companions shift the tone of Strider from 'lone ninja' to 'ninja with loyal team.' Even if mechanically they're just floating damage-dealers, the animals' presence creates an emotional dynamic: protecting them becomes an unspoken goal even when it's not required.",
+    "Strider's cold war geopolitical aesthetic (Kazakhstan, Siberia, Antarctica) gives the game a distinct visual identity separate from fantasy or sci-fi. The world is recognizable but heightened — real locations, impossible threats. This is a design choice about how to frame a high-action game's setting.",
+    "The slide-as-both-traversal-and-attack is the kind of dual-purpose mechanic that makes a move set feel lean and purposeful. Every input serves multiple goals. Slide to cross a room fast. Slide to dodge a projectile. Slide to clear a low enemy. One button, three uses."
+  ]
+}

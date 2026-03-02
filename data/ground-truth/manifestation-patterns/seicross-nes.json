@@ -1,0 +1,140 @@
+{
+  "game_id": "seicross-nes",
+  "game_name": "Seicross",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy riders",
+      "visual_form": "Opposing motorcycle-like vehicles in isometric view",
+      "meaning": "Direct collision threat; bumping mechanic indicates hostile interaction"
+    },
+    {
+      "signal": "Dinosaur Tanks",
+      "visual_form": "Large mechanical/biological hybrid enemies launching detachable heads",
+      "meaning": "Boss-level threat; projectile danger and high damage output"
+    },
+    {
+      "signal": "Rough terrain",
+      "visual_form": "Environmental obstacles replacing enemy riders in second stage",
+      "meaning": "Environmental hazard; navigation difficulty increases danger without agent-based threats"
+    },
+    {
+      "signal": "Progressing difficulty visual feedback",
+      "visual_form": "Changing backgrounds and increased entity density",
+      "meaning": "Escalating danger state; world-state communicates rising threat level through environmental change"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Blue people/stranded civilians",
+      "visual_form": "Blue-colored collectible entities scattered across terrain",
+      "meaning": "Rescue objective; collection provides purpose and likely score/progress reward"
+    },
+    {
+      "signal": "Power modules",
+      "visual_form": "Collectable items on terrain",
+      "meaning": "Temporary power enhancement; likely temporary invulnerability or weapon boost"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (implied rescue/exploration)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy riders with distinct visual appearance from player vehicle",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Enemy riders/hostile entities",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Motorcycle-like vehicles distinguished by isometric sprite differentiation",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Dinosaur Tank faction (boss entities)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Mechanical tank chassis with organic/dinosaur head component; separable projectile component",
+      "environmental_markers": "Appears in final stage area, signaling zone transition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Stage 1 (Rider combat phase)",
+      "visual_manifestation": "Isometric motorcycle arena with scattered enemy riders and blue civilian collectibles; open terrain layout",
+      "behavioral_manifestation": "Bumping/collision-based combat; enemies actively pursue and harass player; civilians stand passively awaiting rescue"
+    },
+    {
+      "world_state": "Mid game / Stage 2 (Terrain challenge phase)",
+      "visual_manifestation": "Rough terrain obstacles replace rider enemies; background shift indicates environmental zone change",
+      "behavioral_manifestation": "Navigation-focused gameplay; hazard avoidance replaces combat; reduced enemy presence"
+    },
+    {
+      "world_state": "Late game / Stage 3 (Boss phase)",
+      "visual_manifestation": "Dinosaur Tank entities with detachable head projectiles; arena suggests contained battle zone",
+      "behavioral_manifestation": "Dinosaur Tanks launch heads as projectiles when attacked; single-entity or multi-entity confrontation"
+    },
+    {
+      "world_state": "Infinite loop escalation",
+      "visual_manifestation": "Background cycling and progressive difficulty indicated through visual density/complexity",
+      "behavioral_manifestation": "Sequence repeats with increased speed, density, and aggression; world-state communicates 'harder' through aesthetic intensification rather than narrative"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Blue people collectibles as narrative hook",
+      "example": "Stranded civilians scattered throughout terrain signal rescue mission context; collection mechanic reinforces 'save these people' narrative without exposition"
+    },
+    {
+      "technique": "Stage progression as world exploration",
+      "example": "Three distinct areas (rider zone → terrain zone → dinosaur zone) imply different environments/regions; background changes telegraph zone transitions and world geography"
+    },
+    {
+      "technique": "Enemy visual design as faction/threat hierarchy",
+      "example": "Standard riders → Dinosaur Tanks progression establishes escalating threat levels; visual distinctiveness marks factional difference"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy riders",
+      "state": "Active / Pursuing",
+      "behavior": "Actively bump and collide with player; present throughout stage until cleared or progressed"
+    },
+    {
+      "entity": "Blue people (civilians)",
+      "state": "Stranded / Passive",
+      "behavior": "Stationary collectibles; no active behavior; waiting for player interaction/rescue"
+    },
+    {
+      "entity": "Power modules",
+      "state": "Available / Passive",
+      "behavior": "Stationary; likely provide temporary enhanced state when collected"
+    },
+    {
+      "entity": "Dinosaur Tanks",
+      "state": "Boss combat",
+      "behavior": "Launch detachable head projectiles; remain until defeated; signal end-of-stage confrontation"
+    },
+    {
+      "entity": "Rough terrain",
+      "state": "Environmental hazard",
+      "behavior": "Static obstacles; cause collision damage or forced navigation around them"
+    }
+  ],
+  "notes": "Seicross uses isometric perspective to communicate multi-directional threats and three-dimensional space. World-state progression is communicated primarily through visual/aesthetic shifts (background changes, entity roster changes) rather than narrative exposition. The 'infinite loop, escalating difficulty' structure means danger is communicated through meta-rhythm: players learn that 'sequences repeat but harder' through repeated visual patterns with increased intensity. Safety signals are purely mechanical (collectibles) with minimal visual identity language. Faction identity is entirely visual/mechanical distinction rather than symbolic or narrative.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:37:22.812Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2072,
+    "output_tokens": 1776,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

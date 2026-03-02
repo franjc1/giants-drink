@@ -1,0 +1,168 @@
+{
+  "game_id": "mortal-kombat-genesis",
+  "game_name": "Mortal Kombat",
+  "platform": "genesis",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "Health bar depletion",
+      "visual_form": "Opponent's health meter visibly decreasing during combat",
+      "meaning": "Indicates player is taking damage and risk of round loss"
+    },
+    {
+      "signal": "Juggling/airborne state",
+      "visual_form": "Opponent launched into air after uppercut, defenseless animation",
+      "meaning": "Opponent is vulnerable and at immediate critical risk of combo damage"
+    },
+    {
+      "signal": "Special move activation",
+      "visual_form": "Distinct visual effect when special move is performed (character-specific animations)",
+      "meaning": "High-damage attack incoming; danger to blocking/retreating player"
+    },
+    {
+      "signal": "Defeated state",
+      "visual_form": "Character falls to ground, health bar empty",
+      "meaning": "Round lost; triggers Fatality vulnerability phase"
+    },
+    {
+      "signal": "Goro/Shang Tsung appearance",
+      "visual_form": "Boss character model distinct from tournament fighters, larger/more imposing design",
+      "meaning": "Escalated danger; progression to higher-difficulty opponent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Distance advantage",
+      "visual_form": "Spatial separation between characters; range-dependent attack variation",
+      "meaning": "Player can control engagement distance, reducing incoming damage"
+    },
+    {
+      "signal": "Block activation",
+      "visual_form": "Character assumes defensive stance when block button held",
+      "meaning": "Incoming damage reduced; minimal ground loss; counterattack opportunity"
+    },
+    {
+      "signal": "Health bar full/near-full",
+      "visual_form": "Opponent's health meter shows substantial remaining capacity",
+      "meaning": "Safety margin; opponent far from defeat"
+    },
+    {
+      "signal": "Timer advantage",
+      "visual_form": "Round timer visible; higher health when time expires",
+      "meaning": "Win condition met by timeout; player ahead in round"
+    },
+    {
+      "signal": "Between-round reset",
+      "visual_form": "Round transition, health bars reset for new round in match",
+      "meaning": "Player health regenerated; fresh start opportunity after endurance damage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Earthrealm fighters",
+      "color_identity": null,
+      "symbol_or_sigil": "Player characters (Johnny Cage, Sonya Blade, Liu Kang, etc.)",
+      "enemy_visual_variants": "Earthrealm warriors use standard martial arts clothing and armor; distinct from otherworldly or corrupted designs",
+      "environmental_markers": "Tournament arena stages on Shang Tsung's Island; Eastern martial arts aesthetic in stage design"
+    },
+    {
+      "faction": "Shang Tsung's forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Shang Tsung (sorcerer), Goro (sub-boss, monstrous champion)",
+      "enemy_visual_variants": "Goro: multi-armed, reptilian/demonic appearance; Shang Tsung: sorcerer robes, supernatural aura; visually distinct from human fighters",
+      "environmental_markers": "Island tournament setting under Shang Tsung's control; implies otherworldly/corrupted realm influence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Earthrealm under threat / Tournament siege",
+      "visual_manifestation": "Seven tournament stages depict Shang Tsung's Island as hostile arena; fighters face escalating opposition culminating in Goro and Shang Tsung",
+      "behavioral_manifestation": "Player must defeat increasing difficulty of opponents; endurance matches force player to fight multiple opponents without health regen between fights"
+    },
+    {
+      "world_state": "Goro's 500-year undefeated reign",
+      "visual_manifestation": "Goro presented as sub-boss with distinctive monstrous design; appears as penultimate threat before final boss",
+      "behavioral_manifestation": "Goro fight is mandatory progression checkpoint; signals player approaching climactic confrontation"
+    },
+    {
+      "world_state": "Shang Tsung's control solidified",
+      "visual_manifestation": "Shang Tsung appears as final boss; tournament stages exist within his domain",
+      "behavioral_manifestation": "Final match against Shang Tsung; defeating him resolves the narrative threat to Earthrealm"
+    },
+    {
+      "world_state": "Player progression / Strength accumulation",
+      "visual_manifestation": "Mirror match against clone of player character; visual parity indicates player skill now equals their own reflected ability",
+      "behavioral_manifestation": "Mirror match serves as checkpoint; player must overcome a duplicate of themselves, testing mastery of character"
+    },
+    {
+      "world_state": "Tournament qualification / Testing phase",
+      "visual_manifestation": "Test Your Might minigame with escalating material difficulty (wood → stone → steel → ruby → diamond)",
+      "behavioral_manifestation": "Optional bonus stages reward player for demonstrating raw power; materials represent ascending challenge tiers"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage design as realm geography",
+      "example": "Seven Shang Tsung Island locations serve as distinct tournament stages; each stage visual implies different areas of a corrupted realm under sorcerer control"
+    },
+    {
+      "technique": "Character visual archetypes communicate faction and role",
+      "example": "Earthrealm fighters depicted with martial arts uniforms/traditional armor; Goro and Shang Tsung use supernatural/monstrous visual language to signal otherworldly threat"
+    },
+    {
+      "technique": "Boss escalation through visual distinctiveness",
+      "example": "Tournament opponents share similar visual/mechanical grounding; Goro's multi-armed reptilian form and Shang Tsung's sorcerer aesthetic visually signal narrative escalation"
+    },
+    {
+      "technique": "Health bar as narrative tension meter",
+      "example": "Depleting opponent health bar visualizes gaining dominance in tournament; full player health bar signals narrative safety before endurance match gauntlet"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Victorious / Defeated opponent",
+      "behavior": "Triggers Fatality finishing move prompt; character executes gruesome finishing animation indicating dominance"
+    },
+    {
+      "entity": "Opponent character",
+      "state": "Airborne after uppercut",
+      "behavior": "Enters defenseless juggle state; cannot block or attack; vulnerable to combo chain"
+    },
+    {
+      "entity": "Opponent character",
+      "state": "Blocking incoming attack",
+      "behavior": "Assumes defensive stance; takes reduced damage; minimal knockback; maintains ground position"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Active round combat",
+      "behavior": "Attacks vary by range and distance; perform special moves contextually; mirror match opponent mimics player inputs"
+    },
+    {
+      "entity": "Goro",
+      "state": "Boss encounter",
+      "behavior": "Distinct attack patterns and superior damage output; serves as skill gate before final confrontation"
+    },
+    {
+      "entity": "Shang Tsung",
+      "state": "Final boss",
+      "behavior": "Represents ultimate narrative threat; defeat required to resolve Earthrealm's siege by Shang Tsung's forces"
+    }
+  ],
+  "notes": "Mortal Kombat (1993 Genesis port) uses fighting game mechanical visual language to communicate world-state. The tournament structure itself is the primary narrative scaffold—player progression through increasingly difficult opponents (7 tournament fighters → Mirror Match → Endurance matches → Goro → Shang Tsung) visually manifests Earthrealm's peril. Boss characters (Goro, Shang Tsung) are distinguished through visual design (monstrous/supernatural aesthetic) rather than color schemes or sigils. Safety/danger signals are mechanics-driven: health bars, block states, and airborne vulnerability communicate tactical threat in real-time. Environmental storytelling relies on stage design and character visual archetypes rather than explicit narrative cutscenes. The Fatality system itself functions as a visual reward for victory and reinforces the high-stakes tournament's lethal nature.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:55:53.434Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3173,
+    "output_tokens": 2161,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

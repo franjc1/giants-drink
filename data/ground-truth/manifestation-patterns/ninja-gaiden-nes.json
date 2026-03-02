@@ -1,0 +1,245 @@
+{
+  "game_id": "ninja-gaiden-nes",
+  "game_name": "Ninja Gaiden",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy spawning",
+      "visual_form": "Sprite animation and entrance on screen",
+      "meaning": "Active threat approaching player; requires defensive positioning or pre-emptive strikes"
+    },
+    {
+      "signal": "Boss health meter appearance",
+      "visual_form": "Enemy HP Display shown separately at top of screen (RAM 0x0066)",
+      "meaning": "Boss encounter initiated; sustained threat with damage accumulation"
+    },
+    {
+      "signal": "Player hit/damage taken",
+      "visual_form": "Ryu flash/knockback animation; HP meter depletion; invulnerability timer (RAM 0x0095) runs 60-0",
+      "meaning": "World state shifted to 'damaged'; player must avoid further hits during brief invincibility window"
+    },
+    {
+      "signal": "Timer depletion (Level Timer)",
+      "visual_form": "Countdown displayed; timer at RAM 0x0063 decrements when timer fractions (0x0062) = 60",
+      "meaning": "Time pressure escalates; failure imminent if level not completed"
+    },
+    {
+      "signal": "Fall into bottomless pit or off-screen",
+      "visual_form": "Ryu leaves viewport vertically; no collision detected",
+      "meaning": "Instant life loss; environmental hazard activates"
+    },
+    {
+      "signal": "Masked Devil (controlled father Ken)",
+      "visual_form": "Specific enemy sprite with distinctive visual design",
+      "meaning": "Critical narrative danger; father is compromised and controlled; emotional and mechanical threat"
+    },
+    {
+      "signal": "Jaquio appearance (final boss)",
+      "visual_form": "Large unique sprite; fiery projectile attacks",
+      "meaning": "Ultimate antagonist; final world-state conflict; uses fire-based aggression"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared level/Act completion",
+      "visual_form": "Screen transition; chapter/act eye-catch (Japanese version shows unique act titles: 宿命/Destiny, 脱出/Escape, 追跡/Pursuit, 罠/Trap, 死闘/Life-or-death Struggle, 降魔/Conquering the Devil)",
+      "meaning": "World state progressed; immediate threats neutralized; safe checkpoint reached"
+    },
+    {
+      "signal": "Invulnerability timer active",
+      "visual_form": "Character flashing after damage taken; invulnerability counter (RAM 0x0095)",
+      "meaning": "Temporary protection granted; brief window of reduced danger after adversity"
+    },
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Lantern/special weapon sprite pickup (RAM 0x04D0-0x04E7); special weapon enabled (RAM 0x00C9: $00=None, $80=Fire Wheel, $81=Throwing Star, $82=Windmill Star, $84=Invincible Fire Wheel, $85=Jump and Slash)",
+      "meaning": "Player capability increased; world state becomes more favorable; temporary offensive advantage"
+    },
+    {
+      "signal": "Defeated enemy or boss",
+      "visual_form": "Boss explosion animation (RAM 0x04B8-0x04BA); sprite removal",
+      "meaning": "Threat eliminated; section cleared; narrative progression secured"
+    },
+    {
+      "signal": "Sunrise/dawn visual",
+      "visual_form": "Final cutscene shows rising sun; brightness palette shift",
+      "meaning": "Darkness overcome; world state transitions to peace; story climax resolved positively"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Ryu Hayabusa (Player/Protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Ninja garb; katana blade",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dojo/temple ancestry (father Ken's lineage); association with demon statues (quest objects)"
+    },
+    {
+      "faction": "The Jaquio (Primary Antagonist/Evil Organization)",
+      "color_identity": null,
+      "symbol_or_sigil": "Masked figure identity; demon statue control",
+      "enemy_visual_variants": "Masked Devil (Ken possessed); Basaquer (statue thief); Bloody Malth (demon champion); Jaquio's true form (final confrontation)",
+      "environmental_markers": "Ancient temple in Amazon; seal chambers; fiery projectile signature; control crystal orbs"
+    },
+    {
+      "faction": "The Malice Four (Jaquio's underlings)",
+      "color_identity": null,
+      "symbol_or_sigil": "Boss-class enemy sprites; individual attack patterns",
+      "enemy_visual_variants": "Encountered at end of each Act; distinct visual designs per boss",
+      "environmental_markers": "Placed at strategic temple locations; defend inner sanctum progression"
+    },
+    {
+      "faction": "CIA Special Auxiliary Unit (Foster's Agency)",
+      "color_identity": null,
+      "symbol_or_sigil": "Government authority; satellite communication",
+      "enemy_visual_variants": "Foster (communicator/betrayer); armed men (interrogators); Irene Lew (double agent)",
+      "environmental_markers": "Interrogation room; parachute drop zone; satellite communication; external political pressure"
+    },
+    {
+      "faction": "Common enemies (foot soldiers)",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied sprite designs (knife tossers, birds, bats, cheetahs, generic soldiers)",
+      "enemy_visual_variants": "Sprite ID at RAM 0x0400-0x0407 determines type; grey disc-tossers have visible HP (RAM 0x0490-0x0497)",
+      "environmental_markers": "Distributed throughout levels; indicate Jaquio's territorial control; spawned by level design"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Act 1 - Initial Journey/Escape",
+      "visual_manifestation": "Jungle and outdoor environments; parachute drop location; dense vegetation; temple exterior approach",
+      "behavioral_manifestation": "Ryu weak/unequipped; enemies are common foot soldiers; time pressure moderate; narrative focus on discovery (father's letter, Walter Smith meeting)"
+    },
+    {
+      "world_state": "Act 2-4 - Temple Infiltration/Pursuit",
+      "visual_manifestation": "Interior temple corridors; stone architecture; trap rooms; ritual chambers; elevator sequences",
+      "behavioral_manifestation": "Enemy difficulty escalates; mini-bosses appear; Ryu gains power-ups (special weapons); time limits per level increase; pressure builds toward revelation"
+    },
+    {
+      "world_state": "Act 5 - Confrontation with Controlled Father",
+      "visual_manifestation": "Inner temple sanctum; Masked Devil sprite (Ken possessed); crystal orb control mechanism visible; dark mystical palette",
+      "behavioral_manifestation": "Masked Devil fights Ryu using ninja techniques; Ken under puppet control indicated by possession visual; player must recognize father despite transformation; emotional climax; control mechanism destruction triggers liberation"
+    },
+    {
+      "world_state": "Act 6 - Final Battle with Jaquio and Jashin",
+      "visual_manifestation": "Temple collapse animation; fiery projectiles from Jaquio; demon resurrection via lunar eclipse visual; Jashin demon sprite (largest boss); destruction sequences",
+      "behavioral_manifestation": "Jaquio highly aggressive; uses fire attacks and environmental hazards; Jashin demonic form requires extended combat; Ken sacrifices himself (visual death scene); temple destruction forces escape sequence"
+    },
+    {
+      "world_state": "Post-Victory/Endgame Cutscene",
+      "visual_manifestation": "Sunrise palette; bright sky; temple ruins receding; Irene and Ryu together; kiss finale; sun rising over ocean",
+      "behavioral_manifestation": "Irene betrays CIA orders (reflects player choice to ally with her); affection shown; peaceful resolution tone; 'darkness is finally over' dialogue confirms world state shift to safety"
+    },
+    {
+      "world_state": "High world danger (bosses alive, statues separated)",
+      "visual_manifestation": "Red/orange tones in boss areas; enemy health meters visible; projectile trails; enemy spawn rates high",
+      "behavioral_manifestation": "Enemies relentless; boss attacks increase frequency; Ryu must chain combos; minimal rest periods; powerup scarcity emphasizes scarcity"
+    },
+    {
+      "world_state": "Low world danger (enemies cleared, powerups active)",
+      "visual_manifestation": "Calmer color palette; empty corridors; special weapon effects (fire wheel glow, star projectiles, windmill spin); invincibility aura",
+      "behavioral_manifestation": "Ryu moves faster with special weapons; attack combos uninterrupted; enemy respawn delays; player offensive advantage; momentum builds"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cutscene narrative with anime-style cinematics",
+      "example": "Opening reveals Ryu finding father Ken's letter; character relationships established through dialogue; Jaquio's world domination plan explained via exposition cutscenes"
+    },
+    {
+      "technique": "Boss identity reveals through visual design",
+      "example": "Masked Devil sprite is Ken but visually corrupted/changed, signaling possession without explicit text; Jaquio's true form appears only in final chamber, suggesting hidden threat; Bloody Malth's appearance links to father Ken's duel backstory"
+    },
+    {
+      "technique": "Temple architecture progression as metaphor",
+      "example": "Ascending from jungle exterior through increasingly ornate temple chambers mirrors Ryu's journey from ignorance to understanding; inner sanctum design reflects mystical power concentration; crystal orb placement in ceremonial chamber emphasizes control mechanism"
+    },
+    {
+      "technique": "Environmental hazards as world-state indicators",
+      "example": "Falling platforms increase in later acts showing world destabilization; temple collapse sequence during final battle visualizes stakes escalation; lunar eclipse triggers demon awakening, connecting celestial phenomena to narrative climax"
+    },
+    {
+      "technique": "Weapon/power-up placement as capability telegraph",
+      "example": "Special weapons (Fire Wheel, Throwing Stars, Windmill Star) appear in acts matching escalating difficulty; invincible fire wheel pickup signals final boss preparation; higher placement in Japanese version reflects intentional pacing design"
+    },
+    {
+      "technique": "NPC appearance and removal as world-state change",
+      "example": "Walter Smith's death signals stakes escalation; Irene Lew's character arc (kidnapper→ally→romantic interest) shown through visual interactions; Foster's satellite communication emphasizes external political threat"
+    },
+    {
+      "technique": "Regional cultural localization as world-building",
+      "example": "Title changed to 'Shadow Warriors' in PAL regions due to ninja controversy; Japanese acts named (Destiny, Escape, Pursuit, Trap, Life-or-death Struggle, Conquering the Devil) removed in international versions, but thematic intent preserved through level design; father's name Ken→Joe creates identity shift in localization"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ryu Hayabusa (Player character)",
+      "state": "Unequipped/base state",
+      "behavior": "Single katana attacks; wall-climb ability (cling to wall mechanic at RAM 0x0084); standard jump physics; walking/running speed at RAM 0x00AC-0x00AD; first sword attack always ineffective (RAM 0x0092: $00 until sword use, then $10)"
+    },
+    {
+      "entity": "Ryu Hayabusa",
+      "state": "Special weapon equipped",
+      "behavior": "Secondary weapon projectiles deployed (Throwing Stars, Fire Wheel, Windmill Star) selected via RAM 0x00C9; attack animation changes; movement speed may increase with special abilities (Jump and Slash); invincible fire wheel provides temporary damage immunity with visual aura"
+    },
+    {
+      "entity": "Ryu Hayabusa",
+      "state": "Damaged/post-hit",
+      "behavior": "Knockback animation; invulnerability flash (RAM 0x0095 runs 60-0 frames); health meter depletes (RAM 0x0065); if HP reaches 0, life lost; brief protection window allows escape repositioning"
+    },
+    {
+      "entity": "Generic enemies (knife tossers, soldiers)",
+      "state": "Spawned/alert",
+      "behavior": "Sprite animation triggers; frames until action increments (RAM 0x0408-0x040F); horizontal movement velocity set (RAM 0x0448-0x0457, 0x0450-0x0457); facing direction determined (RAM 0x0440-0x0447: left/right); projectile throw or charging behavior initiated"
+    },
+    {
+      "entity": "Bird enemies",
+      "state": "Hunting/tracking player",
+      "behavior": "Y-position adjusts to follow Ryu's Y (memory 0x8A) — if bird Y > Ryu Y, bird moves up (-1); if < Ryu Y, bird moves down (+1); X-position and speed adjust to follow Ryu's X (similar convergence logic); predictable tracking curve enables player manipulation (per TASVideos bird trajectory prediction script)"
+    },
+    {
+      "entity": "Boss (Malice Four member or Jaquio)",
+      "state": "In combat",
+      "behavior": "Boss-specific HP tracked separately (RAM 0x0490-0x0497 for active boss); health meter displayed (RAM 0x0066); attack patterns cycle based on frames until action; projectile or melee attacks launch at intervals; defeat triggers explosion animation (RAM 0x04B8-0x04BA) and act completion"
+    },
+    {
+      "entity": "Masked Devil (Ken possessed)",
+      "state": "Under Jaquio's control",
+      "behavior": "Fights with father's ninja techniques (implies advanced combat behavior); visual corruption/darkened sprite indicates possession; eyes show puppet-like control (per narrative dialogue); destroying the control crystal orb (placed in chamber) breaks hold and returns Ken to normal state"
+    },
+    {
+      "entity": "Jaquio (final boss)",
+      "state": "Defending temple/asserting dominion",
+      "behavior": "Throws fiery projectiles as attack signature; moves unpredictably in chamber; dialogue taunts Ryu; upon defeat, triggers lunar eclipse event that resurrects Jashin; throws Ken through trapdoor earlier, showing territorial aggression"
+    },
+    {
+      "entity": "Jashin (demon boss)",
+      "state": "Revived by lunar eclipse",
+      "behavior": "Largest sprite form; intense attack patterns; longest boss health meter; requires sustained player offense; defeat ends game's primary threat; visual destruction sequence signals world-state resolution"
+    },
+    {
+      "entity": "Irene Lew (NPC/ally)",
+      "state": "Double agent/conflicted",
+      "behavior": "Initially kidnaps Ryu (betrayal signal); later aids Ryu in temple (alliance signal); final state shows romantic attraction (kiss scene); rejects CIA order to kill Ryu (defection confirmed); sunrise scene shows alignment with Ryu's faction, not Jaquio's or Foster's"
+    }
+  ],
+  "notes": "Ninja Gaiden NES uses cinematic cutscenes as primary narrative delivery, with environmental and sprite-based visual cues to communicate danger, faction allegiance, and world-state shifts. Danger is primarily signaled through enemy spawning, boss health meters, and time pressure (level timer). Safety is indicated by level completion transitions and power-up acquisition. The game employs regional localization (title change to 'Shadow Warriors' in PAL, character name changes, act title removal) that reflects geopolitical context of the late 1980s ninja-related sensitivities in UK/EU. Behavioral tells for entities are tightly coupled to RAM state — enemy position, velocity, and action timing all derive from specific memory addresses, making the game's state communication highly data-driven. The possessed father (Masked Devil) serves as emotional/narrative danger signal distinct from mechanical threats. The lunar eclipse acts as a world-state trigger event, transforming defeat into victory condition through demon resurrection mechanic.",
+  "sources_used": [
+    "tasvideos",
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:02:40.245Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9371,
+    "output_tokens": 4134,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

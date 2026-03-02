@@ -1,0 +1,176 @@
+{
+  "game_id": "dungeons-dragons-eye-beholder-snes",
+  "game_name": "Dungeons & Dragons: Eye of the Beholder",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster encounter visuals",
+      "visual_form": "First-person rendered 3D creature sprites in dungeon view",
+      "meaning": "Direct threat requiring combat; monster type telegraphs damage type and tactical challenge"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Dungeon geometry obstacles, trapped passages, environmental damage indicators",
+      "meaning": "Spatial danger; progression blocked or character health threatened"
+    },
+    {
+      "signal": "NPC corpses and skeletal remains",
+      "visual_form": "Dead bodies, bones, destroyed equipment visible in dungeon spaces",
+      "meaning": "This area has been lethal to others; danger level communicated through environmental storytelling"
+    },
+    {
+      "signal": "Dungeon depth progression",
+      "visual_form": "Visual transition from sewers → dwarf clan areas → drow clan areas → Xanathar's lair",
+      "meaning": "Escalating threat intensity; deeper = more dangerous"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Party composition indicators",
+      "visual_form": "Character roster showing up to 6 party members with equipment and status",
+      "meaning": "Larger party size = greater safety margin; indicates readiness for next challenge"
+    },
+    {
+      "signal": "Resource management",
+      "visual_form": "Health/mana bars, item inventory displays",
+      "meaning": "Visual confirmation of survival capacity; full resources signal readiness"
+    },
+    {
+      "signal": "Cleared dungeon sections",
+      "visual_form": "Explored grid spaces with no remaining enemies or hazards",
+      "meaning": "Secure areas for rest and regrouping"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dwarf Clan",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Dwarf-specific enemy sprites; may be hostile or neutral depending on faction alignment",
+      "environmental_markers": "Dwarf clan territorial areas in mid-dungeon levels; dwarven architecture and settlements"
+    },
+    {
+      "faction": "Drow Clan",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Dark elf/drow-specific sprites; underground-adapted appearance",
+      "environmental_markers": "Drow territories in deeper dungeon sections; different architectural style from dwarf areas"
+    },
+    {
+      "faction": "Xanathar (Beholder Cult/Faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "The Beholder (Xanathar) itself serves as primary faction symbol",
+      "enemy_visual_variants": "Beholder cult minions, summoned creatures, magical constructs",
+      "environmental_markers": "Xanathar's lair at dungeon depths; cult-themed architecture and symbols"
+    },
+    {
+      "faction": "Waterdeep City Authority",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "City entrance/sewer entrance at game start; represents external authority commissioning the adventure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game start - threat unknown, dungeon sealed",
+      "visual_manifestation": "City of Waterdeep accessible; sewer entrance visible but unstable",
+      "behavioral_manifestation": "NPCs in city provide quest briefing; players must organize 4-character party before descent"
+    },
+    {
+      "world_state": "Upper dungeon - sewer/early levels",
+      "visual_manifestation": "Flooded dungeon aesthetic, water hazards, basic monster encounters, limited faction presence",
+      "behavioral_manifestation": "Lower enemy difficulty; exploration-focused; few NPC interactions"
+    },
+    {
+      "world_state": "Mid-dungeon - dwarf and drow territories",
+      "visual_manifestation": "Clan-specific architecture becomes visible; faction members appear as NPCs and enemies",
+      "behavioral_manifestation": "Faction politics begin; players encounter peaceful NPCs of competing clans; alliance opportunities emerge"
+    },
+    {
+      "world_state": "Deep dungeon - approaching Xanathar's lair",
+      "visual_manifestation": "Beholder-themed environment; cult imagery; powerful monster concentration",
+      "behavioral_manifestation": "Combat intensity increases; faction NPCs scarce; final threats converge visually"
+    },
+    {
+      "world_state": "Post-victory - Xanathar defeated",
+      "visual_manifestation": "Text-only ending window (DOS version) or animated sequence (Amiga version) showing return to city",
+      "behavioral_manifestation": "Party returns to surface; recognized as heroes by Waterdeep authority; adventure concludes"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Corpse and equipment placement",
+      "example": "Dead NPCs and their skeletal remains found in dungeons; discoverable equipment tells story of previous adventurers' fates"
+    },
+    {
+      "technique": "Architectural style shifts",
+      "example": "Visual transition from generic sewer structures to dwarven stonework to drow dark architecture communicates faction territory without exposition"
+    },
+    {
+      "technique": "NPC dialogue and location correlation",
+      "example": "Dwarf NPCs found in dwarf territories, drow in drow areas; physical presence in specific zones reinforces faction control and narrative geography"
+    },
+    {
+      "technique": "Monster density and type variation",
+      "example": "Early levels populated with basic monsters; deeper levels feature faction-specific creatures and beholder cultists; progression communicates threat escalation"
+    },
+    {
+      "technique": "Dungeon collapse narrative",
+      "example": "Sewer entrance blocked by Xanathar-caused collapse establishes the beholder as active antagonist and creates narrative urgency"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dwarf NPCs",
+      "state": "Peaceful",
+      "behavior": "Provide dialogue, may join party as recruitable members; signal safety in dwarf territories"
+    },
+    {
+      "entity": "Dwarf NPCs",
+      "state": "Hostile",
+      "behavior": "Attack on sight in certain faction conflict scenarios; indicate territorial aggression"
+    },
+    {
+      "entity": "Drow NPCs",
+      "state": "Peaceful",
+      "behavior": "Provide dialogue, may join party; signal safety in drow territories"
+    },
+    {
+      "entity": "Drow NPCs",
+      "state": "Hostile",
+      "behavior": "Attack on sight in faction conflict zones; indicate clan territory defense"
+    },
+    {
+      "entity": "Standard monsters",
+      "state": "Roaming",
+      "behavior": "Appear in encounter grid spaces; initiate combat upon proximity; no special behavioral tells"
+    },
+    {
+      "entity": "Xanathar (Beholder boss)",
+      "state": "Final encounter",
+      "behavior": "Statistically powerful; uses magic and special attacks; defeat triggers ending sequence"
+    },
+    {
+      "entity": "Skeletal remains/corpses",
+      "state": "Environmental",
+      "behavior": "Static; indicate previous danger; can sometimes be resurrected as party members by player magic"
+    }
+  ],
+  "notes": "Eye of the Beholder uses first-person dungeon perspective (similar to Dungeon Master) to communicate world state through visual layering: surface city → sewer entry → clan territories → boss lair. Faction identity is communicated primarily through NPC appearance and location rather than explicit color/symbol systems. The game's political situation emerges through encounter structure: dwarf vs. drow clan presence in mid-dungeon creates implicit territorial conflict narrative without explicit exposition. Environmental storytelling relies on architecture shifts, corpse placement, and NPC distribution rather than decorative environmental detail. The blocky 3D rendering style limits granular visual communication, compensated by clear sprite differentiation between faction types and monster classes. Beholder as antagonist is communicated through the dungeon collapse mechanic and lair-specific environment design rather than recurring visual symbols.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:59:12.634Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3427,
+    "output_tokens": 2143,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

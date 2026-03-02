@@ -1,0 +1,171 @@
+{
+  "game_id": "doki-doki-panic-nes",
+  "game_name": "Yume Koujou: Doki Doki Panic",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated sprite characters with distinct silhouettes and hostile appearance",
+      "meaning": "Threats that must be avoided or defeated via throwing/environmental interaction"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Quicksand in desert worlds, slippery surfaces in snowy areas",
+      "meaning": "Stage-specific damage/movement impediment zones that affect traversal"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Heart-based health meter visual representation",
+      "meaning": "Player character vulnerability state; loss of all hearts triggers life loss"
+    },
+    {
+      "signal": "Vertical descent",
+      "visual_form": "Character falling off bottom screen edge",
+      "meaning": "Instant damage/life loss mechanic, stage boundary danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Floating heart sprites appearing after defeating enemies",
+      "meaning": "Temporary reprieve; restores depleted health"
+    },
+    {
+      "signal": "Sub-space access via magic potion",
+      "visual_form": "Collectible potion items scattered in levels",
+      "meaning": "Safe room mechanic; grants access to reflected zone for coin/mushroom collection without enemy pressure"
+    },
+    {
+      "signal": "Mushroom power-up blocks",
+      "visual_form": "Discrete mushroom-shaped objects in Sub-space",
+      "meaning": "Increases maximum health capacity; provides buffer against damage"
+    },
+    {
+      "signal": "Doors and jars as navigation",
+      "visual_form": "Distinct architectural/container sprites marking transitions",
+      "meaning": "Safe passage between rooms; some jars enable warping to later worlds (risk mitigation)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player allies (Arabian family)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rescue objective: retrieve two youngest children from Mamu's custody; family identity embedded in character roster (Mama, Papa, Imajin, Lina)"
+    },
+    {
+      "faction": "Evil Mamu (antagonist/tyrant)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Mamu appears as end-stage boss; distinct from minion enemies",
+      "environmental_markers": "Storybook land of Muu corrupted by Mamu's curse; final confrontation in World 7"
+    },
+    {
+      "faction": "Subcon inhabitants (cursed population)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implied through world theming; freed/restored upon Wart's defeat in Super Mario Bros. 2 conversion"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-victory / Mamu's curse active",
+      "visual_manifestation": "Storybook world themed with thematic hazards (desert quicksand, snowy slippery surfaces); enemies patrol environments",
+      "behavioral_manifestation": "Enemies actively hostile; environmental traps persistent; no safe zones except Sub-space; player must navigate while under threat"
+    },
+    {
+      "world_state": "Temporary safety in Sub-space",
+      "visual_manifestation": "Reflected, mirrored visual representation of normal level space",
+      "behavioral_manifestation": "Enemies inactive/absent; player can freely collect coins and mushrooms; warping jars activate as alternate progression routes"
+    },
+    {
+      "world_state": "Boss encounter imminent",
+      "visual_manifestation": "Distinct boss sprite (Mamu as frog-form antagonist) appears at world conclusion",
+      "behavioral_manifestation": "Boss follows combat pattern; defeated via thrown objects/environmental interaction; world progression blocked until boss defeated"
+    },
+    {
+      "world_state": "Game over condition",
+      "visual_manifestation": "Implied game-over screen after final life loss",
+      "behavioral_manifestation": "Player loses all three lives; continue option available (up to two continues per game)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "World theming by environment type",
+      "example": "Desert worlds contain quicksand hazards; snowy areas feature slippery surfaces. Hazard type communicates world identity and mechanical challenge without explicit narrative text."
+    },
+    {
+      "technique": "Multi-section level design with doors/jars",
+      "example": "Rooms connected via doors and ladders; jars serve dual purpose (navigation gates and Sub-space portals). Architecture suggests interconnected storybook world with hidden passages."
+    },
+    {
+      "technique": "Enemy variety by world",
+      "example": "Different enemy types populate each world, visually distinct sprites communicate stage-specific threats and reinforce environmental theme"
+    },
+    {
+      "technique": "Health system as vulnerability narrative",
+      "example": "Heart-based health meter communicates character fragility in cursed world; floating heart rewards after combat suggest world gradually becoming less hostile"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Playable character (Mario/Luigi/Toad/Princess Toadstool)",
+      "state": "Normal traversal",
+      "behavior": "Character moves left/right, jumps, climbs ladders/vines; can pick up and throw objects (enemies, vegetables, blocks) at other enemies"
+    },
+    {
+      "entity": "Playable character (Luigi variant)",
+      "state": "Jump capability high",
+      "behavior": "Enhanced vertical jump height but slower horizontal speed; visual cue for character specialization"
+    },
+    {
+      "entity": "Playable character (Toad variant)",
+      "state": "Speed and strength high",
+      "behavior": "Rapid object pickup and throwing; lowest jump height; specialization for fast-paced item manipulation"
+    },
+    {
+      "entity": "Playable character (Princess Toadstool variant)",
+      "state": "Floating ability active",
+      "behavior": "Short-duration float/hover mechanic; lowest speed and strength; unique traversal advantage over other characters"
+    },
+    {
+      "entity": "Enemy sprites",
+      "state": "Active pursuit",
+      "behavior": "Patrol and attack patterns; defeated by being thrown at by player or struck with thrown objects; standing on enemies is ineffective"
+    },
+    {
+      "entity": "Boss enemy (Mamu/Wart)",
+      "state": "End-stage confrontation",
+      "behavior": "Distinct boss sprite; follows unique attack pattern; only defeated via environmental or thrown-object mechanics; signals world completion upon defeat"
+    },
+    {
+      "entity": "POW Block",
+      "state": "Activated",
+      "behavior": "Clears all visible enemies from screen instantly; limited-use panic mechanic for danger mitigation"
+    },
+    {
+      "entity": "Stopwatch item",
+      "state": "Collected",
+      "behavior": "Temporarily freezes enemy movement; provides brief window for safe passage or attack opportunity"
+    }
+  ],
+  "notes": "Doki Doki Panic (Yume Koujou: Doki Doki Panic) was an advergame for Fuji Television's 1987 media expo, later adapted into Super Mario Bros. 2 for Western markets. The game communicates world-state primarily through environmental hazards, enemy placement, and character ability differentiation rather than explicit visual state systems. The storybook aesthetic (Muu kingdom, dream-logic level design) and health-based vulnerability system differentiate it from jump-on-enemy platformers. Sub-space mechanic serves as a core safety/risk management system. Faction communication is minimal; the game emphasizes personal/family narrative (Arabian family vs. evil Mamu) over complex political systems.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:32:28.355Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5633,
+    "output_tokens": 2097,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

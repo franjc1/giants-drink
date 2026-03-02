@@ -1,0 +1,169 @@
+{
+  "_meta": {
+    "game": "Donkey Kong Country 2: Diddy's Kong Quest",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Nintendo",
+    "developer": "Rare",
+    "sources": [
+      {
+        "name": "DKC Atlas — DKC2 Technical Documentation",
+        "url": "http://www.dkc-atlas.com/dkc2/",
+        "notes": "Primary ROM hacking resource for DKC2. Physics studies section referenced but specific values not extracted in current review."
+      },
+      {
+        "name": "TASVideos — SNES / Donkey Kong Country 2",
+        "url": "https://tasvideos.org/GameResources/SNES/DonkeyKongCountry2",
+        "notes": "Speedrun technique documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DKC2 uses the same physics engine as DKC1 — 8.8 fixed-point (256 sub-pixels/pixel), signed.",
+      "DK was kidnapped — Diddy Kong and Dixie Kong are the playable pair.",
+      "DIDDY: Same physics as DKC1 Diddy. Cartwheel attack.",
+      "DIXIE: New character. Key addition: HELICOPTER SPIN (hold jump while falling = slow descent/horizontal travel).",
+      "The helicopter spin is the defining new mechanic of DKC2 — Dixie's ponytail spins to carry both Kongs.",
+      "Core physics (walk 2.0 px/f, run 3.0 px/f, jump -7 px/f, dual gravity) are assumed same as DKC1. VERIFY.",
+      "DKC2 is generally considered the best game in the DKC trilogy — level design builds extensively on the helicopter spin."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point signed",
+      "description": "Same as DKC1. Inherited from same physics engine."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 32
+    }
+  },
+
+  "ground_movement": {
+    "_note": "Assumed same as DKC1. VERIFY against DKC2 ROM data.",
+    "walk_speed": {
+      "hex_dkc1_confirmed": "0x02.00",
+      "px_per_frame": 2.0,
+      "confidence": "medium",
+      "notes": "Assumed same as DKC1. VERIFY DKC2 ROM."
+    },
+    "run_speed": {
+      "hex_dkc1_confirmed": "0x03.00",
+      "px_per_frame": 3.0,
+      "confidence": "medium",
+      "notes": "Assumed same as DKC1. VERIFY DKC2 ROM."
+    }
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "hex_dkc1_confirmed": "0xF9.00",
+      "px_per_frame": 7.0,
+      "confidence": "medium",
+      "notes": "Assumed same as DKC1. VERIFY DKC2 ROM."
+    },
+    "variable_jump": true
+  },
+
+  "gravity": {
+    "holding_jump": {
+      "hex_dkc1_confirmed": "0x00.48",
+      "px_per_frame_sq": 0.28125,
+      "confidence": "medium",
+      "notes": "Assumed same as DKC1."
+    },
+    "not_holding_jump": {
+      "hex_dkc1_confirmed": "0x00.70",
+      "px_per_frame_sq": 0.4375,
+      "confidence": "medium",
+      "notes": "Assumed same as DKC1."
+    }
+  },
+
+  "diddy_kong": {
+    "notes": "Diddy's base physics same as DKC1.",
+    "cartwheel": {
+      "description": "Horizontal rolling attack that covers distance and defeats most standard enemies.",
+      "speed_approx_px_per_frame": 4.0,
+      "confidence": "low"
+    }
+  },
+
+  "dixie_kong": {
+    "_note": "Dixie Kong is the new character introduced in DKC2. Her helicopter spin is the defining new mechanic.",
+    "walk_speed": {
+      "notes": "Similar to Diddy — slightly slower or same. VERIFY."
+    },
+    "jump": {
+      "notes": "Dixie's standard jump is slightly lower than Diddy's. Compensated by helicopter spin."
+    },
+    "helicopter_spin": {
+      "description": "While airborne, pressing jump or holding jump causes Dixie to spin her ponytail like a helicopter, slowing descent and allowing horizontal travel.",
+      "activation": "Press or hold jump button while airborne",
+      "effect_on_descent": "Dramatically reduces downward velocity — near-horizontal glide",
+      "horizontal_speed_maintained": "Maintains horizontal momentum from before spin activation",
+      "duration": "Can be maintained for 3-4 seconds before Dixie 'runs out' and falls normally",
+      "confidence": "medium",
+      "notes": [
+        "Helicopter spin allows crossing gaps that would require precise jump timing to navigate without it.",
+        "When carrying Diddy (Diddy on Dixie's back), both benefit from the helicopter spin.",
+        "The spin can be used mid-jump to extend horizontal distance significantly.",
+        "Level design in DKC2 has many gaps explicitly requiring helicopter spin for standard traversal.",
+        "Exact descent speed and horizontal speed during spin need ROM verification."
+      ]
+    },
+    "ponytail_attack": {
+      "description": "Dixie can attack with her ponytail (whip-like) when pressing B while not in run.",
+      "notes": "Short-range melee attack. Primarily used for hitting enemies at close range."
+    }
+  },
+
+  "tag_team": {
+    "notes": "Same 2-hit system as DKC1. First hit loses one partner; second (with remaining partner alone) = death.",
+    "barrel_rescue": "Diddy or Dixie barrels appear in stages to rescue the lost partner."
+  },
+
+  "animal_buddies": {
+    "_note": "Different set from DKC1. Highlights the new mechanics unique to DKC2.",
+    "squawks": {
+      "description": "Parrot. RIDEABLE in DKC2 (upgraded from lantern-carrier in DKC1). Can fly freely and attack by spitting nuts.",
+      "flight_speed_approx": "medium — controllable directional flight",
+      "notes": "Squawks sections are free-flight challenges. Can attack enemies by pressing fire button."
+    },
+    "rattly": {
+      "description": "Rattlesnake. EXTREMELY high jump — higher than any Kong or other buddy.",
+      "jump_height_approx_tiles": 5,
+      "notes": "Rattly's super-jump is the highest vertical reach in the game. Sections using Rattly have tall vertical structures."
+    },
+    "squitter": {
+      "description": "Spider. Creates web platforms by pressing fire. Web platforms can be jumped on.",
+      "web_platform_duration_frames_approx": 120,
+      "notes": "Squitter sections are puzzle-platforms: create webs to reach inaccessible areas. Web creation is the primary mechanic."
+    },
+    "clapper": {
+      "description": "Seal. Claps to temporarily freeze hot lava into solid ground, or cool boiling water.",
+      "notes": "Environmental interaction buddy. Creates temporary platforms in hazardous terrain."
+    },
+    "rambi": {
+      "description": "Rhino. Returns from DKC1. Same high-speed charge mechanics.",
+      "notes": "Same as DKC1 Rambi."
+    },
+    "glimmer": {
+      "description": "Anglerfish. Provides light in dark underwater sections.",
+      "notes": "Like DKC1 Squawks, purely a visibility mechanic. Not combat or traversal."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Dixie's helicopter spin is the most mechanically impactful addition over DKC1. It turns large horizontal gaps from skill challenges into accessibility ramps — even if you don't time the jump perfectly, the spin can compensate. This shifts difficulty from 'can you clear this gap' to 'how efficiently can you navigate with the spin.'",
+    "DKC2's animal buddies are more mechanically varied than DKC1's. Squitter (web platforms), Clapper (terrain transformation), Rattly (extreme vertical reach) each create fundamentally different gameplay contexts within their sections.",
+    "Squitter's web-platform creation is the most puzzle-game-like mechanic in the DKC series. It requires spatial planning: place web here, jump to web, place next web ahead of it. This is light puzzle-game design within a platformer.",
+    "The helicopter spin changes the pace of DKC2 compared to DKC1. DKC1 requires more precise jumping; DKC2 allows more aerial improvisation. DKC2 is consequently considered more approachable while still deeply rewarding skilled play.",
+    "DKC2's level design is widely considered the high point of the trilogy — more varied, more inventive, and better paced than DKC1 and DKC3. The expanded mechanics (helicopter spin + new buddies) gave the designers more tools to work with."
+  ]
+}

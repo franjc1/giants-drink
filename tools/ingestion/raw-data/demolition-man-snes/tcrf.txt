@@ -1,0 +1,349 @@
+Demolition Man (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Demolition Man (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Demolition Man
+
+Developer :
+
+Alexandria
+
+&#91;1&#93;
+
+Publisher :
+
+Acclaim Entertainment
+
+&#91;2&#93;
+
+&#91;3&#93;
+
+Platform :
+
+SNES
+
+Released in US : August 1995  &#91;2&#93;
+
+Released in EU : September 28,&#160;1995  &#91;3&#93;
+
+This game has  uncompiled source code .
+
+This game has  hidden developer credits .
+
+This game has a  hidden level select .
+
+This needs some investigation.
+
+Discuss ideas and findings on the  talk page .
+
+Specifically:  There seems to be text for a level select within the text for the options menu (  x10C4D  ).
+
+Contents
+
+1
+
+Level Skip
+
+2
+
+Sound Driver Credit
+
+3
+
+Uncompiled Source Code
+
+4
+
+References
+
+Level Skip
+
+Pause the game and press  Y ,  A ,  R ,  Down  on the SNES controller to go to the next level.
+
+Sound Driver Credit
+
+Stored at
+
+0x17E27F  :
+
+SLICK/Audio v1.01 Copyright(C)1994 Bitmasters,Inc.
+
+Uncompiled Source Code
+
+The European version has a couple of fragments of code. They can be found inside the ROM at the following points:
+
+0x147DDC  :
+
+eraMan_Foreground+Point_yLoc+Int,x
+
+4,1152,189 
+542408:0E2408 00 0000 ai 90 03 80 04 59600  DC.W 912,1152,162 
+54240E:0E240E 00 0000 ai A0 03 90 04 59700  DC.W 928,1168,162 
+542414:0E2414 00 0000 ai 50 02 A0 04 59800  DC.W 592,1184,132 
+54241A:0E241A 00 0000 ai 80 02 A0 04 59900  DC.W 640,1184,132 
+542420:0E2420 00 0000 ai E0 03 A0 04 60000  DC.W 992,1184,190 
+542426:0E2426 00 0000 ai F0 03 A0 04 60100  DC.W 1008,1184,190 
+54242C:0E242C 00 0000 ai 60 02 B0 04 60200  DC.W 608,1200,45 
+542432:0E2432 00 0000 ai C0 03 B0 04 60300  DC.W 960
+
+0x14F6D0  :
+
+beq	.int_or_wall
+	bra	.not_int_or_wall
+
+.int_or_wall:
+
+; pCMap->nDeltaX.Long = WORD2FIXED(xPrev) - pCMap->xLoc.Long;
+	lda	#0
+	sub	{ContourMap_xLoc+2,X}
+	sta	ContourMap_nDeltaX+2,X&#160;; fraction
+	lda	<.xPrev
+	sbc	ContourMap_xLoc,X
+	sta	ContourMap_nDeltaX,X
+
+; integer
+
+; pCMap->xPos = xPrev;
+	0 00 0000 ai F0 06 C0 0A 27560  DC.W 1776,2752,184 
+54AAA6:0EAAA6 00 0000 ai 00 07 C0 0A 27570  DC.W 1792,2752,184 
+54AAAC:0EAAAC 00 0000 ai 10 07 C0 0A 27580  DC.W 1808,2752,184 
+54AAB2:0EAAB2 00 0000 ai 20 07 C0 0A 27590  DC.W 1824,2752,184 
+54AAB8:0EAAB8 00 0000 ai 30 07 C0 0A 27600  DC.W 1840,2752,184 
+54AABE:0EAABE 00 0000 ai 40 07 C0 0A 27610  DC.W 1856,2752,184 
+54AAC4:0EAAC4 00 0000 ai 50 07 C0 0A 27620  DC.W 1872,2752,184 
+54AACA:0EAACA 00 0000 ai 60 07 C0 0A 27630  DC.W 1888,2752,184 
+54AAD0:0EAAD0 00 0000 ai 70 07 C0 0A 27640  DC.W 1904,2752,184 
+54AAD6:0EAAD6 00 0000 ai 80 07 C0 0A 27650  DC.W 1920,2752,184 
+54AADC:0EAADC 00 0000 ai 90 07 C0 0A 27660  DC.W 1936,2752,184 
+54AAE2:0EAAE2 00 0000 ai A0 07 C0 0A 27670  DC.W 1952,2752,184 
+54AAE8:0EAAE8 00 0000 ai B0 07 C0 0A 27680  DC.W 1968,2752,184 
+54AAEE:0EAAEE 00 0000 ai C0 07 C0 0A 27690  DC.W 1984,2752,184 
+54AAF4:0EAAF4 00 0000 ai D0 07 C0 0A 27700  DC.W 2000,2752,184 
+54AAFA:0EAAFA 00 0000 ai E0 07 C0 0A 27710  DC.W 2016,2752,184 
+54AB00:0EAB00 00 0000 ai F0 07 C0 0A 27720  DC.W 2032,2752,204 
+54AB06:0EAB06 00 0000 ai 60 07 F0 0A 27730  DC.W 1888,2800,201 
+54AB0C:0EAB0C 00 0000 ai
+
+2774  ; METATILE # 165
+
+54AB0C:0EAB0C 00 0000 ai 00 08 C0 0A 27750  DC.W 2048,2752,184 
+54AB12:0EAB12 00 0000 ai 10 08 C0 0A 27760  DC.W 2064,2752,184 
+54AB18:0EAB18 00 0000 ai 20 08 C0 0A 27770  DC.W 2080,2752,184 
+54AB1E:0EAB1E 00 0000 ai 30 08 C0 0A 27780  DC.W 2096,2752,184 
+54AB24:0EAB24 00 0000 ai 40 08 C0 0A 27790  DC.W 2112,2752,184 
+54AB2A:0EAB2A 00 0000 ai 50 08 C0 0A 27800  DC.W 2128,2752,184 
+54AB30:0EAB30 00 0000 ai 60 08 C0 0A 27810  DC.W 2144,2752,184 
+54AB36:0EAB36 00 0000 ai 70 08 C0 0A 27820  DC.W 2160,2752,184 
+54AB3C:0EAB3C 00 0000 ai 80 08 C0 0A 27830  DC.W 2176,2752,184 
+54AB42:0EAB42 00 0000 ai 90 08 C0 0A 27840  DC.W 2192,2752,184 
+54AB48:0EAB48 00 0000 ai A0 08 C0 0A 27850  DC.W 2208,2752,184 
+54AB4E:0EAB4E 00 0000 ai B0 08 C0 0A 27860  DC.W 2224,2752,184 
+54AB54:0EAB54 00 0000 ai C0 08 C0 0A 27870
+
+(Source:  Original TCRF research )
+
+The US release ROM also contains some uncompiled code. At
+
+0x147E00  :
+
+bContinueLevel
+	bnel .LevelLoop
+	brl .endLevel
+
+;-------------------------- 30 Hz Loop -----------------------------------
+	xdef .LevelLoop30Hz
+.LevelLoop30Hz:
+	inc <nWallClock
+	bne .go_on3
+	inc <nWallClock+2
+.go_on3
+	WaitVBlank
+
+jsr VBlank_Tasks1
+
+;	SET_BACK_COLOR RED
+
+; tick spartan explicitly
+	SetBank #OBJECT_BANK
+	ldx pCameraMan
+	DoMethodX Object_mTick
+	ldx pCamera
+	DoMethodX Object_mTick
+	ldx parallaxCamera
+	DoMethodX Object_mTick
+	ldx pPlayer
+	DoMethodX Object_mTick
+
+l
+
+References
+
+↑
+
+Alexandria - GDRI&#160;:: Game Developer Research Institute
+
+↑
+
+2.0
+
+2.1
+
+SNES Games (archived)
+
+↑
+
+3.0
+
+3.1
+
+www.NINTENDO.se - Spel - Super NES (archived)
+
+Retrieved from " https://tcrf.net/index.php?title=Demolition_Man_(SNES)&oldid=2030192 "
+
+Categories :
+
+Games developed by Alexandria
+
+Games published by Acclaim Entertainment
+
+SNES games
+
+Games released in 1995
+
+Games released in August
+
+Games with uncompiled source code
+
+Games with hidden developer credits
+
+Games with hidden level selects
+
+To investigate
+
+Cleanup  >  To investigate
+
+Games  >  Games by content  >  Games with hidden developer credits
+
+Games  >  Games by content  >  Games with hidden level selects
+
+Games  >  Games by content  >  Games with uncompiled source code
+
+Games  >  Games by developer  >  Games developed by Alexandria
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Throwback Entertainment  >  Games published by Acclaim Entertainment
+
+Games  >  Games by release date  >  Games released in 1995
+
+Games  >  Games by release date  >  Games released in August
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 10 February 2026, at 16:09.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

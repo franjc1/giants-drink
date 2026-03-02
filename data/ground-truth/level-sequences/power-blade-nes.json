@@ -1,0 +1,177 @@
+{
+  "game_id": "power-blade-nes",
+  "game_name": "Power Blade",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": 6,
+  "world_count": 1,
+  "element_introduction_order": [
+    {
+      "element": "Boomerang (basic weapon)",
+      "first_appears": "Game Start / Sector 1",
+      "introduction_context": "safe",
+      "mastery_context": "Primary attack tool, fires in 8 directions (unique for NES platformers)"
+    },
+    {
+      "element": "Life Meter",
+      "first_appears": "Game Start",
+      "introduction_context": "safe",
+      "mastery_context": "Depletes on enemy contact; full depletion or pit falls cause life loss"
+    },
+    {
+      "element": "Basic Enemies",
+      "first_appears": "Early Sectors (1-2)",
+      "introduction_context": "moderate",
+      "mastery_context": "Aliens guard each sector; defeated by boomerang attacks"
+    },
+    {
+      "element": "Boomerang Power-ups (spread, range, power)",
+      "first_appears": "Sector 1-2",
+      "introduction_context": "moderate",
+      "mastery_context": "Upgrades to weapon spread (multiple boomerangs), range extension, and damage increase"
+    },
+    {
+      "element": "Agent NPCs (stage-specific)",
+      "first_appears": "Within each Sector",
+      "introduction_context": "moderate",
+      "mastery_context": "Must locate agent in each sector to receive ID card for database access"
+    },
+    {
+      "element": "ID Card / Access mechanic",
+      "first_appears": "After contacting Agent",
+      "introduction_context": "moderate",
+      "mastery_context": "Required to enter security room in each sector"
+    },
+    {
+      "element": "Security Room / Boss Encounters",
+      "first_appears": "Mid-stage (after agent contact)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Sector-specific boss fights; defeat required to obtain data tape"
+    },
+    {
+      "element": "Data Tapes",
+      "first_appears": "After defeating sector boss",
+      "introduction_context": "moderate",
+      "mastery_context": "One tape per sector; all six required to unlock Control Center"
+    },
+    {
+      "element": "Power Suit",
+      "first_appears": "Various stages (mid-to-late game)",
+      "introduction_context": "moderate",
+      "mastery_context": "Equips automatically; grants ability to shoot energy blasts (Power Blades) in 8 directions through most surfaces"
+    },
+    {
+      "element": "Stage Select Screen",
+      "first_appears": "After initial sequence",
+      "introduction_context": "safe",
+      "mastery_context": "Non-linear progression; player chooses any of 6 sectors in any order"
+    },
+    {
+      "element": "Master Computer Control Center",
+      "first_appears": "After all 6 tapes collected",
+      "introduction_context": "dangerous",
+      "mastery_context": "Final stage; player must destroy alien overlord and restore Master Computer"
+    },
+    {
+      "element": "Time Limit",
+      "first_appears": "Each sector (implicit)",
+      "introduction_context": "moderate",
+      "mastery_context": "Time running out causes life loss; pressure mechanic"
+    },
+    {
+      "element": "Pit Hazards",
+      "first_appears": "Early sectors",
+      "introduction_context": "dangerous",
+      "mastery_context": "Falling off screen results in instant death (unique to Power Blade vs sequels)"
+    },
+    {
+      "element": "Password System",
+      "first_appears": "Game Over / Continue Screen",
+      "introduction_context": "safe",
+      "mastery_context": "Allows restart at specific checkpoint; progression persistence"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Defeating a sector boss",
+      "Obtaining data tape (sector disarm cutscene with relief music BGM0A)",
+      "Reaching stage select screen",
+      "Collecting power-ups (boomerang upgrades)",
+      "Contacting agent (grants access card)"
+    ],
+    "typical_tension_triggers": [
+      "Time limit pressure (decreases life)",
+      "Entering security room with boss",
+      "Approaching pit hazards (instant death mechanic)",
+      "Enemy spawn waves in confined spaces",
+      "Low health state",
+      "Transitioning to Control Center (final area music BGM07 'Well!Well!Well!' described as foreboding)"
+    ],
+    "pacing_descriptor": "Non-linear multi-stage structure with repeating tension-relief cycles per sector; six self-contained arc completions before climactic finale. Boss BGM (BGM0B) escalates tension; sector disarm cutscene music (BGM0A) provides relief. Time limit creates sustained low-level pressure throughout. Power-up collection breaks tension momentarily."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Boomerang attack in 8 directions suggests multi-directional exploration; agent location within sectors implies non-linear search patterns",
+    "secret_convention": "Not documented in sources; common NES convention of hidden items in ceiling/wall areas implied by power-up distribution but not explicitly described",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Tutorial-like introduction through Stage Select and Sector 1-2; basic boomerang mechanics and simple enemy patterns establish baseline",
+    "mid_game": "Sectors 3-5 introduce escalating enemy density, more complex platforming hazards (pits, multi-level navigation), and more difficult boss patterns. Power-up collection becomes strategically important",
+    "late_game": "Sector 6 and Control Center feature dense enemy placement, complex arena design, final boss with transformation (David Uncle becomes more dangerous alien form with BGM0C). Player must have mastered 8-direction aiming and boomerang upgrades",
+    "notable_spikes": [
+      "First boss encounter (security room introductory shock)",
+      "Sector 6 (pre-Control Center difficulty peak)",
+      "Final Boss / Control Center (alien overlord with transformation mechanic)",
+      "Pit hazard intensity increases mid-game (instant death penalty unique to Power Blade)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Sector Linear Progression Arc",
+      "description": "Each of 6 sectors follows: exploration → locate agent → receive ID card → navigate to security room → defeat boss → obtain data tape → sector disarm cutscene with BGM0A (relief music). Structurally identical repetition with thematic variation",
+      "example_level": "Sector 1 (Rocket/Space Development BGM05) through Sector 6 (Residential Area BGM08)"
+    },
+    {
+      "pattern_name": "Boss Door Gatekeeping",
+      "description": "Security room access gated behind agent contact; forces non-linear search within sector before linear climax. Creates optional backtracking for power-ups before entering danger zone",
+      "example_level": "All six sectors employ this pattern"
+    },
+    {
+      "pattern_name": "Thematic Music Association",
+      "description": "Each sector has dedicated BGM reflecting its function: Sector 1 (Space Development), Sector 2 (Energy Development BGM06), Sector 3 (Life Research BGM03), Sector 4 (Weather Control BGM09), Sector 5 (Military Base BGM04), Sector 7 (Central Control Center BGM02). Music signals location/purpose",
+      "example_level": "Sector 3 (BIO theme) vs Sector 5 (BASE theme) convey different environmental contexts"
+    },
+    {
+      "pattern_name": "Final Stage Escalation",
+      "description": "Control Center serves as climactic integration; requires all 6 tapes to access. Utilizes new boss theme (BGM0C) for alien overlord transformation. No sector select available; linear final sequence",
+      "example_level": "Control Center / Master Computer final battle"
+    },
+    {
+      "pattern_name": "Non-Linear Sector Selection",
+      "description": "Stage select screen allows any-order progression through 6 sectors (Mega Man-inspired). Map screen redesigned in US/EU version for clarity. Creates player agency and difficulty self-selection",
+      "example_level": "Stage Select (BGM01 Select BGM) gateway for all 6 sectors"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - comprehensive regional differences, music/SFX documentation, stage structure details)",
+    "wikipedia (gameplay mechanics, plot structure, boomerang/power-up systems, time limit/pit hazard rules)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:28:41.247Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6126,
+    "output_tokens": 2280,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

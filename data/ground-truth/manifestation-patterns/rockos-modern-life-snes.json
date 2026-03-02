@@ -1,0 +1,187 @@
+{
+  "game_id": "rockos-modern-life-snes",
+  "game_name": "Rocko's Modern Life: Spunky's Dangerous Day",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Obstacles and hazards",
+      "visual_form": "Environmental objects (mower, geyser, steam, bee)",
+      "meaning": "Physical threats requiring avoidance or navigation skill"
+    },
+    {
+      "signal": "Hostile entities",
+      "visual_form": "Bee sprite, animated hazards",
+      "meaning": "Active enemies that pursue or block progression"
+    },
+    {
+      "signal": "Environmental instability",
+      "visual_form": "Geyser, steam, splash animations",
+      "meaning": "Unpredictable or dynamic hazards that change state"
+    },
+    {
+      "signal": "Mechanical threats",
+      "visual_form": "Mower, gun (mgun), pillar sprites",
+      "meaning": "Automated or structural dangers in modern suburban setting"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Protected escort target",
+      "visual_form": "Spunky character sprite with idle/walking animation",
+      "meaning": "Player objective—keep this entity alive and moving forward"
+    },
+    {
+      "signal": "Clear passage",
+      "visual_form": "Open yard/block space without active hazards",
+      "meaning": "Safe ground for movement and escort progression"
+    },
+    {
+      "signal": "Interactive safe objects",
+      "visual_form": "Button sprite, stationary block structures",
+      "meaning": "Passive elements player can use or activate for progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Rocko (player character)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Rocko turning animation (unused), direction-facing behavior",
+      "environmental_markers": "Yard-based domestic setting with suburban obstacles"
+    },
+    {
+      "faction": "Spunky (escort NPC/objective)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Must remain protected in foreground; tied to player success state"
+    },
+    {
+      "faction": "Hazards/Enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Bee, mechanical threats (gun, mower)",
+      "enemy_visual_variants": "Bee animation, machine sprites with movement patterns",
+      "environmental_markers": "Scattered throughout yard; represent modern suburban dangers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal progression",
+      "visual_manifestation": "Spunky stationary or moving forward; obstacles visible but navigable",
+      "behavioral_manifestation": "Rocko controls movement; Spunky follows or remains in protected zone"
+    },
+    {
+      "world_state": "Active hazard encounter",
+      "visual_manifestation": "Animated hazard sprites (geyser eruption, bee flight, mower movement)",
+      "behavioral_manifestation": "Rocko must dodge; if Spunky hit, likely failure state indicated"
+    },
+    {
+      "world_state": "Button activation",
+      "visual_manifestation": "Button sprite becomes active (visual state change likely)",
+      "behavioral_manifestation": "Mechanical response—gate opens, pillar moves, or hazard deactivates"
+    },
+    {
+      "world_state": "Danger in proximity",
+      "visual_manifestation": "Hazard animation intensifies (steam, splash, pillar creaking sound/visual)",
+      "behavioral_manifestation": "Rocko must react quickly; Spunky vulnerability increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Suburban setting as threat landscape",
+      "example": "Yard transformed from domestic space to obstacle course—lawn mower, garden geyser, yard bee all weaponized by narrative context (Spunky's dangerous day)"
+    },
+    {
+      "technique": "Object literacy from cartoon source",
+      "example": "Players familiar with Rocko's Modern Life recognize visual props (geyser, mower) as recurring hazards from show; environmental design leverages existing IP knowledge"
+    },
+    {
+      "technique": "Mechanized modern dangers",
+      "example": "Gun sprite, steam, flush mechanics suggest household/garden tools become threats—visual metaphor for suburban mundanity turned perilous"
+    },
+    {
+      "technique": "Animation state communication",
+      "example": "Creak, thud, bounce sounds tied to sprite animations indicate object state changes and narrative progression through physical manifestation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Spunky",
+      "state": "Safe/escorted",
+      "behavior": "Remains in designated area; follows Rocko or waits stationary"
+    },
+    {
+      "entity": "Spunky",
+      "state": "Threatened",
+      "behavior": "Likely animation change (panic, fleeing) or loss condition triggered"
+    },
+    {
+      "entity": "Bee",
+      "state": "Patrolling/idle",
+      "behavior": "Flight pattern animation; predictable movement arc"
+    },
+    {
+      "entity": "Bee",
+      "state": "Attacking",
+      "behavior": "Accelerated animation; direct pursuit toward Rocko/Spunky"
+    },
+    {
+      "entity": "Mower",
+      "state": "Off",
+      "behavior": "Static sprite; no animation"
+    },
+    {
+      "entity": "Mower",
+      "state": "Active",
+      "behavior": "Movement animation; sweeping action; hazard zone around blade area"
+    },
+    {
+      "entity": "Geyser",
+      "state": "Dormant",
+      "behavior": "Static ground sprite"
+    },
+    {
+      "entity": "Geyser",
+      "state": "Erupting",
+      "behavior": "Explosive splash animation; temporary hazard zone; likely triggered by proximity or time"
+    },
+    {
+      "entity": "Button",
+      "state": "Unpressed",
+      "behavior": "Visible but no effect; neutral sprite state"
+    },
+    {
+      "entity": "Button",
+      "state": "Pressed",
+      "behavior": "Activates linked hazard deactivation or path opening; visual feedback (depression/highlight)"
+    },
+    {
+      "entity": "Rocko",
+      "state": "Turning/facing direction",
+      "behavior": "Unused animation suggests planned directional behavior (turning toward camera for emphasis or mode change)"
+    }
+  ],
+  "notes": "This is an escort platformer based on Nickelodeon IP. The manifestation layer is primarily visual—hazard sprites, animation states, and environmental props communicate danger. The world-state is largely binary (safe navigation vs. active hazard) with mechanical state-changes (buttons, geyser triggers). Faction identity is implicit through character role (player, escort, enemy) rather than explicit visual markers like color or sigil. The suburban yard setting serves dual purpose: familiar IP context and threat landscape. Available source data is limited to development notes and unused graphics; comprehensive behavioral observation requires gameplay footage analysis.",
+  "sources_used": [
+    "tcrf—Rocko's Modern Life: Spunky's Dangerous Day (development text and unused graphics inventory)"
+  ],
+  "TODO": [
+    "Detailed color palette per faction (requires gameplay footage)",
+    "Exact animation frame counts for state changes",
+    "Audio-visual synchronization patterns",
+    "Difficulty escalation visual tells",
+    "Spunky loss/failure condition visual manifestation",
+    "Level progression visual markers"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:38:34.131Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1616,
+    "output_tokens": 2273,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

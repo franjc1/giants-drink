@@ -1,0 +1,723 @@
+Addams Family Values (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Addams Family Values (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Addams Family Values
+
+Developer :
+
+Ocean
+
+Publisher :
+
+Ocean
+
+Platform :
+
+SNES
+
+Released in US : February 1995  Released in EU :  1995
+
+This game has  unused code .
+
+This game has  unused items .
+
+This game has  debugging material .
+
+This game has a  hidden sound test .
+
+This game has a  hidden level select .
+
+This game has  anti-piracy features .
+
+This game has a prototype article
+
+This game has a notes page
+
+An overhead Action-RPG, similar to Zelda.
+
+Contents
+
+1
+
+Sub-Pages
+
+2
+
+Debugging Features
+
+2.1
+
+Debug Menu
+
+2.1.1
+
+Continue
+
+2.1.2
+
+Statistics
+
+2.1.3
+
+Memory Map
+
+2.1.4
+
+Display Conditions
+
+2.1.5
+
+Messages
+
+2.1.6
+
+Exit
+
+2.2
+
+Debug Cutscene Viewer
+
+2.3
+
+Debug Text Viewer
+
+2.4
+
+Debug Walk Through Walls And Disable Collision Detection
+
+2.5
+
+Debug Inventory
+
+2.6
+
+Misc. Notes
+
+3
+
+Infinite Energy Cheat
+
+4
+
+Removed Options
+
+5
+
+Unused Items
+
+5.1
+
+Black Egg
+
+5.2
+
+Portal Potion
+
+6
+
+Anti-Piracy
+
+Sub-Pages
+
+Prototype Info
+
+Notes
+
+Debugging Features
+
+There were once debugging commands assigned to various buttons (or button combinations), but the pointers to them were deleted in the final game. They can still be accessed by using game enhancer codes.
+
+Debug Menu
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+80830B24
+
+406D-34AD
+
+808324EE
+
+3364-3FDD
+
+80832B00
+
+DD64-34AD
+
+During gameplay, press  Y  to open the debug menu. Note that since these codes map the debug menu to the  Y  button, in order to view the Journal you will need to select it from the inventory screen and press  A .
+
+Continue
+
+Resume the game (not the same as Exit, see below).
+
+Statistics
+
+Press  A ,  B ,  X , or  Y  to exit.
+
+Memory Map
+
+Press  A ,  B ,  X , or  Y  to exit.
+
+Display Conditions
+
+Show the status of story flags. Press  X  or  Y  to change pages. Press  A  or  B  to exit. The screenshots show the conditions as they are set upon starting a new game.
+
+Messages
+
+Displays every line of text from the game. Use D-Pad  Left  or  Right  to decrease or increase the text index, and  Up  and  Down  to scroll through the messages in a conversation. Press  X  or  Y  to change languages. Press  A  or  B  to exit.
+
+Exit
+
+Warps to the location set in ROOM and SECTION.
+
+Debug Cutscene Viewer
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+80830314
+
+F06D-3DAD
+
+808314A9
+
+CB6F-3FDD
+
+808315xx
+
+xx6F-3F0D
+
+80831600
+
+DD6F-3F6D
+
+Use a value from the table below for
+
+xx
+
+and press  Start  during the game to view a cutscene.
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+Description
+
+00
+
+DD
+
+Front gate
+
+01
+
+DF
+
+Smashed pillar hidden staircase
+
+02
+
+D4
+
+Bookcase
+
+03
+
+D7
+
+Wednesday pumpkin
+
+04
+
+D0
+
+Petrified wilderness
+
+05
+
+D9
+
+Swamp
+
+06
+
+D1
+
+Uncle Fritz
+
+07
+
+D5
+
+Mansion
+
+08
+
+D6
+
+Pipe ready to burst
+
+09
+
+DB
+
+Foul sewage
+
+0A
+
+DC
+
+Congratulations! Ending
+
+0B
+
+D8
+
+Gargoyle
+
+0C
+
+DA
+
+Thing escapes up the vine
+
+0D
+
+D2
+
+Bookcase
+
+0E
+
+D3
+
+Bookcase
+
+0F
+
+DE
+
+Bookcase
+
+Debug Text Viewer
+
+Located at SNES address
+
+$808331-808335
+
+is programming to display a text box. It expects RAM address
+
+7E064C
+
+to already contain the 16-bit text index. Since this would require more than a few game enhancer codes to get working, you can instead produce an equivalent effect using  Pro Action Replay  (PAR) code
+
+80FC8Cxx
+
+to change the text that appears when showing the "Hey I can't leave just yet." text box immediately when starting the game. The valid range for
+
+xx
+
+is
+
+00-C1  .
+
+Debug Walk Through Walls And Disable Collision Detection
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+8083033E
+
+736D-3DAD
+
+Press  Start  while playing to toggle the free movement mode on or off. Alternate  Pro Action Replay  (PAR) codes are
+
+7E0A8EFF
+
++
+
+7E0A8FFF  .
+
+Debug Inventory
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+81952D4E
+
+03B4-1709
+
+When the inventory screen is open, move the cursor to the desired item slot and press  B  to add/remove it. Exit and enter the inventory screen again to refresh the view. Note that you can't remove an item if it is currently equipped (just move the cursor to another item that can be equipped and press  A , then go back to the item you want to remove and press  B .)
+
+Misc. Notes
+
+The debug menu, and the debug toggle WTW and collision detection requires memory address
+
+7E0414
+
+to contain
+
+#$5257
+
+to access, which almost certainly is meant to represent ASCII  RW  for programmer Robert Walker. The debug inventory and many features of the debug menu require a non-zero value in memory address
+
+7E0414
+
+as well. This was likely done to provide various levels of access to the debugging features while the game was still in development. No non-zero writes to
+
+7E0414
+
+have been found in the programming of the final version of the game.
+
+(Source: JLukas (debugging codes)
+
+Infinite Energy Cheat
+
+This cheat code managed to stay undiscovered for approximately 25 years. The first step is to hold  Select  while pressing  Start  to open the inventory. Once the inventory screen has finished loading, release  Select  and move the cursor to the item slot reserved for the Spider's Eye as shown in the screenshot above (3rd row from the bottom, last column). It isn't necessary to actually have the item. Next, hold  L  and  Select , and press  Right, A, B, Right, A, B . If done correctly, a sound effect will confirm success. Resume the game and the infinite energy cheat is now enabled. To turn the effect off, repeat the entire cheat process.
+
+(Source: JLukas)
+
+Removed Options
+
+Full options
+
+Final options
+
+A number of options were deleted in the final release:
+
+Difficulty: Easy, Normal, Hard
+
+7EFFC2xx
+
+difficulty
+
+00
+
+- Easy
+
+01
+
+- Normal
+
+02
+
+- Hard
+
+Control: Method A, Method B, Method C
+
+7EFFC6xx
+
+control type
+
+00
+
+- Method A
+
+01
+
+- Method B
+
+02
+
+- Method C
+
+The memory addresses for  Difficulty  and  Control  are never checked anywhere outside the options menu.
+
+Music Test
+
+Sound Test
+
+These were fully programmed, and available in the options menu for the Genesis version, but were deleted for no apparent reason. However, the debug menu has a music and sound effect test of its own.
+
+Unused Items
+
+Black Egg
+
+In the room before the final boss, Morobe offers an item:
+
+It explodes when Fester touches it, reducing HP by half:
+
+The dialogue suggests it was originally meant to be picked up (i.e, added to the inventory) and taken into the final boss room where Fester would receive a nasty surprise. The instruction manual, which details several prototype elements not found in the final game, has the following to say:
+
+" Black Egg (Level 7, Morobe possesses it)
+
+When thrown and smashed, a flurry of small spiders will attack Fester (best to leave alone.) "
+
+This was likely changed either due to it making the battle too difficult, or being funnier to watch Fester immediately fall for the trick.
+
+A spot is still reserved for it on the inventory screen, and although it can be obtained using the debug inventory code, it has no effect when used with the  A  button (the pointer is set to
+
+$0000
+
+/ blank). It's currently unknown if there's any leftovers in the programming for its old behavior, assuming that it was even worked on before the change was made.
+
+Since it can't be picked up, this portrait for it goes unused.
+
+Portal Potion
+
+This item is completely unused, with no clues to its purpose found so far. The pointer to the portrait graphic and/or portrait palette is blank, causing the game to freeze when using an item modifier cheat to pick it up off the ground. When added using the debug inventory code, it has no effect when used with the  A  button (the pointer is set to
+
+$0000
+
+/ blank).
+
+The other three potions share the same portrait but use different palettes; this probably would've done the same using a grey palette.
+
+Anti-Piracy
+
+This game uses a password system instead of battery-backed SRAM to keep track of the player's progress. Nevertheless, the game will check for the presence of SRAM to determine if the game is running on a cartridge copier aka backup unit, which has its own SRAM. There are four known situations where the protection is triggered if the values written to certain SRAM addresses are able to be read back successfully:
+
+On boot up, via writing to
+
+$770000  . Uses the aforementioned ASCII  RW  initials as the test value. If the write is successful, the game fades in on a  SRAM ERROR!  screen and hangs. If the initial bootup check is bypassed, the value will still be read every frame of the copyright screen and the game hangs on the copyright screen if this second check is not bypassed.
+
+When given an item during a conversation (e.g., Journal), via writing two bytes of values to a random address selected by register
+
+$60  . It also prematurely stops the game with an  SRAM ERROR!  screen after a fade out.
+
+When starting a conversation that doesn't give you an item, done by writing the value  30  to a random address selected by register
+
+$60  . If entering a room that has an item on the ground (e.g., Black Rose), its sprite will be invisible. However, it can still be picked up if you know its location.
+
+When Fester tries to pick up an item (again using the Black Rose as an example), he will be unable to do so.
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Addams Family
+
+series
+
+ZX Spectrum
+
+The Addams Family
+
+Commodore 64
+
+The Addams Family
+
+NES
+
+Fester's Quest &#160;&#8226;
+
+The Addams Family &#160;&#8226;
+
+Pugsley's Scavenger Hunt  ( Prototype )
+
+SNES
+
+The Addams Family &#160;&#8226;
+
+Pugsley's Scavenger Hunt &#160;&#8226;
+
+Addams Family Values  ( Prototype )
+
+Game Boy (Color)
+
+The New Addams Family Series  ( Prototype )
+
+Genesis
+
+The Addams Family &#160;&#8226;
+
+Addams Family Values  ( Prototype )
+
+Windows, PlayStation 4, Xbox One, Nintendo Switch
+
+Mansion Mayhem
+
+Retrieved from " https://tcrf.net/index.php?title=Addams_Family_Values_(SNES)&oldid=1973952 "
+
+Categories :
+
+Games developed by Ocean
+
+Games published by Ocean
+
+SNES games
+
+Games released in 1995
+
+Games released in February
+
+Games with unused code
+
+Games with unused items
+
+Games with debugging functions
+
+Games with hidden sound tests
+
+Games with hidden level selects
+
+Games with anti-piracy methods
+
+Addams Family series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Games  >  Games by content  >  Games with anti-piracy methods
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden level selects
+
+Games  >  Games by content  >  Games with hidden sound tests
+
+Games  >  Games by content  >  Games with unused code
+
+Games  >  Games by content  >  Games with unused items
+
+Games  >  Games by developer  >  Games developed by Bandai Namco  >  Games developed by Ocean
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Bandai Namco  >  Games published by Ocean
+
+Games  >  Games by release date  >  Games released in 1995
+
+Games  >  Games by release date  >  Games released in February
+
+Games  >  Games by series  >  Addams Family series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 27 November 2025, at 02:47.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

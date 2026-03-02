@@ -1,0 +1,149 @@
+{
+  "game_id": "ski-or-die-nes",
+  "game_name": "Ski or Die",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Collision with obstacles",
+      "visual_form": "Impact effects, sprite flashing or knockback animation",
+      "meaning": "Loss of control or speed penalty in racing/skiing events"
+    },
+    {
+      "signal": "Fall or wipeout",
+      "visual_form": "Character tumbling animation, ragdoll-like behavior",
+      "meaning": "Immediate failure state or significant score/time penalty"
+    },
+    {
+      "signal": "Halfpipe rim contact",
+      "visual_form": "Edge collision, loss of momentum visual feedback",
+      "meaning": "Failed trick execution or loss of scoring opportunity"
+    },
+    {
+      "signal": "Snowball impact in combat event",
+      "visual_form": "Hit splash effect, character stagger",
+      "meaning": "Damage taken in snowball fight minigame, position disadvantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Smooth terrain progression",
+      "visual_form": "Character maintaining stable sprite animation, continuous forward motion",
+      "meaning": "Successful execution of skiing/boarding without incident"
+    },
+    {
+      "signal": "Trick completion landing",
+      "visual_form": "Smooth character positioning at halfpipe base or mountain landing zone",
+      "meaning": "Successful aerial maneuver completion, points awarded"
+    },
+    {
+      "signal": "Sled stability in racing",
+      "visual_form": "Centered on-screen position, predictable scrolling parallax",
+      "meaning": "Controlled pace in inflatable sled racing event"
+    },
+    {
+      "signal": "Clear downhill path",
+      "visual_form": "Open screen space ahead, minimal visual clutter in foreground",
+      "meaning": "Safe passage in downhill skiing event"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character",
+      "color_identity": "Varies by player (likely bright primary colors for NES palette distinction)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opponent skiers/snowboarders rendered in contrasting color palette",
+      "environmental_markers": "Ski lodge/resort setting serves as player home base implied by Rodney Dangerfield shopkeeper presence"
+    },
+    {
+      "faction": "Competitive opponents (AI/multiplayer)",
+      "color_identity": "Alternate palette swaps from player character",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Different sprite colorations for each of up to 6 players in hotseat modes",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Competition active (minigame in progress)",
+      "visual_manifestation": "Score/time display prominent on HUD, character sprites animating through event-specific terrain",
+      "behavioral_manifestation": "Characters execute sport-specific movements: snowboarding tricks, skiing downslope, sled acceleration, aerial maneuvers"
+    },
+    {
+      "world_state": "Winter resort setting (menu/between events)",
+      "visual_manifestation": "Static shop background with Rodney Dangerfield character model, shop interface displayed",
+      "behavioral_manifestation": "Minigame selection available, player configuration for multiplayer hotseat"
+    },
+    {
+      "world_state": "Event failure/wipeout",
+      "visual_manifestation": "Character tumble animation, potential fade-to-black or event restart prompt",
+      "behavioral_manifestation": "Loss of forward momentum, immediate retry or round conclusion"
+    },
+    {
+      "world_state": "Halfpipe trick execution phase",
+      "visual_manifestation": "Character airborne, terrain walls visible at screen edges, rotation/flip animation frames",
+      "behavioral_manifestation": "Player input timing critical for trick success, visual feedback via landing smoothness"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Resort setting as social context",
+      "example": "Rodney Dangerfield shopkeeper presence establishes casual, comedic winter sports atmosphere rather than serious competitive tone"
+    },
+    {
+      "technique": "Minigame event variety as world expansion",
+      "example": "Five distinct events (halfpipe, sled racing, aerial skiing, downhill, snowball fights) suggest diverse resort facilities and recreational activities"
+    },
+    {
+      "technique": "Multiplayer hotseat support as social play indicator",
+      "example": "Up to 6-player support in majority of minigames suggests shared resort experience, social competition context"
+    },
+    {
+      "technique": "Terrain visual variety per event",
+      "example": "Distinct environmental rendering for each minigame (halfpipe walls, downhill slopes, arena for snowball fights) communicates localized play spaces within larger resort"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (skiing/snowboarding)",
+      "state": "Ascending in halfpipe",
+      "behavior": "Forward momentum with rising y-position, trick input window open"
+    },
+    {
+      "entity": "Player character (skiing/snowboarding)",
+      "state": "Out of control/falling",
+      "behavior": "Uncontrolled tumble animation, loss of player input responsiveness"
+    },
+    {
+      "entity": "AI opponent",
+      "state": "Active competition",
+      "behavior": "Sprite animation matching event type, occasional collision with obstacles matching player vulnerability"
+    },
+    {
+      "entity": "Sled racer (inflatable sled event)",
+      "state": "Accelerating",
+      "behavior": "Increasing horizontal scroll speed, terrain parallax acceleration"
+    },
+    {
+      "entity": "Player character (snowball fight)",
+      "state": "Holding thrown snowball",
+      "behavior": "Arm raise animation, projectile arc trajectory visible on-screen"
+    }
+  ],
+  "notes": "Ski or Die operates as a minigame collection with minimal persistent world-state or faction complexity. Manifestation layer primarily conveys immediate sport-event status through animation frames and HUD elements rather than systemic political/danger signaling. Resort setting via Rodney Dangerfield character provides minimal narrative framing. Visual communication is functional—danger signals tied directly to collision/wipeout failure states, safety signals to smooth progression. No faction conflict or political situation indicated in available sources; competitive context is recreational sports multiplayer framing.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:23:08.830Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2575,
+    "output_tokens": 1881,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "game_id": "adventures-lolo-nes",
+  "game_name": "Adventures of Lolo",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Distinct enemy sprites (Skull, Medusa, Rocky, snake-like creatures)",
+      "meaning": "Immediate threat to Lolo; contact results in life loss or movement impedance"
+    },
+    {
+      "signal": "Locked treasure chest",
+      "visual_form": "Closed chest sprite blocking exit",
+      "meaning": "Puzzle incomplete; cannot progress without collecting hearts and opening chest"
+    },
+    {
+      "signal": "Missing hearts",
+      "visual_form": "Empty heart collection indicators in room",
+      "meaning": "Required gems not yet obtained; exit inaccessible"
+    },
+    {
+      "signal": "Water barriers",
+      "visual_form": "Water tiles blocking direct pathing",
+      "meaning": "Environmental obstacle requiring bridge-building or enemy-egg use to cross"
+    },
+    {
+      "signal": "Immobile rocky obstacles",
+      "visual_form": "Rock sprites in maze layout",
+      "meaning": "Environmental barrier; some require special power-ups to destroy"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Gem collection",
+      "visual_form": "Gem sprite appearing in treasure chest",
+      "meaning": "Puzzle solved; progression unlocked and exit available"
+    },
+    {
+      "signal": "Empty room (post-gem)",
+      "visual_form": "Enemies disappear visually after gem collection",
+      "meaning": "All enemies neutralized; safe to exit"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Distinct item sprites within heart frames (smash-rock power, bridge-build ability)",
+      "meaning": "Temporary ability granted; enables obstacle traversal or enemy control"
+    },
+    {
+      "signal": "Egg-encased enemy",
+      "visual_form": "Enemy sprite encased/transformed into egg visual",
+      "meaning": "Enemy temporarily neutralized; can be pushed, used as bridge, or cleared"
+    },
+    {
+      "signal": "Heart item collection",
+      "visual_form": "Heart sprites scattered in room",
+      "meaning": "Incremental progress toward puzzle completion; necessary for chest unlock"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lolo (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Round anthropomorphic creature sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in all rooms; represents player agency and rescue mission narrative"
+    },
+    {
+      "faction": "Princess Lala (objective/kidnapped party)",
+      "color_identity": null,
+      "symbol_or_sigil": "Referenced in narrative premise; visual presence at castle endpoint",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implied presence at King Egger's castle; represents goal state"
+    },
+    {
+      "faction": "King Egger (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Castle structure represents domain and threat",
+      "enemy_visual_variants": "Enemies (Skull, Medusa, Rocky) serve as visual manifestation of Egger's control",
+      "environmental_markers": "Multi-floor castle maze structure; 10 floors with 5 rooms each = 50 puzzle chambers as fortress layout"
+    },
+    {
+      "faction": "Enemy creatures (Skull, Medusa, Rocky, snakes)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct sprite designs per enemy type",
+      "enemy_visual_variants": "Varying movement and attack patterns visible through animation frames",
+      "environmental_markers": "Populate castle rooms; signal Egger's defensive strategy and maze danger"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Puzzle incomplete",
+      "visual_manifestation": "Enemies present in room; hearts uncollected; chest locked",
+      "behavioral_manifestation": "Enemies patrol/attack; Lolo can restart at cost of life; exit blocked"
+    },
+    {
+      "world_state": "Partial progress (hearts collected)",
+      "visual_manifestation": "Fewer heart indicators empty; chest remains locked",
+      "behavioral_manifestation": "Lolo continues to face enemies; puzzle unsolved state persists"
+    },
+    {
+      "world_state": "Puzzle solved (gem collected)",
+      "visual_manifestation": "Chest opens; gem visible and collectable; enemies vanish from screen",
+      "behavioral_manifestation": "Exit becomes accessible; all enemy threats neutralized; progression enabled"
+    },
+    {
+      "world_state": "Floor completed",
+      "visual_manifestation": "Transition to next floor level; visual progression through castle structure",
+      "behavioral_manifestation": "Lolo advances deeper into King Egger's castle; narrative progression toward rescue"
+    },
+    {
+      "world_state": "Enemy trapped by shot",
+      "visual_manifestation": "Enemy sprite transforms into egg visual state",
+      "behavioral_manifestation": "Enemy immobilized temporarily; can be pushed or re-engaged; tactical advantage gained"
+    },
+    {
+      "world_state": "Life lost",
+      "visual_manifestation": "Lolo sprite disappears; life counter decrements; return to room start or Game Over",
+      "behavioral_manifestation": "Player can restart screen at life cost; puzzle attempt reset"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Castle architecture progression",
+      "example": "10-floor structure with increasing complexity implies deeper danger/challenge as Lolo descends toward Lala's location; visual ascent through castle levels shows tangible progress toward goal"
+    },
+    {
+      "technique": "Enemy type placement",
+      "example": "Different enemy creatures (Skull, Medusa, Rocky) appear in thematic room arrangements; varying movement patterns (movement/attack variance) create escalating puzzle difficulty without text explanation"
+    },
+    {
+      "technique": "Hazard variety signaling",
+      "example": "Water barriers, rock obstacles, and enemy-specific traits (freezing enemies, immobile blockers) introduce mechanic variety visually; each room's layout silently teaches new puzzle interaction rules"
+    },
+    {
+      "technique": "Narrative macro-structure",
+      "example": "50-room journey through one villain's castle (King Egger's domain) = implicit world-state: Egger controls a vast maze-fortress; Lolo's penetration through it = narrative momentum toward rescue confrontation"
+    },
+    {
+      "technique": "Item-in-frame visual encoding",
+      "example": "Power-up items hidden in heart frames = resource scarcity and discovery; smash-rock and bridge-build abilities appear where needed, teaching problem-solving through visual layout logic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Lolo",
+      "state": "Active in puzzle room",
+      "behavior": "Moves, slides blocks, fires limited shots; can be shot by enemies causing life loss"
+    },
+    {
+      "entity": "Lolo",
+      "state": "Puzzle solving",
+      "behavior": "Collects hearts incrementally; navigates obstacles; hunts for gem pickup"
+    },
+    {
+      "entity": "Skull enemy",
+      "state": "Room active",
+      "behavior": "Patrols maze; attacks on contact; encasable in egg when shot"
+    },
+    {
+      "entity": "Medusa enemy",
+      "state": "Room active",
+      "behavior": "Distinct movement/attack pattern (unspecified in sources); responds to Lolo's shots"
+    },
+    {
+      "entity": "Rocky enemy",
+      "state": "Room active",
+      "behavior": "Obstacle with distinct movement pattern; some enemies of this type immune to Lolo's shots"
+    },
+    {
+      "entity": "Snake-like enemy",
+      "state": "Room active",
+      "behavior": "Visible opponent sprite type; encasable or defeatable via puzzle mechanics"
+    },
+    {
+      "entity": "Enemy (general)",
+      "state": "Shot by Lolo",
+      "behavior": "Transforms into egg visual; immobilized temporarily; can be pushed as bridge or re-shot to remove"
+    },
+    {
+      "entity": "Enemy (general)",
+      "state": "Gem collected",
+      "behavior": "Disappears entirely from room; threat eliminated; exit safe"
+    },
+    {
+      "entity": "Treasure chest",
+      "state": "Hearts incomplete",
+      "behavior": "Remains locked; visual closure blocks exit; puzzles prevent opening"
+    },
+    {
+      "entity": "Treasure chest",
+      "state": "All hearts collected",
+      "behavior": "Opens; gem becomes visible and collectable; exit unlocked"
+    }
+  ],
+  "notes": "Adventures of Lolo is a pure puzzle-action game with minimal narrative exposition. World-state communication is entirely visual and behavioral: enemies manifest threat through sprite presence and attack animation, puzzle completion is signaled through environmental state changes (chest locking/unlocking, enemy disappearance), and progression through the 50-room castle is the primary narrative vehicle. The game uses no text overlays or dialogue; all danger/safety/faction information is encoded in sprite design, spatial layout, and mechanic response. No political factions exist; the conflict is purely Lolo vs. King Egger's castle maze. Environmental storytelling relies on puzzle room design logic (heart placement, enemy positioning, obstacle arrangement) to teach mechanics incrementally without tutorials. The game's paradigm (puzzle) prioritizes spatial reasoning and logical deduction; visual design supports this through clear enemy distinctions and unambiguous goal states (locked/unlocked chest, alive/dead player, enemy/egg transformation).",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:40:32.709Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5606,
+    "output_tokens": 2496,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

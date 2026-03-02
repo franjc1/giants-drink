@@ -1,0 +1,167 @@
+{
+  "game_id": "spear-of-destiny-pc",
+  "game_name": "Spear of Destiny",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Nazi soldiers rendered as 2D sprites with distinct uniforms and weapons visible from multiple angles",
+      "meaning": "Armed hostiles require immediate engagement or evasion"
+    },
+    {
+      "signal": "Guard dogs",
+      "visual_form": "Animated canine sprites with aggressive stance",
+      "meaning": "Fast-moving melee threat"
+    },
+    {
+      "signal": "Locked doors",
+      "visual_form": "Solid wall tiles blocking passage",
+      "meaning": "Progression gated by key collection; area contains protected threats or treasure"
+    },
+    {
+      "signal": "Weapon scarcity",
+      "visual_form": "Low ammunition count in HUD; empty weapon slots",
+      "meaning": "Player vulnerability increases; must be strategic"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Health percentage in HUD decreasing; visual screen damage effects",
+      "meaning": "Immediate threat to survival; death results in level restart"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Final level features distinctly larger or mechanically unique enemy sprite",
+      "meaning": "Episode culmination; heightened danger requiring sustained engagement"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health pickups",
+      "visual_form": "Item sprites scattered in levels and secret rooms",
+      "meaning": "Player can recover from damage; safety available through exploration"
+    },
+    {
+      "signal": "Ammunition caches",
+      "visual_form": "Weapon and ammo sprites placed in rooms and on dead enemies",
+      "meaning": "Resource availability ensures combat capability"
+    },
+    {
+      "signal": "Secret areas",
+      "visual_form": "Wall tiles that visually recede when activated; hidden room entrances",
+      "meaning": "Safe spaces containing treasure and supplies; rewards exploration"
+    },
+    {
+      "signal": "Extra-life tokens",
+      "visual_form": "Collectible sprites distributed throughout levels",
+      "meaning": "Death penalty mitigation; safety margin against failure"
+    },
+    {
+      "signal": "Elevator presence",
+      "visual_form": "Designated elevator tile at level end",
+      "meaning": "Safe progression point; level completion imminent"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nazi German Military",
+      "color_identity": "Gray/brown uniforms (period-accurate Nazi Wehrmacht coloring)",
+      "symbol_or_sigil": "Nazi insignia visible on soldier sprites; swastika symbols on architectural elements and decorations",
+      "enemy_visual_variants": "Standard guards, SS soldiers, officers, dogs; higher-tier variants with better weapons and armor appearance",
+      "environmental_markers": "Castle bunker architecture with Nazi banners; prison cell design; military installation aesthetics; Germanic fortress settings"
+    },
+    {
+      "faction": "Allied Forces (Player-aligned)",
+      "color_identity": "Military khaki/tan (implied through protagonist William Blazkowicz as Allied spy)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Escaped prisoner status; castle prison environments; military intelligence mission contexts"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early level/low threat",
+      "visual_manifestation": "Sparse enemy placement; plentiful ammunition and health pickups; open room layouts with minimal obstacles",
+      "behavioral_manifestation": "Enemies patrol slowly; limited aggressive response ranges"
+    },
+    {
+      "world_state": "Mid-level escalation",
+      "visual_manifestation": "Increased enemy density; clustered guard placements in rooms; denser wall mazes; reduced pickup availability",
+      "behavioral_manifestation": "Enemies detect player at greater distances; coordinated attacks from multiple angles"
+    },
+    {
+      "world_state": "Boss encounter/episode climax",
+      "visual_manifestation": "Single dominant enemy sprite of larger visual scale; arena-like room design; minimal environmental cover",
+      "behavioral_manifestation": "Boss executes unique attack patterns; higher damage output; aggressive pursuit"
+    },
+    {
+      "world_state": "Wartime Nazi occupation",
+      "visual_manifestation": "All environmental design reflects military bunker/castle fortress with swastika banners, Nazi iconography, armed guard presence omnipresent",
+      "behavioral_manifestation": "All humanoid NPCs are hostile enemies; no neutral or friendly characters; pure combat paradigm"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural theming",
+      "example": "Each level explicitly themed after Nazi bunkers and military buildings; prison cells establish escape narrative context"
+    },
+    {
+      "technique": "Enemy placement narrative",
+      "example": "Guard density and patrol patterns imply military security protocols; boss encounters positioned as command center or research facility climaxes"
+    },
+    {
+      "technique": "Iconographic saturation",
+      "example": "Swastika symbols and Nazi imagery on walls, doors, and decorations establish faction control and wartime setting without exposition"
+    },
+    {
+      "technique": "Episode naming",
+      "example": "Episode titles ('Escape from Castle Wolfenstein', 'Operation: Eisenfaust', 'Die, Führer, Die!') communicate mission objectives and narrative stakes through text"
+    },
+    {
+      "technique": "Treasure placement",
+      "example": "Gold, jewels, and valuables scattered throughout Nazi facilities suggest looting occupied territory; points reward this collection"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nazi Guard",
+      "state": "Unaware",
+      "behavior": "Patrol sprite animation loops; limited movement range"
+    },
+    {
+      "entity": "Nazi Guard",
+      "state": "Alerted",
+      "behavior": "Sprite animation changes to combat stance; fast movement toward player; weapon discharge visible"
+    },
+    {
+      "entity": "Guard Dog",
+      "state": "Hunting",
+      "behavior": "High-speed sprite movement toward player; aggressive lunge animation"
+    },
+    {
+      "entity": "Boss Enemy",
+      "state": "Combat",
+      "behavior": "Distinctive sprite animation with unique attack patterns; projectile or melee assault visible; movement constrained to arena bounds"
+    },
+    {
+      "entity": "Player",
+      "state": "Low Health",
+      "behavior": "HUD percentage critical; visual screen effects may intensify (empirical implementation varies by port)"
+    }
+  ],
+  "notes": "Spear of Destiny is a standalone retail expansion episode for Wolfenstein 3D, released by FormGen. The game communicates world-state and danger through: (1) visual enemy density and placement variation across difficulty progression, (2) environmental architecture that visually encodes Nazi military occupation, (3) sprite-based 2D character art that signals faction identity through uniform and insignia, (4) HUD resource meters (health, ammo) that directly map internal game state to player perception, (5) secret areas and hidden rooms that reward spatial exploration with narrative suggestion of espionage operations. The paradigm is pure combat with no diplomacy or faction negotiation—all non-player entities are visually and behaviorally hostile. Political situation is communicated implicitly: WWII Allied spy escaping Nazi-controlled fortress. No dialogue or exposition; visual/behavioral language dominant.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T18:59:34.947Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3150,
+    "output_tokens": 1974,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

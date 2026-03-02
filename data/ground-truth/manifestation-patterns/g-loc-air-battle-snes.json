@@ -1,0 +1,153 @@
+{
+  "game_id": "g-loc-air-battle-snes",
+  "game_name": "G-LOC: Air Battle",
+  "platform": "snes",
+  "paradigm": "shmup / combat flight simulator",
+  "danger_signals": [
+    {
+      "signal": "Enemy missile lock",
+      "visual_form": "Perspective shift to third-person behind player aircraft",
+      "meaning": "Imminent threat requiring evasive action; loss of first-person control autonomy"
+    },
+    {
+      "signal": "Incoming enemy aircraft",
+      "visual_form": "Enemy planes approaching from front and rear in first-person view",
+      "meaning": "Active combat engagement; player must choose between cannon and missile attacks"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Distinct enemy units (War Balloon, Bomber, enemy ace pilot)",
+      "meaning": "Escalated threat level; stage progression gates behind defeating specific targets"
+    },
+    {
+      "signal": "Damage accumulation",
+      "visual_form": "Health degradation (not visually specified in sources)",
+      "meaning": "Player aircraft durability decreasing; game-over condition approaching"
+    },
+    {
+      "signal": "Time expiration",
+      "visual_form": "Mission timer countdown",
+      "meaning": "Stage failure if timer reaches zero; pressure mechanic for mission completion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Mission objective completion",
+      "visual_form": "Destruction of assigned targets (ships, fighters, tanks, bosses)",
+      "meaning": "Advancement to next stage; time replenishment and armament resupply"
+    },
+    {
+      "signal": "First-person perspective maintained",
+      "visual_form": "Standard cockpit view without missile lock",
+      "meaning": "Player retains full control; no active threat requiring evasion"
+    },
+    {
+      "signal": "Armament availability",
+      "visual_form": "Replenished cannon and missile loadout after mission completion",
+      "meaning": "Preparedness for next engagement; progression reward"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player",
+      "color_identity": null,
+      "symbol_or_sigil": "Experimental aircraft designation (A8M5 upgraded to A8M6)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cockpit first-person perspective; allied mission objectives"
+    },
+    {
+      "faction": "Enemy forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied enemy aircraft and units (War Balloon, Bomber, enemy ace)",
+      "enemy_visual_variants": "Final adversary uses identical aircraft model to player but with enhanced durability and strength",
+      "environmental_markers": "Approach from front and rear; distinct visual differentiation from player craft"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active mission engagement",
+      "visual_manifestation": "First-person cockpit view with targeting crosshair; enemy aircraft visible in airspace",
+      "behavioral_manifestation": "Enemies attack from multiple vectors; player can select targets and choose weapon loadout"
+    },
+    {
+      "world_state": "Missile threat detected",
+      "visual_manifestation": "Automatic perspective transition to third-person trailing view behind aircraft",
+      "behavioral_manifestation": "Camera repositioning enables evasive maneuvers; loss of direct forward targeting"
+    },
+    {
+      "world_state": "Stage progression",
+      "visual_manifestation": "Transition between mission zones; new enemy types and boss encounters",
+      "behavioral_manifestation": "Enemies scale in difficulty; boss units feature enhanced AI and durability"
+    },
+    {
+      "world_state": "Mission failure",
+      "visual_manifestation": "Timer expiration or excessive damage accumulation reaches game-over threshold",
+      "behavioral_manifestation": "Gameplay halts; player cannot advance stage"
+    },
+    {
+      "world_state": "Mission success",
+      "visual_manifestation": "All assigned objectives destroyed; stage completion",
+      "behavioral_manifestation": "Time replenishment; armament resupply; transition to next stage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Target diversity as world-building",
+      "example": "Selectable targets (ships, jet fighters, tanks) suggest a multi-theater military conflict requiring varied air support"
+    },
+    {
+      "technique": "Aircraft upgrade progression",
+      "example": "Aircraft designation evolution (A8M5 → A8M6) implies iterative military technology development and mission escalation"
+    },
+    {
+      "technique": "Boss hierarchy as conflict narrative",
+      "example": "Final enemy ace pilot using identical aircraft signals a skilled antagonist and personal rivalry; enhanced stats suggest legendary opponent status"
+    },
+    {
+      "technique": "Mission timer as urgency mechanic",
+      "example": "Time-limited engagement suggests tactical pressure and real-world military operational constraints"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy aircraft",
+      "state": "Standard patrol/engagement",
+      "behavior": "Attack from front and rear positions; respond to player targeting with evasion or counter-attack"
+    },
+    {
+      "entity": "Enemy aircraft (missile-equipped)",
+      "state": "Lock acquired",
+      "behavior": "Trigger automatic perspective shift in player camera; force player into defensive posture"
+    },
+    {
+      "entity": "Boss units (War Balloon, Bomber)",
+      "state": "Engagement",
+      "behavior": "Distinct visual presentation; higher durability; stage-blocking defeat requirement"
+    },
+    {
+      "entity": "Enemy ace pilot (final boss)",
+      "state": "Engagement",
+      "behavior": "Uses player's own aircraft model with enhanced stats; represents skill parity plus quantitative advantage; serves as climactic antagonist"
+    },
+    {
+      "entity": "Player aircraft",
+      "state": "Locked by missile",
+      "behavior": "Camera automatically transitions to third-person; player regains positional awareness for evasive maneuvers"
+    }
+  ],
+  "notes": "G-LOC communicates world-state primarily through perspective shifts and enemy variety rather than diegetic UI elements. The core danger signal—missile lock inducing third-person view—is a mechanical communication tool that re-contextualizes the player's spatial relationship to threat. The faction system is minimalist: player vs. unnamed enemy forces, with boss encounters serving as individual personality markers. Political context is absent; the game frames engagement as pure military action without ideological backdrop. Environmental storytelling relies on target type variety and aircraft upgrade nomenclature to hint at a broader conflict. The game's world-state communication is procedural and perspective-based rather than environmental.",
+  "sources_used": [
+    "wikipedia - G-LOC: Air Battle (gameplay, release, reception sections)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:18:24.669Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3467,
+    "output_tokens": 1723,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

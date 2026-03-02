@@ -1,0 +1,114 @@
+{
+  "game_id": "road-rash-2-genesis",
+  "game_name": "Road Rash II",
+  "platform": "genesis",
+  "year": 1992,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Not documented in available source"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Motorcycle Control",
+      "description": "Player controls a motorcycle racer with brake, accelerate, and attack inputs. Can punch, backhand, or kick nearby opponents.",
+      "physics_values": {}
+    },
+    {
+      "name": "Nitrous Oxide Boost",
+      "description": "Certain bikes equipped with nitrous oxide charges that provide burst of speed when player taps acceleration button twice",
+      "physics_values": {
+        "effect": "speed_burst",
+        "trigger": "double_tap_acceleration"
+      }
+    },
+    {
+      "name": "Stamina System",
+      "description": "Racer has stamina meter that depletes during fights. Running out of stamina ejects racer from bike.",
+      "physics_values": {
+        "meter_visibility": "bottom_left_corner",
+        "depletion_cause": "combat_with_opponents"
+      }
+    },
+    {
+      "name": "Bike Ejection & Running",
+      "description": "Player ejected from bike on crash or stamina depletion. Automatically runs back toward bike but player can alter course with directional buttons or stand still with brake.",
+      "physics_values": {
+        "auto_return": true,
+        "control_during_run": "directional_input_available"
+      }
+    },
+    {
+      "name": "Bike Condition Meter",
+      "description": "Bike has separate condition meter that decreases on crashes. Fully depleted condition wrecks bike and ends race participation.",
+      "physics_values": {}
+    }
+  ],
+  "feel_descriptors": [
+    "arcade_racing",
+    "momentum_based",
+    "responsive_controls",
+    "combat_focused"
+  ],
+  "tier_notes": "Tier 2 - Qualitative/empirical data only. Source is Wikipedia gameplay overview with no documented physics values. All precise movement, gravity, and jump parameters are undocumented.",
+  "sources_used": [
+    "wikipedia_road_rash_2"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T09:06:43.408Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2897,
+    "output_tokens": 1012,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

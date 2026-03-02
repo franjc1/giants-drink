@@ -1,0 +1,170 @@
+{
+  "game_id": "gunsmoke-nes",
+  "game_name": "Gun.Smoke",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy gunfire",
+      "visual_form": "Projectiles moving downward toward player sprite",
+      "meaning": "Immediate threat to player health; death occurs from being shot"
+    },
+    {
+      "signal": "Enemy collision",
+      "visual_form": "Enemy sprite contact with player sprite",
+      "meaning": "Direct damage or death; physical threat from outlaws and obstacles"
+    },
+    {
+      "signal": "Screen boundaries closing",
+      "visual_form": "Player caught between obstacle and bottom of screen",
+      "meaning": "Environmental trap; forced death condition if trapped"
+    },
+    {
+      "signal": "Wanted poster appearance",
+      "visual_form": "Enhanced sprite with redesigned outfit (Bandit Bill) or shuriken symbol (Ninja)",
+      "meaning": "Boss enemy encounter; heightened danger from named criminals"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Horse item pickup",
+      "visual_form": "Horse sprite collectible",
+      "meaning": "Extra protection layer; absorbs damage without death"
+    },
+    {
+      "signal": "Boots item pickup",
+      "visual_form": "Boots sprite collectible",
+      "meaning": "Increased movement speed; improves evasion capability"
+    },
+    {
+      "signal": "Bullet upgrade item",
+      "visual_form": "Bullet sprite collectible",
+      "meaning": "Faster shot rate; increased offensive capability to clear threats faster"
+    },
+    {
+      "signal": "Rifle upgrade item",
+      "visual_form": "Rifle sprite collectible",
+      "meaning": "Longer shot range; extended reach to eliminate enemies before they approach"
+    },
+    {
+      "signal": "Yashichi item",
+      "visual_form": "Yashichi sprite collectible",
+      "meaning": "Extra life granted; safety buffer against death"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Wingate Gang",
+      "color_identity": null,
+      "symbol_or_sigil": "Fort Wingate (named location); Wingate (named boss)",
+      "enemy_visual_variants": "Bandit Bill (redesigned outfit in NES), Ninja (shuriken symbol added in NES), Cheyenne River variant, Death Mountain variant",
+      "environmental_markers": "Fort Wingate location; Cheyenne River location; Death Mountain location as stage settings"
+    },
+    {
+      "faction": "Hicksville Town",
+      "color_identity": null,
+      "symbol_or_sigil": "Town of Hicksville mentioned in intro and ending narrative",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Hicksville referenced in stage progression narrative; town as conceptual safe haven (goal state)"
+    },
+    {
+      "faction": "Player (Billie Bob / Lone Gunman)",
+      "color_identity": null,
+      "symbol_or_sigil": "Lone gunman appearing at sunset (narrative symbolism); bounty hunter archetype",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player character sprite; three-button shooting mechanic (left/right/center) establishes player agency"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-liberation (Wingate control)",
+      "visual_manifestation": "Enemy prevalence in stages; Wingate Gang presence across Fort Wingate, Cheyenne River, Death Mountain locations",
+      "behavioral_manifestation": "Enemies actively attack player; continuous threat spawning throughout levels; gang members patrol territories"
+    },
+    {
+      "world_state": "During liberation (Player intervention)",
+      "visual_manifestation": "Player character moving upward through gang-controlled territories; defeated enemy sprites disappear; environmental hazards remain",
+      "behavioral_manifestation": "Player shoots in three directions to clear path; collects upgrades and protective items; avoids environmental obstacles"
+    },
+    {
+      "world_state": "Post-liberation (Victory achieved)",
+      "visual_manifestation": "Ending sequence displays narrative text confirming Wingate family destruction; Capcom logo or victory text replaces normal gameplay interface",
+      "behavioral_manifestation": "No enemy spawning; stage progression halts; cutscene triggers with story message"
+    },
+    {
+      "world_state": "Sheriff's death / Town chaos",
+      "visual_manifestation": "Narrative backdrop shown in intro text and story context; no visual representation in gameplay but establishes narrative urgency",
+      "behavioral_manifestation": "Motivates continuous wave of enemies; explains why Wingate Gang controls multiple distinct territories (Fort, River, Mountain)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location names as faction markers",
+      "example": "Fort Wingate, Cheyenne River, Death Mountain stages directly associate geographic locations with Wingate Gang control and danger escalation"
+    },
+    {
+      "technique": "Wanted poster character redesigns",
+      "example": "NES version enhanced Bandit Bill's outfit and gave Ninja a shuriken symbol; portraits use sprite overlays for increased color, signaling importance of named criminals"
+    },
+    {
+      "technique": "Narrative framing through intro/outro text",
+      "example": "Japanese version contextualizes story as Wingates murdering sheriff and taking control overnight; international versions emphasize lone gunman arriving at sunset—visual metaphor of hope at day's end"
+    },
+    {
+      "technique": "Boss music variation",
+      "example": "Three distinct boss music tracks (Boss Music 1, 2, 3) across three stage groupings signal escalating boss encounters; missing stage-specific tracks in FDS version due to hardware creates audio flattening of world state progression"
+    },
+    {
+      "technique": "Item drop visual language",
+      "example": "Stars, bottles, bags, dragonflies as point-value items; horses, boots, bullets, rifles, yashichi as functional upgrades; visual distinction through sprite design communicates immediate utility"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Billie Bob (Player Character)",
+      "state": "Alive and mobile",
+      "behavior": "Responds to three-button input (left/right/center shooting); can change shot direction via button combinations; collects items for upgrades; moves upward as screen autoscrolls"
+    },
+    {
+      "entity": "Billie Bob (Player Character)",
+      "state": "Threat detected",
+      "behavior": "Must dodge enemy projectiles; must avoid collision with enemies and obstacles; can use collected protective items (horse) to survive hits"
+    },
+    {
+      "entity": "Wingate Gang members",
+      "state": "Patrol/Default",
+      "behavior": "Spawn continuously in stage; move toward or fire upon player; occupy named locations (Fort, River, Mountain)"
+    },
+    {
+      "entity": "Wingate Gang members",
+      "state": "Boss encounter",
+      "behavior": "Named criminals (Bandit Bill, Ninja, Cheyenne River variant, Death Mountain variant, Fort Wingate boss, Wingate final boss) have distinct sprite designs; trigger special music; require concentrated fire to defeat"
+    },
+    {
+      "entity": "Game world",
+      "state": "Level progression",
+      "behavior": "Autoscrolling upward; spawning waves of enemies; presenting obstacles; distributing collectible items; stage transitions trigger new music and enemy sets"
+    },
+    {
+      "entity": "Game world",
+      "state": "Victory condition",
+      "behavior": "Screen stops scrolling; enemy spawning ceases; ending text displays confirming Wingate family destroyed and town saved; narrative closure achieved"
+    }
+  ],
+  "notes": "Gun.Smoke uses primarily narrative and sprite-based visual communication. The NES version significantly enhanced faction visual identity through wanted poster redesigns compared to arcade version. The game's danger communication relies on continuous threat spawning and environmental hazard placement rather than color coding. Safety is communicated through discrete pickup items with distinct sprite designs. World state progression is tracked through stage location names (Fort Wingate, Cheyenne River, Death Mountain) that establish gang territory hierarchy. The shift from arcade (bounty hunter framing) to NES (town liberation narrative) added political context—the Wingates as occupying force and Billie Bob as liberator. Regional differences show Japanese version emphasized narrative context more heavily. Music variation (three boss tracks reused across stages due to FDS hardware limits) may have dampened world-state distinction in that version.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:15:02.736Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6069,
+    "output_tokens": 2166,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

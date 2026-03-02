@@ -1,0 +1,161 @@
+{
+  "game_id": "caesar-3-pc",
+  "game_name": "Caesar III",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Enemy invasion threat",
+      "visual_form": "Map interface showing enemy positions and movement vectors from empire map",
+      "meaning": "Military assignment active; player must defend city or suffer damage to peace rating"
+    },
+    {
+      "signal": "Fire outbreak",
+      "visual_form": "Animated flame graphics spreading across buildings in isometric view",
+      "meaning": "Hazard event occurring; uncontrolled fire reduces housing and prosperity"
+    },
+    {
+      "signal": "Earthquake damage",
+      "visual_form": "Building destruction and terrain disruption visualized in city map",
+      "meaning": "Catastrophic world event; structural integrity compromised, recovery required"
+    },
+    {
+      "signal": "Crime/Riot condition",
+      "visual_form": "Advisor alerts and visual indicators in affected districts",
+      "meaning": "Peace rating threatened; social stability degraded"
+    },
+    {
+      "signal": "Population distress",
+      "visual_form": "Housing quality degradation visuals, advisor warnings",
+      "meaning": "Unmet citizen needs; culture, prosperity, or peace ratings declining"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Peaceful assignment mode",
+      "visual_form": "Mission selection screen designation; no enemy units on map",
+      "meaning": "Military threats absent; focus on city development and natural disasters only"
+    },
+    {
+      "signal": "High culture coverage",
+      "visual_form": "Culture buildings (temples, theaters, schools) distributed across map",
+      "meaning": "Cultural needs met; contributes to overall prosperity and citizen satisfaction"
+    },
+    {
+      "signal": "Adequate housing quality",
+      "visual_form": "Housing structures with visual indicators of quality/upgrades",
+      "meaning": "Citizens' needs being satisfied; population stability and growth supported"
+    },
+    {
+      "signal": "Positive favor rating",
+      "visual_form": "Advisor confirmations of timely tribute payments and gift deliveries",
+      "meaning": "Caesar's political support maintained; no penalty threats"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Roman Empire (Player's faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Caesar as political authority; Roman city architecture",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Roman-style buildings (forums, coliseums, aqueducts); structured grid-based city layout; historical Roman city names (Brundisium, Londinium)"
+    },
+    {
+      "faction": "Enemy invaders",
+      "color_identity": null,
+      "symbol_or_sigil": "Variable based on scenario (selectable in map editor)",
+      "enemy_visual_variants": "Different unit sprites and architectural styles depending on enemy faction identity",
+      "environmental_markers": "Siege camps; fortification positions; units approaching from map edges"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Peaceful assignment active",
+      "visual_manifestation": "Enemy-free map; no hostile units visible; focus on city infrastructure",
+      "behavioral_manifestation": "Citizens move freely; walkers distribute resources without military interference; construction and trade proceed unimpeded"
+    },
+    {
+      "world_state": "Military assignment active",
+      "visual_manifestation": "Enemy units visible on map; defensive fortifications required; military buildings constructed",
+      "behavioral_manifestation": "Military units respond to threats; workers may flee danger zones; resource distribution affected by combat zones"
+    },
+    {
+      "world_state": "Natural disaster (earthquake/fire)",
+      "visual_manifestation": "Building destruction; terrain alterations; smoke and destruction effects in isometric view",
+      "behavioral_manifestation": "Population flees damaged areas; recovery construction begins; economic disruption evident in advisor reports"
+    },
+    {
+      "world_state": "High prosperity/culture rating",
+      "visual_manifestation": "Well-maintained buildings; active cultural structures; bustling city atmosphere",
+      "behavioral_manifestation": "Population growth increases; walker density increases; positive morale indicators"
+    },
+    {
+      "world_state": "Low peace rating (crime/riots)",
+      "visual_manifestation": "Visual indicators of civil unrest; possible building damage from riots",
+      "behavioral_manifestation": "Citizens avoid affected areas; advisor alerts; potential population emigration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain resource distribution",
+      "example": "Different map regions generate specific resources (river channels, fertile land, mining areas); city placement and economic strategy directly reflect geographic constraints of historical locations"
+    },
+    {
+      "technique": "Historical city names and settings",
+      "example": "Assignments set in actual Roman cities (Brundisium, Londinium); environment reflects historical context and expected challenges of that era/location"
+    },
+    {
+      "technique": "Walker-based infrastructure visualization",
+      "example": "Citizens walking past buildings to receive services; visual representation of supply chains and service coverage through movement patterns and behavior"
+    },
+    {
+      "technique": "Building type spatial organization",
+      "example": "Culture buildings (temples, theaters) placed to demonstrate religious/entertainment infrastructure; housing clusters reflect urban planning philosophy"
+    },
+    {
+      "technique": "Isometric perspective world state readability",
+      "visual_manifestation": "Two-dimensional isometric view provides clear visibility of entire city state; allows player to assess danger, prosperity, and faction presence at a glance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Walker (citizen service provider)",
+      "state": "Active",
+      "behavior": "Traverses predetermined paths from buildings; delivers services to nearby structures; appears/disappears based on supply availability and building activation"
+    },
+    {
+      "entity": "Enemy invader unit",
+      "state": "Approaching",
+      "behavior": "Moves across map toward city; visible on empire map before reaching city map; triggers peace rating threats"
+    },
+    {
+      "entity": "Fire event",
+      "state": "Active",
+      "behavior": "Spreads across connected buildings; animation shows progression; can be contained by fire-suppression infrastructure"
+    },
+    {
+      "entity": "Population/housing",
+      "state": "Satisfied",
+      "behavior": "Stays in homes; contributes to population growth; walker traffic increased as needs met"
+    },
+    {
+      "entity": "Population/housing",
+      "state": "Distressed",
+      "behavior": "Emigrates from city; reduced visual activity; advisor alerts triggered"
+    }
+  ],
+  "notes": "Caesar III communicates world-state primarily through isometric perspective visualization and advisor interface integration. Danger signals rely on event-driven graphics (fire, destruction) and map interface threat indicators. Faction identity is implicit through architectural style and enemy unit differentiation. Political situation (favor, peace) manifests through UI ratings and advisor alerts rather than primarily through world visualization. The walker mechanic serves as a core manifestation system for city service delivery state.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:16:30.875Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2500,
+    "output_tokens": 1791,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

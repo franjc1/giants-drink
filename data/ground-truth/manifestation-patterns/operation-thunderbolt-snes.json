@@ -1,0 +1,115 @@
+{
+  "game_id": "operation-thunderbolt-snes",
+  "game_name": "Operation Thunderbolt",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "on-screen adversaries in combat arena",
+      "meaning": "active threat requiring player engagement or evasion"
+    },
+    {
+      "signal": "weapon_fire",
+      "visual_form": "projectile animations from enemies",
+      "meaning": "immediate danger to player avatar; damage imminent"
+    },
+    {
+      "signal": "health_depletion",
+      "visual_form": "HUD health indicator reduction",
+      "meaning": "player vulnerability increasing; failure state approaching"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "no_enemies_visible",
+      "visual_form": "cleared screen space in arena",
+      "meaning": "temporary respite; opportunity for repositioning or healing"
+    },
+    {
+      "signal": "ammo_availability",
+      "visual_form": "weapon pickups or ammo counter on HUD",
+      "meaning": "capability to sustain offensive action; reduced vulnerability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "player avatar/character sprites distinct from adversaries",
+      "environmental_markers": null
+    },
+    {
+      "faction": "enemy_combatants",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "uniformed or distinctly colored enemy sprites",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "mission_active",
+      "visual_manifestation": "arena populated with enemies; combat environment visible",
+      "behavioral_manifestation": "enemies actively attacking; player must engage or evade"
+    },
+    {
+      "world_state": "mission_transitional",
+      "visual_manifestation": "screen clear between encounter waves",
+      "behavioral_manifestation": "brief pause before next enemy wave spawns"
+    },
+    {
+      "world_state": "player_health_critical",
+      "visual_manifestation": "HUD health bar near depletion; possible visual screen effects",
+      "behavioral_manifestation": "increased enemy aggression or damage rates if alive"
+    },
+    {
+      "world_state": "game_over",
+      "visual_manifestation": "title screen or game over state displayed",
+      "behavioral_manifestation": "input disabled; cartridge anti-piracy check activated on title screen (SRAM mismatch detection)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "character_selection",
+      "example": "SNES port features multiple character options with different narrative context, differentiating from arcade original"
+    },
+    {
+      "technique": "title_screen_branding",
+      "example": "Game logo and visual identity establish Operation Thunderbolt as tactical/military action scenario"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "enemy_combatants",
+      "state": "engaged",
+      "behavior": "projectile attacks toward player; movement patterns in arena"
+    },
+    {
+      "entity": "player_avatar",
+      "state": "active",
+      "behavior": "responsive to input; weapon discharge when triggered; movement across screen"
+    },
+    {
+      "entity": "game_system",
+      "state": "title_screen",
+      "behavior": "continuous SRAM anti-piracy check on each frame; disables controller input if SRAM detected (piracy countermeasure)"
+    }
+  ],
+  "notes": "Operation Thunderbolt is a light-gun action game (Super Scope enhanced) with straightforward danger/safety communication through enemy presence and health state. The source material provided focuses on technical development artifacts and anti-piracy mechanisms rather than visual/behavioral manifestation systems. Visual communication patterns inferred from paradigm conventions of early 90s action games. The SNES port differs from arcade original in storyline and character selection, suggesting faction or narrative identity differentiation through playable character choice.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "TODO": "Direct visual/behavioral documentation of: specific color palettes for factions, enemy sprite variants by enemy type/faction, environmental tileset communication of danger zones, HUD design patterns for world-state feedback, character-specific visual indicators, level progression visual markers.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:22:22.876Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1626,
+    "output_tokens": 1160,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

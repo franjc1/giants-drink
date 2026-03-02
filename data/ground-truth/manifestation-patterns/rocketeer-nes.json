@@ -1,0 +1,121 @@
+{
+  "game_id": "rocketeer-nes",
+  "game_name": "The Rocketeer",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": null,
+      "meaning": "Combat encounters indicate danger zones"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": null,
+      "meaning": "Platforming obstacles present collision/damage risk"
+    },
+    {
+      "signal": "Low fuel/ammo visual indicator",
+      "visual_form": "HUD status display",
+      "meaning": "Resource depletion creates vulnerability state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear platforming path",
+      "visual_form": "Empty foreground space with solid platforms",
+      "meaning": "Safe traversal corridor available"
+    },
+    {
+      "signal": "Item pickups",
+      "visual_form": "Health, fuel, ammo sprites",
+      "meaning": "Resource availability indicates resource-safe zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Rocketeer)",
+      "color_identity": null,
+      "symbol_or_sigil": "Rocketeer character sprite with jetpack",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Jetpack propulsion visual effect"
+    },
+    {
+      "faction": "Enemies/Antagonists",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Movie-derived antagonist designs",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission active",
+      "visual_manifestation": "Level environment fully rendered with obstacles and enemies",
+      "behavioral_manifestation": "Enemy patrols and spawns active; platforming hazards present"
+    },
+    {
+      "world_state": "Resource depleted (fuel/ammo)",
+      "visual_manifestation": "HUD indicator shows low/empty resource meters",
+      "behavioral_manifestation": "Limited player action capability (jetpack unusable or weapons unavailable)"
+    },
+    {
+      "world_state": "Level cleared",
+      "visual_manifestation": "Exit/transition zone becomes accessible",
+      "behavioral_manifestation": "No new enemy spawns; progression enabled"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Movie license adaptation",
+      "example": "NES platformer converts The Rocketeer film into level-based combat/traversal narrative"
+    },
+    {
+      "technique": "Resource HUD communication",
+      "example": "Fuel and ammo meters visually show player vulnerability progression"
+    },
+    {
+      "technique": "Enemy placement as narrative",
+      "example": "Enemy distribution reflects danger zones aligned with movie plot progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Rocketeer (player)",
+      "state": "Normal flight",
+      "behavior": "Jetpack active; sprite shows upward propulsion animation"
+    },
+    {
+      "entity": "Rocketeer (player)",
+      "state": "Fuel depleted",
+      "behavior": "Jetpack disabled; falls subject to gravity; grounded movement only"
+    },
+    {
+      "entity": "Enemy",
+      "state": "Patrol/alert",
+      "behavior": "Sprite animation cycle indicates active threat status"
+    }
+  ],
+  "notes": "Available source material (TCRF wiki stub) provides minimal visual communication data. Game mechanics inferred from platformer genre conventions and NES technical constraints. Movie license context suggests enemies/environments derive from 1991 film source material. Debug features present (level select, health/fuel restoration) indicate developer intent for state manipulation, but visual manifestations of these states not documented in source.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "TODO": [
+    "Actual sprite sheets and level layouts needed for precise danger/safety signal documentation",
+    "Movie-to-game visual adaptation mapping (enemy designs, faction colors/sigils)",
+    "HUD element specifics (fuel meter design, ammo counter visual style)",
+    "Environmental palette analysis for world-state communication",
+    "Gameplay footage analysis for behavioral manifestations",
+    "Boss encounter visual patterns"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:35:37.181Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1502,
+    "output_tokens": 1279,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

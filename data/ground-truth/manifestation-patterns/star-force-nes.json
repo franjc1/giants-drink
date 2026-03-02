@@ -1,0 +1,183 @@
+{
+  "game_id": "star-force-nes",
+  "game_name": "Star Force",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spacecraft appearance",
+      "visual_form": "Animated enemy sprites with distinct shapes entering screen",
+      "meaning": "Incoming threat requiring player avoidance or destruction"
+    },
+    {
+      "signal": "Boss entity formation (Larios)",
+      "visual_form": "Multi-part enemy assembling onscreen with extended theme music",
+      "meaning": "Major danger phase requiring focused offensive action; boss combines slower in Japanese version, faster in International versions"
+    },
+    {
+      "signal": "Collision with enemies or projectiles",
+      "visual_form": "Player sprite removal, life indicator decrement",
+      "meaning": "Player damage/death state; loss of protection"
+    },
+    {
+      "signal": "Scrolling hazardous environment",
+      "visual_form": "Continuously advancing playfield with enemy density increasing",
+      "meaning": "Progressive world threat; player must maintain forward momentum or be consumed by scrolling boundary"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon power-up acquisition (Purser)",
+      "visual_form": "Collectible sprite appearing after enemy destruction; audio jingle plays",
+      "meaning": "Temporary offensive enhancement; increased firepower (two-level weapon power system)"
+    },
+    {
+      "signal": "Area target destruction",
+      "visual_form": "Named area marker eliminated (Greek letter A, B, G, etc.); screen flash or visual confirmation",
+      "meaning": "Progress through level; section cleared; advance toward next area"
+    },
+    {
+      "signal": "Score display update",
+      "visual_form": "HUD score counter increments; positioned differently between Japanese (left) and International (right) versions",
+      "meaning": "Player accumulation of points; progress toward extend/extra life thresholds"
+    },
+    {
+      "signal": "Life counter display",
+      "visual_form": "HUD lives indicator (recolored in International versions)",
+      "meaning": "Remaining player reserves; safety margin before game over"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction (Final Star)",
+      "color_identity": null,
+      "symbol_or_sigil": "Final Star starship (player-controlled vehicle)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player positioned at bottom of screen; scrolling vertical arena"
+    },
+    {
+      "faction": "Enemy forces (unnamed hostile entities)",
+      "color_identity": null,
+      "symbol_or_sigil": "Various enemy spacecraft designs; Larios boss entity",
+      "enemy_visual_variants": "Enemy types vary across Greek-lettered areas (Alpha through Omega); Larios has core and combining body parts",
+      "environmental_markers": "Enemy spawn patterns increase in density; area-specific enemy formations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game start / Area beginning",
+      "visual_manifestation": "Japanese version: title screen with arcade-style logo, high score indicator present; International versions: new logo design without high score; European version adds animated stellar background. HUD displays score and lives.",
+      "behavioral_manifestation": "Japanese version plays rolling demo with gameplay on title screen; International versions static title screen requiring Start input"
+    },
+    {
+      "world_state": "Active gameplay / Main area progression",
+      "visual_manifestation": "Vertical scrolling playfield; enemies and structures appear in scrolling space; Greek letter area designation (Alpha, Beta, Gamma... Omega); player starship at screen bottom firing upward",
+      "behavioral_manifestation": "Enemies spawn and advance downscreen; player must shoot enemies and area targets; collision detection active; score accumulation visible in real-time"
+    },
+    {
+      "world_state": "Boss encounter (Larios appears)",
+      "visual_manifestation": "Extended area target becomes visible; multi-part enemy entity assembles onscreen with dedicated boss music theme (Larios track)",
+      "behavioral_manifestation": "Japanese version: Larios takes longer to appear onscreen after theme starts (slower spawn); International versions: rapid appearance making core destruction timing harder. Boss movement and bullet speed slower in European version compared to other International versions"
+    },
+    {
+      "world_state": "Area target destroyed (section cleared)",
+      "visual_manifestation": "Target marker removed from screen; area clear confirmation; jingle plays (Japanese version only has Area Target De jingle; International versions skip directly to Area Clear theme)",
+      "behavioral_manifestation": "Game advances to next Greek-lettered area; difficulty progression continues; enemies refresh for next zone"
+    },
+    {
+      "world_state": "Cleopatra hidden target discovered (Iota/Area I)",
+      "visual_manifestation": "Hidden Cleopatra mask target revealed after shooting specific screen location; destruction triggers special screen displaying hidden message; European/International versions only",
+      "behavioral_manifestation": "Million-point bonus awarded; secret content accessed (referred to as 'The Mystery of the Goddess Continent' in arcade materials)"
+    },
+    {
+      "world_state": "Omega area completed / Game progression to Infinity",
+      "visual_manifestation": "Japanese version: simple game over; International versions: black screen with Tecmo logo advertising Super Star Force sequel",
+      "behavioral_manifestation": "Game transitions to Infinity area; level repeats indefinitely without difficulty increase in NES version"
+    },
+    {
+      "world_state": "Game Over state",
+      "visual_manifestation": "Japanese version: two-line game over tagline; International versions: one-line tagline with unused arcade track playing as Game Over theme (absent in Japanese/arcade versions)",
+      "behavioral_manifestation": "Japanese/US versions: hard reset required, restart from beginning. European version: allows up to three continues before permanent game over"
+    },
+    {
+      "world_state": "Extend/Extra life threshold crossed",
+      "visual_manifestation": "Extend jingle plays (played at higher key in International versions vs Japanese version); lives indicator increments; audio celebration cue",
+      "behavioral_manifestation": "Player gains additional life reserve; continues gameplay with restored protection"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Greek alphabet area naming system",
+      "example": "Game progresses through named regions: Alpha, Beta, Gamma... through Omega, then Infinity symbol after final area. Areas visually distinct but world-state progression communicated through designation rather than narrative"
+    },
+    {
+      "technique": "Boss entity visual design (Larios)",
+      "example": "Larios appears as multi-part assembling structure rather than single sprite, communicating major threat escalation and mechanical complexity requiring different tactical approach than standard enemies"
+    },
+    {
+      "technique": "Regional version visual localization",
+      "example": "European version adds animated stellar background to title screen (vs plain black in US version) and shows HUD during attract mode; these visual upgrades signal modernized presentation to international audiences"
+    },
+    {
+      "technique": "Score accumulation as progression metric",
+      "example": "HUD repositioning between regions (score moved one tile right in International versions) and recoloring emphasizes score importance; extends/extra lives reward high performance, making accumulation the primary non-spatial progression signal"
+    },
+    {
+      "technique": "Music/audio state shifts",
+      "example": "Distinct themes for different world states: Start jingle, Main BGM, Larios boss theme, Area Target De (JP only), Area Clear, Extend, Bonus, and Game Over all use different audio signatures to communicate state transitions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player starship (Final Star)",
+      "state": "Active / Safe",
+      "behavior": "Responds to input; fires projectiles upscreen; maintains screen bottom position; collision detection with enemies/bullets causes damage"
+    },
+    {
+      "entity": "Standard enemy spacecraft",
+      "state": "Spawning / Threat active",
+      "behavior": "Enters screen from top; follows formation patterns; fires projectiles; destroyed by player fire; removal grants points and potential power-up drops"
+    },
+    {
+      "entity": "Larios boss",
+      "state": "Formation phase",
+      "behavior": "Japanese version: enters slowly after theme begins, allowing core destruction before full assembly. International versions: rapid appearance makes pre-assembly destruction difficult. Once formed: independent movement patterns and attack behavior"
+    },
+    {
+      "entity": "Larios boss",
+      "state": "Fully formed / Combat active",
+      "behavior": "Movement speed and bullet speed reduced in European version; aggressive attack patterns; requires sustained damage to destroy; remains primary screen threat until elimination"
+    },
+    {
+      "entity": "Area target marker",
+      "state": "Active / Objective visible",
+      "behavior": "Remains stationary onscreen; absorbs player fire; destruction triggers area clear state; no offensive behavior; communication node rather than combat entity"
+    },
+    {
+      "entity": "Cleopatra hidden target (Iota only)",
+      "state": "Inactive / Hidden until triggered",
+      "behavior": "Appears only after player shoots specific screen location; once revealed, acts as destructible target; destruction displays secret message and awards million-point bonus; Easter egg/reward entity"
+    },
+    {
+      "entity": "Power-up (Purser)",
+      "state": "Available / Collectible",
+      "behavior": "Spawns after enemy destruction; falls or floats onscreen; collection triggers weapon enhancement audio (Purser jingle); passive entity requiring player interaction for activation"
+    }
+  ],
+  "notes": "Star Force is a vertical scrolling shooter with minimal narrative/political content. World-state communication relies entirely on visual gameplay signals (enemy types, area progression), audio cues (distinct musical themes per state), and HUD information (score, lives, area designations). No faction diplomacy or political systems exist. Regional versions (Japanese Famicom vs International NES) show significant presentation differences: title screen design, HUD positioning/coloring, music arrangements, gameplay balance tweaks, and state-specific features (continue system in European version only, hidden Cleopatra bonus in International versions only, different boss spawn timing). These regional variants represent design philosophy shifts rather than political/narrative changes. The game communicates progression and danger through arcade-standard methods: enemy density increase, area naming, boss escalation, and score rewards. Danger signals are purely mechanical (collision, enemy presence) with no environmental hazard variety.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:09:40.686Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4656,
+    "output_tokens": 2597,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

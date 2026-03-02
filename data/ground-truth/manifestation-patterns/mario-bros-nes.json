@@ -1,0 +1,184 @@
+{
+  "game_id": "mario-bros-nes",
+  "game_name": "Mario Bros.",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy emergence from pipes",
+      "visual_form": "Shellcreepers, Sidesteppers, Fighter Flies, Slipice creatures visually distinct from environment, moving from corner pipes toward player",
+      "meaning": "Immediate threat; contact with upright enemy = loss of life"
+    },
+    {
+      "signal": "Enemy upright orientation",
+      "visual_form": "Enemy sprite in normal standing/walking posture on platforms",
+      "meaning": "Enemy is dangerous; touching it causes death"
+    },
+    {
+      "signal": "Fireball entities",
+      "visual_form": "Floating projectile sprites that traverse the screen independently of platforms",
+      "meaning": "Airborne hazard; contact = death; cannot be flipped like grounded enemies"
+    },
+    {
+      "signal": "Icicles forming on platform undersides",
+      "visual_form": "Crystalline visual accumulation on platform bottoms in later rounds",
+      "meaning": "Environmental hazard forming over time; fully formed icicles cause death on contact"
+    },
+    {
+      "signal": "Enemy recovery from flipped state",
+      "visual_form": "Flipped enemy (on back) gradually returning to upright orientation",
+      "meaning": "Time pressure: window to eliminate enemy is closing; if enemy stands back up, hazard is restored"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Enemy flipped on back",
+      "visual_form": "Enemy sprite inverted/upside-down on platform surface",
+      "meaning": "Enemy is temporarily neutralized and vulnerable; player can safely approach and eliminate by kicking"
+    },
+    {
+      "signal": "POW block availability",
+      "visual_form": "Illuminated POW block sprite centered on level, glowing/active appearance",
+      "meaning": "Area control tool available; activating flips all platform-touching enemies instantly, providing momentary safety"
+    },
+    {
+      "signal": "Empty platforms with no enemies",
+      "visual_form": "Platform surfaces rendered without any enemy sprites",
+      "meaning": "Safe traversal space; no immediate threat in that zone"
+    },
+    {
+      "signal": "Bonus coins emergence",
+      "visual_form": "Floating coin sprites exiting pipes after enemies defeated",
+      "meaning": "Enemy successfully eliminated; bonus area is now safe and points are available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Mario/Luigi)",
+      "color_identity": "Red (Mario) and Green (Luigi) overalls with distinguishing hat/sprite colors",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Plumber aesthetic: operates within sewer pipe network of New York City"
+    },
+    {
+      "faction": "Sewer Creature Infestation",
+      "color_identity": "Shellcreepers (brown/turtle-like), Sidesteppers (red crabs), Fighter Flies (dark), Slipice (ice-colored)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Each creature type has distinct silhouette and movement pattern; visual diversity indicates variety of threat types",
+      "environmental_markers": "Emerge from corner pipes; visually anomalous to the urban sewer platform environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early round (low difficulty)",
+      "visual_manifestation": "Fewer enemy types on screen; platforms appear clean without icicle formation",
+      "behavioral_manifestation": "Enemies move at moderate pace; no environmental hazards beyond creature threats"
+    },
+    {
+      "world_state": "Mid-game progression",
+      "visual_manifestation": "Increased enemy density; POW block still available (shows charge state visually)",
+      "behavioral_manifestation": "Enemy spawn rate increases; creatures become more aggressive in emergence timing"
+    },
+    {
+      "world_state": "Late round (high difficulty)",
+      "visual_manifestation": "Visible icicle accumulation on platform undersides; increased fireball presence; POW block depleted/non-glowing",
+      "behavioral_manifestation": "Multiple simultaneous threats; icicles fall progressively; enemy types rotate rapidly; player must manage compound hazards"
+    },
+    {
+      "world_state": "Phase completion",
+      "visual_manifestation": "All enemies defeated; screen transitions or level indicator shows progression",
+      "behavioral_manifestation": "Creature spawning ceases; new phase begins with increased difficulty parameters"
+    },
+    {
+      "world_state": "Game over state",
+      "visual_manifestation": "Player sprite removed from screen; game-over text or screen-wipe transition",
+      "behavioral_manifestation": "All entity movement ceases; no further input response except restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sewer setting with corner pipes",
+      "example": "The four corner pipes establish the location as a subsurface sewage system. Enemies emerge from these pipes, implying an infestation originating from underground infrastructure. The sewage context narratively justifies the creature types (aquatic/subterranean beings) and establishes the plumber protagonist's occupational role as logical."
+    },
+    {
+      "technique": "Platform architecture and wraparound space",
+      "example": "Multi-level horizontal platforms with screen-edge wraparound suggest a confined section of sewer tunnel or chamber. The confined space with limited vertical/horizontal extent creates the gameplay loop: enemies spawn, player must manage them within the bounded area, implying this is a containment/clearing operation."
+    },
+    {
+      "technique": "Bonus coin drops from pipes",
+      "example": "Coins emerge from the same pipes that spawn enemies, suggesting enemy defeat triggers a secondary mechanism in the pipe system. This visual association implies the plumber's action of clearing creatures somehow activates the coin reward system—narrative justification for score mechanics."
+    },
+    {
+      "technique": "Icicle formation progression",
+      "example": "Gradual crystalline buildup on platform undersides in later rounds indicates environmental degradation or freezing conditions spreading through the sewer. Visual progression of ice accumulation conveys escalating environmental hazard unrelated to creature threats, implying an expanding crisis."
+    },
+    {
+      "technique": "POW block central positioning",
+      "example": "The POW block at screen center serves as the spatial and narrative anchor: it's the player's strategic tool to manage the creature outbreak. Its central placement and limited uses (three activations) suggest it's a critical emergency device with finite capacity, implying urgency and resource management in the containment scenario."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Shellcreeper",
+      "state": "Upright/normal",
+      "behavior": "Crawls across platforms horizontally; predictable patrol movement; can only be flipped when struck from below"
+    },
+    {
+      "entity": "Shellcreeper",
+      "state": "Flipped on back",
+      "behavior": "Struggles/thrashes upside-down; gradually rights itself if not kicked away; vulnerable to removal"
+    },
+    {
+      "entity": "Sidestepper (Crab)",
+      "state": "Active",
+      "behavior": "Moves laterally with distinct side-crab gait; same flipping vulnerability as Shellcreeper"
+    },
+    {
+      "entity": "Fighter Fly",
+      "state": "Airborne",
+      "behavior": "Jumps vertically between platforms; cannot be flipped mid-air; only vulnerable when landing on platform"
+    },
+    {
+      "entity": "Slipice",
+      "state": "On platform contact",
+      "behavior": "Transforms platform surface into slippery ice; changes player movement physics; can be flipped when contacted from below"
+    },
+    {
+      "entity": "Fireball",
+      "state": "Active",
+      "behavior": "Floats freely across screen independent of platforms; no flipping mechanic; constant hazard state; cannot be eliminated by standard jump/kick"
+    },
+    {
+      "entity": "POW Block",
+      "state": "Activated (usage 1-3)",
+      "behavior": "Emits visual effect; instantly flips all contact-platform enemies; block becomes inert after three uses; visual deactivation indicates resource depletion"
+    },
+    {
+      "entity": "Player (Mario/Luigi)",
+      "state": "Safe (on platform away from enemies)",
+      "behavior": "Can move freely; can strike platforms below to flip enemies; can activate POW block"
+    },
+    {
+      "entity": "Player (Mario/Luigi)",
+      "state": "In contact with upright enemy/fireball",
+      "behavior": "Immediate death; character sprite removed; life counter decrements; respawn or game-over sequence triggers"
+    }
+  ],
+  "notes": "Mario Bros. (NES 1986) uses visual clarity and spatial arrangement to communicate danger and safety states. Enemies are distinguished by unique sprite designs that immediately signal threat type (grounded vs. airborne, speed, special properties like ice). The sewer platform environment provides narrative context for the infestation scenario. Danger signals are primarily organism-based (enemy presence and orientation), while safety emerges from enemy incapacitation states. The progression system (increasing enemy density, icicle formation) is conveyed through visual accumulation rather than UI elements, relying on player observation of screen state. The game lacks explicit faction symbolism but uses occupational/contextual storytelling (plumbers, sewers, pipes) to establish player agency. No political or ideological dimensions are present; the world-state is purely mechanical/ecological.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:29:07.057Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6097,
+    "output_tokens": 2443,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

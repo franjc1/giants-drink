@@ -1,0 +1,124 @@
+{
+  "game_id": "spy-vs-spy-nes",
+  "game_name": "Spy vs. Spy",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "opponent_presence",
+      "visual_form": "contrasting_spy_character_on_screen",
+      "meaning": "direct_threat_from_player_opponent"
+    },
+    {
+      "signal": "trap_activation",
+      "visual_form": "animated_hazard_deployment",
+      "meaning": "environmental_danger_from_set_traps"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "isolated_rooms",
+      "visual_form": "enclosed_spaces_without_opponent_visible",
+      "meaning": "temporary_refuge_to_gather_items"
+    },
+    {
+      "signal": "trap_disarmed_state",
+      "visual_form": "inactive_hazard_visual",
+      "meaning": "cleared_pathway_is_safe"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Black_Spy",
+      "color_identity": "black",
+      "symbol_or_sigil": "spy_silhouette",
+      "enemy_visual_variants": "inverted_white_spy_variant_when_opponent_controlled",
+      "environmental_markers": "black_footprints_or_shadows_in_wake"
+    },
+    {
+      "faction": "White_Spy",
+      "color_identity": "white",
+      "symbol_or_sigil": "spy_silhouette",
+      "enemy_visual_variants": "inverted_black_spy_variant_when_opponent_controlled",
+      "environmental_markers": "white_footprints_or_traces_in_wake"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "game_start_competition_phase",
+      "visual_manifestation": "both_spies_deployed_in_embassy_setting_visible_simultaneously",
+      "behavioral_manifestation": "movement_available_trap_setting_begins"
+    },
+    {
+      "world_state": "hunt_phase_opponent_nearby",
+      "visual_manifestation": "screen_shows_both_characters_in_same_room_visual_proximity_clear",
+      "behavioral_manifestation": "evasion_required_trap_trigger_risk_increases"
+    },
+    {
+      "world_state": "briefcase_objective_location",
+      "visual_manifestation": "briefcase_object_rendered_visually_distinct_in_room_target_marked",
+      "behavioral_manifestation": "player_movement_directed_toward_objective_opponent_intercepts"
+    },
+    {
+      "world_state": "trap_armed_state",
+      "visual_manifestation": "trap_equipment_rendered_on_floor_or_door_armed_status_visible",
+      "behavioral_manifestation": "opponent_or_player_triggers_hazard_animation_plays_damage_occurs"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "black_and_white_minimalist_aesthetic",
+      "example": "mad_magazine_comic_strip_visual_style_reinforces_spy_parody_genre_ludic_slapstick_tone"
+    },
+    {
+      "technique": "room_layout_functionality",
+      "example": "embassy_interior_spaces_organized_as_trap_zones_and_objective_rooms_communicate_strategic_depth"
+    },
+    {
+      "technique": "character_silhouette_contrast",
+      "example": "black_spy_vs_white_spy_visual_duality_immediately_signals_opposition_and_symmetrical_gameplay"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Black_Spy",
+      "state": "hunting_opponent_in_proximity",
+      "behavior": "visible_movement_toward_white_spy_aggression_signaled_through_animation"
+    },
+    {
+      "entity": "White_Spy",
+      "state": "hunting_opponent_in_proximity",
+      "behavior": "visible_movement_toward_black_spy_aggression_signaled_through_animation"
+    },
+    {
+      "entity": "either_spy",
+      "state": "trap_triggered_state",
+      "behavior": "temporary_stun_animation_vulnerability_displayed_opponent_advantage_moment"
+    },
+    {
+      "entity": "either_spy",
+      "state": "objective_item_acquired",
+      "behavior": "character_animation_changes_to_carrying_pose_visual_status_updated"
+    }
+  ],
+  "notes": "Spy vs. Spy (1988 NES) is a direct adaptation of the wordless Mad magazine comic strip by Antonio Prohías. The game's visual communication relies heavily on stark black-and-white minimalism inherited from the source material. World-state is conveyed through character proximity and item visibility rather than dynamic environmental shifts. Danger is signaled through opponent presence and trap deployment rather than atmospheric cues. The symmetric dual-faction design (black spy vs. white spy) uses color inversion as the primary faction identifier, with gameplay treating both sides identically. Environmental storytelling emerges from room design and trap placement logic rather than decorative narrative elements. The game operates on a turn-based or collision-detection model where visual manifestation of player action determines threat level.",
+  "sources_used": [
+    "wikipedia_spy_vs_spy_disambiguation"
+  ],
+  "TODO": [
+    "requires_gameplay_footage_or_manual_for_exact_trap_visual_states",
+    "requires_color_palette_analysis_for_precise_faction_visual_encoding",
+    "requires_screen_capture_analysis_for_environmental_storytelling_details",
+    "requires_sprite_documentation_for_behavioral_animation_states"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:14:07.571Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1300,
+    "output_tokens": 1472,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

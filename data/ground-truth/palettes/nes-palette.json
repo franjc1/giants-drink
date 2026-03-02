@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "system": "Nintendo Entertainment System (NES) / Famicom",
+    "hardware_chip": "Ricoh 2C02 PPU (NTSC) / 2C07 PPU (PAL)",
+    "palette_type": "hardware_fixed",
+    "total_colors": 64,
+    "indexed_range": "0x00 to 0x3F",
+    "sources": [
+      {
+        "name": "NESdev Wiki — PPU Palettes",
+        "url": "https://www.nesdev.org/wiki/PPU_palettes",
+        "notes": "Authoritative technical reference. Describes 2C02 palette generation, Pally v0.22.1 canonical palette file, and the composite-to-RGB conversion complexity."
+      },
+      {
+        "name": "Lospec — Nintendo Entertainment System Palette",
+        "url": "https://lospec.com/palette-list/nintendo-entertainment-system",
+        "notes": "Source for the 64 RGB hex values below. Lospec palette is a community-standard NES palette used widely in pixel art tools."
+      },
+      {
+        "name": "TurboRGB / FirebrandX NES Composite Palette Project",
+        "url": "http://www.firebrandx.com/nespalette.html",
+        "notes": "Hardware-measurement-based palette variant. Alternative to the Lospec/Pally values."
+      }
+    ],
+    "critical_notes": [
+      "The NES 2C02 does NOT generate RGB video. It generates NTSC composite video directly. There is NO single 'correct' RGB encoding of the NES palette.",
+      "Different emulators use different palette variants. The values below are one widely-used approximation.",
+      "Major variant families: Pally (theoretical), Bisqwit (mathematical model), FirebrandX/TurboRGB (hardware-measured), FCEUX (default), Nestopia (emulator).",
+      "For game development using NES aesthetics, any of these variants produces a valid 'NES look'. Pally or FirebrandX are generally recommended.",
+      "Index $0D: 'Blacker than black' — produces a sub-black composite signal that can damage some older TVs. Avoid in actual NES hardware use.",
+      "Index $0F: Canonical black. Use $0F for true black, not $0D or $0E.",
+      "Indices $0E, $1E, $2E, $3E, $1F, $2F, $3F: Mirrors — produce black. The 64 usable distinct colors are therefore fewer than 64 unique hues.",
+      "Emphasis bits (PPUMASK register bits 5-7) can tint the palette (boost R, G, or B channels), but the tinted colors are derived from the base palette, not separately documented here."
+    ],
+    "palette_structure": {
+      "row_0_0x00_0x0F": "Dark colors: grays, dark neutrals. Three black entries ($0D, $0E, $0F).",
+      "row_1_0x10_0x1F": "Medium-brightness colors: medium gray, blues, purples, reds, oranges, greens, teals. Three black entries ($1D, $1E, $1F).",
+      "row_2_0x20_0x2F": "Bright/vivid colors: white, bright blues, purples, pinks, reds, yellows, greens, teal, dark gray. Two black entries ($2E, $2F).",
+      "row_3_0x30_0x3F": "Pastel/light colors: white again, light blues, lavenders, light pinks, light greens, light gray. Two black entries ($3E, $3F)."
+    }
+  },
+
+  "palette": {
+    "0x00": { "hex": "#585858", "name": "Dark Gray", "row": 0 },
+    "0x01": { "hex": "#00237C", "name": "Dark Navy Blue", "row": 0 },
+    "0x02": { "hex": "#0D1099", "name": "Dark Indigo", "row": 0 },
+    "0x03": { "hex": "#300092", "name": "Dark Violet", "row": 0 },
+    "0x04": { "hex": "#4F006C", "name": "Dark Purple", "row": 0 },
+    "0x05": { "hex": "#600035", "name": "Dark Maroon", "row": 0 },
+    "0x06": { "hex": "#5C0500", "name": "Dark Red-Brown", "row": 0 },
+    "0x07": { "hex": "#461800", "name": "Dark Brown", "row": 0 },
+    "0x08": { "hex": "#272D00", "name": "Dark Olive", "row": 0 },
+    "0x09": { "hex": "#093E00", "name": "Dark Forest Green", "row": 0 },
+    "0x0A": { "hex": "#004500", "name": "Dark Deep Green", "row": 0 },
+    "0x0B": { "hex": "#004106", "name": "Dark Teal-Green", "row": 0 },
+    "0x0C": { "hex": "#003545", "name": "Dark Teal", "row": 0 },
+    "0x0D": { "hex": "#000000", "name": "BLACK (avoid — sub-black signal, can damage hardware)", "row": 0, "warning": "Do not use on NES hardware. Produces sub-black NTSC signal." },
+    "0x0E": { "hex": "#000000", "name": "Black (mirror)", "row": 0 },
+    "0x0F": { "hex": "#000000", "name": "Canonical Black — use this for black", "row": 0 },
+
+    "0x10": { "hex": "#A1A1A1", "name": "Medium Gray", "row": 1 },
+    "0x11": { "hex": "#0B53D7", "name": "Bright Blue", "row": 1 },
+    "0x12": { "hex": "#3337FE", "name": "Royal Blue", "row": 1 },
+    "0x13": { "hex": "#6621F7", "name": "Blue-Violet", "row": 1 },
+    "0x14": { "hex": "#9515BE", "name": "Purple", "row": 1 },
+    "0x15": { "hex": "#AC166E", "name": "Magenta-Purple", "row": 1 },
+    "0x16": { "hex": "#A62721", "name": "Red", "row": 1 },
+    "0x17": { "hex": "#864300", "name": "Red-Orange / Dark Orange", "row": 1 },
+    "0x18": { "hex": "#596200", "name": "Olive-Yellow", "row": 1 },
+    "0x19": { "hex": "#2D7A00", "name": "Medium Green", "row": 1 },
+    "0x1A": { "hex": "#0C8500", "name": "Bright Green", "row": 1 },
+    "0x1B": { "hex": "#007F2A", "name": "Green-Teal", "row": 1 },
+    "0x1C": { "hex": "#006D85", "name": "Teal / Cyan-Blue", "row": 1 },
+    "0x1D": { "hex": "#000000", "name": "Black (mirror)", "row": 1 },
+    "0x1E": { "hex": "#000000", "name": "Black (mirror)", "row": 1 },
+    "0x1F": { "hex": "#000000", "name": "Black (mirror)", "row": 1 },
+
+    "0x20": { "hex": "#FFFFFF", "name": "White", "row": 2 },
+    "0x21": { "hex": "#51A5FE", "name": "Sky Blue", "row": 2 },
+    "0x22": { "hex": "#8084FE", "name": "Periwinkle Blue", "row": 2 },
+    "0x23": { "hex": "#BC6AFE", "name": "Lavender-Purple", "row": 2 },
+    "0x24": { "hex": "#F15BFE", "name": "Bright Magenta", "row": 2 },
+    "0x25": { "hex": "#FE5EC4", "name": "Hot Pink", "row": 2 },
+    "0x26": { "hex": "#FE7269", "name": "Coral / Salmon Red", "row": 2 },
+    "0x27": { "hex": "#E19321", "name": "Orange", "row": 2 },
+    "0x28": { "hex": "#ADB600", "name": "Yellow-Green", "row": 2 },
+    "0x29": { "hex": "#79D300", "name": "Chartreuse Green", "row": 2 },
+    "0x2A": { "hex": "#51DF21", "name": "Bright Lime Green", "row": 2 },
+    "0x2B": { "hex": "#3AD974", "name": "Mint Green", "row": 2 },
+    "0x2C": { "hex": "#39C3DF", "name": "Cyan / Light Teal", "row": 2 },
+    "0x2D": { "hex": "#424242", "name": "Dark Gray (lighter than black)", "row": 2 },
+    "0x2E": { "hex": "#000000", "name": "Black (mirror)", "row": 2 },
+    "0x2F": { "hex": "#000000", "name": "Black (mirror)", "row": 2 },
+
+    "0x30": { "hex": "#FFFFFF", "name": "White (duplicate of $20)", "row": 3 },
+    "0x31": { "hex": "#B5D9FE", "name": "Pastel Blue / Light Sky", "row": 3 },
+    "0x32": { "hex": "#CACAFE", "name": "Pastel Lavender", "row": 3 },
+    "0x33": { "hex": "#E3BEFE", "name": "Pastel Violet", "row": 3 },
+    "0x34": { "hex": "#F9B8FE", "name": "Pastel Pink-Magenta", "row": 3 },
+    "0x35": { "hex": "#FEBAE7", "name": "Pastel Rose Pink", "row": 3 },
+    "0x36": { "hex": "#FEC3BC", "name": "Pastel Salmon / Light Peach", "row": 3 },
+    "0x37": { "hex": "#F4D199", "name": "Light Tan / Peach", "row": 3 },
+    "0x38": { "hex": "#DEE086", "name": "Light Yellow-Green", "row": 3 },
+    "0x39": { "hex": "#C6EC87", "name": "Light Chartreuse", "row": 3 },
+    "0x3A": { "hex": "#B2F29D", "name": "Pastel Green", "row": 3 },
+    "0x3B": { "hex": "#A7F0C3", "name": "Pastel Mint", "row": 3 },
+    "0x3C": { "hex": "#A8E7F0", "name": "Pastel Cyan", "row": 3 },
+    "0x3D": { "hex": "#ACACAC", "name": "Light Gray", "row": 3 },
+    "0x3E": { "hex": "#000000", "name": "Black (mirror)", "row": 3 },
+    "0x3F": { "hex": "#000000", "name": "Black (mirror)", "row": 3 }
+  },
+
+  "palette_as_array": [
+    "#585858", "#00237C", "#0D1099", "#300092", "#4F006C", "#600035", "#5C0500", "#461800",
+    "#272D00", "#093E00", "#004500", "#004106", "#003545", "#000000", "#000000", "#000000",
+    "#A1A1A1", "#0B53D7", "#3337FE", "#6621F7", "#9515BE", "#AC166E", "#A62721", "#864300",
+    "#596200", "#2D7A00", "#0C8500", "#007F2A", "#006D85", "#000000", "#000000", "#000000",
+    "#FFFFFF", "#51A5FE", "#8084FE", "#BC6AFE", "#F15BFE", "#FE5EC4", "#FE7269", "#E19321",
+    "#ADB600", "#79D300", "#51DF21", "#3AD974", "#39C3DF", "#424242", "#000000", "#000000",
+    "#FFFFFF", "#B5D9FE", "#CACAFE", "#E3BEFE", "#F9B8FE", "#FEBAE7", "#FEC3BC", "#F4D199",
+    "#DEE086", "#C6EC87", "#B2F29D", "#A7F0C3", "#A8E7F0", "#ACACAC", "#000000", "#000000"
+  ],
+
+  "usage_notes": {
+    "nes_hardware_subpalettes": {
+      "description": "NES games don't use the full 64 colors simultaneously. The PPU supports 8 subpalettes at once: 4 for background tiles, 4 for sprites. Each subpalette holds 4 colors (3 chosen + 1 universal background color shared across all subpalettes). Maximum simultaneous colors: 25 (1 universal BG + 3×4 BG subpalettes + 3×4 sprite subpalettes).",
+      "subpalette_size": 4,
+      "background_subpalettes": 4,
+      "sprite_subpalettes": 4,
+      "universal_bg_color": "Index 0 of the background palette ($3F00) — one color shared across all backgrounds"
+    },
+    "per_sprite_colors": "Each 8×8 sprite tile uses one of the 4 sprite subpalettes. Maximum 4 distinct colors per sprite (3 + transparent).",
+    "per_tile_colors": "Each 8×8 background tile uses one of the 4 background subpalettes. Maximum 4 colors per tile region.",
+    "common_pattern": "Typically: sky/outdoor games use $11 (bright blue) or $21 (sky blue) for background. Underground/indoor games use $0F (black). Grass often uses $19 or $29 (greens)."
+  },
+
+  "notable_game_palette_selections": {
+    "_note": "Games select a handful of palette indices for each of their subpalettes. The same 64 hardware colors are available to all games.",
+    "super_mario_bros_1": {
+      "background_color": "$0F (black) for underground, $21 (sky blue) or lighter for overworld",
+      "mario_sprite": "Red cap/shirt: $16 ($A62721). Blue overalls: $12 ($3337FE). Skin: $27 ($E19321).",
+      "notes": "SMB1 uses a limited but iconic color set. The red+blue+skin tone combination is instantly recognizable."
+    },
+    "mega_man_2": {
+      "mega_man_sprite": "Blue armor: $12 ($3337FE) or $11. Light blue accents: $21. Skin: $27.",
+      "notes": "Mega Man's blue is typically from row 1 or row 2 blues depending on the game."
+    },
+    "zelda_1": {
+      "link_sprite": "Green tunic: $19 or $1A. Skin: $27. Hair/shadow: $08.",
+      "notes": "The Zelda games typically use a brown-green-tan combination for Link."
+    },
+    "_documentation_status": "Full per-game subpalette documentation is a TODO. The palette indices above are approximate from gameplay observation. Exact palette data requires per-game CHR ROM extraction."
+  },
+
+  "palette_variants": {
+    "_note": "Multiple NES palette variants exist because there is no single 'correct' RGB conversion from composite NTSC.",
+    "pally_v0221": {
+      "author": "Timothy Shannahan",
+      "description": "Mathematical model of NES 2C02 composite output. Referenced on NESdev wiki as canonical.",
+      "url": "https://www.nesdev.org/wiki/PPU_palettes",
+      "notes": "The File:2C02G_wiki.pal downloadable from NESdev is generated via Pally v0.22.1. Values differ slightly from the Lospec palette used in this file."
+    },
+    "bisqwit": {
+      "author": "Bisqwit (Joel Yliluoma)",
+      "description": "Mathematical model, alternative to Pally.",
+      "url": "http://bisqwit.iki.fi/utils/nespalette.php"
+    },
+    "firebrandx_turborgb": {
+      "author": "FirebrandX",
+      "description": "Hardware measurement-based. Captured from real hardware via composite capture.",
+      "url": "http://www.firebrandx.com/nespalette.html",
+      "notes": "Generally considered one of the most hardware-accurate variants."
+    },
+    "fceux_default": {
+      "description": "Default palette used in FCEUX emulator. Widely used by many NES players' first experience.",
+      "notes": "Has a 'cooler' (bluer) tone compared to Pally. Colors are slightly more saturated."
+    },
+    "recommendation": "For production use in a game engine aiming for NES aesthetics, use FirebrandX (TurboRGB) or Pally v0.22.1. The Lospec palette (used in this file) is acceptable for visual development and tool use."
+  }
+}

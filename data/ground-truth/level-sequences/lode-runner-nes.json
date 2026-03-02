@@ -1,0 +1,163 @@
+{
+  "game_id": "lode-runner-nes",
+  "game_name": "Lode Runner",
+  "platform": "nes",
+  "paradigm": "puzzle-platformer",
+  "level_count": 150,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement and gold collection",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns stick figure controls, lateral movement, and gold pickup mechanics in early levels"
+    },
+    {
+      "element": "Single guard enemy",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns guard AI patterns and predictive movement; guards do not always take shortest path"
+    },
+    {
+      "element": "Ladder traversal",
+      "first_appears": "Early levels",
+      "introduction_context": "safe",
+      "mastery_context": "Multi-story platform navigation; guards behave erratically on ladders (sometimes repelled from player)"
+    },
+    {
+      "element": "Hand-to-hand bars (suspended traversal)",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Alternative vertical/horizontal movement; enables digging from hanging position"
+    },
+    {
+      "element": "Digging holes (trap mechanic)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Core puzzle mechanic; holes fill after delay; guards escape or respawn; player cannot escape holes"
+    },
+    {
+      "element": "Guard carrying gold bars",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Guards can carry max one bar; dropping bars when trapped enables puzzle solutions"
+    },
+    {
+      "element": "Multiple guards (2+)",
+      "first_appears": "Mid levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Coordinating avoidance and trapping; guards move alternately; pattern prediction becomes critical"
+    },
+    {
+      "element": "Trapdoors in floors",
+      "first_appears": "Mid levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Player and guards fall through; strategic element for puzzle design"
+    },
+    {
+      "element": "Bedrock (undiggable terrain)",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Constrains digging strategy; forces alternative puzzle solutions"
+    },
+    {
+      "element": "Multi-layer digging (width-matching requirement)",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Advanced puzzle mechanic; requires gap width ≥ layer count, or exploiting ladder/bar positions"
+    },
+    {
+      "element": "Guard rescue and re-trapping",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Complex sequences: dig guard out, move away before guard escapes, coordinate guard position for puzzle solution"
+    },
+    {
+      "element": "Using guards as platforms/bridges",
+      "first_appears": "Late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Feet-to-head contact mechanics; falling guard as traversal aid; timing-critical contact"
+    },
+    {
+      "element": "Guard entrapment in designed dead zones",
+      "first_appears": "Late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Luring guards into inescapable regions; requires deep understanding of AI and level architecture"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting final gold piece",
+      "Reaching exit at top of screen",
+      "Successfully trapping pursuing guard",
+      "Finding safe platform away from guards"
+    ],
+    "typical_tension_triggers": [
+      "Guard entering player's current screen area",
+      "Multiple guards converging",
+      "Digging hole fills while player trapped below",
+      "Guard carrying last uncollected gold bar",
+      "Forced to use risky guard-as-platform mechanic"
+    ],
+    "pacing_descriptor": "Cyclical chase-and-pause rhythm with escalating complexity. Early levels offer exploration time; mid-game pressurizes through guard multiplication and constraint introduction; late-game demands continuous prediction and precision timing. Puzzle-solving provides mental relief breaks between chase sequences."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "frequent",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction to core mechanics (movement, gold, single guard) in safe, exploratory environments. One life penalty per level completion offset by +1 life reward.",
+    "mid_game": "Mechanic density increases: multiple guards, trapdoors, bedrock constraints, digging depth requirements. Puzzle-solving demands grow; reaction time becomes secondary to spatial reasoning.",
+    "late_game": "Integration of all mechanics into complex sequences. Guard AI exploitation (using as platforms, coordinated trapping/rescue), multi-layer digging, entrapment strategy. Mastery of predictive guard pathfinding essential.",
+    "notable_spikes": [
+      "Introduction of 2+ simultaneous guards creating unpredictable AI interference patterns",
+      "Multi-layer digging requirements forcing spatial decomposition",
+      "Levels requiring guard-as-platform mechanic with tight timing windows",
+      "Late-stage levels combining trapdoors, bedrock, and synchronized multi-guard sequences"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Vertical Collection Gauntlet",
+      "description": "Gold distributed across multiple vertical tiers; player must ascend ladders while guards descend. Requires sequential collection and careful guard prediction.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Trap-and-Redirect",
+      "description": "Level design forces guards into predictable paths where digging creates escape-proof zones. Guards drop gold when trapped; player retrieves after escape window closes.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Guard-Mediated Puzzle",
+      "description": "Gold placed such that only a guard can initially reach it. Player must lure guard to location, trap them, force drop, then retrieve. Requires coordination across multiple steps.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Platform Chaining",
+      "description": "Uses feet-to-head contact and falling guard mechanics to create traversal paths unavailable through normal platforming. Timing-critical sequences.",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:42:51.881Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4110,
+    "output_tokens": 2111,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

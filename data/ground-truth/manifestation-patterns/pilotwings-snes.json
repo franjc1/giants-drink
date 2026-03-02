@@ -1,0 +1,177 @@
+{
+  "game_id": "pilotwings-snes",
+  "game_name": "Pilotwings",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Terrain collision",
+      "visual_form": "Ground/mountain surfaces approaching rapidly via Mode 7 scaling effect",
+      "meaning": "Imminent crash hazard; player must correct altitude or trajectory"
+    },
+    {
+      "signal": "Flight instability",
+      "visual_form": "Aircraft/glider pitch and roll distortion in viewport scaling",
+      "meaning": "Loss of control; requires corrective input to avoid stall or spin"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "HUD indicator reduction (qualitative visual feedback during flight segments)",
+      "meaning": "Limited time remaining; must reach landing zone or designated checkpoint"
+    },
+    {
+      "signal": "Out-of-bounds area",
+      "visual_form": "Edge of scrolling playfield; map boundaries indicated by terrain drop-off or ocean",
+      "meaning": "Leaving mission zone results in failure condition"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Landing zone marker",
+      "visual_form": "Designated ground area with contrasting terrain color or flat surface within environment",
+      "meaning": "Target landing location; successful touchdown here completes objective"
+    },
+    {
+      "signal": "Mission waypoint",
+      "visual_form": "On-screen positional indicator or environmental landmark highlighting objective direction",
+      "meaning": "Navigation cue toward next goal or checkpoint"
+    },
+    {
+      "signal": "Altitude gain",
+      "visual_form": "Reduced scaling of ground features via Mode 7 (visual indication of vertical distance)",
+      "meaning": "Safe flight altitude; away from collision hazards"
+    },
+    {
+      "signal": "Stable control response",
+      "visual_form": "Smooth scaling/rotation transitions without erratic viewport distortion",
+      "meaning": "Aircraft responds predictably to input; normal flight conditions maintained"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player pilot (training school)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Civilian aircraft (light planes, hang gliders, jet packs, rocket belt); mission briefing locations representing training academy facilities"
+    },
+    {
+      "faction": "Military (bonus content)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Attack helicopter model; distinct from civilian aircraft",
+      "environmental_markers": "Helicopter sprite appears in bonus stages; represents optional advanced challenge"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission active - light plane segment",
+      "visual_manifestation": "Overhead isometric view via Mode 7; landscape rotating/scaling to show altitude changes and directional movement; aircraft sprite centered in viewport",
+      "behavioral_manifestation": "Player has continuous control over throttle, pitch, and roll; fuel consumption decreases over time; hazard terrain remains static but approaches as altitude drops"
+    },
+    {
+      "world_state": "Mission active - hang gliding segment",
+      "visual_manifestation": "Similar Mode 7 perspective; terrain appears farther due to altitude; glider sprite smaller/more vulnerable visually",
+      "behavioral_manifestation": "No engine power; player depends on thermal updrafts and momentum; drift and descent are primary concerns; control is gentler but more momentum-dependent"
+    },
+    {
+      "world_state": "Mission active - skydiving segment",
+      "visual_manifestation": "Free-fall perspective; landscape approaches rapidly; sky/cloud backdrop indicates altitude; parachute deployment changes viewport scale dramatically",
+      "behavioral_manifestation": "Initial free-fall with lateral movement only; parachute deployment slows descent; landing precision required"
+    },
+    {
+      "world_state": "Mission active - rocket belt segment",
+      "visual_manifestation": "Low-altitude flight; Mode 7 scaling shows immediate proximity to ground; closer visual perspective emphasizes precision requirements",
+      "behavioral_manifestation": "Precise hover control required; rapid fuel burn; small margin for error in terrain avoidance"
+    },
+    {
+      "world_state": "Mission failed - collision",
+      "visual_manifestation": "Abrupt zoom/scale freeze as aircraft impacts terrain; transition to failure state screen",
+      "behavioral_manifestation": "Input becomes unresponsive; mission restarts or returns to menu"
+    },
+    {
+      "world_state": "Mission successful - landing complete",
+      "visual_manifestation": "Aircraft comes to rest on designated landing zone; viewport stabilizes; screen transitions to results/scoring display",
+      "behavioral_manifestation": "Input locked; scoring/grade assignment displayed; progression to next mission unlocked"
+    },
+    {
+      "world_state": "Bonus stage active - attack helicopter combat",
+      "visual_manifestation": "Helicopter sprite enemy visible in playfield; distinct from player aircraft; may feature different coloring or design",
+      "behavioral_manifestation": "Helicopter exhibits autonomous movement patterns; represents scoring target or evasion challenge; player must navigate or intercept"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Topographic visual design via Mode 7",
+      "example": "Mountain terrain, valleys, and flat plains are rendered through scaling/rotation to convey geography; player learns layout through repeated flights and visual exploration"
+    },
+    {
+      "technique": "Mission variety as progression narrative",
+      "example": "Sequential unlock of aircraft types (light plane → hang glider → skydiving → rocket belt) communicates escalating skill challenges; bonus helicopter stage rewards mastery"
+    },
+    {
+      "technique": "Landmark-based navigation",
+      "example": "Distinctive terrain features (peaks, bodies of water, runway areas) serve as visual reference points; player builds mental map of mission space through visual familiarity"
+    },
+    {
+      "technique": "Control scheme differentiation",
+      "example": "Each aircraft type has unique physics/controls; visual feedback (responsiveness, speed, drift patterns) communicates to player how each vehicle handles differently"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Light plane",
+      "state": "Normal flight",
+      "behavior": "Responds immediately to pitch/roll input; altitude maintained via throttle; gradual fuel depletion over time"
+    },
+    {
+      "entity": "Light plane",
+      "state": "Low fuel",
+      "behavior": "Engine performance degrades; descent accelerates; control becomes sluggish (qualitative feedback)"
+    },
+    {
+      "entity": "Hang glider",
+      "state": "Unpowered flight",
+      "behavior": "Constant descent unless in thermal updraft; lateral drift due to wind; player must seek rising air currents to maintain altitude"
+    },
+    {
+      "entity": "Hang glider",
+      "state": "Thermal rising air detected",
+      "behavior": "Ascent rate increases; altitude gain visible through inverse Mode 7 scaling; player must position glider within updraft zone"
+    },
+    {
+      "entity": "Skydiver",
+      "state": "Free fall",
+      "behavior": "Rapid descent; lateral drift only; rapid ground approach visible; parachute not yet deployed"
+    },
+    {
+      "entity": "Skydiver",
+      "state": "Parachute deployed",
+      "behavior": "Descent slows dramatically; viewport scale change reflects reduced velocity; fine control allows precision landing"
+    },
+    {
+      "entity": "Rocket belt",
+      "state": "Active hover",
+      "behavior": "Precise altitude maintenance required; fuel burns rapidly; immediate ground proximity visible; high crash risk"
+    },
+    {
+      "entity": "Attack helicopter (bonus)",
+      "state": "Active patrol",
+      "behavior": "Moves autonomously in playfield; may evade or intercept player; represents obstacle or target depending on mission"
+    }
+  ],
+  "notes": "Pilotwings (SNES) is a flight simulation without explicit faction conflict or political scenarios. Danger and safety signals are purely environmental/mechanical. The game's world state is communicated almost entirely through visual perspective manipulation (Mode 7 scaling/rotation) and flight physics feedback. Visual communication is abstract and mechanical rather than narrative-driven. No hostile non-player factions; bonus helicopter is gameplay challenge, not faction antagonist. The paradigm listed as 'racing' appears inaccurate; this is an amateur flight simulator with mission-based progression.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:49:55.273Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3023,
+    "output_tokens": 2149,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

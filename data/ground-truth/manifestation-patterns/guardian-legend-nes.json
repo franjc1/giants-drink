@@ -1,0 +1,200 @@
+{
+  "game_id": "guardian-legend-nes",
+  "game_name": "The Guardian Legend",
+  "platform": "nes",
+  "paradigm": "action-adventure / shoot-em-up hybrid",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile alien lifeforms appear on screen during Labyrinth exploration and Dungeon corridors",
+      "meaning": "Player is in combat zone; life meter will decrease if hit"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Large alien creature at end of Dungeon corridor",
+      "meaning": "Critical combat section; must defeat to progress and unlock safety device"
+    },
+    {
+      "signal": "Life meter depletion",
+      "visual_form": "Life meter UI visual decreasing",
+      "meaning": "Guardian has taken damage; if fully depleted, Guardian explodes and game ends"
+    },
+    {
+      "signal": "Sealed corridors",
+      "visual_form": "Dungeon entry point requires specific action or key",
+      "meaning": "Cannot access this safety device yet; need clues or progression"
+    },
+    {
+      "signal": "Locked warp panels",
+      "visual_form": "Portal with specific symbol; no matching key in inventory",
+      "meaning": "Area blocked; player lacks required key to progress through this territory"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Blue Lander NPC",
+      "visual_form": "Round, brightly colored blue creature in room",
+      "meaning": "Checkpoint location; safe haven for dispensing advice, upgrades, passwords, and game resume point"
+    },
+    {
+      "signal": "Shop rooms",
+      "visual_form": "Accessible room within Labyrinth connected by warp panel",
+      "meaning": "Safe trading location; can exchange power chips for weapon upgrades and capacity increases"
+    },
+    {
+      "signal": "Password rooms",
+      "visual_form": "Designated Labyrinth room accessible via warp panel",
+      "meaning": "Safe location to record progress; allows game resumption with retained progress"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Collectable items found in Labyrinth or dropped by defeated bosses",
+      "meaning": "Restores life meter and provides resources; safe to collect"
+    },
+    {
+      "signal": "Red Lander",
+      "visual_form": "Round, brightly colored red creature as item or NPC",
+      "meaning": "Increases power chip capacity; provides strategic advantage and safety through resource abundance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Five hostile alien tribes",
+      "color_identity": null,
+      "symbol_or_sigil": "Warp panel symbols correspond to territorial areas controlled by different alien factions",
+      "enemy_visual_variants": "Distinct alien lifeform designs differentiate tribes; enemies in each territory appear faction-specific",
+      "environmental_markers": "Different Dungeon corridors and Labyrinth regions house different alien tribes; territorial segregation indicates faction control"
+    },
+    {
+      "faction": "Guardian (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Gynoid transformer protagonist; aerobot capable of humanoid and spaceship forms",
+      "enemy_visual_variants": "Player transforms between top-down humanoid explorer form (Labyrinth) and spaceship combat form (Dungeon)",
+      "environmental_markers": "Blue Landers serve as allied NPCs providing support; predecessor messages indicate prior Guardian attempts"
+    },
+    {
+      "faction": "Predecessors/Prior Guardians",
+      "color_identity": null,
+      "symbol_or_sigil": "Messages left throughout Naju serve as faction markers",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Message panels scattered in rooms reveal story; sole survivor's first message serves as introduction; later messages provide tactical hints"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Naju approaching Earth (initial crisis)",
+      "visual_manifestation": "Game premise: alien world hurtling toward planet Earth, loaded with hostile lifeforms",
+      "behavioral_manifestation": "Player must infiltrate and deactivate ten safety devices to trigger self-destruct; urgency drives non-linear exploration"
+    },
+    {
+      "world_state": "Alien occupation and territorial control",
+      "visual_manifestation": "Five distinct alien tribes control different regions; Dungeon corridors and Labyrinth sections visually segregated by faction territory",
+      "behavioral_manifestation": "Different enemy types appear in different zones; player must navigate through hostile territories; combat intensity varies by region"
+    },
+    {
+      "world_state": "Safety devices deactivated (progression)",
+      "visual_manifestation": "Dungeon corridors destroyed and disappear after boss defeat; visual landscape changes as player completes objectives",
+      "behavioral_manifestation": "Player returns to Labyrinth after each Dungeon completion; rewards (power-ups, keys) unlock new pathways; map grid updates reflect destroyed corridors"
+    },
+    {
+      "world_state": "Guardian death",
+      "visual_manifestation": "Guardian explodes when life meter depletes",
+      "behavioral_manifestation": "Game ends; player must restart or load saved password; no continuation"
+    },
+    {
+      "world_state": "Lack of progression tools (keys)",
+      "visual_manifestation": "Locked warp panels with unmatched key symbols block visual pathways",
+      "behavioral_manifestation": "Player cannot access certain territories; must explore alternate routes to find matching keys; non-linear gating mechanism"
+    },
+    {
+      "world_state": "Resource scarcity",
+      "visual_manifestation": "Power chip depletion affects secondary weapon availability and shop purchase capability",
+      "behavioral_manifestation": "Player must choose between weapon usage and upgrades; strategic resource management visible through UI"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Message panels with clues",
+      "example": "Predecessor messages reveal tactical hints about sealed corridors and safety device locations; sole survivor's story advances narrative of failed prior attempts"
+    },
+    {
+      "technique": "Territorial visual segregation",
+      "example": "Different Labyrinth regions and Dungeon corridors feature distinct visual designs corresponding to five alien tribes; player learns faction identity through environmental aesthetic"
+    },
+    {
+      "technique": "Warp panel symbol system",
+      "example": "Warp panel symbols match corresponding keys; symbols serve as visual language communicating which territories are accessible and which are locked; guides non-linear exploration path"
+    },
+    {
+      "technique": "Boss defeat consequences",
+      "example": "After defeating Dungeon boss, corridor visually collapses/disappears; return to Labyrinth shows changed landscape reflecting player progress; world reacts to player actions"
+    },
+    {
+      "technique": "NPC checkpoint placement",
+      "example": "Blue Lander positions throughout Labyrinth indicate safe zones and communication hubs; players learn to recognize these as strategic rest points and information sources"
+    },
+    {
+      "technique": "Shop locations as story anchors",
+      "example": "Shops accessible only via specific warp panels; serve as economic and narrative nodes where player can exchange resources and gain world knowledge"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Guardian",
+      "state": "Humanoid form in Labyrinth",
+      "behavior": "Top-down perspective exploration; can navigate freely between screens; interact with NPCs, collect items, unlock warp panels via keys"
+    },
+    {
+      "entity": "Guardian",
+      "state": "Spaceship form in Dungeon",
+      "behavior": "Scrolling shooter perspective; auto-advances through corridor; focused on combat against corridor-specific enemies and boss; exit triggers return to Labyrinth"
+    },
+    {
+      "entity": "Hostile alien lifeforms",
+      "state": "Active in Labyrinth and Dungeon",
+      "behavior": "Attack Guardian on sight; deal damage to life meter; can be defeated to clear paths and obtain power-ups; behavior varies by tribal affiliation and location"
+    },
+    {
+      "entity": "Boss aliens",
+      "state": "Positioned at end of Dungeon corridor",
+      "behavior": "Significantly more aggressive and resilient than standard enemies; require strategic combat; defeat triggers safety device deactivation and corridor destruction"
+    },
+    {
+      "entity": "Blue Lander NPC",
+      "state": "Stationary in designated rooms",
+      "behavior": "Provides password generation; accepts power chip currency for upgrade trades; serves as checkpoint marker; dispenses advice and world context"
+    },
+    {
+      "entity": "Red Lander",
+      "state": "Item or NPC form",
+      "behavior": "When collected, increases maximum power chip capacity; strategic resource multiplier; provides player advantage"
+    },
+    {
+      "entity": "Warp panels",
+      "state": "Locked (no matching key)",
+      "behavior": "Visually present but inaccessible; block territorial access; create gating mechanism for non-linear exploration"
+    },
+    {
+      "entity": "Warp panels",
+      "state": "Unlocked (matching key acquired)",
+      "behavior": "Become accessible; transport player to new territories; reveal new Labyrinth sections or Dungeon corridor access; enable progression"
+    }
+  ],
+  "notes": "The Guardian Legend uses a dual-mode manifestation system: Labyrinth (exploration/top-down action-adventure) and Dungeon (scrolling shooter) visually and behaviorally distinct to communicate gameplay mode and world context. Alien tribal territorial control is communicated through environmental design, enemy variants, and warp panel access restrictions. The safety device activation mechanic creates visual world-state changes (corridor destruction) that reinforce player progression. Blue Landers serve as both mechanical checkpoints and narrative anchors, marking safe zones in a hostile world. The warp panel symbol-matching system uses visual communication to gate exploration and encourage non-linear pathfinding.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:21:15.435Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5357,
+    "output_tokens": 2521,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

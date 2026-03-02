@@ -1,0 +1,195 @@
+{
+  "game_id": "super-adventure-island-ii-snes",
+  "game_name": "Super Adventure Island II",
+  "platform": "snes",
+  "paradigm": "platformer / action-adventure / metroidvania",
+  "danger_signals": [
+    {
+      "signal": "Random encounter trigger",
+      "visual_form": "Enemy appearance on world map during raft travel",
+      "meaning": "Transition from safe world map to hostile side-scrolling combat perspective"
+    },
+    {
+      "signal": "Enemy type presence",
+      "visual_form": "Bird, fox, boar, lizard, dog, crab enemies with distinct sprites",
+      "meaning": "Indicates stage danger level and type of threat player must overcome"
+    },
+    {
+      "signal": "Boss chamber architecture",
+      "visual_form": "Locked camera positioning, extended room design (Mammoth boss chamber extends right, tree boss chamber extends upward)",
+      "meaning": "Spatially constrains player movement, signals climactic danger zone"
+    },
+    {
+      "signal": "Miniboss cavern design",
+      "visual_form": "Obscured floor layer beneath foreground grey stone tiles",
+      "meaning": "Environmental hazard layering suggests danger below visible surface"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Inn / King's chambers location",
+      "visual_form": "Indoor tilemaps with opaque background layer, sky never visible",
+      "meaning": "Safe hub area where player recovers and receives quest information"
+    },
+    {
+      "signal": "Stage completion cutscene",
+      "visual_form": "Tina's face sprite appears in Inn map overlay during boss completion",
+      "meaning": "Narrative confirmation of progress and safety checkpoint reached"
+    },
+    {
+      "signal": "World map raft travel",
+      "visual_form": "Overworld navigation perspective with random encounter possibility",
+      "meaning": "Semi-safe exploration state with controlled threat (random rather than constant)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kingdom rulers (King, appointed queen)",
+      "color_identity": null,
+      "symbol_or_sigil": "King's chambers (royal interior tileset)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Inn and King's chambers as central hub locations, formal interior architecture"
+    },
+    {
+      "faction": "Master Higgins (player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Player character sprite with amnesia-driven quest motivation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Travels by raft, explores islands, gains equipment and items for progression"
+    },
+    {
+      "faction": "Wildlife / Natural threats",
+      "color_identity": null,
+      "symbol_or_sigil": "Bird, fox, boar, lizard, dog, crab enemy sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Island-specific enemy distributions across Waku-Waku, Poka-Poka, Hiya-Hiya islands"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game start / amnesia condition",
+      "visual_manifestation": "Master Higgins wakes on unknown island with no memory; story setup occurs in Inn/King's chambers interior tileset",
+      "behavioral_manifestation": "Player must explore to recover lost memories; NPCs direct player toward kidnapped queen rescue mission"
+    },
+    {
+      "world_state": "Island exploration unlocked",
+      "visual_manifestation": "World map divided into separate islands (Waku-Waku, Poka-Poka, Hiya-Hiya with distinct visual palettes); raft-based navigation",
+      "behavioral_manifestation": "Player travels between islands collecting items and equipment; random encounters trigger perspective shift to side-scrolling combat"
+    },
+    {
+      "world_state": "Boss defeated / stage completed",
+      "visual_manifestation": "Player warped to Inn, Tina's face appears in cutscene overlay, then warped back to completed stage exterior",
+      "behavioral_manifestation": "Quest progress tracked via visual narrative; new areas become accessible based on equipment acquired"
+    },
+    {
+      "world_state": "Equipment acquisition state",
+      "visual_manifestation": "Inventory system reflects weapons, armor, shields, spells, and equipment pieces; visual equipment changes on player sprite",
+      "behavioral_manifestation": "New equipment enables access to previously blocked areas (Metroidvania-style gating); progression non-linear across multiple islands"
+    },
+    {
+      "world_state": "Random encounter active",
+      "visual_manifestation": "Gameplay perspective shifts from world map overhead to side-scrolling view; enemy spawn with varied sprite types",
+      "behavioral_manifestation": "Player must defeat enemies or flee; encounter resolution returns player to world map state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hub location layering",
+      "example": "Inn map uses opaque first background layer with no transparency, hiding unfinished sky layer beneath; same map reused for King's chambers and post-boss cutscenes, communicating location as narrative anchor"
+    },
+    {
+      "technique": "Hidden map extensions",
+      "example": "Boss chambers contain camera-locked regions that extend beyond visible play area (Mammoth boss chamber extends right, tree boss chamber extends upward with extended foliage); hints at world scale beyond immediate interaction"
+    },
+    {
+      "technique": "Island visual differentiation",
+      "example": "Waku-Waku Island, Poka-Poka Island, Hiya-Hiya Island feature distinct enemy palettes and environmental palettes; same miniboss map reused but with different color schemes to indicate location identity"
+    },
+    {
+      "technique": "Foreground / background layering",
+      "example": "Miniboss cavern floor obscured by foreground grey stone tiles; implies environmental hazards and obstacles exist beneath visible surface, creating depth of spatial danger"
+    },
+    {
+      "technique": "Narrative sprite embedding",
+      "example": "Tina's face sprite embedded in Inn background layer, revealed only when background layer toggled off; communicates emotional stakes of amnesia plot and recovery theme"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bird enemy",
+      "state": "Active on island stages",
+      "behavior": "Appears as common monster type; sprite animations include running and jumping; suggests airborne threat"
+    },
+    {
+      "entity": "Fox enemy",
+      "state": "Active on island stages",
+      "behavior": "Common monster type loaded across multiple islands; sprite suggests terrestrial swift threat"
+    },
+    {
+      "entity": "Boar enemy",
+      "state": "Unused / incomplete",
+      "behavior": "Sprite loaded into VRAM on Poka-Poka, Hiya-Hiya, Puka-Puka islands and random encounters; complete sprite animations exist but enemy never placed in actual maps; suggests development iteration cut"
+    },
+    {
+      "entity": "Lizard miniboss",
+      "state": "Boss encounter",
+      "behavior": "Shares miniboss cavern map with dog miniboss; chamber has obscured floor layer; behavior tied to specific stage completion trigger"
+    },
+    {
+      "entity": "Dog miniboss",
+      "state": "Boss encounter",
+      "behavior": "Shares miniboss cavern map with lizard; palette swap indicates location identity despite identical behavioral map"
+    },
+    {
+      "entity": "Mammoth boss",
+      "state": "Boss encounter",
+      "behavior": "Occupies Poka-Poka Island boss chamber; camera lock prevents rightward scrolling but extended chamber exists beyond; defeat triggers stage completion narrative"
+    },
+    {
+      "entity": "Tree boss",
+      "state": "Boss encounter",
+      "behavior": "Occupies Hiya-Hiya Island boss chamber; camera lock prevents upward scrolling but extended foliage chamber exists above; defeat triggers stage completion narrative"
+    },
+    {
+      "entity": "Phantom boss",
+      "state": "Final encounter",
+      "behavior": "Listed as Stage 6 boss in debug menu; represents late-game threat tier"
+    },
+    {
+      "entity": "Space Demon / Scorpion boss",
+      "state": "Final encounter",
+      "behavior": "Listed as final boss in debug menu; represents ultimate world-state threat, story climax"
+    },
+    {
+      "entity": "Master Higgins (player)",
+      "state": "Amnesia-afflicted",
+      "behavior": "Quest-driven exploration; seeks queen rescue while recovering memories; equipment acquisition unlocks new pathways; raft travel indicates semi-vulnerable state"
+    },
+    {
+      "entity": "Queen (kidnapped NPC)",
+      "state": "Missing / objective",
+      "behavior": "Also suffers amnesia; appointed by king; kidnapping drives main narrative; recovery of her location serves as story goal"
+    },
+    {
+      "entity": "King (NPC)",
+      "state": "Active ruler",
+      "behavior": "Resides in King's chambers; requests Higgins undertake queen rescue; provides quest motivation; represents political stability seeking"
+    }
+  ],
+  "notes": "Super Adventure Island II communicates world-state primarily through perspective shifts (world map raft travel vs. side-scrolling stages vs. interior hub), enemy sprite variation across islands, and equipment-gated progression typical of Metroidvania design. Danger signals rely heavily on enemy type presence and boss chamber architecture. Safety is communicated through interior tileset opacity and hub location design. Political situation (king seeking restoration of kidnapped queen) is subtle, embedded in dialogue-driven narrative rather than visual manifestation. Environmental storytelling emphasizes layered map design with hidden extensions and sprite embedding to create narrative depth. The game's core manifestation mechanic is the conversion of abstract world-state (amnesia, quest progress, equipment acquired) into visible equipment on player sprite and accessible map areas.",
+  "sources_used": [
+    "tcrf - Super Adventure Island II (Cutting Room Floor wiki)",
+    "wikipedia - Super Adventure Island II"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:01:05.010Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4853,
+    "output_tokens": 2504,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

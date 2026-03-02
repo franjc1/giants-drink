@@ -1,0 +1,166 @@
+{
+  "game_id": "home-alone-snes",
+  "game_name": "Home Alone",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Wet Bandit presence",
+      "visual_form": "Harry and Marv character sprites in hostile posture",
+      "meaning": "Active threat to Kevin; direct combat/evasion required"
+    },
+    {
+      "signal": "Basement hazards",
+      "visual_form": "Rats, bats, spiders, ghosts in basement environment",
+      "meaning": "Environmental danger zone; hazard avoidance required after item collection phase"
+    },
+    {
+      "signal": "Item collection phase end",
+      "visual_form": "Transition to basement level with supernatural enemies",
+      "meaning": "Shift from preparation to survival mode; increased danger intensity"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Final confrontation in safe room basement area",
+      "meaning": "Critical danger point; must defeat to progress to safe room lockdown"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Safe room/basement vault",
+      "visual_form": "Fortified basement safe area where items are sent via chute",
+      "meaning": "Goal location; represents family wealth protection and Kevin's victory condition"
+    },
+    {
+      "signal": "Item collection areas",
+      "visual_form": "Scattered household objects throughout mansion rooms",
+      "meaning": "Resource gathering zones; safe to traverse during prep phase before bandits arrive"
+    },
+    {
+      "signal": "Trap activation",
+      "visual_form": "Household objects deployed as weapons (traps trigger on contact)",
+      "meaning": "Kevin's defense mechanism; safe when positioned away from traps"
+    },
+    {
+      "signal": "Mansion layout diversity",
+      "visual_form": "Multiple rooms and wings (toys, electronics, pets sections)",
+      "meaning": "Navigation options; allows evasion routing and tactical positioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kevin McCallister (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Household defender; protagonist character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Can interact with household items; presence in multiple mansion rooms"
+    },
+    {
+      "faction": "Wet Bandits (Harry & Marv)",
+      "color_identity": null,
+      "symbol_or_sigil": "Burglar duo; criminal antagonists from film canon",
+      "enemy_visual_variants": "Two distinct character sprites (Harry and Marv); hostile animation states",
+      "environmental_markers": "Appear in house after prep phase; signal threat activation"
+    },
+    {
+      "faction": "Natural/Supernatural Basement Threats",
+      "color_identity": null,
+      "symbol_or_sigil": "Rats, bats, spiders, ghosts; environmental hazards not aligned with bandits",
+      "enemy_visual_variants": "Distinct creature sprites for each hazard type",
+      "environmental_markers": "Confined to basement zone; appear only after item collection phase"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Preparation phase (pre-bandit arrival)",
+      "visual_manifestation": "Mansion rooms fully accessible with scattered items; no enemy presence; normal household atmosphere",
+      "behavioral_manifestation": "Kevin collects household objects to use as trap materials; free movement through all accessible areas"
+    },
+    {
+      "world_state": "Bandit threat active (mid-game)",
+      "visual_manifestation": "Harry and Marv enter house; transition to evasion/combat visuals; sprites show hostile animation",
+      "behavioral_manifestation": "Kevin must evade bandits while completing item collection; traps can be triggered to incapacitate enemies"
+    },
+    {
+      "world_state": "Basement descent (late-game)",
+      "visual_manifestation": "Transition to basement environment; supernatural enemies (rats, bats, spiders, ghosts) become visible; darker aesthetic",
+      "behavioral_manifestation": "Kevin navigates hazard gauntlet; boss encounter triggers; combat/survival focus"
+    },
+    {
+      "world_state": "Safe room lockdown (victory condition)",
+      "visual_manifestation": "Fortified vault visualization; family riches secured; safe visual indicator",
+      "behavioral_manifestation": "Kevin secures McCallister wealth; game objective achieved; threats neutralized or bypassed"
+    },
+    {
+      "world_state": "Game over (defeat condition)",
+      "visual_manifestation": "Kevin McCallister screaming face sprite OR large 'Oh no!' text bubble on screen",
+      "behavioral_manifestation": "Caught by bandits or failed to secure safe room; mission failure state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Mansion layout as narrative geography",
+      "example": "House expanded into sprawling mansion with dedicated wings (toys, electronics, pets) signaling wealth and value to protect; haunted basement represents escalating danger as Kevin descends"
+    },
+    {
+      "technique": "Post-film narrative setting",
+      "example": "Game explicitly set after Home Alone film events; Harry and Marv return from jail seeking revenge with backup, establishing narrative stakes beyond single-burglary scenario"
+    },
+    {
+      "technique": "Objective item placement",
+      "example": "Scattered household objects throughout rooms serve dual purpose: trap materials AND environmental markers of what family treasures exist to be protected via basement safe"
+    },
+    {
+      "technique": "Hazard escalation through vertical descent",
+      "example": "Basement location houses rats, bats, spiders, ghosts—not encountered in upper mansion—creating sense of environmental danger increasing as Kevin approaches safe room"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Harry and Marv (Wet Bandits)",
+      "state": "Pre-arrival",
+      "behavior": "Absent from gameplay; establish threat through narrative/UI presence"
+    },
+    {
+      "entity": "Harry and Marv (Wet Bandits)",
+      "state": "Active threat phase",
+      "behavior": "Patrolling house; can be trapped; display hostile animation toward Kevin; knockable unconscious when hit by traps"
+    },
+    {
+      "entity": "Basement creatures (rats, bats, spiders, ghosts)",
+      "state": "Basement phase",
+      "behavior": "Patrol basement zones; hazard avoidance required; cannot be trapped like bandits; represent environmental danger rather than intelligent antagonism"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Prep phase",
+      "behavior": "Collects items; free movement; setting up traps; no combat pressure"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Threat active",
+      "behavior": "Evades bandits; triggers prepared traps; defensive positioning; survival-focused"
+    },
+    {
+      "entity": "Kevin McCallister",
+      "state": "Basement descent",
+      "behavior": "Navigates hazards; engages boss; moves toward safe room; climactic challenge engagement"
+    }
+  ],
+  "notes": "Home Alone (SNES) uses clear phase-based world state management: preparation (safe), threat activation (danger), environmental escalation (basement), and resolution (victory/defeat). Visual manifestation relies on sprite presence/absence (bandits appear = threat) and environmental transitions (mansion to basement = danger escalation). Faction identity is simple: player vs. criminals vs. supernatural hazards. No sophisticated faction signaling beyond sprite recognition. Regional differences (HUD labels: 'Power'/'Lives' vs. 'Life'/'Kevin') are UI cosmetic, not world-state manifestation. The 'haunted basement' represents deliberate tonal escalation beyond film narrative—environmental storytelling through location design rather than visual effects or color coding.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Home Alone SNES article)",
+    "wikipedia (Home Alone video game - Super NES section with plot/gameplay details)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:21:32.777Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4076,
+    "output_tokens": 2046,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

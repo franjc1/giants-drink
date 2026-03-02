@@ -1,0 +1,105 @@
+{
+  "game_id": "qix-nes",
+  "game_name": "Qix",
+  "platform": "nes",
+  "year": 1991,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel movement data documented for NES version"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Marker Movement",
+      "description": "Player controls a diamond-shaped marker that moves along edges of playfield and draws lines (Stix) in unclaimed territory. Movement is controlled via four-direction joystick.",
+      "physics_values": {
+        "movement_type": "grid/edge-based",
+        "can_draw_line": true,
+        "line_mechanics": "marker draws Stix while holding button; cannot cross or backtrack along current line"
+      }
+    },
+    {
+      "name": "Fuse Mechanic",
+      "description": "If marker stops while drawing, a fuse burns along the drawn line toward the marker. Reaches marker = loss of life. Fuse disappears when marker moves.",
+      "physics_values": {
+        "mechanic_type": "time-based penalty",
+        "trigger": "marker stops during draw"
+      }
+    },
+    {
+      "name": "Draw Speed Modes",
+      "description": "Two drawing speeds: Slow Draw (orange-red, worth double points) and Fast Draw (blue). Speed affects scoring for captured areas.",
+      "physics_values": {
+        "slow_draw_multiplier": 2,
+        "fast_draw_multiplier": 1
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "puzzle-based",
+    "grid-constrained movement",
+    "precision-focused",
+    "turn-based feel"
+  ],
+  "tier_notes": "Qix is a puzzle game without traditional platformer physics. No documented jump, gravity, or acceleration mechanics. Movement is grid/edge-based rather than physics-based. Tier 3 classification appropriate due to lack of detailed movement documentation and puzzle-game nature.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:52:05.573Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3159,
+    "output_tokens": 896,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

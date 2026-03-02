@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "game": "Gargoyle's Quest II: The Demon Darkness",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1992,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Wikipedia — Gargoyle's Quest II",
+        "url": "https://en.wikipedia.org/wiki/Gargoyle's_Quest_II",
+        "notes": "Wall cling, hover flight mechanics confirmed. Hover stamina bar documented."
+      },
+      {
+        "name": "Ghosts 'n Goblins Wiki — Gargoyle's Quest II",
+        "url": "https://ghostsngoblins.fandom.com/wiki/Gargoyle's_Quest_II",
+        "notes": "Firebrand mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Gargoyle's Quest II is a Capcom NES action-RPG hybrid — Firebrand's action segments mixed with RPG overworld.",
+      "FIREBRAND is a gargoyle (Red Arremer enemy type from Ghosts 'n Goblins) as the protagonist.",
+      "DEFINING MECHANIC: Hover flight with stamina. Press jump again in air to hover — limited duration, refills on landing or wall contact.",
+      "DEFINING MECHANIC: Wall cling — grab vertical surfaces, climb up, descend slowly.",
+      "Firebrand moves SLOWLY — 'slower than most video game characters of his kind.' Deliberate, not agile.",
+      "This slowness forces direct engagement with enemies rather than movement-based avoidance.",
+      "Preceded by Gargoyle's Quest (Game Boy, 1990). Followed by Demon's Crest (SNES, 1994).",
+      "Prequel to the original Gargoyle's Quest story-wise."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "description": "Firebrand is notably slow — slower than most action game protagonists.",
+      "px_per_frame_approx": 1.0,
+      "confidence": "low",
+      "notes": [
+        "Deliberate slow walk speed. Community-described as 'slow and deliberate.'",
+        "The slowness forces engagement — Firebrand can't outrun most threats.",
+        "VERIFY from ROM."
+      ]
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 40,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": "Standard jump followed by hover (press again in air). VERIFY jump height."
+  },
+
+  "hover_flight": {
+    "_note": "THE KEY MECHANIC. Press jump again while airborne to begin hovering.",
+    "description": "Press the jump button again while airborne — Firebrand flaps his wings and hovers in place while being able to move left/right.",
+    "stamina_system": {
+      "description": "A stamina bar depletes during hover. When empty, Firebrand falls.",
+      "recharge": "Stamina refills fully upon landing on solid ground OR upon grabbing a wall (wall cling).",
+      "notes": [
+        "The recharge on wall contact is critical — Firebrand can chain wall cling + hover to traverse large gaps.",
+        "Stamina management is the primary skill in navigation: knowing when to hover, when to glide, when to grab.",
+        "Can choose to end hover early by pressing jump again before stamina depletes."
+      ]
+    },
+    "movement_during_hover": "Full left-right movement while hovering. Hover altitude maintained (no significant vertical control).",
+    "confidence": "high",
+    "source": "Wikipedia / Fandom documentation"
+  },
+
+  "wall_cling": {
+    "_note": "Primary traversal mechanic for vertical surfaces.",
+    "description": "Jump into a vertical wall — Firebrand grabs it and clings. Can climb up, descend slowly, or jump off.",
+    "uses": [
+      "Climb vertical cliffs",
+      "Grab sides of moving platforms",
+      "Slow descent (cling + release slowly)",
+      "Refill hover stamina mid-air sequence"
+    ],
+    "notes": [
+      "Wall cling → hover → wall cling creates a chained traversal pattern for crossing large gaps.",
+      "The interaction between wall cling (stamina recharge) and hover (stamina consumption) is the spatial puzzle of the game."
+    ],
+    "confidence": "high"
+  },
+
+  "attacks": {
+    "fireball": {
+      "description": "Firebrand's primary projectile — fires small fireballs forward.",
+      "trajectory": "Straight horizontal",
+      "notes": "Upgradeable through the RPG progression system."
+    },
+    "buster_attack": {
+      "description": "Close-range attack. Short burst.",
+      "notes": "Melee-range fallback when fireballs aren't appropriate."
+    }
+  },
+
+  "rpg_elements": {
+    "_note": "Gargoyle's Quest II has an RPG overworld between action stages.",
+    "overworld": "Top-down perspective. Visit villages, get quests, unlock new action stages.",
+    "upgrades": {
+      "description": "New abilities and power-ups unlock through RPG progression, carried into action stages.",
+      "examples": [
+        "Tornado Projectile: temporary platforms Firebrand can stand on to rise vertically",
+        "Various fireball upgrades",
+        "Hover stamina extensions (VERIFY)"
+      ]
+    },
+    "notes": "The RPG structure means the action stages get harder as the game progresses AND Firebrand gets new tools."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Gargoyle's Quest II's hover stamina system creates a resource loop around movement itself — not combat, not collectibles, but the act of moving through space. Every hover consumes a resource. Every wall contact refills it. The player is constantly managing a traversal economy.",
+    "Playing as a villain (Firebrand is an enemy type in Ghosts 'n Goblins) from their own perspective creates immediate tonal dissonance for players who know the series. The creature you feared and cursed in GnG is now your protagonist. This is a design statement about perspective.",
+    "Firebrand's deliberate slowness is not a mistake — it's a character identity choice. A slow gargoyle who clings to walls and hovers strategically feels fundamentally different from a fast, agile hero. The movement conveys character: methodical, predatory, patient.",
+    "The wall cling → hover stamina recharge creates an interesting emergent pattern: players seeking hover efficiency will use walls as refill stations mid-traversal, creating a path that zigzags between walls and air. The room layout determines optimal routes.",
+    "Gargoyle's Quest II's RPG progression means the action mechanics evolve — Firebrand at the end of the game has different tools than Firebrand at the start. This is the RPG/action hybrid promise: learn the mechanics deeply, then get new ones that expand what you've mastered."
+  ]
+}

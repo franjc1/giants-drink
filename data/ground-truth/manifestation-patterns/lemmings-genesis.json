@@ -1,0 +1,185 @@
+{
+  "game_id": "lemmings-genesis",
+  "game_name": "Lemmings",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Fatal fall distance",
+      "visual_form": "Large vertical drops; lemming sprite position relative to ground level",
+      "meaning": "Lemmings die if they fall from too great a height—player must visually judge safe vs. unsafe drop distances"
+    },
+    {
+      "signal": "Lava pools",
+      "visual_form": "Animated liquid terrain obstacle; distinct color/animation from solid landscape",
+      "meaning": "Contact with lava is fatal; environmental hazard that requires skill assignment or pathfinding to avoid"
+    },
+    {
+      "signal": "Traps and fire",
+      "visual_form": "Specialized level obstacles; visual distinctness from navigable terrain",
+      "meaning": "Environmental hazards that kill lemmings on contact; must be avoided or cleared"
+    },
+    {
+      "signal": "Time limit expiration",
+      "visual_form": "Timer UI element; countdown visual feedback",
+      "meaning": "When timer expires, all lemmings explode; world-state of failure/time pressure visualized through countdown"
+    },
+    {
+      "signal": "Bomber lemming activation",
+      "visual_form": "Assigned skill visual state on lemming; 5-second timer display",
+      "meaning": "Assigned lemming will self-destruct, destroying nearby destructible landscape but not other lemmings"
+    },
+    {
+      "signal": "Overhang collision (Climber)",
+      "visual_form": "Vertical obstruction above lemming; spatial layout of terrain",
+      "meaning": "Climbers cannot pass overhangs and will fall if they hit one; visual obstacle detection required"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ground-level terrain",
+      "visual_form": "Solid landscape; stable platform appearance",
+      "meaning": "Safe walking surface for lemmings; primary navigation path"
+    },
+    {
+      "signal": "Exit/goal location",
+      "visual_form": "Designated exit point in level; visual landmark distinct from obstacles",
+      "meaning": "Lemmings that reach this location are saved; primary objective marker"
+    },
+    {
+      "signal": "Parachute deployment (Floater)",
+      "visual_form": "Lemming assigned Floater skill; visible parachute visual state",
+      "meaning": "Safe descent from any height; negates fall damage"
+    },
+    {
+      "signal": "Stairway construction (Builder)",
+      "visual_form": "Built 12-step structure; visual ladder formed from lemming labor",
+      "meaning": "Safe vertical passage; allows lemmings to ascend or traverse otherwise impassable terrain"
+    },
+    {
+      "signal": "Blocker lemming placement",
+      "visual_form": "Lemming assigned Blocker role; stationary positioning; visual barrier",
+      "meaning": "Safe redirection point; other lemmings reverse direction on contact without harm"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lemmings (player-controlled units)",
+      "color_identity": "Green hair, blue robes",
+      "symbol_or_sigil": "Anthropomorphized lemming sprite; distinct visual appearance",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Entrance trap doors above; exit goal location; path-dependent behavior changes based on assigned skills"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level active / time remaining",
+      "visual_manifestation": "Timer UI visible and counting down; lemmings spawning and active on level",
+      "behavioral_manifestation": "Lemmings follow programmed paths; respond to assigned skills; world is interactive and mutable"
+    },
+    {
+      "world_state": "Level failure / time expired",
+      "visual_manifestation": "All lemmings explode; timer reaches zero; visual feedback of failure state",
+      "behavioral_manifestation": "All lemmings become inactive/destroyed; level ends; player receives failure evaluation"
+    },
+    {
+      "world_state": "Level success / exit reached",
+      "visual_manifestation": "Sufficient lemmings reach exit location; visual progression marker",
+      "behavioral_manifestation": "Rescued lemmings leave level; player advances to next difficulty tier"
+    },
+    {
+      "world_state": "Terrain modification in progress",
+      "visual_manifestation": "Landscape changes as lemmings use Basher, Miner, or Digger skills; destructible terrain visually alters",
+      "behavioral_manifestation": "Level geometry becomes dynamic; new paths open; impassable areas become passable"
+    },
+    {
+      "world_state": "Trap / hazard triggered",
+      "visual_manifestation": "Lemmings make contact with lava, fire, or traps; death animation plays; lemming disappears",
+      "behavioral_manifestation": "Lemming count decreases; loss state visualized through lemming removal"
+    },
+    {
+      "world_state": "Skill assignment limitation",
+      "visual_manifestation": "Skill UI shows available quantity of each skill type; limited numbers per level",
+      "behavioral_manifestation": "Player must strategically ration skills; world state constrains player choices through resource scarcity"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Obstacle progression and level design narrative",
+      "example": "Levels grouped into four difficulty categories; obstacles increase in complexity; visual and mechanical progression tells story of escalating challenge and player mastery"
+    },
+    {
+      "technique": "Trap and hazard placement",
+      "example": "Lava pools, fire, booby traps, and large drops positioned as narrative obstacles; their visual placement communicates environmental danger and world state of 'hostile terrain'"
+    },
+    {
+      "technique": "Lemming behavior communication through sprite and animation",
+      "example": "Green-haired blue-robed lemmings follow each other in a line; turn around at obstacles; fall off edges; visual animation communicates AI pathfinding and behavioral autonomy"
+    },
+    {
+      "technique": "Skill assignment visual feedback",
+      "example": "Assigned skills visibly change lemming behavior and appearance (e.g., Climber climbing vertically, Floater deploying parachute); visual feedback reinforces player agency and world mutability"
+    },
+    {
+      "technique": "Time pressure visualization",
+      "example": "Countdown timer in UI; visual urgency increases as time expires; explosion of all lemmings at zero is ultimate failure state marker"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Lemming (default state)",
+      "state": "Unassigned / walking",
+      "behavior": "Walks in one direction; ignores other lemmings; falls off edges; turns around if hitting obstacle; no skill assignment active"
+    },
+    {
+      "entity": "Lemming (Climber)",
+      "state": "Skill assigned: Climber",
+      "behavior": "Climbs vertically; falls if hitting overhang; visual climbing animation communicates vertical movement capability"
+    },
+    {
+      "entity": "Lemming (Floater)",
+      "state": "Skill assigned: Floater",
+      "behavior": "Deploys parachute; descends safely from any height; visual parachute graphic indicates fall-damage immunity"
+    },
+    {
+      "entity": "Lemming (Bomber)",
+      "state": "Skill assigned: Bomber",
+      "behavior": "Explodes after 5-second timer; destroys nearby destructible landscape; death animation communicates self-destruct state"
+    },
+    {
+      "entity": "Lemming (Blocker)",
+      "state": "Skill assigned: Blocker",
+      "behavior": "Stands still; prevents other lemmings from passing; other lemmings reverse direction on contact; stationary visual state communicates barrier role"
+    },
+    {
+      "entity": "Lemming (Builder)",
+      "state": "Skill assigned: Builder",
+      "behavior": "Constructs 12-step stairway; stops if head hits object, runs out of bricks, or hits solid object; visible stairway construction animates player agency"
+    },
+    {
+      "entity": "Lemming (Basher/Miner/Digger)",
+      "state": "Skill assigned: Basher/Miner/Digger",
+      "behavior": "Tunnels horizontally/diagonally/vertically; cannot break steel barriers; visual terrain destruction communicates landscape mutability"
+    },
+    {
+      "entity": "Lemming (trapped in hazard)",
+      "state": "Contact with lava, fire, trap, or excessive fall height",
+      "behavior": "Dies; visual death animation; lemming sprite removed from level; loss state communicated through removal"
+    }
+  ],
+  "notes": "Lemmings communicates world-state primarily through visual clarity of terrain obstacles, lemming sprite behavior, and real-time environmental feedback. The game lacks faction conflict or political systems—instead, it visualizes player agency through skill assignment mechanics and dynamic landscape modification. Danger and safety are communicated through landscape design (height, hazard placement) and skill-state visuals. Time pressure is the primary narrative tension, visualized through countdown timer. The game's communication layer is fundamentally mechanical: visual feedback (sprite animation, terrain changes, timer) reinforces player understanding of cause-effect relationships between skill assignment and world state change.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:36:10.770Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3457,
+    "output_tokens": 2389,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "game_id": "mappy-land-nes",
+  "game_name": "Mappy-Land",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": null,
+  "world_count": 8,
+  "element_introduction_order": [
+    {
+      "element": "Basic jumping and trampolines",
+      "first_appears": "Railroad Town (Story 1, Area 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Foundation for all subsequent movement and obstacle avoidance"
+    },
+    {
+      "element": "Target item collection (cheese)",
+      "first_appears": "Railroad Town (Story 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Primary objective mechanic; six items per area"
+    },
+    {
+      "element": "Meowkies (basic enemies)",
+      "first_appears": "Railroad Town (Story 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "Avoidable through timing; foundational threat"
+    },
+    {
+      "element": "Goro (boss enemy)",
+      "first_appears": "Railroad Town (Story 1)",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary antagonist; cannot be affected by most distraction items"
+    },
+    {
+      "element": "Cat Toys (distraction item)",
+      "first_appears": "Railroad Town (Story 1)",
+      "introduction_context": "safe",
+      "mastery_context": "Temporarily stops Meowkies; stacks up to 15 items"
+    },
+    {
+      "element": "Silver Vine Pots (distraction item)",
+      "first_appears": "Early areas",
+      "introduction_context": "moderate",
+      "mastery_context": "Causes Meowkies to lose consciousness; stronger effect than Cat Toys"
+    },
+    {
+      "element": "Gold Coin (distraction item)",
+      "first_appears": "Early-to-mid areas",
+      "introduction_context": "moderate",
+      "mastery_context": "Distracts Goro specifically; complements Cat Toys for dual-enemy control"
+    },
+    {
+      "element": "Fish (distraction item)",
+      "first_appears": "Mid-game areas",
+      "introduction_context": "moderate",
+      "mastery_context": "Attracts both Goro and Meowkies; different tactical use case"
+    },
+    {
+      "element": "Subareas/bonus stages",
+      "first_appears": "Mid-game (Story 1 onwards)",
+      "introduction_context": "moderate",
+      "mastery_context": "Required collection of specific items; optional bonus subareas yield extra lives"
+    },
+    {
+      "element": "Goro Coin (chase enemy)",
+      "first_appears": "When timer expires (any area)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Spawned as time pressure; cannot be distracted or attacked; forces rapid completion"
+    },
+    {
+      "element": "Ghost Town mechanics (flashlight, balloon)",
+      "first_appears": "Ghost Town (Area 6)",
+      "introduction_context": "moderate",
+      "mastery_context": "Stage-specific tools; flashlight wards off ghosts; balloon enables movement"
+    },
+    {
+      "element": "Stage-specific counterattack items",
+      "first_appears": "Varies by world",
+      "introduction_context": "moderate",
+      "mastery_context": "Triggered by short jump; replaces door mechanics from original Mappy"
+    },
+    {
+      "element": "Story progression (objective variation)",
+      "first_appears": "Story 2 (Wedding rings)",
+      "introduction_context": "safe",
+      "mastery_context": "Narrative wrapper; alters target items but maintains core gameplay"
+    },
+    {
+      "element": "Final castle bonus area (Milky Town)",
+      "first_appears": "After completing all 8 areas in a story",
+      "introduction_context": "dangerous",
+      "mastery_context": "Timed delivery challenge; must collect items and reach Mapico/Mappy Jr. before music ends"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully using distraction items (Cat Toys, Silver Vine Pots)",
+      "Reaching exit after collecting all six target items",
+      "Entering bonus subareas with extra lives",
+      "Completing a story and progressing to next narrative chapter"
+    ],
+    "typical_tension_triggers": [
+      "Appearance of Goro and Meowkies in close proximity",
+      "Time warning chime and music speed-up",
+      "Spawn of Goro Coin (unavoidable, unkillable pursuer)",
+      "Trampoline breaking after multiple jumps",
+      "Entering subarea sections where specific items must be located",
+      "Final castle timed delivery sequence (Story completion)"
+    ],
+    "pacing_descriptor": "Steady escalation within each area (safe collection → enemy pressure → time stress). Story transitions provide narrative pacing relief. Later stories significantly increase enemy speed, creating difficulty curve progression. Ghost Town subarea callback to original Mappy provides nostalgia relief break."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Bonus subareas accessible by jumping on specific trampolines with no controller input; signaled by successful trampoline trigger, not visual cue",
+    "secret_convention": "Ghost Town subareas sometimes echo original Mappy game layout with nostalgic theme music as hidden reference; standard subarea warps redirect to different doorways",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Story 1 in Railroad Town serves as tutorial; basic enemy patterns, ample time to collect six items, straightforward layouts. Introduces core mechanics without pressure.",
+    "mid_game": "Stories 2-3 (Western World through Pirate World): Stage layouts become more complex, Meowkies increase in number, timing requirements tighten. Distraction item management becomes strategic. Bonus subareas introduce optional challenge.",
+    "late_game": "Story 4 (Jungle World through Milky Town): Enemy speeds significantly increase, stage layouts alter substantially, final castle bonus area adds strict time limit and delivery mechanic. Loops back to Story 1 with compounded difficulty.",
+    "notable_spikes": [
+      "Time warning chime triggering Goro Coin spawn (immediate threat escalation)",
+      "Final castle bonus sequence in Milky Town (timed delivery under music countdown)",
+      "Story 4 and beyond: Documented re-runs with 'much faster' enemies and altered layouts",
+      "Jungle World: Exception to trampoline breaking mechanics creates unexpected rule shift"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Eight-area themed world progression",
+      "description": "Each story cycles through 8 distinct themed areas (Railroad Town, Western World, Tropical World, Jungle World, Pirate World, Ghost Town, Seventh Avenue, Milky Town). Goro wears corresponding costume per theme. Areas feature stage-specific counterattack items and unique mechanics.",
+      "example_level": "Railroad Town (Story 1, Area 1) - introductory; Ghost Town (Area 6) - mechanics variation"
+    },
+    {
+      "pattern_name": "Target collection + subarea requirement",
+      "description": "Player must collect six target items in main area, then sometimes locate and enter a subarea to obtain a special item before exiting. Subarea access varies by story and area; some require specific conditions.",
+      "example_level": "Variable across all stories; Ghost Town subareas occasionally recreate original Mappy level design"
+    },
+    {
+      "pattern_name": "Time-pressure escalation",
+      "description": "Standard completion allowed under normal time. If time expires, warning chime sounds, music speeds up, and Goro Coin spawns as unkillable pursuer. Forces rapid item collection on subsequent attempts.",
+      "example_level": "All areas (Story 1 onwards)"
+    },
+    {
+      "pattern_name": "Story-wrapper narrative progression",
+      "description": "Four narrative stories provide thematic context for target items (Mapico's birthday cheese, wedding rings, Christmas trees, Mappy Jr.'s baseballs). Core gameplay identical; story loops after Story 4 completion with increased difficulty and altered layouts.",
+      "example_level": "Story transitions between Mapico's Birthday (Story 1) → Wedding (Story 2) → Christmas (Story 3) → Jr.'s Birthday (Story 4)"
+    },
+    {
+      "pattern_name": "Final castle bonus area (Milky Town completion)",
+      "description": "After collecting all items in final area of a story, player enters a castle bonus stage. Must collect six target items and deliver them to Mapico or Mappy Jr. before music ends. Requires successful completion to advance; endless retries in NES version until success. Awards bonus points.",
+      "example_level": "Milky Town, final sequence per story"
+    },
+    {
+      "pattern_name": "Distraction item inventory management",
+      "description": "Player can carry up to 15 distraction items (Cat Toys, Gold Coins, Silver Vine Pots, Fish). Strategic deployment to control enemy behavior. Different items affect different enemies (Cat Toys → Meowkies, Gold Coin → Goro, Silver Vine Pots → Meowkies unconscious, Fish → both). Bonus subareas require zero inventory to access.",
+      "example_level": "All areas; inventory pressure increases in later stories"
+    }
+  ],
+  "sources_used": [
+    "Wikipedia - Mappy-Land (Gameplay, Storyline, Release sections)",
+    "The Cutting Room Floor - Mappy-Land (Regional Differences, hidden level select, bonus area mechanics)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:45:21.930Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4264,
+    "output_tokens": 2507,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

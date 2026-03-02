@@ -1,0 +1,173 @@
+{
+  "game_id": "terra-cresta-nes",
+  "game_name": "Terra Cresta",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_aircraft_descent",
+      "visual_form": "incoming enemy craft sprites moving downward on screen",
+      "meaning": "active threat; player must shoot or evade"
+    },
+    {
+      "signal": "ground_based_enemy_presence",
+      "visual_form": "stationary and mobile enemy units on terrain below flight path",
+      "meaning": "environmental hazard; requires targeting and avoidance"
+    },
+    {
+      "signal": "mandler_army_faction_visual",
+      "visual_form": "distinct enemy sprite designs and formations",
+      "meaning": "organized hostile force; waves indicate escalating threat level"
+    },
+    {
+      "signal": "player_ship_damage_state",
+      "visual_form": "visual loss of ship pieces/modules when hit",
+      "meaning": "health degradation; loss of weapon upgrades increases vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "collected_power_up_capsule",
+      "visual_form": "small capsule appearing on ground after destruction; visual attachment to Wing Galibur",
+      "meaning": "upgraded firepower and defensive shields; collected pieces provide extra hit protection"
+    },
+    {
+      "signal": "invulnerable_transformation_state",
+      "visual_form": "Wing Galibur transforms into flaming phoenix sprite",
+      "meaning": "temporary invincibility period; brief safety window from all enemy fire"
+    },
+    {
+      "signal": "separated_formation_mode",
+      "visual_form": "ship pieces split into triangular formation around main craft",
+      "meaning": "pieces become invulnerable shields; player gains tactical positioning advantage"
+    },
+    {
+      "signal": "game_progression_advancement",
+      "visual_form": "stage scrolling and level transitions",
+      "meaning": "successful survival and advancement toward mission goal"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mandler Army",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "distinct enemy aircraft sprite designs; ground-based combat units with varied appearance",
+      "environmental_markers": "organized wave formations; hierarchical attack patterns indicating military structure"
+    },
+    {
+      "faction": "Humanity/Player Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Wing Galibur fighter craft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "singular player-controlled ship with modular upgrade system; phoenix transformation represents ultimate defensive capability"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage / low threat",
+      "visual_manifestation": "sparse enemy formations; basic enemy types on screen",
+      "behavioral_manifestation": "enemies move in predictable patterns; slower attack frequency"
+    },
+    {
+      "world_state": "Mid-stage / escalating threat",
+      "visual_manifestation": "increased enemy density; more complex sprite formations",
+      "behavioral_manifestation": "coordinated wave attacks; more aggressive enemy movement and firing patterns"
+    },
+    {
+      "world_state": "High threat / critical stage",
+      "visual_manifestation": "dense enemy coverage across screen; ground and air threats simultaneously",
+      "behavioral_manifestation": "concentrated fire patterns; sustained attack waves; minimal safe movement space"
+    },
+    {
+      "world_state": "Player powered up",
+      "visual_manifestation": "visually expanded ship with attached modules; wider visual footprint on screen",
+      "behavioral_manifestation": "enhanced weapon fire spread; multi-directional attack capability; increased hit tolerance"
+    },
+    {
+      "world_state": "Invulnerability active",
+      "visual_manifestation": "phoenix transformation visual; flaming aura around craft",
+      "behavioral_manifestation": "all enemy fire passes through player; temporary offensive/defensive invulnerability"
+    },
+    {
+      "world_state": "Ship fragmented/separated",
+      "visual_manifestation": "modular pieces visually separated in triangular formation around main ship",
+      "behavioral_manifestation": "pieces orbit/protect main craft; pieces absorb damage while main ship remains vulnerable"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Enemy type progression",
+      "example": "increasing complexity and variety of Mandler Army units across stages; signals deepening conflict and escalating stakes"
+    },
+    {
+      "technique": "Ground and air threat simultaneous presence",
+      "example": "combination of airborne and terrestrial enemy units creates environmental narrative of total war scenario"
+    },
+    {
+      "technique": "Power-up system as narrative mechanic",
+      "example": "modular ship upgrades represent technological accumulation and preparation against existential threat"
+    },
+    {
+      "technique": "Phoenix transformation sequence",
+      "example": "Wing Galibur's ability to become flaming phoenix symbolizes ultimate defensive capability; invulnerability state represents peak tactical advantage in conflict"
+    },
+    {
+      "technique": "Stage progression scrolling",
+      "example": "vertical scrolling through battlefield terrain communicates ongoing military campaign through territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wing Galibur (Player Ship)",
+      "state": "standard_flight",
+      "behavior": "responds to player input; fires weapons at enemies; collects power-up capsules"
+    },
+    {
+      "entity": "Wing Galibur",
+      "state": "modular_collected",
+      "behavior": "displays attached ship pieces; wider weapon spread; increased durability"
+    },
+    {
+      "entity": "Wing Galibur",
+      "state": "separated_formation",
+      "behavior": "pieces orbit in triangular pattern around main ship; pieces invulnerable; main ship vulnerable"
+    },
+    {
+      "entity": "Wing Galibur",
+      "state": "phoenix_transformed",
+      "behavior": "invulnerable to all damage; active offensive capability; temporary state with duration limit"
+    },
+    {
+      "entity": "Mandler Army Units",
+      "state": "organized_assault",
+      "behavior": "form coordinated wave patterns; attack in hierarchical formations; increase density/aggression as stage progresses"
+    },
+    {
+      "entity": "Mandler Army Units",
+      "state": "ground_based",
+      "behavior": "stationary or slow-moving; present as environmental hazards requiring active targeting"
+    },
+    {
+      "entity": "Power-up Capsules",
+      "state": "uncollected",
+      "behavior": "appear on ground after enemy destruction; visual marker indicates active acquisition opportunity"
+    }
+  ],
+  "notes": "Terra Cresta communicates world-state primarily through enemy density, formation complexity, and threat manifestation rather than explicit HUD elements. The faction conflict is implicit: Mandler Army aggression versus humanity's (player's) technological adaptation. Safety and danger states map directly to power-up collection and transformation mechanics. Visual communication relies on sprite variation, formation patterns, and modular ship appearance changes. No explicit political/diplomatic communication system present; conflict is purely military in nature. NES version features recolored UI (gold to lilac title screen) and enhanced soundtrack compared to Japanese Famicom version, but core visual communication systems remain consistent.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:08:03.714Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3949,
+    "output_tokens": 1880,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

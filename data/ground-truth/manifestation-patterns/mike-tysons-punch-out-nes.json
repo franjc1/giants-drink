@@ -1,0 +1,255 @@
+{
+  "game_id": "mike-tysons-punch-out-nes",
+  "game_name": "Mike Tyson's Punch-Out!!",
+  "platform": "nes",
+  "paradigm": "sports-boxing",
+  "danger_signals": [
+    {
+      "signal": "Opponent charging attack pattern",
+      "visual_form": "Visual wind-up animations specific to each boxer (e.g., Bald Bull's distinctive Bull Charge stance)",
+      "meaning": "Imminent high-damage punch incoming; player must counter or dodge"
+    },
+    {
+      "signal": "Little Mac color shift to pink/exhausted appearance",
+      "visual_form": "Mac's sprite palette changes to lighter pink/washed-out colors",
+      "meaning": "Heart counter depleted; Mac is exhausted and cannot attack, vulnerability state"
+    },
+    {
+      "signal": "Knockdown and rising animation",
+      "visual_form": "Mac falls to canvas and struggles to rise within 10-second count",
+      "meaning": "Imminent loss if knocked down 3 times per round or 4 times total in bout"
+    },
+    {
+      "signal": "Opponent guard raised",
+      "visual_form": "Opponent raises hands/gloves to face in defensive posture",
+      "meaning": "Face punches will be blocked; body blows required instead (gutter opportunity)"
+    },
+    {
+      "signal": "Star earned visual cue",
+      "visual_form": "Golden star appears above/near Mac after successful counter-punch",
+      "meaning": "Powerful uppercut now available; limited resource (max 3 stars)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Opponent guard lowered",
+      "visual_form": "Opponent drops hands, neutral stance visible",
+      "meaning": "Window to land face punches safely without block"
+    },
+    {
+      "signal": "Successful dodge/duck animation",
+      "visual_form": "Mac moves left/right or crouches while opponent punch whiffs past",
+      "meaning": "Attack avoided; heart counter not depleted; counter-punch opportunity"
+    },
+    {
+      "signal": "Mac normal color palette",
+      "visual_form": "Flesh tone sprite appearance (not pink/exhausted)",
+      "meaning": "Heart counter is healthy; Mac can attack and defend normally"
+    },
+    {
+      "signal": "Pre-fight entrance music and opponent introduction",
+      "visual_form": "Character enters ring with country-specific theme music; Mario referee present",
+      "meaning": "Match beginning; no danger yet, establishment phase"
+    },
+    {
+      "signal": "Post-knockdown recovery",
+      "visual_form": "Mac stands upright after rising from canvas within 10-second count",
+      "meaning": "Match continues; opportunity to regain hearts by dodging opponent attacks"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Minor Circuit Boxers",
+      "color_identity": "Varied (Glass Joe: yellow/blonde, Don Flamenco: pink/red tones, Piston Honda: yellow, Bald Bull: blue shorts)",
+      "symbol_or_sigil": "Rank within Minor Circuit progression; lower difficulty opponents",
+      "enemy_visual_variants": "All use simplified animation sets; fewer attack patterns than World Circuit versions",
+      "environmental_markers": "Minor Circuit ring has distinct HUD palette; lower-tier arena aesthetics"
+    },
+    {
+      "faction": "Major Circuit Boxers",
+      "color_identity": "Enhanced/darker color schemes (e.g., Von Kaiser, King Hippo, Bald Bull Major variant)",
+      "symbol_or_sigil": "Mid-tier ranking badge; opponents show increased complexity",
+      "enemy_visual_variants": "Same character sprites as Minor but with palette changes; expanded attack repertoires",
+      "environmental_markers": "Major Circuit ring palette differs from Minor; slightly more ornate presentation"
+    },
+    {
+      "faction": "World Circuit Boxers",
+      "color_identity": "International/exotic color palettes (Great Tiger: orange/purple, Don Flamenco World: enhanced colors, Super Macho Man: bright color scheme)",
+      "symbol_or_sigil": "Championship-tier standing; international representation",
+      "enemy_visual_variants": "Reappearances with new attack patterns; completely redesigned move sets forcing new strategies",
+      "environmental_markers": "World Circuit ring has most ornate HUD and arena design; championship prestige visual language"
+    },
+    {
+      "faction": "Dream Fight Champion (Mike Tyson/Mr. Dream)",
+      "color_identity": "Black with white/gold accents (Tyson's real-world appearance translated to sprite)",
+      "symbol_or_sigil": "Title bout designation; final boss status; undisputed world heavyweight champion aura",
+      "enemy_visual_variants": "Unique sprite set not shared with other fighters; distinctive stance and attack patterns",
+      "environmental_markers": "Dream Fight bout has special presentation; separate password access (007 373 5963 for Tyson); no ring-entrance music (builds tension)"
+    },
+    {
+      "faction": "Neutral/Authority",
+      "color_identity": "Red (Mario referee clothing)",
+      "symbol_or_sigil": "Mario cameo as ringside referee",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Mario presence in all bouts signifies official match legitimacy; maintains visual continuity across circuits"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player ascending circuit ranks (Minor → Major → World)",
+      "visual_manifestation": "Progressive HUD palette changes; opponent sprite complexity increases; ring aesthetics enhance; championship tier implied through visual hierarchy",
+      "behavioral_manifestation": "Opponents gain new attack patterns; previously-defeated opponents reappear with redesigned strategies; difficulty progression tied to visual sophistication"
+    },
+    {
+      "world_state": "Opponent vulnerable to counter-attack",
+      "visual_manifestation": "Opponent throws punch with telegraphed animation; Mac's counter-punch lands visually before opponent guard raises",
+      "behavioral_manifestation": "Star earned; opponent temporarily stunned; clock stops (in TAS exploits); reset to neutral stance"
+    },
+    {
+      "world_state": "Mac exhausted/low on stamina",
+      "visual_manifestation": "Mac sprite palette shifts to pink/washed-out appearance; pose becomes slumped; visual fatigue indicator",
+      "behavioral_manifestation": "Mac cannot attack; can only dodge/duck/block; opponent presses advantage with unblocked attacks"
+    },
+    {
+      "world_state": "Opponent knocked down",
+      "visual_manifestation": "Opponent sprite falls to canvas; 10-second count timer displayed visually; Mac stands over downed opponent",
+      "behavioral_manifestation": "Match pauses for knockout sequence; opponent attempts to rise; if fails to rise within 10 seconds, automatic KO loss"
+    },
+    {
+      "world_state": "Three knockdowns achieved in single round",
+      "visual_manifestation": "Visual TKO indicator (technical knockout condition met); match ends without full 10-second count",
+      "behavioral_manifestation": "Automatic win condition triggered; opponent cannot continue"
+    },
+    {
+      "world_state": "Mac knocked down fourth time in match",
+      "visual_manifestation": "Mac unable to rise sprite/animation plays; referee raises arm in loss gesture",
+      "behavioral_manifestation": "Automatic knockout loss; match ends; ranking penalty applied if title bout loss"
+    },
+    {
+      "world_state": "Match proceeding to decision (full 3 rounds)",
+      "visual_manifestation": "Round counter visible; clock depletes through rounds; no knockout achieved",
+      "behavioral_manifestation": "Point accumulation determines winner; some opponents cannot be defeated by decision (auto-loss condition)"
+    },
+    {
+      "world_state": "Limited Edition vs. Mike Tyson version",
+      "visual_manifestation": "Character palette changes (Piston Honda and King Hippo: pinkish to yellow; Glass Joe: hair color change; Bald Bull: purple to light blue shorts); title screen differences; newspaper ending variant",
+      "behavioral_manifestation": "Final boss is Super Macho Man (Limited Ed.) vs. Mike Tyson (public version); passworded 'Another World Circuit' mode; different ending narrative"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Country-of-origin ring entrance music",
+      "example": "Glass Joe enters to 'La Marseillaise' (French anthem); Piston Honda to 'Sakura' (Japanese folk); Von Kaiser and Super Macho Man to Wagner's 'Ride of the Valkyries' (European prestige signal)"
+    },
+    {
+      "technique": "Character nationality encoded in sprite design and color palette",
+      "example": "Visual nationality communicated through hair color, clothing style, and color scheme rather than explicit text; player recognizes 'foreignness' through design language"
+    },
+    {
+      "technique": "Circuit-tier visual hierarchy",
+      "example": "Ring HUD palette progression from Minor to Major to World; background and arena aesthetics shift subtly to imply championship-level prestige and international scope"
+    },
+    {
+      "technique": "Opponent behavioral patterns as visual-kinetic storytelling",
+      "example": "Each boxer has signature attack animation sequence that teaches player through observation; repeated pattern recognition is core gameplay loop; visual tells replace dialogue"
+    },
+    {
+      "technique": "Mario referee presence as authority signifier",
+      "example": "Mario's consistent presence across all bouts (Minor, Major, World, Dream) maintains visual continuity and legitimacy; his sprite presence is world-state confirmation"
+    },
+    {
+      "technique": "Newspaper post-match narrative (ending state)",
+      "example": "Final screen displays newspaper headline and text communicating player's championship achievement; text Engrish corrections between Limited and public versions reflect localization story"
+    },
+    {
+      "technique": "Star uppercut as visual resource management",
+      "example": "Golden star sprite above Mac is concrete, visible resource; player sees max 3 stars simultaneously; star loss on hit or knockdown is visually immediate feedback"
+    },
+    {
+      "technique": "Heart counter as stamina/health visual language",
+      "example": "Heart icons represent Mac's remaining stamina; depletion causes palette shift to pink/exhaustion; visual feedback loop replaces numeric health bar"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Glass Joe (Minor Circuit)",
+      "state": "Pre-attack wind-up",
+      "behavior": "Distinctive slow punch animation with long telegraph; player learns to identify and counter easily; represents beginner-tier difficulty"
+    },
+    {
+      "entity": "Bald Bull (Major and World Circuit)",
+      "state": "Bull Charge attack incoming",
+      "behavior": "Visual charging stance and move pattern; counter-punch at exact moment creates instant knockdown; signature attack becomes visual tutorial for pattern recognition"
+    },
+    {
+      "entity": "King Hippo (Major Circuit)",
+      "state": "Guard lowered",
+      "behavior": "Opens mouth wide in vulnerable state; player must punch into open mouth for damage; unique visual weak-point indicator"
+    },
+    {
+      "entity": "Piston Honda (Major and World Circuit)",
+      "state": "Charge attack (World variant)",
+      "behavior": "Backs up before charging forward; World Circuit variant has clock-stopping glitch opportunity; behavioral change signals difficulty escalation"
+    },
+    {
+      "entity": "Don Flamenco (Minor and World Circuit)",
+      "state": "Taunting/extended stance",
+      "behavior": "Holds Rose between rounds; visual arrogance indicator; behavioral change between circuits (Minor: easier; World: aggressive)"
+    },
+    {
+      "entity": "Great Tiger (World Circuit)",
+      "state": "Telepathy/invisibility attack",
+      "behavior": "Opponent vanishes briefly and reappears; visual disorientation technique; no ring-entrance music (ominous silence); unique behavioral anomaly"
+    },
+    {
+      "entity": "Mr. Sandman (World Circuit)",
+      "state": "Victory taunt",
+      "behavior": "Smiling mocking animation on win; alternate unused pointing-and-laughing animation exists in ROM (developer intent for additional arrogance visual)"
+    },
+    {
+      "entity": "Super Macho Man (Major and World Circuit, Dream Fight in Limited Ed.)",
+      "state": "Charging attack",
+      "behavior": "Distinctive visual wind-up; uses 'Dizzy Destroyer' combo technique (gut-then-face combo); behavioral complexity increases in World Circuit variant"
+    },
+    {
+      "entity": "Mike Tyson/Mr. Dream (Dream Fight)",
+      "state": "All attacks",
+      "behavior": "Unique attack pattern set not derived from other fighters; no ring-entrance music (signifies final boss prestige); no blocked punches possible (perfect defense), representing unmatched skill tier"
+    },
+    {
+      "entity": "Little Mac (Player character)",
+      "state": "Low stamina/exhausted",
+      "behavior": "Palette shift to pink; can dodge/duck/block but cannot attack; behavioral constraint forces defensive gameplay until hearts regenerate"
+    },
+    {
+      "entity": "Little Mac (Player character)",
+      "state": "Star acquired",
+      "behavior": "Golden star visible above head; can perform powerul uppercut once; star loss on hit/knockdown removes capability immediately"
+    },
+    {
+      "entity": "All opponents",
+      "state": "Guard raised",
+      "behavior": "Hands/gloves shield face; face punches blocked; body blows penetrate guard (gutter mechanic); visual guard position directly communicates vulnerability window"
+    }
+  ],
+  "notes": "Mike Tyson's Punch-Out!! uses minimal HUD and relies on sprite-based visual communication for world-state. The game encodes difficulty, nationality, and match status through character sprite design, palette shifts, animation choreography, and arena aesthetics. No numeric health bars exist; instead, heart icons and pink color shifts communicate stamina. Faction progression (Minor → Major → World Circuit) is signaled through subtle ring palette changes and opponent complexity. The game's core mechanic—learning opponent attack patterns through visual observation—makes this primarily a visual communication game. Regional differences (Limited Edition vs. public Tyson version) include palette corrections and character color changes, reflecting localization effort. The absence of dialogue requires all narrative to flow through sprite design, animation, and environmental detail. Mario's referee presence serves as consistent world-state anchor across all bouts.",
+  "sources_used": [
+    "tcrf",
+    "tasvideos",
+    "wikipedia",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:17:04.388Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9041,
+    "output_tokens": 3603,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

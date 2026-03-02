@@ -1,0 +1,161 @@
+{
+  "game_id": "congo-caper-snes",
+  "game_name": "Congo's Caper",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Sprite collision with hostile entities (demon, T-Rex, ninja, pirate, mad scientist, vampire)",
+      "meaning": "Immediate threat; triggers damage state or form-change"
+    },
+    {
+      "signal": "Form reversion",
+      "visual_form": "Congo visually transforms from human to monkey form upon enemy hit",
+      "meaning": "First damage taken; player enters vulnerable state with one hit remaining before life loss"
+    },
+    {
+      "signal": "Boss presence",
+      "visual_form": "Large unique sprite entities with distinct designs per world (demon, T-Rex, ninja, pirate, mad scientist, vampire)",
+      "meaning": "Major threat and progression gate; world-state culmination"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "World-specific obstacles across jungle, mountain, pirate ship, volcano, ghost town settings",
+      "meaning": "Contextual danger tied to world-state thematic identity"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Human form",
+      "visual_form": "Congo rendered as half-human, half-monkey character sprite in default state",
+      "meaning": "Full health/protection; capable of sustaining two hits before life loss"
+    },
+    {
+      "signal": "Level progression",
+      "visual_form": "Advancement through 35 levels across distinct world zones",
+      "meaning": "Safe zone transitions communicate world-state shifts and narrative progression"
+    },
+    {
+      "signal": "Password system",
+      "visual_form": "Save/resume mechanic (noted as feature in reviews)",
+      "meaning": "Player agency; ability to return to safe progression state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Congo (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Half-human, half-monkey hybrid character; romantic quest narrative",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Presence in all worlds; rescues girlfriend from demon abduction"
+    },
+    {
+      "faction": "Demon (primary antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Demon entity; kidnapper/thematic evil",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Boss encounter; narrative linchpin for rescue quest"
+    },
+    {
+      "faction": "Multi-boss pantheon",
+      "color_identity": null,
+      "symbol_or_sigil": "T-Rex (prehistoric danger), Ninja (oriental threat), Pirate (nautical lawlessness), Mad Scientist (chaotic disruption), Vampire (supernatural evil)",
+      "enemy_visual_variants": "Each boss type represents distinct world context",
+      "environmental_markers": "Thematic alignment with respective worlds (volcano/T-Rex, pirate ship/Pirate, ghost town/Vampire, etc.)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Jungle world",
+      "visual_manifestation": "Tropical environment with flora, fauna, natural hazards",
+      "behavioral_manifestation": "Early-game baseline; establishes rescue narrative context"
+    },
+    {
+      "world_state": "Mountain range world",
+      "visual_manifestation": "High-altitude terrain, vertical level design, alpine aesthetics",
+      "behavioral_manifestation": "Climbing/elevation mechanics; mid-game difficulty escalation"
+    },
+    {
+      "world_state": "Pirate ship world",
+      "visual_manifestation": "Naval vessel setting with nautical obstacles, water hazards, ship architecture",
+      "behavioral_manifestation": "Boss encounter with pirate faction; maritime-themed challenges"
+    },
+    {
+      "world_state": "Volcano world",
+      "visual_manifestation": "Lava environments, volcanic hazards, geothermal aesthetics",
+      "behavioral_manifestation": "T-Rex boss arena; thematic alignment of prehistoric and volcanic imagery"
+    },
+    {
+      "world_state": "Ghost town world",
+      "visual_manifestation": "Abandoned settlement, supernatural atmosphere, spectral aesthetic",
+      "behavioral_manifestation": "Vampire boss encounter; late-game supernatural escalation"
+    },
+    {
+      "world_state": "Damaged/vulnerable state",
+      "visual_manifestation": "Congo reverts to monkey form visually",
+      "behavioral_manifestation": "One hit remaining before life loss; heightened player tension state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "World thematic consistency",
+      "example": "Each of 5 world zones (jungle, mountain, pirate ship, volcano, ghost town) establishes narrative context and visual identity through environment design and boss type alignment"
+    },
+    {
+      "technique": "Form-state narrative communication",
+      "example": "Congo's transformation from human to monkey visually narrates damage progression and vulnerability without UI overlay"
+    },
+    {
+      "technique": "Boss-as-world-culmination",
+      "example": "Each world's boss embodies that world's danger archetype (T-Rex = prehistoric, Pirate = lawlessness, Vampire = supernatural), making thematic coherence visible"
+    },
+    {
+      "technique": "Rescue quest framing",
+      "example": "Girlfriend abduction by demon establishes narrative drive across all 35 levels; visual progression through worlds communicates narrative advancement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Congo (protagonist)",
+      "state": "Default (human form)",
+      "behavior": "Full combat capability; standard platforming and enemy engagement"
+    },
+    {
+      "entity": "Congo (protagonist)",
+      "state": "Damaged (monkey form)",
+      "behavior": "One hit remaining; player behavior shifts to avoidance-focused gameplay"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Active",
+      "behavior": "Collision damage; sprite-based threat communication"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Encounter",
+      "behavior": "Large sprite presentation; unique visual design per boss type; world-state culmination markers"
+    },
+    {
+      "entity": "Environmental hazards",
+      "state": "Active across worlds",
+      "behavior": "Context-specific obstacle communication (volcanic lava, nautical water, mountain cliffs, etc.)"
+    }
+  ],
+  "notes": "Congo's Caper uses minimal explicit UI for world-state communication; danger and safety are primarily conveyed through protagonist form state (human vs. monkey) and environmental visual design. The game eschews faction complexity, focusing instead on a straightforward rescue narrative with thematically aligned boss encounters across diverse world zones. Visual communication relies on sprite-based enemy identification and world aesthetics rather than symbolic markers. The lack of color-coding or faction insignia reflects the game's action-platformer paradigm prioritizing immediate spatial/visual hazard recognition over political or allegiance signaling.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:17:41.836Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3802,
+    "output_tokens": 1818,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

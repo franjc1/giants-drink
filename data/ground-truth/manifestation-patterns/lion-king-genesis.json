@@ -1,0 +1,204 @@
+{
+  "game_id": "lion-king-genesis",
+  "game_name": "The Lion King",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Health depletion",
+      "visual_form": "Health meter reduction on HUD",
+      "meaning": "Player character Simba taking damage from enemies or environmental hazards"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures on screen (hyenas, etc.)",
+      "meaning": "Active threat requiring evasion or combat engagement"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Bottomless pits, lava lakes, water bodies, rolling boulders, falling stalactites",
+      "meaning": "Instant-death or damage hazards that trigger loss of life"
+    },
+    {
+      "signal": "Black spiders",
+      "visual_form": "Distinct black spider sprites among collectible bugs",
+      "meaning": "Harmful collectibles that damage Simba on contact"
+    },
+    {
+      "signal": "Game Over state",
+      "visual_form": "Life counter reaches zero, return to title screen or level restart",
+      "meaning": "Loss condition triggered by depleting all available lives"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Checkpoint passage",
+      "visual_form": "Environmental marker or visual transition in level",
+      "meaning": "Safe restart point established; player can resume here after losing a life"
+    },
+    {
+      "signal": "Health-restoring bugs",
+      "visual_form": "Specific bug sprites (non-black varieties) scattered in levels",
+      "meaning": "Collectible items that replenish Simba's health meter"
+    },
+    {
+      "signal": "Roar meter availability",
+      "visual_form": "Replenishable roar meter on HUD",
+      "meaning": "Ability to stun enemies or solve puzzles; renewable defensive/puzzle-solving resource"
+    },
+    {
+      "signal": "Circle of Life icon",
+      "visual_form": "Distinct collectible icon in stages",
+      "meaning": "Grants continues, allowing progression restart if game is lost"
+    },
+    {
+      "signal": "Bonus stage access",
+      "visual_form": "Transition to Timon or Pumbaa minigame stages",
+      "meaning": "Safe, reward-focused gameplay section; opportunity to earn extra lives and continues"
+    },
+    {
+      "signal": "Adult Simba form",
+      "visual_form": "Character sprite changes from cub to large adult lion",
+      "meaning": "Progression milestone; enhanced combat capabilities (scratching, mauling, throws)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Simba (protagonist/hero)",
+      "color_identity": null,
+      "symbol_or_sigil": "Lion cub sprite (first half) / Adult lion sprite (second half)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Pride Lands terrain; natural African savanna and wildlife"
+    },
+    {
+      "faction": "Enemies (hyenas/hostile creatures)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinctive enemy sprite designs",
+      "enemy_visual_variants": "Varies by level and context (Hakuna Matata, Be Prepared scenes suggest thematic enemy groupings)",
+      "environmental_markers": "Appear throughout levels as obstacles; dense in certain story-beat locations"
+    },
+    {
+      "faction": "Scar (final boss/antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Adult dark-maned lion sprite with distinctive scarred appearance",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in final confrontation; represents climactic battle in narrative"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Simba as cub",
+      "visual_manifestation": "Smaller Simba sprite; limited combat options; reliance on jumping on enemies",
+      "behavioral_manifestation": "Player uses roar ability to stun enemies and solve puzzles; limited offensive repertoire"
+    },
+    {
+      "world_state": "Mid-to-late game / Simba grown to adulthood",
+      "visual_manifestation": "Larger adult lion sprite; enhanced visual presence on screen",
+      "behavioral_manifestation": "Access to multiple combat moves (scratching, mauling, throws); gameplay shift from evasion to engagement"
+    },
+    {
+      "world_state": "Safe/bonus areas",
+      "visual_manifestation": "Timon and Pumbaa character sprites; distinct minigame visual presentation",
+      "behavioral_manifestation": "Shift to bug-collection and time-based challenges; reward-focused gameplay without threat of losing lives"
+    },
+    {
+      "world_state": "Story progression (Hakuna Matata level)",
+      "visual_manifestation": "Level environment and theming based on film's Hakuna Matata sequence",
+      "behavioral_manifestation": "Gameplay adapted from cut film scene; thematic enemy and obstacle design"
+    },
+    {
+      "world_state": "Story progression (Be Prepared level)",
+      "visual_manifestation": "Level environment and theming based on film's Be Prepared musical sequence",
+      "behavioral_manifestation": "Gameplay adapted from cut film scene; thematic enemy density and placement"
+    },
+    {
+      "world_state": "Final confrontation / Scar boss battle",
+      "visual_manifestation": "Unique boss arena; Scar sprite with scarred detail; likely contrasting color or emphasized design",
+      "behavioral_manifestation": "Enhanced enemy AI; multiple-phase combat; climactic narrative moment requiring mastery of adult combat moves"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level design based on film narrative beats",
+      "example": "Levels labeled as story events (Can't Wait to be King, Hakuna Matata, Be Prepared) that visually represent locations and scenarios from the film"
+    },
+    {
+      "technique": "Sprite animation and visual progression",
+      "example": "Simba transitions from cub sprite to adult lion sprite, visually communicating passage of time and character growth without dialogue"
+    },
+    {
+      "technique": "Environmental hazard design",
+      "example": "Specific hazards (lava lakes, water bodies, rolling boulders, falling stalactites) suggest savanna geography and danger types thematic to Pride Lands"
+    },
+    {
+      "technique": "Enemy placement and type variation",
+      "example": "Different enemy creatures appear in thematically appropriate levels; hyenas and hostile wildlife populate environments matching film's antagonistic forces"
+    },
+    {
+      "technique": "Bonus stage character presence",
+      "example": "Timon and Pumbaa character appearances in bonus stages visually reinforce their comic relief role and safe-haven association in narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Simba (cub form)",
+      "state": "Default / Exploring",
+      "behavior": "Walks and jumps; can roar to stun enemies; limited offensive options"
+    },
+    {
+      "entity": "Simba (cub form)",
+      "state": "Under threat",
+      "behavior": "Takes damage; health meter depletes; may lose life if hazard contact occurs"
+    },
+    {
+      "entity": "Simba (adult form)",
+      "state": "Default / Exploring",
+      "behavior": "Walks and jumps with larger sprite; access to scratch, maul, and throw attacks"
+    },
+    {
+      "entity": "Simba (adult form)",
+      "state": "In combat",
+      "behavior": "Engages enemies directly with multiple attack options; primary offensive paradigm shift from cub phase"
+    },
+    {
+      "entity": "Generic enemies (hyenas, hostile creatures)",
+      "state": "Unaware of Simba",
+      "behavior": "Patrol or stationary placement; standard animation loops"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Aware of Simba",
+      "behavior": "Aggressive approach; attack animations; may be stunned by roar or combat moves"
+    },
+    {
+      "entity": "Scar (final boss)",
+      "state": "Boss encounter",
+      "behavior": "Enhanced combat AI; multi-phase behavior; narrative climax requiring full mastery of adult combat mechanics"
+    },
+    {
+      "entity": "Timon (bonus stage character)",
+      "state": "Bonus stage active",
+      "behavior": "Bug-hunting minigame logic; time-limited challenge; avoids spiders while collecting bugs"
+    },
+    {
+      "entity": "Pumbaa (bonus stage character)",
+      "state": "Bonus stage active",
+      "behavior": "Bug-collection minigame logic; vertical falling hazards; loses if bad bug or item reaches screen bottom"
+    }
+  ],
+  "notes": "The Lion King (Genesis 1994) uses sprite-based visual communication tied directly to film narrative progression. Safety and danger signals are clearly delineated through health mechanics, environmental hazard design, and collectible distinction (safe bugs vs. black spiders). Faction identity is implicit rather than explicit (no faction color schemes or sigils documented); antagonism is communicated through enemy presence and sprite design rather than faction markers. World state is visually expressed through protagonist form change (cub to adult) and level theming matching film's story beats. Environmental storytelling relies on level design fidelity to film source material and hazard-type theming. Behavioral tells are primarily tied to gameplay mechanics rather than emergent NPC behavior.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:49:08.197Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3312,
+    "output_tokens": 2447,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "game_id": "populous-genesis",
+  "game_name": "Populous",
+  "platform": "genesis",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Enemy follower presence",
+      "visual_form": "Opposing deity's followers displayed on isometric map in contrasting visual style",
+      "meaning": "Indicates active threat; enemy population growth threatens player victory conditions"
+    },
+    {
+      "signal": "Landscape obstacles around player settlements",
+      "visual_form": "Water barriers, lava, swamps, steep terrain rendered in 3D isometric view",
+      "meaning": "Environmental hazards that impede follower expansion and economic growth"
+    },
+    {
+      "signal": "Mana depletion",
+      "visual_form": "Slider bar measuring divine power drops; visual feedback on power meter",
+      "meaning": "Loss of ability to cast divine interventions; vulnerability to enemy actions"
+    },
+    {
+      "signal": "Earthquake/Flood visual effects",
+      "visual_form": "Animated terrain destruction, water inundation, landmass collapse",
+      "meaning": "Active divine catastrophe affecting both player and enemy populations indiscriminately"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flat, buildable land",
+      "visual_form": "Clear, level terrain patches rendered in isometric perspective",
+      "meaning": "Suitable foundation for follower settlements; enables population growth and economic expansion"
+    },
+    {
+      "signal": "Growing follower population",
+      "visual_form": "Increasing density of small character sprites on player-controlled terrain",
+      "meaning": "Rising player power and mana regeneration; strengthening position against enemy"
+    },
+    {
+      "signal": "Mana accumulation",
+      "visual_form": "Slider bar measuring divine power rises; visual fill indicating available power",
+      "meaning": "Capacity to cast protective or offensive divine spells increasing"
+    },
+    {
+      "signal": "Knight conversion",
+      "visual_form": "Ordinary followers upgraded to visually distinct 'knight' sprites with enhanced appearance",
+      "meaning": "Military escalation; enhanced combat capability for player forces"
+    },
+    {
+      "signal": "Landscape terraform under player control",
+      "visual_form": "Raised land, swamps created, volcanoes formed at player direction",
+      "meaning": "Environmental manipulation securing player territory and restricting enemy movement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Deity/Followers",
+      "color_identity": null,
+      "symbol_or_sigil": "Player-controlled sprite color/style (varies by platform rendering)",
+      "enemy_visual_variants": "Opposing deity's followers rendered in distinctly different visual style to enable player differentiation",
+      "environmental_markers": "Flat terrain development, constructed houses, cleared land indicate player-controlled regions"
+    },
+    {
+      "faction": "Enemy Deity/Followers",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy sprites rendered in contrasting visual presentation to player faction",
+      "enemy_visual_variants": "Enemy population density and settlement patterns visible on isometric map",
+      "environmental_markers": "Enemy-developed terrain, enemy house structures, opponent civilization footprint on landscape"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low mana",
+      "visual_manifestation": "Limited divine power options available; mana meter shows minimal charge",
+      "behavioral_manifestation": "Followers wander passively; basic terrain raising/lowering only available; no advanced interventions possible"
+    },
+    {
+      "world_state": "Mid game / Escalating conflict",
+      "visual_manifestation": "Increasingly developed terrain with both player and enemy settlements visible; multiple landscape types (desert, snow, lava) affecting aesthetics",
+      "behavioral_manifestation": "Followers actively construct houses; both sides expand populations; mana generation accelerates with building"
+    },
+    {
+      "world_state": "High mana / Divine power available",
+      "visual_manifestation": "Mana slider visibly near maximum; spell casting UI elements become prominent",
+      "behavioral_manifestation": "Player can deploy earthquakes, floods, swamps, volcanoes; knight conversions possible; decisive interventions feasible"
+    },
+    {
+      "world_state": "Stalemate / Prolonged conflict",
+      "visual_manifestation": "Map shows entrenched positions; both factions maintain territorial control; landscape fragmented",
+      "behavioral_manifestation": "Final conflict trigger activated; forced endgame battle initiated; followers summoned to decisive confrontation"
+    },
+    {
+      "world_state": "Landscape type variation",
+      "visual_manifestation": "Desert, rock, lava, snow/ice terrain rendered with distinct visual palette and aesthetic",
+      "behavioral_manifestation": "Terrain type affects follower development speed and settlement patterns; not merely cosmetic"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Isometric landscape as political geography",
+      "example": "Terrain elevation, water placement, and natural barriers visually communicate strategic chokepoints and territorial boundaries between player and enemy domains"
+    },
+    {
+      "technique": "Settlement density as power indicator",
+      "example": "Cluster of houses and follower sprites indicate regions of strong civilization control; sparse areas indicate vulnerability or unclaimed territory"
+    },
+    {
+      "technique": "Catastrophic landscape events as narrative moments",
+      "example": "Earthquake and flood visual effects communicate divine conflict directly; destruction visible on map reinforces god-game narrative of celestial warfare"
+    },
+    {
+      "technique": "Terrain modification as territorial claim",
+      "example": "Player-raised land, created swamps, and terraforming visually mark regions as 'civilized' and controlled; natural landscape indicates contested or enemy territory"
+    },
+    {
+      "technique": "Knight conversion as visual escalation",
+      "example": "Upgrading ordinary followers to knights through visual sprite change signals military escalation and shift toward combat-focused strategy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ordinary Follower",
+      "state": "Wandering on empty terrain",
+      "behavior": "Moves aimlessly until encountering flat land, then constructs house; mana generation begins upon settlement"
+    },
+    {
+      "entity": "Ordinary Follower",
+      "state": "Encountering barrier (water, steep terrain, swamp)",
+      "behavior": "Stops movement; cannot progress without divine terrain manipulation; signals need for player intervention"
+    },
+    {
+      "entity": "Ordinary Follower",
+      "state": "In developed settlement area",
+      "behavior": "Contributes to population growth; generates mana passively; supports expansion"
+    },
+    {
+      "entity": "Knight Follower",
+      "state": "Converted from ordinary follower",
+      "behavior": "Visually distinct, enhanced military capability; prepared for final conflict with enemy forces"
+    },
+    {
+      "entity": "Enemy Follower",
+      "state": "Active on map",
+      "behavior": "Mirrors player follower development; builds settlements, expands territory, grows population in opposition to player"
+    },
+    {
+      "entity": "Landscape",
+      "state": "Under earthquake effect",
+      "behavior": "Terrain visibly destabilizes and collapses; affects both player and enemy populations indiscriminately"
+    },
+    {
+      "entity": "Landscape",
+      "state": "Under flood effect",
+      "visual": "Water inundates terrain; blocks follower movement; creates barriers"
+    }
+  ],
+  "notes": "Populous (Genesis 1993) communicates world-state primarily through isometric landscape visualization and follower sprite density. The game lacks explicit faction color identity markers (unavailable in sources) but distinguishes player vs. enemy through sprite rendering differentiation. Danger is signaled through environmental obstacles and enemy population growth; safety through buildable flat land and mana accumulation. The 'book' UI framing (world as open book on tabletop) reinforces god-game narrative. Landscape type (desert/snow/lava) is mechanically non-cosmetic, affecting civilization development. The mana slider serves as explicit world-state indicator. Divine powers (earthquakes, floods, swamps, volcanoes) manifest as catastrophic visual events that communicate celestial conflict. Final battle trigger represents narrative completion mechanism.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:37:40.677Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3056,
+    "output_tokens": 2385,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

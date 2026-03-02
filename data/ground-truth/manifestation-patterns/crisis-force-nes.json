@@ -1,0 +1,156 @@
+{
+  "game_id": "crisis-force-nes",
+  "game_name": "Crisis Force",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spawning",
+      "visual_form": "Artificial monsters from Atlantis appearing on screen in formation patterns",
+      "meaning": "Active threat requiring evasion and attack response"
+    },
+    {
+      "signal": "Boss presence",
+      "visual_form": "Large sprite entities (made possible by VRC4 chip allowing expanded graphics), fire-breathing animations",
+      "meaning": "Major world-state crisis point; final confrontation stage"
+    },
+    {
+      "signal": "Screen-filling attack patterns",
+      "visual_form": "Dense projectile formations covering multiple screen areas",
+      "meaning": "Escalating danger requiring tactical form-switching"
+    },
+    {
+      "signal": "Dark cloud environments",
+      "visual_form": "Environmental backdrop of continent shrouded in dark clouds per narrative",
+      "meaning": "World under Atlantean control; hostile territory"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up containers",
+      "visual_form": "Blue orbs (normal power-ups) and red orbs (special power-ups) dropped by defeated enemies",
+      "meaning": "Resource accumulation enabling survivability and offensive capability"
+    },
+    {
+      "signal": "Bomb acquisition",
+      "visual_form": "Bomb power-up items collectible up to 9 units",
+      "meaning": "Emergency defensive/offensive reserve capacity"
+    },
+    {
+      "signal": "Speed modulation items",
+      "visual_form": "Speed-up and speed-down power-ups adjustable to 5 levels",
+      "meaning": "Player agency over evasion capability; safer positioning options"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mu (Ancient Civilization)",
+      "color_identity": null,
+      "symbol_or_sigil": "Aurawing aircraft with mystical power",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Archaeological artifacts; life-support systems; ancient technology aesthetic in ship design"
+    },
+    {
+      "faction": "Atlantis (Hostile Ancient Civilization)",
+      "color_identity": null,
+      "symbol_or_sigil": "Seven monsters/artificial creatures serving as embodiment of faction threat",
+      "enemy_visual_variants": "Artificial monsters with strange weapons distinct from modern military aesthetic",
+      "environmental_markers": "Dark cloud-shrouded continent; architectural remnants of lost civilization; supernatural weapon technology"
+    },
+    {
+      "faction": "Modern Humanity",
+      "color_identity": null,
+      "symbol_or_sigil": "Tokyo setting; contemporary high-school student protagonists",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Modern urban environments contrasted with ancient mysteries; 'modern weapons' explicitly noted as ineffective against Atlantean tech"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-crisis (opening narrative state)",
+      "visual_manifestation": "Urban Tokyo environment; normal civilization indicators",
+      "behavioral_manifestation": "Protagonists living mundane high-school life; parents conducting archaeology"
+    },
+    {
+      "world_state": "Crisis activation (monster revival)",
+      "visual_manifestation": "Shift from urban to dark cloud-covered continent; appearance of seven artificial monsters",
+      "behavioral_manifestation": "Entire world engulfed in flames of war; military forces proving ineffective; parents reveal truth before death"
+    },
+    {
+      "world_state": "Player awakening/combat readiness",
+      "visual_manifestation": "Player-controlled Aurawing ships (Mu technology) appearing in combat zone; mystical power activation",
+      "behavioral_manifestation": "Protagonists transform from students to warriors; take control of ancient aircraft; engage in active combat against Atlantean forces"
+    },
+    {
+      "world_state": "Escalating threat intensity",
+      "visual_manifestation": "Increasing enemy density; boss encounters; complex projectile patterns; parallax scrolling revealing depth of invaded territory",
+      "behavioral_manifestation": "Player must switch between three ship forms (Front Offense, Side Offense, Rear Offense); accumulate combination parts for temporary merged form with co-op partner"
+    },
+    {
+      "world_state": "Progressive victory markers",
+      "visual_manifestation": "Level completion progression (level 1 to level 2 noted in anti-piracy mechanic); environmental changes as player advances through Atlantean-held territory",
+      "behavioral_manifestation": "Power-up level accumulation carries forward; strategic form selection based on enemy patterns"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Archaeological backdrop narrative",
+      "example": "Parents revealed as archaeologists; ancient Mu civilization connection; Aurawing discovery on deserted island 17 years prior; establishes world mythological framework"
+    },
+    {
+      "technique": "Temporal contrast in setting",
+      "example": "Shift from mundane Tokyo high-school life to dark cloud-shrouded continent battlefield; modern weapons ineffective against ancient Atlantean technology; visual/gameplay communication of world transformation"
+    },
+    {
+      "technique": "Technological aesthetic differentiation",
+      "example": "Aurawing ships visually distinct as Mu-origin technology; 'strange weapons of Atlantis' explicitly noted as different from modern military; parallax scrolling reveals layered environment suggesting ancient civilization depth"
+    },
+    {
+      "technique": "Crisis scale communication through level structure",
+      "example": "Multiple level progression (at least 2 levels documented in anti-piracy check) showing expanding theater of conflict; dark clouds as persistent environmental visual reinforcing world-state occupation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Aurawing ship (player-controlled)",
+      "state": "Normal combat",
+      "behavior": "Maintains selected form (Front/Side/Rear Offense); collects power-ups to increase offensive capability by levels; absorbs damage reducing power-up level until destruction"
+    },
+    {
+      "entity": "Aurawing ship (player-controlled)",
+      "state": "Co-op mode with combination parts collected",
+      "behavior": "Transforms into combined form with partner ship; player with more parts controls main shot, other controls secondary weapon; reverts to individual form after timer or damage threshold"
+    },
+    {
+      "entity": "Enemy monsters (Atlantean)",
+      "state": "Active combat",
+      "behavior": "Spawn in formation patterns; release normal (blue) and special (red) power-up orbs upon defeat; respond to ship form by requiring tactical adjustment"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Encounter phase",
+      "behavior": "Display fire-breathing attack animations; generate dense projectile patterns; escalate attack complexity requiring form-switching strategy"
+    },
+    {
+      "entity": "Player ship overall",
+      "state": "Resource management",
+      "behavior": "Can carry up to 9 bombs; speed adjustable from -5 to +5 levels; power-up levels transfer across form transformations; visual indicator of current offensive capability"
+    }
+  ],
+  "notes": "Crisis Force uses parallax scrolling and the VRC4 chip to communicate environmental scale and Atlantean-occupied territory depth. The transformation system (three ship forms + combination mechanic) serves as both gameplay and narrative communication: form-switching reflects tactical adaptation to crisis escalation. The visual absence of effective modern military response reinforces the world-state of catastrophic alien/ancient threat. Power-up orb colors (blue/red) provide instant feedback on enhancement type, reducing cognitive load in fast-paced combat while maintaining clear danger/safety signal distinction. The game's late 1991 release and Japan-only distribution limit global narrative reach, but the design demonstrates sophisticated visual world-state communication through environmental contrast (Tokyo to dark continent), technological aesthetic (modern vs. Atlantean), and mechanical metaphor (form transformation as civilization-level adaptation to existential threat).",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:09:08.942Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4014,
+    "output_tokens": 2020,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

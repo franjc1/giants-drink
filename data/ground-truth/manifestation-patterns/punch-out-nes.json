@@ -1,0 +1,205 @@
+{
+  "game_id": "punch-out-nes",
+  "game_name": "Punch-Out!!",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Opponent attack pattern initiation",
+      "visual_form": "Character sprite animation change, distinct punch/kick startup frames",
+      "meaning": "Imminent damage incoming; player must dodge, duck, or block"
+    },
+    {
+      "signal": "Little Mac color shift to pink/exhaustion palette",
+      "visual_form": "Mac's sprite changes to desaturated pink shades",
+      "meaning": "Health/stamina critically depleted; cannot attack, vulnerability state"
+    },
+    {
+      "signal": "Heart counter depletion visual",
+      "visual_form": "Heart meter at bottom of screen decreases; last hearts flash or empty",
+      "meaning": "Stamina critical; one more blocked punch or opponent hit ends exhaustion state"
+    },
+    {
+      "signal": "Knockdown animation",
+      "visual_form": "Mac falls to canvas; 10-second countdown timer appears",
+      "meaning": "Severe danger; failure to rise within time results in KO loss"
+    },
+    {
+      "signal": "Third knockdown in round",
+      "visual_form": "Visual indicator or announcer callout (TKO state)",
+      "meaning": "Technical knockout triggered; automatic round/bout loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful counter-punch connection",
+      "visual_form": "Star symbol appears above/near Mac; opponent knocked back or stunned",
+      "meaning": "Player executed correct read; earned power resource (star for uppercut)"
+    },
+    {
+      "signal": "Mac regains normal color palette",
+      "visual_form": "Sprite returns to standard skin tone and clothing colors",
+      "meaning": "Stamina recovered; return to attack capability"
+    },
+    {
+      "signal": "Heart counter increasing",
+      "visual_form": "Heart meter refills during successful dodge sequences",
+      "meaning": "Stamina regenerating; safety window active while avoiding opponent"
+    },
+    {
+      "signal": "Opponent dazed/stunned animation",
+      "visual_form": "Opponent sprite shows dizziness effect, reduced movement, or vulnerable stance",
+      "meaning": "Opening created; safe window for aggressive punching"
+    },
+    {
+      "signal": "Between-round intermission",
+      "visual_form": "Screen transition, corner man animations, round counter advances",
+      "meaning": "Temporary safety; no damage possible during transition"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Little Mac (Player Character)",
+      "color_identity": "Flesh tone, red boxing gloves, generic/minimal outfit",
+      "symbol_or_sigil": "Heart meter (health/stamina resource)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Center-left positioned on screen, smaller sprite than opponents"
+    },
+    {
+      "faction": "World Video Boxing Association (WVBA) Opponents",
+      "color_identity": "Highly varied per opponent (Glass Joe blue/white, Bald Bull red/brown, Great Tiger orange/purple, etc.)",
+      "symbol_or_sigil": "Distinct national/cultural costume and styling; themed ring entrance music",
+      "enemy_visual_variants": "Opponents reappear in World Circuit with new color schemes and attack patterns, signaling evolved threat level",
+      "environmental_markers": "Ring center-right position; larger sprite scale; unique background music; championship-tier opponents have more elaborate sprites"
+    },
+    {
+      "faction": "Final Boss (Mike Tyson / Mr. Dream)",
+      "color_identity": "Distinct from Minor/Major/World circuit opponents; iconic real-world or dream champion appearance",
+      "symbol_or_sigil": "Title of 'Dream Fight' opponent; world heavyweight champion status",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears only after completing all three circuits; represents ultimate tier of threat"
+    },
+    {
+      "faction": "Referee (Mario)",
+      "color_identity": "Red cap, blue overalls (iconic Mario design)",
+      "symbol_or_sigil": "Presence signals bout legitimacy and WVBA authority",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears at top-center of screen; announces round starts and victories"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early circuit progression (Minor Circuit)",
+      "visual_manifestation": "Opponents have simple sprite designs, basic color differentiation, minimal animation frames",
+      "behavioral_manifestation": "Opponents execute predictable, repeating attack patterns; easily memorized counters; lower aggression frequency"
+    },
+    {
+      "world_state": "Mid-circuit progression (Major Circuit)",
+      "visual_manifestation": "Opponent sprites show more color detail, slightly more elaborate costumes",
+      "behavioral_manifestation": "Attack patterns become more complex; opponents execute multi-hit combinations; star-earning opportunities increase"
+    },
+    {
+      "world_state": "High-circuit progression (World Circuit)",
+      "visual_manifestation": "Opponents reappear with new color palettes, enhanced sprite detail, more animated entrance sequences",
+      "behavioral_manifestation": "Completely new attack strategies required; opponents use previously-unseen moves; higher damage-per-hit; Mac faces same opponent twice with different strategies"
+    },
+    {
+      "world_state": "Championship bout (Final Title Fight)",
+      "visual_manifestation": "Opponent sprite significantly larger or more detailed; championship-level animation quality",
+      "behavioral_manifestation": "Most complex patterns; minimal predictability windows; loss in championship bout results in ranking drops"
+    },
+    {
+      "world_state": "Dream Fight (Final Boss)",
+      "visual_manifestation": "Mike Tyson/Mr. Dream sprite distinct from all circuit opponents; iconic champion appearance",
+      "behavioral_manifestation": "Unpredictable or extremely demanding pattern recognition; defeat ends game; victory signifies campaign completion"
+    },
+    {
+      "world_state": "Rematch after loss",
+      "visual_manifestation": "Same opponent sprite as before, no visual differentiation",
+      "behavioral_manifestation": "Opponent retains same attack patterns; player has opportunity to implement learned counters; loss results in ranking penalty"
+    },
+    {
+      "world_state": "Exhaustion state (heart counter at zero)",
+      "visual_manifestation": "Little Mac sprite color palette shifts to pink/desaturated shades; visual desaturation communicates depleted state",
+      "behavioral_manifestation": "Player cannot attack; must focus entirely on defensive dodging to regain stamina; stamina regenerates only through successful defense"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Opponent national/cultural costume theming",
+      "example": "Glass Joe wears French flag colors and tricolor elements; entrance music is 'La Marseillaise'; visual design communicates French boxing identity"
+    },
+    {
+      "technique": "Ring entrance music as cultural identifier",
+      "example": "Piston Honda uses Japanese folk song 'Sakura'; Von Kaiser and Super Macho Man use Wagner's 'Ride of the Valkyries'; music communicates opponent origin and fighting tradition without dialogue"
+    },
+    {
+      "technique": "Sprite scale and detail as progression marker",
+      "example": "Opponents in later circuits have more animation frames and sprite detail, visually communicating increased threat level through graphical investment"
+    },
+    {
+      "technique": "Attack animation variation as pattern communication",
+      "example": "Each opponent has distinct attack startup frames; player learns visual tells (specific animation frame = specific incoming attack); visual language replaces verbal cues"
+    },
+    {
+      "technique": "Color reuse with variant modifications",
+      "example": "Same sprite template used for multiple opponents with color and head changes; reappearing opponents in World Circuit use different color palettes to signal they are 'evolved' versions of earlier foes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Little Mac",
+      "state": "Normal/Healthy",
+      "behavior": "Standard skin color palette; can punch (jab, body blow); can dodge left/right, duck, guard; moves at normal speed"
+    },
+    {
+      "entity": "Little Mac",
+      "state": "Stamina depleted (exhaustion)",
+      "behavior": "Sprite color shifts to pink shades; cannot punch at all; can only dodge, duck, guard; movement slowed; must avoid all incoming attacks to regenerate stamina"
+    },
+    {
+      "entity": "Little Mac",
+      "state": "Knocked down",
+      "behavior": "Falls to canvas; 10-second countdown appears; player must press button to rise; taking a 4th knockdown in bout = automatic KO loss"
+    },
+    {
+      "entity": "Little Mac",
+      "state": "Holding power star(s)",
+      "behavior": "Star icon(s) visible above Mac; uppercut attack becomes available; stars lost upon being hit or knocked down"
+    },
+    {
+      "entity": "Any opponent",
+      "state": "Executing signature attack",
+      "behavior": "Distinct animation startup unique to opponent; visual tells player which attack is incoming; correct counter-punch earns Mac a star"
+    },
+    {
+      "entity": "Any opponent",
+      "state": "Stunned/dazed",
+      "behavior": "Sprite shows dizziness animation or vulnerable stance; opponent cannot attack; represents safe window for Mac to strike"
+    },
+    {
+      "entity": "Any opponent",
+      "state": "Knocked down",
+      "behavior": "Falls to canvas; 10-second countdown; opponent must rise or lose bout; three knockdowns in one round = TKO automatic loss for opponent"
+    },
+    {
+      "entity": "Bald Bull",
+      "state": "Preparing 'Bull Charge'",
+      "behavior": "Specific animation windup; warns player of incoming powerful attack; successful counter results in instant knockdown"
+    }
+  ],
+  "notes": "Punch-Out!! uses minimal UI and heavy reliance on visual/behavioral pattern recognition. The game communicates danger and world-state entirely through sprite animation, color palette shifts, and opponent behavior tells. No dialogue or text explains strategies; players learn by observation. The franchise's progression (Minor > Major > World > Dream) is communicated purely through visual complexity increase and sprite reuse with modifications. The game is a pure 'read the visual tell' combat system where correct prediction of opponent attack animations is the core mechanic. Political/faction identity is communicated through costume, music, and visual styling rather than narrative or UI.",
+  "sources_used": [
+    "wikipedia:punch-out-nes"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:17:31.612Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2904,
+    "output_tokens": 2673,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

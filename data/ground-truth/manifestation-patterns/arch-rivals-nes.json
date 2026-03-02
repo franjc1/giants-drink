@@ -1,0 +1,150 @@
+{
+  "game_id": "arch-rivals-nes",
+  "game_name": "Arch Rivals",
+  "platform": "nes",
+  "paradigm": "sports-basketball",
+  "danger_signals": [
+    {
+      "signal": "Opposing player proximity",
+      "visual_form": "Character sprite animation showing aggressive stance or punch wind-up",
+      "meaning": "Risk of being punched and losing ball control or position"
+    },
+    {
+      "signal": "Floor hazards",
+      "visual_form": "Soda cans and candy wrappers rendered on court surface",
+      "meaning": "Tripping hazard that causes ball handler to fall and lose possession"
+    },
+    {
+      "signal": "Referee position",
+      "visual_form": "Referee sprite in collision path on court",
+      "meaning": "Hazard that can cause player to stumble similar to floor objects"
+    },
+    {
+      "signal": "Opponent with ball advantage",
+      "visual_form": "Opponent character in ball-holding animation closer to basket",
+      "meaning": "Immediate scoring threat requiring defensive action"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Possession of ball",
+      "visual_form": "Player sprite holding ball graphic",
+      "meaning": "Control of play and immediate scoring opportunity"
+    },
+    {
+      "signal": "Distance from opponent",
+      "visual_form": "Spatial separation between player sprites on court",
+      "meaning": "Reduced immediate threat of being punched or stealing attempts"
+    },
+    {
+      "signal": "Clear court path to basket",
+      "visual_form": "Unobstructed visual line from player position to goal",
+      "meaning": "Safe opportunity to move toward scoring position"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team",
+      "color_identity": "Team-specific color scheme (customizable per arcade configuration)",
+      "symbol_or_sigil": "Team name displayed on scoreboard and player uniforms",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Scoreboard position and sideline positioning indicates home team"
+    },
+    {
+      "faction": "Away Team",
+      "color_identity": "Contrasting team-specific color scheme",
+      "symbol_or_sigil": "Different team name on scoreboard and uniforms",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Opposite scoreboard position indicates away team status"
+    },
+    {
+      "faction": "Selectable Teams (Arcade)",
+      "color_identity": "Chicago, Los Angeles, New York, Denver, Natural High, Brawl State each with distinct color palettes",
+      "symbol_or_sigil": "Team names serve as primary identifier",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Team colors visible on uniforms and scoreboard display"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (opening quarter)",
+      "visual_manifestation": "Scoreboard shows tied or low scores; center court positioning with both teams relatively fresh",
+      "behavioral_manifestation": "Players move at standard speed; both teams actively competing for ball"
+    },
+    {
+      "world_state": "Scoring lead established",
+      "visual_manifestation": "Scoreboard displays point differential visually emphasized; leading team positioned favorably",
+      "behavioral_manifestation": "Trailing team may display more aggressive punch attempts and stealing behavior"
+    },
+    {
+      "world_state": "Tied game in overtime",
+      "visual_manifestation": "Scoreboard emphasizes tie condition; sudden death visual indicator (if present in UI)",
+      "behavioral_manifestation": "Both teams exhibit maximum aggression; every possession treated as final scoring opportunity"
+    },
+    {
+      "world_state": "Final quarters (time pressure)",
+      "visual_manifestation": "Shot clock display becomes critical visual; scoreboard position emphasizes remaining time",
+      "behavioral_manifestation": "Increased frequency of punch attempts and aggressive stealing mechanics; faster gameplay pace"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Court hazards as gameplay consequence",
+      "example": "Soda cans and candy wrappers scattered on court floor create environmental obstacles that communicate a casual, street-basketball atmosphere rather than pristine professional arena"
+    },
+    {
+      "technique": "Team name customization",
+      "example": "Arcade operator ability to rename teams to local heroes or real teams establishes local competitive context and community ownership"
+    },
+    {
+      "technique": "Character-specific traits",
+      "example": "Eight playable characters with unique characteristics (not detailed in source but mentioned as present) visually differentiate player archetypes and playstyles"
+    },
+    {
+      "technique": "Scoreboard as world state anchor",
+      "visual_form": "Scoreboard continuously displays quarter, score, and time remaining",
+      "meaning": "Primary visual communication of game pressure, team standing, and remaining opportunity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ball handler",
+      "state": "Vulnerable to hazards",
+      "behavior": "Falling animation triggered by stepping on floor objects, dropping ball for opponent pickup"
+    },
+    {
+      "entity": "Defending player",
+      "state": "Aggressive advantage",
+      "behavior": "Punch animation toward opponent; flying leap tackle that pulls down opponent shorts (arcade version only)"
+    },
+    {
+      "entity": "Player without ball",
+      "state": "Seeking possession",
+      "behavior": "Movement toward ball location; call-out animation for teammate pass"
+    },
+    {
+      "entity": "Both players",
+      "state": "Collision with referee",
+      "behavior": "Stumble/fall animation similar to hazard collision, allowing opponent ball steal"
+    },
+    {
+      "entity": "Scoring player",
+      "state": "Successful basket",
+      "behavior": "Basket completion animation; scoreboard updates immediately"
+    }
+  ],
+  "notes": "Arch Rivals communicates world-state primarily through scoreboard information and court positioning rather than atmospheric visual elements. Danger is signaled mechanically through sprite proximity and floor hazard placement rather than color-coded warnings. Faction identity is lightweight—distinguished primarily by uniform colors and team names rather than narrative or symbolic depth. The game emphasizes street-level, casual basketball competition through environmental details (litter on court) and aggressive mechanics (punching, short-pulling) that contrast with professional sports presentation. NES version has reduced visual fidelity compared to arcade, limiting some manifestation clarity.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:25:02.913Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3014,
+    "output_tokens": 1645,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

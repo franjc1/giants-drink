@@ -1,0 +1,151 @@
+{
+  "game_id": "laser-invasion-nes",
+  "game_name": "Laser Invasion",
+  "platform": "nes",
+  "paradigm": "other",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Helicopter piloting (cockpit view)",
+      "first_appears": "Mission start",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns fuel management, speed control, radar reading, and landing mechanics before combat pressure"
+    },
+    {
+      "element": "Vulcan cannon (unlimited ammo)",
+      "first_appears": "Helicopter mode, initial airspace",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary weapon available immediately with no ammo scarcity"
+    },
+    {
+      "element": "Missile selection (strategic choice)",
+      "first_appears": "Pre-mission equipment screen",
+      "introduction_context": "safe",
+      "mastery_context": "Player must choose between quantity (40 small), power (10 large), or balance (20 medium) before takeoff"
+    },
+    {
+      "element": "Enemy heliports and bases (radar targets)",
+      "first_appears": "Helicopter mode, wide area radar",
+      "introduction_context": "moderate",
+      "mastery_context": "Navigation and targeting introduced via dual radar system (Wide Area and Immediate Range)"
+    },
+    {
+      "element": "Enemy missiles (helicopter threats)",
+      "first_appears": "Helicopter mode, airspace approach",
+      "introduction_context": "dangerous",
+      "mastery_context": "Danger lamp warning system cues player; chaff grenades available as countermeasure"
+    },
+    {
+      "element": "Landing mechanics (speed/alignment/wind)",
+      "first_appears": "Approaching allied or enemy heliports",
+      "introduction_context": "moderate",
+      "mastery_context": "Requires hovering, sight alignment, descent timing; failure allows retry without penalty"
+    },
+    {
+      "element": "Gun shooting (light gun segments)",
+      "first_appears": "After helicopter lands at enemy heliport",
+      "introduction_context": "moderate",
+      "mastery_context": "Auto-scrolling right; player shoots enemies and oil drums; ammo and health management begins"
+    },
+    {
+      "element": "Enemy soldiers (varied types)",
+      "first_appears": "Gun shooting mode",
+      "introduction_context": "dangerous",
+      "mastery_context": "Machine gun soldiers (2 HP in US version), positioned at varying screen heights"
+    },
+    {
+      "element": "Ammo and health pickups",
+      "first_appears": "Gun shooting mode, weapon crates",
+      "introduction_context": "moderate",
+      "mastery_context": "Resource scarcity introduced; player must manage ammunition carefully in crowded situations"
+    },
+    {
+      "element": "Maze exploration (first-person corridors)",
+      "first_appears": "After gun shooting segment completes",
+      "introduction_context": "moderate",
+      "mastery_context": "Interior base navigation; collecting vital items and avoiding traps"
+    },
+    {
+      "element": "Traps (interior base hazards)",
+      "first_appears": "Maze mode",
+      "introduction_context": "dangerous",
+      "mastery_context": "Obstacle avoidance mechanic in confined spaces"
+    },
+    {
+      "element": "Ally 'Spider' (NPC assistance)",
+      "first_appears": "Maze mode encounters",
+      "introduction_context": "safe",
+      "mastery_context": "Provides information and mission guidance"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Landing at allied heliport for repair/refuel",
+      "Completing gun shooting segment",
+      "Exiting base and escaping to helicopter",
+      "Encountering ally Spider for information"
+    ],
+    "typical_tension_triggers": [
+      "Enemy missiles approaching (danger lamp warning)",
+      "Helicopter fuel/damage critical",
+      "Crowded enemy soldier waves in gun shooting mode",
+      "Navigating maze traps with low health",
+      "Failed landing attempts at heliports"
+    ],
+    "pacing_descriptor": "Multi-phase tension cycling: high-pressure helicopter dogfighting → moderate-tension auto-scroll shooting → sustained low-tension maze exploration, repeating across four missions with escalating difficulty"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Allied heliports offer optional equipment upgrades and repairs; player can strategically choose between fuel, chaff grenades, or ground missiles",
+    "secret_convention": "Oil drums in gun shooting segments eliminate all on-screen enemies when destroyed; weapon crates contain hidden pickups",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Tutorial-like helicopter controls introduced at mission start with minimal initial threats; fuel and speed management prioritized over combat",
+    "mid_game": "Enemy soldiers become more numerous in gun shooting segments; ammunition scarcity increases (US version has tougher enemies: 2 HP machine gunners, 5 HP turrets); missile management becomes critical",
+    "late_game": "Mission 3 takes place entirely in air (pure helicopter combat); maze exploration becomes more complex; combined threat of fuel, damage, and time pressure",
+    "notable_spikes": [
+      "Transition from helicopter to gun shooting mode requires shift in input method and pacing",
+      "Crowded enemy waves in late gun shooting segments requiring careful ammunition management",
+      "Mission 3 removal of ground-based safety valve (no heliport landings)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard mission structure (Missions 1, 2, 4)",
+      "description": "Helicopter approach → land at enemy heliport → gun shooting corridor → maze base infiltration → escape sequence",
+      "example_level": "Mission 1"
+    },
+    {
+      "pattern_name": "Pure aerial combat mission",
+      "description": "Mission 3 eliminates ground segments; player engages entirely in helicopter dogfighting with extended fuel management and enemy interception",
+      "example_level": "Mission 3"
+    },
+    {
+      "pattern_name": "Heliport checkpoint system",
+      "description": "Allied heliports serve as safe zones for repair/refuel and equipment reconfiguration; enemy heliports are forced landing destinations for objective infiltration",
+      "example_level": "All missions"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor)",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:11:32.454Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4644,
+    "output_tokens": 1711,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

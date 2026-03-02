@@ -1,0 +1,168 @@
+{
+  "game_id": "doom-snes",
+  "game_name": "DOOM",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "2D sprite demons and possessed undead humans rendered at fixed angles",
+      "meaning": "Immediate threat; combat encounter required"
+    },
+    {
+      "signal": "Large enemy groups",
+      "visual_form": "Multiple sprite enemies clustered or approaching simultaneously",
+      "meaning": "High danger; resource management critical"
+    },
+    {
+      "signal": "Toxic waste",
+      "visual_form": "Pits and pools of waste material in level geometry",
+      "meaning": "Environmental hazard; requires avoidance or radiation suit protection"
+    },
+    {
+      "signal": "Lowering ceilings",
+      "visual_form": "Animated ceiling descent in level architecture",
+      "meaning": "Crushing hazard; time-limited threat requiring movement"
+    },
+    {
+      "signal": "Locked doors",
+      "visual_form": "Sealed doorways in level geometry",
+      "meaning": "Progression blocked; keycard or switch required"
+    },
+    {
+      "signal": "Boss enemy appearance",
+      "visual_form": "Larger or distinct demon sprite at level terminus",
+      "meaning": "Climactic encounter; level completion blocked until defeated"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit room",
+      "visual_form": "Marked room location within labyrinthine level",
+      "meaning": "Safe passage to next level; level completion objective"
+    },
+    {
+      "signal": "Health pickups",
+      "visual_form": "Collectible items scattered throughout levels",
+      "meaning": "Resource restoration; survival support"
+    },
+    {
+      "signal": "Armor items",
+      "visual_form": "Wearable protection pickups",
+      "meaning": "Damage reduction; defensive resource"
+    },
+    {
+      "signal": "Weapons and ammunition",
+      "visual_form": "Armament items in level or dropped by defeated enemies",
+      "meaning": "Combat capability; threat mitigation"
+    },
+    {
+      "signal": "Invulnerability power-up",
+      "visual_form": "Temporary protective pickup",
+      "meaning": "Temporary immunity to damage"
+    },
+    {
+      "signal": "Radiation suit",
+      "visual_form": "Wearable protection item",
+      "meaning": "Toxic waste immunity; enables safe passage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Human/Marine",
+      "color_identity": null,
+      "symbol_or_sigil": "Space marine military aesthetic; chainsaw, shotgun, plasma rifle weaponry",
+      "enemy_visual_variants": "Possessed undead humans with military/human appearance; may carry weapons",
+      "environmental_markers": "Military bases on moons of Mars; technological installations; military infrastructure"
+    },
+    {
+      "faction": "Demonic/Hellish",
+      "color_identity": null,
+      "symbol_or_sigil": "Demons; supernatural creatures; grotesque sprite designs",
+      "enemy_visual_variants": "Multiple demon types with distinct visual forms; horn/claw designs; magical attack capabilities",
+      "environmental_markers": "Hell dimension locations; supernatural/infernal aesthetic; demonic architecture"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early episode (Mars moons/military bases)",
+      "visual_manifestation": "Technological military architecture; human and possessed human enemies predominate",
+      "behavioral_manifestation": "Enemies show human-like movement patterns; mixed melee and ranged attacks"
+    },
+    {
+      "world_state": "Late episode (Hell dimension)",
+      "visual_manifestation": "Infernal/supernatural environment; pure demonic enemies; hellish aesthetic",
+      "behavioral_manifestation": "Demons use magical attacks (fireballs); faster, more aggressive behavior"
+    },
+    {
+      "world_state": "Enemy aggression escalation",
+      "visual_manifestation": "Larger enemy groups; denser sprite clustering",
+      "behavioral_manifestation": "Enemies move toward player on sight/sound; attack speed increases with difficulty"
+    },
+    {
+      "world_state": "Difficulty setting change",
+      "visual_manifestation": "Enemy sprite density increases; no visual indicator of difficulty",
+      "behavioral_manifestation": "Enemies move faster; attack more frequently; increased damage output"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression from technology to supernatural",
+      "example": "Mars military bases transition to Hell dimension, visualizing narrative shift from human conflict to demonic invasion"
+    },
+    {
+      "technique": "Enemy type distribution by location",
+      "example": "Possessed undead humans in military bases; pure demons in hell; indicates invasion origin and scale"
+    },
+    {
+      "technique": "Hazard placement narrative",
+      "example": "Toxic waste pits in industrial areas; lowering ceilings in confined spaces; environmental design indicates human industrial presence corrupted by demonic influence"
+    },
+    {
+      "technique": "Boss encounters as episodic climax",
+      "example": "Final level of each episode culminates in single major boss fight; visual/mechanical emphasis marks narrative progression gates"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Generic demon",
+      "state": "Unaware of player",
+      "behavior": "Stationary or wandering within patrol area"
+    },
+    {
+      "entity": "Generic demon",
+      "state": "Player visible or audible",
+      "behavior": "Direct movement toward player; initiate melee or magical attack"
+    },
+    {
+      "entity": "Possessed undead human",
+      "state": "Combat engaged",
+      "behavior": "Bite, claw, or gunfire attacks; human-like movement speed"
+    },
+    {
+      "entity": "Boss demon",
+      "state": "Level final encounter",
+      "behavior": "Enhanced aggression; larger sprite; heightened attack frequency and damage"
+    },
+    {
+      "entity": "Player (space marine)",
+      "state": "High difficulty setting",
+      "behavior": "Enemies react faster; reduced reaction time to player actions"
+    }
+  ],
+  "notes": "DOOM (SNES 1995) uses 2.5D graphics (3D environment + 2D sprite enemies) to communicate world state primarily through enemy type placement, environmental hazard visual presentation, and architectural design. Faction identity is implicit rather than explicit—human vs. demonic distinction carries through enemy sprite design and environmental aesthetic. No color-coded faction systems or symbolic sigils present; communication relies on creature design and context. World state progression (Mars→Hell) manifests through environmental visual transition. Difficulty affects behavioral manifestation (enemy speed/aggression) without visual environmental change.",
+  "sources_used": [
+    "wikipedia:Doom_(1993_video_game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:17:05.843Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3800,
+    "output_tokens": 1758,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "wikipedia"
+    ]
+  }
+}

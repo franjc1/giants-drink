@@ -1,0 +1,156 @@
+{
+  "game_id": "karnov-nes",
+  "game_name": "Karnov",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Diverse monster sprites (sword-wielding monks, dinosaurs, djinn, fish men, gargoyles, tree monsters, will-o-wisps, rock creatures, centipede women, skeleton warriors)",
+      "meaning": "Active threats in level environment"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Large, distinctively-designed enemy sprite at level end or final area",
+      "meaning": "Major obstacle/progression gate requiring defeat"
+    },
+    {
+      "signal": "Player vulnerability state",
+      "visual_form": "Karnov sprite turns blue after single hit",
+      "meaning": "One hit remaining before death; heightened danger state"
+    },
+    {
+      "signal": "Projectile attack",
+      "visual_form": "Enemy fireballs traveling toward player",
+      "meaning": "Ranged threat requiring evasion or reflection"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Red orb item",
+      "visual_form": "Red collectible sprite",
+      "meaning": "Upgrades Karnov's fireball capacity (up to three simultaneous projectiles)"
+    },
+    {
+      "signal": "Blue fireball orb",
+      "visual_form": "Blue collectible sprite",
+      "meaning": "Restores health when Karnov is in vulnerable blue state"
+    },
+    {
+      "signal": "Shield item",
+      "visual_form": "Shield equipment sprite (NES-specific)",
+      "meaning": "Protective tool that reflects enemy fireballs"
+    },
+    {
+      "signal": "Spike Bomb item",
+      "visual_form": "Bomb equipment sprite (NES-specific)",
+      "meaning": "Screen-clearing weapon destroying all visible enemies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Karnov)",
+      "color_identity": "Flesh-toned muscular sprite; turns blue when damaged",
+      "symbol_or_sigil": "Fireball projectiles (red when upgraded)",
+      "enemy_visual_variants": "Kusamochi Karnov (pale grey variant in Bad Dudes, representing corrupted/alternative version)",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Antagonist forces (Alakatay's minions)",
+      "color_identity": null,
+      "symbol_or_sigil": "Diverse monster designs across nine levels",
+      "enemy_visual_variants": "Progression through varied enemy types indicates ascending threat hierarchy",
+      "environmental_markers": "Level design reflects cursed regions of Cleamina (Japanese narrative context)"
+    },
+    {
+      "faction": "The Wizard / Final Boss",
+      "color_identity": null,
+      "symbol_or_sigil": "Powerful final encounter sprite",
+      "enemy_visual_variants": "NES version replaces Wizard with three-headed dragon final boss",
+      "environmental_markers": "Guards final treasure map piece; occupies similar themed arena to arcade version"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Cursed/corrupted (Japanese narrative)",
+      "visual_manifestation": "Diverse monster ecology across nine distinct level environments; progression through increasingly dangerous encounters",
+      "behavioral_manifestation": "Enemies actively attack player; bosses guard progression gates; escalating difficulty through level sequence"
+    },
+    {
+      "world_state": "Quest progression",
+      "visual_manifestation": "Treasure map pieces accumulated after each boss defeat; visual evidence of advancement toward final objective",
+      "behavioral_manifestation": "New level environment loaded; enemy patterns reset; boss encounter triggered at level end"
+    },
+    {
+      "world_state": "Player recovery/power increase",
+      "visual_manifestation": "Red orb collection increments fireball capacity visually; blue orb restores blue-state sprite to normal coloring",
+      "behavioral_manifestation": "Karnov's attack capability expands; defensive vulnerability reduced; positioning changes as player gains firepower"
+    },
+    {
+      "world_state": "Regional differences (censorship in US release)",
+      "visual_manifestation": "Story cutscenes and narrative text removed from US version; intro/ending stripped of religious context",
+      "behavioral_manifestation": "Game begins directly at level selection without narrative framing; ending shows text-only 'CONGRATULATIONS' instead of character resolution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Enemy type as environmental indicator",
+      "example": "Sword-wielding monks, djinn, and magical creatures suggest mystical/cursed setting; dinosaurs and gargoyles indicate mythological realm; skeleton warriors on ostriches suggest exotic geography"
+    },
+    {
+      "technique": "Level progression as narrative arc",
+      "example": "Nine distinct level environments signal journey through multiple regions of Cleamina; each level completion yields map piece, creating visible accumulation toward treasure"
+    },
+    {
+      "technique": "Character state communication",
+      "example": "Blue color change on Karnov indicates damage/vulnerability state without text; visual-only system communicates player health condition across language barriers"
+    },
+    {
+      "technique": "Boss variation as world-state marker",
+      "example": "NES version's three-headed dragon replaces arcade Wizard, signaling platform-specific narrative divergence; suggests alternate magical hierarchy or corrupted transformation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Karnov (player character)",
+      "state": "Full health",
+      "behavior": "Normal sprite coloring; full firepower capacity available; can withstand one hit"
+    },
+    {
+      "entity": "Karnov (player character)",
+      "state": "Damaged/vulnerable",
+      "behavior": "Sprite turns blue; reduced to one hit remaining; can be restored by blue orb pickup"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Active/patrolling",
+      "behavior": "Persistent spawning and attack patterns; projectile firing; movement toward player or environmental boundaries"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Encounter active",
+      "behavior": "Located at level terminus; requires defeat to progress; guards treasure map piece; specialized attack patterns distinguishing them from regular enemies"
+    },
+    {
+      "entity": "Collectible items",
+      "state": "Available",
+      "behavior": "Stationary sprites; player contact triggers pickup; red orbs queue upgrade progression; blue orbs instantiate healing"
+    }
+  ],
+  "notes": "Karnov is a straightforward action-platformer with minimal narrative UI. Communication occurs primarily through sprite design, enemy variety, and item collection mechanics. Japanese version contextualizes action within religious/magical narrative (Alakatay curse, Karnov as divine agent seeking redemption), but US release strips narrative framing entirely. Visual manifestation relies on character coloring (blue damage state), enemy silhouettes, and progression markers (treasure map pieces). No faction allegiance system; world-state communication is linear and progression-based rather than dynamic or player-choice-dependent. NES modifications (blue health state, shield/spike bomb items, alternate bosses) represent mechanical storytelling divergences from arcade original.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:33:49.385Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4924,
+    "output_tokens": 1865,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

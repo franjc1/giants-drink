@@ -1,0 +1,242 @@
+{
+  "game_id": "kirby-super-star-snes",
+  "game_name": "Kirby Super Star",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite animation and positioning on screen; enemies move toward Kirby",
+      "meaning": "Active threat requiring avoidance or absorption via inhale"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": "Visual distinction of platforms, spikes, and obstacles in level design",
+      "meaning": "Environmental damage zones that reduce health if touched"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large enemy sprite, distinct animation set, often fills significant screen space",
+      "meaning": "Major confrontation requiring strategy; multiple health bar segments"
+    },
+    {
+      "signal": "Time limit (Revenge of Meta Knight)",
+      "visual_form": "On-screen timer and Halberd damage meter at bottom of screen",
+      "meaning": "Urgency mechanic; failure to complete stage within time loses a life"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Kirby sprite flashing or shrinking; Helper character disappearing",
+      "meaning": "Imminent loss of life or Helper; critical state requiring healing"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items scattered in levels",
+      "visual_form": "Sprites of food (fruit, pastries) rendered on platforms and in open spaces",
+      "meaning": "Health restoration; safe areas to gather resources"
+    },
+    {
+      "signal": "Helper presence",
+      "visual_form": "Secondary character sprite on screen alongside Kirby, mimicking Kirby's form with copy ability visual",
+      "meaning": "Ally providing support; extends survival capacity and combat options"
+    },
+    {
+      "signal": "Copy ability acquisition",
+      "visual_form": "Enemy with distinct visual (e.g., Fire Waddle Dee, Spark enemy) and visual effect when consumed",
+      "meaning": "Power-up state; Kirby gains temporary enhanced abilities"
+    },
+    {
+      "signal": "Safe platform layout",
+      "visual_form": "Clear pathways with solid ground; absence of spikes or moving hazards",
+      "meaning": "Traversable terrain without immediate danger"
+    },
+    {
+      "signal": "Door/checkpoint",
+      "visual_form": "Door sprites leading to next room or level checkpoint",
+      "meaning": "Progress marker; safe transition point"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dream Land Inhabitants (Kirby's allies)",
+      "color_identity": "Pink (Kirby), pastel palette",
+      "symbol_or_sigil": "Waddle Dees, Whispy Woods (natural environment assets)",
+      "enemy_visual_variants": "Enemies in Dream Land are standard/default coloration; serve as neutral obstacles",
+      "environmental_markers": "Green Greens level theme with grass, trees, natural setting; peaceful music score"
+    },
+    {
+      "faction": "King Dedede's faction (antagonist)",
+      "color_identity": "Purple/dark coloration (King Dedede sprite)",
+      "symbol_or_sigil": "King Dedede crown and hammer; castle setting as territorial marker",
+      "enemy_visual_variants": "Dedede appears as boss with large sprite, distinct attack animations",
+      "environmental_markers": "King Dedede's castle level; regal architecture; confrontational stage design"
+    },
+    {
+      "faction": "Meta Knight (antagonist)",
+      "color_identity": "Dark blue/teal (Meta Knight sprite and armor)",
+      "symbol_or_sigil": "Halberd airship; Meta Knight's mask and cape; sword weapon",
+      "enemy_visual_variants": "Meta Knight appears in multiple encounters with escalating difficulty; Halberd damage meter shows territorial control shift",
+      "environmental_markers": "Halberd interior level (Revenge of Meta Knight); mechanical/technological aesthetic contrasts natural Dream Land; time limit pressure reflects military invasion narrative"
+    },
+    {
+      "faction": "Dyna Blade (antagonist)",
+      "color_identity": "Brown/tan avian coloration",
+      "symbol_or_sigil": "Giant bird creature; nest/agricultural disruption visual motif",
+      "enemy_visual_variants": "Dyna Blade appears as massive boss sprite significantly larger than Kirby",
+      "environmental_markers": "Cocoa Cave and natural outdoor levels; crop fields affected by bird presence"
+    },
+    {
+      "faction": "Marx (Milky Way Wishes antagonist)",
+      "color_identity": "Jester-like appearance with contrasting colors",
+      "symbol_or_sigil": "Jester mask; cosmic setting (planets, Nova comet-clock)",
+      "enemy_visual_variants": "Marx reveals true form as boss with distinct sprite and attack patterns",
+      "environmental_markers": "Milky Way Wishes planetary levels; cosmic/space aesthetic; Nova wish-granting device as symbolic control point"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Dream Land at peace (Spring Breeze start state)",
+      "visual_manifestation": "Pastel color palette; clear skies; natural level themes; food abundance visible on screen",
+      "behavioral_manifestation": "Enemies patrol naturally; no time pressure; King Dedede stealing food is narrative framing of disturbance"
+    },
+    {
+      "world_state": "Dream Land under threat (Dyna Blade mode)",
+      "visual_manifestation": "Crops visible in environment; agricultural terrain emphasized; Dyna Blade sprite dominates sky areas",
+      "behavioral_manifestation": "Mini-boss Dyna Blade moves across world map; enemies appear more aggressive near affected crop areas"
+    },
+    {
+      "world_state": "Halberd invasion (Revenge of Meta Knight)",
+      "visual_manifestation": "Technological/mechanical level design replaces natural scenery; Halberd ship interior visible; damage meter at screen bottom shows ship deterioration; color palette shifts to metallic grays and blues",
+      "behavioral_manifestation": "Enemies appear in organized waves reflecting military structure; time limit creates urgency; final escape sequence shows Halberd falling apart visually"
+    },
+    {
+      "world_state": "Cosmic imbalance (Milky Way Wishes premise)",
+      "visual_manifestation": "Nine planets rendered with distinct visual styles; Sun and Moon in conflict visible in space scenes; Nova comet-clock as central visual anchor; scrolling shooter aesthetic for space levels",
+      "behavioral_manifestation": "Kirby lacks standard copy abilities; must select from persistent list; Marx's manipulation reflected in boss encounter design"
+    },
+    {
+      "world_state": "Copy ability active",
+      "visual_manifestation": "Kirby's sprite changes to reflect ability (Fire Kirby shows flame effects, Jet Kirby shows rocket exhaust, Sword Kirby displays blade); ability cap sprite appears on Kirby's head",
+      "behavioral_manifestation": "Attack patterns change; new visual feedback for attacks; Helper character visually mimics Kirby's current form"
+    },
+    {
+      "world_state": "Helper defeated/depleted",
+      "visual_manifestation": "Helper sprite disappears; brief grace period window with visual prompt for new power-up",
+      "behavioral_manifestation": "Player loses cooperative combat advantage; solo Kirby vulnerability increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architecture and setting as narrative",
+      "example": "King Dedede's castle in Spring Breeze signals royal antagonist presence; Halberd mechanical interior in Revenge of Meta Knight visually communicates militaristic invasion theme distinct from natural Dream Land"
+    },
+    {
+      "technique": "Treasure references as world-building",
+      "example": "The Great Cave Offensive contains 60 treasure chests referencing Nintendo franchises (Triforce, Captain Falcon's helmet, Mr. Saturn) and RPG valuables; visual variety tells story of diverse world with cross-game cosmology"
+    },
+    {
+      "technique": "Time limit as environmental pressure",
+      "example": "Revenge of Meta Knight's on-screen timer and Halberd damage meter at bottom communicate urgency and show ship degradation visually; environmental destruction is measurable and visible"
+    },
+    {
+      "technique": "Level progression as spatial dominion",
+      "example": "Dyna Blade moves across world map showing territorial threat progression; Halberd interior levels escalate in complexity reflecting deepening invasion"
+    },
+    {
+      "technique": "Color palette shifts for world state",
+      "example": "Pastel Dream Land palette contrasts sharply with metallic Halberd interior and cosmic Milky Way Wishes space aesthetic; visual tone communicates narrative context"
+    },
+    {
+      "technique": "Enemy composition reflects locale and threat",
+      "example": "Natural enemies (Waddle Dees, Whispy Woods) in Dream Land; mechanical enemies in Halberd; cosmic entities in Milky Way Wishes; visual enemy design communicates faction and thematic intent"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Kirby",
+      "state": "Normal (no copy ability)",
+      "behavior": "Standard walk/run/jump/inhale/spit attacks; limited combat options; visual sprite is pink with neutral stance"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Copy ability active",
+      "behavior": "Enhanced attacks reflecting ability (flame projectiles for Fire, sword swings for Cutter, etc.); ability cap visible on head; movement speed and jump height may increase; attack range expands"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Critical health",
+      "behavior": "Sprite flashing on-screen indicating vulnerability; reduced knockback resistance; visual signal of one-hit-KO proximity"
+    },
+    {
+      "entity": "Helper",
+      "state": "Active with copy ability",
+      "behavior": "Mimics Kirby's form with ability visual; attacks autonomously or responds to player 2 input; floats continuously; can be reverted to power-up if Kirby is threatened"
+    },
+    {
+      "entity": "Helper",
+      "state": "Defeated",
+      "behavior": "Sprite disappears; brief on-screen icon prompt for Kirby to grant new power before permanent loss; visual grace period communicates recovery window"
+    },
+    {
+      "entity": "King Dedede",
+      "state": "Boss encounter",
+      "behavior": "Large sprite; multi-phase attack patterns; jumps and hammer swings visible; health bar displayed; defeated after hitting required times"
+    },
+    {
+      "entity": "Meta Knight",
+      "state": "Boss encounter",
+      "behavior": "Fast sprite animations; sword attacks; teleportation visual effects; multiple health bars in Revenge of Meta Knight; final escape sequence shows flee behavior"
+    },
+    {
+      "entity": "Dyna Blade",
+      "state": "Boss and mini-boss",
+      "behavior": "Massive sprite dwarfing Kirby; aerial positioning; dive attacks visualized; multi-phase behavior; world map positioning shows territorial threat"
+    },
+    {
+      "entity": "Marx",
+      "state": "Jester form (deceptive ally)",
+      "behavior": "Appears helpful; standard sprite with jester animation; narrative deception communicated through dialogue and setup"
+    },
+    {
+      "entity": "Marx",
+      "state": "True form (boss)",
+      "behavior": "Sprite transforms to reveal true antagonistic form; large boss sprite; complex attack patterns; reveals Marx masterminded conflict"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Patrolling/idle",
+      "behavior": "Predictable movement patterns; standard sprite animation loops; non-aggressive unless approached"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Copy ability host",
+      "behavior": "Distinct visual (Fire Waddle Dee glows, Spark enemy crackles); defeating/inhaling produces copy ability visual effect; sprite indicates power-up potential"
+    },
+    {
+      "entity": "Halberd ship",
+      "state": "Invasion phase (Revenge of Meta Knight)",
+      "behavior": "Interior levels show mechanical design; damage meter decreases with each level completion; visual deterioration communicated on-screen; final level shows ship crashing with escape sequence"
+    }
+  ],
+  "notes": "Kirby Super Star communicates world-state primarily through visual art direction (color palettes, architectural style, sprite design) and level structure rather than explicit UI overlays. The Halberd damage meter is exceptional as explicit world-state visualization. Political situations are framed through boss encounters and level narrative context rather than faction warfare displays. The game uses contrast between peaceful Dream Land aesthetic and threatening Halberd mechanical interior to communicate invasion narrative. Copy ability system creates visual power-state feedback through sprite changes and ability cap appearance. Helper character presence/absence signals survival state and combat capability. Treasure references and environmental design choices provide implicit world-building without explicit exposition.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf",
+    "tasvideos",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:56:29.655Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8022,
+    "output_tokens": 3291,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

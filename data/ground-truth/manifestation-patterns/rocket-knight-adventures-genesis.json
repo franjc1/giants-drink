@@ -1,0 +1,194 @@
+{
+  "game_id": "rocket-knight-adventures-genesis",
+  "game_name": "Rocket Knight Adventures",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldiers",
+      "visual_form": "Devotindos pig-humanoid soldiers in distinct armor",
+      "meaning": "Active hostile forces; territorial threats"
+    },
+    {
+      "signal": "Spike terrain",
+      "visual_form": "Protruding spikes in level geometry (cart segment stage 2)",
+      "meaning": "Instant death hazard; environmental danger zone"
+    },
+    {
+      "signal": "Lava",
+      "visual_form": "Flowing molten liquid at stage boundaries (stage 3 beginning)",
+      "meaning": "Instant death hazard; environmental damage source"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large unique enemy sprite at stage endpoints",
+      "meaning": "Major conflict point; escalated threat level"
+    },
+    {
+      "signal": "Bottomless pits",
+      "visual_form": "Stage edges / fall zones",
+      "meaning": "Environmental death trap; boundary enforcement"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Incoming fire from enemy sprites",
+      "meaning": "Ranged threat; damage indicator"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible apples",
+      "visual_form": "Fruit item sprites distributed in levels",
+      "meaning": "Health recovery; safe-to-gather resource"
+    },
+    {
+      "signal": "Collectible bananas",
+      "visual_form": "Fruit item sprites with higher visual prominence",
+      "meaning": "Major health recovery; safe-to-gather resource (greater vitality restoration than apples)"
+    },
+    {
+      "signal": "1UP items",
+      "visual_form": "Special item sprites in specific level locations",
+      "meaning": "Extra life gain; safety buffer against failure"
+    },
+    {
+      "signal": "Point milestones",
+      "visual_form": "Score accumulation (20,000 initial, then every 60,000)",
+      "meaning": "Progress toward extra life; resource accumulation indicator"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Rocket Knights (Kingdom of Zephyrus)",
+      "color_identity": null,
+      "symbol_or_sigil": "Rocket pack armor; knightly aesthetic",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Zephyrus castle; royal kingdom architecture"
+    },
+    {
+      "faction": "Devotindos Empire (Pig tribe)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pig-humanoid physiology; empire military gear",
+      "enemy_visual_variants": "Standard soldiers vs. elite variants (Axel Gear as 'Black Knight' corrupted variant)",
+      "environmental_markers": "Devotindos desert territory; Devotindos castle; pig-constructed structures; Pig Star starship"
+    },
+    {
+      "faction": "Axel Gear (Antagonist/Defector)",
+      "color_identity": null,
+      "symbol_or_sigil": "Black Knight armor variant; former Rocket Knight corrupted form",
+      "enemy_visual_variants": "Distinct from standard Devotindos soldiers; unique boss-level sprite",
+      "environmental_markers": "Airship escape vessel; kidnapper presence in castle"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Kingdom of Zephyrus under invasion",
+      "visual_manifestation": "Devotindos soldiers occupying Zephyrus castle and surrounding terrain; altered castle interior aesthetics",
+      "behavioral_manifestation": "Enemy patrols and ambushes throughout levels; escalating enemy density as player progresses toward castle"
+    },
+    {
+      "world_state": "Seal key secured in royal family",
+      "visual_manifestation": "Princess Sherry present in castle (kidnapped state); key location unknown visually",
+      "behavioral_manifestation": "Axel Gear active as kidnapper; final boss Devilgus Devotindos pursues key"
+    },
+    {
+      "world_state": "Pig Star starship awakened/activated",
+      "visual_manifestation": "Final stage environment shifts to starship interior aesthetic; cosmic/space environment",
+      "behavioral_manifestation": "Final boss encounters; Core entity as true antagonist control source; alternate stage gameplay (space flight segment)"
+    },
+    {
+      "world_state": "Desert territory (neutral/hostile terrain)",
+      "visual_manifestation": "Arid biome visuals; Devotindos Empire presence in desert region",
+      "behavioral_manifestation": "Enemy encounters in desert; transition zone between Zephyrus and Devotindos kingdoms"
+    },
+    {
+      "world_state": "Level difficulty escalation",
+      "visual_manifestation": "Enemy sprite intensity; visual density of hazards increases",
+      "behavioral_manifestation": "Enemy attack patterns become more aggressive; enemy projectile frequency increases; reduced player vitality allowance on higher difficulties"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Biome progression as political geography",
+      "example": "Journey from Zephyrus castle → desert → Devotindos castle → Pig Star space vessel traces invasion route and territorial conquest; visual environment shift communicates political boundary crossing"
+    },
+    {
+      "technique": "Architectural style differentiation",
+      "example": "Zephyrus royal castle has distinct architectural aesthetic vs. Devotindos pig-empire fortress; visual contrast establishes faction territorial identity"
+    },
+    {
+      "technique": "Enemy composition as occupying force",
+      "example": "Devotindos soldiers stationed throughout early levels communicate invasion occupation; enemy patrol patterns suggest military control"
+    },
+    {
+      "technique": "Hazard environment as faction signature",
+      "example": "Lava in Devotindos territory, spikes in mechanical/industrial areas; environmental hazard type signals which faction controls the space"
+    },
+    {
+      "technique": "Boss character visual prominence",
+      "example": "Axel Gear distinguished as 'Black Knight' corrupted form vs. standard Rocket Knight aesthetic; visual design communicates internal betrayal/corruption subplot"
+    },
+    {
+      "technique": "Starship aesthetics as technology/power indicator",
+      "example": "Pig Star interior has distinct sci-fi military aesthetic vs. medieval kingdom architecture; visual shift communicates Devotindos Empire as technologically superior threat"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sparkster (player character)",
+      "state": "Normal combat",
+      "behavior": "Sword attacks with short-range energy projectiles; sword-centric combat stance"
+    },
+    {
+      "entity": "Sparkster (player character)",
+      "state": "Rocket attack charged",
+      "visual_tell": "Blue bar fills on screen top; visual charge indicator",
+      "behavior": "Burst attack in 8 directional outputs or stationary spin; wall-rebound capability for vertical traversal"
+    },
+    {
+      "entity": "Devotindos soldiers",
+      "state": "Patrol/alert",
+      "behavior": "Standard movement patterns; projectile fire at player proximity"
+    },
+    {
+      "entity": "Devotindos soldiers",
+      "state": "Combat escalation",
+      "behavior": "Increased projectile frequency and pattern complexity on higher difficulty settings"
+    },
+    {
+      "entity": "Axel Gear",
+      "state": "Airship escape",
+      "behavior": "Kidnapper evasion; initiates chase sequence; establishes as mobile threat"
+    },
+    {
+      "entity": "Axel Gear",
+      "state": "Boss encounter (stage endpoint)",
+      "behavior": "Melee duel; distinct attack pattern vs. standard enemies"
+    },
+    {
+      "entity": "Devilgus Devotindos (Emperor)",
+      "state": "Boss encounter",
+      "behavior": "Melee combat; higher durability; reveals robotic nature on defeat"
+    },
+    {
+      "entity": "Pig Star Core",
+      "state": "True final boss",
+      "behavior": "Controlling force; escape pod pursuit; atmospheric re-entry sequence; ultimate threat manifestation"
+    }
+  ],
+  "notes": "Rocket Knight Adventures uses biological/mechanical faction contrast as primary world-state communicator. Zephyrus kingdom = medieval knight aesthetic; Devotindos = pig-humanoid industrial-military empire. Difficulty settings alter enemy behavior and damage output, creating layered threat communication through behavior rather than visual redesign. Stage hazard types (spikes, lava, instant-death terrain) serve dual purpose: environmental storytelling (faction control signature) and mechanical danger signaling. Boss progression reveals narrative escalation: soldier → Axel Gear (defector) → Emperor → Core (true AI threat), with each escalation accompanied by visual/mechanical complexity increase. Starship environment represents technological threat superiority.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:50:38.717Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3091,
+    "output_tokens": 2287,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

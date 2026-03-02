@@ -1,0 +1,158 @@
+{
+  "game_id": "mighty-bomb-jack-nes",
+  "game_name": "Mighty Bomb Jack",
+  "platform": "nes",
+  "paradigm": "platformer/adventure",
+  "level_count": 16,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic platforming (action zones)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core traversal mechanic established early"
+    },
+    {
+      "element": "Treasure chests (visible)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Rewards exploration; accessed by touching from side"
+    },
+    {
+      "element": "Blue Mighty Coin (color powerup)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Opens orange treasure chests; teaches color-gating mechanic"
+    },
+    {
+      "element": "Orange Mighty Coin",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Opens any treasure chest by touch; removes chest interaction requirement"
+    },
+    {
+      "element": "Green Mighty Coin (enemy transmutation)",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Converts all on-screen enemies to coins for 5 seconds; offensive power"
+    },
+    {
+      "element": "Mighty Drink (timer extension)",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Adds 10 seconds to timer; resource management introduced"
+    },
+    {
+      "element": "Hidden Sphinx (secret passage trigger)",
+      "first_appears": "Early levels (in treasure chests)",
+      "introduction_context": "moderate",
+      "mastery_context": "Teaches hidden discovery mechanic; unlocks secret passages"
+    },
+    {
+      "element": "Royal Palace rooms (Bomb Jack mechanic)",
+      "first_appears": "After each action zone",
+      "introduction_context": "moderate",
+      "mastery_context": "Bomb-collection sequence; direct port of original Bomb Jack mechanics"
+    },
+    {
+      "element": "Torture Room (penalty state)",
+      "first_appears": "Mid-late levels (triggered by greed)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Triggered by collecting 10+ Mighty Coins or 100+ seconds; requires jump sequence to escape"
+    },
+    {
+      "element": "Secret block breaking",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Hidden breakable blocks; international versions made single-jump breakable"
+    },
+    {
+      "element": "Enemy encounters (unpredictable behavior)",
+      "first_appears": "Throughout all levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Behavior described as near-random; requires anticipation for evasion"
+    },
+    {
+      "element": "Timer mechanic (60-second baseline)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Core pressure system; determines pacing throughout run"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting Mighty Drink (adds 10 seconds)",
+      "Entering secret passage",
+      "Completing action zone (transition to familiar Royal Palace)",
+      "Green coin activation (5-second enemy immunity window)"
+    ],
+    "typical_tension_triggers": [
+      "Timer counting down toward zero",
+      "Encountering unpredictable enemy behavior",
+      "Attempting to access color-locked treasure chests",
+      "Approaching 10 Mighty Coins or 100 seconds (Torture Room threshold)",
+      "Hidden block discoveries requiring multiple jumps",
+      "Royal Palace bomb collection under time pressure"
+    ],
+    "pacing_descriptor": "Fast-paced action-adventure with escalating greed penalties; alternates between exploration tension (action zones) and reflexive navigation tension (Royal Palace); timer creates constant pressure with strategic relief opportunities"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Treasure chests (visible and hidden); Sphinx icons trigger secret passages; breakable blocks indicate hidden areas",
+    "secret_convention": "Hidden treasure chests contain Sphinx item to unlock secret passages; undocumented breakable blocks hide passages; secrets heavily emphasized as replay value",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Tutorial-phase introduction of Mighty Coins, basic platforming, visible treasure chests; safe exploration encouraged",
+    "mid_game": "Multiple color-gated chests requiring strategic coin collection; hidden secrets proliferate; enemy behavior becomes critical to navigation",
+    "late_game": "Increased Torture Room risk as player accumulates coins and timer bonuses; near-random enemy patterns demand precise anticipation; Royal Palace sections maintain steady difficulty",
+    "notable_spikes": [
+      "First Torture Room encounter (introduces penalty state mechanic)",
+      "Transition to hidden block discovery requirements (changes safe exploration assumption)",
+      "Late-stage Royal Palace rooms under cumulative time pressure"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Action Zone → Royal Palace Binary Structure",
+      "description": "Every level split into two distinct sections: exploration-focused action zone (Mighty Coin hunting, secret discovery), followed by reflexive bomb-collection Royal Palace room (direct Bomb Jack port). Creates rhythm cycle of strategic thinking then execution.",
+      "example_level": "All 16 levels follow this structure"
+    },
+    {
+      "pattern_name": "Greed-Punishment Loop",
+      "description": "Torture Room activated if player collects 10+ Mighty Coins or extends timer to 100+ seconds. Forces choice between power-up accumulation and safety. Resets coins and timer to 60s upon escape.",
+      "example_level": "Triggered mid-run if threshold exceeded"
+    },
+    {
+      "pattern_name": "Color-Gated Treasure Progression",
+      "description": "Treasure chests locked by Mighty Coin color (orange requires blue coin, etc.). Teaches resource-type gating early; orange coin breaks this by making all chests accessible via touch.",
+      "example_level": "Early-mid levels establish; blue coins appear first"
+    },
+    {
+      "pattern_name": "Secret Passage Discovery via Sphinx",
+      "description": "Finding Sphinx in treasure chest unlocks secret passages; alternative routing through levels. Incentivizes thorough chest exploration and replay.",
+      "example_level": "Multiple per level (exact count undocumented)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:25:55.138Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5404,
+    "output_tokens": 2032,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

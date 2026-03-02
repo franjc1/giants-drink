@@ -1,0 +1,143 @@
+{
+  "game_id": "arrow-flash-genesis",
+  "game_name": "Arrow Flash",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "alien_presence",
+      "visual_form": "hostile alien enemies appearing in stage scrolls",
+      "meaning": "active threat to player; indicates combat zone"
+    },
+    {
+      "signal": "single_hit_vulnerability",
+      "visual_form": "player ship destroyed on one hit (without shield)",
+      "meaning": "heightened danger state; shield absent or depleted"
+    },
+    {
+      "signal": "power_up_loss_on_death",
+      "visual_form": "weapon upgrades and helper ships disappear visually after life loss",
+      "meaning": "progression reset; return to weakened baseline state"
+    },
+    {
+      "signal": "shield_depletion",
+      "visual_form": "energy shield visual indicator (inferred) sustaining three hits before breaking",
+      "meaning": "player approaching vulnerable state; limited protection remaining"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "power_up_acquisition",
+      "visual_form": "weapon upgrades and helper ships distributed throughout levels",
+      "meaning": "momentary safety window; player gains temporary offensive/defensive advantage"
+    },
+    {
+      "signal": "helper_ships",
+      "visual_form": "smaller ships following player, copying attacks",
+      "meaning": "augmented firepower and presence; reduced isolation in combat"
+    },
+    {
+      "signal": "energy_shield",
+      "visual_form": "shield pickup item granting three-hit protection",
+      "meaning": "damage mitigation; temporary invulnerability buffer"
+    },
+    {
+      "signal": "arrow_flash_ability",
+      "visual_form": "jet form: five large forward blasts; mech form: flame engulfment + immunity frame",
+      "meaning": "player agency to clear threats or gain temporary invincibility; controlled reset moment"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "transformable fighter-mecha prototype (jet/humanoid mech dual forms)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player ship follows horizontal/vertical scrolling; mech form broader firing angles; jet form streamlined forward focus"
+    },
+    {
+      "faction": "alien_invaders",
+      "color_identity": null,
+      "symbol_or_sigil": "generic hostile aliens (design details not documented)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "appear throughout scrolling stages; positioned as environmental threats to humanity"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_alien_invasion",
+      "visual_manifestation": "alien enemies populate scrolling stages; protagonist required to pilot transformable mecha",
+      "behavioral_manifestation": "player must transition between jet and mech forms to adapt combat approach; enemies attack in waves"
+    },
+    {
+      "world_state": "player_powered_state",
+      "visual_manifestation": "weapon upgrades visible; helper ships follow in formation (mech) or snakelike pattern (jet)",
+      "behavioral_manifestation": "jet form: faster horizontal flight, forward-intensive fire; mech form: faster vertical speed, wider angles, homing missiles"
+    },
+    {
+      "world_state": "player_vulnerable_state",
+      "visual_manifestation": "basic shot only; no helper ships; no shield indicator",
+      "behavioral_manifestation": "single-hit destruction; reduced offensive output; slower maneuverability"
+    },
+    {
+      "world_state": "form_transformation",
+      "visual_manifestation": "mecha shifts between humanoid and fighter-jet appearance",
+      "behavioral_manifestation": "weapon change, movement pattern change, helper ship positioning change, tactical implications (homing vs. direct fire)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "protagonist_backstory_via_object",
+      "example": "player ship is prototype transformable fighter-mecha left from protagonist Zana Keene's grandfather; inheritance establishes motivation and legacy narrative"
+    },
+    {
+      "technique": "world_threat_through_gameplay_premise",
+      "example": "alien attack on humankind is the core narrative driver; stages represent battle zones against invading force"
+    },
+    {
+      "technique": "visual_genre_reference",
+      "example": "game contains references to Gundam and Macross; mecha design language signals anime/sci-fi world context without explicit dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_ship_jet_form",
+      "state": "offensive_focused",
+      "behavior": "shoots forward intensely; flies faster horizontally; helper ships follow in snakelike pattern"
+    },
+    {
+      "entity": "player_ship_mech_form",
+      "state": "defensive_adaptive",
+      "behavior": "wider shooting angle (sometimes backwards with upgrades); faster vertical speed; helper ships in fixed formation; missiles home on enemies"
+    },
+    {
+      "entity": "arrow_flash_ability_jet",
+      "state": "emergency_offensive",
+      "behavior": "fires five large blasts forward; limited uses (Stock mode) or charged usage (Charge mode)"
+    },
+    {
+      "entity": "arrow_flash_ability_mech",
+      "state": "emergency_defensive",
+      "behavior": "engulfs in flame; grants temporary invulnerability; limited or charged based on mode"
+    },
+    {
+      "entity": "alien_enemies",
+      "state": "active_invasion",
+      "behavior": "populate stages in waves; attack player across scrolling environment; threat intensifies without power-ups"
+    }
+  ],
+  "notes": "Arrow Flash communicates world-state primarily through form-switching mechanics and power-up availability rather than explicit visual narrative. The transformable mecha serves dual purpose: mechanical gameplay differentiation and faction identity signal (humanity's technological response to alien threat). Single-hit vulnerability and power-up loss on death create tension cycles visually; the Arrow Flash ability provides controlled reset moments. Environmental storytelling relies on mecha design language (Gundam/Macross references) and premise framing (alien invasion context) rather than detailed stage scenery documentation in available sources. Limited data on actual enemy visual design, color palette, or stage environmental details prevents full manifestation layer extraction.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:30:13.128Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2476,
+    "output_tokens": 1638,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

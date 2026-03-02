@@ -1,0 +1,154 @@
+{
+  "game_id": "tetris-nes",
+  "game_name": "Tetris",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising blocks approach top of playfield",
+      "visual_form": "Tetrominoes stack visually higher in the play grid; screen fills from bottom upward",
+      "meaning": "Imminent game over; player losing control of play space"
+    },
+    {
+      "signal": "Accelerating piece drop speed",
+      "visual_form": "Pieces fall faster with each level increase; visual tempo increases",
+      "meaning": "Game difficulty escalating; at level 29+ becomes 'kill screen' (unplayably fast)"
+    },
+    {
+      "signal": "Level 29+ 'kill screen' reached",
+      "visual_form": "Pieces fall at maximum speed (1 grid cell per frame); level numbers display improperly past 29",
+      "meaning": "Game approaching intentional crash point; designed endpoint where developers never expected play to continue"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared lines and high score accumulation",
+      "visual_form": "Score display in top-right corner increases; lines cleared counter increments",
+      "meaning": "Player performing well; maintaining control and efficiency"
+    },
+    {
+      "signal": "Next piece preview visible",
+      "visual_form": "Preview window shows upcoming tetromino adjacent to playfield",
+      "meaning": "Player has information advantage; can plan ahead safely"
+    },
+    {
+      "signal": "Color changes with level progression",
+      "visual_form": "Game pieces change color palette with each new level (levels 1-10 and beyond)",
+      "meaning": "Safe progression; game advancement communicates through aesthetic shift"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Soviet Union (thematic/historical)",
+      "color_identity": null,
+      "symbol_or_sigil": "Saint Basil's Cathedral",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Saint Basil's Cathedral appears prominently in title screen and ending sequences; alludes to Soviet origin of Tetris by Alexey Pajitnov"
+    },
+    {
+      "faction": "Nintendo (institutional presence)",
+      "color_identity": null,
+      "symbol_or_sigil": "Nintendo characters in B-Type endings",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Nintendo characters perform in front of cathedral after high-level B-Type completion; institutional branding through character cameos"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low levels (0-10)",
+      "visual_manifestation": "Slower piece drop speed; playable speed with normal reflexes; piece colors cycle through palette changes",
+      "behavioral_manifestation": "Player can react naturally; game reward structure emphasizes score accumulation efficiency"
+    },
+    {
+      "world_state": "Mid-game / Mid levels (11-28)",
+      "visual_manifestation": "Moderate speed increases at specific levels (13, 16, 19); playfield becomes increasingly pressured visually",
+      "behavioral_manifestation": "Player must develop technical skill; speed plateaus between increases allow mastery windows"
+    },
+    {
+      "world_state": "End-game / Level 29+ 'Kill Screen'",
+      "visual_manifestation": "Pieces fall at maximum frame-locked speed; level display becomes corrupted/improper; visual chaos",
+      "behavioral_manifestation": "Game becomes unplayable by design; modern players use novel speed techniques (rolling controller) to bypass intended endpoint; game crashes as designed endpoint"
+    },
+    {
+      "world_state": "Victory state (A-Type high score ending)",
+      "visual_manifestation": "Animated rocket launch in front of Saint Basil's Cathedral; rocket size scales with final score (bottle rocket → Buran spaceplane → UFO); cathedral lifts off at maximum score",
+      "behavioral_manifestation": "Aesthetic reward for score efficiency; visual spectacle communicates achievement magnitude"
+    },
+    {
+      "world_state": "Victory state (B-Type completion)",
+      "visual_manifestation": "Nintendo character performance in front of cathedral after clearing 25 lines",
+      "behavioral_manifestation": "Character cameo serves as institutional reward; celebratory visual closure"
+    },
+    {
+      "world_state": "Game over / Topout",
+      "visual_manifestation": "Playfield visually fills to top; blocks can no longer fall",
+      "behavioral_manifestation": "Game terminates; in competitive mode (Nintendo World Championships 1990) cannot restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cultural landmark framing",
+      "example": "Saint Basil's Cathedral as constant backdrop in title and endings explicitly signals Tetris' Soviet origin and cultural significance; transforms puzzle game into geopolitical narrative"
+    },
+    {
+      "technique": "Score-based narrative scaling",
+      "example": "Rocket launch animation grows from bottle rocket (small score) to Buran spaceplane (high score) to UFO with cathedral ascension (maximum score); score efficiency directly communicates progression narrative"
+    },
+    {
+      "technique": "Visual speed ramping as difficulty storytelling",
+      "example": "Piece drop speed acceleration tells implicit narrative of mounting pressure; level-specific color palette shifts mark temporal progression without explicit text"
+    },
+    {
+      "technique": "Character cameo endings",
+      "example": "Nintendo character appearances in B-Type victories establish institutional presence and celebrate player achievement through character recognition"
+    },
+    {
+      "technique": "Interface as diegetic information",
+      "example": "Tetromino counter panel tracks piece frequency (visual right panel showing appearance counts); next piece preview communicates game state information through UI placement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tetromino pieces",
+      "state": "Falling (normal speed levels 0-10)",
+      "behavior": "Controlled descent; player can reliably rotate and position; visual drop speed allows reaction time"
+    },
+    {
+      "entity": "Tetromino pieces",
+      "state": "Falling (accelerated speed levels 11-28)",
+      "behavior": "Faster descent with periodic speed jumps at level milestones; requires anticipatory rather than reactive play"
+    },
+    {
+      "entity": "Tetromino pieces",
+      "state": "Falling (kill screen level 29+)",
+      "behavior": "Maximum speed (1 cell per frame); falls faster than human reflexes can process; effectively uncontrollable by traditional means"
+    },
+    {
+      "entity": "Game system",
+      "state": "Approaching level 29 threshold",
+      "behavior": "Level display becomes visually corrupted; game not designed to display levels past 29; signals intentional endpoint"
+    },
+    {
+      "entity": "Game system",
+      "state": "Post level 1550 lines cleared",
+      "behavior": "Crashes due to inefficient multiplication operations; software behaves erratically; this crash is popularly considered 'beating the game'"
+    }
+  ],
+  "notes": "Tetris NES is a minimal-text game that communicates world-state entirely through visual and behavioral manifestation. The game's 'danger' is abstract (mathematical speed escalation) rather than literal threats. The Soviet/cultural framing through Saint Basil's Cathedral provides geopolitical subtext without explicit narrative. The 'kill screen' at level 29 represents intentional design closure—the developers never expected play beyond this point, making the game itself a bounded system. Modern competitive play has discovered methods to overcome this boundary, effectively rewriting the game's implicit ending. The ending animations scale with score, making the visual reward directly proportional to play efficiency. No factions compete; instead, institutional presence (Nintendo characters) is celebratory rather than adversarial. The game communicates all narrative and state information through pure visual and mechanical language.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:39:48.371Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6320,
+    "output_tokens": 1994,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

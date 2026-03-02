@@ -1,0 +1,191 @@
+{
+  "game_id": "double-dribble-nes",
+  "game_name": "Double Dribble",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Opponent possession of ball",
+      "visual_form": "Ball aura/glow in opponent team color",
+      "meaning": "Active threat to score; defensive pressure required"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "On-screen timer counting down",
+      "meaning": "Game state deterioration; must score more points before timer expires"
+    },
+    {
+      "signal": "Foul committed",
+      "visual_form": "Screen message display ('Nice steal!' opposite behavior)",
+      "meaning": "Loss of possession or opponent advances to free-throw line"
+    },
+    {
+      "signal": "Missed shot",
+      "visual_form": "Ball bounces high and far off rim; visual rebound opportunity",
+      "meaning": "Possession contested; vulnerable state requiring defensive positioning"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Player possession of ball",
+      "visual_form": "Ball aura/glow in player team color; player-controlled character highlighted",
+      "meaning": "Offensive control; opportunity to advance score"
+    },
+    {
+      "signal": "Successful steal",
+      "visual_form": "On-screen message 'Nice steal!' with ball transfer",
+      "meaning": "Transition to offense; momentum shift to player team"
+    },
+    {
+      "signal": "Successful dunk/shot",
+      "visual_form": "Cinematic slam dunk animation sequence; scoreboard update",
+      "meaning": "Points secured; positive world-state progression"
+    },
+    {
+      "signal": "Free-throw line access",
+      "visual_form": "Screen transition showing free-throw lineup with player at line",
+      "meaning": "Controlled scoring opportunity; no defensive interference"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Team",
+      "color_identity": "Primary team color (varies by match/selection)",
+      "symbol_or_sigil": "Aura/glow outline around controlled players",
+      "enemy_visual_variants": "Opponent team displays complementary color scheme",
+      "environmental_markers": "Player team color designates possession indicator; teammate positioning shown via colored auras"
+    },
+    {
+      "faction": "Opponent Team (Computer/Second Player)",
+      "color_identity": "Contrasting team color",
+      "symbol_or_sigil": "Distinct visual outline differentiating from player team",
+      "enemy_visual_variants": "Opponent players rendered in different color palette; movement patterns algorithmically distinct",
+      "environmental_markers": "Opponent team color used for ball possession aura; defensive formation indicators"
+    },
+    {
+      "faction": "Referee/Game Authority",
+      "color_identity": null,
+      "symbol_or_sigil": "Jump ball initiation; foul call system",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Court centerline; foul messaging system; free-throw line enforcement"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match initialization",
+      "visual_manifestation": "Title screen with 'The Star-Spangled Banner' theme (NES); intro sequence with stadium, palm trees, balloons, blimp with American flag",
+      "behavioral_manifestation": "Players in team formation; jump ball centerline positioning; teams separated on court halves"
+    },
+    {
+      "world_state": "Active gameplay - Player possession",
+      "visual_manifestation": "Player-controlled character highlighted with team color aura; ball visible in character's control",
+      "behavioral_manifestation": "Player can dribble, pass, shoot; teammates indicated by colored auras showing pass targets"
+    },
+    {
+      "world_state": "Active gameplay - Opponent possession",
+      "visual_manifestation": "Opponent character highlighted; ball in opponent team color aura",
+      "behavioral_manifestation": "Player controls defensive stance; can attempt steal, switch players, jump to block"
+    },
+    {
+      "world_state": "Scoring opportunity - Dunk/Shot",
+      "visual_manifestation": "Screen focus transitions to character attempting shot; if in lane moving toward basket, cinematic dunk animation sequence triggered",
+      "behavioral_manifestation": "Player must time button release at apex of jump; ring descent visual indicates timing window for free throws"
+    },
+    {
+      "world_state": "Foul state",
+      "visual_manifestation": "Screen displays foul messaging; transition to free-throw line with five characters positioned on opposing sides of lane",
+      "behavioral_manifestation": "Fouled player moved to free-throw line; five-second timer per attempt; ring visual descends toward basket"
+    },
+    {
+      "world_state": "Time expiration",
+      "visual_manifestation": "On-screen timer reaches zero; scoreboard comparison displayed",
+      "behavioral_manifestation": "If player score exceeds opponent: game continues with additional minute; if opponent score ≥ player score: game ends"
+    },
+    {
+      "world_state": "Difficulty progression",
+      "visual_manifestation": "No explicit visual indicator documented",
+      "behavioral_manifestation": "Gameplay becomes incrementally more difficult as match duration increases; opponent AI aggression/speed increases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cinematic dunk sequences",
+      "example": "When player character in lane moving toward basket executes shot button, screen transitions to animated slam dunk sequence; communicates moment of high-stakes scoring opportunity and athletic achievement"
+    },
+    {
+      "technique": "Court layout and positioning",
+      "example": "Side-scrolling court perspective shows both teams separated at opposite baskets; jump ball at centerline establishes neutral start state; free-throw line isolation removes defensive pressure to communicate control state"
+    },
+    {
+      "technique": "Aura/glow color coding",
+      "example": "Ball and teammate indicators use team-specific color palette; instantaneously communicates possession state and available pass targets without requiring text or UI elements"
+    },
+    {
+      "technique": "Character animation differentiation",
+      "example": "Each player character moves at different speeds and jumps to different heights; visual movement patterns communicate individual player stats and require learning for optimal play strategy"
+    },
+    {
+      "technique": "Introductory presentation",
+      "example": "NES intro sequence with stadium, oversized palm trees, balloons, and Konami logo blimp carrying American flag establishes American sporting context and legitimate athletic legitimacy"
+    },
+    {
+      "technique": "Sound effect and music regionalization",
+      "example": "'The Star-Spangled Banner' added to NES intro (not in FDS version); establishes American cultural context for Western audiences; corrupted voice samples ('Dubble Dibble', 'Too Slow') create unintentional iconic signature"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player-controlled character",
+      "state": "Possession (offense)",
+      "behavior": "Responds to joystick + dribble button input for movement; can pass to teammates indicated by colored auras; can shoot/dunk when in appropriate zone; movement speed and jump height character-specific"
+    },
+    {
+      "entity": "Player-controlled character",
+      "state": "Non-possession (defense)",
+      "behavior": "Can attempt steal via steal button toward ball-carrier; can switch player control toward preferred teammate via pass button; can jump to block opposing shots when positioned near shot-taker"
+    },
+    {
+      "entity": "Teammate characters",
+      "state": "Off-ball",
+      "behavior": "Indicated by colored auras showing pass availability; move in support formations based on ball position; can receive passes when targeted by player via joystick direction + pass button"
+    },
+    {
+      "entity": "Opponent team characters",
+      "state": "Possession (offense)",
+      "behavior": "Move with varying speeds based on individual stats; attempt shots; execute dunks; trigger foul system if contact with player occurs during defensive play"
+    },
+    {
+      "entity": "Opponent team characters",
+      "state": "Non-possession (defense)",
+      "behavior": "Attempt to block player shots; reposition defensively; can foul player character during steal attempts or defensive contact"
+    },
+    {
+      "entity": "Basketball",
+      "state": "In possession",
+      "visual_tell": "Aura glow in team color (player or opponent); attached to character control; shadow visible on court floor",
+      "behavior": "Follows character movement when dribbled; transfers on pass execution; follows trajectory on shot attempt; bounces visually off rim on missed shot"
+    },
+    {
+      "entity": "Basketball",
+      "state": "Free/Rebound state",
+      "visual_tell": "Shadow visible on court; elevated above rim on missed shot",
+      "behavior": "Falls with gravity; available for rebound attempt by character positioned beneath shadow pressing shot button"
+    }
+  ],
+  "notes": "Double Dribble communicates game state primarily through color-coded auras (team possession indicator), cinematic animation sequences (dunk moments, free-throw transitions), character-specific movement speeds (difficulty/stat communication), and on-screen messaging ('Nice steal!'). The game lacks explicit danger/safety UI indicators; instead, state is communicated through possession aura color, timer visibility, and behavioral state changes. Regional variants (NES 'Star-Spangled Banner', intro stadium redesign, Konami logo balloon American flag addition) establish cultural/national context without affecting core manifestation mechanics. Corrupted DPCM audio samples create unintentional signature audio identity independent of visual design.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:22:19.298Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4280,
+    "output_tokens": 2433,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

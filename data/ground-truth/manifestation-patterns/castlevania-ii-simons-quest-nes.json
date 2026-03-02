@@ -1,0 +1,171 @@
+{
+  "game_id": "castlevania-ii-simons-quest-nes",
+  "game_name": "Castlevania II: Simon's Quest",
+  "platform": "nes",
+  "paradigm": "action role-playing platformer",
+  "danger_signals": [
+    {
+      "signal": "Nightfall/darkness transition",
+      "visual_form": "Screen darkens, day/night cycle visual shift",
+      "meaning": "Enemies become stronger, more aggressive, deal increased damage; villagers replaced by hostile zombies"
+    },
+    {
+      "signal": "Enemy type escalation",
+      "visual_form": "Stronger enemy sprites appear in same locations",
+      "meaning": "Nighttime enemies are more dangerous variants of daytime counterparts; visual distinction indicates threat level change"
+    },
+    {
+      "signal": "Zombie presence in villages",
+      "visual_form": "Zombie sprites occupying merchant/villager locations",
+      "meaning": "Cannot access safe services (merchants, information); environmental corruption indicates danger zone"
+    },
+    {
+      "signal": "Mansion architecture",
+      "visual_form": "Distinct mansion tileset with ornate, decrepit visuals",
+      "meaning": "Danger area containing puzzle challenges and hostile enemy variants (e.g., mansion-specific 'Franken' enemy)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Daytime presence",
+      "visual_form": "Bright screen palette, day cycle visual",
+      "meaning": "Weaker enemies; safer to explore and gather resources (hearts)"
+    },
+    {
+      "signal": "Village locations with NPCs visible",
+      "visual_form": "Villager sprites present in town areas",
+      "meaning": "Safe zone; can access merchants, receive information, obtain items and clues"
+    },
+    {
+      "signal": "Merchant presence",
+      "visual_form": "NPC merchant sprites in specific locations",
+      "meaning": "Safe transaction point; can purchase whips, items, magical weapons for progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Simon Belmont (Protagonist/Vampire Hunter)",
+      "color_identity": null,
+      "symbol_or_sigil": "Whip weapon, holy items (Holy Water, Magic Cross)",
+      "enemy_visual_variants": "Simon fights standard enemies and boss-variant enemy types",
+      "environmental_markers": "Villages where NPCs aid Simon; mansions where Dracula's body parts are hidden"
+    },
+    {
+      "faction": "Dracula's Forces (Antagonist/Undead)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dracula's body parts (Rib, Eye, Heart, etc.); undead/zombie visual theme",
+      "enemy_visual_variants": "Daytime zombies (weaker), nighttime zombies (stronger); mansion-specific 'Franken' variant; boss encounters",
+      "environmental_markers": "Five mansions as strongholds; Dracula's castle ruins as final location; graveyards"
+    },
+    {
+      "faction": "Village NPCs (Neutral/Misleading)",
+      "color_identity": null,
+      "symbol_or_sigil": "Human NPC sprites; dialogue-based interaction",
+      "enemy_visual_variants": "Replaced by zombies at night (corrupted state)",
+      "environmental_markers": "Villages throughout the game world; only accessible during daytime"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Daytime",
+      "visual_manifestation": "Bright, lighter screen palette; visible NPCs in villages; weaker enemy sprites present",
+      "behavioral_manifestation": "Enemies are less aggressive and deal reduced damage; villagers offer dialogue (though often misleading); merchants available for transactions; safer exploration window"
+    },
+    {
+      "world_state": "Nighttime",
+      "visual_manifestation": "Dark, dimmed screen palette; zombies replace villagers in towns; stronger enemy sprite variants appear",
+      "behavioral_manifestation": "Enemies gain strength and increased damage output; villagers unavailable; merchants inaccessible; higher heart drops from defeated enemies; player must navigate hostile environment"
+    },
+    {
+      "world_state": "Curse active on Simon",
+      "visual_manifestation": "Game mechanics reflect time pressure (cycling day/night); multiple possible endings based on completion speed",
+      "behavioral_manifestation": "Player must complete objective within time limit (8 game days for best ending); slower completion results in fatal injury endings; curse mechanically manifests as temporal constraint"
+    },
+    {
+      "world_state": "Dracula's body parts collected",
+      "visual_manifestation": "Inventory items representing five body parts (Rib, Eye, Heart, Nail, Ring) plus Magic Cross",
+      "behavioral_manifestation": "Collected parts provide gameplay benefits (e.g., Dracula's Rib blocks projectiles); final collection allows passage to Dracula's castle blockade removal"
+    },
+    {
+      "world_state": "Mansion exploration",
+      "visual_manifestation": "Distinct mansion tileset distinct from village/outdoor environments; ornate, decrepit aesthetic",
+      "behavioral_manifestation": "Contains puzzle-solving requirements; houses specific enemy types; guards Dracula body parts as progression gates"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Day/night cycle as narrative mechanic",
+      "example": "Daytime shows functioning village with living NPCs; nighttime shows same locations corrupted by undead, visually communicating Dracula's supernatural influence over the land"
+    },
+    {
+      "technique": "NPC dialogue (intentionally misleading)",
+      "example": "Villagers provide cryptic or false clues about item locations and progression; game design choice embeds unreliability into world narrative—civilization is compromised by curse"
+    },
+    {
+      "technique": "Enemy type variation by location and time",
+      "example": "Same outdoor areas contain weak zombies during day, strong variants at night; visual escalation communicates danger progression and encourages strategic timing of exploration"
+    },
+    {
+      "technique": "Mansion architecture as progression gate",
+      "example": "Five distinct mansions house Dracula's body parts; architectural distinctness from villages visually marks them as dangerous, corrupted sanctums requiring specific items to traverse"
+    },
+    {
+      "technique": "Item collection as curse remedy",
+      "example": "Collecting five body parts and Magic Cross creates visual inventory manifestation; symbolic reassembly of Dracula communicates Simon's burden and the desperate nature of curse-breaking"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Daytime enemy (outdoor)",
+      "state": "Active during day cycle",
+      "behavior": "Weaker attack patterns; lower damage output; drop fewer hearts on defeat"
+    },
+    {
+      "entity": "Nighttime enemy (outdoor)",
+      "state": "Active during night cycle",
+      "behavior": "Stronger attack patterns; increased damage; higher heart drops; visually distinct sprite variant"
+    },
+    {
+      "entity": "Zombie (village, nighttime)",
+      "state": "Replaces villager at night",
+      "behavior": "Hostile; prevents NPC interaction; indicates location corruption; implies villager transformation or death"
+    },
+    {
+      "entity": "Mansion enemy ('Franken')",
+      "state": "Exclusive to mansion interiors",
+      "behavior": "Concept art indicates: walks toward player; causes ground-shaking effect; involves collapse mechanic—more dangerous than outdoor variants"
+    },
+    {
+      "entity": "Simon Belmont (player character)",
+      "state": "Cursed throughout game",
+      "behavior": "Must collect specific items to progress; time-constrained completion (8 days for best outcome); uses whip and magical weapons; gains experience/power through heart collection"
+    },
+    {
+      "entity": "Village NPC",
+      "state": "Daytime only",
+      "behavior": "Offers dialogue (often misleading); some provide actual clues; available only before nightfall; replaced by zombies at dusk"
+    },
+    {
+      "entity": "Merchant NPC",
+      "state": "Daytime availability",
+      "behavior": "Sells items, whips, magical weapons; accepts hearts as currency; only transacts during daylight hours; inaccessible at night"
+    }
+  ],
+  "notes": "Castlevania II introduces world-state visualization primarily through day/night cycle mechanics. Danger signals are communicated via palette shifts, enemy sprite swapping, and NPC replacement. The game's nonlinear open-world design requires visual distinction between safe (villages, daytime) and dangerous (outdoors at night, mansions) zones. Faction identity is implicit rather than explicit: Simon opposes Dracula's undead forces, which manifest visually through zombie enemies and corrupted locations. The curse mechanic is communicated through time pressure rather than visual affliction. Environmental storytelling relies heavily on NPC dialogue (intentionally unreliable) and location-based visual design. Unused content suggests originally planned sixth Dracula body part (fangs) and mansion-specific enemy variant, indicating design iteration in danger signal development.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:16:58.168Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6654,
+    "output_tokens": 2281,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

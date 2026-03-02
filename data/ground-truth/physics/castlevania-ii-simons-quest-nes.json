@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "game": "Castlevania II: Simon's Quest",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "Wikipedia — Castlevania II: Simon's Quest",
+        "url": "https://en.wikipedia.org/wiki/Castlevania_II:_Simon's_Quest",
+        "notes": "Day/night cycle, town NPCs, false clues documented."
+      },
+      {
+        "name": "Speedrun.com — Castlevania II",
+        "url": "https://www.speedrun.com/cv2",
+        "notes": "Speedrun community mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Castlevania II is a massive departure from CV1 — Konami tried an open-world RPG/action hybrid.",
+      "NOT a linear level game. Features connected towns, NPCs, day/night cycle, and item-based puzzle progression.",
+      "INFAMOUS DESIGN: Some NPCs in towns give FALSE information. Players could not complete the game honestly without a guide.",
+      "Day/Night cycle: daytime — safe travel and shopping. Nighttime — enemies swarm, towns become dangerous.",
+      "Kneel by the red tornado (or any red orb) to be transported — an unintuitive mechanic with no in-game explanation.",
+      "Simon's movement feels similar to CV1 but the level design is non-linear and exploration-based.",
+      "Often criticized for opacity but praised for ambition — a Metroidvania prototype from 1988."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "simon_physics": {
+    "_note": "Similar physics to CV1 but in a non-linear world structure.",
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Approximate Konami NES movement. VERIFY from ROM."
+    },
+    "jump": {
+      "type": "committed_fixed_arc",
+      "height_px_approx": 48,
+      "air_control": "none",
+      "variable_height": false,
+      "confidence": "medium",
+      "notes": "Same committed arc as CV1 — no air control. Jump direction is determined at takeoff."
+    },
+    "whip": {
+      "description": "Simon's Vampire Killer whip. Same mechanic as CV1.",
+      "notes": [
+        "Whip upgrades available: Leather Whip (start), Thorn Whip, Chain Whip, Morning Star, Flame Whip.",
+        "Higher-level whips have more reach and damage.",
+        "Kneel while whipping to hit low enemies."
+      ]
+    },
+    "stair_movement": {
+      "description": "Stairs traversal similar to CV1 — diagonal movement up/down stairs.",
+      "notes": "Same stair system as CV1."
+    }
+  },
+
+  "day_night_cycle": {
+    "_note": "A key system unique to CV2 in the Castlevania series.",
+    "description": "Time passes as the player moves through the world. The cycle shifts between day and night.",
+    "day": {
+      "description": "Towns are safe. NPCs are present and can be spoken to. Enemies in the world are manageable.",
+      "notes": "Daytime is the 'safe' state for exploration and item acquisition."
+    },
+    "night": {
+      "description": "Towns are dangerous — random enemy spawns in the streets. World enemies are more aggressive.",
+      "transition": "Screen fades, music changes, enemies respawn everywhere including towns.",
+      "notes": [
+        "Night transitions happen at fixed intervals, not player-triggered.",
+        "The danger of nighttime creates urgency to complete travel or reach safety before the transition.",
+        "Some doors/areas may only be accessible at specific times (VERIFY)."
+      ]
+    },
+    "confidence": "high"
+  },
+
+  "npcs_and_information": {
+    "_note": "Famous/infamous for NPCs who give FALSE information.",
+    "true_info_npcs": "Some NPCs give genuine hints about progression and item locations.",
+    "false_info_npcs": {
+      "description": "Some NPCs deliberately give incorrect information — false puzzle solutions.",
+      "famous_example": "Multiple NPCs give wrong directions. The 'kneel at the tornado' mechanic was reportedly not explained correctly by any NPC.",
+      "notes": [
+        "In the NES era, Nintendo Power published a guide — without it, many players were stuck.",
+        "The false NPC information is considered a major design flaw by modern standards.",
+        "Creates an environment of information distrust — players can't take NPC dialogue at face value."
+      ]
+    },
+    "confidence": "high"
+  },
+
+  "items_and_progression": {
+    "_note": "CV2 has a Metroidvania-style progression where items open new areas.",
+    "hearts": {
+      "description": "Used as currency AND combat sub-weapon ammo (same as CV1 for sub-weapons, but CV2 uses them for purchases too).",
+      "notes": "Dual purpose creates resource tension between combat and shopping."
+    },
+    "dracula_parts": {
+      "description": "Dracula's body parts are the key items — must collect all 5 to defeat Dracula.",
+      "parts": ["Rib", "Heart", "Eye", "Nail", "Ring"],
+      "notes": "These are the MacGuffins of the game — the progression motivation."
+    },
+    "sub_weapons": [
+      "Holy Water — thrown arc, creates fire pool on contact (same as CV1)",
+      "Dagger — forward throw",
+      "Laurels — temporary invincibility",
+      "Garlic — summons NPCs when used in specific locations (opens hidden events)"
+    ]
+  },
+
+  "transportation": {
+    "tornado_mechanic": {
+      "description": "Red tornado objects appear at certain screen positions. Kneeling in front of them transports Simon to new areas.",
+      "notes": [
+        "This was one of the most confusing mechanics in CV2 — no clear in-game explanation.",
+        "Required kneeling (hold down) near the tornado for several seconds.",
+        "This specific mechanic contributed to the game's reputation for inscrutability."
+      ]
+    },
+    "ferry_man": {
+      "description": "A ferryman moves Simon across bodies of water.",
+      "notes": "Passive transportation — Simon just waits on the ferry."
+    }
+  },
+
+  "endings": {
+    "description": "Three different endings based on time taken to complete the game (fast, medium, slow).",
+    "notes": "The multiple endings were a notable feature for 1988 — different outcomes for efficiency vs exploration."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Castlevania II is one of the earliest examples of an action game trying to be an RPG — information gathering, NPC dialogue, and item-based progress gates were novel in an action context. The ambition was right; the execution (false NPC info, unexplained tornado mechanic) was poor. But the concept is the seed of Metroidvania.",
+    "The false NPC information is historically significant as a design lesson: intentional misdirection from characters who appear trustworthy destroys the player's ability to trust the game's feedback. Once one NPC is wrong, all NPCs are suspect. The lie detection mechanic in Giants Drink must account for this dynamic.",
+    "The day/night cycle creates environmental urgency without gameplay mechanics changing — it's a social/visual pressure system. The visual and audio transition to night is the stress, not additional enemy damage numbers. Atmosphere as mechanical pressure.",
+    "CV2's three-ending structure based on completion time predates 'efficiency as reward' mechanics that became common later. The player who completes the game faster gets a better narrative outcome — this is a direct design argument that mastery deserves recognition.",
+    "The dual purpose of hearts (combat resource AND currency) creates constant resource pressure. Every purchase depletes combat capability, and every combat depletes purchasing power. This is an elegant resource-scarcity design from 1988 that modern games recreate deliberately."
+  ]
+}

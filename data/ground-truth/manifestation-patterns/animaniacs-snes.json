@@ -1,0 +1,177 @@
+{
+  "game_id": "animaniacs-snes",
+  "game_name": "Animaniacs",
+  "platform": "SNES",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy robots",
+      "visual_form": "Small robots with white blockheads, red bodies, and yellow appendages",
+      "meaning": "Minions of Pinky and the Brain; direct threats to player progression"
+    },
+    {
+      "signal": "Ralph the Security Guard",
+      "visual_form": "Distinct character model (appears in test levels)",
+      "meaning": "Capture threat; defeated characters must be rescued"
+    },
+    {
+      "signal": "Harmful objects",
+      "visual_form": "Environmental hazards requiring specific interaction to defeat",
+      "meaning": "Stage-specific dangers that require character-specific abilities or timing"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Larger enemy forms at end of stages",
+      "meaning": "Stage completion gates; must be defeated to advance"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items",
+      "visual_form": "Ice cream and sweets collectibles",
+      "meaning": "Health restoration (Genesis/Game Boy versions); indicates safe pickup zones"
+    },
+    {
+      "signal": "Coins",
+      "visual_form": "Silver and golden coins (noted in test levels)",
+      "meaning": "Slot machine activation; grants power-ups including invincibility and character revival"
+    },
+    {
+      "signal": "Script pages",
+      "visual_form": "Collectible objects hidden throughout stages",
+      "meaning": "Primary objective markers; hidden in safe or hard-to-reach areas"
+    },
+    {
+      "signal": "Studio map screen",
+      "visual_form": "Hub level visualization",
+      "meaning": "Safe navigation zone for stage selection"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Warner Siblings (protagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Warner Bros. studio property/branding",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Warner Bros. studio lot; various film set parodies"
+    },
+    {
+      "faction": "Pinky and the Brain (antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Small robot minions with white/red/yellow color scheme",
+      "enemy_visual_variants": "Robot design consistency marks their organization; boss forms at stage ends",
+      "environmental_markers": "SNES: stealing script pages from development; Genesis: attempting memorabilia theft"
+    },
+    {
+      "faction": "Warner Bros. Studio",
+      "color_identity": null,
+      "symbol_or_sigil": "Studio infrastructure, film sets, CEO authority",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Multiple film genre parody stages (Western, Science Fiction, Action Movie, etc.)"
+    },
+    {
+      "faction": "Security/Authority (Ralph)",
+      "color_identity": null,
+      "symbol_or_sigil": "Security Guard character model",
+      "enemy_visual_variants": "Chase mechanic variant in test level 2",
+      "environmental_markers": "Studio enforcement; appears in SNES version as capture threat"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / incomplete script collection",
+      "visual_manifestation": "Studio lot with accessible main stages; script pages scattered visibly",
+      "behavioral_manifestation": "Pinky and the Brain remain in background antagonist role; minions populate stages"
+    },
+    {
+      "world_state": "Mid-game / partial script collection",
+      "visual_manifestation": "Multiple stages unlock through completion; boss designs reflect film genre parodies",
+      "behavioral_manifestation": "Characters can be swapped freely; rescue mechanics activate when characters captured"
+    },
+    {
+      "world_state": "Late game / high script collection (SNES)",
+      "visual_manifestation": "Editing Room stage unlocks (final area)",
+      "behavioral_manifestation": "Boss rush gauntlet triggers; all previous bosses reappear; final Pinky/Brain confrontation"
+    },
+    {
+      "world_state": "Character defeat / capture",
+      "visual_manifestation": "Defeated character removed from active party; rescue stage appears",
+      "behavioral_manifestation": "Remaining characters must complete rescue objective to restore party; lives system replaced by capture mechanics"
+    },
+    {
+      "world_state": "Coin accumulation threshold met",
+      "visual_manifestation": "Slot machine activates at bottom of screen",
+      "behavioral_manifestation": "Power-up availability (invincibility, character revival, coin gain/loss)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Film genre parody stages",
+      "example": "Different movie sets represent thematic dangers: Western, Science Fiction, Action Movie, etc. Visual design communicates stage identity and anticipated hazard types"
+    },
+    {
+      "technique": "Hidden script page placement",
+      "example": "Pages positioned in hard-to-reach areas and revealed through object interaction; rewards exploration and character ability switching"
+    },
+    {
+      "technique": "Character ability gating",
+      "example": "Yakko's paddleball stuns, Wakko's mallet breaks objects/lights fuses, Dot's kiss triggers character actions; environment requires specific character to progress, communicating puzzle design visually"
+    },
+    {
+      "technique": "Studio lot hub organization",
+      "visual_manifestation": "Central map with stage nodes; visual layout communicates progression structure and stage availability"
+    },
+    {
+      "technique": "Character health communication (Genesis/GB)",
+      "example": "Character faces on HUD change from smiling (healthy) to tired/unhappy/weak (injured); food pickups immediately restore visual state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Warner Siblings (Yakko, Wakko, Dot)",
+      "state": "Healthy / Normal operation",
+      "behavior": "Freely navigable with character-specific mechanics; can stack to reach higher platforms"
+    },
+    {
+      "entity": "Warner Siblings (Yakko, Wakko, Dot)",
+      "state": "Defeated/Captured",
+      "behavior": "Removed from party; rescue stage initiated; remaining characters must complete rescue objective"
+    },
+    {
+      "entity": "Pinky and the Brain minion robots",
+      "state": "Patrol/Idle",
+      "behavior": "Present throughout stages; collision causes character defeat; defeated by environmental object interaction"
+    },
+    {
+      "entity": "Ralph the Security Guard",
+      "state": "Active pursuit",
+      "behavior": "Chases characters; capture results in character removal; cannot be defeated (TEST 2/3 behavior)"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Stage completion gate",
+      "behavior": "Appear at stage ends; require stage-specific object/ability interaction to defeat; reappear in Editing Room rush"
+    },
+    {
+      "entity": "Slot machine",
+      "state": "Activated (after coin threshold)",
+      "behavior": "Dispenses randomized power-ups; invincibility mode, character revival, or coin modification"
+    }
+  ],
+  "notes": "Animaniacs SNES focuses on script collection over pure platforming (distinct from Genesis version). Visual communication relies heavily on parody film aesthetics for thematic stage identity, character-ability-locked progression, and state-change feedback (character defeat = rescue mission trigger). The small robot minion design with white/red/yellow coloring serves as consistent visual faction marker. No traditional health bars in SNES version; state communicated through character capture mechanics and slot machine activation thresholds.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:06:17.585Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4591,
+    "output_tokens": 1985,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

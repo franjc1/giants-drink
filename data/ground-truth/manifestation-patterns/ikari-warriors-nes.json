@@ -1,0 +1,175 @@
+{
+  "game_id": "ikari-warriors-nes",
+  "game_name": "Ikari Warriors",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "enemy_soldiers_presence",
+      "visual_form": "animated sprite characters moving toward player",
+      "meaning": "active hostile combatants requiring engagement or avoidance"
+    },
+    {
+      "signal": "tank_units",
+      "visual_form": "armored vehicle sprites with turrets",
+      "meaning": "heavily-armed threats with superior firepower; player must use vehicles or grenades"
+    },
+    {
+      "signal": "helicopter_enemies",
+      "visual_form": "airborne sprites with rotors",
+      "meaning": "ranged threats from above; indicate aerial assault phase"
+    },
+    {
+      "signal": "call_for_fire_tracking",
+      "visual_form": "red spot appearing below player character on screen",
+      "meaning": "computer-controlled suppressive fire; player is stalling and must advance upward"
+    },
+    {
+      "signal": "tank_fuel_depletion",
+      "visual_form": "vehicle sprite damage state or on-screen fuel indicator",
+      "meaning": "commandeered tank losing protection; player must exit before explosion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "powerup_items",
+      "visual_form": "collectible sprites distributed along level path",
+      "meaning": "temporary advantage or weapon enhancement; indicates safe passage zones"
+    },
+    {
+      "signal": "allied_tank_commandeering",
+      "visual_form": "player sprite entering enemy tank sprite",
+      "meaning": "temporary invulnerability from enemy bullets; shift to vehicle combat mode"
+    },
+    {
+      "signal": "helicopter_acquisition",
+      "visual_form": "player sprite occupying helicopter sprite",
+      "meaning": "mobile sanctuary with flight capability; enables water crossing and area control"
+    },
+    {
+      "signal": "upward_screen_progression",
+      "visual_form": "camera scroll moving toward village of Ikari at top of screen",
+      "meaning": "advancement toward objective; mission progress indicator"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player_Commandos",
+      "color_identity": "red (Colonel Ralf Jones) / blue (Second Lieutenant Clark Still)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "player sprites armed with machine gun (right hand) and grenades (left hand); visible weapon usage asymmetry"
+    },
+    {
+      "faction": "Enemy_Military_Force",
+      "color_identity": null,
+      "symbol_or_sigil": "swastika present in final room, indicating neo-Nazi enemies",
+      "enemy_visual_variants": "soldier sprites, tank sprites, helicopter sprites; no color differentiation documented",
+      "environmental_markers": "progression toward hostile village; enemy concentration increases toward objective"
+    },
+    {
+      "faction": "Captive_Authority",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "General Kawasaki (JP version) / Colonel Cook (US/EU version) positioned at village of Ikari; final room location signals rescue objective"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_combat_pressure_low",
+      "visual_manifestation": "sparse enemy sprite density; open movement space visible",
+      "behavioral_manifestation": "enemies advance methodically; no tracking fire yet"
+    },
+    {
+      "world_state": "mid_game_acceleration",
+      "visual_manifestation": "increased enemy sprite count; tank and helicopter appearances",
+      "behavioral_manifestation": "player must commandeer vehicles; call-for-fire tracking begins if stalling detected"
+    },
+    {
+      "world_state": "player_stalling",
+      "visual_manifestation": "red spot appears below player character on screen",
+      "behavioral_manifestation": "computer AI forces upward progression through suppressive fire; mandatory screen scroll"
+    },
+    {
+      "world_state": "vehicle_occupancy",
+      "visual_manifestation": "player sprite integrated into tank or helicopter sprite; weapon configuration changes",
+      "behavioral_manifestation": "player gains temporary invulnerability to bullets; fuel/ammo management required; vehicle damage possible from explosions"
+    },
+    {
+      "world_state": "final_objective_approach",
+      "visual_manifestation": "swastika symbol visible in final room; village of Ikari at screen top occupied by enemy forces",
+      "behavioral_manifestation": "intense enemy concentration; rescue target (named character) positioned for liberation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "objective_placement_geography",
+      "example": "village of Ikari positioned at top of screen; player must traverse upward through enemy territory to reach it; geographic direction reinforces narrative journey"
+    },
+    {
+      "technique": "enemy_faction_symbol_revelation",
+      "example": "swastika symbol appears in final room only; late-game reveal of enemy identity as neo-Nazi force; contextualizes military opposition thematically"
+    },
+    {
+      "technique": "character_color_coding",
+      "example": "red sprite (Ralf) vs. blue sprite (Clark) in two-player mode; color identity persists throughout mission; visual distinction enables player differentiation"
+    },
+    {
+      "technique": "vehicle_scarcity_narrative",
+      "example": "tanks and helicopters distributed strategically along path; player must commandeer enemy vehicles; suggests enemy superior technology, requiring tactical acquisition"
+    },
+    {
+      "technique": "named_rescue_target",
+      "example": "General Kawasaki (JP) / Colonel Cook (US/EU) named as hostage at Ikari; named character creates personal stakes; village destination becomes human liberation mission"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "normal_movement",
+      "behavior": "eight-directional movement via joystick push; independent rotary aiming via joystick rotation; enables forward movement with lateral or rear fire"
+    },
+    {
+      "entity": "player_character",
+      "state": "weapon_asymmetry",
+      "behavior": "machine gun fires from right hand; grenades thrown from left hand; no shot fires directly ahead; requires aiming rotation for full firing arc"
+    },
+    {
+      "entity": "enemy_soldier",
+      "state": "active_patrol",
+      "behavior": "advance toward player; basic attack pattern; no documented evasion AI"
+    },
+    {
+      "entity": "enemy_tank",
+      "state": "defensive_stationary",
+      "behavior": "occupies terrain; turret rotates to track player; bullets bypass grenades but not vehicle occupancy"
+    },
+    {
+      "entity": "commandeered_tank",
+      "state": "player_controlled",
+      "behavior": "bullet_immunity active; fuel management required; vehicle destruction triggers player damage unless exit executed; limited fuel supply creates time pressure"
+    },
+    {
+      "entity": "computer_ai",
+      "state": "player_stalling_detected",
+      "behavior": "initiates call-for-fire tracking (red spot appears); forces upward screen progression through suppressive fire; prevents passive play strategy"
+    }
+  ],
+  "notes": "Ikari Warriors NES communicates world-state primarily through sprite density, vehicle availability, and call-for-fire mechanics rather than environmental color shifts. The asymmetric weapon system (gun right, grenades left) creates constant aiming pressure. Neo-Nazi symbolism (swastika in final room) functions as late-game faction revelation. Character color coding (red/blue) enables cooperative identity without dialogue. The game's core manifestation tension exists between player freedom (rotary aiming, eight-direction movement) and forced progression (call-for-fire tracking). Vehicle mechanics shift threat model mid-game: bullets become irrelevant, fuel becomes critical. No documented faction-specific environmental markers exist beyond the final room Nazi symbol.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:08:33.021Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4200,
+    "output_tokens": 2051,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

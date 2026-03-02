@@ -1,0 +1,180 @@
+{
+  "game_id": "nes-play-action-football-nes",
+  "game_name": "NES Play Action Football",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "opposing_team_possession",
+      "visual_form": "ball control by opponent-colored players on field",
+      "meaning": "loss of offensive advantage; defensive vulnerability"
+    },
+    {
+      "signal": "field_position_tracking",
+      "visual_form": "isometric view showing player proximity to end zone",
+      "meaning": "distance from scoring opportunity or defensive threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "team_possession",
+      "visual_form": "ball held by player-controlled team",
+      "meaning": "offensive control; opportunity to advance"
+    },
+    {
+      "signal": "first_down_marker",
+      "visual_form": "visual progression along field",
+      "meaning": "successful advance; maintained drive momentum"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Los Angeles",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "Denver",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "San Francisco",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "Washington",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "Miami",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "New York",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "Chicago",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    },
+    {
+      "faction": "Houston",
+      "color_identity": null,
+      "symbol_or_sigil": "city name display",
+      "enemy_visual_variants": "visual team uniform differentiation on field",
+      "environmental_markers": "field-based team identification through player sprites"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "game_in_progress",
+      "visual_manifestation": "isometric field view with all players visible; ball position central to action",
+      "behavioral_manifestation": "continuous player movement; play execution in real-time"
+    },
+    {
+      "world_state": "play_selection_phase",
+      "visual_manifestation": "play card system for 4-player mode; hidden selection interface to prevent opponent viewing",
+      "behavioral_manifestation": "players point to play card without revealing selection on-screen"
+    },
+    {
+      "world_state": "pre_snap",
+      "visual_manifestation": "lined-up players on field; audio cue 'Ready! Set! Hut, hut..'",
+      "behavioral_manifestation": "static formation; awaiting play initiation"
+    },
+    {
+      "world_state": "first_down_achieved",
+      "visual_manifestation": "field position advancement; audio cue 'First down!'",
+      "behavioral_manifestation": "continued offensive drive; marker reset"
+    },
+    {
+      "world_state": "touchdown_scored",
+      "visual_manifestation": "player in end zone; audio cue 'Touchdown!'",
+      "behavioral_manifestation": "score increment; return to play selection"
+    },
+    {
+      "world_state": "game_conclusion",
+      "visual_manifestation": "Nester (Nintendo Power mascot) appearance as commentator",
+      "behavioral_manifestation": "announcement of winner/loser; game termination"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "isometric perspective 3D visualization",
+      "example": "angled field view creates spatial depth perception; allows display of all 22 players simultaneously; differentiates player positions and distances"
+    },
+    {
+      "technique": "team uniform differentiation",
+      "example": "distinct sprite coloring for each of eight teams; enables quick visual identification of possession and alliance on field"
+    },
+    {
+      "technique": "audio-visual synchronization",
+      "example": "primitive digitized voice callouts ('Touchdown!', 'First down!', 'Ready! Set! Hut, hut..') reinforce play state and world progression"
+    },
+    {
+      "technique": "mascot commentary",
+      "example": "Nester character appearance at game end provides meta-narrative closure and Nintendo branding integration"
+    },
+    {
+      "technique": "player depth chart representation",
+      "example": "surname, numbers, and position-specific visual indicators communicate roster composition and player roles"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "offensive_team",
+      "state": "possession",
+      "behavior": "active movement toward opponent end zone; formation-based coordination"
+    },
+    {
+      "entity": "defensive_team",
+      "state": "possession_loss",
+      "behavior": "reactive positioning; attempt to intercept or tackle ball carrier"
+    },
+    {
+      "entity": "ball_carrier",
+      "state": "evasion",
+      "behavior": "directional movement; avoidance of defensive players"
+    },
+    {
+      "entity": "referee_system",
+      "state": "enforcement",
+      "behavior": "collision detection management; play-state transition triggers"
+    }
+  ],
+  "notes": "NES Play Action Football uses city-based faction identification (Los Angeles, Denver, etc.) rather than traditional team names due to licensing constraints with the NFL Players Association. The 1989 NFL season player rosters formed the basis for roster composition. Virtual Console re-release replaced player names with fictional alternatives but retained graphics and stats. The isometric perspective was technically innovative for NES, enabling display of large numbers of moving entities. Disabled debug feature (Game Genie code AENNONNY) indicates collision detection was core to world-state manifestation. No color-coded faction identity documented in sources; differentiation occurs through sprite design alone.",
+  "sources_used": [
+    "tcrf - NES Play Action Football (The Cutting Room Floor)",
+    "wikipedia - NES Play Action Football"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:25:31.126Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2784,
+    "output_tokens": 2040,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

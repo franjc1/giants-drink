@@ -1,0 +1,139 @@
+{
+  "game_id": "outrun-genesis",
+  "game_name": "Out Run",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "oncoming_traffic",
+      "visual_form": "opposing vehicles on road, obscured by road curves and crests limiting sight distance",
+      "meaning": "collision hazard; player must avoid to maintain run"
+    },
+    {
+      "signal": "road_geometry_obscuration",
+      "visual_form": "curved, cresting, and dipping road segments that hide upcoming obstacles",
+      "meaning": "danger ahead is concealed; player must navigate blindly; difficulty spike mechanic"
+    },
+    {
+      "signal": "time_pressure",
+      "visual_form": "timer countdown; stages end at checkpoints where time must be renewed",
+      "meaning": "urgency state; failure to reach checkpoint within time ends run"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "checkpoint_reached",
+      "visual_form": "stage completion and time extension awarded",
+      "meaning": "player has navigated successfully; run continues; temporary relief from time pressure"
+    },
+    {
+      "signal": "wide_roads",
+      "visual_form": "expansive road design with multiple lanes and maneuvering space",
+      "meaning": "player is given agency and comfort; emphasized design element by Yu Suzuki for fun"
+    },
+    {
+      "signal": "clear_visibility_segments",
+      "visual_form": "straightaways between curved sections",
+      "meaning": "player can plan movement; temporary reduction in hidden danger"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_vehicle",
+      "color_identity": null,
+      "symbol_or_sigil": "Ferrari Testarossa convertible (photographed from real car)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "red convertible sports car; distinctive silhouette photographed and recorded with authentic engine sound"
+    },
+    {
+      "faction": "traffic_vehicles",
+      "color_identity": null,
+      "symbol_or_sigil": "generic civilian traffic (unnamed in sources)",
+      "enemy_visual_variants": "multiple vehicle types to avoid",
+      "environmental_markers": "opposing traffic on same roads; no faction identity—purely hazard entities"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_progression",
+      "visual_manifestation": "European scenic environments (Frankfurt, Monaco, Swiss Alps, French Riviera, Florence, Milan inspired locations)",
+      "behavioral_manifestation": "player navigates through initial stages with manageable traffic density; each stage ends with checkpoint fork offering route choice"
+    },
+    {
+      "world_state": "stage_completion",
+      "visual_manifestation": "checkpoint reached; time extension granted; branching path appears near stage end",
+      "behavioral_manifestation": "player selects one of five possible final destinations; each destination has distinct ending scene"
+    },
+    {
+      "world_state": "destination_reached_success",
+      "visual_manifestation": "ending scene displays outcome (trophy awarded, car presented)",
+      "behavioral_manifestation": "run concludes; destination represents difficulty level achieved"
+    },
+    {
+      "world_state": "destination_reached_failure",
+      "visual_manifestation": "ending scene shows negative outcome (Ferrari breaking down)",
+      "behavioral_manifestation": "run ends; consequence for difficulty selection or performance"
+    },
+    {
+      "world_state": "time_critical",
+      "visual_manifestation": "timer approaching zero before checkpoint",
+      "behavioral_manifestation": "player must prioritize speed over safety; increased collision risk as desperation rises"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "geographic_progression",
+      "example": "stages progress through European locations scouted by designer Yu Suzuki; environments communicate leisurely continental driving experience inspired by 'The Cannonball Run' (1981)"
+    },
+    {
+      "technique": "vehicle_authenticity",
+      "example": "Ferrari Testarossa photographed from every angle; engine sound recorded authentically; vehicle communicates luxury, speed, and aspirational lifestyle"
+    },
+    {
+      "technique": "ending_scene_differentiation",
+      "example": "five different destinations each with unique concluding scene; outcomes range from trophy to vehicle breakdown; communicates player achievement and difficulty navigation"
+    },
+    {
+      "technique": "road_design_narrative",
+      "visual_form": "wide roads, buildings visible, curves and crests create dynamic landscape",
+      "example": "expansive road design with architectural elements communicates European touring aesthetic; hidden obstacles reinforce challenge without explicit warning"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_ferrari",
+      "state": "navigating_safely",
+      "behavior": "maintains speed, avoids traffic, reaches checkpoints on time"
+    },
+    {
+      "entity": "player_ferrari",
+      "state": "time_critical",
+      "behavior": "accelerates; takes higher-risk routes; collision likelihood increases"
+    },
+    {
+      "entity": "player_ferrari",
+      "state": "collision_imminent",
+      "behavior": "traffic is visible on converging trajectory; player must brake or swerve (game does not feature car explosion mechanics per Suzuki's design philosophy)"
+    },
+    {
+      "entity": "traffic_vehicles",
+      "state": "active_hazard",
+      "behavior": "appears on road unpredictably due to sight-distance limitations; maintains opposing or crossing trajectory"
+    }
+  ],
+  "notes": "Out Run uses road geometry as primary danger communication mechanism. Sight distance limitation (camera placed near ground, simulating Ferrari driver position) creates emergent tension without explicit danger indicators. Safety is communicated through wide road design and checkpoint rewards. The game lacks faction politics entirely—all opposition is environmental hazard (traffic) rather than adversarial faction. Five destination endings serve as difficulty/skill communication rather than narrative faction choice. Designer Yu Suzuki intentionally avoided explosive collision mechanics to emphasize driving enjoyment and player agency.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:35:04.202Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3353,
+    "output_tokens": 1533,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "game_id": "sonic-2-genesis",
+  "game_name": "Sonic the Hedgehog 2",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Spikes",
+      "visual_form": "Pointed metallic obstacles scattered in level geometry",
+      "meaning": "Instant damage on contact; one-hit kill if no rings collected"
+    },
+    {
+      "signal": "Bottomless pits",
+      "visual_form": "Dark void below walkable surfaces, often with visual separation/drop-off edge",
+      "meaning": "Instant level failure and life loss if fallen into"
+    },
+    {
+      "signal": "Water/drowning hazard",
+      "visual_form": "Blue liquid environments in zones like Aquatic Ruin; visual submersion of player",
+      "meaning": "Drowning timer; player loses air and dies if not surfaced within time limit"
+    },
+    {
+      "signal": "Robotnik's robot enemies",
+      "visual_form": "Mechanical enemies with distinct silhouettes; often colored gray/metallic with red accents or zone-specific coloring",
+      "meaning": "Hostile entities; collision causes ring loss or death if unprotected"
+    },
+    {
+      "signal": "Vertical loops and moving platforms",
+      "visual_form": "Spiraling track sections and platforms that shift position or rotate",
+      "meaning": "Hazard of momentum loss, collision with edges, or falling if platform timing is missed"
+    },
+    {
+      "signal": "Time limit expiration (10-minute threshold)",
+      "visual_form": "Timer UI element counting down; visual stress cues when near expiration",
+      "meaning": "Game over state if time runs out; pressure signal for level progression"
+    },
+    {
+      "signal": "Boss arenas",
+      "visual_form": "Distinct visual separation; zone-themed battleground with Robotnik's machine as focal point",
+      "meaning": "High-danger encounter; Robotnik attacks in themed mechanical form specific to zone"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Rings (golden)",
+      "visual_form": "Bright yellow/gold circular collectibles distributed throughout levels",
+      "meaning": "Health currency; one ring negates one hit; more rings = greater survival buffer"
+    },
+    {
+      "signal": "Shield power-up",
+      "visual_form": "Glowing shield icon item; visual aura around player when collected",
+      "meaning": "One free hit absorbed without ring loss; visual indicator of temporary invulnerability layer"
+    },
+    {
+      "signal": "Invincibility power-up",
+      "visual_form": "Star or glowing effect; player sprite wrapped in temporary visual effect",
+      "meaning": "Temporary invulnerability period; enemies cannot damage player; audio/visual cue of active state"
+    },
+    {
+      "signal": "1-up (extra life)",
+      "visual_form": "Sonic head icon or life symbol item box",
+      "meaning": "Grants additional life; extends play session before game over"
+    },
+    {
+      "signal": "Checkpoints",
+      "visual_form": "Visual marker or post in level geometry indicating save point",
+      "meaning": "Progress save; respawn location if player dies; safety anchor in level progression"
+    },
+    {
+      "signal": "Springs and launchers",
+      "visual_form": "Coiled spring or launch pad graphics; red/yellow colored mechanical objects",
+      "meaning": "Momentum boost; propels player to safety or shortcuts; enables high-speed traversal"
+    },
+    {
+      "signal": "Cleared/passed zones",
+      "visual_form": "Zone act completion screen; visual transition to next zone theme",
+      "meaning": "Progress security; advance to new environment; level threat reset"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Sonic/Player (hero)",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Sonic the Hedgehog character model; spiky silhouette; red shoes",
+      "enemy_visual_variants": "No direct variant; Sonic remains visually consistent across zones",
+      "environmental_markers": "Natural, organic zone themes (Green Hill, Aquatic Ruin, Hill Top Zone); nature-aligned aesthetics suggest protection of natural world"
+    },
+    {
+      "faction": "Tails/Miles Prower (ally sidekick)",
+      "color_identity": "Orange/yellow",
+      "symbol_or_sigil": "Fox character with two tails; can fly (tail propulsion); smaller than Sonic",
+      "enemy_visual_variants": "None; Tails is allied NPC/co-player in single-player mode",
+      "environmental_markers": "Appears alongside Sonic; indicates cooperative gameplay; two-player presence"
+    },
+    {
+      "faction": "Doctor Robotnik (antagonist)",
+      "color_identity": "Red/dark (theme color); metallic/industrial aesthetic",
+      "symbol_or_sigil": "Robotnik's flying machine; egg-shaped cockpit; rotund silhouette; goggles and mustache character design",
+      "enemy_visual_variants": "Zone-specific robot armies; mechanical enemies throughout levels reflect Robotnik's industrial/technological faction; metal coloring (gray, red, black)",
+      "environmental_markers": "Industrial, mechanical zones (Hill Top Zone, Chemical Plant Zone, Metropolis Zone); heavy machinery; technological takeover aesthetics; Death Egg space station as faction headquarters"
+    },
+    {
+      "faction": "Animal inhabitants (trapped civilians)",
+      "color_identity": "Varied (natural colors)",
+      "symbol_or_sigil": "Small animal sprites within captured robot shells; visible in boss defeats when animals are freed",
+      "enemy_visual_variants": "Enemies are animal-based robots (trapped creatures in mechanical suits); freeing animals is visual reward",
+      "environmental_markers": "Natural zone designs suggest habitats; animal presence in freed state at zone completion indicates restoration"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Robotnik occupying zone (active control)",
+      "visual_manifestation": "Zone environment displays industrial/mechanical overlay; natural elements suppressed or corrupted; Robotnik's machines visible; zone themed as 'taken over' (e.g., Chemical Plant has toxic coloring)",
+      "behavioral_manifestation": "Enemy robots patrol and attack; hazards are dense; boss machine appears at zone end; animals remain trapped in robot shells"
+    },
+    {
+      "world_state": "Zone cleared/Robotnik defeated",
+      "visual_manifestation": "Zone transitions to clean/restored visual state; mechanical elements fade or are destroyed; animals freed from robot shells; visual transition to next zone or completion screen",
+      "behavioral_manifestation": "Enemies cease spawning; boss defeated and removed from level; Robotnik flees or is shown in retreat animation; freed animals appear on screen"
+    },
+    {
+      "world_state": "Chaos Emeralds missing/Robotnik powering Death Egg",
+      "visual_manifestation": "Death Egg space station visible in background or end-game scenes; threatening presence in sky; industrial/apocalyptic tone in later zones",
+      "behavioral_manifestation": "Robotnik continues to spawn enemies; zone difficulty increases; end boss encounters escalate; final confrontation at space station"
+    },
+    {
+      "world_state": "Player collecting Chaos Emeralds (quest progress)",
+      "visual_manifestation": "Special stage access (pre-rendered 3D environments); visual reward sequences showing emerald collection; progress toward goal communicated through HUD",
+      "behavioral_manifestation": "Special stages triggered at intervals; visual 3D graphics contrast with 2D main gameplay; emerald acquisition displayed on completion screen"
+    },
+    {
+      "world_state": "Player low on health/rings near zero",
+      "visual_manifestation": "Sonic sprite may show stress animation; visual HUD emphasizes ring count (often displayed prominently); screen may flash or color shift warning",
+      "behavioral_manifestation": "Player moves cautiously; single-hit vulnerability; heightened collision awareness; risk of immediate failure state"
+    },
+    {
+      "world_state": "Time limit approaching expiration",
+      "visual_manifestation": "Timer UI element flashing red or accelerating visually; visual stress cues (screen shake, color shift); urgency conveyed through HUD design",
+      "behavioral_manifestation": "Forced player movement toward goal; rushed gameplay; avoidance of exploration; linear progression pressure"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Zone theme as narrative progression",
+      "example": "Early zones (Green Hill, Chemical Plant) represent natural world threatened by Robotnik; later zones (Metropolis, Oil Ocean, Casino Night) show increasing industrialization and environmental corruption; visual progression tells story of invasion"
+    },
+    {
+      "technique": "Trapped animals in robot shells",
+      "example": "Enemy robot sprites contain visible small animal silhouettes inside mechanical bodies; visual representation of Robotnik's enslavement; freeing animals (on boss defeat) shows player agency in liberation narrative"
+    },
+    {
+      "technique": "Death Egg space station as looming threat",
+      "example": "Large mechanical structure visible in background of later zones and cinematics; grows visually closer as player progresses; represents Robotnik's ultimate goal and end-game threat without explicit text"
+    },
+    {
+      "technique": "Zone environmental hazards reflecting faction control",
+      "example": "Chemical Plant Zone contains toxic liquid and mechanical hazards; Hill Top Zone shows volcanic/industrial corruption; Metropolis Zone displays heavy machinery; visual environment reflects Robotnik's technological dominion"
+    },
+    {
+      "technique": "Natural element transformation into hazard",
+      "example": "Water in early zones is navigable challenge; in corrupted zones becomes toxic/dangerous; visual color shift (blue → sickly green/orange) communicates environmental degradation"
+    },
+    {
+      "technique": "Boss machine design reflecting zone identity",
+      "example": "Each Robotnik encounter uses zone-specific mechanical design (aquatic-themed in Aquatic Ruin, mine-themed in Hill Top); visual cohesion between environment and threat reinforces world consistency"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sonic",
+      "state": "Normal/unprotected",
+      "behavior": "Standard run/jump/curl animations; collision causes ring scatter and audio cue; vulnerability visual feedback"
+    },
+    {
+      "entity": "Sonic",
+      "state": "Shielded (power-up active)",
+      "behavior": "Visual aura around sprite; shield absorbs one hit; shield breaks with visual effect; temporary invulnerability layer"
+    },
+    {
+      "entity": "Sonic",
+      "state": "Invincible (power-up active)",
+      "behavior": "Sprite displays glowing/star effect; rapid color cycling or shimmer animation; enemies cannot damage; audio cue confirms state"
+    },
+    {
+      "entity": "Sonic",
+      "state": "Drowning (in water without air)",
+      "behavior": "Animation shows struggle/panic; sprite colors shift or flash; countdown timer visible; visual urgency cue"
+    },
+    {
+      "entity": "Robotnik/Doctor Eggman",
+      "state": "Zone boss (active combat)",
+      "behavior": "Mechanical animation cycles; attack patterns synchronized with visual tells; machine movements telegraph incoming danger; defeat animation shows destruction/retreat"
+    },
+    {
+      "entity": "Robot enemies (minions)",
+      "state": "Patrolling/neutral",
+      "behavior": "Predictable movement patterns; visual patrol cycles; no immediate aggression animation; collision triggers damage"
+    },
+    {
+      "entity": "Robot enemies (minions)",
+      "state": "Defeated",
+      "behavior": "Explosion animation; sprite destruction visual effect; sometimes reveals trapped animal sprite; visual reward for player"
+    },
+    {
+      "entity": "Tails",
+      "state": "AI-controlled sidekick (single-player)",
+      "behavior": "Follows Sonic at offset distance; animation mirrors Sonic's movement; can assist in reaching areas; visual indicator of ally presence"
+    },
+    {
+      "entity": "Tails",
+      "state": "Player-controlled (multiplayer/select mode)",
+      "behavior": "Full independent control; separate animation cycles from Sonic; can separate from main player; distinct visual identity maintained"
+    },
+    {
+      "entity": "Trapped animals (in robot shells)",
+      "state": "Imprisoned",
+      "behavior": "Visible but immobile within robot body; no independent movement; sprite partially obscured by mechanical frame; visual captivity state"
+    },
+    {
+      "entity": "Trapped animals (after boss defeat)",
+      "state": "Freed/liberated",
+      "behavior": "Break free from robot shell animation; run or fly away with joyful animation; visual reward sequence; contributes to zone completion narrative"
+    }
+  ],
+  "notes": "Sonic 2 uses minimal text-based narrative; world-state communication is primarily visual and behavioral. Danger signals are conveyed through environmental design, enemy presence, and hazard placement rather than explicit warnings. Faction identity is established through color coding (Sonic=blue/natural, Robotnik=red/industrial) and environmental theming. The game's progression from natural to industrial zones visually narrates the story of invasion and takeover. Power-ups and collectibles use bright, distinct visuals for quick recognition during high-speed play. Boss encounters provide zone-specific visual context for Robotnik's faction through mechanical design reflecting zone themes. The freed animals mechanic provides visual reward and narrative satisfaction through liberation imagery.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:44:18.301Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5204,
+    "output_tokens": 3716,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

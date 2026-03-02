@@ -1,0 +1,172 @@
+{
+  "_meta": {
+    "game": "Ghosts 'n Goblins",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1986,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "StrategyWiki — Ghosts 'n Goblins / How to Play",
+        "url": "https://strategywiki.org/wiki/Ghosts_%27n_Goblins/How_to_play",
+        "notes": "Confirms: jump is fully committed arc (no air control), walking faster than jump traversal."
+      },
+      {
+        "name": "TASVideos — NES / Ghosts 'n Goblins",
+        "url": "https://tasvideos.org/GameResources/NES/GhostsAndGoblins",
+        "notes": "Speedrun technique documentation."
+      },
+      {
+        "name": "Data Crystal — Ghosts 'n Goblins (NES)",
+        "url": "https://datacrystal.tcrf.net/wiki/Ghosts%27n_Goblins_(NES)",
+        "notes": "RAM map supplemental."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Ghosts 'n Goblins is one of the most brutally difficult NES games — every design choice emphasizes player punishment.",
+      "Jump is a FULLY COMMITTED ARC — more restrictive than even Castlevania (no directional adjustment).",
+      "TWO-HIT KILL system: first hit strips Arthur's armor (leaves him in underwear), second hit kills.",
+      "Must complete the game TWICE to see the real ending.",
+      "Enemies respawn when Arthur walks off-screen.",
+      "Knockback on damage throws Arthur back (like Castlevania) but mid-jump damage is especially fatal.",
+      "Walk speed: community confirms walking is faster than using jumps for traversal — jump only when necessary.",
+      "No slide, no dash, no special mobility — pure methodical traversal against constant enemy pressure."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Approximate from gameplay observation. Community confirms walking is faster traversal than jumping. VERIFY against ROM."
+    },
+    "notes": "No run, no dash. Arthur walks at constant speed."
+  },
+
+  "jump": {
+    "_note": "THE MOST RESTRICTIVE JUMP MECHANIC IN THE DOCUMENTED GAMES. Once committed, the arc is completely fixed.",
+    "type": "fully_committed_fixed_arc",
+    "air_control": "NONE",
+    "variable_height": false,
+    "source": "StrategyWiki + community consensus",
+    "confidence": "high",
+    "height_px_approx": 48,
+    "confidence_height": "low",
+    "notes": [
+      "A jump in Ghosts 'n Goblins is 100% commitment. No direction change, no height adjustment mid-air.",
+      "This is MORE restrictive than Castlevania (which also has no air control but only has fixed height, not fixed direction).",
+      "The lack of any air control means players must plan their jump arc before pressing the button.",
+      "This makes GnG one of the games where 'thinking before jumping' is the primary skill requirement.",
+      "Community tip: 'Jump the least possible — only when necessary.' Walking is safer and faster.",
+      "Getting hit in mid-air causes knockback that continues from your current airborne position — often fatal."
+    ]
+  },
+
+  "gravity": {
+    "notes": "Gravity not explicitly documented. Arc appears similar to NES Castlevania — fast fall after peak.",
+    "confidence": "low"
+  },
+
+  "damage_system": {
+    "_note": "The two-hit system is the defining damage model of GnG — it's explicitly designed to be punishing but fair.",
+    "hits_before_death": 2,
+    "first_hit": {
+      "effect": "Strips Arthur's armor — he falls to his underwear",
+      "armor_restored_by": "Collecting armor pickup from a hidden chest",
+      "notes": "The visible 'underwear' state is both humiliating and a clear damage indicator. Arthur is completely vulnerable — aesthetically communicates the danger."
+    },
+    "second_hit": {
+      "effect": "Death — Arthur turns into a pile of bones",
+      "notes": "Getting hit while in underwear = instant death. No continuing the fight."
+    },
+    "armor_types": {
+      "default_armor": "Knight armor — standard protection",
+      "golden_armor": {
+        "description": "Found in hidden chests. Enables the magical weapons.",
+        "notes": "Golden Armor is required for the real ending — must have it during the final boss fight."
+      }
+    },
+    "respawn_invincibility_frames": {
+      "approx_frames": 80,
+      "confidence": "low",
+      "notes": "Brief invincibility after being hit. VERIFY."
+    }
+  },
+
+  "weapons": {
+    "lance": {
+      "description": "Default weapon. Travels horizontally at medium speed. Medium damage.",
+      "trajectory": "straight horizontal"
+    },
+    "dagger": {
+      "description": "Fast, short-range. Good rate of fire.",
+      "trajectory": "straight horizontal but short range"
+    },
+    "torch": {
+      "description": "Fires forward and slightly arcs up. Slow.",
+      "trajectory": "slight upward arc"
+    },
+    "axe": {
+      "description": "High arc trajectory. Covers more vertical space.",
+      "trajectory": "steep upward arc"
+    },
+    "cross": {
+      "description": "Bounces off terrain. Area coverage.",
+      "trajectory": "bouncing"
+    },
+    "magical_weapons": {
+      "requirement": "Golden Armor",
+      "description": "Each weapon type has a powered-up version available only while wearing the Golden Armor."
+    },
+    "pickup_mechanic": "Found in hidden chests scattered throughout stages. Collecting replaces current weapon."
+  },
+
+  "knockback": {
+    "description": "Taking damage knocks Arthur backward.",
+    "notes": [
+      "Knockback direction is away from the damage source.",
+      "Knockback while jumping is particularly dangerous — it alters the committed jump arc.",
+      "Getting knocked back into a pit = instant death regardless of armor status.",
+      "Knockback from certain enemies can send Arthur backward off a platform into a previously cleared area."
+    ]
+  },
+
+  "level_structure": {
+    "type": "linear horizontal scrolling",
+    "stages": 6,
+    "enemy_respawn": "Enemies respawn when Arthur scrolls off-screen and back",
+    "two_loops_required": {
+      "description": "After beating the final boss, the game restarts. Only by completing it TWICE is the true ending seen.",
+      "notes": "The second loop is identical to the first — same stages, same enemies, same difficulty."
+    }
+  },
+
+  "hitboxes": {
+    "arthur_standing": {
+      "notes": "Arthur hitbox is relatively generous — the game is hard enough without unfair hitboxes.",
+      "confidence": "low"
+    },
+    "arthur_underwear": {
+      "notes": "Same hitbox as armored. Underwear is purely visual/damage-state indicator."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The fully-committed jump (no air control) combined with high enemy density and respawning creates a game where 'not jumping' is often the optimal strategy. Walk under enemies, walk around obstacles, jump only when there's no ground alternative.",
+    "The two-hit system creates a visible vulnerability state (underwear) that functions as both humor and danger indicator. The first hit doesn't kill — it warns. This is brilliant HCI: the game communicates threat level through Arthur's clothing.",
+    "Enemy respawning off-screen means 'progress' doesn't feel permanent — the same stretch of ground requires re-clearing every time you retreat. This creates momentum loss as a punishment mechanic.",
+    "The two-loop requirement for the real ending is divisive design: it expects players to play through the entire game twice. The modern equivalent would be NG+ required for the true ending.",
+    "The committed jump arc's real skill requirement: pattern recognition before jumping. Players who understand GnG deeply are calculating 3-4 seconds ahead of their inputs."
+  ]
+}

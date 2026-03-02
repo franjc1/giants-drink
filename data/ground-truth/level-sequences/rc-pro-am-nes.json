@@ -1,0 +1,160 @@
+{
+  "game_id": "rc-pro-am-nes",
+  "game_name": "R.C. Pro-Am",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": 32,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic racing mechanics",
+      "first_appears": "Track 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns steering and acceleration against 3 opponents"
+    },
+    {
+      "element": "Turbo acceleration (tune-up item)",
+      "first_appears": "Early tracks",
+      "introduction_context": "safe",
+      "mastery_context": "Collect to increase top speed temporarily"
+    },
+    {
+      "element": "Roll cage (protective item)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Protects from crash damage when hazards introduced"
+    },
+    {
+      "element": "Missiles (weapon)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Fire forward to disable opponents; requires ammunition management"
+    },
+    {
+      "element": "Bombs (weapon)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Fire backward to disable trailing opponents"
+    },
+    {
+      "element": "Oil slicks (hazard)",
+      "first_appears": "Mid game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Spin cars out of control; requires spatial awareness"
+    },
+    {
+      "element": "Water puddles/rain (hazard)",
+      "first_appears": "Mid game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Slow car; combined with AI aggression"
+    },
+    {
+      "element": "Pop-up barriers (hazard)",
+      "first_appears": "Mid-late game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Crash cars; requires high-speed avoidance"
+    },
+    {
+      "element": "Bonus letters (NINTENDO/CHAMPION)",
+      "first_appears": "Throughout all tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Collect all 8 letters to upgrade car; provides strategic collection goal"
+    },
+    {
+      "element": "Vehicle upgrades (Truck → 4-Wheeler → Off Roader)",
+      "first_appears": "After collecting complete letter set",
+      "introduction_context": "moderate",
+      "mastery_context": "Each upgrade increases speed and handling"
+    },
+    {
+      "element": "Skulls (ammunition penalty)",
+      "first_appears": "Mid-late game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Decrease ammo supply; forces weapon conservation strategy"
+    },
+    {
+      "element": "Zippers (speed boost)",
+      "first_appears": "Mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Stationary speed boosts placed strategically on track"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting turbo or tie upgrades",
+      "Using missiles to disable threatening opponent",
+      "Collecting roll cage before hazard section",
+      "Qualifying for next race (top 3 finish)",
+      "Strategic use of zippers for speed boost"
+    ],
+    "typical_tension_triggers": [
+      "Approaching lap final sections with multiple opponents",
+      "Running low on weapon ammunition",
+      "Encountering clustered hazards (oil slicks + rain + barriers)",
+      "4th place position near race end",
+      "Yellow car AI acceleration to 127 mph (unbeatable threshold)",
+      "Track repeats with increased AI aggression (tracks 25+)"
+    ],
+    "pacing_descriptor": "Cyclical tension-relief across 32-track structure with escalating difficulty; early tracks introduce mechanics safely, mid tracks combine hazards with weapons, late tracks (25+) become punishing with max-speed AI opponents requiring constant weapon usage"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Bonus letter placement and power-up distribution creates exploration incentive within racing path; collecting all 8 letters is optional but enables car upgrades",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduces core mechanics (steering, acceleration, basic opponents) in gentle curve; 3 opponents manageable without heavy weapon reliance; tune-up items abundant",
+    "mid_game": "Hazards multiply (oil slicks, rain, barriers); weapon economy becomes critical; opponent aggression increases; player must balance speed tuning with defensive roll cages",
+    "late_game": "Tracks 25-32 repeat with escalated features; by track 32, all opponents run maximum speed (127 mph) and become unbeatable without constant missile/bomb use; game becomes attrition-based where eventual ammunition depletion leads to elimination",
+    "notable_spikes": [
+      "Track 25+ restart cycle: dramatic jump in AI opponent speed",
+      "Track 32: all opponents at maximum speed threshold",
+      "Hazard introduction points where oil slicks combine with rain",
+      "Late game weapon scarcity: skull collection depletes ammo reserves"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Mechanical introduction zones",
+      "description": "Early tracks (1-8) focus on single mechanic introduction without hazard clusters; racing-first, with safe pickup collection",
+      "example_level": "Track 1-5: basic steering vs. 3 opponents, minimal hazards"
+    },
+    {
+      "pattern_name": "Hazard integration phase",
+      "description": "Mid tracks (9-24) layer hazards incrementally while maintaining weapon viability; oil slicks, rain, and barriers appear in distributed patterns rather than dense clusters",
+      "example_level": "Track 10-20: combined oil/rain sections with clear racing line alternatives"
+    },
+    {
+      "pattern_name": "Repetition with escalation",
+      "description": "Tracks 25-32 repeat layout from tracks 1-8 but with maximum AI speed and mandatory weapon usage; same track geometry becomes survival challenge",
+      "example_level": "Track 25 is Track 1 layout with unbeatable AI opponents"
+    },
+    {
+      "pattern_name": "Weapon economy pressure",
+      "description": "Late-game structure emphasizes ammunition scarcity; collecting skulls reduces ammo, forcing players to choose between weapon spending and shield vulnerability",
+      "example_level": "Tracks 28-32: skull frequency increases, missile ammunition critical"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:44:37.086Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5249,
+    "output_tokens": 2012,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

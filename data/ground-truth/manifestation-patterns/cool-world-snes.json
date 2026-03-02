@@ -1,0 +1,154 @@
+{
+  "game_id": "cool-world-snes",
+  "game_name": "Cool World",
+  "platform": "snes",
+  "paradigm": "platformer/adventure",
+  "danger_signals": [
+    {
+      "signal": "Popper Police presence",
+      "visual_form": "Cartoon police force sprites/characters visible in game world",
+      "meaning": "Law enforcement threat; player will be arrested if surrounded"
+    },
+    {
+      "signal": "Arrest state",
+      "visual_form": "Visual transition to Detective Frank Harris encounter",
+      "meaning": "Player has been caught breaking the law; consequences are imminent (lecture/bail payment)"
+    },
+    {
+      "signal": "Insufficient funds",
+      "visual_form": "Low nickel/coin count display",
+      "meaning": "Unable to pay bail; financial constraint danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cool World bank access",
+      "visual_form": "Bank location/interior visible in game world",
+      "meaning": "Safe location to store coins; refuge from financial loss"
+    },
+    {
+      "signal": "Successful date arrangement",
+      "visual_form": "Holli Would interaction at Slash Club completed",
+      "meaning": "Progress toward end-goal; narrative advancement safety"
+    },
+    {
+      "signal": "Malt shop access",
+      "visual_form": "Interior location with candy/sweets available",
+      "meaning": "Safe zone for resource collection if entry requirements met"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Popper Police",
+      "color_identity": null,
+      "symbol_or_sigil": "Police uniform/badge (cartoon aesthetic)",
+      "enemy_visual_variants": "Described as 'cartoon police force' with distinct visual presentation",
+      "environmental_markers": "Police presence in public spaces; Detective Frank Harris office/interrogation room for post-arrest scenes"
+    },
+    {
+      "faction": "Civilian/Criminal (Player as Jack Deebs)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player sprite contrasted against police authority figures",
+      "environmental_markers": "Holli's apartment building, Slash Club, Las Vegas, malt shop—civilian recreational/illicit spaces"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Law-abiding player state",
+      "visual_manifestation": "Minimal police presence; open access to most locations",
+      "behavioral_manifestation": "Popper Police avoid or ignore player; smooth movement through world"
+    },
+    {
+      "world_state": "Criminal state (law broken)",
+      "visual_manifestation": "Popper Police actively patrol and surround player",
+      "behavioral_manifestation": "Player must avoid police; arrest triggers transition to Detective Harris interrogation scene"
+    },
+    {
+      "world_state": "Post-arrest consequence state",
+      "visual_manifestation": "Detective Frank Harris appears; lecture or bail demand UI/visual display",
+      "behavioral_manifestation": "Player must pay bail (nickels) or accept lecture; determines progression"
+    },
+    {
+      "world_state": "Resource-wealthy state",
+      "visual_manifestation": "High nickel/coin count visible; access to pawn shop purchases",
+      "behavioral_manifestation": "Player can negotiate trades, access restricted locations, pay bail freely"
+    },
+    {
+      "world_state": "Date-arranged state",
+      "visual_manifestation": "Holli Would interaction complete; access to Holli's apartment building",
+      "behavioral_manifestation": "Player navigates exterior of apartment to reach date; failure results in being reset to ground level"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location hierarchy and access control",
+      "example": "Malt shop restricted to players with sufficient candy; signals progression and player achievement through visual gatekeeping"
+    },
+    {
+      "technique": "Faction territory markers",
+      "example": "Police-frequented public spaces vs. civilian entertainment zones (Slash Club, apartment buildings); visual separation of authority vs. freedom spaces"
+    },
+    {
+      "technique": "Economic system visualization",
+      "example": "Nickel/coin display and bail system; visually communicates financial consequences and player economic state through UI and location-based transactions"
+    },
+    {
+      "technique": "NPC behavior as world-state indicator",
+      "example": "Detective Frank Harris appearance post-arrest; NPC visual presence signals narrative consequence and punishment state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Popper Police",
+      "state": "Patrol/normal",
+      "behavior": "Visible in world; will surround player if player breaks law"
+    },
+    {
+      "entity": "Popper Police",
+      "state": "Arrest engaged",
+      "behavior": "Apprehend player; trigger transition to Detective Harris encounter"
+    },
+    {
+      "entity": "Detective Frank Harris",
+      "state": "Post-arrest",
+      "behavior": "Delivers lecture or demands bail payment; visual authority figure in interrogation context"
+    },
+    {
+      "entity": "Holli Would",
+      "state": "Date not arranged",
+      "behavior": "Available at Slash Club for interaction/negotiation"
+    },
+    {
+      "entity": "Holli Would",
+      "state": "Date arranged",
+      "behavior": "Awaits player at apartment; reaching her triggers progression; failing to reach her results in player reset"
+    },
+    {
+      "entity": "Jack Deebs (Player)",
+      "state": "Law-abiding",
+      "behavior": "Free movement; minimal police interaction"
+    },
+    {
+      "entity": "Jack Deebs (Player)",
+      "state": "Criminal/pursued",
+      "behavior": "Must evade Popper Police; risk of surrounding and arrest"
+    }
+  ],
+  "notes": "Cool World SNES uses a unique adventure-game structure compared to other platform versions, featuring a law/authority dynamic with the Popper Police as primary antagonistic faction. The game communicates world-state through location accessibility, NPC interactions (especially Detective Harris and Holli Would), and the police pursuit/arrest mechanic. The cartoon aesthetic from the source film carries through in visual faction presentation. Economic resources (nickels) serve as both progression gate and consequence mechanism (bail payment). The game's core tension is communicating 'legal consequence' as a persistent environmental threat.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:32:04.190Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3181,
+    "output_tokens": 1644,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

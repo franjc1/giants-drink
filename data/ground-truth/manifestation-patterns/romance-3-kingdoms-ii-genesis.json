@@ -1,0 +1,156 @@
+{
+  "game_id": "romance-3-kingdoms-ii-genesis",
+  "game_name": "Romance of the Three Kingdoms II",
+  "platform": "genesis",
+  "paradigm": "turn-based strategy rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy warlord territorial expansion",
+      "visual_form": "Province control map showing enemy-colored territories advancing toward player holdings",
+      "meaning": "Immediate threat to player domains; military action required"
+    },
+    {
+      "signal": "Officer loyalty degradation",
+      "visual_form": "Reputation/loyalty meter decline for controlled officers",
+      "meaning": "Risk of defection or betrayal within player's own forces"
+    },
+    {
+      "signal": "Messenger interception opportunity",
+      "visual_form": "Visual or UI alert indicating enemy communication in transit",
+      "meaning": "Enemy coordination attempt; tactical vulnerability window"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Controlled provinces with high land value",
+      "visual_form": "Visually distinct provinces colored in player faction color with enhanced visual indicators",
+      "meaning": "Secure territory generating resources and stability"
+    },
+    {
+      "signal": "High-stat adviser presence",
+      "visual_form": "Officer with Intelligence stat of 100 in advisory position",
+      "meaning": "Accurate strategic predictions; reduced uncertainty in military/diplomatic planning"
+    },
+    {
+      "signal": "Officer charm influence",
+      "visual_form": "Character portrait or stat display showing high Charm value",
+      "meaning": "Improved recruitment and retention of new officers; stable power base"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player-controlled warlord faction",
+      "color_identity": "Player-assigned territory color (game engine assigns per faction)",
+      "symbol_or_sigil": "Warlord character portrait and name displayed on controlled provinces",
+      "enemy_visual_variants": "Enemy warlord factions use contrasting colors on map; each scenario features 2-6 distinct warlord factions with visual differentiation",
+      "environmental_markers": "Province borders and capital cities marked with controlling faction's color; territory clustering indicates allied or hostile bloc formation"
+    },
+    {
+      "faction": "Wei, Wu, and Shu (Three Kingdoms endgame factions)",
+      "color_identity": "Historically distinct faction colors (implied by historical novel structure)",
+      "symbol_or_sigil": "Faction names correspond to historical kingdoms in Romance of the Three Kingdoms narrative",
+      "enemy_visual_variants": "Scenarios progress from multi-warlord fragmentation (AD 189-208) toward tripartite division (AD 215-220)",
+      "environmental_markers": "Geographic territorial blocks reflecting historical Three Kingdoms division of China"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game fragmentation (Scenarios 1-3: AD 189-201)",
+      "visual_manifestation": "Map displays 5+ independent warlord-controlled colored regions scattered across 41 provinces; high territorial fragmentation",
+      "behavioral_manifestation": "Chaos simulation: multiple simultaneous warlord expansion attempts; player must manage simultaneous threats from unpredictable factions"
+    },
+    {
+      "world_state": "Mid-game consolidation (Scenario 4: AD 208)",
+      "visual_manifestation": "Map shows reduced number of major territorial blocs; Cao Cao faction shown as militarily dominant force",
+      "behavioral_manifestation": "Cao Cao supremacy attempt creates unified threat vector; other warlords form defensive alliances or competition blocs"
+    },
+    {
+      "world_state": "Late game partition (Scenarios 5-6: AD 215-220)",
+      "visual_manifestation": "Map displays three major colored regions corresponding to Wei, Wu, and Shu historical kingdoms; clear territorial tripartition",
+      "behavioral_manifestation": "Three-way cold war structure: player controls one kingdom faction and competes against two stable rival powers"
+    },
+    {
+      "world_state": "Province economic development",
+      "visual_manifestation": "High land value provinces display enhanced visual distinction or marker indicating resource generation capacity",
+      "behavioral_manifestation": "Developed provinces attract officer recruitment and support higher strategic decision success rates"
+    },
+    {
+      "world_state": "Officer loyalty crisis",
+      "visual_manifestation": "Reputation system meter shows low loyalty values for key officers; visual indicator of defection risk",
+      "behavioral_manifestation": "Officers may switch allegiance to rival warlords if loyalty drops below threshold; player loses command capability in contested provinces"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Scenario title and date anchoring",
+      "example": "Six scenarios labeled with historical dates (AD 189, 194, 201, 208, 215, 220) and key historical events (Dong Zhuo seizes Luoyang; Rise of Wei, Wu, Shu). Each scenario title communicates the political crisis state of that era."
+    },
+    {
+      "technique": "Territory clustering and natural geographic divisions",
+      "example": "41 provinces arranged to reflect historical China geography; player observes natural geographic chokepoints and defensive positions that mirror historical military strategy"
+    },
+    {
+      "technique": "Character roster size and composition",
+      "example": "200+ unique officers available, many drawn from Romance of the Three Kingdoms novel. Officer appearance and stats reflect historical roles (e.g., high Intelligence officers serve as strategists/advisers)"
+    },
+    {
+      "technique": "Warlord initial power distribution",
+      "example": "Scenario selection determines which warlord player controls and their starting territory. Initial distribution reflects novel's historical setup, communicating relative power imbalance at each era"
+    },
+    {
+      "technique": "Special items and treasures as world-state markers",
+      "example": "Treasures and stat-boosting items function as rare strategic resources that convey scarcity and high-value objective positioning within territories"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Officer (generic)",
+      "state": "High loyalty to warlord",
+      "behavior": "Continues service; provides stat-based support in duels, planning, and province management"
+    },
+    {
+      "entity": "Officer (generic)",
+      "state": "Low loyalty (threatened by reputation system)",
+      "behavior": "Risk of defection to rival warlords; reduced success rate in assigned tasks; may abandon player without warning"
+    },
+    {
+      "entity": "Officer (Adviser role)",
+      "state": "Intelligence stat 100",
+      "behavior": "Provides perfectly accurate strategic predictions; eliminates uncertainty in military/diplomatic planning outcomes"
+    },
+    {
+      "entity": "Officer (Adviser role)",
+      "state": "Intelligence stat < 100",
+      "behavior": "Provides probabilistic predictions with accuracy inversely related to intelligence gap; creates strategic uncertainty"
+    },
+    {
+      "entity": "Warlord faction (player-controlled)",
+      "state": "Controls all 41 provinces",
+      "behavior": "Victory achieved; game ends with player triumph"
+    },
+    {
+      "entity": "Warlord faction (rival)",
+      "state": "High territorial coverage",
+      "behavior": "Expands aggressively; intercepts player communications; competes for officer recruitment"
+    },
+    {
+      "entity": "Custom character (player-created)",
+      "state": "Placed in unoccupied province",
+      "behavior": "Becomes independent warlord; can ally with or oppose player based on relationship mechanics"
+    }
+  ],
+  "notes": "Romance of the Three Kingdoms II communicates world-state primarily through turn-based strategic map representation. Danger and safety are expressed via territory control visualization, officer loyalty/reputation meters, and scenario-based political context. Factions are distinguished by territory color and character roster composition rather than explicit visual sigils. The game's six scenarios function as narrative/political state markers, each representing a distinct historical crisis phase. Environmental storytelling relies heavily on historical grounding (dates, character names from novel, geographic authenticity) rather than dynamic visual manifestation. The reputation system creates dynamic danger signals through officer loyalty fluctuation. Officer stats (Intelligence, War Ability, Charm) drive behavioral differences that communicate strategic role differentiation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:24:31.060Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2643,
+    "output_tokens": 2053,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

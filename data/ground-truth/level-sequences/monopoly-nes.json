@@ -1,0 +1,119 @@
+{
+  "game_id": "monopoly-nes",
+  "game_name": "Monopoly",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Starting cash and board position",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Financial management fundamentals"
+    },
+    {
+      "element": "Property purchase mechanic",
+      "first_appears": "First property landing",
+      "introduction_context": "safe",
+      "mastery_context": "Strategic property acquisition"
+    },
+    {
+      "element": "Rent payment system",
+      "first_appears": "Landing on opponent property",
+      "introduction_context": "moderate",
+      "mastery_context": "Financial consequence management"
+    },
+    {
+      "element": "House/Hotel building",
+      "first_appears": "Mid-game after property sets acquired",
+      "introduction_context": "moderate",
+      "mastery_context": "Investment escalation and rent amplification"
+    },
+    {
+      "element": "Jail mechanic",
+      "first_appears": "Rolling doubles three times or landing on Go to Jail",
+      "introduction_context": "moderate",
+      "mastery_context": "Risk mitigation in late game"
+    },
+    {
+      "element": "Trading system",
+      "first_appears": "Available once multiple properties exist",
+      "introduction_context": "moderate",
+      "mastery_context": "Negotiation and strategic advantage"
+    },
+    {
+      "element": "Bankruptcy",
+      "first_appears": "When player cannot pay debt",
+      "introduction_context": "dangerous",
+      "mastery_context": "Game elimination - final consequence"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Passing Go and collecting salary",
+      "Landing on unowned property with insufficient funds to purchase",
+      "Getting out of Jail in late game",
+      "Successful property trade reducing debt pressure"
+    ],
+    "typical_tension_triggers": [
+      "Landing on high-rent developed property",
+      "Rolling doubles (forced additional movement)",
+      "Drawing Community Chest or Chance cards with negative outcomes",
+      "Approaching bankruptcy threshold",
+      "Being sent to Jail with active properties generating rent"
+    ],
+    "pacing_descriptor": "Turn-based with escalating financial pressure; early game exploratory, mid-game competitive acquisition, late-game survival-focused. Pacing controlled by die rolls and player decisions rather than time."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Low pressure - abundant cash, property acquisition encourages activity, limited financial consequence",
+    "mid_game": "Moderate escalation - property monopolies forming, rent payment begins straining cash reserves, trading decisions become critical",
+    "late_game": "High pressure - developed properties generate severe rent, Jail becomes strategic shelter rather than penalty, AI exploitability increases vulnerability to bankruptcy",
+    "notable_spikes": [
+      "First major rent payment from developed property",
+      "Transition from property acquisition to house/hotel building phase",
+      "Late-game multiple consecutive rent payments forcing liquidation"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Single-game economy cycle",
+      "description": "Linear progression from economic expansion (purchasing properties) to consolidation (building improvements) to contraction (bankruptcy elimination). No level-based structure; game is one continuous economy simulation.",
+      "example_level": "N/A - single-session gameplay"
+    },
+    {
+      "pattern_name": "Circular spatial loop with strategic positions",
+      "description": "Board is continuous loop (Go → properties 1-40 → back to Go). Key tension nodes at railroads, utilities, and Free Parking. Go to Jail acts as circuit-breaker mechanic.",
+      "example_level": "Board layout - spaces 5 (railroad), 20 (Free Parking), 30 (Go to Jail)"
+    },
+    {
+      "pattern_name": "AI exploit window",
+      "description": "German version exposes AI flaw where computer players undervalue properties in trades (prices not doubled when currency was). Creates exploitable advantage phase in mid-game.",
+      "example_level": "Trading phase any point after AI acquires property set"
+    }
+  ],
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:53:27.717Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2779,
+    "output_tokens": 1407,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "game_id": "tetris-nes",
+  "game_name": "Tetris",
+  "platform": "nes",
+  "year": 1989,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system documented for this puzzle game"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "tetromino_fall_speeds": {
+    "description": "Drop speed in frames per grid cell by level (NTSC/North America vs PAL/Europe-Asia)",
+    "data": [
+      {
+        "level": 0,
+        "frames_ntsc": 48,
+        "frames_pal": 36
+      },
+      {
+        "level": 1,
+        "frames_ntsc": 43,
+        "frames_pal": 32
+      },
+      {
+        "level": 2,
+        "frames_ntsc": 38,
+        "frames_pal": 29
+      },
+      {
+        "level": 3,
+        "frames_ntsc": 33,
+        "frames_pal": 25
+      },
+      {
+        "level": 4,
+        "frames_ntsc": 28,
+        "frames_pal": 22
+      },
+      {
+        "level": 5,
+        "frames_ntsc": 23,
+        "frames_pal": 18
+      },
+      {
+        "level": 6,
+        "frames_ntsc": 18,
+        "frames_pal": 15
+      },
+      {
+        "level": 7,
+        "frames_ntsc": 13,
+        "frames_pal": 11
+      },
+      {
+        "level": 8,
+        "frames_ntsc": 8,
+        "frames_pal": 7
+      },
+      {
+        "level": 9,
+        "frames_ntsc": 6,
+        "frames_pal": 5
+      },
+      {
+        "level": "10-12",
+        "frames_ntsc": 5,
+        "frames_pal": 4
+      },
+      {
+        "level": "13-15",
+        "frames_ntsc": 4,
+        "frames_pal": 3
+      },
+      {
+        "level": "16-18",
+        "frames_ntsc": 3,
+        "frames_pal": 2
+      },
+      {
+        "level": "19-28",
+        "frames_ntsc": 2,
+        "frames_pal": 1
+      },
+      {
+        "level": "29+",
+        "frames_ntsc": 1,
+        "frames_pal": 1
+      }
+    ],
+    "notes": "Level 29 is the 'kill screen' - pieces fall at 1 grid cell per frame, intended to be unplayable. Speed differences account for PAL vs NTSC frame rates."
+  },
+  "special_mechanics": [
+    {
+      "name": "Tetromino Placement",
+      "description": "Tetrominoes fall in random order with preview window showing next piece. Players can move left/right and rotate pieces before placement.",
+      "physics_values": {
+        "horizontal_movement": "Real-time responsive input",
+        "rotation": "90-degree clockwise rotation",
+        "lock_delay": "Piece locks immediately upon landing"
+      }
+    },
+    {
+      "name": "A-Type Mode",
+      "description": "Score accumulation mode. Level advances every 10 lines cleared. Game speed increases at levels 1-10, then again at levels 13, 16, 19, and 29.",
+      "physics_values": {
+        "level_progression": "Every 10 lines cleared",
+        "max_level": 29,
+        "scoring_formula": "Single: 40(n+1), Double: 100(n+1), Triple: 300(n+1), Tetris: 1200(n+1) where n = current level"
+      }
+    },
+    {
+      "name": "B-Type Mode",
+      "description": "Challenge mode with randomized obstacle blocks at bottom. Goal is to clear 25 lines at constant selected level.",
+      "physics_values": {
+        "goal_lines": 25,
+        "level_locked": true,
+        "starting_height_options": "Selectable"
+      }
+    },
+    {
+      "name": "Roll Technique",
+      "description": "Modern high-level strategy where players rapidly roll the controller back to move tetrominoes faster than normal input, enabling play past level 29.",
+      "physics_values": {
+        "enabled_by": "Controller hardware properties, not intentional game design",
+        "effect": "Enables extended play sessions and novel speed techniques"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "grid-locked",
+    "rhythm-based",
+    "turn-based feel despite real-time input",
+    "deterministic piece selection with random order",
+    "escalating difficulty"
+  ],
+  "tier_notes": "Tier 2 (qualitative/empirical). This is a puzzle game without traditional physics mechanics. No sub-pixel system, gravity, or jump mechanics exist. Only tetromino fall speed data is documented and quantified. Regional differences (NTSC vs PAL) affect perceived game speed.",
+  "sources_used": [
+    "The Cutting Room Floor - Tetris (NES, Nintendo)",
+    "tetris.wiki - Regional speed differences table",
+    "Wikipedia - Tetris (NES video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:49:53.702Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6517,
+    "output_tokens": 1528,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

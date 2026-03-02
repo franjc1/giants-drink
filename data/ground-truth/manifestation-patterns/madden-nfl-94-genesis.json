@@ -1,0 +1,157 @@
+{
+  "game_id": "madden-nfl-94-genesis",
+  "game_name": "Madden NFL '94",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Opposing team formation",
+      "visual_form": "Player arrangement on field; defensive line positioning",
+      "meaning": "Indicates threat level and play type intention"
+    },
+    {
+      "signal": "Field position",
+      "visual_form": "Ball location relative to end zones",
+      "meaning": "Red zone proximity indicates scoring threat or defensive vulnerability"
+    },
+    {
+      "signal": "Turnover event",
+      "visual_form": "Fumble/interception animation; possession change indicator",
+      "meaning": "Sudden shift from offensive opportunity to defensive vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Own team possession",
+      "visual_form": "Ball control indicator; player control highlighting",
+      "meaning": "Active agency and control state"
+    },
+    {
+      "signal": "First down achievement",
+      "visual_form": "Yard markers; visual feedback on progress",
+      "meaning": "Continued offensive viability and momentum"
+    },
+    {
+      "signal": "Field position advantage",
+      "visual_form": "Ball placement in opponent territory",
+      "meaning": "Reduced scoring threat; increased defensive security"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Offensive team (player-controlled)",
+      "color_identity": "Primary uniform color of selected NFL team",
+      "symbol_or_sigil": "Official NFL team logo and uniform design",
+      "enemy_visual_variants": "Opponent team colors and logo; contrasting uniform palette",
+      "environmental_markers": "Team-colored field markers; sideline personnel in team apparel"
+    },
+    {
+      "faction": "Defensive team (opponent-controlled or AI)",
+      "color_identity": "Contrasting uniform color palette",
+      "symbol_or_sigil": "Official NFL team logo of defensive team",
+      "enemy_visual_variants": "Distinct from offensive team through uniform differentiation",
+      "environmental_markers": "Opposite sideline; defensive formation positioning"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-snap (play selection phase)",
+      "visual_manifestation": "Field paused; play-call mode interface active; players stationary in formation",
+      "behavioral_manifestation": "No player movement; awaiting user input for play execution"
+    },
+    {
+      "world_state": "Active play (post-snap)",
+      "visual_manifestation": "Animated player movement; ball in flight or carrier motion; field dynamic",
+      "behavioral_manifestation": "AI-controlled defensive positioning; player route execution; real-time play development"
+    },
+    {
+      "world_state": "Turnover event",
+      "visual_manifestation": "Possession indicator change; field perspective shift or rotation preparation",
+      "behavioral_manifestation": "Control transfer between player and AI; formation reset; momentum reversal"
+    },
+    {
+      "world_state": "Kickoff/Punt scenario",
+      "visual_manifestation": "Field rotates; screen pauses to reorient perspective to opposite team's viewpoint",
+      "behavioral_manifestation": "Camera rotation instead of instant reversal; prevents player disorientation"
+    },
+    {
+      "world_state": "Instant replay mode",
+      "visual_manifestation": "Field rotatable to any angle; play viewable from multiple camera positions",
+      "behavioral_manifestation": "Player-controlled camera; temporal pause; analytical observation mode"
+    },
+    {
+      "world_state": "Super Bowl access unlocked",
+      "visual_manifestation": "Special team uniforms available; championship-tier roster display",
+      "behavioral_manifestation": "Expanded team selection without special codes; elevated competition state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Official NFL team branding",
+      "example": "Authentic 1993-1994 season team logos and uniforms communicate legitimacy and real-world sports context; players recognize actual franchises"
+    },
+    {
+      "technique": "Field yard markers",
+      "example": "Visual progression indicators show distance to goal; communicate strategic geography"
+    },
+    {
+      "technique": "Sideline personnel",
+      "example": "Team-colored sideline staff and coaching positions reinforce faction identity and organizational structure"
+    },
+    {
+      "technique": "Formation spatial layout",
+      "example": "Defensive and offensive line positioning communicates tactical approach and strategic intent"
+    },
+    {
+      "technique": "Uniform differentiation",
+      "example": "Color contrast between opposing teams provides immediate faction identification without text overlay"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Offensive players",
+      "state": "Pre-snap",
+      "behavior": "Stationary in formation; awaiting snap signal"
+    },
+    {
+      "entity": "Defensive players",
+      "state": "Pre-snap",
+      "behavior": "Static alignment; positioned for coverage/run defense assignments"
+    },
+    {
+      "entity": "Offensive players",
+      "state": "Post-snap (active play)",
+      "behavior": "Execute assigned routes; move toward receivers or blocking assignments"
+    },
+    {
+      "entity": "Defensive players",
+      "state": "Post-snap (active play)",
+      "behavior": "Pursue ball carrier or cover assigned receivers; react to play development"
+    },
+    {
+      "entity": "Ball carrier",
+      "state": "In possession",
+      "behavior": "Move downfield; attempt to advance toward opposing end zone"
+    },
+    {
+      "entity": "Defensive unit",
+      "state": "Turnover possession",
+      "behavior": "Transition from reactive to aggressive offensive posture"
+    }
+  ],
+  "notes": "Madden NFL '94 represents a pivotal moment in sports game visual communication through introduction of official NFL licensing. The game's manifestation layer communicates world-state primarily through formation positioning, field perspective, and uniform differentiation rather than explicit textual indicators. The play-call and pause-rotate systems for special teams plays address a critical usability issue (disorientation) through thoughtful visual design. No explicit danger/safety signals exist beyond game-state positional indicators; threat communication relies on player reading of formation tactics rather than visual warnings.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:40:39.671Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3419,
+    "output_tokens": 1798,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

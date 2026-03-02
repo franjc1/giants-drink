@@ -1,0 +1,400 @@
+RoboCop 2 (NES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+RoboCop 2 (NES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+RoboCop 2
+
+Developer :
+
+Painting by Numbers
+
+&#91;1&#93;
+
+Publishers :
+
+Data East
+
+&#91;2&#93;
+
+&#91;3&#93;
+
+(JP/US),
+
+Ocean
+
+&#91;4&#93;
+
+(EU)  Platform :
+
+NES
+
+Released in JP : April 2,&#160;1991  &#91;2&#93;
+
+Released in US : April 1991  &#91;3&#93;
+
+Released in EU : March 1992  &#91;4&#93;
+
+This game has a  hidden developer message .
+
+This game has  hidden developer credits .
+
+This game has  hidden development-related text .
+
+This game has a  hidden level select .
+
+This game has  anti-piracy features .
+
+A very hard platformer that's a port of the Commodore 64 version and is also based on the movie of the same name.
+
+Contents
+
+1
+
+Level Select
+
+2
+
+Hidden Text
+
+3
+
+Game Genie Detection
+
+4
+
+References
+
+Level Select
+
+At the title screen, press and hold  Up + Right  on Controller 2 and  Down + Left  on Controller 1 at the same time. Now, by pressing  B  on Controller 1, the player can cycle through levels 0 to 14. Press  A  to reset the level index back to 0. A sound will confirm code triggering after each time  A  or  B  is pressed. Select the "CONTINUE" option to start from the selected level.
+
+Hidden Text
+
+This game shares the same music driver library that many other NES Ocean Software games used. As a result, there is a hidden version and copyright string:
+
+MUSIC DRIVER V1.0 (C)JONATHAN DUNN & OCEAN SOFTWARE
+
+Additionally, a small bit of placeholder text is at offset
+
+0x01b256  , at the end of BANK 6:
+
+hello this is a bit of text
+
+Game Genie Detection
+
+The game checks for the presence of a  Game Genie  on startup by adding each byte in
+
+$10-$26
+
+(zeropage RAM) with a corresponding complement in PRG-ROM (located immediately after the checking routine). The routine only exits when at least one of the byte pairs produces a sum other than 0, otherwise it will loop forever and cause the game to hang.  &#91;5&#93;
+
+The zeropage RAM area being checked for is the setup routine executed by the Game Genie ROM just before handing over control to the game. Below is a disassembly of said routine:
+
+$0010  LDX #$0B
+$0012  LDA $90,X
+
+; Write Game Genie register bytes
+$0014  STA $8001,X  ; for each of the 3 codes
+$0017  DEX
+$0018  BPL $0012
+
+; Loop until all bytes written
+$001A  LDA $89
+$001C  STA $8000
+
+; Set primary control byte to enter game mode
+$001F  LDA #$00
+$0021  STA $8000
+
+; Interpreted by the game's mapper, reason for write is unknown
+$0024  JMP ($FFFC)  ; Jump to game's reset handler
+
+Unfortunately, this measure can be bypassed using a single GG code by patching the first byte of the checking routine to immediately execute an RTS instruction. Use one of the below codes depending on the version:
+
+Version
+
+Code
+
+USA Rev 0, JP
+
+AVXNOTXZ
+
+USA Rev 1, EU
+
+AVUYXTXZ
+
+(Source: TakuikaNinja (GG codes))
+
+References
+
+↑
+
+Painting by Numbers - GDRI&#160;:: Game Developer Research Institute
+
+↑
+
+2.0
+
+2.1
+
+GDR ファミリーコンピュータ ソフト一覧 1991年 - FAMILY COMPUTER Software List 1991
+
+↑
+
+3.0
+
+3.1
+
+NES Games
+
+↑
+
+4.0
+
+4.1
+
+ALEX Mail Service ad  -  Consolemania (IT) , Issue 7, April 1992
+
+↑
+
+NESdev forum thread : What does this code do?
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+RoboCop
+
+series
+
+Arcade
+
+RoboCop 2
+
+Commodore 64
+
+RoboCop
+
+NES
+
+RoboCop 2 &#160;&#8226;
+
+RoboCop 3
+
+Game Boy
+
+RoboCop
+
+Genesis
+
+RoboCop 3
+
+Game Boy Color
+
+RoboCop
+
+Game Boy Advance
+
+RoboCop
+
+PlayStation 2
+
+RoboCop
+
+RoboCop vs. The Terminator
+
+SNES
+
+RoboCop Versus The Terminator
+
+Game Boy
+
+RoboCop vs. The Terminator
+
+NES
+
+RoboCop Versus The Terminator
+
+Genesis
+
+RoboCop Versus The Terminator
+
+Game Gear, Sega Master System
+
+RoboCop Versus The Terminator
+
+Retrieved from " https://tcrf.net/index.php?title=RoboCop_2_(NES)&oldid=2025047 "
+
+Categories :
+
+Games developed by Painting by Numbers
+
+Games published by Data East
+
+Games published by Ocean
+
+NES games
+
+Games released in 1991
+
+Games released in April
+
+Games released on April 2
+
+Games with hidden developer messages
+
+Games with hidden developer credits
+
+Games with hidden development-related text
+
+Games with hidden level selects
+
+Games with anti-piracy methods
+
+RoboCop series
+
+Games  >  Games by content  >  Games with anti-piracy methods
+
+Games  >  Games by content  >  Games with hidden developer credits
+
+Games  >  Games by content  >  Games with hidden developer messages
+
+Games  >  Games by content  >  Games with hidden development-related text
+
+Games  >  Games by content  >  Games with hidden level selects
+
+Games  >  Games by developer  >  Games developed by Painting by Numbers
+
+Games  >  Games by platform
+
+Games  >  Games by publisher  >  Games published by Bandai Namco  >  Games published by Ocean
+
+Games  >  Games by publisher  >  Games published by Data East
+
+Games  >  Games by release date  >  Games released in 1991
+
+Games  >  Games by release date  >  Games released in April
+
+Games  >  Games by release date  >  Games released in April  >  Games released on April 2
+
+Games  >  Games by series  >  RoboCop series
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 31 January 2026, at 03:39.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

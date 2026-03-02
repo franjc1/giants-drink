@@ -1,0 +1,155 @@
+{
+  "game_id": "mike-tysons-punch-out-nes",
+  "game_name": "Mike Tyson's Punch-Out!!",
+  "platform": "NES",
+  "year": 1987,
+  "tier": 1,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Star Uppercut System",
+      "description": "Little Mac can earn up to 3 stars by counter-punching opponents at specific times. Stars enable a powerful uppercut attack. Stars are lost when Mac is hit or knocked down.",
+      "physics_values": {
+        "max_stars": 3,
+        "stars_lost_on_hit": true,
+        "stars_lost_on_knockdown": true
+      }
+    },
+    {
+      "name": "Heart/Energy Depletion",
+      "description": "Little Mac has a heart counter that decreases when hit, blocking punches, or throwing blocked/dodged punches. When depleted, Mac becomes exhausted (visual palette change) and cannot attack but can still dodge, duck, and block. Hearts are regained by avoiding opponent punches.",
+      "physics_values": {
+        "hearts_lost_on_hit": true,
+        "hearts_lost_on_block": true,
+        "hearts_lost_on_miss": true,
+        "hearts_regained_by_dodging": true,
+        "hearts_reset_on_knockdown": true
+      }
+    },
+    {
+      "name": "Knockdown System",
+      "description": "Fighters are knocked down and must rise within 10 seconds. Third knockdown in a round = TKO. Mac can be knocked down maximum 4 times total per match; 4th knockdown = automatic loss.",
+      "physics_values": {
+        "knockdown_count_limit": 4,
+        "tko_threshold": 3,
+        "tko_per_round": true,
+        "rise_time_limit_seconds": 10
+      }
+    },
+    {
+      "name": "Defense Mechanics",
+      "description": "Little Mac can dodge left/right, duck, and block. Ducking is 1 frame faster than dodging, making it optimal in tool-assisted play but risky in real-time.",
+      "physics_values": {
+        "dodge_frames": null,
+        "duck_frames": null,
+        "duck_faster_than_dodge": true,
+        "frame_advantage_duck_vs_dodge": 1
+      }
+    },
+    {
+      "name": "Clock Stop Glitch",
+      "description": "Advanced TAS technique: rapid punches temporarily stop the match clock. A delayed punch after rapid punches can permanently stop the clock until specific events occur (knockdown, stun, damage, star uppercut).",
+      "physics_values": {
+        "rapid_punch_stops_clock": true,
+        "clock_restart_on_knockdown": true,
+        "clock_restart_on_stun": true,
+        "clock_restart_on_damage": true,
+        "clock_restart_on_star_uppercut": true
+      }
+    },
+    {
+      "name": "Gutter Technique",
+      "description": "TAS/advanced technique: holding Up raises opponent's guard, then releasing and performing a body blow lands against slow-reacting opponents. Up to 3 gutters possible before opponent reacts.",
+      "physics_values": {
+        "max_consecutive_gutters_minor_circuit": 3,
+        "guard_raise_on_up_input": true
+      }
+    },
+    {
+      "name": "Misdirection Technique",
+      "description": "Advanced TAS frame-perfect technique exploiting 2-frame button input windows. Alternating button combinations allow faster gutter execution against normally impossible opponents like Soda Popinski.",
+      "physics_values": {
+        "button_input_frames": 2,
+        "requires_frame_perfection": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "pattern-based",
+    "commitment-required",
+    "memorization-heavy",
+    "frame-tight",
+    "responsive",
+    "reads-dependent"
+  ],
+  "tier_notes": "Tier 1 empirical/qualitative data. This is a non-platformer sports game (boxing) with no documented jump physics, gravity, or sub-pixel systems. All documented parameters relate to combat mechanics, not character movement physics. Game uses pattern recognition and timing-based combat rather than physics-driven movement. Developer: Nintendo R&D3 (also listed as Nintendo IRD). Little Mac is 17 years old, weighs ~107 lbs. NES hardware limitations prevented recreation of arcade graphics; character made smaller and named 'Little Mac' for visibility. ROM uses Nintendo MMC2 mapper (Mapper 9): 8x16KiB PRG-ROM, 16x8KiB CHR-ROM.",
+  "sources_used": [
+    "tasvideos - GameResources/NES/MikeTysonsPunchout",
+    "tcrf - Mike Tyson's Punch-Out!!",
+    "wikipedia - Punch-Out!! (1987 video game)",
+    "data_crystal - Mike Tyson's Punch-Out!!"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:02:55.148Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9238,
+    "output_tokens": 1750,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "game_id": "worms-armageddon-pc",
+  "game_name": "Worms Armageddon",
+  "platform": "pc",
+  "paradigm": "strategy",
+  "danger_signals": [
+    {
+      "signal": "water_boundary",
+      "visual_form": "water terrain surrounding and below level",
+      "meaning": "instant death zone; worms knocked into water die regardless of health"
+    },
+    {
+      "signal": "explosive_weapon_aiming",
+      "visual_form": "weapon trajectory indicators and targeting reticles",
+      "meaning": "imminent damage to worms in blast radius"
+    },
+    {
+      "signal": "health_depletion_visual",
+      "visual_form": "worm health bar reduction",
+      "meaning": "proximity to death state; loss of hitpoints from weapon impact"
+    },
+    {
+      "signal": "enemy_team_presence",
+      "visual_form": "opposing worms on terrain marked by team color",
+      "meaning": "active threat; worms capable of dealing damage on their turn"
+    },
+    {
+      "signal": "destructible_terrain_instability",
+      "visual_form": "crater formations and missing terrain tiles after explosions",
+      "meaning": "environmental hazard; worms may fall into newly created gaps or water"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "solid_terrain",
+      "visual_form": "intact ground and platforms",
+      "meaning": "stable position; worm can stand without falling"
+    },
+    {
+      "signal": "distance_from_enemies",
+      "visual_form": "spatial separation on 2D board",
+      "meaning": "reduced immediate threat; enemies cannot reach in current turn"
+    },
+    {
+      "signal": "crate_drops",
+      "visual_form": "airdropped weapon and utility crates with distinctive visual markers",
+      "meaning": "resource availability; access to weapons and items for offensive/defensive action"
+    },
+    {
+      "signal": "turn_rotation_display",
+      "visual_form": "UI indicator showing which team is active",
+      "meaning": "inactive teams cannot be targeted; safe from direct attack during enemy turns"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "team_a_through_h",
+      "color_identity": "player-selectable team colors (red, blue, green, yellow, etc.)",
+      "symbol_or_sigil": "worm sprites rendered in team color",
+      "enemy_visual_variants": "all teams use identical worm models; differentiation purely through color assignment",
+      "environmental_markers": "team color extends to health bars, UI elements, and weapon crate ownership indicators"
+    },
+    {
+      "faction": "alliance_mechanic",
+      "color_identity": "matched team colors signal alliance membership",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "allied worms rendered in same color; appear as unified force visually despite separate control",
+      "environmental_markers": "shared weapon pool and score display indicate alliance relationship"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_state",
+      "visual_manifestation": "full, intact terrain; all worms at starting positions; weapon crates distributed evenly",
+      "behavioral_manifestation": "limited weapon availability; teams select opening strategies based on standard weapon sets"
+    },
+    {
+      "world_state": "mid_game_state",
+      "visual_manifestation": "partially destructed terrain with craters; scattered crate remnants; multiple worms eliminated (fewer sprites visible)",
+      "behavioral_manifestation": "increased tactical positioning; players seek high-ground advantage; resource scarcity drives crate-hunting behavior"
+    },
+    {
+      "world_state": "late_game_state",
+      "visual_manifestation": "heavily fragmented terrain; few remaining worms; concentrated water hazards from terrain loss",
+      "behavioral_manifestation": "conservative movement; high-risk weapon usage; focus shifts to survival positioning"
+    },
+    {
+      "world_state": "special_weapon_availability",
+      "visual_manifestation": "UI notification and weapon availability timer; distinct weapon slot highlights team-specific super-weapons",
+      "behavioral_manifestation": "aggressive plays when special weapons unlock; teams reset tactical priorities to deploy devastating attacks"
+    },
+    {
+      "world_state": "turn_sequence_progression",
+      "visual_manifestation": "turn order indicator cycles through team colors in UI",
+      "behavioral_manifestation": "worm behavior changes from active (mobile, weapon-enabled) to passive (stationary, defensive stance)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "destructible_terrain_persistence",
+      "example": "crater formations left behind after explosions serve as visual record of previous engagements; terrain shape tells narrative of combat intensity"
+    },
+    {
+      "technique": "worm_elimination_visual",
+      "example": "removal of worm sprites from board communicates defeat; absence of color-coded worms indicates team progress toward victory"
+    },
+    {
+      "technique": "crate_scarcity_narrative",
+      "example": "density and placement of airdropped crates shifts environmental narrative from abundant resources to scarcity-driven gameplay"
+    },
+    {
+      "technique": "terrain_topology_challenge",
+      "example": "map design with cliffs, islands, and water boundaries creates implicit narrative of environmental hazards as primary opponent"
+    },
+    {
+      "technique": "weapon_visual_feedback",
+      "example": "cartoonish explosion effects (sheep blast, skunk gas cloud) communicate tone and establish thematic consistency with humorous world"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "worm",
+      "state": "alive_active_turn",
+      "behavior": "can walk, jump, use rope/parachute/teleport/bungee mechanics; actively controlled by player; equipped with selected weapon"
+    },
+    {
+      "entity": "worm",
+      "state": "alive_inactive_turn",
+      "behavior": "static on terrain; cannot be moved or controlled; remains vulnerable to enemy attacks"
+    },
+    {
+      "entity": "worm",
+      "state": "health_critical",
+      "behavior": "visual feedback through health bar near depletion; may exhibit knockback or recoil animations from recent weapon hits"
+    },
+    {
+      "entity": "worm",
+      "state": "eliminated",
+      "behavior": "removal from board; sprite disappears; team worm count decreases; no further participation in match"
+    },
+    {
+      "entity": "enemy_ai_worm",
+      "state": "active_turn",
+      "behavior": "autonomous movement toward player worms or strategic positions; selects weapons based on difficulty setting; exhibits increasing aggression in deathmatch mode"
+    },
+    {
+      "entity": "weapon_crate",
+      "state": "falling",
+      "behavior": "animated descent onto terrain with visual trajectory; communicates random reinforcement mechanic"
+    },
+    {
+      "entity": "weapon_crate",
+      "state": "landed",
+      "behavior": "static visual marker on terrain; accessible to any worm that touches it; team color association determines ownership"
+    }
+  ],
+  "notes": "Worms Armageddon communicates game state primarily through spatial visualization on a 2D destructible board. Team identity is purely color-coded with no faction-specific symbols or sigils—differentiation is cosmetic and mechanical rather than narrative. Danger is communicated through persistent environmental hazards (water), turn-based vulnerability states, and health bar reduction. The cartoonish art style and humorous weapon designs (sheep as mobile bomb, skunk gas) establish a comedic tone that supersedes serious world-state narrative. Faction relationships are determined by player-selected team color matching for alliances; this is a mechanical construct without lore basis. World-state changes are telegraphed through terrain destruction persistence, worm elimination, and weapon availability timers. The game lacks environmental storytelling in the narrative sense but uses destruction patterns and spatial configuration as implicit communication of combat history.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:42:53.643Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2845,
+    "output_tokens": 2020,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

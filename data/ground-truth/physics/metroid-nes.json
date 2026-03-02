@@ -1,0 +1,207 @@
+{
+  "_meta": {
+    "game": "Metroid",
+    "platform": "Nintendo Entertainment System (NES) / Famicom Disk System",
+    "region": "NTSC (North America / Japan)",
+    "year": 1986,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D1 / Intelligent Systems",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Metroid",
+        "url": "https://tasvideos.org/GameResources/NES/Metroid",
+        "notes": "Techniques documentation: morph bomb jumps, bomb boost mechanics, diagonal bomb jumps. Movement descriptions are qualitative — no exact pixel values published."
+      },
+      {
+        "name": "Data Crystal — Metroid",
+        "url": "https://datacrystal.tcrf.net/wiki/Metroid",
+        "notes": "RAM map with velocity addresses ($0020 X velocity, $0022 Y velocity). Physics variable values not fully annotated in public documentation."
+      },
+      {
+        "name": "Metroid Speedrunning Wiki",
+        "url": "https://metroid.speedruns.wiki",
+        "notes": "Technique descriptions for bomb jumping, morph mechanics. Frame-precise mechanics documented qualitatively."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "WARNING: Exact ROM-level physics constants for NES Metroid are less thoroughly documented than SMB or Mega Man.",
+      "NES Metroid uses room-based scrolling, NOT continuous scrolling. This is architecturally significant.",
+      "The 'floaty' feel comes from genuinely lower gravity than contemporaries — not an illusion.",
+      "High-Jump Boots increase jump height approximately 1.5x.",
+      "Space Jump is NOT present in NES Metroid — introduced in Super Metroid (SNES, 1994).",
+      "Charge Beam is NOT present in NES Metroid — introduced in Super Metroid.",
+      "All physics values below marked with confidence levels. Verify against Data Crystal RAM map."
+    ],
+    "units": {
+      "speed": "pixels per frame (approximate — exact sub-pixel unit uncertain without verified RAM map)",
+      "time": "frames at 60fps NTSC"
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    },
+    "scrolling_architecture": {
+      "type": "room_based",
+      "description": "Metroid uses room-based screen transitions rather than smooth scrolling. Each room is one screen. Entering a door triggers a transition to the adjacent room. This is fundamentally different from SMB's continuous scrolling.",
+      "significance": "Level generation must account for discrete room units, not tile strips. Camera is always locked to the room."
+    }
+  },
+
+  "samus_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "medium",
+      "ram_address": "$0020",
+      "notes": "Samus's walk speed is approximately 2 px/frame. She does not have a separate run speed — constant velocity movement similar to Mega Man. VERIFY against Data Crystal RAM map."
+    },
+    "acceleration": {
+      "notes": "Appears to be instant velocity (no acceleration ramp). Movement begins at full speed immediately. VERIFY."
+    }
+  },
+
+  "jump": {
+    "initial_y_velocity_approx": {
+      "px_per_frame": 4.5,
+      "confidence": "medium",
+      "notes": "Approximate from gameplay observation and community documentation. VERIFY against ROM."
+    },
+    "variable_jump": true,
+    "notes": "Jump height is variable — holding jump longer produces higher apex. Samus has meaningful air control, unlike Castlevania."
+  },
+
+  "gravity": {
+    "px_per_frame_sq_approx": 0.25,
+    "confidence": "medium",
+    "notes": "Metroid gravity is low compared to contemporaries — this is the source of the 'floaty' feel. Approximately 0.25 px/frame². The game deliberately emulates a sci-fi low-gravity environment. VERIFY exact value."
+  },
+
+  "terminal_velocity": {
+    "px_per_frame_approx": 5.0,
+    "confidence": "low",
+    "notes": "Approximate from gameplay observation. VERIFY."
+  },
+
+  "morph_ball": {
+    "speed_px_per_frame": 2.0,
+    "confidence": "medium",
+    "notes": "Morph ball horizontal speed matches Samus's walk speed. The morph ball hitbox is significantly smaller — approximately 1 tile × 1 tile vs Samus's 1×2 standing hitbox.",
+    "input": "Down to morph, Up to unmorph",
+    "hitbox": {
+      "width_px": 16,
+      "height_px": 16,
+      "notes": "Morph ball fits through 1-tile-tall passages inaccessible to standing Samus."
+    }
+  },
+
+  "bombs": {
+    "timer_frames": 60,
+    "notes": "Morph ball bombs explode after approximately 60 frames (1 second at 60fps).",
+    "bomb_jump": {
+      "description": "Laying a bomb and unmorphing allows Samus to jump on the explosion for extra height. Timing-sensitive.",
+      "source": "TASVideos: 'Samus can get extra height using a bomb by laying a bomb and unmorphing, where the bomb will push her upwards, and you can then jump for extra height.'",
+      "extra_height_constraint": "Do not press left or right between unmorph and jump — pressing a direction causes Samus to stop on landing and lose momentum."
+    },
+    "diagonal_bomb_boost": {
+      "description": "Lay a bomb, unmorph, move very slightly in the desired direction (only a few pixels), then jump after explosion for a high, far jump.",
+      "source": "TASVideos documented technique",
+      "notes": "The 'very slightly' horizontal movement before jumping is critical — too much direction input and the height boost is lost."
+    },
+    "capacity": 3,
+    "notes": "Samus can place up to 3 bombs simultaneously."
+  },
+
+  "high_jump_boots": {
+    "effect": "approximately 1.5x jump height increase",
+    "mechanism": "increases initial Y velocity at jump",
+    "confidence": "medium",
+    "notes": "High-Jump Boots are a major exploration unlock — they allow accessing previously unreachable areas. The ~1.5x multiplier is from community gameplay analysis. VERIFY exact multiplier against ROM."
+  },
+
+  "projectiles": {
+    "standard_beam": {
+      "speed_px_per_frame_approx": 6,
+      "direction": "horizontal (can aim up or horizontal, NOT diagonally)",
+      "confidence": "medium",
+      "notes": "Standard beam fires horizontally or upward. Speed approximately 6 px/frame. VERIFY."
+    },
+    "ice_beam": {
+      "effect": "Freezes enemies on contact",
+      "speed_px_per_frame_approx": 6,
+      "notes": "Ice Beam allows freezing enemies as platforms — a key exploration mechanic."
+    },
+    "wave_beam": {
+      "effect": "Oscillating wave pattern",
+      "notes": "Wave Beam travels in a sine-wave pattern, allowing hits around corners."
+    },
+    "missile": {
+      "speed_px_per_frame_approx": 6,
+      "direction": "horizontal only",
+      "damage_multiplier": "5x standard beam damage",
+      "capacity": "varies by count collected",
+      "notes": "Missiles are the primary boss-killing tool. Horizontal-only firing. Speed approximately 6 px/frame. VERIFY."
+    }
+  },
+
+  "varia_suit": {
+    "effect": "halves damage taken in hot areas (lava, Norfair)",
+    "notes": "Not a physics change — damage reduction only. But critical for exploration viability."
+  },
+
+  "hitboxes": {
+    "samus_standing": {
+      "width_px_approx": 8,
+      "height_px_approx": 24,
+      "confidence": "low",
+      "notes": "Approximate. Samus's hitbox is narrower than her sprite. VERIFY exact values."
+    },
+    "samus_morph_ball": {
+      "width_px_approx": 16,
+      "height_px_approx": 16,
+      "confidence": "medium"
+    }
+  },
+
+  "absent_mechanics": {
+    "space_jump": {
+      "present": false,
+      "introduced_in": "Super Metroid (SNES, 1994)"
+    },
+    "charge_beam": {
+      "present": false,
+      "introduced_in": "Super Metroid (SNES, 1994)"
+    },
+    "wall_jump": {
+      "present": false,
+      "notes": "No wall-jump mechanics in NES Metroid."
+    },
+    "grapple_beam": {
+      "present": false
+    }
+  },
+
+  "level_structure": {
+    "map_design": "non-linear open world (unusual for 1986)",
+    "room_size": "one screen per room (256x240 pixels)",
+    "navigation": "Samus enters doors and transitions to adjacent rooms",
+    "map_areas": ["Brinstar", "Norfair", "Kraid's Lair", "Ridley's Lair", "Tourian"],
+    "notes": [
+      "NES Metroid is one of the earliest 'Metroidvania' games — open world with ability-gated exploration.",
+      "Room-based scrolling means no parallax or smooth camera — the world is composed of discrete screen-sized chambers.",
+      "Norfair causes continuous damage without Varia Suit — a gating mechanism via gear dependency."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "The room-based architecture is a fundamentally different level generation target than SMB-style tile strips. Instead of generating a tile map with camera scroll, you generate a graph of rooms. Each room is one screen.",
+    "The floaty gravity is the Metroid feel. Without it, the game feels like generic NES platformer. The gravity value needs to be genuinely low (≈0.25 px/frame²), not just 'a bit lower than Mario'.",
+    "Bomb jumping is the hidden skill expression axis — casual players see bombs as combat tools; advanced players see them as a secondary jump mechanic. This duality (obvious use and advanced use) is great design.",
+    "The open-world structure means level generation would need to produce a room graph with choke points that require abilities to pass — not a linear level. This is a paradigm shift from platformer levels.",
+    "Ice Beam → enemy platforms is a puzzle mechanic: item A enables mechanic B which unlocks area C. This cascading ability unlock is the core Metroid design pattern."
+  ]
+}

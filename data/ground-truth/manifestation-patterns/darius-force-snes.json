@@ -1,0 +1,163 @@
+{
+  "game_id": "darius-force-snes",
+  "game_name": "Darius Force / Super Nova",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy formation approach",
+      "visual_form": "Complete formations of enemy ships advancing on screen",
+      "meaning": "Threat requiring evasion or destruction; destroying complete formations yields power-ups"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large distinctive enemy entity at stage end",
+      "meaning": "Stage culmination threat; defeat required to progress or reach alternate ending"
+    },
+    {
+      "signal": "Meteor rain",
+      "visual_form": "Flashing meteors descending across screen",
+      "meaning": "Environmental hazard with opportunity; flashing meteors contain power-ups"
+    },
+    {
+      "signal": "Amoeba formations",
+      "visual_form": "Amoeba-like enemy swarms",
+      "meaning": "Destructible enemy formations with power-up rewards"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Red bubbles (shot/bomb power), blue bubbles (shield/level), green bubbles (bonus/ship)",
+      "meaning": "Player capability enhancement; defensive and offensive strengthening"
+    },
+    {
+      "signal": "Checkpoint system",
+      "visual_form": "Stage checkpoints (unmarked in-game, implied by respawn mechanics)",
+      "meaning": "Safe progression markers; ship destruction returns player to last checkpoint rather than stage start"
+    },
+    {
+      "signal": "Special power-up",
+      "visual_form": "Unique power object distinct from standard bubbles",
+      "meaning": "Exceptional temporary capability: all-enemy-clear or powerful laser beam"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Silver Hawk (Player forces)",
+      "color_identity": "Green (original Darius), Blue (Darius II variant), Red (new prototype)",
+      "symbol_or_sigil": "Silver Hawk craft design (three distinct visual variants)",
+      "enemy_visual_variants": "Not documented",
+      "environmental_markers": "Player ship color indicates which continuity/variant is active"
+    },
+    {
+      "faction": "Enemy forces (unspecified)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple enemy types (ships, amoebas, meteors, boss entities)",
+      "environmental_markers": "Opposition to human/alliance forces implied by shmup paradigm"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression active",
+      "visual_manifestation": "Horizontal scrolling environment with enemy formations and obstacles",
+      "behavioral_manifestation": "Enemies advance; player navigates and destroys; stage scrolls forward"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Large boss entity appears at stage culmination",
+      "behavioral_manifestation": "Standard enemies cease; boss attacks; defeat triggers stage completion or ending"
+    },
+    {
+      "world_state": "Meteor rain event",
+      "visual_manifestation": "Flashing meteors rain across screen",
+      "behavioral_manifestation": "Destructible meteors appear; flashing variants contain power-ups; environmental hazard with reward opportunity"
+    },
+    {
+      "world_state": "Player power level change",
+      "visual_manifestation": "No power-up bar displayed; player shot/bomb intensity changes with power-up acquisition",
+      "behavioral_manifestation": "Shot and bomb power reset to minimum if ship destroyed; power-ups restore capability"
+    },
+    {
+      "world_state": "Ship destruction",
+      "visual_manifestation": "Player respawns at checkpoint with reduced power",
+      "behavioral_manifestation": "Return to last checkpoint; loss of all accumulated power-ups; progression continues from safe point"
+    },
+    {
+      "world_state": "Stage fork (L/N/O stages)",
+      "visual_manifestation": "Path choice presented to player",
+      "behavioral_manifestation": "Player selects forward or upward path; different paths lead to different boss encounters and endings"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-end boss encounters",
+      "example": "Each of three final stages (L, N, O) contains its own boss and leads to distinct ending, suggesting multiple narrative outcomes based on player choice"
+    },
+    {
+      "technique": "Stage map branching",
+      "example": "15-stage map with forward/upward path choices creates branching progression; player agency in destination selection implies different mission objectives or theaters"
+    },
+    {
+      "technique": "Power-up source variety",
+      "example": "Three acquisition methods (enemy formation destruction, meteor destruction, cage destruction) suggest multiple enemy supply lines and environmental hazards coexist"
+    },
+    {
+      "technique": "Vehicle continuity markers",
+      "example": "Three playable Silver Hawk variants reference previous Darius games, suggesting this is a continuation or cross-over event within larger conflict"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Silver Hawk (player ship)",
+      "state": "Active/powered-up",
+      "behavior": "Shoots projectiles (Y button default), drops bombs (B button default), switches to side lasers (R button); maintains position unless destroyed"
+    },
+    {
+      "entity": "Silver Hawk (player ship)",
+      "state": "Destroyed",
+      "behavior": "Resets to last stage checkpoint; all shot and bomb upgrades lost; capability returns to minimum level"
+    },
+    {
+      "entity": "Enemy formations",
+      "state": "Intact",
+      "behavior": "Advances across screen; must be completely destroyed to yield power-up reward"
+    },
+    {
+      "entity": "Meteors",
+      "state": "Rain event active",
+      "behavior": "Descend across screen; flashing variants contain power-ups; destroyable; present hazard and opportunity simultaneously"
+    },
+    {
+      "entity": "Boss",
+      "state": "Stage-end",
+      "behavior": "Unique attack pattern; defeat required for progression; each of three final bosses (L/N/O stages) leads to distinct ending"
+    },
+    {
+      "entity": "Futuristic cage (power-up container)",
+      "state": "On stage floor/ceiling",
+      "behavior": "Static; destructible; releases power-up upon destruction"
+    },
+    {
+      "entity": "Special power-up",
+      "state": "On-screen",
+      "behavior": "If destroyed by player fire: clears all enemies on screen; if grabbed by player: grants powerful laser beam; temporary effect"
+    }
+  ],
+  "notes": "Darius Force operates as a shmup without explicit faction narrative or political context in available sources. World-state communication relies entirely on visual/behavioral mechanics rather than story exposition. The branching 15-stage map and three distinct endings suggest narrative agency, but specific story/political content is not documented. The three Silver Hawk variants (green/blue/red) serve as mechanical/visual distinction rather than faction markers. Power-up system and checkpoint mechanics are core to world-state visualization—destruction resets capability, reinforcing progression stakes. Stage-end boss encounters and path branching create implicit narrative diversity without explicit exposition.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:13:26.380Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2712,
+    "output_tokens": 1979,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

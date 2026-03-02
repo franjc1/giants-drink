@@ -1,0 +1,140 @@
+{
+  "game_id": "kung-fu-nes",
+  "game_name": "Kung Fu",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated adversaries on screen (distinct sprite patterns from player)",
+      "meaning": "Immediate physical threat requiring combat response"
+    },
+    {
+      "signal": "Stage progression",
+      "visual_form": "Vertical level layouts with enemies densifying toward exits",
+      "meaning": "Escalating difficulty and danger intensity as player advances"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Larger, distinctly-colored enemy sprite at stage endpoint",
+      "meaning": "Critical confrontation requiring mastery of combat mechanics"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Stage cleared",
+      "visual_form": "Screen state transition, enemy disappearance, exit/goal reached",
+      "meaning": "Safe completion of current challenge; progression unlocked"
+    },
+    {
+      "signal": "Player positioning",
+      "visual_form": "Player character sprite at edges/corners of play space",
+      "meaning": "Spatial distance from enemies reduces immediate threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Kung Fu Master/Spartan X protagonist)",
+      "color_identity": "Distinct from enemy sprites; standard action game protagonist palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Not faction-based; enemies are generic adversaries",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Enemy forces",
+      "color_identity": "Contrasting sprite coloration (red/dark tones typical for NES era antagonists)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple enemy types with distinct sprite designs (guards, martial artists, boss character)",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active combat stage",
+      "visual_manifestation": "Multi-platform vertical level with enemies distributed across floors/platforms; animated player and enemy sprites in motion",
+      "behavioral_manifestation": "Enemies patrol, attack, and respond to player proximity; player must navigate and engage"
+    },
+    {
+      "world_state": "Stage completion",
+      "visual_manifestation": "Screen transition animation; enemy sprites vanish; new level loads with fresh enemy configurations",
+      "behavioral_manifestation": "Player gains access to next stage; difficulty ramps through stage-by-stage progression"
+    },
+    {
+      "world_state": "Boss confrontation",
+      "visual_manifestation": "Large boss sprite positioned at stage apex (typically final floor); more elaborate animation than standard enemies",
+      "behavioral_manifestation": "Boss executes distinct attack patterns; defeat triggers stage clear and progression"
+    },
+    {
+      "world_state": "Game over / failure state",
+      "visual_manifestation": "Likely screen-state change indicating loss condition (player sprite removal or dedicated game-over screen)",
+      "behavioral_manifestation": "Game halts progression; may trigger restart or continue sequence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Vertical level architecture as narrative space",
+      "example": "Multi-floor pagoda/building structure suggests player ascending toward objective (rescuing captive); each floor represents progress toward goal"
+    },
+    {
+      "technique": "Enemy placement density as difficulty/threat escalation",
+      "example": "Lower floors have sparse enemies; upper floors and final boss chamber show increased enemy concentration, visually communicating rising stakes"
+    },
+    {
+      "technique": "Sprite-based character differentiation",
+      "example": "Boss character receives distinctive, larger sprite treatment distinguishing them from generic guards, signaling narrative importance"
+    },
+    {
+      "technique": "Regional title variation as world-state marker",
+      "example": "Spartan X (original) vs Kung Fu (re-release) reflects licensing/political change in game's real-world state; both versions visually identical internally but represent different world contexts"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy",
+      "state": "Patrol",
+      "behavior": "Regular movement pattern across platforms; sprite cycles through walk/idle animations"
+    },
+    {
+      "entity": "Standard enemy",
+      "state": "Alert to player proximity",
+      "behavior": "Animation acceleration; directional sprite orientation toward player; attack initiation"
+    },
+    {
+      "entity": "Standard enemy",
+      "state": "Defeated",
+      "behavior": "Sprite removal or knockout animation; clearing screen space for player advancement"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Active combat",
+      "behavior": "Complex movement patterns; multi-stage attack sequences; sustained sprite presence through multiple player interactions"
+    },
+    {
+      "entity": "Player character",
+      "state": "Movement",
+      "behavior": "Responsive sprite animation reflecting directional input; climbing animations on vertical traversal"
+    },
+    {
+      "entity": "Player character",
+      "state": "Combat-ready",
+      "behavior": "Stance animation; attack sprite frames indicating punch/kick animations on enemy engagement"
+    }
+  ],
+  "notes": "Kung Fu (NES/Famicom) is a 1985 port of an arcade beat-em-up. The game employs classic action paradigm visual communication: enemy density and boss-stage structure create world-state progression. No explicit faction system exists—conflict is binary (player vs. generic enemies). The game's world-state is communicated primarily through vertical level progression and enemy configuration changes. Licensed title variation (Spartan X to Kung Fu) reflects external political/licensing changes but no in-game manifestation. Game uses NES-era sprite limitations effectively: distinct enemy types through sprite variation, boss differentiation through size/animation complexity. Environmental storytelling relies on level architecture metaphor (ascending pagoda/building toward rescue objective).",
+  "sources_used": [
+    "data_crystal",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:06:32.195Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3602,
+    "output_tokens": 1525,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

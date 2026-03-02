@@ -1,0 +1,162 @@
+{
+  "game_id": "indianapolis-500-genesis",
+  "game_name": "Indianapolis 500: The Simulation",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Yellow flag",
+      "visual_form": "Yellow flag flashing in top-left corner of screen",
+      "meaning": "Crash or incident on track; speed restrictions imposed; passing forbidden until cleared"
+    },
+    {
+      "signal": "Crashed car wreckage",
+      "visual_form": "Disabled vehicle remains visible on circuit for 2-3 laps",
+      "meaning": "Active hazard on track; collision risk; yellow flag conditions active"
+    },
+    {
+      "signal": "Engine damage/mechanical failure",
+      "visual_form": "Car retired to pit lane; displayed in standings as 'Crashed' or specific failure type",
+      "meaning": "Vehicle permanently out of race; loss of competitor"
+    },
+    {
+      "signal": "High rev indicator (implied)",
+      "visual_form": "Engine overstimulation during acceleration",
+      "meaning": "Imminent engine failure if revs continue unchecked"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Green flag",
+      "visual_form": "Green flag display as leader exits turn 4",
+      "meaning": "Track cleared; normal racing resumed; passing permitted; full speed allowed (~230 mph)"
+    },
+    {
+      "signal": "Clear track status",
+      "visual_form": "No yellow flags; no wreckage visible; normal lap timing displays",
+      "meaning": "No active incidents; safe to race at full competitive pace"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Car",
+      "color_identity": "Yellow (Penske-Chevrolet default) | Red (Lola-Buick) | Blue (March-Cosworth)",
+      "symbol_or_sigil": "Car number 17 (always player-controlled)",
+      "enemy_visual_variants": "32 computer-controlled cars in various liveries matching 1989 Indianapolis 500 grid",
+      "environmental_markers": "Always displayed in UI; tracked separately in standings from computer opponents"
+    },
+    {
+      "faction": "Computer Opponents",
+      "color_identity": "Varied by historical 1989 grid liveries",
+      "symbol_or_sigil": "Car numbers 1-33 (excluding 17); shows 'Crashed' or mechanical failure status in standings",
+      "enemy_visual_variants": "Realistic Indy car designs from 1989 season; visual damage states visible on track",
+      "environmental_markers": "Displayed in standings screen with position, status, and retirement reason if applicable"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Green flag / normal racing conditions",
+      "visual_manifestation": "Green flag display; clear track; normal lap counter; cars maintain high speed (~230 mph)",
+      "behavioral_manifestation": "All cars race at full competitive pace; passing permitted; no speed restrictions"
+    },
+    {
+      "world_state": "Yellow flag / incident active",
+      "visual_manifestation": "Yellow flag flashing in top-left corner; wreckage visible on circuit; speed indicator reduced",
+      "behavioral_manifestation": "All cars reduce speed to ~90 mph; passing forbidden; AI cars maintain formation until cleared"
+    },
+    {
+      "world_state": "Crash occurred",
+      "visual_manifestation": "Crashed car wreckage remains on track for 2-3 laps; reflected in standings as 'Crashed' status",
+      "behavioral_manifestation": "Affected computer car stops racing; other cars navigate around wreckage; yellow flag conditions persist"
+    },
+    {
+      "world_state": "Mechanical retirement",
+      "visual_manifestation": "Computer car in pits; standings show specific failure type (Engine, Bearing, Clutch, etc.)",
+      "behavioral_manifestation": "Affected car leaves race permanently; removed from active competition display"
+    },
+    {
+      "world_state": "Player car damaged",
+      "visual_manifestation": "Wheel damage affects visual handling feedback; engine damage may affect speed output in replay mode",
+      "behavioral_manifestation": "Car becomes harder to control; performance degraded; recovery to pit increasingly difficult with multiple damage types"
+    },
+    {
+      "world_state": "Race completion / Victory",
+      "visual_manifestation": "End-sequence celebration images displayed; final standings show player position (1st for victory); position ribbon at top of screen",
+      "behavioral_manifestation": "Return to main menu; end replay available; victory ceremony shown if first place achieved"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Standings screen status display",
+      "example": "Computer cars show mechanical failure reasons (Radiator, Oil Leak, Valve, etc.) rather than generic 'DNF', providing specific failure narratives for each AI competitor"
+    },
+    {
+      "technique": "Persistent wreckage visualization",
+      "example": "Crashed cars remain on circuit for 2-3 laps before being cleared, allowing player to witness consequence of incident over time and plan alternate racing lines"
+    },
+    {
+      "technique": "Yellow flag UI placement and persistence",
+      "visual_form": "Yellow flag flashing in top-left corner maintains visibility throughout caution period, creating urgency and hazard awareness",
+      "example": "Flag persists until 'green flag' display returns, teaching player to monitor top-left corner for state changes"
+    },
+    {
+      "technique": "Realistic grid representation",
+      "example": "Starting grid matches 1989 Indianapolis 500 qualifying order (with player replacing Car #29), grounding simulation in historical race context"
+    },
+    {
+      "technique": "Replay camera system",
+      "example": "Leader/Crash camera automatically focuses on incident vehicles during replay, directing player attention to consequential race moments"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Computer-controlled car",
+      "state": "Normal racing",
+      "behavior": "Maintains racing line; competes at full speed; responds to yellow flag by reducing speed to ~90 mph"
+    },
+    {
+      "entity": "Computer-controlled car",
+      "state": "Crash occurred",
+      "behavior": "Becomes immobilized on track; wreckage remains visible for 2-3 laps; removed from race standings as 'Crashed'"
+    },
+    {
+      "entity": "Computer-controlled car",
+      "state": "Mechanical failure during pit stop",
+      "behavior": "Pulls into pits; remains there permanently; retirement reason displayed in standings (Engine, Bearing, Clutch, etc.)"
+    },
+    {
+      "entity": "Player car",
+      "state": "Wheel damage (single)",
+      "behavior": "Maintains drivability; handling becomes more difficult; recovery to pits still possible"
+    },
+    {
+      "entity": "Player car",
+      "state": "Wheel damage (two or more)",
+      "behavior": "Control severely degraded; recovery to pits extremely difficult or impossible; race effectively over"
+    },
+    {
+      "entity": "Player car",
+      "state": "Engine damage",
+      "behavior": "No recovery possible; race ended; mechanics cannot repair mid-race"
+    },
+    {
+      "entity": "All cars",
+      "state": "Yellow flag active",
+      "behavior": "Forced speed reduction to ~90 mph; passing forbidden; maintains formation until green flag; speeds return to ~230 mph upon clearance"
+    }
+  ],
+  "notes": "Indianapolis 500: The Simulation operates as a pure racing simulation with minimal narrative or faction elements. Visual communication focuses entirely on race-state signaling (green/yellow flags), damage consequences, and historical accuracy (1989 grid). No political situations, narrative factions, or world-state beyond immediate racing conditions are present. The game's manifestation layer is purely mechanical: flags signal rule changes, wreckage signals hazards, and standings display communicate competitor elimination. Color identity (yellow/red/blue cars) is cosmetic rather than faction-driven.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:37:46.132Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2638,
+    "output_tokens": 2181,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

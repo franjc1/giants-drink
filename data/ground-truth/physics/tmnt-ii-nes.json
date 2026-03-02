@@ -1,0 +1,123 @@
+{
+  "game_id": "tmnt-ii-nes",
+  "game_name": "Teenage Mutant Ninja Turtles II: The Arcade Game",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system documentation available in sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Jump Kick",
+      "description": "In Japanese version, jump kick can be performed at any point during jump. In western versions, only while descending. Character performs aerial kick attack.",
+      "physics_values": {
+        "jp_version_timing": "any_point_in_jump",
+        "western_version_timing": "descending_only"
+      }
+    },
+    {
+      "name": "Special Attack",
+      "description": "Performed by holding attack button and pressing jump. Raphael rolls along ground and finishes with kick; other turtles perform sweeping jump attack with weapons.",
+      "physics_values": {
+        "input": "hold_attack_plus_jump",
+        "raphael_pattern": "ground_roll_into_kick",
+        "others_pattern": "sweeping_jump_attack"
+      }
+    },
+    {
+      "name": "Wall Spring/Wall Jump",
+      "description": "Turtles can spring off walls in certain areas of levels.",
+      "physics_values": {
+        "mechanic": "wall_spring"
+      }
+    },
+    {
+      "name": "Direction Change Post-Attack",
+      "description": "In Japanese version only, for a few frames after jump kick or special attack, player can push opposite direction to switch which way attack is aimed.",
+      "physics_values": {
+        "available_in": "jp_version_only",
+        "window_frames": "few_frames",
+        "mechanic": "attack_direction_switching"
+      }
+    },
+    {
+      "name": "Throw Mechanic",
+      "description": "Turtles can throw Foot soldiers overhead as special move.",
+      "physics_values": {
+        "mechanic": "enemy_throw"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "arcade-style",
+    "responsive",
+    "momentum-based combat",
+    "responsive_direction_changes"
+  ],
+  "tier_notes": "Tier 2 empirical/qualitative data. Sources document gameplay mechanics but contain no precise physics parameters (velocities, accelerations, gravity values in pixels/frame, sub-pixel formats). Regional differences between Japanese and western versions affect mechanics (jump kick timing, attack direction switching, enemy health values). Game is arcade port with simplified NES adaptation.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (gameplay mechanics, regional differences, character-specific attack patterns)",
+    "wikipedia - Teenage Mutant Ninja Turtles arcade game article (gameplay description, special moves, wall mechanics)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:32:28.425Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6513,
+    "output_tokens": 1058,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

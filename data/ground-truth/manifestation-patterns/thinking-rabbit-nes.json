@@ -1,0 +1,150 @@
+{
+  "game_id": "thinking-rabbit-nes",
+  "game_name": "Sokoban",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Box against wall",
+      "visual_form": "box sprite positioned adjacent to wall sprite",
+      "meaning": "imminent deadlock risk—box cannot be pulled back, only pushable forward"
+    },
+    {
+      "signal": "Box in corner",
+      "visual_form": "box sprite in corner formed by two wall sprites",
+      "meaning": "critical deadlock state—box permanently trapped if not on storage location"
+    },
+    {
+      "signal": "Box in dead-end alcove",
+      "visual_form": "box sprite in enclosed space with single entry point",
+      "meaning": "severe constraint—box can only exit via the entry direction, limiting solution paths"
+    },
+    {
+      "signal": "Player positioning relative to box",
+      "visual_form": "player sprite on wrong side of unsolved box",
+      "meaning": "tactical danger—player cannot push box toward target without repositioning, consuming moves"
+    },
+    {
+      "signal": "Multiple boxes clustered",
+      "visual_form": "two or more box sprites adjacent to each other",
+      "meaning": "deadlock vulnerability—pushing one box may trap another against wall or third box"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Box on storage location",
+      "visual_form": "box sprite overlaid on or aligned with red dot marker",
+      "meaning": "objective achieved for this box—one step closer to puzzle completion"
+    },
+    {
+      "signal": "Empty storage locations visible",
+      "visual_form": "red dot markers on unoccupied floor squares",
+      "meaning": "available destinations—paths remain open for box placement"
+    },
+    {
+      "signal": "Open floor space",
+      "visual_form": "empty floor squares with no walls, boxes, or obstacles",
+      "meaning": "maneuvering room—player has movement freedom to reposition for pushing"
+    },
+    {
+      "signal": "Player in center of open area",
+      "visual_form": "player sprite surrounded by empty floor squares",
+      "meaning": "tactical safety—player has multiple directional options without immediate constraints"
+    },
+    {
+      "signal": "Box away from walls",
+      "visual_form": "box sprite with clear space on multiple sides",
+      "meaning": "pushable in multiple directions—flexible solution pathways remain available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "none",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "puzzle unsolved",
+      "visual_manifestation": "boxes not aligned with storage location markers; red dots visible beneath or near boxes",
+      "behavioral_manifestation": "player can move and push boxes; input remains responsive; level progression blocked"
+    },
+    {
+      "world_state": "puzzle solved",
+      "visual_manifestation": "all boxes positioned on storage locations; red dot markers fully obscured or merged with box sprites",
+      "behavioral_manifestation": "level completion triggered; player typically advances to next puzzle or sees completion feedback"
+    },
+    {
+      "world_state": "deadlock condition",
+      "visual_manifestation": "box permanently trapped against wall or in corner with no solution path remaining",
+      "behavioral_manifestation": "puzzle becomes unsolvable; undo function activated or level restart required"
+    },
+    {
+      "world_state": "mid-puzzle progress",
+      "visual_manifestation": "some boxes on storage locations, others scattered; mix of solved and unsolved targets visible",
+      "behavioral_manifestation": "player continues active pushing; partial visual feedback for completed objectives"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "warehouse context via level design",
+      "example": "top-down layout with walls representing warehouse shelving and cargo areas; floor tiles suggest concrete or warehouse flooring"
+    },
+    {
+      "technique": "visual hierarchy through box vs. target contrast",
+      "example": "distinct visual separation between pushable boxes and storage location markers (dots) communicates goal without text"
+    },
+    {
+      "technique": "spatial constraint as narrative of logistics challenge",
+      "example": "narrow corridors, tight corners, and wall layouts implicitly communicate warehouse congestion and the difficulty of cargo handling"
+    },
+    {
+      "technique": "progressive level complexity as narrative escalation",
+      "example": "early levels feature open layouts; later levels introduce tighter spaces and more boxes, suggesting increasing operational difficulty"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "box",
+      "state": "unsolved (not on storage location)",
+      "behavior": "remains static until pushed by player; responds to directional force only; cannot be pulled; stops against obstacles"
+    },
+    {
+      "entity": "box",
+      "state": "solved (on storage location)",
+      "behavior": "visually anchored to location; no further interaction needed; may display visual confirmation (color change, overlay)"
+    },
+    {
+      "entity": "player",
+      "state": "mobile",
+      "behavior": "moves one square at a time in four cardinal directions; can approach and push boxes; blocked by walls and occupied squares"
+    },
+    {
+      "entity": "player",
+      "state": "constrained by boxes",
+      "behavior": "movement limited by adjacent box positions; forced to navigate around unsolved boxes to access other areas"
+    },
+    {
+      "entity": "wall",
+      "state": "static obstacle",
+      "behavior": "immovable barrier; blocks both player and box movement; defines level boundaries and internal architecture"
+    }
+  ],
+  "notes": "Sokoban contains no faction systems, combat states, or political dynamics. World-state communication is purely logical and spatial: danger signals manifest through geometric constraint (deadlock risk), while safety signals reflect solution availability. The game's entire manifestation layer operates on puzzle-logic visualization—red dots for goals, box positioning for risk assessment, and empty space for tactical freedom. NES version uses simple tile-based graphics; danger and safety are communicated implicitly through spatial relationships rather than explicit visual styling (no color-coded warnings or animated alerts).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:48:22.548Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3122,
+    "output_tokens": 1594,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

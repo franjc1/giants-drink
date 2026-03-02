@@ -1,0 +1,113 @@
+{
+  "game_id": "side-pocket-nes",
+  "game_name": "Side Pocket",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Life loss indicator",
+      "visual_form": "Lives counter decrement on HUD",
+      "meaning": "Player scratch or consecutive missed shots result in loss of life; visual feedback of game-over approach"
+    },
+    {
+      "signal": "Failed shot state",
+      "visual_form": "Cue ball returns without pocket; turn control transfers",
+      "meaning": "Indicates missed objective and loss of turn advantage in competitive modes"
+    },
+    {
+      "signal": "Foul condition",
+      "visual_form": "Life loss in 9-Ball mode upon illegal shot",
+      "meaning": "Violation of pool rules; immediate penalty state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Bonus pocket activation",
+      "visual_form": "Flashing star appears in specific pocket during play",
+      "meaning": "Opportunity for bonus points, extra lives, or bonus round; positive world state"
+    },
+    {
+      "signal": "Successful pocket",
+      "visual_form": "Ball enters pocket; points awarded on HUD",
+      "meaning": "Progress toward level objective; safe state advancement"
+    },
+    {
+      "signal": "Consecutive shot success",
+      "visual_form": "Point multiplier or combo indicator",
+      "meaning": "Player maintains control and momentum; reduced danger of life loss"
+    }
+  ],
+  "faction_indicators": null,
+  "world_state_to_visual": [
+    {
+      "world_state": "Progression through difficulty levels",
+      "visual_manifestation": "Enhanced remakes feature five 'city' themed levels (Los Angeles, San Francisco, Las Vegas, New York City, Atlantic City) as visual/contextual progression markers",
+      "behavioral_manifestation": "Increasing number of balls on table per level; escalating score requirements; difficulty curve visualized through expanded rack complexity"
+    },
+    {
+      "world_state": "Single-player vs. multiplayer mode",
+      "visual_manifestation": "Lives system active in single-player Pocket Game; lives removed in two-player competitive modes",
+      "behavioral_manifestation": "Turn-based control switching in multiplayer; continuous penalty structure in single-player"
+    },
+    {
+      "world_state": "Challenge/trick shot mode active",
+      "visual_manifestation": "Dedicated visual layout for 19 trick shot levels with increasing difficulty visual indicators",
+      "behavioral_manifestation": "Single-shot constraint; all-balls-pocketed-in-one-shot requirement; high-risk/high-reward point structure"
+    },
+    {
+      "world_state": "Game over/level fail state",
+      "visual_manifestation": "Lives counter reaches zero; HUD state change",
+      "behavioral_manifestation": "Game loop reset; return to level start or game start"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "City-themed level progression",
+      "example": "Genesis/SNES versions use photo-realistic city backgrounds (Los Angeles, San Francisco, Las Vegas, NYC, Atlantic City) to contextualize billiards within American gambling/entertainment geography; visual setting communicates narrative of rising stakes and social context of competitive pool"
+    },
+    {
+      "technique": "Character homage styling",
+      "example": "Photo-realistic player character representation in Genesis/SNES/Game Gear versions designed as homage to 1986 film 'The Color of Money' (resembling Tom Cruise and Paul Newman characters); visual character design establishes cultural/cinematic context and aspirational narrative"
+    },
+    {
+      "technique": "Table configuration variety",
+      "example": "Four different rack configurations become standard visual variation; communicates game complexity escalation and pool ruleset authenticity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Cue ball",
+      "state": "Active turn",
+      "behavior": "Player controls trajectory, spin (english), special shots (massé, jump shots); visual feedback through aiming reticle"
+    },
+    {
+      "entity": "Numbered balls",
+      "state": "Pocketing sequence",
+      "behavior": "Visual despawn upon pocket; point addition to HUD; numerical order achievement triggers bonus state"
+    },
+    {
+      "entity": "Bonus star indicator",
+      "state": "Activated pocket",
+      "behavior": "Flashing visual animation in designated pocket; conditional bonus trigger if ball pocketed in same shot"
+    },
+    {
+      "entity": "Player turn control",
+      "state": "Two-player mode",
+      "behavior": "Visual/behavioral handoff of input control between players upon missed shot or foul; turn indicator shifts"
+    }
+  ],
+  "notes": "Side Pocket is a pure mechanics-focused sports simulation with minimal narrative/political world-state elements. Visual communication centers on game status (lives, points, level progression) and rule-state feedback (valid/invalid shots, bonus activation). Faction and danger/safety signals are implicit to billiards rule structure rather than explicit game design. City-themed levels in enhanced versions (Genesis/SNES) provide minimal environmental narrative context—primarily cosmetic progression markers. The game's 'world-state' is entirely game-state (score, lives, level, mode); no dynamic faction systems, political conditions, or environmental storytelling beyond surface-level venue theming. Manifestation layer reflects purely ludic communication: HUD feedback, ball physics, turn control, and visual reward triggers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:28:49.230Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2794,
+    "output_tokens": 1386,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

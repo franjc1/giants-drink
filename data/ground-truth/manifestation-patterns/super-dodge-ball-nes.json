@@ -1,0 +1,219 @@
+{
+  "game_id": "super-dodge-ball-nes",
+  "game_name": "Super Dodge Ball",
+  "platform": "nes",
+  "paradigm": "sports (dodgeball)",
+  "danger_signals": [
+    {
+      "signal": "Ball in opponent possession",
+      "visual_form": "Ball sprite moving toward player team",
+      "meaning": "Immediate threat; player must catch or dodge"
+    },
+    {
+      "signal": "Team member elimination",
+      "visual_form": "Character transforms into angel caricature and flies upward off-screen",
+      "meaning": "Loss of team strength; reduced life bar"
+    },
+    {
+      "signal": "Incoming power shot",
+      "visual_form": "Captain character winds up for specialized throw with faster ball travel",
+      "meaning": "High-damage attack; multiple hits required to eliminate opponent"
+    },
+    {
+      "signal": "Numerical disadvantage",
+      "visual_form": "Fewer characters on player's side of court than opponent",
+      "meaning": "Team is losing; risk of match failure if time expires"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ball in player possession",
+      "visual_form": "Ball sprite held by player character",
+      "meaning": "Player can attack or pass; control of match tempo"
+    },
+    {
+      "signal": "Successful catch/interception",
+      "visual_form": "Player character animation catches incoming ball",
+      "meaning": "Threat neutralized; possession transferred to player team"
+    },
+    {
+      "signal": "Full team roster displayed",
+      "visual_form": "All seven team members visible on court (captain + 6 members)",
+      "meaning": "Team at full strength; optimal defensive and offensive capability"
+    },
+    {
+      "signal": "Time remaining",
+      "visual_form": "Timer display; match progresses without elimination",
+      "meaning": "If team has more survivors when time expires, player wins regardless of ball possession"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dallas (Player team, USA)",
+      "color_identity": "Blue/red team colors (regional variation)",
+      "symbol_or_sigil": "National flag (US version displays flag; Japanese version uses school uniform)",
+      "enemy_visual_variants": "Dallas vs. Chicago team roster differs in character appearance (skin tone, hair color reflect Americanization)",
+      "environmental_markers": "Court background changes per match; USA home court music and visual setting"
+    },
+    {
+      "faction": "Chicago (Rival USA team)",
+      "color_identity": "Contrasting team uniform colors",
+      "symbol_or_sigil": "National flag (US version); school insignia (Japanese version as Hanazono High School)",
+      "enemy_visual_variants": "Character designs reflect American representation",
+      "environmental_markers": "Distinct home court background from Dallas"
+    },
+    {
+      "faction": "England",
+      "color_identity": "Team-specific uniform palette",
+      "symbol_or_sigil": "Union Jack flag (incorrectly used in US version; source notes confusion with English flag)",
+      "enemy_visual_variants": "Four offensive players plus backup roster",
+      "environmental_markers": "Stage music references Beatles hits ('Get Back' + 'A Hard Day's Night' mashup); British-themed court"
+    },
+    {
+      "faction": "Iceland",
+      "color_identity": "Distinct team uniform",
+      "symbol_or_sigil": "National flag",
+      "enemy_visual_variants": "Multiple backup players not visible on main court",
+      "environmental_markers": "Stage-specific background and music"
+    },
+    {
+      "faction": "China",
+      "color_identity": "Team uniform colors",
+      "symbol_or_sigil": "National flag",
+      "enemy_visual_variants": "Four main court players with bench reserves",
+      "environmental_markers": "Stage music and court background"
+    },
+    {
+      "faction": "Kenya (Africa in Japanese version)",
+      "color_identity": "Team uniform palette",
+      "symbol_or_sigil": "National/continental flag",
+      "enemy_visual_variants": "Backup roster system",
+      "environmental_markers": "Stage setting and music"
+    },
+    {
+      "faction": "Japan (Final opponent, or home team in Japanese version)",
+      "color_identity": "Team uniform colors",
+      "symbol_or_sigil": "National flag (US version); Nekketsu High School insignia (Japanese version)",
+      "enemy_visual_variants": "In Japanese version, Nekketsu High School is player team; Hanazono is rival. In US version, roles reversed with team names/stats swapped",
+      "environmental_markers": "Japan stage theme uses 'Sakura Sakura'; distinct court background. Home court music and visuals swapped between versions"
+    },
+    {
+      "faction": "USSR (Soviet team, US version final opponent)",
+      "color_identity": "Team uniform colors",
+      "symbol_or_sigil": "Soviet flag",
+      "enemy_visual_variants": "Derived from original Team USA data; stats and visual presentation reflect Cold War-era finalization",
+      "environmental_markers": "Court and music associated with original Team USA; final match significance in US version reflects late 1980s geopolitics"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "International tournament progression (early stage)",
+      "visual_manifestation": "Match order: Dallas vs. Chicago → England → Iceland → China → Kenya/Africa → Japan (US version); England → India → Iceland → China → Kenya → Japan → USA (Japanese version order before regional swap)",
+      "behavioral_manifestation": "Difficulty scaling: early opponents have fewer backup players and simpler AI; player team adjusts roster composition"
+    },
+    {
+      "world_state": "Tournament climax / Cold War era context (US version)",
+      "visual_manifestation": "Final match against USSR team (geopolitical substitution); court and music are swapped from original Team USA presentation",
+      "behavioral_manifestation": "Final opponent uses most aggressive tactics; all backup roster members employed; highest stats on opposing team"
+    },
+    {
+      "world_state": "Match stalemate / time pressure",
+      "visual_manifestation": "Timer visible on-screen; no eliminations occurring",
+      "behavioral_manifestation": "Winning condition shifts: team with most surviving members wins if timer expires; strategic camping/defense becomes viable"
+    },
+    {
+      "world_state": "Match victory",
+      "visual_manifestation": "Entire opposing team transformed into angel caricatures; all characters fly off-screen; trophy awarded by ninja character (Superman parody in arcade version)",
+      "behavioral_manifestation": "Tournament advances to next opponent; match setup resets with new team; world cycle restarts after defeating final team"
+    },
+    {
+      "world_state": "Regional/geopolitical difference (Japanese vs. US versions)",
+      "visual_manifestation": "Japanese version: domestic school rivalry (Nekketsu vs. Hanazono) begins tournament; international teams follow. US version: national team selection (Team USA vs. All-Stars) precedes world cup; USSR positioned as final boss",
+      "behavioral_manifestation": "Team roster swapping: Team Japan receives Team USA's stats/formation; Team USSR receives Team USA's original stats; character faces remain unchanged, creating cognitive dissonance in localization"
+    },
+    {
+      "world_state": "Player team customization enabled (Japanese version only)",
+      "visual_manifestation": "Name entry screen displays custom team and player names; team identity displayed in World Cup, Versus Play, and Bean Ball modes",
+      "behavioral_manifestation": "US version disabled this feature entirely; pressing Select produces sound effect but no action"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-specific music and background art",
+      "example": "England stage features mashup of Beatles songs ('Get Back' + 'A Hard Day's Night'); Japan stage uses traditional 'Sakura Sakura'; each nation's court background reflects cultural/geographical identity"
+    },
+    {
+      "technique": "Backup roster system as world-state indicator",
+      "example": "Foreign teams have more than four offensive players available; when a member is eliminated, backup players replace them, signaling deep bench depth and tournament-level competition"
+    },
+    {
+      "technique": "Character appearance as nationality signal",
+      "example": "US version changed character skin tones and hair colors from Japanese version to reflect Americanization; visual appearance communicates team affiliation and geopolitical context"
+    },
+    {
+      "technique": "Captain design as faction power indicator",
+      "example": "Each team's captain is larger-sized character with exclusive 'Power Shot' ability; captain prominence signals leadership structure and specialized threat level"
+    },
+    {
+      "technique": "Flag display as political/national identity marker",
+      "example": "US version displays national flags for each team on selection screen; Japanese version omits flags, using school uniforms instead; localization choice reflects regional audience expectations"
+    },
+    {
+      "technique": "Final boss visual elevation via trophy ceremony",
+      "example": "Victory animatic features ninja (or Superman parody in arcade) awarding trophy; visual celebration ritual reinforces tournament hierarchy and geopolitical dominance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player team captain",
+      "state": "Has ball possession",
+      "behavior": "Can execute 'Power Shot' (faster travel, higher damage) by dashing twice and throwing; visual wind-up animation distinguishes from regular throw"
+    },
+    {
+      "entity": "Opposing team captain",
+      "state": "Has ball possession",
+      "behavior": "Employs Power Shot with increased frequency as match progresses; targets player team captain preferentially"
+    },
+    {
+      "entity": "Any player character",
+      "state": "Low health (multiple hits taken)",
+      "behavior": "Character remains on court but shows visual damage indicator (reduced animation frames or staggered movement); one final hit triggers elimination"
+    },
+    {
+      "entity": "Eliminated character",
+      "state": "Defeated",
+      "behavior": "Transforms into angel caricature and floats upward off-screen; creates darkly comedic tone while signaling loss condition"
+    },
+    {
+      "entity": "Backup roster member",
+      "state": "Main court player eliminated",
+      "behavior": "Replaces fallen teammate on court; visually appears from sideline area; maintains team offensive/defensive balance"
+    },
+    {
+      "entity": "Player-controlled character",
+      "state": "Opponent has ball, incoming throw detected",
+      "behavior": "Right button triggers duck/dodge animation; left button triggers catch animation; successful catch transfers possession; failed dodge applies damage"
+    },
+    {
+      "entity": "AI opponent team",
+      "state": "Numerical disadvantage (more team members eliminated)",
+      "behavior": "Increases throwing frequency and Power Shot usage; targets player team captain to eliminate captain advantage"
+    }
+  ],
+  "notes": "Super Dodge Ball demonstrates aggressive localization strategy: US version performs complete team name/data swapping to reposition USSR as final antagonist (Cold War context, late 1980s), while Japanese version features domestic school rivalry (Nekketsu High School vs. Hanazono High School). Visual identity systems rely heavily on national flags, character appearance alterations, and stage-specific audio/background art. Faction differentiation achieved through roster depth (backup player system), captain design prominence, and uniform color coding. World-state communication minimal; progression is linear tournament structure without dynamic world changes. Regional differences include disabled name-entry feature in US version, disabled microphone easter eggs (NES lacks hardware), and stage order reordering. Visual danger/safety signals depend entirely on ball possession, team roster status, and timer pressure. No complex environmental state shifts; game maintains consistent court setup throughout.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:42:47.564Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4773,
+    "output_tokens": 2912,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

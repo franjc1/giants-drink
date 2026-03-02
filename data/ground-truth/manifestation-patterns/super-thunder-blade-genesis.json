@@ -1,0 +1,118 @@
+{
+  "game_id": "super-thunder-blade-genesis",
+  "game_name": "Super Thunder Blade",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "enemy_military_vehicles",
+      "visual_form": "ground-based and airborne hostile units rendered in third-person perspective segments",
+      "meaning": "active combat threat requiring player engagement"
+    },
+    {
+      "signal": "boss_entity_appearance",
+      "visual_form": "larger-scale enemy units that trigger camera perspective shift to top-down view",
+      "meaning": "escalated danger state requiring tactical repositioning"
+    },
+    {
+      "signal": "guerrilla_forces",
+      "visual_form": "organized hostile combatants distributed across stage environments",
+      "meaning": "persistent environmental threat necessitating continuous offensive response"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "helicopter_operational_status",
+      "visual_form": "player-controlled aircraft remains on-screen and responsive to input",
+      "meaning": "player entity integrity; safe state maintained while vehicle functions"
+    },
+    {
+      "signal": "stage_progression_zones",
+      "visual_form": "forward rail-based movement through environmental segments",
+      "meaning": "advancement through level indicates safe passage through prior threats"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_military",
+      "color_identity": null,
+      "symbol_or_sigil": "helicopter gunship",
+      "enemy_visual_variants": null,
+      "environmental_markers": "operates across diverse military terrain; no fixed base visual"
+    },
+    {
+      "faction": "guerrilla_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "military vehicles (ground and air units)",
+      "enemy_visual_variants": "differentiated by stage environment and combat role",
+      "environmental_markers": "distributed throughout stage environments as organized opposition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "normal_engagement",
+      "visual_manifestation": "third-person perspective behind helicopter; enemies render as tactical threats in environment",
+      "behavioral_manifestation": "enemies pursue standard patrol/attack patterns; player moves through rail-based forward progression"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "camera shifts from third-person to top-down perspective; boss entity becomes focal point",
+      "behavioral_manifestation": "escalated enemy behavior; player must adapt to new viewpoint paradigm for targeting and evasion"
+    },
+    {
+      "world_state": "stage_completion",
+      "visual_manifestation": "progression to next stage with environmental transition; new threat hierarchy established",
+      "behavioral_manifestation": "new enemy formations and boss encounters replace prior threats"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "environmental_variety_as_narrative",
+      "example": "four distinct stages with different geographic/military contexts communicate campaign scope and diverse operational theaters"
+    },
+    {
+      "technique": "threat_density_escalation",
+      "example": "increasing numbers and complexity of military vehicles across stages suggest intensifying conflict severity"
+    },
+    {
+      "technique": "perspective_shift_as_narrative_emphasis",
+      "example": "camera change to top-down during boss fights signals shift from tactical movement to focused confrontation—communicates strategic importance of boss entities"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_helicopter",
+      "state": "normal_flight",
+      "behavior": "responds to directional input; maintains rail-based forward momentum; weapons fire on player command"
+    },
+    {
+      "entity": "player_helicopter",
+      "state": "air_brake_engaged",
+      "behavior": "velocity reduction allows tactical repositioning; distinctive mechanical feature differentiates helicopter capability from generic flight"
+    },
+    {
+      "entity": "enemy_military_vehicles",
+      "state": "patrol",
+      "behavior": "render within environment prior to player proximity; suggest organized ground operations"
+    },
+    {
+      "entity": "boss_unit",
+      "state": "encounter_active",
+      "behavior": "triggers perspective shift; occupies focal screen position; requires sustained combat engagement to defeat"
+    }
+  ],
+  "notes": "Super Thunder Blade communicates world-state primarily through mechanical perspective shifts and enemy density/type variation. The helicopter platform itself serves as a faction identifier—its design and armament (guns/missiles) signal military authority and combat capability. Danger is communicated through enemy presence and concentration rather than environmental hazard visualization. The political situation (military operation against guerrillas) is implicit in game structure rather than explicitly visualized through environmental markers like flags, insignia, or territorial control zones. The rail-shooter paradigm constrains manifestation complexity; world-state exists primarily as enemy configuration and camera perspective rather than dynamic environmental transformation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:55:03.313Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2349,
+    "output_tokens": 1241,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "game_id": "ogre-battle-snes",
+  "game_name": "Ogre Battle: The March of the Black Queen",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Nocturnal enemy activity",
+      "visual_form": "Vampires appearing in coffins during day; werewolves appearing as normal men during day but transforming at night",
+      "meaning": "Time-of-day danger indicator; certain threats only manifest under darkness"
+    },
+    {
+      "signal": "Boss presence on stage map",
+      "visual_form": "Marked enemy unit representing stage commander",
+      "meaning": "Primary objective threat; defeating boss completes liberation mission"
+    },
+    {
+      "signal": "Undefended liberated towns",
+      "visual_form": "Previously captured town reverting to enemy control on map",
+      "meaning": "Loss of territory and income if tactical position not maintained"
+    },
+    {
+      "signal": "Enemy unit proximity",
+      "visual_form": "Opposing squad moving close to player unit on tactical map",
+      "meaning": "Imminent engagement; battle will trigger when units are adjacent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Liberated town control",
+      "visual_form": "Town under player faction control on map",
+      "meaning": "Generates income each day cycle; provides shop access and information"
+    },
+    {
+      "signal": "Daytime state",
+      "visual_form": "Day phase on alternating day/night cycle",
+      "meaning": "Reduced threat from nocturnal monsters (vampires, werewolves disabled)"
+    },
+    {
+      "signal": "Liberated temples",
+      "visual_form": "Temple structure under player control",
+      "meaning": "Strategic position; can be held as defensive locations"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Zeteginean Empire",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy units and boss units appear as Zeteginean forces attempting to recapture towns and temples",
+      "environmental_markers": "Occupied towns and temples; controlled military positions on stage map"
+    },
+    {
+      "faction": "Player Revolution",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player-controlled units display under player squad control; distinct from enemy forces",
+      "environmental_markers": "Liberated towns and temples; player-deployed squad positions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Day cycle",
+      "visual_manifestation": "Time-of-day indicator showing daylight; nocturnal enemies (vampires in coffins, werewolves as normal men) rendered harmless",
+      "behavioral_manifestation": "Vampires and werewolves unable to function; removed from active threat roster during daylight hours"
+    },
+    {
+      "world_state": "Night cycle",
+      "visual_manifestation": "Time-of-day indicator showing darkness; vampires emerge from coffins, werewolves transform to combat form",
+      "behavioral_manifestation": "Nocturnal enemies become active combatants; increased danger threat; different tactical composition"
+    },
+    {
+      "world_state": "Territory liberated",
+      "visual_manifestation": "Town/temple icon changes to player faction control on map; visual distinction from enemy-held locations",
+      "behavioral_manifestation": "Town begins generating income; becomes accessible for shopping and information; if undefended, will revert to Zeteginean control"
+    },
+    {
+      "world_state": "Territory reclaimed by Empire",
+      "visual_manifestation": "Previously liberated town reverts to enemy control indicator on map",
+      "behavioral_manifestation": "Lost income source; loss of access to shop and information; enemy presence reinstated"
+    },
+    {
+      "world_state": "Stage boss defeated",
+      "visual_manifestation": "Boss unit removed from map; stage completion indicator",
+      "behavioral_manifestation": "Mission objective complete; stage unlocked for future replay; progression to next stage enabled"
+    },
+    {
+      "world_state": "High reputation revolution",
+      "visual_manifestation": "Reputation score displayed; affects character recruitment visuals and dialogue tone",
+      "behavioral_manifestation": "High-alignment characters willing to join; certain story branches and recruits only available to high-reputation leader"
+    },
+    {
+      "world_state": "Low reputation revolution",
+      "visual_manifestation": "Reputation score displayed; affects character recruitment visuals and dialogue tone",
+      "behavioral_manifestation": "Low-alignment (evil) characters willing to join; alternate recruits and story branches available only to low-reputation leader"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Town liberation with random tarot card draw",
+      "example": "Upon capturing a town, a Major Arcana card is drawn, providing variable effects to reflect fortune/consequence of liberation; creates sense of consequence and unpredictability"
+    },
+    {
+      "technique": "Hidden towns and treasure caches",
+      "example": "Some towns and temples do not display on initial map; only revealed when unit moves over location; rewards exploration and encourages thorough tactical positioning"
+    },
+    {
+      "technique": "Time-of-day enemy manifestation",
+      "example": "Vampire visual form changes from coffin (day) to active combatant (night); werewolf appears as normal man (day) vs. beast form (night); communicates danger differently by time period"
+    },
+    {
+      "technique": "Maintenance cost system",
+      "example": "Deploying and maintaining squads costs money each day cycle; reinforces that liberated towns must generate income to sustain revolution; creates economic strategy layer"
+    },
+    {
+      "technique": "Multiple endings tied to conduct",
+      "example": "13 different endings based on reputation and moral choices; game visually/narratively reflects player alignment through story branches and character availability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Vampire",
+      "state": "Daytime",
+      "behavior": "Renders in coffin form; non-functional; cannot engage in combat"
+    },
+    {
+      "entity": "Vampire",
+      "state": "Nighttime",
+      "behavior": "Emerges from coffin; active combatant; functional threat unit"
+    },
+    {
+      "entity": "Werewolf",
+      "state": "Daytime",
+      "behavior": "Appears as normal man; non-threatening appearance; non-functional as combat unit"
+    },
+    {
+      "entity": "Werewolf",
+      "state": "Nighttime",
+      "behavior": "Transforms to beast form; active combatant; functional threat unit"
+    },
+    {
+      "entity": "Enemy unit",
+      "state": "Adjacent to player unit",
+      "behavior": "Battle engagement triggered; unit moves to close-up battle view"
+    },
+    {
+      "entity": "Enemy unit",
+      "state": "Round won",
+      "behavior": "Defeated unit retreats from map; victor unit remains in tactical position"
+    },
+    {
+      "entity": "Liberated town",
+      "state": "Undefended for multiple day cycles",
+      "behavior": "Town captured by Zeteginean forces; reverts to enemy control; income generation stops"
+    },
+    {
+      "entity": "Boss unit",
+      "state": "Defeated",
+      "behavior": "Removed from map; stage completion achieved; progression enabled"
+    }
+  ],
+  "notes": "Ogre Battle uses a sophisticated real-time tactical system where world state is communicated through time-of-day cycles (affecting enemy manifestation), territorial control markers (town/temple occupation), and alignment systems that determine available characters and story branches. The game employs visual transformation (vampires/werewolves) and icon-based map control to convey danger and political control. Tarot cards function as both mechanical randomizers and narrative devices, adding unpredictability to world state changes. The 13-ending structure ensures that player conduct visually and narratively manifests in endgame state.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:57:02.762Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2985,
+    "output_tokens": 2065,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

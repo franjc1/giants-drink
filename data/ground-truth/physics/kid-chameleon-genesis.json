@@ -1,0 +1,155 @@
+{
+  "game_id": "kid-chameleon-genesis",
+  "game_name": "Kid Chameleon",
+  "platform": "Genesis",
+  "year": 1992,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": 256,
+    "format": "8.8_fixed",
+    "notes": "Speeds measured in pixels:subpixels format where 256 subpixels equals one pixel"
+  },
+  "player": {
+    "walk_speed": {
+      "value": 2,
+      "unit": "pixels:subpixels (2:0)"
+    },
+    "run_speed": {
+      "value": 3.5,
+      "unit": "pixels:subpixels (3:128)"
+    },
+    "max_horizontal_speed": {
+      "value": 3.5,
+      "unit": "pixels:subpixels (3:128)"
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "jump_velocity": null,
+    "gravity": null,
+    "max_fall_speed": null,
+    "air_acceleration": null,
+    "air_friction": {
+      "value": 0.00391,
+      "unit": "pixels:subpixels per frame (0:1)"
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Air Drag",
+      "description": "All characters except SkyCutter decelerate in air by 0:1 per frame regardless of jump source. If speed falls below 2:95, it resets to 2:160.",
+      "physics_values": {
+        "air_friction_per_frame": "0:1 pixels:subpixels",
+        "minimum_speed_threshold": "2:95 pixels:subpixels",
+        "reset_speed": "2:160 pixels:subpixels"
+      }
+    },
+    {
+      "name": "Enemy Bounce Boost",
+      "description": "Bouncing off enemies provides a speed boost. Multiple bounces in succession possible. Mechanics under investigation.",
+      "physics_values": {}
+    },
+    {
+      "name": "Surface Friction - Rubber",
+      "description": "Walking on rubber decreases max speed: reduces run speed by 0:128 and walk speed modification.",
+      "physics_values": {
+        "run_speed_reduction": "0:128 pixels:subpixels"
+      }
+    },
+    {
+      "name": "Surface Acceleration - Ice",
+      "description": "Walking on ice speeds up character by approximately 0:4 per frame.",
+      "physics_values": {
+        "ice_acceleration": "0:4 pixels:subpixels per frame"
+      }
+    },
+    {
+      "name": "SkyCutter - Variable Gravity",
+      "description": "When forward or B (jump) held, gravity affects SkyCutter less. Gravity behavior changes based on input.",
+      "physics_values": {
+        "note": "Gravity mechanics described as mysterious, requires further investigation"
+      }
+    },
+    {
+      "name": "SkyCutter - Horizontal Speed Control",
+      "description": "Horizontal speed depends only on whether A (run) is held or not.",
+      "physics_values": {
+        "run_speed": "4:0 pixels:subpixels",
+        "walk_speed": "2:0 pixels:subpixels"
+      }
+    },
+    {
+      "name": "SkyCutter - Landing Penalties",
+      "description": "Landing, running off ledge, or ducking stops SkyCutter for one frame if board turned down. Jumping reduces speed to 3 pixels/frame. No penalty if board up.",
+      "physics_values": {
+        "post_jump_speed": "3:0 pixels/frame",
+        "landing_stop_frames": 1
+      }
+    },
+    {
+      "name": "MicroMax - Wall Cling & Climbing",
+      "description": "1x1 block sized character that can cling to walls. Zig-zagging faster in 1-2 block width tunnels than single-wall climbing.",
+      "physics_values": {
+        "character_dimensions": "1x1 blocks"
+      }
+    },
+    {
+      "name": "MicroMax - Increased Air Control",
+      "description": "Can adjust jump height/distance by holding or releasing B even after jump peak, unlike other characters.",
+      "physics_values": {
+        "jump_velocity_preliminary": "2:130 pixels:subpixels (under investigation)"
+      }
+    },
+    {
+      "name": "MicroMax - Cannon Avoidance",
+      "description": "Fits between horizontal spikes from cannon blocks (normal characters fit between vertical spikes).",
+      "physics_values": {}
+    },
+    {
+      "name": "Cyclone - Flight",
+      "description": "Can fly by pressing C repeatedly. Flying speed slower than running, but can maintain higher speed if flying off ledge or after enemy bounce.",
+      "physics_values": {}
+    },
+    {
+      "name": "Red Stealth - Strike While Jumping Bug",
+      "description": "Can strike in air (normally impossible) by starting strike with C then jumping mid-animation. Strike animation shows but damage applies frames later.",
+      "physics_values": {
+        "normal_attack_cooldown": "13 frames",
+        "bug_attack_cooldown": "5 frames"
+      }
+    },
+    {
+      "name": "Maniaxe - Rapid Throw Bug",
+      "description": "Jump during throw animation to cancel it and throw again quickly. Best method: B (jump) 1 frame, C (throw) 4 frames, repeated.",
+      "physics_values": {
+        "normal_throw_cooldown": "18 frames",
+        "bug_throw_cooldown": "5 frames minimum"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "responsive",
+    "momentum-based",
+    "variable jump heights per form",
+    "form-dependent physics"
+  ],
+  "tier_notes": "T2 empirical data from TASVideos speedrun documentation. Speed values in pixel:subpixel format well-documented for multiple characters. Gravity and acceleration values not explicitly numerically documented; qualitative descriptions available for special character mechanics. Jump velocity values only documented for Red Stealth, Cyclone, MicroMax, and SkyCutter forms, not base Kid Chameleon.",
+  "sources_used": [
+    "TASVideos - Kid Chameleon Game Resources (movement speeds, air drag, surface physics, character-specific mechanics)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T09:15:33.785Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5712,
+    "output_tokens": 1710,
+    "dimension": "physics",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "_meta": {
+    "game": "Super Castlevania IV",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1991,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "Castlevania Speedrunning Wiki — Cv4/tricks",
+        "url": "https://castlevaniaspeedruns.com/mediawiki/index.php?title=Cv4/tricks",
+        "notes": "Documents jump heights and frame counts (3-frame=45px/40f, 2-frame=41px/38f, 1-frame=36px/36f), whip animation timing (12 frames to hit, 12 more active), invincibility 80 frames, weapon damage values."
+      },
+      {
+        "name": "TASVideos Game Resources — SNES / Super Castlevania IV",
+        "url": "https://tasvideos.org/GameResources/SNES/SuperCastlevaniaIV",
+        "notes": "Whip cancel timing, ring swing dynamics, ledge fall behavior. Qualitative mechanics, limited quantified values."
+      }
+    ],
+    "confidence": "medium-high",
+    "notes": [
+      "Super Castlevania IV is a COMPLETE REDESIGN of Castlevania physics compared to NES CV1.",
+      "NES CV1: fixed jump trajectory (lookup table), no air control, 1px/f walk. SCV4: variable jump, full air control, faster movement.",
+      "The 8-directional whip is the signature new mechanic — Simon can whip in all 8 directions and grapple rings to swing.",
+      "Jump physics are VARIABLE (not lookup table) — this is the key departure from NES Castlevania design.",
+      "Gravity and initial jump velocity calculated from documented jump heights/frames.",
+      "Walk speed not explicitly documented in reviewed sources — estimated from community gameplay documentation."
+    ],
+    "nes_castlevania_comparison": {
+      "jump_type": "NES: fixed lookup table. SCV4: variable height simulation",
+      "air_control": "NES: none. SCV4: full",
+      "walk_speed": "NES: 1.0 px/f. SCV4: approximately 1.5 px/f (faster)",
+      "whip_directions": "NES: 1 (horizontal). SCV4: 8 directions",
+      "whip_grapple": "NES: none. SCV4: ring grapple for swinging",
+      "whip_timing": "NES: 22f animation, hits at 17. SCV4: 12f to damage, 12f active (24f total)",
+      "invincibility": "NES: 96 frames. SCV4: 80 frames",
+      "stair_control": "NES: locked while on stairs. SCV4: can jump on stairs"
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    },
+    "collision_grid": {
+      "tile_size_px": 8,
+      "notes": "CV4 uses 8×8 pixel collision tiles (half the visual tile size). The gaps every 8 pixels are exploitable in speedrunning."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "medium",
+      "notes": "Walk speed not explicitly documented in reviewed sources. Community description: Simon moves 'quicker' than NES Castlevania (1.0 px/f). Estimated ~1.5 px/f. VERIFY against ROM."
+    },
+    "acceleration": null,
+    "notes": "Movement appears to be instant velocity like NES Castlevania. No acceleration ramp."
+  },
+
+  "jump": {
+    "_note": "CRITICAL DIFFERENCE FROM NES CASTLEVANIA: SCV4 jump is variable height with full air control. NOT a lookup table.",
+    "type": "physics_simulation_variable_height",
+    "full_jump_3_plus_frames": {
+      "total_height_px": 45,
+      "frames_airborne": 40,
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high"
+    },
+    "2_frame_jump": {
+      "total_height_px": 41,
+      "frames_airborne": 38,
+      "height_vs_full": "-4 pixels",
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high"
+    },
+    "1_frame_jump": {
+      "total_height_px": 36,
+      "frames_airborne": 36,
+      "height_vs_full": "-9 pixels",
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high"
+    },
+    "calculated_physics": {
+      "_method": "Derived from 3-frame jump: height=45px, airborne=40f, apex at frame 20. Using h=v₀t - ½gt²: at apex v=0, so v₀=g×20; height: 200g=45; g=0.225, v₀=4.5",
+      "initial_y_velocity_calculated": {
+        "px_per_frame": 4.5,
+        "confidence": "medium",
+        "notes": "Calculated from jump height/duration data. Assumes constant gravity. VERIFY against ROM."
+      },
+      "gravity_calculated": {
+        "px_per_frame_sq": 0.225,
+        "confidence": "medium",
+        "notes": "Calculated from jump data. Close to NES Castlevania's effective gravity. VERIFY."
+      }
+    },
+    "variable_height": true,
+    "air_control": "full",
+    "notes": [
+      "FULL AIR CONTROL — Simon can freely change horizontal direction mid-jump. Opposite of NES Castlevania.",
+      "Variable height: holding jump longer produces higher apex. NES Castlevania had fixed apex.",
+      "Can jump while on stairs — impossible in NES Castlevania.",
+      "The combination (variable height + full air control) makes SCV4 Simon the most mobile Castlevania protagonist to this point."
+    ]
+  },
+
+  "whip": {
+    "animation_timing": {
+      "frames_to_damage": 12,
+      "frames_damage_active": 12,
+      "total_animation_frames": 24,
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high",
+      "notes": "Compare to NES CV: 22 total frames, hits at frame 17. SCV4 whip activates FASTER (12 vs 17 frames) and has a wider damage window (12 active vs ~5 in NES CV)."
+    },
+    "directions": {
+      "count": 8,
+      "description": "Whip can be aimed in 8 directions: up, upper-right, right, lower-right (airborne), down (airborne), lower-left (airborne), left, upper-left",
+      "notes": "8-directional whip is SCV4's signature mechanic. In NES CV1, whip only fires horizontal. The 8 directions transform whip from a fixed-horizontal tool to a flexible combat system."
+    },
+    "damage": {
+      "leather_whip": {
+        "full_hit": 32,
+        "partial_hit": 8
+      },
+      "chain_whip": {
+        "full_hit": 48,
+        "partial_hit": 12
+      },
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high"
+    },
+    "ring_grapple": {
+      "description": "Simon can use the whip to grapple on designated ring points in the environment, swinging in a pendulum arc.",
+      "mechanics": "Attach to ring → swing using momentum → jump off at desired point",
+      "swing_behavior": "Pendulum physics. Swing height is higher when Simon's sprite faces right (TASVideos: 'oddly enough, this boost is higher when his sprite points to the right').",
+      "notes": "Ring grapple sections require swinging to build height/momentum before releasing at the optimal point. This is a precision timing challenge."
+    }
+  },
+
+  "subweapons": {
+    "damage_values": {
+      "dagger": 32,
+      "axe": 48,
+      "holy_water": 48,
+      "cross_boomerang": {
+        "damage": 48,
+        "bonus": "effectively double due to forward/backward hit on same throw",
+        "notes": "Cross hits on both outgoing and return trajectories, making it highest total damage subweapon."
+      }
+    },
+    "cooldown_after_hit": {
+      "frames": 17,
+      "notes": "17-frame window after subweapon contacts enemy or candle where further hits are disabled."
+    }
+  },
+
+  "damage_system": {
+    "invincibility_frames": {
+      "duration_frames": 80,
+      "source": "Castlevania Speedrunning Wiki",
+      "confidence": "high",
+      "notes": "80 frames after taking damage. Compare to NES CV1: 96 frames. Slightly shorter in SCV4."
+    },
+    "damage_boost": {
+      "description": "Taking damage increases Simon's movement speed temporarily.",
+      "notes": "Damage boost is exploited in speedrunning for faster horizontal movement. The invincibility frames + speed boost create a useful tool despite the HP cost."
+    }
+  },
+
+  "hitboxes": {
+    "simon_standing": {
+      "collision_tile_unit": "8px grid",
+      "notes": "SCV4 uses 8×8 collision tiles. Simon's hitbox is multiple tiles wide and tall. Exact pixel dimensions need ROM verification.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "SCV4 represents the 'reboot' philosophy: take a beloved NES game's theme and completely rethink the mechanics for new hardware capabilities. The soul (castles, whip, subweapons, enemies) is the same; the physics are fundamentally different.",
+    "The 8-directional whip transforms the game from 'advance left-to-right timing the whip' to 'manage space in all directions.' Level design in SCV4 exploits the 8 directions — enemies attack from diagonals and above/below in ways NES CV couldn't.",
+    "Full air control + variable jump is the biggest quality-of-life improvement. NES Castlevania's locked-in jumps felt punishing. SCV4 Simon feels responsive. This changes the difficulty model from 'memorize exact jump points' to 'react to what's happening.'",
+    "The ring grapple sections create a movement mode shift mid-level — swinging on rings is a different physical challenge from walking and jumping. The pendulum physics create their own timing challenges.",
+    "The 8×8 collision tile grid creates a different 'feel' than the visual 16×16 tiles — smaller collision precision allows more nuanced interactions with terrain edges."
+  ]
+}

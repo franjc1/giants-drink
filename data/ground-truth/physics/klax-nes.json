@@ -1,0 +1,108 @@
+{
+  "game_id": "klax-nes",
+  "game_name": "Klax",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented for this puzzle game"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Paddle Movement",
+      "description": "Player controls a paddle at the lower end of a conveyor belt. Paddle moves left/right via four-position joystick. Joystick up flips topmost tile a short distance up the conveyor. Joystick down accelerates tile motion down the conveyor.",
+      "physics_values": {
+        "paddle_max_tiles": 5,
+        "well_capacity": 25,
+        "well_columns": 5,
+        "well_rows": 5
+      }
+    },
+    {
+      "name": "Tile Falling",
+      "description": "Pressing button causes topmost tile on paddle to fall directly downward into the well column below. Tiles fall and stack if column not full. Penalty incurred if tile falls off conveyor without being caught or paddle is full.",
+      "physics_values": {
+        "fall_direction": "straight_down",
+        "acceleration_mod": "accelerated_by_down_input"
+      }
+    },
+    {
+      "name": "Tile Cascading",
+      "description": "When Klaxs (matching lines) are formed and cleared, tiles above them fall toward bottom of well due to gravity.",
+      "physics_values": {
+        "cascade_trigger": "line_clear",
+        "fall_behavior": "cascade"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "puzzle-based",
+    "reactive",
+    "grid-based",
+    "tile-matching"
+  ],
+  "tier_notes": "Tier 3: Klax is a puzzle game with no jump/platformer physics. Available sources contain only high-level gameplay mechanics and development history. No sub-pixel, gravity, jump velocity, or detailed movement physics are documented. All movement is input-driven paddle control and physics-based tile falling/cascading on a grid system.",
+  "sources_used": [
+    "The Cutting Room Floor - Klax (NES)",
+    "Wikipedia - Klax (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:51:46.777Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4759,
+    "output_tokens": 912,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

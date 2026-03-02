@@ -1,0 +1,191 @@
+{
+  "game_id": "fire-emblem-genealogy-snes",
+  "game_name": "Fire Emblem: Genealogy of the Holy War",
+  "platform": "snes",
+  "paradigm": "tactical-rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit proximity",
+      "visual_form": "Movement range display on grid-based map",
+      "meaning": "Visual indication of enemy attack reach and threat zone"
+    },
+    {
+      "signal": "Castle siege status",
+      "visual_form": "Castle capture state change on map",
+      "meaning": "Loss of home base or strategic position indicates critical danger and mission failure condition"
+    },
+    {
+      "signal": "Leader vulnerability",
+      "visual_form": "Player army leader unit position relative to enemies",
+      "meaning": "Leader defeat results in immediate game over and mission restart requirement"
+    },
+    {
+      "signal": "Permanent character death",
+      "visual_form": "Unit removal from battlefield after defeat",
+      "meaning": "Fallen units except plot-critical ones are permanently lost from roster"
+    },
+    {
+      "signal": "Reinforcement deployment",
+      "visual_form": "New enemy units appearing on map after castle seizure",
+      "meaning": "Environmental state change (castle capture) triggers escalated enemy response"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Home base access",
+      "visual_form": "Castle towns within mission maps",
+      "meaning": "Safe zones for weapon repair, item trading, and arena battles"
+    },
+    {
+      "signal": "Save point availability",
+      "visual_form": "Save file capability at start of each turn",
+      "meaning": "Player agency to preserve progress and mitigate permanent death risk"
+    },
+    {
+      "signal": "Character relationship proximity",
+      "visual_form": "Adjacent allied units on grid",
+      "meaning": "Family and married pairs provide critical hit bonuses and resource sharing safety"
+    },
+    {
+      "signal": "Leadership rank aura",
+      "visual_form": "High-ranking unit within three-tile radius",
+      "meaning": "Stat boosts to nearby units indicate protective leadership presence"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Grannvale (First Generation - Sigurd's Kingdom)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Military units under Grannvalian command vs. corrupted/cult-aligned variants",
+      "environmental_markers": "Castles and territories controlled by Grannvale; player home base location"
+    },
+    {
+      "faction": "Loptous Cult (Primary Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Religious cult identity tied to revival of ancient dragon Loptous",
+      "enemy_visual_variants": "Cult-aligned enemy units distinguished from legitimate state forces",
+      "environmental_markers": "Territories influenced by cult activity; scripted events showing cult dominance"
+    },
+    {
+      "faction": "Eight Holy Nations (Jugdral Continent)",
+      "color_identity": null,
+      "symbol_or_sigil": "Founded by Twelve Crusaders; divine heraldry implied",
+      "enemy_visual_variants": "Nation-specific unit types and military configurations",
+      "environmental_markers": "Multi-region map structure reflecting eight distinct political entities"
+    },
+    {
+      "faction": "Second Generation Forces (Seliph's Army)",
+      "color_identity": null,
+      "symbol_or_sigil": "Inherited heraldry from first generation; continuity of crusader legacy",
+      "enemy_visual_variants": "Stat values and skills visually influenced by parental attributes",
+      "environmental_markers": "Castle progression showing generational territory reclamation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Castle under player control",
+      "visual_manifestation": "Castle ownership display on map; accessible home base services",
+      "behavioral_manifestation": "Neighboring enemy castles deploy reinforcements; scripted objective changes trigger"
+    },
+    {
+      "world_state": "Castle lost to enemy",
+      "visual_manifestation": "Castle visual state change indicating enemy ownership",
+      "behavioral_manifestation": "Mission failure if player's home castle seized; forced mission restart"
+    },
+    {
+      "world_state": "Generation transition (Gen 1 to Gen 2)",
+      "visual_manifestation": "Character roster swap; parental trait inheritance visible in stat displays",
+      "behavioral_manifestation": "Second-gen units inherit stat modifiers from parent assigned attributes; new relationship bonds form"
+    },
+    {
+      "world_state": "Character romance established",
+      "visual_manifestation": "Married character pair proximity indicators on grid",
+      "behavioral_manifestation": "Critical hit boost activation; gold resource sharing; story-driven romantic scenes"
+    },
+    {
+      "world_state": "Cult influence escalation",
+      "visual_manifestation": "Enemy unit composition shift; cult-aligned forces become more prevalent",
+      "behavioral_manifestation": "Story-driven enemy behavior changes; scripted cult-affiliated boss encounters"
+    },
+    {
+      "world_state": "Leadership hierarchy established",
+      "visual_manifestation": "High-ranking unit visual prominence; aura radius indicator (three-tile range)",
+      "behavioral_manifestation": "Stat boost application to all units within leadership range; rank-dependent boost magnitude"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dynamic objective changes",
+      "example": "Seizing a castle triggers neighboring castle reinforcement deployment, showing escalating enemy response to player actions"
+    },
+    {
+      "technique": "Multi-generational landscape",
+      "example": "Chapter structure spans two generations of characters across same continent (Jugdral), with territories shifting control between generations"
+    },
+    {
+      "technique": "Sacred geography",
+      "example": "Eight nations founded by Twelve Crusaders establish regional identity and territorial division; player progression reclaims crusader legacy territories"
+    },
+    {
+      "technique": "Cult infiltration visualization",
+      "example": "Enemy unit composition changes reflect growing Loptous cult influence across regions; story beats show cult stirring war between nations"
+    },
+    {
+      "technique": "Family inheritance display",
+      "example": "Second generation units visually inherit stat traits from parents; appearance and skills communicate bloodline legacy and parentage"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player leader (Sigurd / Seliph)",
+      "state": "Active on battlefield",
+      "behavior": "Movement range displayed; critical to army survival; defeat triggers mission failure"
+    },
+    {
+      "entity": "Enemy leader units",
+      "state": "High-ranking (Leadership rank)",
+      "behavior": "Grant stat boosts to all units within three-tile radius; prioritized tactical targets"
+    },
+    {
+      "entity": "Castle garrison units",
+      "state": "Pre-reinforcement (before siege)",
+      "behavior": "Defend fixed positions; static deployment"
+    },
+    {
+      "entity": "Castle garrison units",
+      "state": "Post-siege reinforcement triggered",
+      "behavior": "New units deploy from reinforcement points; dynamic troop escalation"
+    },
+    {
+      "entity": "Related character pairs (siblings / spouses)",
+      "state": "Adjacent on grid",
+      "behavior": "Critical hit bonus activation; gold sharing capability; stat conversation boosts"
+    },
+    {
+      "entity": "Permanent death candidates",
+      "state": "Non-plot-critical; defeated in battle",
+      "behavior": "Immediate permanent roster removal; irreversible loss for remainder of campaign"
+    },
+    {
+      "entity": "Weapon triangle users",
+      "state": "Engaged in combat",
+      "behavior": "Visual/mechanical advantage/disadvantage based on rock-paper-scissors (lance > sword > axe > lance)"
+    }
+  ],
+  "notes": "Fire Emblem: Genealogy of the Holy War establishes world-state communication through grid-based tactical visualization and dynamic scripted events. Danger is communicated via permanent death mechanics, leadership dependency, and castle control stakes. Factions are distinguished through territorial control, unit composition, and generational inheritance systems. Political situation manifests through two-generation narrative structure showing crusader legacy conflict, cult infiltration, and inter-kingdom warfare. The game uses relationship mechanics (marriage, sibling bonds) as both narrative and mechanical danger-mitigation signals. World state changes visually through castle ownership, enemy reinforcement patterns, and character roster generational transitions.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:56:03.844Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3036,
+    "output_tokens": 2151,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

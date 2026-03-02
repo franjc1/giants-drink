@@ -1,0 +1,1378 @@
+Mighty Morphin Power Rangers (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Mighty Morphin Power Rangers (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Mighty Morphin Power Rangers
+
+Developer :
+
+Natsume
+
+Publisher :
+
+Bandai
+
+Platform :
+
+SNES
+
+Released in JP : November 24,&#160;1995  Released in US : September 1994  Released in EU : January 26,&#160;1995
+
+This game has  uncompiled source code .
+
+This game has a  hidden sound test .
+
+This game has  regional differences .
+
+A side-scrolling action platformer based on the TV show of the same name.
+
+Sound Test
+
+Hold  Select  and press  A, A, A, A, B, B, B, B, X, Y, X, Y, X, Y, X, Y  (Japanese version only) or use the  Pro Action Replay  (PAR) code
+
+7E000E26
+
+at the title screen to enable a Sound Test menu. This feature appears to be exclusive to the Japanese and European releases of the game.
+
+(Source: Abystus)
+
+Uncompiled Source Code
+
+A decent chunk of uncompiled source code can be found in the ROM at
+
+0xF8000  .
+
+a	group	$00
+high	=	<>>>
+low	=	<<>
+
+INCLUDE	KAN.EQU
+
+; <<<<<<<<<<<<<<<<<<<<  Velocity & Gate  >>>>>>>>>>>>>>>>>>>>>
+
+P00	=	$00
+P01	=	$10
+P02	=	$20
+P03	=	$30
+P04	=	$40
+P05	=	$50
+P06	=	$60
+P07	=	$70
+
+V00	=	$00
+V01	=	$01
+V02	=	$02
+V03	=	$03
+V04	=	$04
+V05	=	$05
+V06	=	$06
+V07	=	$07
+V08	=	$08
+V09	=	$09
+V10	=	$0A
+V11	=	$0B
+V12	=	$0C
+V13	=	$0D
+V14	=	$0E
+V15	=	$0F
+
+ORG	02000H
+
+; <<<<<<<<<<<<<<<<<<<<  GAKUFU (Score Data)  >>>>>>>>>>>>>>>>>>>>>
+
+GFT
+	DW	GAK00
+
+; <<< Original Parcution Table >>>
+DD0	=	080H+04AH
+
+SD00	=	DD0+0
+SD01	=	DD0+1
+SD02	=	DD0+2
+SD03	=	DD0+3
+SD04	=	DD0+4
+SD05	=	DD0+5
+SD06	=	DD0+6
+SD07	=	DD0+7
+SD08	=	DD0+8
+SD09	=	DD0+9
+SD10	=	DD0+10
+SD11	=	DD0+11
+SD12	=	DD0+12
+SD13	=	DD0+13
+SD14	=	DD0+14
+SD15	=	DD0+15
+SD16	=	DD0+16
+SD17	=	DD0+17
+SD18	=	DD0+18
+SD19	=	DD0+19
+
+; ---------- Sequence 00 ----------
+
+GAK00
+	DW	GAK00_I_000
+	DW	GAK00_1_768
+	DW	GAK00_2_768
+	DW	GAK00_3_384
+	DW	GAK00_4_384
+	DW	GAK00_5_384
+	DW	$00FF, $02*2+GAK00
+	DW	$0000
+
+GAK00_PAT0030	=	0
+GAK00_PAT0031	=	0
+GAK00_P_GT_6	=	0
+
+; ---------- Flase 000 ----------
+GAK00_I_000
+	DW	GAK00_START
+	DW	$0000
+	DW	$0000
+	DW	$0000
+	DW	$0000
+	DW	$0000
+	DW	$0000
+	DW	$0000
+
+; ---------- Flase 001 ----------
+GAK00_1_768
+	DW	GAK00_1_GUIT
+	DW	GAK00_1_BACK
+	DW	GAK00_1_BASS
+	DW	GAK00_1_DRUM
+	DW	GAK00_1_TOM
+	DW	GAK00_1_HIHT
+	DW	GAK00_1_OR_A
+	DW	GAK00_1_OR_B
+
+; ---------- Flase 002 ----------
+GAK00_2_768
+	DW	GAK00_2_GUIT
+	DW	GAK00_2_BACK
+	DW	GAK00_2_BASS
+	DW	GAK00_2_DRUM
+	DW	GAK00_2_GT_E
+	DW	GAK00_2_HIHT
+	DW	GAK00_2_OR_A
+	DW	GAK00_2_OR_B
+
+; ---------- Flase 003 ----------
+GAK00_3_384
+	DW	GAK00_3_GUIT
+	DW	GAK00_3_BACK
+	DW	GAK00_3_BASS
+	DW	GAK00_3_DRUM
+	DW	GAK00_3_GT_E
+	DW	GAK00_3_HIHT
+	DW	GAK00_3_ORGN
+	DW	GAK00_3_OBRI
+
+; ---------- Flase 004 ----------
+GAK00_4_384
+	DW	GAK00_4_GUIT
+	DW	GAK00_4_BACK
+	DW	GAK00_4_BASS
+	DW	GAK00_4_DRUM
+	DW	GAK00_4_GT_E
+	DW	GAK00_4_HIHT
+	DW	GAK00_4_ORGN
+	DW	$0000
+
+; ---------- Flase 005 ----------
+GAK00_5_384
+	DW	GAK00_5_GUIT
+	DW	GAK00_5_BACK
+	DW	GAK00_5_BASS
+	DW	GAK00_5_DRUM
+	DW	GAK00_5_GT_E
+	DW	GAK00_5_HIHT
+	DW	GAK00_5_ORGN
+	DW	GAK00_5_OBRI
+
+; ---------- Pattern 0000 ---------- 
+GAK00_1_GUIT
+
+DB	SNO, $08
+	DB	PAN, $0A
+	DB	PV1, $C8
+	DB	VIB, $12, $20, $20
+	DB	PAT,<GAK00_P_GT_1,>GAK00_P_GT_1, $07
+	DB	018,P07+V07,D40, 012,P02+V09,E40, 012,P02+V08,D40
+	DB	012,P02+V07,C4S, 006,P07+V07,C4S, G4S, 018,C5S
+	DB	PV2, $0C, $64
+	DB	012,TIE
+	DB	SWP, $00, $0C, $31
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0001 ---------- 
+GAK00_1_BACK
+
+DB	SNO, $07
+	DB	PAN, $09
+	DB	PV1, $A0
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	096,P07+V10,F3S
+	DB	036,P04+V10,D30, 024,P07+V10,E30, 012,P02+V10,E30
+	DB	024,P05+V10,E30
+	DB	096,P07+V10,F3S
+	DB	036,P04+V10,D30, 024,P07+V10,E30, 012,P02+V10,F3S
+	DB	024,P05+V10,E30
+; ---- [ mean:  1 / step:  384 ] ----
+	DB	PAT,<GAK00_P_BC_1,>GAK00_P_BC_1, $01
+	DB	012,P07+V10,E30, F3S
+; ---- [ mean:  2 / step:
+
+24 ] ----
+	DB	D30, D30, 006,C3S, 012,D30, E30, E30
+	DB	C3S, E30, 006,C3S
+; ---- [ mean:  3 / step:
+
+96 ] ----
+	DB	PAT,<GAK00_P_BC_1,>GAK00_P_BC_1, $01
+	DB	012,P07+V10,A30, F3S
+; ---- [ mean:  4 / step:
+
+24 ] ----
+	DB	018,D30, 012,P02+V10,E30, D30, 054,P07+V10,C3S
+; ---- [ mean:  5 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0002 ---------- 
+GAK00_1_BASS
+
+DB	SNO, $06
+	DB	PAN, $0A
+	DB	PV1, $FA
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	096,P07+V13,F1S
+	DB	018,P07+V12,D10, 018,P07+V10,D10, 024,P07+V12,E10
+	DB	012,F1S, G1S, E10
+	DB	096,P07+V13,F1S
+	DB	018,P07+V12,D10, 018,P07+V10,D10, 024,P07+V12,E10
+	DB	006,P07+V10,C1S, 006,P07+V11,D10, 006,P07+V12,E10
+	DB	F1S, 006,P07+V13,G1S, 006,P07+V10,C1S
+	DB	PAT,<GAK00_P_BS_1,>GAK00_P_BS_1, $01
+	DB	012,P07+V12,D10, D10, 006,P07+V09,C1S, 012,P07+V10,D10
+	DB	012,P07+V12,E10, E10, C1S, 006,P07+V10,E10
+	DB	006,P07+V12,G1S, 006,P07+V10,E10
+	DB	PAT,<GAK00_P_BS_1,>GAK00_P_BS_1, $01
+	DB	018,P07+V12,D10, 012,P02+V12,E10, D10, 012,P07+V12,C1S
+	DB	006,P07+V13,C1S, 006,P07+V12,G1S, 030,P07+V13,C1S
+; ---- [ mean:  1 / step:  576 ] ----
+	DB	$00
+
+; ---------- Pattern 0003 ---------- 
+GAK00_1_DRUM
+
+DB	PAN, $0A
+	DB	PV1, $F0
+	DB	036,P06+V13,SD00
+	DB	SNO, $05
+	DB	PAN, $0B
+	DB	008,P07+V10,C3S
+	DB	PAN, $08
+	DB	052,P07+V07,G20
+	DB	PAN, $0B
+	DB	006,KYU, 018,P07+V10,C3S
+	DB	PAN, $09
+	DB	A2S
+	DB	PAN, $08
+	DB	G20
+	DB	PAN, $07
+	DB	E20
+	DB	PAN, $06
+	DB	C2S
+	DB	PAN, $08
+	DB	008,P07+V09,A2S
+	DB	PAN, $06
+	DB	008,P07+V12,E20
+	DB	PAN, $07
+	DB	008,P07+V10,G20
+	DB	PAN, $0A
+	DB	036,P06+V13,SD00
+	DB	SNO, $05
+	DB	012,KYU, 012,P07+V11,A2S, 012,P06+V13,SD00
+	DB	SNO, $05
+	DB	PAN, $0A
+	DB	008,P07+V09,A2S
+	DB	PAN, $09
+	DB	008,P07+V12,G20
+	DB	PAN, $08
+	DB	008,P07+V10,E20
+	DB	PAN, $0A
+	DB	024,P06+V13,SD00, 012,P06+V12,SD00, 006,P06+V09,SD01
+	DB	SD01, 006,P06+V10,SD01, 006,P06+V11,SD01, 006,P06+V12,SD01
+	DB	SD01
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	PAT,<GAK00_P_DR_1,>GAK00_P_DR_1, $01
+	DB	PAT,<GAK00_P_DR_2,>GAK00_P_DR_2, $01
+	DB	PAT,<GAK00_P_DR_1,>GAK00_P_DR_1, $01
+	DB	012,P06+V12,SD00, 012,P06+V14,SD01, 012,P06+V10,SD00
+	DB	006,P06+V14,SD01, 012,P06+V12,SD00, 006,P06+V09,SD00
+	DB	012,P06+V14,SD01, 006,P06+V10,SD00, 006,P06+V11,SD01
+	DB	006,P06+V12,SD01, 006,P06+V14,SD01
+; ---- [ mean:  1 / step:
+
+96 ] ----
+
+DB	$00
+
+; ---------- Pattern 0004 ---------- 
+GAK00_1_TOM
+
+DB	PV1, $F0
+	DB	SNO, $05
+	DB	040,KYU
+	DB	PAN, $09
+	DB	008,P07+V09,A2S
+	DB	PAN, $07
+	DB	048,P07+V12,E20
+	DB	PAN, $0B
+	DB	018,P07+V09,C3S
+	DB	PAN, $09
+	DB	A2S
+	DB	PAN, $08
+	DB	G20
+	DB	PAN, $07
+	DB	E20
+	DB	PAN, $06
+	DB	012,C2S, 016,P05+V12,C2S
+	DB	PAN, $07
+	DB	008,P07+V10,G2S
+	DB	PAN, $08
+	DB	008,P07+V09,A2S
+	DB	PAN, $06
+	DB	040,P07+V12,E20
+	DB	PAN, $0B
+	DB	018,C3S
+	DB	PAN, $09
+	DB	006,P07+V10,G20
+	DB	PAN, $08
+	DB	016,P07+V12,E20
+	DB	PAN, $0A
+	DB	008,P02+V10,A2S
+	DB	PAN, $09
+	DB	008,P02+V09,G20
+	DB	PAN, $05
+	DB	076,P07+V12,E20
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	096,KYU
+	DB	KYU
+	DB	KYU
+	DB	012,KYU
+	DB	SNO, $08
+	DB	PAN, $0A
+	DB	TUN, $40
+	DB	PV1, $78
+	DB	018,P07+V07,D40, 012,P02+V09,E40, 012,P02+V08,D40
+	DB	012,P02+V07,C4S, 006,P07+V07,C4S, G4S, 018,C5S
+; ---- [ mean:  1 / step:  384 ] ----
+	DB	$00
+
+; ---------- Pattern 0005 ---------- 
+GAK00_1_HIHT
+
+DB	PAN, $0C
+	DB	PV1, $FA
+	DB	PAN, $09
+	DB	048,P06+V14,SD04
+	DB	PAN, $0C
+	DB	024,P06+V13,SD02, 024,P06+V10,SD02
+	DB	024,P06+V13,SD02, 024,P06+V10,SD02, 024,P06+V13,SD02
+	DB	024,P06+V10,SD02
+	DB	024,P06+V13,SD02
+	DB	PAN, $09
+	DB	048,P06+V10,SD04
+	DB	PAN, $0C
+	DB	024,P06+V13,SD02
+	DB	024,P06+V12,SD02, 072,P06+V13,SD02
+	DB	PAT,<GAK00_P_HH_1,>GAK00_P_HH_1, $10
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	$00
+
+; ---------- Pattern 0006 ---------- 
+GAK00_1_OR_A
+
+DB	SNO, $0A
+	DB	PAN, $0B
+	DB	PV1, $A0
+	DB	PAT,<GAK00_P_OR_1,>GAK00_P_OR_1, $07
+	DB	018,P07+V09,D40, 012,P02+V10,E40, 012,P02+V09,D40
+	DB	C4S, 006,P07+V08,C4S, 006,P07+V09,G4S, 030,C5S
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0007 ---------- 
+GAK00_1_OR_B
+
+DB	SNO, $0A
+	DB	PAN, $0B
+	DB	PV1, $A0
+	DB	PAT,<GAK00_P_OR_2,>GAK00_P_OR_2, $07
+	DB	096,KYU
+	DB	$00
+
+; ---------- Pattern 0008 ---------- 
+GAK00_2_GUIT
+
+DB	PV1, $C8
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,A30, 012,P07+V07,G3S
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,E40, 012,P07+V07,D40
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,A30, 012,P07+V07,G3S
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,E40
+	DB	012,P07+V09,G4S
+; ---- [ mean:  0 / step:  120 ] ----
+	DB	$00
+
+; ---------- Pattern 0009 ---------- 
+GAK00_2_BACK
+
+DB	SNO, $07
+	DB	PAN, $09
+	DB	PV1, $AA
+	DB	PAT,<GAK00_P_BC_2,>GAK00_P_BC_2, $04
+	DB	$00
+
+; ---------- Pattern 0010 ---------- 
+GAK00_2_BASS
+
+DB	PAT,<GAK00_P_BS_2,>GAK00_P_BS_2, $01
+	DB	PAT,<GAK00_P_BS_3,>GAK00_P_BS_3, $01
+	DB	PAT,<GAK00_P_BS_2,>GAK00_P_BS_2, $01
+	DB	PAT,<GAK00_P_BS_3,>GAK00_P_BS_3, $01
+	DB	PAT,<GAK00_P_BS_2,>GAK00_P_BS_2, $01
+	DB	PAT,<GAK00_P_BS_3,>GAK00_P_BS_3, $01
+	DB	PAT,<GAK00_P_BS_2,>GAK00_P_BS_2, $01
+	DB	012,P07+V12,E10, 006,P07+V10,B10, 006,P07+V13,E20
+	DB	006,P07+V12,E10
+; ---- [ mean:  0 / step:
+
+30 ] ----
+	DB	$00
+
+; ---------- Pattern 0011 ---------- 
+GAK00_2_DRUM
+
+DB	PAT,<GAK00_P_DR_2,>GAK00_P_DR_2, $07
+	DB	012,P06+V12,SD00, 012,P06+V14,SD01, 012,P06+V10,SD00
+	DB	006,P06+V14,SD01, 012,P06+V12,SD00, 006,P06+V09,SD00
+	DB	006,P06+V14,SD01, 006,P06+V09,SD00, 006,P06+V11,SD01
+	DB	006,P06+V12,SD01, SD01, 006,P06+V13,SD01
+	DB	$00
+
+; ---------- Pattern 0012 ---------- 
+GAK00_2_GT_E
+
+DB	SNO, $08
+	DB	PAN, $0A
+	DB	PV1, $64
+	DB	TUN, $40
+	DB	012,KYU
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,A30, 012,P07+V07,G3S
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,E40, 012,P07+V07,D40
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,A30, 012,P07+V07,G3S
+	DB	PAT,<GAK00_P_GT_2,>GAK00_P_GT_2, $01
+	DB	018,P07+V08,E40
+; ---- [ mean:  0 / step:  120 ] ----
+	DB	$00
+
+; ---------- Pattern 0013 ---------- 
+GAK00_2_HIHT
+
+DB	PAN, $09
+	DB	024,P06+V12,SD04
+	DB	PAN, $0C
+	DB	PAT,<GAK00_P_HH_1,>GAK00_P_HH_1, $1E
+	DB	024,TIE
+; ---- [ mean:  0 / step:
+
+48 ] ----
+	DB	$00
+
+; ---------- Pattern 0014 ---------- 
+GAK00_2_OR_A
+
+DB	SNO, $0A
+	DB	PAN, $0B
+	DB	PV1, $A0
+	DB	PTP, $F4
+	DB	PAT,<GAK00_P_OR_1,>GAK00_P_OR_1, $08
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	$00
+
+; ---------- Pattern 0015 ---------- 
+GAK00_2_OR_B
+
+DB	SNO, $0A
+	DB	PAN, $0B
+	DB	PV1, $A0
+	DB	PAN, $0B
+	DB	PV1, $A0
+	DB	PTP, $F4
+	DB	PAT,<GAK00_P_OR_2,>GAK00_P_OR_2, $08
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	$00
+
+; ---------- Pattern 0016 ---------- 
+GAK00_3_GUIT
+
+DB	PAT,<GAK00_P_GT_3,>GAK00_P_GT_3, $01
+	DB	018,P07+V09,E40, D40, 030,P07+V08,C4S, 018,P07+V09,G3S
+	DB	C4S
+	DB	018,P07+V08,G4S, 024,P07+V07,C5S
+	DB	PAT,<GAK00_P_GT_3,>GAK00_P_GT_3, $01
+	DB	018,P07+V09,E40, F4S, 012,P07+V08,G40
+	DB	084,P07+V09,G4S
+	DB	PV2, $0C, $64
+	DB	012,TIE
+	DB	$00
+
+; ---------- Pattern 0017 ---------- 
+GAK00_3_BACK
+
+DB	048,P07+V09,D30, 018,D30, E30, 108,C3S
+	DB	048,D30
+	DB	018,D30, E30, 012,D30
+	DB	096,C3S
+	DB	$00
+
+; ---------- Pattern 0018 ---------- 
+GAK00_3_BASS
+
+DB	PAT,<GAK00_P_BS_4,>GAK00_P_BS_4, $01
+	DB	006,P07+V10,G0S, 006,P07+V12,C1S, D1S, 006,P07+V13,F10
+	DB	006,P07+V12,D1S, 006,P07+V13,C1S, 006,P07+V10,G0S
+	DB	PAT,<GAK00_P_BS_4,>GAK00_P_BS_4, $01
+	DB	006,P07+V10,C1S, 006,P07+V12,D10, 006,P07+V10,C1S
+	DB	006,P07+V13,E10, 006,P07+V10,C1S, 006,P07+V13,F10
+	DB	006,P07+V10,C1S
+	DB	$00
+
+; ---------- Pattern 0019 ---------- 
+GAK00_3_DRUM
+
+DB	PAT,<GAK00_P_DR_2,>GAK00_P_DR_2, $04
+	DB	$00
+
+; ---------- Pattern 0020 ---------- 
+GAK00_3_GT_E
+
+DB	012,P07+V09,G4S
+	DB	PAT,<GAK00_P_GT_3,>GAK00_P_GT_3, $01
+	DB	018,P07+V09,E40, D40, 030,P07+V08,C4S, 018,P07+V09,G3S
+	DB	C4S, 018,P07+V08,G4S, 024,P07+V07,C5S
+	DB	PAT,<GAK00_P_GT_3,>GAK00_P_GT_3, $01
+	DB	018,P07+V09,E40, F4S
+	DB	012,P07+V08,G40, 084,P07+V09,G4S
+; ---- [ mean:  0 / step:  288 ] ----
+	DB	$00
+
+; ---------- Pattern 0021 ---------- 
+GAK00_3_HIHT
+
+DB	PAN, $09
+	DB	024,P06+V12,SD04
+	DB	PAN, $0C
+	DB	PAT,<GAK00_P_HH_1,>GAK00_P_HH_1, $0F
+; ---- [ mean:  0 / step:
+
+24 ] ----
+	DB	$00
+
+; ---------- Pattern 0022 ---------- 
+GAK00_3_ORGN
+
+DB	PTP, $00
+	DB	PAT,<GAK00_P_OR_3,>GAK00_P_OR_3, $05
+	DB	006,P07+V07,D40
+	DB	PAT,<GAK00_P_OR_4,>GAK00_P_OR_4, $05
+	DB	006,P07+V07,C4S
+	DB	PAT,<GAK00_P_OR_3,>GAK00_P_OR_3, $05
+	DB	006,P07+V07,D40
+	DB	PAT,<GAK00_P_OR_4,>GAK00_P_OR_4, $04
+	DB	006,P07+V07,C4S, G3S, C4S, F40
+; ---- [ mean:  0 / step:
+
+42 ] ----
+	DB	$00
+
+; ---------- Pattern 0023 ---------- 
+GAK00_3_OBRI
+
+DB	SNO, $08
+	DB	PAN, $0B
+	DB	PV1, $96
+	DB	PTP, $00
+	DB	048,P07+V09,A20, 018,D30, E30, 066,P06+V09,C3S
+	DB	006,P07+V09,C3S, D30, F30, F3S, F30, D30
+	DB	C3S
+; ---- [ mean:  0 / step:  192 ] ----
+	DB	048,A20, 018,D30, E30, 018,P04+V09,D30
+	DB	006,P07+V09,G3S, A30, G3S, 012,C4S, 006,B30
+	DB	A30, 012,B30, 006,A30, G3S, A30, G3S
+	DB	F3S, F30
+; ---- [ mean:  1 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0024 ---------- 
+GAK00_4_GUIT
+
+DB	PV1, $C8
+	DB	PAT,<GAK00_P_GT_4,>GAK00_P_GT_4, $01
+	DB	PAT,<GAK00_P_GT_5,>GAK00_P_GT_5, $01
+	DB	006,P07+V10,C4S, D40, 006,P07+V09,E40, G4S
+; ---- [ mean:  0 / step:
+
+24 ] ----
+	DB	$00
+
+; ---------- Pattern 0025 ---------- 
+GAK00_4_BACK
+
+DB	096,P07+V09,D30
+	DB	E30
+	DB	024,F3S, E30, D30, B20
+	DB	018,P04+V09,C3S, C3S, C3S, C3S, 006,P07+V10,C3S
+	DB	D30, 006,P07+V09,E30, C3S
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	$00
+
+; ---------- Pattern 0026 ---------- 
+GAK00_4_BASS
+
+DB	PAT,<GAK00_P_BS_5,>GAK00_P_BS_5, $01
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	012,P07+V13,F1S, 012,P07+V12,F1S, 012,P07+V13,E10
+	DB	012,P07+V12,E10, 012,P07+V13,D10, 012,P07+V12,D10
+	DB	012,P07+V13,B00, 012,P07+V12,B00
+; ---- [ mean:  1 / step:
+
+96 ] ----
+	DB	018,P07+V13,C1S, 018,P07+V12,C1S, 018,P07+V13,C1S
+	DB	018,P07+V12,C1S, 006,P07+V13,C1S, G0S, 006,P07+V12,C1S
+	DB	E10
+; ---- [ mean:  2 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0027 ---------- 
+GAK00_4_DRUM
+
+DB	PAT,<GAK00_P_DR_2,>GAK00_P_DR_2, $04
+	DB	$00
+
+; ---------- Pattern 0028 ---------- 
+GAK00_4_ORGN
+
+DB	PAT,<GAK00_P_OR_5,>GAK00_P_OR_5, $05
+	DB	006,P07+V09,A30
+	DB	PAT,<GAK00_P_OR_6,>GAK00_P_OR_6, $05
+	DB	006,P07+V09,E40
+; ---- [ mean:  0 / step:
+
+12 ] ----
+	DB	F3S, 006,P07+V08,G3S, 006,P07+V07,A30, 006,P07+V09,F3S
+	DB	006,P07+V08,G3S, 006,P07+V07,A30, 006,P07+V09,B30
+	DB	006,P07+V08,G3S, 006,P07+V07,A30, 006,P07+V09,B30
+	DB	006,P07+V08,C4S, 006,P07+V07,A30, 006,P07+V09,B30
+	DB	006,P07+V08,C4S, 006,P07+V07,D40, 006,P07+V09,B30
+	DB	018,C4S, F40, G4S, B40, 006,P07+V10,C5S
+	DB	B40, 006,P07+V09,A40, G4S
+; ---- [ mean:  1 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0029 ---------- 
+GAK00_4_HIHT
+
+DB	PAN, $09
+	DB	024,P06+V12,SD04
+	DB	PAN, $0C
+	DB	PAT,<GAK00_P_HH_1,>GAK00_P_HH_1, $0F
+; ---- [ mean:  0 / step:
+
+24 ] ----
+	DB	$00
+
+; ---------- Pattern 0032 ---------- 
+GAK00_5_GUIT
+
+DB	PAT,<GAK00_P_GT_4,>GAK00_P_GT_4, $01
+	DB	PAT,<GAK00_P_GT_6,>GAK00_P_GT_6, $01
+	DB	012,P07+V09,F4S, 006,P07+V07,E40, 012,P02+V09,F4S
+	DB	006,P07+V07,C4S, 006,P07+V09,E40, 006,P07+V07,C4S
+	DB	012,P07+V09,F4S, 006,P07+V07,E40, 012,P02+V09,F4S
+	DB	006,P07+V07,C4S, 006,P07+V08,E40, 006,P07+V09,F4S
+	DB	A40, 012,P02+V09,G4S, F4S, E40, 042,P07+V09,F4S
+	DB	PV2, $0C, $64
+	DB	012,TIE
+; ---- [ mean:  0 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0033 ---------- 
+GAK00_5_BACK
+
+DB	096,P07+V09,D30
+	DB	E30
+	DB	048,B20, C3S
+	DB	006,D30, 012,P02+V09,D30, E30, E30, 054,P07+V09,F3S
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	$00
+
+; ---------- Pattern 0034 ---------- 
+GAK00_5_BASS
+
+DB	PAT,<GAK00_P_BS_5,>GAK00_P_BS_5, $01
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	012,P07+V13,B00, 006,P07+V10,B00, 012,P07+V13,B00
+	DB	006,P07+V10,F0S, 006,P07+V12,A00, 006,P07+V10,B00
+	DB	012,P07+V13,C1S, 006,P07+V10,C1S, 012,P07+V13,C1S
+	DB	006,P07+V10,G0S, 006,P07+V11,B00, 006,P07+V12,C1S
+	DB	006,P07+V13,D10, 012,P02+V13,D10, E10, 006,P07+V10,C1S
+	DB	006,P07+V13,E10, 012,F1S, 006,P07+V12,E10
+	DB	006,P07+V10,C1S, 030,P07+V13,F1S
+; ---- [ mean:  1 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0035 ---------- 
+GAK00_5_DRUM
+
+DB	PAT,<GAK00_P_DR_2,>GAK00_P_DR_2, $02
+	DB	018,P06+V13,SD00, 006,P06+V12,SD00
+	DB	SNO, $05
+	DB	PAN, $0B
+	DB	012,P07+V12,C3S
+	DB	PAN, $08
+	DB	012,P07+V10,G20
+	DB	PAN, $0A
+	DB	018,P06+V13,SD00, 006,P06+V12,SD00
+	DB	SNO, $05
+	DB	PAN, $0B
+	DB	012,P07+V12,C3S
+	DB	PAN, $08
+	DB	012,P07+V10,G20
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	PAN, $0A
+	DB	018,P06+V10,SD00, 024,SD00, 012,SD00, 006,SD01
+	DB	006,P06+V13,SD01, 006,P06+V12,SD01, 006,P06+V13,SD01
+	DB	006,P06+V12,SD01, 006,P06+V13,SD01, 006,P06+V12,SD01
+; ---- [ mean:  1 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0036 ---------- 
+GAK00_5_GT_E
+
+DB	006,P07+V09,E40, G4S
+	DB	PAT,<GAK00_P_GT_4,>GAK00_P_GT_4, $01
+	DB	030,KYU
+	DB	PV1, $F0
+	DB	SNO, $05
+	DB	PAN, $0A
+	DB	048,P07+V11,A2S
+	DB	PAN, $0C
+	DB	SNO, $05
+	DB	PAN, $0A
+	DB	012,A2S
+	DB	SNO, $05
+	DB	PAN, $0A
+	DB	006,A2S
+	DB	PAN, $09
+	DB	012,G20
+	DB	PAN, $08
+	DB	006,E20
+	DB	PAN, $08
+	DB	E20
+	DB	PAN, $06
+	DB	060,C2S
+; ---- [ mean:  0 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0037 ---------- 
+GAK00_5_HIHT
+
+DB	PAN, $09
+	DB	024,P06+V10,SD04
+; ---- [ mean:  0 / step:
+
+24 ] ----
+	DB	PAN, $0C
+	DB	PAT,<GAK00_P_HH_1,>GAK00_P_HH_1, $07
+	DB	PAN, $09
+	DB	018,P06+V12,SD04
+	DB	PAN, $0A
+	DB	030,P06+V13,SD04
+	DB	PAN, $09
+	DB	018,P06+V10,SD04
+	DB	PAN, $0A
+	DB	030,P06+V12,SD04
+; ---- [ mean:  1 / step:
+
+96 ] ----
+	DB	PAN, $09
+	DB	018,P06+V13,SD04, 024,P06+V10,SD04, 054,P06+V12,SD04
+; ---- [ mean:  2 / step:
+
+96 ] ----
+
+DB	$00
+
+; ---------- Pattern 0038 ---------- 
+GAK00_5_OBRI
+
+DB	096,KYU
+	DB	KYU
+	DB	SNO, $08
+	DB	PAN, $0A
+	DB	PV1, $C8
+	DB	012,P07+V09,B30, 006,P07+V07,A30, 012,P02+V09,B30
+	DB	006,P07+V07,F3S, 006,P07+V09,A30, 006,P07+V07,B30
+	DB	012,P07+V09,C4S, 006,P07+V07,B30, 012,P02+V09,C4S
+	DB	006,P07+V07,G3S, 006,P07+V08,B30, 006,P07+V09,C4S
+	DB	F4S, 012,P02+V09,E40, C4S, B30, 054,P07+V07,C4S
+; ---- [ mean:  0 / step:  384 ] ----
+	DB	$00
+
+; ---------- Pattern 0039 ---------- 
+GAK00_5_ORGN
+
+DB	PAT,<GAK00_P_OR_5,>GAK00_P_OR_5, $05
+	DB	006,P07+V09,A30
+	DB	PAT,<GAK00_P_OR_6,>GAK00_P_OR_6, $05
+	DB	006,P07+V09,E40
+; ---- [ mean:  0 / step:
+
+12 ] ----
+	DB	B20, C3S, D30, E30, F3S, G3S, A30, B30
+	DB	C3S, D30, E30, F3S, G3S, A30, B30, C4S
+	DB	D40, C4S, D40, E40, C4S, 012,E40, 054,F4S
+; ---- [ mean:  1 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0040 ---------- 
+GAK00_P_GT_1
+
+DB	006,P07+V07,F3S, C4S, F4S, F3S, C4S, E40
+	DB	F3S, C4S, D40, B30, C4S, A30, B30, G3S
+	DB	F3S, E30
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0041 ---------- 
+GAK00_P_GT_2
+
+DB	012,P07+V09,C4S, 012,P07+V08,C4S, 006,P07+V07,B30
+	DB	012,P02+V08,C4S, 012,P02+V09,F4S, 054,P05+V08,C4S
+	DB	018,P07+V09,A30, 018,P07+V08,C4S, 018,P07+V09,B30
+	DB	$00
+
+; ---------- Pattern 0042 ---------- 
+GAK00_P_GT_3
+
+DB	006,P07+V07,D30, 006,P07+V08,E30, 006,P07+V09,F3S
+	DB	G3S, 006,P07+V08,A30, 006,P07+V09,B30, C4S
+	DB	006,P07+V10,D40
+; ---- [ mean:  0 / step:
+
+48 ] ----
+	DB	$00
+
+; ---------- Pattern 0043 ---------- 
+GAK00_P_GT_4
+
+DB	012,P07+V09,F4S, 006,P07+V07,E40, 036,P05+V09,F4S
+	DB	006,P07+V08,C4S, 006,P07+V07,E40, 006,P07+V08,F4S
+	DB	006,P07+V09,A40, G4S, F4S, E40
+	DB	012,F4S, 006,P07+V07,E40, 036,P05+V09,F4S
+	DB	006,P07+V07,D40, E40, 006,P07+V08,F4S, 006,P07+V09,A40
+	DB	G4S, F4S, E40
+; ---- [ mean:  0 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0044 ---------- 
+GAK00_P_GT_5
+
+DB	006,P07+V07,F4S, 006,P07+V08,E40, 006,P07+V09,C4S
+	DB	F4S, 006,P07+V07,G4S, 006,P07+V08,E40, 006,P07+V09,C4S
+	DB	G4S, 006,P07+V07,A40, 006,P07+V08,F4S, 006,P07+V09,D40
+	DB	A40, 006,P07+V07,B40, 006,P07+V08,F4S, 006,P07+V09,D40
+	DB	B40
+	DB	018,P07+V10,C5S, 018,P07+V09,B40, G4S, 018,P07+V08,E40
+	DB	$00
+
+; ---------- Pattern 0046 ---------- 
+GAK00_P_BS_3
+
+DB	012,P07+V12,C1S, 006,E10, 006,P07+V13,G1S
+	DB	006,P07+V10,E10
+; ---- [ mean:  0 / step:
+
+30 ] ----
+	DB	$00
+
+; ---------- Pattern 0047 ---------- 
+GAK00_P_BS_4
+
+DB	012,P07+V13,D10, 012,P07+V10,A00, 012,P07+V13,D10
+	DB	006,P07+V10,A00, 012,P02+V13,D10, 012,P07+V12,D10
+	DB	006,P07+V10,A00, 012,P07+V12,D10, 006,P07+V13,E10
+	DB	006,P07+V12,D10
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	012,P07+V13,C1S, 012,P07+V10,G0S, 012,P07+V13,C1S
+	DB	006,P07+V10,G0S, 012,P02+V13,C1S
+	DB	$00
+
+; ---------- Pattern 0048 ---------- 
+GAK00_P_BC_1
+
+DB	012,P07+V10,F3S, F3S, 006,E30, 012,P02+V10,F3S
+	DB	012,P07+V10,F3S, 006,C3S, E30, F3S
+	DB	$00
+
+; ---------- Pattern 0049 ---------- 
+GAK00_P_BC_2
+
+DB	012,P02+V09,F3S, F3S, 006,P07+V09,E30, 012,F3S
+	DB	F3S, 042,P06+V09,F3S
+	DB	012,P02+V09,D30, D30, 018,P04+V09,D30, 012,P02+V09,E30
+	DB	018,P04+V09,E30, 024,P05+V09,E30
+; ---- [ mean:  0 / step:  192 ] ----
+	DB	$00
+
+; ---------- Pattern 0050 ---------- 
+GAK00_START
+
+DB	WAV, $00
+	DB	TP1, $1B
+	DB	MV1, $FF
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	$00
+
+; ---------- Pattern 0051 ---------- 
+GAK00_P_BS_1
+
+DB	012,P07+V13,F1S, F1S, 006,P07+V10,E10, 012,P07+V12,F1S
+	DB	012,P07+V13,F1S, 006,P07+V10,C1S, 006,P07+V12,E10
+	DB	006,P07+V10,F1S, 006,P07+V12,A10, 006,P07+V10,F1S
+	DB	006,P07+V12,E10, 006,P07+V10,F1S
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0052 ---------- 
+GAK00_P_OR_1
+
+DB	012,P07+V07,F3S, F4S, C4S, F3S, D40, C4S
+	DB	B30, F3S
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0053 ---------- 
+GAK00_P_OR_2
+
+DB	006,TIE, 012,P07+V07,C4S, F3S, E40, C4S
+	DB	B30, A30, G3S, 006,E30
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0054 ---------- 
+GAK00_P_OR_3
+
+DB	006,P07+V07,D40, A30, F3S
+	DB	$00
+
+; ---------- Pattern 0055 ---------- 
+GAK00_P_OR_4
+
+DB	006,P07+V07,C4S, G3S, F30
+	DB	$00
+
+; ---------- Pattern 0056 ---------- 
+GAK00_4_GT_E
+
+DB	012,TIE
+	DB	PAT,<GAK00_P_GT_4,>GAK00_P_GT_4, $01
+	DB	PAT,<GAK00_P_GT_5,>GAK00_P_GT_5, $01
+	DB	006,P07+V10,C4S, D40
+	DB	$00
+
+; ---------- Pattern 0057 ---------- 
+GAK00_P_OR_5
+
+DB	006,P07+V09,D40, 006,P07+V08,A30, 006,P07+V07,F3S
+	DB	$00
+
+; ---------- Pattern 0058 ---------- 
+GAK00_P_OR_6
+
+DB	006,P07+V09,E40, 006,P07+V08,B30, 006,P07+V07,G3S
+	DB	$00
+
+; ---------- Pattern 0059 ---------- 
+GAK00_P_DR_1
+
+DB	012,P06+V12,SD00, 012,P06+V14,SD01, 012,P06+V10,SD00
+	DB	006,P06+V14,SD01, 012,P06+V12,SD00, 006,P06+V09,SD00
+	DB	012,P06+V14,SD01, 012,P06+V10,SD00, 012,P06+V14,SD01
+	DB	$00
+
+; ---------- Pattern 0060 ---------- 
+GAK00_P_DR_2
+
+DB	012,P06+V12,SD00, 012,P06+V14,SD01, 012,P06+V10,SD00
+	DB	006,P06+V14,SD01, 012,P06+V12,SD00, 006,P06+V09,SD00
+	DB	012,P06+V14,SD01, 006,P06+V09,SD00, 006,P06+V10,SD00
+	DB	006,P06+V14,SD01, 006,P06+V09,SD00
+; ---- [ mean:  0 / step:
+
+96 ] ----
+	DB	$00
+
+; ---------- Pattern 0061 ---------- 
+GAK00_P_HH_1
+
+DB	012,P06+V07,SD03, SD03
+	DB	$00
+
+; ---------- Pattern 0062 ---------- 
+GAK00_P_BS_2
+
+DB	012,P07+V13,F1S, F1S, 006,P07+V10,E10, 012,P07+V12,F1S
+	DB	012,P07+V13,F1S, 006,P07+V10,C1S, 006,P07+V12,E10
+	DB	006,P07+V10,F1S, 006,P07+V12,A10, 006,P07+V10,G1S
+	DB	006,P07+V12,F1S, 006,P07+V10,E10
+	DB	012,P07+V12,D10, D10, 006,P07+V10,C1S, 012,P07+V12,D10
+	DB	E10, E10
+; ---- [ mean:  0 / step:  162 ] ----
+	DB	$00
+
+; ---------- Pattern 0063 ---------- 
+GAK00_P_BS_5
+
+; ---- [ mean:  0 / step:
+
+0 ] ----
+	DB	012,P07+V13,D10, 012,P07+V10,A00, 012,P07+V13,D10
+	DB	006,P07+V10,A00, 012,P02+V13,D10, 012,P07+V12,D10
+	DB	006,P07+V10,A00, 012,P07+V12,D10, 012,P07+V10,A00
+; ---- [ mean:  1 / step:
+
+96 ] ----
+	DB	012,P07+V13,E10, 012,P07+V10,B00, 012,P07+V13,E10
+	DB	006,P07+V10,B00, 012,P02+V13,E10, 012,P07+V12,E10
+	DB	006,P07+V10,B00, 012,P07+V12,E10, 012,P07+V10,B00
+	DB	$00
+
+Regional Differences
+
+To do:  The final boss is substantially tougher in the Japanese version.
+
+International
+
+Japan
+
+The Japanese version has a different title screen, and removed the logo's periodic animation. Surprisingly, the game was  not  edited to be a tie-in with  Super Sentai .
+
+In the Japanese version, there are more enemies and they come in different patterns. They are also are more aggressive and deal more damage.
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Power Rangers/Super Sentai
+
+series
+
+Power Rangers
+
+SNES
+
+Mighty Morphin Power Rangers &#160;&#8226;
+
+The Movie &#160;&#8226;
+
+The Fighting Edition &#160;&#8226;
+
+Zeo: Battle Racers
+
+Genesis
+
+Mighty Morphin Power Rangers &#160;&#8226;
+
+The Movie
+
+Game Gear
+
+Mighty Morphin Power Rangers &#160;&#8226;
+
+The Movie
+
+PlayStation
+
+Zeo: Full Tilt Battle Pinball &#160;&#8226;
+
+Lightspeed Rescue &#160;&#8226;
+
+Time Force  ( Prototype )
+
+Nintendo 64
+
+Lightspeed Rescue
+
+Game Boy (Color)
+
+Lightspeed Rescue
+
+Game Boy Advance
+
+Time Force
+
+Adobe Flash
+
+Samurai: Portals of Power
+
+Nintendo 3DS
+
+Super Megaforce
+
+Android, iOS
+
+Legacy Wars &#160;&#8226;
+
+Mighty Force
+
+Windows, PlayStation 4, Xbox One, Nintendo Switch, Google Stadia
+
+Battle for the Grid
+
+Super Sentai
+
+NES
+
+Kyouryuu Sentai Zyuranger
+
+Sufami Turbo
+
+Gekisou Sentai Carranger: Zenkai! Racer Senshi
+
+Retrieved from " https://tcrf.net/index.php?title=Mighty_Morphin_Power_Rangers_(SNES)&oldid=1866580 "
+
+Categories :
+
+Games developed by Natsume
+
+Games published by Bandai
+
+SNES games
+
+Games released in 1994
+
+Games released in September
+
+Games with uncompiled source code
+
+Games with hidden sound tests
+
+Games with regional differences
+
+To do
+
+Power Rangers and Super Sentai series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with hidden sound tests
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with uncompiled source code
+
+Games  >  Games by developer  >  Games developed by NatsumeAtari  >  Games developed by Natsume
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Bandai Namco  >  Games published by Bandai
+
+Games  >  Games by release date  >  Games released in 1994
+
+Games  >  Games by release date  >  Games released in September
+
+Games  >  Games by series  >  Power Rangers and Super Sentai series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 23 June 2025, at 08:36.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

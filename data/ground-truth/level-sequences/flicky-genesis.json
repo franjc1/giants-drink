@@ -1,0 +1,125 @@
+{
+  "game_id": "flicky-genesis",
+  "game_name": "Flicky",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "level_count": 48,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement (run, jump)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Flicky has only side-to-side movement and jump; core mechanics established immediately"
+    },
+    {
+      "element": "Chirps (collectible small birds)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns Chirps follow in chain, must be guided to exit; bonus points awarded for collecting multiple in single chain"
+    },
+    {
+      "element": "Tigers (cat enemies)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Basic avoidance threat; disperses collected Chirps on contact, creating risk-reward tension"
+    },
+    {
+      "element": "Iggys (green iguana enemies)",
+      "first_appears": "Post-initial development phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Added after testing to increase difficulty; same threat model as Tigers"
+    },
+    {
+      "element": "Throwable items (telephones, flower pots, cups, bottles)",
+      "first_appears": "Early-to-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Available on some levels; picked up by walking, thrown by jumping; optional offensive strategy"
+    },
+    {
+      "element": "Sunglassed Chirps (unpredictable variants)",
+      "first_appears": "Mid-game onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "Behave erratically when dispersed; increase puzzle complexity and enemy encounter consequence"
+    },
+    {
+      "element": "Diamonds (bonus point items)",
+      "first_appears": "Mid-game onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "Non-throwable; provide bonus points; create incentive for exploration without combat engagement"
+    },
+    {
+      "element": "Bonus rounds (catch falling Chirps in net)",
+      "first_appears": "Interspersed throughout campaign",
+      "introduction_context": "safe",
+      "mastery_context": "Separate mechanic from main platforming; provides score-building opportunity without enemy threat"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting all Chirps and reaching exit",
+      "Successfully avoiding enemy contact",
+      "Completing bonus round",
+      "Using throwable items to neutralize threats"
+    ],
+    "typical_tension_triggers": [
+      "Enemy proximity to Flicky or Chirp chain",
+      "Chirps dispersing on enemy contact",
+      "Multiple enemies on screen simultaneously",
+      "Sunglassed Chirps behaving unpredictably after dispersal",
+      "Limited throwable items on difficult levels"
+    ],
+    "pacing_descriptor": "Escalating difficulty across 48 stages with incremental enemy threat introduction; loops infinitely on increased difficulty after completion"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Throwable items placed on levels; diamonds scattered for optional point collection",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of basic mechanics and single threat type (Tigers); safe contexts for learning",
+    "mid_game": "Introduction of Iggys, sunglassed Chirps variants, and throwable item strategies; increased enemy density",
+    "late_game": "Complex multi-enemy encounters with unpredictable Chirp behavior; resource scarcity of throwable items",
+    "notable_spikes": [
+      "Addition of Iggy enemy type (post-testing implementation)",
+      "Introduction of sunglassed Chirps with erratic behavior",
+      "Game loop restart at increased difficulty after stage 48"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Single-screen wraparound stages",
+      "description": "Each of 48 stages confined to single wraparound screen with Flicky centered; horizontal scrolling follow camera",
+      "example_level": "All levels (uniform structure)"
+    },
+    {
+      "pattern_name": "Urban apartment building setting",
+      "description": "Background themed as apartment building inspired by developer observation; color variations created visual diversity",
+      "example_level": "All stages (unified aesthetic)"
+    },
+    {
+      "pattern_name": "Bonus round interludes",
+      "description": "Alternating falling-Chirp catch mechanics break main platforming flow; lower-threat score opportunities",
+      "example_level": "Interspersed throughout campaign"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:05:04.233Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3003,
+    "output_tokens": 1325,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

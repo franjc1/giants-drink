@@ -1,0 +1,137 @@
+{
+  "game_id": "star-soldier-nes",
+  "game_name": "Star Soldier",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_formation_approach",
+      "visual_form": "enemy sprites moving down screen in organized patterns",
+      "meaning": "incoming threat requiring evasion or engagement"
+    },
+    {
+      "signal": "boss_appearance",
+      "visual_form": "large enemy sprite filling significant screen area",
+      "meaning": "major threat; high-priority target with substantial firepower"
+    },
+    {
+      "signal": "projectile_fire",
+      "visual_form": "bullet sprites traveling toward player ship",
+      "meaning": "immediate dodge requirement; collision = damage/death"
+    },
+    {
+      "signal": "screen_edge_boundary",
+      "visual_form": "play field limits marked by screen borders",
+      "meaning": "spatial constraint; player ship cannot escape screen perimeter"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "empty_screen_area",
+      "visual_form": "black/dark background with minimal sprite activity",
+      "meaning": "brief respite; safe zone for repositioning"
+    },
+    {
+      "signal": "power_up_appearance",
+      "visual_form": "distinctive colored/animated sprite dropping from defeated enemies",
+      "meaning": "beneficial item; weapon upgrade or scoring bonus available for collection"
+    },
+    {
+      "signal": "cleared_formation",
+      "visual_form": "absence of enemy sprites in previously occupied screen area",
+      "meaning": "threat eliminated; temporary safety until next wave"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "player-controlled ship sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player ship positioned at bottom center of screen; distinct from enemy sprites"
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "alien/mechanical enemy sprites; distinct silhouette from player ship",
+      "enemy_visual_variants": "multiple enemy types with varied sprite designs (small fighters, larger cruisers, boss entities)",
+      "environmental_markers": "enemies spawn from top of screen; move in coordinated downward patterns; occupy upper/middle screen space"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_combat",
+      "visual_manifestation": "high sprite density; projectiles visible on screen; animated explosion effects",
+      "behavioral_manifestation": "enemies fire at player; player ship responsive to input; constant movement of all entities"
+    },
+    {
+      "world_state": "between_waves",
+      "visual_manifestation": "reduced sprite count; clear screen areas; slower visual activity",
+      "behavioral_manifestation": "enemy formations retreat or clear; brief pause in projectile fire; player repositioning opportunity"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "single large sprite dominating screen area; intensive projectile patterns; more elaborate animation",
+      "behavioral_manifestation": "boss sprite moves autonomously in scripted patterns; fires concentrated projectile streams; requires sustained engagement"
+    },
+    {
+      "world_state": "score_multiplier_active",
+      "visual_manifestation": "defeated enemy formations within proximity glow or flash; bonus text/indicators appear on screen",
+      "behavioral_manifestation": "player earns enhanced points for sequential kills; visual feedback confirms multiplier status"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "scrolling_background_progression",
+      "example": "continuous downward screen scroll suggests forward movement through space; establishes sense of journey through enemy-occupied territory"
+    },
+    {
+      "technique": "enemy_sprite_variety",
+      "example": "different enemy types and boss designs suggest escalating military opposition; visual complexity increases with progression"
+    },
+    {
+      "technique": "destructible_tile_integration",
+      "example": "hidden destructible environment elements suggest hostile territory with embedded obstacles and bonuses; encourages thorough spatial exploration"
+    },
+    {
+      "technique": "weapon_power_up_visuals",
+      "example": "dropped items from defeated enemies communicate available upgrades; visual distinction of power-up types indicates weapon variety"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_ship",
+      "state": "active_control",
+      "behavior": "responds to input; moves horizontally; can fire continuously; changes position based on player command"
+    },
+    {
+      "entity": "standard_enemy",
+      "state": "aggressive",
+      "behavior": "descends screen in formation; fires projectiles at player; follows predictable movement patterns"
+    },
+    {
+      "entity": "boss_enemy",
+      "state": "high_threat",
+      "behavior": "occupies large sprite space; executes complex movement patterns; fires intensive projectile patterns; persists across extended engagement"
+    },
+    {
+      "entity": "power_up_object",
+      "state": "available",
+      "behavior": "drops from defeated enemies; descends screen slowly; collected on contact with player ship; grants temporary or permanent benefits"
+    }
+  ],
+  "notes": "Star Soldier (1988 NES) operates as a pure arcade-style scrolling shooter with minimal narrative world-state. The game communicates danger, threat escalation, and player capability through sprite-based visual language: enemy density, projectile patterns, and boss design complexity create progression. Safety is indicated through cleared screen areas and power-up appearances. No faction identity system exists beyond player vs. enemy binary opposition. World-state transitions are purely mechanical (wave patterns, difficulty escalation) rather than narrative. Environmental storytelling relies on enemy variety and spatial progression. The 'Caravan Mode' time-attack mechanic introduces secondary world-state (score multiplier zones) that manifests through proximity-based visual feedback. No political or social faction systems present.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:06:25.116Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3159,
+    "output_tokens": 1522,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

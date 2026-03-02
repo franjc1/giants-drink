@@ -1,0 +1,165 @@
+{
+  "game_id": "maniac-mansion-pc",
+  "game_name": "Maniac Mansion",
+  "platform": "pc",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Hostile NPC presence",
+      "visual_form": "Edison family members and mansion inhabitants visible in scene",
+      "meaning": "Immediate threat; characters will be thrown into dungeon or killed if spotted"
+    },
+    {
+      "signal": "Character death state",
+      "visual_form": "Character sprite disappears from playable roster; game ends if all three selected characters die",
+      "meaning": "Permanent loss of character; critical failure state if all companions eliminated"
+    },
+    {
+      "signal": "Dungeon confinement",
+      "visual_form": "Location change to dungeon area when caught by hostile NPCs",
+      "meaning": "Consequence of being discovered; requires escape or alternative solution path"
+    },
+    {
+      "signal": "Sentient meteor influence",
+      "visual_form": "Narrative/cutscene presentation of meteor brainwashing the Edison family",
+      "meaning": "Root cause of mansion danger; explains why inhabitants are hostile"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Green tentacle friendliness",
+      "visual_form": "Green tentacle (disembodied) depicted differently from purple tentacle; associated with positive interactions",
+      "meaning": "Only non-hostile mansion inhabitant; safe to approach and interact with"
+    },
+    {
+      "signal": "Puzzle solution availability",
+      "visual_form": "Character-specific abilities (Syd/Razor with instruments, Bernard with appliance repair) highlighted in UI and gameplay",
+      "meaning": "Safe progression path; using correct character for puzzle avoids danger and advances story"
+    },
+    {
+      "signal": "Multiple character team",
+      "visual_form": "Player selects two companions from six possible characters before entering mansion",
+      "meaning": "Redundancy in team composition allows continued play even if one character dies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Edison Family (Hostile)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mad scientist archetype visual identity",
+      "enemy_visual_variants": "Dr. Fred (mad scientist), Nurse Edna (wife), Weird Ed (son) depicted as distinct character sprites",
+      "environmental_markers": "Mansion interior spaces; dungeon; scientific equipment and lab apparatus"
+    },
+    {
+      "faction": "Tentacle Entities",
+      "color_identity": "Purple tentacle (hostile), Green tentacle (friendly)",
+      "symbol_or_sigil": "Disembodied tentacle forms; cosmic origin (sentient meteor)",
+      "enemy_visual_variants": "Purple and green color differentiation signals alignment; purple hostile, green benign",
+      "environmental_markers": "Presence within mansion; meteor origin suggests cosmic/otherworldly contamination"
+    },
+    {
+      "faction": "Player Characters (Protagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Teenage archetypes: Dave Miller (protagonist), Bernard, Jeff, Michael, Razor, Syd, Wendy",
+      "enemy_visual_variants": "Each character has unique visual appearance and character-specific abilities",
+      "environmental_markers": "Enter from outside mansion; represent rescue mission theme"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-game (introductory state)",
+      "visual_manifestation": "Cutscene showing meteor crash near mansion twenty years prior; brainwashing of Edison family",
+      "behavioral_manifestation": "Narrative exposition; establishes context for why inhabitants are hostile and Sandy is kidnapped"
+    },
+    {
+      "world_state": "Active exploration (player entering mansion)",
+      "visual_manifestation": "Two-dimensional mansion interior rendered with point-and-click interface; NPC positions visible",
+      "behavioral_manifestation": "Hostile NPCs patrol or occupy rooms; attempt to catch player characters; green tentacle remains passive"
+    },
+    {
+      "world_state": "Character capture/death",
+      "visual_manifestation": "Location shift to dungeon; character removed from active roster display",
+      "behavioral_manifestation": "Captured characters confined; dead characters permanently unavailable; game ends if all three die"
+    },
+    {
+      "world_state": "Puzzle progression",
+      "visual_manifestation": "Environmental objects and puzzle elements become interactive; character-specific ability availability highlighted",
+      "behavioral_manifestation": "Correct character selection allows puzzle completion; incorrect selection blocks progress path"
+    },
+    {
+      "world_state": "Game ending (multiple paths)",
+      "visual_manifestation": "Five possible endings; cutscenes vary based on character selection, survival, and accomplishments",
+      "behavioral_manifestation": "Different narrative outcomes based on party composition and survival status"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Mansion layout as narrative device",
+      "example": "Edison family mansion interior communicates isolation, danger, and the scale of infiltration challenge; dungeon location conveys consequence of discovery"
+    },
+    {
+      "technique": "Character archetype visual design",
+      "example": "Dr. Fred portrayed as mad scientist; Nurse Edna as medical professional; Weird Ed as odd family member; visual appearance immediately communicates their threat level and role in kidnapping plot"
+    },
+    {
+      "technique": "Tentacle color coding",
+      "example": "Purple vs. green tentacles use color to signal faction alignment without requiring text; green = safe, purple = threat"
+    },
+    {
+      "technique": "Object interactivity and puzzle spaces",
+      "example": "Scientific equipment, appliances, and instruments visible in environment signal which characters can solve associated puzzles"
+    },
+    {
+      "technique": "Cutscene narrative exposition",
+      "example": "Intro sequence explains meteor origin and brainwashing mechanic, providing world-state context that justifies NPC hostility"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dr. Fred (Mad Scientist)",
+      "state": "Active/Patrolling",
+      "behavior": "Hostile; attacks player characters on sight; throws them to dungeon or kills them; kidnapper motivation"
+    },
+    {
+      "entity": "Nurse Edna",
+      "state": "Active/Patrolling",
+      "behavior": "Hostile; complicit in kidnapping; shares Dr. Fred's brainwashed allegiance"
+    },
+    {
+      "entity": "Weird Ed",
+      "state": "Active/Patrolling",
+      "behavior": "Hostile; family member; follows same threat pattern as parents"
+    },
+    {
+      "entity": "Green Tentacle",
+      "state": "Passive/Non-hostile",
+      "behavior": "Friendly; non-threatening interaction; only safe NPC contact point in mansion"
+    },
+    {
+      "entity": "Purple Tentacle",
+      "state": "Hostile/Brainwashing agent",
+      "behavior": "Associated with meteor; represents alien intelligence controlling Edison family"
+    },
+    {
+      "entity": "Player Character (Any Selected)",
+      "state": "Infiltration/Rescue mission",
+      "behavior": "Must avoid detection; use stealth, character abilities, and puzzle solutions; can die permanently if caught"
+    }
+  ],
+  "notes": "Maniac Mansion communicates world-state through color-coded faction identity (green=safe, purple=threat), character archetype visual design, and environmental layout. Danger is signaled through hostile NPC presence and dungeon consequences. The game uses non-linear design where character selection determines available puzzle paths, making each playable character's visual abilities part of the world-state communication system. Cutscenes provide narrative context for the meteor brainwashing premise, explaining why all NPCs except the green tentacle are hostile. The UI itself (character roster, death removal) is a manifestation layer showing current world-state.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T18:49:27.868Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3206,
+    "output_tokens": 2007,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

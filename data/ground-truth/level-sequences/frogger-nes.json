@@ -1,0 +1,138 @@
+{
+  "game_id": "frogger-nes",
+  "game_name": "Frogger",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Road traffic (cars, buggies, trucks, bulldozers)",
+      "first_appears": "Level 1 - bottom screen",
+      "introduction_context": "moderate",
+      "mastery_context": "Players learn timing and gap identification in safe, predictable lanes before encountering river hazards"
+    },
+    {
+      "element": "River crossing (logs, turtles, alligators moving)",
+      "first_appears": "Level 1 - after road section",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces platform riding and directional awareness; complexity increases with moving obstacles in opposite directions"
+    },
+    {
+      "element": "Snakes and otters (passive hazards in river)",
+      "first_appears": "Early levels - river section",
+      "introduction_context": "moderate",
+      "mastery_context": "Collision avoidance on moving platforms; requires spatial prediction"
+    },
+    {
+      "element": "Alligator mouths (active river threat)",
+      "first_appears": "Early levels - river section",
+      "introduction_context": "moderate",
+      "mastery_context": "Visual recognition of threat state; timing-dependent avoidance"
+    },
+    {
+      "element": "Diving turtles (sinking platforms)",
+      "first_appears": "Early levels - river section",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces time-based platform reliability; requires forward planning"
+    },
+    {
+      "element": "Female frog bonus (log riding)",
+      "first_appears": "Early levels - river section",
+      "introduction_context": "safe",
+      "mastery_context": "Optional risk-reward mechanic; teaches players to recognize bonuses amid threats"
+    },
+    {
+      "element": "Fly bonus (home jumping)",
+      "first_appears": "Early levels - destination area",
+      "introduction_context": "safe",
+      "mastery_context": "Optional precision bonus; rewards accurate targeting"
+    },
+    {
+      "element": "Occupied homes (blocking frog homes)",
+      "first_appears": "Mid-game escalation",
+      "introduction_context": "dangerous",
+      "mastery_context": "Reduces available safe destinations; forces route optimization"
+    },
+    {
+      "element": "Alligators in homes (lethal destinations)",
+      "first_appears": "Mid-game escalation",
+      "introduction_context": "dangerous",
+      "mastery_context": "Home deception; requires careful home selection under time pressure"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": 3,
+      "max": 30
+    },
+    "typical_relief_triggers": [
+      "Successfully reaching a safe median strip",
+      "Reaching a frog home safely",
+      "Completing a full level (all 5 frogs home)",
+      "Brief difficulty easing after level 5"
+    ],
+    "typical_tension_triggers": [
+      "Spawning at bottom with active traffic",
+      "Jumping onto moving river platforms in opposite directions",
+      "Timer approaching 0 seconds",
+      "Sinking turtle detected",
+      "Alligator mouth opening sequence",
+      "Proximity to screen edge while riding platforms",
+      "Limited safe home slots available"
+    ],
+    "pacing_descriptor": "Cyclical tension within single-frog attempts (30-second timer creating micro-tension cycles), interrupted by relief upon reaching median or home; macro-tension escalates across five-level progression curve then resets"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Female frog appears randomly on logs; fly bonus appears in homes; both offer bonuses without blocking safe progression",
+    "secret_convention": "Homes with alligators appear identical to safe homes; requires learning through failure or careful observation",
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Road traffic with basic predictable patterns; river introduces moving obstacles but at learnable speeds; timer at 30-60 seconds per frog allows adjustment",
+    "mid_game": "Traffic speed increases; river objects move at varied speeds in opposing directions; available homes reduce as they become occupied by alligators; timer pressure increases",
+    "late_game": "Maximal traffic density and speed; river obstacles move unpredictably; false safe destinations (alligators in homes) force routing precision; minimal timer margin",
+    "notable_spikes": [
+      "Transition from road to river (introduces platform-dependent safety)",
+      "Level 5-6 transition (difficulty briefly eases then escalates again)",
+      "Homes becoming occupied with alligators (converts safe zone into threat)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Fixed obstacle lanes",
+      "description": "Road section consists of horizontal lanes with predictable vehicle patterns; players identify gaps and timing windows",
+      "example_level": "Level 1-2 road section"
+    },
+    {
+      "pattern_name": "Multi-directional platform crossing",
+      "description": "River contains logs and creatures moving left and right simultaneously; requires path-finding through moving obstacles at different speeds",
+      "example_level": "Level 1+ river section"
+    },
+    {
+      "pattern_name": "Progressive capacity reduction",
+      "description": "Available safe homes decrease as game progresses (alligators occupy slots, other frogs already home); forces player to use remaining safe routes with increasing pressure",
+      "example_level": "Level 3+ destination area"
+    },
+    {
+      "pattern_name": "Time-decay platform reliability",
+      "description": "Diving turtles sink on schedule; players must time platform usage or face unexpected loss",
+      "example_level": "Level 2+ river section"
+    }
+  ],
+  "sources_used": [
+    "wikipedia - Frogger article (Gameplay section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:51:52.892Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3227,
+    "output_tokens": 1671,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

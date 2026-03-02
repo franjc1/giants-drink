@@ -1,0 +1,178 @@
+{
+  "game_id": "balloon-fight-nes",
+  "game_name": "Balloon Fight",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "popped_balloon",
+      "visual_form": "balloon disappears from player character helmet; character model loses visual asset",
+      "meaning": "loss of flotation ability; increased vulnerability; one step closer to death"
+    },
+    {
+      "signal": "water_surface",
+      "visual_form": "blue horizontal band at bottom of screen representing water",
+      "meaning": "instant death if player falls into it; environmental hazard"
+    },
+    {
+      "signal": "piranha_fish",
+      "visual_form": "large animated fish sprite near water surface",
+      "meaning": "predatory hazard; instant death if player flies too close to water"
+    },
+    {
+      "signal": "lightning_sparks",
+      "visual_form": "animated electrical effects moving across screen in Balloon Trip mode",
+      "meaning": "collision hazard; causes instant death in Balloon Trip mode"
+    },
+    {
+      "signal": "enemy_balloon_fighter",
+      "visual_form": "identical character sprite to player but controlled by AI; floats around screen",
+      "meaning": "active threat; will attempt to pop player balloons; must be defeated by popping enemy balloons first"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "intact_balloons",
+      "visual_form": "two balloon shapes attached to player character helmet",
+      "meaning": "player is alive and has full flotation; protection against one balloon-pop"
+    },
+    {
+      "signal": "platforms",
+      "visual_form": "solid horizontal surfaces scattered throughout screen; varied architectural elements",
+      "meaning": "safe resting points; allow player to pause and plan; prevent immediate water hazard"
+    },
+    {
+      "signal": "cleared_screen",
+      "visual_form": "all enemy sprites removed from play area",
+      "meaning": "level victory; progression to next stage; temporary safety state"
+    },
+    {
+      "signal": "rising_bubble",
+      "visual_form": "animated bubble sprite floating upward after enemy defeat",
+      "meaning": "collectible reward; bonus points; visual feedback of successful enemy elimination"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_balloon_fighter",
+      "color_identity": null,
+      "symbol_or_sigil": "balloon helmet with two inflated balloons",
+      "enemy_visual_variants": "enemy Balloon Fighters appear visually identical but are AI-controlled opponents",
+      "environmental_markers": "player character always centered or player-controlled; spawns at level start; always has helmet balloons as status indicator"
+    },
+    {
+      "faction": "enemy_balloon_fighters",
+      "color_identity": null,
+      "symbol_or_sigil": "balloon helmet with two inflated balloons (identical to player)",
+      "enemy_visual_variants": "distinguished only by AI movement patterns and screen position; no visual differentiation from player model",
+      "environmental_markers": "multiple copies spawn on screen; float autonomously; balloons are identical but must be popped by player action"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "stage_active",
+      "visual_manifestation": "enemies present on screen; platforms visible; water hazard at bottom edge",
+      "behavioral_manifestation": "enemies float around autonomously; player must engage in combat; platforms anchor gameplay geography"
+    },
+    {
+      "world_state": "stage_cleared",
+      "visual_manifestation": "all enemy sprites removed; screen returns to empty state with platforms only",
+      "behavioral_manifestation": "stage progression triggered; player advances to next level; bonus stage may appear every three stages"
+    },
+    {
+      "world_state": "bonus_stage",
+      "visual_manifestation": "balloons float up from chimneys at bottom of screen; no enemy fighters present",
+      "behavioral_manifestation": "player switches to collection mode; goal becomes hitting balloons for points rather than defeating enemies"
+    },
+    {
+      "world_state": "balloon_trip_mode",
+      "visual_manifestation": "side-scrolling perspective; lightning effects animate across screen; single life indicator shown",
+      "behavioral_manifestation": "obstacle avoidance replaces enemy combat; high-score focus; continuous horizontal movement; one life only"
+    },
+    {
+      "world_state": "player_one_balloon_remaining",
+      "visual_manifestation": "single balloon visible on player character helmet (second balloon missing/popped)",
+      "behavioral_manifestation": "critical vulnerability state; next balloon pop triggers death; increased difficulty perception"
+    },
+    {
+      "world_state": "player_defeated",
+      "visual_manifestation": "both balloons popped; player character disappears or collapses; life counter decrements",
+      "behavioral_manifestation": "game over or respawn depending on remaining lives; level may restart or fail"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "hazard_placement_narrative",
+      "example": "water at screen bottom establishes the playing field as a contained vertical space above a deadly boundary; tells player they must stay airborne"
+    },
+    {
+      "technique": "predator_introduction",
+      "visual_example": "piranha fish sprite near water surface suggests aquatic danger; teaches player water = death without explicit text"
+    },
+    {
+      "technique": "platform_architecture",
+      "example": "scattered platforms of varying heights and positions communicate level difficulty progression; stages add more platforms suggesting safer complexity later in game"
+    },
+    {
+      "technique": "visual_symmetry_equality",
+      "example": "enemy Balloon Fighters appear identical to player character, establishing competitive parity; no visual hierarchy suggests fair fight mechanic"
+    },
+    {
+      "technique": "chimney_reward_structure",
+      "example": "chimneys spouting balloons in bonus stages visually communicate resource/point generation; architectural element signals game mode shift"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_balloon_fighter",
+      "state": "ascending",
+      "behavior": "flaps arms repeatedly; rises vertically when A button pressed or B button held; floats upward with momentum"
+    },
+    {
+      "entity": "player_balloon_fighter",
+      "state": "descending",
+      "behavior": "falls downward when no input given; accelerates toward water if balloons are popped; reduced buoyancy visually apparent"
+    },
+    {
+      "entity": "player_balloon_fighter",
+      "state": "one_balloon_popped",
+      "behavior": "slower vertical rise rate; struggles to maintain altitude; visual indicator of compromised state"
+    },
+    {
+      "entity": "enemy_balloon_fighter",
+      "state": "active_hunting",
+      "behavior": "floats around screen attempting to maneuver toward player position; responds to player proximity; autonomous movement pattern"
+    },
+    {
+      "entity": "enemy_balloon_fighter",
+      "state": "defeated",
+      "behavior": "disappears from screen; replaced by rising bubble sprite; no death animation present"
+    },
+    {
+      "entity": "piranha_fish",
+      "state": "waiting",
+      "behavior": "positioned at or near water surface; remains stationary or swims horizontally; threatens any player flying too low"
+    },
+    {
+      "entity": "lightning_spark",
+      "state": "moving",
+      "behavior": "animated electrical effect sweeping across screen in Balloon Trip mode; deterministic pattern; unavoidable except through careful positioning"
+    }
+  ],
+  "notes": "Balloon Fight uses minimalist visual language typical of 1985 NES design. No faction complexity exists—conflict is purely player versus identical-looking enemies with no political or social dimension. World state communication relies entirely on sprite presence/absence, balloon count, and hazard positioning. The game establishes danger through simple visual rules: two balloons = safe, one = critical, zero = dead; water = instant death; lightning in trip mode = instant death. Environmental storytelling is implicit in geometry (platforms) and sprite placement (fish, enemies, chimneys). No dialogue, text, or symbolic communication of world state beyond visual gameplay elements.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:30:12.675Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4350,
+    "output_tokens": 2060,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

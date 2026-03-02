@@ -1,0 +1,192 @@
+{
+  "game_id": "metroid-nes",
+  "game_name": "Metroid",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite-based flying/crawling creatures on screen",
+      "meaning": "Active threat; collision deals damage"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large distinctive enemy sprites (Kraid, Ridley, Mother Brain)",
+      "meaning": "Major obstacle requiring defeat to progress"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "EN meter in upper-left corner decreasing",
+      "meaning": "Damage taken; critical state when low"
+    },
+    {
+      "signal": "Inaccessible areas",
+      "visual_form": "Solid walls, sealed doors, vertical shafts without platforms",
+      "meaning": "Progression blocked; requires specific upgrade to enter"
+    },
+    {
+      "signal": "Destructible terrain",
+      "visual_form": "Breakable blocks and spheres in environment",
+      "meaning": "Hazard or obstacle; bombs required to clear"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Item sprites dropped by defeated enemies or in isolated rooms",
+      "meaning": "Capability enhancement; enables new movement/combat abilities"
+    },
+    {
+      "signal": "Energy tanks",
+      "visual_form": "Collectible items in rooms",
+      "meaning": "Health capacity increase; improves survivability"
+    },
+    {
+      "signal": "Energy drops from enemies",
+      "visual_form": "Small sprite items spawning when enemies are killed",
+      "meaning": "Health restoration; sustains player through combat"
+    },
+    {
+      "signal": "Door transitions",
+      "visual_form": "Blue doors connecting rooms",
+      "meaning": "Safe passage between areas; exploration progress"
+    },
+    {
+      "signal": "Stable platforms",
+      "visual_form": "Horizontal surfaces in cavern environments",
+      "meaning": "Safe standing area; prevents fall damage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Space Pirates",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Various alien creature types: flying parasites, crawlers, armored foes distributed across Zebes regions",
+      "environmental_markers": "Fortress structures on Zebes; Kraid and Ridley as regional commanders; Mother Brain as command nexus in Tourian"
+    },
+    {
+      "faction": "Galactic Federation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Not represented as enemies; only mentioned in narrative context",
+      "environmental_markers": "Research vessel mentioned in opening; no visual in-game representation"
+    },
+    {
+      "faction": "Metroid organisms",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Dangerous floating parasitic creatures; primary threat in final area (Tourian)",
+      "environmental_markers": "Concentrated in Tourian facility; represent biological weapon threat central to plot"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-boss regional control",
+      "visual_manifestation": "Enemy type distribution varies by region (Brinstar, Norfair); zone-specific architecture and enemy placement",
+      "behavioral_manifestation": "Regional enemies patrol/spawn in designed patterns; Kraid and Ridley occupy separate strongholds"
+    },
+    {
+      "world_state": "Boss defeated / regional secured",
+      "visual_manifestation": "Boss statue becomes shootable; new areas unlock; enemy composition changes as areas become accessible",
+      "behavioral_manifestation": "Passage to deeper regions opens; progression toward Mother Brain becomes possible after both Kraid and Ridley fall"
+    },
+    {
+      "world_state": "Power-up equipped",
+      "visual_manifestation": "Samus sprite changes to reflect new armor/ability (Ice Beam visual, Morph Ball form, Screw Attack animation)",
+      "behavioral_manifestation": "New movement options (climbing, morphing), new weapon effects, previously blocked areas become traversable"
+    },
+    {
+      "world_state": "Final confrontation",
+      "visual_manifestation": "Tourian environment with concentrated Metroid presence; Mother Brain sprite in throne room; timed explosion sequence",
+      "behavioral_manifestation": "Escape sequence triggered after Mother Brain defeat; lair self-destructs visually"
+    },
+    {
+      "world_state": "Critical health",
+      "visual_manifestation": "EN meter critically low; character may have visual damage indicator (palette/sprite variation possible but not documented)",
+      "behavioral_manifestation": "One hit from most enemies ends run; invulnerability window after damage becomes tactically crucial"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Regional architecture distinctiveness",
+      "example": "Brinstar features ice-themed caverns; Norfair displays heat/lava-themed design; Tourian shows technological/biomechanical aesthetic. Each region's visual design reinforces Space Pirate functional specialization"
+    },
+    {
+      "technique": "Upgrade gating through visual barriers",
+      "example": "Impassable walls, sealed doors, and vertical shafts without platforms visually communicate progression gates. Ice Beam required to freeze platforms, bombs required to break walls; visual structure tells player what abilities are needed"
+    },
+    {
+      "technique": "Boss lair distinctiveness",
+      "example": "Kraid's hideout and Ridley's domain have visually distinct room layouts and enemy compositions, establishing territorial control. Larger rooms and boss arenas signal importance"
+    },
+    {
+      "technique": "Item isolation and prominence",
+      "example": "Power-ups placed in dedicated rooms or after significant challenges, establishing them as major milestone acquisitions. Visual prominence of item sprites signals value"
+    },
+    {
+      "technique": "Environmental hazards as storytelling",
+      "example": "Destructible terrain and enemy placement patterns suggest prior conflict and dynamic occupation. Platform availability tells spatial stories about how areas were constructed/used"
+    },
+    {
+      "technique": "Palette and sprite variation by region",
+      "example": "Each major area (Brinstar, Norfair, Kraid's lair, Ridley's lair, Tourian) uses distinct color palettes and tileset graphics, creating visual regionalism that communicates zone identity and progression depth"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Samus Aran",
+      "state": "Powered-up / equipped upgrade",
+      "behavior": "Sprite visually changes (e.g., Ice Beam palette shift, Morph Ball form); movement capabilities expand (can climb, morph, execute Screw Attack); visual feedback confirms new state"
+    },
+    {
+      "entity": "Samus Aran",
+      "state": "Invulnerable (post-hit)",
+      "behavior": "Temporary invincibility frames allow passing through enemies/projectiles; visual persistence of sprite indicates active invulnerability window"
+    },
+    {
+      "entity": "Common enemies (Wavers, Rippers, Crawlers)",
+      "state": "Active / patrolling",
+      "behavior": "Consistent movement patterns on screen; spawn/despawn based on screen position; attack player on proximity; drop energy/ammo on defeat based on frame RNG"
+    },
+    {
+      "entity": "Kraid",
+      "state": "Undefeated / territorial control",
+      "behavior": "Occupies dedicated boss arena; blocks progression to lower Brinstar; defeat triggers statue unlocking passage"
+    },
+    {
+      "entity": "Ridley",
+      "state": "Undefeated / territorial control",
+      "behavior": "Occupies dedicated boss arena in Norfair; blocks progression to Lower Norfair; defeat triggers statue unlocking path to Tourian"
+    },
+    {
+      "entity": "Mother Brain",
+      "state": "Final boss / command nexus",
+      "behavior": "Located in Tourian final chamber; commands Metroid defenses; destruction triggers facility self-destruct sequence; controls ultimate world state (game end)"
+    },
+    {
+      "entity": "Metroids",
+      "state": "Active threat / final obstacle",
+      "behavior": "Concentrated in Tourian; latch-on parasitic attack behavior; final encounter before Mother Brain; represent core threat justifying mission"
+    }
+  ],
+  "notes": "Metroid (1986) communicates world-state primarily through visual progression gates and sprite-based regional distinctiveness. The game lacks explicit map or HUD narrative markers; all world-state communication is implicit through accessibility (what can be reached) and visual variation (what regions look/feel different). Boss statues becoming shootable after defeat is key mechanical/visual signal for state change. No faction explicitly identified through color coding or symbols; Space Pirates represented only through enemy types and commander bosses. Environmental storytelling relies on architecture distinctiveness, placement patterns, and upgrade gating logic. The absence of a map and explicit narrative text in-game makes visual communication critical—players learn state through what they can/cannot access and how enemies/areas change after major defeats.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:05:27.472Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8547,
+    "output_tokens": 2373,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "game_id": "donkey-kong-nes",
+  "game_name": "Donkey Kong",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Barrel projectiles",
+      "visual_form": "Rolling brown/dark sprites moving down platforms with physics variation (straight or alternating left-right)",
+      "meaning": "Imminent collision hazard; player must avoid or use hammer to destroy"
+    },
+    {
+      "signal": "Donkey Kong's position at top of stage",
+      "visual_form": "Large antagonist sprite positioned at apex of level structure",
+      "meaning": "Source of barrel threats; visual anchor for threat origination"
+    },
+    {
+      "signal": "Fire/flames on platforms",
+      "visual_form": "Orange/red animated sprites on specific girder sections",
+      "meaning": "Static environmental hazard; contact causes damage/loss of life"
+    },
+    {
+      "signal": "Hammer pickup depletion",
+      "visual_form": "Hammer sprite becomes unavailable after timer expiration (visual disappearance)",
+      "meaning": "Loss of temporary invulnerability state; return to vulnerable status"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Hammer power-up acquisition",
+      "visual_form": "Hammer sprite appears on platform, distinguished visual asset",
+      "meaning": "Temporary invulnerability period activated; player can destroy barrels without collision damage"
+    },
+    {
+      "signal": "Elevated platforms/girders",
+      "visual_form": "Horizontal beam structures in gray/metallic tones",
+      "meaning": "Safe traversal paths; structural navigation routes away from ground-level threats"
+    },
+    {
+      "signal": "Pauline (objective character) position",
+      "visual_form": "Female character sprite at top platform, typically stationary",
+      "meaning": "Level objective; reaching this location completes stage"
+    },
+    {
+      "signal": "Ladder structures",
+      "visual_form": "Vertical climbing paths rendered as distinct sprites",
+      "meaning": "Safe vertical mobility; alternate elevation access routes"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Mario)",
+      "color_identity": "Red and tan/flesh tones",
+      "symbol_or_sigil": "Distinctive hat, small jumping humanoid sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Can occupy any platform; interacts with hammers and ladders"
+    },
+    {
+      "faction": "Antagonist (Donkey Kong)",
+      "color_identity": "Brown/tan with darker accents",
+      "symbol_or_sigil": "Larger primate sprite; distinctive silhouette",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Stationed at level apex; barrel-throwing animation indicates aggression state"
+    },
+    {
+      "faction": "Objective (Pauline)",
+      "color_identity": "Pink/red dress with blonde/yellow hair",
+      "symbol_or_sigil": "Female character sprite; visually distinct from Mario",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Confined to top platform; immobile placement signals rescue objective"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (100m, 75m, 50m levels)",
+      "visual_manifestation": "Background girder arrangement changes; different platform layouts and fire positions per level",
+      "behavioral_manifestation": "Barrel throw patterns and frequency scale with stage difficulty; Donkey Kong AI adjusts projectile timing"
+    },
+    {
+      "world_state": "Hammer active (temporary power state)",
+      "visual_manifestation": "Hammer sprite visible on platform until collision or timer expiration; visual indicator of invulnerability window",
+      "behavioral_manifestation": "Barrels destroyed on contact instead of causing collision damage; Mario movement behavior unchanged but interaction outcome differs"
+    },
+    {
+      "world_state": "Level completion (Pauline reached)",
+      "visual_manifestation": "Character sprites transition to ending sequence; visual state shift from gameplay to cutscene",
+      "behavioral_manifestation": "Input freeze; automatic animation sequence begins (Mario and Pauline sitting sprites, though unused in final version)"
+    },
+    {
+      "world_state": "Barrel threat density escalation",
+      "visual_manifestation": "Multiple barrel sprites visible simultaneously on screen; increased sprite saturation as level difficulty increases",
+      "behavioral_manifestation": "Barrel spawn rate increases; multiple projectiles active in later stages creates spatially complex threat environment"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural constraint as narrative",
+      "example": "Girder/platform layout communicates industrial setting (construction/factory environment); vertical stacking suggests building ascent progression"
+    },
+    {
+      "technique": "Hazard placement as implicit conflict",
+      "example": "Fire placement on specific platforms suggests environmental danger independent of antagonist; creates multi-threat scenario requiring route planning"
+    },
+    {
+      "technique": "Character positioning as dramatic staging",
+      "example": "Pauline positioned at unreachable apex with Donkey Kong between her and player; spatial arrangement communicates obstacle and objective simultaneously"
+    },
+    {
+      "technique": "Sprite distinctiveness as role communication",
+      "example": "Color and size differences immediately identify Mario (player), Donkey Kong (threat), and Pauline (objective) without UI or text"
+    },
+    {
+      "technique": "Missing content as world state",
+      "example": "Absence of 50m level in NES port (memory limitations) is narrative gap; later 'Original Edition' restoration implies design intent"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario (Player)",
+      "state": "Movement control",
+      "behavior": "Revision 0 cannot move when D-Pad held diagonally; Revision 1 implements directional priority allowing continued horizontal movement when rolling diagonally upward"
+    },
+    {
+      "entity": "Mario (Player)",
+      "state": "Hammer equipped",
+      "behavior": "Cannot jump while holding hammer (Revision 0 bug allows rare jump under specific RNG conditions); hammer timer resets if bug triggered, extending invulnerability window"
+    },
+    {
+      "entity": "Donkey Kong",
+      "state": "Barrel throwing",
+      "behavior": "Two standard patterns: straight descent or alternating left-right lateral movement; unused third pattern (down-right trajectory) suggests design iteration"
+    },
+    {
+      "entity": "Barrel projectile",
+      "state": "Descent phase",
+      "behavior": "Physics-based movement through platform gaps; collision with horizontal surfaces produces bounce/ricochet behavior"
+    },
+    {
+      "entity": "Donkey Kong (Demo mode)",
+      "state": "Hammer possession bug (Revision 0)",
+      "behavior": "Can jump while holding hammer under rare RNG alignment; unintended state reveals control interpretation ambiguity in original code"
+    }
+  ],
+  "notes": "Donkey Kong NES is a constrained port of the 1981 arcade original, missing the 50m (Cement Factory) level due to cartridge memory limits. The game uses simple color-coding and sprite distinctiveness rather than UI elements to communicate world state. Danger is primarily signaled through projectile visibility and spatial threat density. Two revisions exist with notable controller input and demo mode differences. The 2010 'Original Edition' Virtual Console release attempted arcade fidelity restoration. Visual communication relies entirely on sprite animation and level layout; no dynamic environmental feedback beyond projectile behavior and hazard placement. Faction identity is established purely through color palette and sprite silhouette rather than symbolic markers.",
+  "sources_used": [
+    "tcrf",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:27:56.790Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 10364,
+    "output_tokens": 1949,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

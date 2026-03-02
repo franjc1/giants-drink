@@ -1,0 +1,1060 @@
+Dr. Mario (NES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Dr. Mario (NES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Dr. Mario
+
+Developer :
+
+Nintendo R&D1
+
+&#91;1&#93;
+
+Publishers :
+
+Nintendo
+
+&#91;2&#93;
+
+&#91;3&#93;
+
+&#91;4&#93;
+
+(JP/US/EU/AU),
+
+Playtronic
+
+&#91;5&#93;
+
+(BR)  Platforms :
+
+NES  ,
+
+Arcade  &#160;(PlayChoice-10)  Released in JP : July 27,&#160;1990  &#91;2&#93;
+
+Released in US : October 1990  &#91;3&#93;
+
+Released in EU : June 27,&#160;1991  &#91;4&#93;
+
+Released in AU :  1991  Released in BR : September 1994  &#91;5&#93;
+
+This game has  unused code .
+
+This game has  unused graphics .
+
+This game has  debugging material .
+
+This game has  anti-piracy features .
+
+This game has a prototype article
+
+This game has a notes page
+
+This game has a bugs page
+
+This game has a Data Crystal page
+
+To do:  ­
+
+There appears to be some evidence that the extended string in Fever from the Game Boy version is in the game, but is unused.
+
+Unused sound that is used in  Virus  PlayChoice-10  prototype and the Vs. System arcade version
+
+Dr. Mario
+
+is a puzzle game featuring Mario, who throws colored pills into a bottle to match with like-colored viruses and destroy them. It's also been remade several times since.
+
+Contents
+
+1
+
+Sub-Pages
+
+2
+
+Unused Graphics
+
+3
+
+Unused Gameplay Behavior
+
+4
+
+Famicom Disk System Remnants
+
+4.1
+
+Unused Alternate Controller Polling Routines
+
+4.2
+
+Disabled Demo Recording Mode
+
+5
+
+Anti-Piracy
+
+6
+
+References
+
+Sub-Pages
+
+Prototype Info
+
+Notes
+
+Bugs
+
+Unused Graphics
+
+These sprites were intended to appear in the cutscenes shown between levels.
+
+Either a soccer ball or a meteor. Nobody knows.
+
+A snowman in boots? Whatever it is, it  does  have a proper tilemap and behavior, and its placement in the sprite list suggests it was meant to appear in the Level 20 HIGH cutscene before the final UFO scene was implemented.
+
+Some strange colorful lines, possibly an early virus-deletion animation. The final game uses a much simpler starburst graphic. This sprite appears in later prototypes of the arcade version.
+
+What looks to be half of a large pill. This was added sometime after  the PlayChoice-10  Virus  prototype .
+
+Unused Gameplay Behavior
+
+The game has two leftovers from its earliest days of development, when it was called  Virus .
+
+Normally, Megavitamin halves fall down after the other halves are matched. In the first two builds of  Virus , the options menu allowed players to turn this off, letting them stay in mid-air. In any version of the final, changing RAM address
+
+$724
+
+to a non-zero value or using the following Game Genie codes below will cause the Megavitamins to stay in mid-air.
+
+Revision
+
+Codes
+
+JP/USA Rev 1
+
+XVLEAE + AELEPA
+
+JP Rev 0
+
+XVZEZE + AEZELA
+
+EU
+
+XVLALE + AELAGA
+
+Normally, 2-Player mode continues until a player wins three times. In the first two builds of  Virus , this number could be set in the options menu. Similar to the above, the number of games needed to win can be changed at RAM address
+
+$725
+
+or using either the following Game Genie code below.
+
+Revision
+
+1 Set
+
+2 Set
+
+JP/USA Rev 1
+
+PEAPXP
+
+ZEAPXP
+
+JP Rev 0
+
+PAYPKP
+
+ZAYPKP
+
+EU
+
+PAYOSP
+
+ZAYOSP
+
+Famicom Disk System Remnants
+
+The game appears to have been originally developed for the  Famicom Disk System , as many  FDS BIOS  routines and their associated variables are present in the final game.
+
+Unused Alternate Controller Polling Routines
+
+(ROM addresses are for the Rev 1 release but these are present in all final releases.)
+
+The game contains unused alternate controller polling routines which originate from the FDS BIOS.
+
+$B7E1
+
+contains the polling routine used in the final game. It polls the controllers twice (including the Famicom's expansion port) and bitwise ANDs the results to work around  DMC input corruption .
+
+$B812
+
+contains a routine which rereads the standard controllers in a loop until two polls match, which is a more typical workaround.
+
+$B828
+
+contains a routine which is identical to the previous one but combines inputs from the expansion port.
+
+$B844
+
+contains a polling routine which only reads the controllers once but treats expansion port inputs separately from standard controllers.
+
+See the notes page for more details.
+
+Disabled Demo Recording Mode
+
+To do:  Demonstrate the recording mode on an FDS port, and include a video.
+
+The game checks the memory address
+
+$0741
+
+against a constant value of
+
+FF
+
+to determine if the demo inputs should be recorded instead of replayed. This address is normally set to
+
+00  , disabling this feature. Even if the check passes, inputs cannot be recorded in the final game as the game attempts to write these to ROM on the cartridge.
+Since the FDS loads code from disks into PRG-RAM instead, the recording mode would have been functional (and therefore used) during development.
+
+Anti-Piracy
+
+The game features a simple anti-piracy check that will intentionally crash the game if the title screen is altered. On reset, the game performs an 8-bit checksum of the area of ROM containing the title screen tilemap data (  $B900-$BDFF  ). If the check passes, RAM address
+
+$740
+
+is set to
+
+00
+
+and the game runs normally. However, if it fails,
+
+$740
+
+is set to
+
+FF
+
+instead. This address is checked whenever a pill lands; if it's set to
+
+FF  , the game pulls whatever value is stored at RAM address
+
+$53  , pushes it to the stack three times, and performs an RTS. This causes the CPU to jump somewhere in RAM, and since there's no valid program code there, the game soon crashes.
+
+Interestingly, a very similar 8-bit checksum routine (and method of crashing) appears in
+
+Final Fantasy  . Perhaps the programmers drew inspiration from NASIR?
+
+(Source: Rachel Mae)
+
+References
+
+↑
+
+MobyGames
+
+↑
+
+2.0
+
+2.1
+
+GDR ファミリーコンピュータ ソフト一覧 1990年 - FAMILY COMPUTER Software List 1990
+
+↑
+
+3.0
+
+3.1
+
+NES Games
+
+↑
+
+4.0
+
+4.1
+
+www.NINTENDO.se - Spel - NES (archived)
+
+↑
+
+5.0
+
+5.1
+
+Nintendo com a família toda  "Nintendo with the whole family" -  O Globo , September 26, 1994
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Mario
+
+series
+
+NES
+
+Super Mario Bros. &#160;&#8226;
+
+Super Mario Bros. 2 (NES)  ( Prototype ;  Doki Doki Panic )&#160;&#8226;
+
+Super Mario Bros. 3
+
+Famicom Disk System
+
+Super Mario Bros. &#160;&#8226;
+
+Super Mario Bros. 2 (FDS) &#160;&#8226;
+
+All Night Nippon Super Mario Bros.
+
+Arcade
+
+VS. Super Mario Bros.
+
+Game Boy (Color)
+
+Super Mario Land &#160;&#8226;
+
+Super Mario Land 2: 6 Golden Coins &#160;&#8226;
+
+Wario Land: Super Mario Land 3 &#160;&#8226;
+
+Super Mario Bros. Deluxe
+
+SNES
+
+Super Mario World  ( Localization Prototype )&#160;&#8226;
+
+Super Mario All-Stars &#160;&#8226;
+
+Super Mario World 2: Yoshi's Island  ( Prototypes )
+
+Satellaview
+
+BS Super Mario USA &#160;&#8226;
+
+BS Super Mario Collection
+
+Nintendo 64(DD)
+
+Super Mario 64  ( iQue Prototypes ;  64DD Version )
+
+Game Boy Advance
+
+Super Mario Advance &#160;&#8226;
+
+Super Mario Advance 2 &#160;&#8226;
+
+Super Mario Advance 3 &#160;&#8226;
+
+Super Mario Advance 4
+
+GameCube
+
+Super Mario Sunshine  ( Demos )
+
+Nintendo DS
+
+Super Mario 64 DS &#160;&#8226;
+
+New Super Mario Bros.
+
+Wii
+
+Super Mario Galaxy &#160;&#8226;
+
+New Super Mario Bros. Wii &#160;&#8226;
+
+Super Mario Galaxy 2 &#160;&#8226;
+
+Super Mario All-Stars
+
+Nintendo 3DS
+
+Super Mario 3D Land  ( Prototype )&#160;&#8226;
+
+New Super Mario Bros. 2
+
+Wii U
+
+New Super Mario Bros. U  ( New Super Luigi U )&#160;&#8226;
+
+Super Mario 3D World
+
+iOS, Android
+
+Super Mario Run
+
+Nintendo Switch
+
+Super Mario Odyssey &#160;&#8226;
+
+New Super Mario Bros. U Deluxe &#160;&#8226;
+
+Super Mario 3D All-Stars &#160;&#8226;
+
+Super Mario Bros. 35 &#160;&#8226;
+
+Super Mario 3D World + Bowser's Fury &#160;&#8226;
+
+Super Mario Bros. Wonder  ( Kiosk Demo )
+
+Game & Watch
+
+Game & Watch: Super Mario Bros.
+
+Mario Kart
+
+Console Games
+
+Super Mario Kart  ( Prototypes )&#160;&#8226;
+
+Mario Kart 64  ( iQue Prototype )&#160;&#8226;
+
+Mario Kart: Double Dash!!  ( Demos ,  Bonus Disc )&#160;&#8226;
+
+Mario Kart Wii  ( Mario Kart Channel ,  Demo )&#160;&#8226;
+
+Mario Kart 8 &#160;&#8226;
+
+Mario Kart 8 Deluxe  ( Prototype )
+
+Handheld Games
+
+Mario Kart: Super Circuit &#160;&#8226;
+
+Mario Kart XXL &#160;&#8226;
+
+Mario Kart DS  ( Demos )&#160;&#8226;
+
+Mario Kart 7  ( Prototype )&#160;&#8226;
+
+Mario Kart Tour  ( Closed Beta )
+
+Arcade Games
+
+Mario Kart Arcade GP &#160;&#8226;
+
+Mario Kart Arcade GP 2 &#160;&#8226;
+
+Mario Kart Arcade GP DX
+
+RPGs
+
+Super Mario RPG
+
+Legend of the Seven Stars  ( Switch )
+
+Paper Mario
+
+Paper Mario &#160;&#8226;
+
+The Thousand-Year Door  ( Demos ,  Switch )&#160;&#8226;
+
+Super Paper Mario &#160;&#8226;
+
+Sticker Star &#160;&#8226;
+
+Color Splash &#160;&#8226;
+
+The Origami King
+
+Mario & Luigi
+
+Superstar Saga  ( Prototype ,  + Bowser's Minions )&#160;&#8226;
+
+Partners in Time  ( Demos )&#160;&#8226;
+
+Bowser's Inside Story  ( + Bowser Jr.'s Journey )&#160;&#8226;
+
+Dream Team &#160;&#8226;
+
+Paper Jam &#160;&#8226;
+
+Brothership
+
+Mario + Rabbids
+
+Kingdom Battle &#160;&#8226;
+
+Sparks of Hope
+
+Mario Party
+
+Console Games
+
+Mario Party &#160;&#8226;
+
+Mario Party 2 &#160;&#8226;
+
+Mario Party 3  ( Prototype )&#160;&#8226;
+
+Mario Party 4  ( Demo )&#160;&#8226;
+
+Mario Party 5  ( Demo )&#160;&#8226;
+
+Mario Party 6  ( Demo )&#160;&#8226;
+
+Mario Party 7 &#160;&#8226;
+
+Mario Party 8 &#160;&#8226;
+
+Mario Party 9 &#160;&#8226;
+
+Mario Party 10 &#160;&#8226;
+
+Super Mario Party &#160;&#8226;
+
+Mario Party Superstars
+
+Handheld Games
+
+Mario Party Advance &#160;&#8226;
+
+Mario Party DS &#160;&#8226;
+
+Island Tour &#160;&#8226;  Star Rush &#160;&#8226;  The Top 100
+
+Web Games
+
+Mario Party 7: Bowser's Lair Hockey &#160;&#8226;
+
+Mario's Matching Madness
+
+Sports
+
+Golf
+
+NES Open Tournament Golf &#160;&#8226;  Mario Golf ( N64 ,  GBC )&#160;&#8226;
+
+Mario Golf: Toadstool Tour  ( Demos )&#160;&#8226;
+
+Mario Golf: Advance Tour &#160;&#8226;
+
+Mobile Golf
+
+Tennis
+
+Mario's Tennis &#160;&#8226;  Mario Tennis ( N64 ,  GBC )&#160;&#8226;
+
+Mario Power Tennis &#160;&#8226;
+
+Mario Tennis: Power Tour  ( Bicep Pump )&#160;&#8226;
+
+New Play Control! Mario Power Tennis &#160;&#8226;
+
+Mario Tennis: Ultra Smash &#160;&#8226;
+
+Mario Tennis Aces
+
+Soccer
+
+Super Mario Strikers  ( Demos )&#160;&#8226;
+
+Mario Strikers Charged &#160;&#8226;
+
+Mario Strikers: Battle League
+
+Baseball
+
+Mario Superstar Baseball  (  Mario Baseball  Demo )&#160;&#8226;
+
+Mario Super Sluggers
+
+Mario & Sonic at the Olympic Games
+
+Beijing 2008 ( DS ,  Wii )&#160;&#8226;  Vancouver 2010 ( DS ,  Wii )&#160;&#8226;
+
+London 2012 &#160;&#8226;
+
+Sochi 2014 &#160;&#8226;  Rio 2016 ( Wii U ,  Arcade )&#160;&#8226;
+
+Tokyo 2020
+
+Other
+
+Excitebike: Bun Bun Mario Battle &#160;&#8226;
+
+Mario Pinball Land &#160;&#8226;
+
+Dance Dance Revolution Mario Mix &#160;&#8226;
+
+Mario Sports Mix
+
+Dr. Mario
+
+Console Games
+
+Dr. Mario  ( Prototypes )&#160;&#8226;
+
+Tetris & Dr. Mario &#160;&#8226;
+
+Dr. Mario 64 &#160;&#8226;
+
+Nintendo Puzzle Collection &#160;&#8226;
+
+Dr. Mario Online Rx &#160;&#8226;
+
+Dr. Luigi
+
+Handheld Games
+
+Dr. Mario &#160;&#8226;
+
+Dr. Mario & Puzzle League &#160;&#8226;
+
+Dr. Mario Express &#160;&#8226;
+
+Dr. Mario: Miracle Cure &#160;&#8226;
+
+Dr. Mario World
+
+Web Games
+
+Dr. Mario: Vitamin Toss
+
+Super Mario Maker
+
+Wii U
+
+Super Mario Maker
+
+Nintendo 3DS
+
+Super Mario Maker for Nintendo 3DS
+
+Nintendo Switch
+
+Super Mario Maker 2
+
+Mario vs. Donkey Kong
+
+Handheld Games
+
+Mario vs. Donkey Kong  ( Demo )&#160;&#8226;
+
+March of the Minis  ( Demo )&#160;&#8226;
+
+Minis March Again! &#160;&#8226;
+
+Mini-Land Mayhem! &#160;&#8226;
+
+Tipping Stars &#160;&#8226;
+
+Mini Mario & Friends: amiibo Challenge
+
+Console Games
+
+Tipping Stars &#160;&#8226;
+
+Mini Mario & Friends: amiibo Challenge
+
+Mario Bros.
+
+Arcade
+
+Mario Bros.
+
+NES/FDS
+
+Mario Bros.  ( Kaettekita )
+
+PC-88
+
+Punch Ball Mario Bros.
+
+Virtual Boy
+
+Mario Clash
+
+Game Boy Advance
+
+Mario Bros. Classic
+
+Mario's Picross
+
+Game Boy
+
+Mario's Picross &#160;&#8226;
+
+Picross 2
+
+SNES
+
+Mario's Super Picross
+
+Captain Toad
+
+Wii U
+
+Treasure Tracker
+
+Nintendo Switch, Nintendo 3DS
+
+Treasure Tracker
+
+Donkey Kong
+
+Arcade
+
+Donkey Kong &#160;&#8226;
+
+Donkey Kong Jr.
+
+Atari 8-bit family
+
+Donkey Kong  ( Prototype )
+
+NES/FDS
+
+Donkey Kong &#160;&#8226;
+
+Donkey Kong Jr.
+
+Game Boy
+
+Donkey Kong
+
+Luigi's Mansion
+
+GameCube
+
+Luigi's Mansion
+
+Nintendo 3DS
+
+Dark Moon &#160;&#8226;
+
+Luigi's Mansion
+
+Arcade
+
+Luigi's Mansion Arcade
+
+Nintendo Switch
+
+Luigi's Mansion 3 &#160;&#8226;
+
+Luigi's Mansion 2 HD
+
+Princess Peach
+
+Nintendo DS
+
+Super Princess Peach
+
+Nintendo Switch
+
+Princess Peach: Showtime!
+
+Adobe Flash
+
+Super Princess Peach: Parasol Fall
+
+Wrecking Crew
+
+NES/FDS
+
+Wrecking Crew
+
+SNES
+
+Wrecking Crew '98
+
+Art
+
+Console Games
+
+Mario Paint  ( Prototype )&#160;&#8226;
+
+Mario Artist: Paint Studio  ( Prototype )&#160;&#8226;
+
+Mario Artist: Talent Studio &#160;&#8226;
+
+Mario Artist: Communication Kit &#160;&#8226;
+
+Mario Artist: Polygon Studio
+
+I am a Teacher: Super Mario no Sweater &#160;&#8226;
+
+Mario no Photopi
+
+Handheld Games
+
+Jaguar Mishin Sashi Sen'you Soft: Mario Family &#160;&#8226;
+
+Photos with Mario
+
+Educational
+
+Computer Games
+
+Mario is Missing! &#160;&#8226;
+
+Mario's Early Years &#160;&#8226;
+
+Mario Teaches Typing
+
+Console Games  Mario is Missing! ( SNES ,  NES )&#160;&#8226;  Mario's Time Machine ( SNES ,  NES )&#160;&#8226;  Mario's Early Years ( Fun With Letters ,  Fun With Numbers ,  Preschool Fun )
+
+Miscellaneous
+
+Arcade Games
+
+Mario Roulette
+
+Computer Games
+
+Mario's Game Gallery
+
+Console Games
+
+Mario & Wario &#160;&#8226;
+
+Yoshi's Safari &#160;&#8226;
+
+Undake 30: Same Game Mario Version &#160;&#8226;
+
+Hotel Mario  ( Prototype )&#160;&#8226;
+
+Super Mario's Wacky Worlds &#160;&#8226;
+
+Fortune Street
+
+Handheld Games
+
+Alleyway &#160;&#8226;
+
+Mario Clock &#160;&#8226;
+
+Puzzle & Dragons: Super Mario Bros. Edition
+
+Web Games
+
+Bowser's Diary Quiz &#160;&#8226;
+
+Heads-Up &#160;&#8226;
+
+Which Mushroom Kingdom Character Would Be Your BFF?
+
+Compilations
+
+Donkey Kong, Donkey Kong Jr., Mario Bros. &#160;&#8226;
+
+3-in-1 Super Mario Bros. / Duck Hunt / World Class Track Meet  ( Prototype )
+
+Competitions
+
+Nintendo World Championships 1990 &#160;&#8226;
+
+Nintendo Campus Challenge 1991 &#160;&#8226;
+
+Nintendo Campus Challenge 1992 &#160;&#8226;
+
+Nintendo PowerFest '94
+
+See Also
+
+Donkey Kong &#160;&#8226;
+
+Game & Watch &#160;&#8226;
+
+Wario &#160;&#8226;
+
+Yoshi
+
+Retrieved from " https://tcrf.net/index.php?title=Dr._Mario_(NES)&oldid=2028681 "
+
+Categories :
+
+Games developed by Nintendo R&D1
+
+Games published by Nintendo
+
+Games published by Playtronic
+
+NES games
+
+Arcade games
+
+Games released in 1990
+
+Games released in July
+
+Games released on July 27
+
+Games with unused code
+
+Games with unused graphics
+
+Games with debugging functions
+
+Games with anti-piracy methods
+
+Pages with a Data Crystal link
+
+To do
+
+Mario series
+
+Hidden category:
+
+Pages missing date references
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with anti-piracy methods
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with unused code
+
+Games  >  Games by content  >  Games with unused graphics
+
+Games  >  Games by content  >  Pages with a Data Crystal link
+
+Games  >  Games by developer  >  Games developed by Nintendo  >  Games developed by Nintendo EPD  >  Games developed by Nintendo SPD  >  Games developed by Nintendo R&D1
+
+Games  >  Games by platform
+
+Games  >  Games by platform  >  Arcade games
+
+Games  >  Games by publisher  >  Games published by Gradiente  >  Games published by Playtronic
+
+Games  >  Games by publisher  >  Games published by Nintendo
+
+Games  >  Games by release date  >  Games released in 1990
+
+Games  >  Games by release date  >  Games released in July
+
+Games  >  Games by release date  >  Games released in July  >  Games released on July 27
+
+Games  >  Games by series  >  Mario series
+
+Hidden categories  >  Pages missing date references
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 7 February 2026, at 14:48.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

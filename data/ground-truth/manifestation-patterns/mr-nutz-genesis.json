@@ -1,0 +1,173 @@
+{
+  "game_id": "mr-nutz-genesis",
+  "game_name": "Mr. Nutz",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites positioned in platformer level geometry",
+      "meaning": "Direct threats that can be defeated by jumping on them, tail strikes, or thrown nuts; contact without sufficient defeat causes health loss"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Level design obstacles and environmental dangers (implicit in 'hazards' gameplay mention)",
+      "meaning": "Indestructible or unavoidable level elements that cause health loss on contact"
+    },
+    {
+      "signal": "Boss encounter - Mr. Blizzard",
+      "visual_form": "Yeti character sprite, likely large/imposing visual presentation distinct from regular enemies",
+      "meaning": "World-threatening antagonist attempting to freeze the world; requires defeat to progress narrative; cannot be defeated by standard enemy-kill mechanics"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Character sprite flashing during invulnerability frames after damage",
+      "meaning": "Current vulnerability state and recovery window after taking damage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Coin collection",
+      "visual_form": "Collectable coin sprites distributed throughout levels",
+      "meaning": "Safe pickups that increase score and determine completion bonus; hidden coins reward exploration"
+    },
+    {
+      "signal": "Health items",
+      "visual_form": "Health recovery pickups hidden throughout levels",
+      "meaning": "Safe items that restore health units; hidden placement encourages cautious exploration"
+    },
+    {
+      "signal": "Extra lives",
+      "visual_form": "1-Up or life container sprites hidden in levels",
+      "meaning": "Safe collectibles that extend player longevity and reduce failure consequences"
+    },
+    {
+      "signal": "Nut ammunition",
+      "visual_form": "Nut sprites collected and displayed as inventory",
+      "meaning": "Safe resource acquisition that enables safe-distance threat elimination; non-depleting in levels"
+    },
+    {
+      "signal": "Level progression checkpoints",
+      "visual_form": "Password system display at level transitions (post-SNES versions)",
+      "meaning": "Safe progression markers allowing players to resume from reached levels without restart penalty"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mr. Nutz (protagonist)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Anthropomorphic red squirrel character design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Presence in foreground sprite layer; player-controllable movement patterns distinguish from static world elements"
+    },
+    {
+      "faction": "Mr. Blizzard (antagonist)",
+      "color_identity": "White/Ice-themed (implied by yeti design and ice world takeover theme)",
+      "symbol_or_sigil": "Yeti creature; magical ice powers",
+      "enemy_visual_variants": "Single boss entity with unique sprite set; visually distinct from standard enemies through scale and animation complexity",
+      "environmental_markers": "Associated with ice-themed level design; magic-induced environmental transformation (frozen world state)"
+    },
+    {
+      "faction": "Standard enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Diverse enemy sprite designs across six themed levels",
+      "enemy_visual_variants": "Multiple distinct enemy types per level, each with unique sprite work and behavior patterns",
+      "environmental_markers": "Positioned within level-specific environmental contexts; themed to match level aesthetics"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal world (starting condition)",
+      "visual_manifestation": "Six themed levels with natural or neutral environmental aesthetics; vegetation, water, cave structures visible",
+      "behavioral_manifestation": "Standard enemy patrol patterns; environmental hazards stationary; level geometry stable and traversable"
+    },
+    {
+      "world_state": "Mr. Blizzard's threat escalation",
+      "visual_manifestation": "Progressive environmental icing/freezing implied through level-specific ice-themed aesthetics; water stages present as environmental storytelling of frozen world impacts",
+      "behavioral_manifestation": "Boss encounter escalation; Mr. Blizzard uses magic powers to transform environment; player must navigate increasingly hazardous frozen terrain"
+    },
+    {
+      "world_state": "Level completion progress",
+      "visual_manifestation": "Coin counter and score display; completion bonus calculation visible at level end; password display in GBC/GBA versions",
+      "behavioral_manifestation": "Enemy populations remain constant until level reset; checkpoints enable non-linear resume capability"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Themed level design progression",
+      "example": "Six distinct themed levels communicate narrative progression toward Mr. Blizzard; level aesthetics shift from natural/neutral environments toward ice-world consequences of yeti antagonist's magic"
+    },
+    {
+      "technique": "Enemy type placement in environmental context",
+      "example": "Enemies themed to match level aesthetics (water level enemies, cave enemies, ice realm enemies) communicate world-specific threats and environmental character"
+    },
+    {
+      "technique": "Removed content as narrative artifact",
+      "example": "Water stage removal from original release, later restored as bonus content in GBA version, suggests iteration on world-building; water mechanics communicate environmental hazard progression"
+    },
+    {
+      "technique": "Boss positioning and scale",
+      "example": "Mr. Blizzard as singular boss entity distinct from standard enemies communicates unique narrative threat status; yeti design directly visualizes world-freezing threat"
+    },
+    {
+      "technique": "Hidden collectible distribution",
+      "example": "Placement of coins, health, and lives rewards exploration of level geometry; communicates safe resource availability in dangerous environments"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mr. Nutz (player character)",
+      "state": "Normal movement",
+      "behavior": "Can run, jump, swim in designated levels; responds to controller input with immediate animation state changes"
+    },
+    {
+      "entity": "Mr. Nutz (player character)",
+      "state": "Damaged/recovering",
+      "behavior": "Sprite flashes during invulnerability frames; temporary invulnerability prevents re-damage during recovery window; movement continues uninterrupted"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Patrolling",
+      "behavior": "Predictable movement patterns within level geometry; can be jumped upon, tail-struck, or nut-struck for defeat"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Defeated",
+      "behavior": "Most enemies destroyed with single strike (visual: disappearance/death animation); removed from level population"
+    },
+    {
+      "entity": "Mr. Blizzard",
+      "state": "Boss encounter",
+      "behavior": "Complex animation cycles; uses magic powers to transform environment; cannot be defeated by standard enemy-kill mechanics; requires boss-specific strategy"
+    },
+    {
+      "entity": "Mr. Blizzard",
+      "state": "Defeated",
+      "behavior": "Defeat stops world-freezing threat; end-goal narrative condition achieved; game conclusion triggered"
+    },
+    {
+      "entity": "Collectible items",
+      "state": "Uncollected",
+      "behavior": "Stationary sprite display in level geometry; visual distinction by item type (coin sparkle, health glow, life icon)"
+    },
+    {
+      "entity": "Collectible items",
+      "state": "Collected",
+      "behavior": "Removal from level; instantaneous pickup; inventory/score/health counter increment"
+    }
+  ],
+  "notes": "Mr. Nutz uses straightforward visual communication typical of early-1990s platformers: protagonist colored distinctly (red squirrel), antagonist visually imposing (yeti), and world-state communicated through level theming rather than dynamic environmental transformation. The game lacks documented faction complexity or political narrative elements; conflict is straightforward good (player) vs evil (yeti antagonist). Visual manifestation relies on sprite design clarity, level aesthetic theming, and simple behavioral animation cycles. The water stage's inclusion/exclusion across versions suggests environmental storytelling iteration. Safety vs danger signals communicated through sprite type (enemy vs collectible), animation state (flashing = vulnerable), and level geometry context (hazard placement).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:59:37.316Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3249,
+    "output_tokens": 2148,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

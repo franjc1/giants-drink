@@ -1,0 +1,153 @@
+{
+  "game_id": "final-fantasy-mystic-quest-snes",
+  "game_name": "Final Fantasy Mystic Quest",
+  "platform": "snes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Stationary enemy sprites in dungeons",
+      "visual_form": "Large, visible enemy sprites placed on dungeon field screens",
+      "meaning": "Player can see and choose to engage danger; larger-than-player visual scale indicates threat magnitude"
+    },
+    {
+      "signal": "Gray arrow path blockage on world map",
+      "visual_form": "Grayed-out directional indicators on linear travel routes",
+      "meaning": "Impassable territory; danger or incompletion of prerequisites blocks forward progression"
+    },
+    {
+      "signal": "Battle screen transition",
+      "visual_form": "Shift from exploration top-down view to dedicated battle window interface",
+      "meaning": "Player has engaged with hostile entity; combat state is now active"
+    },
+    {
+      "signal": "Enemy sprite size in battle",
+      "visual_form": "Enemies rendered significantly larger than player character on battle screen despite camera distance",
+      "meaning": "Visual intimidation and threat assessment; scale disparity communicates power/danger level"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town icons on world map",
+      "visual_form": "Pictorial settlement representations accessible via open paths",
+      "meaning": "Safe haven locations; NPCs and merchant vendors present; restoration and story progression occur here"
+    },
+    {
+      "signal": "Open path routes (non-grayed arrows)",
+      "visual_form": "Clear directional indicators on world map connecting accessible locations",
+      "meaning": "Safe travel corridor; player has cleared prerequisites; progression is available"
+    },
+    {
+      "signal": "Save-anywhere mechanic during exploration",
+      "visual_form": "No mandatory save points; manual save access at any time in field screen",
+      "meaning": "Player agency and safety; world-state can be preserved at player discretion without resource limitation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dark Kings / Evil Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Stolen elemental crystals (four types)",
+      "enemy_visual_variants": "Large enemy sprites representing corrupted elemental servants",
+      "environmental_markers": "Sealed dungeons with element-themed challenges; barred paths until crystals reclaimed"
+    },
+    {
+      "faction": "Benjamin (Hero / Light)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Allied NPC presence in towns; progression through dungeon completion unlocks new paths"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Crystal stolen / dungeon incomplete",
+      "visual_manifestation": "Gray arrow blockage on world map; sealed dungeon entrance with locked doors; barred pathways",
+      "behavioral_manifestation": "Stationary enemies occupy dungeon space; NPCs express concern in dialogue; world map remains constrained"
+    },
+    {
+      "world_state": "Crystal recovered / dungeon cleared",
+      "visual_manifestation": "Gray arrow becomes active (white/normal); dungeon entrances open; new world map paths become traversable",
+      "behavioral_manifestation": "Enemy sprites vanish from cleared dungeons; NPCs provide gratitude dialogue; player gains large EXP/GP rewards"
+    },
+    {
+      "world_state": "Battlefield active (uncleaned)",
+      "visual_manifestation": "Battlefield icon appears on world map; battle screen loads immediately upon entry",
+      "behavioral_manifestation": "Player must defeat ten consecutive enemy encounters to 'clean' the battlefield; each enemy encounter fully resolved before next begins"
+    },
+    {
+      "world_state": "Battlefield cleaned",
+      "visual_manifestation": "Battlefield icon remains but enemy encounters cease; large reward container appears",
+      "behavioral_manifestation": "No further combat triggers; player receives armor piece, magic spell, large GP, or large EXP deposit"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Linear path gating with visual blockage",
+      "example": "Gray arrows indicate locked routes on world map; player understands dungeon completion is prerequisite before seeing detailed story explanation"
+    },
+    {
+      "technique": "Icon-based location design",
+      "example": "Towns, dungeons, and battlefields represented as discrete pictorial icons; player learns world structure through icon exploration rather than continuous scrolling"
+    },
+    {
+      "technique": "Enemy sprite placement as danger narrative",
+      "example": "Stationary enemy sprites visible in dungeon field communicate 'this space is contested'; their removal signals player victory and dungeon safety restoration"
+    },
+    {
+      "technique": "Puzzle elements tied to exploration tools",
+      "example": "Axe for tree-chopping, bombs for sealed doors, grappling hook for gaps — tool necessity communicates environmental narrative (blockage type implies solution)"
+    },
+    {
+      "technique": "Battlefield cleanup mechanic",
+      "example": "Ten-battle requirement to 'clean' a battlefield visually demonstrates player pacification of a dangerous region; reward variation (armor/spell/GP/EXP) signals world-state change"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy",
+      "state": "Unengaged (in dungeon field)",
+      "behavior": "Stationary sprite; player can choose avoidance or engagement; no forced random encounters"
+    },
+    {
+      "entity": "Enemy",
+      "state": "Engaged (in battle)",
+      "behavior": "Conditional turn-based combat; largest enemies may use crushing/physical attacks; can be defeated, fled from, or survived"
+    },
+    {
+      "entity": "Benjamin (Player Character)",
+      "state": "Exploration mode",
+      "behavior": "Top-down navigation; can interact with objects/NPCs; uses equipped tools (axe, bombs, grappling hook) for environmental manipulation"
+    },
+    {
+      "entity": "Benjamin",
+      "state": "Battle defeat",
+      "behavior": "Game Over triggered; player offered continue option, but character attack power temporarily penalized as narrative/mechanical consequence"
+    },
+    {
+      "entity": "NPC",
+      "state": "Pre-crystal recovery",
+      "behavior": "Dialogue expresses concern/urgency; may indicate blocked paths; communicate dungeon objectives"
+    },
+    {
+      "entity": "NPC",
+      "state": "Post-crystal recovery",
+      "behavior": "Dialogue shifts to gratitude; world-state progression acknowledged; may open new dialogue branches or quest pathways"
+    }
+  ],
+  "notes": "Final Fantasy Mystic Quest uses strong visual gating (gray arrows, locked doors, sealed dungeons) to communicate world-state without reliance on text. The elimination of random encounters in favor of stationary, visible enemies allows players to visually assess danger and choose engagement. Enemy sprite scaling (larger than player) provides immediate threat assessment. The crystal-recovery mechanic creates binary world states (blocked/open) that are clearly manifested through map visuals. This design favors clarity and accessibility — a stated design goal for 'entry-level players.' Environmental storytelling relies heavily on tool-puzzle correspondence (tool type implies environmental challenge type) rather than detailed narrative exposition. The save-anywhere system removes resource scarcity and communicates safety/player agency during exploration.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:50:54.622Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4762,
+    "output_tokens": 1867,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "game_id": "rushn-attack-nes",
+  "game_name": "Rush'n Attack",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": 6,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Combat knife (melee)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Primary weapon throughout all stages; always available"
+    },
+    {
+      "element": "Basic soldiers/grunts",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Semi-random spawning from screen edges; spawn rate increases in western version"
+    },
+    {
+      "element": "Supply runners (drop weapons)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Eliminate to obtain secondary weapons; fewer in western version"
+    },
+    {
+      "element": "Grenades (3-pack pickup)",
+      "first_appears": "Stage 1 or 2",
+      "introduction_context": "moderate",
+      "mastery_context": "Western version: adds 3 uses per pickup; Japanese version: adds 1 use; max 3 grenades total"
+    },
+    {
+      "element": "Rocket Launcher/RPG (4-shot)",
+      "first_appears": "Stage 1 or 2",
+      "introduction_context": "moderate",
+      "mastery_context": "Obtained from supply runners; western version adds 3 uses per pickup"
+    },
+    {
+      "element": "Ladders (vertical navigation)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Climbing mechanic; allows vertical stage traversal"
+    },
+    {
+      "element": "Gunners (ranged enemies)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "More numerous in western version; fire projectiles"
+    },
+    {
+      "element": "Combat specialists",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Escalating enemy difficulty"
+    },
+    {
+      "element": "Jetpack soldiers",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Aerial threat; adds vertical complexity"
+    },
+    {
+      "element": "Parachute gunners",
+      "first_appears": "Stage 4",
+      "introduction_context": "dangerous",
+      "mastery_context": "Descending enemies; different sprite in later stages"
+    },
+    {
+      "element": "German Shepherds (dogs)",
+      "first_appears": "Later stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Melee threat; adds combat pressure"
+    },
+    {
+      "element": "Flame throwers (enemy type)",
+      "first_appears": "Late-game stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "High threat; arcade version only (removed in NES)"
+    },
+    {
+      "element": "Gyrocopters",
+      "first_appears": "Late-game stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Aerial threat; escalating difficulty"
+    },
+    {
+      "element": "Star power-up (invincibility)",
+      "first_appears": "NES version stages",
+      "introduction_context": "safe",
+      "mastery_context": "Limited duration; temporary threat nullification"
+    },
+    {
+      "element": "Pistol power-up (unlimited ammo)",
+      "first_appears": "NES version stages",
+      "introduction_context": "safe",
+      "mastery_context": "Limited duration; resource advantage"
+    },
+    {
+      "element": "Landmines (destructible)",
+      "first_appears": "Stage 2, 4, 5 (FDS version)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Destruction reveals hidden ladders to tunnel areas (FDS only)"
+    },
+    {
+      "element": "Stage-specific boss ambushers",
+      "first_appears": "Each stage end",
+      "introduction_context": "dangerous",
+      "mastery_context": "Special group encounters at stage conclusions"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Obtaining secondary weapons (grenades, RPG)",
+      "Collecting invincibility star power-up",
+      "Collecting unlimited ammo pistol power-up",
+      "Completing stage and reaching boss encounter",
+      "Successfully defeating boss ambushers"
+    ],
+    "typical_tension_triggers": [
+      "Constant invisible time limit pressure",
+      "Semi-random enemy spawning from screen edges (especially frequent in western version)",
+      "Increased enemy density in western version (more dangerous types)",
+      "Escalating enemy types: soldiers → specialists → jetpack/parachute units",
+      "Boss encounters at each stage end",
+      "Running out of secondary weapon ammo",
+      "Damage accumulation toward death"
+    ],
+    "pacing_descriptor": "Constant low-to-moderate tension with escalating enemy pressure throughout stages; punctuated by high-tension boss encounters; westward version maintains higher baseline tension via increased spawn rates and enemy variety"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Destructible landmines reveal ladders to hidden tunnel areas (FDS version stages 2, 4, 5); tunnel sections contain standard enemies and supply runners with random exit ladder placement",
+    "secret_convention": "Landmine destruction in specific stages opens concealed vertical passages to underground areas",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of basic soldiers and supply runners; knife + grenades/RPG acquisition establishes core combat loop; moderate enemy density",
+    "mid_game": "Introduction of Combat Specialists, Jetpack Soldiers, and Parachute Gunners; increases aerial threats and specialized enemy types; western version maintains higher enemy spawn rates; landmine-triggered secret areas available (FDS)",
+    "late_game": "Gyrocopters, Flame Throwers (arcade), and German Shepherds; stage-specific boss ambushers; final NES stages feature nuclear missile disarming objective; compressed time limits",
+    "notable_spikes": [
+      "Stage 4 transition: introduction of parachute gunners and escalated enemy variety",
+      "Stage 5/Final stage: combines all previous enemy types; boss encounters; time pressure intensifies",
+      "Western version baseline spike: constant increased enemy spawn frequency and dangerous type prevalence compared to Japanese version",
+      "Boss ambusher encounters at each stage end"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear horizontal progression with vertical ladder sections",
+      "description": "Primary movement left-to-right with ladders providing vertical navigation breaks; boss ambushers at stage conclusions",
+      "example_level": "Stages 1-5"
+    },
+    {
+      "pattern_name": "Warehouse/Base interior (Stage 3 analogue)",
+      "description": "Indoor environment with vertical traversal; complex enemy spacing",
+      "example_level": "Stage 3"
+    },
+    {
+      "pattern_name": "Airport stage (NES addition)",
+      "description": "New stage added in NES version between Missile Base and Harbor; distinct rocket soldier enemy focus",
+      "example_level": "Stage 4 (NES)"
+    },
+    {
+      "pattern_name": "Final base infiltration (NES addition)",
+      "description": "Nuclear missile disarming objective; uses captured enemy rocket launchers; culmination stage combining all enemy types and mechanics",
+      "example_level": "Stage 6 (NES final)"
+    },
+    {
+      "pattern_name": "Hidden tunnel networks (FDS exclusive)",
+      "description": "Accessed via landmine destruction in stages 2, 4, 5; contains standard enemies, supply runners, landmines; random exit ladder placement creates replayable variation",
+      "example_level": "Stages 2, 4, 5 (FDS version only)"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Rush'n Attack NES/FDS)",
+    "wikipedia (Rush'n Attack gameplay and ports)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:42:23.756Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5096,
+    "output_tokens": 2203,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

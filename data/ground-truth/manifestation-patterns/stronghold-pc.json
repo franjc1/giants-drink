@@ -1,0 +1,262 @@
+{
+  "game_id": "stronghold-pc",
+  "game_name": "Stronghold",
+  "platform": "pc",
+  "paradigm": "strategy",
+  "danger_signals": [
+    {
+      "signal": "Enemy castle presence",
+      "visual_form": "Fortified structures with enemy faction colors/banners on map display",
+      "meaning": "Active military threat requiring siege preparation or avoidance"
+    },
+    {
+      "signal": "Enemy army movement",
+      "visual_form": "Troop formations moving across territory on strategic map",
+      "meaning": "Immediate invasion threat; player settlement under siege risk"
+    },
+    {
+      "signal": "Burnt/damaged structures",
+      "visual_form": "Visual degradation of buildings from fire or siege damage",
+      "meaning": "Recent combat or ongoing threat; economic disruption in progress"
+    },
+    {
+      "signal": "Bandit presence",
+      "visual_form": "Unaligned hostile units appearing in ungoverned territories",
+      "meaning": "Lawlessness in region; threat to trade routes and resource gathering"
+    },
+    {
+      "signal": "Low food/resource indicators",
+      "visual_form": "UI status metrics; potentially empty granaries or depleted stockpiles",
+      "meaning": "Starvation risk; economic collapse imminent; population vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Owned castle with garrison",
+      "visual_form": "Fortified structure displaying player colors with visible troop deployment",
+      "meaning": "Secured territory; defensible position established"
+    },
+    {
+      "signal": "Monk monastery presence",
+      "visual_form": "Distinctive religious structure on map (ally faction marker)",
+      "meaning": "Safe haven; source of tactical aid (crossbows, devices); diplomatic support"
+    },
+    {
+      "signal": "Loyal lord territory",
+      "visual_form": "Neighboring region controlled by Woolsack or Longarm (allied noble colors)",
+      "meaning": "Protected flank; reinforcement availability; political stability"
+    },
+    {
+      "signal": "Intact economic infrastructure",
+      "visual_form": "Functional farm buildings, markets, granaries with active production animation",
+      "meaning": "Stable food supply; economic resilience; sustainable military support"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (unnamed young commander)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Youngest and most inexperienced of the nobles; territories expand as objectives complete"
+    },
+    {
+      "faction": "Duc de Puce (The Rat)",
+      "color_identity": null,
+      "symbol_or_sigil": "Rat sigil/identifier",
+      "enemy_visual_variants": "First tyrant lord; controls initial contested territory",
+      "environmental_markers": "Starting enemy faction; controls eastern territories in campaign map"
+    },
+    {
+      "faction": "Duc Beauregard (The Snake)",
+      "color_identity": null,
+      "symbol_or_sigil": "Snake sigil/identifier",
+      "enemy_visual_variants": "Second tyrant; betrays player mid-campaign; opportunistic strategist",
+      "environmental_markers": "Territorial ambitions; absorbs de Puce's lands after initial conflict"
+    },
+    {
+      "faction": "Duc Truffe (The Pig)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pig sigil/identifier",
+      "enemy_visual_variants": "Third tyrant; aggressive early pressure; kills ally Woolsack",
+      "environmental_markers": "Controls second front territory; operates alongside Volpe"
+    },
+    {
+      "faction": "Duc Volpe (The Wolf)",
+      "color_identity": null,
+      "symbol_or_sigil": "Wolf sigil/identifier",
+      "enemy_visual_variants": "Final tyrant; master strategist; heavily armored elite units (swordsmen); personal assassin of player's father",
+      "environmental_markers": "Ultimate antagonist; controls most strategically valuable territory; strongest military power"
+    },
+    {
+      "faction": "Lord Woolsack (allied noble)",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal/noble insignia",
+      "enemy_visual_variants": "Loyal to captured king; operates secondary campaign front; killed by Truffe",
+      "environmental_markers": "Visible in campaign map as allied force; provides strategic counsel"
+    },
+    {
+      "faction": "Sir Longarm (allied noble)",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal/noble insignia",
+      "enemy_visual_variants": "Impatient, brash personality; captures de Puce's castle; diplomatic negotiator; returns to aid final sieges",
+      "environmental_markers": "Ally with visible military presence; provides reinforcement windows"
+    },
+    {
+      "faction": "Monks (religious order)",
+      "color_identity": null,
+      "symbol_or_sigil": "Religious cross/monastery architecture",
+      "enemy_visual_variants": "Non-combatant but strategically critical; provides weapon upgrades and siege devices",
+      "environmental_markers": "Monastery structures placed on map; defensive support locations"
+    },
+    {
+      "faction": "The Captured King (nominal authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal crown/throne insignia",
+      "enemy_visual_variants": "Held hostage throughout campaign; released mid-game; provides final command authority for endgame battles",
+      "environmental_markers": "Ransomed location; appears in throne room cinematically; grants player command of royal armies"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "King held hostage - realm in anarchy",
+      "visual_manifestation": "Multiple faction territories visible; tyrant lords control conquered regions; nobility fractured across map",
+      "behavioral_manifestation": "Player must build from nothing; minor lords neutral or weakly allied; bandit activity high; no central authority command"
+    },
+    {
+      "world_state": "Tyrant territory conquered (Rat/de Puce)",
+      "visual_manifestation": "Territory color shifts from enemy to player control; captured castle visual changes to player colors/banners",
+      "behavioral_manifestation": "Reinforcement of captured stronghold; population integration; expanded resource base; escalation to next tyrant"
+    },
+    {
+      "world_state": "Betrayal by Beauregard (Snake)",
+      "visual_manifestation": "Allied/purple colors shift to enemy colors mid-campaign; relationship indicator reversal on diplomatic UI",
+      "behavioral_manifestation": "Former ally becomes active threat; two-front warfare now required; loss of expected reinforcements"
+    },
+    {
+      "world_state": "Death of Woolsack (ally killed)",
+      "visual_manifestation": "Ally territory visibly conquered; secondary front collapses on campaign map; noble representation removed",
+      "behavioral_manifestation": "Loss of strategic depth on second front; player must consolidate; increased isolation before Longarm return"
+    },
+    {
+      "world_state": "King ransomed and released mid-campaign",
+      "visual_manifestation": "King appears in player's court/castle visually; royal army units become visible in player's command interface",
+      "behavioral_manifestation": "Massive military power boost; player gains elite royal units; campaign narrative transition to endgame"
+    },
+    {
+      "world_state": "Monk alliance established (device provision)",
+      "visual_manifestation": "Monastery on map visibly allied; special siege device icons appear in player build menu",
+      "behavioral_manifestation": "New tactical options available; previously impossible sieges become viable; religious faction becomes gameplay asset"
+    },
+    {
+      "world_state": "Final confrontation with Volpe (Wolf)",
+      "visual_manifestation": "Volpe's castle shown at maximum fortification; elite swordsmen units visibly garrisoned; dramatic map isolation",
+      "behavioral_manifestation": "King grants direct command authority; player receives full royal military support; final siege mechanics trigger"
+    },
+    {
+      "world_state": "Victory - King restored, tyrants defeated",
+      "visual_manifestation": "All territories unified under player color; throne room cinematically restored; royal banners replace tyrant symbols",
+      "behavioral_manifestation": "Campaign completion; transition to economic reconstruction phase; peasant happiness/stability narrative resolution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Faction color coding on map",
+      "example": "Tyrant lords (Rat, Snake, Pig, Wolf) visually distinguished by distinct territory colors; player immediately understands political fragmentation and multiple-front warfare requirement"
+    },
+    {
+      "technique": "Castle architectural complexity as power indicator",
+      "example": "Volpe's final castle visibly more fortified and larger than earlier tyrant strongholds; communicates escalating difficulty and his superior strategic position without explicit stats"
+    },
+    {
+      "technique": "Noble presence on strategic map",
+      "example": "Woolsack and Longarm army icons visible on allied territory; their removal or isolation indicates campaign narrative progression and increasing player isolation"
+    },
+    {
+      "technique": "Monastery placement as sanctuary marker",
+      "example": "Monastery structure placed in enemy territory but visually neutral; signals safe harbor for dialogue/alliance within hostile lands; religious architecture distinct from military structures"
+    },
+    {
+      "technique": "Territory control progression visualization",
+      "example": "Campaign map shows captured territories incrementally changing color from enemy to player faction; visual 'painting' of map conveys concrete territorial reconquest narrative"
+    },
+    {
+      "technique": "Captured castle visual transformation",
+      "example": "De Puce's castle captured by player shows visual change from enemy colors/banners to player identity; same physical structure becomes player asset, communicating ownership shift"
+    },
+    {
+      "technique": "Resource scarcity visual indicators",
+      "example": "Burnt farmland, empty granaries, or damaged economic buildings in territory signal recent conflict or mismanagement; visual state of economy communicates world hardship"
+    },
+    {
+      "technique": "Bandit activity as ungoverned space marker",
+      "example": "Bandit icons appearing in empty territories between faction holdings; visual indication of lawlessness and economic vulnerability in contested zones"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character/commander",
+      "state": "Early game (inexperienced)",
+      "behavior": "Limited military options; small garrison size; economic dependence on peaceful development; requires ally support"
+    },
+    {
+      "entity": "Player character/commander",
+      "state": "Mid-game (post-king-ransom)",
+      "behavior": "Massive power spike; royal armies available; direct command authority from king; aggressive multi-territory conquest possible"
+    },
+    {
+      "entity": "Duc de Puce (Rat)",
+      "state": "Opening campaign",
+      "behavior": "Defensive posture initially; sends scouts to investigate player threat; responds to player invasion with counter-siege"
+    },
+    {
+      "entity": "Duc Beauregard (Snake)",
+      "state": "Mid-campaign ally",
+      "behavior": "Collaborates with player against de Puce; military cooperation visible in joint operations"
+    },
+    {
+      "entity": "Duc Beauregard (Snake)",
+      "state": "Post-betrayal",
+      "behavior": "Seizes de Puce's lands opportunistically; becomes aggressive threat; reveals treacherous AI nature through territorial expansion"
+    },
+    {
+      "entity": "Duc Truffe (Pig)",
+      "state": "Secondary front conflict",
+      "behavior": "Aggressive early assault; kills Woolsack demonstrating ruthlessness; coordinates with Volpe's elite units (swordsmen)"
+    },
+    {
+      "entity": "Duc Volpe (Wolf)",
+      "state": "Strategic overview (pre-final battle)",
+      "behavior": "Distant threat; sends elite heavy swordsmen to support allies; maintains strongest military; reveals himself as father's killer"
+    },
+    {
+      "entity": "Monks (monastery order)",
+      "state": "Neutral territory phase",
+      "behavior": "Defend monastery location; refuse to engage in non-defensive combat; provide equipment/devices in exchange for protection"
+    },
+    {
+      "entity": "King (during hostage state)",
+      "state": "Captive",
+      "behavior": "Absent from battlefield; ransom negotiations ongoing; cannot provide military support"
+    },
+    {
+      "entity": "King (post-ransom)",
+      "state": "Liberated",
+      "behavior": "Grants complete command authority; deploys royal armies; present in throne room cinematically; demonstrates satisfaction through victory cinematic"
+    }
+  ],
+  "notes": "Stronghold (2001) employs a classic feudal RTS manifestation layer where faction identity, political allegiance, and world-state are communicated primarily through: (1) map territory color-coding for faction control, (2) named noble characters with distinct military signatures (Woolsack's intelligence, Longarm's aggression, Volpe's elite swordsmen), (3) siege/castle visual complexity as power gradient, (4) architectural distinction (monastery as sanctuary, tyrant castles as fortification escalation), and (5) narrative progression through territory conquest. Danger is signaled through enemy army proximity on map, castle fortification levels, and active siege mechanics. Safety emerges from owned territory control, allied noble presence, and monk sanctuary access. The game's political situation is entirely conveyed through map control visualization—the player literally sees the realm's fragmentation and reconquest through territory color shifts. No explicit faction reputation meters or diplomatic UI mentioned in source; alliance/betrayal communicated through narrative scripting and behavioral changes rather than numerical systems.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:23:37.997Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2710,
+    "output_tokens": 3453,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "game_id": "super-pitfall-nes",
+  "game_name": "Super Pitfall",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy encounter",
+      "visual_form": "Animated sprite enemies (frogs, spiders, other creatures)",
+      "meaning": "Hostile entity that causes life loss on contact"
+    },
+    {
+      "signal": "Environmental hazard",
+      "visual_form": "Pit obstacles, cave walls, water sections",
+      "meaning": "Physical danger from level geometry"
+    },
+    {
+      "signal": "Trapped NPCs",
+      "visual_form": "Rhonda statue (petrified), Quickclaw imprisoned",
+      "meaning": "Story-critical danger state requiring resource expenditure to resolve"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Invulnerability items",
+      "visual_form": "Collectible power-up items",
+      "meaning": "Temporary immunity to enemy/hazard damage"
+    },
+    {
+      "signal": "Spare pistols",
+      "visual_form": "Weapon pickup items",
+      "meaning": "Resource replenishment for combat capability"
+    },
+    {
+      "signal": "Extra lives",
+      "visual_form": "Point accumulation (50,000 and 80,000 thresholds)",
+      "meaning": "Extended player resilience through score milestone achievement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Pitfall Harry)",
+      "color_identity": null,
+      "symbol_or_sigil": "Gun-equipped adventurer character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting position in cave entrance; returns to starting point as win condition"
+    },
+    {
+      "faction": "Underground Kingdom creatures",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy sprite variants (frogs, spiders, etc.)",
+      "enemy_visual_variants": "Unused spider sprites suggest PC-88 version had different enemy designs",
+      "environmental_markers": "Inhabit subterranean cavern spaces; non-player-aligned"
+    },
+    {
+      "faction": "Allies in distress",
+      "color_identity": null,
+      "symbol_or_sigil": "Rhonda (petrified), Quickclaw the Lion",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Located deep in caverns; require item acquisition for liberation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Initial exploration phase",
+      "visual_manifestation": "Nonlinear cave maze with multiple branching paths; inventory of collected items visible",
+      "behavioral_manifestation": "Harry navigates freely, enemies patrol predetermined patterns, items remain in fixed locations"
+    },
+    {
+      "world_state": "Rhonda petrified (story progression barrier)",
+      "visual_manifestation": "Rhonda appears as stone statue sprite",
+      "behavioral_manifestation": "Cannot complete rescue until specific liberation items acquired"
+    },
+    {
+      "world_state": "Quickclaw imprisoned (story progression barrier)",
+      "visual_manifestation": "Quickclaw visible but inaccessible, visually constrained in cage/location",
+      "behavioral_manifestation": "Requires item acquisition before interaction succeeds"
+    },
+    {
+      "world_state": "Raj diamond acquired + photo obtained",
+      "visual_manifestation": "Inventory confirmation of critical items",
+      "behavioral_manifestation": "Return-to-start becomes viable; cave entrance becomes functional exit"
+    },
+    {
+      "world_state": "Game over condition",
+      "visual_manifestation": "Life counter depleted visual feedback",
+      "behavioral_manifestation": "Player movement locks, game state returns to title/restart"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Trapped NPC placement",
+      "example": "Rhonda and Quickclaw positioned deep in caverns, visually separated by maze distance and petrification/imprisonment states, establishing narrative stakes"
+    },
+    {
+      "technique": "Hidden object integration",
+      "example": "Items invisible until grabbed at specific jump moments; encourages exploration and teaches player that environment contains secrets"
+    },
+    {
+      "technique": "Collectible progression markers",
+      "visual_form": "Playing card suit icons used as door keys; establishes puzzle logic and gating"
+    },
+    {
+      "technique": "Cave architecture",
+      "example": "Nonlinear subterranean dwelling layout communicates vastness and danger through spatial complexity; Andes Mountains setting suggested through environmental design"
+    },
+    {
+      "technique": "Enemy population distribution",
+      "example": "Varied enemy types in specific cave zones establish territorial markers and environmental character"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pitfall Harry",
+      "state": "Normal movement",
+      "behavior": "Directional pad controls left/right movement; up arrow climbs/swims upward; jump and fire actions with A/B buttons"
+    },
+    {
+      "entity": "Pitfall Harry",
+      "state": "Invulnerable (power-up active)",
+      "behavior": "Sprite visual change (or animation cycle change); enemies cannot cause life loss on contact"
+    },
+    {
+      "entity": "Enemy creatures (frogs, spiders, etc.)",
+      "state": "Patrolling/idle",
+      "behavior": "Automated sprite animation cycles, fixed movement patterns within designated zones"
+    },
+    {
+      "entity": "Enemy creatures",
+      "state": "Player in range",
+      "behavior": "Collision detection triggers life loss; visual feedback (sprite removal or damage animation)"
+    },
+    {
+      "entity": "Rhonda NPC",
+      "state": "Petrified/imprisoned",
+      "behavior": "Stationary sprite; no animation; visual state communicates unavailability until liberation items applied"
+    },
+    {
+      "entity": "Quickclaw NPC",
+      "state": "Trapped",
+      "behavior": "Constrained animation or positioning; interaction blocked until item requirements met"
+    }
+  ],
+  "notes": "Super Pitfall uses minimal faction complexity; primary narrative tension stems from exploration-based resource collection rather than faction conflict. Danger and safety signals are primarily mechanical (life/invulnerability systems) rather than narrative-driven. Environmental storytelling relies heavily on spatial maze complexity and hidden object discovery. The game's 'dull' and 'repetitive' reception per sources suggests visual communication of world-state was not sufficiently varied or compelling. Unused graphics (particularly unused spider sprites) indicate original design may have included more diverse enemy visual variants. Regional differences are primarily administrative (trademark, copyright, licensing text) rather than mechanical or world-state communicative.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:15:07.353Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4350,
+    "output_tokens": 1743,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

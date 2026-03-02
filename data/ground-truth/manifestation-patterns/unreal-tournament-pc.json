@@ -1,0 +1,204 @@
+{
+  "game_id": "unreal-tournament-pc",
+  "game_name": "Unreal Tournament",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Lava hazards",
+      "visual_form": "Glowing orange/red liquid environment obstacles",
+      "meaning": "Instant death zone; environmental threat to avoid"
+    },
+    {
+      "signal": "Water hazards",
+      "visual_form": "Large bodies of water in level geometry",
+      "meaning": "Movement impediment and drowning risk; environmental threat"
+    },
+    {
+      "signal": "Enemy player presence",
+      "visual_form": "Opposing team colored avatars and weapon fire effects",
+      "meaning": "Direct combat threat; immediate danger"
+    },
+    {
+      "signal": "Redeemer weapon acquisition",
+      "visual_form": "Miniature nuke weapon item pickup",
+      "meaning": "High-damage threat indicator; powerful opponent capability activated"
+    },
+    {
+      "signal": "Elevated positions",
+      "visual_form": "Architectural high ground in arena layout",
+      "meaning": "Tactical vulnerability; sniper/elevation advantage threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health pack availability",
+      "visual_form": "Health item pickups scattered across level",
+      "meaning": "Recovery resources; damage mitigation opportunity"
+    },
+    {
+      "signal": "Body armor pickups",
+      "visual_form": "Armor item objects in environment",
+      "meaning": "Damage reduction active; enhanced survivability"
+    },
+    {
+      "signal": "Teleporters",
+      "visual_form": "Teleportation portal geometry",
+      "meaning": "Escape route; rapid repositioning safety mechanism"
+    },
+    {
+      "signal": "Damage amplifier items",
+      "visual_form": "Power-up items in arena",
+      "meaning": "Offensive advantage; threat escalation capability"
+    },
+    {
+      "signal": "Own team presence",
+      "visual_form": "Same-colored teammate avatars",
+      "meaning": "Allied support; reduced isolation threat in team modes"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Red Team",
+      "color_identity": "Red",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Red-tinted player models and weapon effects",
+      "environmental_markers": "Red team base and flag in Capture the Flag mode"
+    },
+    {
+      "faction": "Blue Team",
+      "color_identity": "Blue",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Blue-tinted player models and weapon effects",
+      "environmental_markers": "Blue team base and flag in Capture the Flag mode"
+    },
+    {
+      "faction": "Defending Force",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Base-defending positioned entities in Assault mode",
+      "environmental_markers": "Fortified base structures with defensive objectives (power generators, entry points)"
+    },
+    {
+      "faction": "Attacking Force",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Offensive-positioned entities in Assault mode",
+      "environmental_markers": "Assault objectives scattered through enemy base territory"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active deathmatch competition",
+      "visual_manifestation": "All-versus-all player avatars with continuous weapon fire effects and kill announcements",
+      "behavioral_manifestation": "Bots and players constantly engaging; no territorial structure; free roaming across arena"
+    },
+    {
+      "world_state": "Team-based dominance match",
+      "visual_manifestation": "Control points marked in arena; point indicators showing which team controls each location",
+      "behavioral_manifestation": "Concentrated player positioning around control points; occupation-based territory claiming; point capture animations"
+    },
+    {
+      "world_state": "Flag capture in progress",
+      "visual_manifestation": "Enemy flag highlighted/visible in team base; carrier avatar marked with flag attachment",
+      "behavioral_manifestation": "Defensive players clustering near flag spawn; offensive players pursuing flag carrier toward friendly base"
+    },
+    {
+      "world_state": "Assault phase - attacking",
+      "visual_manifestation": "Objective markers and progress indicators; destructible or interactive base elements glowing/highlighted",
+      "behavioral_manifestation": "Attacker bots coordinating toward sequential objectives; defenders concentrated at objective locations"
+    },
+    {
+      "world_state": "Assault phase - defending",
+      "visual_manifestation": "Same objective markers; defensive positions reinforced with player/bot positioning",
+      "behavioral_manifestation": "Defenders holding chokepoints; attackers probing for entry; objective timer display tracking defensive duration"
+    },
+    {
+      "world_state": "High-skill opponent encounter (Xan Kriegor boss)",
+      "visual_manifestation": "Champion avatar with distinctive appearance; arena-specific effects for this matchup",
+      "behavioral_manifestation": "Bot uses superior weapon selection and positioning; advanced evasion patterns; tournament ladder visual indicator showing progression"
+    },
+    {
+      "world_state": "Power-up availability window",
+      "visual_manifestation": "Pickup items glowing/pulsing in arena locations; minimap indicators for item positions",
+      "behavioral_manifestation": "All players converging toward power-up spawns; timing-based repositioning before pickup refresh"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Arena setting variety",
+      "example": "Spaceships, outposts, castles, and monasteries convey thematic environmental context (futuristic vs. medieval) without narrative exposition; each locale implies different combat scenarios"
+    },
+    {
+      "technique": "Hazard placement communication",
+      "example": "Lava and water obstacles positioned in arena layouts tell players 'this space is dangerous'; their visual distinctiveness (orange glow, blue liquid) immediately communicates environmental threat type"
+    },
+    {
+      "technique": "Item distribution storytelling",
+      "example": "Health packs, armor, and damage amplifiers scattered strategically imply resource scarcity and competitive balance; item placement guides player flow through arena geometry"
+    },
+    {
+      "technique": "Architectural verticality",
+      "example": "Elevators and elevated platforms create positional hierarchy; visual architecture implies tactical high-ground advantages without explicit UI instruction"
+    },
+    {
+      "technique": "Base structure design",
+      "example": "In Assault and Capture the Flag modes, fortified base structures visually communicate defense intent; flag placement and objective markers tell story of territorial conflict without dialogue"
+    },
+    {
+      "technique": "Champion bot differentiation",
+      "example": "Xan Kriegor's mysterious presentation and tournament ladder progression visually establish narrative hierarchy; single opponent escalation communicates competitive story arc"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player avatar",
+      "state": "Holding Redeemer weapon",
+      "behavior": "Moves with visible weapon model; indicates elevated threat state and imminent high-damage capability"
+    },
+    {
+      "entity": "Bot with customized skill level",
+      "state": "High difficulty setting",
+      "behavior": "Superior weapon preference selection; advanced positioning; strategic item timing; evasion patterns more complex than low-difficulty bots"
+    },
+    {
+      "entity": "Defending team",
+      "state": "Assault mode active",
+      "behavior": "Concentrates around objective markers; demonstrates predictable positional clustering that attackers can target"
+    },
+    {
+      "entity": "Attacking team",
+      "state": "Assault objective uncompleted",
+      "behavior": "Moves sequentially toward objective waypoints; coordinates timing around interactive elements"
+    },
+    {
+      "entity": "Flag carrier",
+      "state": "Enemy flag captured",
+      "behavior": "Avatar distinctly marked with flag attachment; becomes priority target for defending team; movement speed may be visually affected"
+    },
+    {
+      "entity": "Control point occupant",
+      "state": "Point under dispute in Domination",
+      "behavior": "Player maintains positional occupancy; control indicator animates to show team ownership transition"
+    },
+    {
+      "entity": "Xan Kriegor",
+      "state": "Champion match initiated",
+      "behavior": "Demonstrates exceptional weapon handling; uses arena space strategically; evasion is more sophisticated than standard bots"
+    }
+  ],
+  "notes": "Unreal Tournament's visual communication relies heavily on color coding (red/blue teams), environmental hazard contrast (lava/water), and item pickup visibility. The game lacks complex political faction systems; team distinction is purely mechanical (red vs. blue). World state is communicated through objective markers, point indicators, and flag positioning rather than environmental transformation. Bot behavior customization allows emergent difficulty storytelling. The arena-based design means danger and safety signals are environment-dependent rather than systemic. Weapon visual effects clearly indicate threat escalation (Redeemer's nuke effect). Tournament progression toward Xan Kriegor provides narrative arc through bot difficulty escalation rather than environmental or visual transformation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:08:13.700Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2869,
+    "output_tokens": 2329,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

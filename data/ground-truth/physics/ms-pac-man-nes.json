@@ -1,0 +1,107 @@
+{
+  "game_id": "ms-pac-man-nes",
+  "game_name": "Ms. Pac-Man",
+  "platform": "nes",
+  "year": 1993,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel movement system documented for NES port"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Maze Movement",
+      "description": "Pac-Man movement confined to enclosed maze. Speed increases as rounds progress. Ghosts have semi-random behavioral patterns.",
+      "physics_values": {
+        "speed_progression": "increases per level",
+        "movement_type": "grid/maze-based",
+        "ai_behavior": "semi-random with some pattern-based movement until first reversal"
+      }
+    },
+    {
+      "name": "Warp Tunnels",
+      "description": "Horizontal passages allowing Pac-Man to exit one side of maze and re-enter on opposite side. First three rounds have slowdown applied to ghosts in tunnels.",
+      "physics_values": {
+        "slowdown_applied": "first 3 rounds only",
+        "affects": "ghosts only"
+      }
+    },
+    {
+      "name": "Power Pellet / Energizer",
+      "description": "Larger pellets that cause ghosts to turn blue, become vulnerable, and allow Pac-Man to eat them for points. Duration decreases over rounds, eventually stopping.",
+      "physics_values": {
+        "ghost_vulnerability_duration": "decreases per level, eventually disabled",
+        "ghost_state_when_active": "blue and fleeing"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "arcade-style",
+    "maze-navigation-based",
+    "pattern-breakable in original (less so in NES due to semi-random ghosts)",
+    "steady-paced with progression"
+  ],
+  "tier_notes": "Tier 2: No precise physics values documented. Sources provide gameplay mechanics and design differences from original arcade, but no quantified movement parameters, gravity values, or sub-pixel data. NES port released November 1993 by Namco. Game mechanics emphasize maze traversal and ghost avoidance rather than precision platforming physics.",
+  "sources_used": [
+    "Wikipedia - Ms. Pac-Man (general gameplay mechanics)",
+    "The Cutting Room Floor (disambiguation page - limited specific technical data)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:27:45.081Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3591,
+    "output_tokens": 931,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

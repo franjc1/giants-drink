@@ -1,0 +1,199 @@
+{
+  "game_id": "sonic-1-genesis",
+  "game_name": "Sonic the Hedgehog",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Spikes",
+      "visual_form": "Sharp metallic protrusions embedded in terrain and walls",
+      "meaning": "Instant damage; one-hit kill regardless of ring count"
+    },
+    {
+      "signal": "Robot enemies",
+      "visual_form": "Mechanical constructs with distinct zone-appropriate designs",
+      "meaning": "Hostile entities trapping animals; collision causes damage unless spinning"
+    },
+    {
+      "signal": "Bottomless pits",
+      "visual_form": "Absence of visible terrain; black void below platforms",
+      "meaning": "Fall damage or instant death; level reset"
+    },
+    {
+      "signal": "Lava/hazardous terrain",
+      "visual_form": "Zone-specific environmental hazards (e.g., Marble Zone magma)",
+      "meaning": "Contact results in damage; navigational obstacle"
+    },
+    {
+      "signal": "Dr. Eggman boss appearance",
+      "visual_form": "Large mechanical vehicle with rotating weapons/contraptions",
+      "meaning": "Zone culmination encounter; requires skilled pattern recognition to defeat"
+    },
+    {
+      "signal": "Ring loss on damage",
+      "visual_form": "Rings scatter visually from Sonic when hit",
+      "meaning": "Health depletion; player must collect scattered rings before they despawn"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Gold rings",
+      "visual_form": "Bright yellow circular collectibles scattered throughout levels",
+      "meaning": "Health/protection mechanic; one ring absorbs one hit; 100 rings grant extra life"
+    },
+    {
+      "signal": "Power-up canisters",
+      "visual_form": "Metal containers with visual indicators (shield, invincibility star, speed)",
+      "meaning": "Temporary buffs; invincibility frames or enhanced movement"
+    },
+    {
+      "signal": "Signposts",
+      "visual_form": "Wooden posts with checkpoints markers",
+      "meaning": "Safe respawn points after losing a life; progress checkpoint"
+    },
+    {
+      "signal": "Springs",
+      "visual_form": "Coiled metal springs in varied colors",
+      "meaning": "Safe momentum boosters; propel player upward/forward without damage"
+    },
+    {
+      "signal": "Solid ground/platforms",
+      "visual_form": "Terrain with clear collision geometry; zone-themed visual style",
+      "meaning": "Safe traversal surface; no damage on contact"
+    },
+    {
+      "signal": "Animal capsules (breakable)",
+      "visual_form": "Metal containers with visible animals inside before breaking",
+      "meaning": "Rescued animals = mission success indicator; no direct gameplay benefit but narrative reward"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dr. Eggman's regime",
+      "color_identity": "Red, silver, metallic",
+      "symbol_or_sigil": "Mechanical egg-shaped machines; industrial aesthetic",
+      "enemy_visual_variants": "Zone-specific robots all share mechanical construction; each zone has unique enemy designs reflecting Eggman's technology adapted to environment",
+      "environmental_markers": "Metal structures, industrial machinery, capsules containing trapped animals, metallic platforms, mechanical contraptions"
+    },
+    {
+      "faction": "Sonic (protagonist/nature)",
+      "color_identity": "Blue, green (natural environments)",
+      "symbol_or_sigil": "Sonic's blue hedgehog sprite; organic ring collectibles",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Natural zones (Green Hill Zone lush grass, Spring Yard Zone crystal formations, Labyrinth Zone water); animals visible in environment; plants and natural features"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Green Hill Zone)",
+      "visual_manifestation": "Bright greens, natural grassland aesthetic, clear visibility, pastoral environment with minimal mechanical intrusion",
+      "behavioral_manifestation": "Low enemy density; basic robot types; minimal hazards; tutorial-paced progression"
+    },
+    {
+      "world_state": "Mid-game escalation (Spring Yard, Labyrinth, Star Light Zones)",
+      "visual_manifestation": "Progressive shift from organic to increasingly mechanical environments; darker color palettes; environmental hazards intensify (lava, water, darkness)",
+      "behavioral_manifestation": "Enemy variety increases; hazard complexity rises; platforming demands escalate; environmental puzzles emerge"
+    },
+    {
+      "world_state": "Final zone (Final Zone)",
+      "visual_manifestation": "Completely mechanized environment; industrial metallic aesthetic; dense machinery and technological elements; minimal natural features",
+      "behavioral_manifestation": "Culminating boss encounter; all accumulated mechanics tested; no additional new hazards, but maximum concentration"
+    },
+    {
+      "world_state": "Animal liberation success",
+      "visual_manifestation": "End-game animation shows animals returning to Green Hill Zone; visual return to pastoral setting",
+      "behavioral_manifestation": "Narrative closure; animals freed from mechanical capsules; restoration of natural world"
+    },
+    {
+      "world_state": "Zones under Eggman occupation",
+      "visual_manifestation": "Each zone displays occupation through machinery overlay on natural terrain; capsules with trapped animals visible throughout",
+      "behavioral_manifestation": "Zone cannot be exited/progressed without defeating Eggman boss at zone end; enemies actively defend territory"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Zone-specific visual identity",
+      "example": "Green Hill Zone uses pastoral greens and gentle slopes to establish peaceful origin state; Labyrinth Zone uses water and ancient ruins to suggest Eggman's expansion into natural spaces; Final Zone's industrial design shows Eggman's power base"
+    },
+    {
+      "technique": "Animal capsule placement",
+      "example": "Visible metal containers throughout zones contain trapped animals; breaking them shows they were imprisoned, communicating Eggman's villainy without dialogue"
+    },
+    {
+      "technique": "Robot enemy design language",
+      "example": "Each zone's enemies reflect local environment and Eggman's adaptation strategy—aquatic robots in Labyrinth, flying robots in Star Light—showing oppressor's control over territory"
+    },
+    {
+      "technique": "Gradient from natural to industrial",
+      "example": "Zone progression visualizes narrative arc: natural Green Hill → corrupted/mechanized middle zones → fully industrial Final Zone, showing Eggman's expanding footprint"
+    },
+    {
+      "technique": "Checkpoint signpost symbolism",
+      "example": "Signposts represent humanity's attempt to organize/control progression in world under siege; they are the only 'friendly' structures in Eggman-occupied zones"
+    },
+    {
+      "technique": "Ring collectible color/shape",
+      "example": "Gold rings contrast with metallic enemy design, establishing them as natural/valuable resources Eggman has not corrupted—player must preserve and collect them"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sonic",
+      "state": "Normal/unharmed",
+      "behavior": "Continuous forward momentum at controlled speed; responsive jump/spin mechanics; able to collect rings and interact with environment"
+    },
+    {
+      "entity": "Sonic",
+      "state": "Post-damage (without rings)",
+      "behavior": "Visible recoil on hit; sprite knockback animation; temporary invulnerability frames; scattered rings visible on screen for recovery window"
+    },
+    {
+      "entity": "Sonic",
+      "state": "Ring-protected",
+      "behavior": "Can absorb one hit without life loss; rings visually scatter on damage rather than causing death animation"
+    },
+    {
+      "entity": "Robot enemies",
+      "state": "Idle/patrolling",
+      "behavior": "Zone-dependent movement patterns (horizontal patrol, vertical movement, orbiting paths); visible before Sonic approaches"
+    },
+    {
+      "entity": "Robot enemies",
+      "state": "Engaged by Sonic spin attack",
+      "behavior": "Immediate destruction animation; release of trapped animal sprite; temporary invulnerability ends for that unit"
+    },
+    {
+      "entity": "Dr. Eggman (boss)",
+      "state": "Phase 1 (zone boss)",
+      "behavior": "Appears in zone-appropriate machine form; uses weapon pattern specific to zone mechanics; telegraphed attack patterns requiring learned responses"
+    },
+    {
+      "entity": "Trapped animals",
+      "state": "Imprisoned in capsules",
+      "behavior": "Visible but immobile inside metal containers; static waiting state; no interaction until capsule destroyed"
+    },
+    {
+      "entity": "Trapped animals",
+      "state": "Liberated",
+      "behavior": "Released sprite animation; rapid exit from zone; contributes to end-game narrative animation showing return to Green Hill"
+    }
+  ],
+  "notes": "Sonic 1 uses visual language to communicate a nature-vs-technology narrative without explicit exposition. The color and aesthetic progression from Green Hill's organic palette through increasingly industrial zones creates a visual metaphor for Eggman's invasion. Ring mechanics are purely visual—the gold color distinguishes them from enemy metallic aesthetic, establishing them as player resources rather than Eggman technology. Zone bosses are contained within zone-appropriate vehicles, reinforcing that each area is under localized occupation. Animal capsules serve dual purpose: mechanical hazard + narrative story element (suffering animals motivate player). The game requires no text-based world-state communication; all information conveyed through sprite design, color theory, and environmental art direction. Final Zone's complete mechanization shows narrative climax visually before gameplay.",
+  "sources_used": [
+    "wikipedia",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:43:40.003Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7254,
+    "output_tokens": 2470,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

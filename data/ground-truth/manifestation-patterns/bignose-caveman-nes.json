@@ -1,0 +1,170 @@
+{
+  "game_id": "bignose-caveman-nes",
+  "game_name": "Big Nose the Caveman",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Pitfalls",
+      "visual_form": "Screen-space gaps and drops in level design",
+      "meaning": "Instant death hazard; player cannot recover"
+    },
+    {
+      "signal": "Lava/Water",
+      "visual_form": "Liquid terrain obstacles",
+      "meaning": "Environmental kill zone; Big Nose cannot swim"
+    },
+    {
+      "signal": "Traps",
+      "visual_form": "Mechanical and environmental hazards scattered throughout levels",
+      "meaning": "Stage-specific threats requiring avoidance or item defense"
+    },
+    {
+      "signal": "Enemy Presence",
+      "visual_form": "Animated hostile entities in play space",
+      "meaning": "Combat threat; can be neutralized only by club-stone attack, not jump-on mechanic"
+    },
+    {
+      "signal": "Health State (Unprotected)",
+      "visual_form": "Big Nose sprite without stone upgrade visual indicator",
+      "meaning": "One-hit death state; immediate danger from any enemy contact"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Shops",
+      "visual_form": "Static structures within islands where bones can be spent",
+      "meaning": "Safe trading zones; player can purchase spells, ability upgrades, and protective items"
+    },
+    {
+      "signal": "Stone Upgrade",
+      "visual_form": "Visual equipment or status change on Big Nose sprite",
+      "meaning": "Damage mitigation; grants one-hit protection; enables club-based projectile attacks"
+    },
+    {
+      "signal": "Checkpoint Zones",
+      "visual_form": "Level segment boundaries (implied by level structure)",
+      "meaning": "Mid-stage safe positions; however, losing all lives resets to level start"
+    },
+    {
+      "signal": "Bone Collectibles",
+      "visual_form": "Scattered environmental pickup objects",
+      "meaning": "Currency for safety purchases; resource accumulation indicates progression toward defensive items"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Big Nose (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Caveman protagonist with large nose sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Prehistoric caveman aesthetic; club weapon as identity symbol"
+    },
+    {
+      "faction": "Island Fauna/Enemies",
+      "color_identity": null,
+      "symbol_or_sigil": "Dinosaurs and hostile creatures implied by island names (Monster Island, Terror Island, Chaos Island)",
+      "enemy_visual_variants": "Escalating threat designs across four islands: Paradise → Monster → Terror → Chaos",
+      "environmental_markers": "Island theming communicates enemy composition; later islands indicate stronger, more diverse threats"
+    },
+    {
+      "faction": "Neutral Shopkeepers",
+      "color_identity": null,
+      "symbol_or_sigil": "Shop structure sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Distributed across islands as safe trading points; neutral to player faction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early Game (Paradise Island)",
+      "visual_manifestation": "Relatively open, safe-looking environment with basic enemy types",
+      "behavioral_manifestation": "Lower enemy density and aggression; more forgiving platform layout"
+    },
+    {
+      "world_state": "Mid Game (Monster Island, Terror Island)",
+      "visual_manifestation": "Increased environmental hazard density; more complex enemy placements",
+      "behavioral_manifestation": "Escalating difficulty through trap placement and enemy variety; shop upgrades become critical"
+    },
+    {
+      "world_state": "Late Game (Chaos Island)",
+      "visual_manifestation": "Visual peak of hostile design; maximum environmental and enemy threat",
+      "behavioral_manifestation": "All hazard types combined; no checkpoint system recovery if lives exhausted; final challenge"
+    },
+    {
+      "world_state": "Player Vulnerability (No Stone)",
+      "visual_manifestation": "Big Nose sprite in base state without protective equipment visual",
+      "behavioral_manifestation": "One-hit death vulnerability; combat avoidance required; incentivizes shop visits"
+    },
+    {
+      "world_state": "Player Protection (Stone Equipped)",
+      "visual_manifestation": "Big Nose sprite with stone upgrade indication",
+      "behavioral_manifestation": "One additional hit allowed; enables offensive projectile attack; increased risk tolerance in level navigation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Island Progression Naming",
+      "example": "Four-island sequence (Paradise → Monster → Terror → Chaos) communicates narrative escalation and danger without explicit dialogue"
+    },
+    {
+      "technique": "Hunger Motivation",
+      "example": "Core mechanic framing ('Big Nose runs through islands to find his dinner because he is very hungry') establishes caveman survival narrative through hunger goal rather than written story"
+    },
+    {
+      "technique": "Hazard Density as Worldbuilding",
+      "example": "Pitfalls, lava, water, and traps increase in concentration across islands, implying each island is progressively more hostile and dinosaur-infested"
+    },
+    {
+      "technique": "Shop Prevalence as Civilization Marker",
+      "example": "Available shops suggest minimal civilization infrastructure in island chains; commerce exists but is scarce, reinforcing primitive setting"
+    },
+    {
+      "technique": "Enemy Type Theming",
+      "example": "Dinosaur enemies (implied by 'videos about dinosaurs' category) populate Monster/Terror/Chaos islands, creating prehistoric fauna narrative without exposition"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Big Nose (Player Character)",
+      "state": "Unprotected (no stone)",
+      "behavior": "One-hit death; must avoid all enemy contact; incentivizes avoidance platforming"
+    },
+    {
+      "entity": "Big Nose (Player Character)",
+      "state": "Protected (stone equipped)",
+      "behavior": "Can sustain one hit; can project club-stones as offensive projectiles (up to three stones); increased aggression viability"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Active/Patrolling",
+      "behavior": "Can kill player on contact unless player has stone defense; require club-stone projectile attacks to defeat (not jump mechanic)"
+    },
+    {
+      "entity": "Shops",
+      "state": "Available",
+      "behavior": "Static; accept bone currency; dispense spells, ability upgrades, and defensive items; signal safe interaction zones"
+    },
+    {
+      "entity": "Environmental Hazards (Lava/Water/Pitfalls)",
+      "state": "Present",
+      "behavior": "Instant death on contact; no recovery mechanic; force level restart if player dies with no lives remaining"
+    }
+  ],
+  "notes": "Big Nose the Caveman uses minimal explicit signaling due to NES-era technical constraints. World-state communication relies heavily on level design progression (four-island sequence), enemy placement density escalation, and thematic naming rather than UI elements. The game's primary danger signal is the presence of hazards and enemies in the environment itself. Safety is communicated through shop access and the visual distinction between protected (stone-equipped) and unprotected player states. No faction conflict is present; instead, a solo-player-versus-environment dynamic dominates, with the world itself (dinosaurs, hazards) as the antagonist. The removed 'Help' balloon and rescue mechanics (visible in unused graphics) suggest an earlier design iteration that may have included NPC factions, which were ultimately cut. The caveman protagonist's large nose is his primary visual identity marker and directly references his name—a simple but effective character branding in 8-bit context.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:56:11.731Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4066,
+    "output_tokens": 2039,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

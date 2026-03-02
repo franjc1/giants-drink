@@ -1,0 +1,140 @@
+{
+  "game_id": "truxton-genesis",
+  "game_name": "Truxton",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "contrasting colored bullets/energy patterns moving toward player",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "enemy_presence",
+      "visual_form": "hostile aircraft and mechanical units filling screen space",
+      "meaning": "active combat engagement required"
+    },
+    {
+      "signal": "screen_edge_boundaries",
+      "visual_form": "playfield limits where player ship cannot traverse",
+      "meaning": "navigation constraints and collision hazards"
+    },
+    {
+      "signal": "dense_enemy_formations",
+      "visual_form": "large clusters of sprites converging on player position",
+      "meaning": "escalating difficulty and overwhelming force"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "empty_screen_space",
+      "visual_form": "clear areas between enemy formations",
+      "meaning": "safe navigation corridors and breathing room"
+    },
+    {
+      "signal": "power_up_items",
+      "visual_form": "distinctive pickup objects with contrasting colors",
+      "meaning": "player capability enhancement and resource gain"
+    },
+    {
+      "signal": "player_ship_visual_integrity",
+      "visual_form": "undamaged sprite with stable animation",
+      "meaning": "operational status and combat readiness"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": "typically bright/primary colors for player ship sprite",
+      "symbol_or_sigil": "distinct player aircraft sprite design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player positioned at screen bottom, forward-facing orientation"
+    },
+    {
+      "faction": "enemy_military",
+      "color_identity": "contrasting darker or secondary palette for hostile units",
+      "symbol_or_sigil": "mechanical/military aircraft and weapon platform designs",
+      "enemy_visual_variants": "multiple enemy types with distinct silhouettes and attack patterns",
+      "environmental_markers": "enemies spawn from top/sides, descend toward player in formation patterns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_combat",
+      "visual_manifestation": "screen filled with enemy sprites, projectile patterns, and visual effects",
+      "behavioral_manifestation": "enemies continuously fire and maneuver; player must dodge and counterattack"
+    },
+    {
+      "world_state": "escalating_threat",
+      "visual_manifestation": "progressive increase in enemy sprite density and projectile complexity per wave/stage",
+      "behavioral_manifestation": "enemy formations become tighter and more aggressive; attack patterns accelerate"
+    },
+    {
+      "world_state": "victory_progression",
+      "visual_manifestation": "stage completion markers; visual transitions between level sets",
+      "behavioral_manifestation": "enemy waves clear; screen resets for next stage with increased difficulty parameters"
+    },
+    {
+      "world_state": "player_damage",
+      "visual_manifestation": "potential visual feedback on player sprite or screen effects indicating hit registration",
+      "behavioral_manifestation": "player loses health/lives; game-over state triggered if depleted"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "enemy_sprite_design_as_narrative",
+      "example": "military aircraft and weapon platforms communicate hostile faction identity and combat context through visual design alone"
+    },
+    {
+      "technique": "spatial_arrangement_hierarchy",
+      "example": "player positioned at bottom suggests defensive posture against invasion from above; top-to-bottom enemy flow implies overwhelming superior force"
+    },
+    {
+      "technique": "wave_progression_as_conflict_escalation",
+      "example": "increasing enemy density and complexity per stage visually communicates intensifying military conflict without dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_ship",
+      "state": "operational",
+      "behavior": "responsive to input; fires projectiles in forward direction; occupies bottom-center screen position"
+    },
+    {
+      "entity": "player_ship",
+      "state": "damaged",
+      "behavior": "potential visual damage states or flashing indicating vulnerability; reduced maneuverability or firing rate possible"
+    },
+    {
+      "entity": "enemy_aircraft",
+      "state": "active_engagement",
+      "behavior": "moves in formation patterns; fires projectiles at player; maintains altitude advantage"
+    },
+    {
+      "entity": "enemy_aircraft",
+      "state": "defeated",
+      "behavior": "removed from screen; possible explosion/destruction animation"
+    },
+    {
+      "entity": "power_up_items",
+      "state": "available",
+      "behavior": "drops from destroyed enemies or screen edges; moves toward player or drifts passively"
+    }
+  ],
+  "notes": "Truxton is a vertically-scrolling shoot-em-up with military conflict framing. Visual communication relies entirely on sprite design, spatial positioning, and behavioral patterns rather than narrative text. The game world-state is conveyed through enemy density escalation, projectile pattern complexity, and stage progression. No dialogue or explicit faction lore; conflict identity emerges purely from visual military aesthetic (aircraft, weapons platforms). T2 tier assessment due to lack of detailed source documentation on specific visual design choices.",
+  "sources_used": [
+    "Wikipedia disambiguation entry (confirms game as 1988 arcade release, known as Tatsujin in Japan)"
+  ],
+  "TODO": "Direct gameplay documentation of specific sprite palettes, enemy type visual variants, power-up visual designs, and stage background environmental storytelling would require primary gameplay footage analysis or detailed developer documentation not available in provided sources.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:28:32.348Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1677,
+    "output_tokens": 1672,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "game_id": "chubby-cherub-nes",
+  "game_name": "Chubby Cherub",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Dog barks",
+      "visual_form": "Sound effect / likely enemy sprite animation",
+      "meaning": "Lethal threat — player character is 'brutally killed' by dog barks"
+    },
+    {
+      "signal": "Power meter depletion",
+      "visual_form": "Meter UI element that depletes during gameplay",
+      "meaning": "Resource loss — indicates vulnerability state or hunger mechanic"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "High score achievement",
+      "visual_form": "Score display notification on screen",
+      "meaning": "Success milestone — validates player progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Enemy entities (dogs/threats)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Dogs (as lethal hostile entities in US version; part of original Q-Tarō licensed IP in Japan)",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player vulnerability / hunger",
+      "visual_manifestation": "Power meter depletion indicator",
+      "behavioral_manifestation": "Player movement/action constrained as meter depletes; death triggered by dog encounters when vulnerable"
+    },
+    {
+      "world_state": "High performance achieved",
+      "visual_manifestation": "Score notification display (with regional text variants)",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Title screen / game state shift (regional)",
+      "visual_manifestation": "Dark US version vs. lively Japanese version; logo replaced with hearts in US; character redesigns",
+      "behavioral_manifestation": null
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character redesign signaling IP localization",
+      "example": "Q-Tarō (licensed hungry ghost) redrawn as 'Chubby Cherub' (original property angel cherub) to obscure unknown Japanese IP from Western audiences"
+    },
+    {
+      "technique": "Title screen mood setting",
+      "example": "Dark US title screen vs. lively Japanese version establishes different tonal contexts for the same mechanical game"
+    },
+    {
+      "technique": "Symbol substitution for cultural adaptation",
+      "example": "Q logo replaced with hearts in US version — shifts identity from anime-licensed property to generic platformer"
+    },
+    {
+      "technique": "Pacing through resource depletion",
+      "example": "Power meter depletes faster in Wan-Wan Panic (JP) than Chubby Cherub (US), signaling different difficulty/urgency narratives"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dogs",
+      "state": "Hostile/Active",
+      "behavior": "Bark attacks that instantly kill player character — primary threat mechanic"
+    },
+    {
+      "entity": "Player character (Chubby Cherub / Q-Tarō)",
+      "state": "Hungry/Depleting",
+      "behavior": "Power meter depletion reflects hunger state; vulnerability increases as meter empties"
+    }
+  ],
+  "notes": "This is a minimal-documentation T3 entry. The game's manifestation layer is heavily shaped by regional localization: the JP version communicates 'licensed anime property' through visual identity (lively title screen, Q logo, original characters), while the US version removes all anime signaling through darkness, heart symbols, and character redesigns. Danger is communicated purely through mechanical threat (dog barks = instant death) rather than visual warning systems. The power meter is the primary world-state indicator, visually communicating player vulnerability progression. No faction politics or complex social systems are documented — the game operates on a simple predator-prey communication model.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Chubby Cherub article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:31:13.090Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1576,
+    "output_tokens": 1048,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

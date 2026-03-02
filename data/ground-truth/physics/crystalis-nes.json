@@ -1,0 +1,135 @@
+{
+  "game_id": "crystalis-nes",
+  "game_name": "Crystalis",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": "none",
+    "notes": "No subpixel system. Movement engine uses a counter that increments every step. Pixel movement varies based on counter state. Diagonal movement alternates between 1 and 2 pixels per direction each frame. Manhattan steps always move 2 pixels. Different movement sequences exist for grass/swamp terrain, changed form, and dolphin."
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Eight-Direction Movement",
+      "description": "Player character moves in eight cardinal and diagonal directions using control pad",
+      "physics_values": {
+        "directions_supported": 8,
+        "movement_system": "counter-based pixel stepping"
+      }
+    },
+    {
+      "name": "Sword Charging",
+      "description": "Swords can be charged for powered-up attacks that launch elemental projectiles. Can charge while moving if B is released for one frame at correct timing intervals (every four counts of global counter at $0008).",
+      "physics_values": {
+        "charge_release_timing": "every 4 global counter increments",
+        "charge_release_window": "1 frame"
+      }
+    },
+    {
+      "name": "Rabbit Boots Jump",
+      "description": "Allows short jump with preset arc. When on water, hero enters flight state (Ghetto Flight). Jumping into a pit and immediately jumping again allows continuous jumping (Moonjumping).",
+      "physics_values": {
+        "jump_type": "preset arc",
+        "water_interaction": "flight mode",
+        "pit_interaction": "sustained jumping possible"
+      }
+    },
+    {
+      "name": "Dolphin Riding",
+      "description": "Mountable creature with different movement sequences. Moves faster by shore. Movement physics differ significantly from normal terrain.",
+      "physics_values": {
+        "movement_variant": "distinct from normal terrain"
+      }
+    },
+    {
+      "name": "Terrain-Based Movement Variation",
+      "description": "Different movement sequences for different terrain types: normal terrain, grass/swamp, changed form, and dolphin. Complex tweaking possible for optimization.",
+      "physics_values": {
+        "terrain_types": [
+          "normal",
+          "grass/swamp",
+          "changed_form",
+          "dolphin"
+        ]
+      }
+    },
+    {
+      "name": "Ice Climbing",
+      "description": "On ice terrain, a counter increments every 16 counts when global counter has lower nibble of 0. Preventing this event allows indefinite climbing. Moving down when counter increments jumps to 16 instead of incrementing by one for faster descent.",
+      "physics_values": {
+        "ice_counter_increment": "every 16 counts",
+        "ice_counter_trigger": "global counter lower nibble = 0"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "grid-based movement",
+    "momentum-free",
+    "deliberate step-based",
+    "tactical positioning",
+    "non-floaty jump"
+  ],
+  "tier_notes": "Tier 2 - Empirical/Qualitative data from speedrun documentation and game mechanics analysis. No exact physics constants documented. Movement system fundamentally differs from typical platformers due to counter-based stepping rather than velocity systems. Sub-pixel absence is documented and significant for movement optimization.",
+  "sources_used": [
+    "TASVideos - GameResources/NES/Crystalis (Quirks and Tricks, Glitches sections)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:54:33.179Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5732,
+    "output_tokens": 1233,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "wikipedia"
+    ]
+  }
+}

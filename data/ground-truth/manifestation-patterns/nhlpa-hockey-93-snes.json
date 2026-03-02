@@ -1,0 +1,147 @@
+{
+  "game_id": "nhlpa-hockey-93-snes",
+  "game_name": "NHLPA Hockey '93",
+  "platform": "snes",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Player injury state",
+      "visual_form": "Player sprite animation change or status indicator",
+      "meaning": "Player is injured and removed from play or performance degraded"
+    },
+    {
+      "signal": "Puck possession loss",
+      "visual_form": "Puck sprite location change to opponent player",
+      "meaning": "Immediate danger of scoring against own team"
+    },
+    {
+      "signal": "Opposing player approach",
+      "visual_form": "Opponent sprite movement toward player with puck",
+      "meaning": "Check or body contact imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Puck possession by own team",
+      "visual_form": "Puck sprite attached to allied player sprite",
+      "meaning": "Control of play, scoring opportunity available"
+    },
+    {
+      "signal": "Distance from opposing goal",
+      "visual_form": "Player sprite position in offensive zone visual layout",
+      "meaning": "Closer proximity to scoring area reduces defensive pressure"
+    },
+    {
+      "signal": "Open ice space",
+      "visual_form": "Empty sprite tiles in forward direction",
+      "meaning": "Safe passing lane or movement corridor available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team (user-controlled)",
+      "color_identity": "Primary jersey color (varies by selected NHL team)",
+      "symbol_or_sigil": "City name displayed (e.g., 'NEW YORK', 'LONG ISLAND' for Islanders due to NHLPA licensing restriction)",
+      "enemy_visual_variants": "Opponent team uses contrasting jersey color",
+      "environmental_markers": "Own team bench on one side of rink, opposing bench opposite"
+    },
+    {
+      "faction": "Away Team (opponent)",
+      "color_identity": "Contrasting jersey color to home team",
+      "symbol_or_sigil": "Opponent city name displayed (NHLPA license restricts team logos/NHL emblems)",
+      "enemy_visual_variants": "White or light jerseys typically used for away teams per NHL convention",
+      "environmental_markers": "Positioned opposite home team bench; color-coded HUD elements"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game in progress - even score",
+      "visual_manifestation": "Score display shows equal points for both teams; neutral crowd energy implied",
+      "behavioral_manifestation": "Both teams display standard aggression and pacing in sprite movement patterns"
+    },
+    {
+      "world_state": "Game in progress - own team losing",
+      "visual_manifestation": "Score display shows lower number for player team",
+      "behavioral_manifestation": "AI opponent plays with increased confidence; player team aggression may need to escalate"
+    },
+    {
+      "world_state": "Game in progress - own team winning",
+      "visual_manifestation": "Score display shows higher number for player team",
+      "behavioral_manifestation": "Opponent AI increases check frequency and aggressiveness to recover"
+    },
+    {
+      "world_state": "Playoff mode active",
+      "visual_manifestation": "UI displays 'Playoff' mode indicator; trophy icon visible as goal",
+      "behavioral_manifestation": "Single-elimination or best-of-7 series structure affects replay logic"
+    },
+    {
+      "world_state": "Player eliminated in single-game mode",
+      "visual_manifestation": "Game over screen; final score display",
+      "behavioral_manifestation": "Return to menu or team selection state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Jersey color differentiation",
+      "example": "Home team displays primary color (e.g., blue for Toronto), away team displays white/light alternate, immediately establishing faction identity"
+    },
+    {
+      "technique": "Rink side bench positioning",
+      "example": "Player bench on screen-left, opponent bench on screen-right (or vice versa) reinforces territorial control and team identity"
+    },
+    {
+      "technique": "City name branding",
+      "example": "UI scoreboard displays only city names ('LONG ISLAND', 'BOSTON', 'CALGARY') rather than team nicknames, due to NHLPA-only licensing; communicates political reality of game production constraints"
+    },
+    {
+      "technique": "Shattering glass effect",
+      "example": "Puck hitting boards produces visual glass-break animation; adds physical authenticity to play-by-play action"
+    },
+    {
+      "technique": "Player roster completion",
+      "example": "All 24 teams from 1991-92 NHL season included with real player names and rosters; establishes comprehensive competitive legitimacy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Own team player (controlled)",
+      "state": "Has puck",
+      "behavior": "Responds to input commands; sprite faces direction of intended movement; can pass or shoot based on input"
+    },
+    {
+      "entity": "Own team player (AI-controlled)",
+      "state": "Defending",
+      "behavior": "Sprite moves to intercept passing lanes; positions between opponent and own goal"
+    },
+    {
+      "entity": "Opponent team player",
+      "state": "Pursuing ball carrier",
+      "behavior": "Sprite moves directly toward player with puck; initiates body check animation when in contact range"
+    },
+    {
+      "entity": "Opponent team player",
+      "state": "Defending own goal",
+      "behavior": "Maintains positioning in defensive zone; sprite moves to block shooting lanes"
+    },
+    {
+      "entity": "Player (any team)",
+      "state": "Injured",
+      "behavior": "Sprite removed from active play or animated in penalty box/sideline; team plays short-handed or substitute enters"
+    }
+  ],
+  "notes": "NHLPA Hockey '93 operates within licensing constraints that directly impact visual communication: absence of NHL logos and team nicknames requires city-name-only identification. This is a manifestation layer signal of the game's political/legal positioning. The game communicates world-state primarily through score display, player sprite position/animation, and jersey coloring. Danger and safety are signaled through spatial proximity of sprites and ball possession. The paradigm field was listed as 'racing' in input but should be 'sports' (ice hockey) based on actual game content.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:51:28.793Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3439,
+    "output_tokens": 1735,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

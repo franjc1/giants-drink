@@ -1,0 +1,139 @@
+{
+  "game_id": "joust-nes",
+  "game_name": "Joust",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Player knight on bird (ostrich/stork)",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Flight control via wing-flapping rhythm; ascent/hover/descent via button press frequency"
+    },
+    {
+      "element": "Floating rock platforms",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Spatial navigation anchors; safe zones above lava"
+    },
+    {
+      "element": "Enemy knights (Bounder type - weakest)",
+      "first_appears": "Wave 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduction to collision-based combat; jousting mechanic (higher lance wins)"
+    },
+    {
+      "element": "Enemy eggs (defeated enemy drops)",
+      "first_appears": "Upon first enemy defeat",
+      "introduction_context": "moderate",
+      "mastery_context": "Risk/reward mechanic; must collect for points or egg hatches into stronger knight"
+    },
+    {
+      "element": "Lava at screen bottom",
+      "first_appears": "Game start (visible but avoided)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Indestructible Lava Troll hazard; instant life loss if touched"
+    },
+    {
+      "element": "Hunter-type enemies",
+      "first_appears": "Later waves (after Bounder mastery)",
+      "introduction_context": "dangerous",
+      "mastery_context": "More aggressive AI; higher point value than Bounders"
+    },
+    {
+      "element": "Shadow Lord enemies",
+      "first_appears": "Later waves (final enemy type)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Highest difficulty enemy type; highest point value"
+    },
+    {
+      "element": "Pterodactyl bonus hazard",
+      "first_appears": "After predetermined time in wave",
+      "introduction_context": "dangerous",
+      "mastery_context": "Optional high-risk/high-reward target; hunting behavior adds dynamic threat"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Defeating all enemies in current wave",
+      "Collecting fallen enemy eggs for points",
+      "Hovering on platforms above lava",
+      "Wave completion transitioning to next level"
+    ],
+    "typical_tension_triggers": [
+      "Enemy knight approach",
+      "Pterodactyl appearance after time threshold",
+      "Low altitude flight near lava",
+      "Equal-height collision (both knights repelled)",
+      "Uncollected egg hatching into new enemy",
+      "Wave increase in difficulty (more/stronger enemies)"
+    ],
+    "pacing_descriptor": "Escalating wave-based intensity; each wave introduces more enemies and upgraded enemy types (Bounder → Hunter → Shadow Lord); pterodactyl interrupts calm collection periods; constant vertical resource management (altitude vs. lava threat)"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Pterodactyl appearance (bonus points opportunity); egg collection vs. hatching (risk/reward positioning)",
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Single enemy type (Bounder) introduced; player learns flight control and basic jousting with low-pressure encounters",
+    "mid_game": "Wave progression introduces Hunter enemies; increased enemy count per wave; pterodactyl mechanic adds time pressure",
+    "late_game": "Shadow Lord enemies (highest difficulty type); wave complexity escalates; cumulative pressure from mixed enemy types; egg management becomes critical resource challenge",
+    "notable_spikes": [
+      "Introduction of Hunter-type enemies (behavioral shift from Bounder)",
+      "Introduction of Shadow Lord enemies (final difficulty tier)",
+      "Each wave completion: enemy count and type composition increases",
+      "Pterodactyl appearance: interrupts egg-collection windows, adds aggressive hunting element"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Wave Progression System",
+      "description": "Game structured as repeating 'waves' of enemy groups. Each completed wave triggers next wave with increased difficulty (more enemies, upgraded enemy types). No traditional level structure; progression through escalating enemy composition.",
+      "example_level": "Wave 1 (Bounders) → Wave 2 (mixed Bounder/Hunter) → Wave N (Shadow Lords dominant)"
+    },
+    {
+      "pattern_name": "Vertical Resource Management",
+      "description": "Single-screen arena with platforms at multiple altitudes and lava hazard at bottom. Player must manage altitude for combat positioning (higher lance wins jousts) vs. lava threat (Lava Troll). Platforms serve as safe refuge and enemy encounter zones.",
+      "example_level": "Floating platform layout creates vertical risk/reward zones"
+    },
+    {
+      "pattern_name": "Collision-Based Combat",
+      "description": "No projectiles; all combat via aerial collision with jousting mechanic (vertical position determines winner). Equal-height collisions create repulsion, teaching positioning skill. Defeated enemies drop collectible eggs.",
+      "example_level": "Every enemy encounter"
+    },
+    {
+      "pattern_name": "Egg Hatching Mechanic",
+      "description": "Defeated enemies become eggs falling toward lava. Player faces binary choice: collect egg for points (positions player near lava risk) or leave uncollected (egg hatches into new, stronger knight). Risk/reward decision gate.",
+      "example_level": "After each enemy defeat"
+    },
+    {
+      "pattern_name": "Pterodactyl Disruption",
+      "description": "After fixed time in wave, pterodactyl spawns to hunt player. High-point bonus for defeat but aggressive behavior interrupts safe egg-collection periods. Acts as difficulty spike and timer mechanic.",
+      "example_level": "Mid-to-late wave sequence"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:53:14.719Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4281,
+    "output_tokens": 1755,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "game": "Batman: The Video Game",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1989,
+    "publisher": "Sunsoft",
+    "developer": "Sunsoft",
+    "sources": [
+      {
+        "name": "Data Crystal — Batman: The Video Game (NES)",
+        "url": "https://datacrystal.tcrf.net/wiki/Batman:_The_Video_Game_(NES)",
+        "notes": "RAM map referenced but values not extracted in reviewed session."
+      },
+      {
+        "name": "TASVideos — NES / Batman",
+        "url": "https://tasvideos.org/GameResources/NES/Batman",
+        "notes": "Mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Batman NES (Sunsoft, 1989) is widely considered one of the best-playing NES action games — tightly designed physics.",
+      "DEFINING MECHANIC: Wall jump system. Batman can jump off walls by pressing jump while adjacent to a wall.",
+      "The wall jump is more restricted than later wall jump systems (Ninja Gaiden, MMX) — must alternate between two walls.",
+      "Regarded as having excellent game feel despite limited exact documentation in public sources.",
+      "High walk speed compared to most NES protagonists.",
+      "Combat: Batarangs (thrown), melee punch/kick combo.",
+      "Values below are primarily community estimates. VERIFY against ROM."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Approximate. Batman moves faster than Mega Man (1.5 px/f). Community impression: 'fast and responsive.' VERIFY."
+    },
+    "notes": "Instant velocity. No acceleration ramp."
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "notes": [
+      "Batman has full horizontal air control during jump.",
+      "Variable height jump.",
+      "Jump physics are regarded as 'tight and responsive' by the community."
+    ]
+  },
+
+  "wall_jump": {
+    "available": true,
+    "type": "alternating_wall_bounce",
+    "description": "Batman can jump between two parallel walls by pressing jump each time he contacts a wall. Cannot repeatedly jump off the SAME wall.",
+    "notes": [
+      "The wall jump requires TWO walls — Batman must alternate between left and right walls to ascend.",
+      "This differs from Ninja Gaiden (same wall cling) and MMX (same wall repeated).",
+      "Makes vertical shaft traversal possible but requires proper spacing of walls.",
+      "The constraint (must alternate) shapes level design — vertical sections need pairs of walls, not single pillars."
+    ]
+  },
+
+  "combat": {
+    "batarang": {
+      "description": "Thrown weapon that travels in a straight horizontal path.",
+      "notes": "Limited ammo. Collectible to restore. Fast projectile."
+    },
+    "melee": {
+      "description": "Punch and kick combo. Multi-hit enemies require melee.",
+      "notes": "Melee has short range but is always available."
+    }
+  },
+
+  "hitboxes": {
+    "batman_standing": {
+      "notes": "Batman is taller than most NES protagonists — standard superhero proportions. Hitbox narrower than sprite.",
+      "confidence": "low"
+    }
+  },
+
+  "_verification_checklist": [
+    "Walk speed in px/frame",
+    "Jump initial velocity",
+    "Wall jump velocity (horizontal and vertical components)",
+    "Gravity constant",
+    "Batarang travel speed"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "Batman NES represents the 'corporate IP done right' school of NES design — a licensed game that uses the IP's strengths (acrobatic hero, urban environment, projectile + melee combat) to inform tight mechanics, not just to slap Batman skin on a generic platformer.",
+    "The alternating-walls wall jump creates a distinct rhythm for vertical traversal: left-wall → jump → right-wall → jump → repeat. This rhythm is predictable and teachable, making it feel like a skill rather than a cheap trick.",
+    "The combination of full air control + wall jump allows Batman to navigate complex urban environments in ways that feel authentic to the character — no 'Mario parabola' jumps, but fluid directional movement.",
+    "Batarang resource management adds a light ammunition economy to what is otherwise pure action — players must decide when to expend ranged attacks vs. risk melee."
+  ]
+}

@@ -1,0 +1,265 @@
+GameResources/NES/DuckTales2 - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Duck Tales 2
+
+This page documents information about
+
+DuckTales 2
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Movie base
+
+Lua script
+
+NamesLog
+
+userfiles/game/27
+
+-- feos, 2012
+-- Duck Tales 2 lag counter and HUD
+
+lagged = false
+lastXpos = 0
+lastYpos = 0
+lastXcam = 0
+lastYcam = 0
+
+function Stuff()
+
+Xpos = memory.readbyte(0x96) + (memory.readbyte(0x97)*0x100) + (memory.readbyte(0x95)/400)
+
+Ypos = memory.readbyte(0x99) + (memory.readbyte(0x9A)*0x100) + (memory.readbyte(0x98)/400)
+
+Xcam = memory.readbyte(0x17) + memory.readbyte(0x18)*0x100
+
+Ycam = memory.readbyte(0x1A) + memory.readbyte(0x1B)*0x100
+
+timer = memory.readbyte(0x8F)
+
+RNG = memory.readbyte(0x90)
+
+bossHP = memory.readbyte(0xB9)
+
+bossInv = memory.readbyte(0xB8)
+
+Xspd = Xpos - lastXpos
+
+Yspd = Ypos - lastYpos
+
+Xcamspd = Xcam - lastXcam
+
+Ycamspd = Ycam - lastYcam
+
+gui.text( 0, 8, string.format("X: %.2f\nY: %.2f",Xpos,Ypos))
+
+gui.text(170, 8, string.format("Xcam: %4d\nYcam: %4d",Xcam,Ycam))
+
+gui.text(115, 8, string.format("Tmr: %d\nRNG: %X\nHP: %d\nInv: %d",timer,RNG,bossHP,bossInv))
+
+gui.text(Xpos-Xcam, Ypos-Ycam, string.format("%.2f\n%.2f",Xspd,Yspd), "#00ff00ff")
+
+lastXpos = Xpos
+
+lastYpos = Ypos
+
+lastXcam = Xcam
+
+lastYcam = Ycam
+
+for i = 0, 8 do
+
+id		= memory.readbyte(0x405+i)
+
+xSub	= memory.readbyte(0x4A5+i)/400
+
+x		= memory.readbyte(0x4B5+i) + memory.readbyte(0x4C5+i)*0x100 - Xcam
+
+ySub	= memory.readbyte(0x4D5+i)/400
+
+y		= memory.readbyte(0x4E5+i) + memory.readbyte(0x4F5+i)*0x100 - Ycam
+
+state	= memory.readbyte(0x415+i)
+
+speed	= memory.readbyte(0x465+i)
+
+if x<0 then x=0 elseif x>242 then x=242 end
+
+if id>0 then
+
+gui.text(x, y, string.format("%X\n%X",id,state))
+
+end
+
+end
+end
+
+function DetectLag()
+
+lagged = (memory.readbyte(0x88) == 0)
+end
+
+function SetLag()
+
+emu.setlagflag(lagged)
+end
+
+memory.registerexecute(0xC780, DetectLag)
+memory.registerexecute(0xD362, SetLag)
+emu.registerafter(Stuff)
+
+Save as  'Duck Tales 2 (U) [!].nes.ram.nl'  and put to 'roms' folder for symbolic debugging.
+
+$000A#XposLowTtemp#
+$000B#XposHighTemp#
+$000C#YposLowTemp#
+$000D#YposHighTemp#
+$0013#XcamLowTemp#
+$0014#XcamHighTemp#
+$0015#YcamLowTemp#
+$0016#YcamHighTemp#
+$0017#XcamLow#
+$0018#XcamHigh#
+$001A#YcamLow#
+$001B#YcamHigh#
+$008F#GlobalTimer#
+$0090#RNG#
+$0095#PlayerXposSub#
+$0096#PlayerXposLow#
+$0097#PlayerXposHigh#
+$0098#PlayerYposSub#
+$0099#PlayerYposLow#
+$009A#PlayerYposHigh#
+$00B1#SlotPointer#
+$03FE#ID#
+$040E#State#
+$042E#Timer#
+$043E#DeathFlag#
+$044E#Sprite#
+$045E#Yspeed#
+$049E#XposSub#
+$04AE#XposLow#
+$04BE#XposHigh#
+$04CE#YposSub#
+$04DE#YposLow#
+$04EE#YposHigh#
+
+Positioning
+
+Regular horizontal moving speed is 1.x pixel per frame. x is subpixel value, each subpixel used in the game is 4 256ths of a pixel, and it alters within 1/2 of a pixel each frame you move (it is either less than 0x80, or more). X subpixel rolls each frame you move, even if you are running into a wall. So by adding such wall bumps when possible you can manipulate X subpos to always result in a higher total position.
+
+Y subpixel only advances while you are on a rope, or are falling through a screen transition gap. So you can manipulate Y subpixel by grabbing the ropes or jumping into gaps at different time. Sometimes Y subpixel is critical for some collision.
+
+Subpixels get carried between levels, so you want to adjust them after boss fights to be higher. X position resets to a default value on each level start, so you will be farther right even if you moved left enough to have 0x80+ subpos.
+
+Collision glitch
+
+You usually are able to damage enemies only from above, but if you position yourself right relatively to an enemy, you can damage them from a side. This requires enemies to move to allow precise adjustment, doesn't work on Boss 1 when he is in the upper corner.
+
+Interactive objects
+
+Usually you need to run into an interactive object to setup hockey hit on it or pulling it. But if you are moving along the same platform before it for 15 frames, you can add one blank frame 16 (or 32) frames back and be able to hit it as soon as you reach it.
+
+Jumping for 4 frames once you press B cancels the rest of hit animation as you land, so you can move forward instantly too.
+
+Zipping
+
+The game has hidden boxes. If you spawn them at a proper position and face backwards for a proper frame, you get zipped through them, gaining about 10 pixels.
+
+RNG
+
+Usual RNG roll:
+
+$D320:A5 8F
+
+LDA GlobalTmr
+
+$D322:65 90
+
+ADC RNG
+
+$D324:85 90
+
+STA RNG
+
+$D326:E6 90
+
+INC RNG
+
+It runs each time you kill an enemy that can drop an item, or when an enemy wants to get its new pattern. So you can manipulate RNG by killing enemies at different frames. Bosses also account your X position, mixing it with global timer and previous RNG values.
+
+More code samples can be found in  DT2 thread .
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/DuckTales2 last edited by adelikat  on 4/14/2024 2:53 AM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

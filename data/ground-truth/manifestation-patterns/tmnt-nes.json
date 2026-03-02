@@ -1,0 +1,158 @@
+{
+  "game_id": "tmnt-nes",
+  "game_name": "Teenage Mutant Ninja Turtles",
+  "platform": "nes",
+  "paradigm": "beat-em-up / action-adventure platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Foot Clan soldiers, Bebop, Rocksteady, Fire Freak sprites in red/dark colors",
+      "meaning": "Combat threat; areas controlled by villain faction"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Larger, distinct sprite designs (Shredder, Technodrome); flinching animation states",
+      "meaning": "High-threat encounter; progression gate; major antagonist presence"
+    },
+    {
+      "signal": "Technodrome structure",
+      "visual_form": "Large mechanical fortress graphic (mini variant in design; full version as level environment)",
+      "meaning": "Villain headquarters; stronghold of enemy faction; final danger zone"
+    },
+    {
+      "signal": "Captured allies",
+      "visual_form": "Splinter confined/imprisoned visual state in-level",
+      "meaning": "World under threat; faction dominance; rescue objective signals danger ahead"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Accessible turtles",
+      "visual_form": "Character selection screen showing four distinct turtle sprites (each with unique color identity)",
+      "meaning": "Multiple lives/resources available; player agency; safe hub state"
+    },
+    {
+      "signal": "Sewer/base areas",
+      "visual_form": "Overhead exploration areas with benign environmental tiles",
+      "meaning": "Safe zones; friendly territory; home base before combat stages"
+    },
+    {
+      "signal": "April presence",
+      "visual_form": "April NPC sprite (supporting character in narrative)",
+      "meaning": "Ally; friendly faction indicator; narrative anchor for safety/mission briefing"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Teenage Mutant Ninja Turtles (heroes)",
+      "color_identity": "Four distinct shell colors: Leonardo (blue), Raphael (red), Donatello (purple), Michelangelo (orange)",
+      "symbol_or_sigil": "Ninja-themed weapons (katanas, sai, bo staff, nunchaku); turtle shell silhouettes",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Sewers, New York urban environments, turtle van (unused open state frame exists)"
+    },
+    {
+      "faction": "Foot Clan / Shredder's regime",
+      "color_identity": "Red/dark soldiers; black/metallic Shredder design",
+      "symbol_or_sigil": "Shredder armor/claw weapon; generic ninja foot soldiers; Foot Clan emblem (implicit in enemy spawn)",
+      "enemy_visual_variants": "Bebop and Rocksteady (mutant henchmen with unused flinching frames); Fire Freak (specialized variant with unused flinching); standard soldiers",
+      "environmental_markers": "Technodrome fortress (villain stronghold); industrial/tech environments; dark urban areas under faction control"
+    },
+    {
+      "faction": "Splinter/Mentor figure",
+      "color_identity": "Brown/tan rat character sprite",
+      "symbol_or_sigil": "Wise sage; father figure (especially in Japanese localization where April is reframed as Splinter's daughter)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Initially in captive state; requires rescue; appears in end-sequence narrative (heart symbol appears in Japanese ending text)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Enemy faction dominance / Foot Clan control",
+      "visual_manifestation": "Dark tile palettes in controlled areas; increased enemy spawn density; Technodrome visible as environmental backdrop or level zone",
+      "behavioral_manifestation": "Enemies patrol aggressively; captive allies (Splinter) remain imprisoned; faction forces block progression"
+    },
+    {
+      "world_state": "Safe/allied territory",
+      "visual_manifestation": "Overhead exploration view; lighter color palette; minimal enemy presence; April and friendly NPCs visible",
+      "behavioral_manifestation": "Free movement; mission briefing opportunities; character switching between turtles (turtle can be swapped as 'glorified extra life' mechanic)"
+    },
+    {
+      "world_state": "Boss/confrontation imminent",
+      "visual_manifestation": "Larger sprite graphics; Shredder or henchman (Bebop, Rocksteady, Fire Freak) appear; Technodrome interior as stage setting",
+      "behavioral_manifestation": "Boss enters flinching state when hit; unique attack patterns; high-difficulty combat encounter"
+    },
+    {
+      "world_state": "Narrative climax / Ending state",
+      "visual_manifestation": "Cutscene with door open sound effect (JP version) and text dialogue; heart symbol (JP only, modified in international releases); April and Splinter sprite states change",
+      "behavioral_manifestation": "Dialogue sequence; resolution of captive storyline; mission completion state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Captive character presence",
+      "example": "Splinter appears imprisoned during level progression; rescue objective implicitly communicates faction threat and player mission"
+    },
+    {
+      "technique": "Technodrome as environmental landmark",
+      "visual_form": "Large fortress structure visible or accessible as final level; mini-Technodrome graphics suggest scale and threat",
+      "example": "Unused mini-Technodrome graphic (grouped with Area 3 boss graphics) indicates enemy stronghold significance; final level takes place inside/at this structure"
+    },
+    {
+      "technique": "Overhead exploration to side-scroll combat transition",
+      "example": "Game structure shifts between safe overhead areas (mission prep) and dangerous side-scrolling combat zones (enemy territory); spatial layout communicates progression into danger"
+    },
+    {
+      "technique": "Turtle individuation through color",
+      "example": "Character selection screen with four distinct shell colors means player visually learns turtle identity; logo color doesn't change per turtle in JP version, but sprite color always distinct"
+    },
+    {
+      "technique": "Regional narrative variation",
+      "example": "Japanese localization reframes April as Splinter's daughter (otōsan/'father' address), changing family/alliance storytelling; European censorship renames game 'Teenage Mutant Hero Turtles' (no ninja reference), altering faction identity perception"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Shredder (boss)",
+      "state": "Hit/damaged",
+      "behavior": "Flinches with dedicated animation frames; shows vulnerability; signals successful player action"
+    },
+    {
+      "entity": "Bebop, Rocksteady, Fire Freak (henchmen)",
+      "state": "Defeated/unused interaction",
+      "behavior": "Unused flinching frames exist but go unused in-game (never flinch from player attacks); suggests simplified AI or design constraint; visual preparedness unused"
+    },
+    {
+      "entity": "Splinter (ally)",
+      "state": "Captive",
+      "behavior": "Appears imprisoned in level; triggers end-sequence dialogue when rescued; presence signals world-state threat"
+    },
+    {
+      "entity": "Foot Clan soldiers (generic enemies)",
+      "state": "Patrol/active",
+      "behavior": "Spawn in controlled territory; attack on contact; represent faction presence throughout levels"
+    },
+    {
+      "entity": "Player turtle",
+      "state": "Defeat",
+      "behavior": "Character switches to next available turtle (treated as extra life); visual communication of resource depletion; swappable state allows continued play"
+    }
+  ],
+  "notes": "Game communicates world-state primarily through color-coded turtle identities, environmental transitions (overhead safe zones vs. side-scroll combat danger), and enemy/boss presence. Faction identity (Foot Clan vs. Turtles/Splinter) expressed through sprite design and territorial control of level geography. Regional differences (Japanese title 'Geki Kame Ninja Den', European censorship of 'Ninja' term, April-as-daughter reframe) alter political/narrative messaging without changing core visual manifestation. Unused assets (flinching frames for bosses, mini-Technodrome, open turtle van, 'THANKS' speech bubble, heart symbol) suggest design iteration where additional state-communication was planned but cut. Sound cues (door opening in JP cutscenes) provide secondary world-state signals. Tier T2 assessment suitable: qualitative visual patterns documented but no numerical hitpoint/damage/behavior metrics available in sources.",
+  "sources_used": [
+    "tcrf",
+    "data_crystal",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:39:49.712Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6506,
+    "output_tokens": 2498,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

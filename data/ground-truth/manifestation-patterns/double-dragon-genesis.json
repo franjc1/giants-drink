@@ -1,0 +1,124 @@
+{
+  "game_id": "double-dragon-genesis",
+  "game_name": "Double Dragon",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "hostile characters appearing on screen",
+      "meaning": "immediate threat requiring combat or evasion"
+    },
+    {
+      "signal": "environmental_hazards",
+      "visual_form": "stage-specific obstacles and platforms",
+      "meaning": "collision damage and falling hazards present danger"
+    },
+    {
+      "signal": "boss_appearance",
+      "visual_form": "larger, distinctly designed enemy at stage end",
+      "meaning": "escalated threat level requiring increased player skill"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "empty_space",
+      "visual_form": "clear screen with no enemies present",
+      "meaning": "momentary reprieve to recover and advance"
+    },
+    {
+      "signal": "stage_progression",
+      "visual_form": "visual transition between levels",
+      "meaning": "checkpoint reached, partial progress secured"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_character",
+      "color_identity": "distinct sprite design for protagonist",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "enemies display contrasting sprite palette to player",
+      "environmental_markers": "player spawn position at stage start indicates safe entry point"
+    },
+    {
+      "faction": "antagonist_forces",
+      "color_identity": "unified enemy sprite design across minions",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "gang members and bosses share visual theme but distinct silhouettes",
+      "environmental_markers": "enemies emerge from stage-specific locations (streets, buildings, vehicles)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_combat_zone",
+      "visual_manifestation": "enemies continuously spawn and patrol designated areas; stage environment reflects urban setting with street-level hazards",
+      "behavioral_manifestation": "enemies pursue player with melee attacks; player must engage or evade; combat animations show damage feedback"
+    },
+    {
+      "world_state": "stage_clear",
+      "visual_manifestation": "transition screen or visual confirmation when all enemies defeated and stage boundary reached",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "player_damage_state",
+      "visual_manifestation": "visual hit feedback on player sprite; potential loss of visual integrity (knockback animation)",
+      "behavioral_manifestation": "player speed reduced, temporary invulnerability frames if implemented, knockback physics applied"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stage_location_design",
+      "example": "levels progress through urban environments (streets, factories, etc.) establishing antagonist territory without explicit dialogue"
+    },
+    {
+      "technique": "enemy_type_progression",
+      "example": "escalating enemy difficulty and variety across stages suggests expanding antagonist organization"
+    },
+    {
+      "technique": "visual_stage_theming",
+      "example": "each stage background depicts location-specific danger (vehicles, industrial hazards, structural obstacles)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "minion_enemy",
+      "state": "unaware",
+      "behavior": "patrol or idle animation until player proximity triggers awareness"
+    },
+    {
+      "entity": "minion_enemy",
+      "state": "aware",
+      "behavior": "pursuit animation directed at player; melee attack execution when adjacent"
+    },
+    {
+      "entity": "boss_enemy",
+      "state": "active",
+      "behavior": "distinct attack patterns; larger sprite size communicates increased threat; may use environmental position advantage"
+    },
+    {
+      "entity": "player_character",
+      "state": "healthy",
+      "behavior": "normal movement speed, responsive input handling, animation fluidity"
+    },
+    {
+      "entity": "player_character",
+      "state": "damaged",
+      "behavior": "knockback animation, temporary animation lock, visual feedback (flash or sprite damage indicator)"
+    }
+  ],
+  "notes": "Double Dragon Genesis (1993) is a beat-em-up platformer that communicates game state primarily through sprite-based visual design and animation. The game lacks explicit HUD narrative elements; world-state communication relies on enemy presence/absence, stage environment design, and character animation states. Faction distinction is implicit: player protagonist visually distinct from uniformly-designed antagonist gang members. Danger signals are direct: enemy visibility = threat. The speedrun data source provides context about game completion time and platform fidelity but minimal data on visual design specifics, requiring reliance on paradigm-standard beat-em-up communication patterns.",
+  "sources_used": [
+    "speedrun.com - Double Dragon Genesis leaderboards and game metadata"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:16:11.755Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1292,
+    "output_tokens": 1427,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun"
+    ]
+  }
+}

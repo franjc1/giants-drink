@@ -1,0 +1,170 @@
+{
+  "game_id": "t2-arcade-game-snes",
+  "game_name": "T2: The Arcade Game",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Digitized sprite graphics of Terminators and endoskeletons",
+      "meaning": "Active threats requiring elimination; player must engage or evade"
+    },
+    {
+      "signal": "T-1000 appearance",
+      "visual_form": "Advanced liquid-metal Terminator sprite with distinct visual design",
+      "meaning": "Boss-level threat; primary antagonist that regenerates and pursues relentlessly"
+    },
+    {
+      "signal": "Police/SWAT presence",
+      "visual_form": "Human officers in uniform sprites firing weapons",
+      "meaning": "Environmental hazard; misguided antagonists protecting Cyberdyne facility"
+    },
+    {
+      "signal": "Helicopter and vehicle attacks",
+      "visual_form": "Animated sprites of police helicopter and liquid nitrogen tanker truck",
+      "meaning": "Escalating threat level; stage-specific environmental danger"
+    },
+    {
+      "signal": "Health/Power gauge depletion",
+      "visual_form": "On-screen power gauge that decreases with sustained fire",
+      "meaning": "Weapon effectiveness degradation; player must cease fire to regenerate"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Human refugees/allies",
+      "visual_form": "Civilian sprites in hideout environments",
+      "meaning": "Objectives to protect; casualties incur point penalties but indicate mission failure state"
+    },
+    {
+      "signal": "John Connor presence",
+      "visual_form": "Key character sprite during escape sequences",
+      "meaning": "Primary protected asset; his death triggers stage restart and health penalty"
+    },
+    {
+      "signal": "Power-up pickups",
+      "visual_form": "On-screen health and secondary weapon ammunition supplies",
+      "meaning": "Resource availability; restoration of combat capability"
+    },
+    {
+      "signal": "Stage completion zones",
+      "visual_form": "Environmental boundaries (hideout locations, steel mill areas)",
+      "meaning": "Safe progression points; reaching them advances narrative and avoids stage replay"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Human Resistance (Player-aligned)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Refugee civilians and T-800 protagonist cyborg",
+      "environmental_markers": "Hideouts, refugee gathering points, Cyberdyne Systems facility (target for destruction)"
+    },
+    {
+      "faction": "Skynet (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Terminators, endoskeletons, T-1000 liquid-metal prototype, hunter-killer aircraft",
+      "environmental_markers": "Skynet headquarters in 2029, Cyberdyne Systems research facility in 1990s, steel mill (final confrontation site)"
+    },
+    {
+      "faction": "Law Enforcement (Unwitting Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "SWAT officers, police officers in uniform sprites",
+      "environmental_markers": "Cyberdyne facility, police helicopter, SWAT van; present during facility infiltration stages"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "2029 - Human/Machine War",
+      "visual_manifestation": "Battlefield environments, industrial Skynet facility aesthetic, machinery and combat-damaged structures",
+      "behavioral_manifestation": "Player encounters endoskeletons and Terminators; refugee protection objectives; heavy machine gun and missile loadout emphasis"
+    },
+    {
+      "world_state": "1990s - Past timeline (John's childhood)",
+      "visual_manifestation": "Urban environments, Cyberdyne research facility, steel mill setting, civilian and police presence",
+      "behavioral_manifestation": "Shotgun secondary weapons; SWAT officer opposition; protection of Sarah and John Connor; T-1000 liquid-nitrogen vulnerability becomes exploitable"
+    },
+    {
+      "world_state": "Cyberdyne Systems infiltration (completion state)",
+      "visual_manifestation": "Equipment destruction indicators; visual feedback for destroyed lab installations",
+      "behavioral_manifestation": "Bonus points awarded; unlocks optimal ending (Judgment Day averted); determines narrative outcome"
+    },
+    {
+      "world_state": "T-1000 liquid nitrogen vulnerability",
+      "visual_manifestation": "Tanker truck spray effect; frozen Terminator sprite state",
+      "behavioral_manifestation": "T-1000 temporarily immobilized; window of opportunity for final destruction; requires pushing into molten steel vat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Photorealistic digitized sprites",
+      "example": "Actors from the film (Arnold Schwarzenegger as T-800, etc.) rendered as digitized graphics; establishes canonical story continuity and film authenticity"
+    },
+    {
+      "technique": "Sequential environment progression",
+      "example": "Movement from 2029 Skynet war → Cyberdyne infiltration → 1990s escape sequence; spatial geography reinforces temporal/narrative structure"
+    },
+    {
+      "technique": "NPC casualty system",
+      "example": "Scoring system penalizes civilian deaths in early stages; refugees visually present but vulnerable; communicates moral weight of collateral damage"
+    },
+    {
+      "technique": "Equipment destruction feedback",
+      "example": "Cyberdyne stage allows destruction of lab equipment; visual destruction accumulation determines ending variant; spatial state affects narrative outcome"
+    },
+    {
+      "technique": "Weapon progression",
+      "example": "Machine gun + missiles (2029) vs. machine gun + shotgun (1990s); visual weapon swap reflects timeline shift and enemy composition changes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "T-800 Player Character",
+      "state": "Engaged in combat",
+      "behavior": "Automatic firing with continuous trigger pull; power gauge visible for rate-of-fire management; regenerates weapon effectiveness when trigger released"
+    },
+    {
+      "entity": "Terminator/Endoskeleton enemies",
+      "state": "Active patrol/attack",
+      "behavior": "Sprite-based movement toward player; firing weapons; on-screen presence indicates immediate threat requiring elimination"
+    },
+    {
+      "entity": "T-1000",
+      "state": "Pursuit across multiple stages",
+      "behavior": "Operates police helicopter in stage 6; drives liquid nitrogen tanker in stage 7; regenerates from damage; requires specific interaction (freezing + molten steel) for permanent destruction"
+    },
+    {
+      "entity": "SWAT/Police officers",
+      "state": "Facility defense",
+      "behavior": "Return fire at player; present as environmental hazard during Cyberdyne infiltration; do not regenerate like machines but respawn in waves"
+    },
+    {
+      "entity": "John Connor",
+      "state": "Protected asset",
+      "behavior": "Visible presence in escape sequences; death triggers stage restart and health penalty; communicates high-stakes narrative importance through mechanical consequence"
+    },
+    {
+      "entity": "Refugees",
+      "state": "Hideout shelter",
+      "behavior": "Stationary in protected zones; vulnerability to fire from enemies; point penalty system ties their survival to player agency"
+    }
+  ],
+  "notes": "T2 arcade game uses light-gun first-person perspective with digitized actor likenesses (film tie-in advantage). Visual communication is primarily through sprite-based threat taxonomy and environmental contextual shifts between 2029 war and 1990s timeline. The casualty scoring system is unusual for arcade shooters—it penalizes player firepower indiscriminately, creating resource management tension around collateral damage. No faction color-coding documented; distinction relies on sprite asset differences and narrative context. Ending branching tied to equipment destruction metrics creates spatial state importance.",
+  "sources_used": [
+    "wikipedia:Terminator 2: Judgment Day (arcade game) - gameplay and plot sections",
+    "tcrf:T2: The Arcade Game (SNES) - development credits and references"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:23:02.485Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5462,
+    "output_tokens": 2141,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

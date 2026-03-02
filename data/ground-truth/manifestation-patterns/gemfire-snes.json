@@ -1,0 +1,196 @@
+{
+  "game_id": "gemfire-snes",
+  "game_name": "Gemfire",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "Enemy territory adjacency",
+      "visual_form": "Adjacent provinces on tactics screen map display different owner colors",
+      "meaning": "Threat of attack; vulnerable border requires defense or preemptive action"
+    },
+    {
+      "signal": "Low resource availability",
+      "visual_form": "Resource panel on left side of tactics screen shows depleted counts",
+      "meaning": "Territory weakness; inability to hire/upgrade units or sustain military operations"
+    },
+    {
+      "signal": "Military unit defeat in battle",
+      "visual_form": "Turn-based battle screen shows unit removal or health depletion",
+      "meaning": "Loss of tactical advantage; risk of territory capture if main base is reached"
+    },
+    {
+      "signal": "Enemy food depletion state",
+      "visual_form": "Battle outcome condition when enemy army runs out of food",
+      "meaning": "Imminent enemy surrender or army dissolution"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Owned territory control",
+      "visual_form": "Provinces displayed in player's color on world map",
+      "meaning": "Secure zone under player command; safe from external attack"
+    },
+    {
+      "signal": "Alliance status",
+      "visual_form": "Diplomatic action completion on tactics screen",
+      "meaning": "Non-aggression pact; reduced threat from allied faction"
+    },
+    {
+      "signal": "Upgraded territory defenses",
+      "visual_form": "Defense upgrade action completed on tactics screen",
+      "meaning": "Increased castle resistance to enemy siege; improved garrison strength"
+    },
+    {
+      "signal": "Full unit strength in battle",
+      "visual_form": "Battle screen shows all five fielded units active and healthy",
+      "meaning": "Peak combat readiness; tactical advantage in current engagement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "House Blanche",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Led by Prince Erin; supported by Zendor (Emerald Wizard wielding Lightning magic)",
+      "environmental_markers": "One of two most powerful clans; controls gem-affiliated territory"
+    },
+    {
+      "faction": "House Lyle",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Led by Prince Ander; backed by Pluvius (Sapphire Wizard casting Meteors)",
+      "environmental_markers": "One of two most powerful clans; controls gem-affiliated territory"
+    },
+    {
+      "faction": "House Flax",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Wizard: Scylla; holder of one wizard gem",
+      "environmental_markers": "Minor clan with gem-affiliated territory"
+    },
+    {
+      "faction": "House Coryll",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Wizard: Empyron; holder of one wizard gem",
+      "environmental_markers": "Minor clan with gem-affiliated territory"
+    },
+    {
+      "faction": "House Chrysalis",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Wizard: Chylla; holder of one wizard gem",
+      "environmental_markers": "Minor clan with gem-affiliated territory"
+    },
+    {
+      "faction": "House Molbrew",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Wizard: Skulryk; holder of one wizard gem",
+      "environmental_markers": "Minor clan with gem-affiliated territory"
+    },
+    {
+      "faction": "Royal House (King Eselred)",
+      "color_identity": null,
+      "symbol_or_sigil": "Gemfire Crown (six jewels + central ruby)",
+      "enemy_visual_variants": "Tyrannical incumbent; currently controls Gemfire crown artifact",
+      "environmental_markers": "Princess Robyn imprisoned in tower; represents corrupted authority"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Political fragmentation - Gemfire crown broken",
+      "visual_manifestation": "Six wizard gems scattered across island territories, each claimed by competing family",
+      "behavioral_manifestation": "All families engage in territorial conquest; multiple simultaneous military campaigns"
+    },
+    {
+      "world_state": "Tyrannical rule (Eselred era)",
+      "visual_manifestation": "Crown artifact held as central power symbol; royal tower contains imprisoned princess",
+      "behavioral_manifestation": "Subjects oppressed; families motivated to unseat incumbent and seize throne"
+    },
+    {
+      "world_state": "Power balance shift - gem collection by player",
+      "visual_manifestation": "Captured wizard gems visible on tactics screen as player resources; territory color shifts to player ownership",
+      "behavioral_manifestation": "Enemy AI responds with increased aggression toward player; alliances shift based on player threat level"
+    },
+    {
+      "world_state": "Military dominance - player controls majority territories",
+      "visual_manifestation": "Map display shows player color occupying large contiguous regions",
+      "behavioral_manifestation": "Remaining factions may seek alliance or abandon weaker territories; unification victory condition approaches"
+    },
+    {
+      "world_state": "Battle engagement phase",
+      "visual_manifestation": "Screen shifts from tactics overview to tactical battle map with individual unit placement",
+      "behavioral_manifestation": "Units move in turn-based sequence; terrain features (fences) become relevant for defensive positioning"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative-driven world map partition",
+      "example": "Isle of Ishmeria divided into provinces; each holds gem-affiliated family, telling story of dispersed power after Gemfire's destruction"
+    },
+    {
+      "technique": "Artifact placement as political center",
+      "example": "Gemfire crown was symbol of unified authority; now broken into six gems, visually representing political fragmentation across families"
+    },
+    {
+      "technique": "Character positioning as stakes",
+      "example": "Princess Robyn locked in tower after breaking crown; creates emotional motivation for all factions to claim throne and restore order"
+    },
+    {
+      "technique": "Wizard affiliation as faction identity",
+      "example": "Each family's association with specific wizard (lightning, meteors, etc.) creates visual/mechanical distinction beyond territorial color"
+    },
+    {
+      "technique": "Scenario variation structure",
+      "example": "Four scenarios use same game board but alter family positions, provinces, vassals, and gem distribution—tells different political narratives from same map"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wizard unit (hired or faction-affiliated)",
+      "state": "Active in battle",
+      "behavior": "Casts elemental magic (lightning, meteors) according to type; provides significant tactical advantage"
+    },
+    {
+      "entity": "Enemy family AI",
+      "state": "Threatened by player expansion",
+      "behavior": "Increases military production; may initiate attack on adjacent player territories; seeks alliances with other families"
+    },
+    {
+      "entity": "Enemy family AI",
+      "state": "Weakened with few territories",
+      "behavior": "May propose alliance or plunder actions to gain resources; defensive posture on remaining provinces"
+    },
+    {
+      "entity": "Player-controlled army",
+      "state": "Out of food in battle",
+      "behavior": "Automatic defeat condition triggered; territory remains vulnerable to capture"
+    },
+    {
+      "entity": "Territory garrison",
+      "state": "Upgraded defense level",
+      "behavior": "Castle shows increased visual fortification; inflicts higher casualties on attacking forces"
+    },
+    {
+      "entity": "Hired mercenary unit",
+      "state": "Deployed in battle",
+      "behavior": "Functions as alternative to wizard; fills fifth unit slot; provides tactical flexibility without committing faction wizard"
+    }
+  ],
+  "notes": "Gemfire communicates world-state primarily through territory map coloring (faction ownership), resource panel displays (safety/vulnerability), and diplomatic/military action outcomes on tactics screen. The game lacks detailed visual effects or dynamic environmental changes; communication is abstract and menu-driven. Faction identity relies on narrative (wizard affiliation) rather than visual distinction beyond territorial color. The dual-screen layout (tactics overview + battle detail) creates meta-narrative of strategic planning versus tactical execution. Limited source material restricts specificity on exact visual representations.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:28:40.201Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2971,
+    "output_tokens": 2450,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

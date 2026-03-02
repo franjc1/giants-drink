@@ -1,0 +1,200 @@
+{
+  "game_id": "spy-hunter-nes",
+  "game_name": "Spy Hunter",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy vehicles on road",
+      "visual_form": "Distinct vehicle sprites moving toward player or blocking road",
+      "meaning": "Active threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Helicopter appearance",
+      "visual_form": "Overhead sprite dropping bomb indicators",
+      "meaning": "Aerial threat creating crater hazards on road surface"
+    },
+    {
+      "signal": "Road craters from bomb impacts",
+      "visual_form": "Dark destructive marks/gaps in road texture",
+      "meaning": "Environmental hazard that destroys player vehicle on contact"
+    },
+    {
+      "signal": "Vehicle collision proximity",
+      "visual_form": "Enemy sprite overlapping or adjacent to player car",
+      "meaning": "Imminent collision damage or forced road exit"
+    },
+    {
+      "signal": "Road edge/waterway boundary",
+      "visual_form": "Visual transition to off-road terrain or water",
+      "meaning": "Zone where player vehicle sustains cumulative damage and eventual destruction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open road ahead",
+      "visual_form": "Clear scrolling path with minimal vehicle sprites",
+      "meaning": "Safe forward progression zone"
+    },
+    {
+      "signal": "Weapons van appearance",
+      "visual_form": "Distinct special vehicle sprite with visual differentiation",
+      "meaning": "Opportunity to acquire temporary combat advantage (oil slick, smoke screen, SAM)"
+    },
+    {
+      "signal": "Boathouse structure",
+      "visual_form": "Architectural landmark sprite on roadside",
+      "meaning": "Transition point offering alternate movement mode (speedboat) for tactical variety"
+    },
+    {
+      "signal": "Score counter increment",
+      "visual_form": "Dashboard/HUD numeric display rising while on-road",
+      "meaning": "Player vehicle is intact and operating in safe condition"
+    },
+    {
+      "signal": "Extra car earned indicator",
+      "visual_form": "HUD status change reflecting score threshold achievement",
+      "meaning": "Player has surpassed performance milestone, gaining death buffer"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Spy/Interceptor)",
+      "color_identity": null,
+      "symbol_or_sigil": "G-6155 Interceptor sportscar",
+      "enemy_visual_variants": "Vehicle is distinct from all enemy types",
+      "environmental_markers": "Spawns on road center; persists at screen top during vertical scroll"
+    },
+    {
+      "faction": "Enemy vehicles (generic adversaries)",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied enemy vehicle types (sedans, trucks, etc.)",
+      "enemy_visual_variants": "Multiple silhouettes indicating different attack patterns and threat profiles",
+      "environmental_markers": "Distributed across road lanes; approach from forward/rear/sides"
+    },
+    {
+      "faction": "Civilian vehicles",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct non-combat vehicle sprite",
+      "enemy_visual_variants": "Visually separated from both player and armed enemies",
+      "environmental_markers": "Present on shared roadway; collision penalizes player score"
+    },
+    {
+      "faction": "Aerial threat (Helicopter)",
+      "color_identity": null,
+      "symbol_or_sigil": "Overhead sprite with bomb drop animation",
+      "enemy_visual_variants": "Unique visual distinct from ground vehicles",
+      "environmental_markers": "Appears above road; bomb indicators cascade downward"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (abundant resources)",
+      "visual_manifestation": "Unlimited car supply during lead-in period; minimal enemy density",
+      "behavioral_manifestation": "Player has freedom to explore and make mistakes without permanent penalty"
+    },
+    {
+      "world_state": "Mid-game (resource scarcity)",
+      "visual_manifestation": "Finite car supply; must earn extra cars by score milestones; increased enemy vehicle frequency",
+      "behavioral_manifestation": "Player must balance aggression with caution; tactical weapon deployment becomes critical"
+    },
+    {
+      "world_state": "Regional transition (new terrain/weather)",
+      "visual_manifestation": "Visual palette shift in road and background; new environmental features",
+      "behavioral_manifestation": "Enemy types and patterns may adapt; weapons van repositioned for new territory"
+    },
+    {
+      "world_state": "Speedboat mode active",
+      "visual_manifestation": "Vehicle sprite transforms to boat; water environment replaces road; oil slick becomes flamethrower visual",
+      "behavioral_manifestation": "Movement and firing patterns adjust to aquatic physics; helicopter threat persists; boat-specific enemies appear"
+    },
+    {
+      "world_state": "Weapon availability (special weapons armed)",
+      "visual_manifestation": "Dashboard lights illuminate to indicate active weapon state (oil, smoke, SAM)",
+      "behavioral_manifestation": "Player can deploy limited-ammo tactical tools; visual feedback on button press confirms firing"
+    },
+    {
+      "world_state": "Vehicle damage/near-destruction",
+      "visual_manifestation": "Collision proximity visual cues; road-edge transition animations",
+      "behavioral_manifestation": "Vehicle movement becomes increasingly constrained; cumulative off-road exposure triggers destruction"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain variation and regional forks",
+      "example": "Different road types (standard highway, waterway sections) signal progression through fictional spy mission geography"
+    },
+    {
+      "technique": "Vehicle diversity",
+      "example": "Multiple enemy vehicle silhouettes suggest organized opposition forces; civilian cars establish stakes (protection objective)"
+    },
+    {
+      "technique": "Weapons van as recurring landmark",
+      "example": "Periodic special-weapon supply points imply player operates in hostile territory with pre-positioned support infrastructure"
+    },
+    {
+      "technique": "Boathouse structures",
+      "example": "Architectural transition points communicate secret agent protocol (vehicle mode conversion as evasion tactic)"
+    },
+    {
+      "technique": "Helicopter threat",
+      "example": "Aerial opponent and bomb crater hazards suggest high-level pursuit; persistent threat across all terrain modes"
+    },
+    {
+      "technique": "Score-based survival mechanics",
+      "visual_form": "Dashboard status lights and extra-car thresholds",
+      "example": "Performance-based resource gain (extra lives) communicates narrative of escalating danger requiring improved skill"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy vehicles",
+      "state": "Approach phase",
+      "behavior": "Move toward player lane with collision intent; sprite animation suggests directional momentum"
+    },
+    {
+      "entity": "Enemy vehicles",
+      "state": "Forced ejection attempt",
+      "behavior": "Angle toward player car edges; nudge player toward road boundary"
+    },
+    {
+      "entity": "Helicopter",
+      "state": "Bombing run",
+      "behavior": "Appears overhead; drops bomb indicators that cascade to road; craters persist as environmental hazard"
+    },
+    {
+      "entity": "Civilian vehicle",
+      "state": "Neutral transit",
+      "behavior": "Maintains lane movement; does not attack; collision triggers score penalty (visual feedback: counter halt)"
+    },
+    {
+      "entity": "Weapons van",
+      "state": "Available",
+      "behavior": "Appears in new territory; dashboard light signals summoning capability; collision grants special weapon pickup"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "On-road nominal",
+      "behavior": "Score counter increments; responsive to steering yoke and acceleration input"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Off-road/waterway edge",
+      "behavior": "Cumulative damage accrual; reduced score; visual positioning at boundary; eventual sprite destruction"
+    }
+  ],
+  "notes": "Spy Hunter (NES 1987) employs a top-down scrolling perspective to communicate world-state primarily through environmental visual distinction and enemy sprite differentiation rather than explicit political/faction symbolism. The game's spy-thriller paradigm (drawing from James Bond inspiration) is communicated through mechanical gameplay elements (weapons, gadgets, evasion) rather than visual faction markers. Danger is signaled through proximity mechanics (enemy vehicles, helicopter), environmental hazards (road craters, boundaries), and resource depletion (finite special weapons, limited cars). Safety is indicated by open road space, weapon van access, and score increments. The vertical-scrolling vehicular combat paradigm limits faction representation to entity type differentiation (player/enemy/civilian/helicopter). World-state shifts manifest through terrain changes, enemy density variation, and weapon availability rather than narrative visual cues.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:12:26.392Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2856,
+    "output_tokens": 2275,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

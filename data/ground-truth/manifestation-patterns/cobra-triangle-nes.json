@@ -1,0 +1,164 @@
+{
+  "game_id": "cobra-triangle-nes",
+  "game_name": "Cobra Triangle",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Rogue enemy boats",
+      "visual_form": "Competing watercraft visible on isometric playfield, distinct from player speedboat",
+      "meaning": "Active threats that attack player and endanger swimmers; must be destroyed or avoided"
+    },
+    {
+      "signal": "Swimmers in distress",
+      "visual_form": "Human figures positioned near water edges or being dragged toward lake perimeter",
+      "meaning": "Rescue objectives under threat; failure to retrieve endangered swimmers results in life loss"
+    },
+    {
+      "signal": "Bombs",
+      "visual_form": "Bomb objects scattered across waterscape requiring collection and transport",
+      "meaning": "Hazardous payload requiring careful navigation to detonation sites; timing and positioning critical"
+    },
+    {
+      "signal": "Riverbank and obstacles",
+      "visual_form": "Shoreline boundaries and mid-river obstructions (logs, whirlpools) in racing levels",
+      "meaning": "Environmental collision hazards that cause navigation failure and time loss"
+    },
+    {
+      "signal": "Timer pressure",
+      "visual_form": "On-screen countdown in race objectives",
+      "meaning": "Temporal danger state; failure to complete objectives before timer expires causes life loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-ups",
+      "visual_form": "Collectible items scattered throughout levels",
+      "meaning": "Upgrades to weapon capability and boat speed; enhance combat effectiveness and survivability"
+    },
+    {
+      "signal": "Open water channels",
+      "visual_form": "Clear navigable pathways in isometric view, absence of obstacles",
+      "meaning": "Safe movement corridors; allow rapid transit and evasion"
+    },
+    {
+      "signal": "Ramps",
+      "visual_form": "Elevated structures enabling vertical traversal",
+      "meaning": "Tactical advantage enabling airborne movement for shortcuts and obstacle avoidance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Cobra-branded speedboat",
+      "enemy_visual_variants": "Cannon-equipped speedboat distinguished from competitor boats in races",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Competitor boats (racing opponents)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct watercraft without player's weaponry; engaged in head-to-head racing",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Rogue boat faction",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Hostile watercraft actively attacking swimmers and endangering rescue objectives",
+      "environmental_markers": "Behavior pattern: dragging swimmers toward lake edges"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Racing competition active",
+      "visual_manifestation": "Multiple boats visible on screen competing for position; timer displayed; obstacles and riverbanks emphasized",
+      "behavioral_manifestation": "Player boat must outpace timer and competitors while navigating hazards; combat with other racers available"
+    },
+    {
+      "world_state": "Rescue scenario active",
+      "visual_manifestation": "Swimmers depicted at water surface or being dragged by rogue boats; rescue zones marked",
+      "behavioral_manifestation": "Player must intercept rogue boats, prevent swimmer abduction, manually return captured swimmers to center water"
+    },
+    {
+      "world_state": "Bomb defusal mission",
+      "visual_manifestation": "Four bomb objects positioned on playfield; detonation site designated",
+      "behavioral_manifestation": "Player must collect bombs with protection mechanism and transport to specific location; careful navigation required to prevent detonation"
+    },
+    {
+      "world_state": "Boss encounter triggered",
+      "visual_manifestation": "Large or distinct enemy entity replacing standard race/objective format at level conclusion",
+      "behavioral_manifestation": "Escalated combat requirements; player must defeat boss to advance"
+    },
+    {
+      "world_state": "Upstream navigation challenge",
+      "visual_manifestation": "Dynamic obstacles (logs, whirlpools) positioned throughout waterway; increased environmental hazard density",
+      "behavioral_manifestation": "Player evasion-focused gameplay; combat reduced; obstacle avoidance primary mechanic"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Objective-driven level design",
+      "example": "Transition from racing to rescue to bomb defusal across 25 graduated difficulty levels communicates escalating mission complexity and world danger intensity"
+    },
+    {
+      "technique": "Visual hazard representation",
+      "example": "Logs, whirlpools, and rogue boats positioned in water environment directly indicate environmental hostility and ongoing threats requiring active response"
+    },
+    {
+      "technique": "Isometric perspective affordance",
+      "example": "3D isometric camera angle provides omniscient view of mission space, allowing player to perceive spatial relationships between threats (competitor boats, swimmers, obstacles) and communicate environmental topology"
+    },
+    {
+      "technique": "Weapon-equipped vessel design",
+      "example": "Player speedboat explicitly depicted with cannon armament; distinguishes player capability and faction identity from civilian/rescue roles"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player speedboat",
+      "state": "Racing mode",
+      "behavior": "Pursues optimal racing line; engages competitors with cannon fire; maintains speed awareness of timer"
+    },
+    {
+      "entity": "Player speedboat",
+      "state": "Rescue mode",
+      "behavior": "Intercepts rogue boats; prevents swimmer abduction; performs manual rescue of captured swimmers"
+    },
+    {
+      "entity": "Competitor boats",
+      "state": "Racing active",
+      "behavior": "Navigate toward finish; avoid obstacles; attempt to outpace player; can be disabled via cannon fire"
+    },
+    {
+      "entity": "Rogue boats",
+      "state": "Hunting",
+      "behavior": "Target swimmers; drag victims toward lake perimeter; must be destroyed or intercepted before swimmer capture completes"
+    },
+    {
+      "entity": "Swimmers",
+      "state": "Threatened",
+      "behavior": "Stationary or dragged by rogue boats; require active rescue intervention; halfway capture point triggers mandatory manual return action"
+    },
+    {
+      "entity": "Boss encounter",
+      "state": "Level conclusion",
+      "behavior": "Presents escalated combat challenge; behavior pattern suggests distinct AI/attack patterns differentiated from standard enemy boats"
+    }
+  ],
+  "notes": "Cobra Triangle employs graduated difficulty progression across 25 levels to communicate evolving world threats. Danger signals are predominantly behavioral (enemy actions) and temporal (timer pressure) rather than static visual indicators. The isometric perspective enables simultaneous threat visualization—allowing players to perceive spatial relationships between multiple danger sources (competitor boats, obstacles, swimmers under threat). World-state transitions between racing/rescue/defusal are communicated through objective-specific spawning and goal positioning rather than dramatic visual environmental changes. The game lacks faction-based political complexity; conflict is mechanically-driven (competition, rescue, destruction) rather than narrative-driven. Power-ups provide clear positive feedback signals that enhance player capability and safety perception.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:21:35.258Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3061,
+    "output_tokens": 1905,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,473 @@
+T2: The Arcade Game (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+T2: The Arcade Game (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+T2: The Arcade Game
+
+Also known as : Terminator 2: The Arcade Game  Developer :
+
+Probe Software
+
+&#91;1&#93;
+
+&#91;2&#93;
+
+Publishers :
+
+LJN
+
+(EU/US),
+
+Acclaim Japan
+
+&#91;1&#93;
+
+(JP)  Platform :
+
+SNES
+
+Released in JP : February 25,&#160;1994  &#91;1&#93;
+
+Released in US : February 1994  &#91;3&#93;
+
+Released in EU : January 1994  &#91;2&#93;
+
+This game has  uncompiled source code .
+
+T2: The Arcade Game
+
+on the SNES is a pretty good port of the arcade game, complete with mouse and Super Scope support.
+
+Source Code Fragments
+
+A few bits of source, as well as a symbols list, can be seen in the US ROM at the hex addresses noted below.
+
+0x2FDA0  :
+
+008D8000  HUD_TEXT
+ 0081A8C5  HUD_TRIGGER
+ 0083FB73  HUMAN_CASUALTY_STRING
+ 0082FE94  INITIALISE_GHK
+ 00808F0C  INIT_ASYNC_TEXT
+ 0083ED25  INIT_BONUS_VARS
+ 0082855C  INIT_COPPER
+ 008080A9  INIT_GAME_LEVEL
+ 0081E232  INIT_L4_WEAPONS
+ 0083EB08  INIT_LEVEL_VARS
+ 00818295  INIT_MACHINE
+ 0083EABB  INIT_MASTER_PLAYER_VARS
+ 008194E6  INIT_OAM_BUFFER
+ 0083EC84  INIT_P1_L6_VARS
+ 0083EC46  INIT_P1_VARS
+ 0083ECF1  INIT_P2_L6_VARS
+ 0083ECB8  INIT_P2_VARS
+ 008284DE  INIT_SCREEN
+ 00828637  INIT_SCROLL_HANDLER
+ 0082874C  INIT_SCROLL_STRUCTURES
+ 008286D1  INIT_SKY_COPPER
+ 0080F2DB  INSERT_NEW_DE
+
+0x37E86  :
+
+ata pointer
+;	SETBANK	Collision_Maps>>16
+
+;────────────────────────────────────────────────────────────────────────────
+
+Score2
+	jsr	Extra_Score2
+	brl	NMI_Return
+
+PRC	Extra_Score2
+	php
+	phb
+
+SHORT_A
+	lda	<Player2_Enable
+	beq	@Not_Now
+	jsl	Print_Score2
+@Not_Now
+	plb
+	plp
+	rts
+
+;───────────────────────────────────────────────────────────────────────────
+
+0x77DD9  :
+
+ef	Target_Sprites
+	xref	Test_Aim_Map
+
+xref	Credits_Charset
+	xref	Credits_Palette
+
+xref	Logo_Charset
+	xref	Logo_Map
+	xref	Logo_Palette
+
+xref	JohnFace_Charset
+	xref	JohnFace_Palette
+	xref	JohnFace_Red_Palette
+	xref	JohnFace_Map
+
+xref	Lv0_Top_Map,Lv0_Top_Map_Size
+	xref	Lv0_Top_Blk,Lv0_Top_Blk_Size
+	xref	Lv0_Bot_Map,Lv0_Bot_Map_Size
+	xref	Lv0_Bot_Blk,Lv0_Bot_Blk_Size
+
+xref	Hud_Text
+	xref	Cls_Hud_Text
+
+xref	HudL1_Charset
+	xref	HudL1_Map
+	xref	HudL2_Charset
+	xref	HudL2_Map
+	xref	HudL3_Charset
+	xref	HudL3_Map
+	xref
+
+0x7FF84  :
+
+plp
+	rts
+
+;────────────────────────────────────────────────────────────────────────────
+
+Do_Computer_Death
+	php
+	phb
+
+0x8FD0C  :
+
+TRIG	1,		Door_Completion
+	TRIG	1,		Time_Waste
+
+GOTO	L4_Loop30
+
+* It takes 50 seconds to reach the next stop point
+
+TRIG	Frame_Rate*1,	Drop_Weapon1
+	TRIG	Frame_Rate*2,	Large_T800_LWalk
+	TRIG	Frame_Rate*1,	Large_T800_RWalk
+	TRIG	Frame_Rate*1,	L4_Medium_Endo_Rwalk
+	TRIG	Frame_Rate*1,	L4_Medium_Endo_LWalk
+	TRIG	Frame_Rate*2,	Large_T800_LWalk
+	TRIG	Frame_Rate*1,	Large_T800_RWalk
+	TRIG	Frame_Rate*1,	L4_Medium_Endo_Rwalk
+	TRIG	Frame_Rate*1,	Drop_Weapon1
+	TRIG	Frame_Rate*1,	L4_Medium_Endo_LWalk
+	TRIG	Frame_Rate*2,	Large_T800_LWalk
+	TRIG	Frame_Rate*1,	Large_T800_RWalk
+	TRIG	Frame_Rate*2,	L4_Medium_Endo_Rwalk
+	TRIG	Frame_Rate*1,	L4_Medium_Endo_LWalk
+	TRIG	Frame_Rate*1,	Large_T800_LWalk
+	TRIG	Frame_Rate*1,	Drop_Weapon1
+	TRIG	Frame_R
+
+0x97F4B  :
+
+creen_Sprites
+
+incbin	..\data\StartSpr._s4
+
+PRC	JohnFace_Charset
+
+incbin	..\data\johnface._s8
+ PRC	JohnFace_Palette
+
+incbin	..\data\johnface._pl
+ PRC	JohnFace_Red_Pal
+
+References
+
+↑
+
+1.0
+
+1.1
+
+1.2
+
+GDR スーパーファミコン ソフト一覧 1994年 - SUPER FAMICOM Software List 1994
+
+↑
+
+2.0
+
+2.1
+
+SNES Review: T2: The Arcade Game  -  Total! , Issue 25, January 1994
+
+↑
+
+SNES Games (archived)
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Terminator
+
+series
+
+NES
+
+The Terminator
+
+SNES
+
+The Terminator
+
+Genesis
+
+The Terminator
+
+Game Gear
+
+The Terminator
+
+Sega CD
+
+The Terminator
+
+DOS
+
+The Terminator: Future Shock
+
+Terminator 2: Judgement Day
+
+Arcade
+
+Terminator 2: Judgment Day
+
+Game Gear
+
+T2: The Arcade Game
+
+NES
+
+Terminator 2: Judgment Day &#160;( Prototype )
+
+SNES
+
+T2: The Arcade Game &#160;&#8226;
+
+Terminator 2: Judgment Day
+
+Genesis
+
+T2: The Arcade Game &#160;&#8226;
+
+Terminator 2: Judgment Day
+
+Terminator 3: Rise of the Machines
+
+Game Boy Advance
+
+Terminator 3: Rise of the Machines
+
+PlayStation 2
+
+Terminator 3: Rise of the Machines
+
+RoboCop vs. The Terminator
+
+SNES
+
+RoboCop Versus The Terminator
+
+Game Boy
+
+RoboCop vs. The Terminator
+
+NES
+
+RoboCop Versus The Terminator
+
+Genesis
+
+RoboCop Versus The Terminator
+
+Game Gear, Sega Master System
+
+RoboCop Versus The Terminator
+
+Dark Fate
+
+Windows
+
+Terminator: Dark Fate - Defiance
+
+Salvation
+
+Windows
+
+Terminator Salvation
+
+Related Games
+
+NES
+
+Journey to Silius
+
+Retrieved from " https://tcrf.net/index.php?title=T2:_The_Arcade_Game_(SNES)&oldid=1890584 "
+
+Categories :
+
+Games developed by Probe Software
+
+Games published by LJN
+
+Games published by Acclaim Japan
+
+SNES games
+
+Games released in 1994
+
+Games released in January
+
+Games with uncompiled source code
+
+Terminator series
+
+Hidden category:
+
+Pages missing publisher references
+
+Cleanup
+
+Games  >  Games by content  >  Games with uncompiled source code
+
+Games  >  Games by developer  >  Games developed by Throwback Entertainment  >  Games developed by Acclaim Entertainment  >  Games developed by Acclaim Studios Cheltenham  >  Games developed by Acclaim Studios London  >  Games developed by Probe Entertainment  >  Games developed by Probe Software
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Throwback Entertainment  >  Games published by Acclaim Entertainment  >  Games published by Acclaim Japan
+
+Games  >  Games by publisher  >  Games published by Throwback Entertainment  >  Games published by Acclaim Entertainment  >  Games published by LJN
+
+Games  >  Games by release date  >  Games released in 1994
+
+Games  >  Games by release date  >  Games released in January
+
+Games  >  Games by series  >  Terminator series
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 31 July 2025, at 02:18.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

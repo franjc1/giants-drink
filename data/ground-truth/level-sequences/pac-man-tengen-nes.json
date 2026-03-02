@@ -1,0 +1,113 @@
+{
+  "game_id": "pac-man-tengen-nes",
+  "game_name": "Pac-Man (Tengen)",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Pac-Man character",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns basic movement and maze navigation in enclosed safe space before ghosts become threatening"
+    },
+    {
+      "element": "Dots (pellets)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Primary objective introduced immediately; player learns collection mechanic in low-threat environment"
+    },
+    {
+      "element": "Four colored ghosts (Blinky, Pinky, Inky, Clyde)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Ghosts introduced from start with distinct AI personalities; player learns evasion and ghost behavior patterns across levels"
+    },
+    {
+      "element": "Power Pellets (energizers)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Located at four corners of maze; player learns strategic collection and ghost vulnerability mechanics"
+    },
+    {
+      "element": "Bonus fruit items",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Appear after eating certain dot count; teaches secondary scoring objective and timing awareness"
+    },
+    {
+      "element": "Warp tunnels",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Located on maze sides; player discovers tunnel mechanics and ghost slowdown effect in tunnels"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Eating power pellet causes ghosts to turn blue and reverse direction",
+      "Eating a blue ghost grants bonus points and removes immediate threat temporarily",
+      "Using warp tunnels to escape pursuit (ghosts move slower in tunnels)",
+      "Reaching level completion (all dots eaten) triggers inter-level cutscene"
+    ],
+    "typical_tension_triggers": [
+      "Ghost proximity increases threat level during dot collection",
+      "Power pellet effect duration decreases with each level, reducing relief window",
+      "Ghosts increase speed progressively across levels",
+      "Multiple ghosts coordinating pursuit (Pinky and Inky position ahead, Blinky gives direct chase)",
+      "Being cornered in maze dead-ends with approaching ghosts"
+    ],
+    "pacing_descriptor": "Rhythmic tension-relief cycles driven by power pellet availability; initial levels emphasize learning with manageable threat escalation; mid-to-late levels shift to sustained high tension as power pellet duration shrinks and ghost speed increases"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Bonus fruit items appear in center area after eating threshold number of dots; players may choose to collect for points or avoid if threatened",
+    "secret_convention": "Warp tunnels on maze sides provide escape routes; ghosts move slower in tunnels creating strategic safe passage opportunities",
+    "dead_end_frequency": "frequent",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Introductory threat level with slower ghosts and longer power pellet duration; player learns all core mechanics (movement, collection, evasion, power pellet usage) with relatively forgiving chase patterns",
+    "mid_game": "Ghost speed increases; power pellet duration shortens noticeably; bonus items introduce secondary objective; players must balance risk-reward of collection vs. evasion",
+    "late_game": "Ghosts move significantly faster; power pellet effect duration becomes very brief; energizers eventually disappear entirely; sustained high-threat environment requiring expert navigation and ghost AI prediction",
+    "notable_spikes": [
+      "Power pellet duration decrease creates difficulty jumps at regular progression intervals",
+      "Transition to levels without power pellet effect represents major difficulty spike",
+      "Level 256 (kill screen) features integer overflow making level uncompletable"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard Dot Collection Loop",
+      "description": "Player navigates enclosed maze eating dots while avoiding four ghosts with distinct AI behaviors; power pellets provide temporary vulnerability window for ghost consumption; completion triggers level advancement and cutscene",
+      "example_level": "Level 1 through Level 255"
+    },
+    {
+      "pattern_name": "Inter-Level Cutscene Break",
+      "description": "Between level completions, short humorous cutscenes featuring Pac-Man and Blinky provide pacing relief and narrative flavor while allowing player brief rest before difficulty increase",
+      "example_level": "All level transitions"
+    },
+    {
+      "pattern_name": "Progressive Difficulty Escalation",
+      "description": "Systematic increase in ghost speed and decrease in power pellet duration across consecutive levels; creates graduated challenge curve rather than dramatic spikes (except at kill screen)",
+      "example_level": "Levels 1-255 continuous progression"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:52:22.394Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3129,
+    "output_tokens": 1546,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "game_id": "darkwing-duck-nes",
+  "game_name": "Darkwing Duck",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite-based adversaries from Fearsome Five and hired criminals",
+      "meaning": "Active threats in stage areas; defeat required to progress"
+    },
+    {
+      "signal": "Projectile fire",
+      "visual_form": "Visual attack patterns from enemies and bosses",
+      "meaning": "Immediate danger requiring avoidance or cape deflection"
+    },
+    {
+      "signal": "Boss stage transition",
+      "visual_form": "Entry to stage finale areas housing criminal bosses",
+      "meaning": "Escalated threat level; significant combat encounter ahead"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Heart icon in top-left HUD decreasing",
+      "meaning": "Player vulnerability state; loss of reserve capacity"
+    },
+    {
+      "signal": "F.O.W.L. Fortress presence",
+      "visual_form": "Final stage environment following criminal stage completion",
+      "meaning": "Ultimate danger; Steelbeak confrontation imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ammunition pickups",
+      "visual_form": "Collectible gas canisters (Thunder, Heavy, Arrow variants)",
+      "meaning": "Resource replenishment; enablement of special weapon functionality"
+    },
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Heart collectibles restoring reserve capacity",
+      "meaning": "Damage mitigation; increased survival capacity"
+    },
+    {
+      "signal": "Stage completion",
+      "visual_form": "Transition screen after criminal boss defeat",
+      "meaning": "Temporary safety; progression to next challenge tier"
+    },
+    {
+      "signal": "Gas Gun availability",
+      "visual_form": "Standard weapon always accessible via Select button",
+      "meaning": "Constant defensive capability; no ammunition dependency"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "S.H.U.S.H.",
+      "color_identity": null,
+      "symbol_or_sigil": "Organization acronym in plot description",
+      "enemy_visual_variants": null,
+      "environmental_markers": "St. Canard city setting as jurisdiction"
+    },
+    {
+      "faction": "F.O.W.L.",
+      "color_identity": null,
+      "symbol_or_sigil": "Criminal organization name; Floating Fortress as base",
+      "enemy_visual_variants": "Steelbeak as primary operative; Fearsome Five as hired agents",
+      "environmental_markers": "F.O.W.L.'s Floating Fortress as final stage environment"
+    },
+    {
+      "faction": "Fearsome Five / Hired Criminals",
+      "color_identity": null,
+      "symbol_or_sigil": "Individual criminal identities: The Liquidator, Megavolt, Dr. Reginald Bushroot, Quackerjack, Professor Moliarty, Wolfduck",
+      "enemy_visual_variants": "Each criminal appears as distinct boss sprite with unique attack patterns",
+      "environmental_markers": "Six distinct stage environments corresponding to criminal territories"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Crime wave active in St. Canard",
+      "visual_manifestation": "Enemy presence throughout accessible stages; criminal bosses occupying stage environments",
+      "behavioral_manifestation": "Hostile NPC behavior; boss combat initiation upon stage completion"
+    },
+    {
+      "world_state": "Darkwing responds to threat",
+      "visual_manifestation": "Player character equipped with Gas Gun and cape",
+      "behavioral_manifestation": "Player can engage enemies, collect power-ups, and navigate platforming challenges"
+    },
+    {
+      "world_state": "Criminals defeated progressively",
+      "visual_manifestation": "Stage selection screen shows completed (cleared) and available stages",
+      "behavioral_manifestation": "New stage tier becomes accessible after three criminal defeats; progression toward Steelbeak"
+    },
+    {
+      "world_state": "F.O.W.L. command structure vulnerable",
+      "visual_manifestation": "F.O.W.L.'s Floating Fortress becomes accessible final stage after all six criminals defeated",
+      "behavioral_manifestation": "Steelbeak confrontation becomes possible; final boss battle mechanics activate"
+    },
+    {
+      "world_state": "Ammunition scarcity",
+      "visual_manifestation": "Special gas canister collectibles scattered throughout stages; limited capacity indicator",
+      "behavioral_manifestation": "Player must choose which special gas type to carry; Switch via Select button required"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage variety reflecting criminal nature",
+      "example": "Six distinct stage environments correspond to hired criminals' characteristics (implied through stage progression structure); each represents different area of St. Canard under criminal control"
+    },
+    {
+      "technique": "Fortress as final stronghold visual",
+      "example": "F.O.W.L.'s Floating Fortress final stage represents command center; spatial design indicates escalation from street-level crime to organized crime infrastructure"
+    },
+    {
+      "technique": "Weapon loadout as narrative readiness",
+      "example": "Darkwing begins with standard Gas Gun only; access to Thunder, Heavy, and Arrow gas variants acquired through stage progression indicates increasing capability to counter organized threat"
+    },
+    {
+      "technique": "Sewer tileset with unused placeholder",
+      "example": "Sewer environment in stage design indicates urban underworld locations; unused smiley-face placeholder suggests environmental detail development for criminal hideout areas"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Darkwing Duck (player character)",
+      "state": "Armed and mobile",
+      "behavior": "Can jump, move laterally, fire Gas Gun, deflect projectiles with cape, switch between weapon types"
+    },
+    {
+      "entity": "Enemy sprites",
+      "state": "Active hostility",
+      "behavior": "Patrol stage areas and attack with projectiles; require defeat to clear stage"
+    },
+    {
+      "entity": "Criminal boss entities",
+      "state": "Confrontation phase",
+      "behavior": "Unique attack patterns per criminal; defeat triggers stage completion and progression to next tier"
+    },
+    {
+      "entity": "Steelbeak (final boss)",
+      "state": "Ultimate threat",
+      "behavior": "Appears only in F.O.W.L.'s Floating Fortress after all six criminals defeated; represents culmination of threat"
+    },
+    {
+      "entity": "Collectible power-ups",
+      "state": "Environmental resources",
+      "behavior": "Remain stationary until acquired; restore health or provide ammunition for special weapons"
+    }
+  ],
+  "notes": "Darkwing Duck is based on Mega Man 5 architecture, employing stage-select gameplay where player chooses from available criminal stages. The game communicates world-state primarily through stage progression rather than dynamic environmental changes. Faction identity is conveyed through character opposition (S.H.U.S.H. implied as Darkwing's employer vs. F.O.W.L./Fearsome Five as antagonists). Danger and safety signals are mechanical/UI-based rather than subtle environmental storytelling. The game uses binary safety states: in-stage (danger) and between-stage (neutral). No subtle faction visual markers or color coding documented in available sources.",
+  "sources_used": [
+    "wikipedia - Darkwing Duck (Capcom video game)",
+    "tcrf - Darkwing Duck (NES) - The Cutting Room Floor"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:03:45.471Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7891,
+    "output_tokens": 1960,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

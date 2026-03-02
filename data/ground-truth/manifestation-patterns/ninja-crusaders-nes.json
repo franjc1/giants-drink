@@ -1,0 +1,99 @@
+{
+  "game_id": "ninja-crusaders-nes",
+  "game_name": "Ninja Crusaders",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "one-hit death mechanic",
+      "visual_form": "no visible life bar or health indicator; player character sprite removal on contact",
+      "meaning": "all enemies and environmental hazards present lethal threat; any collision is terminal danger"
+    },
+    {
+      "signal": "enemy presence in level progression",
+      "visual_form": "sprite-based enemies appearing in scrolling platformer space",
+      "meaning": "forward progress requires active threat avoidance and evasion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "clear platforming space",
+      "visual_form": "gaps between enemies; platform-to-platform progression paths without active threat sprites",
+      "meaning": "safe traversal windows exist between danger zones"
+    },
+    {
+      "signal": "level geometry sanctuary",
+      "visual_form": "background environment and platform structures",
+      "meaning": "level terrain itself does not directly kill player (danger is externalized to enemies)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player ninja force",
+      "color_identity": null,
+      "symbol_or_sigil": "ninja/shinobi visual archetype in protagonist sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": null
+    },
+    {
+      "faction": "opposing forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "varied enemy sprite designs indicating different enemy types and hierarchy",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active combat/threat zone",
+      "visual_manifestation": "enemies present in current screen/level segment",
+      "behavioral_manifestation": "player must avoid collision; forward progression blocked until enemies are cleared or bypassed"
+    },
+    {
+      "world_state": "level progression stage",
+      "visual_manifestation": "platformer screen layout with progressive enemy placement across horizontal space",
+      "behavioral_manifestation": "side-scrolling movement required; cannot return to previous sections; unidirectional forced progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "level design difficulty curve",
+      "example": "enemy density and placement increases as player progresses through side-scrolling stages, communicating escalating opposition"
+    },
+    {
+      "technique": "sprite-based enemy variety",
+      "example": "different enemy visual designs across levels imply different faction units or threat types without explicit narrative exposition"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player character",
+      "state": "alive",
+      "behavior": "controllable traversal across platforms; evasion/jumping responses to threat proximity"
+    },
+    {
+      "entity": "player character",
+      "state": "dead",
+      "behavior": "sprite removal; instant level restart or continue state"
+    },
+    {
+      "entity": "enemy sprites",
+      "state": "patrolling",
+      "behavior": "predictable movement patterns across platforms; visual positioning communicates threat zones"
+    }
+  ],
+  "notes": "Ninja Crusaders uses minimal narrative exposition; visual communication relies entirely on sprite design, platformer level layout, and the one-hit-death mechanic to convey danger/safety states. Faction identity is suggested through character archetype (ninja protagonist) but is not explicitly visualized through environmental markers or symbolic systems. The game employs pure mechanical difficulty as world-state communication rather than explicit visual faction indicators. Source material is limited to technical metadata and does not contain detailed gameplay documentation.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:22:07.484Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1461,
+    "output_tokens": 1093,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

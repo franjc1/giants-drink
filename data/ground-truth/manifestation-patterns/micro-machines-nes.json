@@ -1,0 +1,156 @@
+{
+  "game_id": "micro-machines-nes",
+  "game_name": "Micro Machines",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Track boundary exceeded",
+      "visual_form": "Player vehicle sent back to track after leaving defined route",
+      "meaning": "Player has strayed from safe racing path and must reposition"
+    },
+    {
+      "signal": "Obstacle collision",
+      "visual_form": "Cereal boxes on breakfast tables, pencil sharpeners on desks, environmental hazards",
+      "meaning": "Physical dangers embedded in track environment that impede progress"
+    },
+    {
+      "signal": "Opponent proximity in head-to-head",
+      "visual_form": "Opponent vehicle visible on-screen in same view",
+      "meaning": "Active threat from competing racer; losing positional advantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Defined track path",
+      "visual_form": "Clear racing route marked through household environments",
+      "meaning": "Established safe corridor for vehicle movement"
+    },
+    {
+      "signal": "Qualification achievement",
+      "visual_form": "First or second place finish in race round",
+      "meaning": "Player has survived gauntlet and earned progression to next challenge"
+    },
+    {
+      "signal": "Extra life earned",
+      "visual_form": "Time trial completion every three races grants additional chance",
+      "meaning": "Safety net extended; player gains buffer against elimination"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "One of two player colors (color-coded in head-to-head mode)",
+      "symbol_or_sigil": "Light indicator on screen matching player color",
+      "enemy_visual_variants": "Contrasting color vehicle for Player 2",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "Opposite color from Player 1 in competitive modes",
+      "symbol_or_sigil": "Light indicator on screen matching player color",
+      "enemy_visual_variants": "Contrasting color vehicle for Player 1",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Computer-controlled opponents",
+      "color_identity": null,
+      "symbol_or_sigil": "AI-controlled vehicles in Challenge mode (three opponents per race)",
+      "enemy_visual_variants": "Distinct vehicle sprites from player-controlled cars",
+      "environmental_markers": "Guided by invisible arrow system on track"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player Challenge mode active",
+      "visual_manifestation": "Three computer opponents visible on single screen racing simultaneously",
+      "behavioral_manifestation": "AI vehicles follow predetermined invisible arrow paths; player must finish 1st or 2nd to progress"
+    },
+    {
+      "world_state": "Head-to-head competitive mode active",
+      "visual_manifestation": "Two vehicles on shared single screen; light indicators (eight total) at screen edge show progress",
+      "behavioral_manifestation": "Player gaining screen distance converts lights to their color; leader becomes invisible when distance sufficient"
+    },
+    {
+      "world_state": "Multiplayer two-player mode active",
+      "visual_manifestation": "Both players observe same single-screen view; color-coded vehicles with potential handicap modifier on one",
+      "behavioral_manifestation": "Direct head-to-head racing with symmetrical ruleset; handicap applied to balance skill differences"
+    },
+    {
+      "world_state": "Time trial race (every three rounds)",
+      "visual_manifestation": "Solo racing against clock; timer displayed",
+      "behavioral_manifestation": "Completion grants extra life; extends player survival in Challenge mode"
+    },
+    {
+      "world_state": "Game over condition approaching",
+      "visual_manifestation": "Three chances (lives) system depleted",
+      "behavioral_manifestation": "Player can no longer progress through Challenge rounds; final failure triggers game end state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Household environment scaling",
+      "example": "Racing on breakfast tables with cereal box obstacles, pool tables, work desks with pencil sharpeners, treehouses — environments communicate the 'micro' scale of toy vehicles through recognizable oversized household props"
+    },
+    {
+      "technique": "Vehicle type matching environment",
+      "example": "Formula One cars, powerboats, helicopters, and tanks as selectable vehicles convey different thematic racing scenarios within same miniature world contexts"
+    },
+    {
+      "technique": "Obstacle placement as world design",
+      "example": "Cereal boxes and pencil sharpeners are not generic barriers but specific environmental hazards that anchor races in authentic domestic settings"
+    },
+    {
+      "technique": "Track-edge boundary system",
+      "example": "Forcing players back to predefined path when leaving route communicates the bounded 'tabletop' nature of the racing arena — tracks are finite household surface spaces"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle (controlled)",
+      "state": "On track",
+      "behavior": "Responsive to player input; maintains position in single shared view"
+    },
+    {
+      "entity": "Player vehicle (controlled)",
+      "state": "Off track (boundary exceeded)",
+      "behavior": "Automatically repositioned back to track; brief penalty applied"
+    },
+    {
+      "entity": "Computer-controlled opponent",
+      "state": "Active race",
+      "behavior": "Follows invisible arrow navigation system; maintains consistent difficulty through AI pathfinding"
+    },
+    {
+      "entity": "Computer-controlled opponent",
+      "state": "Defeated",
+      "behavior": "Eliminated from current race; replaced in next race round if player qualifies"
+    },
+    {
+      "entity": "Handicapped player (two-player mode)",
+      "state": "Disadvantaged setup",
+      "behavior": "Starting position or vehicle stat modifier applied to balance against stronger opponent"
+    },
+    {
+      "entity": "Leading player (head-to-head)",
+      "state": "Screen distance achieved",
+      "behavior": "Becomes invisible when sufficient lead gained; opponent sees only empty track ahead"
+    }
+  ],
+  "notes": "Micro Machines NES employs a minimalist visual communication system appropriate to 8-bit hardware. World-state is conveyed primarily through: (1) light indicator progression in head-to-head mode, (2) screen position relativity between players, (3) environmental theming (household environments communicate scale narrative), (4) single-screen constraint that forces proximity-based competition mechanics. The game lacks faction complexity or political state — competition is purely mechanical and positional. Danger and safety signals are embedded in track design (boundaries, obstacles) and game-rule progression (qualification/elimination). The 'world state' is essentially the game mode active and round progression; there is no persistent world narrative or environmental storytelling beyond the toy-scale household settings.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:54:10.693Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4498,
+    "output_tokens": 1777,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

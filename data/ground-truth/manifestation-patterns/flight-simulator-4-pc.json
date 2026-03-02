@@ -1,0 +1,113 @@
+{
+  "game_id": "flight-simulator-4-pc",
+  "game_name": "Microsoft Flight Simulator 4.0",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "enemy_aircraft_presence",
+      "visual_form": "opposing aircraft rendered in flight view during Europe 1917 mode",
+      "meaning": "active combat threat when war is declared"
+    },
+    {
+      "signal": "terrain_collision",
+      "visual_form": "mountains on two sides of grid in Europe 1917 mode",
+      "meaning": "environmental hazard requiring navigation skill to avoid"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "airport_location",
+      "visual_form": "Meigs Field in Chicago rendered as starting point with city skyline and Lake Michigan visible",
+      "meaning": "safe landing zone and reference landmark for navigation"
+    },
+    {
+      "signal": "geographical_reference",
+      "visual_form": "city skylines (Chicago, Los Angeles, New York City, Seattle) visible from flight view",
+      "meaning": "safe navigation landmarks and world orientation cues"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_allied_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Sopwith Camel aircraft in Europe 1917 mode",
+      "enemy_visual_variants": "opposing aircraft (unspecified type)",
+      "environmental_markers": "grid-divided terrain with mountains in Europe 1917 combat zone"
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "enemy aircraft rendered distinctly in flight view during combat",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "peace_flight_mode",
+      "visual_manifestation": "clear out-the-window display showing US regional terrain (Chicago, Los Angeles, New York, Seattle) with city skylines, lakes, and landscape features; variable weather and time of day conditions",
+      "behavioral_manifestation": "player can freely navigate and explore without combat threat"
+    },
+    {
+      "world_state": "europe_1917_combat_mode",
+      "visual_manifestation": "grid-divided terrain area with mountains on two sides; enemy aircraft visible in flight space; Cessna replaced with Sopwith Camel aircraft",
+      "behavioral_manifestation": "player can declare war and engage in combat with enemy aircraft; navigation constrained by terrain hazards"
+    },
+    {
+      "world_state": "weather_variation",
+      "visual_manifestation": "dynamic weather conditions affecting visibility and rendering of terrain and sky",
+      "behavioral_manifestation": "flight difficulty and visibility conditions change based on weather system"
+    },
+    {
+      "world_state": "time_of_day_variation",
+      "visual_manifestation": "lighting conditions and sky color change to reflect different times of day",
+      "behavioral_manifestation": "visual navigation cues shift with daylight/darkness conditions"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "geographical_authenticity",
+      "example": "real US cities (Chicago, Los Angeles, New York City, Seattle) rendered with recognizable skylines and landmarks; Meigs Field as default airport grounds player in authentic aviation history"
+    },
+    {
+      "technique": "historical_setting_establishment",
+      "example": "Europe 1917 mode communicates historical context through aircraft type (Sopwith Camel), grid terrain layout, and mountain barriers suggesting WWI flight combat environment"
+    },
+    {
+      "technique": "landscape_as_navigation_aid",
+      "example": "Lake Michigan visibility from Chicago starting point; city skylines as visual references for orientation and position verification"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_aircraft_cessna_182",
+      "state": "normal_flight",
+      "behavior": "responds to control inputs; rendered in first-person out-the-window view"
+    },
+    {
+      "entity": "player_aircraft_sopwith_camel",
+      "state": "combat_ready",
+      "behavior": "can fire at enemy aircraft when war is declared in Europe 1917 mode"
+    },
+    {
+      "entity": "enemy_aircraft",
+      "state": "active_combat",
+      "behavior": "visible in flight space after war declaration; can be engaged with player fire"
+    }
+  ],
+  "notes": "Microsoft Flight Simulator (1982/4.0) uses minimal visual communication due to early PC hardware constraints (monochrome/limited color capability). World-state is communicated primarily through mode selection (peaceful flight vs. Europe 1917 combat) rather than dynamic visual transitions. The simulation prioritizes authenticity of aircraft physics and real-world geography over complex faction or danger visualization systems. Safety and danger signals are primarily navigational (landmarks vs. terrain hazards) rather than narrative or environmental storytelling. The game establishes world-state through terrain layout (US cities vs. WWI grid-divided area) and available aircraft type rather than dynamic visual manifestation.",
+  "sources_used": [
+    "wikipedia: Microsoft Flight Simulator (1982 video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:09:19.052Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3027,
+    "output_tokens": 1320,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

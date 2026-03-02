@@ -1,0 +1,160 @@
+{
+  "game_id": "monopoly-snes",
+  "game_name": "Monopoly",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Bankruptcy threat",
+      "visual_form": "Player token graying out or depleted cash display",
+      "meaning": "Player is approaching financial elimination from the game"
+    },
+    {
+      "signal": "Landing on opponent property",
+      "visual_form": "Rent payment animation or currency transfer visual",
+      "meaning": "Active financial loss state; immediate resource drain"
+    },
+    {
+      "signal": "Jail status",
+      "visual_form": "Token repositioning to jail space with visual indicator",
+      "meaning": "Temporary movement restriction; potential missed opportunities"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Property ownership",
+      "visual_form": "Color-coded property indicator on board tiles",
+      "meaning": "Secured asset generating income; protected territory"
+    },
+    {
+      "signal": "Liquid cash display",
+      "visual_form": "Currency counter visible on player HUD",
+      "meaning": "Financial security and flexibility to make purchases or pay debts"
+    },
+    {
+      "signal": "Free Parking",
+      "visual_form": "Dedicated board space with safe landing designation",
+      "meaning": "Risk-free turn with no financial consequences"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "Typically red or primary controller color",
+      "symbol_or_sigil": "Unique game piece token",
+      "enemy_visual_variants": "Visually distinct from other player tokens",
+      "environmental_markers": "Property color set assigned exclusively to player"
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "Typically yellow or secondary controller color",
+      "symbol_or_sigil": "Unique game piece token distinct from Player 1",
+      "enemy_visual_variants": "Clearly differentiated visual representation",
+      "environmental_markers": "Separate property color set"
+    },
+    {
+      "faction": "Computer Opponent",
+      "color_identity": "Tertiary or quaternary colors depending on player count",
+      "symbol_or_sigil": "AI-controlled token with distinct appearance",
+      "enemy_visual_variants": "May have visual indicator denoting computer control",
+      "environmental_markers": "AI-claimed properties marked with assigned color"
+    },
+    {
+      "faction": "The Bank",
+      "color_identity": null,
+      "symbol_or_sigil": "Non-playable entity managing currency and property deeds",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Central repository for unowned properties and cards"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (few properties owned)",
+      "visual_manifestation": "Board appears mostly uncolored; sparse property ownership indicators",
+      "behavioral_manifestation": "Players move freely; negotiation and acquisition phase active"
+    },
+    {
+      "world_state": "Mid game (properties consolidating)",
+      "visual_manifestation": "Board shows increasing property color clustering; multiple color sets visible",
+      "behavioral_manifestation": "Strategic property trading; calculated movement; income generation begins"
+    },
+    {
+      "world_state": "Late game (monopolies formed)",
+      "visual_manifestation": "Board dominated by complete color sets with house/hotel indicators; visual wealth disparity obvious",
+      "behavioral_manifestation": "High rent payments; reduced player flexibility; elimination phase begins"
+    },
+    {
+      "world_state": "Player elimination imminent",
+      "visual_manifestation": "Target player token visually diminished or grayed; cash display critically low; few properties remain",
+      "behavioral_manifestation": "Forced property sales; inability to pay rents; final turns before bankruptcy"
+    },
+    {
+      "world_state": "Winner emerging",
+      "visual_manifestation": "Dominant player shows colorful property monopolies with houses/hotels; largest cash pool displayed",
+      "behavioral_manifestation": "Control over board movement; collection of substantial rents; opponent elimination trigger"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Property color clustering",
+      "example": "Visual concentration of same-colored properties on board indicates player control and economic power concentration"
+    },
+    {
+      "technique": "House and hotel progression",
+      "example": "Visual building structures on properties communicate investment level and rent multiplication power"
+    },
+    {
+      "technique": "Currency display differential",
+      "example": "Visible disparity in player cash reserves tells economic inequality story without text"
+    },
+    {
+      "technique": "Token movement speed",
+      "example": "Animation pace may indicate player turn order or game phase progression"
+    },
+    {
+      "technique": "Card deck visibility",
+      "example": "Chance and Community Chest card visual indicators show upcoming decision points and fortune variables"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player token",
+      "state": "Moving around board",
+      "behavior": "Follows dice roll path; stops on landing space; triggers rent/acquisition logic"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Decision phase",
+      "behavior": "Pause animation; visible calculation indicator; property purchase or trade initiation"
+    },
+    {
+      "entity": "Property deed",
+      "state": "Unowned",
+      "behavior": "Neutral color; available for purchase; displayed in auction or purchase menu"
+    },
+    {
+      "entity": "Property deed",
+      "state": "Owned by player",
+      "behavior": "Displays owner color; generates income on landing; accepts house/hotel construction"
+    },
+    {
+      "entity": "Rent payment",
+      "state": "Triggered on landing",
+      "behavior": "Currency animation flows from landing player to owner; cash display updates visibly"
+    }
+  ],
+  "notes": "Monopoly SNES (1991) follows the standard board game paradigm digitized for console play. The game communicates world-state primarily through property color ownership, cash display differentials, and board position. Faction identity is represented through distinct player tokens and color-coded property sets. Danger is signaled through low cash reserves and high-rent properties; safety through liquidity and owned property income generation. The 1991 console version would have used simple 2D graphics and sprite-based tokens, with turn-based mechanics creating natural decision points. Computer AI opponents require visual indicators of their economic status and strategic choices. The paradigm classification as 'puzzle' appears inaccurate—this is a strategy/digital tabletop game—but reflects source data provided.",
+  "sources_used": [
+    "wikipedia - Monopoly video games (console and computer versions section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:45:32.747Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3094,
+    "output_tokens": 1709,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

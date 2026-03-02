@@ -1,0 +1,162 @@
+{
+  "game_id": "dragon-warrior-nes",
+  "game_name": "Dragon Warrior",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Random encounter initiation",
+      "visual_form": "Screen transition to battle backdrop; enemy sprite appears centered",
+      "meaning": "Player has entered hostile territory; combat imminent"
+    },
+    {
+      "signal": "Monster sprite appearance in overworld",
+      "visual_form": "Enemy character models visible on map; increased sprite density moving away from towns",
+      "meaning": "Danger level increases with distance from safe zones; visual gradient from safety to peril"
+    },
+    {
+      "signal": "Dungeon entry",
+      "visual_form": "Darker tileset; castle or cave architecture; limited visibility relative to overworld",
+      "meaning": "Heightened danger zone; stronger enemy encounters expected"
+    },
+    {
+      "signal": "HP depletion visual indicator",
+      "visual_form": "Hit Points counter in status window decreases; player character sprite may show damage state",
+      "meaning": "Immediate threat to survival; healing items or spell use required"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town boundary entry",
+      "visual_form": "Transition to populated tileset; NPC sprites present; shop and inn structures visible",
+      "meaning": "Combat-free zone; resource restoration and trading available"
+    },
+    {
+      "signal": "Inn location",
+      "visual_form": "Distinctive building architecture; labeled/recognizable as lodging structure",
+      "meaning": "Full HP/MP recovery available; safe resting point"
+    },
+    {
+      "signal": "Shop presence",
+      "visual_form": "Distinctive merchant structure; NPC vendors visible",
+      "meaning": "Equipment upgrades available; economic safety through preparation"
+    },
+    {
+      "signal": "Tantegel Castle (starting location)",
+      "visual_form": "Large castle structure; King's chamber; royal architecture",
+      "meaning": "Primary safe haven and quest origin; narrative and mechanical anchor"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kingdom of Alefgard (Player Ally)",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal crest; King Lorik's authority",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Tantegel Castle; towns with shops and inns; civilized architecture; populated NPCs"
+    },
+    {
+      "faction": "Dragonlord (Primary Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragon imagery; dark/evil association",
+      "enemy_visual_variants": "Dragonlord castle architecture (distinctive from player-aligned structures); minion enemy types",
+      "environmental_markers": "Dragonlord's castle; dungeon-style locales; isolated from civilian settlements"
+    },
+    {
+      "faction": "Monster/Beast forces (Dragonlord servants)",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied enemy sprites (Slime, Golem, Dragon, etc.)",
+      "enemy_visual_variants": "Progressive design complexity and visual threat level correlating with overworld proximity to final dungeon",
+      "environmental_markers": "Overworld wilderness; dungeons; caves; spaces between towns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (weak hero, low level)",
+      "visual_manifestation": "Hero sprite small relative to environment; basic starting equipment; limited map accessibility (enemies near castle are weak)",
+      "behavioral_manifestation": "Enemies near Tantegel Castle are low-threat (Slimes); player confined to nearby towns and immediate overworld"
+    },
+    {
+      "world_state": "Mid game (hero strengthening, equipment progression)",
+      "visual_manifestation": "Hero sprite remains constant size but appears more equipped (visual armor upgrades possible); expanded accessible map",
+      "behavioral_manifestation": "Monsters grow progressively stronger with distance; player can venture into new towns and dungeons; experience gain accelerates"
+    },
+    {
+      "world_state": "Late game (hero powerful, approaching endgame)",
+      "visual_manifestation": "Hero fully equipped with advanced gear; Dragonlord's castle becomes accessible (final dungeon opens)",
+      "behavioral_manifestation": "Maximum difficulty enemies in endgame dungeons; confrontation with Dragonlord becomes viable"
+    },
+    {
+      "world_state": "Princess captured / Balls of Light stolen",
+      "visual_manifestation": "Narrative state communicated through NPC dialogue and quest objectives rather than direct visual world change",
+      "behavioral_manifestation": "NPCs reference the crisis; quest locations marked by dungeon/castle architecture holding key items"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial progression as power ladder",
+      "example": "Distance from Tantegel Castle directly correlates to enemy difficulty; movement outward signals both narrative exploration and mechanical challenge scaling"
+    },
+    {
+      "technique": "Architectural distinction between safe and unsafe zones",
+      "example": "Towns feature orderly, civilian-scale buildings; dungeons use darker, fortress-like tilework; visual language immediately communicates zone type"
+    },
+    {
+      "technique": "NPC dialogue hints embedded in town exploration",
+      "example": "Townspeople provide narrative exposition and quest direction; required interaction creates environmental narrative dependency"
+    },
+    {
+      "technique": "Monster variety as regional flavor",
+      "example": "Different enemy types populate different zones; visual monster design telegraphs regional danger profile and player progression stage"
+    },
+    {
+      "technique": "Locked doors and keys as gating mechanisms",
+      "example": "Purchasable keys and locked dungeon passages create visual/mechanical progression gates that force resource gathering and planning"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Hero protagonist",
+      "state": "In town",
+      "behavior": "Free movement; interaction with NPCs and shops; no combat encounters"
+    },
+    {
+      "entity": "Hero protagonist",
+      "state": "In wilderness/dungeon",
+      "behavior": "Subject to random encounter system; combat initiation possible at any moment; movement hazardous beyond current level"
+    },
+    {
+      "entity": "Random encounter enemies",
+      "state": "Pre-battle",
+      "behavior": "Display sprite, initiate battle screen transition; no dialogue or negotiation option"
+    },
+    {
+      "entity": "NPCs in towns",
+      "state": "All",
+      "behavior": "Static positioning; text dialogue on interaction; provide quest information and worldbuilding; no hostility"
+    },
+    {
+      "entity": "Dragonlord",
+      "state": "Castle location",
+      "behavior": "Final boss encounter; appears only when hero reaches appropriate power level and castle location; initiates climactic battle"
+    }
+  ],
+  "notes": "Dragon Warrior uses a classic distance-from-safety model for danger communication. The game's world-state is primarily communicated through mechanical progression (enemy difficulty scaling, accessible map regions) rather than dynamic visual changes. The binary town/wilderness split creates clear safe/danger zones. Political situation (Dragonlord's reign, princess capture) is communicated narratively through NPC dialogue rather than visual world manifestation. The game's sprite-based NES presentation limits dynamic world-state visuals, relying instead on tileset transitions and enemy distribution patterns.",
+  "sources_used": [
+    "wikipedia",
+    "speedrun"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:49:56.629Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6800,
+    "output_tokens": 1893,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "game_id": "road-rash-genesis",
+  "game_name": "Road Rash",
+  "platform": "genesis",
+  "paradigm": "action",
+  "level_count": 5,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic motorcycle racing",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns throttle, braking, steering on straightforward tracks"
+    },
+    {
+      "element": "Opponent combat (punching)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Default attack against nearby opponents; teaches stamina management"
+    },
+    {
+      "element": "Directional attacks (backhand, kick)",
+      "first_appears": "Level 1-2",
+      "introduction_context": "moderate",
+      "mastery_context": "Holding directional button during attack; tactical positioning"
+    },
+    {
+      "element": "Weapon pickup (clubs)",
+      "first_appears": "Level 2-3",
+      "introduction_context": "moderate",
+      "mastery_context": "Attack opponents wielding clubs to acquire them as temporary weapons"
+    },
+    {
+      "element": "Environmental obstacles",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Cows, deer, cars, trees cause ejection; tests steering precision"
+    },
+    {
+      "element": "Motor officer encounters",
+      "first_appears": "Level 2-3",
+      "introduction_context": "dangerous",
+      "mastery_context": "Police apprehension after crashes; financial penalty; incentivizes clean racing"
+    },
+    {
+      "element": "Bike damage meter",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Cumulative crash damage; full depletion ends race and triggers repair cost"
+    },
+    {
+      "element": "Stamina system (player and opponent)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Visible UI feedback; depletion from combat causes ejection; teaches resource management"
+    },
+    {
+      "element": "Bike purchasing/upgrade system",
+      "first_appears": "Between Level 1 and 2",
+      "introduction_context": "safe",
+      "mastery_context": "Between-race shop access; weight/speed/steering tradeoffs; progression gate"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Finishing a race successfully",
+      "Reaching shop screen between races",
+      "Opponent ejection from bike (stamina depletion)",
+      "Gaining distance from pursuing competitors"
+    ],
+    "typical_tension_triggers": [
+      "Opponent initiates attack",
+      "Player stamina depletes during combat",
+      "Motor officer appears on track",
+      "Bike damage accumulates from crashes",
+      "Approaching curves and obstacles at high speed",
+      "Low cash reserves threatening game-over state"
+    ],
+    "pacing_descriptor": "Continuous tension with rhythmic peaks during opponent encounters and obstacle avoidance; relief comes at race completion and progression gates"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction to racing mechanics and basic combat on Grass Valley and Sierra Nevada courses; player learns stamina and damage management",
+    "mid_game": "Addition of motor officers and weapon dynamics; Napa Valley introduces familiar but faster traffic patterns; players refine bike purchases and positioning",
+    "late_game": "Pacific Coast Highway and final levels demand mastery of all systems: combat positioning, obstacle navigation, opponent stamina depletion, and financial management to avoid game-over via repair/fine penalties",
+    "notable_spikes": [
+      "First motor officer encounter (introduces new fail condition)",
+      "Transition to Level 3+ (cumulative traffic density and opponent aggression)",
+      "Final races requiring specific bike stats that demand strategic purchasing"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Five races per level gate",
+      "description": "Player must win 5 consecutive races on different Californian tracks within each of 5 levels; progression is linear and mandatory",
+      "example_level": "Levels 1-5 (all)"
+    },
+    {
+      "pattern_name": "Californian location rotation",
+      "description": "Races cycle through distinct geographic settings (Grass Valley, Sierra Nevada, Napa Valley, Pacific Coast Highway) that repeat across levels with increasing difficulty",
+      "example_level": "All levels"
+    },
+    {
+      "pattern_name": "Combat escalation across levels",
+      "description": "Early levels focus on basic punching; later levels introduce weapon pickups, aggressive opponent tactics, and police interference",
+      "example_level": "Level 1 vs Level 4-5"
+    },
+    {
+      "pattern_name": "Financial pressure arc",
+      "description": "Player begins with $1000; repair/fine penalties create escalating economic tension; bike upgrades become necessary but drain reserves",
+      "example_level": "All levels (meta-progression)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:39:43.416Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3121,
+    "output_tokens": 1551,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

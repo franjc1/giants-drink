@@ -1,0 +1,182 @@
+{
+  "_meta": {
+    "game": "Castlevania III: Dracula's Curse",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1989,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "TASVideos — NES / Castlevania 3 / Stair Dismounting Guide",
+        "url": "https://tasvideos.org/GameResources/NES/Castlevania3/StairDismountingGuide",
+        "notes": "Stair mechanics: pushing up/down = 8 pixels movement, game checks proximity to floor. Grant variable jump confirmed. Character-specific technique documentation."
+      },
+      {
+        "name": "TASVideos submissions — Castlevania III",
+        "url": "https://tasvideos.org/7743S",
+        "notes": "Supplemental technique documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Castlevania III uses the SAME BASE PHYSICS ENGINE as Castlevania 1 for Trevor Belmont (the main character).",
+      "Trevor: walk 1 px/f, fixed jump arc (lookup table), no air control — identical to CV1 Simon.",
+      "The major innovation: THREE ALTERNATE PLAYABLE CHARACTERS with completely different mechanics.",
+      "Grant DaCnair: wall cling, faster movement, VARIABLE jump height (unusual for CV — contradicts the CV1 fixed arc).",
+      "Sypha Belnades: slower movement, magic-based attacks (freeze, fire, lightning).",
+      "Alucard: bat form (flight), higher jump, can transform mid-air.",
+      "Multi-route game: different stage paths based on which character you rescue.",
+      "Stair mechanics confirmed: 8 pixels per input while on staircase."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "trevor_belmont": {
+    "_note": "Same physics as CV1 Simon Belmont. See castlevania-nes.json for full documentation.",
+    "walk_speed_px_per_frame": 1.0,
+    "jump_type": "fixed_lookup_table",
+    "air_control": "none",
+    "whip": {
+      "type": "fixed_horizontal",
+      "directions": 1,
+      "notes": "Trevor's whip fires horizontally only — same as CV1. NOT 8-directional (that's SCV4)."
+    },
+    "cross_reference": "See castlevania-nes.json for complete physics documentation of Trevor's mechanics."
+  },
+
+  "grant_dacnair": {
+    "_note": "Most mobile character — wall cling and variable jump make him the preferred speedrun character for most routes.",
+    "walk_speed_px_per_frame_approx": 1.5,
+    "confidence": "medium",
+    "notes": "Grant is faster than Trevor. Exact px/frame value needs ROM verification.",
+    "jump": {
+      "type": "variable_height",
+      "notes": [
+        "Grant has VARIABLE JUMP HEIGHT — unique among CV1/CV3 characters.",
+        "This makes Grant feel closer to an action-platformer protagonist than the lookup-table CV1 feel.",
+        "TASVideos confirms: 'Grant has variable jump height, which is exploited in various techniques.'"
+      ],
+      "air_control": "some horizontal control (more than Trevor/CV1)"
+    },
+    "wall_cling": {
+      "description": "Grant can cling to walls and ceiling by pressing toward them while airborne.",
+      "notes": [
+        "From wall/ceiling: can launch off in any direction.",
+        "One frame release while walking off ledge causes instant maximum fall speed (speed preservation technique).",
+        "Wall cling enables traversal of vertical shafts not accessible to Trevor."
+      ]
+    },
+    "weapon": {
+      "type": "thrown daggers / knives",
+      "notes": "Grant throws knives that can be rapidly thrown by canceling the throw animation (frame-precise technique)."
+    }
+  },
+
+  "sypha_belnades": {
+    "_note": "Slowest character but with powerful magic capable of crowd control.",
+    "walk_speed_px_per_frame_approx": 1.0,
+    "confidence": "medium",
+    "jump": {
+      "type": "fixed_lookup_table_approx",
+      "notes": "Sypha's jump is similar to Trevor's — fixed arc. No air control.",
+      "height_approx_px": 48,
+      "confidence": "low"
+    },
+    "magic_spells": {
+      "freeze": {
+        "description": "Freezes all enemies on screen. Frozen enemies can be used as platforms.",
+        "notes": [
+          "Freeze spell is exploitable: frozen enemy can be stood on, including mid-air enemies.",
+          "TASVideos: 'Sypha's freeze spell can be used to disalign yourself from stairs vertically and horizontally.'",
+          "Standing on a frozen airborne enemy gives access to otherwise unreachable staircase entrances."
+        ]
+      },
+      "fire": {
+        "description": "Fireballs that travel forward and deal area damage."
+      },
+      "lightning": {
+        "description": "Lightning bolts — high single-target damage."
+      }
+    }
+  },
+
+  "alucard": {
+    "_note": "Dracula's dhampir son. Highest jump, bat transformation for flight.",
+    "walk_speed_px_per_frame_approx": 1.0,
+    "confidence": "medium",
+    "jump": {
+      "type": "higher_than_trevor",
+      "notes": "Alucard jumps higher than Trevor and has some variable height. Exact values need verification.",
+      "height_approx_px": 64,
+      "confidence": "low"
+    },
+    "bat_form": {
+      "description": "Alucard can transform into a bat for brief flight segments.",
+      "notes": [
+        "Bat form allows sustained flight — different from jumps.",
+        "TASVideos: 'Bat Form can be used strategically by switching back to Trevor while partially intersecting with the ground to start a few pixels into the ground.'",
+        "Bat form has a duration/energy limitation.",
+        "Flight moves at a fixed speed in the direction held."
+      ],
+      "flight_speed_approx_px_per_frame": 2.0,
+      "confidence": "low"
+    },
+    "fireball": {
+      "description": "Alucard's subweapon fires a fireball projectile."
+    }
+  },
+
+  "character_switching": {
+    "description": "At certain junction points in the game, Trevor can choose to pair with one of the three alternate characters. Characters are found and rescued during the game.",
+    "mechanic": "Press Select to switch between Trevor and the current partner.",
+    "notes": [
+      "Only one partner can be active at a time.",
+      "Switching costs no time but may waste the partner's subweapon.",
+      "Different paths unlock different characters: Grant on the graveyard path, Sypha in the forest, Alucard at the Clock Tower."
+    ]
+  },
+
+  "stairs": {
+    "movement": {
+      "px_per_input": 8,
+      "source": "TASVideos Stair Dismounting Guide",
+      "confidence": "high",
+      "notes": "Each up/down input on a staircase moves character 8 pixels vertically. Same mechanism as CV1."
+    },
+    "dismounting": {
+      "description": "Game checks proximity to floor — if standing near a floor edge while on stairs, character dismounts.",
+      "notes": "This dismounting check can be exploited for position manipulation."
+    }
+  },
+
+  "subweapons": {
+    "holy_water": "Drops a splash of holy water that burns on the floor",
+    "axe": "Arcing projectile that travels in a high arc",
+    "cross": "Boomerang — travels forward then returns",
+    "stopwatch": "Freezes all enemies briefly",
+    "notes": "Same subweapon system as CV1. Powered by hearts."
+  },
+
+  "invincibility_frames": {
+    "duration_frames_approx": 96,
+    "confidence": "medium",
+    "notes": "Same as CV1 (96 frames). VERIFY for CV3."
+  },
+
+  "design_notes_for_giants_drink": [
+    "CV3's character switching system is a brilliant solution to the 'one-character-one-movement-vocabulary' limitation of CV1. By making the world traversable by four different means, the same geometry has four different difficulty levels and strategies.",
+    "Grant's variable jump + wall cling makes him feel like a completely different game within the same level. CV3 levels work with both Trevor's rigid fixed-arc jumps and Grant's flexible variable jumps — a design constraint that forced Konami to think about every gap as solvable multiple ways.",
+    "Sypha's freeze spell as a platform generator is a puzzle mechanic: 'freeze the flying enemy, use it as a platform, reach the staircase.' This converts combat tools into traversal tools — elegant design.",
+    "The multi-route structure (rescuing different characters unlocks different stage paths) creates meaningful replay value. Each route is a substantially different experience, not just cosmetically.",
+    "The character-switching mechanic (Select button) allows real-time tactical adaptation. Expert players learn to switch characters for specific sub-sections within a stage."
+  ]
+}

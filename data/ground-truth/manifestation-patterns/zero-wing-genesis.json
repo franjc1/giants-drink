@@ -1,0 +1,161 @@
+{
+  "game_id": "zero-wing-genesis",
+  "game_name": "Zero Wing",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectile patterns",
+      "visual_form": "Dense bullet patterns that increase in complexity across loops; denser fire when enemies are destroyed",
+      "meaning": "Escalating threat level and stage difficulty progression"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Stage-end boss battles that must be defeated to progress",
+      "meaning": "Critical danger threshold; player must overcome major threat to advance"
+    },
+    {
+      "signal": "Collision hazards",
+      "visual_form": "Solid stage obstacles in the constantly scrolling environment",
+      "meaning": "Environmental threats beyond faction enemies"
+    },
+    {
+      "signal": "Enemy carrier spawns",
+      "visual_form": "Incoming carriers dropping colored weapon items",
+      "meaning": "Active enemy presence and combat engagement zones"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up items",
+      "visual_form": "Color-changing items from destroyed enemy carriers (Red, Blue, Green)",
+      "meaning": "Resource availability for weapon upgrade and tactical advantage"
+    },
+    {
+      "signal": "Speed increasers",
+      "visual_form": "Collectible items along the stage",
+      "meaning": "Enhanced mobility for evasion and positioning"
+    },
+    {
+      "signal": "1UP items",
+      "visual_form": "Extra life collectibles",
+      "meaning": "Life resource replenishment; increased survivability buffer"
+    },
+    {
+      "signal": "Bomb module",
+      "visual_form": "Deployable area-effect weapon",
+      "meaning": "Tactical safety tool for clearing threats; also triggered passively when taking damage"
+    },
+    {
+      "signal": "Checkpoint/respawn system",
+      "visual_form": "Stage progression markers and respawn locations",
+      "meaning": "Progression safety net; player can recover from mistakes within reasonable bounds"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "CATS (Abigor in PC-Engine)",
+      "color_identity": null,
+      "symbol_or_sigil": "CATS organization; space pirate faction identity",
+      "enemy_visual_variants": "Various enemy types and boss entities that manifest CATS military forces; cyborg aesthetic implied",
+      "environmental_markers": "Space colonies under CATS control represent faction-controlled territory; mothership destruction signals CATS presence and military capability"
+    },
+    {
+      "faction": "United Nations / Milky Way Federation",
+      "color_identity": null,
+      "symbol_or_sigil": "Federation authority; protagonist Trent represents Federation interests",
+      "enemy_visual_variants": "Player-controlled ZIG spacecraft represents Federation military capability",
+      "environmental_markers": "Japanese/Federation space colonies serve as contested territory; mothership represents Federation military infrastructure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Peace treaty status (broken)",
+      "visual_manifestation": "CATS breaks covenant and assumes control of Federation space colonies; shift from peace to active conflict",
+      "behavioral_manifestation": "CATS military aggression escalates; enemies increase in density and firepower; boss encounters represent major tactical operations"
+    },
+    {
+      "world_state": "Stage progression / territory liberation",
+      "visual_manifestation": "Constantly scrolling environment through eight increasingly difficult levels; visual environment changes per stage",
+      "behavioral_manifestation": "Enemy density and bullet patterns intensify; boss difficulty scales; player must defeat stage boss to liberate that sector"
+    },
+    {
+      "world_state": "Player combat capability",
+      "visual_manifestation": "Weapon color system (Red Cannon, Blue Laser, Green Homing) reflects current loadout; visual weapon upgrade indicators",
+      "behavioral_manifestation": "Equipped weapon type determines firepower, range, and effectiveness; weapon downgrades after taking damage signal vulnerability"
+    },
+    {
+      "world_state": "Critical threat (boss encounter)",
+      "visual_manifestation": "Boss appearance at stage end; distinct visual entity different from standard enemies",
+      "behavioral_manifestation": "Boss requires specific tactical engagement; stage scrolling stops; boss-specific attack patterns and movement"
+    },
+    {
+      "world_state": "Game over / failure state",
+      "visual_manifestation": "Loss of all lives; game loop reset or continue screen",
+      "behavioral_manifestation": "Player must insert credits to continue (arcade context); game returns to stage one on loop continuation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Progressive stage environment",
+      "example": "Eight levels with increasingly difficult visual scenarios representing deeper penetration into CATS-controlled territory toward final confrontation"
+    },
+    {
+      "technique": "Mothership context",
+      "example": "Destroyed Federation mothership establishes why Trent is sole operative; loss of Federation military infrastructure justifies desperate solo mission"
+    },
+    {
+      "technique": "Colony occupation visuals",
+      "example": "Japanese/Federation space colonies shown as CATS-controlled territory; visual differentiation between stages implies different colonial regions under occupation"
+    },
+    {
+      "technique": "Enemy density escalation",
+      "example": "Loop system with increasing difficulty conveys expanding CATS military mobilization and desperation of conflict"
+    },
+    {
+      "technique": "Weapon system narrative",
+      "example": "Color-coded weapon types (Red, Blue, Green) suggest modular Federation arsenal design; upgradeable system implies Federation maintained advanced military technology"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "ZIG spacecraft (player)",
+      "state": "Normal operation",
+      "behavior": "Responsive control through scrolling environment; can grab enemies with Seizer Beam; destroys enemy carriers to collect weapons"
+    },
+    {
+      "entity": "ZIG spacecraft (damaged)",
+      "state": "Post-hit vulnerability",
+      "behavior": "Firepower and speed reset to original state; bomb module triggered automatically on hit (secondary defense)"
+    },
+    {
+      "entity": "Enemy forces (standard)",
+      "state": "Active patrol/engagement",
+      "behavior": "Spawn with pattern-based projectile fire; release weapon carriers when destroyed; increase fire density in later loops"
+    },
+    {
+      "entity": "Enemy forces (boss)",
+      "state": "Critical threat",
+      "behavior": "Unique visual appearance; stage-blocking presence; advanced attack patterns; must be defeated to progress"
+    },
+    {
+      "entity": "CATS organization",
+      "state": "Occupying force",
+      "behavior": "Maintains control of space colonies; breaks peace covenant; coordinates military operations across eight territorial sectors"
+    }
+  ],
+  "notes": "Zero Wing uses minimal narrative communication through gameplay; world-state is conveyed primarily through enemy density escalation, visual stage progression, and weapon system feedback. The game's political situation (broken peace treaty, territory occupation, liberation mission) is established through synopsis text rather than in-game visuals, typical of early 1990s arcade design. Danger/safety signals rely on arcade conventions: color-coded power-ups, projectile patterns, and boss encounters. Faction identity is implicit in space pirate aesthetic (CATS) versus Federation military context (player) rather than explicit visual markers like heraldry or faction colors.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:31:11.138Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2888,
+    "output_tokens": 1850,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

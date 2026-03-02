@@ -1,0 +1,211 @@
+{
+  "_meta": {
+    "game": "Mega Man X",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1993,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — SNES / Mega Man X / Data",
+        "url": "https://tasvideos.org/GameResources/SNES/MegaManX/Data",
+        "notes": "Physics constants confirmed: walk speed 1.5 px/f, dash speed 3.5 px/f, jump velocity 5.0 px/f, gravity 0.25 px/f², terminal velocity 5.75 px/f, ladder speed 1.5 px/f."
+      },
+      {
+        "name": "Data Crystal — Mega Man X",
+        "url": "https://datacrystal.tcrf.net/wiki/Mega_Man_X",
+        "notes": "RAM map supplemental."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "Mega Man X is the SNES successor to the NES Mega Man series. Physics share core Capcom constants (gravity 0.25 px/f², walk 1.5 px/f) but extend significantly with dash and wall kick.",
+      "The dash (3.5 px/f) is the signature addition — 2.33x walk speed. Changes the movement vocabulary fundamentally.",
+      "Wall kick (wall jump) is the other major new mechanic. Absent from all NES Mega Man games.",
+      "Charge shot (introduced in NES MM4) is present and enhanced — three charge levels.",
+      "All primary physics values from TASVideos MMX Data page — high confidence.",
+      "The NES-to-SNES transition maintained the series' core feel (same gravity, same walk speed) while adding high-end movement tools."
+    ],
+    "nes_mm_comparison": {
+      "walk_speed": "identical (1.5 px/f)",
+      "gravity": "identical (0.25 px/f²)",
+      "jump_velocity": "slightly higher: 5.0 px/f vs NES MM2 6.0 px/f... wait — NES MM2 is 6.0, MMX is 5.0. MMX jump is slightly lower.",
+      "additions": ["dash (3.5 px/f)", "wall kick", "charge shot levels 1-3", "upgrades system", "higher terminal velocity (5.75 vs 4.0 px/f)"]
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    },
+    "subpixel_system": {
+      "description": "SNES MMX uses a fixed-point system similar to NES Mega Man. Exact sub-pixel unit per pixel requires ROM verification — values below are in px/frame."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame": 1.5,
+      "source": "TASVideos MMX Data page",
+      "confidence": "high",
+      "notes": "Identical to NES Mega Man series (1-6). Instant velocity — no acceleration ramp. Direction reversal is instant."
+    },
+    "dash_speed": {
+      "px_per_frame": 3.5,
+      "source": "TASVideos MMX Data page",
+      "confidence": "high",
+      "notes": [
+        "Dash is the defining new movement mechanic in MMX. 3.5 / 1.5 = 2.33x walk speed.",
+        "Dash initiates immediately at full dash speed — no acceleration ramp.",
+        "Dash has a finite duration — automatically ends after a set number of frames.",
+        "Dash can be performed on ground or in air (air dash).",
+        "Dash → jump (dash jump) preserves dash momentum through the jump arc."
+      ]
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "notes": "Instant velocity on ground (same as NES series). No acceleration or deceleration curves for walking."
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "px_per_frame": 5.0,
+      "source": "TASVideos MMX Data page",
+      "confidence": "high",
+      "notes": "Standard jump velocity. Slightly lower than NES MM2 (6.0 px/f) but higher than NES MM3 (5.5 px/f)."
+    },
+    "slope_jump_bonus": {
+      "px_per_frame_range": "5.25 to 5.5",
+      "confidence": "medium",
+      "notes": "Jumping off an ascending slope gives a velocity bonus. Exact slope-angle-to-bonus mapping needs verification."
+    },
+    "variable_jump": {
+      "available": true,
+      "notes": "Releasing jump early produces a shorter apex. Same variable-height mechanic as NES Mega Man series."
+    },
+    "dash_jump": {
+      "description": "Jumping while dashing (or immediately after initiating dash) carries dash horizontal momentum through the jump arc.",
+      "notes": [
+        "Dash jump covers dramatically more horizontal distance than a walk jump.",
+        "Ground dash → jump is the primary horizontal traversal tool for long gaps.",
+        "Air dash → the dash can also be performed in the air, giving a mid-air horizontal boost."
+      ]
+    },
+    "horizontal_speed_during_jump": {
+      "walk_jump_px_per_frame": 1.5,
+      "dash_jump_px_per_frame": 3.5,
+      "notes": "Horizontal speed during jump matches the speed at which the jump was initiated (walk or dash)."
+    }
+  },
+
+  "wall_kick": {
+    "available": true,
+    "notes": [
+      "Wall kick (wall jump) is a core mechanic in MMX — completely absent from all NES Mega Man games.",
+      "X slides down walls when airborne and in contact with a vertical surface.",
+      "Pressing jump while wall-sliding kicks X off the wall in the opposite horizontal direction.",
+      "Multiple wall kicks can chain to climb tall vertical shafts.",
+      "Wall kick + dash expands the vertical+horizontal reach of movement significantly.",
+      "Wall sliding speed: slower than normal fall (friction effect)."
+    ],
+    "kick_y_velocity_approx": {
+      "px_per_frame": 5.0,
+      "confidence": "medium",
+      "notes": "Approximate — near standard jump velocity. Exact wall kick Y velocity needs ROM verification."
+    }
+  },
+
+  "gravity": {
+    "px_per_frame_sq": 0.25,
+    "source": "TASVideos MMX Data page",
+    "confidence": "high",
+    "notes": "Identical to NES Mega Man series. 0.25 px/frame² is the Capcom series constant for this era."
+  },
+
+  "terminal_velocity": {
+    "px_per_frame": 5.75,
+    "source": "TASVideos MMX Data page",
+    "confidence": "high",
+    "notes": "Higher than NES Mega Man terminal velocity (4.0 px/f). SNES MMX falls faster at maximum."
+  },
+
+  "ladder": {
+    "climb_speed_px_per_frame": 1.5,
+    "source": "TASVideos MMX Data page",
+    "confidence": "high",
+    "notes": [
+      "Standard ladder climb speed in MMX is 1.5 px/frame (same as walk speed).",
+      "In Mega Man X2 and X3, ladder climb speed increases to 3.0 px/f with a dash upgrade.",
+      "X can shoot horizontally from ladders."
+    ]
+  },
+
+  "mega_buster": {
+    "standard_bullet_speed_px_per_frame": 8,
+    "max_on_screen": 3,
+    "charge_shot": {
+      "available": true,
+      "requires_upgrade": false,
+      "notes": "Charge shot is available from the start in MMX (no Arms Parts upgrade needed for base charge).",
+      "levels": {
+        "level_1": {
+          "description": "Partial charge — slightly enhanced projectile",
+          "charge_time_frames_approx": 30,
+          "confidence": "low"
+        },
+        "level_2": {
+          "description": "Full charge — large energy blast",
+          "charge_time_frames_approx": 90,
+          "confidence": "low",
+          "notes": "Pierces some enemies and hits multiple times."
+        }
+      }
+    },
+    "special_weapons": {
+      "notes": "X acquires a special weapon from each defeated Maverick boss. 8 special weapons total. Each has strengths/weaknesses against other bosses (type chart)."
+    }
+  },
+
+  "upgrades_system": {
+    "description": "MMX introduces armor upgrades: Helmet, Body, Arms (Arm Parts), Legs. Each found in a capsule hidden in a stage.",
+    "helmet": "Shows map information, breaks certain blocks with head slide",
+    "body": "Reduces damage taken by 50%",
+    "arms_parts": "Enhances charge shot to Level 2 (more powerful full charge)",
+    "legs": {
+      "description": "Enables air dash and double-tap dash on ground",
+      "notes": "Leg upgrade is usually the first obtained — enables air dash which dramatically expands movement options."
+    },
+    "heart_tanks": "8 total — each increases max HP by 2 units",
+    "sub_tanks": "4 total — each stores up to 32 HP units for later use",
+    "full_armor_bonus": {
+      "notes": "Collecting all 4 armor parts grants a gold armor with additional enhancements beyond individual part effects."
+    }
+  },
+
+  "hitboxes": {
+    "standing": {
+      "width_px_approx": 14,
+      "height_px_approx": 24,
+      "confidence": "medium",
+      "notes": "Approximate — similar to NES Mega Man proportions. VERIFY against ROM."
+    },
+    "dashing": {
+      "notes": "Dash hitbox may have slightly reduced height. Needs ROM verification."
+    },
+    "wall_sliding": {
+      "notes": "Hitbox position adjusts when sliding on wall. X's sprite flips to face the wall."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Walk speed (1.5 px/f) and gravity (0.25 px/f²) are identical to NES Mega Man — the fundamental feel is preserved. The expansion is entirely in the ceiling: dash doubles range, wall kick opens vertical space, air dash adds a third dimension to movement.",
+    "Dash jump is the primary traversal tool — levels MUST have gaps that require dash jump to cross. Walk jump gaps feel like small obstacles; dash jump gaps are the real tests.",
+    "Wall kick transforms vertical space from one-directional (up via jump only) to bidirectional (ascend via wall chains, descend via gravity). Level designers can now use vertical height as real terrain.",
+    "The upgrade system creates a 'power curve' within a single playthrough: stages feel different with full armor. Design can account for this by having upgrades in early stages modify how hard stages feel later.",
+    "The weakness system (each boss weak to another boss's weapon) creates a meta-routing decision before the game starts. This is 'strategic' decision-making in a fast-action game — unusual design."
+  ]
+}

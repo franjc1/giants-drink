@@ -1,0 +1,160 @@
+{
+  "game_id": "flicky-genesis",
+  "game_name": "Flicky",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "House cats (Tigers) and green iguanas (Iggys) rendered as distinct sprites on playfield",
+      "meaning": "Immediate threat to player and Chirps; contact disperses collected Chirps"
+    },
+    {
+      "signal": "Chirp dispersion",
+      "visual_form": "Chirps scatter visually when chain contacts enemy",
+      "meaning": "Loss of progress; need to recollect and re-chain dispersed Chirps"
+    },
+    {
+      "signal": "Sunglasses on Chirps",
+      "visual_form": "Visual modifier on specific Chirp sprites (sunglasses drawn on 8x8 pixel chick)",
+      "meaning": "Unpredictable behavior when dispersed; increased difficulty/danger state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit door location",
+      "visual_form": "Exit platform positioned on screen with door visual",
+      "meaning": "Safe delivery zone; collecting Chirps here clears round"
+    },
+    {
+      "signal": "Item availability",
+      "visual_form": "Throwable objects (telephones, flower pots, cups, bottles) visible on playfield; diamonds also present",
+      "meaning": "Defense mechanism; player can proactively eliminate threats before Chirps are endangered"
+    },
+    {
+      "signal": "Flicky's mobility",
+      "visual_form": "Blue bird sprite with side-to-side run and jump animations",
+      "meaning": "Player agency to navigate threats and protect Chirps; movement-based safety strategy"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Flicky (Player)",
+      "color_identity": "Blue bird",
+      "symbol_or_sigil": "Flightless blue sparrow character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Urban apartment building setting; platforms represent building architecture"
+    },
+    {
+      "faction": "Chirps (Allies/Protected)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Small chick sprites; some with sunglasses",
+      "enemy_visual_variants": "Sunglasses variant indicates 'bad' Chirps with unpredictable behavior",
+      "environmental_markers": "Distributed across playfield platforms; must be guided to exit"
+    },
+    {
+      "faction": "Tigers (Enemy)",
+      "color_identity": null,
+      "symbol_or_sigil": "House cat sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Patrol playfield as obstacle/predator"
+    },
+    {
+      "faction": "Iggys (Enemy)",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Iguana sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Secondary threat type introduced post-development; patrol playfield"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Round active / Chirps uncollected",
+      "visual_manifestation": "Multiple Chirp sprites visible on platforms, some forming chains behind Flicky",
+      "behavioral_manifestation": "Chirps follow Flicky in line formation; enemies actively patrol; player must navigate and collect"
+    },
+    {
+      "world_state": "Chirps dispersed (enemy contact)",
+      "visual_manifestation": "Collected Chirps scatter explosively across screen, breaking chain formation",
+      "behavioral_manifestation": "All gathered Chirps separate and resume independent movement; player must restart collection effort"
+    },
+    {
+      "world_state": "Round complete / All Chirps delivered",
+      "visual_manifestation": "Chirp sprites vanish upon exit door contact; platform state clears",
+      "behavioral_manifestation": "Stage advances to next level; difficulty increases on repeat cycles"
+    },
+    {
+      "world_state": "Bonus round active",
+      "visual_manifestation": "Chirps fall from top of screen; net visual presented to player",
+      "behavioral_manifestation": "Flicky attempts catch mechanic rather than collection escort; different win condition"
+    },
+    {
+      "world_state": "Difficulty escalation (loop cycles)",
+      "visual_manifestation": "Background color variations (same architectural theme, different palette); same stage structure repeated",
+      "behavioral_manifestation": "Increased enemy aggression/speed; Chirp behavior becomes more chaotic on subsequent loops"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural setting as narrative",
+      "example": "Urban apartment building background (inspired by Kawasaki's office window view) conveys domestic safety theme; player must return Chirps 'home' to building"
+    },
+    {
+      "technique": "Platform-as-metaphor",
+      "example": "Game originally conceived as power lines (from Japanese variety show sparrow song reference), later reframed as apartment building levels; environment reinforces 'protect the children and return them safe to home' emotional core"
+    },
+    {
+      "technique": "Enemy type selection",
+      "example": "House cats (Tigers) and iguanas (Iggys) as predators in urban setting; natural predators that would threaten small birds; environmental logic reinforces danger"
+    },
+    {
+      "technique": "Item placement as resource scarcity",
+      "example": "Throwable objects (phones, pots, cups, bottles) scattered on levels; not all levels have defense items; player must choose whether to use items or avoid enemies"
+    },
+    {
+      "technique": "Palette variation as level differentiation",
+      "example": "Only 4 unique background designs created initially; color shifts applied to create visual variety across 48+ stages without new assets; communicates progression through repeated-but-distinct spaces"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Flicky",
+      "state": "Safe/active collection mode",
+      "behavior": "Moves side-to-side, jumps to reach platforms, picks up items by walking into them, throws by jumping"
+    },
+    {
+      "entity": "Chirps (normal)",
+      "state": "Following Flicky",
+      "behavior": "Chain formation behind player in single-file line; award bonus points when multiple delivered simultaneously"
+    },
+    {
+      "entity": "Chirps (sunglasses variant)",
+      "state": "After dispersal/unpredictable",
+      "behavior": "More chaotic movement patterns when separated from Flicky; designed as 'bad' Chirps to increase difficulty"
+    },
+    {
+      "entity": "Tigers/Iggys (Enemies)",
+      "state": "Patrol/hunting",
+      "behavior": "Can be avoided by standard movement or defeated by thrown items; contact breaks Chirp chains and disperses all collected"
+    },
+    {
+      "entity": "Diamonds",
+      "state": "Bonus state",
+      "behavior": "Cannot be thrown like other items; provide bonus points only when collected; visual indicator of risk-reward (collecting = exposed to enemies)"
+    }
+  ],
+  "notes": "Flicky communicates world-state primarily through visual clarity of entity positioning and state. The core design philosophy ('protect the children') manifests through visual contrast: vulnerable yellow Chirps vs. predatory enemy sprites vs. safe blue player character. The sunglasses on 'bad' Chirps is a subtle visual tell for increased unpredictability — behavioral manifestation through character design. The game relies heavily on spatial communication (chain formation, exit location, platform topology) rather than narrative UI. Color palette shifts across 48 levels communicate progression without asset variation. The urban apartment setting grounds the protection/safety narrative visually.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:57:57.402Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2926,
+    "output_tokens": 1979,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

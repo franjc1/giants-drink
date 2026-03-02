@@ -1,0 +1,109 @@
+{
+  "game_id": "bust-a-move-snes",
+  "game_name": "Bust-A-Move",
+  "platform": "snes",
+  "year": 1995,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Puzzle game; sub-pixel data not documented"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Bubble Firing",
+      "description": "Player controls a pointer at bottom of screen that aims and fires colored bubbles upward. Bubbles travel in straight lines, bounce off sidewalls, and stop when touching other bubbles or reaching top arena.",
+      "physics_values": {
+        "movement_type": "ballistic_straight_line",
+        "wall_bounce": true,
+        "auto_fire_on_idle": true
+      }
+    },
+    {
+      "name": "Match Mechanic",
+      "description": "When three or more bubbles of identical color form a group upon contact, those bubbles and any bubbles hanging from them are removed from play.",
+      "physics_values": {
+        "minimum_match_count": 3,
+        "gravity_affected": true
+      }
+    },
+    {
+      "name": "Ceiling Drop",
+      "description": "After every few shots, the ceiling of the playing arena drops downwards slightly along with all bubbles stuck to it. Drop frequency influenced by number of bubble colors remaining.",
+      "physics_values": {
+        "mechanic_type": "arena_compression",
+        "frequency_scaling": "color_dependent"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "puzzle-based",
+    "turn-paced",
+    "arcade-style",
+    "responsive controls",
+    "addictive",
+    "simple mechanics"
+  ],
+  "tier_notes": "Tier 2: Puzzle game with no documented character physics. Sources confirm core gameplay mechanics (bubble firing, matching, ceiling drop) but contain no movement speed, acceleration, gravity, or jump parameters. Game focuses on puzzle mechanics rather than action platforming physics.",
+  "sources_used": [
+    "tcrf_bust_a_move_snes",
+    "wikipedia_puzzle_bobble"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T00:13:46.179Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5890,
+    "output_tokens": 955,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

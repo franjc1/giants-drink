@@ -1,0 +1,210 @@
+{
+  "game_id": "mighty-bomb-jack-nes",
+  "game_name": "Mighty Bomb Jack",
+  "platform": "nes",
+  "paradigm": "platformer/adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated sprite entities with distinct visual design (flying enemies, walking guards)",
+      "meaning": "Hazards to avoid; collision causes damage or life loss"
+    },
+    {
+      "signal": "Torture Room transition",
+      "visual_form": "Screen change to specialized room layout with countdown display",
+      "meaning": "Punishment state triggered by greedy resource collection (>9 Mighty Coins or >99 seconds); player must complete jump challenges to escape"
+    },
+    {
+      "signal": "Closed treasure chests",
+      "visual_form": "Chest sprites without visual indication of contents or access state",
+      "meaning": "Some chests locked behind color-based Mighty Coin requirements; inaccessible chests signal resource scarcity"
+    },
+    {
+      "signal": "Timer depletion",
+      "visual_form": "On-screen countdown timer visible in action zones",
+      "meaning": "Temporal pressure; running out of time triggers level failure"
+    },
+    {
+      "signal": "Demon Belzebut (final boss concept)",
+      "visual_form": "End-level antagonist sprite (visual design not detailed in sources)",
+      "meaning": "Ultimate danger; must be defeated to complete game objective"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Mighty Drink power-ups",
+      "visual_form": "Hidden in treasure chests, consumable item sprite",
+      "meaning": "Adds 10 seconds to timer; extends survival window"
+    },
+    {
+      "signal": "Blue Mighty Coin state",
+      "visual_form": "Jack changes to blue color after collecting blue Mighty Coin",
+      "meaning": "Grants access to orange treasure chests; unlocks hidden resources"
+    },
+    {
+      "signal": "Orange Mighty Coin state",
+      "visual_form": "Jack changes to orange color after collecting orange Mighty Coin",
+      "meaning": "Allows opening any treasure chest by touching from side; unrestricted resource access"
+    },
+    {
+      "signal": "Green Mighty Coin state",
+      "visual_form": "Jack changes to green color after collecting green Mighty Coin",
+      "meaning": "Temporary invulnerability; transforms all on-screen enemies into coins for 5 seconds"
+    },
+    {
+      "signal": "Money bags in chests",
+      "visual_form": "Coin/currency sprite items within treasure chests",
+      "meaning": "Score/progression resource; non-essential but beneficial"
+    },
+    {
+      "signal": "Secret passages",
+      "visual_form": "Revealed by finding Sphinx trigger in hidden or visible treasure chest",
+      "meaning": "Shortcuts and hidden progression routes; allow level advancement without full completion"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Royal Pamera Family",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal Palace (architectural setting)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Royal Palace rooms serve as half of each level; distinct visual aesthetic from action zones. Palace rooms borrowed from original Bomb Jack arcade mechanics."
+    },
+    {
+      "faction": "Demon Belzebut / Evil Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Pyramid setting (underworld/hostile domain)",
+      "enemy_visual_variants": "Flying enemies with distinct sprite designs; unused walking guards and wall hatches suggest planned enemy variety",
+      "environmental_markers": "16-level pyramid structure represents demon's domain; holds royal family hostage"
+    },
+    {
+      "faction": "Jack (Player/Hero)",
+      "color_identity": "Blue (default), Orange (treasure access), Green (invulnerability state)",
+      "symbol_or_sigil": "Player sprite with distinctive design",
+      "enemy_visual_variants": "Color-state variations indicate power-up acquisition; visual transformation signals capability shift",
+      "environmental_markers": "Appears in both Action Zones and Royal Palace rooms; navigates dual-environment level structure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Action Zone (first half of level)",
+      "visual_manifestation": "Distinct tileset featuring platforms, treasure chests, hidden passages; separate visual theme from Palace",
+      "behavioral_manifestation": "Exploration and collection-focused gameplay; enemies patrol; multiple portions/segments allow route variation"
+    },
+    {
+      "world_state": "Royal Palace Room (second half of level)",
+      "visual_manifestation": "Palace-themed tileset with architectural elements; direct visual lift from original Bomb Jack arcade",
+      "behavioral_manifestation": "Collection/achievement focused; mechanics replicate arcade predecessor; requires specific color-states to access all chests"
+    },
+    {
+      "world_state": "Torture Room (penalty state)",
+      "visual_manifestation": "Specialized room layout distinct from both action zone and palace; countdown display prominent on screen",
+      "behavioral_manifestation": "Forced platforming challenge; player must complete required number of jumps; loss of all Mighty Coins upon exit; timer reset to 60 seconds"
+    },
+    {
+      "world_state": "Blue Mighty Coin active",
+      "visual_manifestation": "Jack renders in blue color; orange treasure chests become accessible",
+      "behavioral_manifestation": "Limited access mode; player can only open orange chests; encourages exploration for color variants"
+    },
+    {
+      "world_state": "Orange Mighty Coin active",
+      "visual_manifestation": "Jack renders in orange color; all treasure chests appear accessible",
+      "behavioral_manifestation": "Unrestricted access; player can open any chest by touching from side; maximum resource availability"
+    },
+    {
+      "world_state": "Green Mighty Coin active",
+      "visual_manifestation": "Jack renders in green color; on-screen enemies visibly transform into coins",
+      "behavioral_manifestation": "Temporary invulnerability window; 5-second duration; enemies neutralized; bonus collection opportunity"
+    },
+    {
+      "world_state": "Timer near zero",
+      "visual_manifestation": "On-screen countdown display approaches zero",
+      "behavioral_manifestation": "Urgency increased; player must complete level quickly or fail; temporal pressure on decision-making"
+    },
+    {
+      "world_state": "Greedy state (excessive collection)",
+      "visual_manifestation": "Automatic transition to Torture Room layout when thresholds exceeded (>9 Mighty Coins or >99 seconds)",
+      "behavioral_manifestation": "Punishment mechanic triggered by over-collection; forces jump challenge completion before level resumption; Mighty Coins forfeit"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dual-environment level structure",
+      "example": "Each of 16 levels split into Action Zone and Royal Palace room; visual and mechanical contrast tells story of hero progressing from demon's outer domain (pyramid action zone) to inner sanctum (palace room) to rescue royal family"
+    },
+    {
+      "technique": "Pyramid setting as narrative frame",
+      "example": "16-level pyramid structure physically represents descent into demon Belzebut's lair; increasingly complex/dangerous environment signals deeper penetration into hostile territory"
+    },
+    {
+      "technique": "Treasure chest distribution",
+      "example": "Hidden vs. visible chests signal exploration reward; color-lock requirements (blue/orange Mighty Coins) suggest fortress security layers protecting royal family"
+    },
+    {
+      "technique": "Sphinx trigger mechanism",
+      "example": "Sphinx symbol within treasure chests unlocks secret passages; mythological iconography suggests ancient magical security protecting escape routes and shortcuts"
+    },
+    {
+      "technique": "Torture Room as world-state consequence",
+      "example": "Automatic penalty room triggered by greed tells meta-narrative: demon's curse punishes excessive ambition; mechanical consequence reinforces thematic balance (can't be too powerful)"
+    },
+    {
+      "technique": "Color-state transformation",
+      "example": "Jack's visual color change via Mighty Coins signals power-up acquisition; blue/orange/green states represent different capability tiers, visually communicating progression within levels"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Flying enemies",
+      "state": "Unpredictable movement pattern",
+      "behavior": "Reviews note 'almost random' behavior; players must anticipate movement to navigate safely; no consistent patrol patterns reduce predictability"
+    },
+    {
+      "entity": "Unused walking guards",
+      "state": "Planned but not implemented",
+      "behavior": "Sprite graphics exist in ROM; were likely intended for slave rooms where royal family members are held; suggests planned stationary or patrol-based enemy variety"
+    },
+    {
+      "entity": "Jack (player)",
+      "state": "Default (no Mighty Coin active)",
+      "behavior": "Standard platforming movement; restricted to accessible treasure chests; vulnerable to enemy collision"
+    },
+    {
+      "entity": "Jack (Blue Mighty Coin active)",
+      "state": "Selective access mode",
+      "behavior": "Can open orange treasure chests only; encourages hunting for orange/green coins; restricted resource access forces exploration"
+    },
+    {
+      "entity": "Jack (Green Mighty Coin active)",
+      "state": "Temporary invulnerability",
+      "behavior": "5-second window where all on-screen enemies transform to coins; enemies cease threat; enables high-risk collection strategies"
+    },
+    {
+      "entity": "Enemies (Green Mighty Coin active)",
+      "state": "Transformed state",
+      "behavior": "Convert to collectible coins; threat neutralized; provides bonus resource window"
+    },
+    {
+      "entity": "Timer mechanism",
+      "state": "Counting down throughout action zone",
+      "behavior": "Pressures player to complete zones quickly; Mighty Drink pickup extends duration; timer reset in Torture Room penalty"
+    }
+  ],
+  "notes": "Mighty Bomb Jack demonstrates world-state communication through dual-environment design (Action Zone vs. Royal Palace) and resource-gating via color-state mechanics. Danger signals rely heavily on enemy presence and temporal pressure (timer) rather than explicit visual markers. Safety signals are color-coded (blue/orange/green Mighty Coins) and provide both mechanical and visual feedback. The Torture Room serves as a unique penalty state that reinforces thematic balance through visual/mechanical consequence. The game's communication style is implicit and rewards player learning; enemy behavior is noted as unpredictable, requiring anticipation rather than pattern recognition. Limited source material on detailed enemy sprite design and environmental visual techniques; TCRF notes unused graphics suggest planned but removed enemy variety and UI elements (compass map).",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:12:07.128Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5327,
+    "output_tokens": 2715,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

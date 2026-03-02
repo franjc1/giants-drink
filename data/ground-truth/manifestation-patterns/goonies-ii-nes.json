@@ -1,0 +1,170 @@
+{
+  "game_id": "goonies-ii-nes",
+  "game_name": "The Goonies II",
+  "platform": "nes",
+  "paradigm": "action-adventure",
+  "danger_signals": [
+    {
+      "signal": "Fratelli Family Appearance",
+      "visual_form": "Recurring enemy sprites (Jake, Francis, Cousin Pipsqueak, Ma Fratelli) in platform sections",
+      "meaning": "Active threat; pursuers closing in on player; narrative danger from antagonist faction"
+    },
+    {
+      "signal": "Health Meter Depletion",
+      "visual_form": "Visible health bar reduction during combat or environmental damage",
+      "meaning": "Immediate danger to player character; risk of losing a life"
+    },
+    {
+      "signal": "Fall Hazard",
+      "visual_form": "Bottom edge of platform screen; gaps between platforms",
+      "meaning": "Environmental danger; loss of life if player falls off bottom edge"
+    },
+    {
+      "signal": "Enemy Encounters in Zone Rooms",
+      "visual_form": "Distinct enemy sprites unique to each zone type (varying graphics per area)",
+      "meaning": "Zone-specific threats; visual differentiation signals changed danger profile"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health Increase from Rescued Goonies",
+      "visual_form": "Health meter expansion when Goonie is rescued and returns to platform mode",
+      "meaning": "Progress toward safety; each rescued Goonie increases resilience"
+    },
+    {
+      "signal": "Item Collection",
+      "visual_form": "Weapons (yo-yo, slingshot, boomerang), shoes (spring shoes, hyper shoes), protective gear (diving suit)",
+      "meaning": "Enhanced capability and survivability; means to overcome obstacles"
+    },
+    {
+      "signal": "Door/Warp Zone Transitions",
+      "visual_form": "Door sprites and threshold graphics indicating level transitions",
+      "meaning": "Safe passage between areas; access to new exploration spaces"
+    },
+    {
+      "signal": "NPC Presence in First-Person Maze",
+      "visual_form": "Character sprites and dialogue in first-person mode rooms",
+      "meaning": "Interaction opportunity; potential source of items, information, or rescue targets"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Fratelli Family (Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Recurring sprite designs for Jake, Francis, Cousin Pipsqueak, Ma Fratelli",
+      "enemy_visual_variants": "Four distinct Fratelli member designs; Pipsqueak vanishes when hit (visual distinction from others who can only be stunned)",
+      "environmental_markers": "Appear across multiple platform screen zones as persistent pursuers; presence indicates hideout control"
+    },
+    {
+      "faction": "The Goonies (Allies/Rescue Targets)",
+      "color_identity": null,
+      "symbol_or_sigil": "Six distinct Goonie characters; represented as cells/captives in first-person maze sections",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Located in cells within first-person mode rooms; marked by Magic Locator Device (blue dot on map); each rescue increases player health visually"
+    },
+    {
+      "faction": "Annie (Secondary Objective)",
+      "color_identity": null,
+      "symbol_or_sigil": "Unique character sprite; only accessible after all six Goonies rescued",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Final cell target; visual separation from other Goonies indicates higher narrative importance"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early Game (No Goonies Rescued)",
+      "visual_manifestation": "Low health meter for player; limited weapon/item availability; map areas sparse with discoverable items",
+      "behavioral_manifestation": "Fratelli family pursues with standard behavior; enemy encounters follow zone-specific patterns"
+    },
+    {
+      "world_state": "Mid Game (Some Goonies Rescued)",
+      "visual_manifestation": "Expanded health meter; accumulated items visible in inventory; Magic Locator Devices vanish after each rescue but can be recollected",
+      "behavioral_manifestation": "Increased resilience in platform sections; first-person maze exploration becomes less threatening"
+    },
+    {
+      "world_state": "Late Game (All Goonies Rescued)",
+      "visual_manifestation": "Maximum or near-maximum health meter; full weapon/equipment access; Annie's cell becomes accessible in first-person mode",
+      "behavioral_manifestation": "Final objective shift; Fratelli pursuit continues but player capacity to resist is highest"
+    },
+    {
+      "world_state": "Underwater Areas (After Diving Suit Acquired)",
+      "visual_manifestation": "Visual palette shift; water/aquatic terrain graphics; weapon restrictions (harpoon gun only, bombs allowed)",
+      "behavioral_manifestation": "Movement speed/physics change; enemy types shift to aquatic variants; spatial layout becomes three-dimensional in appearance"
+    },
+    {
+      "world_state": "Hidden Areas (Glasses/Bomb Reveal)",
+      "visual_manifestation": "Previously invisible doors/passages become visible after using glasses or bomb explosions",
+      "behavioral_manifestation": "Access to new platform screens or first-person rooms; spatial expansion of explorable world"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Zone-Specific Visual Identity",
+      "example": "Each of the several zone types in the non-linear map features distinct enemy graphics, music, and visual style; communicates location change and danger profile shift without text"
+    },
+    {
+      "technique": "Implicit Clue Absence",
+      "example": "Strategic absence of things (no visible path, no obvious item placement) signals to player that discovery is required; visual void becomes instruction to explore further"
+    },
+    {
+      "technique": "Cell/Captive Visual Representation",
+      "example": "Goonies appear in cell sprites within first-person maze rooms; visual containment communicates capture state and rescue objective"
+    },
+    {
+      "technique": "Item Visual Consequence",
+      "example": "Equipped shoes (spring shoes, hyper shoes) visually alter player sprite or movement animation; diving suit changes sprite appearance and weapon silhouette; visual feedback of capability gain"
+    },
+    {
+      "technique": "Fratelli Persistent Threat",
+      "example": "Fratelli family members appear across multiple zone types as recurring sprites; visual consistency across environments establishes them as overarching antagonist presence rather than zone-specific threats"
+    },
+    {
+      "technique": "Health Meter as Progress Indicator",
+      "example": "Visible health bar expansion with each Goonie rescue; player can visually track progression toward objective and resilience increase"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fratelli Family Members (Jake, Francis, Ma Fratelli)",
+      "state": "Active Pursuit",
+      "behavior": "Frequently appear in platform screens; can be stunned briefly with attacks but cannot be defeated; visual persistence despite attack"
+    },
+    {
+      "entity": "Cousin Pipsqueak",
+      "state": "Unique Vulnerability",
+      "behavior": "Vanishes when hit (unlike other Fratelli members); visual distinction signals different interaction mechanic"
+    },
+    {
+      "entity": "Enemy Sprites by Zone",
+      "state": "Zone-Specific Threat",
+      "behavior": "Each zone type contains distinct enemies with unique graphics and behavior patterns; visual differentiation signals changing threat profile"
+    },
+    {
+      "entity": "Rescued Goonies",
+      "state": "Integrated Ally",
+      "behavior": "Return to platform mode with player; visually increase health meter upon rescue; no longer appear as cell sprites"
+    },
+    {
+      "entity": "NPCs in First-Person Maze",
+      "state": "Information/Item Source",
+      "behavior": "Accessible through command menu interaction; visual presence indicates interaction opportunity; some NPCs require specific actions (e.g., hitting old woman five times for candle)"
+    }
+  ],
+  "notes": "The Goonies II employs a hybrid visual communication system spanning both platform (action) and first-person (exploration/puzzle) modes. Danger and progression are communicated primarily through persistent visual presence of antagonists (Fratelli family) and visual expansion of player capabilities (health meter growth, item acquisition). The game lacks explicit on-screen text or numeric displays for world-state progression; instead, it relies on visual transformation of the player character (equipment changes) and spatial expansion (hidden doors revealed). Zone distinction through unique enemy graphics and music serves as primary environmental storytelling mechanism. The strategic absence of visual guidance is intentional design—the game requires implicit deduction, making visual discovery itself a form of progression feedback. Regional text changes (Buki→Weapons, Item→Implements, Foot→Shoes) suggest localization prioritized clarity over conciseness in non-English versions.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:06:15.397Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6239,
+    "output_tokens": 2261,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

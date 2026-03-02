@@ -1,0 +1,142 @@
+{
+  "game_id": "nba-jam-te-genesis",
+  "game_name": "NBA Jam: Tournament Edition",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Opponent aggression",
+      "visual_form": "Player animations showing shoving/elbowing during play",
+      "meaning": "Opponent is actively contesting possession; no foul penalty exists"
+    },
+    {
+      "signal": "Defensive pressure",
+      "visual_form": "Opponent positioning close to player character",
+      "meaning": "Immediate threat to ball possession or shooting attempt"
+    },
+    {
+      "signal": "24-second violation timer",
+      "visual_form": "On-screen timer countdown (inferred from rule system)",
+      "meaning": "Possession will be lost if shot not attempted within time window"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open court space",
+      "visual_form": "Large uncontested areas on court between player and basket",
+      "meaning": "Opportunity for fast break or uncontested scoring attempt"
+    },
+    {
+      "signal": "Teammate positioning",
+      "visual_form": "AI teammate character placement relative to player",
+      "meaning": "Safe passing option available; allied presence reduces isolation risk"
+    },
+    {
+      "signal": "Distance from defenders",
+      "visual_form": "Spatial separation between player character and opposing team",
+      "meaning": "Safe window for shooting or dribbling without immediate contest"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home team",
+      "color_identity": "Team-specific jersey colors (1992–93 or 1993–94 NBA rosters)",
+      "symbol_or_sigil": "NBA team logos and names (implied on jerseys and scoreboard)",
+      "enemy_visual_variants": "Away team renders in alternate jersey coloration",
+      "environmental_markers": "Home court branding visible on court/sidelines (inferred)"
+    },
+    {
+      "faction": "Away team",
+      "color_identity": "Secondary/alternate jersey palette per NBA team",
+      "symbol_or_sigil": "Opposing team logo (implied on uniforms)",
+      "enemy_visual_variants": "Distinct visual differentiation from home team through color contrast",
+      "environmental_markers": "Away uniform designation; opposing team sideline representation (inferred)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player on fire (3+ consecutive baskets)",
+      "visual_manifestation": "Character rendering changes to indicate hot status; visual effect emphasizes player state",
+      "behavioral_manifestation": "Unlimited turbo availability; increased shooting precision; continued scoring extends fire status until opponent scores or player scores 4 additional baskets while on fire"
+    },
+    {
+      "world_state": "Possession active",
+      "visual_manifestation": "Ball rendered in player's hands; player character highlighted as active controller",
+      "behavioral_manifestation": "Player can move, dribble, pass, or shoot; turbo meter available for use"
+    },
+    {
+      "world_state": "Opponent possession",
+      "visual_manifestation": "Ball held by opponent character model; defensive player becomes focal point",
+      "behavioral_manifestation": "Player switches to defensive positioning; must contest opponent shooting/passing without foul penalty available"
+    },
+    {
+      "world_state": "Shot clock violation imminent",
+      "visual_manifestation": "24-second timer visually decrements on-screen (inferred from rule system)",
+      "behavioral_manifestation": "Team must attempt shot or lose possession; time pressure escalates late in clock window"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Digitized player likenesses",
+      "example": "Real NBA players from 1992–93 season (arcade) or 1993–94 season (console) rendered as digitized sprites, creating visual connection to actual athletes and teams; absence of Michael Jordan and Shaquille O'Neal (licensing limitations) visually marks their unavailability"
+    },
+    {
+      "technique": "Court design and team branding",
+      "example": "NBA team logos, court colors, and sideline aesthetics embed team identity into play environment; home/away jersey differentiation signals faction alignment"
+    },
+    {
+      "technique": "Exaggerated physics and superhuman capabilities",
+      "example": "Extreme dunking heights and impossible jump trajectories visually communicate game's arcade style and power fantasy, differentiating it from realistic sports sims"
+    },
+    {
+      "technique": "Easter egg activation states",
+      "example": "Hidden character unlocks (Bill Clinton, Hugo the mascot, secret players) and special features (Super Clean Floors) create discoverable world-states that alter visual behavior and character availability, rewarding player exploration"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "On fire (3+ consecutive baskets)",
+      "behavior": "Unlimited turbo; increased shooting precision; animation/visual state changes to indicate hot status"
+    },
+    {
+      "entity": "Player character",
+      "state": "On fire, post-scoring (4 additional consecutive baskets)",
+      "behavior": "Fire status expires; turbo returns to limited meter; shooting precision normalizes"
+    },
+    {
+      "entity": "Player character",
+      "state": "With ball possession",
+      "behavior": "Can freely shove or elbow opponents (no foul penalty); can dribble, pass, or shoot; turbo meter enables enhanced movement"
+    },
+    {
+      "entity": "Opponent character",
+      "state": "Defending",
+      "behavior": "Can contest shots and passes; uses physical contact without foul consequences; positioning indicates defensive pressure"
+    },
+    {
+      "entity": "Team (collective)",
+      "state": "24-second shot clock active",
+      "behavior": "Must attempt shot before clock expires or possession is lost; behavioral urgency increases as timer depletes"
+    },
+    {
+      "entity": "Game state",
+      "state": "Super Clean Floors active (Easter egg)",
+      "behavior": "Characters fall if running too fast or changing direction too quickly; physics behavior visually altered to indicate special rule state"
+    }
+  ],
+  "notes": "NBA Jam: Tournament Edition operates within a sports arcade paradigm that prioritizes spectacle and accessibility over simulation realism. Danger and safety signals emerge primarily from spatial relationships (defender proximity, court openness) and possession state rather than explicit visual warnings. Faction identity is rooted in NBA team authenticity—real team rosters, colors, and likenesses create sports legitimacy. The 'on fire' mechanic is the primary world-state indicator, signaling momentum and player performance visually and mechanically. Easter eggs and hidden features (unlockable characters, special modes like Super Clean Floors) represent discoverable world-state variations. No explicit political or ideological faction systems exist; team differentiation is purely sports-competitive. The absence of fouls/free throws/violations simplifies visual communication—no penalty animation states clutter the screen, focusing player attention on action and scoring. Digitized player graphics anchor the game to real 1990s NBA identity, though licensing gaps (Jordan, O'Neal) are visible absences that communicate commercial/legal constraints as narrative gaps.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:53:47.481Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2891,
+    "output_tokens": 1812,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

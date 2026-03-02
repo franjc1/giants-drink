@@ -1,0 +1,168 @@
+{
+  "game_id": "yoshis-safari-snes",
+  "game_name": "Yoshi's Safari",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Goombas, Koopas, Cheep-Cheeps rendered on screen in first-person perspective",
+      "meaning": "Active threats requiring player response via shooting"
+    },
+    {
+      "signal": "Boss encounter initiation",
+      "visual_form": "Level transition to boss arena; Koopalings piloting giant mechs or enlarged enemy versions appear",
+      "meaning": "High-difficulty threat requiring focused firepower and strategy"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Health bar visual indicator shown on HUD",
+      "meaning": "Player proximity to life loss; increased vulnerability state"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Level timer display and countdown",
+      "meaning": "Temporal threat; failure to complete level within time limit causes life loss"
+    },
+    {
+      "signal": "Pit hazards",
+      "visual_form": "Environmental bottomless gaps visible in level geometry",
+      "meaning": "Instant death risk if player falls with fewer than three coins"
+    },
+    {
+      "signal": "Power gauge depletion",
+      "visual_form": "Weapon power meter on HUD dropping during rapid fire",
+      "meaning": "Mechanical vulnerability; extended pause between shots increases enemy attack window"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Mushrooms, flowers, and stars rendered as collectible items; visual feedback when acquired",
+      "meaning": "Temporary stat enhancements: extra health, firepower boost, or invincibility frames"
+    },
+    {
+      "signal": "Coin collection",
+      "visual_form": "Question mark blocks shot to release coins; 60-coin threshold visualization",
+      "meaning": "Resource accumulation toward extra life; safety buffer against game over"
+    },
+    {
+      "signal": "Mario riding Yoshi",
+      "visual_form": "First-person perspective anchored to Yoshi mount; visible in level transitions",
+      "meaning": "Player agency state; controlled mobility and combat platform"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario/Yoshi alliance (heroic)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario and Yoshi as protagonists; Mario's iconic silhouette in first-person POV",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Jewelry Land setting; visual separation between allied and enemy-controlled zones through level design"
+    },
+    {
+      "faction": "Bowser's forces (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bowser and Koopalings as identifiable boss entities; mech designs piloted by Koopalings (Iggy's invention)",
+      "enemy_visual_variants": "Standard Goombas, Koopas, Cheep-Cheeps as foot soldiers; enlarged versions as mini-bosses; mechs as faction-specific technology",
+      "environmental_markers": "Jewelry Land territories corrupted by invasion; split kingdom geography indicates occupation zones"
+    },
+    {
+      "faction": "Jewelry Land rulers (passive)",
+      "color_identity": null,
+      "symbol_or_sigil": "King Fret and Prince Pine mentioned as kidnapped objectives",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Targets of rescue mission; their imprisonment reflects kingdom vulnerability state"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-invasion (stable Jewelry Land)",
+      "visual_manifestation": "Protected kingdom with 12 magic gems intact; unified geography",
+      "behavioral_manifestation": "No enemy presence; normal level progression expected"
+    },
+    {
+      "world_state": "Post-invasion (compromised Jewelry Land)",
+      "visual_manifestation": "Kingdom split in two by earthquake; visual destruction and corruption; gems scattered across 12 levels as mission objectives",
+      "behavioral_manifestation": "Bowser's forces occupy territories; Koopalings and mechs deployed; enemy patrols and boss encounters in each level"
+    },
+    {
+      "world_state": "Level active (combat zone)",
+      "visual_manifestation": "First-person perspective of level environment with enemies and hazards visible; branching path architecture visible",
+      "behavioral_manifestation": "Enemies actively attack; time limit actively counts down; power gauge responds to player firing rate"
+    },
+    {
+      "world_state": "Boss arena (faction confrontation)",
+      "visual_manifestation": "Elevated visual presentation of boss entity; Koopaling in mech or Bowser at level terminus",
+      "behavioral_manifestation": "Boss-specific attack patterns; enhanced enemy AI; concentrated damage requirement for progression"
+    },
+    {
+      "world_state": "Level cleared (progression unlocked)",
+      "visual_manifestation": "Gem recovery visual; overworld map update showing level completion state",
+      "behavioral_manifestation": "Player advances to next level; score registered on leaderboard; difficulty increase unlocks with cheat code after game completion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative geography splitting",
+      "example": "Earthquake caused by gem theft visually manifests as kingdom split in two; this geographic division communicates the magnitude of invasion and justifies multi-level quest structure"
+    },
+    {
+      "technique": "Enemy type placement as faction signature",
+      "example": "Koopalings piloting giant mechs designed by Iggy serves as visual technology signature of Bowser's faction; upgraded enemy variants (larger Goombas/Koopas) indicate military escalation"
+    },
+    {
+      "technique": "Level-end boss progression as narrative escalation",
+      "example": "Each level culminates in confrontation with Koopaling or Bowser; visual elevation of boss arena signals story progression toward final confrontation"
+    },
+    {
+      "technique": "Gem collection as world restoration",
+      "example": "12 magic gems scattered across 12 levels represent kingdom's life force; visual collection of gems (shown on HUD or in cutscenes) communicates restoration of world stability"
+    },
+    {
+      "technique": "Mode 7 3D effect for immersion",
+      "example": "First-person perspective using Mode 7 graphics creates visual illusion of depth and 3D space; this communicates player immersion into invaded territory rather than observing from distance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goomba/Koopa/Cheep-Cheep (standard enemy)",
+      "state": "Patrol/active combat",
+      "behavior": "Visible on screen requiring targeting and shooting; behavior changes based on level branching path selection"
+    },
+    {
+      "entity": "Koopaling in mech",
+      "state": "Boss encounter",
+      "behavior": "Elevated attack complexity; giant mech form requires sustained firepower; pattern-based attack behavior distinct from standard enemies"
+    },
+    {
+      "entity": "Bowser",
+      "state": "Final boss encounter",
+      "behavior": "Appears at game finale; represents faction leader; requires maximum firepower and invincibility stars for effective damage; ultimate threat manifestation"
+    },
+    {
+      "entity": "Power-up item",
+      "state": "Available for collection",
+      "behavior": "Stationary; becomes active when shot by player; provides temporary buff (health, firepower, invincibility)"
+    },
+    {
+      "entity": "Mario (player character)",
+      "state": "Mounted on Yoshi",
+      "behavior": "Continuous forward motion through level; controlled shooting via light gun aiming; vulnerable to enemy fire and environmental hazards; health bar decreases with damage"
+    }
+  ],
+  "notes": "Yoshi's Safari uses first-person perspective with light gun mechanics to create unique danger/safety signal vocabulary compared to traditional Mario games. Visual communication relies heavily on: (1) enemy placement and scale variation to indicate threat level; (2) environmental geometry (pits, paths) to communicate hazard zones; (3) HUD elements (health bar, power gauge, timer, coin counter) for state feedback; (4) boss arena visual elevation to mark narrative progression; (5) Mode 7 perspective effect to immerse player in invaded territory. Faction identity is communicated through character design (Mario/Yoshi vs. Bowser/Koopalings) and technology signature (mechs as Bowser faction innovation). World state transitions from stable to compromised kingdom are communicated through narrative setup (gem theft, kingdom split) and level progression structure (12 levels = 12 gems = restoration path). Limited sources restrict depth of analysis on subtle visual communication techniques not explicitly documented.",
+  "sources_used": [
+    "wikipedia: Yoshi's Safari article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:21:46.068Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2998,
+    "output_tokens": 2244,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

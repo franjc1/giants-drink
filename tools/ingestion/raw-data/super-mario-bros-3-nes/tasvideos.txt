@@ -1,0 +1,320 @@
+GameResources/NES/SuperMarioBros3 - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Super Mario Bros 3
+
+This page documents information about
+
+Mario Adventure
+
+,
+
+Super Mario All-Stars: Super Mario Bros. 3
+
+,
+
+Kaizo Mario Bros. 3
+
+,
+
+Super Mario Bros. 3Mix
+
+,
+
+Super Mario Bros. 3
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Table of contents
+
+Speed & Pixel Position Mechanics
+
+Maintaining Sliding Speed
+
+The Walljump
+
+Enter walls at a corner
+
+Corner Boosting
+
+Ceiling Boosting
+
+Getting in floors
+
+Early pipe entry via floor glitching
+
+Bouncing high off turtles (SMB1, SMB2j)
+
+Mushroom / enemy bounce
+
+Not taking damage from Bowser's ground pound.
+
+Running down hill
+
+Remote Sprite Bumping
+
+Instant Sprite Bumping
+
+Important RAM Addresses
+
+Page created, content coming soon! Meanwhile, look at the  tricks for the previous game , the games share a lot of stuff.
+
+Speed & Pixel Position Mechanics
+
+0x00BD - X Speed
+
+0x0075 - X position in level, 2nd byte
+
+0x0090 - X position in level
+
+0x074D - X subpixel position
+
+Like  SMB and SMB2j  (as well as many NES games), SMB3 has a subpixel precision of 16.  Subpixel is a 1 byte value that represents a fraction of a pixel (256ths of a pixel).  A precision of 16 means it will only change in increments of 16.  Thus 1 subpixel equals a value of 16 on 0x074D.
+
+Speed (0x00BD) is measured in subpixels per frame.  A value of 40 means 40 16ths of a pixel, or 2.5 pixels per frame.
+
+Mario has a different max speed in various situations:
+
+Situation  Max  Pix/Frame
+
+Wall ejecting  16  1
+
+Flying  23  1.958
+
+Walking/swimming  24  1.5
+
+Run-no P  40  2.5
+
+Run+P  56  3.5
+
+Sliding  63  3.938
+
+Subpixel carry over
+
+This game has subpixel carryover, meaning that x & y subpixel values are not cleared at the end of a level and are thus carried over to the next level.  Having a high x subpixel value at the end of one level will give you a head start in the next.
+
+Maintaining Sliding Speed
+
+TODO :  Explain 8 frame rule + RAM address, how to use this to keep speed.
+
+The Walljump
+
+A walljump occurs when you jump towards a wall and Mario's foot collides with the wall in such a way that he can jump again.  In the animation above (made on a custom map), three walljumps are performed.
+
+Theory: Walljumps are possible because the game does a floor check
+(a simple "is position divided by 16 even? Is there a solid block below him?" test)
+even during a wall-ejection.
+Wall-ejection is SMB's mechanism to adjust Mario's horizontal position properly
+when his left side and right side have a different inside-wall status. The game
+ejects Mario in the opposite direction from the one in which he was traveling when he entered the wall.
+
+Two conditions must be met for a walljump to be possible:
+
+Mario must have a minimum of 33 horizontal speed (towards the wall)
+
+Mario's feet must hit the wall exactly at a block boundary (every 16 pixels)
+
+It's possible to perform a walljump on any non-lethal solid material
+(bricks, pipes, etc).
+
+In SMB3, the trick works exactly the same way as in  SMB1 , but
+is harder to perform, because the game is more effective at keeping Mario outside of walls.
+
+Enter walls at a corner
+
+This can not be done with small mario.
+
+Do a duck jump towards a wall and aim at the block just below the corner.  If your speed and subpixel values are right you will enter in the wall.  Stop ducking on the right frame, and mario will begin to eject out of the wall towards the right.  Once in the wall, mario will not be able to run left or right.
+
+Corner Boosting
+
+Corner boosts work on any block that is one block wide and isn't adjacent to another block.  This block can be in the air or on the ground.  If you jump at it at the right height, subpixel position, and speed, you can fall through the block.  In the process you get a small ~1 pixel boost from doing so.
+
+TODO: Add animated GIF
+
+Ceiling Boosting
+
+It is possible to boost a pixel off of corners of ceilings (similar to how it works in  NSMB ) by duck jumping.
+
+This animated GIF demonstrates how the ceiling boost works.  While Mario's speed never changes he is boosted 1 pixel if he hits the corner with the correct subpixel position.  The right side of the GIF shows his "predicted" position based on Mario's speed and then his actual position.  The actual position is greater due to the boosting that has occurred.  The left counter shows Mario has boosted exactly 1 pixel.
+
+Getting in floors
+
+This is the same trick as with corner boosting except there are several blocks to the right (the "floor").  If you do a corner boost into the block you will be stuck in the block instead of going through -- unless you duck.  Ducking ejects Mario to the right, allowing him to pass through the wall.
+
+Early pipe entry via floor glitching
+
+An application of the Getting in Floors trick.  Using this trick in auto-scrolling levels such as airships allows Mario to enter the pipe much sooner than he normally could.
+
+TODO: Demonstration.
+
+Bouncing high off turtles (SMB1, SMB2j)
+
+How it's done: If you jump toward a turtle while it's in the air,
+you can stomp it while moving upward and keep moving upward.
+The maximum height that you'll be able to reach if you keep holding
+down A depends on the exact frame that you made your jump and which
+part of the turtle you hit, so if you aren't bouncing high enough,
+keep adjusting your jump one frame at a time.
+
+This is useful for being able to get over an obstacle or landing on
+another enemy after bouncing off a turtle.
+
+The same can be done for a couple of walking enemies too, when
+you are running at top speed.
+
+Mushroom / enemy bounce
+
+How it's done: If you hold A while picking up a mushroom that's on top of an enemy, and you manage to collect the mushroom before killing the enemy, you will bounce off of the enemy without killing it. Probably useless.
+
+Not taking damage from Bowser's ground pound.
+
+How it's done: Stay perfectly still when Bowser is about to slam you. If you are small Mario, you won't be killed, and you'll remain perfectly safe unless you move while you're overlapping him.
+
+Running down hill
+
+While running downhill doesn't change the speed address, it does cause Mario to travel 3 subpixels per frame faster than his reported speed.  This gives an effective speed boost of +3.
+
+Remote Sprite Bumping
+
+Sprite AI subroutines use a shared variable (a byte at address 0x7F74)
+to store what kind of block is immediately beneath the sprite.
+When the block has type 0xF3 (meaning it is a block that Mario has just
+bumped from below) the sprite reacts accordingly:
+a Goomba is defeated, a Super Mushroom makes a small jump,
+a Koopa Troopa flips over and hides in its shell, etc.
+
+Certain sprites do not initialize the shared block type variable
+before running the AI subroutine.
+Instead, they use the  same  block type as
+the sprite slot that most recently set the variable.
+This means that bumping a sprite can affect more that one sprite,
+even ones that are far from the bumped block.
+a completely different sprite, even if they are not directly above it.
+For example, you can defeat a flying Paragoomba in sprite slot 3
+by bumping a Super Mushroom in sprite slot 6,
+if slots 4 and 5 are empty or do not set the shared variable.
+(Sprite slots are processed in reverse order.)
+
+(Link to video)
+
+The following sprites can be remotely bumped:
+
+Paragoomba
+
+one kind of Cheep Cheep
+
+Boomerang Bro
+
+Fire Bro
+
+upside-down Buzzy Beetle
+
+upside-down Spiny
+
+Boom Boom
+
+Rocky Wrench
+
+Koopaling projectile / Bowser fireball
+
+Instant Sprite Bumping
+
+The shared global variable indicating block type
+retains its value as long as there are no sprites
+that set it—even across level transitions.
+As long as the variable holds the value 0xF3,
+any remote-bumpable sprites will be bumped
+immediately after spawning.
+
+There are a few places in the game where
+there are no sprites that change the value of the block type variable
+and it is possible to retain the 0xF3 state
+until encountering a remote-bumpable enemy.
+This trick can be used to defeat Boom Boom
+faster in Fortress 2 of World 6.
+
+(Link to video)
+
+Important RAM Addresses
+
+BizHawk .wch file:  UserFiles/Info/637936906462581196
+
+TODO: add these
+
+Tompa's "pipe glitch"
+
+Stuttering (getting P speed with less floor distance)
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/SuperMarioBros3 last edited by adelikat  on 9/2/2023 3:01 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

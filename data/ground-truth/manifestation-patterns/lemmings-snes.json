@@ -1,0 +1,231 @@
+{
+  "game_id": "lemmings-snes",
+  "game_name": "Lemmings",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Lava pools",
+      "visual_form": "Orange/red fluid terrain",
+      "meaning": "Instant death on contact; lemming drowning hazard"
+    },
+    {
+      "signal": "Large vertical drops",
+      "visual_form": "Tall cliff edges at bottom of screen or gaps",
+      "meaning": "Fall damage or instant death if height exceeds safe threshold"
+    },
+    {
+      "signal": "Booby traps",
+      "visual_form": "Specific terrain obstacles (spikes, hazard objects)",
+      "meaning": "Instant lemming death on triggering"
+    },
+    {
+      "signal": "Fire/burning zones",
+      "visual_form": "Flame visual effects in environment",
+      "meaning": "Lemming catches fire and dies"
+    },
+    {
+      "signal": "Time limit expiration",
+      "visual_form": "Timer display countdown; lemmings flash/explode when time reaches zero",
+      "meaning": "All remaining lemmings explode, mission fails"
+    },
+    {
+      "signal": "Bottom screen edge",
+      "visual_form": "Void below playable terrain",
+      "meaning": "Falling off screen kills lemming instantly"
+    },
+    {
+      "signal": "Bomber skill activation",
+      "visual_form": "Lemming assigned bomb skill; five-second countdown",
+      "meaning": "Lemming self-destructs after timer, destroying nearby destructible terrain"
+    },
+    {
+      "signal": "Steel barriers",
+      "visual_form": "Metallic/reinforced terrain segments",
+      "meaning": "Cannot be tunneled through by Basher, Miner, or Digger skills"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit/goal door",
+      "visual_form": "Designated exit structure in level",
+      "meaning": "Lemming safe zone; reaching this completes objective for that lemming"
+    },
+    {
+      "signal": "Solid ground/traversable terrain",
+      "visual_form": "Stable brown/tan rock and dirt blocks",
+      "meaning": "Safe walking surface for lemmings"
+    },
+    {
+      "signal": "Floater parachute deployment",
+      "visual_form": "Lemming with parachute visual above it",
+      "meaning": "Lemming falling safely; will not take fall damage"
+    },
+    {
+      "signal": "Climber skill active",
+      "visual_form": "Lemming in climbing animation on vertical surface",
+      "meaning": "Can traverse vertical obstacles; safe unless hitting overhang"
+    },
+    {
+      "signal": "Blocker lemming placement",
+      "visual_form": "Stationary lemming standing in position",
+      "meaning": "Creates living barrier; other lemmings reverse direction on contact"
+    },
+    {
+      "signal": "Builder stairway construction",
+      "visual_form": "Lemming building 12-step staircase visual",
+      "meaning": "Creates safe ascending path for other lemmings to cross obstacles"
+    },
+    {
+      "signal": "Basher/Miner/Digger tunneling",
+      "visual_form": "Lemming actively carving through terrain in horizontal/diagonal/vertical direction",
+      "meaning": "Creates safe passage through destructible terrain (not steel)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lemmings (player-controlled collective)",
+      "color_identity": "Green hair, blue robes",
+      "symbol_or_sigil": "Anthropomorphic lemming sprite with distinctive silhouette",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Entrance trap doors (release points); exit goal structure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level start/initialization",
+      "visual_manifestation": "Trap doors open from top of screen in steady sequence",
+      "behavioral_manifestation": "Lemmings released one after another in predetermined rate; all follow each other in line"
+    },
+    {
+      "world_state": "Standard traversal/safe state",
+      "visual_manifestation": "Lemmings walking left or right on solid ground with normal sprite animation",
+      "behavioral_manifestation": "Lemming ignores other lemmings (except Blockers), falls off edges, turns around when hitting unpassable obstacle"
+    },
+    {
+      "world_state": "Skill assignment active",
+      "visual_manifestation": "Selected lemming highlights; skill UI shows available ability count",
+      "behavioral_manifestation": "Lemming transitions to skill behavior (climbing, floating, building, etc.) in real-time"
+    },
+    {
+      "world_state": "Imminent danger (approaching hazard)",
+      "visual_manifestation": "Lemming sprite positions near lava, cliff edge, trap, or fire zone",
+      "behavioral_manifestation": "Lemming continues movement; no visual warning given before collision"
+    },
+    {
+      "world_state": "Lemming death",
+      "visual_manifestation": "Lemming sprite disappears or explodes; visual death effect",
+      "behavioral_manifestation": "Lemming removed from play; death counter incremented"
+    },
+    {
+      "world_state": "Level completion (save threshold met)",
+      "visual_manifestation": "Completion screen with statistics; message: 'SPOT ON' (exact %), 'to you on that attempt' (minimum + 20%)",
+      "behavioral_manifestation": "Game advances to next level or rating; remaining lemmings may continue to exit or level ends"
+    },
+    {
+      "world_state": "Level failure (time expired or save threshold not met)",
+      "visual_manifestation": "Timer reaches zero; all lemmings flash and explode; 'LEVEL FAILED' state",
+      "behavioral_manifestation": "All remaining lemmings self-destruct regardless of Bomber assignment; level restarts or returns to menu"
+    },
+    {
+      "world_state": "Difficulty rating progression",
+      "visual_manifestation": "Level names grouped by rating: 'Fun', 'Tricky', 'Taxing', 'Mayhem' (regional variants in text only)",
+      "behavioral_manifestation": "Increased complexity, more hazards, stricter time limits, fewer skill uses per progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain-as-narrative: Level geometry spells words or shapes",
+      "example": "Tricky 21 (Japan): Level structure spells '666' in rocks; changed to 'ohayou' hiragana in international versions for censorship. Taxing 3 spells 'heaven' (Japan) or 'paradise' (international). Taxing 24 spells 'death' (Japan) or 'terminate' (international)."
+    },
+    {
+      "technique": "Religious/cultural symbol substitution",
+      "example": "Christian crosses in dirt tileset replaced with neutral signs in US/EU versions. Christian cross in 'A Beast II of a Level' changed to generic wooden pieces in international versions."
+    },
+    {
+      "technique": "Hazard visual distinctiveness",
+      "example": "Lava pools use warm orange/red color to signal liquid hazard; distinct from solid terrain. Traps and fire zones use visually distinctive sprites to indicate danger zones."
+    },
+    {
+      "technique": "Level set progression names",
+      "example": "Difficulty categories ('Fun', 'Tricky', 'Taxing', 'Mayhem') signal escalating challenge through naming convention; visual level complexity increases correspondingly."
+    },
+    {
+      "technique": "UI text localization as world-building",
+      "example": "Level name changes between regions ('Lovely Jubilee' US vs 'Luvly Jubly' JP; 'Umbrella land' US vs 'Mary Poppins' land' JP) reflect cultural reference adaptation; 'The Other Side' (US) vs 'The Far Side' (JP) for Mayhem 12."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Lemming (unassigned)",
+      "state": "default walking",
+      "behavior": "Walks in one direction; ignores other lemmings; falls off edges; reverses direction on hitting unpassable obstacle"
+    },
+    {
+      "entity": "Lemming assigned Climber skill",
+      "state": "climbing",
+      "behavior": "Climbs vertically upward; falls if encountering overhang; allows vertical obstacle traversal"
+    },
+    {
+      "entity": "Lemming assigned Floater skill",
+      "state": "falling with parachute",
+      "behavior": "Deploys parachute during fall; descends slowly; negates fall damage"
+    },
+    {
+      "entity": "Lemming assigned Bomber skill",
+      "state": "explosive countdown",
+      "behavior": "Five-second timer activates; explosion destroys nearby destructible terrain; kills the lemming; does not damage other lemmings or traps"
+    },
+    {
+      "entity": "Lemming assigned Blocker skill",
+      "state": "stationary barrier",
+      "behavior": "Stands still; other lemmings reverse direction on contact; acts as living obstacle"
+    },
+    {
+      "entity": "Lemming assigned Builder skill",
+      "state": "constructing stairway",
+      "behavior": "Builds 12-step staircase in forward direction; stops if head hits ceiling, runs out of bricks, or stairway hits solid object"
+    },
+    {
+      "entity": "Lemming assigned Basher skill",
+      "state": "tunneling horizontally",
+      "behavior": "Carves horizontal tunnel through destructible terrain; cannot break steel barriers"
+    },
+    {
+      "entity": "Lemming assigned Miner skill",
+      "state": "tunneling diagonally downward",
+      "behavior": "Carves diagonal downward tunnel through destructible terrain; cannot break steel barriers"
+    },
+    {
+      "entity": "Lemming assigned Digger skill",
+      "state": "tunneling vertically downward",
+      "behavior": "Carves vertical downward tunnel through destructible terrain; cannot break steel barriers"
+    },
+    {
+      "entity": "Lemming in exit zone",
+      "state": "goal reached",
+      "behavior": "Enters exit structure; counted toward save quota; removed from level; safe"
+    },
+    {
+      "entity": "Lemming contacting hazard",
+      "state": "death triggered",
+      "behavior": "Disappears or explodes; removed from play; counted as death; cannot be saved"
+    }
+  ],
+  "notes": "Lemmings SNES uses minimal color-coded visual distinction due to platform constraints. Danger communication relies heavily on environmental positioning (proximity to hazards) and sprite behavioral animation rather than color warning systems. Level design geography itself is the primary storytelling medium. Regional censorship modified terrain visuals (cross replacement) and level geometry text (666, heaven, death word-spells) without altering core danger signals. Player must infer danger through spatial layout and prior experience; no explicit visual warnings precede hazards. Completion feedback uses text-based messaging ('SPOT ON', 'Right on!') with regional variation.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:41:06.457Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5823,
+    "output_tokens": 2874,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "game_id": "need-for-speed-3-pc",
+  "game_name": "Need for Speed III: Hot Pursuit",
+  "platform": "pc",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "police_presence",
+      "visual_form": "police car models in pursuit, distinctive police vehicle skins",
+      "meaning": "active threat to player racer; indicates enforcement zone and chase initiation"
+    },
+    {
+      "signal": "roadblock_deployment",
+      "visual_form": "wall formation of police cars across road",
+      "meaning": "imminent collision risk; forced stopping point ahead"
+    },
+    {
+      "signal": "spike_strips",
+      "visual_form": "visual hazard markers on road surface (one side only)",
+      "meaning": "tire damage zone; steering vulnerability if hit"
+    },
+    {
+      "signal": "multiple_pursuing_vehicles",
+      "visual_form": "multiple police car models converging on player vehicle",
+      "meaning": "escalating pursuit intensity; ambush formation"
+    },
+    {
+      "signal": "radio_chatter_alerts",
+      "visual_form": "audio + UI indicator of police communication",
+      "meaning": "real-time threat awareness; police coordination acknowledgment"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "absence_of_police",
+      "visual_form": "clear road, no pursuing vehicles visible",
+      "meaning": "safe racing zone; no enforcement active"
+    },
+    {
+      "signal": "gaps_in_blockade",
+      "visual_form": "visual spaces between police car formation",
+      "meaning": "escape route available; avoidable threat"
+    },
+    {
+      "signal": "track_environment_clarity",
+      "visual_form": "clear visibility of race path, no obstacles",
+      "meaning": "optimal racing conditions; low environmental hazard"
+    },
+    {
+      "signal": "competitive_racer_pursuit",
+      "visual_form": "police focus shifts to AI racer, away from player",
+      "meaning": "temporary reprieve; police targeting more dangerous competitor"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_racer",
+      "color_identity": null,
+      "symbol_or_sigil": "exotic sports car models (Lamborghini Diablo SV, etc.)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "racing circuit paths, speed-optimized routes"
+    },
+    {
+      "faction": "law_enforcement",
+      "color_identity": "police car standard livery (implied standard police coloring)",
+      "symbol_or_sigil": "police vehicle designation, official police car models",
+      "enemy_visual_variants": "police sports car variants (selectable in PC version for role reversal)",
+      "environmental_markers": "roadblocks, spike strips, patrol positioning on track"
+    },
+    {
+      "faction": "ai_racers",
+      "color_identity": null,
+      "symbol_or_sigil": "sports car variants distinct from player selection",
+      "enemy_visual_variants": "opposing racer vehicles with custom tuning visible through handling differences",
+      "environmental_markers": "competitive positioning on race circuit"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "standard_race_mode_active",
+      "visual_manifestation": "clean track environment, opponent racers visible, no police presence",
+      "behavioral_manifestation": "AI competitors follow race line, focus on circuit completion"
+    },
+    {
+      "world_state": "hot_pursuit_mode_active",
+      "visual_manifestation": "police vehicles present on track, roadblock formations deployed, spike strips visible on road surface",
+      "behavioral_manifestation": "police AI uses tactical blocking, ambush tactics, pursuit intensifies with multiple units; player must evade while racing"
+    },
+    {
+      "world_state": "police_role_reversal",
+      "visual_manifestation": "player operates police sports car variant, racer vehicles are targets, roadblock and spike strip tools deployed by player",
+      "behavioral_manifestation": "player assumes enforcement role, controls blockade formation, deploys hazards, pursues racer targets across track"
+    },
+    {
+      "world_state": "weather_variation",
+      "visual_manifestation": "desert canyons, countryside villages, snow-capped mountain ranges visible; rain/racing tire selections affect visual grip indicators",
+      "behavioral_manifestation": "track conditions alter AI and player handling; tire selection becomes tactical choice"
+    },
+    {
+      "world_state": "escalating_pursuit_danger",
+      "visual_manifestation": "progressive police unit accumulation, coordinated blocking patterns, radio chatter frequency increase",
+      "behavioral_manifestation": "police tactics become more aggressive; collision threat escalates; multiple vectors of attack"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "track_setting_diversity",
+      "example": "desert canyons, countryside villages, snow-capped mountains communicate varied North American geography; each locale establishes different evasion challenges"
+    },
+    {
+      "technique": "police_radio_communication",
+      "visual_form": "audio cues + implicit UI indicators of coordination",
+      "example": "radio chatter reveals police locations, racer positions, roadblock deployment; reactions to collisions and speed violations establish enforcement narrative"
+    },
+    {
+      "technique": "tactical_obstacle_placement",
+      "example": "roadblocks and spike strips positioned strategically on track communicate organized police response; gaps in formations suggest deliberate challenge design"
+    },
+    {
+      "technique": "pursuit_intensity_scaling",
+      "example": "single police car escalates to multiple pursuing units; visual accumulation of police vehicles establishes narrative of intensifying law enforcement commitment"
+    },
+    {
+      "technique": "secret_shortcut_availability",
+      "example": "hidden track routes provide visual evidence of experienced racer knowledge; implies underground racing culture awareness"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "police_ai",
+      "state": "pursuing_player",
+      "behavior": "blocks racer's intended path, deploys roadblocks ahead, forms ambush formations with multiple units"
+    },
+    {
+      "entity": "police_ai",
+      "state": "pursuing_rival_racer",
+      "behavior": "shifts focus away from player when rival driving is deemed more dangerous; resets player pursuit priority"
+    },
+    {
+      "entity": "police_ai",
+      "state": "tactical_deployment",
+      "behavior": "coordinates spike strip placement (one side of road only), creates wall formations with exploitable gaps"
+    },
+    {
+      "entity": "player_racer",
+      "state": "arrested_or_ticketed",
+      "behavior": "forced stop near police vehicle; pursuit mode termination"
+    },
+    {
+      "entity": "ai_racer",
+      "state": "knockout_eliminated",
+      "behavior": "last-place finisher removed from race; visual elimination from circuit"
+    },
+    {
+      "entity": "ai_racer",
+      "state": "tournament_progression",
+      "behavior": "carries tuning and handling characteristics across rounds; demonstrates learning or consistent threat level"
+    }
+  ],
+  "notes": "Need for Speed III: Hot Pursuit establishes a two-faction dynamic (racers vs. law enforcement) with clear visual and behavioral distinction. The Pursuit system is the primary manifestation layer—police presence, tactical obstacles (roadblocks/spike strips), and radio chatter create a layered threat communication system. World-state shifts between standard racing and hot pursuit mode alter track visual complexity and AI behavioral priorities. The role-reversal mechanic (player as police) inverts faction perception but maintains the same visual manifestation logic. Environmental settings (desert, rural, mountains) serve as static storytelling backdrop rather than dynamic world-state indicators. Car tuning system affects handling visibility but not faction identity—all cars remain faction-neutral until assigned role.",
+  "sources_used": [
+    "wikipedia_need_for_speed_iii_hot_pursuit"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:21:41.877Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2584,
+    "output_tokens": 2000,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

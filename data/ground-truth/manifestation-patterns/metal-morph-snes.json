@@ -1,0 +1,112 @@
+{
+  "game_id": "metal-morph-snes",
+  "game_name": "Metal Morph",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "colored bullets/energy bolts contrasting with background",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "enemy_presence",
+      "visual_form": "distinct mechanical/organic enemy sprites entering screen",
+      "meaning": "combat encounter incoming"
+    },
+    {
+      "signal": "screen_edge_warning",
+      "visual_form": "scrolling playfield boundaries",
+      "meaning": "spatial constraint; collision hazard"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "clear_screen_space",
+      "visual_form": "empty playfield areas with no enemies or projectiles",
+      "meaning": "safe zone for repositioning"
+    },
+    {
+      "signal": "power_up_items",
+      "visual_form": "collectible objects with distinct visual markers",
+      "meaning": "beneficial resource acquisition opportunity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "morphing/transformation mechanic distinguishes player from static enemies",
+      "environmental_markers": null
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "mechanical/robotic design language differentiation from player entity",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "player_transformation_active",
+      "visual_manifestation": "character model shifts form/appearance via morphing animation",
+      "behavioral_manifestation": "altered movement speed, attack patterns, or collision properties"
+    },
+    {
+      "world_state": "combat_escalation",
+      "visual_manifestation": "increased enemy sprite density on screen; denser projectile patterns",
+      "behavioral_manifestation": "enemies attack more frequently; projectile velocity increases"
+    },
+    {
+      "world_state": "screen_progression",
+      "visual_manifestation": "scrolling playfield reveals new enemy formations and environmental layout",
+      "behavioral_manifestation": "boss or major threat appears at predetermined screen positions"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "enemy_design_progression",
+      "example": "mechanical enemies suggest industrial/technological setting; visual complexity increases with progression"
+    },
+    {
+      "technique": "playfield_layout",
+      "example": "scrolling arena design communicates level geography and implied world structure"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "default",
+      "behavior": "responds to input; navigates playfield; fires weapons"
+    },
+    {
+      "entity": "player_character",
+      "state": "morphed",
+      "behavior": "altered movement/attack parameters based on transformation state"
+    },
+    {
+      "entity": "enemies",
+      "state": "patrol",
+      "behavior": "enter screen and move in predictable patterns; minimal aggressive action"
+    },
+    {
+      "entity": "enemies",
+      "state": "engaged",
+      "behavior": "track player position; fire projectiles with targeting logic; execute evasion patterns"
+    }
+  ],
+  "notes": "Metal Morph (1994, SNES) is a shoot-em-up with core mechanic centered on player character morphing/transformation. Visual communication relies primarily on: (1) sprite-based distinction between player and enemies; (2) projectile contrast for threat signaling; (3) screen-space density for combat intensity feedback. World-state manifests through playfield progression (scrolling arena) and enemy formation complexity. Limited faction differentiation—bipolar player vs. enemy-force structure typical of shmup genre. Political/narrative content appears minimal in shmup context; focus is mechanical/tactical communication. TCRF source provided no substantial extraction data beyond general wiki framework.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:19:03.993Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 916,
+    "output_tokens": 1224,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

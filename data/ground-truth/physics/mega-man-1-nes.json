@@ -1,0 +1,165 @@
+{
+  "_meta": {
+    "game": "Mega Man",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1987,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "Data Crystal — Mega Man (NES) / RAM map",
+        "url": "https://datacrystal.tcrf.net/wiki/Mega_Man_(NES)/RAM_map",
+        "notes": "RAM map confirms position addresses but physics velocity values not fully documented in available review."
+      },
+      {
+        "name": "TASVideos — NES / Mega Man 1",
+        "url": "https://tasvideos.org/GameResources/NES/MegaMan",
+        "notes": "Technique documentation. Physics values referenced in speedrun context."
+      },
+      {
+        "name": "sprites-inc.co.uk — Mega Man Physics Forum",
+        "url": "https://www.sprites-inc.co.uk/thread-388.html",
+        "notes": "Community physics documentation. Notes differences in terminal velocity between MM1-2 (12 px/f) vs MM3-6 (7 px/f) — conflicts with TASVideos MM2 data of 4.0 px/f. Values unverified."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Mega Man 1 is the FIRST game in the series. Same engine as MM2/3 but with key differences.",
+      "KEY ABSENCE: NO SLIDE. The slide mechanic was introduced in Mega Man 2.",
+      "KEY ABSENCE: NO RUSH. Support items (Wire, Balloon) replace Rush in MM1.",
+      "Walk speed: same as MM2/3 (1.5 px/f). Instant velocity.",
+      "Gravity: same as MM2/3 (0.25 px/f²). Series constant.",
+      "Jump velocity: may differ slightly from MM2 (6.0 px/f). VERIFY.",
+      "Forum claim: terminal velocity is 12 px/f in MM1-2 (vs 4.0 px/f from TASVideos MM2 data). VERIFY — major discrepancy.",
+      "MM1 is the only NES Mega Man where walking through enemy contact kills instantly (no invincibility on certain contact types — needs verification)."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point",
+      "description": "Same engine as MM2/3. Established in MM1."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "hex": "$01.80",
+      "px_per_frame": 1.5,
+      "confidence": "high",
+      "notes": "Same as MM2/3. Confirmed series constant.",
+      "source": "Inferred from MM2 TASVideos confirmed value ($01.80). MM1 same engine."
+    },
+    "acceleration": null,
+    "notes": "Instant velocity, same as all NES Mega Man games."
+  },
+
+  "jump": {
+    "initial_y_velocity_approx": {
+      "px_per_frame": 6.0,
+      "confidence": "medium",
+      "notes": "Approximate. MM2 is ROM-confirmed at 6.0 px/f. MM1 may match or differ slightly. VERIFY against ROM."
+    },
+    "variable_jump": true,
+    "notes": "Variable height via early release, same as MM2."
+  },
+
+  "gravity": {
+    "px_per_frame_sq": 0.25,
+    "hex": "$40",
+    "confidence": "high",
+    "notes": "Series constant. Same as MM2/3. Confirmed consistent across all Mega Man NES reviews.",
+    "source": "Inferred from series consistency (0.25 is documented in MM2/3 ROM data)."
+  },
+
+  "terminal_velocity": {
+    "mm1_forum_claim_px_per_frame": 12.0,
+    "mm2_tasvideos_px_per_frame": 4.0,
+    "confidence": "low",
+    "notes": [
+      "MAJOR DISCREPANCY: Community forum claims 12 px/f terminal velocity for MM1-2. TASVideos MM2 data shows 4.0 px/f.",
+      "One of these values must be wrong. VERIFY MM1 terminal velocity against ROM.",
+      "Possible explanation: forum may use sub-pixel units without conversion, or different definition of 'terminal velocity.'"
+    ]
+  },
+
+  "absent_mechanics_vs_later_games": {
+    "slide": {
+      "present": false,
+      "introduced_in": "Mega Man 2"
+    },
+    "rush": {
+      "present": false,
+      "introduced_in": "Mega Man 3"
+    },
+    "charge_shot": {
+      "present": false,
+      "introduced_in": "Mega Man 4"
+    }
+  },
+
+  "support_items": {
+    "item_1": {
+      "name": "Item 1",
+      "description": "Creates a platform that Mega Man can ride horizontally.",
+      "notes": "Obtained from Cut Man. Limited uses."
+    },
+    "item_2": {
+      "name": "Item 2",
+      "description": "Creates a climbing rope/platform that moves horizontally.",
+      "notes": "Obtained from Guts Man."
+    },
+    "item_3": {
+      "name": "Item 3",
+      "description": "Creates a platform that moves vertically (elevator).",
+      "notes": "Obtained from Ice Man."
+    }
+  },
+
+  "special_weapons": {
+    "source": "Defeat the 6 Robot Masters to obtain their weapons",
+    "cut_man": "Rolling Cutter — boomerang that returns",
+    "guts_man": "Super Arm — lift and throw blocks",
+    "ice_man": "Ice Slasher — freezes enemies",
+    "bomb_man": "Hyper Bomb — exploding projectile",
+    "fire_man": "Fire Storm — vertical fire shield + projectile",
+    "elec_man": "Thunder Beam — horizontal + vertical electric blast",
+    "notes": "6 Robot Masters in MM1 vs 8 in MM2+. Each weapon can be used against a specific master's weakness."
+  },
+
+  "mega_buster": {
+    "bullet_speed_px_per_frame": 8,
+    "max_on_screen": 3,
+    "charge_shot": false,
+    "notes": "Basic rapid-fire Mega Buster. No charge shot — that comes in MM4."
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 128,
+    "notes": "Series standard. Same as MM2/3."
+  },
+
+  "hitboxes": {
+    "standing": {
+      "width_px": 14,
+      "height_px": 24,
+      "confidence": "medium",
+      "notes": "Same as MM2/3. VERIFY."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "Mega Man 1 is the 'raw' version of the series — the slide and Rush hadn't been invented yet. The movement vocabulary is strictly: walk, jump, shoot. This simplicity means every level challenge must be solved with only these tools.",
+    "The 6 Robot Masters (fewer than MM2's 8) make the weapon matrix simpler but the game's difficulty less precisely tuned. MM1 is famously harder than MM2 partly because the weapon weaknesses are less obvious.",
+    "The support Items (Item 1/2/3) replace Rush's mobility assistance but in a less elegant way — each Item creates a platform object in the world rather than a callable companion. This makes Items feel more like puzzle solutions and less like mobility tools.",
+    "MM1's physics are the genesis of the series feel. The 1.5 px/f walk and 0.25 px/f² gravity became the series constants for a reason — they produce the precise, methodical movement that the level design demands."
+  ]
+}

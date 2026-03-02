@@ -1,0 +1,139 @@
+{
+  "game_id": "ice-climber-nes",
+  "game_name": "Ice Climber",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": 32,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Standard ice blocks (dull, breakable)",
+      "first_appears": "Mountain 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic platforming foundation; easily disposed barrier"
+    },
+    {
+      "element": "Topi enemy (seal/yeti variant)",
+      "first_appears": "Mountain 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Can fill holes with ice, confined to single floor layer; requires timing awareness"
+    },
+    {
+      "element": "Nitpicker enemy (swooping bird)",
+      "first_appears": "Mountain 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Crosses multiple ice layers; adds vertical threat dimension and timing complexity"
+    },
+    {
+      "element": "Indestructible square ice blocks",
+      "first_appears": "Early mountains",
+      "introduction_context": "moderate",
+      "mastery_context": "Forces path choice and navigation puzzle-solving"
+    },
+    {
+      "element": "Hatched conveyor belt ice",
+      "first_appears": "Early-to-mid mountains",
+      "introduction_context": "moderate",
+      "mastery_context": "Adds directional momentum challenge; requires compensatory jumping"
+    },
+    {
+      "element": "Moving cloud platforms",
+      "first_appears": "Mid mountains",
+      "introduction_context": "dangerous",
+      "mastery_context": "Combines platforming with timing; later variants move diagonally or with wind effects"
+    },
+    {
+      "element": "Falling icicles",
+      "first_appears": "After early mountains established",
+      "introduction_context": "dangerous",
+      "mastery_context": "Hazard timing; can form on any platform type"
+    },
+    {
+      "element": "White Bear (speed-enforcer)",
+      "first_appears": "Mid-to-late mountains",
+      "introduction_context": "dangerous",
+      "mastery_context": "Appears when players take too long; forces screen upward; eliminates stalling strategy"
+    },
+    {
+      "element": "Bonus stage (peak, 40-second time limit)",
+      "first_appears": "Top of each mountain",
+      "introduction_context": "dangerous",
+      "mastery_context": "No enemies but trickier jumps and multiple moving platforms; only location for vegetable recovery"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Reaching bonus stage at peak (40-second window, no enemies)",
+      "Defeating or avoiding enemies to clear a layer",
+      "Successfully navigating conveyor belt sections"
+    ],
+    "typical_tension_triggers": [
+      "Enemy speed increases after early mountains",
+      "White Bear appearance (enforces upward screen movement)",
+      "Combination of multiple enemy types on same layer",
+      "Falling icicle hazards during navigation",
+      "Bonus stage time pressure (40-second countdown)"
+    ],
+    "pacing_descriptor": "Escalating difficulty wave pattern with enemy acceleration; tension builds through accumulated threats (enemies + hazards + platforms) then releases at bonus stage; White Bear eliminates downtime and prevents camping strategy"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Vegetables distributed across mountains, with eggplants only at peaks; single corn piece from fifth bonus stage grants extra life (progression gate)",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Mountain 1 introduces all basic mechanics (standard ice, Topi, Nitpicker, basic jumping); dull ice blocks pose minimal threat; establishes vocabulary without overwhelming",
+    "mid_game": "Indestructible ice blocks force navigation choices; conveyor belt sections add momentum complexity; White Bear appears to enforce pace; enemy speeds increase cumulatively",
+    "late_game": "Combination of all threats (multiple enemy types, falling icicles, moving platforms); bonus stages feature trickier jump sequences with no enemy respite; cumulative speed increases compound difficulty",
+    "notable_spikes": [
+      "Introduction of White Bear (eliminates stalling; forces upward screen pressure)",
+      "Conveyor belt ice combined with other obstacles",
+      "Multi-enemy encounters on single layer with limited safe platforms",
+      "Bonus stage time limit (40 seconds) intersecting with complex platforming"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Eight-layer mountain structure",
+      "description": "Each mountain consists of 8 layers of colored ice plus a bonus stage at peak. Layer progression is mandatory upward; eight mountains lead to Super Bonus Stage in arcade version",
+      "example_level": "Mountain 1-8 (NES); Mountains 1-24 then Super Bonus, then 25-48 (VS. Arcade)"
+    },
+    {
+      "pattern_name": "Enemy confinement vs. freedom",
+      "description": "Topi confined to single floor (manageable threat scope); Nitpicker crosses multiple layers (vertical threat); White Bear appears only when pace slackens (enforces momentum)",
+      "example_level": "Any standard mountain layer"
+    },
+    {
+      "pattern_name": "Bonus stage isolation",
+      "description": "Peak stage removes enemies entirely, replacing threat with precision platforming and time pressure; only location to recover vegetables and access extra life condition",
+      "example_level": "Peak of every mountain"
+    },
+    {
+      "pattern_name": "Cumulative enemy acceleration",
+      "description": "After early mountains cleared, all enemies' speeds increase; no explicit difficulty select; difficulty rises through entity behavior tuning rather than level redesign",
+      "example_level": "Mountains 3-32 (NES progression)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:39:20.149Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5155,
+    "output_tokens": 1700,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

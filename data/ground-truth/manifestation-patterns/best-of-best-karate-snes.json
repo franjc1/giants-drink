@@ -1,0 +1,125 @@
+{
+  "game_id": "best-of-best-karate-snes",
+  "game_name": "Best of the Best: Championship Karate",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "opponent_stance",
+      "visual_form": "fighting pose with raised guard",
+      "meaning": "opponent is ready to attack or defend"
+    },
+    {
+      "signal": "health_depletion",
+      "visual_form": "health bar reduction on screen",
+      "meaning": "player or opponent taking damage; risk of knockout"
+    },
+    {
+      "signal": "opponent_aggression",
+      "visual_form": "rapid animation frames, forward movement",
+      "meaning": "opponent executing offensive technique"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "match_not_active",
+      "visual_form": "static standing pose, neutral stance",
+      "meaning": "no immediate threat; preparation or rest phase"
+    },
+    {
+      "signal": "successful_block",
+      "visual_form": "guard animation with no health loss",
+      "meaning": "opponent attack was defended against"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "player controlled vs AI-controlled opponent sprites",
+      "environmental_markers": null
+    },
+    {
+      "faction": "opponent_fighters",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "different character models per tournament opponent",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "tournament_active",
+      "visual_manifestation": "arena background, opponent present on screen, health bars displayed",
+      "behavioral_manifestation": "opponent executes combat AI routines; player input accepted for attacks/blocks"
+    },
+    {
+      "world_state": "between_matches",
+      "visual_manifestation": "static character select or results screen",
+      "behavioral_manifestation": "no combat actions; menu input accepted"
+    },
+    {
+      "world_state": "character_defeated",
+      "visual_manifestation": "knockout animation, health bar depleted to zero",
+      "behavioral_manifestation": "character falls or collapses; match ends; winner declared"
+    },
+    {
+      "world_state": "match_in_progress",
+      "visual_manifestation": "both characters on screen in arena, active health bars, timer counting down",
+      "behavioral_manifestation": "both entities performing combat moves, collision detection active"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "arena_backdrop",
+      "example": "tournament location visual context establishes competitive environment without narrative text"
+    },
+    {
+      "technique": "character_sprite_differentiation",
+      "example": "unique fighter models and color palettes distinguish opponents and communicate progression through tournament brackets"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "opponent_ai",
+      "state": "attacking",
+      "behavior": "animation frames showing punch/kick; forward movement toward player"
+    },
+    {
+      "entity": "opponent_ai",
+      "state": "defending",
+      "behavior": "guard pose; reduced movement; damage reduction on contact"
+    },
+    {
+      "entity": "opponent_ai",
+      "state": "knocked_down",
+      "behavior": "fall animation; temporary inability to act; recovery delay"
+    },
+    {
+      "entity": "player_character",
+      "state": "executing_move",
+      "behavior": "animation sequence plays based on input; collision box active"
+    },
+    {
+      "entity": "player_character",
+      "state": "hit",
+      "behavior": "knockback animation; health bar decreases; brief stun state"
+    }
+  ],
+  "notes": "Source material provides only ROM-level technical data (MIDI chunks) with no visual design, faction, or world-state documentation. Game design patterns inferred from fighting game genre conventions. Limited T3 empirical data available for this title.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "TODO": "Requires gameplay video footage or manual screenshots to document: exact color palettes, specific arena designs, opponent character differentiation visuals, UI/HUD design for world-state communication, effects for damage states, victory/defeat animations, character selection screen layout",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:34:45.715Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1516,
+    "output_tokens": 1317,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

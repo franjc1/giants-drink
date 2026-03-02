@@ -1,0 +1,153 @@
+{
+  "game_id": "lethal-enforcers-snes",
+  "game_name": "Lethal Enforcers",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Figures wearing sunglasses, ski masks, or gas masks",
+      "meaning": "Armed threats to be neutralized; obscured faces indicate enemy combatants"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Enemy with exposed face in civilian-free environment",
+      "meaning": "Major threat requiring elimination; face exposure signals heightened danger level"
+    },
+    {
+      "signal": "Weapon loss consequence",
+      "visual_form": "Player reverts to basic revolver after being shot while holding upgraded weapon",
+      "meaning": "Vulnerability state; player has sustained damage and lost tactical advantage"
+    },
+    {
+      "signal": "Civilian presence in combat zone",
+      "visual_form": "Barefaced figures without masks in same environment as armed enemies",
+      "meaning": "Collateral damage risk; shooting these figures triggers rank penalty"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Officer identification",
+      "visual_form": "Barefaced figures in police context",
+      "meaning": "Friendly forces; must not be harmed to maintain rank progression"
+    },
+    {
+      "signal": "Civilian status",
+      "visual_form": "Barefaced non-combatant figures in public spaces",
+      "meaning": "Protected non-targets; shooting causes rank demotion or stasis"
+    },
+    {
+      "signal": "Weapon upgrade acquisition",
+      "visual_form": "In-stage weapon pickups (Magnum, shotgun, assault rifle, SMG, grenade launcher)",
+      "meaning": "Tactical advantage; temporary enhanced firepower until player sustains damage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Chicago Police Department",
+      "color_identity": null,
+      "symbol_or_sigil": "CPD officer status; barefaced appearance",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Urban police environments (bank, downtown areas, chemical plant)"
+    },
+    {
+      "faction": "Crime Organization",
+      "color_identity": null,
+      "symbol_or_sigil": "Masked/goggled appearance (sunglasses, ski masks, gas masks)",
+      "enemy_visual_variants": "Varying mask types indicate different enemy unit types or stages",
+      "environmental_markers": "Bank robbery locations, Chinatown/Downtown assault zones, hijacking sites, drug dealer operations, chemical plant sabotage"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active crime wave / emergency response",
+      "visual_manifestation": "Armed masked enemies proliferating across urban environments; civilians present in combat zones",
+      "behavioral_manifestation": "Enemies actively engage with weapons; dispatcher call initiates emergency protocol"
+    },
+    {
+      "world_state": "Police force casualties / understaffed response",
+      "visual_manifestation": "Player is one of two surviving elite officers; rest hospitalized or dead",
+      "behavioral_manifestation": "Single or two-player cooperative gameplay; reduced police presence in environments"
+    },
+    {
+      "world_state": "Escalating criminal operations",
+      "visual_manifestation": "Stage progression from bank robbery → hijacking → drug operations → chemical plant sabotage",
+      "behavioral_manifestation": "Boss encounters intensify; weapon variety increases; civilian-criminal distinction becomes clearer"
+    },
+    {
+      "world_state": "Player rank degradation (collateral damage)",
+      "visual_manifestation": "Rank display downgrades when civilians are shot",
+      "behavioral_manifestation": "Mechanical penalty for rule violations; rank floor at Patrolman prevents infinite demotion"
+    },
+    {
+      "world_state": "Player rank advancement (clean operations)",
+      "visual_manifestation": "Promotion from Patrolman → Detective → Sergeant → Lieutenant → Captain → Commander",
+      "behavioral_manifestation": "Post-stage rank increase tied to zero civilian casualties"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-based narrative progression",
+      "example": "Stages named 'The Bank Robbery', 'Chinatown Assault', 'The Hijacking', 'Drug Dealers', 'Chemical Plant Sabotage' tell story of escalating crime organization activity across Chicago infrastructure"
+    },
+    {
+      "technique": "Photorealistic digitized imagery",
+      "example": "Entirely digitized photographs and sprites create immersive urban crime scenario; realistic civilian and officer appearances enhance identification stakes"
+    },
+    {
+      "technique": "Environmental civilian presence",
+      "example": "Civilians appear in bank, downtown, and other public spaces to establish normal city life disrupted by criminal activity"
+    },
+    {
+      "technique": "Boss arena isolation",
+      "example": "Boss fights occur in civilian-free zones, signaling shift from collateral-risk to direct confrontation mode"
+    },
+    {
+      "technique": "Weapon availability as tactical narrative",
+      "example": "Progression from basic .38 revolver to assault rifles, submachine guns, and grenade launchers reflects escalating threat level and tactical response needs"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Armed enemies (generic)",
+      "state": "Combat ready",
+      "behavior": "Emerge from environments with masks/goggles; engage player with weapons; one-shot death indicates vulnerability but threatening nature"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Final threat",
+      "behavior": "Face exposed (barefaced unlike regular enemies); fought in isolated civilian-free arena; requires tactical elimination to progress stage"
+    },
+    {
+      "entity": "Police officer (NPC)",
+      "state": "Allied presence",
+      "behavior": "Barefaced in environment; must not be shot; presence indicates civilian-friendly zones requiring discrimination"
+    },
+    {
+      "entity": "Civilian (NPC)",
+      "state": "Protected non-combatant",
+      "behavior": "Barefaced and unarmed; present in public spaces; shooting triggers rank penalty; presence forces player restraint discipline"
+    },
+    {
+      "entity": "Player character",
+      "state": "Equipped with weapon",
+      "behavior": "Maintains current weapon tier until sustaining damage; reverts to revolver on hit; rank advances/degrades based on collateral damage"
+    }
+  ],
+  "notes": "Lethal Enforcers uses photorealistic digitization to create morally-complex visual communication. The core danger/safety signaling mechanism relies entirely on facial obscuration (masks = threat, barefaced = ally or protected civilian). The rank system mechanically reinforces visual discrimination through consequences—players must learn to read the environment to maintain rank progression. World state manifests through geographic escalation (bank → plant sabotage) and NPC distribution patterns. The game's controversial photorealism amplifies the visual distinction between combatants and non-combatants, making the moral choice to avoid civilian casualties visually explicit.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:22:40.693Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3755,
+    "output_tokens": 1809,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

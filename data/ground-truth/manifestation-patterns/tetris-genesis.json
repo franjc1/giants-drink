@@ -1,0 +1,79 @@
+{
+  "game_id": "tetris-genesis",
+  "game_name": "Tetris",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising tetromino stack",
+      "visual_form": "Blocks accumulating toward top of playfield",
+      "meaning": "Increasing threat of game over; player losing control of pace"
+    },
+    {
+      "signal": "Top-of-screen proximity",
+      "visual_form": "Blocks reaching or crossing top boundary line",
+      "meaning": "Imminent failure state; no horizontal space remaining"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared lines",
+      "visual_form": "Horizontal lines flash/dissolve when completely filled",
+      "meaning": "Player successfully eliminated blocks; score increase; reduced stack height"
+    },
+    {
+      "signal": "Low stack profile",
+      "visual_form": "Visible empty space at top of playfield",
+      "meaning": "Player has control; safe positioning for incoming pieces"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active gameplay",
+      "visual_manifestation": "Falling tetromino piece with shadow/preview indicator; grid background; score/level display active",
+      "behavioral_manifestation": "Pieces descend at speed determined by level; player input responsive; next piece queue visible"
+    },
+    {
+      "world_state": "Game over",
+      "visual_manifestation": "Playfield freezes; stack reaches top boundary; game over text or screen overlay",
+      "behavioral_manifestation": "Input disabled; piece movement stops; transition to menu or restart state"
+    },
+    {
+      "world_state": "Level progression",
+      "visual_manifestation": "Level counter increments; potential color or background shift; fall speed noticeably increases",
+      "behavioral_manifestation": "Tetromino descent acceleration; difficulty spike in piece timing"
+    }
+  ],
+  "environmental_storytelling": [],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Falling tetromino piece",
+      "state": "controllable",
+      "behavior": "Responds to left/right input; rotates on button press; descends at steady rate unless accelerated by player"
+    },
+    {
+      "entity": "Stacked blocks",
+      "state": "settled",
+      "behavior": "Remain stationary until complete line formed; then dissolve/clear"
+    },
+    {
+      "entity": "Next piece queue",
+      "state": "informational",
+      "behavior": "Displays upcoming tetromino; updates when current piece locks; allows player planning"
+    }
+  ],
+  "notes": "Tetris (Genesis 1988) is a pure puzzle paradigm with minimal narrative or faction content. World-state communication is entirely mechanical/numerical rather than thematic. Visual manifestation focuses on grid-based spatial feedback, line-clear rewards, and difficulty escalation through acceleration. No political, faction, or environmental storytelling systems present. All danger/safety signals are derived from core mechanical feedback loops rather than worldbuilding.",
+  "sources_used": [],
+  "TODO": "No accessible source data provided; analysis based on universal Tetris game design knowledge. TCRF source was inaccessible due to robot detection. Consider consulting Genesis Tetris ROM documentation or official Sega release materials for ROM-level detail on visual encoding, color palette decisions, or debug/cut content.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:35:30.925Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 909,
+    "output_tokens": 973,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

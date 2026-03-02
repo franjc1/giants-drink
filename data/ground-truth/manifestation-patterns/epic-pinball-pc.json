@@ -1,0 +1,108 @@
+{
+  "game_id": "epic-pinball-pc",
+  "game_name": "Epic Pinball",
+  "platform": "pc",
+  "paradigm": "pinball",
+  "danger_signals": [
+    {
+      "signal": "Tilt mechanic",
+      "visual_form": "Table shake/visual distortion feedback",
+      "meaning": "Player has lost control; game over state imminent"
+    },
+    {
+      "signal": "Ball trajectory toward drain",
+      "visual_form": "Ball physics moving toward table edges/gutters",
+      "meaning": "Immediate loss of ball/life if not intercepted by flippers"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flipper activation",
+      "visual_form": "Flipper sprites moving upward at table bottom",
+      "meaning": "Player has active control; ball can be redirected"
+    },
+    {
+      "signal": "Bumper/ramp targets lit",
+      "visual_form": "Bright sprite elements on playfield",
+      "meaning": "Safe scoring zones; interactive elements ready"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active gameplay",
+      "visual_manifestation": "Ball in motion on table; playfield elements animated and responsive",
+      "behavioral_manifestation": "Bumpers activate on ball contact; ramps trigger sequences; scoring multipliers active"
+    },
+    {
+      "world_state": "Table theme context",
+      "visual_manifestation": "Thematic artwork and sprites define each table's world (Android/sci-fi, Jungle/organic, Deep Sea/aquatic, Medieval/Excalibur, etc.)",
+      "behavioral_manifestation": "Scoring mechanics and ramp sequences align with table narrative (e.g., Jungle Pinball tribute to Jill of the Jungle; Space Journey sci-fi aesthetics)"
+    },
+    {
+      "world_state": "High-score chase mode",
+      "visual_manifestation": "Score counter updates; multiplier indicators visible",
+      "behavioral_manifestation": "Consecutive successful hits increase multipliers; ramp sequences unlock progressive bonuses"
+    },
+    {
+      "world_state": "Ball lost/Drain event",
+      "visual_manifestation": "Ball disappears; visual feedback or animation for drain",
+      "behavioral_manifestation": "Ball count decrements; player returns to plunger or game over if no balls remain"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic table design",
+      "example": "Android table communicates sci-fi setting through sprite artwork and mechanical elements; Jungle Pinball evokes organic, dangerous environment through tropical-themed artwork"
+    },
+    {
+      "technique": "Named ramps and targets",
+      "example": "Table names (Excalibur, Deep Sea, Space Journey, Toy Factory) establish narrative context without explicit story; visual design reinforces theme"
+    },
+    {
+      "technique": "Cross-game continuity",
+      "example": "Jungle Pinball designed as tribute to Epic's earlier game Jill of the Jungle, using familiar aesthetic to bridge game worlds"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ball",
+      "state": "In play",
+      "behavior": "Responds to gravity, flipper contact, bumper collision; physics-driven trajectory"
+    },
+    {
+      "entity": "Flipper",
+      "state": "Player input active",
+      "behavior": "Rotates upward to intercept/launch ball; timing-dependent impact on trajectory"
+    },
+    {
+      "entity": "Bumper",
+      "state": "Ball contact",
+      "behavior": "Activates on collision; launches ball in opposing direction; visual feedback (bright sprite flash)"
+    },
+    {
+      "entity": "Ramp",
+      "state": "Ball rolling on surface",
+      "behavior": "Directs ball along predefined path; may trigger sequence bonuses or lane locks"
+    },
+    {
+      "entity": "Drain/Gutter",
+      "state": "Ball trajectory intersects",
+      "behavior": "Captures ball; ends current ball life; triggers game-over if no balls remain"
+    }
+  ],
+  "notes": "Epic Pinball operates in a pure mechanical paradigm with minimal narrative world-state complexity. Communication is primarily through table-specific theming (visual aesthetic design) and physics-based feedback. No faction systems, political situations, or dynamic world-state changes exist. Danger/safety signals derive entirely from pinball mechanics (tilt, drain, flipper control). Manifestation is deterministic and physics-driven rather than narrative-driven. The 1993 technology (320x240, raster graphics) constrains visual communication to sprite-based thematic elements and fundamental HUD feedback (score, ball count, lives).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:40:55.280Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3130,
+    "output_tokens": 1222,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

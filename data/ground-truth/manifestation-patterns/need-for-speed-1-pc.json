@@ -1,0 +1,139 @@
+{
+  "game_id": "need-for-speed-1-pc",
+  "game_name": "The Need for Speed",
+  "platform": "pc",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Police vehicle presence",
+      "visual_form": "Police cars appearing on track during races",
+      "meaning": "Active threat to player; accumulating tickets leads to arrest and race failure"
+    },
+    {
+      "signal": "Traffic vehicles",
+      "visual_form": "AI-controlled civilian cars on racing course",
+      "meaning": "Environmental hazard requiring avoidance; collision risk"
+    },
+    {
+      "signal": "Police pursuit engagement",
+      "visual_form": "Police car actively chasing player vehicle",
+      "meaning": "Imminent ticketing or arrest if contact made; escalating danger state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear road ahead",
+      "visual_form": "Absence of traffic or police vehicles in immediate path",
+      "meaning": "Safe acceleration zone; optimal racing conditions"
+    },
+    {
+      "signal": "Completed track sections",
+      "visual_form": "Flag indicator in bottom right corner of track menu showing victory progress",
+      "meaning": "Safe progression through tournament; track mastery achieved"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Racer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Police force (antagonistic faction)",
+      "environmental_markers": "Exotic sports cars (Ferrari, Porsche, Corvette, Japanese imports); high-performance vehicle aesthetic"
+    },
+    {
+      "faction": "Law Enforcement",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Police cars with distinctive pursuit behavior and ticketing mechanic",
+      "environmental_markers": "Police vehicles spawning on courses; active pursuit dynamics during races"
+    },
+    {
+      "faction": "Civilian Traffic",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Non-player vehicles as environmental obstacles",
+      "environmental_markers": "Regular traffic cars occupying racing routes; avoidable hazards"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active racing (tournament mode)",
+      "visual_manifestation": "Track environments (City, Coastal, Alpine, Rusty Springs, Autumn Valley, Vertigo, Transtropolis, Burnt Sienna) rendered with distinctive visual characteristics per location",
+      "behavioral_manifestation": "Police and traffic spawning on courses; opponent AI active; checkpoint system engaged"
+    },
+    {
+      "world_state": "Police pursuit active",
+      "visual_manifestation": "Police vehicle visible on track pursuing player car",
+      "behavioral_manifestation": "Police car acceleration and interception attempt; player receives tickets upon contact; arrest on third ticket (or second in Saturn version)"
+    },
+    {
+      "world_state": "Tournament progression",
+      "visual_manifestation": "Flag victory indicator in menu bottom-right corner marking completed tracks",
+      "behavioral_manifestation": "Track unlock progression; completion enables access to Lost Vegas bonus track and rally mode"
+    },
+    {
+      "world_state": "Arcade/Rally mode unlocked",
+      "visual_manifestation": "Car dynamics visually altered for faster arcade handling; fictional Warrior PTO E/2 jet-powered vehicle becomes available",
+      "behavioral_manifestation": "Reduced realistic physics; increased speed arcade feel"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-specific track design",
+      "example": "Six distinct environments (City, Coastal, Alpine, Rusty Springs, Autumn Valley, Vertigo) communicate different racing contexts through visual differentiation"
+    },
+    {
+      "technique": "Vehicle presentation with documentary context",
+      "example": "Each licensed sports car includes magazine-style interior/exterior images, audio commentary on specifications and history, and video clips set to music—communicating vehicle authenticity and prestige within racing culture"
+    },
+    {
+      "technique": "Traffic and urban simulation",
+      "example": "Civilian traffic on racing courses establishes street-racing reality; point-to-point track design suggests real-world urban navigation rather than closed circuits"
+    },
+    {
+      "technique": "Police mechanic as world rule",
+      "example": "Police pursuits and ticketing system visually communicate that this is an illegal street-racing scenario; arrest on third ticket establishes law enforcement as constant threat"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Racing normally",
+      "behavior": "Responds to input; speeds along track; avoids traffic and police"
+    },
+    {
+      "entity": "Police car",
+      "state": "Patrolling",
+      "behavior": "Appears on track during races; pursues player if engaged"
+    },
+    {
+      "entity": "Police car",
+      "state": "In pursuit",
+      "behavior": "Accelerates toward player; attempts contact to ticket; escalates to arrest on cumulative tickets"
+    },
+    {
+      "entity": "Traffic vehicle",
+      "state": "Active",
+      "behavior": "Occupies track lanes; moves predictably; serves as avoidable obstacle"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Racing",
+      "behavior": "Competes against player in point-to-point and circuit races; provides competitive challenge"
+    }
+  ],
+  "notes": "The Need for Speed (1994) communicates world-state primarily through adversarial mechanics rather than narrative faction systems. The core tension is between player-racer and law enforcement, establishing an illegal street-racing premise. Environmental storytelling relies on vehicle authenticity (licensed cars with real specifications) and distinctive track locations. Danger is signaled through police presence and pursuit mechanics; safety is implied through track progression and completion flags. The game's paradigm emphasizes realism in vehicle behavior and audio/visual presentation (Road & Track collaboration), which reinforces the authenticity of the racing simulation and the stakes of police encounters. No explicit political factions exist; the conflict is mechanical rather than ideological.",
+  "sources_used": [
+    "wikipedia:The Need for Speed"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:21:09.006Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2796,
+    "output_tokens": 1579,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

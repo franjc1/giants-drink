@@ -1,0 +1,183 @@
+{
+  "game_id": "age-of-empires-2-pc",
+  "game_name": "Age of Empires II: The Age of Kings",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit presence",
+      "visual_form": "Distinct unit sprites with enemy faction coloring/heraldry",
+      "meaning": "Active military threat requiring defensive response"
+    },
+    {
+      "signal": "Military structures near player territory",
+      "visual_form": "Enemy barracks, archery ranges, stables visible on map",
+      "meaning": "Opponent preparing for offensive operations"
+    },
+    {
+      "signal": "Resource depletion markers",
+      "visual_form": "Empty or depleting trees, gold mines, stone quarries",
+      "meaning": "Economic vulnerability and pressure to expand or trade"
+    },
+    {
+      "signal": "Undefended villagers/economy",
+      "visual_form": "Civilians gathering resources without military escort",
+      "meaning": "Vulnerability to raiding and economic disruption"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Defensive structures",
+      "visual_form": "Walls, towers, palisades surrounding settlement",
+      "meaning": "Protected territory; reduced vulnerability to attack"
+    },
+    {
+      "signal": "Garrisoned units",
+      "visual_form": "Military units positioned in defensive structures or town center",
+      "meaning": "Active defense readiness and fortified position"
+    },
+    {
+      "signal": "Economic diversity",
+      "visual_form": "Multiple resource gathering sites active simultaneously",
+      "meaning": "Stable economy resistant to single-point disruption"
+    },
+    {
+      "signal": "Trade activity",
+      "visual_form": "Trading carts/cogs traveling between markets and docks",
+      "meaning": "Secondary gold income reducing raw resource vulnerability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Civilization",
+      "color_identity": "Primary player color (typically blue/green in base game)",
+      "symbol_or_sigil": "Civilization-specific unit designs and building aesthetics",
+      "enemy_visual_variants": "Same unit types in contrasting enemy faction colors",
+      "environmental_markers": "Player-colored flags on town center and military buildings; unit heraldry"
+    },
+    {
+      "faction": "Enemy AI Civilizations",
+      "color_identity": "Distinct palette per opponent (red, yellow, purple, etc.)",
+      "symbol_or_sigil": "Unique unit silhouettes and building styles per civilization",
+      "enemy_visual_variants": "Different armor, weapons, architecture reflecting historical civilization",
+      "environmental_markers": "Faction-colored structures; distinct military unit armor/appearance"
+    },
+    {
+      "faction": "Neutral/Gaia",
+      "color_identity": "Brown/gray for wildlife and resources",
+      "symbol_or_sigil": "Trees, animals, stone formations, gold piles",
+      "enemy_visual_variants": "Non-aligned entities; not faction-specific",
+      "environmental_markers": "Natural terrain features; unowned resource deposits"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Dark Age (early game)",
+      "visual_manifestation": "Limited building styles; simple structures; fewer unit types visible",
+      "behavioral_manifestation": "Slower unit movement; lower technological capabilities; focus on basic resource gathering"
+    },
+    {
+      "world_state": "Feudal Age (mid-early game)",
+      "visual_manifestation": "Expanded building roster; more complex architecture; additional unit types become available",
+      "behavioral_manifestation": "Increased military diversity; improved economy through new buildings (market, dock)"
+    },
+    {
+      "world_state": "Castle Age (mid-late game)",
+      "visual_manifestation": "Castle structures appear; more ornate buildings; specialized military units visible",
+      "behavioral_manifestation": "Advanced military tactics enabled; powerful unique units become available per civilization"
+    },
+    {
+      "world_state": "Imperial Age (late game)",
+      "visual_manifestation": "Most advanced structures; enhanced unit armor/appearance; full technological suite visible",
+      "behavioral_manifestation": "Peak military power; maximum economic efficiency; endgame unit and technology deployment"
+    },
+    {
+      "world_state": "Economic pressure/resource scarcity",
+      "visual_manifestation": "Visible depletion of local resource nodes; trade routes more prominent",
+      "behavioral_manifestation": "Player forced to invest in distant mining camps, mills, lumber yards; reliance on trading carts for gold income"
+    },
+    {
+      "world_state": "Military threat/active warfare",
+      "visual_manifestation": "Enemy units concentrated near player borders; smoke/fire effects from combat; damaged buildings",
+      "behavioral_manifestation": "Player reallocates villagers to military production; defensive structures prioritized"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Historical campaign narrative",
+      "example": "Joan of Arc campaign: player controls named hero unit Joan of Arc; progression through historical battles (Rouen, Angers, Orleans) communicates military progression and historical context"
+    },
+    {
+      "technique": "Civilization asymmetry",
+      "example": "13 distinct civilizations with unique units, buildings, and technologies; visual differences (Byzantine ornate architecture vs. Briton simplicity) communicate cultural/historical identity"
+    },
+    {
+      "technique": "Building progression reveals technological era",
+      "example": "Transition from wood palisades to stone walls to full castles visually marks progression through historical Ages; architectural complexity increases with civilization advancement"
+    },
+    {
+      "technique": "Monastery as strategic resource marker",
+      "example": "Presence of monastery structure indicates relics (valuable gold sources) available in the map; communicates religious significance and economic opportunity"
+    },
+    {
+      "technique": "Resource cluster distribution",
+      "example": "Gold mines, stone quarries, and forest placement communicate map control strategy; dense clusters signal valuable contested territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Villager (civilian unit)",
+      "state": "Gathering resources",
+      "behavior": "Moves to resource nodes and performs labor animations; returns to depot buildings when loaded"
+    },
+    {
+      "entity": "Villager (civilian unit)",
+      "state": "Fleeing from threat",
+      "behavior": "Changes direction away from approaching enemy units; seeks proximity to defensive structures or military units"
+    },
+    {
+      "entity": "Military unit (generic)",
+      "state": "Idle/patrolling",
+      "behavior": "Stands in formation or slow patrol pattern; can be garrisoned in structures"
+    },
+    {
+      "entity": "Military unit (generic)",
+      "state": "Engaged in combat",
+      "behavior": "Performs attack animations toward target; moves to close distance to enemy; takes damage animations"
+    },
+    {
+      "entity": "Town Center",
+      "state": "Under player control",
+      "behavior": "Serves as rally point for newly trained units; can garrison villagers for defense; produces villagers"
+    },
+    {
+      "entity": "Town Center",
+      "state": "Under siege/low health",
+      "behavior": "Visual damage states progress; may change color/appearance to indicate critical status"
+    },
+    {
+      "entity": "Defensive tower",
+      "state": "Targeting enemy",
+      "behavior": "Shoots projectiles at approaching enemies; attack animations indicate active threat response"
+    },
+    {
+      "entity": "Trading cart/cog",
+      "state": "Active trade route",
+      "behavior": "Visible movement between markets or docks; returns with gold income indicator"
+    }
+  ],
+  "notes": "Age of Empires II uses a primarily isometric perspective with clear unit/faction differentiation through color and silhouette. World state is communicated through Age system (Dark/Feudal/Castle/Imperial) which gates buildings, units, and technologies—players visually recognize their technological tier through available structures. Danger is conveyed through unit proximity, defensive structure presence/absence, and resource depletion visibility. Faction identity is achieved through color coding (player vs. each AI opponent), unique unit designs per civilization, and distinct architectural styles. The game emphasizes real-time visual feedback for economic state (resource stockpiles) and military readiness (army composition visible on-screen). Campaign mode adds narrative context through named hero units and historically-based scenarios, enriching environmental storytelling beyond pure mechanical state.",
+  "sources_used": [
+    "wikipedia:Age of Empires II"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:57:49.590Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2894,
+    "output_tokens": 2143,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

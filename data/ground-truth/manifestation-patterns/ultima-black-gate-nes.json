@@ -1,0 +1,192 @@
+{
+  "game_id": "ultima-black-gate-nes",
+  "game_name": "Ultima: The Black Gate (Famicom)",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster infestations",
+      "visual_form": "Hostile creature sprites in overworld and dungeons",
+      "meaning": "Active threats to Avatar and party; world corruption/danger zones"
+    },
+    {
+      "signal": "Real-time combat activation",
+      "visual_form": "Enemy sprites attacking; particle effects or weapon animations",
+      "meaning": "Immediate danger requiring active response; no turn-based safety"
+    },
+    {
+      "signal": "Dungeon environments",
+      "visual_form": "Dark, multi-layered underground or shadowed tile-sets",
+      "meaning": "High-risk areas; locations of significant threats and plot dangers"
+    },
+    {
+      "signal": "NPC behavioral changes",
+      "visual_form": "Characters drawing weapons or fleeing dialogue",
+      "meaning": "Shift from safety to hostility; social danger or deception revealed"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town/settlement environments",
+      "visual_form": "Structured building clusters, NPCs in stationary positions",
+      "meaning": "Controlled spaces; reduced monster spawning; faction presence"
+    },
+    {
+      "signal": "Interactive object density",
+      "visual_form": "Draggable items, containers (gumps), workstations visible",
+      "meaning": "Stable world-state; opportunity for crafting, trading, puzzle-solving"
+    },
+    {
+      "signal": "Crown authority symbols",
+      "visual_form": "Guard NPCs, royal emblems in buildings, structured militia presence",
+      "meaning": "Order maintained; legitimate governance active in region"
+    },
+    {
+      "signal": "Dialogue tree availability",
+      "visual_form": "NPC interaction prompts; keyword options displayed",
+      "meaning": "Stable social interaction; no immediate combat; information gathering possible"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Crown/Kingdom Authority",
+      "color_identity": null,
+      "symbol_or_sigil": "Royal emblems, guard uniforms",
+      "enemy_visual_variants": "Enemies undermining crown authority appear hostile to guards",
+      "environmental_markers": "Guard barracks, royal chambers, structured military bases"
+    },
+    {
+      "faction": "Hostile plot agents",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Deceptive NPCs initially appearing friendly; reveal as threats during dialogue",
+      "environmental_markers": "Shadowed meeting places, hidden lairs associated with schemes"
+    },
+    {
+      "faction": "Monster/Corrupted forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct creature sprites; hostile attack animations",
+      "environmental_markers": "Infested zones, dungeons, wilderness areas lacking civilization"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Corruption/Infested areas",
+      "visual_manifestation": "Monster sprite density increases; darker tile coloration; environmental decay",
+      "behavioral_manifestation": "Creatures actively spawn and attack; NPCs may flee or express fear"
+    },
+    {
+      "world_state": "Order maintained by Crown",
+      "visual_manifestation": "Guard presence in towns; structured NPC positions; well-maintained building states",
+      "behavioral_manifestation": "NPCs follow routines; guards patrol; dialogue trees accessible and stable"
+    },
+    {
+      "world_state": "Plot/Scheme active (deception phase)",
+      "visual_manifestation": "NPCs appear normal but dialogue reveals hidden agendas; visual disguise of intent",
+      "behavioral_manifestation": "Characters interact peacefully until dialogue reveals conspiracy; sudden behavioral shifts possible"
+    },
+    {
+      "world_state": "Real-time danger escalation",
+      "visual_manifestation": "Enemy sprites move toward party; combat particle effects; weapon animations active",
+      "behavioral_manifestation": "All party members engaged in autonomous combat; AI makes tactical positioning changes"
+    },
+    {
+      "world_state": "Puzzle/Crafting opportunity",
+      "visual_manifestation": "Stackable objects visible; workstations (forges, cooking areas) rendered; container gumps open",
+      "behavioral_manifestation": "Game pauses during inventory/crafting actions; objects respond to drag-and-drop interaction"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Interactive object placement",
+      "example": "Weapons, tools, and items scattered in dungeons tell stories of previous battles or occupants; stacking items reveals puzzle solutions and world traversal history"
+    },
+    {
+      "technique": "NPC routine and positioning",
+      "example": "Guards stationed at specific locations communicate authority presence; NPCs in homes or workplaces indicate civilization stability"
+    },
+    {
+      "technique": "Visual environmental decay",
+      "example": "Monster-infested areas show visual corruption compared to orderly towns; darker palettes and hostile sprite presence indicate danger zones"
+    },
+    {
+      "technique": "Dialogue tree keyword progression",
+      "example": "Keywords only appear when encountered in plot; conversation options reveal world lore and political situations as Avatar discovers them"
+    },
+    {
+      "technique": "Multi-layered map architecture",
+      "example": "Stackable objects and vertical space convey dungeon complexity and environmental puzzle design; inaccessible areas until items form stairs indicate progression barriers"
+    },
+    {
+      "technique": "Container and inventory gumps",
+      "example": "Books, scrolls, and equipment displays show character history; what NPCs carry or store hints at their role and affiliation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Avatar (player character)",
+      "state": "Safe/exploring",
+      "behavior": "Mouse-driven movement; drag-and-drop interaction with objects; inventory management via gump interface"
+    },
+    {
+      "entity": "Avatar (player character)",
+      "state": "In combat",
+      "behavior": "Real-time positioning changes; automatic party AI engagement; optional manual targeting for Avatar; pause only when accessing inventory mid-action"
+    },
+    {
+      "entity": "Party members (allies)",
+      "state": "Idle/exploration",
+      "behavior": "Follow Avatar; remain in formation; respond to dialogue and interaction prompts"
+    },
+    {
+      "entity": "Party members (allies)",
+      "state": "Combat engaged",
+      "behavior": "Autonomous AI behavior execution; weapon switching based on tactical assessment; retreat from overwhelming threats; occasional self-defeating moves (e.g., friendly fire)"
+    },
+    {
+      "entity": "Guard NPCs",
+      "state": "Patrolling/stationed",
+      "behavior": "Fixed or patrol-route positioning; dialogue accessible; represent crown authority and order"
+    },
+    {
+      "entity": "Guard NPCs",
+      "state": "Responding to threat",
+      "behavior": "Turn hostile toward monsters/conspirators; engage in combat; movement toward danger sources"
+    },
+    {
+      "entity": "Conspiracy/scheme NPCs",
+      "state": "Disguised/deceptive",
+      "behavior": "Appear as normal townspeople; friendly dialogue initially; reveal hostility through specific keyword triggers or plot progression"
+    },
+    {
+      "entity": "Conspiracy/scheme NPCs",
+      "state": "Revealed as hostile",
+      "behavior": "Draw weapons; change dialogue tone; may attack or flee depending on tactical assessment"
+    },
+    {
+      "entity": "Monster sprites",
+      "state": "Idle in infested area",
+      "behavior": "Stationary or slow patrol; become aggressive when Avatar approaches"
+    },
+    {
+      "entity": "Monster sprites",
+      "state": "Engaged in combat",
+      "behavior": "Attack with sprite-based animations; move toward target; no dialogue or negotiation possible"
+    }
+  ],
+  "notes": "Ultima VII's visual communication relies heavily on real-time interaction dynamics and environmental contrast. The shift from tile-based grid movement to continuous space allows for fluid danger/safety signaling through NPC proximity and environmental density. Factions are communicated primarily through NPC role-positioning (guards vs. civilians) and dialogue trees rather than distinct visual markers. The game's paradigm emphasizes world interactivity (draggable objects, stackable puzzles, multi-layered maps) as a manifestation system — players read world-state through what can be manipulated and what resists interaction. Deception is a core political mechanic: conspirators appear visually identical to legitimate NPCs until dialogue keywords unlock their true allegiances. The Famicom port (1994) would compress these visual systems but retains core interaction paradigms.",
+  "sources_used": [
+    "wikipedia:Ultima VII: The Black Gate"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:02:50.368Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2612,
+    "output_tokens": 2238,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

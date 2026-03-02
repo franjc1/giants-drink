@@ -1,0 +1,189 @@
+{
+  "game_id": "road-rash-genesis",
+  "game_name": "Road Rash",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Road obstacles",
+      "visual_form": "Cows, deer, cars, and trees rendered on track",
+      "meaning": "Collision hazards that cause motorcycle ejection and damage"
+    },
+    {
+      "signal": "Stamina depletion",
+      "visual_form": "Stamina meter in bottom-left corner decreasing during combat",
+      "meaning": "Player vulnerability to ejection from bike; combat pressure indicator"
+    },
+    {
+      "signal": "Opponent stamina visibility",
+      "visual_form": "Enemy stamina meter displayed bottom-right corner",
+      "meaning": "Opponent proximity and combat readiness state"
+    },
+    {
+      "signal": "Bike damage accumulation",
+      "visual_form": "Damage meter depleting with each crash",
+      "meaning": "Bike structural integrity declining; total wreckage imminent"
+    },
+    {
+      "signal": "Motor officer presence",
+      "visual_form": "Police figures appearing sporadically on tracks",
+      "meaning": "Enforcement threat; apprehension results in fine penalty and race termination"
+    },
+    {
+      "signal": "Speed loss indicators",
+      "visual_form": "Visual sense of reduced velocity after crashes or combat",
+      "meaning": "Temporary vulnerability window after collision"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open track ahead",
+      "visual_form": "Clear road visible with no obstacles or opponents immediately proximate",
+      "meaning": "Opportunity to accelerate and gain position without immediate threat"
+    },
+    {
+      "signal": "Cash accumulation",
+      "visual_form": "Prize money awarded and displayed after race completion",
+      "meaning": "Resources available for bike upgrades and repair/fine coverage"
+    },
+    {
+      "signal": "Successful race completion",
+      "visual_form": "Race end screen with password generation",
+      "meaning": "Progress secured; advancement to next difficulty tier unlocked"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player racer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opponent motorcyclists rendered with distinct visual designs; some wield clubs",
+      "environmental_markers": "Customizable bike selection indicates player agency within racing community"
+    },
+    {
+      "faction": "Rival racers",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Fourteen distinct opponent sprites; variable weapon equipment (clubs); differentiated motorcycle types",
+      "environmental_markers": "Scattered throughout five Californian tracks; positioned as competitors rather than faction members"
+    },
+    {
+      "faction": "Law enforcement",
+      "color_identity": null,
+      "symbol_or_sigil": "Motor officer uniform and authority",
+      "enemy_visual_variants": "Police figures distinguished from racers; represent institutional opposition",
+      "environmental_markers": "Sporadic appearance on tracks; signals jurisdiction and penalty zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early-game (Level 1) races",
+      "visual_manifestation": "California locations rendered with Grass Valley and Sierra Nevada environments; lower difficulty visual design",
+      "behavioral_manifestation": "Fewer aggressive opponents; reduced police enforcement frequency"
+    },
+    {
+      "world_state": "Mid-game progression (Levels 2-4)",
+      "visual_manifestation": "Napa Valley and varied track designs; increased visual density of competitors",
+      "behavioral_manifestation": "More aggressive combat from opponents; increased stamina demands"
+    },
+    {
+      "world_state": "Late-game (Level 5) races",
+      "visual_manifestation": "Pacific Coast Highway environments; maximum track complexity and competitor density",
+      "behavioral_manifestation": "Highest opponent aggression; peak motor officer enforcement; most demanding stamina management"
+    },
+    {
+      "world_state": "Post-crash vulnerability",
+      "visual_manifestation": "Player character running on foot toward bike; visual speed reduction; exposed positioning",
+      "behavioral_manifestation": "Inability to attack; susceptibility to incoming traffic; motor officer apprehension risk elevated"
+    },
+    {
+      "world_state": "Combat engagement",
+      "visual_manifestation": "Animated punch, backhand, and kick actions; weapon transfer (club) when opponent disarmed",
+      "behavioral_manifestation": "Opponent stamina depletion visible in real-time; successful hits increment distance advantage"
+    },
+    {
+      "world_state": "Financial crisis",
+      "visual_manifestation": "Cash balance approaching zero or insufficient for repair/fine coverage",
+      "behavioral_manifestation": "Game termination forced; progression loss; return to password recovery necessary"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic progression narrative",
+      "example": "Five levels span California locations (Grass Valley → Sierra Nevada → Napa Valley → Pacific Coast Highway) suggesting journey across state; environment difficulty mirrors mechanical difficulty scaling"
+    },
+    {
+      "technique": "Racing culture contextualization",
+      "example": "Violent combat mechanics justified by real Grand Prix motorcyclist behavior; unarmed and armed combat presented as normalized racing conduct rather than crime"
+    },
+    {
+      "technique": "Economic consequence visualization",
+      "example": "Cash system communicates real-world racing costs; repair bills and fines are not abstract penalties but narrative economic pressures that can end career (game over)"
+    },
+    {
+      "technique": "Bike customization as character development",
+      "example": "Shop system between races allows player to visually transform motorcycle; purchase decisions reflect progression and investment in racing identity"
+    },
+    {
+      "technique": "Law enforcement presence as environmental opposition",
+      "example": "Motor officers appearing sporadically signal racing occurs within legal constraints; apprehension threat mirrors underground or illicit racing context"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player racer",
+      "state": "In combat",
+      "behavior": "Punches, backhand strikes, kicks nearest opponent; stamina depletes with each action; weapon acquisition if opponent disarmed"
+    },
+    {
+      "entity": "Player racer",
+      "state": "Crashed/ejected",
+      "behavior": "Automatically runs toward bike; player can redirect trajectory or stand still; vulnerable to traffic; motor officer apprehension possible"
+    },
+    {
+      "entity": "Player racer",
+      "state": "Low stamina",
+      "behavior": "Ejection from bike imminent; reduced offensive capability; heightened vulnerability"
+    },
+    {
+      "entity": "Opponent racer",
+      "state": "Armed with club",
+      "behavior": "Extended reach attack capability; disarmable if struck; visual distinction indicates threat level"
+    },
+    {
+      "entity": "Opponent racer",
+      "state": "High stamina",
+      "behavior": "Sustained combat engagement; continuing to attack player; maintaining position in race"
+    },
+    {
+      "entity": "Opponent racer",
+      "state": "Stamina depleted",
+      "behavior": "Ejection from bike; removal from race competition; visual confirmation of player combat success"
+    },
+    {
+      "entity": "Motor officer",
+      "state": "Patrol mode",
+      "behavior": "Sporadic track appearance; enforces post-crash consequences; apprehends player if vulnerable"
+    },
+    {
+      "entity": "Motorcycle",
+      "state": "Damaged",
+      "behavior": "Damage meter decreases with crashes; visual or performance degradation; wreckage upon full depletion; repair cost incurred"
+    }
+  ],
+  "notes": "Road Rash communicates world-state primarily through mechanical meter visibility (stamina, bike damage, opponent stamina) rather than complex environmental narrative. Danger is signaled through immediate hazards (obstacles, opponents, police) and depleting resources (stamina, money, bike integrity). The game operates on a combat-racing hybrid model where violence is normalized as competition mechanic. Geographic setting (California locations) provides narrative scaffolding but minimal storytelling depth. Faction distinction is minimal; opposition is presented as economic (rival racers for prize money) and legal (police enforcement) rather than ideological or territorial. Visual communication prioritizes immediate gameplay state over world-building.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:54:25.371Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3044,
+    "output_tokens": 2127,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

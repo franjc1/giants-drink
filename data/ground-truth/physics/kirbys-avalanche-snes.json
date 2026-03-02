@@ -1,0 +1,102 @@
+{
+  "game_id": "kirbys-avalanche-snes",
+  "game_name": "Kirby's Avalanche",
+  "platform": "snes",
+  "year": 1995,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Not documented. Puzzle game with falling blob mechanics, sub-pixel precision not relevant to gameplay."
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Blob Drop & Rotation",
+      "description": "Groups of two colored blobs fall from top of screen. Player rotates and moves blobs before they touch bottom or existing pile.",
+      "physics_values": {
+        "fall_mechanic": "gravity-based descent",
+        "documented": false
+      }
+    },
+    {
+      "name": "Chain Reaction",
+      "description": "Matching colored blobs (4+ touching horizontally/vertically) disappear. Blobs above fall to fill space. Consecutive chains trigger.",
+      "physics_values": {
+        "match_count_minimum": 4,
+        "gravity_direction": "downward"
+      }
+    },
+    {
+      "name": "Rock Fall Penalty",
+      "description": "Successful chain reactions cause rocks to fall on opponent's screen based on blob count and consecutive chain reactions.",
+      "physics_values": {
+        "scaling": "proportional to chain length and blob count"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "puzzle-focused",
+    "turn-based pacing",
+    "gravity-driven blob mechanics"
+  ],
+  "tier_notes": "Tier 2: Puzzle game with no character movement or physics-based platforming. Player actions are rotation and horizontal positioning of falling blobs. Wikipedia source provides only gameplay mechanics overview, not physics parameters. Movement physics extraction not applicable to puzzle genre.",
+  "sources_used": [
+    "Wikipedia - Kirby's Avalanche (Gameplay section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T00:13:54.507Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3246,
+    "output_tokens": 884,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

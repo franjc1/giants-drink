@@ -1,0 +1,114 @@
+{
+  "game_id": "columns-genesis",
+  "game_name": "Columns",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Well filling up",
+      "visual_form": "Jewels stacking toward top of playing area",
+      "meaning": "Game over imminent; player is losing"
+    },
+    {
+      "signal": "Increased fall speed",
+      "visual_form": "Columns descending faster as game progresses",
+      "meaning": "Difficulty escalation; higher pressure/danger state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful match elimination",
+      "visual_form": "Jewels disappearing when three or more align",
+      "meaning": "Player action succeeded; cleared space in well"
+    },
+    {
+      "signal": "Well with space",
+      "visual_form": "Empty areas visible in playing field",
+      "meaning": "Safe state; player has room to maneuver"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / low difficulty",
+      "visual_manifestation": "Slower column fall rate; jewels descend at leisurely pace",
+      "behavioral_manifestation": "Player has more time to position and rotate columns"
+    },
+    {
+      "world_state": "Mid game / escalating difficulty",
+      "visual_manifestation": "Accelerated column descent speed; visual tempo increases",
+      "behavioral_manifestation": "Player must react faster; decision time per move decreases"
+    },
+    {
+      "world_state": "Late game / high difficulty",
+      "visual_manifestation": "Rapid fall speed; well increasingly filled with jewels",
+      "behavioral_manifestation": "Pressure mounts; one error leads to game over"
+    },
+    {
+      "world_state": "Game over condition",
+      "visual_manifestation": "Well completely filled from bottom to top with jewels",
+      "behavioral_manifestation": "No more columns can enter; game halts"
+    },
+    {
+      "world_state": "Chain reaction / cascade",
+      "visual_manifestation": "Multiple matches disappearing in sequence as gravity resettles jewels",
+      "behavioral_manifestation": "Automatic elimination continues without player input; visual feedback of cascading success"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Visual progression through gameplay",
+      "example": "The rising well level and increasing fall speed create implicit narrative of mounting pressure without dialogue or cutscenes"
+    },
+    {
+      "technique": "Symbolic color/jewel identity",
+      "example": "Different colored jewels serve as visual language for matching logic—player learns to read and group colors as core mechanic"
+    },
+    {
+      "technique": "Magic Jewel as special event",
+      "example": "Multicolor jewel appearance signals occasional reprieve mechanic; its presence communicates rule variation and strategic opportunity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Column (three-jewel stack)",
+      "state": "Falling",
+      "behavior": "Descends at game-state-dependent speed; rotatable by player; stops on contact with floor or previous jewels"
+    },
+    {
+      "entity": "Jewel",
+      "state": "Matched (three or more in line)",
+      "behavior": "Disappears immediately; triggers gravity cascade and potential chain reactions"
+    },
+    {
+      "entity": "Jewel",
+      "state": "Unmatched",
+      "behavior": "Remains static; settles under gravity after column lands"
+    },
+    {
+      "entity": "Magic Jewel",
+      "state": "Active",
+      "behavior": "Destroys all jewels matching the color directly beneath it; acts as special power mechanic"
+    },
+    {
+      "entity": "Jewel pile",
+      "state": "Settling post-match",
+      "behavior": "Descends under gravity; may create new matches, triggering automatic cascade without player action"
+    }
+  ],
+  "notes": "Columns is a pure puzzle game with no faction, political, or narrative context. World-state communication is entirely mechanical and visual—danger and safety are expressed through gameplay physics (fall speed, well capacity) rather than thematic or narrative signals. The game's 'world' is the abstract well itself. Visual design emphasizes clarity for match-three mechanics rather than worldbuilding. Game Gear version included cosmetic variants (fruit, cards, dice) but no semantic differences in communication.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:34:23.178Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3481,
+    "output_tokens": 1366,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

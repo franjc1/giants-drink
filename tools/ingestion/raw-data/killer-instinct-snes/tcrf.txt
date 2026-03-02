@@ -1,0 +1,361 @@
+Killer Instinct (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Killer Instinct (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Killer Instinct
+
+Developer :
+
+Rare
+
+Publishers :
+
+Nintendo
+
+&#91;1&#93;
+
+(US/EU),
+
+Playtronic
+
+&#91;2&#93;
+
+(BR)  Platform :
+
+SNES
+
+Released in US : August 30,&#160;1995  Released in EU : September 21,&#160;1995  &#91;1&#93;
+
+Released in BR : September 1995  &#91;2&#93;
+
+This game has  anti-piracy features .
+
+To do:
+
+Prototype
+
+The Super Nintendo port of
+
+Killer Instinct
+
+cuts down on quite a few features of the  arcade classic , but still manages to be a solid fighter while bringing offerings of its own, like tournament and training modes. While not outright confirmed, this port's existence owes itself to the arcade's promise that Killer Instinct would be available for your home in 1995 only on Nintendo  Ultra  64 - a console that didn't actually come out in 1995.
+
+Notably, the  sequel  had a  nearly finished port  that went the way of
+
+Star Fox 2
+
+due to the Nintendo 64 finally being out that next year.
+
+Contents
+
+1
+
+Anti-Piracy
+
+1.1
+
+Boot State Test
+
+1.2
+
+Stack Test
+
+1.3
+
+RAM Tests
+
+1.3.1
+
+Jump $4C
+
+1.3.2
+
+Indirect Jump $6C
+
+1.3.3
+
+Incrementing RAM Pattern
+
+2
+
+References
+
+Anti-Piracy
+
+A number of anti-piracy measures exist, sharing many of the same routines used in
+
+Donkey Kong Country 2
+
+and
+
+3  .
+
+Failing any of the below tests will write the string  I PiRatE  to RAM address
+
+$7E0200
+
+and then display the above unauthorized device message on boot up.
+
+Boot State Test
+
+Almost immediately after booting, the Emulation Flag and Direct Page register are examined. The console already being in Native Mode and/or the Direct Page register containing a non-zero value fails the test as these are evidence that another program (e.g., a backup unit menu) was running before the game had a chance to boot.
+
+Stack Test
+
+If the Reset Vector was at the top of the stack, the test fails. Explained in more detail in the next section.
+
+RAM Tests
+
+The beginning of RAM (range
+
+$7E0000-7E1FFF  ) is searched for three types of fingerprints left behind by the unauthorized devices. The two jump tests, along with the stack test mentioned in the previous section, are looking for the various methods that attached hardware can use to switch from its programming to that of the game cartridge.
+
+Jump $4C
+
+Checks for operation
+
+$4Cxxxx  , where
+
+xxxx
+
+is the Reset Vector.
+
+Indirect Jump $6C
+
+Checks for operation
+
+$6CFCFF  , an indirect jump.
+
+Incrementing RAM Pattern
+
+Checks for the incrementing 32 byte string
+
+$60-7F
+
+(i.e.,
+
+60,61,62 ... 7D,7E,7F  ). This includes lowercase ASCII characters a-z.
+
+References
+
+↑
+
+1.0
+
+1.1
+
+www.NINTENDO.se - Spel - Super NES (archived)
+
+↑
+
+2.0
+
+2.1
+
+O Estado de S. Paulo - Acervo Estadão
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Killer Instinct
+
+series
+
+Arcade
+
+Killer Instinct &#160;&#8226;
+
+Killer Instinct 2
+
+SNES
+
+Killer Instinct
+
+Game Boy
+
+Killer Instinct
+
+Nintendo 64
+
+Killer Instinct Gold
+
+Xbox One, Windows, Xbox Series X
+
+Killer Instinct (2013)  ( Prototypes )
+
+Retrieved from " https://tcrf.net/index.php?title=Killer_Instinct_(SNES)&oldid=1887557 "
+
+Categories :
+
+Games developed by Rare
+
+Games published by Nintendo
+
+Games published by Playtronic
+
+SNES games
+
+Games released in 1995
+
+Games released in August
+
+Games released on August 30
+
+Games with anti-piracy methods
+
+To do
+
+Killer Instinct series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with anti-piracy methods
+
+Games  >  Games by developer  >  Games developed by Microsoft  >  Games developed by Xbox Game Studios  >  Games developed by Rare
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Gradiente  >  Games published by Playtronic
+
+Games  >  Games by publisher  >  Games published by Nintendo
+
+Games  >  Games by release date  >  Games released in 1995
+
+Games  >  Games by release date  >  Games released in August
+
+Games  >  Games by release date  >  Games released in August  >  Games released on August 30
+
+Games  >  Games by series  >  Killer Instinct series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 27 July 2025, at 04:32.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

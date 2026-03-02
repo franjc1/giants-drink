@@ -1,0 +1,197 @@
+{
+  "game_id": "might-magic-6-pc",
+  "game_name": "Might and Magic VI: The Mandate of Heaven",
+  "platform": "pc",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy encounter",
+      "visual_form": "First-person view transition to combat rendering, enemy sprite manifestation in dungeon/wilderness",
+      "meaning": "Active threat present; immediate tactical decision required"
+    },
+    {
+      "signal": "Night cycle",
+      "visual_form": "Environmental darkness, sky color shift to nocturnal palette",
+      "meaning": "Temporal state change affecting entity availability and behavior patterns"
+    },
+    {
+      "signal": "Dungeon environment",
+      "visual_form": "Underground architecture, confined spaces, narrow corridors",
+      "meaning": "High-danger zone with concentrated enemy density and limited retreat options"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Character portrait/status indicator showing reduced vitality metric",
+      "meaning": "Party vulnerability state; escalating threat to continued viability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Settlement/town entrance",
+      "visual_form": "Architectural transition to humanoid structures, NPCs present, calm environment lighting",
+      "meaning": "Safe zone for rest, resource acquisition, quest completion"
+    },
+    {
+      "signal": "Day cycle",
+      "visual_form": "Environmental brightness, sky color shift to diurnal palette",
+      "meaning": "Reduced danger period; certain events unavailable"
+    },
+    {
+      "signal": "Training center presence",
+      "visual_form": "Specific building type within settlement, NPC trainer availability",
+      "meaning": "Character advancement opportunity; safe progression mechanic"
+    },
+    {
+      "signal": "Shrine/well/fountain",
+      "visual_form": "Interactable environmental object with distinctive appearance",
+      "meaning": "Stat improvement opportunity; resource benefit without combat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Generic human settlements (towns/cities)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Town guards (allied), hostile humanoid NPCs (hostile faction members)",
+      "environmental_markers": "Structured architecture, guild halls, training centers, quest-givers clustered in populated areas"
+    },
+    {
+      "faction": "Monster/creature types",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinctive creature models per enemy class (beasts, undead, magical constructs differentiate through sprite/model design)",
+      "environmental_markers": "Wilderness zones, dungeons, unstructured terrain indicate monster territory; specific biome types correlate to creature faction presence"
+    },
+    {
+      "faction": "Calendar-based event entities (Circus of the Sun, Solstice phenomena)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Temporary NPC manifestation with unique sprite set during scheduled windows",
+      "environmental_markers": "Temporal markers (calendar day/season state) trigger visual presence of faction entities in specific locations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Day cycle (calendar time state)",
+      "visual_manifestation": "Bright environmental lighting, sky palette shift to daylight colors, specific NPCs visible in settlements",
+      "behavioral_manifestation": "Certain scheduled events unavailable (e.g., Circus of the Sun appears only at specific times); NPC availability changes; some monsters may have altered spawn rates or behavior patterns"
+    },
+    {
+      "world_state": "Night cycle (calendar time state)",
+      "visual_manifestation": "Dark environmental lighting, sky palette shift to nocturnal colors, reduced NPC visibility in outdoor areas",
+      "behavioral_manifestation": "Alternative event scheduling becomes active; dungeon exploration becomes primary activity path; potentially increased monster activity"
+    },
+    {
+      "world_state": "Solstice event (calendar milestone state)",
+      "visual_manifestation": "Potentially unique environmental effects or NPC manifestations tied to seasonal transition",
+      "behavioral_manifestation": "Special events triggered; unique quest opportunities or entity encounters available only during this world state"
+    },
+    {
+      "world_state": "Character aging (temporal degradation state)",
+      "visual_manifestation": "Character portrait/status display shows age metric; visual aging effects on character representation beyond age 50",
+      "behavioral_manifestation": "Stat penalties applied once character age exceeds 50; affects combat viability and party composition strategy"
+    },
+    {
+      "world_state": "Party health depletion (vulnerability state)",
+      "visual_manifestation": "Health point indicators on character portraits/status display show reduced values; visual damage indicators on party member representations",
+      "behavioral_manifestation": "Tactical decision-making shifts toward survival (retreat, healing priority); enemy aggression patterns may intensify; threat level perception increases"
+    },
+    {
+      "world_state": "Character death (party composition change state)",
+      "visual_manifestation": "Deceased character removed from party visual formation; status display marks character as deceased/unavailable",
+      "behavioral_manifestation": "Party combat capability reduced; specific skills/magic dependent on that class become unavailable; resurrection quest becomes priority"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural style variance",
+      "example": "Settlement structures communicate civilization presence and safety; dungeon layouts communicate danger escalation through density and complexity"
+    },
+    {
+      "technique": "Biome-specific creature clustering",
+      "example": "Specific enemy types appear in correlated terrain types; player learns to associate visual environment with threat level and creature type"
+    },
+    {
+      "technique": "Scalable mountain terrain",
+      "example": "Explorable vertical space signals progression and discovery opportunity; visual elevation change communicates world geography and accessible vs. restricted areas"
+    },
+    {
+      "technique": "Interactive object placement",
+      "example": "Barrels, cauldrons, shrines, wells, fountains scattered in world communicate stat improvement opportunities; their presence suggests resource abundance or intentional waypoint placement"
+    },
+    {
+      "technique": "Guild hall presence in settlements",
+      "example": "Specific building type signals skill acquisition opportunity; architectural clustering communicates functional settlement zones"
+    },
+    {
+      "technique": "Calendar-triggered visual events",
+      "example": "Circus of the Sun manifestation signals time passage and world dynamism; temporal visual markers communicate passage of in-game time to player"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Party character",
+      "state": "Below 50 years old",
+      "behavior": "Full stat functionality; no age-based penalties; optimal combat and exploration viability"
+    },
+    {
+      "entity": "Party character",
+      "state": "Above 50 years old",
+      "behavior": "Stat penalties applied; reduced combat effectiveness; visual aging indicator present in character status display"
+    },
+    {
+      "entity": "Party character",
+      "state": "Unpromoted class member",
+      "behavior": "Can accept single promotion quest; increased stat/capability benefits upon successful completion; class title changes"
+    },
+    {
+      "entity": "Party character",
+      "state": "Once-promoted class member",
+      "behavior": "Can pursue second promotion quest; two promotions maximum per class; non-promoted classes receive honorary promotion option"
+    },
+    {
+      "entity": "Non-player character (quest giver)",
+      "state": "During daytime cycle",
+      "behavior": "Present in settlement; available for interaction and quest acceptance"
+    },
+    {
+      "entity": "Non-player character (quest giver)",
+      "state": "During nighttime cycle",
+      "behavior": "Potentially unavailable or relocated; reduces quest availability depending on NPC schedule"
+    },
+    {
+      "entity": "Circus of the Sun (event entity)",
+      "state": "Non-scheduled calendar period",
+      "behavior": "Absent from world; no visual manifestation; not available for interaction"
+    },
+    {
+      "entity": "Circus of the Sun (event entity)",
+      "state": "Scheduled calendar period",
+      "behavior": "Manifests in specific location; available for interaction; unique visual appearance signaling special event status"
+    },
+    {
+      "entity": "Monster/dungeon enemy",
+      "state": "Day cycle",
+      "behavior": "Spawn rates potentially reduced; behavioral patterns may shift toward less aggressive engagement"
+    },
+    {
+      "entity": "Monster/dungeon enemy",
+      "state": "Night cycle",
+      "behavior": "Spawn rates potentially increased; dungeon exploration becomes primary threat vector; behavioral patterns may shift toward increased aggression"
+    }
+  ],
+  "notes": "Might and Magic VI communicates world-state primarily through temporal systems (day/night, calendar scheduling) and character life-cycle mechanics (aging, promotion status). Danger and safety are signaled through environment type (settlement vs. wilderness/dungeon), NPC presence, and lighting conditions. Faction identity is minimal in available documentation but implied through creature type clustering and NPC settlement organization. The game uses first-person perspective to make environmental visual communication direct and immersive. Stat modification through environmental interactions (barrels, shrines, etc.) creates a visual-spatial language for player progression without explicit UI. Character aging as a visible mechanic communicates temporal passage and creates strategic resource management pressure.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:48:14.304Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2547,
+    "output_tokens": 2363,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

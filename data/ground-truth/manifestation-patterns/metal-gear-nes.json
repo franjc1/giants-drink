@@ -1,0 +1,210 @@
+{
+  "game_id": "metal-gear-nes",
+  "game_name": "Metal Gear",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Exclamation mark above enemy head",
+      "visual_form": "Single exclamation mark icon appearing above soldier's head",
+      "meaning": "Enemy has spotted player; local alert confined to current screen"
+    },
+    {
+      "signal": "Double exclamation marks",
+      "visual_form": "Two exclamation marks above enemy head (intended feature, unused in NES)",
+      "meaning": "Higher alert phase indicating reinforcements will pursue across multiple screens"
+    },
+    {
+      "signal": "Alert Mode activation",
+      "visual_form": "Screen-wide alert state triggered by camera detection, infrared sensor, or loud noise",
+      "meaning": "Reinforcements spawn off-screen; player must eliminate enemies or escape to adjacent area/floor/outdoor"
+    },
+    {
+      "signal": "Weapon discharge without suppressor",
+      "visual_form": "Gunshot sound effect and visual muzzle flash",
+      "meaning": "Creates noise that triggers alarm and full Alert Mode with reinforcements"
+    },
+    {
+      "signal": "Guard patrol presence",
+      "visual_form": "Animated soldier sprites moving along predetermined paths",
+      "meaning": "Visual contact with these entities triggers Alert Mode; can be neutralized with fists or weapons"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Screen transition away from enemies",
+      "visual_form": "Moving to adjacent screen removes enemy pursuit",
+      "meaning": "Single-exclamation alerts are automatically canceled when changing screens; safe to resume infiltration"
+    },
+    {
+      "signal": "Entering elevator",
+      "visual_form": "Animated elevator door closure",
+      "meaning": "Escapes Alert Mode; provides safe passage between floors"
+    },
+    {
+      "signal": "Outdoor area access",
+      "visual_form": "Visual transition to outdoor jungle/perimeter environment",
+      "meaning": "Exiting building removes active Alert state and pursuing reinforcements"
+    },
+    {
+      "signal": "Absence of soldier sprites",
+      "visual_form": "Empty corridor or room with no animated guard characters",
+      "meaning": "Safe to move and explore without immediate detection risk"
+    },
+    {
+      "signal": "Suppressed weapon use",
+      "visual_form": "Handgun or submachine gun with suppressor attachment equipped",
+      "meaning": "No noise generated; safe to eliminate guards without triggering alarm"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "FOXHOUND / Solid Snake forces",
+      "color_identity": null,
+      "symbol_or_sigil": "FOXHOUND military unit insignia (implied through radio communications)",
+      "enemy_visual_variants": "Player character is unmarked soldier; can equip enemy uniform to blend in",
+      "environmental_markers": "Radio transceiver as communication device; presence in base as infiltrator"
+    },
+    {
+      "faction": "Outer Heaven / Enemy military",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Guard soldiers in uniform sprites; distinct from player character model",
+      "environmental_markers": "Military base architecture (Buildings 1, 2, 3, 5); patrolling soldiers; security doors; key card locks"
+    },
+    {
+      "faction": "Resistance / Allied contacts",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Radio frequencies for contact (Big Boss, Schneider, Diane, Jennifer); rescued prisoners represent resistance sympathizers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Infiltration phase (undetected)",
+      "visual_manifestation": "Player sprite moves freely; guards patrol in predictable patterns; no alert indicators visible",
+      "behavioral_manifestation": "Enemies perform standard patrol routines; will only investigate if player enters line of sight"
+    },
+    {
+      "world_state": "Alert Mode (single exclamation)",
+      "visual_manifestation": "Exclamation mark appears above detecting enemy; screen-wide enemy activation visible",
+      "behavioral_manifestation": "All enemies on current screen attack; switching screens cancels alert and resumes normal patrol"
+    },
+    {
+      "world_state": "Alert Mode (reinforcements active)",
+      "visual_manifestation": "Double exclamation marks; reinforcement soldiers spawn and pursue across multiple screens",
+      "behavioral_manifestation": "Off-screen reinforcements chase player relentlessly until all enemies eliminated or player reaches safe area"
+    },
+    {
+      "world_state": "Rank progression (prisoner rescue)",
+      "visual_manifestation": "Rank stars increase on HUD; carrying capacity visually expands in inventory; max health increases",
+      "behavioral_manifestation": "Every 5 rescued hostages = rank increase; dead hostage causes rank demotion; affects equipment slots available"
+    },
+    {
+      "world_state": "Building access locked",
+      "visual_manifestation": "Locked door sprite with keycard requirement indicator; visual barrier blocks passage",
+      "behavioral_manifestation": "Player must obtain corresponding key card; doors open only with matching card or enemy uniform disguise"
+    },
+    {
+      "world_state": "Equipment obtained",
+      "visual_manifestation": "Weapon/equipment icons appear in inventory screen with distinct visual designs (gun, missile launcher, grenade, suit, flashlight)",
+      "behavioral_manifestation": "New capabilities unlock (e.g., suppressor silences shots; bomb suit protects from hazards; RC missiles bypass obstacles)"
+    },
+    {
+      "world_state": "Hazardous environment active",
+      "visual_manifestation": "Electric panels, heat panels, or deep water shown as distinct environmental visual obstacles",
+      "behavioral_manifestation": "Certain equipment required to traverse (bomb blast suit for electrified floors, RC missiles to destroy obstacles)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Key card progression gating",
+      "example": "Buildings 1, 2, 3, 5 with multiple floors; each area locked behind progressively higher-tier key cards (card 1, 2, 3); visual door states tell player where they can and cannot access"
+    },
+    {
+      "technique": "Rescued hostage information",
+      "example": "Defeated/freed prisoners provide story exposition and mission objectives; each rescue advances rank and unlocks new capabilities, creating narrative momentum through mechanical progression"
+    },
+    {
+      "technique": "Radio frequency communication",
+      "example": "Player must track four different ally frequencies (Big Boss, Schneider, Diane, Jennifer); each character provides contextual advice based on current location and equipment, revealing world state through dialogue"
+    },
+    {
+      "technique": "Equipment discovery as world state indicator",
+      "example": "Finding suppressor, gas mask, binoculars, bomb blast suit in specific locations tells player about environmental hazards and enemy security measures ahead"
+    },
+    {
+      "technique": "Building architecture and layout",
+      "example": "Three main buildings with distinct floor layouts and elevator systems; northern vs. southern entrances; basement areas; visual design communicates strategic importance and guard positions"
+    },
+    {
+      "technique": "Boss encounters as faction representatives",
+      "example": "Mercenary bosses (Twin Shot, Coward Duck, Fire Trooper, Grey Fox) serve as visual embodiment of enemy faction strength and military capability; each boss represents different tactical approach"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Patrolling guard soldier",
+      "state": "Normal patrol",
+      "behavior": "Moves in fixed patterns across screen; ignores player if not in line of sight"
+    },
+    {
+      "entity": "Patrolling guard soldier",
+      "state": "Player spotted",
+      "behavior": "Displays exclamation mark; attacks player; alerts other guards on screen"
+    },
+    {
+      "entity": "Guard reinforcements",
+      "state": "Alert Mode triggered",
+      "behavior": "Spawn off-screen and pursue relentlessly across adjacent screens until eliminated or player escapes to safe zone"
+    },
+    {
+      "entity": "Solid Snake player character",
+      "state": "Infiltration",
+      "behavior": "Can move freely when undetected; can equip enemy uniform to bypass certain guards"
+    },
+    {
+      "entity": "Solid Snake player character",
+      "state": "Detected",
+      "behavior": "Must either eliminate all enemies, flee to adjacent screen/floor/outdoor, or enter combat encounter"
+    },
+    {
+      "entity": "Hostage / Prisoner",
+      "state": "Captured",
+      "behavior": "Remains stationary in cell; rescued when player reaches location; each rescue increases rank"
+    },
+    {
+      "entity": "Boss mercenary",
+      "state": "Combat encounter",
+      "behavior": "Initiates forced combat scenario; uses specialized tactics and weapons; victory yields equipment or access to new areas"
+    },
+    {
+      "entity": "Camera security system",
+      "state": "Active",
+      "behavior": "Visual contact triggers immediate Alert Mode with reinforcements; cannot be avoided without detection"
+    },
+    {
+      "entity": "Infrared sensor",
+      "state": "Active",
+      "behavior": "Invisible threat that triggers Alert Mode if player passes through; requires equipment or evasion to bypass"
+    }
+  ],
+  "notes": "NES version significantly differs from original MSX2 version. Higher alert phases (double exclamation marks with cross-screen reinforcement pursuit) were designed for MSX2 but removed in NES port, as alert state resets when changing screens in NES version. Regional variants include: UI polish on weapon icons, transceiver design changes, title screen publisher logos (Ultra Games vs. Konami), and level layout alterations. Enemy uniform mechanic allows visual faction disguise but is less critical to progression than in MSX2. Radio transceiver communication system (Big Boss, Schneider, Diane, Jennifer) is primary narrative mechanism for world-state exposition.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:30:07.158Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5861,
+    "output_tokens": 2538,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "game_id": "nes-open-tournament-golf-nes",
+  "game_name": "NES Open Tournament Golf",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Wind indicator",
+      "visual_form": "On-screen wind visualization during shot planning",
+      "meaning": "Environmental hazard affecting ball trajectory; player must compensate for wind direction and strength"
+    },
+    {
+      "signal": "Ball lie indication",
+      "visual_form": "Text display at bottom of screen showing current ball position and lie quality",
+      "meaning": "Terrain difficulty state; poor lie (rough, sand) indicates increased shot difficulty"
+    },
+    {
+      "signal": "Distance-to-hole readout",
+      "visual_form": "Numerical display at bottom screen showing remaining yards",
+      "meaning": "Progress state indicator; reveals how far player is from objective"
+    },
+    {
+      "signal": "Power meter positioning",
+      "visual_form": "Visual meter gauge during swing phase showing power accumulation",
+      "meaning": "Risk indicator; mistiming button press results in poor shot accuracy or distance loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Caddie presence and tips",
+      "visual_form": "Princess Peach (Mario) or Princess Daisy (Luigi) character sprite visible during play with advisory text",
+      "meaning": "Support system active; caddie provides tactical guidance to aid player decision-making"
+    },
+    {
+      "signal": "Club selection interface",
+      "visual_form": "Club type displayed at bottom of screen (1W, 2W, etc.) with bird's-eye view planning phase",
+      "meaning": "Control state; player has agency to select appropriate tool before committing to shot"
+    },
+    {
+      "signal": "Third-person camera view",
+      "visual_form": "Shift to behind-golfer perspective during swing execution",
+      "meaning": "Feedback visibility; player can visually assess swing quality and ball impact"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario Team",
+      "color_identity": "Red primary (Mario sprite coloring)",
+      "symbol_or_sigil": "Mario character sprite; recognizable jump pose",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Playable character selection; Mario associated with primary player role"
+    },
+    {
+      "faction": "Luigi Team",
+      "color_identity": "Green primary (Luigi sprite coloring)",
+      "symbol_or_sigil": "Luigi character sprite; taller stature, distinct hat",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Alternate playable character for multiplayer; Luigi available in two-player modes"
+    },
+    {
+      "faction": "Caddie Support",
+      "color_identity": "Pink/magenta (Princess Peach) and light purple (Princess Daisy)",
+      "symbol_or_sigil": "Princess crown imagery; Peach and Daisy character sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Advisory role; caddie characters provide contextual hints and encouragement throughout rounds"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Course selection available (international version)",
+      "visual_manifestation": "Course select menu displays overhead map view of United States with three selectable courses (US Course, Japan Course, UK Course) all available from start",
+      "behavioral_manifestation": "Player can freely choose any international course without unlocking requirements; contrasts with Japanese version progression"
+    },
+    {
+      "world_state": "Course difficulty progression (Japanese version)",
+      "visual_manifestation": "Course select menu shows rectangle background; only Japan Course visible at game start; other courses (Australia, France, Hawaii, UK, Extra) locked and require unlocking",
+      "behavioral_manifestation": "Player must complete courses sequentially to unlock new ones; creates progression narrative; Japanese version noted as harder overall"
+    },
+    {
+      "world_state": "Shot planning phase",
+      "visual_manifestation": "Bird's-eye view of hole layout displayed; club selection interface active; wind conditions visualized; distance meter shown",
+      "behavioral_manifestation": "Player pauses in decision-making; can adjust aim direction, select appropriate club, plan approach strategy before commitment"
+    },
+    {
+      "world_state": "Swing execution phase",
+      "visual_manifestation": "Camera perspective shifts to third-person view behind golfer; power meter becomes primary focal point; ball sprite visible at impact point",
+      "behavioral_manifestation": "Player enters timing-based interaction; must press button to halt power meter at desired strength level, then confirm shot quality"
+    },
+    {
+      "world_state": "Putting phase",
+      "visual_manifestation": "Camera switches to top-down orthographic viewpoint of green; hole position clearly marked; ball sprite positioned relative to cup",
+      "behavioral_manifestation": "Player transitions to precision aiming mode; different control scheme emphasizes accuracy over power"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic course naming and sequencing",
+      "example": "International version features US Course, Japan Course, UK Course suggesting world tour narrative; Japanese version includes Australia, France, Hawaii as additional destinations, implying expanded international golf competition context"
+    },
+    {
+      "technique": "Regional customization of UI elements",
+      "example": "Course select menu displays overhead map of United States in international versions vs. basic rectangle in Japanese version; world geography integration frames gameplay in cultural/geographic context"
+    },
+    {
+      "technique": "Character sprite visual identity",
+      "example": "Mario and Luigi maintain consistent red/green color coding across all Mario series games; Princess Peach and Daisy serve as caddies, establishing support role narrative without dialogue; character positioning (caddie off to side) communicates mentorship relationship"
+    },
+    {
+      "technique": "Visual difficulty communication through lie quality",
+      "example": "Ball lie descriptor at screen bottom (fairway, rough, sand, etc.) communicates terrain-based challenge state; players learn to recognize visual grass/sand textures as difficulty modifiers"
+    },
+    {
+      "technique": "Interface transparency in sports simulation",
+      "example": "Club type, wind direction, distance-to-hole, and power meter displayed as diegetic golf information; UI elements serve as simulation of caddie communication and scorecard data"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario (player character)",
+      "state": "Shot preparation",
+      "behavior": "Stands in third-person view holding club; caddie (Princess Peach) positioned nearby providing verbal guidance and tips"
+    },
+    {
+      "entity": "Mario (player character)",
+      "state": "Ball travel",
+      "behavior": "Camera follows ball trajectory through air; sprite follows ball movement until landing; third-person perspective maintains camera on player for visual feedback"
+    },
+    {
+      "entity": "Luigi (alternate player character)",
+      "state": "Active in multiplayer",
+      "behavior": "Replaces Mario in two-player mode; uses identical animation framework and mechanics; paired with Princess Daisy as caddie instead of Peach"
+    },
+    {
+      "entity": "Princess Peach (caddie)",
+      "state": "Supporting Mario",
+      "behavior": "Visible on-screen during gameplay providing directional tips; sprite appears in background or off-side; text boxes communicate advice about wind, club selection, or shot strategy"
+    },
+    {
+      "entity": "Princess Daisy (caddie)",
+      "state": "Supporting Luigi",
+      "behavior": "Identical function to Peach; provides same advisory role in multiplayer; visual distinction through character sprite differentiation (pink vs. purple coloring)"
+    },
+    {
+      "entity": "Golf ball",
+      "state": "Before swing",
+      "behavior": "Stationary sprite positioned on course; lie quality affects visual appearance slightly (depth in rough vs. fairway)"
+    },
+    {
+      "entity": "Golf ball",
+      "state": "During swing",
+      "behavior": "Animated trajectory arc in air; speed and distance determined by power meter timing; wind affects lateral drift during flight"
+    },
+    {
+      "entity": "Golf ball",
+      "state": "On putting green",
+      "behavior": "Top-down view shows ball in relation to hole; camera angle change communicates transition to precision phase"
+    }
+  ],
+  "notes": "NES Open Tournament Golf employs minimal narrative world-state communication; the game functions as a sports simulation where visual manifestation focuses on mechanics (power meter, wind indicators, camera perspectives) rather than environmental storytelling. Faction indicators are character-based rather than ideological—Mario/Luigi/caddie system establishes cooperative team identity rather than competitive opposition. Regional differences (Japanese vs. international versions) represent business/market customization rather than narrative world-state changes. The game's manifestation layer relies on interface clarity, sprite differentiation, and camera perspective shifts to communicate game state rather than on environmental hazards, danger zones, or political situation visualization. Danger and safety signals are mechanical (power meter accuracy, wind compensation) rather than environmental (no visible enemies, obstacles, or terrain hazards that block progression).",
+  "sources_used": [
+    "tcrf - NES Open Tournament Golf (The Cutting Room Floor)",
+    "wikipedia - NES Open Tournament Golf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:24:46.215Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5361,
+    "output_tokens": 2287,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

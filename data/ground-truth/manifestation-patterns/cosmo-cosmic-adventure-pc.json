@@ -1,0 +1,193 @@
+{
+  "game_id": "cosmo-cosmic-adventure-pc",
+  "game_name": "Cosmo's Cosmic Adventure",
+  "platform": "PC (MS-DOS)",
+  "paradigm": "2D side-scrolling platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Alien creatures positioned in level space",
+      "meaning": "Hazards that damage Cosmo on contact or via projectile fire; player must avoid or destroy"
+    },
+    {
+      "signal": "Projectile fire",
+      "visual_form": "Visible projectiles launched from enemy entities",
+      "meaning": "Ranged threat requiring movement evasion or shield protection"
+    },
+    {
+      "signal": "Chasms/falls",
+      "visual_form": "Bottomless pit gaps in level geometry",
+      "meaning": "Instant level restart on contact; critical spatial hazard"
+    },
+    {
+      "signal": "Health meter depletion",
+      "visual_form": "Health bar UI indicating remaining units (3 base, max 5 with cheeseburgers)",
+      "meaning": "Visual countdown to failure state; each enemy/hazard contact removes one unit"
+    },
+    {
+      "signal": "Bomb detonation",
+      "visual_form": "Explosive effect after brief delay",
+      "meaning": "Area damage hazard; can harm Cosmo if proximity too close at detonation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up modules",
+      "visual_form": "Collectible objects restoring one health unit",
+      "meaning": "Damage mitigation; distributed throughout levels as resource placement"
+    },
+    {
+      "signal": "Hidden cheeseburgers",
+      "visual_form": "Two hidden items per episode",
+      "meaning": "Reward for exploration; permanent health meter expansion (adds empty unit, max 5)"
+    },
+    {
+      "signal": "Shield cubes",
+      "visual_form": "Collectible protective items",
+      "meaning": "Temporary invincibility shield; negates next damage instance"
+    },
+    {
+      "signal": "Level exit",
+      "visual_form": "Goal location within each level",
+      "meaning": "Safe completion state; progression to next level"
+    },
+    {
+      "signal": "Hovercraft pads",
+      "visual_form": "Floating platforms enabling flight",
+      "meaning": "Safe traversal mechanic; avoids ground-based hazards temporarily"
+    },
+    {
+      "signal": "Wall surfaces",
+      "visual_form": "Climbable walls using suction-cup hand mechanic",
+      "meaning": "Safe vertical navigation; avoids enemy/hazard areas"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Cosmo (player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Alien boy character sprite with distinctive appearance",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Designated level starting positions; story framing as explorer rescuing missing parents"
+    },
+    {
+      "faction": "Alien creatures (hostile)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct hostile entity sprites per level/episode",
+      "enemy_visual_variants": "Different creature designs across three episodes reflecting alien-themed level progression",
+      "environmental_markers": "Placed throughout alien planet environment; indicate territory control/ecosystem"
+    },
+    {
+      "faction": "Unknown planet inhabitants (Zonk)",
+      "color_identity": null,
+      "symbol_or_sigil": "Large creature that swallows Cosmo at end of Episode 1",
+      "enemy_visual_variants": "Mega-scale entity indicating apex threat/environmental hazard",
+      "environmental_markers": "Environment itself becomes hostile; interior of creature is navigable level space in Episode 2"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Episode 1 - Exploration phase (parents missing)",
+      "visual_manifestation": "Alien planet surface environment; diverse enemy types; outdoor/natural structures",
+      "behavioral_manifestation": "Cosmo explores defensively; enemies patrol/attack; story event triggers at level exit (swallowed by creature)"
+    },
+    {
+      "world_state": "Episode 2 - Interior/survival phase (inside creature)",
+      "visual_manifestation": "Organic, internal environment aesthetic replacing external alien landscape",
+      "behavioral_manifestation": "Cosmo navigates internal anatomy; must find escape route; enemy/hazard types reflect internal ecosystem"
+    },
+    {
+      "world_state": "Episode 3 - Rescue/climax phase (alien city location)",
+      "visual_manifestation": "Urban alien architecture; city environment distinct from natural planet",
+      "behavioral_manifestation": "Cosmo approaches final objective; convergence of story elements; parents located safely (narrative twist)"
+    },
+    {
+      "world_state": "Damage taken (health loss)",
+      "visual_manifestation": "Health meter UI decreases visually; Cosmo may flash/change sprite state",
+      "behavioral_manifestation": "Player must seek power-ups or avoid further contact; moment of vulnerability"
+    },
+    {
+      "world_state": "Shield active (invincibility)",
+      "visual_manifestation": "Temporary visual effect around Cosmo entity",
+      "behavioral_manifestation": "One enemy/hazard contact negated; shield consumed; invincibility state ends"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level progression as narrative structure",
+      "example": "Three episodes with 10 levels each; progression communicates story beats: exploration → internal journey → rescue/discovery"
+    },
+    {
+      "technique": "Alien aesthetic world-building",
+      "example": "Distinct visual design of alien planet, internal creature, and city environment creates narrative momentum without dialogue"
+    },
+    {
+      "technique": "Implied threat via environment",
+      "example": "Large footprints in story setup suggest predatory inhabitants; later encounter with swallowing creature validates environmental danger signals"
+    },
+    {
+      "technique": "Bonus level access via collectible",
+      "example": "Star collection gates access to bonus levels; resource scarcity communicates progression hierarchy"
+    },
+    {
+      "technique": "Hidden collectibles as exploration reward",
+      "example": "Two cheeseburgers per episode hidden in level geometry; incentivizes non-linear exploration; permanent stat reward signals meaningful discovery"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Cosmo (player character)",
+      "state": "Healthy (full health meter)",
+      "behavior": "Standard movement, jumping, wall-clinging, bomb-throwing capabilities available; no restrictions"
+    },
+    {
+      "entity": "Cosmo (player character)",
+      "state": "Damaged (health < max)",
+      "behavior": "Same mechanical capabilities but visual/audio feedback indicates vulnerability; behavior unchanged but player risk assessment increases"
+    },
+    {
+      "entity": "Cosmo (player character)",
+      "state": "Shield active (invincible)",
+      "behavior": "Continues normal movement/actions; next damage absorbed by shield effect; behavioral change is protection mechanism only"
+    },
+    {
+      "entity": "Enemy creatures",
+      "state": "Unaware of Cosmo",
+      "behavior": "Patrol patterns, static positions, or simple AI routines; no aggression"
+    },
+    {
+      "entity": "Enemy creatures",
+      "state": "Aware/engaged",
+      "behavior": "Attack via contact or projectile fire; pursuit behavior if capable; indicates threat escalation"
+    },
+    {
+      "entity": "Enemy creatures",
+      "state": "Defeated (jumped on or bombed)",
+      "behavior": "Removal from level; eliminated threat; resource/point reward"
+    },
+    {
+      "entity": "Hint globes",
+      "state": "Intact",
+      "behavior": "Display helpful message on contact; non-hostile information source"
+    },
+    {
+      "entity": "Hint globes",
+      "state": "Destroyed (bombed)",
+      "behavior": "Removed from level; point reward (12,800 points); trades information for score"
+    }
+  ],
+  "notes": "Cosmo's Cosmic Adventure uses minimal narrative exposition; world-state communication relies heavily on visual environment shifts across episodes and sprite-based enemy/hazard visibility. The 16-color EGA 320×200 resolution constrains visual communication to iconic design—alien creatures must be instantly recognizable as threats, collectibles as benefits, and level geometry as navigable/hazardous. Parallax scrolling reinforces spatial depth, aiding player threat assessment at distance. Health meter is central UI for danger communication; invincibility shield state likely uses color/animation overlay. Bomb mechanics introduce delayed hazard communication (explosion delay forces planning). Story progression (three episodes with distinct visual environments) serves as macro-level world-state indicator without dialogue or cutscenes.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:32:48.497Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2942,
+    "output_tokens": 2252,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

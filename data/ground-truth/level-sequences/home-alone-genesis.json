@@ -1,0 +1,123 @@
+{
+  "game_id": "home-alone-genesis",
+  "game_name": "Home Alone",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "BB gun (basic weapon)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "primary offensive tool for entire game"
+    },
+    {
+      "element": "Craftable weapons (multiple gun types)",
+      "first_appears": "early game",
+      "introduction_context": "moderate",
+      "mastery_context": "combining items to create rifle, bazooka, launcher, mortar variants"
+    },
+    {
+      "element": "Ammunition types (glue, snow, light bulbs, sound waves, coals)",
+      "first_appears": "early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "selecting ammunition type to match tactical needs and gun type"
+    },
+    {
+      "element": "Sled traversal (top-down view)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "navigation between neighborhood houses"
+    },
+    {
+      "element": "House interiors (side-scroller platformer combat spaces)",
+      "first_appears": "when Bandits enter first house",
+      "introduction_context": "moderate",
+      "mastery_context": "combat encounters against Wet Bandits in constrained spaces"
+    },
+    {
+      "element": "Pain Meter (enemy damage tracking)",
+      "first_appears": "first house encounter",
+      "introduction_context": "moderate",
+      "mastery_context": "filling meter to incapacitate Bandits and save house"
+    },
+    {
+      "element": "Robbery Meter (house damage tracking)",
+      "first_appears": "first house encounter",
+      "introduction_context": "moderate",
+      "mastery_context": "race condition: must fill Pain Meter before Bandits fill Robbery Meter"
+    },
+    {
+      "element": "Flooded house state (permanent loss)",
+      "first_appears": "first house failure",
+      "introduction_context": "dangerous",
+      "mastery_context": "consequence system: failed houses cannot be revisited"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "successfully filling Pain Meter to save house",
+      "Bandits leave in van after house completion",
+      "time passing with houses remaining protected"
+    ],
+    "typical_tension_triggers": [
+      "Bandits enter a house",
+      "Robbery Meter advancing during combat",
+      "multiple houses threatened in sequence",
+      "Bandits approaching final unprotected houses"
+    ],
+    "pacing_descriptor": "cyclical tension: sled navigation (low tension) interrupted by sudden house combat encounters (high tension), with racing dual-meter pressure during each confrontation"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "multiple houses available for protection; player chooses which to defend",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "single house encounters with basic BB gun and straightforward combat",
+    "mid_game": "multiple houses vulnerable simultaneously; weapon crafting required to fill Pain Meters efficiently",
+    "late_game": "time pressure increases on higher difficulties (40 minutes vs 20); all houses approaching threat",
+    "notable_spikes": [
+      "first Bandit house entry (transition from exploration to time-pressure combat)",
+      "multiple house activations requiring rapid weapon switching and ammunition management",
+      "endgame scenario with limited unprotected houses remaining"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Dual-Meter Race Condition",
+      "description": "During each house encounter, Pain Meter (player progress) races against Robbery Meter (enemy progress). Victory requires filling Pain Meter before Robbery Meter completes. Creates temporal pressure within each spatial encounter.",
+      "example_level": "any house interior during active Bandit robbery"
+    },
+    {
+      "pattern_name": "Neighborhood Macro-Structure",
+      "description": "Top-down sled navigation between houses creates macro-level spatial puzzle: Kevin must anticipate which houses Bandits will target and position himself accordingly. Failed houses become permanently flooded, reducing available targets.",
+      "example_level": "overworld neighborhood map"
+    },
+    {
+      "pattern_name": "Weapon Crafting Gating",
+      "description": "Different gun types and ammunition combinations provide varying effectiveness. Player must explore house interiors to discover and craft appropriate weapon combinations for upcoming encounters.",
+      "example_level": "any house interior exploration phase before Bandit arrival"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:11:26.323Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2887,
+    "output_tokens": 1286,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

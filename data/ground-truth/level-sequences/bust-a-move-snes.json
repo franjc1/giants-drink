@@ -1,0 +1,115 @@
+{
+  "game_id": "bust-a-move-snes",
+  "game_name": "Bust-A-Move",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "level_count": 30,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Colored bubbles (initial arena pattern)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns to identify colors and match groups of three or more"
+    },
+    {
+      "element": "Pointer device (aiming mechanism)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns trajectory control and wall bouncing mechanics"
+    },
+    {
+      "element": "Random color generation",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Player adapts to unpredictable firing colors drawn from remaining on-screen colors"
+    },
+    {
+      "element": "Ceiling drop mechanic",
+      "first_appears": "After several shots (frequency varies by color count)",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns time pressure increases as ceiling descends; connected bubbles fall when support is removed"
+    },
+    {
+      "element": "Accelerating music tempo",
+      "first_appears": "As bubbles approach bottom line",
+      "introduction_context": "dangerous",
+      "mastery_context": "Auditory stress signal indicating imminent game over condition"
+    },
+    {
+      "element": "Bottom line boundary",
+      "first_appears": "Round 1 (implicit loss condition)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Hard failure boundary; crossing triggers game over"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful three-bubble match removes bubbles and points awarded",
+      "Clearing entire arena advances to next level",
+      "Cascading matches (bubbles falling and creating new matches)",
+      "Solving a difficult arrangement without ceiling drop"
+    ],
+    "typical_tension_triggers": [
+      "Ceiling drop every few shots",
+      "Random color mismatch forcing suboptimal play",
+      "Bubbles accumulating near bottom line",
+      "Music tempo acceleration",
+      "Fewer remaining color options increasing random firing difficulty"
+    ],
+    "pacing_descriptor": "Escalating pressure loop: each successful volley brings ceiling closer; music accelerates; player forced into faster decision-making with fewer color options; relief comes only through clearing matching groups and arena completion"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Simple bubble arrangements with abundant matching opportunities; player learns pointer aiming and color matching fundamentals",
+    "mid_game": "Increasingly complex bubble placements requiring strategic shot planning; ceiling drops more frequent; color variety increases",
+    "late_game": "Dense arena configurations with limited optimal moves; high ceiling drop frequency; minimal color redundancy forces precise play; arcade version culminates at level 30",
+    "notable_spikes": [
+      "Transition from early simple patterns to mid-game complexity as level progresses",
+      "Levels where few color options remain in arena, constraining firing flexibility",
+      "Final levels in arcade 30-level sequence with deliberately constrained match opportunities"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Progressive Arena Density",
+      "description": "Each round presents a new prearranged bubble pattern; patterns become increasingly packed and complex, reducing clear paths and forcing multi-step solution sequences",
+      "example_level": "Early levels feature sparse, easily-matched clusters; later levels present interlocking structures requiring cascades"
+    },
+    {
+      "pattern_name": "Color Scarcity Escalation",
+      "description": "Arcade version spans 30 levels; as player progresses, fewer distinct colors remain in arena, making random color generation a harder constraint—fired bubble color may not match available targets",
+      "example_level": "Late arcade levels with 2-3 color options create high-tension scenarios where wrong shots are more likely"
+    },
+    {
+      "pattern_name": "Ceiling Drop Cadence",
+      "description": "After every few shots, ceiling descends; shot count between drops influenced by remaining bubble colors. Fewer colors = more frequent drops. Creates escalating time pressure",
+      "example_level": "All levels implement this mechanic with varying intensity based on complexity"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor: Bust-A-Move SNES)",
+    "wikipedia (Puzzle Bobble)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:02:03.168Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5770,
+    "output_tokens": 1394,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

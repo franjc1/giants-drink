@@ -1,0 +1,177 @@
+{
+  "game_id": "lemmings-genesis",
+  "game_name": "Lemmings",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Basic lemming movement",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Lemmings walk in one direction, fall off edges, reverse at obstacles"
+    },
+    {
+      "element": "Trap doors / lemming spawning",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "One or more trap doors release steady stream of lemmings; rate controllable by player"
+    },
+    {
+      "element": "Climber skill",
+      "first_appears": "Early levels",
+      "introduction_context": "safe",
+      "mastery_context": "Climb vertical surfaces but fall if hitting overhang; introduces vertical navigation"
+    },
+    {
+      "element": "Floater skill",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Deploy parachute to survive falls; teaches height-fall mitigation"
+    },
+    {
+      "element": "Blocker skill",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Stand still, reverse other lemmings; introduces flow control"
+    },
+    {
+      "element": "Builder skill",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Construct 12-step stairway; stops at obstacles or head hits; bridges gaps"
+    },
+    {
+      "element": "Basher skill",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Tunnel horizontally through terrain; cannot penetrate steel"
+    },
+    {
+      "element": "Miner skill",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Tunnel diagonally downward; cannot penetrate steel"
+    },
+    {
+      "element": "Digger skill",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Tunnel straight downward; cannot penetrate steel"
+    },
+    {
+      "element": "Bomber skill",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Explodes after 5 seconds, destroys landscape; high-risk tool"
+    },
+    {
+      "element": "Large drops",
+      "first_appears": "Early levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Falling from height kills lemmings; requires Floater or Blocker mitigation"
+    },
+    {
+      "element": "Booby traps",
+      "first_appears": "Mid levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Environmental hazards that kill lemmings"
+    },
+    {
+      "element": "Lava pools",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Instant-kill hazard; requires bypass or skill avoidance"
+    },
+    {
+      "element": "Steel barriers",
+      "first_appears": "Late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Impenetrable to tunneling skills; forces alternative route planning"
+    },
+    {
+      "element": "Time limit",
+      "first_appears": "All levels",
+      "introduction_context": "moderate",
+      "mastery_context": "All lemmings explode if timer expires; creates pacing pressure"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully routing lemmings to exit",
+      "Reaching safe zone after hazard",
+      "Pausing game to plan (allows inspection without time pressure)"
+    ],
+    "typical_tension_triggers": [
+      "Approaching time limit",
+      "Lemmings approaching hazard (lava, pit, trap)",
+      "Skills exhausted or nearly exhausted",
+      "Lemming about to walk off screen edge",
+      "Limited spawn rate forcing wait periods"
+    ],
+    "pacing_descriptor": "Real-time strategy with pause-to-plan option; tension builds as timer decreases and lemming stream encounters obstacles; relief cycles when safe passage confirmed"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Difficult alternate routes may exist to increase percentage saved beyond minimum requirement",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of single basic skills and simple obstacle avoidance; safe spawning with minimal hazards",
+    "mid_game": "Multi-skill combination levels; terrain tunneling introduced; moderate hazards (drops, traps); skill economy tightens",
+    "late_game": "Complex skill sequencing required; steel barriers limit approach options; lava and booby traps prevalent; tight time limits",
+    "notable_spikes": [
+      "First time limits enforce strict skill assignment",
+      "First steel barrier level (forces route reconsideration)",
+      "Lava introduction with limited safe passage"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Vertical Ascent",
+      "description": "Lemmings enter at bottom, must climb or build upward to reach exit at higher elevation; emphasizes Climber and Builder skills",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Obstacle Course",
+      "description": "Linear path with sequential hazards (pits, drops, traps); tests skill allocation order and timing",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Terrain Maze",
+      "description": "Tunneling-heavy level requiring digging horizontally, diagonally, and vertically to create safe passage through rock",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Flow Control",
+      "description": "Uses Blockers and rate manipulation to segment lemming stream and prevent collision losses",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Precision Platforming",
+      "description": "Narrow passages and specific jumps require exact Floater or Builder skill deployment",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:49:07.640Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3534,
+    "output_tokens": 1764,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

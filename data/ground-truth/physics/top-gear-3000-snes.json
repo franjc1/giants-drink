@@ -1,0 +1,136 @@
+{
+  "game_id": "top-gear-3000-snes",
+  "game_name": "Top Gear 3000",
+  "platform": "snes",
+  "year": 1995,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Racing game; sub-pixel precision not documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Jump (Weapon)",
+      "description": "Player-controlled weapon with unlimited uses. Allows car to jump over other cars and obstacles. Useful for collecting bonuses and passing vehicles when far behind.",
+      "physics_values": {
+        "uses_limited": false,
+        "notes": "Only weapon with no usage limit"
+      }
+    },
+    {
+      "name": "Warp (Weapon)",
+      "description": "Car disappears for approximately 1.5 seconds, travels through track invisible (performing turns correctly), then reappears almost instantly. Car is immune to obstacles and collisions while invisible but can collect bonuses.",
+      "physics_values": {
+        "duration_seconds": 1.5,
+        "uses_limited": true,
+        "max_uses": 4,
+        "travel_speed": "almost instant"
+      }
+    },
+    {
+      "name": "Attractor (Weapon)",
+      "description": "Magnetic device that steals kinetic energy from other cars, pulling player's car toward them.",
+      "physics_values": {
+        "mechanic": "kinetic_energy_transfer",
+        "uses_limited": true
+      }
+    },
+    {
+      "name": "Fuel System",
+      "description": "Cars limited by fuel range. Players gain fuel by driving over red Recharge strips. Futuristic cars can sustain great speed even without gas. If car loses too much speed from collisions, it runs at very low speed until refueled or boosted.",
+      "physics_values": {
+        "recharge_mechanic": "proximity_based",
+        "low_speed_stall_condition": true
+      }
+    },
+    {
+      "name": "Boost",
+      "description": "Upgradable boost system (levels 1-6). Level 4+ boost can restore car velocity from stalled low-speed state.",
+      "physics_values": {
+        "boost_levels": 6,
+        "velocity_recovery_threshold": 4
+      }
+    },
+    {
+      "name": "Nuclear Fusion Engine (Upgrade)",
+      "description": "Advanced engine upgrade that maintains velocity even when car runs out of gas.",
+      "physics_values": {
+        "fuel_independent": true
+      }
+    },
+    {
+      "name": "Repair System",
+      "description": "Cars have structural integrity measured by frame condition. Players repair by driving over blue Repair strips.",
+      "physics_values": {
+        "repair_mechanic": "proximity_based"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "arcade-driven",
+    "momentum-based",
+    "high-speed",
+    "energy-management-heavy"
+  ],
+  "tier_notes": "Tier 3 empirical/qualitative data. No exact physics values documented. Source is Wikipedia overview of game mechanics. Car movement governed by fuel state and collision damage rather than traditional acceleration curves. Game emphasizes strategic weapon use and vehicle upgrades over precise movement control. Platform racing genre with futuristic theme.",
+  "sources_used": [
+    "Wikipedia - Top Gear 3000"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T00:16:12.916Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2886,
+    "output_tokens": 1124,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

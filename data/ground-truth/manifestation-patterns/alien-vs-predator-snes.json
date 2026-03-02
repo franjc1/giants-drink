@@ -1,0 +1,152 @@
+{
+  "game_id": "alien-vs-predator-snes",
+  "game_name": "Alien vs. Predator",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Charger Alien (Warrior Xenomorph) sprites with distinctive hunched posture and elongated head",
+      "meaning": "Immediate combat threat; player must engage or evade"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Health bar visual reduction on HUD",
+      "meaning": "Player approaching vulnerable state; risk of defeat imminent"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Stage-specific obstacles and environmental elements (waterfall basin in Stage 3, urban areas in Stage 1-2)",
+      "meaning": "Environmental damage or movement restriction zones"
+    },
+    {
+      "signal": "Special attack vulnerability (Japanese version)",
+      "visual_form": "Health drain during special attack execution; visual power bar depletion tied to player HP",
+      "meaning": "Cost-benefit risk: powerful attacks damage the player; requires tactical consideration"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cloaking device active",
+      "visual_form": "Predator character becomes translucent/invisible on screen",
+      "meaning": "Temporary invulnerability period; enemies cannot detect or attack"
+    },
+    {
+      "signal": "Item pickups available",
+      "visual_form": "Spear and disc weapons as collectible sprites; visual distinction from environment",
+      "meaning": "Resource acquisition enables enhanced offensive capability"
+    },
+    {
+      "signal": "Empty arena space",
+      "visual_form": "Cleared stage areas with no visible enemies",
+      "meaning": "Safe zone for movement and strategic positioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Predator (player character)",
+      "color_identity": "Brown and blue (International version); Orange and green (Japanese version)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Predator palette changed between regions to reflect canonical color scheme",
+      "environmental_markers": "Predator occupies center of arena; dominates screen real estate during gameplay"
+    },
+    {
+      "faction": "Alien Xenomorphs (Charger/Warrior type)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinctive elongated head crest, hunched attacking posture",
+      "enemy_visual_variants": "Japanese version: Drone-type with horn; International version: Warrior Xenomorph with closed mouth (more canonical)",
+      "environmental_markers": "Spawn from level architecture; appear as primary hostile entities throughout stages"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Japanese regional build active",
+      "visual_manifestation": "Predator sprite rendered in orange/green palette with aggressive fist-raised walking stance; Drone-type Aliens with horn protrusions",
+      "behavioral_manifestation": "Slower base movement speed requiring double-tap dash input; special attacks drain player health; cloaking lasts 44 seconds; weapons single-use per pickup"
+    },
+    {
+      "world_state": "International regional build active",
+      "visual_manifestation": "Predator rendered in brown/blue palette with casual walking posture; Warrior Xenomorphs with closed mouths; Stage 3 redesigned as waterfall basin instead of urban area",
+      "behavioral_manifestation": "Constant dashing movement speed as default; L/R slide input instead of dash-attack hybrid; special attacks cost no health; cloaking lasts 17 seconds; weapons have 6 uses per pickup"
+    },
+    {
+      "world_state": "Special attack charging",
+      "visual_manifestation": "Power bar fills with color segments (gray, yellow, blue sections); bar flashes at variable rate depending on charge level",
+      "behavioral_manifestation": "Player movement restricted during charge; visual feedback indicates readiness threshold; full charge displays visual notification (flashing rate differs by region)"
+    },
+    {
+      "world_state": "Player invulnerable (cloaking active)",
+      "visual_manifestation": "Predator sprite becomes translucent/fades from view",
+      "behavioral_manifestation": "Enemies do not engage; player can move freely without threat; temporary tactical advantage window"
+    },
+    {
+      "world_state": "Stage completion approaching",
+      "visual_manifestation": "Enemy density decreases; fewer Alien sprites on screen; clear pathways emerge in arena",
+      "behavioral_manifestation": "Reduced combat pressure; opportunity for item collection and health management"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural design reflecting thematic setting",
+      "example": "Stage 3 waterfall basin (International) or urban outdoor area (Japanese) establishes environment as contested territory; visual emphasis on natural/artificial boundaries suggests warfare in populated zones"
+    },
+    {
+      "technique": "Alien pod graphics fidelity",
+      "example": "Redesigned pods in International version to match Alien film series aesthetic; visual authenticity grounds the Xenomorph threat in recognizable franchise canon"
+    },
+    {
+      "technique": "Spear weapon visual design",
+      "example": "Japanese spear rendered as dangerous/impractical (hazardous to wielder); International spear redesigned with ergonomic grip; visual representation of difficulty/accessibility philosophy"
+    },
+    {
+      "technique": "HUD communication of constraints",
+      "example": "Special attack power bar visual structure (segment sizing, flashing rate) communicates different difficulty parameters between regions without text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Predator (player)",
+      "state": "Idle/standing",
+      "behavior": "Japanese: aggressive fist-raised stance (ready posture); International: casual walking stance (relaxed posture)"
+    },
+    {
+      "entity": "Predator (player)",
+      "state": "Moving",
+      "behavior": "Japanese version requires double-tap input to dash; International version moves at constant dash speed"
+    },
+    {
+      "entity": "Predator (player)",
+      "state": "Special attack active",
+      "behavior": "Japanese: laser attack drains 5-40 HP depending on intensity; International: laser attack costs no health (pure benefit)"
+    },
+    {
+      "entity": "Charger Alien (Warrior Xenomorph)",
+      "state": "Hunting",
+      "behavior": "Spawns from level geometry; pursues Predator player character; hunched posture indicates aggressive intent"
+    },
+    {
+      "entity": "Charger Alien (Drone variant - Japanese only)",
+      "state": "Hunting",
+      "behavior": "Visually distinct with horn protrusion; identical combat behavior to Warrior variant; replaced in International versions for canonical accuracy"
+    },
+    {
+      "entity": "Cloaking device item",
+      "state": "Active",
+      "behavior": "Predator becomes translucent; enemies cease pursuit; visual stealth indicator"
+    }
+  ],
+  "notes": "This SNES port is a single-character beat-em-up (Predator only) with asymmetric regional balance: Japanese version emphasizes risk-reward (health-draining powers, single-use weapons, slower movement) while International release prioritizes accessibility (free special attacks, multi-use weapons, constant sprint). Visual design changes between regions—Predator color scheme, Alien enemy types, Stage 3 environment, even ending credits text ('Dr. Banana' vs. 'K. Nakabayashi')—suggest Nintendo of America/Europe content filtering and localization philosophy. Unused 2P versus mode (Predator vs. Charger Alien) hints at original design scope before streamlining. Danger/safety communication relies on sprite presence/absence, item pickups, and HUD bar depletion rather than atmospheric lighting or camera work.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:19:15.855Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2756,
+    "output_tokens": 2008,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

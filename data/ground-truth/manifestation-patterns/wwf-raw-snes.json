@@ -1,0 +1,127 @@
+{
+  "game_id": "wwf-raw-snes",
+  "game_name": "WWF Raw",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "opponent_health_depletion",
+      "visual_form": "health bar reduction on-screen",
+      "meaning": "wrestler approaching knockout state; increased vulnerability to finishing moves"
+    },
+    {
+      "signal": "wrestler_on_ground",
+      "visual_form": "downed sprite animation",
+      "meaning": "wrestler in danger zone; opponent can execute pinning attempts or continued attacks"
+    },
+    {
+      "signal": "opponent_charging_finishing_move",
+      "visual_form": "distinct animation sequence and audio cue",
+      "meaning": "imminent high-damage attack; match outcome at critical juncture"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "full_health_bar",
+      "visual_form": "complete health meter display",
+      "meaning": "wrestler at optimal fighting capacity; safe to engage aggressively"
+    },
+    {
+      "signal": "wrestler_standing_neutral",
+      "visual_form": "idle stance animation",
+      "meaning": "wrestler in stable state; opportunity for action or recovery"
+    },
+    {
+      "signal": "outside_ring_position",
+      "visual_form": "character sprite beyond ring boundaries",
+      "meaning": "temporary safe zone; opportunity to recover or plan strategy without immediate threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Individual Wrestlers (WWF Roster)",
+      "color_identity": "wrestler-specific attire colors (e.g., Shawn Michaels, Bret Hart variations)",
+      "symbol_or_sigil": "wrestler entrance theme and titantron graphics (though titantron only displays on victory)",
+      "enemy_visual_variants": "palette swaps indicate opponent vs. player character (same sprite base with different coloring)",
+      "environmental_markers": "wrestling ring as neutral arena; no faction-based environmental distinction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match in progress",
+      "visual_manifestation": "active wrestler sprites with animations; opponent health bars visible; ring boundaries active",
+      "behavioral_manifestation": "wrestlers respond to input commands; active collision detection; real-time health depletion"
+    },
+    {
+      "world_state": "Wrestler victory",
+      "visual_manifestation": "defeated wrestler remains downed; winning wrestler plays victory animation; titantron graphics display winner's theme imagery",
+      "behavioral_manifestation": "winning wrestler performs celebratory animation; defeated wrestler cannot act; match transitions to post-victory state"
+    },
+    {
+      "world_state": "Match selection/character roster view",
+      "visual_manifestation": "wrestler portraits and biographies; character selection screen with all 12 roster members (plus unused '??Mystery??' placeholder)",
+      "behavioral_manifestation": "player navigates roster; theme music plays based on selected character"
+    },
+    {
+      "world_state": "Game over/Royal Rumble winner determination",
+      "visual_manifestation": "title screen transitions; winner theme plays (SNES uses winning wrestler's theme rather than dedicated victory fanfare)",
+      "behavioral_manifestation": "game returns to main menu; victory state communicated through audio rather than unique visual sequence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character palette identity",
+      "example": "Mystery character's grey hair, pale skin, and black pants differentiate him from other roster members despite using borrowed sprite frames; visual distinction communicates incomplete development or placeholder status"
+    },
+    {
+      "technique": "Missing visual assets as absence-storytelling",
+      "example": "Mystery wrestler lacks finishing move animations, theme song, portrait biography, and titantron graphics—visual void communicates character incompleteness to attentive players"
+    },
+    {
+      "technique": "Wrestler sprite migration",
+      "example": "Mystery character switches between Shawn Michaels and Bret Hart sprite frames during certain moves, visually implying hybrid/uncertain identity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Active Wrestler (Player-controlled)",
+      "state": "healthy",
+      "behavior": "responsive to input commands; performs requested attacks and movements with full animation speed"
+    },
+    {
+      "entity": "Active Wrestler (Player-controlled)",
+      "state": "injured/low health",
+      "behavior": "movement speed potentially reduced; vulnerability increased to finishing moves (inferred from game structure)"
+    },
+    {
+      "entity": "Opponent Wrestler (AI-controlled)",
+      "state": "aggressive",
+      "behavior": "executes attack sequences; chains moves together; pursues downed opponent"
+    },
+    {
+      "entity": "Opponent Wrestler (AI-controlled)",
+      "state": "defeated",
+      "behavior": "ceases action; remains downed; cannot respond to player input"
+    },
+    {
+      "entity": "Mystery Character (unused)",
+      "state": "incomplete",
+      "behavior": "lacks finishing move execution; sprite inconsistency suggests non-functional state when accessed via cheat codes"
+    }
+  ],
+  "notes": "WWF Raw (1994) uses a sprite-based action fighting game paradigm where visual communication is minimal—limited to health bars, sprite animations, and entrance theming. The game lacks complex world-state systems; instead, match state is conveyed through animation frames and opponent positioning. The unused Mystery character provides insight into how visual incompleteness communicated development status. Faction identity is wrestler-specific rather than organizational; each wrestler's unique color palette, theme music, and (intended) titantron graphics serve as individual faction markers. No danger/safety systems exist beyond health depletion; environmental positioning (ring vs. outside) provides minor tactical advantage but no visual world-state changes.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - WWF Raw SNES article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:16:27.954Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4162,
+    "output_tokens": 1484,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

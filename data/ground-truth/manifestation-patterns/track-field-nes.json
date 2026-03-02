@@ -1,0 +1,155 @@
+{
+  "game_id": "track-field-nes",
+  "game_name": "Track & Field",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Failing to qualify",
+      "visual_form": "Loss of lives counter decrement",
+      "meaning": "Player has not met qualifying time/distance threshold for current event"
+    },
+    {
+      "signal": "Game over condition",
+      "visual_form": "Lives counter reaches zero",
+      "meaning": "Player has exhausted all attempts and competition ends"
+    },
+    {
+      "signal": "Crowd reaction",
+      "visual_form": "Audience visual in background scrolling/reaction changes",
+      "meaning": "Spectator engagement reflects performance quality (positive for success, negative for failure)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful qualification",
+      "visual_form": "Advancement to next event screen",
+      "meaning": "Player has achieved qualifying standard and progresses safely"
+    },
+    {
+      "signal": "Extra lives earned",
+      "visual_form": "Lives counter increment at 100,000 point intervals",
+      "meaning": "High score performance grants additional attempts/safety buffer"
+    },
+    {
+      "signal": "World record display",
+      "visual_form": "Large scoreboard showing world records and current attempts",
+      "meaning": "Visual feedback of performance relative to established standards provides context for success/failure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (athlete)",
+      "color_identity": null,
+      "symbol_or_sigil": "Onscreen athlete sprite representation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Running track, field equipment (hurdles, javelins, hammers)"
+    },
+    {
+      "faction": "Computer CPU players",
+      "color_identity": null,
+      "symbol_or_sigil": "Alternative athlete sprites in multiplayer",
+      "enemy_visual_variants": "Different sprite designs for competing CPU athletes",
+      "environmental_markers": "Separate lanes on horizontal split-screen display"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early competition rounds",
+      "visual_manifestation": "Lower qualifying thresholds displayed on scoreboard; accessible event parameters",
+      "behavioral_manifestation": "Player CPU competitors perform at baseline difficulty level"
+    },
+    {
+      "world_state": "Advanced competition rounds",
+      "visual_manifestation": "Higher qualifying thresholds appear on scoreboard after completing all six events",
+      "behavioral_manifestation": "Increased difficulty scaling; CPU competitors perform at higher efficiency"
+    },
+    {
+      "world_state": "Multiplayer mode active",
+      "visual_manifestation": "Split horizontal scrolling screens showing paired competitors side-by-side",
+      "behavioral_manifestation": "Players 2&4 use left control set, Players 1&3 use right set; competitors race simultaneously but qualify independently"
+    },
+    {
+      "world_state": "Single-player mode active",
+      "visual_manifestation": "Right control set selected; CPU fills remaining player slots",
+      "behavioral_manifestation": "Player competes against CPU athletes; relative performances displayed but qualification based on solo qualifying times only"
+    },
+    {
+      "world_state": "Olympic context (thematic)",
+      "visual_manifestation": "Event-specific visual theming: 100m dash, long jump, javelin, hurdles, hammer throw, high jump stations",
+      "behavioral_manifestation": "Six-event tournament structure mimics Olympic competition format with progression mechanics"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Audience background visuals",
+      "example": "Packed crowd in background serves as spectator presence; scrolling at independent rates creates depth and atmosphere of Olympic stadium setting"
+    },
+    {
+      "technique": "Event-specific equipment visualization",
+      "example": "Hurdles appear on track for 110m hurdles event; javelin and hammer throw implements visible during respective events; high jump bar displayed during jumping event"
+    },
+    {
+      "technique": "Scoreboard display system",
+      "visual_form": "Large prominent scoreboard showing world records, current player attempts, qualifying standards, and performance metrics",
+      "example": "World records contextualize player achievement; current score display motivates performance competition"
+    },
+    {
+      "technique": "Multi-lane track visualization",
+      "example": "Horizontal split-screen scrolling for multiple independent areas (track, audience, back wall) creates stadium environment and multiplayer space differentiation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player athlete",
+      "state": "Running (100m dash, hurdles, long jump approach)",
+      "behavior": "Speed determined by alternating button press frequency; faster button mashing equals faster running velocity"
+    },
+    {
+      "entity": "Player athlete",
+      "state": "Long jump execution",
+      "behavior": "Timing of jump button press determines angle; holding button sets trajectory at optimal 42-degree angle"
+    },
+    {
+      "entity": "Player athlete",
+      "state": "Javelin throw",
+      "behavior": "Action button timing determines throw angle; 43-degree angle represents optimal performance"
+    },
+    {
+      "entity": "Player athlete",
+      "state": "Hurdle clearing",
+      "behavior": "Action button timing required to clear each hurdle; mistiming results in collision and performance penalty"
+    },
+    {
+      "entity": "Player athlete",
+      "state": "Hammer throw",
+      "behavior": "Single run button press initiates spin; action button press timing determines release angle; 45-degree angle optimal"
+    },
+    {
+      "entity": "Player athlete",
+      "state": "High jump",
+      "behavior": "Computer sets approach run speed; action button held to determine angle; rapid run button presses provide additional height in air"
+    },
+    {
+      "entity": "CPU competitor",
+      "state": "Competition active",
+      "behavior": "Performs athletics tasks; player relative performance does not affect CPU qualifying status; each athlete judged against independent qualifying times only"
+    }
+  ],
+  "notes": "Track & Field is a pure sports simulation with minimal narrative world-state. Visual communication centers on Olympic athletic competition mechanics rather than danger/safety in traditional sense. Instead, 'danger' represents failure to qualify, while 'safety' represents successful advancement. The game's world-state is entirely determined by competition round progression and difficulty escalation. NES version combines Hyper Olympic and Hyper Sports Famicom games; regional differences exist only in title screen (European version retitled to coincide with 1992 Barcelona Olympics). Unused code indicates original arcade version featured variable scroll rates for audience and back wall at different rates, creating additional depth layering not implemented in NES version. Manifestation patterns are purely mechanical/performance-based rather than environmental or political.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:19:42.894Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4265,
+    "output_tokens": 1733,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

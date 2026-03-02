@@ -1,0 +1,165 @@
+{
+  "game_id": "city-connection-nes",
+  "game_name": "City Connection",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Police car pursuit",
+      "visual_form": "Colored police vehicles that follow the player on-screen",
+      "meaning": "Active threat requiring evasion or offensive action via oil cans"
+    },
+    {
+      "signal": "Flag-waving cats",
+      "visual_form": "Cat sprites with flags that block pathways",
+      "meaning": "Static obstacles that cannot be killed; must be avoided or bypassed"
+    },
+    {
+      "signal": "Ground spikes",
+      "visual_form": "Spikes that extrude from the stage ground",
+      "meaning": "Instant-death hazard triggered by prolonged stationary play"
+    },
+    {
+      "signal": "White unpainted roads",
+      "visual_form": "Road sections that differ in color from painted sections",
+      "meaning": "Incomplete objective state; player must traverse to change to green"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Green painted roads",
+      "visual_form": "Road sections changed from white to green after traversal",
+      "meaning": "Completed objective areas; visual progress indicator"
+    },
+    {
+      "signal": "Red balloons",
+      "visual_form": "Red-colored collectible objects appearing occasionally in stages",
+      "meaning": "Bonus items; three collected warps player to new area and grants points"
+    },
+    {
+      "signal": "Stunned enemy vehicles",
+      "visual_form": "Police cars or traffic vehicles rendered immobile after oil can impact",
+      "meaning": "Temporarily neutralized threats; safe to ram and remove from stage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Police",
+      "color_identity": "Determined by stage/variant (not specified in sources)",
+      "symbol_or_sigil": "Police car sprite design",
+      "enemy_visual_variants": "Police cars that pursue and follow player; can be stunned but not permanently eliminated until rammed while stunned",
+      "environmental_markers": "None documented; police appear as mobile threats rather than occupying fixed locations"
+    },
+    {
+      "faction": "Player (Clarice/unnamed protagonist)",
+      "color_identity": "Orange Honda City hatchback",
+      "symbol_or_sigil": "Vehicle sprite; blue-haired female character (Famicom/arcade) or unnamed male (NES NA)",
+      "enemy_visual_variants": "Single controllable unit",
+      "environmental_markers": "Trail of painted roads left behind as player drives; visual mark of player's presence and progress"
+    },
+    {
+      "faction": "Neutral/Environmental",
+      "color_identity": null,
+      "symbol_or_sigil": "Flag-waving cats; generic traffic vehicles",
+      "enemy_visual_variants": "Cats are invulnerable and block pathways; traffic vehicles can be stunned like police",
+      "environmental_markers": "Cats stationed at fixed points; traffic vehicles appear to patrol or cross paths"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage / low pressure",
+      "visual_manifestation": "White unpainted roads dominate; few obstacles visible; open pathways",
+      "behavioral_manifestation": "Police cars patrol slowly or are distant; cats positioned at limited choke points"
+    },
+    {
+      "world_state": "Mid-stage / increasing pressure",
+      "visual_manifestation": "Mix of white and green roads; more visual clutter; police cars positioned closer",
+      "behavioral_manifestation": "Police pursuit intensifies; multiple vehicles on-screen; cat placement increases"
+    },
+    {
+      "world_state": "Extended time on same stage",
+      "visual_manifestation": "Ground spikes emerge and extrude visually from stage floor",
+      "behavioral_manifestation": "Instant-death hazard forces player to either complete objective or lose life; urgency escalates"
+    },
+    {
+      "world_state": "Objective completion (stage clear)",
+      "visual_manifestation": "All roads turn green; visual confirmation of full traversal",
+      "behavioral_manifestation": "Progression to next stage; world shifts to new location backdrop"
+    },
+    {
+      "world_state": "Between stages / world travel",
+      "visual_manifestation": "Background shifts to iconic real-world location (New York, London, Paris, etc.)",
+      "behavioral_manifestation": "Visual storytelling through environmental backdrops; twelve stages span globe; musical track changes per stage"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Iconic landmark backdrops",
+      "example": "Big Ben and Tower Bridge for London stage; Arc de Triomphe and Eiffel Tower for Paris; Mount Fuji for Japan; Sydney Opera House for Australia"
+    },
+    {
+      "technique": "Stage-specific musical scoring",
+      "example": "Tchaikovsky's Piano Concerto No. 1 used across multiple stages; 'Flohwalzer' (Neko Funjatta) plays when hitting flag-waving cats; Deep Purple's 'Highway Star' remix in another stage; credited as one of first games to use unique music per stage"
+    },
+    {
+      "technique": "Global journey narrative",
+      "example": "Twelve stages depicting world tour: USA → UK → France → Germany → Netherlands → Egypt → India → China → Japan → Australia → Latin America → USA; player travels in Honda City hatchback on 'quest of finding herself the perfect man'"
+    },
+    {
+      "technique": "Road painting as progress",
+      "example": "White roads convert to green as player drives over them; visual manifestation of objective completion and territorial control"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Police cars",
+      "state": "Active pursuit",
+      "behavior": "Follow player around stage; chase continuously; can be stunned by oil cans; knocked off stage when rammed while stunned"
+    },
+    {
+      "entity": "Police cars",
+      "state": "Stunned",
+      "behavior": "Rendered immobile and vulnerable to ramming; temporary neutralization lasting briefly"
+    },
+    {
+      "entity": "Flag-waving cats",
+      "state": "Static blockade",
+      "behavior": "Remain fixed in position waving flags; cannot be killed or stunned by any means; force player to jump over or find alternate route"
+    },
+    {
+      "entity": "Traffic vehicles",
+      "state": "Obstacle",
+      "behavior": "Function similarly to police cars; can be stunned by oil cans and rammed; appear to patrol or cross paths with player"
+    },
+    {
+      "entity": "Red balloons",
+      "state": "Spawned (occasional)",
+      "behavior": "Appear randomly in stage; collecting three triggers warp to new area and bonus points; incentivizes exploration and risk-taking"
+    },
+    {
+      "entity": "Ground spikes",
+      "state": "Triggered by time",
+      "behavior": "Extrude from ground after extended player stasis; instant-kill mechanic forcing player action and preventing idle camping"
+    },
+    {
+      "entity": "Clarice/Player character",
+      "state": "Mobile",
+      "behavior": "Drives horizontally across elevated roads; can jump over gaps to reach higher sections; collects and launches oil cans as offensive tool; leaves trail of painted roads"
+    }
+  ],
+  "notes": "City Connection operates as a chase-evasion action platformer with minimal political or factional narrative. World-state communication relies primarily on visual environmental changes (painted roads, spike emergence, police proximity) and location backdrops rather than complex political dynamics. The game's faction structure is simple: player vs. law enforcement vs. environmental hazards. Danger signals are performance-based (time pressure, proximity threats) rather than narrative. The global stage design and character journey theme provide light environmental storytelling but no explicit world-state politics. Data extracted from available Wikipedia and TCRF disambiguation sources; detailed game mechanics sourced from Wikipedia gameplay and development sections.",
+  "sources_used": [
+    "wikipedia_city_connection"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:27:47.893Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3404,
+    "output_tokens": 2035,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

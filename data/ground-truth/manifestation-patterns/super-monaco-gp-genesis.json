@@ -1,0 +1,144 @@
+{
+  "game_id": "super-monaco-gp-genesis",
+  "game_name": "Super Monaco GP",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "position_countdown",
+      "visual_form": "numerical position limit displayed on HUD that counts down during race",
+      "meaning": "player must maintain minimum placement or face game over; falling below threshold indicates imminent failure state"
+    },
+    {
+      "signal": "timer_expiration",
+      "visual_form": "45-second qualification timer on practice lap",
+      "meaning": "time pressure signal; failure to complete lap before timer ends results in immediate game over"
+    },
+    {
+      "signal": "rear_view_mirror_traffic",
+      "visual_form": "top 20% of screen showing vehicles approaching from behind",
+      "meaning": "incoming collision hazard; opponent vehicles closing distance signal danger of being overtaken or hit"
+    },
+    {
+      "signal": "wet_conditions_visual_state",
+      "visual_form": "visual environmental change (wet track appearance after qualifying in top 3)",
+      "meaning": "difficulty escalation; progression to harder race conditions signals increased challenge/danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "qualifying_success",
+      "visual_form": "successful lap completion within 45-second timer",
+      "meaning": "player has secured entry to main race and avoided immediate failure; safe progression to next phase"
+    },
+    {
+      "signal": "top_3_position_completion",
+      "visual_form": "finishing race in third place or better",
+      "meaning": "achievement of safe performance threshold; allows advancement to next challenge level"
+    },
+    {
+      "signal": "team_upgrade_invitation",
+      "visual_form": "notification/UI element indicating invitation to better racing team",
+      "meaning": "progression signal; player has performed well enough to earn faster car, indicating safe advancement in world championship"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "racing_teams",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "computer-controlled opponent drivers with distinct liveries representing different teams",
+      "environmental_markers": "team identity conveyed through car visual design and racing team hierarchy; player can be invited to join better teams during season"
+    },
+    {
+      "faction": "formula_one_championship",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "19 competing drivers in arcade mode; multiple opponents in championship mode representing different national teams",
+      "environmental_markers": "multiple real-world race circuits (Brands Hatch, Hockenheimring, Monaco) serve as faction territory markers representing 1989 F1 World Championship locations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "qualification_phase",
+      "visual_manifestation": "practice lap display with 45-second countdown timer; player positioned alone on track",
+      "behavioral_manifestation": "player must complete single lap within time limit; computer opponents not yet active; failure ends game immediately"
+    },
+    {
+      "world_state": "main_race_active",
+      "visual_manifestation": "19 computer-controlled drivers visible on track; position counter displayed showing current grid placement and minimum threshold",
+      "behavioral_manifestation": "player must maintain above position limit throughout three laps; opponents actively racing and competing for positions"
+    },
+    {
+      "world_state": "wet_conditions",
+      "visual_manifestation": "environmental visual change indicating rain/wet track surface; activated after qualifying in top 3",
+      "behavioral_manifestation": "increased difficulty; handling becomes more challenging; visual manifestation of world state progression to harder difficulty tier"
+    },
+    {
+      "world_state": "championship_season_progression",
+      "visual_manifestation": "multiple circuit locations from 1989 F1 calendar displayed; team upgrade notifications appear",
+      "behavioral_manifestation": "player races across different tracks; team invitations trigger car upgrades; password system enables long-form progression tracking"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "circuit_authenticity",
+      "example": "Monaco Grand Prix circuit (albeit fictionalized with modifications) establishes racing prestige context; real 1989 F1 circuits in Genesis Championship mode (Brands Hatch, Hockenheimring) ground game in authentic motorsport calendar"
+    },
+    {
+      "technique": "rear_view_mirror_design",
+      "example": "top 20% of screen dedicated to rear-view mirror communicates player vulnerability from behind; spatial storytelling element showing player perspective and imminent threats"
+    },
+    {
+      "technique": "car_transmission_selection",
+      "example": "player choice between automatic, 4-speed, and 7-speed manual transmission before races communicates vehicle complexity and racing team professionalism; choice carries gameplay consequence"
+    },
+    {
+      "technique": "team_hierarchy_narrative",
+      "example": "World Championship mode allows player to be 'invited to join a better racing team' with faster car; this communicates upward progression through team hierarchy without explicit narrative, purely through mechanical reward"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_car",
+      "state": "qualification_phase",
+      "behavior": "must complete lap within 45-second window; performance determines starting grid position; isolated from opponent interaction"
+    },
+    {
+      "entity": "player_car",
+      "state": "main_race_active",
+      "behavior": "must maintain position above countdown limit; interactions with 19 computer opponents; position changes reflected in real-time counter"
+    },
+    {
+      "entity": "computer_opponent_drivers",
+      "state": "racing_active",
+      "behavior": "dynamically position themselves on track; visible in rear-view mirror when approaching; represent threat to player position maintenance"
+    },
+    {
+      "entity": "player_team_affiliation",
+      "state": "early_championship",
+      "behavior": "player races in initial team; visible through car visual design and performance characteristics"
+    },
+    {
+      "entity": "player_team_affiliation",
+      "state": "post_upgrade",
+      "behavior": "after invitation, player receives faster car; visual and performance change signals world state progression and earned advancement"
+    }
+  ],
+  "notes": "Super Monaco GP communicates world state primarily through mechanical systems (timers, position counters) rather than narrative elements. The game uses spatial design (rear-view mirror) and visual progression (wet conditions unlock, team upgrades) to manifest danger and safety states. Faction identity is implicit through racing team hierarchy rather than explicit visual markers like colors or symbols. The Genesis version adds world state complexity through multi-circuit championship mode, creating progression through geography and team advancement. No explicit political allegiances are communicated beyond Formula One championship structure.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:36:07.997Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3241,
+    "output_tokens": 1731,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

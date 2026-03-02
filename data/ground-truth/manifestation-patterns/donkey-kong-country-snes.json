@@ -1,0 +1,176 @@
+{
+  "game_id": "donkey-kong-country-snes",
+  "game_name": "Donkey Kong Country",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Kremling crocodile enemies with distinct sprite designs",
+      "meaning": "Active threat requiring avoidance or defeat through jumping/rolling"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": "Spiked obstacles, bottomless pits, water hazards in underwater reef levels",
+      "meaning": "Environmental danger causing loss of current Kong character"
+    },
+    {
+      "signal": "Boss arena visual shift",
+      "visual_form": "Level transition to enlarged enemy character at area end",
+      "meaning": "Escalated challenge state requiring sustained combat engagement"
+    },
+    {
+      "signal": "Kong separation",
+      "visual_form": "One Kong character running away from play area after collision",
+      "meaning": "Reduced capability state—player loses stronger or faster character temporarily"
+    },
+    {
+      "signal": "Minecart/barrel mechanics",
+      "visual_form": "Uncontrolled movement sequences through narrow mine/factory passages",
+      "meaning": "High-speed obstacle avoidance required; reduced player directional control"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Barrel containers",
+      "visual_form": "Brown/yellow barrel sprites scattered throughout levels",
+      "meaning": "Freeable Kong allies (source of character revival) or throwable weapons against enemies"
+    },
+    {
+      "signal": "Animal buddy presence",
+      "visual_form": "Rideable animals (Winky frog, Candy Kong station) with distinct sprites",
+      "meaning": "Temporary ability enhancement—special movement mechanics granting traversal advantages"
+    },
+    {
+      "signal": "Bonus stage entrance",
+      "visual_form": "Hidden secret areas accessible through exploration",
+      "meaning": "Resource accumulation opportunity (items, banana collection for completion)"
+    },
+    {
+      "signal": "Collectible items",
+      "visual_form": "Banana bunches, letter tokens (K-O-N-G), animal tokens visually distributed",
+      "meaning": "Progress markers and completion percentage indicators"
+    },
+    {
+      "signal": "Stable platform terrain",
+      "visual_form": "Jungle vines, solid ground, navigable tree structures",
+      "meaning": "Safe traversal zones supporting normal movement without hazard"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kong Family (Heroes)",
+      "color_identity": "Brown/tan (Donkey Kong), red (Diddy Kong)",
+      "symbol_or_sigil": "Banana hoard (stolen property driving narrative conflict)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Jungle/natural environments as Kong territory; Candy's Save Barrel stations mark safe Kong-controlled zones"
+    },
+    {
+      "faction": "Kremling Krew (Antagonists)",
+      "color_identity": "Green/teal crocodile coloration",
+      "symbol_or_sigil": "King K. Rool as faction leader; Kremling army as collective threat",
+      "enemy_visual_variants": "Multiple Kremling enemy types with distinct attack patterns (basic Kremlings, armored variants, aquatic versions in reef levels)",
+      "environmental_markers": "Factory and mine levels represent Kremling-occupied/controlled industrial zones; boss arena placements signal Kremling stronghold territories"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Banana hoard theft / Active conflict",
+      "visual_manifestation": "Kremling enemies actively patrolling all level environments; boss characters stationed at area terminals",
+      "behavioral_manifestation": "Enemies pursue Kong characters; minecart sequences suggest occupied/contested infrastructure"
+    },
+    {
+      "world_state": "Kong resource depletion / Survival pressure",
+      "visual_manifestation": "Limited barrel availability in certain level sections; two-Kong system where loss of one character restricts player capability",
+      "behavioral_manifestation": "Character swap mechanic forces tactical selection between Donkey (strength) and Diddy (speed) based on level demands"
+    },
+    {
+      "world_state": "Safe haven / Neutral territory",
+      "visual_manifestation": "Candy's Save Barrel stations appear as peaceful checkpoint locations distinct from combat zones",
+      "behavioral_manifestation": "No enemy presence at barrel locations; inventory save mechanic available at these points"
+    },
+    {
+      "world_state": "Terrain type variation (jungle→underwater→cave→mine→mountain→factory)",
+      "visual_manifestation": "Distinct visual themes per world area communicating environmental progression and Kremling territorial expansion",
+      "behavioral_manifestation": "Enemy roster changes per environment; water levels introduce swimming mechanics; factory levels feature industrial hazards (conveyor belts, machinery)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic level design progression",
+      "example": "Jungle levels establish Kong homeland; mine/factory levels reveal Kremling industrial occupation; final showdown occurs in enemy fortress"
+    },
+    {
+      "technique": "Enemy placement as territorial markers",
+      "example": "Kremling concentration increases toward level end/boss arenas, signaling deeper penetration into enemy strongholds"
+    },
+    {
+      "technique": "Obstacle type escalation",
+      "example": "Early jungle levels feature natural hazards (vines, bottomless pits); later factory levels feature mechanical threats (spiked belts, moving platforms), suggesting Kremling industrial control"
+    },
+    {
+      "technique": "Item/barrel scarcity variation",
+      "example": "Bonus stages and secret areas offer abundant resources; main level paths show controlled scarcity, reinforcing survival narrative"
+    },
+    {
+      "technique": "Animal buddy association with environment",
+      "example": "Winky (frog) appears in water/jungle zones; animal roster matches biome, reinforcing environmental authenticity and Kong ally integration with homeland"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Donkey Kong",
+      "state": "Active player character",
+      "behavior": "Slower movement speed but higher attack power; capable of ground slap to defeat enemies and uncover hidden items; preferred for combat-heavy sections"
+    },
+    {
+      "entity": "Diddy Kong",
+      "state": "Active player character",
+      "behavior": "Higher speed and agility; lower attack power; preferred for platforming-intensive sections; enables faster traversal across hazardous terrain"
+    },
+    {
+      "entity": "Kong in barrel",
+      "state": "Incapacitated / Benched",
+      "behavior": "Contained within barrel sprite; requires player to reach barrel location to free and swap back into active play"
+    },
+    {
+      "entity": "Kremling enemies",
+      "state": "Active patrol/pursuit",
+      "behavior": "Patrol designated level zones; pursue Kong on visual detection; retreat or attack based on proximity and Kong action (jump, roll)"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Final area challenge",
+      "behavior": "Enlarged sprite with complex attack patterns; stationary or limited movement; requires sustained engagement without barrel respawn mechanic"
+    },
+    {
+      "entity": "Animal buddy (Winky, Candy station)",
+      "state": "Active buff state",
+      "behavior": "Grants temporary ability enhancement (jumping height, speed boost); visual transformation of Kong sprite while active"
+    },
+    {
+      "entity": "Minecart/barrel cannon sequence",
+      "state": "Automated traversal",
+      "behavior": "Automatic movement through hazard zone; player input limited to jump-timing for obstacle avoidance; visual speed increase indicates heightened danger state"
+    }
+  ],
+  "notes": "DKC operates on a binary faction model (Kong vs. Kremling) with minimal political nuance—the narrative is straightforward resource theft requiring reclamation. The game communicates world-state primarily through environmental visual themes and enemy roster changes rather than dynamic faction behavior shifts. The two-Kong mechanic (swappable characters with opposing stat profiles) is the core mechanical manifestation of strategic resource allocation under pressure. Animal buddies and bonus stages represent Kong-controlled safe zones and resource networks within occupied territory. Pre-rendered 3D visuals converted to SNES sprites enabled detailed sprite work for clear enemy/ally visual differentiation, supporting rapid threat assessment in platformer pacing.",
+  "sources_used": [
+    "wikipedia",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:54:54.303Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 9855,
+    "output_tokens": 2145,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

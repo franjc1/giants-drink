@@ -1,0 +1,176 @@
+{
+  "game_id": "pinball-quest-nes",
+  "game_name": "Pinball Quest",
+  "platform": "nes",
+  "paradigm": "pinball-rpg-hybrid",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Skeletal creatures, demon dogs, goblin guards, harpies, dark knights positioned on playfield",
+      "meaning": "Threats to overcome via ball physics; defeat required to progress"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Beezelbub sprite (Dark Lord of the Machine) in throne room stage",
+      "meaning": "Final danger; represents kidnapper of princess and primary antagonist"
+    },
+    {
+      "signal": "Hazardous stage themes",
+      "visual_form": "Tomb, Gate, Goblins, River, Harpy, Throne Room progression",
+      "meaning": "Escalating danger; visual environment communicates increased difficulty"
+    },
+    {
+      "signal": "Ball loss state",
+      "visual_form": "Silver pinball removal from playfield",
+      "meaning": "Failure state; player must maintain ball in play to survive encounters"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flipper availability",
+      "visual_form": "Dual flippers at bottom of playfield",
+      "meaning": "Player control mechanism; upgraded flippers indicate safety improvement"
+    },
+    {
+      "signal": "Stopper symbols",
+      "visual_form": "Upgraded stopper graphics marked '1 F P' (used version)",
+      "meaning": "Ball retention upgrades purchasable at Black Market; defensive capability"
+    },
+    {
+      "signal": "Gold accumulation",
+      "visual_form": "Currency earned during gameplay",
+      "meaning": "Economic safety; enables purchases of defensive upgrades"
+    },
+    {
+      "signal": "Black Market location",
+      "visual_form": "Imp-run shop accessible during progression",
+      "meaning": "Safe trading space; neutral ground for equipment acquisition"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Protagonist",
+      "color_identity": "Silver",
+      "symbol_or_sigil": "Silver pinball",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle interior; rescuing princess narrative"
+    },
+    {
+      "faction": "Royal/Good",
+      "color_identity": null,
+      "symbol_or_sigil": "Princess Bali (kidnapped goal), King (beaten in intro)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Throne Room; castle hierarchy; rescue objective"
+    },
+    {
+      "faction": "Dark/Evil",
+      "color_identity": null,
+      "symbol_or_sigil": "Beezelbub (Dark Lord of the Machine)",
+      "enemy_visual_variants": "Skeletal creatures, demon dogs, goblin guards, demon guards, harpies, dark knights",
+      "environmental_markers": "Tomb, Gate, Goblins, River, Harpy stages; ascending castle interior"
+    },
+    {
+      "faction": "Neutral/Commerce",
+      "color_identity": null,
+      "symbol_or_sigil": "Imps",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Black Market; trading post; embedded in gameplay progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Princess kidnapped; kingdom in distress",
+      "visual_manifestation": "US intro sequence shows Queen in distress, King beaten; castle occupied by dark forces",
+      "behavioral_manifestation": "Player must progress through six escalating stages; enemies block forward movement"
+    },
+    {
+      "world_state": "Stage progression (Tomb → Gate → Goblins → River → Harpy → Throne)",
+      "visual_manifestation": "Castle interior transitions through thematic locations; each stage features distinct enemy types and environmental hazards",
+      "behavioral_manifestation": "Difficulty escalation; new enemy types appear; castle ownership by dark lord becomes clearer"
+    },
+    {
+      "world_state": "Player economic status (gold availability)",
+      "visual_manifestation": "Black Market access; flipper/stopper upgrade availability visual state",
+      "behavioral_manifestation": "Equipped upgrades alter ball physics responsiveness; stronger flippers enable new offensive strategies"
+    },
+    {
+      "world_state": "Boss battle (Throne room)",
+      "visual_manifestation": "Beezelbub sprite dominates final stage; confrontation with Dark Lord",
+      "behavioral_manifestation": "Boss-specific ball targets; final mechanical challenge before rescue objective complete"
+    },
+    {
+      "world_state": "Regional context (Japan vs US)",
+      "visual_manifestation": "Japan version: Japanese characters in graphics; US version: Jaleco logo removed, copyright altered",
+      "behavioral_manifestation": "US version includes narrative intro; both versions share core mechanical communication"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage naming and progression",
+      "example": "Tomb → Gate → Goblins → River → Harpy → Throne Room creates narrative arc through castle architecture; each stage name hints at enemy type and danger level"
+    },
+    {
+      "technique": "Enemy type placement",
+      "example": "Captain's Spirit in Tomb, Ziffroo witch in Gate, goblin kids/guards in Goblins stage; enemies communicate location identity and occupant history"
+    },
+    {
+      "technique": "Visual hierarchy of danger",
+      "example": "Escalating enemy complexity (skeletons → demons → goblins → dark knights → harpies → Beezelbub) communicates progression toward final threat"
+    },
+    {
+      "technique": "Mechanical environment integration",
+      "example": "Wheel O' Luck and other stage-specific hazards embedded in pinball layout communicate environmental personality distinct from pure combat"
+    },
+    {
+      "technique": "NPC presence as world population",
+      "example": "Imps at Black Market indicate occupied castle economy; merchant activity suggests ongoing civilization despite dark lord occupation"
+    },
+    {
+      "technique": "Castle architecture as narrative",
+      "example": "Entry through Tomb and Goblins stages, progression to central River and Harpy sections, culminating in Throne Room—spatial hierarchy mirrors authority structure"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Silver pinball (player avatar)",
+      "state": "Active",
+      "behavior": "Ball physics-driven movement; responsive to flipper input; gravity-bound; objective seeking (hitting targets)"
+    },
+    {
+      "entity": "Enemies (skeletons, demons, goblins, knights, harpies)",
+      "state": "Hostile/Engaged",
+      "behavior": "Positioned as static or semi-mobile obstacles on playfield; require ball contact/targets for defeat; block progression paths"
+    },
+    {
+      "entity": "Beezelbub",
+      "state": "Final threat/Boss",
+      "behavior": "Occupies throne room; requires specific ball interactions to defeat; represents climactic challenge distinct from standard enemies"
+    },
+    {
+      "entity": "Imps (Black Market operators)",
+      "state": "Neutral/Merchant",
+      "behavior": "Remain stationary at trading location; enable commerce without combat; neutral faction behavior despite dark lord occupation"
+    },
+    {
+      "entity": "Princess Bali",
+      "state": "Captured/Objective",
+      "behavior": "Represented narratively as kidnapped goal; occupies throne room; liberation triggers game completion/ending"
+    }
+  ],
+  "notes": "Pinball Quest uses hybrid visual/mechanical communication: the pinball physics engine itself becomes the danger/safety signal system. Danger is communicated through enemy placement and stage theming rather than explicit HUD indicators. The castle architecture and stage progression provide primary environmental storytelling; narrative context (kingdom in distress, princess rescue mission) is explicit in intro sequence (US version). Faction identity relies heavily on character design rather than color coding. The Black Market represents unique safe space within hostile environment—merchant neutrality is implicitly communicated through economic interaction. Unused graphics ('1 2 3' vs '1 F P' stoppers, 'GOD!! FINE' golf text) suggest iterative design but do not affect manifestation layer in released version. World state is primarily communicated through stage progression and available upgrades rather than HUD or explicit indicators. This game predates modern UI conventions; all world-state communication flows through mechanical/environmental channels.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:52:11.071Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3805,
+    "output_tokens": 2153,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

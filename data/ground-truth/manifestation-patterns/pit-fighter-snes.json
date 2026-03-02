@@ -1,0 +1,186 @@
+{
+  "game_id": "pit-fighter-snes",
+  "game_name": "Pit-Fighter",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "Opponent health depletion",
+      "visual_form": "Energy bar reduction on-screen",
+      "meaning": "Opponent weakening; victory approaching"
+    },
+    {
+      "signal": "Player knockdown",
+      "visual_form": "Character falling to ground, count mechanic (3 knockdowns = elimination)",
+      "meaning": "Vulnerability state; cumulative danger in Grudge Matches"
+    },
+    {
+      "signal": "Masked Warrior appearance",
+      "visual_form": "Final boss character with distinctive masked appearance",
+      "meaning": "Ultimate threat; final challenge after 15 standard matches"
+    },
+    {
+      "signal": "Crowd interference",
+      "visual_form": "NPCs attacking, dropping weapons, or pushing players",
+      "meaning": "Environmental hazard; unpredictable danger from arena inhabitants"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power pill pickup",
+      "visual_form": "Collectible item on arena floor",
+      "meaning": "Temporary invulnerability/damage reduction; brief safety window"
+    },
+    {
+      "signal": "Bonus round victory",
+      "visual_form": "Grudge Match win notification",
+      "meaning": "Progression secured; bonus monetary reward gained"
+    },
+    {
+      "signal": "Match progression",
+      "visual_form": "Match counter (1-15 standard, special Grudge/Championship matches)",
+      "meaning": "Distance toward goal; structural safety in tournament format"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Characters (selectable)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Buzz (wrestler), Ty (kickboxer), Kato (martial artist) — visually distinct by body type and fighting style",
+      "environmental_markers": "Arena fighter status; digitized live-action portrayal distinguishes them from opponents"
+    },
+    {
+      "faction": "Opposition fighters",
+      "color_identity": null,
+      "symbol_or_sigil": "Character archetypes: Executioner, Southside Jim, Angel, C.C. Rider, Mad Miles, Heavy Metal, Chainman Eddie",
+      "enemy_visual_variants": "Each opponent has unique visual identity and weapon association (Knife Woman, Knife Man carry blades)",
+      "environmental_markers": "Progressive opponent roster; thematic naming and appearance signal underground fighting pit culture"
+    },
+    {
+      "faction": "Masked Warrior (final boss)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinctive mask; mysterious/supernatural presentation",
+      "enemy_visual_variants": "Solo final opponent; serves as antagonistic taunt-giver between matches",
+      "environmental_markers": "Tournament apex; positioned as shadowy orchestrator of pit-fighting events"
+    },
+    {
+      "faction": "Crowd/Arena environment",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Neutral-to-hostile NPCs; can become aggressive actors in match space",
+      "environmental_markers": "Visual audience presence; weapons and interference suggest lawless underground arena setting"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early tournament phase",
+      "visual_manifestation": "Standard opponent roster; single-fighter matches with 15 sequential fights",
+      "behavioral_manifestation": "CPU-controlled clone appears every third fight (Grudge Match); single-player progression structure"
+    },
+    {
+      "world_state": "Multiplayer mode active",
+      "visual_manifestation": "Up to 3 simultaneous players on-screen with CPU-controlled additional opponents",
+      "behavioral_manifestation": "Grudge Match rules: players fight each other; 3 knockdowns = elimination; last player standing advances"
+    },
+    {
+      "world_state": "Late tournament/Championship",
+      "visual_manifestation": "Masked Warrior appears; final match screen",
+      "behavioral_manifestation": "If multiplayer, remaining players must eliminate each other before facing Masked Warrior; final boss battle"
+    },
+    {
+      "world_state": "Crowd interference active",
+      "visual_manifestation": "NPCs visible in arena edges; weapons drop into play space; pushing/attacking animations",
+      "behavioral_manifestation": "Crowd can disrupt match flow; players pushed back into combat; environmental hazards deployed"
+    },
+    {
+      "world_state": "Power-up availability",
+      "visual_manifestation": "Power pill object appears on arena floor",
+      "behavioral_manifestation": "Temporary stat boost; player damage output increases, incoming damage reduces"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Underground fighting pit setting",
+      "example": "Arena populated by civilian crowd and unruly NPCs; weapons available on ground; loose social contract of brutal combat suggests illegal/underground operation"
+    },
+    {
+      "technique": "Character archetypes and naming",
+      "example": "Opponents named 'Executioner,' 'Chainman Eddie,' 'Knife Woman' convey criminal/violent subculture; character backgrounds (wrestler, kickboxer, martial artist) establish skill hierarchy"
+    },
+    {
+      "technique": "Digitized live-action actors",
+      "example": "Real human performers captured via bluescreen create immersive presence; bodies and clothing variations signal diverse socioeconomic origins and fighting traditions"
+    },
+    {
+      "technique": "Progressive opponent difficulty",
+      "example": "15-match sequence implies survival tournament; increasing opponent strength signals escalating stakes toward final confrontation with Masked Warrior"
+    },
+    {
+      "technique": "Mysterious final antagonist",
+      "example": "Masked Warrior taunts between matches; positioned as orchestrator/overseer; mask and singular appearance suggest supernatural or hidden-identity threat"
+    },
+    {
+      "technique": "Crowd as active hazard",
+      "example": "Audience interference (weapon drops, pushing, attacks) frames arena as chaotic, lawless space; removes referee authority and suggests mob mentality"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Buzz (player character)",
+      "state": "Active in match",
+      "behavior": "Wrestler-style moves; high strength, lower agility; grapple-oriented attacks"
+    },
+    {
+      "entity": "Ty (player character)",
+      "state": "Active in match",
+      "behavior": "Kickboxer moves; balanced speed/power; kick-oriented attack set"
+    },
+    {
+      "entity": "Kato (player character)",
+      "state": "Active in match",
+      "behavior": "Martial artist moves; quick strikes, black belt techniques; high speed, lower raw power"
+    },
+    {
+      "entity": "Opponent AI",
+      "state": "Engaged in combat",
+      "behavior": "CPU-controlled fighters attack until energy depleted; Grudge Match clones mirror player behavior; varied fighting styles per opponent archetype"
+    },
+    {
+      "entity": "Masked Warrior",
+      "state": "Between matches (taunt phase)",
+      "behavior": "Issues periodic taunts; narrative presence without direct interaction"
+    },
+    {
+      "entity": "Masked Warrior",
+      "state": "Championship match active",
+      "behavior": "Final boss combat; unique move set; positioned as ultimate opponent requiring victory for tournament completion"
+    },
+    {
+      "entity": "Crowd NPCs",
+      "state": "Passive/interference phase",
+      "behavior": "Attack players, drop weapons, push combatants; can interfere with match flow; suggests mob mentality and chaotic arena culture"
+    },
+    {
+      "entity": "Player character",
+      "state": "Super move available",
+      "behavior": "Simultaneous three-button press triggers enhanced attack; temporary power spike"
+    }
+  ],
+  "notes": "Pit-Fighter uses digitized live-action actors (1990 arcade original), creating visual authenticity rare for early fighting games. SNES version lacks interactive audience and three characters (Southside Jim, Heavy Metal, Mad Miles), reducing environmental storytelling capacity. Game communicates world-state primarily through match structure (15-count tournament, Grudge Matches every third fight, final Masked Warrior confrontation) and crowd behavior. Danger signals rely on health depletion mechanics and knockdown counting. Factions are minimal — distinction between player-selected fighter, CPU opponents, and final boss. No explicit political/faction conflict; world-state is primarily tournament progression. Unused graphics ('TIME UP,' 'ELIMINATION') suggest features planned but removed, indicating design iteration.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:35:34.101Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4082,
+    "output_tokens": 2220,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

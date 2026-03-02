@@ -1,0 +1,161 @@
+{
+  "game_id": "mission-impossible-nes",
+  "game_name": "Mission: Impossible",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Distinct colored enemy sprites (purple, grey, flame-themed variants)",
+      "meaning": "Hostile forces that deal damage; detection triggers security response"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Flame-thrower wall traps, bombs, debris from destructible objects",
+      "meaning": "Stationary or triggered damage sources that reduce player health"
+    },
+    {
+      "signal": "Surveillance detection",
+      "visual_form": "Not visually detailed in sources, but mechanically present",
+      "meaning": "Alerting guards when player is spotted during infiltration"
+    },
+    {
+      "signal": "Civilian presence (street level)",
+      "visual_form": "NPCs in open areas during initial stages",
+      "meaning": "Harming civilians triggers arrest and mission failure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Interior hideout infiltration zones",
+      "visual_form": "Multi-floor installations with controlled layouts",
+      "meaning": "Areas where stealth and combat are primary concerns rather than civilian restrictions"
+    },
+    {
+      "signal": "Character switching availability",
+      "visual_form": "UI affordance allowing player to switch between Max, Grant, Nicholas",
+      "meaning": "Access to different skill sets for solving environmental puzzles and challenges"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "IMF (International Rescue Mission)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled operatives represent IMF; no explicit visual branding documented"
+    },
+    {
+      "faction": "Sinister 7 (Terrorist organization)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple enemy types with distinct colors (purple Pistol Pete Piranovich, grey Slash Stiletto, flame-thrower variants Fido T. Flamethrower and Jorgé Burns, stationary knights)",
+      "environmental_markers": "Enemy hideouts across Venice, Swiss Alps, Moscow, Berlin, Cyprus locations"
+    },
+    {
+      "faction": "Local authorities",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Present in street-level areas; arrest player if civilians harmed"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Open street environment (Venice, public spaces)",
+      "visual_manifestation": "Drab color palette with civilian NPCs present; non-hostile initial setting",
+      "behavioral_manifestation": "Player restricted from combat; must avoid harming civilians; detection by authorities results in arrest and mission failure"
+    },
+    {
+      "world_state": "Enemy infiltration/hideout",
+      "visual_manifestation": "Multi-floor interior installations with distinct enemy placement; surveillance systems implied",
+      "behavioral_manifestation": "Combat and stealth are primary mechanics; detection triggers guard response; discretion advised"
+    },
+    {
+      "world_state": "Hostile territory under Sinister 7 control",
+      "visual_manifestation": "Enemy sprites distributed throughout levels; environmental traps visible (flame walls, bombs, destructible objects)",
+      "behavioral_manifestation": "Enemies deal damage based on regional difficulty (US version: higher damage; EU version: reduced damage)"
+    },
+    {
+      "world_state": "Puzzle/infiltration challenge",
+      "visual_manifestation": "Environmental elements requiring specific character skills (manhole covers, locked doors, obstacles)",
+      "behavioral_manifestation": "Player switches between Max, Grant, Nicholas to leverage different abilities"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-based narrative progression",
+      "example": "Mission takes place across Venice canals, Swiss Alps, Moscow, Berlin, Cyprus—geographic scope communicates escalating stakes and international scope of terrorist threat"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Different enemy variants (Pistol Pete Piranovich, Fido T. Flamethrower, Jorgé Burns, Slash Stiletto) suggest diverse hostile forces rather than generic soldiers"
+    },
+    {
+      "technique": "Multi-floor installation design",
+      "example": "Vertically-structured hideouts communicate fortress-like security and infiltration challenge complexity"
+    },
+    {
+      "technique": "Civilian presence context",
+      "example": "Street-level civilians in opening area establish IMF operatives as undercover agents who must blend in, setting espionage tone"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fido T. Flamethrower",
+      "state": "Hostile",
+      "behavior": "Throws Molotov cocktails; deals high damage (6 pts US / 2 pts EU per hit)"
+    },
+    {
+      "entity": "Pistol Pete Piranovich (purple enemy)",
+      "state": "Hostile",
+      "behavior": "Uses ranged attacks; deals 2 pts damage (US) / 1 pt (EU) per bullet"
+    },
+    {
+      "entity": "Jorgé Burns",
+      "state": "Hostile",
+      "behavior": "Uses flamethrower; final stage enemy with high damage output"
+    },
+    {
+      "entity": "Slash Stiletto (grey variant)",
+      "state": "Hostile",
+      "behavior": "Deploys bombs at stage end; grey version indicates late-game escalation"
+    },
+    {
+      "entity": "Stationary knights (Stage 2)",
+      "state": "Hostile",
+      "behavior": "Deal melee damage (2-3 pts US / 1 pt EU); standing variants paired with mobile variants"
+    },
+    {
+      "entity": "Flame-thrower wall traps",
+      "state": "Environmental hazard",
+      "behavior": "Stationary damage source; deals 6 pts (US) / 2 pts (EU); triggers on proximity"
+    },
+    {
+      "entity": "Security guards",
+      "state": "Alerted (post-detection)",
+      "behavior": "Respond when surveillance system detects player infiltration"
+    },
+    {
+      "entity": "Local authorities",
+      "state": "Enforcement (street level)",
+      "behavior": "Arrest player if civilians harmed; represents mission failure condition"
+    }
+  ],
+  "notes": "Mission: Impossible NES communicates world-state primarily through enemy type variation and environmental hazard placement rather than explicit visual symbolism. The paradigm shift from street-level (civilian presence, authority threat) to infiltration (enemy combat, stealth) is behavioral rather than purely visual. Regional difficulty balancing (US version 2-3x damage scaling) suggests different threat perception across markets. Character switching mechanic reinforces puzzle-solving narrative (different operatives for different challenges). Limited color palette ('drab colors' per reviews) constrains faction visual differentiation, relying instead on enemy sprite design and behavior to communicate threat level.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:33:29.646Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4655,
+    "output_tokens": 1856,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

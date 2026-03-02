@@ -1,0 +1,181 @@
+{
+  "game_id": "super-glove-ball-nes",
+  "game_name": "Super Glove Ball",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Energy balls in play",
+      "visual_form": "Animated spheres bouncing off walls and room surfaces",
+      "meaning": "Active threat; ball behind glove = life loss"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Entities that occupy room space and move autonomously",
+      "meaning": "Direct combat threat; some enemies deal one-hit knockouts in later worlds"
+    },
+    {
+      "signal": "Tile destruction state",
+      "visual_form": "Walls with partially cleared tile grids showing gaps and cleared sections",
+      "meaning": "Progression indicator; impassable areas until fully cleared"
+    },
+    {
+      "signal": "Life meter depletion",
+      "visual_form": "26-bar life meter reducing in segments",
+      "meaning": "Health status; 5 ball losses = 1 life loss; 0 lives = game over"
+    },
+    {
+      "signal": "Bomb ball active",
+      "visual_form": "Energy ball with altered visual appearance while holding bonus active",
+      "meaning": "Immediate self-damage risk if held too long during bomb effect"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Question mark tiles",
+      "visual_form": "Tiles marked with '?' symbol on walls",
+      "meaning": "Potential power-up sources; interactive reward tiles"
+    },
+    {
+      "signal": "Red arrow appearance",
+      "visual_form": "Red directional arrow overlay on wall",
+      "meaning": "Cleared wall passage; safe passage to next room"
+    },
+    {
+      "signal": "Power-up icons",
+      "visual_form": "Visual representations of LIFE, EXTRA, ICE BALL, BOMB BALL, POWER, ROW, SUPER BALL, TRIPLE, ROBO-BULLET REFILL, PINBALL",
+      "meaning": "Temporary beneficial effects or resource restoration"
+    },
+    {
+      "signal": "Robo-Bullet availability",
+      "visual_form": "Ammunition count display (max 99, start 40)",
+      "meaning": "Resource for tile destruction and enemy attack; one-hit tile destruction capability"
+    },
+    {
+      "signal": "PINBALL power-up",
+      "visual_form": "Specially colored moving tile among wall tiles",
+      "meaning": "Unlocks all adjacent room pathways when hit; escape mechanism"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Glove)",
+      "color_identity": null,
+      "symbol_or_sigil": "Virtual glove hand representation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "First-person perspective centered on glove; glove as game avatar"
+    },
+    {
+      "faction": "Commander (Rescue Target)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Trapped in dimensional maze; narrative objective, not visually present in gameplay"
+    },
+    {
+      "faction": "Enemies",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy difficulty increases across three worlds; later worlds feature one-hit-kill variants",
+      "environmental_markers": "Mobile entities inhabiting maze rooms; visual distinction by world progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Room entry",
+      "visual_manifestation": "3D first-person perspective showing rectangular tiled walls (20 tiles per side wall, 32 per top/bottom, 40 on far wall)",
+      "behavioral_manifestation": "Energy ball spawns and begins bouncing; player must engage with tile destruction puzzle"
+    },
+    {
+      "world_state": "Tile destruction progression",
+      "visual_manifestation": "Wall tiles incrementally disappear as hit by balls or Robo-Bullets; grid pattern shows gaps",
+      "behavioral_manifestation": "Walls become passable only when fully cleared; red arrow indicates valid exit direction"
+    },
+    {
+      "world_state": "World difficulty escalation",
+      "visual_manifestation": "Progressive worlds (1-3) show increasing enemy toughness and harder-to-hit tile placements",
+      "behavioral_manifestation": "Enemies deal greater damage; certain tiles positioned in less accessible wall locations; random warping increases threat"
+    },
+    {
+      "world_state": "Dimensional maze setting",
+      "visual_manifestation": "First-person perspective maze environment set in 'outer space' (2005 futuristic setting)",
+      "behavioral_manifestation": "Room-to-room navigation; player must map 60+ rooms in world 2 to avoid disorientation"
+    },
+    {
+      "world_state": "Ball loss condition",
+      "visual_manifestation": "Ball disappears behind glove; new ball spawns; life meter segment depletes after 5 ball losses",
+      "behavioral_manifestation": "Game over when all lives depleted; no continues available"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative framing (plot context)",
+      "example": "Setting established as year 2005 with shuttle commander trapped in dimensional maze in outer space; context explains puzzle-solving purpose"
+    },
+    {
+      "technique": "Mechanical storytelling (gameplay as narrative)",
+      "example": "Rescue mission mechanic: throwing energy balls at walls = rescue action; maze progression = journey through dimensional space; three worlds = escalating danger"
+    },
+    {
+      "technique": "Room numbering system",
+      "example": "Each room has numeric identifier enabling player map-making; encourages spatial reasoning and exploration documentation"
+    },
+    {
+      "technique": "Power-up visual differentiation",
+      "example": "Question mark tiles signal reward opportunities; different power-up effects communicated through icon/effect type (ICE BALL, BOMB BALL, SUPER BALL convey function through naming)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Energy ball",
+      "state": "Active in play",
+      "behavior": "Bounces off walls and tiles; destroyed if passes behind glove; AI ball loss triggers new spawn"
+    },
+    {
+      "entity": "Enemy",
+      "state": "World 1-2",
+      "behavior": "Variable threat level; some deal standard damage"
+    },
+    {
+      "entity": "Enemy",
+      "state": "World 3",
+      "behavior": "One-hit knockouts possible; increased aggression and movement difficulty"
+    },
+    {
+      "entity": "Tile (standard)",
+      "state": "Intact",
+      "behavior": "Blocks passage; destroyed by energy ball or Robo-Bullet impact"
+    },
+    {
+      "entity": "Tile (question mark)",
+      "state": "Intact",
+      "behavior": "Triggers power-up reward when hit; indicates interactive environment"
+    },
+    {
+      "entity": "Red arrow",
+      "state": "Post-wall-clear",
+      "behavior": "Points valid exit direction; indicates passable threshold to adjacent room"
+    },
+    {
+      "entity": "Glove (player avatar)",
+      "state": "Active",
+      "behavior": "Controlable via Power Glove or standard controller; hits/throws/punches ball; shoots Robo-Bullets from index finger"
+    }
+  ],
+  "notes": "Super Glove Ball communicates world-state primarily through mechanical and visual feedback rather than faction-based systems. The game lacks traditional political or factional conflict; danger/safety signals are gameplay-mechanic focused (ball physics, tile states, enemy behavior). The dimensional maze setting and first-person perspective create environmental storytelling through spatial layout and progression challenges. World state escalation occurs through difficulty curve (enemy toughness, tile placement complexity) rather than narrative beats. Power-up system provides tactical resource management signals through icon recognition and effect types.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor) - Super Glove Ball article",
+    "wikipedia - Super Glove Ball article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:53:04.339Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3563,
+    "output_tokens": 2081,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

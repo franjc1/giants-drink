@@ -1,0 +1,115 @@
+{
+  "game_id": "warsong-genesis",
+  "game_name": "Warsong",
+  "platform": "genesis",
+  "year": 1991,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Not documented for tactical RPG"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "tactical_turn_based_movement",
+      "description": "Units move on grid-based map during turn-based combat. Any unit can be moved once per turn. Command range affects unit bonuses.",
+      "physics_values": {
+        "command_range_bonus": "affects attack and defense",
+        "movement_type": "discrete grid-based",
+        "movement_limitation": "one move per unit per turn"
+      }
+    },
+    {
+      "name": "unit_affinity_system",
+      "description": "Different unit types have tactical advantages/disadvantages. Fliers strong vs soldiers but weak to bowmen. Soldiers strong vs pikemen but weak to cavalry. Seafaring units gain advantage from water positioning.",
+      "physics_values": {
+        "affinity_types": [
+          "fliers",
+          "soldiers",
+          "bowmen",
+          "cavalry",
+          "pikemen",
+          "holy_units",
+          "demon_units",
+          "seafaring_units"
+        ]
+      }
+    },
+    {
+      "name": "commander_healing",
+      "description": "Commanders can recover HP. Troops recover 3 HP at start of turn when positioned around commander.",
+      "physics_values": {
+        "troop_recovery_per_turn": 3,
+        "troop_recovery_unit": "HP",
+        "recovery_requirement": "adjacent to commander"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "tactical",
+    "turn-based",
+    "strategic",
+    "non-linear"
+  ],
+  "tier_notes": "Tier 2: Warsong is a tactical RPG with turn-based combat. No character-level physics parameters (jump, gravity, acceleration) are applicable or documented. Game focuses on unit positioning, command ranges, and affinity systems rather than real-time platformer mechanics. Movement is grid-based and turn-sequenced, not continuous physics-based.",
+  "sources_used": [
+    "wikipedia_langrisser_series_entry"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T09:24:43.803Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3310,
+    "output_tokens": 1019,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

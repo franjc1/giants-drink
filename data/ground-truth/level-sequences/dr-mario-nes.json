@@ -1,0 +1,144 @@
+{
+  "game_id": "dr-mario-nes",
+  "game_name": "Dr. Mario",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": 21,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Red viruses",
+      "first_appears": "Level 0",
+      "introduction_context": "safe",
+      "mastery_context": "Foundational color matching mechanic introduced at lowest difficulty"
+    },
+    {
+      "element": "Yellow viruses",
+      "first_appears": "Level 0",
+      "introduction_context": "safe",
+      "mastery_context": "Second color introduced simultaneously with red for basic pattern recognition"
+    },
+    {
+      "element": "Blue viruses",
+      "first_appears": "Level 0",
+      "introduction_context": "safe",
+      "mastery_context": "Third color completes the basic matching triad"
+    },
+    {
+      "element": "Two-colored capsules (Megavitamins)",
+      "first_appears": "Level 0",
+      "introduction_context": "safe",
+      "mastery_context": "Core mechanic: rotation and placement of heterogeneous pairs for matching"
+    },
+    {
+      "element": "Chain reactions",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Gravity causes cascading matches after initial elimination; chains add bonus points and opponent capsules in multiplayer"
+    },
+    {
+      "element": "Increased virus density",
+      "first_appears": "Mid-game (Level 10+)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Virus population scales with difficulty; requires faster decision-making and planning"
+    },
+    {
+      "element": "Speed variations",
+      "first_appears": "Level select (configurable)",
+      "introduction_context": "moderate",
+      "mastery_context": "Three capsule fall speeds available; faster speeds compress time-to-decision"
+    },
+    {
+      "element": "Multiplayer opponent interference",
+      "first_appears": "Multiplayer mode",
+      "introduction_context": "moderate",
+      "mastery_context": "Chain eliminations send capsules to opponent field; first to 3 wins match"
+    },
+    {
+      "element": "Bottle neck constraint",
+      "first_appears": "Game over condition (present from start)",
+      "introduction_context": "moderate",
+      "mastery_context": "Playfield narrow at top creates spatial pressure; overflow triggers loss"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "4-in-a-row elimination clears viruses",
+      "Chain reaction cascades provide scoring bursts",
+      "Completing level clears playfield entirely",
+      "Cutscene plays after every 5th level (Level 5, 10, 15, 20)"
+    ],
+    "typical_tension_triggers": [
+      "Capsules fill bottle toward narrow neck",
+      "Unmatched capsule pairs accumulate",
+      "Limited rotation space at top of playfield",
+      "Opponent sends cascading capsules in multiplayer",
+      "Difficulty spikes between level increments increase virus density"
+    ],
+    "pacing_descriptor": "Continuous low-to-moderate tension with periodic relief through eliminations; tension builds gradually as bottle fills; complete level clears provide narrative breathing room via cutscenes every 5 levels"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Levels 0-5: Low virus density, wide open playfield, ample space for experimentation and learning rotation mechanics",
+    "mid_game": "Levels 6-15: Virus density increases progressively; playfield constraint becomes real factor; chain reactions become essential for efficiency",
+    "late_game": "Levels 16-20: High virus density requires forward planning; limited space for error; cutscenes at Levels 5, 10, 15, 20 provide paced narrative relief",
+    "notable_spikes": [
+      "Level 0→1 jump increases initial virus count",
+      "Mid-game density scaling (Levels 6-10) requires shift from reactive to tactical play",
+      "Levels 16-20 approach maximum constraint; board state planning becomes mandatory"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Fixed virus placement",
+      "description": "Viruses spawn in fixed starting positions and do not move until matched; creates predictable spatial layout per level allowing planning-ahead strategies",
+      "example_level": "All levels 0-20"
+    },
+    {
+      "pattern_name": "Graduated difficulty via virus count",
+      "description": "Player selects starting level (0-20) which directly determines virus population; higher levels pack more viruses requiring tighter play",
+      "example_level": "Level 0 (minimal) vs Level 20 (maximum density)"
+    },
+    {
+      "pattern_name": "Gravity-driven cascade",
+      "description": "After a match, unsupported capsule halves fall and trigger new matches; enables chain reactions and secondary scoring opportunities",
+      "example_level": "All levels with stacked capsules"
+    },
+    {
+      "pattern_name": "Narrative breathing (cutscene gates)",
+      "description": "After every 5th level completion (5, 10, 15, 20), a cutscene plays showing virus characters in new location with flying object; breaks mechanical rhythm with story beats",
+      "example_level": "Level 5, 10, 15, 20 completion cutscenes"
+    },
+    {
+      "pattern_name": "Bottleneck constraint escalation",
+      "description": "The playfield's narrow neck at top represents the loss condition; as density increases, this space becomes the critical resource",
+      "example_level": "Increasingly critical in Levels 15-20"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:47:04.840Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5895,
+    "output_tokens": 1792,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

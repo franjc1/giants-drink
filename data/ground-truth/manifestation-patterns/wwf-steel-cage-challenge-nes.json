@@ -1,0 +1,147 @@
+{
+  "game_id": "wwf-steel-cage-challenge-nes",
+  "game_name": "WWF WrestleMania: Steel Cage Challenge",
+  "platform": "nes",
+  "paradigm": "beat-em-up / professional wrestling",
+  "danger_signals": [
+    {
+      "signal": "Steel cage enclosure",
+      "visual_form": "Metal cage walls surrounding the wrestling ring",
+      "meaning": "Match danger escalation — escape/containment threat; wrestler cannot flee arena"
+    },
+    {
+      "signal": "Opponent proximity in ring",
+      "visual_form": "Close character spacing during matches",
+      "meaning": "Immediate physical threat requiring defensive/evasive action"
+    },
+    {
+      "signal": "Health/stamina depletion visual",
+      "visual_form": "Character sprite state degradation (knockdown, stagger animations)",
+      "meaning": "Wrestler approaching defeat state; match outcome in jeopardy"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ring corner positioning",
+      "visual_form": "Character at turnbuckle location",
+      "meaning": "Safe zone offering tactical recovery; launch point for offensive moves"
+    },
+    {
+      "signal": "Tag team partner availability",
+      "visual_form": "Partner character visible at ring apron in Tag Team modes",
+      "meaning": "Tactical escape available via tag; can rotate fresh wrestler into match"
+    },
+    {
+      "signal": "Match selection screen",
+      "visual_form": "Menu interface before match starts",
+      "meaning": "Safe state; no active threat until match begins"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "WWF (World Wrestling Federation)",
+      "color_identity": null,
+      "symbol_or_sigil": "WWF branding, wrestler roster presentation",
+      "enemy_visual_variants": "Opponent wrestlers differentiated by character model/sprite",
+      "environmental_markers": "WWF-branded ring, arena setting, championship title visuals"
+    },
+    {
+      "faction": "Individual wrestlers (hero/rival archetypes)",
+      "color_identity": null,
+      "symbol_or_sigil": "Character-specific attire, wrestling personas (e.g., Hulk Hogan, The Undertaker, Papa Shango)",
+      "enemy_visual_variants": "NES roster: Hulk Hogan, Randy Savage, Ted DiBiase, I.R.S., Bret Hart, The Undertaker, Jake Roberts, Sid Justice, Roddy Piper, The Mountie. Sega roster swaps characters (Ric Flair, Papa Shango, Shawn Michaels, Tatanka replaces some)",
+      "environmental_markers": "Wrestler-specific character sprites, entrance presentation in match modes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match in progress (One-on-One)",
+      "visual_manifestation": "Two wrestlers in ring; visible health/stamina indicators; opponent proximity and animation states",
+      "behavioral_manifestation": "Wrestlers perform attacks, grapples, running moves, ground attacks, turnbuckle moves; reactive knockdowns and stagger states"
+    },
+    {
+      "world_state": "Steel Cage Match active",
+      "visual_manifestation": "Metal cage walls enclose ring; wrestler position relative to cage exit/top",
+      "behavioral_manifestation": "Wrestler must escape cage via door or climb over cage top; cage walls block standard ring exit"
+    },
+    {
+      "world_state": "Tag Team Match in progress",
+      "visual_manifestation": "Two wrestlers per team; partner visible at apron; active wrestler highlighted/centered in play area",
+      "behavioral_manifestation": "Active wrestler can tag out to partner; fresh wrestler enters ring; fatigued wrestler retreats to apron"
+    },
+    {
+      "world_state": "Championship tournament (WWF Championship / Tag Team Championship)",
+      "visual_manifestation": "Bracket progression visual; championship title displayed; opponent roster presented sequentially",
+      "behavioral_manifestation": "Wrestler advances through ladder of opponents; defeated wrestlers removed from roster; victory chain leads to championship crown"
+    },
+    {
+      "world_state": "Wrestler defeated",
+      "visual_manifestation": "Knockdown animation; character sprite in prone state; match end screen or transition",
+      "behavioral_manifestation": "Wrestler unable to recover; match concludes; opponent declared victor"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Roster presentation as power hierarchy",
+      "example": "Championship mode requires defeating all other wrestlers in sequence, visually establishing a ranked competitive order within WWF"
+    },
+    {
+      "technique": "Steel cage as narrative escalation",
+      "example": "Cage match mode represents heightened danger/desperation compared to standard One-on-One match; cage walls are physical manifestation of 'no escape' stakes"
+    },
+    {
+      "technique": "Character sprite as faction/identity marker",
+      "example": "Unique wrestler models (Hulk Hogan vs. The Undertaker vs. Papa Shango) communicate distinct personas and real-world wrestling personalities to player; visual differentiation replaces stat variation"
+    },
+    {
+      "technique": "Match mode menu as narrative branching",
+      "example": "Multiple game modes (One-on-One, Tag Team, Championship, Tag Championship) represent different competitive narratives; player selects which 'story' to pursue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Active wrestler",
+      "state": "Healthy / High stamina",
+      "behavior": "Standard sprite; responsive to player input; can perform full moveset (punches, kicks, grapples, running attacks, ground attacks, turnbuckle moves)"
+    },
+    {
+      "entity": "Active wrestler",
+      "state": "Damaged / Low stamina",
+      "behavior": "Staggered or knockdown animation; slower response; reduced movement speed; vulnerability to opponent attacks"
+    },
+    {
+      "entity": "Active wrestler",
+      "state": "In cage match — near cage top",
+      "behavior": "Climbing animation; escape attempt behavior; opponent interference from below"
+    },
+    {
+      "entity": "Tag team partner",
+      "state": "Awaiting tag / On apron",
+      "behavior": "Stationary at ring apron; inactive sprite; cannot participate in ring action until tagged in"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Defeated",
+      "behavior": "Prone/knockout animation; disappears from ring; replaced by next opponent in tournament modes"
+    },
+    {
+      "entity": "Wrestler",
+      "state": "Turnbuckle positioned",
+      "behavior": "Can execute turnbuckle-specific attack move (implied move off turnbuckle); gain tactical positioning advantage"
+    }
+  ],
+  "notes": "WWF Steel Cage Challenge is a 1992 NES wrestling game with limited visual complexity. It communicates world-state primarily through: (1) match mode selection (One-on-One, Tag Team, Championship progression); (2) cage presence as danger escalation; (3) character sprite differentiation for wrestler identity; (4) health/stamina depletion animations. The game lacks finishing moves and character-specific movesets, so all wrestlers share identical attack patterns. Visual communication relies on sprite animation, ring positioning, and cage presence rather than color-coded factions or symbolic markers. The steel cage mechanic is the primary world-state escalation signal. Roster variations between NES and Sega versions suggest platform-specific licensing deals but do not affect in-game visual communication mechanics.",
+  "sources_used": [
+    "wikipedia: WWF WrestleMania: Steel Cage Challenge"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:44:43.498Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3200,
+    "output_tokens": 1922,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

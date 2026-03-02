@@ -1,0 +1,200 @@
+{
+  "game_id": "mappy-nes",
+  "game_name": "Mappy",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Cat proximity",
+      "visual_form": "Red leader cat (Goro) or blue underling cats (Meowky) on screen",
+      "meaning": "Direct collision threat; loss of life if touched while cat is un-stunned"
+    },
+    {
+      "signal": "Gosenzo coin appearance",
+      "visual_form": "Large coin with Goro's face enters from screen edge",
+      "meaning": "Immune to all defensive mechanics (microwaves); instant death on contact even mid-air; time pressure escalation"
+    },
+    {
+      "signal": "Hurry-up warning sound",
+      "visual_form": "Audio alert; visual consequence: more Meowky cats spawn, all enemies accelerate",
+      "meaning": "Player has lingered too long; danger level increases dramatically"
+    },
+    {
+      "signal": "Trampoline color change",
+      "visual_form": "Trampoline changes color after each bounce (tracks through 4 bounces)",
+      "meaning": "Structural integrity degradation; 5th bounce breaks it, creating fall hazard"
+    },
+    {
+      "signal": "Flashing floor sections",
+      "visual_form": "Floor tiles blink/flash before vanishing",
+      "meaning": "Temporary platform failure; fall hazard for player and cats"
+    },
+    {
+      "signal": "Platform edges and gaps",
+      "visual_form": "Gaps between horizontal passages; gaps bridged only by trampolines",
+      "meaning": "Fall hazard; player loses life if falls to bottom without trampoline bounce"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Bouncing state (trampoline engagement)",
+      "visual_form": "Player character bouncing vertically on trampoline platform",
+      "meaning": "Temporary invulnerability; cats cannot harm player while bouncing up or down"
+    },
+    {
+      "signal": "Microwave door activation",
+      "visual_form": "Flashing door releases burst of microwaves when opened by Mappy",
+      "meaning": "Offensive tool; sweeps cats away, grants points; doubled points if Goro caught"
+    },
+    {
+      "signal": "Stunned cat state",
+      "visual_form": "Cat briefly immobilized after door opens toward it or after microwave hit",
+      "meaning": "Temporary safety window; stunned cats cannot pursue; window closes after short delay"
+    },
+    {
+      "signal": "Collected items",
+      "visual_form": "Stolen goods (stereos, TVs, paintings, computers, safes) collected by Mappy",
+      "meaning": "Progress toward round completion; collecting pairs consecutively increases point multiplier"
+    },
+    {
+      "signal": "Item pair behind Goro",
+      "visual_form": "Item location coincides with leader cat position",
+      "meaning": "High-risk collection opportunity; briefly stuns Goro when collected, grants bonus"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Law Enforcement (Mappy - Police Mouse)",
+      "color_identity": "Primary player character (color varies by port; typically light/neutral)",
+      "symbol_or_sigil": "Police mouse identity; hero identity communicated through role name and narrative framing",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Mansion setting frames player as law enforcement recovering stolen property; Mappy operates the microwave doors (exclusive mechanic), positioning him as authority wielder"
+    },
+    {
+      "faction": "Thieving Cats (Criminal gang)",
+      "color_identity": "Goro (leader): red; Meowky (underlings): blue",
+      "symbol_or_sigil": "Cat enemies; hierarchy communicated through size (Goro large) and color differentiation",
+      "enemy_visual_variants": "Goro: large, red, moves with leadership autonomy; Meowky: smaller, blue, act as underlings with follower behavior patterns",
+      "environmental_markers": "Mansion hideout; stolen items scattered throughout represent criminal operation; cats' bouncing behavior on trampolines mirrors player but without breaking them, differentiating their nature"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early round (low difficulty)",
+      "visual_manifestation": "Fewer Meowky cats on screen; slower cat movement; basic platform layout",
+      "behavioral_manifestation": "Cats move predictably; player has more reaction time; fewer simultaneous threats"
+    },
+    {
+      "world_state": "Mid-round progression",
+      "visual_manifestation": "Additional Meowky cats enter mansion; all enemy movement visibly accelerates; more environmental complexity (attic access, bells above trampolines, vanishing floor sections)",
+      "behavioral_manifestation": "Cats swarm with increased coordination; player must employ microwave doors more defensively; risk of being cornered increases"
+    },
+    {
+      "world_state": "Time pressure escalation (hurry-up triggered)",
+      "visual_manifestation": "More Meowky cats spawn and remain on screen; audible warning cue; visual indication of accelerated enemy speed",
+      "behavioral_manifestation": "All cats move at elevated speed; player forced into offensive/evasive strategies; round completion becomes urgent"
+    },
+    {
+      "world_state": "Critical danger (Gosenzo coin phase)",
+      "visual_manifestation": "Large Gosenzo coin with Goro's face enters from screen edge; unmissable visual indicator of maximum threat level",
+      "behavioral_manifestation": "Instant death on contact (no invulnerability windows); coin immune to all defensive mechanics; player must evade completely or end round immediately"
+    },
+    {
+      "world_state": "Round completion",
+      "visual_manifestation": "All 10 stolen items collected (visual counter or item disappearance); round transitions to bonus stage (balloon-popping challenge with vertical passages)",
+      "behavioral_manifestation": "Enemies cease pursuit; player enters isolated bonus environment; danger state resets for next round"
+    },
+    {
+      "world_state": "Bonus round active",
+      "visual_manifestation": "Isolated vertical passage environment; balloons distributed throughout; trampolines as primary navigation tool",
+      "behavioral_manifestation": "No enemy threats; pure platforming and timing challenge; player bounces and veers through passages to pop balloons"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial hierarchy and item placement",
+      "example": "Stolen items (stereos, TVs, paintings, computers, safes) scattered throughout mansion communicate ongoing theft operation; their positioning across multiple levels tells story of gang's systematic looting"
+    },
+    {
+      "technique": "Architecture as narrative",
+      "example": "Mansion setting with horizontal passages, doors, gaps, and eventually attic access frames the space as criminal hideout; physical layout communicates both escape routes for thieves and strategic chokepoints for law enforcement"
+    },
+    {
+      "technique": "Microwave door mechanics as world-state",
+      "example": "Special flashing doors that release microwaves are exclusive to player (Mappy); this mechanic communicates police authority and defensive/offensive advantage over criminal cats"
+    },
+    {
+      "technique": "Enemy capability differentiation",
+      "example": "Cats cannot break trampolines (unlike Mappy) and cannot open microwave doors; physical differences in behavior tell story of species-based abilities and criminal limitations"
+    },
+    {
+      "technique": "Bonus round as narrative break",
+      "example": "Isolated balloon-popping challenge provides respite from cat pursuit; frames successful item recovery as enabling safe operations, contrasting the danger of main rounds"
+    },
+    {
+      "technique": "Trampoline degradation visual feedback",
+      "example": "Color-change progression on trampolines (4 bounces before breaking) communicates infrastructure wear under repeated pressure, echoing themes of law enforcement wear-and-tear"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goro (Red leader cat)",
+      "state": "Normal pursuit",
+      "behavior": "Follows Mappy actively; can be stunned by door opening or microwave burst; presence behind items creates high-value collection opportunity"
+    },
+    {
+      "entity": "Goro (Red leader cat)",
+      "state": "Stunned (brief)",
+      "behavior": "Immobilized; vulnerable; returns to pursuit after short delay"
+    },
+    {
+      "entity": "Goro (Red leader cat)",
+      "state": "As Gosenzo coin",
+      "behavior": "Enters screen as large coin during time-pressure phase; unstoppable; immune to microwave defense; instant-kill on contact"
+    },
+    {
+      "entity": "Meowky (Blue underling cats)",
+      "state": "Normal patrol/pursuit",
+      "behavior": "Multiple underlings swarm mansion; speed increases as round progresses; more spawn when hurry-up warning triggered"
+    },
+    {
+      "entity": "Meowky (Blue underling cats)",
+      "state": "Door-stunned",
+      "behavior": "Knocked back and briefly immobilized when door opens toward them; returns to pursuit after stun expires"
+    },
+    {
+      "entity": "Meowky (Blue underling cats)",
+      "state": "Microwave-hit",
+      "behavior": "Swept away horizontally by microwave burst; removed from screen; re-enter from top screen edge after delay"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Bouncing on trampoline",
+      "behavior": "Invulnerable to cat contact; can veer left/right while ascending; cannot change direction while falling; breaks trampoline on 5th consecutive bounce"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "On platform (grounded)",
+      "behavior": "Vulnerable to cat contact; can open/close doors; can collect items; can activate microwave doors (exclusive)"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Falling without trampoline",
+      "behavior": "Loss of life if reaches bottom of screen; indicates failed platforming"
+    }
+  ],
+  "notes": "Mappy communicates world-state primarily through visual color coding (red vs. blue faction), spatial mechanics (trampoline safety vs. gap danger), and progressive difficulty escalation (cat spawning, speed increase, Gosenzo coin). The microwave door mechanic serves as visual/mechanical expression of player authority. Danger increases through cumulative visual signals: cat proliferation, animation speed increases, and introduction of new hazards (vanishing floors, bells, attic access). Safety is communicated inversely: trampoline bouncing invulnerability, microwave effectiveness, and stunned enemy states. The political situation (police mouse vs. thieving cats) is communicated through role identity, exclusive mechanics (microwave doors), and environmental framing (mansion as criminal hideout, player as recovery agent).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:28:33.668Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2984,
+    "output_tokens": 2771,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

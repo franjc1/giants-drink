@@ -1,0 +1,117 @@
+{
+  "game_id": "balloon-fight-nes",
+  "game_name": "Balloon Fight",
+  "platform": "nes",
+  "year": 1985,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Arm Flapping/Floating",
+      "description": "Primary movement mechanic. Repeatedly pressing A button or holding B button causes Balloon Fighter to flap arms and rise into air. Flotation directly tied to balloon count.",
+      "physics_values": {
+        "balloons_required_for_lift": 2,
+        "lift_on_single_balloon": "severely reduced",
+        "lift_on_zero_balloons": "none - fall immediately"
+      }
+    },
+    {
+      "name": "Balloon Popping/Loss",
+      "description": "Each balloon can be popped by enemy contact. Loss of balloons directly reduces upward flotation capability. Both balloons popped = loss of life.",
+      "physics_values": {
+        "balloons_per_player": 2,
+        "balloons_required_for_survival": 1,
+        "death_condition_balloons": 0
+      }
+    },
+    {
+      "name": "Water Hazard",
+      "description": "Player loses a life if falling into water. Piranha near water surface can also kill player on contact.",
+      "physics_values": {
+        "water_contact": "instant death"
+      }
+    },
+    {
+      "name": "Lightning Strike",
+      "description": "In Balloon Trip mode, lightning sparks are primary obstacles to avoid. Contact results in life loss.",
+      "physics_values": {
+        "lightning_contact": "instant death"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "floaty",
+    "momentum-based",
+    "commitment-based",
+    "responsive arm control",
+    "skill-based timing"
+  ],
+  "tier_notes": "Tier 2 - Empirical/Qualitative. No precise physics values documented in available sources. Movement is entirely arm-flap based with flotation tied to balloon count. No horizontal speed values, gravity constants, or sub-pixel data available in sources. Game emphasizes arcade-style action with skill-based mechanics rather than detailed physics documentation.",
+  "sources_used": [
+    "wikipedia - Balloon Fight gameplay section",
+    "data_crystal - ROM specifications and technical data",
+    "tcrf - disambiguation page"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:46:38.654Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4547,
+    "output_tokens": 1113,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

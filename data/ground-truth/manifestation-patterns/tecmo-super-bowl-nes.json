@@ -1,0 +1,128 @@
+{
+  "game_id": "tecmo-super-bowl-nes",
+  "game_name": "Tecmo Super Bowl",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "defensive_formation_proximity",
+      "visual_form": "opponent defense positioning on field grid",
+      "meaning": "indicator of incoming tackle/sack threat during play execution"
+    },
+    {
+      "signal": "linebacker_clustering",
+      "visual_form": "concentrated defender sprites in passing lane",
+      "meaning": "high interception or incompletion risk on quarterback pass attempts"
+    },
+    {
+      "signal": "edge_defender_alignment",
+      "visual_form": "defensive ends flanking offensive line edges",
+      "meaning": "rushing threat to ball carrier on running plays"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open_receiver_distance",
+      "visual_form": "receiver sprite separation from nearest defender on field grid",
+      "meaning": "viable passing target with low interception risk"
+    },
+    {
+      "signal": "offensive_line_blocking",
+      "visual_form": "lineman sprite positioning between offense and defense",
+      "meaning": "protection window for quarterback development or running lane creation"
+    },
+    {
+      "signal": "field_position_advantage",
+      "visual_form": "ball position proximity to opponent endzone",
+      "meaning": "scoring opportunity likelihood based on yardage to goal"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "nfl_teams",
+      "color_identity": "team-specific uniform colors (28 official NFL teams from 1990-91 season)",
+      "symbol_or_sigil": "official NFL team logos in endzone (16-bit versions)",
+      "enemy_visual_variants": "opposing team uniforms distinguished through color and logo differentiation on field sprites",
+      "environmental_markers": "team locker room/sideline area identification; playbook-specific play formation visual layouts"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "season_progression",
+      "visual_manifestation": "roster turnover reflects prior 1990-91 NFL season rosters; no 1991 rookies represented due to licensing timing",
+      "behavioral_manifestation": "player attribute values (speed, strength, accuracy) correspond to actual NFL statistics from preceding season"
+    },
+    {
+      "world_state": "game_weather_conditions",
+      "visual_manifestation": "rain and snow visual effects on field (16-bit versions); sunny default state",
+      "behavioral_manifestation": "weather impacts ball physics trajectory and player movement responsiveness"
+    },
+    {
+      "world_state": "field_position_state",
+      "visual_manifestation": "yard-line markers and distance-to-goal display; field grid positioning of player sprites",
+      "behavioral_manifestation": "play selection restrictions based on down/distance scenarios; statistical tracking of field position advantage"
+    },
+    {
+      "world_state": "scoring_scenario",
+      "visual_manifestation": "endzone entry visualization; score display state changes",
+      "behavioral_manifestation": "touchdown completion triggers end-of-play sequence; field goal attempt visualization through sprite animation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "roster_authenticity_signaling",
+      "example": "inclusion of real NFL teams and players (Bo Jackson specifically featured) communicates game legitimacy; exclusion of unlicensed players (Jim Kelly, Randall Cunningham, Bernie Kosar represented as generic QB names) telegraphs licensing constraints within world-state"
+    },
+    {
+      "technique": "playbook_visual_differentiation",
+      "example": "team-specific offensive and defensive playbook formations visually represented during play selection; expanded playbooks in sequel versions signal increased strategic complexity and team identity"
+    },
+    {
+      "technique": "field_stadium_context",
+      "example": "team sideline positioning and locker room identification establish home/away context; endzone logo display (in 16-bit versions) reinforces team territorial control narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "quarterback",
+      "state": "pre_snap_decision_phase",
+      "behavior": "play selection from playbook menu; audible capability to change pre-called plays (SNES/Genesis versions)"
+    },
+    {
+      "entity": "offensive_receiver",
+      "state": "route_execution",
+      "behavior": "sprite pathfinding toward predetermined route; separation from defensive coverage based on play design"
+    },
+    {
+      "entity": "defender",
+      "state": "assignment_coverage",
+      "behavior": "positioning to intercept receiver routes or tackle ball carrier; linebacker clustering behavior indicates aggressive blitz package activation"
+    },
+    {
+      "entity": "running_back",
+      "state": "tackle_avoidance",
+      "behavior": "directional movement control to navigate open field; dive play option (16-bit versions) provides evasion mechanic variant"
+    },
+    {
+      "entity": "kicker",
+      "state": "special_teams_execution",
+      "behavior": "field goal attempt animation; user-controlled touchback mechanics (16-bit versions)"
+    }
+  ],
+  "notes": "Tecmo Super Bowl communicates world-state primarily through roster authenticity (official NFL teams/players from 1990-91 season) and field positioning mechanics. Visual faction identity derives from official team uniform colors and logos (16-bit versions). Danger/safety signals manifest as defender proximity and coverage alignment on field grid. The game's manifestation layer emphasizes sports-simulation authenticity: player attributes reflect real-world NFL statistics, weather systems affect field state (16-bit versions), and play outcomes depend on formation positioning rather than narrative world-state. No political faction or geopolitical tension signaling present—game world-state is purely sports-competition-based. Developer text (Akihiko Shimoji credit) and unused animations (False Start penalty referee) indicate development-phase manifestation choices not fully realized in shipping version.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:18:25.947Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4077,
+    "output_tokens": 1738,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

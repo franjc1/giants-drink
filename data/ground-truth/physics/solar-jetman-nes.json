@@ -1,0 +1,121 @@
+{
+  "game_id": "solar-jetman-nes",
+  "game_name": "Solar Jetman: Hunt for the Golden Warpship",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system documentation available for NES version"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Pod Flight Physics",
+      "description": "Jetman controls a small jet pod that is subject to inertia but NOT drag physics depending on planet gravity level. The pod maneuvers in clockwise or anti-clockwise directions.",
+      "physics_values": {
+        "gravity_varies_by_level": true,
+        "drag_physics": false,
+        "inertia_based": true,
+        "notes": "Gravity changes every level, making stable flight challenging and maneuvering progressively more difficult"
+      }
+    },
+    {
+      "name": "Variable Planetary Gravity",
+      "description": "Each of twelve planets (plus one hidden planet) has its own distinct gravitational pull, fundamentally altering the physics behavior of the pod.",
+      "physics_values": {
+        "planet_count": 13,
+        "gravity_levels_documented": null,
+        "gravity_variation": "constant pull changes per level"
+      }
+    },
+    {
+      "name": "Tow Cable / Item Drag",
+      "description": "Items are collected via a tow cable. The collected item creates drag that makes flight more difficult and responsive.",
+      "physics_values": {
+        "has_drag_when_loaded": true,
+        "affects_handling": true
+      }
+    },
+    {
+      "name": "Ejection and Suit Gameplay",
+      "description": "When a pod is destroyed, Jetman ejects and walks around in a space suit. The suit is described as agile but vulnerable.",
+      "physics_values": {
+        "suit_mobility": "agile",
+        "can_return_to_mothership": true,
+        "death_condition_outside_pod": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "inertia-based",
+    "momentum-driven",
+    "gravity-dependent",
+    "challenging flight dynamics",
+    "responsive to gravity variation",
+    "difficult maneuvering"
+  ],
+  "tier_notes": "Tier 2 (Empirical/Qualitative): No precise numerical physics values are documented in available sources. Game mechanics are described qualitatively emphasizing inertia, variable gravity, and physics-based pod flight without specific acceleration/deceleration values, frame data, or sub-pixel information.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:41:00.789Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5176,
+    "output_tokens": 1009,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

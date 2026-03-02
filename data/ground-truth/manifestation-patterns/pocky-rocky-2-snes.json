@@ -1,0 +1,161 @@
+{
+  "game_id": "pocky-rocky-2-snes",
+  "game_name": "Pocky & Rocky 2",
+  "platform": "snes",
+  "paradigm": "shoot-em-up (top-down)",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles and melee attacks",
+      "visual_form": "Incoming attack sprites from enemy entities",
+      "meaning": "Immediate threat to player character requiring evasion or defense"
+    },
+    {
+      "signal": "Boss entity presence",
+      "visual_form": "Large, distinctly-designed enemy sprite occupying significant screen space",
+      "meaning": "High-difficulty encounter ahead; escalated danger state"
+    },
+    {
+      "signal": "Damage taken visual feedback",
+      "visual_form": "Character sprite knockback/flash animation; health indicator depletion",
+      "meaning": "Player has been hit; health status degrading"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up items on field",
+      "visual_form": "Collectible sprites (attack enhancement, protective clothing)",
+      "meaning": "Opportunity to strengthen offense or gain temporary invulnerability"
+    },
+    {
+      "signal": "Partner character availability",
+      "visual_form": "CPU-controlled ally sprite present on screen or selectable via magic possession",
+      "meaning": "Support available; can be thrown at enemies for massive damage or possessed for unique abilities"
+    },
+    {
+      "signal": "Cleared stage progression",
+      "visual_form": "Level completion visual feedback",
+      "meaning": "Safe zone reached; progression secured"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Pocky (protagonist faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Ofuda talismans (cards) - traditional Japanese spiritual seals",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Japanese supernatural/shrine aesthetics (based on Japanese title 'Kiki Kaikai: Mysterious Ghost World')"
+    },
+    {
+      "faction": "Enemy/supernatural forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Diverse enemy sprite designs representing supernatural/yokai entities",
+      "environmental_markers": "Nighttime/moonlit setting (Japanese title references 'Moonlit Night'); ghostly/supernatural visual themes"
+    },
+    {
+      "faction": "Support allies (Player 2 roles)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct character designs for each unique ally with individual attack signatures",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Ally appears alongside Pocky in promotional/menu art; subordinate positioning visually"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player mode (CPU partner)",
+      "visual_manifestation": "Partner character sprite rendered with AI control behavior",
+      "behavioral_manifestation": "Ally follows programmed attack patterns; attacks automatically without player input for second controller"
+    },
+    {
+      "world_state": "Multiplayer mode (human player 2)",
+      "visual_manifestation": "Two distinct character sprites on screen with independent animation states",
+      "behavioral_manifestation": "Player 2 character responds to second controller input; cooperation enables throwing mechanics and magic possession"
+    },
+    {
+      "world_state": "Pocky possessed by partner (magic usage)",
+      "visual_manifestation": "Visual transformation of Pocky sprite to reflect temporary possession state",
+      "behavioral_manifestation": "Player gains unique ability tied to possessed character; attack patterns and movement change"
+    },
+    {
+      "world_state": "Partner character thrown at enemy",
+      "visual_manifestation": "Ally sprite travels toward enemy in ballistic arc",
+      "behavioral_manifestation": "Massive damage dealt to target; thrown character becomes temporarily inactive (dead) until respawn"
+    },
+    {
+      "world_state": "Difficulty/Rank selection (Japanese version 'Rank', International 'Difficulty')",
+      "visual_manifestation": "Menu option text; regional UI variation in options screen",
+      "behavioral_manifestation": "Game parameters adjust (enemy density, attack patterns, damage scaling)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Nocturnal setting as world-state indicator",
+      "example": "Japanese title 'Tsukiyo' (moonlit night) and 'Tsukiyo Soushi' (moonlit night chronicles) embed temporal context; nighttime aesthetic creates supernatural/ghost world framing without explicit narrative"
+    },
+    {
+      "technique": "Character costume/clothing as protective state communication",
+      "example": "New clothes pickups visually change Pocky's appearance and provide damage protection; visual armor represents mechanical invulnerability"
+    },
+    {
+      "technique": "Talisman/card attack system as cultural world-building",
+      "example": "Ofuda talismans (spiritual seals used in Shinto practice) serve as attack projectiles; visual design grounds game in Japanese supernatural/spiritual framework without explicit exposition"
+    },
+    {
+      "technique": "Ally subordination through visual hierarchy and UI",
+      "example": "Player 2 character rendered as supporting role in promotional art and menu screens; reviews note they act as 'mere subordinates to Pocky,' communicated through sprite positioning and possession mechanics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pocky (player 1 character)",
+      "state": "Normal combat",
+      "behavior": "Throws ofuda talismans in eight directions; free movement in top-down space; can pick up power-ups and clothing"
+    },
+    {
+      "entity": "Pocky",
+      "state": "Using partner magic",
+      "behavior": "Visually transforms; gains unique ability tied to possessed ally character (attack pattern and movement change)"
+    },
+    {
+      "entity": "Pocky",
+      "state": "Damaged/hit",
+      "behavior": "Knockback animation; sprite flash; health meter depletes"
+    },
+    {
+      "entity": "Partner character (CPU or Player 2)",
+      "state": "Active support",
+      "behavior": "Attacks with unique ability; possessable by Pocky via magic; can be thrown at enemies for massive damage"
+    },
+    {
+      "entity": "Partner character",
+      "state": "Thrown/inactive",
+      "behavior": "Temporarily removed from field; respawns after short delay; indicated visually by absence from screen"
+    },
+    {
+      "entity": "Enemy entities",
+      "state": "Active threat",
+      "behavior": "Attack Pocky with projectiles or melee; move according to behavior patterns; affected by partner throwables (massive damage)"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Encounter phase",
+      "behavior": "Enlarged sprite occupying significant screen real estate; more complex attack patterns; stage-defining threat"
+    }
+  ],
+  "notes": "Pocky & Rocky 2 is a top-down shoot-em-up with Japanese supernatural (yokai/ghost) theming. The manifestation layer primarily communicates through: (1) attack/defense visual feedback (projectiles, knockback, health depletion), (2) power-up and protective clothing sprites as safety/strength signals, (3) distinct ally characters with unique visual designs and attack signatures, (4) possession and throwing mechanics that visually alter game state, and (5) nocturnal/supernatural environmental aesthetic that frames the entire world as a 'mysterious ghost world.' The game uses no explicit faction conflict narrative but establishes opposition through enemy sprite diversity and protagonist-ally hierarchy. Regional UI differences (JP 'Rank' vs. International 'Difficulty', controller button color changes, title card design) do not affect core manifestation systems. The core world-state-to-visual mapping centers on multiplayer cooperation: single-player shows CPU ally behavior; multiplayer shows human control; magic possession shows character transformation; ally throwing shows temporary removal and massive damage impact.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Pocky & Rocky 2 article)",
+    "wikipedia (Pocky & Rocky 2 article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:59:42.271Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4815,
+    "output_tokens": 2048,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

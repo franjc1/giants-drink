@@ -1,0 +1,246 @@
+{
+  "_meta": {
+    "game": "Contra",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Contra",
+        "url": "https://tasvideos.org/GameResources/NES/Contra",
+        "notes": "Primary reference. Gromaides boss arm physics documented here (0x0.B5 pixels/frame). Player physics described qualitatively."
+      },
+      {
+        "name": "Contra Speedrunning Wiki (Fandom)",
+        "url": "https://contra-speedrunning.fandom.com/wiki/Contra",
+        "notes": "Movement mechanics, weapon interactions, stage-specific physics."
+      },
+      {
+        "name": "Data Crystal — Contra",
+        "url": "https://datacrystal.tcrf.net/wiki/Contra",
+        "notes": "RAM map. Physics constants less thoroughly documented than SMB or Mega Man."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Contra has significantly less precise ROM-level documentation than the Mario or Mega Man games.",
+      "Most documented values are from speedrunning community frame-counting rather than disassembly.",
+      "Contra uses different physics in its three stage types: side-scrolling, top-down (base), and vertically-scrolling.",
+      "Side-scrolling stages: standard platformer physics.",
+      "Top-down stages (Stages 2, 4 — 'base stages'): 8-directional movement, no jump, screen-by-screen transitions.",
+      "Vertically-scrolling stage (Stage 5, waterfall): same as side-scrolling but with forced upward scroll.",
+      "NO acceleration: players move at constant speed (like Castlevania, unlike Mario).",
+      "Jump is NOT variable height — committed on press."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "side_scrolling_stages": {
+    "applies_to": "Stages 1, 3, 5, 6, 7, 8",
+    "run_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "medium",
+      "notes": [
+        "Contra has no walk/run distinction — players always move at one constant speed.",
+        "Speed is approximately 1.5 px/frame based on community measurement.",
+        "VERIFY against Data Crystal RAM map or disassembly."
+      ]
+    },
+    "acceleration": null,
+    "notes": "No acceleration — constant velocity from the moment direction is pressed. Stopping is instant."
+  },
+
+  "jump_side_scrolling": {
+    "type": "fixed_height",
+    "initial_y_velocity_approx": {
+      "px_per_frame": 4.0,
+      "confidence": "medium",
+      "notes": "Approximate from community measurement. VERIFY against ROM."
+    },
+    "variable_height": false,
+    "source": "Community documentation: 'Contra's jump is non-variable — holding jump does NOT extend height. The arc is committed on button press.'",
+    "air_control": "full",
+    "notes": [
+      "Jump height is FIXED — cannot be extended by holding A.",
+      "Horizontal direction CAN be changed mid-air freely — full air control.",
+      "This combination (fixed height, free direction) is unusual. Most games with fixed jump also have locked direction (Castlevania) or full variable height.",
+      "8-directional aiming is available while jumping."
+    ],
+    "jump_height_approx_tiles": 3.0,
+    "jump_height_approx_px": 48
+  },
+
+  "gravity": {
+    "px_per_frame_sq_approx": 0.375,
+    "confidence": "low",
+    "notes": "Approximate. Contra's jump arc is relatively fast compared to Mario. VERIFY."
+  },
+
+  "aiming_system": {
+    "description": "8-directional aiming: up-left, up, up-right, right, down-right (jump only), down (jump only), down-left (jump only), left",
+    "standing_directions": ["left", "upper-left", "up", "upper-right", "right"],
+    "jumping_directions": ["all 8 directions"],
+    "prone_directions": ["left", "lower-left", "right", "lower-right"],
+    "input_method": "D-pad held in aiming direction simultaneously with move/fire inputs",
+    "notes": [
+      "The 8-directional aiming is Contra's signature mechanic. Players can aim diagonally while standing and shoot in all 8 directions while jumping.",
+      "Down/lower directions are only accessible while jumping — cannot aim downward while standing.",
+      "Prone (hold Down on ground) allows low-angle aiming and reduces hitbox."
+    ]
+  },
+
+  "prone": {
+    "activation": "hold Down while on ground",
+    "movement_while_prone": false,
+    "hitbox_reduction": "approximately half standing height",
+    "shooting_while_prone": true,
+    "directions_while_prone": ["horizontal", "lower-diagonal"],
+    "notes": "Prone is essential for avoiding certain enemy attacks and repositioning under fire. Cannot move — it's a stationary combat stance."
+  },
+
+  "weapons": {
+    "_source": "Konami game manual + community documentation",
+    "default_rifle": {
+      "label": "R (default)",
+      "bullet_speed_px_per_frame_approx": 6,
+      "max_bullets_on_screen": 2,
+      "fire_mode": "semi-auto (one press = one bullet)",
+      "ammo": "infinite"
+    },
+    "machine_gun": {
+      "label": "M",
+      "bullet_speed_px_per_frame_approx": 6,
+      "max_bullets_on_screen": 4,
+      "fire_mode": "auto (hold button)",
+      "ammo": "infinite while held"
+    },
+    "fireball": {
+      "label": "F",
+      "bullet_speed_px_per_frame_approx": 3,
+      "trajectory": "bounces off floors",
+      "max_bullets_on_screen": 2,
+      "notes": "Slow bouncing projectile. Useful for clearing floor-level enemies."
+    },
+    "laser": {
+      "label": "L",
+      "bullet_speed": "instant (screen-length)",
+      "max_bullets_on_screen": 1,
+      "pierces_enemies": true,
+      "notes": "Laser fires instantaneously across the screen. Extremely powerful — kills most enemies in one hit. Limited to 1 on screen at a time, creating a fire-rate tradeoff."
+    },
+    "spread_gun": {
+      "label": "S",
+      "bullet_count_per_shot": 5,
+      "bullet_speed_px_per_frame_approx": 6,
+      "spread_angles": [0, 30, 60, -30, -60],
+      "spread_angle_unit": "degrees from horizontal",
+      "notes": "5 bullets fire simultaneously in a fan pattern. Center bullet goes straight; pairs at ~±30° and ~±60°. The most powerful weapon in most situations due to coverage. VERIFY exact angles."
+    },
+    "rapid_bullet": {
+      "label": "RB",
+      "fire_rate": "higher than machine gun",
+      "notes": "Rapid fire variant. Exact fire rate vs machine gun needs verification."
+    },
+    "pickup_system": {
+      "mechanism": "Shoot the Falcon Pod (red helicopter) to reveal a capsule icon; touch the icon to pick up",
+      "weapon_loss_on_death": true,
+      "revert_to": "default rifle on death",
+      "holds_multiple": false,
+      "notes": "One weapon at a time. The helicopter circles continuously. Shooting the pod reveals the power-up icon on the ground."
+    }
+  },
+
+  "climbing": {
+    "rope_speed_px_per_frame_approx": 1.0,
+    "confidence": "medium",
+    "input": "hold Up or Down on rope to climb",
+    "shooting_while_climbing": "left and right (horizontal and diagonal)",
+    "dismount": "press jump to release and launch off rope",
+    "gravity_while_holding": "suspended — no falling while holding rope"
+  },
+
+  "damage_system": {
+    "hp_per_life": 1,
+    "type": "one_hit_kill",
+    "notes": [
+      "ONE HIT KILL — any contact with enemy, projectile, or hazard kills immediately.",
+      "This makes Contra a reaction and positioning game, not a health management game.",
+      "The Konami Code (Up Up Down Down Left Right Left Right B A Start) gives 30 lives."
+    ],
+    "lives_default": 3,
+    "continues_default": 3,
+    "respawn_invincibility_frames_approx": 120,
+    "respawn_location": "last checkpoint or stage start"
+  },
+
+  "hitboxes": {
+    "standing": {
+      "width_px_approx": 8,
+      "height_px_approx": 24,
+      "confidence": "low",
+      "notes": "Narrower than the sprite. Exact values need ROM verification. Contra is known for relatively forgiving hitboxes relative to sprite size."
+    },
+    "prone": {
+      "width_px_approx": 16,
+      "height_px_approx": 8,
+      "confidence": "low"
+    },
+    "notes": "Contra hitboxes are intentionally narrower than sprites — the game is punishing enough with one-hit-kill mechanics."
+  },
+
+  "top_down_stages": {
+    "applies_to": "Stages 2, 4 (base infiltration stages)",
+    "movement_type": "8-directional free movement",
+    "speed_px_per_frame_approx": 1.0,
+    "jump": false,
+    "shooting_directions": 8,
+    "scrolling": "screen-by-screen (not smooth)",
+    "objective": "destroy base components to progress to next screen",
+    "notes": [
+      "Top-down stages are structurally different from side-scrolling: no jump, 8-directional movement, stationary camera until reaching screen edge.",
+      "These stages break up the run-and-gun pacing with a different tactical challenge.",
+      "Enemy spawns and object placement create flanking threats from multiple directions."
+    ]
+  },
+
+  "waterfall_stage": {
+    "applies_to": "Stage 5",
+    "scrolling": "forced upward vertical scroll",
+    "physics": "same as side-scrolling stages",
+    "death_condition": "falling off bottom of screen = instant death",
+    "notes": "Stage 5 is a vertically-scrolling variation. Same physics as horizontal stages but the camera forces upward movement. Falling behind the scroll kills immediately."
+  },
+
+  "gromaides_boss": {
+    "arm_movement_speed": {
+      "x_per_frame": 0.7109375,
+      "y_per_frame": -0.7109375,
+      "hex": "0x0.B5",
+      "source": "TASVideos: 'Adds ±0x0.B5 pixels to x-coordinate and −0x0.B5 pixels to y-coordinate'",
+      "notes": "0xB5 = 181. 181/256 ≈ 0.707 px/frame. This is approximately √2/2, which gives exactly 45-degree extension. This is a ROM-confirmed value from TASVideos."
+    },
+    "boss_hp_limit": {
+      "description": "Boss HP can only drop 1 HP per frame maximum",
+      "source": "TASVideos: 'Boss HP can only drop 1 HP per frame'",
+      "notes": "This limits how fast bosses can be killed regardless of weapon. Important for speedrun routing."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The one-hit-kill system fundamentally changes level design philosophy. Every enemy placement is life-threatening. Enemy density, projectile speed, and timing must be calibrated around instant death.",
+    "8-directional aiming makes Contra a different genre from Mario — it's a 'shooter within a platformer.' Level design must create scenarios where aiming direction matters as much as positioning.",
+    "Fixed jump height with full air control is a unique combination. The player can reposition horizontally mid-jump but cannot extend the arc. This makes jump timing about starting height (when to jump) rather than hold duration.",
+    "The weapon system creates a strong economy around the helicopter pods. Players make risk/reward decisions about when to expose themselves to grab a weapon upgrade.",
+    "The two-player simultaneous design means Contra levels work with shared screen space. Levels are wider than average to accommodate two players without constant overlap."
+  ]
+}

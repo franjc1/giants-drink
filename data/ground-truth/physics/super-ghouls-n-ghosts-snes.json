@@ -1,0 +1,137 @@
+{
+  "_meta": {
+    "game": "Super Ghouls 'n Ghosts",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1991,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "TASVideos — SNES / Super Ghouls 'n Ghosts",
+        "url": "https://tasvideos.org/GameResources/SNES/SuperGhoulsNGhosts",
+        "notes": "Mechanics documentation."
+      },
+      {
+        "name": "Data Crystal — Super Ghouls 'n Ghosts (SNES)",
+        "url": "https://datacrystal.tcrf.net/wiki/Super_Ghouls_%27n_Ghosts",
+        "notes": "RAM map reference."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Super Ghouls 'n Ghosts is the SNES sequel to Ghouls 'n Ghosts (1988 arcade/Genesis) and Ghosts 'n Goblins (1985).",
+      "KEY ADDITION over NES GnG: DOUBLE JUMP. Arthur can jump a second time in mid-air.",
+      "KEY EXCEPTION: The double jump arc is ALSO fixed/committed — no air control, even mid-double-jump.",
+      "Three-tier armor system (vs NES GnG's two-tier): Bronze → Steel → Golden → Enchanted (magic attacks).",
+      "Still requires TWO PLAYTHROUGHS for the true ending — same design as GnG.",
+      "Walk speed: Arthur moves faster than NES Castlevania but with no acceleration.",
+      "The double jump fundamentally changes the difficulty vs NES GnG: players have more vertical options but still no horizontal control."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Approximate. Arthur moves somewhat faster than in NES GnG. VERIFY."
+    }
+  },
+
+  "jump": {
+    "_note": "Double jump is the KEY addition over GnG. But both jumps are committed arcs with no air control.",
+    "first_jump": {
+      "type": "committed_fixed_arc",
+      "air_control": "none",
+      "height_px_approx": 48,
+      "confidence": "low"
+    },
+    "double_jump": {
+      "available": true,
+      "description": "Press jump again while airborne to initiate a second fixed arc.",
+      "type": "committed_fixed_arc",
+      "air_control": "none",
+      "notes": [
+        "The double jump is also a fully committed arc — no direction control mid-air.",
+        "The double jump can be used EARLY in the first jump arc (when still ascending) or late (at/past peak).",
+        "Timing of the double jump determines the final peak height and horizontal distance.",
+        "The double jump fundamentally changes the gap-crossing options compared to NES GnG."
+      ]
+    },
+    "total_max_height_px_approx": 80,
+    "confidence": "low",
+    "notes": "Approximate double-jump peak height. VERIFY."
+  },
+
+  "armor_system": {
+    "_note": "Three-tier armor system (vs NES GnG's two-tier). More hits before death.",
+    "bronze_armor": {
+      "tier": 1,
+      "description": "Starting armor. Standard protection.",
+      "hits_to_lose": 1
+    },
+    "steel_armor": {
+      "tier": 2,
+      "description": "Second level. Better than bronze.",
+      "upgrade_source": "Chest in level",
+      "hits_to_lose": 1
+    },
+    "golden_armor": {
+      "tier": 3,
+      "description": "Third level. Enables magic attack when collected with matching weapon.",
+      "upgrade_source": "Chest in level",
+      "hits_to_lose": 1
+    },
+    "enchanted_armor": {
+      "tier": "bonus",
+      "description": "Found in second playthrough. Enables special magical weapon forms.",
+      "notes": "Enchanted Armor's weapon transforms grant access to the weapons needed to face the true final boss."
+    },
+    "underwear_state": {
+      "description": "Losing all armor leaves Arthur in underwear — same as NES GnG. Next hit = death.",
+      "notes": "The visual indicator (armor → underwear) is inherited from GnG as both humor and danger signal."
+    },
+    "three_hits_before_death": {
+      "hits": 3,
+      "notes": "Bronze → Steel = 1 hit. Steel → Golden = 1 hit. Golden → Underwear = 1 hit. Underwear → Death = 1 hit. So Arthur can take up to 4 hits total if at Golden, or fewer depending on starting armor."
+    }
+  },
+
+  "weapons": {
+    "lance": "Straight horizontal throw. Default weapon.",
+    "sword": "Short range but can be upgraded to magical versions",
+    "torch": "Arcing path, sets enemies on fire",
+    "crossbow": "Multiple shots fired simultaneously",
+    "dagger": "Fast straight throw",
+    "axe": "Arcing path",
+    "scythe": "Wide arc, multiple hits",
+    "notes": "Weapon is changed by collecting chests. Different weapons interact differently with the armor system's magic mode."
+  },
+
+  "knockback": {
+    "description": "Taking damage causes Arthur to fly backward.",
+    "notes": "Same as NES GnG. Knockback into a pit = death regardless of armor. Knockback during jump interferes with the arc."
+  },
+
+  "two_playthrough_ending": {
+    "description": "After defeating the final boss, the game reveals it was an illusion. Arthur must complete the game again (second loop) on the hardest setting to reach the true final boss and ending.",
+    "notes": "Inherited from GnG. The second loop is the same stages but with different enemy behaviors and the requirement for Enchanted Armor."
+  },
+
+  "design_notes_for_giants_drink": [
+    "The double jump is the minimum viable solution to 'GnG is too hard' — it gives players one more tool without fundamentally changing the commitment-based jump design. Two committed arcs instead of one. The core skill (planning the trajectory before jumping) is unchanged.",
+    "Three-tier armor means players can survive more hits before the embarrassment of the underwear state. This softens the death curve compared to NES GnG while maintaining the visual feedback system.",
+    "The two-playthrough true ending requirement is a legacy design from an arcade game era where replaying content was normal. In a home console game, it's divisive — some see it as cruel, others see it as gating the 'real' ending behind mastery.",
+    "Super Ghouls n Ghosts is the gold standard for 'SNES upgrade of an NES game' — it keeps the soul (committed jumps, enemy-dense, armor system, two loops) while leveraging the SNES hardware (larger sprites, Mode 7 effects, smoother scrolling, stereo audio).",
+    "The weapon system creates an economy of choice: every chest might give you a better or worse weapon, and you can't refuse. Sometimes the game hands you a scythe when you need range; sometimes you get the lance at the perfect moment. Managed randomness."
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "game_id": "commando-nes",
+  "game_name": "Commando",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "enemy_soldiers_streaming",
+      "visual_form": "multiple sprite characters moving toward player from gates/fortresses",
+      "meaning": "active combat zone; waves of incoming threats"
+    },
+    {
+      "signal": "officer_character",
+      "visual_form": "distinct enemy sprite that appears at level gates, runs away after ordering troops",
+      "meaning": "command authority present; tactical threat organizing the assault"
+    },
+    {
+      "signal": "fortresses_and_gates",
+      "visual_form": "static environmental structures on screen that spawn enemy units",
+      "meaning": "enemy stronghold; source of continuous threat generation"
+    },
+    {
+      "signal": "environmental_hazards",
+      "visual_form": "pits, water, gas rooms visible in level layout",
+      "meaning": "instant-death environmental dangers; map-based threats independent of enemy action"
+    },
+    {
+      "signal": "grenade_required_obstacles",
+      "visual_form": "bunker entrances and barriers that visually block progression",
+      "meaning": "hidden threats contained; resource expenditure required to progress safely"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "rescued_prisoners",
+      "visual_form": "POW sprites transported across screen by enemy convoy; can be freed by player",
+      "meaning": "objective completion markers; non-hostile entities indicating mission success"
+    },
+    {
+      "signal": "bonus_point_officers",
+      "visual_form": "officer character running away after troop dispatch",
+      "meaning": "optional high-value target; reward for aggressive pursuit rather than danger"
+    },
+    {
+      "signal": "item_pickups",
+      "visual_form": "machine gun upgrade, unlimited grenade power-up, glasses items in underground shelters",
+      "meaning": "temporary power progression; enhanced capability zones"
+    },
+    {
+      "signal": "life_progression",
+      "visual_form": "score accumulation visual feedback",
+      "meaning": "resource security; extra lives awarded at 10,000 points and per 50,000 thereafter"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_force",
+      "color_identity": null,
+      "symbol_or_sigil": "Super Joe soldier character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "dropped by helicopter at level start; represents lone commando infiltration"
+    },
+    {
+      "faction": "enemy_military",
+      "color_identity": null,
+      "symbol_or_sigil": "generic enemy soldier sprites; distinct officer character with command authority",
+      "enemy_visual_variants": "cowardly officer who flees after dispatching troops; distinguishes leadership from rank-and-file",
+      "environmental_markers": "fortresses, gates, underground bunkers; organized military infrastructure"
+    },
+    {
+      "faction": "prisoners_of_war",
+      "color_identity": null,
+      "symbol_or_sigil": "POW sprites in transport convoy",
+      "enemy_visual_variants": null,
+      "environmental_markers": "hidden in underground shelters accessible only via grenade destruction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "initial_infiltration",
+      "visual_manifestation": "helicopter drop-off at jungle level start; player character Super Joe begins surrounded",
+      "behavioral_manifestation": "player spawns with unlimited assault rifle and limited grenades; must navigate toward extraction"
+    },
+    {
+      "world_state": "level_progression",
+      "visual_manifestation": "screen transition between four unique level designs that repeat with increasing difficulty across 16 total levels",
+      "behavioral_manifestation": "minor visual/layout changes signal escalating threat density and enemy complexity"
+    },
+    {
+      "world_state": "end_of_level_combat",
+      "visual_manifestation": "screen locks; gate/fortress visual dominates; officer character visible dispatching soldiers",
+      "behavioral_manifestation": "soldiers stream from gate in waves; officer runs backward; bonus points awarded for shooting officer"
+    },
+    {
+      "world_state": "hazard_zones",
+      "visual_manifestation": "pits, water, gas rooms rendered in level terrain; some blocked by destructible bunker covers",
+      "behavioral_manifestation": "player cannot survive entering these zones without grenades (for bunkers) or alternate traversal; instant failure state"
+    },
+    {
+      "world_state": "power_escalation",
+      "visual_manifestation": "machine gun upgrade sprite, unlimited grenade item, special glasses item appear in hidden underground shelters",
+      "behavioral_manifestation": "player capability increases; upgrades lost upon life loss; glasses item reveals all hidden bunker locations visually"
+    },
+    {
+      "world_state": "game_completion",
+      "visual_manifestation": "secret ending message displays if game cleared with 3 lives and 24 grenades remaining",
+      "behavioral_manifestation": "specific resource management requirement signals developer-intended optimal play path"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "level_naming_and_progression",
+      "example": "four unique areas in NES version that repeat with difficulty scaling; regional text 'BROKE THE ___ AREA NOW RUSH/RASH TO THE ___ AREA' signals continuous territory conquest narrative"
+    },
+    {
+      "technique": "architectural_design",
+      "example": "fortresses and gates serve dual purpose: visually reinforce enemy military control of territory while functionally acting as spawn points for threat waves"
+    },
+    {
+      "technique": "character_behavior_narrative",
+      "example": "officer character runs away after dispatching troops, visually communicating cowardice and establishing moral hierarchy—player incentivized to pursue and shoot officer for bonus points"
+    },
+    {
+      "technique": "hidden_bunker_deployment",
+      "example": "underground shelters containing prisoners and power-ups require grenade destruction to access, suggesting enemy fortification and hidden strategic assets"
+    },
+    {
+      "technique": "helicopter_insertion",
+      "example": "level start visual of player dropped by helicopter establishes commando infiltration scenario without explicit narrative text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Super_Joe_player_character",
+      "state": "armed_combat",
+      "behavior": "can fire assault rifle in eight directions with unlimited ammo; grenades throw only vertically regardless of facing direction; grenades can destroy obstacles and clear multiple enemies; movement in all eight directions"
+    },
+    {
+      "entity": "Super_Joe_player_character",
+      "state": "upgraded",
+      "behavior": "machine gun upgrade increases firepower; unlimited grenade upgrade removes resource constraint; glasses item reveals hidden bunker locations; upgrades permanently lost on life loss"
+    },
+    {
+      "entity": "Super_Joe_player_character",
+      "state": "hazard_state",
+      "behavior": "instantly dies from pits, water, gas rooms regardless of invulnerability cheat status; must use grenades or alternate routes to survive hazard zones"
+    },
+    {
+      "entity": "enemy_soldier",
+      "state": "patrolling",
+      "behavior": "streams toward player in waves from gates and fortresses; generates continuously during level play; demonstrates organized military assault pattern"
+    },
+    {
+      "entity": "enemy_officer",
+      "state": "command_dispatch",
+      "behavior": "appears at level gates; orders soldiers to attack; immediately runs away in retreat; high bonus point target; establishes hierarchy and moral dimension"
+    },
+    {
+      "entity": "prisoner_of_war",
+      "state": "transport_convoy",
+      "behavior": "moves across screen under enemy guard; can be freed by player combat; visual markers of objective completion and moral victory"
+    },
+    {
+      "entity": "game_state",
+      "state": "level_end_gate_combat",
+      "behavior": "screen locks in place; no further terrain scrolling; soldier waves emerge continuously from static gate; creates contained arena for final combat test before area transition"
+    }
+  ],
+  "notes": "Commando (NES 1986) uses overhead perspective to communicate tactical infiltration through environmental layout and enemy spawning patterns. Visual communication is primarily through sprite behavior and environmental fixtures rather than color or detailed faction markings. The game lacks explicit political narrative but implies military conflict through hierarchy (officer vs. soldiers), territory control (areas/gates), and rescue objectives (POW liberation). Japanese title 'Senjou no Ookami' (Wolf of the Battlefield) suggests individual soldier heroism against organized force. Hidden developer messages indicate personal touches (fan messages, birthday codes) that humanize the design team but don't directly impact player-facing manifestation systems. The game's danger/safety dichotomy is primarily mechanical (hazard zones) rather than visual-narrative.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:08:12.849Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5571,
+    "output_tokens": 2234,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

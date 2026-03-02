@@ -1,0 +1,144 @@
+{
+  "game_id": "aerobiz-snes",
+  "game_name": "Aerobiz",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "level_count": null,
+  "world_count": 2,
+  "element_introduction_order": [
+    {
+      "element": "Airline headquarters selection",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Difficulty handicapping via city choice (wealthy cities like New York vs. resource-constrained cities like Lima)"
+    },
+    {
+      "element": "Difficulty level selection",
+      "first_appears": "Game start (post-headquarters)",
+      "introduction_context": "safe",
+      "mastery_context": "Affects passenger volume, world event frequency, win condition thresholds (2.5M-4.5M passengers)"
+    },
+    {
+      "element": "Airport access negotiation",
+      "first_appears": "Gameplay loop begins",
+      "introduction_context": "moderate",
+      "mastery_context": "Core resource acquisition mechanic; foundation for all route expansion"
+    },
+    {
+      "element": "Aircraft purchasing",
+      "first_appears": "Post-negotiation phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Capital management; aircraft capability locked by geopolitical constraints (e.g., Moscow restricts to Soviet planes)"
+    },
+    {
+      "element": "Route opening and service configuration",
+      "first_appears": "Early gameplay loop",
+      "introduction_context": "moderate",
+      "mastery_context": "Continuous optimization: fare reduction, service quality, convenience improvements"
+    },
+    {
+      "element": "World events (geopolitical/natural disasters)",
+      "first_appears": "After turn resolution",
+      "introduction_context": "moderate",
+      "mastery_context": "Reactive decision-making; Cold War restrictions (lifted post-Perestroika) create temporal challenge escalation"
+    },
+    {
+      "element": "Competitive route conflict",
+      "first_appears": "Quarterly resolution phase",
+      "introduction_context": "moderate",
+      "mastery_context": "Direct AI airline opposition; influences profitability on shared routes"
+    },
+    {
+      "element": "Quarterly financial results",
+      "first_appears": "Post-turn resolution",
+      "introduction_context": "moderate",
+      "mastery_context": "Win condition tracking: profitability required; 4 consecutive negative quarters = bankruptcy"
+    },
+    {
+      "element": "Peripheral business expansion (hotels, shuttle services)",
+      "first_appears": "Mid-game (optional)",
+      "introduction_context": "moderate",
+      "mastery_context": "Advanced capital allocation; diversification strategy"
+    },
+    {
+      "element": "Stock market/charter airline acquisition",
+      "first_appears": "Mid-game (optional)",
+      "introduction_context": "moderate",
+      "mastery_context": "51% ownership threshold triggers assimilation; alternative growth path"
+    },
+    {
+      "element": "Multi-city network linking requirement",
+      "first_appears": "Win condition (implicit from start)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Must connect all 22 cities + hit passenger threshold + maintain profitability simultaneously; final tension layer"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful route negotiation",
+      "Positive quarterly results announcement",
+      "Olympic Games world event (traffic boost)",
+      "Perestroika event (Cold War restrictions lifted)"
+    ],
+    "typical_tension_triggers": [
+      "World events announcement (labor strikes, political instability)",
+      "Competitive airline on same route",
+      "Approaching 4-quarter bankruptcy threshold",
+      "Aircraft delivery delays from strikes",
+      "Geopolitical restrictions on aircraft purchases",
+      "Approaching 32-year game-over condition"
+    ],
+    "pacing_descriptor": "Turn-based quarterly cycles with asynchronous world event interruptions; tension builds through resource scarcity and competitive pressure; relief cycles on quarterly profit confirmation"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Peripheral business opportunities (hotels, shuttles) are optional revenue sources; stock market acquisition path is optional alternative growth",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Low pressure; headquarters and difficulty selection provide handicapping; early routes establish profitability baseline",
+    "mid_game": "Escalating competition; world events introduce unpredictability; geopolitical constraints compound resource decisions (Cold War era in Scenario 1)",
+    "late_game": "Multi-objective pressure: must link all 22 cities while maintaining profitability and hitting passenger threshold (2.5M-4.5M); approaching 32-year time limit creates resource urgency",
+    "notable_spikes": [
+      "Cold War restrictions (Scenario 1, 1963-1989): Soviet airline paths blocked from Western negotiation and aircraft",
+      "Perestroika event: geopolitical landscape shift removes restrictions, creating new strategic window",
+      "Late-game network completion: exponential route negotiation complexity with 22-city requirement"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Scenario 1: Intercontinental Expansion Race",
+      "description": "1963-1995 timeframe emphasizes transpacific competition and Cold War geopolitical constraints. Player must balance Soviet vs. Western infrastructure, with increasing aircraft range unlocking intercontinental routes. Perestroika event provides mid-game difficulty shift.",
+      "example_level": "Scenario 1"
+    },
+    {
+      "pattern_name": "Scenario 2: Supersonic Acceleration",
+      "description": "1983-2015 timeframe focuses on faster aircraft technology adoption and modern competitive dynamics. Shorter timespan (32 years vs. 32 years) concentrates decision pressure; supersonic aircraft availability alters route viability.",
+      "example_level": "Scenario 2"
+    },
+    {
+      "pattern_name": "Handicap-Based Difficulty Asymmetry",
+      "description": "Starting city choice creates asymmetric AI matchups: wealthy cities (New York, London, Tokyo) reduce handicap; poor cities (Lima, Nairobi, Honolulu) increase challenge. Same difficulty setting but inverted starting conditions.",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:33:26.661Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2960,
+    "output_tokens": 1920,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

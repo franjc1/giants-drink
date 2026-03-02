@@ -1,0 +1,178 @@
+{
+  "game_id": "ironsword-wizards-warriors-ii-nes",
+  "game_name": "Ironsword: Wizards & Warriors II",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Elemental boss encounters",
+      "visual_form": "Large sprite bosses filling significant screen real estate; Earth, Wind, Fire, Water elemental visual forms",
+      "meaning": "Mandatory progression threats requiring specific magic spells to damage; failure to obtain corresponding elemental spell makes encounter impossible to survive"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Dangerous projectiles in environment",
+      "meaning": "Direct damage to life meter; environmental hazard requiring evasion"
+    },
+    {
+      "signal": "Fall damage",
+      "visual_form": "Extended vertical drops in level design",
+      "meaning": "Sustained fall duration decreases life meter; spatial hazard communication through level topology"
+    },
+    {
+      "signal": "Life meter depletion",
+      "visual_form": "Decreasing health bar visual feedback",
+      "meaning": "Proximity to game-over state; visual urgency indicator"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items (chicken, brew)",
+      "visual_form": "Collectible sprites scattered throughout levels and in treasure chests",
+      "meaning": "Life meter replenishment; visual markers for resource availability"
+    },
+    {
+      "signal": "Inns",
+      "visual_form": "Safe interior locations accessible from main domains",
+      "meaning": "Safe zones for commerce and gambling; respite from active threats"
+    },
+    {
+      "signal": "Treasure chests",
+      "visual_form": "Locked containers distributed throughout levels",
+      "meaning": "Potential resource caches (money, spells, equipment); reward for exploration"
+    },
+    {
+      "signal": "Magic spell acquisition",
+      "visual_form": "Spell items found in environment or purchased at inns",
+      "meaning": "Power-up availability; essential tools for defeating bosses without spell make encounters unwinnable"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Malkil (Evil Wizard)",
+      "color_identity": null,
+      "symbol_or_sigil": "Four elemental forms: Earth Elemental, Wind Elemental, Fire Elemental, Water Elemental",
+      "enemy_visual_variants": "Each domain contains the corresponding elemental boss form; Malkil's manifestation changes per stage",
+      "environmental_markers": "Each domain named after elemental type; IceFire Mountain as final stronghold location"
+    },
+    {
+      "faction": "Animal Kings (Domain rulers)",
+      "color_identity": null,
+      "symbol_or_sigil": "Golden artifacts representing each domain; collected as quest objectives",
+      "enemy_visual_variants": null,
+      "environmental_markers": "One Animal King per domain; artifact return triggers path progression within each level"
+    },
+    {
+      "faction": "Kuros (Player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Knight warrior identity; IronSword assembly as ultimate power symbol",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Temporal character progression through equipment upgrades, armor, helmets, shields"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-elemental-defeat in domain",
+      "visual_manifestation": "Level contains hidden magic spell required to damage boss; spell must be located and equipped before boss encounter",
+      "behavioral_manifestation": "Elemental boss is invulnerable without corresponding spell (Windbane, Blightwater, Firesmite, Earthscorch); boss behavior unchanged but combat impossible"
+    },
+    {
+      "world_state": "Post-animal-king-artifact-return",
+      "visual_manifestation": "Previously blocked path becomes accessible; level expands to second domain section",
+      "behavioral_manifestation": "New areas open allowing progression to boss encounter and spell retrieval"
+    },
+    {
+      "world_state": "Elemental defeated",
+      "visual_manifestation": "IronSword piece obtained; visual reward for completion",
+      "behavioral_manifestation": "Domain cleared; progression to next elemental stage enabled"
+    },
+    {
+      "world_state": "Four elementals defeated / IronSword assembled",
+      "visual_manifestation": "IceFire Mountain becomes accessible as final destination",
+      "behavioral_manifestation": "Final boss encounter with Malkil enabled; game culmination available"
+    },
+    {
+      "world_state": "Resource scarcity",
+      "visual_manifestation": "Low money supply limits equipment purchases; spell availability dependent on treasure chest contents or random gold bubble spawns",
+      "behavioral_manifestation": "Player must choose between purchasing spells, equipment, or keys; economic system gates progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Domain-based elemental theming",
+      "example": "Each of four domains visually themed around classical Greek element (Earth, Wind, Fire, Water); environmental art communicates domain identity and boss type"
+    },
+    {
+      "technique": "Artifact quest structure",
+      "example": "Golden artifacts belonging to Animal Kings serve as visual macguffins; their retrieval and return signals level progression and world-state changes"
+    },
+    {
+      "technique": "Mountain geography as narrative culmination",
+      "example": "IceFire Mountain as final location; name combines opposing elements (ice/fire) signaling ultimate confrontation with shapeshifting wizard"
+    },
+    {
+      "technique": "Equipment visual progression",
+      "example": "Armor, helmets, shields, and weapons purchased through progression visually manifest power growth; character appearance updated through equipment acquisition"
+    },
+    {
+      "technique": "Inn architecture as safe space marker",
+      "example": "Interior inn locations contrast with outdoor domain exploration; visual sanctuary indicating economic and rest functionality"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wind Elemental (Boss)",
+      "state": "Without Windbane spell",
+      "behavior": "Invulnerable; player cannot damage or safely remain in encounter room"
+    },
+    {
+      "entity": "Wind Elemental (Boss)",
+      "state": "With Windbane spell equipped",
+      "behavior": "Vulnerable to spell attacks; defeatable and yields IronSword piece"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Normal",
+      "behavior": "Standard hostile behavior; projectile attacks; defeatable with sword or spells"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Affected by Familiar Spell",
+      "behavior": "Transformed into money; resource conversion utility"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Affected by Dragon Tooth Spell",
+      "behavior": "Transformed into food; life meter recovery utility"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Affected by Veil of Slumber Spell",
+      "behavior": "Slowed movement and attack speed; tactical advantage window"
+    },
+    {
+      "entity": "Kuros (Player character)",
+      "state": "Affected by Silver Fleece Spell",
+      "behavior": "Temporary invincibility; damage immunity window"
+    },
+    {
+      "entity": "Kuros (Player character)",
+      "state": "Using Water Spout Spell",
+      "behavior": "Creates upward water column; vertical traversal mechanic enabling high-reach areas"
+    }
+  ],
+  "notes": "Ironsword uses elemental theming as primary world-state and faction communication system. The four Elemental bosses (Earth, Wind, Fire, Water) serve as both antagonists and level-zone identifiers. Visual communication relies heavily on: (1) spell acquisition as gating mechanism—spells are essential narrative gatekeepers, not optional power-ups; (2) boss invulnerability states that force players to engage with environmental puzzle-solving to locate domain-specific spells; (3) equipment visual progression through purchasable armor and weapons; (4) treasure chests as reward containers communicating exploration incentive; (5) Inn locations as safe-zone visual markers. The game communicates danger primarily through enemy sprite behavior and projectile patterns, with life meter as persistent threat indicator. Safety is signaled through food availability and spell acquisition. Political/factional structure is minimal—primarily Malkil vs. Kuros with Animal Kings as neutral quest-givers. World-state changes are most visibly communicated through domain transitions and path accessibility gating (artifact return unlocks second domain section). The paradigm is action-platforming focused on resource management (money, magic, health) and pattern-based boss encounters where specific spell matching is mandatory.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:22:49.501Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2728,
+    "output_tokens": 2219,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

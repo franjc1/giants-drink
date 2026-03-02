@@ -1,0 +1,121 @@
+{
+  "game_id": "pipe-dream-nes",
+  "game_name": "Pipe Dream",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Puzzle game; sub-pixel precision not applicable"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "pipe_placement",
+      "description": "Grid-based puzzle mechanic where player clicks to place pipe sections from a 5-piece dispenser column; pieces cannot be rotated or flipped",
+      "physics_values": {
+        "dispenser_size": 5,
+        "rotation_allowed": false,
+        "flip_allowed": false
+      }
+    },
+    {
+      "name": "flooz_flow",
+      "description": "Green slime (flooz/goo) flows through placed pipes after a set time delay; continues until reaching open end or blockage",
+      "physics_values": {
+        "flow_behavior": "follows_connected_pipes",
+        "flow_speed_progression": "increases_in_later_levels",
+        "initial_delay_configurable": true
+      }
+    },
+    {
+      "name": "wrapping_edges",
+      "description": "Later levels feature openings at opposite grid edges allowing flooz to wrap around from one edge to another",
+      "physics_values": {
+        "wrapping_enabled": "level_dependent"
+      }
+    },
+    {
+      "name": "reservoir_delay",
+      "description": "Reservoir pipe sections take a few seconds to fill once flooz enters, providing extra time for pipe placement",
+      "physics_values": {
+        "fill_time": "configurable_per_level"
+      }
+    },
+    {
+      "name": "one_way_pipes",
+      "description": "Special pipe sections restrict flow to indicated direction only",
+      "physics_values": {
+        "directional_restriction": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "turn-based",
+    "puzzle-paced",
+    "grid-locked",
+    "non-kinetic"
+  ],
+  "tier_notes": "Tier 3 empirical/qualitative rating. Pipe Dream is a grid-based puzzle game with no character physics or movement parameters. No jump, gravity, acceleration, or velocity mechanics apply. Game centers on pipe placement mechanics, flooz flow physics (time-based progression), and level design progression.",
+  "sources_used": [
+    "The Cutting Room Floor - Pipe Dream (NES)",
+    "Wikipedia - Pipe Mania"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:51:37.973Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4109,
+    "output_tokens": 1024,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

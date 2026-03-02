@@ -1,0 +1,93 @@
+{
+  "game_id": "tetris-2-nes",
+  "game_name": "Tetris 2",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising block stack",
+      "visual_form": "Tetromino pieces accumulating toward top of playfield",
+      "meaning": "Imminent game-over state; player losing control of board"
+    },
+    {
+      "signal": "Incomplete line formations",
+      "visual_form": "Gaps in horizontal lines that cannot be cleared",
+      "meaning": "Inefficient placement; board state degradation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared lines",
+      "visual_form": "Horizontal line completion and disappearance with visual feedback",
+      "meaning": "Successful action; board state improvement and points earned"
+    },
+    {
+      "signal": "Low stack height",
+      "visual_form": "Tetromino pieces occupying lower third of playfield",
+      "meaning": "Player has space and control; safe operational state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": null,
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Puzzle gameplay mode active",
+      "visual_manifestation": "Static playfield with Tetromino pieces; score/level display in UI",
+      "behavioral_manifestation": "Blocks fall at regular interval; player rotates and positions pieces"
+    },
+    {
+      "world_state": "Game progression (difficulty increase)",
+      "visual_manifestation": "Potential visual changes in piece appearance or board state per difficulty level",
+      "behavioral_manifestation": "Block falling speed increases; difficulty scaling observed in Dr. Mario-influenced mechanics"
+    },
+    {
+      "world_state": "Regional/localization variation",
+      "visual_manifestation": "Japanese version features animated title screen with visual flair; international versions use static title screen",
+      "behavioral_manifestation": null
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Title screen regionalization",
+      "example": "Japanese version (Tetris Flash) presents animated, visually rich title; US/EU versions present plain static title — communicates intended market positioning and visual polish investment by region"
+    },
+    {
+      "technique": "Unused visual assets (contextual archaeology)",
+      "example": "Stone tablet with snake motif (difficulty level indicator in design); stone statue; UFO-esque creatures resembling Dr. Mario viruses — suggests game's hybrid nature and discarded thematic directions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tetromino pieces",
+      "state": "active_falling",
+      "behavior": "Pieces descend at gravity-affected rate; respond to player input for rotation and horizontal repositioning"
+    },
+    {
+      "entity": "Completed line",
+      "state": "clear_triggered",
+      "behavior": "Line disappears; blocks above cascade downward; score increments; visual feedback communicates success"
+    }
+  ],
+  "notes": "Tetris 2 (NES, 1993) is a puzzle game with minimal narrative or faction complexity. It blends Tetris block-falling mechanics with Dr. Mario-style gameplay elements. Primary visual communication is state-of-board rather than world-state or political situation. Sources document regional title screen differences and unused graphical assets (snake tablets, UFO creatures) that hint at thematic development that did not manifest in final release. Game includes debugging material and hidden sound/CHR test modes. No danger, safety, faction, or political communication systems documented beyond core puzzle mechanics.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:42:35.487Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3936,
+    "output_tokens": 1166,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

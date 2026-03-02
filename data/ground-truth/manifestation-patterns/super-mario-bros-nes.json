@@ -1,0 +1,264 @@
+{
+  "game_id": "super-mario-bros-nes",
+  "game_name": "Super Mario Bros.",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite animations of Goombas, Koopa Troopas, Piranha Plants, Bullet Bills, Spinies, Bloopers, Hammers",
+      "meaning": "Immediate collision hazard; defeat by jumping on or using Fire Flower"
+    },
+    {
+      "signal": "Bottomless pit",
+      "visual_form": "Screen edge drop-off or visual absence of solid ground extending downward",
+      "meaning": "Instant death if player falls; requires precision platforming"
+    },
+    {
+      "signal": "Lava/fire hazard",
+      "visual_form": "Animated red/orange terrain in later worlds (8-x), firebars rotating through space",
+      "meaning": "Contact causes immediate damage or death; must avoid or use invincibility"
+    },
+    {
+      "signal": "Small Mario state",
+      "visual_form": "Mario sprite is half-height compared to Super Mario form",
+      "meaning": "One hit from any enemy or hazard causes death; vulnerable state"
+    },
+    {
+      "signal": "Timer depletion",
+      "visual_form": "Countdown display at top of screen reaching zero",
+      "meaning": "Time-pressure hazard; reaching zero results in instant death"
+    },
+    {
+      "signal": "Piranha Plant emergence",
+      "visual_form": "Plant sprite rising from pipe in synchronized pattern",
+      "meaning": "Timed hazard that appears predictably; must time movement to avoid"
+    },
+    {
+      "signal": "Firebar rotation",
+      "visual_form": "Animated rotating bars of fire projectiles around fixed points",
+      "meaning": "High-damage obstacle requiring spatial timing to navigate through gaps"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Super Mushroom",
+      "visual_form": "Red/white mushroom sprite emerging from ? block",
+      "meaning": "Grants size upgrade; provides one damage absorption buffer"
+    },
+    {
+      "signal": "Fire Flower",
+      "visual_form": "Animated flower sprite (red/yellow) emerging from ? block",
+      "meaning": "Grants projectile attack capability; expands offensive options"
+    },
+    {
+      "signal": "Starman",
+      "visual_form": "Flashing star sprite with rotating animation",
+      "meaning": "Temporary invincibility period; allows collision with enemies without harm"
+    },
+    {
+      "signal": "1-Up Mushroom",
+      "visual_form": "Green mushroom with distinct spotting pattern",
+      "meaning": "Grants extra life; hidden in bricks as fail-safe resource"
+    },
+    {
+      "signal": "Solid ground/platform",
+      "visual_form": "Brown/brick-textured horizontal surfaces",
+      "meaning": "Safe traversal zone; supports Mario movement without hazard"
+    },
+    {
+      "signal": "Coin collection",
+      "visual_form": "Small circular glinting sprite in midair or blocks",
+      "meaning": "Resource collection; 100 coins grants extra life"
+    },
+    {
+      "signal": "Flagpole reach",
+      "visual_form": "Red/white flagpole structure at level end with flag attachment",
+      "meaning": "Goal completion; touching flag lowers it and triggers level victory"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario (Player)",
+      "color_identity": "Red and brown (shirt and overalls in sprite)",
+      "symbol_or_sigil": "M on cap (sprite detail); mushroom motif aligns with protagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Footprint trail animation during movement; distinct silhouette"
+    },
+    {
+      "faction": "Luigi (Player 2)",
+      "color_identity": "Green and brown (shirt and overalls)",
+      "symbol_or_sigil": "L on cap (sprite detail); visually distinguished from Mario only by color swap",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Identical movement and interaction patterns to Mario; functionally equivalent character"
+    },
+    {
+      "faction": "Bowser/King Koopa (Antagonist)",
+      "color_identity": "Dark (black outline sprite) with red accents (fire breathing)",
+      "symbol_or_sigil": "Crown visible on sprite; large turtle-like silhouette; castle fortress association",
+      "enemy_visual_variants": "Bowser appears only as level 8-4 boss; no standard enemy variant",
+      "environmental_markers": "Castle structure with dark stone aesthetic; fire/lava surrounding boss arena"
+    },
+    {
+      "faction": "Mushroom Kingdom (Civilian/Allied)",
+      "color_identity": "Earth tones (browns, greens); Toads depicted in red/white mushroom colors",
+      "symbol_or_sigil": "Princess Toadstool (rescue target); mushroom-shaped Toad NPCs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle ruins scattered throughout; flag markers; green pipe structures (warp infrastructure)"
+    },
+    {
+      "faction": "Koopa Troop (Antagonist Army)",
+      "color_identity": "Red and green variants for different unit types (red = stationary, green = mobile)",
+      "symbol_or_sigil": "Turtle/shell silhouette; retractable shell behavior as faction signature",
+      "enemy_visual_variants": "Red Koopa Troopa (slower, land-based), Green Koopa Troopa (faster, land-based), Koopa Paratroopa (winged variants of both colors)",
+      "environmental_markers": "Shell projectiles; organized placement in later levels suggesting military positioning"
+    },
+    {
+      "faction": "Goomba Troops (Antagonist Minions)",
+      "color_identity": "Brown with tan underside",
+      "symbol_or_sigil": "Mushroom-like cap silhouette; simple enemy design suggests low-level unit status",
+      "enemy_visual_variants": "Standard brown Goomba only; no visual sub-types",
+      "environmental_markers": "Paired/grouped placement in early levels; frequent spawn points suggest basic mook designation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Worlds 1-4)",
+      "visual_manifestation": "Green grass/trees, blue sky, brown earth terrain, abundant platforms, visible coins, few hazards",
+      "behavioral_manifestation": "Low enemy density, predictable Goomba/Koopa Troopa encounters, straightforward level design, generous checkpoint positioning"
+    },
+    {
+      "world_state": "Mid game (Worlds 5-6)",
+      "visual_manifestation": "Introduction of water/cave tiles, darker backgrounds, increased spike/firebar placement, narrower passages",
+      "behavioral_manifestation": "Increased enemy aggression, introduction of Piranha Plants and Spinies, more complex platforming sequences"
+    },
+    {
+      "world_state": "Late game (Worlds 7-8)",
+      "visual_manifestation": "Lava/fire tiles prominent, dark red/orange color scheme, castle fortress visual progression, dense enemy spacing",
+      "behavioral_manifestation": "High difficulty enemy placement, Bullet Bill and Hammer Brother encounters, minimal platform safety, time pressure intensified"
+    },
+    {
+      "world_state": "Underground/Castle transition",
+      "visual_manifestation": "Gray stone textures, dark backgrounds, pipe entry visual, dungeon aesthetic appears",
+      "behavioral_manifestation": "Level architecture shifts to enclosed spaces, reduced visibility, increased reliance on enemy patterns rather than navigation"
+    },
+    {
+      "world_state": "Small Mario state (Damage taken)",
+      "visual_manifestation": "Mario sprite shrinks visually; audio cue triggers; brief invincibility frames with sprite flashing",
+      "behavioral_manifestation": "Next collision is fatal; player behavior changes to avoidance-focused rather than aggressive; risk perception increases"
+    },
+    {
+      "world_state": "Invincibility active (Starman collected)",
+      "visual_manifestation": "Mario sprite rotates/flashes with rapid animation; distinct audio loop plays continuously",
+      "behavioral_manifestation": "Player behavior shifts to offensive (jump through enemies); enemy collision no longer causes fear response; time-limited window creates urgency"
+    },
+    {
+      "world_state": "Fire Flower active",
+      "visual_manifestation": "Mario sprite holds fire flower graphic; fireball projectiles visible when attack input given",
+      "behavioral_manifestation": "Player gains ranged attack option; engagement distance increases; fire hazard avoidance becomes secondary concern"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Progression through kingdom geography",
+      "example": "Grass/sky world → underground cave → castle hierarchy communicates player advancing toward Bowser's seat of power"
+    },
+    {
+      "technique": "Hazard escalation as visual narrative",
+      "example": "Early levels feature Goombas on flat ground; later levels introduce lava pits and fire obstacles, visually demonstrating increasing danger as player approaches endgame"
+    },
+    {
+      "technique": "Architectural visual hierarchy",
+      "example": "Simple structures early (grass platforms) evolve into fortress stone architecture, signaling player entering enemy stronghold"
+    },
+    {
+      "technique": "Color-coded danger zones",
+      "example": "Red/orange lava world signals danger through warm color palette; blue water world signals different hazard type through cool palette"
+    },
+    {
+      "technique": "Enemy placement as environmental design",
+      "example": "Sparse Goomba placement in early levels teaches enemy patterns; dense enemy clusters in later levels demonstrate escalating territorial control by antagonists"
+    },
+    {
+      "technique": "Power-up distribution narrative",
+      "example": "Abundance of mushrooms and flowers in early levels suggests Mushroom Kingdom's resources; scarcity in later levels implies Bowser's occupation depletes defenses"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goomba",
+      "state": "Normal patrol",
+      "behavior": "Walks in straight line; reverses direction on wall/edge collision; deterministic movement pattern"
+    },
+    {
+      "entity": "Goomba",
+      "state": "Collided with Mario",
+      "behavior": "Sprite compresses/flattens; disappears; score points awarded; communication of enemy defeat"
+    },
+    {
+      "entity": "Koopa Troopa (Red)",
+      "state": "Normal patrol",
+      "behavior": "Walks slowly in consistent direction; shell visible; relatively stationary threat"
+    },
+    {
+      "entity": "Koopa Troopa (Green)",
+      "state": "Normal patrol",
+      "behavior": "Walks faster than red variant; indicates mobile patrol unit through speed differentiation"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Stomped by Mario",
+      "behavior": "Sprite retracts into shell; shell becomes projectile entity; player can redirect threat as weapon"
+    },
+    {
+      "entity": "Piranha Plant",
+      "state": "Pipe residence",
+      "behavior": "Animated rise/fall pattern from pipe opening; synchronized bite animation; time-based hazard"
+    },
+    {
+      "entity": "Firebar",
+      "state": "Rotation active",
+      "behavior": "Continuous rotation around fixed pivot point; predictable trajectory; navigable through timing"
+    },
+    {
+      "entity": "Bullet Bill",
+      "state": "Launch from cannon",
+      "behavior": "Fast horizontal projectile movement; unstopping trajectory; represents high-damage ranged threat"
+    },
+    {
+      "entity": "Bowser",
+      "state": "Level 8-4 boss arena",
+      "behavior": "Breathing fire projectiles; walking pattern; castle bridge arena; final antagonist encounter; sprite size indicates power/importance"
+    },
+    {
+      "entity": "Mario",
+      "state": "Collected power-up",
+      "behavior": "Size change (Mushroom) or sprite modification (Fire Flower); communication of mechanical state change through immediate visual feedback"
+    },
+    {
+      "entity": "Mario",
+      "state": "Invincible (Starman)",
+      "behavior": "Sprite flashing animation; unique audio loop; behavioral freedom to collide with enemies without consequence"
+    }
+  ],
+  "notes": "Super Mario Bros. uses classical platformer visual language: color as faction identity (red Mario vs. red/green Koopas), sprite size differentiation for threat hierarchy, environmental aesthetics to signal danger progression (grass→cave→lava→castle), and animation states to communicate entity behavior and world-state changes. The game establishes core paradigms for platformer manifestation that persist across the genre: hazard signals through distinct sprite design, safety through power-up visual distinctness, and progression through environmental visual escalation. No complex political systems exist; threat structure is purely antagonist (Bowser faction) vs. protagonist (Mario/Luigi). The visual communication relies entirely on sprite animation, color identity, and level architecture rather than UI elements or dialogue.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:57:04.193Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 11790,
+    "output_tokens": 3347,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "other",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

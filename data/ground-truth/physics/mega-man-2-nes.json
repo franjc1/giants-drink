@@ -1,0 +1,236 @@
+{
+  "_meta": {
+    "game": "Mega Man 2",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "TASVideos — Mega Man 2 Game Resources",
+        "url": "https://tasvideos.org/UserFiles/Game/10",
+        "notes": "TAS documentation including subpixel alignment, jump height table (12-frame maximum), and Item-2 alignment trick."
+      },
+      {
+        "name": "Data Crystal — Mega Man 2",
+        "url": "https://datacrystal.tcrf.net/wiki/Mega_Man_2",
+        "notes": "RAM map with physics variable addresses."
+      },
+      {
+        "name": "Mega Man 2 Speedrunning Wiki — RTA Wiki",
+        "url": "https://megamanrta.fandom.com/wiki/Mega_Man_2",
+        "notes": "Movement mechanics, slide details, invincibility frame documentation from the speedrunning community."
+      },
+      {
+        "name": "Romhacking.net — Mega Man 2 ROM Documents",
+        "url": "https://www.romhacking.net/games/795/",
+        "notes": "ROM hacking documents including jump speed address (x38923) and jump height address (x38A81)."
+      }
+    ],
+    "notes": [
+      "All NES Mega Man games use a fixed-point speed system: 1 pixel = 256 sub-pixels (8.8 fixed-point).",
+      "Importantly: all Mega Man 2 velocities are multiples of 16 sub-pixels — the fractional byte always ends in 0x0 (hex). This means effective precision is 16 sub-pixels = 1/16 pixel.",
+      "TASVideos confirmed: 'all velocities that Mega Man can move at (walking, jumping, knockback, conveyor belts) have subpixel velocities that are multiples of 16, or 0x10.'",
+      "There is NO acceleration — Mega Man reaches full walk speed instantly. This is a defining feel difference from Mario.",
+      "Jump height has 12 distinct levels based on hold duration. A 12-frame held jump is significantly higher than an 11-frame jump.",
+      "Jump ROM address: x38923. Jump height ROM address: x38A81."
+    ],
+    "units": {
+      "speed": "sub-pixels per frame (256 sub-px = 1 pixel). Values in this file are the decimal sub-pixel values.",
+      "speed_px": "pixels per frame (sub-pixels / 256)",
+      "note": "Because all MM2 velocities are multiples of 16, effective resolution is 1/16 pixel like many NES games."
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "effective_precision_subpixels": 16,
+      "description": "8.8 fixed-point system. All actual game velocities are multiples of 16 sub-pixels, giving effective 1/16 pixel precision."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "visible_height": 208,
+      "tile_size_px": 16,
+      "notes": "NES standard resolution. HUD uses top 16px, status bar 16px, leaving ~208px of playfield."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "sub_pixels_per_frame": 384,
+      "px_per_frame": 1.5,
+      "hex": "$01.80",
+      "description": "Fixed-point: integer part $01 (1 pixel), fractional part $80 (128/256 = 0.5 pixel). Total = 1.5 px/frame.",
+      "notes": [
+        "Mega Man reaches this speed INSTANTLY — no acceleration ramp-up.",
+        "Walk speed is constant at 1.5 px/frame until the player releases direction.",
+        "Stopping is also instant — no deceleration.",
+        "This mechanical, non-inertial feel is intentional and is core to Mega Man's precise platforming."
+      ]
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "notes": "NO acceleration or deceleration. Constant velocity movement. This is a fundamental design choice distinguishing Mega Man from Mario-style platformers."
+  },
+
+  "jump": {
+    "jump_rom_address": "x38923",
+    "jump_height_rom_address": "x38A81",
+    "initial_velocity_approx": {
+      "px_per_frame": 5.5,
+      "notes": "Approximate initial Y velocity. The jump table provides multiple height levels — the maximum (12-frame hold) gives the full jump height."
+    },
+    "variable_jump": {
+      "mechanic": "Holding jump extends upward phase. Releasing early cuts the jump.",
+      "max_hold_frames": 12,
+      "source": "TASVideos: 'The highest jump in Mega Man 2 is 12 frames, and while 1-11 frames all result in distinct jump heights, 12 is substantially higher than all the others.'",
+      "notes": "Frames 1-11 produce smoothly increasing jump heights. Frame 12 produces a disproportionately large jump — the tallest jump is much higher than frame 11. This makes the full jump a distinct commitment."
+    },
+    "max_jump_height_px_approx": 52,
+    "max_jump_height_tiles": 3.25,
+    "horizontal_speed_during_jump": {
+      "px_per_frame": 1.5,
+      "notes": "Horizontal speed in the air is the same as walk speed. Unlike Mario, there is no air acceleration or separate air speed."
+    }
+  },
+
+  "gravity": {
+    "acceleration_sub_pixels_per_frame_sq": 64,
+    "acceleration_px_per_frame_sq": 0.25,
+    "hex": "$40",
+    "description": "$40 = 64 sub-pixels added to Y velocity each frame while airborne. 64/256 = 0.25 px/frame².",
+    "notes": [
+      "This gravity value is consistent across NES Mega Man 2, 3, 4, and 5.",
+      "The 0.25 px/frame² gravity was tuned in the original Mega Man and kept for the series.",
+      "Variable jump (early release) works by applying higher gravity when the button is not held."
+    ]
+  },
+
+  "terminal_velocity": {
+    "sub_pixels_per_frame": 1024,
+    "px_per_frame": 4.0,
+    "hex": "$04.00",
+    "notes": "Maximum downward speed is 4 px/frame. Consistent across NES Mega Man series."
+  },
+
+  "slide": {
+    "speed": {
+      "sub_pixels_per_frame": 768,
+      "px_per_frame": 3.0,
+      "hex": "$03.00",
+      "notes": "Slide speed is exactly 2× walk speed (3.0 vs 1.5 px/frame)."
+    },
+    "duration_frames": 22,
+    "total_distance_px": 66,
+    "calculation": "3.0 px/frame × 22 frames = 66 pixels",
+    "input": "Down + B (jump) on ground",
+    "cancel": "Pressing jump during slide launches Mega Man out of slide",
+    "hitbox": {
+      "width_px": 16,
+      "height_px": 12,
+      "notes": "Standing hitbox is ~16×24px. Slide reduces height to ~12px — just over half. Allows sliding under medium-height obstacles."
+    },
+    "notes": [
+      "Slide was introduced in Mega Man 2 (not present in MM1).",
+      "The 22-frame duration at 3 px/frame gives exactly 66 pixels of travel — about 4 tiles.",
+      "The reduced hitbox is the tactical value: clearing obstacles and enemy projectiles."
+    ]
+  },
+
+  "ladder": {
+    "climb_speed_px_per_frame": 1.0,
+    "direction_up_and_down": "both at 1.0 px/frame",
+    "centering": "Mega Man's X position snaps to ladder center on grab",
+    "shooting_on_ladder": {
+      "allowed_directions": ["left", "right"],
+      "not_allowed": ["up", "down"],
+      "animation_pauses_climb": true,
+      "pause_duration_frames": 8,
+      "notes": "Shooting from a ladder plays a brief animation that halts vertical movement for ~8 frames."
+    },
+    "jump_from_ladder": {
+      "velocity": "normal jump velocity",
+      "notes": "Pressing jump on a ladder launches Mega Man with standard jump force."
+    }
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 128,
+    "duration_seconds": 2.13,
+    "visual": "Mega Man flickers during invincibility",
+    "notes": [
+      "128 frames (~2.1 seconds) of invincibility after taking damage.",
+      "This value is consistent across the NES Mega Man series (MM2, MM3, MM4, MM5).",
+      "During invincibility, Mega Man's animation plays at a different speed (walk cycle appears slower due to flicker).",
+      "Pause trick: Pausing and unpausing briefly grants a few frames of invincibility upon unpausing. Used in speedruns."
+    ]
+  },
+
+  "subpixel_alignment": {
+    "optimal_right_facing_subpixel": "X7.00",
+    "optimal_left_facing_subpixel": "X8.FC",
+    "all_velocities_multiple_of": 16,
+    "source": "TASVideos: 'The optimal right-side subpixel is X7.00 and optimal left-side subpixel is X8.FC'",
+    "item_2_alignment_trick": {
+      "description": "An accelerating Item-2 can set Mega Man's subpixel to X8 by landing on it in a specific way. Maintaining this until full acceleration gives X8-alignment.",
+      "source": "TASVideos documented trick"
+    }
+  },
+
+  "weapons": {
+    "mega_buster": {
+      "bullet_speed_px_per_frame": 8,
+      "max_bullets_on_screen": 3,
+      "ammo": "infinite",
+      "notes": "Standard buster fires at ~8 px/frame. Up to 3 bullets on screen simultaneously."
+    },
+    "general_weapon_energy": {
+      "max_units": 28,
+      "display": "7 bars of 4 units each",
+      "notes": "Each special weapon has 28 units. The same bar system is used for boss health."
+    },
+    "boss_health": {
+      "max_hp": 28,
+      "notes": "Boss HP matches weapon energy bar: 28 HP = 7 bars."
+    }
+  },
+
+  "rush_coil": {
+    "launch_velocity_px_per_frame": 9.0,
+    "notes": [
+      "Rush Coil gives an upward velocity boost significantly higher than a standard jump.",
+      "The ~9 px/frame upward launch allows reaching platforms inaccessible by normal jump.",
+      "Rush Coil energy depletes with each use."
+    ]
+  },
+
+  "rush_jet": {
+    "horizontal_speed_px_per_frame": 1.5,
+    "notes": "Rush Jet moves at walk speed horizontally. Mega Man rides on top."
+  },
+
+  "hitboxes": {
+    "standing": {
+      "width_px": 14,
+      "height_px": 24,
+      "notes": "Approximately 14×24px. Slightly narrower than the 16px sprite tile."
+    },
+    "sliding": {
+      "width_px": 14,
+      "height_px": 12,
+      "notes": "Slide reduces height to ~12px — allows clearing medium obstacles."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The instant velocity (no acceleration) is what makes Mega Man feel 'mechanical' in a good way. Every movement is precise and predictable — no overshoot, no momentum to manage.",
+    "Variable jump height with 12 levels is nuanced: it rewards held-jump for maximum height while allowing tap-jumps for lower precision hops. The frame-12 height being disproportionally large is a deliberate feel choice.",
+    "The slide + reduced hitbox combo is pure movement-as-puzzle: most level sections that require sliding were designed with the slide hitbox in mind.",
+    "No air control variation from ground control means aerial movement is entirely determined by ground speed at jump time. This is the opposite of Sonic's air drag and makes planning jump position critical.",
+    "The 28-HP bar for both weapons and bosses creates a unified resource mental model — the player intuitively understands boss health in the same terms as weapon ammo."
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "game_id": "joe-montana-2-genesis",
+  "game_name": "Joe Montana II: Sports Talk Football",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "defensive pressure",
+      "visual_form": "opposing team defensive line positioning and animation speed changes",
+      "meaning": "increased likelihood of quarterback sack or pass incompletion"
+    },
+    {
+      "signal": "injury indicator",
+      "visual_form": "player sprite slowdown or ground contact animation",
+      "meaning": "player health degradation, potential removal from play"
+    },
+    {
+      "signal": "turnover risk",
+      "visual_form": "fumble animation trigger or interception pass trajectory",
+      "meaning": "loss of possession and field position"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open receiver",
+      "visual_form": "receiver sprite separation from nearest defender, highlighting or color distinction",
+      "meaning": "safe passing target with completion probability"
+    },
+    {
+      "signal": "running lane",
+      "visual_form": "gap in offensive line formation, defender spacing",
+      "meaning": "viable rushing direction with reduced contact risk"
+    },
+    {
+      "signal": "clock management",
+      "visual_form": "game clock visual display and quarter indicator",
+      "meaning": "time remaining for play execution and strategy adjustment"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "home team",
+      "color_identity": "primary jersey color (varies by team selection)",
+      "symbol_or_sigil": "team logo displayed on scoreboard and field sideline",
+      "enemy_visual_variants": "away team uses contrasting jersey color (typically white/light)",
+      "environmental_markers": "home team bench positioned at consistent field location, crowd audio cues favor home team"
+    },
+    {
+      "faction": "away team",
+      "color_identity": "secondary/white jersey color variant",
+      "symbol_or_sigil": "team logo on visiting sideline",
+      "enemy_visual_variants": "away uniforms use lighter palette to contrast home team",
+      "environmental_markers": "away team bench positioned opposite home bench, crowd audio volume remains neutral or reduced"
+    },
+    {
+      "faction": "referee/officiating authority",
+      "color_identity": "black and white striped uniform",
+      "symbol_or_sigil": "whistle animation and flag indicator sprites",
+      "enemy_visual_variants": null,
+      "environmental_markers": "referee position on field center, flag throws for penalty visualization"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "first down achieved",
+      "visual_manifestation": "scoreboard first-down marker resets, chain placement resets, visual emphasis on new line to gain",
+      "behavioral_manifestation": "play clock resets, offensive play selection menu reopens, momentum audio cue"
+    },
+    {
+      "world_state": "field goal range",
+      "visual_manifestation": "scoreboard and field grid indicate kicking distance, field position markers highlight proximity to goal line",
+      "behavioral_manifestation": "play calling shifts to field goal attempt options, kicker enters field of play"
+    },
+    {
+      "world_state": "red zone (inside 20 yards)",
+      "visual_manifestation": "field color or grid pattern change in end zone area, scoreboard highlights goal proximity",
+      "behavioral_manifestation": "play difficulty scaling increases, defense AI aggression heightens, turnover risk visualization"
+    },
+    {
+      "world_state": "two-minute warning / end of half",
+      "visual_manifestation": "game clock visual emphasis, scoreboard urgency highlighting, field animation tempo acceleration",
+      "behavioral_manifestation": "play clock management becomes critical, timeout counter becomes visible UI element"
+    },
+    {
+      "world_state": "game outcome determined (win/loss)",
+      "visual_manifestation": "final scoreboard display, player celebration or defeat animation sequence, crowd reaction visual",
+      "behavioral_manifestation": "field clears, trophy or defeat sequence triggers, transition to post-game menu"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stadium crowd reaction audio-visual sync",
+      "example": "crowd roars louder and longer for home team touchdowns; reduced or absent for away team scoring"
+    },
+    {
+      "technique": "scoreboard narrative progression",
+      "example": "score differential visualization tells story of game momentum; visual dominance of leading team's color in display"
+    },
+    {
+      "technique": "field position mapping",
+      "example": "yard line markers and field grid communicate strategic urgency; proximity to goal line affects play calling availability"
+    },
+    {
+      "technique": "player fatigue visual indicators",
+      "example": "sprite animation speed reduction and stance changes after high-intensity plays communicate exhaustion state"
+    },
+    {
+      "technique": "weather/condition effects",
+      "example": "field texture and player movement animations reflect rain/mud conditions affecting gameplay difficulty"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "quarterback",
+      "state": "under pressure",
+      "behavior": "faster animation cycles, erratic throwing motion, increased fumble animation triggers"
+    },
+    {
+      "entity": "running back",
+      "state": "injured",
+      "behavior": "reduced sprite movement speed, limp animation, frequent ground contact without advancing"
+    },
+    {
+      "entity": "defensive line",
+      "state": "blitzing",
+      "behavior": "aggressive forward charging animation, increased collision detection triggers, gap filling speed"
+    },
+    {
+      "entity": "receiver",
+      "state": "open",
+      "behavior": "isolated sprite positioning away from defenders, animated hand-raising for target priority"
+    },
+    {
+      "entity": "kicker",
+      "state": "attempting field goal",
+      "behavior": "animated approach and foot plant motion, ball trajectory arc visualization, success/miss animation completion"
+    }
+  ],
+  "notes": "Joe Montana II communicates game state primarily through scoreboard UI elements, field grid positioning, and sprite animation variations rather than complex environmental or faction-based visual systems typical of narrative-driven games. The paradigm is sports competition without political/factional conflict, so danger/safety signals relate to gameplay mechanics (defensive pressure, injury risk) rather than world-state threats. Visual manifestation of team identity relies on standard sports UI (jersey color, logo display, bench positioning) rather than symbolic or environmental storytelling. The game uses audio-visual crowd reactions as primary narrative device for momentum and dramatic tension.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:41:31.275Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 916,
+    "output_tokens": 1736,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

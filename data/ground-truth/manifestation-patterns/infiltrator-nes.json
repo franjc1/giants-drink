@@ -1,0 +1,208 @@
+{
+  "game_id": "infiltrator-nes",
+  "game_name": "Infiltrator",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft detection",
+      "visual_form": "Approaching planes during helicopter missions requiring identification via radio communication",
+      "meaning": "Threat requiring player to hail and determine friend-or-foe status; incorrect response triggers firefight"
+    },
+    {
+      "signal": "Guard suspicion",
+      "visual_form": "Guard behavior change indicating awareness of player deception",
+      "meaning": "Imminent combat or detection; player must use gas canister or gas grenades before guards alert facility"
+    },
+    {
+      "signal": "Buried mines",
+      "visual_form": "Hidden environmental hazards detectable only via mine detector equipment",
+      "meaning": "Instant death hazard requiring specialized detection tool to navigate safely"
+    },
+    {
+      "signal": "Locked security doors",
+      "visual_form": "Barriers blocking access to mission objectives",
+      "meaning": "Requires security card acquisition; without card, mission progression impossible"
+    },
+    {
+      "signal": "Countdown timer (final mission)",
+      "visual_form": "10-minute timer (20 real-time minutes) displayed during sixth mission",
+      "meaning": "Time-pressure danger; failure to escape within window results in mission failure"
+    },
+    {
+      "signal": "Detection via whisper mode vulnerability",
+      "visual_form": "Helicopter landing visibility to enemy",
+      "meaning": "Landing without whisper mode (silent approach) reveals player position to base defenses"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful papers deception",
+      "visual_form": "Guards accepting forged documents without suspicion",
+      "meaning": "Player identity as enemy force member accepted; safe passage through area"
+    },
+    {
+      "signal": "Whisper mode activation",
+      "visual_form": "Helicopter entering silent approach mode during landing",
+      "meaning": "Undetected infiltration possible; reduces enemy alert status"
+    },
+    {
+      "signal": "Invisibility pill use",
+      "visual_form": "Temporary invisibility state applied to rescued scientist (Dr. Phineas Gump)",
+      "meaning": "Safe escape possible; enemy cannot detect invisible unit"
+    },
+    {
+      "signal": "Home base return",
+      "visual_form": "Successful helicopter return flight with fewer enemy encounters than outbound",
+      "meaning": "Mission completion imminent; reduced threat environment on return trajectory"
+    },
+    {
+      "signal": "Security card acquisition",
+      "visual_form": "Card discovery in cabinet within multi-room buildings",
+      "meaning": "Access to restricted areas granted; mission progression enabled"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Allied forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Johnny 'Jimbo Baby' McGibbits hero identity; Gizmo DHX-3 helicopter as faction asset",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Home base (return destination); friendly aircraft responding to radio hails"
+    },
+    {
+      "faction": "Enemy/Mad Leader forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Mad leader as antagonist authority; hostile aircraft and ground guards as faction enforcers",
+      "enemy_visual_variants": "Distinguishable via radio communication failure or hostile response; guards visually distinct from player",
+      "environmental_markers": "Enemy bases with multi-room compounds; security doors; missile control rooms; nerve gas facilities; chemical containers; guard patrols"
+    },
+    {
+      "faction": "Neutral/Ambiguous aircraft",
+      "color_identity": null,
+      "symbol_or_sigil": "Unidentified planes requiring friend-or-foe determination via ADF and radio hailing",
+      "enemy_visual_variants": "Visual distinction from confirmed friendly or hostile based on player radio interaction outcome",
+      "environmental_markers": "Airspace around infiltration zones; encountered during helicopter transit missions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission (planning/departure)",
+      "visual_manifestation": "ADF (Automatic Direction Finder) programming; helicopter equipment status terminal displaying available tools",
+      "behavioral_manifestation": "Player configures course and verifies helicopter systems before takeoff; mission-specific inventory loaded"
+    },
+    {
+      "world_state": "En route to enemy base (helicopter phase)",
+      "visual_manifestation": "Approaching aircraft requiring identification; enemy planes in airspace; radar/radio communication interface",
+      "behavioral_manifestation": "Player must hail approaching aircraft, determine threat status, engage in combat if identification fails or enemy confirmed"
+    },
+    {
+      "world_state": "Landing approach (infiltration begins)",
+      "visual_manifestation": "Helicopter descending toward landing zone; enemy base visible; detection risk high without whisper mode",
+      "behavioral_manifestation": "Whisper mode activation required to avoid detection; safe landing enables ground mission transition"
+    },
+    {
+      "world_state": "Ground infiltration (guard interactions)",
+      "visual_manifestation": "Multi-room compound buildings; guard NPCs; cabinet-stored security cards; locked doors",
+      "behavioral_manifestation": "Guards respond to player papers (deception tool); suspicion triggers require gas canister/grenade use; security cards unlock progression paths"
+    },
+    {
+      "world_state": "Objective completion (mission-specific)",
+      "visual_manifestation": "Chemical containers for analysis; captured scientist (Dr. Gump) waiting rescue; missile control rooms for sabotage; nerve gas vat for neutralization",
+      "behavioral_manifestation": "Mission 2: analyze containers to identify neutralizer, apply to nerve gas vat. Mission 4: rescue scientist, apply invisibility pill for escape. Mission 6: plant explosives in all missile rooms before timer expires"
+    },
+    {
+      "world_state": "Extraction phase (helicopter return)",
+      "visual_manifestation": "Return path with reduced enemy aircraft; helicopter flight back to home base",
+      "behavioral_manifestation": "Fewer combat encounters on return; mission completion triggers four-letter passcode for future replay"
+    },
+    {
+      "world_state": "Mission failure states",
+      "visual_manifestation": "Guard detection leading to combat; mine detonation; timer expiration in final mission; unsuccessful helicopter landing",
+      "behavioral_manifestation": "Mission restart required; passcode system allows return to specific mission without replaying earlier objectives"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Equipment inventory as mission storytelling",
+      "example": "Papers, gas canister, gas grenades, mine detector, explosives communicate player infiltration methodology; different equipment enables different narrative approaches (deception vs. incapacitation vs. sabotage)"
+    },
+    {
+      "technique": "Location-based objective design",
+      "example": "Chemical containers hidden in compound rooms; nerve gas vat requiring neutralizer; missile control rooms scattered throughout bases; Dr. Gump prisoner rescue point—each location tells story of enemy operations"
+    },
+    {
+      "technique": "Technology signaling via helicopter systems",
+      "visual_form": "ADF navigation, Status terminal, Turbo engine, Whisper mode, Radio Communications, missiles, guns, chaffs, flares",
+      "example": "Advanced helicopter capabilities suggest technological superiority of player faction; whisper mode vs. loud operation creates stealth-vs-direct tension"
+    },
+    {
+      "technique": "Radio communication as faction identification",
+      "example": "Hailing unknown aircraft reveals intent and allegiance; successful radio response indicates friend; no response or hostile reply indicates enemy—communication itself becomes world-state indicator"
+    },
+    {
+      "technique": "Time pressure as narrative urgency",
+      "example": "10-minute countdown in final mission (20 real-time minutes) creates story beat of escalating threat; missile base chain reaction suggests catastrophic consequences for delay"
+    },
+    {
+      "technique": "Multi-phase mission structure as escalating stakes",
+      "example": "Six missions paired as helicopter transit + ground infiltration creates narrative of progressive penetration into enemy infrastructure; later missions introduce more complex objectives (rescue, multi-location sabotage)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy aircraft (helicopter missions)",
+      "state": "Unidentified/approaching",
+      "behavior": "Flies toward player aircraft; requires radio hail to determine allegiance; hostile aircraft attack if player fires first or hailing fails"
+    },
+    {
+      "entity": "Enemy aircraft (helicopter missions)",
+      "state": "Confirmed hostile",
+      "behavior": "Engages in firefight with player helicopter; defeated via missiles/guns; player must manage ammo and flare/chaff countermeasures"
+    },
+    {
+      "entity": "Enemy aircraft (helicopter missions)",
+      "state": "Confirmed friendly",
+      "behavior": "Passes player without engagement; allows safe passage through airspace"
+    },
+    {
+      "entity": "Ground guards",
+      "state": "Unaware of player",
+      "behavior": "Patrol compound; accept forged papers without challenge; do not attack player"
+    },
+    {
+      "entity": "Ground guards",
+      "state": "Suspicious of player",
+      "behavior": "Question player identity; papers deception begins to fail; require incapacitation via gas canister or gas grenades before alert is sounded"
+    },
+    {
+      "entity": "Ground guards",
+      "state": "Confirmed hostile (alert sounded)",
+      "behavior": "Attack player; mission compromised; area becomes unsafe for stealth infiltration"
+    },
+    {
+      "entity": "Dr. Phineas Gump (rescued scientist)",
+      "state": "Captive",
+      "behavior": "Waits in designated location; cannot move independently; requires player to provide invisibility pill for escape protection"
+    },
+    {
+      "entity": "Dr. Phineas Gump (after invisibility pill)",
+      "state": "Invisible/protected",
+      "behavior": "Becomes undetectable to enemies; player can safely extract from enemy base without guard interference"
+    }
+  ],
+  "notes": "Infiltrator is fundamentally a deception-based world where visual cues communicate threat levels through guard behavior and aircraft identification systems. The game's world-state manifestation relies heavily on non-visual communication (radio hailing, papers deception) paired with behavioral tells (guard suspicion, aircraft response). The NES version cited here is actually Infiltrator II rebranded, suggesting the manifestation systems may differ from original 1986 computer versions. Limited visual/behavioral documentation available; inferences drawn from gameplay mechanics described in source material.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:35:36.783Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2795,
+    "output_tokens": 2674,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

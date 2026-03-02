@@ -1,0 +1,113 @@
+{
+  "game_id": "kid-icarus-nes",
+  "game_name": "Kid Icarus",
+  "platform": "NES",
+  "year": 1986,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No subpixels in this game. Movement is pixel-based only."
+  },
+  "player": {
+    "walk_speed": {
+      "value": 1,
+      "unit": "pixels/frame"
+    },
+    "run_speed": null,
+    "max_horizontal_speed": {
+      "value": 8,
+      "unit": "pixels/frame (on ground)"
+    },
+    "acceleration": {
+      "value": 1,
+      "unit": "per frame"
+    },
+    "deceleration": {
+      "value": 1,
+      "unit": "per frame (after 1 frame delay)"
+    },
+    "jump_velocity": {
+      "value": -27,
+      "unit": "internal units (Y speed)"
+    },
+    "gravity": {
+      "value": 2,
+      "unit": "per frame (without A held)"
+    },
+    "max_fall_speed": {
+      "value": 3,
+      "unit": "pixels/frame (Y speed 128 or greater)"
+    },
+    "air_acceleration": {
+      "value": 1,
+      "unit": "per frame (when A held)"
+    },
+    "air_friction": null,
+    "jump_hold_gravity_modifier": 0.5,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Flight (Jump Hold)",
+      "description": "Pit can hold jump button (A) during ascent to reduce gravity from 2 to 1 per frame, allowing variable jump height and sustained air control.",
+      "physics_values": {
+        "gravity_with_A_held": 1,
+        "gravity_without_A": 2,
+        "max_upward_speed": -3,
+        "max_downward_speed": 3
+      }
+    },
+    {
+      "name": "Ice Physics",
+      "description": "On ice surfaces, maximum horizontal speed increases dramatically, requiring 65 frames to decelerate to a complete stop.",
+      "physics_values": {
+        "ice_max_speed": 64,
+        "ice_deceleration_frames": 65
+      }
+    },
+    {
+      "name": "In-Air Horizontal Speed",
+      "description": "When airborne, speed value 9 moves at 1 pixel/frame. Values 2-7 move 1 pixel every other frame when speed value is odd.",
+      "physics_values": {
+        "airborne_speed_9_rate": "1 pixel/frame",
+        "airborne_speed_2_to_7_rate": "1 pixel every other frame (when odd)"
+      }
+    },
+    {
+      "name": "Damage Knockback",
+      "description": "Taking damage from most enemies pushes Pit 5 pixels in one direction, equivalent to 5 frames of normal movement. Some enemies push right instead of left.",
+      "physics_values": {
+        "knockback_distance": 5,
+        "knockback_frames_saved": 4
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "momentum-based",
+    "commitment-based",
+    "floaty (with A held)",
+    "fine-tunable (frame-perfect jump control)",
+    "responsive directional changes"
+  ],
+  "tier_notes": "Tier 2 empirical data extracted from ROM analysis and speedrun documentation. RAM addresses documented (001C for X speed, 001D for Y speed). Horizontal speed is 8-bit signed value; vertical speed uses non-linear conversion. No subpixel system present. Movement feels loose compared to later platformers, with 1-frame acceleration delay and variable gravity based on input.",
+  "sources_used": [
+    "tasvideos - Horizontal speed analysis, vertical speed analysis, RAM addresses, physics conversion formulas",
+    "datacrystal.tcrf.net - ROM structure confirmation"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:39:17.614Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8024,
+    "output_tokens": 1087,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

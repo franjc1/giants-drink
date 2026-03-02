@@ -1,0 +1,120 @@
+{
+  "game_id": "strider-genesis",
+  "game_name": "Strider",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites with distinct attack patterns",
+      "meaning": "Areas containing active threats requiring evasion or combat"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": "Spikes, moving platforms, and environmental obstacles with contrasting colors",
+      "meaning": "Environmental damage zones that drain health on contact"
+    },
+    {
+      "signal": "Boss arena transitions",
+      "visual_form": "Screen changes to enclosed spaces with larger enemy sprites and warning positioning",
+      "meaning": "Imminent major threat encounter requiring focused engagement"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open walkable space",
+      "visual_form": "Solid platforms with clear pathways, neutral background colors",
+      "meaning": "Traversable safe zones without immediate threats"
+    },
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Collectible power-ups and item pickups with distinct sprite appearance",
+      "meaning": "Beneficial resources that restore or enhance player capability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Strider (Player)",
+      "color_identity": "Primary sprite coloring in bright/distinct hues",
+      "symbol_or_sigil": "Cyborg ninja silhouette with sword",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player movement path through hostile territory"
+    },
+    {
+      "faction": "Enemy forces (Generic)",
+      "color_identity": "Contrasting enemy sprite colors distinct from player",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple enemy types with different behavioral animations",
+      "environmental_markers": "Enemy placement patterns suggesting military/organized opposition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active combat zone",
+      "visual_manifestation": "Screen populated with multiple animated enemy sprites, hazards highlighted",
+      "behavioral_manifestation": "Enemies patrol and attack in coordinated patterns; Strider must navigate through fire"
+    },
+    {
+      "world_state": "Safe traversal area",
+      "visual_manifestation": "Sparse enemy presence, clear platform geometry, reduced visual clutter",
+      "behavioral_manifestation": "Enemies stationary or distant; player can move freely across space"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Large enemy sprite centered on screen, dramatic arena layout with distinctive background",
+      "behavioral_manifestation": "Single powerful enemy with complex attack patterns; screen-filling threat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architecture as faction indicator",
+      "example": "Military or industrial environment design suggests organized enemy territory"
+    },
+    {
+      "technique": "Hazard placement narrative",
+      "example": "Spikes and moving obstacles arranged to create challenging gauntlets reflecting hostile world state"
+    },
+    {
+      "technique": "Enemy density mapping",
+      "example": "Higher enemy concentration in certain areas indicates strategic strongholds or defended positions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy soldier",
+      "state": "Unaware",
+      "behavior": "Stationary or simple patrol pattern animation"
+    },
+    {
+      "entity": "Standard enemy soldier",
+      "state": "Alerted",
+      "behavior": "Animated attack movement toward player, sprite orientation changes"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Combat active",
+      "behavior": "Multi-frame attack animation sequences, movement between screen positions"
+    }
+  ],
+  "notes": "Source access limited. Strider (1990 Genesis) data extracted from available TCRF reference material; detailed visual communication mechanics require direct game analysis. Game uses classic platformer visual language: sprite-based enemy differentiation, terrain hazard visibility through color contrast, and spatial layout to communicate threat levels. World state manifest through enemy density and screen composition rather than environmental shader/weather effects (technical limitations of 1990 Genesis hardware).",
+  "sources_used": [
+    "tcrf.net (limited access - metadata reference only)"
+  ],
+  "TODO": [
+    "Detailed color palette mappings for faction identification",
+    "Specific sprite animation frame analysis for behavioral tells",
+    "Complete environmental hazard catalog with visual manifestation details",
+    "Regional/level-specific world state visual progression documentation",
+    "NPC or ally entity behavioral communication patterns (if present)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:55:09.494Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 910,
+    "output_tokens": 1370,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

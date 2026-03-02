@@ -1,0 +1,181 @@
+{
+  "game_id": "aladdin-snes",
+  "game_name": "Disney's Aladdin",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Lava waves",
+      "visual_form": "Animated rising/falling magma in Cave of Wonders stage",
+      "meaning": "Immediate environmental hazard requiring upward/downward traversal to avoid"
+    },
+    {
+      "signal": "Enemy placement",
+      "visual_form": "Hostile creatures positioned throughout platforming sections",
+      "meaning": "Combat encounters requiring jump-on or apple-throw mechanics to neutralize"
+    },
+    {
+      "signal": "Falling hazard",
+      "visual_form": "Screen bottom boundary in all stages",
+      "meaning": "Bottomless pit death state—loss of life if player falls below screen"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Heart meter UI element decreasing on hit",
+      "meaning": "Cumulative damage from enemy contact or obstacle collision"
+    },
+    {
+      "signal": "Fire Hand enemy",
+      "visual_form": "Large hand made of fire (unused sprite 0x71)",
+      "meaning": "Planned Stage 6 hazard—fire-based threat with directional facing and patrol behavior"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Gem collection",
+      "visual_form": "Sparkle/gleam of collectible gems scattered in stages",
+      "meaning": "Resource pickup granting extra lives and score; red gems provide substantial score boost"
+    },
+    {
+      "signal": "Treasure chest",
+      "visual_form": "Chest sprite containing scarab item",
+      "meaning": "Bonus stage gateway—collect scarab within time window to access Genie wheel for extra lives and power-ups"
+    },
+    {
+      "signal": "Health pickups",
+      "visual_form": "Heart items appearing after defeating enemies or in bonus stages",
+      "meaning": "Heart meter restoration—increases player survivability"
+    },
+    {
+      "signal": "Magic Carpet sections",
+      "visual_form": "Self-scrolling flying stage with open sky environment",
+      "meaning": "Safe traversal zone with music-driven timing (Jasmine bonus stage ends with 'A Whole New World' melody)"
+    },
+    {
+      "signal": "Continue mechanic",
+      "visual_form": "Continue screen after life loss",
+      "meaning": "Player can resume from current level if continues remain—failure is recoverable"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Aladdin (Player character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Street urchin protagonist with monkey companion Abu",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Stages progress through Agrabah city locations; narrative beats tied to Disney film sequence"
+    },
+    {
+      "faction": "Hostile forces (Generic enemies)",
+      "color_identity": null,
+      "symbol_or_sigil": "Non-specific platformer enemies defeated via jump-on or apple-throw",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Enemy placement varies by stage; Cave of Wonders has lava-themed hazards; later stages feature bosses"
+    },
+    {
+      "faction": "Genie (Bonus provider)",
+      "color_identity": null,
+      "symbol_or_sigil": "Wheel-spinning mechanic granting rewards (extra lives, power-ups)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Bonus stages accessible only through scarab collection in treasure chests"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (Agrabah exploration)",
+      "visual_manifestation": "Distinct stage environments reflecting film locations: street scenes, Cave of Wonders, palace areas",
+      "behavioral_manifestation": "Enemy types and hazard configurations change per stage; bosses appear at stages 1, 6, 7; stage 7 is final confrontation"
+    },
+    {
+      "world_state": "Cave of Wonders (escape sequence)",
+      "visual_manifestation": "Animated lava waves rising/falling as visual threat indicator",
+      "behavioral_manifestation": "Self-scrolling forced navigation up and down to outrun advancing lava—time pressure mechanic"
+    },
+    {
+      "world_state": "Magic Carpet bonus stage",
+      "visual_manifestation": "Free-flying environment with open sky, collectible gems scattered",
+      "behavioral_manifestation": "Music-driven duration—stage ends when 'A Whole New World' melody concludes, not on player failure"
+    },
+    {
+      "world_state": "Player health critical",
+      "visual_manifestation": "Heart meter depletes visually with each hit; game over when all lives consumed",
+      "behavioral_manifestation": "Reduced survivability increases tension; continue system allows retry from current stage"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Dedicated boss sprite and arena design (stages 1, 6, 7)",
+      "behavioral_manifestation": "Enemy does not follow generic patrol—executes scripted attack patterns requiring player dodge/counter"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage geography as narrative progression",
+      "example": "Stages unfold through Agrabah locations (city streets → Cave of Wonders → palace), mirroring Disney film plot sequence without explicit exposition"
+    },
+    {
+      "technique": "Obstacle design reflecting world danger",
+      "example": "Lava in Cave of Wonders stage visually communicates magical danger; Magic Carpet stage uses open sky to signal escape/freedom"
+    },
+    {
+      "technique": "Treasure chest ritual as world-rule",
+      "example": "Scarab scarab spawning from chests establishes collectible reward system tied to bonus access—teaches player world mechanics through interactive discovery"
+    },
+    {
+      "technique": "Enemy visual variety implying setting specificity",
+      "example": "Planned unused Fire Hand enemy (Stage 6) would have communicated magical/supernatural threat type without dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Aladdin (Player)",
+      "state": "Combat-ready",
+      "behavior": "Jumps on enemies or throws apples to disorient; apple throw indicates ranged option vs. melee jump"
+    },
+    {
+      "entity": "Abu (Monkey companion)",
+      "state": "Accompanying player",
+      "behavior": "Follows Aladdin; mechanically integrated into player control (not specified in sources but present in gameplay)"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Patrolling/hostile",
+      "behavior": "Defeat via jump-on or apple disorientation; implies simple AI following patrol routes until player interaction"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Boss encounter",
+      "behavior": "Scripted attack patterns (not random patrol); stages 1, 6, 7 feature boss-specific arenas implying designed encounters"
+    },
+    {
+      "entity": "Fire Hand (unused, Stage 6)",
+      "state": "Directional threat",
+      "behavior": "Three behaviors: facing right, facing left, moving back-and-forth in small area; suggests melee threat with telegraphed direction"
+    },
+    {
+      "entity": "Moving Platforms (unused, Stage 4)",
+      "state": "Traversal hazard",
+      "behavior": "Blue platform travels 8 screens at constant pace; red platform travels twice as long with increasing speed acceleration—implies dynamic difficulty"
+    },
+    {
+      "entity": "Lava (Cave of Wonders)",
+      "state": "Active pursuit",
+      "behavior": "Waves advance and recede; forces player upward/downward navigation; implies mechanical pressure system vs. static hazard"
+    }
+  ],
+  "notes": "This game contains a strong Disney film adaptation narrative structure with visual world-state tied to stage progression rather than dynamic faction conflict. Danger signals are primarily environmental (lava, bottomless pits, enemies) rather than political or faction-based. Safety is communicated through collectible rewards and bonus access mechanics. The unused enemies (Fire Hand, Moving Platforms) suggest originally planned variety. No explicit faction conflict or political messaging detected in available sources—world-state is primarily adventure/exploration with escalating difficulty via stage design rather than world-state variation.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor) - Disney's Aladdin SNES article",
+    "wikipedia - Disney's Aladdin (SNES video game) article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:05:16.508Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4695,
+    "output_tokens": 2195,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

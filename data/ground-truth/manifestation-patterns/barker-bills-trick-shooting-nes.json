@@ -1,0 +1,142 @@
+{
+  "game_id": "barker-bills-trick-shooting-nes",
+  "game_name": "Barker Bill's Trick Shooting",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Character proximity to player target",
+      "visual_form": "Barker Bill, Trixie, or parrot positioned near or overlapping with interactive objects on screen",
+      "meaning": "Risk zone—shooting these characters costs a life; signals constraint and hazard"
+    },
+    {
+      "signal": "Closed window panes",
+      "visual_form": "Window visually blocked or marked as closed in Window Pains stage",
+      "meaning": "Impassable barrier; shooting blocked objects results in miss and life loss"
+    },
+    {
+      "signal": "Falling object trajectory toward floor",
+      "visual_form": "Objects descending rapidly in Window Pains stage",
+      "meaning": "Time pressure; objects disappearing = failed target and life loss"
+    },
+    {
+      "signal": "Disappearing targets",
+      "visual_form": "Balloons flying away, plates approaching floor, objects falling off screen",
+      "meaning": "Imminent failure state; spatial positioning communicates urgency"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Diamond collectible",
+      "visual_form": "Diamond object appearing on screen during stages",
+      "meaning": "Extra life currency; safe to shoot, rewards player with insurance against mistakes"
+    },
+    {
+      "signal": "Open window panes",
+      "visual_form": "Unblocked window visually distinguishable from closed ones",
+      "meaning": "Safe shooting corridor; indicates valid targets can be hit"
+    },
+    {
+      "signal": "Coin presentation by Trixie",
+      "visual_form": "Trixie tosses coins explicitly; temporal presentation signal",
+      "meaning": "Designated target moment; safe to shoot when actively presented"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Barker Bill's crew)",
+      "color_identity": null,
+      "symbol_or_sigil": "Barker Bill, Trixie, parrot—carnival performer avatars",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Carnival/fair setting; game show aesthetic with objects as props"
+    },
+    {
+      "faction": "Duck Hunt universe crossover",
+      "color_identity": null,
+      "symbol_or_sigil": "Duck Hunt dog cameo in Balloon Saloon mode",
+      "enemy_visual_variants": "Dog is protected entity (avoid shooting); visual callback to Duck Hunt paradigm",
+      "environmental_markers": "Balloons + dog presence = Duck Hunt thematic borrowing"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage (low difficulty)",
+      "visual_manifestation": "Slower object movement, fewer blocking elements, fewer character obstacles",
+      "behavioral_manifestation": "Targets linger longer on screen; parrot and characters appear less frequently"
+    },
+    {
+      "world_state": "Mid-stage progression (increasing difficulty)",
+      "visual_manifestation": "Objects move faster, more windows blocked, increased character presence on screen",
+      "behavioral_manifestation": "Trixie introduces coins as bonus target; Bill's Thrills stage adds small, fast-moving objects"
+    },
+    {
+      "world_state": "Slot machine bonus state",
+      "visual_manifestation": "Screen transitions to slot machine interface; diamonds previously collected influence visual slot lines",
+      "behavioral_manifestation": "Player pulls trigger to stop reels; visual complexity of winning lines increases with diamond count"
+    },
+    {
+      "world_state": "High score/endgame state",
+      "visual_manifestation": "Bill's Thrills stage: tiny eggs and tomatoes, fastest object speeds, parrot omnipresent",
+      "behavioral_manifestation": "Highest point values; maximum difficulty; objects thrown at extreme heights requiring anticipatory aim"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Carnival setting as thematic container",
+      "example": "Four game modes (Balloon Saloon, Flying Saucers, Window Pains, Fun Follies) presented as themed carnival attractions; setting communicates low-stakes fun vs. arcade competition"
+    },
+    {
+      "technique": "Character presence as narrative anchors",
+      "example": "Barker Bill as showman, Trixie as assistant, parrot as sidekick—visual hierarchy establishes game-show aesthetic distinct from combat/action paradigm"
+    },
+    {
+      "technique": "Object symbolism",
+      "example": "Balloons = flight/escape, plates = fragility, coins/diamonds = reward, eggs/tomatoes = messy consequences—visual object choice reinforces carnival tone"
+    },
+    {
+      "technique": "Stage progression via aesthetic variation",
+      "example": "Window Pains introduces architectural constraint (windows); Fun Follies adds gambling mechanic (slot machine)—visual environment shifts signal rule changes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Barker Bill",
+      "state": "Throwing objects (Bill's Thrills stage)",
+      "behavior": "Tosses eggs and tomatoes high up; player must intercept before objects land on Trixie; position indicates threat/obstacle"
+    },
+    {
+      "entity": "Trixie",
+      "state": "Walking/presenting",
+      "behavior": "Walks across screen presenting coins; occasional movement signals variable timing challenge; player must avoid hitting her"
+    },
+    {
+      "entity": "Parrot",
+      "state": "Omnipresent obstacle",
+      "behavior": "Appears throughout stages as protected entity; hitting parrot costs a life; visual marker for collision avoidance"
+    },
+    {
+      "entity": "Duck Hunt dog",
+      "state": "Cameo appearance",
+      "behavior": "Flies across Balloon Saloon stage; protected entity; signals crossover and establishes safe-zone logic"
+    },
+    {
+      "entity": "Objects (balloons, plates, falling items)",
+      "state": "In-flight/falling",
+      "behavior": "Motion trajectory communicates point value and time pressure; proximity to screen edge signals imminent disappearance"
+    }
+  ],
+  "notes": "Barker Bill's Trick Shooting is a light gun carnival simulator with minimal narrative complexity. World-state communication relies entirely on visual object placement, character positioning, and stage-specific environmental layouts (windows, slot machine). Danger is signaled through character proximity and object trajectory rather than explicit visual warnings. The game lacks faction conflict, political narrative, or world-state text; all state information is conveyed through object affordances and spatial composition. Paradigm is 'other' (carnival game emulation) rather than traditional action/RPG/strategy. Data quality is T3 qualitative due to Wikipedia source limitations.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:51:49.177Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2838,
+    "output_tokens": 1744,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

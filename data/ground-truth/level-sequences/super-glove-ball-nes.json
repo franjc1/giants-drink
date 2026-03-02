@@ -1,0 +1,152 @@
+{
+  "game_id": "super-glove-ball-nes",
+  "game_name": "Super Glove Ball",
+  "platform": "nes",
+  "paradigm": "other",
+  "level_count": null,
+  "world_count": 3,
+  "element_introduction_order": [
+    {
+      "element": "Basic energy ball mechanic",
+      "first_appears": "World 1, Room 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns to bounce ball off walls and destroy tiles in confined 3D space"
+    },
+    {
+      "element": "Tile destruction and wall clearing",
+      "first_appears": "World 1, early rooms",
+      "introduction_context": "safe",
+      "mastery_context": "Core puzzle loop: destroy all tiles on a wall to unlock passage to next room"
+    },
+    {
+      "element": "Question mark bonus tiles",
+      "first_appears": "World 1, early-to-mid game",
+      "introduction_context": "safe",
+      "mastery_context": "Learning to identify and target power-ups strategically"
+    },
+    {
+      "element": "Robo-Bullets (finite resource)",
+      "first_appears": "World 1, early game",
+      "introduction_context": "moderate",
+      "mastery_context": "Resource management: 40 starting bullets, max 99, required for efficient progression"
+    },
+    {
+      "element": "Life meter depletion (26 bars)",
+      "first_appears": "World 1, immediate",
+      "introduction_context": "moderate",
+      "mastery_context": "Threat management: losing 5 balls costs 1 life; game over when all lives lost"
+    },
+    {
+      "element": "Basic enemies",
+      "first_appears": "World 1, mid-game",
+      "introduction_context": "moderate",
+      "mastery_context": "Combat introduced as secondary concern to puzzle-solving"
+    },
+    {
+      "element": "Multi-room maze navigation",
+      "first_appears": "World 1, later rooms",
+      "introduction_context": "moderate",
+      "mastery_context": "Map-making becomes critical; World 2 has 60+ rooms, establishing exploration as core mechanic"
+    },
+    {
+      "element": "Advanced power-ups (ROW, SUPER BALL, TRIPLE, PINBALL)",
+      "first_appears": "World 1-2 transition",
+      "introduction_context": "moderate",
+      "mastery_context": "Tempo-changing mechanics that allow room-clearing shortcuts and tactical advantages"
+    },
+    {
+      "element": "Difficult tile patterns and enemy types",
+      "first_appears": "World 2",
+      "introduction_context": "dangerous",
+      "mastery_context": "Significantly harder hit zones; some enemies one-shot kill; increased precision required"
+    },
+    {
+      "element": "Random room warping",
+      "first_appears": "World 2-3",
+      "introduction_context": "dangerous",
+      "mastery_context": "Disorientation mechanic; map-making becomes essential survival strategy, not optional"
+    },
+    {
+      "element": "Progressive world difficulty scaling",
+      "first_appears": "World 2 onward",
+      "introduction_context": "dangerous",
+      "mastery_context": "Enemies tougher; more ways to lose balls; tighter hit detection on certain tiles"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Clearing all tiles on a wall (passage unlocked, forward progress)",
+      "Obtaining ROW power-up (mass tile destruction, rapid room escape)",
+      "Finding extra life bonus (safety margin increased)",
+      "Reaching a new room via arrow navigation (successful maze progression)"
+    ],
+    "typical_tension_triggers": [
+      "Ball approaching danger zone (behind glove position)",
+      "Losing balls (5 losses = 1 life lost)",
+      "Encountering one-shot enemy encounters in World 2-3",
+      "Running low on Robo-Bullets in tile-dense rooms",
+      "Random warp to unknown room (disorientation, map invalidation)",
+      "Difficult tile patterns with narrow hit zones",
+      "Life meter depleting toward zero"
+    ],
+    "pacing_descriptor": "Cyclical puzzle-exploration rhythm: calm tile-destruction phase interrupted by chaotic enemy encounters and navigation anxiety; tension builds through maze depth and world progression; relief comes from successful room transitions and power-up acquisition"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Question mark tiles within destructible wall surfaces indicate hidden power-ups; ROW and PINBALL power-ups reveal optional pathways",
+    "secret_convention": "Arrow indicators point to newly unlocked passages after wall clearing; hidden level select via controller input sequence",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Tutorial phase: basic ball-bouncing mechanics in confined 3D rooms; safe introduction to tile destruction and room navigation; minimal enemy presence",
+    "mid_game": "World 1-2 transition: maze complexity increases dramatically (60+ rooms in World 2 alone); map-making becomes critical survival skill; power-up variety expands; first serious enemy encounters",
+    "late_game": "World 3: enemy difficulty spikes significantly (one-shot kills); tile patterns become harder to hit; random warping increases disorientation; resource management (Robo-Bullets) becomes critical",
+    "notable_spikes": [
+      "World 2 entry: massive room count jump and introduction of harder enemy types",
+      "World 2-3 transition: one-shot kill enemies introduced",
+      "Random warp mechanic: disruptive difficulty spike that punishes map-based progression strategy"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Tile-Clearing Puzzle Chamber",
+      "description": "Single-room enclosed space with walls covered in destructible tiles (5-40 tiles per wall depending on wall position). Player bounces ball or shoots Robo-Bullets to destroy tiles until passage arrow appears. Difficulty increases with tile count and hit-zone precision requirements.",
+      "example_level": "World 1 early rooms, World 2 standard rooms"
+    },
+    {
+      "pattern_name": "Multi-Room Maze Progression",
+      "description": "Interconnected dungeon-like structure where clearing one room's walls opens passages to adjacent rooms. Requires spatial mapping and systematic navigation. World 2 has 60+ interconnected rooms, establishing exploration as dominant mechanic.",
+      "example_level": "World 2 (majority of progression)"
+    },
+    {
+      "pattern_name": "Enemy Encounter Gauntlet",
+      "description": "Rooms where enemy presence forces combat or evasion before tile-clearing can occur. World 2-3 enemies deliver one-shot kills, creating high-tension combat phases between puzzle-solving.",
+      "example_level": "World 2-3 designated combat chambers"
+    },
+    {
+      "pattern_name": "Power-up Hunting Chamber",
+      "description": "Rooms designed to encourage players to hunt question mark tiles for beneficial effects (ROW for speed-clearing, PINBALL for path revelation, SUPER BALL for ball speed control). Reward structure incentivizes exploration and risk-taking.",
+      "example_level": "Distributed throughout all worlds"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Super Glove Ball article)",
+    "wikipedia (Super Glove Ball - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:11:53.203Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3640,
+    "output_tokens": 1933,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

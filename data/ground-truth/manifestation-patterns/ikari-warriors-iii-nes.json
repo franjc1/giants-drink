@@ -1,0 +1,162 @@
+{
+  "game_id": "ikari-warriors-iii-nes",
+  "game_name": "Ikari III: The Rescue",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldiers advancing",
+      "visual_form": "Pursuing army visible on-screen or off-screen tracking distance meter",
+      "meaning": "Active threat; maintaining distance from enemy force is a time-limit mechanic"
+    },
+    {
+      "signal": "Crime Ghost faction troops",
+      "visual_form": "Uniformed enemy soldiers, likely with distinctive visual markers",
+      "meaning": "Organized terrorist opposition; heightened danger from coordinated military-style threats"
+    },
+    {
+      "signal": "Hostage endangered state",
+      "visual_form": "Captive character present in danger zones or being recaptured",
+      "meaning": "Mission failure risk; rescuers must protect objective or restart stage"
+    },
+    {
+      "signal": "Heavy weaponry and defensive positions",
+      "visual_form": "Stationary turrets, fortified positions, armed guards clustered",
+      "meaning": "Environmental combat hazards requiring strategic approach"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Extraction point reached",
+      "visual_form": "Rescue plane or helicopter visible at designated location",
+      "meaning": "Safe zone; successful mission completion if hostage and heroes reach this point"
+    },
+    {
+      "signal": "Hostage secured",
+      "visual_form": "Rescued character moving with player characters (NES version: Elise follows Paul and Vince)",
+      "meaning": "Primary objective achieved; transition to extraction phase"
+    },
+    {
+      "signal": "Distance margin maintained",
+      "visual_form": "Distance counter showing safe gap between pursuing army and player position",
+      "meaning": "Temporal safety; game continues if distance > 0km"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Crime Ghost (Terrorist Organization)",
+      "color_identity": null,
+      "symbol_or_sigil": "Crime Ghost branding/insignia (visual form not detailed in sources)",
+      "enemy_visual_variants": "Dangerous criminals, disgruntled soldiers, uniformed troops, commander-class units (Faust as supreme leader in NES version)",
+      "environmental_markers": "Crime Ghost hideout facilities, fortified terrorist bases, command centers where hostages are held"
+    },
+    {
+      "faction": "Government/Presidential Forces (Allied)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Not applicable (player faction)",
+      "environmental_markers": "Presidential residence, extraction points, safe government zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission (opening narrative)",
+      "visual_manifestation": "Presidential setting, briefing/kidnapping location, blackmail letter delivery",
+      "behavioral_manifestation": "Static exposition; president's desperation drives hiring of warriors"
+    },
+    {
+      "world_state": "Active pursuit/chase sequence",
+      "visual_manifestation": "On-screen distance meter tracking enemy army proximity; pursuing troops visible or implied through UI",
+      "behavioral_manifestation": "Players must advance continuously; stopping or moving backward increases distance danger; failure occurs at 0km separation"
+    },
+    {
+      "world_state": "Stage boss / command structure compromise",
+      "visual_manifestation": "Crime Ghost commanders and lieutenants present in fortified positions (e.g., stage 3 captors, Crime Ghost soldiers, final boss Faust in NES)",
+      "behavioral_manifestation": "Escalating resistance; main army realizes deception and returns with reinforcements"
+    },
+    {
+      "world_state": "Hostage recapture (mid-mission setback)",
+      "visual_manifestation": "Rescue helicopter shot down; captive removed from player proximity; Crime Ghost forces consolidate position",
+      "behavioral_manifestation": "Mission resets or extends; additional stages required to re-secure hostage before extraction"
+    },
+    {
+      "world_state": "Final extraction phase",
+      "visual_manifestation": "Rescue plane at designated extraction point; Crime Ghost soldiers making final stand; multiple hostiles concentrated",
+      "behavioral_manifestation": "Highest intensity combat; all remaining Crime Ghost forces attempt to prevent escape; final boss encounter (NES version only: Faust)"
+    },
+    {
+      "world_state": "Mission success",
+      "visual_manifestation": "Warriors boarding rescue plane with secured hostage; departure sequence",
+      "behavioral_manifestation": "Game completion; narrative closure revealing heroes' deed remains classified"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Distance-based time limit visualization",
+      "example": "On-screen meter or HUD element showing 'km' gap between pursuing Crime Ghost army and player position; zero distance triggers stage failure/restart"
+    },
+    {
+      "technique": "Hostage presence as narrative anchor",
+      "example": "Rescued character physically present with player party during extraction phase; visual confirmation of objective completion or failure"
+    },
+    {
+      "technique": "Weapon scarcity and combat environment design",
+      "example": "Reduced weapon availability (vs. earlier Ikari games) signals higher-difficulty covert operation; hand-to-hand dominance reflects Rambo III inspiration of unarmed combat mastery"
+    },
+    {
+      "technique": "Fortified base progression",
+      "example": "Sequential stages representing deeper infiltration into Crime Ghost territory; stage 1 outer perimeter → stage 3 command center → extraction zone at furthest depth"
+    },
+    {
+      "technique": "Faction-specific visual hierarchy",
+      "example": "Crime Ghost commanders and troops visually distinguish themselves from generic soldiers; supreme leader Faust (NES) presented as final obstacle with heightened visual prominence"
+    },
+    {
+      "technique": "Exclusive level type differentiation (NES)",
+      "example": "Fourth scuba-diving stage provides environmental story beat of expanded rescue complexity and underwater infiltration mechanic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Crime Ghost Soldiers (standard troops)",
+      "state": "Aware / Hostile",
+      "behavior": "Active combat engagement; guard positions at fortifications; patrol routes"
+    },
+    {
+      "entity": "Crime Ghost Army (main force)",
+      "state": "Pursuing / Reinforcing",
+      "behavior": "Continuous advancement toward player position; return acceleration after deception revealed; distance-based pressure mechanic"
+    },
+    {
+      "entity": "Hostage (Arcade: President's son; NES: Elise)",
+      "state": "Captive → Rescued → Extracted",
+      "behavior": "Stationary when held by Crime Ghost; follows player after rescue; vulnerable during escort phase; mission failure if recaptured or killed"
+    },
+    {
+      "entity": "Ralf Jones / Clark Still (Arcade); Paul / Vince (NES)",
+      "state": "Mission Active",
+      "behavior": "Offensive hand-to-hand and limited ranged combat; movement tied to hostage escort priority in final phase; stage restart on capture"
+    },
+    {
+      "entity": "Faust (NES final boss)",
+      "state": "Command Authority / Final Threat",
+      "behavior": "Elite combat capability; positioned at extraction point as ultimate obstacle; mega-boss encounter design with heightened visual distinction"
+    }
+  ],
+  "notes": "Ikari III manifests political tension through a covert military narrative: kidnapped hostage of political figure → blackmail ultimatum → secret warrior deployment to avoid public knowledge. Visual communication relies heavily on pursuit mechanics (distance meter as core UI storytelling) and hostage state changes. Crime Ghost's global infiltration post-economic recession provides geopolitical context. The game uses environmental progression (outer perimeter → command center → extraction) to scaffold narrative advancement. NES version expands story with named characters (Paul, Vince, Elise, Faust) and additional stage, strengthening faction identity and political narrative. Hand-to-hand combat emphasis (vs. vehicle/weapon focus in earlier Ikari games) signals asymmetric covert operation rather than direct military engagement.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:09:12.856Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3618,
+    "output_tokens": 2059,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

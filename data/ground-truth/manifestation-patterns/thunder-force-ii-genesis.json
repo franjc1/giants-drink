@@ -1,0 +1,148 @@
+{
+  "game_id": "thunder-force-ii-genesis",
+  "game_name": "Thunder Force II",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy ship presence",
+      "visual_form": "Animated enemy sprites filling screen space during scrolling segments",
+      "meaning": "Active combat threat requiring evasion and weapon discharge"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large-scale guardian sprite at end of side-view stages, described as 'huge end-of-level guardians'",
+      "meaning": "Significant difficulty spike; stage completion gate"
+    },
+    {
+      "signal": "Weapon loss",
+      "visual_form": "Ship destruction animation; loss of equipped weapons except defaults",
+      "meaning": "Vulnerability state; player reverts to basic Twin/Back shot and bombs"
+    },
+    {
+      "signal": "Dense enemy fields",
+      "visual_form": "Screen 'packed to the gills with enemy ships' in side-view stages",
+      "meaning": "High incoming fire density; need for evasion and CRAW pod blocking"
+    },
+    {
+      "signal": "CRAW destruction",
+      "visual_form": "Loss of orbiting pod add-ons upon ship destruction",
+      "meaning": "Loss of bullet-blocking capability and supplementary firepower"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "CRAW acquisition",
+      "visual_form": "Orbiting pod items collected; up to two revolving around player ship",
+      "meaning": "Defensive reinforcement; passive bullet blocking and extra firepower"
+    },
+    {
+      "signal": "Weapon upgrade collection",
+      "visual_form": "Item pickup resulting in weapon power-level increase or new weapon acquisition",
+      "meaning": "Offensive capability enhancement; access to signature weapons like Hunter"
+    },
+    {
+      "signal": "CRAW speed boost",
+      "visual_form": "Temporary item increasing orbit speed of pods",
+      "meaning": "Enhanced bullet-blocking probability; defensive advantage window"
+    },
+    {
+      "signal": "Stage progression",
+      "visual_form": "Transition from top-view base destruction to side-view horizontal scroll",
+      "meaning": "Mission objective achieved; game state advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Galaxy Federation",
+      "color_identity": null,
+      "symbol_or_sigil": "FIRE LEO series fighter craft designation (player control asset)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Controlled territory undergoing ORN assault; planets Reda and Nepura/Nebula"
+    },
+    {
+      "faction": "ORN Empire",
+      "color_identity": null,
+      "symbol_or_sigil": "Plealos battleship (primary strategic asset); enemy ships and bases",
+      "enemy_visual_variants": "All hostile enemy sprites encountered in both top-view and side-view stages represent ORN military forces",
+      "environmental_markers": "Occupied planets; underground Plealos housing facility on Nepura; scattered military bases requiring destruction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "ORN offensive ongoing",
+      "visual_manifestation": "Dense enemy presence throughout stages; multiple enemy bases indicated in top-view segments",
+      "behavioral_manifestation": "Continuous enemy fire and ship spawning; bases must be actively located and destroyed by player"
+    },
+    {
+      "world_state": "Nebula/Nepura under ORN control",
+      "visual_manifestation": "Stage environments represent occupied territory; Plealos battleship functions as stage goal",
+      "behavioral_manifestation": "Player must destroy ORN bases and penetrate defended airspace to reach final battleship target"
+    },
+    {
+      "world_state": "Galaxy Federation counter-operation",
+      "visual_manifestation": "Player ship (FIRE LEO-02 Exceliza) represents Federation military response; mission objective to eliminate Plealos",
+      "behavioral_manifestation": "Multi-stage progression structure: top-view base targeting followed by side-view stage completion with boss defeat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dual-perspective stage structure",
+      "example": "Top-view segments represent strategic reconnaissance and base targeting phase; transition to side-view represents tactical combat engagement phase"
+    },
+    {
+      "technique": "Boss creature as political artifact",
+      "example": "Plealos battleship serves as both mechanical enemy and symbol of ORN Empire's military power; its destruction is final narrative goal"
+    },
+    {
+      "technique": "Planet names and damage states",
+      "example": "Reda's destruction and Nepura's heavy damage communicate ORN's strategic success; player mission to recapture Nepura and eliminate Plealos demonstrates Federation recovery attempt"
+    },
+    {
+      "technique": "Enemy base proliferation",
+      "example": "Multiple ORN bases scattered across stages imply occupation depth and defensive infrastructure; required destruction conveys liberation narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "ORN enemy ships",
+      "state": "Active combat",
+      "behavior": "Continuous spawning and firing in patterns throughout scrolling stages; dense field indicates coordinated defensive presence"
+    },
+    {
+      "entity": "FIRE LEO-02 Exceliza (player ship)",
+      "state": "Armed with default weapons",
+      "behavior": "Twin forward shot, single forward/backward shot, bomb capability; baseline engagement capability"
+    },
+    {
+      "entity": "FIRE LEO-02 Exceliza (upgraded)",
+      "state": "Weapon-enhanced with CRAWs",
+      "behavior": "Increased offensive output through collected weapons (Hunter etc.); passive defense through orbiting pods blocking incoming fire"
+    },
+    {
+      "entity": "Boss guardians",
+      "state": "Stage-end encounter",
+      "behavior": "Large-scale sprite with high health; represents major ORN defensive asset; defeat required for stage completion"
+    },
+    {
+      "entity": "CRAW pods",
+      "state": "Orbiting player ship",
+      "behavior": "Automatic bullet interception and supplementary fire output; lost upon ship destruction, requiring re-acquisition"
+    }
+  ],
+  "notes": "Thunder Force II communicates faction conflict through binary spatial organization: top-view stages represent strategic theater (locating and destroying ORN infrastructure), while side-view stages represent tactical engagement (surviving enemy fire and defeating stage bosses). The Plealos battleship functions as both mechanical enemy and political symbol—its location beneath Nebula's surface and eventual destruction frame the entire narrative arc. Visual progression from reconnaissance (top-view) to assault (side-view) mirrors military operational doctrine. Enemy density and boss scale directly signal danger escalation. Weapon and CRAW systems provide visual feedback on defensive/offensive capability states. No faction color differentiation noted in available sources; faction identity relies on context (player-controlled vs. hostile) rather than palette.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:27:13.133Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3312,
+    "output_tokens": 1779,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

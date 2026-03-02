@@ -1,0 +1,195 @@
+{
+  "game_id": "nobunaga-ambition-nes",
+  "game_name": "Nobunaga's Ambition",
+  "platform": "nes",
+  "paradigm": "turn-based strategy / historical simulation",
+  "danger_signals": [
+    {
+      "signal": "enemy_military_proximity",
+      "visual_form": "hex map display showing enemy daimyo forces adjacent to player fiefs",
+      "meaning": "imminent threat of invasion or military conflict"
+    },
+    {
+      "signal": "peasant_dissatisfaction",
+      "visual_form": "loyalty/morale indicator for controlled territories",
+      "meaning": "risk of rebellion or fief loss to rival daimyos"
+    },
+    {
+      "signal": "resource_depletion",
+      "visual_form": "rice/gold reserves displayed in fief management screens",
+      "meaning": "inability to sustain army or support peasants; vulnerability to economic collapse"
+    },
+    {
+      "signal": "supply_exhaustion_in_battle",
+      "visual_form": "battle turn counter; supply meter depletion during multi-day engagements",
+      "meaning": "army will be forced to retreat or face dissolution"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "high_peasant_loyalty",
+      "visual_form": "loyalty stat in fief interface",
+      "meaning": "stable territory; resistance to recruitment raids by rivals"
+    },
+    {
+      "signal": "full_military_readiness",
+      "visual_form": "trained soldier units displayed in fief; high morale after training",
+      "meaning": "capacity to defend or conduct offensive operations"
+    },
+    {
+      "signal": "economic_surplus",
+      "visual_form": "rice and gold reserves exceeding maintenance costs",
+      "meaning": "ability to weather conflicts and fund expansion"
+    },
+    {
+      "signal": "diplomatic_pacts",
+      "visual_form": "non-aggression pact or marriage alliance status in diplomatic menu",
+      "meaning": "reduced military threat from treaty partner"
+    },
+    {
+      "signal": "allied_military_support",
+      "visual_form": "allied daimyo units visible on hex map during conflicts",
+      "meaning": "reinforcement against shared enemies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Daimyo (selectable historical figures including Oda Nobunaga)",
+      "color_identity": null,
+      "symbol_or_sigil": "daimyo name/mon (family crest) displayed on map and in interface",
+      "enemy_visual_variants": "rival daimyo represented by distinct names and faction identifiers on hex map",
+      "environmental_markers": "controlled fiefs marked with player faction color/identifier; castle/fort icons indicate territorial holdings"
+    },
+    {
+      "faction": "Rival Daimyos (multiple competing warlords across Japan map)",
+      "color_identity": null,
+      "symbol_or_sigil": "each rival daimyo identified by name and distinct map faction marker",
+      "enemy_visual_variants": "visual differentiation on hex map by faction color or symbol; enemy units appear distinct from player units in battle view",
+      "environmental_markers": "rival-controlled provinces marked distinctly; enemy castle/fort icons on 5x10 hex battle maps"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early campaign (1560 scenarios: 'Battle for the East', 'Daimyo Power Struggles')",
+      "visual_manifestation": "hex map shows fragmented Japan with many independent daimyo factions; numerous small fiefs scattered across 50-province map",
+      "behavioral_manifestation": "multiple rival daimyos actively competing; frequent military conflicts; low political consolidation"
+    },
+    {
+      "world_state": "Mid-campaign (1571: 'Ambition Untamed')",
+      "visual_manifestation": "hex map shows increasing consolidation; fewer independent daimyo territories; larger regional power blocks emerging",
+      "behavioral_manifestation": "more aggressive rival expansion; increased diplomatic maneuvering; formation of alliances and marriage pacts"
+    },
+    {
+      "world_state": "Late campaign (1582: 'Road Towards Unification')",
+      "visual_manifestation": "hex map dominated by 2-3 major power factions; majority of provinces controlled by large daimyo; pathway to unification visible",
+      "behavioral_manifestation": "endgame military campaigns; rivals deploy maximum military strength; final unification conflicts determine winner"
+    },
+    {
+      "world_state": "Player daimyo aging/succession",
+      "visual_manifestation": "daimyo age counter visible in interface; character status screen shows health/age progression",
+      "behavioral_manifestation": "player character eventually dies of old age; succession mechanics trigger (heir takes control or faction weakens)"
+    },
+    {
+      "world_state": "Territory under taxation pressure",
+      "visual_manifestation": "fief interface displays increased tax rate; peasant loyalty meter shows declining satisfaction",
+      "behavioral_manifestation": "higher tax collection but risk of peasant rebellion or fief desertion to rivals"
+    },
+    {
+      "world_state": "Fief under military occupation/siege",
+      "visual_manifestation": "fief status changes in interface; battle map shows defender/attacker positions on hex grid",
+      "behavioral_manifestation": "defender must sustain supplies; can be forced to retreat if supplies exhaust before enemy elimination"
+    },
+    {
+      "world_state": "Active espionage campaign",
+      "visual_manifestation": "spy menu interface; rival intelligence discovered through intel reports",
+      "behavioral_manifestation": "information about rival positions, morale, resources; potential for sabotage or peasant theft between fiefs"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Fief productivity/resource visualization",
+      "example": "rice and gold reserves in fief menu reflect economic capacity; flooded fiefs (reduced flood control) show lower productivity; cultivated lands increase productivity but lower loyalty, visually representing economic strain on peasantry"
+    },
+    {
+      "technique": "Loyalty/morale as territorial stability marker",
+      "example": "low peasant loyalty in a fief creates vulnerability to rival recruitment raids or rebellion; high loyalty fief resists enemy incursion attempts, encoding territorial resilience through numerical/visual indicator"
+    },
+    {
+      "technique": "Hex map territorial control",
+      "example": "player fiefs and rival daimyo territories displayed on 50-province hex map; geographic proximity of fiefs indicates military threat level; fragmented vs. consolidated territory shows political state of Japan"
+    },
+    {
+      "technique": "Battle deployment and supply mechanics",
+      "example": "5x10 hex battle maps show terrain; armies visible with supply counter; gradual supply depletion over battle days tells story of extended siege or attrition warfare"
+    },
+    {
+      "technique": "Diplomatic pact visualization",
+      "example": "non-aggression pacts and marriage alliances displayed in diplomatic menu; presence/absence of alliances communicates political alignment and stability of player position"
+    },
+    {
+      "technique": "Seasonal turn progression",
+      "example": "each campaign turn represents one season; passage of time shown through turn counter; years pass as daimyo age toward eventual death, encoding historical progression and consequence of time"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Peasants",
+      "state": "high_loyalty",
+      "behavior": "remain in fief; resist recruitment raids by rivals; produce stable tax and food revenue"
+    },
+    {
+      "entity": "Peasants",
+      "state": "low_loyalty",
+      "behavior": "may rebel and leave fief; vulnerable to theft by rival merchant operations; reduce tax and food output"
+    },
+    {
+      "entity": "Trained Army Units",
+      "state": "well_fed_high_morale",
+      "behavior": "increased combat effectiveness in battle; faster movement on hex map; higher casualty retention"
+    },
+    {
+      "entity": "Trained Army Units",
+      "state": "poorly_supplied_low_morale",
+      "behavior": "reduced combat efficiency; higher casualty rates in battle; faster supply depletion during extended conflicts"
+    },
+    {
+      "entity": "Rival Daimyo",
+      "state": "militarily_weak",
+      "behavior": "likely to form defensive alliances; may accept non-aggression pacts; avoid direct confrontation with stronger players"
+    },
+    {
+      "entity": "Rival Daimyo",
+      "state": "militarily_strong",
+      "behavior": "aggressive territorial expansion; attack weaker neighbors; refuse diplomatic concessions; seek marriage alliances to strengthen power"
+    },
+    {
+      "entity": "Player Daimyo",
+      "state": "advancing_in_age",
+      "behavior": "age counter visible; eventual death triggering succession; encourages player to secure stable power base before succession event"
+    },
+    {
+      "entity": "Fief under enemy attack",
+      "state": "sufficient_supplies",
+      "behavior": "defender can sustain resistance; reinforcements can arrive; victory possible through enemy elimination or retreat"
+    },
+    {
+      "entity": "Fief under enemy attack",
+      "state": "depleted_supplies",
+      "behavior": "forced retreat if battle continues; loss of fief if no reinforcement arrives; visual supply meter guides strategic decisions"
+    }
+  ],
+  "notes": "Nobunaga's Ambition (1986/1988 NES) is a complex historical simulation focusing on Sengoku period Japan unification. The game communicates world-state primarily through menu-driven interface (fiefs, peasant loyalty, resources, diplomatic status) and hex-map territory control visualization. Danger is signaled through proximity to rival daimyo forces, depleting supplies, and declining peasant loyalty. Safety emerges from high loyalty, trained armies, economic surplus, and diplomatic alliances. The game lacks color-coded faction identity on NES (compared to PC versions) but uses territorial occupancy and historical daimyo names as faction markers. Environmental storytelling relies heavily on numerical stats (loyalty, morale, supplies) and turn-based progression mechanics rather than visual spectacle. The 50-province map and four campaign scenarios encode Japanese geography and historical timeline progression.",
+  "sources_used": [
+    "wikipedia: Nobunaga's Ambition (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:01:13.598Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3020,
+    "output_tokens": 2567,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

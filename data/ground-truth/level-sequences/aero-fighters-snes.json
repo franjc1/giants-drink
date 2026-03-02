@@ -1,0 +1,113 @@
+{
+  "game_id": "aero-fighters-snes",
+  "game_name": "Aero Fighters",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "level_count": 7,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic weapon fire (P items)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Continuous upgrades available; maximum power level has hidden ammo count before reverting to previous level"
+    },
+    {
+      "element": "Special attacks (B items)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Limited use; players start with two charges per life, acquire more by collecting B items"
+    },
+    {
+      "element": "Ground enemy encounters",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Destruction yields score items (currency); contributes to 200,000 point threshold for extra life"
+    },
+    {
+      "element": "Stage randomization",
+      "first_appears": "Stage selection",
+      "introduction_context": "moderate",
+      "mastery_context": "First three stages selected randomly from four nation-specific variants; player's character never encounters own nation stage"
+    },
+    {
+      "element": "Fixed stage sequence",
+      "first_appears": "Stage 4 onward",
+      "introduction_context": "dangerous",
+      "mastery_context": "Final four stages are fixed progression; introduces consistent difficulty escalation"
+    },
+    {
+      "element": "Game loop continuation",
+      "first_appears": "After Stage 7 completion",
+      "introduction_context": "dangerous",
+      "mastery_context": "Character ending triggers; game repeats all seven stages in 'much more difficult versions'"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Defeating enemy formations",
+      "Collecting weapon upgrade items (P items)",
+      "Collecting special attack ammo (B items)",
+      "Clearing ground enemies for score items",
+      "Stage completion and character ending sequence"
+    ],
+    "typical_tension_triggers": [
+      "Dense enemy waves in vertical scroll",
+      "Fixed stage sequence difficulty escalation (stages 4-7)",
+      "New Game+ harder difficulty pass after stage 7",
+      "Limited special attack charges (starting with only 2 B items)"
+    ],
+    "pacing_descriptor": "Escalating wave-based tension with relief provided by collectible drops; second pass through stages significantly increases difficulty to extend play loop"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Moderate; introduces weapon upgrades and special attacks through standard shmup mechanics with three starting lives",
+    "mid_game": "Increasing challenge as fixed stage sequence begins (stage 4); player must adapt to consistent progression rather than random stage selection",
+    "late_game": "Significant spike; game repeats all seven stages in 'much more difficult versions' after initial completion and character ending",
+    "notable_spikes": [
+      "Transition from random stage selection (stages 1-3) to fixed sequence (stages 4-7)",
+      "New Game+ difficulty pass after stage 7 completion"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Random Stage Selection (Stages 1-3)",
+      "description": "First three stages randomly selected from nation-specific variant pool (one per character); character never encounters own nation's stage. Creates replayability variation while maintaining introduction phase.",
+      "example_level": "Stages 1-3 (any random combination from four national variants)"
+    },
+    {
+      "pattern_name": "Fixed Progression (Stages 4-7)",
+      "description": "Final four stages locked in consistent order; introduces predictable difficulty escalation and eliminates randomization element",
+      "example_level": "Stages 4-7 (fixed sequence)"
+    },
+    {
+      "pattern_name": "New Game+ Difficulty Loop",
+      "description": "After character ending at stage 7, game repeats all seven stages with significantly increased difficulty; extends engagement beyond initial completion",
+      "example_level": "Stages 1-7 (second pass, higher difficulty)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:28:30.203Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3352,
+    "output_tokens": 1328,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

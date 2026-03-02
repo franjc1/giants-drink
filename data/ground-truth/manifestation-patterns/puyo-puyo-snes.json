@@ -1,0 +1,139 @@
+{
+  "game_id": "puyo-puyo-snes",
+  "game_name": "Puyo Puyo",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Opponent chain attacks",
+      "visual_form": "Garbage blocks accumulating in player's grid",
+      "meaning": "Opponent is winning; player is in immediate danger of grid overflow"
+    },
+    {
+      "signal": "Rising filled blocks",
+      "visual_form": "Puyos ascending toward top of play field",
+      "meaning": "Game state approaching loss condition; imminent failure if blocks reach ceiling"
+    },
+    {
+      "signal": "Broken chain sequences",
+      "visual_form": "Failed match attempts; puyos not connecting",
+      "meaning": "Loss of offensive capability; vulnerability to opponent counterattack"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful chain completion",
+      "visual_form": "Multiple puyos disappearing in cascade; screen flash or visual feedback",
+      "meaning": "Offensive action successful; sending garbage blocks to opponent"
+    },
+    {
+      "signal": "Clear grid space",
+      "visual_form": "Empty or mostly empty play field with room at top",
+      "meaning": "Player has safety margin; time to build strategy without immediate loss risk"
+    },
+    {
+      "signal": "Offset capability",
+      "visual_form": "Player chains while opponent's garbage blocks incoming",
+      "meaning": "Player can neutralize threat through counter-attack; defensive option available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Protagonist (Arle Nadja)",
+      "color_identity": null,
+      "symbol_or_sigil": "Female spellcaster character; magic-user identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Story mode positions player as hero fighting against Dark Prince's plans; world-saving narrative"
+    },
+    {
+      "faction": "Dark Prince (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dark Prince archetype; villain seeking world domination",
+      "enemy_visual_variants": "Final boss encounter after defeating 12 sequential opponents",
+      "environmental_markers": "Represents existential threat to world order; defeated in final story progression"
+    },
+    {
+      "faction": "Intermediate opponents (Rulue, others)",
+      "color_identity": null,
+      "symbol_or_sigil": "Various character types from Madō Monogatari universe",
+      "enemy_visual_variants": "Non-aligned with Dark Prince (except Rulue, who has personal motivation)",
+      "environmental_markers": "Encountered in fixed sequence during story mode; represent obstacles rather than coordinated faction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal gameplay",
+      "visual_manifestation": "Falling puyos; balanced grid fill on both sides; normal block descent speed",
+      "behavioral_manifestation": "Players exchanging turns; building chains; stable match state"
+    },
+    {
+      "world_state": "Player winning (chains active)",
+      "visual_manifestation": "Cascade animations; opponent's grid filling with garbage blocks; visual feedback of combo success",
+      "behavioral_manifestation": "Opponent grid rising; opponent defensive; game pressure shifting toward player advantage"
+    },
+    {
+      "world_state": "Player losing (grid near full)",
+      "visual_manifestation": "Play field blocks approaching ceiling; reduced empty space; visual crowding",
+      "behavioral_manifestation": "Player must clear blocks urgently; limited strategic options; reactive play mode"
+    },
+    {
+      "world_state": "Story progression",
+      "visual_manifestation": "Sequential opponent encounters; character roster displayed; final encounter with Dark Prince",
+      "behavioral_manifestation": "Fixed opponent sequence (12 opponents before final boss); narrative progression through combat victories"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character roster narrative",
+      "example": "Story mode introduces 12 opponents before Dark Prince; each represents obstacle to world-saving goal; Rulue specifically noted as motivated by romance rather than Dark Prince allegiance"
+    },
+    {
+      "technique": "Protagonist positioning",
+      "example": "Arle Nadja presented as 16-year-old spellcaster standing against Dark Prince's world domination plans; framed as hero required to 'foil' villain's ambitions"
+    },
+    {
+      "technique": "Narrative reward structure",
+      "example": "Victory in story mode results in world being 'saved' and protagonist returning home; implies stakes are existential and binary (world saved or conquered)"
+    },
+    {
+      "technique": "Source universe integration",
+      "example": "Characters drawn from Madō Monogatari (1990 RPG); establishes shared world context; puyos themselves are fictional creatures with implied lore"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Arle Nadja",
+      "state": "Winning against opponent",
+      "behavior": "Continues building chains; offensive mode; sending garbage blocks"
+    },
+    {
+      "entity": "Arle Nadja",
+      "state": "Approaching defeat",
+      "behavior": "Defensive play; attempting to clear blocks before grid overflow; reactive rather than strategic"
+    },
+    {
+      "entity": "Dark Prince",
+      "state": "Final boss encounter",
+      "behavior": "Fixed opponent in final story sequence; requires defeating after 12 preliminary matches"
+    },
+    {
+      "entity": "Intermediate opponents",
+      "state": "Pre-Dark Prince encounters",
+      "behavior": "Sequential fixed battles; story progression gates; not coordinated faction action"
+    }
+  ],
+  "notes": "Puyo Puyo is a puzzle game with minimal faction-based world-state communication. Political situation (Dark Prince's threat to world domination) is communicated through narrative framing rather than visual systems. Danger and safety signals are primarily mechanical (grid fill state, chain success/failure) rather than thematic. The game uses character encounter sequencing as primary storytelling method. Visual communication of world-state centers on play field mechanics rather than environmental or systemic visual indicators of political/faction conditions. Story mode provides narrative context that frames puzzle victories as world-saving actions.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:42:34.465Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3313,
+    "output_tokens": 1594,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

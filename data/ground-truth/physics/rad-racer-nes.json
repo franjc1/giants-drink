@@ -1,0 +1,82 @@
+{
+  "game_id": "rad-racer-nes",
+  "game_name": "Rad Racer",
+  "platform": "NES",
+  "year": 1987,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Sprite-based racing game with scanline-by-scanline road rendering for 3D effect; no documented sub-pixel movement system"
+  },
+  "player": {
+    "walk_speed": null,
+    "run_speed": null,
+    "max_horizontal_speed": {
+      "value": 255,
+      "unit": "km/h (turbo mode)"
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "jump_velocity": null,
+    "gravity": null,
+    "max_fall_speed": null,
+    "air_acceleration": null,
+    "air_friction": null,
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Turbo Acceleration",
+      "description": "Car can accelerate from 0-100 km/h normally, then activate turbo to reach maximum 255 km/h",
+      "physics_values": {
+        "normal_max_speed": "100 km/h",
+        "turbo_max_speed": "255 km/h"
+      }
+    },
+    {
+      "name": "Coasting Deceleration",
+      "description": "When time runs out, player vehicle coasts and decelerates to 0 km/h over 5-10 seconds instead of immediate game over (unlike OutRun)",
+      "physics_values": {
+        "deceleration_time_on_timeout": "5-10 seconds"
+      }
+    },
+    {
+      "name": "Crash Physics",
+      "description": "Vehicle can flip and crash when hitting obstacles or other cars",
+      "physics_values": {}
+    },
+    {
+      "name": "Stereoscopic 3D Mode",
+      "description": "Scanline-by-scanline rendering creates 3D perspective effect via anaglyph glasses or Famicom 3D shutter system",
+      "physics_values": {
+        "rendering_method": "scanline-based road scrolling"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "sense of speed",
+    "arcade-style racing",
+    "responsive steering",
+    "momentum-based"
+  ],
+  "tier_notes": "Tier 2 empirical/qualitative data. Game is a racing title with car physics rather than character movement. No jump mechanics, gravity, or sub-pixel movement documented. Only documented values are maximum speed metrics (0-100 km/h normal, 0-255 km/h turbo) and timeout coasting behavior (5-10 seconds). Developers noted 'tricky' programming for road movement simulation but no specific physics parameters published.",
+  "sources_used": [
+    "Wikipedia - Rad Racer (gameplay section)",
+    "The Cutting Room Floor - Rad Racer"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:03:38.769Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4792,
+    "output_tokens": 830,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

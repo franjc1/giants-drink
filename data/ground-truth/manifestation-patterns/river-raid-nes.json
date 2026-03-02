@@ -1,0 +1,142 @@
+{
+  "game_id": "river-raid-nes",
+  "game_name": "River Raid",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Fuel depletion warning",
+      "visual_form": "Klaxon-styled auditory alert; fuel gauge at bottom of screen depleting",
+      "meaning": "Player is running out of fuel and will lose jet if not replenished soon"
+    },
+    {
+      "signal": "River bank proximity",
+      "visual_form": "Visual lane boundaries on left and right edges of screen",
+      "meaning": "Collision with river bank will cause immediate jet loss"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Tankers, helicopters, and bridge structures appearing in scrolling river",
+      "meaning": "Active combat threats that deal damage or cause collision if not destroyed"
+    },
+    {
+      "signal": "Helicopters firing back",
+      "visual_form": "Helicopter sprites with projectile animation (in Atari 8-bit version)",
+      "meaning": "Escalated threat level; enemies are now actively aggressive rather than static obstacles"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fuel depot",
+      "visual_form": "Distinct fuel tank sprite positioned in the river corridor",
+      "meaning": "Flying over refuels the jet; restores fuel gauge at bottom of screen"
+    },
+    {
+      "signal": "Bridge checkpoint",
+      "visual_form": "Bridge structure spanning the river width",
+      "meaning": "Successfully destroying a bridge marks a save point; player restarts at that location upon losing a life instead of earlier in the level"
+    },
+    {
+      "signal": "Clear river corridor",
+      "visual_form": "Empty river sections with no enemy or obstacle sprites",
+      "meaning": "Safe passage zone; allows fuel conservation and repositioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player faction",
+      "color_identity": null,
+      "symbol_or_sigil": "B1 StratoWing Assault Jet sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player jet positioned at bottom of screen; controlled by player input"
+    },
+    {
+      "faction": "Enemy forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Tankers, helicopters, fuel depots, bridges",
+      "enemy_visual_variants": "Helicopters in Atari 8-bit version fire projectiles; bridges may have tanks on them (bonus destruction points)",
+      "environmental_markers": "Enemy structures and units scroll downscreen toward player; represent blockade positions along River of No Return"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early mission progression",
+      "visual_manifestation": "Fuel depots appear frequently in the river corridor; sparse enemy formations",
+      "behavioral_manifestation": "Player can maintain fuel safely; enemies are stationary or predictable; difficulty is low"
+    },
+    {
+      "world_state": "Advanced mission progression",
+      "visual_manifestation": "Fewer fuel depots; higher density of enemy tankers, helicopters, and bridges",
+      "behavioral_manifestation": "Player must make strategic fuel conservation choices; risk-reward between collecting points and surviving; helicopters fire back at higher difficulties"
+    },
+    {
+      "world_state": "Critical fuel state",
+      "visual_manifestation": "Fuel gauge depletes visibly at bottom of screen; Klaxon alert sound activates",
+      "behavioral_manifestation": "Player must prioritize fuel depot collection over combat or point scoring; heightened tension and urgency"
+    },
+    {
+      "world_state": "Bridge destroyed (checkpoint reached)",
+      "visual_manifestation": "Bridge sprite disappears from river; new section begins",
+      "behavioral_manifestation": "Upon jet loss, player restarts at destroyed bridge location rather than earlier; indicates forward progress saved"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Scrolling river canyon",
+      "example": "Vertical scroll continuously moves player forward through the 'River of No Return,' establishing setting as a deep infiltration raid behind enemy lines with no retreat option"
+    },
+    {
+      "technique": "Enemy infrastructure placement",
+      "example": "Tankers, fuel depots, and bridges represent enemy supply and defensive lines; destroying them communicates player role as saboteur dismantling enemy logistics"
+    },
+    {
+      "technique": "Fuel scarcity narrative",
+      "example": "Fuel depots decrease in frequency as player progresses, visually indicating supply lines are being disrupted and player is deeper in hostile territory"
+    },
+    {
+      "technique": "River bank confinement",
+      "example": "Narrow corridor between left and right banks forces tactical positioning and creates sense of constrained movement through enemy-held territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fuel depot",
+      "state": "Present in river",
+      "behavior": "Static; player must fly over it to collect fuel; can be destroyed for points but destroys fuel source"
+    },
+    {
+      "entity": "Enemy tanker",
+      "state": "Scrolling in river",
+      "behavior": "Static position in corridor; must be destroyed by player missiles; represents mobile enemy supply"
+    },
+    {
+      "entity": "Helicopter",
+      "state": "Scrolling in river (Atari 8-bit+)",
+      "behavior": "Fires projectiles at player in advanced versions; indicates escalated threat level and enemy active defense"
+    },
+    {
+      "entity": "Bridge",
+      "state": "Scrolling in river",
+      "behavior": "Spans full river width; blocking passage; destruction marks checkpoint; may carry tanks on surface (visual variant)"
+    },
+    {
+      "entity": "Player jet",
+      "state": "Fuel critical",
+      "behavior": "Klaxon warning activates; visual fuel gauge flashes or depletes; forces immediate fuel-seeking behavior"
+    }
+  ],
+  "notes": "River Raid communicates world-state primarily through resource scarcity (fuel depletion), checkpoint architecture (bridge destruction), and enemy density escalation. The game uses no explicit faction colors or symbols; instead, faction identity is implicit through role (player jet = ally, all obstacles = enemy forces). Visual communication relies on sprite density, fuel gauge status, and Klaxon audio cues rather than detailed graphical storytelling. The 'River of No Return' concept is communicated through continuous downscreen scrolling with no option to retreat, establishing the raid narrative without explicit narrative UI.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:11:18.808Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2835,
+    "output_tokens": 1669,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

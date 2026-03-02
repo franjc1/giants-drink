@@ -1,0 +1,185 @@
+{
+  "game_id": "marathon-pc",
+  "game_name": "Marathon",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence indicator",
+      "visual_form": "Red triangles on motion sensor display",
+      "meaning": "Hostile alien creatures or threats nearby; directional awareness of danger"
+    },
+    {
+      "signal": "Shield depletion",
+      "visual_form": "Depleting shield bar UI element",
+      "meaning": "Player vulnerability increasing; imminent death risk if not recharged"
+    },
+    {
+      "signal": "Oxygen depletion",
+      "visual_form": "Depleting oxygen level bar UI element",
+      "meaning": "Environmental hazard (low-gravity, oxygen-free spaces); lethal threat if not restored"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Visual renderings of molten material pits, crushing ceilings, narrow dark passages",
+      "meaning": "Instant-death or high-damage zones; spatial threat communication through level design"
+    },
+    {
+      "signal": "Magnetic field interference",
+      "visual_form": "Motion sensor malfunction or distortion visual feedback",
+      "meaning": "Loss of tactical awareness; increased danger due to sensor unreliability"
+    },
+    {
+      "signal": "Locked doors without switches visible",
+      "visual_form": "Impassable barriers blocking forward progress",
+      "meaning": "Unsolved puzzle or incomplete objective; blocked path indicates unfinished task"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Allied character presence",
+      "visual_form": "Green squares on motion sensor display",
+      "meaning": "Friendly NPCs nearby; reduced immediate danger zones or mission-critical entities"
+    },
+    {
+      "signal": "Recharge station availability",
+      "visual_form": "Wall-mounted recharge station architecture; visual cues in environment",
+      "meaning": "Safe zone for shield/oxygen restoration; proximity to recharge indicates sanctuary"
+    },
+    {
+      "signal": "Pattern buffer device presence",
+      "visual_form": "Distinctive terminal/device architecture placed in level openings",
+      "meaning": "Save point location; checkpoint safety; rarity communicates progression stakes"
+    },
+    {
+      "signal": "Computer terminal access",
+      "visual_form": "Terminal interfaces in wall openings",
+      "meaning": "Mission briefing available; narrative guidance; objective clarification reduces uncertainty"
+    },
+    {
+      "signal": "Open, well-lit areas",
+      "visual_form": "Rendered spaces with visibility and navigable pathways",
+      "meaning": "Safer zones compared to dark/narrow passages; reduced environmental threat density"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "UESC Marathon (Human colonial authority/ship AI)",
+      "color_identity": null,
+      "symbol_or_sigil": "Ship's crest of UESC Marathon (featured on game cover)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Computer terminals with AI interface displays; ship architecture (walls, doors, recharge stations); interior colony ship setting"
+    },
+    {
+      "faction": "Alien invaders",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct enemy creature models visually differentiated from human/ship elements",
+      "environmental_markers": "Exterior space setting threat; motion sensor red triangle indicators identify faction allegiance through hostile status"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active alien invasion in progress",
+      "visual_manifestation": "Enemy creatures spawned throughout levels; hostile indicators on motion sensor; combat-ready environment",
+      "behavioral_manifestation": "Enemies actively attacking; player forced into defensive/offensive gameplay; level objectives tied to eliminating threats"
+    },
+    {
+      "world_state": "Compromised ship systems/reduced life support",
+      "visual_manifestation": "Oxygen-free environments; low-gravity areas; magnetic field interference affecting sensor reliability",
+      "behavioral_manifestation": "Player must manage oxygen levels; environmental hazards restrict movement; sensor unreliability forces tactical caution"
+    },
+    {
+      "world_state": "Incomplete objectives/unsolved puzzles",
+      "visual_manifestation": "Locked doors blocking access; inaccessible platforms; sealed areas in level design",
+      "behavioral_manifestation": "Player must explore non-linear level spaces; requires switch activation; necessitates backtracking and investigation"
+    },
+    {
+      "world_state": "Ship systems functional/normal operations",
+      "visual_manifestation": "Recharge stations operational; pattern buffers accessible; functional computer terminals; navigation map visible on HUD",
+      "behavioral_manifestation": "Player can save progress; can restore shields/oxygen; can access mission briefings; can rely on motion sensor"
+    },
+    {
+      "world_state": "Critical player vulnerability",
+      "visual_manifestation": "Shield bar critically low or depleted; oxygen bar critically low or depleted; visual screen effects indicating damage state",
+      "behavioral_manifestation": "Player seeks immediate recharge station; avoids combat; prioritizes survival over exploration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Computer terminal narratives",
+      "example": "Terminals contain engineering documents, crew diaries, and AI conversations that reveal plot without cutscenes; player must actively seek out terminals to understand situation context"
+    },
+    {
+      "technique": "Level progression gating via plot terminals",
+      "example": "Specific terminals must be accessed to teleport to next level; gates advancement on narrative requirements, not just combat completion"
+    },
+    {
+      "technique": "Ship architecture and interior design",
+      "example": "Colony ship (Marathon constructed from Mars moon Deimos) setting communicates sci-fi context; interior passages, recharge stations, and sealed areas tell story of functional vessel under siege"
+    },
+    {
+      "technique": "Environmental hazard variety",
+      "example": "Specific level designs (e.g., 'Smells Like Napalm, Tastes Like Chicken') feature both open and maze-like sections communicating combat diversity and exploration challenges"
+    },
+    {
+      "technique": "Hidden terminals as easter eggs",
+      "example": "Secret terminals difficult to locate contain designer messages; reward player curiosity and exploration, expanding narrative beyond mandatory path"
+    },
+    {
+      "technique": "Objective variation across levels",
+      "example": "Some levels require endpoint reach only; others mandate item retrieval, switch activation, area exploration, or creature extermination; objective communicated through terminal briefings and level design constraints"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Security Officer (Player)",
+      "state": "High shield and oxygen",
+      "behavior": "Can explore freely, engage enemies, solve puzzles; full tactical capability"
+    },
+    {
+      "entity": "Security Officer (Player)",
+      "state": "Low shield",
+      "behavior": "Seeks recharge stations; avoids combat; prioritizes defensive positioning"
+    },
+    {
+      "entity": "Security Officer (Player)",
+      "state": "Low oxygen in oxygen-free environment",
+      "behavior": "Must find recharge station or exit hazardous zone; behavior driven by survival necessity"
+    },
+    {
+      "entity": "Alien creatures",
+      "state": "Active/engaged",
+      "behavior": "Visible on motion sensor as red triangles; actively attack player; force combat or avoidance behavior"
+    },
+    {
+      "entity": "Alien creatures",
+      "state": "Undetected/distant",
+      "behavior": "Indicated on motion sensor but not yet engaged; player can plan approach or avoidance strategy"
+    },
+    {
+      "entity": "Allied characters (NPCs)",
+      "state": "Present in level",
+      "behavior": "Marked as green squares on motion sensor; indicate mission-critical zones or safe areas"
+    },
+    {
+      "entity": "Computer terminal AI",
+      "state": "Active",
+      "behavior": "Provides mission briefings, objective clarification, and narrative exposition; gates level progression; communicates strategic information"
+    }
+  ],
+  "notes": "Marathon (1994) uses a motion sensor HUD element as primary world-state communication tool—red triangles for enemies, green squares for allies creates immediate tactical awareness. The game's world-state manifestation is heavily tied to ship systems integrity: oxygen availability, gravity fields, and magnetic interference directly alter player behavior and capability. Narrative world-state (invasion status, objectives) is communicated through mandatory computer terminal access rather than environmental visual changes, creating a hybrid system where spatial design and UI communication work in tandem. The rarity of save points (pattern buffers) is itself a world-state signal—their scarcity increases tension and stakes perception. Environmental hazards (molten pits, crushing ceilings, narrow passages) communicate danger through pure spatial design without requiring UI explanation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:10:08.112Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2545,
+    "output_tokens": 2229,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

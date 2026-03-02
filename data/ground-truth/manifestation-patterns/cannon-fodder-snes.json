@@ -1,0 +1,157 @@
+{
+  "game_id": "cannon-fodder-snes",
+  "game_name": "Cannon Fodder",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "enemy_spawning_buildings",
+      "visual_form": "structures that are visually distinct from terrain; invulnerable to small arms fire",
+      "meaning": "active threat source; requires explosive weapons to neutralize"
+    },
+    {
+      "signal": "vehicle_presence",
+      "visual_form": "jeeps, tanks, helicopters rendered distinctly from infantry",
+      "meaning": "escalated threat level; superior firepower compared to foot soldiers"
+    },
+    {
+      "signal": "terrain_hazards",
+      "visual_form": "rivers (slow soldiers, disable ranged capability), quicksand, mines, booby traps visually indicated",
+      "meaning": "environmental danger; movement restriction and death traps"
+    },
+    {
+      "signal": "missile_turrets",
+      "visual_form": "stationary defensive installations",
+      "meaning": "ranged threat; cannot be defeated with standard weaponry"
+    },
+    {
+      "signal": "escalating_enemy_power",
+      "visual_form": "enemy soldiers become visually more numerous and aggressive as game progresses",
+      "meaning": "world-state progression toward difficulty; player's initial firepower advantage erodes"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "supply_crates",
+      "visual_form": "collectible objects scattered in environment",
+      "meaning": "resource replenishment; grenades and rockets ammunition restoration"
+    },
+    {
+      "signal": "squad_fragmentation",
+      "visual_form": "ability to split unit into smaller visual groups",
+      "meaning": "tactical positioning; reduced exposure for soldiers"
+    },
+    {
+      "signal": "open_terrain",
+      "visual_form": "clear sightlines without hazards or obstacles",
+      "meaning": "reduced immediate danger; allows formation and controlled advance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "player-controlled soldiers visually distinct from enemy infantry through uniform/silhouette",
+      "environmental_markers": "squad grouping and cursor-based control UI indicates player faction"
+    },
+    {
+      "faction": "enemy_forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "enemy infantry rendered differently from player troops; spawn from designated buildings",
+      "environmental_markers": "buildings and military installations indicate enemy presence and control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_advantage",
+      "visual_manifestation": "player troops visually outnumber enemy formations; enemy infantry rendered as less dense",
+      "behavioral_manifestation": "enemies die quickly to single rounds; player firepower dominates initially"
+    },
+    {
+      "world_state": "escalating_difficulty",
+      "visual_manifestation": "enemy infantry becomes more numerous; vehicles and turrets appear with greater frequency",
+      "behavioral_manifestation": "player firepower advantage erodes; enemies become more powerful as progression continues"
+    },
+    {
+      "world_state": "environmental_context_shifts",
+      "visual_manifestation": "jungle, snow, desert, and other biome-specific terrain rendering; unique structures like igloos and snowmobiles",
+      "behavioral_manifestation": "level-specific hazards manifest visually (rivers, quicksand, snow terrain); movement mechanics adapt to environment"
+    },
+    {
+      "world_state": "mission_criticality",
+      "visual_manifestation": "ammunition scarcity communicated through supply crate distribution; limited explosive weapon availability",
+      "behavioral_manifestation": "player must conserve resources and plan carefully; wasting weapons risks mission failure"
+    },
+    {
+      "world_state": "heavy_outnumbering",
+      "visual_manifestation": "enemy swarms rendered across screen; player squad appears small relative to opposition",
+      "meaning": "strategic necessity enforced visually; caution and positioning critical"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "terrain_as_narrative",
+      "example": "jungle, snow, and desert settings with unique features (igloos, snowmobiles, rural inspiration from Emmerdale Farm) communicate geographic and cultural context without exposition"
+    },
+    {
+      "technique": "hazard_placement_logic",
+      "example": "rivers, quicksand, mines, and booby traps positioned to suggest inhabited/contested territory; visual placement tells story of conflict zones"
+    },
+    {
+      "technique": "building_density_storytelling",
+      "example": "concentration of enemy spawning buildings and installations visually indicates fortified enemy positions; sparse structures suggest captured/neutral areas"
+    },
+    {
+      "technique": "resource_scarcity_communication",
+      "example": "limited supply crate placement and ammunition conservation mechanic visually reinforces anti-war theme; scarcity of resources mirrors real military logistics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_soldiers",
+      "state": "traversing_open_terrain",
+      "behavior": "move at normal speed; maintain firing capability"
+    },
+    {
+      "entity": "player_soldiers",
+      "state": "crossing_rivers",
+      "behavior": "movement slowed visibly; firing capability disabled; vulnerability increased"
+    },
+    {
+      "entity": "enemy_infantry",
+      "state": "early_game",
+      "behavior": "die to single machine gun rounds; spawn from buildings; visually numerous but individually weak"
+    },
+    {
+      "entity": "enemy_infantry",
+      "state": "late_game",
+      "behavior": "require multiple rounds to kill; spawn more frequently; visually more aggressive"
+    },
+    {
+      "entity": "enemy_vehicles",
+      "state": "active",
+      "behavior": "invulnerable to standard weaponry; require specialized tactics; visually mobile and threatening"
+    },
+    {
+      "entity": "supply_crates",
+      "state": "available",
+      "behavior": "can be retrieved for ammunition or shot to destroy nearby enemies; placement suggests strategic choices"
+    }
+  ],
+  "notes": "Cannon Fodder employs darkly humorous visual communication with an underlying anti-war message. The game communicates world-state primarily through environmental variety (biomes, hazards), enemy density escalation, and resource scarcity mechanics. Factions are distinguished not through explicit color/symbol systems but through behavioral and visual manifestation—player troops are controlled via point-and-click UI while enemies spawn from buildings. The overhead camera perspective provides omniscient world-view crucial to strategy elements. Visual fragility of troops (single-round kills) and small squad size relative to enemy swarms reinforce anti-war commentary. Sensible Software's design philosophy prioritized 'instant' action over complex war-game mechanics, resulting in visual simplicity with tactical depth.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:32:09.096Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2856,
+    "output_tokens": 1781,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

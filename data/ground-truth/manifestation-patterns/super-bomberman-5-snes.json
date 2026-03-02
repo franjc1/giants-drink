@@ -1,0 +1,144 @@
+{
+  "game_id": "super-bomberman-5-snes",
+  "game_name": "Super Bomberman 5",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy proximity",
+      "visual_form": "Animated enemy sprites with distinct movement patterns",
+      "meaning": "Active threat requiring evasion or bomb placement"
+    },
+    {
+      "signal": "Bomb timer/fuse",
+      "visual_form": "Animated fuse on placed bombs, sprite animation acceleration",
+      "meaning": "Imminent explosion — danger zone expanding"
+    },
+    {
+      "signal": "Blast radius expansion",
+      "visual_form": "Cross-pattern fire sprite propagation across tiles",
+      "meaning": "Active lethal area; player must be outside blast range"
+    },
+    {
+      "signal": "Enemy projectiles or charge-up",
+      "visual_form": "Distinct sprite animations preceding attack behavior",
+      "meaning": "Enemy aggression state — immediate threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear tile space",
+      "visual_form": "Empty floor tiles with no enemies, bombs, or fire sprites",
+      "meaning": "Safe position for movement and regrouping"
+    },
+    {
+      "signal": "Destructible terrain absence",
+      "visual_form": "Open pathways without soft blocks",
+      "meaning": "Traversable area with reduced bomb placement strategy required"
+    },
+    {
+      "signal": "Power-up presence",
+      "visual_form": "Distinct colored item sprites (varies by power type)",
+      "meaning": "Resource availability; safe interaction point"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1 Character",
+      "color_identity": "White/light primary palette",
+      "symbol_or_sigil": "Distinct character sprite design (standard Bomberman silhouette)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player 1 starting zone position in arena"
+    },
+    {
+      "faction": "Player 2 Character",
+      "color_identity": "Black/dark primary palette",
+      "symbol_or_sigil": "Distinct character sprite design (standard Bomberman silhouette with color swap)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player 2 starting zone position, typically opposite corner from P1"
+    },
+    {
+      "faction": "AI Enemies/Boss entities",
+      "color_identity": "Varies by enemy type; distinct from playable characters",
+      "symbol_or_sigil": "Unique sprite designs per enemy archetype",
+      "enemy_visual_variants": "Different animation states reflecting aggression level or special abilities",
+      "environmental_markers": "Spawning zones; arena placement patterns"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Arena initialization / round start",
+      "visual_manifestation": "Soft blocks arranged in maze pattern; hard blocks static; players positioned at starting corners; no active bombs or flames",
+      "behavioral_manifestation": "Enemies dormant or in patrol state; no projectile activity"
+    },
+    {
+      "world_state": "Active combat phase",
+      "visual_manifestation": "Bomb sprites placed on grid; fuse animation active; destroyed blocks create visual gaps; power-ups revealed as blocks clear",
+      "behavioral_manifestation": "Enemies pursue player; collision detection active; bomb detonation sequences trigger"
+    },
+    {
+      "world_state": "Player near defeat / low mobility",
+      "visual_manifestation": "Narrow safe zones remaining; dense fire sprite patterns; limited clear tiles",
+      "behavioral_manifestation": "Enemies become more aggressive; movement becomes restricted"
+    },
+    {
+      "world_state": "Power-up acquired",
+      "visual_manifestation": "Power-up sprite disappears; player sprite may show subtle visual change or equipment indicator",
+      "behavioral_manifestation": "Increased bomb blast range or placement speed; enhanced movement capabilities"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Maze architecture variation",
+      "example": "Soft block wall patterns create natural choke points and strategic bomb placement zones; hard block placement defines arena flow"
+    },
+    {
+      "technique": "Power-up distribution",
+      "example": "Placement of range/speed upgrades in accessible vs. contested zones signals strategic difficulty and player progression pacing"
+    },
+    {
+      "technique": "Starting position asymmetry",
+      "example": "Player 1 and Player 2 spawned in opposite corners with similar terrain sight-lines suggests balanced competitive design intent"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bomberman (Player character)",
+      "state": "Normal movement",
+      "behavior": "Sprite animates in cardinal direction; responds immediately to input"
+    },
+    {
+      "entity": "Bomberman (Player character)",
+      "state": "Bomb placement active",
+      "behavior": "Brief placement animation; bomb sprite appears on tile; player forced to occupy adjacent tile"
+    },
+    {
+      "entity": "Enemy/Boss",
+      "state": "Patrol/idle",
+      "behavior": "Slow movement loops or stationary animation; predictable path patterns"
+    },
+    {
+      "entity": "Enemy/Boss",
+      "state": "Player detected/aggression",
+      "behavior": "Animation acceleration; directed movement toward player; projectile/charge animations triggered"
+    },
+    {
+      "entity": "Fire/Blast sprite",
+      "state": "Active propagation",
+      "behavior": "Cross-pattern expansion; collision damage on contact; automatic despawn after brief duration"
+    }
+  ],
+  "notes": "Super Bomberman 5 uses classic grid-based arena design with visual clarity between safe/dangerous zones. Faction distinction relies on character color palette swap (white vs. black) rather than complex faction systems. World state communication is primarily mechanical (bomb placement, fire expansion) rather than narrative-driven. Power-up discovery serves as both mechanical progression and visual reward for strategic block destruction. The game prioritizes immediate visual feedback for collision and blast interaction.",
+  "sources_used": [],
+  "TODO": "Source file (tcrf.net) did not contain accessible game-specific manifestation data. Analysis performed from standard Bomberman 5 design knowledge. To enhance: obtain official design documents, gameplay mechanic breakdowns, or detailed sprite/visual effect documentation.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:09:43.013Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 919,
+    "output_tokens": 1718,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

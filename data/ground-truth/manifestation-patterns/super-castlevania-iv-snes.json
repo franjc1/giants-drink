@@ -1,0 +1,185 @@
+{
+  "game_id": "super-castlevania-iv-snes",
+  "game_name": "Super Castlevania IV",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Blood-filled pools and dripping blood",
+      "visual_form": "Red liquid hazards in dungeon/torture chamber; blood dripping from ceiling",
+      "meaning": "Environmental damage zones; player health threat"
+    },
+    {
+      "signal": "Spikes with blood coating",
+      "visual_form": "Blood stains on spike traps",
+      "meaning": "Contact hazard; instant damage/death"
+    },
+    {
+      "signal": "Coffins with crosses",
+      "visual_form": "Mobile coffin enemies with religious iconography",
+      "meaning": "Undead threat; aggressive enemy units"
+    },
+    {
+      "signal": "Nude statues (Japanese version)",
+      "visual_form": "Unclothed statue environmental objects",
+      "meaning": "Corrupted/unholy castle interior; Gothic horror atmosphere"
+    },
+    {
+      "signal": "Breakable blocks and crumbling architecture",
+      "visual_form": "Destructible environmental elements",
+      "meaning": "Structural instability; collision hazard; time pressure"
+    },
+    {
+      "signal": "Tight vertical spaces and falling platforms",
+      "visual_form": "Crushing hazards between moving blocks and ceiling",
+      "meaning": "Environmental death trap; precision navigation required"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Candles",
+      "visual_form": "Interactable candle sprites in environment",
+      "meaning": "Food item source; health restoration point"
+    },
+    {
+      "signal": "Rings (grapple points)",
+      "visual_form": "Circular grapple targets suspended in air",
+      "meaning": "Safe traversal mechanic; checkpoint for swinging passages"
+    },
+    {
+      "signal": "Magic Crystal drops",
+      "visual_form": "Item drop from defeated boss",
+      "meaning": "Full health restoration; boss defeat reward"
+    },
+    {
+      "signal": "Food items",
+      "visual_form": "Consumable sprites dropping from candles/blocks",
+      "meaning": "Health recovery mechanism; resource availability"
+    },
+    {
+      "signal": "Solid ground/platforms",
+      "visual_form": "Stable architectural surfaces",
+      "meaning": "Safe traversal zone; absence of hazards"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Simon Belmont (Player)",
+      "color_identity": "Brown/tan clothing (historical vampire hunter attire)",
+      "symbol_or_sigil": "Whip as signature weapon; holy water and religious sub-weapons",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Holy items (rosary); churches and religious architecture represent allied spaces"
+    },
+    {
+      "faction": "Dracula/Undead Castle Inhabitants",
+      "color_identity": "Dark purples, blacks, reds; gothic decay",
+      "symbol_or_sigil": "Crosses (inverted/removed in international versions, suggesting desecration); coffins; blood imagery",
+      "enemy_visual_variants": "Bat variants, skeletal enemies, coffin creatures, possessed statues",
+      "environmental_markers": "Graveyard; dungeon; torture chamber; treasury; demonic castle architecture; religious iconography corrupted or removed"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Castle desecrated/corrupted by Dracula",
+      "visual_manifestation": "Religious symbols (crosses) removed or defaced in international version; nude statues; blood-filled pools; dungeon torture implements",
+      "behavioral_manifestation": "Enemies spawn continuously; time limit pressure; boss patterns intensify as Simon progresses deeper"
+    },
+    {
+      "world_state": "Player health depleted",
+      "visual_manifestation": "Health gauge empties; Simon sprite may show damage state",
+      "behavioral_manifestation": "Life lost; game over triggered if all lives consumed"
+    },
+    {
+      "world_state": "Environmental hazard encountered",
+      "visual_manifestation": "Blood pools glow red (or green acid in international versions); spikes protrude; platforms move or fall",
+      "behavioral_manifestation": "Simon takes damage; knockback occurs; forced crouch animation on high falls"
+    },
+    {
+      "world_state": "Boss defeated",
+      "visual_manifestation": "Boss sprite vanishes; Magic Crystal drops with visual effect",
+      "behavioral_manifestation": "Level progression unlock; health fully restored; next stage becomes accessible"
+    },
+    {
+      "world_state": "Stage progression (regional difference)",
+      "visual_manifestation": "Japanese version: blood dripping logo, cross-filled environments, white text story. International version: logo static, crosses removed, rocks replace crosses, blood becomes green acid, story in green HUD font",
+      "behavioral_manifestation": "Game censorship removes religious/violent imagery in Western release; mechanical gameplay remains identical"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Religious iconography censorship",
+      "example": "Japanese version features prominent crosses in graveyard, password screen (Jesus Christ), coffins, and background details. International versions have crosses systematically removed or replaced with rocks/tombstones, signaling regional content policies and recontextualization of sacred space as defiled."
+    },
+    {
+      "technique": "Blood/acid color substitution",
+      "example": "Dungeon stage blood pools and ceiling drips changed from red to green in international versions, recontextualizing fatal hazards as chemical rather than visceral threats, reducing horror tone."
+    },
+    {
+      "technique": "Statue corruption",
+      "example": "Nude statues in Main Hall clothed in international versions, shifting the visual language from desecration/blasphemy to architectural decay."
+    },
+    {
+      "technique": "Environmental hazard visualization",
+      "example": "Moving blocks, falling platforms, and vertical crushes visually communicate death traps without explicit gore; collision detection disabled during ring-swinging indicates safe mechanical zones."
+    },
+    {
+      "technique": "Boss-stage architecture",
+      "example": "Each stage environment (Stables, Graveyard, Dungeon, Treasury) escalates gothic horror through visual complexity and hazard density, structuring narrative progression through space."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Simon Belmont",
+      "state": "Landing from high fall (2+ blocks)",
+      "behavior": "Forced crouch animation; can be canceled by continuous jumping to avoid lag/delay"
+    },
+    {
+      "entity": "Simon Belmont",
+      "state": "Whip activated",
+      "behavior": "8-directional attack capability; can be canceled early; limp whip mode allows blocking and weak damage; whip length upgradeable via Morning Star item"
+    },
+    {
+      "entity": "Simon Belmont",
+      "state": "Ring contact",
+      "behavior": "Grapple/swing mechanic engaged; collision with level geometry disabled; vertical boost on release from above ring; can chain height gains by repeated hits"
+    },
+    {
+      "entity": "Simon Belmont",
+      "state": "Invincibility frames active (post-damage)",
+      "behavior": "Can pass through moving blocks without crush damage; enables wall-entry via collision exploitation"
+    },
+    {
+      "entity": "Enemies (generic)",
+      "state": "Onscreen",
+      "behavior": "Active aggression; continuous spawning; some cause frame lag when killed (elaborate death animations); collision detection reduces during high lag"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Defeated",
+      "behavior": "Vanish with visual effect; drop Magic Crystal; stage advancement triggered"
+    },
+    {
+      "entity": "Coffin enemies (Snapper Caskets)",
+      "state": "Active",
+      "behavior": "Mobile attack units; cross-marked in Japanese version (removed international); aggressive pursuit pattern"
+    }
+  ],
+  "notes": "Super Castlevania IV uses environmental design, hazard visualization, and item placement to communicate world state. Primary distinction between Japanese and international versions: systematic removal of Christian iconography (crosses, Jesus Christ imagery, blood) in Western release, replaced with censored visuals (green acid, clothed statues, rocks). This represents content policy enforcement rather than mechanical change. Whip mechanics enable safe traversal (ring-swinging disables collision), creating visual/mechanical symbiosis where grapple points signal safe passages. Gothic horror communicated through architecture escalation: Stables→Graveyard→Dungeon→Treasury→Castle interior, each with increased hazard density. Lag exploitation in speedrunning reveals collision detection weakness under load—mechanically significant but not intentional world-state communication.",
+  "sources_used": [
+    "tasvideos",
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:57:19.114Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7158,
+    "output_tokens": 2240,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

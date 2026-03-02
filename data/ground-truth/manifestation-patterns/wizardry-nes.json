@@ -1,0 +1,175 @@
+{
+  "game_id": "wizardry-nes",
+  "game_name": "Wizardry: Proving Grounds of the Mad Overlord",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster encounter screen",
+      "visual_form": "Dungeon maze disappears, replaced by monster sprite/portrait",
+      "meaning": "Active combat threat; party health at risk"
+    },
+    {
+      "signal": "Darkness spell effect",
+      "visual_form": "Text-based indicator of 'Darkness' on dungeon square; visual maze becomes obscured",
+      "meaning": "Loss of navigation control; party disoriented and vulnerable to ambush"
+    },
+    {
+      "signal": "Teleport trap",
+      "visual_form": "Sudden location shift without warning; player appears in unknown dungeon coordinates",
+      "meaning": "Potentially lethal spatial danger; risk of landing in solid stone or hostile area"
+    },
+    {
+      "signal": "Dungeon depth progression",
+      "visual_form": "Deeper dungeon levels accessed via elevator/stairs; increased monster complexity in encounters",
+      "meaning": "Escalating threat intensity; enemies grow progressively more dangerous per level"
+    },
+    {
+      "signal": "Total party kill (TPK)",
+      "visual_form": "Party status shows all members dead; game state locked unless bodies recovered",
+      "meaning": "Irreversible failure state requiring new party or body recovery mission"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town menu interface",
+      "visual_form": "Text-based town menu screen; character creation and equipment management",
+      "meaning": "Safe zone outside dungeon; no combat encounters possible"
+    },
+    {
+      "signal": "Party formation screen",
+      "visual_form": "Character roster and alignment compatibility checks (Good/Evil separation rules)",
+      "meaning": "Preparation state; party composition validated before dungeon entry"
+    },
+    {
+      "signal": "Spell availability",
+      "visual_form": "Multiple spell levels per class (up to 7 levels); healing spells accessible at higher levels",
+      "meaning": "Mitigation resources available; party resilience increases with progression"
+    },
+    {
+      "signal": "Teleport spell (high-level)",
+      "visual_form": "Controlled fast-travel mechanic requiring coordinate input",
+      "meaning": "Player agency over dungeon navigation; escape route from dangerous zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Party Alignment System",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Good and Evil characters cannot share party; alignment affects NPC interactions and spell availability",
+      "environmental_markers": "Dungeon encounters filter enemy types based on party moral alignment"
+    },
+    {
+      "faction": "Werdna (Arch-Wizard antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Final boss encounter at dungeon level 10; visual representation as unique monster sprite",
+      "environmental_markers": "Bottom dungeon level reserved as Werdna's domain; amulet artifact tied to his defeat"
+    },
+    {
+      "faction": "Trebor's Castle authority",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Town hub above dungeon; implicit safe haven governed by castle authority; dungeon is 'Proving Grounds' under this jurisdiction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Party alive and equipped",
+      "visual_manifestation": "First-person dungeon maze view with party status display",
+      "behavioral_manifestation": "Free movement through 20x20 dungeon grid; random encounters triggered by exploration"
+    },
+    {
+      "world_state": "Party in combat",
+      "visual_manifestation": "Dungeon maze hidden; monster portrait/sprite replaces maze view; combat menu interface appears",
+      "behavioral_manifestation": "Turn-based combat engagement; party cannot move through dungeon until combat resolves"
+    },
+    {
+      "world_state": "Character death in dungeon",
+      "visual_manifestation": "Character status changes from 'Alive' to 'Dead'; corpse remains in dungeon location",
+      "behavioral_manifestation": "Dead character cannot participate in combat; body can be recovered by new party; loot remains in place"
+    },
+    {
+      "world_state": "Total party kill",
+      "visual_manifestation": "All party member statuses shift to 'Dead'; game state freezes; cannot exit dungeon",
+      "behavioral_manifestation": "Game progression halted; player must create new party or abandon save file"
+    },
+    {
+      "world_state": "Progression through dungeon levels",
+      "visual_manifestation": "Dungeon level counter increments (1-10); visual complexity and enemy sprite quality increases",
+      "behavioral_manifestation": "Stronger monsters appear; spell requirements increase; treasure quality escalates"
+    },
+    {
+      "world_state": "Character class advancement",
+      "visual_manifestation": "Character experience level display; visual representation of elite class unlock (Bishop, Samurai, Lord, Ninja)",
+      "behavioral_manifestation": "New spells become available; combat effectiveness increases; access to higher-level dungeon areas improves"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dungeon layout complexity",
+      "example": "20x20 maze grid per level with permanent traps (Darkness, Teleport); spatial design communicates dungeon as hostile, maze-like fortress requiring player cartography"
+    },
+    {
+      "technique": "Elevation structure",
+      "example": "10-level vertical dungeon under Trebor's castle; deeper levels are progressively more lethal; final level contains Werdna's chamber—spatial hierarchy conveys authority and power"
+    },
+    {
+      "technique": "Item scarcity and progression",
+      "example": "Equipment must be purchased before dungeon entry; rare treasures found in dungeon; amulet is final objective—material economy communicates resource management and long-term goals"
+    },
+    {
+      "technique": "Character mortality stakes",
+      "example": "No mid-dungeon saves; total party kill is permanent unless bodies recovered; death remains visible in corpse locations—mechanical design conveys real consequences for failure"
+    },
+    {
+      "technique": "NPC party recovery mechanic",
+      "example": "New adventurers can descend to recover dead party bodies and loot; establishes cyclical dungeon population and emergent narrative of adventuring legacies"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Monster group",
+      "state": "Encountered during exploration",
+      "behavior": "Visual sprite appears; combat initiation; 1-4 groups can attack simultaneously; behavior varies by monster type and dungeon level"
+    },
+    {
+      "entity": "Party member",
+      "state": "Alive in dungeon",
+      "behavior": "Can move, cast spells, attack, use items; participates in turn-based combat; experience accumulates"
+    },
+    {
+      "entity": "Party member",
+      "state": "Dead",
+      "behavior": "Cannot act in combat; body remains in dungeon location; cannot be resurrected in field; requires new party to recover"
+    },
+    {
+      "entity": "Werdna (arch-wizard)",
+      "state": "Occupies dungeon level 10",
+      "behavior": "Final encounter boss; defeating him completes game objective; amulet is held as quest artifact"
+    },
+    {
+      "entity": "Elevator/Stairs",
+      "state": "Located at each dungeon level exit",
+      "behavior": "Visual landmark; enables level progression; hidden within maze requiring full exploration to locate"
+    }
+  ],
+  "notes": "Wizardry NES (1987) communicates world-state almost entirely through text-based menus and simple line-graphics dungeon visualization. Danger is signaled by narrative events (monster encounter screen) rather than environmental visual design. Faction identity is minimal—the game features alignment-based party restrictions but no visual faction sigils or color coding. World-state changes manifest as mechanical state transitions (alive→dead, level_0→level_10) reflected in UI rather than dynamic environmental visual shifts. The game's primary manifestation layer is procedural/mechanical rather than aesthetic; player understanding derives from rules comprehension and learned spatial navigation patterns. Regional differences (class name changes: Priest→Cleric, Bishop→Wizard in US version) suggest cultural faction adaptation but not visual manifestation changes.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Wizardry NES article)",
+    "wikipedia (Wizardry: Proving Grounds of the Mad Overlord)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:56:27.390Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4332,
+    "output_tokens": 2219,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

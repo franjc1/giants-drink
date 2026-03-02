@@ -1,0 +1,187 @@
+{
+  "game_id": "gimmick-nes",
+  "game_name": "Gimmick! (Mr. Gimmick)",
+  "platform": "NES",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated enemy sprites with distinct visual designs distinct from Yumetaro",
+      "meaning": "Threat to player; contact causes damage"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Large, detailed sprite occupying significant screen real estate; typically positioned at level end",
+      "meaning": "Major threat requiring defeat to progress; heightened difficulty"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": "Background and foreground obstacles (spikes, gaps, moving platforms) visually distinct from safe passage",
+      "meaning": "Environmental damage or fall death; requires platforming precision"
+    },
+    {
+      "signal": "Life loss",
+      "visual_form": "HUD display of remaining lives decrements; visual feedback on character damage/knockback",
+      "meaning": "Player resource depletion; game over condition approaching"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Star platform creation",
+      "visual_form": "Spawning star projectile above Yumetaro's horn solidifies into platform; bright, glowing appearance",
+      "meaning": "Player-controlled safe passage; accessible area created on demand"
+    },
+    {
+      "signal": "Item collection",
+      "visual_form": "Magic items glow/shimmer in dedicated stage locations; distinct visual presentation from enemies",
+      "meaning": "Progress toward good ending; hidden collectible secured"
+    },
+    {
+      "signal": "Checkpoint progression",
+      "visual_form": "Stage advancement markers; transition between level sections",
+      "meaning": "Safe progression; player advancement through world"
+    },
+    {
+      "signal": "Yumetaro's active state",
+      "visual_form": "Character sprite animated and responsive to input; horn glowing when star-attack ready",
+      "meaning": "Player agency intact; combat/mobility capability available"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Yumetaro (protagonist)",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Horn (star-generation point)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Yumetaro's presence marks player-controlled safe zone; stars mark his attack area"
+    },
+    {
+      "faction": "The Girl (objective)",
+      "color_identity": null,
+      "symbol_or_sigil": "Present/toy form in opening; human form in ending cutscene",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Depicted in intro/outro cinematics; presence motivates all player action"
+    },
+    {
+      "faction": "Hostile Toys",
+      "color_identity": null,
+      "symbol_or_sigil": "Variety of distinct enemy designs (Ohagi, etc.); non-Yumetaro sprite forms",
+      "enemy_visual_variants": "Different enemy types per stage; behavior varies but all oppose player",
+      "environmental_markers": "Scattered throughout levels; concentrated in final castle area"
+    },
+    {
+      "faction": "Alternate Dimension",
+      "color_identity": null,
+      "symbol_or_sigil": "Crumbling castle; surreal stage environments",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Progressive architectural decay; final stage shows castle collapse sequence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Stages 1-3)",
+      "visual_manifestation": "Colorful, diverse environments; toy-themed aesthetics; varied background art per stage",
+      "behavioral_manifestation": "Enemies have moderate patrol patterns; star attack sufficient for basic progression"
+    },
+    {
+      "world_state": "Mid-game (Stages 4-6)",
+      "visual_manifestation": "Environments become darker, more castle-like; architectural elements dominate; visual complexity increases",
+      "behavioral_manifestation": "Enemy density increases; boss patterns require learned attack timings; star platforming mechanics become mandatory"
+    },
+    {
+      "world_state": "Bad ending state (defeat without magic items)",
+      "visual_manifestation": "Loop restart; same stages replay from beginning",
+      "behavioral_manifestation": "No access to secret Stage 7; final boss remains inaccessible; cycle repeats"
+    },
+    {
+      "world_state": "Good ending state (all magic items collected, no continues)",
+      "visual_manifestation": "Secret Stage 7 revealed; final boss arena accessible; castle destruction cutscene triggers upon victory",
+      "behavioral_manifestation": "Player gains access to true final boss; rescue cutscene plays; world narrative completes"
+    },
+    {
+      "world_state": "Tampered/pirated cartridge (Japanese version only)",
+      "visual_manifestation": "Anti-tampering message displayed referencing Atlantis no Nazo; progression halt at Stage 7",
+      "behavioral_manifestation": "Game prevents access to final boss; blocks good ending achievement"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Progressive architectural decay",
+      "example": "Stages 1-3 show toy shop and natural environments; Stages 4-6 transition into crumbling castle with visibly damaged walls, debris, and ominous atmosphere"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Stage-specific enemy designs (Ohagi in ship interior Stage 2) suggest location-appropriate hostile entities; variety communicates different threat environments"
+    },
+    {
+      "technique": "Star platform mechanic as narrative accessibility",
+      "example": "Star attack required to reach hidden magic items in each stage; star platform doubles as both combat tool and traversal mechanism, reinforcing Yumetaro's unique capability as rescue hero"
+    },
+    {
+      "technique": "Hidden item placement",
+      "example": "Magic items hidden in stage alcoves and secret areas; their collection serves as both gameplay progression gate and narrative reward for thorough exploration"
+    },
+    {
+      "technique": "Opening/closing cinematics",
+      "example": "Intro depicts girl's birthday and toy abduction; bad ending loops to start; good ending shows castle collapse and girl rescue, framing player agency through visual narrative bookends"
+    },
+    {
+      "technique": "Screen layout arcadization",
+      "example": "Score and status displayed in lower screen portion mimicking arcade layout; upper gameplay area; visual presentation reinforces arcade-style action communication"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Yumetaro",
+      "state": "Combat ready",
+      "behavior": "Horn glows; star projectiles spawn above head on input; character oriented toward threats"
+    },
+    {
+      "entity": "Yumetaro",
+      "state": "Star platform deployed",
+      "behavior": "Star solidifies into platform; character can stand on own generated projectile to reach high areas"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Patrol",
+      "behavior": "Consistent movement pattern; animation loops; no direct player targeting"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Hit by star",
+      "behavior": "Knockback animation; damage visual feedback; potential despawn or defeat state"
+    },
+    {
+      "entity": "Boss",
+      "state": "Active combat",
+      "behavior": "Larger sprite with complex animation patterns; projectile attacks or movement patterns requiring player response; health reduction communicated through visual changes"
+    },
+    {
+      "entity": "Magic item (collectible)",
+      "state": "Uncollected",
+      "behavior": "Glow/shimmer effect; stationary position; distinct visual separation from enemies and terrain"
+    },
+    {
+      "entity": "Magic item (collectible)",
+      "state": "Collected",
+      "behavior": "Disappears from level; progress toward good ending increments; hidden stage unlock condition moves closer to satisfaction"
+    }
+  ],
+  "notes": "Mr. Gimmick is a single-player platformer without faction conflict or political systems. World-state communication relies on environmental progression and visual aesthetic shifts (toy environments → castle decay). Danger is communicated primarily through enemy design diversity and increasing environmental hazard density across stage progression. The good ending / bad ending mechanic creates a binary world state distinction based on player resource management (magic item collection without continues). The game's narrative motivation (rescuing the girl) is communicated through opening cinematic and sprite/environment design rather than in-game dialogue. Anti-tampering routine in Japanese version represents developer intent expression through technical means. Star attack mechanic serves dual narrative/mechanical purpose as Yumetaro's unique identification.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:19:54.075Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5698,
+    "output_tokens": 2217,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

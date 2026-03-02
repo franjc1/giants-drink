@@ -1,0 +1,182 @@
+{
+  "game_id": "ms-pac-man-nes",
+  "game_name": "Ms. Pac-Man",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Ghost proximity",
+      "visual_form": "Colored ghost sprites (red/Blinky, pink/Pinky, cyan/Inky, orange/Sue) moving toward player",
+      "meaning": "Immediate threat to player life; contact causes loss of life"
+    },
+    {
+      "signal": "Ghost chase behavior",
+      "visual_form": "Ghosts moving in coordinated patterns with semi-random movement preventing predictable evasion",
+      "meaning": "Escalating danger as ghosts employ learned behavioral patterns to corner Ms. Pac-Man"
+    },
+    {
+      "signal": "Increasing game speed",
+      "visual_form": "Faster sprite animation and movement velocity of both player and ghosts across progressive rounds",
+      "meaning": "Difficulty escalation; world state becoming more hostile and demanding"
+    },
+    {
+      "signal": "Energizer duration reduction",
+      "visual_form": "Power pellets provide shorter vulnerability windows for ghosts as rounds progress, eventually ceasing to work",
+      "meaning": "Loss of escape mechanism; player becomes increasingly vulnerable"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power pellet / Energizer consumption",
+      "visual_form": "Large pellet sprite; ghosts turn blue and reverse direction",
+      "meaning": "Temporary invulnerability window; threat reversal from hunted to hunter"
+    },
+    {
+      "signal": "Warp tunnel access",
+      "visual_form": "Passageways at maze edges allowing teleportation across screen",
+      "meaning": "Escape route; allows evasion of pursuing ghosts"
+    },
+    {
+      "signal": "Clear maze pathways",
+      "visual_form": "Solid-color walls with distinct outline vs. path contrast (improvement over original)",
+      "meaning": "Visual clarity reduces navigation confusion and increases player agency"
+    },
+    {
+      "signal": "Bonus fruit availability",
+      "visual_form": "Fruit sprites bouncing through maze (cherries, banana, etc.) appearing twice per round",
+      "meaning": "Opportunity for point gain and progression; safe to pursue when ghost threat is managed"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Ms. Pac-Man (Player)",
+      "color_identity": "Yellow/white protagonist sprite",
+      "symbol_or_sigil": "Female character design; bow or dress visual distinction from original Pac-Man",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Centered starting position in maze; controls primary movement through pellet collection"
+    },
+    {
+      "faction": "Ghost Quartet (Antagonists)",
+      "color_identity": "Red (Blinky), Pink (Pinky), Cyan (Inky), Orange (Sue)",
+      "symbol_or_sigil": "Four distinct colored ghosts with consistent visual identity across gameplay",
+      "enemy_visual_variants": "Ghosts turn blue when powered-down (energizer active), indicating temporary role reversal",
+      "environmental_markers": "Emerge from center ghost box; patrol specific behavioral zones (Blinky/Pinky random then patterned; Inky/Sue use corner-targeting patterns)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early round (1-2)",
+      "visual_manifestation": "Pink-colored maze; slower ghost speed; longer power pellet vulnerability duration",
+      "behavioral_manifestation": "Blinky and Pinky move semi-randomly for first several seconds before establishing patterns; player has extended escape window"
+    },
+    {
+      "world_state": "Mid-game progression (3-9)",
+      "visual_manifestation": "Maze color scheme shifts from light blue (levels 3-5) to brown (levels 6-9); increasing animation speed",
+      "behavioral_manifestation": "Ghosts establish patterns faster; power pellet duration shortens; difficulty escalates through speed and reduced invulnerability"
+    },
+    {
+      "world_state": "Late-game endgame (10+)",
+      "visual_manifestation": "Dark blue maze; maximum speed; minimal or no power pellet protection",
+      "behavioral_manifestation": "Ghosts become nearly unstoppable; player must rely on perfect pattern execution; energizers may cease functioning entirely"
+    },
+    {
+      "world_state": "Player death",
+      "visual_manifestation": "Ms. Pac-Man spins or swoons, falling in defeat animation",
+      "behavioral_manifestation": "Life counter decrements; ghost positions reset; player respawns at maze center"
+    },
+    {
+      "world_state": "Intermission sequences (between rounds)",
+      "visual_manifestation": "Narrative cutscenes showing relationship progression between Pac-Man and Ms. Pac-Man (meeting → romance → baby arrival)",
+      "behavioral_manifestation": "Gameplay pauses; world-state contextualized through character relationship storytelling"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Maze color coding by progression stage",
+      "example": "Pink maze (early), light blue (mid), brown (late), dark blue (endgame) creates visual language of escalating difficulty without UI explanation"
+    },
+    {
+      "technique": "Fruit sprite behavior and movement",
+      "example": "Bouncing fruits that traverse warp tunnels communicate dynamic world where collectibles are mobile targets, increasing challenge and visual interest"
+    },
+    {
+      "technique": "Ghost color-personality association",
+      "example": "Four distinct ghost colors (Blinky red/aggressive, Pinky pink/predictive, Inky cyan/evasive, Sue orange/unpredictable) create implied behavioral identities without exposition"
+    },
+    {
+      "technique": "Intermission narrative cutscenes",
+      "example": "Three intermissions depicting Pac-Man/Ms. Pac-Man romance arc contextualize the game within larger franchise narrative; character relationship progression provides meta-world-state"
+    },
+    {
+      "technique": "Solid maze wall rendering",
+      "example": "Improvement from original: solid-color walls vs. outline style communicates design learning and player accessibility without explicit tutorial"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Blinky (Red Ghost)",
+      "state": "Early round",
+      "behavior": "Semi-random movement for first several seconds before establishing pursuit pattern"
+    },
+    {
+      "entity": "Blinky (Red Ghost)",
+      "state": "Mid-to-late round",
+      "behavior": "Aggressive pursuit pattern; targets player directly"
+    },
+    {
+      "entity": "Pinky (Pink Ghost)",
+      "state": "Early round",
+      "behavior": "Semi-random movement until first reversal"
+    },
+    {
+      "entity": "Pinky (Pink Ghost)",
+      "state": "Mid-to-late round",
+      "behavior": "Predictive pathing; attempts to intercept player movement"
+    },
+    {
+      "entity": "Inky (Cyan Ghost)",
+      "state": "All rounds",
+      "behavior": "Movement pattern targeting toward designated corner; less aggressive than Blinky/Pinky"
+    },
+    {
+      "entity": "Sue (Orange Ghost)",
+      "state": "All rounds",
+      "behavior": "Pattern-based corner-targeting; behavioral continuity from original Pac-Man (Clyde)"
+    },
+    {
+      "entity": "All Ghosts",
+      "state": "Power pellet active (energizer consumed)",
+      "behavior": "Color shift to blue; reverse direction immediately; flee from player; become vulnerable to consumption for bonus points"
+    },
+    {
+      "entity": "All Ghosts",
+      "state": "Warp tunnel transit",
+      "behavior": "Speed reduction applied; provides temporary escape window for player"
+    },
+    {
+      "entity": "Ms. Pac-Man",
+      "state": "Pellet collection",
+      "behavior": "Continuous movement through maze; points accumulate; progression toward round completion"
+    },
+    {
+      "entity": "Ms. Pac-Man",
+      "state": "Ghost contact",
+      "behavior": "Spin/swoon animation; fall; life loss; respawn at center"
+    }
+  ],
+  "notes": "Ms. Pac-Man (1993 NES Namco version) uses minimalist visual communication typical of early 1980s arcade design. Danger and safety are signaled through ghost color, sprite animation speed, and maze color-coding by progression stage. The game lacks explicit UI elements for world-state communication; instead, visual changes to maze aesthetics and ghost behavior convey difficulty escalation. The four-ghost faction is not a traditional 'faction' in narrative terms, but rather a unified antagonistic force with differentiated behavioral personalities. Intermission sequences provide meta-narrative context within the Pac-Man universe. The improvement of solid maze walls over outline rendering demonstrates design iteration focused on player clarity. NES conversion maintains arcade design philosophy with minimal adaptation.",
+  "sources_used": [
+    "wikipedia_ms_pac_man"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:26:15.016Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3394,
+    "output_tokens": 2290,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

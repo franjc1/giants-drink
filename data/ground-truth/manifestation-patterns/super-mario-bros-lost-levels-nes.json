@@ -1,0 +1,210 @@
+{
+  "game_id": "super-mario-bros-lost-levels-nes",
+  "game_name": "Super Mario Bros.: The Lost Levels",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Poison Mushroom",
+      "visual_form": "Mushroom sprite with distinct visual variant from power-up mushroom",
+      "meaning": "Anti-power-up that shrinks or kills player; acts as trap disguised as benefit"
+    },
+    {
+      "signal": "Enemy Koopa Troopa",
+      "visual_form": "Turtle-like creature sprite with shell",
+      "meaning": "Mobile hazard; collision causes damage unless player jumps on it"
+    },
+    {
+      "signal": "Pit/Chasm",
+      "visual_form": "Empty space below platforms; black void",
+      "meaning": "Instant death hazard; unavoidable fall results in life loss"
+    },
+    {
+      "signal": "Invisible Blocks",
+      "visual_form": "No visual representation; manifests only through collision",
+      "meaning": "Hidden platform danger; player must memorize or discover placement through trial"
+    },
+    {
+      "signal": "Midair Wind Gust",
+      "visual_form": "Physics manifestation; player redirected during jump arc",
+      "meaning": "Environmental hazard that disrupts trajectory and causes missed jumps"
+    },
+    {
+      "signal": "Bowser (Boss)",
+      "visual_form": "Large enemy sprite with distinctive crown and fire-breathing animation",
+      "meaning": "Final-stage antagonist; boss encounter requiring pattern recognition and precision"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up Mushroom",
+      "visual_form": "Red/white mushroom sprite in block",
+      "meaning": "Increases player size and survivability; grants extra hit point"
+    },
+    {
+      "signal": "Fire Flower",
+      "visual_form": "Flower sprite with flame visual",
+      "meaning": "Grants offensive capability; allows ranged attack against enemies"
+    },
+    {
+      "signal": "Invincibility Star",
+      "visual_form": "Star sprite with animated shimmer/glow",
+      "meaning": "Temporary invulnerability; all enemies become harmless and collectible"
+    },
+    {
+      "signal": "Solid Platform",
+      "visual_form": "Brick or stone tile blocks with defined edges",
+      "meaning": "Safe ground; collision detection allows standing and jumping"
+    },
+    {
+      "signal": "Warp Zone",
+      "visual_form": "Special pipe or portal-like structure",
+      "meaning": "Level progression shortcut; allows skipping to later worlds (but may lock alternate paths)"
+    },
+    {
+      "signal": "Vertical Vine",
+      "visual_form": "Climbing sprite structure extending upward",
+      "meaning": "Secret passage; leads to hidden areas and bonus content"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario/Luigi (Player)",
+      "color_identity": "Red (Mario) and Green/Dark (Luigi)",
+      "symbol_or_sigil": "M logo on chest (Mario); character silhouette distinct from Luigi",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player sprite size changes when powered up; visual feedback through animation states"
+    },
+    {
+      "faction": "Bowser's Forces (Antagonist)",
+      "color_identity": "Dark/Brown (Bowser); varied enemy coloration (Red Koopa Troopa, etc.)",
+      "symbol_or_sigil": "Bowser crown and fire-breathing; turtle shell imagery for Koopa enemies",
+      "enemy_visual_variants": "Red Koopa (mobile ground threat); other enemy types with distinct sprites",
+      "environmental_markers": "Castle architecture in boss stages; enemy clustering in later worlds signals faction presence"
+    },
+    {
+      "faction": "Princess Peach (Objective)",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "Crown imagery; damsel-in-castle narrative marker",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle throne room at world endings; Toad NPC at stage completion"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early Game (Worlds 1-4)",
+      "visual_manifestation": "Simpler level layouts with wider platforms; more predictable enemy placement; clearer visual distinction between safe and dangerous areas",
+      "behavioral_manifestation": "Enemies follow simple patrol patterns; fewer simultaneous hazards; forgiving jump windows"
+    },
+    {
+      "world_state": "Mid Game (Worlds 5-8)",
+      "visual_manifestation": "Increased visual density; more complex platform configurations; poison mushroom introduction; narrower safety margins in level design",
+      "behavioral_manifestation": "Enemy variety increases; wind gusts and invisible blocks introduce; warp zones with negative consequences appear"
+    },
+    {
+      "world_state": "Late Game (Worlds 9, A-D)",
+      "visual_manifestation": "Extreme visual complexity; minimal safe space; heavy use of visual tricks (poison mushrooms indistinguishable from power-ups); dense enemy clustering",
+      "behavioral_manifestation": "Requires frame-perfect inputs; invisible blocks become essential mechanic; counterproductive warps force specific routing"
+    },
+    {
+      "world_state": "Boss Encounter",
+      "visual_manifestation": "Isolated arena; Bowser sprite dominates screen; fire attack visual effects; throne room castle interior",
+      "behavioral_manifestation": "Bowser follows attack pattern; projectile avoidance required; no escape; pattern-based vulnerability window"
+    },
+    {
+      "world_state": "Game Completion",
+      "visual_manifestation": "Stars appear on title screen after each 8-4 completion; world select menu visual feedback; achievement of hidden worlds",
+      "behavioral_manifestation": "New worlds unlock; difficulty scaling continues; rewards skill-based progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Castle Architecture Progression",
+      "example": "Boss stages feature castle interiors; final world 8-4 emphasizes throne room setting; visual narrative of approaching Bowser's domain"
+    },
+    {
+      "technique": "Level Design Difficulty Scaling",
+      "example": "Visual complexity and platform density increase per world; early worlds use repeating simple patterns; later worlds show visual chaos communicating danger"
+    },
+    {
+      "technique": "NPC Text Feedback",
+      "example": "Toad's 'Princess is in another castle' statement after boss defeats; narrative progression signal through dialogue rather than environmental visuals"
+    },
+    {
+      "technique": "Hazard Introduction Sequencing",
+      "example": "Poison mushrooms absent from early worlds; introduced mid-game as visual trick mechanic; signals rising difficulty through new threat category"
+    },
+    {
+      "technique": "Packaging Label 'For Super Players'",
+      "example": "Marketing text on FDS cartridge packaging communicates design intent; meta-level signal that difficulty has intentionally escalated beyond original game"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario",
+      "state": "Normal",
+      "behavior": "Fast acceleration/deceleration; lower jump arc; standard running speed"
+    },
+    {
+      "entity": "Mario",
+      "state": "Powered Up (Mushroom)",
+      "behavior": "Larger sprite size; survives one hit before shrinking; increased visual profile"
+    },
+    {
+      "entity": "Mario",
+      "state": "Fire Flower Active",
+      "behavior": "Throws fireballs on input; can destroy enemies at range; animation change during fire throw"
+    },
+    {
+      "entity": "Mario",
+      "state": "Invincible Star",
+      "behavior": "Sprite flashes with invulnerability animation; enemies become collectible; all hazards harmless"
+    },
+    {
+      "entity": "Luigi",
+      "state": "Normal",
+      "behavior": "Slower acceleration/deceleration; higher jump arc; designed for skilled technical play"
+    },
+    {
+      "entity": "Koopa Troopa (Red)",
+      "state": "Patrolling",
+      "behavior": "Walks platform patrol route; reverses direction at edges; predictable movement pattern"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Jumped On",
+      "behavior": "Enters shell state; can be kicked as projectile; slides across platforms when kicked"
+    },
+    {
+      "entity": "Bowser",
+      "state": "Boss Fight",
+      "behavior": "Shoots fireballs in attack pattern; jumps to traverse arena; vulnerable during specific animation windows"
+    },
+    {
+      "entity": "Poison Mushroom",
+      "state": "Uncollected",
+      "behavior": "Static in block; visually indistinguishable from power-up mushroom until close inspection"
+    },
+    {
+      "entity": "Poison Mushroom",
+      "state": "Collected",
+      "behavior": "Shrinks player or causes death; acts as trap; causes immediate negative state change"
+    }
+  ],
+  "notes": "Super Mario Bros.: The Lost Levels primarily communicates world-state through level design density and visual complexity rather than explicit narrative. Danger is signaled through platform scarcity, enemy clustering, and introduction of counter-intuitive hazards (poison mushrooms, backwards warps). No political factions exist; instead, a simple hero-vs-antagonist binary (Mario vs. Bowser) is communicated through sprite design and arena architecture. Character differentiation (Mario vs. Luigi) is behavioral rather than visual. The game's difficulty progression serves as primary world-state indicator: visual simplicity early = tutorial; visual chaos late = expertise required. Invisible blocks and poison mushroom ambiguity represent game's core design philosophy: trust and mastery through failure.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:58:29.871Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5170,
+    "output_tokens": 2516,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

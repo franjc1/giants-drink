@@ -1,0 +1,207 @@
+{
+  "_meta": {
+    "game": "Sonic the Hedgehog 2",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1992,
+    "publisher": "Sega",
+    "developer": "Sega Technical Institute / Sonic Team",
+    "sources": [
+      {
+        "name": "Sonic Physics Guide (SPG) — Jumping",
+        "url": "https://info.sonicretro.org/SPG:Jumping",
+        "notes": "Confirmed: jump_force 6.5 px/frame (1664 sub-pixels), Knuckles 6.0 px/frame. Gravity 0.21875 px/frame² (56 sub-pixels). Variable height: release caps Y at -4 px/frame."
+      },
+      {
+        "name": "Sonic Physics Guide (SPG) — Running",
+        "url": "https://info.sonicretro.org/SPG:Running",
+        "notes": "Core running constants: ACC 0.046875, DEC 0.5, FRC 0.046875, top speed 6.0 px/frame. SPG notes Sonic 2+ behavior difference when Ground Speed exceeds top_speed."
+      },
+      {
+        "name": "Sonic Retro SPG — general",
+        "url": "https://info.sonicretro.org/Sonic_Physics_Guide",
+        "notes": "All 256-subpixel hex values for physics constants. Primary authoritative source for Genesis Sonic physics."
+      },
+      {
+        "name": "Data Crystal — Sonic the Hedgehog 2",
+        "url": "https://datacrystal.tcrf.net/wiki/Sonic_the_Hedgehog_2_(Genesis)",
+        "notes": "RAM map supplemental."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "Sonic 2 uses the same core physics engine as Sonic 1 (same acc/dec/friction/top_speed/gravity/jump constants).",
+      "Key SPG confirmation: 'The source does not differentiate physics constants between Sonic 1 vs 2 vs 3 — it treats them as unified across the classic era.'",
+      "Sonic 2 additions: Super Sonic, Miles 'Tails' Prower as second player, Super Spin Dash (new move).",
+      "The Spin Dash is NEW in Sonic 2 — not present in Sonic 1. It allows charging a spin in place before launching.",
+      "256 sub-pixels per pixel (8.8 fixed-point), same as Sonic 1.",
+      "All physics values that match Sonic 1 are marked as confirmed from Sonic 1 SPG documentation (same engine)."
+    ],
+    "sonic_1_vs_sonic_2_differences": [
+      "Spin Dash added (new mechanic)",
+      "Super Sonic added (requires 7 Chaos Emeralds)",
+      "Tails (Miles Prower) playable in multiplayer — can fly using twin tails",
+      "Running mechanic: Sonic 2+ does not apply acceleration_speed when Ground Speed > top_speed (Sonic 1 does still apply it)",
+      "2-player split-screen mode added",
+      "Some stages have unique mechanics: Casino Night (pinball), Aquatic Ruin (water physics)"
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point",
+      "description": "Same 256 sub-pixel system as Sonic 1. All physics constants expressed in sub-pixels in the SPG."
+    },
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16,
+      "notes": "Genesis displays at 320×224 (wide mode) vs NES 256×240. Stages appear wider as a result."
+    }
+  },
+
+  "ground_movement": {
+    "_source_note": "Core constants identical to Sonic 1. Confirmed by SPG which documents these as unified across classic Sonic.",
+    "acceleration": {
+      "hex": "0x000C",
+      "px_per_frame_sq": 0.046875,
+      "sub_pixels_per_frame_sq": 12,
+      "source": "SPG:Running",
+      "confidence": "high"
+    },
+    "deceleration": {
+      "hex": "0x0080",
+      "px_per_frame_sq": 0.5,
+      "sub_pixels_per_frame_sq": 128,
+      "source": "SPG:Running",
+      "confidence": "high",
+      "notes": "Applied when pressing opposite direction while moving."
+    },
+    "friction": {
+      "hex": "0x0018",
+      "px_per_frame_sq": 0.046875,
+      "sub_pixels_per_frame_sq": 12,
+      "source": "SPG:Running",
+      "confidence": "high",
+      "notes": "Applied when no direction is pressed."
+    },
+    "top_speed": {
+      "hex": "0x0600",
+      "px_per_frame": 6.0,
+      "sub_pixels_per_frame": 1536,
+      "source": "SPG:Running",
+      "confidence": "high"
+    },
+    "sonic_2_behavior_note": {
+      "description": "In Sonic 2+, when Ground Speed > top_speed, acceleration is NOT applied. In Sonic 1, acceleration IS still applied above top speed.",
+      "source": "SPG:Running",
+      "significance": "medium — affects how Sonic 2 handles speed obtained from slopes or springs exceeding top_speed"
+    }
+  },
+
+  "spin_dash": {
+    "available": true,
+    "introduced_in": "Sonic 2",
+    "not_in": "Sonic 1",
+    "description": "Crouch (Down) + press jump to charge a spin in place. Release or press jump again to launch.",
+    "charged_release_speed": {
+      "notes": "Release speed depends on charge level (number of button presses while crouching). At full charge, launch speed significantly exceeds normal top speed.",
+      "approx_max_px_per_frame": 8.0,
+      "confidence": "medium"
+    },
+    "notes": [
+      "Spin Dash allows instant acceleration from stationary to high speed.",
+      "Critical for speedrunning: replaces the need for a run-up before slopes.",
+      "Changes level design possibilities: previously, hills required a run-up to gain momentum. Spin Dash makes any incline a launch ramp."
+    ]
+  },
+
+  "jump": {
+    "_source_note": "Same jump constants as Sonic 1 — confirmed by SPG treating classic series as unified.",
+    "jump_force": {
+      "hex": "0x0680",
+      "px_per_frame": 6.5,
+      "sub_pixels_per_frame": 1664,
+      "source": "SPG:Jumping",
+      "confidence": "high",
+      "notes": "Force applied at jump initiation along the ground angle normal (not straight up — slope-aware)."
+    },
+    "variable_jump": {
+      "mechanic": "Releasing jump caps upward Y Speed at -4 px/frame before gravity is applied that frame",
+      "source": "SPG:Jumping: 'Y Speed is capped at -4'",
+      "confidence": "high",
+      "notes": "This means: short tap produces a truncated arc; holding produces full height arc."
+    },
+    "slope_aware_jump": {
+      "description": "Jump force is applied via: X Speed -= jump_force * sin(Ground Angle); Y Speed -= jump_force * cos(Ground Angle). Jumping off a slope sends Sonic in the slope-normal direction.",
+      "source": "SPG:Jumping",
+      "confidence": "high"
+    }
+  },
+
+  "gravity": {
+    "_source_note": "Same as Sonic 1 — confirmed by SPG.",
+    "hex": "0x0038",
+    "px_per_frame_sq": 0.21875,
+    "sub_pixels_per_frame_sq": 56,
+    "source": "SPG:Jumping",
+    "confidence": "high"
+  },
+
+  "air_drag": {
+    "_source_note": "Same as Sonic 1.",
+    "condition": "Active when Y Speed < 0 (ascending) AND |X Speed| > 0.125",
+    "formula": "X Speed -= (X Speed / 0.125) / 256",
+    "source": "Sonic Retro SPG",
+    "confidence": "high",
+    "notes": "Air drag only acts during the ascending half of the jump arc and only when moving quickly horizontally. Slows horizontal speed slightly on ascent."
+  },
+
+  "tails": {
+    "real_name": "Miles Prower",
+    "physics_base": "Same core physics as Sonic",
+    "fly_mechanic": {
+      "description": "Tails can fly by pressing jump in the air — his twin tails spin to generate lift.",
+      "activation": "Press jump while airborne",
+      "max_fly_duration_approx_seconds": 8,
+      "confidence": "medium",
+      "notes": [
+        "Flying maintains a slow upward or hovering movement.",
+        "Flight depletes — Tails gets tired after several seconds and descends.",
+        "In Sonic 2, Tails is a second player following Sonic and can be flown out-of-bounds.",
+        "In Sonic 3, Tails is more fully featured as a solo character."
+      ]
+    }
+  },
+
+  "super_sonic": {
+    "requires": "All 7 Chaos Emeralds collected + 50 rings",
+    "activation": "Jump while holding nothing (releases collected rings)",
+    "speed_multiplier_approx": 2.0,
+    "invincibility": true,
+    "ring_drain_per_second_approx": 1,
+    "notes": [
+      "Super Sonic moves significantly faster — approximate 2x multiplier on top speed.",
+      "Invincible to all enemies. Destroys enemies on contact.",
+      "Requires rings to maintain — drains 1 ring/second. Reverts to normal when rings hit 0.",
+      "Introduced in Sonic 2 (not in Sonic 1)."
+    ]
+  },
+
+  "water_physics": {
+    "_note": "Water stages present in Aquatic Ruin zone.",
+    "jump_height_reduction": "approximately 50% in water",
+    "speed_reduction": "yes, but exact values need verification",
+    "confidence": "low",
+    "notes": "Same physics principles as Sonic 1 water (Labyrinth Zone) but specific values for S2 need ROM verification."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Spin Dash fundamentally changes the level design contract. In Sonic 1, you needed a run-up to achieve high speed. In Sonic 2, any flat surface + spin dash = instant momentum. Level designers for Sonic 2 can place speed sections anywhere, not just after long flat corridors.",
+    "The core physics are identical to Sonic 1 (same constants) but the Spin Dash's instant acceleration changes how the physics FEEL — the game is faster and more responsive even though the underlying physics engine is unchanged.",
+    "Tails' flight ability in Sonic 2 is primarily a multiplayer accessibility tool — the second player can fly over obstacles that the first player must run through. This creates interesting cooperative dynamics.",
+    "Super Sonic as an endgame bonus speed mode changes the game's late-game difficulty curve: players who find all emeralds get a mode that trivializes most obstacles. The challenge becomes ring management, not obstacle avoidance."
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "game_id": "zelda-ii-nes",
+  "game_name": "Zelda II: The Adventure of Link",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Enemy encounter icon on overworld",
+      "visual_form": "Small blob sprite (easy enemies) or large biped sprite (harder enemies) appearing randomly on map",
+      "meaning": "Triggers transition to side-scrolling combat mode; larger/biped form indicates increased threat level"
+    },
+    {
+      "signal": "Palace architecture",
+      "visual_form": "Fortress-like structures with distinct palace graphics, window designs, and spike hazards",
+      "meaning": "High-danger zones requiring progression through guarded puzzle areas"
+    },
+    {
+      "signal": "Leever enemy placement",
+      "visual_form": "Desert-dwelling enemies positioned in sand areas",
+      "meaning": "Environmental hazard indicator; originally placed too low to be visible (developer oversight)"
+    },
+    {
+      "signal": "Experience-draining enemies",
+      "visual_form": "Specific enemy types with drain mechanics",
+      "meaning": "Increased threat severity—defeats cause loss of accumulated experience points"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fairy icon on overworld",
+      "visual_form": "Fairy sprite appearing randomly during traversal",
+      "meaning": "Safe encounter; restores Link's health/life"
+    },
+    {
+      "signal": "Non-player characters",
+      "visual_form": "NPCs positioned in towns and safe zones",
+      "meaning": "Interactive storytelling nodes; indicate safe areas and information hubs"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Hyrule Kingdom / Link's Alliance",
+      "color_identity": null,
+      "symbol_or_sigil": "Link character (protagonist); Princess Zelda (sleeping, requires rescue)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Overworld map structure; towns with NPCs; palaces containing crystals and statues"
+    },
+    {
+      "faction": "Ganon's forces (defeated but lingering threat)",
+      "color_identity": null,
+      "symbol_or_sigil": "Generic enemy types (blobs, bipeds); palace guardians",
+      "enemy_visual_variants": "Small blob sprites (weaker minions) vs. large biped sprites (stronger minions)",
+      "environmental_markers": "Six guarded palaces scattered across Hyrule; desert regions with Leevers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Post-Ganon era, Princess Zelda under sleeping spell",
+      "visual_manifestation": "Overworld map showing six distinct palaces as primary objectives; NPCs and signage reference the quest; introductory text explains the curse",
+      "behavioral_manifestation": "Enemies spawn randomly during overworld traversal; palace encounters trigger side-scrolling combat sequences"
+    },
+    {
+      "world_state": "Link's progression through palace sequence",
+      "visual_manifestation": "Crystals placed in statues; six palaces each have unique window graphics and architectural variations",
+      "behavioral_manifestation": "Difficulty escalates with each palace cleared; enemy types intensify; experience requirements reset on save"
+    },
+    {
+      "world_state": "Life loss condition",
+      "visual_manifestation": "NES version: rapid rainbow color flashing screen (seizure risk); updated versions: red-shade flashing only",
+      "behavioral_manifestation": "Game Over / Save Option Menu displayed; in Japanese FDS version, attribute levels reset to lowest of three if all lives lost (Western version permanent)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Palace window graphics variance",
+      "example": "Every palace has unique window designs; Maze Palace (4th) and Hidden Palace (6th) lack actual windows but retain window graphics (unused state)"
+    },
+    {
+      "technique": "Broken wall tiles (unused)",
+      "example": "Broken wall graphics exist but were never incorporated into palace design; indicates architectural storytelling framework left incomplete"
+    },
+    {
+      "technique": "Topographical hazards",
+      "example": "Spike graphics exist for every palace but spikes never appear as actual hazards in final game; represents environmental design vocabulary that wasn't activated"
+    },
+    {
+      "technique": "Overworld traversal mechanics",
+      "example": "Top-down overworld map serves as navigation layer; different terrain types (mountains, oceans) block or allow movement, encoding world geography as barrier/path system"
+    },
+    {
+      "technique": "NPC dialogue and positioning",
+      "example": "Non-player characters in towns provide quest context; their presence marks safe zones contrasting with random enemy encounters in wilderness"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Link",
+      "state": "leveling up",
+      "behavior": "Player can selectively increase Attack, Magic, or Life attributes; choice deferred or committed based on accumulated experience. Western version: permanent levels; Japanese FDS version: resets to lowest attribute if all lives lost"
+    },
+    {
+      "entity": "Link",
+      "state": "at max attribute level",
+      "behavior": "Further experience in maxed attributes converts to extra lives instead of stat increase"
+    },
+    {
+      "entity": "Random enemies",
+      "state": "overworld spawn",
+      "behavior": "Small blob icon = easy encounter; large biped icon = hard encounter; triggers transition to side-scrolling combat mode"
+    },
+    {
+      "entity": "Experience-draining enemies",
+      "state": "in combat",
+      "behavior": "Attack drains accumulated experience points (never causes permanent level loss, but delays progression)"
+    },
+    {
+      "entity": "Fairy",
+      "state": "overworld spawn",
+      "behavior": "Restores Link's health on encounter"
+    },
+    {
+      "entity": "Palace guardians",
+      "state": "patrol/encounter",
+      "behavior": "Side-scrolling combat sequences; palace graphics and unique window designs encode location identity"
+    }
+  ],
+  "notes": "Zelda II uses a hybrid world-state communication system: top-down overworld map conveys strategic navigation and faction territories, while side-scrolling combat sequences communicate danger through enemy sprite size/type and health-drain mechanics. World state changes (post-Ganon, sleeping curse, crystal placement) are communicated through NPC dialogue and quest markers rather than visual transformation of existing environments. The game's experience system and lives mechanic create a separate layer of world-state communication tied to player progression status. Unused graphics (palace windows without corresponding hazards, spike tiles, broken walls) suggest an incomplete environmental storytelling vocabulary—these elements were visually prepared but mechanically deactivated, indicating design iteration at the asset level.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:29:40.842Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7112,
+    "output_tokens": 1721,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

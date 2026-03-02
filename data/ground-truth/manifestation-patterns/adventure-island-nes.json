@@ -1,0 +1,257 @@
+{
+  "game_id": "adventure-island-nes",
+  "game_name": "Adventure Island",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Animated hostile creatures positioned in player path",
+      "meaning": "Immediate threat — touching enemies causes life loss"
+    },
+    {
+      "signal": "Fire roast hazard",
+      "visual_form": "Fire-based obstacle in environment",
+      "meaning": "Environmental danger — instantaneous death on contact"
+    },
+    {
+      "signal": "Pitfalls and water",
+      "visual_form": "Ground discontinuities and water bodies at stage boundaries",
+      "meaning": "Fall hazard — loss of life if Higgins descends into void or water"
+    },
+    {
+      "signal": "Health depletion over time",
+      "visual_form": "Visible health gauge decreasing during gameplay",
+      "meaning": "Survival pressure — player must locate health items before gauge reaches zero"
+    },
+    {
+      "signal": "Rock obstacles",
+      "visual_form": "Static rock formations in player path",
+      "meaning": "Collision hazard — causes health damage on contact"
+    },
+    {
+      "signal": "Boss appearance (Evil Witch Doctor)",
+      "visual_form": "Large enemy sprite with morphing head forms at area end",
+      "meaning": "Stage culmination threat — must be defeated to progress"
+    },
+    {
+      "signal": "Enemy fireball attacks",
+      "visual_form": "Projectiles fired from boss entity",
+      "meaning": "Ranged threat — direct contact causes life loss"
+    },
+    {
+      "signal": "Eggplant item",
+      "visual_form": "Negative pickup within eggs (visual distinction from beneficial fruit)",
+      "meaning": "Trap mechanic — drains health meter if collected"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fruit pickups",
+      "visual_form": "Small fruit sprites scattered throughout stages",
+      "meaning": "Health recovery — replenishes health gauge"
+    },
+    {
+      "signal": "Milk bottle",
+      "visual_form": "Bottle-shaped item sprite",
+      "meaning": "Health recovery — alternative healing consumable"
+    },
+    {
+      "signal": "Stone axe weapon",
+      "visual_form": "Axe item sprite found at specific stage locations",
+      "meaning": "Combat enablement — grants attack capability to unarmed Higgins"
+    },
+    {
+      "signal": "Magical fireballs upgrade",
+      "visual_form": "Transformed projectile weapon visual after axe trade",
+      "meaning": "Combat enhancement — extended range and rock-destruction capability"
+    },
+    {
+      "signal": "Honey Girl (bee-like fairy)",
+      "visual_form": "Distinct fairy sprite with bee characteristics",
+      "meaning": "Temporary invincibility state — 10-second protection and one-touch enemy elimination"
+    },
+    {
+      "signal": "Special pot (hidden)",
+      "visual_form": "Pot sprite hidden within stage environment",
+      "meaning": "Bonus multiplier — doubles end-of-stage score bonus"
+    },
+    {
+      "signal": "Checkpoint passage",
+      "visual_form": "Stage progression markers (four checkpoints per round)",
+      "meaning": "Safe respawn point — if life lost, Higgins revives at last checkpoint"
+    },
+    {
+      "signal": "Bonus stage warp cloud",
+      "visual_form": "Cloud sprite activated by standing still at specific hidden location",
+      "meaning": "Safe risk area — fruit collection with fall safety (no life loss in bonus stage)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Evil Witch Doctor (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Morphing head forms (eight distinct head types across game progression)",
+      "enemy_visual_variants": "Boss health and speed increase with each area; fireball attack speed increases; requires escalating hit count (8 hits area 1, up to 22 hits area 8)",
+      "environmental_markers": "Confrontation occurs at end of fourth round in each area; spatial isolation for boss arena"
+    },
+    {
+      "faction": "Princess Tina (rescue objective)",
+      "color_identity": null,
+      "symbol_or_sigil": "Princess character sprite — visual representation of goal state",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Located at game conclusion after final Witch Doctor defeat; visual reward for completion"
+    },
+    {
+      "faction": "Master Higgins/Player avatar",
+      "color_identity": null,
+      "symbol_or_sigil": "Protagonist sprite with visible weapon state transitions (unarmed → axe-wielding → fireball-casting)",
+      "enemy_visual_variants": "Invincible state visual (temporary during Honey Girl buff)",
+      "environmental_markers": "Player movement and weapon selection define interaction with environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Health critical (gauge near zero)",
+      "visual_manifestation": "Health gauge visual indicator shows low status",
+      "behavioral_manifestation": "Increased urgency for fruit collection; player susceptible to single hazard contact"
+    },
+    {
+      "world_state": "Unarmed state",
+      "visual_manifestation": "Higgins sprite without axe or weapon visual",
+      "behavioral_manifestation": "Cannot damage enemies; must avoid or navigate around hostile entities"
+    },
+    {
+      "world_state": "Armed with stone axe",
+      "visual_manifestation": "Axe appears in Higgins' hand sprite",
+      "behavioral_manifestation": "Can destroy enemies and certain rock obstacles; limited melee range"
+    },
+    {
+      "world_state": "Armed with magical fireballs",
+      "visual_manifestation": "Fireball projectile visual replaces axe in attack animation",
+      "behavioral_manifestation": "Extended attack range; capability to destroy rolling stones (immune to axe)"
+    },
+    {
+      "world_state": "Invincibility active (Honey Girl collected)",
+      "visual_manifestation": "Temporary visual effect on Higgins sprite indicating protection state",
+      "behavioral_manifestation": "10-second window of enemy-touch killing; collision with enemies eliminates them"
+    },
+    {
+      "world_state": "Checkpoint reached",
+      "visual_manifestation": "Checkpoint marker visibly passed within level structure",
+      "behavioral_manifestation": "Respawn point established; subsequent life loss returns to checkpoint rather than stage start"
+    },
+    {
+      "world_state": "Boss arena (Area end, Round 4)",
+      "visual_manifestation": "Spatial transition to isolated boss chamber; Evil Witch Doctor sprite appears",
+      "behavioral_manifestation": "Stage progression blocked until boss defeated; mandatory combat encounter"
+    },
+    {
+      "world_state": "Bonus stage active",
+      "visual_manifestation": "Visual shift to bonus stage environment; fruit-collection scenery",
+      "behavioral_manifestation": "Pitfall does not cause life loss; only exit mechanic is falling off screen"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Quest framing through narrative setup",
+      "example": "Opening plot establishes Evil Witch Doctor kidnapped Princess Tina on Adventure Island; rescue mission provides context for traversing eight areas and defeating eight boss forms"
+    },
+    {
+      "technique": "Escalating boss difficulty as visual storytelling",
+      "example": "Evil Witch Doctor changes head form with each area defeat; increased hit requirements (8→10→12→...→22) and stat increases communicate protagonist's journey through increasingly dangerous regions"
+    },
+    {
+      "technique": "Spatial progression through world structure",
+      "example": "Eight worlds (areas) with four stages each; hierarchical checkpoint system (four checkpoints per round) visually represents deep progression into dangerous territory"
+    },
+    {
+      "technique": "Hidden item discovery as world exploration",
+      "example": "Weapon disappearance before ground impact signals hidden egg location; hidden bonus clouds require standing still — mechanic teaches environment reading and reward discovery"
+    },
+    {
+      "technique": "Item availability communicates stage danger level",
+      "example": "Placement of axe weapons, fruit, and Honey Girl in specific stage locations; scarcity of healing items in later stages suggests increasing environmental hostility"
+    },
+    {
+      "technique": "Weapon progression as mechanical storytelling",
+      "example": "Transition from unarmed → stone axe → magical fireballs represents combat capability growth; fireballability to destroy rolling stones (immune to axe) creates new accessibility to stage areas"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Master Higgins",
+      "state": "Healthy (full health gauge)",
+      "behavior": "Normal movement speed; capable of surviving single hazard contact"
+    },
+    {
+      "entity": "Master Higgins",
+      "state": "Low health (gauge near zero)",
+      "behavior": "Same movement mechanics but elevated danger state; single enemy contact fatal"
+    },
+    {
+      "entity": "Master Higgins",
+      "state": "Unarmed",
+      "behavior": "Cannot attack; must evade enemies; collision causes immediate life loss"
+    },
+    {
+      "entity": "Master Higgins",
+      "state": "Axe-wielding",
+      "behavior": "Melee attack capability activated; can damage enemies and certain rock types"
+    },
+    {
+      "entity": "Master Higgins",
+      "state": "Fireball-casting",
+      "behavior": "Extended projectile range; can destroy rolling stones and other obstacles immune to axe"
+    },
+    {
+      "entity": "Master Higgins",
+      "state": "Invincible (Honey Girl active)",
+      "behavior": "Enemy collision becomes lethal to enemies rather than Higgins; 10-second window of offensive advantage"
+    },
+    {
+      "entity": "Evil Witch Doctor",
+      "state": "Early form (Area 1)",
+      "behavior": "Requires eight hits to defeat; slower attack speed; lower fireball frequency"
+    },
+    {
+      "entity": "Evil Witch Doctor",
+      "state": "Late form (Area 8)",
+      "behavior": "Requires 22 hits to defeat; faster movement and attack speed; accelerated fireball attack rate"
+    },
+    {
+      "entity": "Evil Witch Doctor",
+      "state": "Any form defeated",
+      "behavior": "Head morph transition; escape to next area; combat encounter terminates"
+    },
+    {
+      "entity": "Evil Witch Doctor",
+      "state": "Final form defeated",
+      "behavior": "Falls into pit; game completion triggered; Princess Tina rescue achieved"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Active in stage",
+      "behavior": "Patrol or fixed positioning; contact with Higgins causes his life loss regardless of health"
+    },
+    {
+      "entity": "Honey Girl (bee fairy)",
+      "state": "Collected",
+      "behavior": "Confers 10-second invincibility window; visual protection effect on Higgins"
+    }
+  ],
+  "notes": "Adventure Island (1986) uses primarily visual and mechanical manifestation of world-state rather than explicit UI elements or dialogue-based communication. Danger is conveyed through enemy sprite design, hazard placement, and health gauge depletion mechanics. Safety signals emerge through item collection and checkpoint system. The Evil Witch Doctor's escalating forms across eight areas serve as both mechanical difficulty progression and visual storytelling of increasing threat. Environmental storytelling relies heavily on item placement logic (hidden eggs, weapon locations) and spatial hierarchy (checkpoint-based progression). No faction conflict mechanics exist beyond player-vs-boss; world-state is primarily survival-pressure focused.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:05:58.997Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2683,
+    "output_tokens": 2972,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "game_id": "pinball-nes",
+  "game_name": "Pinball",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Ball falling below paddle",
+      "visual_form": "Ball exits bottom of screen",
+      "meaning": "Loss of ball / game over condition"
+    },
+    {
+      "signal": "Slingshot collision",
+      "visual_form": "Ball bounces off angled rails at edges",
+      "meaning": "High-velocity trajectory change, risk of uncontrolled ball movement"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Paddle positioning",
+      "visual_form": "Horizontal paddle at bottom of play field",
+      "meaning": "Ball containment and recovery mechanism"
+    },
+    {
+      "signal": "Bumpers and targets",
+      "visual_form": "Stationary obstacles on play field",
+      "meaning": "Ball deceleration and scoring opportunity zones"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active gameplay",
+      "visual_manifestation": "Ball rolling/bouncing on play field with paddle responsive to input",
+      "behavioral_manifestation": "Paddle tracks player input; ball physics consistent and predictable"
+    },
+    {
+      "world_state": "Bonus game active",
+      "visual_manifestation": "Lady (Pauline) character sprite walking on platform above main play field",
+      "behavioral_manifestation": "Lady sprite moves independently; falling off edge triggers end state"
+    },
+    {
+      "world_state": "Ball lost",
+      "visual_manifestation": "Ball absent from play field; score persists",
+      "behavioral_manifestation": "New ball spawns at top or game transitions to next ball"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Bonus game diegesis",
+      "example": "Lady (Pauline) character sprite appears in bonus round, referencing Donkey Kong arcade game; establishes narrative connection despite game being non-Mario title"
+    },
+    {
+      "technique": "Physical table layout",
+      "example": "Play field organized with bumpers, targets, and slingshots mimics real pinball table topology; guides player attention and ball flow"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ball",
+      "state": "In play",
+      "behavior": "Rolls downward due to gravity; bounces off bumpers and slingshots with variable trajectory"
+    },
+    {
+      "entity": "Paddle",
+      "state": "Responsive",
+      "behavior": "Moves left/right based on player input; contacts ball to redirect upward trajectory"
+    },
+    {
+      "entity": "Lady (Pauline)",
+      "state": "Bonus round",
+      "behavior": "Walks across platform; falls below paddle if no collision occurs; walking animation suggests panic/vulnerability"
+    }
+  ],
+  "notes": "Pinball (1985 NES) is a non-Mario digital adaptation of physical pinball mechanics. The game uses minimal narrative framing; world-state is communicated almost entirely through physics feedback and sprite animation. The inclusion of Pauline as a bonus game character provides the only explicit narrative connection to other Nintendo properties. Unused graphics suggest abandoned features: pop-up bumpers, one-way gates, and numeric rollover indicators (1-4) indicate developer iteration on table complexity. The game has no faction systems, political situations, or explicit danger/safety semantics—these emerge from pure mechanical interaction (ball loss = danger state; paddle positioning = safety state). Visual communication relies on position, velocity, and collision response rather than symbolic markers.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Pinball NES/FDS article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:43:39.588Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2796,
+    "output_tokens": 1067,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

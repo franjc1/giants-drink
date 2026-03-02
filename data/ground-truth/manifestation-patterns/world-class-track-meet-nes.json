@@ -1,0 +1,130 @@
+{
+  "game_id": "world-class-track-meet-nes",
+  "game_name": "World Class Track Meet / Stadium Events",
+  "platform": "nes",
+  "paradigm": "sports-racing / exergaming",
+  "danger_signals": [
+    {
+      "signal": "False start detection",
+      "visual_form": "Player lifting feet before starting signal on mat",
+      "meaning": "Rule violation; three false starts result in disqualification from tournament"
+    },
+    {
+      "signal": "Hurdle markers",
+      "visual_form": "White box markers appearing along screen edge during 110M hurdles event",
+      "meaning": "Required jump zones; failure to jump at correct timing results in collision/performance loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Starting line position",
+      "visual_form": "Runners positioned at race start on stadium track",
+      "meaning": "Ready state; awaiting 'on your mark' signal to begin competition"
+    },
+    {
+      "signal": "Valid jump execution",
+      "visual_form": "Player successfully clearing hurdle or landing jump within marked zones",
+      "meaning": "Correct performance; contributes to score advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Computer-controlled opponent runners visually distinct on split-screen during dash and hurdle events",
+      "environmental_markers": "Left side of mat designated for dash and hurdle events; either side for jump events"
+    },
+    {
+      "faction": "Computer tournament opponents",
+      "color_identity": null,
+      "symbol_or_sigil": "Tournament opponent changed species between Japanese and international versions",
+      "enemy_visual_variants": "Six distinct computer players to defeat sequentially in tournament mode",
+      "environmental_markers": "Stadium environment; tournament bracket progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-competition (menu/selection)",
+      "visual_manifestation": "Regional variants show different stadium background colors (dark blue sky in Japan, light blue in US original, darkened in World Class Track Meet re-release); Japanese flags replaced with US flags in international versions; 'Mat B' graphic rebranded as 'Power Pad' in re-release",
+      "behavioral_manifestation": "Player selects event type and registers alternating competitors (up to six per event)"
+    },
+    {
+      "world_state": "Tournament mode active",
+      "visual_manifestation": "Split-screen display showing player vs. computer opponent side-by-side during 100M dash and 110M hurdle events",
+      "behavioral_manifestation": "Player must beat each of six sequential computer opponents at both dash and hurdles; three false starts trigger disqualification"
+    },
+    {
+      "world_state": "Olympic mode (multi-event competition)",
+      "visual_manifestation": "All four events displayed consecutively; scoring references Guinness 1982 world track records as visual/textual benchmarks",
+      "behavioral_manifestation": "Multiple alternating players compete across 100M dash, 110M hurdles, long jump, and triple jump; cumulative scoring"
+    },
+    {
+      "world_state": "Speed variation (mat input sensitivity)",
+      "visual_manifestation": "Runner animation speed correlates to which row of mat buttons player activates",
+      "behavioral_manifestation": "Top speed of character runner depends on button row selection; higher rows = faster acceleration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Regional visual differentiation",
+      "example": "Stadium background colors and sky tone changed between Japanese (dark blue), US original (light blue), and World Class Track Meet re-release (darker, less saturated). Sky color and stadium color palette communicate regional/publisher identity."
+    },
+    {
+      "technique": "Branding integration through UI",
+      "example": "'Mat B' graphic rebranded to 'Power Pad' visual in World Class Track Meet version; all Bandai mentions scrubbed for Nintendo re-release. Publisher identity communicated through accessory branding in UI."
+    },
+    {
+      "technique": "Olympic standard referencing",
+      "visual_manifestation": "Guinness 1982 world track records displayed as benchmark in Olympics mode; creates aspirational performance standard",
+      "behavioral_manifestation": "Player scores measured against real-world athletic records, establishing competitive context"
+    },
+    {
+      "technique": "Track and field venue setting",
+      "example": "Stadium environment with track, hurdles, and jump zones provide authentic athletic venue context. Signage and layout communicate Olympic/championship-level competition."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player runner",
+      "state": "Pre-start (feet elevated on mat before signal)",
+      "behavior": "Flagged as false start; visual/mechanical penalty applied"
+    },
+    {
+      "entity": "Player runner",
+      "state": "Dash event active",
+      "behavior": "Speed determined by mat button row; running animation speed reflects input frequency"
+    },
+    {
+      "entity": "Player runner",
+      "state": "Hurdle event active",
+      "behavior": "Must jump when white box markers appear; timing-based mechanic communicates skill requirement"
+    },
+    {
+      "entity": "Player runner",
+      "state": "Long jump / triple jump",
+      "behavior": "Jump height and duration maintained by continued mat input; air time extends distance"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Tournament mode",
+      "behavior": "Six distinct opponents appear sequentially; visual distinction indicates progression through tournament bracket"
+    }
+  ],
+  "notes": "World Class Track Meet is primarily a fitness/sports competition simulator with minimal narrative or faction conflict. Visual communication focuses on athletic performance metrics, event rules, and regional/corporate branding differences rather than danger/safety or political hierarchy. The game lacks traditional world-state complexity; instead, its 'states' are event-based (dash, hurdles, jumps, tournament vs. Olympics mode). Regional variants communicate publisher/market differentiation through UI and environmental color palette changes rather than gameplay-affecting world-state shifts. The mat accessory itself serves as the primary interface, with visual cues on-screen indicating required actions (hurdle markers, start signals).",
+  "sources_used": [
+    "tcrf - Family Fun Fitness: Stadium Events (The Cutting Room Floor)",
+    "wikipedia - Stadium Events"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:21:07.997Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4283,
+    "output_tokens": 1604,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

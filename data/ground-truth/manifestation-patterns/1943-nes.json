@@ -1,0 +1,194 @@
+{
+  "game_id": "1943-nes",
+  "game_name": "1943: The Battle of Midway",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft formations",
+      "visual_form": "Red planes in organized squadrons",
+      "meaning": "Active aerial threat; destroying complete formations triggers power-ups"
+    },
+    {
+      "signal": "Battleship/carrier stage bosses",
+      "visual_form": "Large naval vessel sprites at stage end",
+      "meaning": "Major escalation in threat level; required defeat to progress"
+    },
+    {
+      "signal": "Fuel meter depletion",
+      "visual_form": "Continuously draining energy bar",
+      "meaning": "Time-pressure danger; constant threat of mission failure"
+    },
+    {
+      "signal": "Enemy fire patterns",
+      "visual_form": "Projectile spray from aircraft and ships",
+      "meaning": "Immediate collision hazard; requires evasion"
+    },
+    {
+      "signal": "Strategic bomber squadrons",
+      "visual_form": "Multiple large aircraft in formation",
+      "meaning": "All-aerial battle stages; higher sustained threat vs. ship stages"
+    },
+    {
+      "signal": "Yamato battleship",
+      "visual_form": "Largest naval sprite in game",
+      "meaning": "Final boss; ultimate mission objective and maximum danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Red plane formations destroyed",
+      "visual_form": "Explosion animation + power-up drop",
+      "meaning": "Reward state; player performance advantage triggered"
+    },
+    {
+      "signal": "POW item collected",
+      "visual_form": "Glowing POW sprite pickup",
+      "meaning": "Energy restoration; safety margin increased"
+    },
+    {
+      "signal": "Energy tank item",
+      "visual_form": "Special container sprite",
+      "meaning": "Major fuel restoration (24 units); increased survivability"
+    },
+    {
+      "signal": "Yashichi pickup",
+      "visual_form": "Rare item sprite",
+      "meaning": "Complete energy bar refill; maximum safety state"
+    },
+    {
+      "signal": "Weapon upgrades obtained",
+      "visual_form": "Cycling power-up sprites (Shotgun, Three-way MG, Auto, Shell, Laser)",
+      "meaning": "Player firepower increased; tactical advantage vs. threats"
+    },
+    {
+      "signal": "Side fighters acquired",
+      "visual_form": "Two wingmen sprites flanking player aircraft",
+      "meaning": "Enhanced damage output and visual ally presence"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "American forces (player)",
+      "color_identity": null,
+      "symbol_or_sigil": "P-38 Lightning aircraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Pacific theater; Midway Atoll vicinity; player's single-plane perspective"
+    },
+    {
+      "faction": "Imperial Japanese Armed Forces (antagonist)",
+      "color_identity": "Red (enemy aircraft)",
+      "symbol_or_sigil": "Red plane formations; Japanese naval vessels (battleships, carriers)",
+      "enemy_visual_variants": "Strategic bombers, heavy bombers, naval gun emplacements",
+      "environmental_markers": "Yamato battleship (flagship); sea-based naval formations; air squadrons"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early mission phase (air-to-sea stages)",
+      "visual_manifestation": "Mixed aircraft and naval vessel enemies; lighter enemy density",
+      "behavioral_manifestation": "Standard enemy patrol patterns; boss battleship/carrier at stage end"
+    },
+    {
+      "world_state": "All-aerial battle stages (5 of 16 stages)",
+      "visual_manifestation": "Screen filled with strategic bombers or single heavy bomber sprite",
+      "behavioral_manifestation": "Sustained aerial combat; heavy bomber requires engine destruction for defeat"
+    },
+    {
+      "world_state": "Fuel critical (low energy meter)",
+      "visual_manifestation": "Energy bar visual warning (color change or flashing)",
+      "behavioral_manifestation": "Player cannot use special attacks; mission failure imminent without power-up collection"
+    },
+    {
+      "world_state": "Final stage (Yamato confrontation)",
+      "visual_manifestation": "Largest battleship sprite; maximum screen presence",
+      "behavioral_manifestation": "Ultimate boss mechanics; player's final objective"
+    },
+    {
+      "world_state": "Player advantage (post-formation destruction)",
+      "visual_manifestation": "Power-up drops on screen; weapon upgrade cycles available",
+      "behavioral_manifestation": "Temporary tactical superiority; window to upgrade weapons"
+    },
+    {
+      "world_state": "Co-op overlap (2-player mode)",
+      "visual_manifestation": "Two P-38 sprites on screen simultaneously",
+      "behavioral_manifestation": "Energy transfer mechanic when aircraft overlap; shared fuel pool"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Battleship/carrier as stage-end encounter",
+      "example": "11 stages feature naval vessel bosses; visual progression from smaller ships to Yamato communicates escalating threat and historical Pacific campaign"
+    },
+    {
+      "technique": "Bomber formation variety",
+      "example": "5 all-aerial stages use different bomber types (strategic vs. heavy); communicates enemy force diversity and changing engagement context"
+    },
+    {
+      "technique": "Fuel meter as narrative timer",
+      "visual_manifestation": "Constant depletion creates war mission urgency; supplies are finite resource",
+      "example": "Player must manage fuel consumption like real combat pilot; every maneuver has resource cost"
+    },
+    {
+      "technique": "Pacific theater setting",
+      "example": "Midway Atoll location, sea-based combat, Japanese naval assets (Yamato) establish WW2 Pacific naval context without explicit exposition"
+    },
+    {
+      "technique": "Red vs. player aircraft color coding",
+      "example": "Enemy formations shown in red; visual opposition to player's (implied) opposing color; instant faction recognition"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Red enemy plane formations",
+      "state": "Active patrol/attack",
+      "behavior": "Organized squadron movement; destruction of complete formation triggers power-up reward"
+    },
+    {
+      "entity": "Battleship stage boss",
+      "state": "Engaged combat",
+      "behavior": "Sustained gun fire; requires multiple hits to defeat; controls stage scrolling pause via Tsunami attack"
+    },
+    {
+      "entity": "Heavy bomber",
+      "state": "Active evasion",
+      "behavior": "Requires engine-specific destruction; more complex defeat condition than smaller aircraft"
+    },
+    {
+      "entity": "Power-up sprite (cycling)",
+      "state": "Available choice",
+      "behavior": "Can be shot to cycle between weapon types and energy restoration; communicates player agency in upgrade selection"
+    },
+    {
+      "entity": "Player P-38 (low fuel state)",
+      "state": "Critical vulnerability",
+      "behavior": "Cannot use special attacks; forced evasion-only tactics; visual warning of mission failure proximity"
+    },
+    {
+      "entity": "Side fighters (wingmen)",
+      "state": "Escort presence",
+      "behavior": "Flank player aircraft; enhance damage output; can be destroyed by enemy fire; temporary tactical asset"
+    },
+    {
+      "entity": "Yamato battleship",
+      "state": "Final confrontation",
+      "behavior": "Largest sprite on screen; final objective; communicates mission culmination through visual dominance"
+    }
+  ],
+  "notes": "1943 uses minimalist NES-era visuals to communicate world-state through sprite size/color hierarchy, formation patterns, and stage structure. The game's core danger/safety loop is fuel management: danger is constant (depleting meter), safety requires enemy destruction (power-ups) or strategic bombing (Yamato as final fuel sink). Faction identity is communicated entirely through color (red = enemy) and vehicle type (P-38 vs. Japanese naval/air assets). Regional differences (JP: 'Battle of Valhalla' vs. US: 'Battle of Midway') suggest ideological framing but don't affect visual communication of game state. The 16-stage progression (11 sea + 5 air) creates alternating engagement contexts that visually reinforce campaign progression.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:05:18.595Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4153,
+    "output_tokens": 2170,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

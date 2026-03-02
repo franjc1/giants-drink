@@ -1,0 +1,191 @@
+{
+  "game_id": "simcity-genesis",
+  "game_name": "SimCity",
+  "platform": "genesis",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Disaster event",
+      "visual_form": "Animated disaster sprites (tornado, flood, fire, earthquake, monster)",
+      "meaning": "Imminent threat to city infrastructure and population; financial/population loss incoming"
+    },
+    {
+      "signal": "Unpowered zones",
+      "visual_form": "Dark or unlit residential/commercial/industrial tiles",
+      "meaning": "Power grid failure; zone will decline without electricity"
+    },
+    {
+      "signal": "High crime indicator",
+      "visual_form": "Visual change in zone appearance or crime overlay",
+      "meaning": "Residential property values declining; industrial/commercial inefficiency"
+    },
+    {
+      "signal": "Pollution",
+      "visual_form": "Visual environmental degradation in zones near industrial areas",
+      "meaning": "Health hazard; residential zone value decline; need for pollution controls"
+    },
+    {
+      "signal": "Traffic congestion",
+      "visual_form": "Road network overlay showing congestion levels",
+      "meaning": "Transport inadequacy; reduced commercial/industrial efficiency; population dissatisfaction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Powered residential zones",
+      "visual_form": "Lit, developed residential tiles with visible housing structures",
+      "meaning": "Stable population growth; citizens choosing to build and upgrade homes"
+    },
+    {
+      "signal": "Commercial/industrial development",
+      "visual_form": "Developed commercial and industrial zone tiles with building sprites",
+      "meaning": "Economic activity; tax revenue generation; balanced city sector development"
+    },
+    {
+      "signal": "Transportation network coverage",
+      "visual_form": "Road, rail, and transit infrastructure connecting zones",
+      "meaning": "Adequate mobility; reduced crime potential; zone accessibility for workers"
+    },
+    {
+      "signal": "Low pollution zones",
+      "visual_form": "Clear, undegraded visual appearance in residential areas",
+      "meaning": "Health safety; property values stable or rising; population attracted to area"
+    },
+    {
+      "signal": "Balanced tax rate",
+      "visual_form": "Stable population growth visualization; no mass exodus of residents",
+      "meaning": "Citizens satisfied with city services; sustainable revenue model"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Residential sector",
+      "color_identity": null,
+      "symbol_or_sigil": "House/residential building sprites",
+      "enemy_visual_variants": "Depopulated or demolished residential zones indicate abandonment",
+      "environmental_markers": "Residential zones cluster in low-pollution, well-powered, low-crime areas"
+    },
+    {
+      "faction": "Commercial sector",
+      "color_identity": null,
+      "symbol_or_sigil": "Commercial building sprites (small office/retail structures)",
+      "enemy_visual_variants": "Abandoned or undeveloped commercial zones indicate poor zoning conditions",
+      "environmental_markers": "Commercial zones develop near residential areas and transportation networks"
+    },
+    {
+      "faction": "Industrial sector",
+      "color_identity": null,
+      "symbol_or_sigil": "Industrial building sprites (factories, heavy structures)",
+      "enemy_visual_variants": "Shuttered industrial zones indicate power loss or poor transport links",
+      "environmental_markers": "Industrial zones create visible pollution; typically located away from residential areas due to pollution aversion"
+    },
+    {
+      "faction": "Municipal infrastructure",
+      "color_identity": null,
+      "symbol_or_sigil": "Power plants, water systems, transit infrastructure sprites",
+      "enemy_visual_variants": "Damaged or non-functional infrastructure appears disabled/darkened",
+      "environmental_markers": "Power lines and transit routes visible as network overlay; critical to all sector development"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early city development (low population, limited budget)",
+      "visual_manifestation": "Sparse zone development; limited power grid; minimal road network; few buildings visible",
+      "behavioral_manifestation": "Sims slowly construct basic residential housing; limited commercial/industrial growth until infrastructure expands"
+    },
+    {
+      "world_state": "Thriving city (high population, balanced sectors, good services)",
+      "visual_manifestation": "Dense developed zones; extensive power grid coverage; complex road/transit networks; diverse building types visible",
+      "behavioral_manifestation": "Sims continuously upgrade housing; commercial/industrial zones actively develop; population growth visible"
+    },
+    {
+      "world_state": "City decline (high taxes, poor services, crime/pollution)",
+      "visual_manifestation": "Zone degradation; darkened unpowered areas; visible abandonment; decreased building density",
+      "behavioral_manifestation": "Sims emigrate (population decline); zones devolve to lower density housing; commercial/industrial shutdown"
+    },
+    {
+      "world_state": "Disaster event active",
+      "visual_manifestation": "Animated disaster sprite (tornado funnel, flood water, fire, earthquake terrain shift, monster); affected zones destroyed or damaged",
+      "behavioral_manifestation": "Temporary population flight; infrastructure damage; revenue disruption; recovery period required"
+    },
+    {
+      "world_state": "Bankrupt/financial crisis",
+      "visual_manifestation": "Infrastructure shutdown (power plants offline, roads unmaintained); widespread zone depopulation; visual deterioration",
+      "behavioral_manifestation": "Unable to build new structures; services collapse; population exodus accelerates; game-over condition approaches"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Zoning adjacency effects",
+      "example": "Industrial zones near residential areas visibly degrade property values; residential zones develop preferentially in low-pollution, well-serviced areas, naturally segregating sectors"
+    },
+    {
+      "technique": "Infrastructure as visual narrative",
+      "example": "Power grid expansion visibly lights up dark zones; transit networks enable zone clustering; player's infrastructure choices directly reflected in city layout and development patterns"
+    },
+    {
+      "technique": "Disaster aftermath",
+      "example": "Destroyed building sprites and cleared tiles show disaster impact; zones require rebuilding; visual scars persist until restoration occurs"
+    },
+    {
+      "technique": "Economic health visualization",
+      "example": "Building density, zone upgrade levels, and population visible in zone appearance; thriving zones show dense development; struggling zones show sparse, degraded structures"
+    },
+    {
+      "technique": "Service coverage patterns",
+      "example": "Crime and pollution radiate visually from zones; player learns to isolate industrial areas and provide police/health services through visual cause-effect in zone development"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Sims (residents)",
+      "state": "Content/satisfied",
+      "behavior": "Construct and upgrade houses; populate zones fully; zone density increases visually"
+    },
+    {
+      "entity": "Sims (residents)",
+      "state": "Dissatisfied (high crime/pollution/taxes/lack of services)",
+      "behavior": "Abandon houses; emigrate; zone density visibly decreases; buildings devolve to lower-grade housing"
+    },
+    {
+      "entity": "Commercial sector",
+      "state": "Thriving (good transport, residential proximity, adequate power)",
+      "behavior": "Zone fills with commercial buildings; business structures develop and persist"
+    },
+    {
+      "entity": "Commercial sector",
+      "state": "Failing (poor transport, isolated location, power loss)",
+      "behavior": "Commercial buildings disappear; zone returns to undeveloped state"
+    },
+    {
+      "entity": "Industrial sector",
+      "state": "Active (power available, transport access, not choked by pollution limits)",
+      "behavior": "Industrial buildings persist; factories visible; pollution generated; tax revenue flows"
+    },
+    {
+      "entity": "Industrial sector",
+      "state": "Shutdown (power loss, isolation, excessive pollution)",
+      "behavior": "Industrial buildings demolished; zone clears; pollution effects persist; revenue loss"
+    },
+    {
+      "entity": "Disaster events",
+      "state": "Triggered",
+      "behavior": "Animated disaster sprite moves across map; destroys buildings and infrastructure in path; population disruption; financial impact immediate and visual"
+    }
+  ],
+  "notes": "SimCity communicates game state primarily through visible zone development density, building sprite diversity, and infrastructure visibility. The player learns to read city health through visual patterns: dense thriving zones vs. sparse abandoned zones, lit vs. dark areas, polluted vs. clean regions. The game uses implicit visual language—the player discovers adjacency rules and service requirements by observing which zones develop and which decline in response to zoning choices. Disaster visualization is explicit and immediate (animated sprites). Faction identity (residential/commercial/industrial) is implicit in building sprite differentiation and sector-specific behavior. Political/economic systems are communicated through gameplay feedback loops made visible: taxation level affects zone desirability (visible emigration); pollution affects residential values (zone decay); transport enables commerce (zone clustering). The Genesis port (1991) maintained this visual communication system from the original design.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:37:16.026Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3103,
+    "output_tokens": 2291,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

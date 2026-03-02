@@ -1,0 +1,184 @@
+{
+  "game_id": "jagged-alliance-2-pc",
+  "game_name": "Jagged Alliance 2",
+  "platform": "pc",
+  "paradigm": "strategy",
+  "danger_signals": [
+    {
+      "signal": "Enemy force presence",
+      "visual_form": "NPC entities visible on tactical screen when spotted by player-controlled or allied characters",
+      "meaning": "Indicates hostile presence; triggers transition from real-time to turn-based combat"
+    },
+    {
+      "signal": "Combat initiation",
+      "visual_form": "Visual transition and game mode switch when player and enemy forces occupy same sector",
+      "meaning": "Imminent tactical engagement requiring immediate defensive/offensive response"
+    },
+    {
+      "signal": "Wounded mercenary status",
+      "visual_form": "Mercenary character state indicating health damage requiring medical attention",
+      "meaning": "Reduced combat effectiveness and need for medical kit intervention"
+    },
+    {
+      "signal": "Damaged equipment state",
+      "visual_form": "Weapon, tool, and armor degradation status visible in inventory/equipment UI",
+      "meaning": "Reduced functionality requiring mechanical skill repair before deployment"
+    },
+    {
+      "signal": "Enemy-controlled sectors",
+      "visual_form": "Strategic map display showing sector occupation by enemy forces (grid-based sector system)",
+      "meaning": "Contested territory requiring military reclamation to progress campaign"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Player-controlled sector",
+      "visual_form": "Sector ownership indicator on strategic map screen",
+      "meaning": "Secure territory controlled by player; militia can be stationed for defense"
+    },
+    {
+      "signal": "Stealth mode engagement",
+      "visual_form": "Mercenary movement option toggle allowing silent, noise-free traversal",
+      "meaning": "Reduced enemy detection risk; tactical advantage for infiltration"
+    },
+    {
+      "signal": "Medical treatment availability",
+      "visual_form": "Mercenary with medical kit and medical skill assigned to tend wounded mercs",
+      "meaning": "Recovery acceleration and restoration of combat effectiveness"
+    },
+    {
+      "signal": "Training/Militia presence",
+      "visual_form": "Local citizens trained into militia status by trainer mercs in controlled sectors",
+      "meaning": "Passive sector defense capability allowing mercenary deployment elsewhere"
+    },
+    {
+      "signal": "Vehicle acquisition",
+      "visual_form": "Ground or aerial vehicle availability for troop transport on strategic map",
+      "meaning": "Accelerated sector traversal reducing exposure time during movement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player-controlled forces (mercenaries)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct from enemy forces through character models and allegiance state",
+      "environmental_markers": "Sector ownership display on strategic map; militia presence in controlled towns"
+    },
+    {
+      "faction": "Queen Deidranna's government forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy NPC entities occupying contested and controlled sectors",
+      "environmental_markers": "Sector occupation on strategic grid; enemy troop deployment across Arulco"
+    },
+    {
+      "faction": "Local militia/citizenry",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Trained citizens can be distinguished from mercenaries through training status",
+      "environmental_markers": "Presence in towns after training; assigned to defend specific sectors passively"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Campaign progression (Deidranna's rule over Arulco)",
+      "visual_manifestation": "Strategic map sector control distribution; number of enemy-held vs. player-controlled territories",
+      "behavioral_manifestation": "Enemy force deployment patterns; increasing difficulty and enemy presence as player advances"
+    },
+    {
+      "world_state": "Military strength parity",
+      "visual_manifestation": "Mercenary roster size and equipment quality; weapon/armor upgrades displayed in inventory",
+      "behavioral_manifestation": "Combat difficulty scaling based on hired mercenary experience and tactical loadout"
+    },
+    {
+      "world_state": "Territorial control shift",
+      "visual_manifestation": "Real-time grid-based sector ownership changes on strategic map after successful military action",
+      "behavioral_manifestation": "Enemy force reallocation and reinforcement patterns in neighboring sectors"
+    },
+    {
+      "world_state": "Local resistance capability",
+      "visual_manifestation": "Militia training indicators in player-controlled sectors; trained citizen availability count",
+      "behavioral_manifestation": "Passive sector defense by militia when player forces are deployed elsewhere"
+    },
+    {
+      "world_state": "Mercenary readiness",
+      "visual_manifestation": "Health status of individual mercs; equipment condition (damaged/functional); skill training progress",
+      "behavioral_manifestation": "Action point allocation per turn affected by physical state; medical recovery time visible in strategic screen"
+    },
+    {
+      "world_state": "Combat engagement state",
+      "visual_manifestation": "Isometric tactical screen with terrain, buildings, items; character positioning relative to cover",
+      "behavioral_manifestation": "Game mode transition from real-time to turn-based upon enemy spotting; interrupt chance display"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sector-based territory mapping",
+      "example": "Strategic map displays square grid of Arulco sectors with ownership status, conveying territorial conflict without narrative exposition"
+    },
+    {
+      "technique": "Urban/building structure exploration",
+      "example": "Tactical isometric view allows discovery of items, destructible obstacles, and cover positions indicating how towns have been fortified under Deidranna's rule"
+    },
+    {
+      "technique": "Enemy deployment distribution",
+      "example": "Pattern of enemy force placement on strategic map communicates Deidranna's military strategy and territorial priorities"
+    },
+    {
+      "technique": "Local citizen interaction",
+      "example": "Availability of local citizens for militia training indicates degree of local resistance and support for player campaign against Deidranna"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mercenary",
+      "state": "Spotted by enemy",
+      "behavior": "Triggers automatic game mode switch to turn-based combat; position locked in tactical view"
+    },
+    {
+      "entity": "Mercenary",
+      "state": "In stealth mode",
+      "behavior": "Attempts noise-free movement; reduced enemy detection probability"
+    },
+    {
+      "entity": "Mercenary",
+      "state": "Wounded",
+      "behavior": "Reduced action point allocation per turn; requires medical attention to restore combat capability"
+    },
+    {
+      "entity": "Mercenary",
+      "state": "Assigned trainer role",
+      "behavior": "Stationary position in sector; increases local citizen skill progression for militia development"
+    },
+    {
+      "entity": "Enemy NPC",
+      "state": "Undetected",
+      "behavior": "Invisible on tactical screen until player-controlled character achieves line of sight"
+    },
+    {
+      "entity": "Enemy NPC",
+      "state": "In combat",
+      "behavior": "Participates in turn-based action economy; spends action points for movement, attacks, and tactical maneuvers"
+    },
+    {
+      "entity": "Local citizen",
+      "state": "Trained militia",
+      "behavior": "Provides passive sector defense when stationed; independent defensive capability without player direct control"
+    }
+  ],
+  "notes": "Jagged Alliance 2 uses a dual-layer visual communication system: (1) Strategic map with grid-based sector ownership for high-level world state, and (2) Isometric tactical screen for granular combat and environmental detail. The game lacks explicit color-coded faction identity systems, instead relying on NPC entity differentiation, character roster management, and sector control visualization. World state is primarily communicated through strategic map configuration, mercenary equipment/health status, and the presence/absence of enemy forces in specific sectors. Political situation (Deidranna's grip on Arulco) is expressed through the distribution of enemy-controlled territories rather than explicit faction visual markers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:26:15.804Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2771,
+    "output_tokens": 2101,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

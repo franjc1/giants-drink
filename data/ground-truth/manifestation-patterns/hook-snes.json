@@ -1,0 +1,181 @@
+{
+  "game_id": "hook-snes",
+  "game_name": "Hook",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hook's pirate henchmen sprites, spiders, snakes, skeletons",
+      "meaning": "Combat threat requiring evasion or engagement"
+    },
+    {
+      "signal": "Health depletion indicator",
+      "visual_form": "Leaf-based health meter (max 4 leaves, player starts with 2)",
+      "meaning": "Cumulative damage taken; losing all leaves results in level restart"
+    },
+    {
+      "signal": "Weapon loss",
+      "visual_form": "Golden sword drops from Peter Pan when hit; reverts to dagger",
+      "meaning": "Status downgrade after damage; offensive capability reduced until sword recovered"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Caves, forests, lagoons, snowy mountains with navigational challenges",
+      "meaning": "Platforming obstacles and terrain-specific threats"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Fruits scattered throughout levels",
+      "meaning": "Refill health meter; consumable healing resource"
+    },
+    {
+      "signal": "Flying ability",
+      "visual_form": "Pixie dust pickups; Tinker Bell visual presence",
+      "meaning": "Temporary invulnerability to platforming hazards; movement advantage"
+    },
+    {
+      "signal": "Fly Meter refill",
+      "visual_form": "Tinker Bell sprite interactions throughout levels",
+      "meaning": "Extension of flight duration; safety window for aerial traversal"
+    },
+    {
+      "signal": "Weapon upgrade",
+      "visual_form": "Golden sword acquisition after level 1 completion",
+      "meaning": "Offensive upgrade enabling ranged energy attacks; status improvement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Peter Pan (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dagger and golden sword",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Neverland locations (caves, forests, lagoons, snowy mountains)"
+    },
+    {
+      "faction": "Captain Hook's Pirates",
+      "color_identity": null,
+      "symbol_or_sigil": "Pirate henchmen as visual enemy type",
+      "enemy_visual_variants": "Multiple henchman sprite designs",
+      "environmental_markers": "Pirate Town setting; Hook's ship presence"
+    },
+    {
+      "faction": "Neutral/Wildlife",
+      "color_identity": null,
+      "symbol_or_sigil": "Spiders, snakes, skeletons as enemies",
+      "enemy_visual_variants": "Distinct sprite designs per creature type",
+      "environmental_markers": "Natural Neverland hazards throughout level environments"
+    },
+    {
+      "faction": "Tinker Bell (ally)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sprite character accompanying Peter Pan",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Present throughout game levels for mechanical support"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (levels 1-3)",
+      "visual_manifestation": "Dagger as primary weapon; basic enemy encounters; foundational platforming",
+      "behavioral_manifestation": "Limited offensive range; reliance on melee combat and evasion"
+    },
+    {
+      "world_state": "Mid-game (levels 4-8)",
+      "visual_manifestation": "Golden sword equipped; increased enemy density and complexity; varied terrain",
+      "behavioral_manifestation": "Ranged energy attacks available; greater offensive versatility; flight mechanics introduced"
+    },
+    {
+      "world_state": "Late game (levels 9-11)",
+      "visual_manifestation": "All enemy types present; complex level layouts across diverse biomes; visual intensification",
+      "behavioral_manifestation": "Maximum challenge state; flight meter management critical; preparation for Hook confrontation"
+    },
+    {
+      "world_state": "Final confrontation",
+      "visual_manifestation": "Captain Hook as boss opponent; sword duel setting; climactic visual framing",
+      "behavioral_manifestation": "Boss battle mechanics; one-on-one combat emphasis; narrative conclusion"
+    },
+    {
+      "world_state": "Health critical (1 leaf remaining)",
+      "visual_manifestation": "Leaf meter visually depleted; Peter Pan sprite may show damage states",
+      "behavioral_manifestation": "High vulnerability state; one hit from failure; enemy avoidance becomes priority"
+    },
+    {
+      "world_state": "Flying (pixie dust active)",
+      "visual_manifestation": "Peter Pan sprite in flight animation; Fly Meter visible and consuming",
+      "behavioral_manifestation": "Temporary invulnerability to ground hazards; elevated movement capabilities"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Biome progression as narrative markers",
+      "example": "Progression through caves → forests → lagoons → snowy mountains visually tracks journey deeper into Neverland and toward Hook's territory"
+    },
+    {
+      "technique": "Enemy type density as difficulty escalation",
+      "example": "Early levels feature sparse pirate henchmen; mid-levels introduce spiders and snakes; late levels combine all enemy types, signaling approach to final conflict"
+    },
+    {
+      "technique": "Weapon upgrade as power fantasy and progression",
+      "example": "Dagger-to-golden-sword transition after level 1 victory establishes Peter Pan's growing power and readiness to face Hook"
+    },
+    {
+      "technique": "Tinker Bell's presence as protective marker",
+      "example": "Tinker Bell sprite visibility in levels indicates availability of healing support and flight meter restoration—zones of relative safety within danger"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Peter Pan",
+      "state": "Healthy (3-4 leaves)",
+      "behavior": "Normal movement speed; can engage enemies; full offensive capability with equipped weapon"
+    },
+    {
+      "entity": "Peter Pan",
+      "state": "Damaged (1-2 leaves)",
+      "behavior": "Altered sprite appearance; restricted engagement options; prioritizes evasion over combat"
+    },
+    {
+      "entity": "Peter Pan",
+      "state": "Flying (pixie dust active)",
+      "behavior": "Elevated sprite position; altered movement trajectory; temporary hazard invulnerability; Fly Meter countdown visible"
+    },
+    {
+      "entity": "Peter Pan",
+      "state": "Weaponless (after hit with golden sword)",
+      "behavior": "Reverts to dagger; reduced attack range; must retrieve golden sword in subsequent level"
+    },
+    {
+      "entity": "Hook's Pirate Henchmen",
+      "state": "Patrolling",
+      "behavior": "Predictable movement patterns; aggro on player proximity; standard sprite animations"
+    },
+    {
+      "entity": "Spiders/Snakes/Skeletons",
+      "state": "Active in environment",
+      "behavior": "Environmental threats with distinct movement patterns; hazards rather than conscious enemies; engage automatically on contact"
+    },
+    {
+      "entity": "Tinker Bell",
+      "state": "Present in level",
+      "behavior": "Provides visual cue for item pickups; appears at intervals to refill Fly Meter; ally indicator"
+    }
+  ],
+  "notes": "Hook (SNES) uses a leaf-based health system and pixie dust flight mechanics to communicate vulnerability and temporary power states. Weapon downgrades (sword loss) create visible status regression. Enemy variety (pirates vs. wildlife) signals both faction threat and environmental hazard types. Biome progression through Neverland serves dual narrative and difficulty scaling functions. Tinker Bell's presence is the game's primary visual safety signal. The game lacks explicit faction dialogue or political complexity—danger/safety communication relies on enemy sprite design, environmental layout, and mechanical feedback systems rather than lore or world-state narrative.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:17:24.759Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3217,
+    "output_tokens": 2088,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

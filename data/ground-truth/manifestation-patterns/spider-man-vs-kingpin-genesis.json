@@ -1,0 +1,131 @@
+{
+  "game_id": "spider-man-vs-kingpin-genesis",
+  "game_name": "The Amazing Spider-Man vs. The Kingpin",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite animation and onscreen placement of hostile characters",
+      "meaning": "Immediate threat to player; collision results in damage"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Spikes, falling platforms, moving obstacles rendered in level geometry",
+      "meaning": "Collision with these elements causes damage or death"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large, distinctive sprite with aggressive animation patterns; screen focus shift",
+      "meaning": "High-difficulty confrontation; defeat required to progress"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Spider-Man sprite flashing or color shift; HUD health bar reduction",
+      "meaning": "Player character taking damage; imminent death risk if health reaches zero"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item pickups",
+      "visual_form": "Collectable sprites (health restoration items, power-ups) placed in level",
+      "meaning": "Resource acquisition; health recovery or temporary invulnerability"
+    },
+    {
+      "signal": "Clear level sections",
+      "visual_form": "Open platforming spaces without visible enemies or hazards",
+      "meaning": "Safe passage opportunity; room to maneuver and plan next action"
+    },
+    {
+      "signal": "Checkpoint/safe zones",
+      "visual_form": "Designated level areas or visual markers indicating progress save points",
+      "meaning": "Player progress secured; death returns to this location rather than level start"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Spider-Man (Player)",
+      "color_identity": "Red and blue sprite coloration",
+      "symbol_or_sigil": "Spider insignia on costume",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Urban New York settings; skyscraper and rooftop environments aligned with Spider-Man's territory"
+    },
+    {
+      "faction": "Kingpin's Criminal Organization",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Thugs, henchmen, and criminal operatives rendered as distinct enemy sprites throughout levels",
+      "environmental_markers": "Industrial, warehouse, and criminal hideout locations; interiors suggesting organized crime operations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early story progression (Act 1-2)",
+      "visual_manifestation": "City environments with moderate enemy density; cleaner, more navigable spaces",
+      "behavioral_manifestation": "Enemy encounters are introductory in difficulty; henchmen follow basic patrol patterns"
+    },
+    {
+      "world_state": "Mid-story escalation (Act 3-4)",
+      "visual_manifestation": "Darker environments, warehouse/industrial settings; increased visual clutter and hazard placement",
+      "behavioral_manifestation": "More aggressive enemy types appear; hazard frequency increases; boss encounters become more frequent"
+    },
+    {
+      "world_state": "Crisis/Final confrontation (Act 5+)",
+      "visual_manifestation": "Kingpin's headquarters or climactic location; heavily fortified visual design; maximum environmental density",
+      "behavioral_manifestation": "All enemy types present; pattern complexity maximal; final boss appears with full sprite animation set"
+    },
+    {
+      "world_state": "Player at low health",
+      "visual_manifestation": "Spider-Man sprite may flash or display distress animation",
+      "behavioral_manifestation": "Increased enemy aggression; tighter timing windows on platforming sections"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting progression as narrative",
+      "example": "Movement from rooftop and street-level environments into criminal infrastructure (warehouses, hideouts) visually demonstrates Spider-Man's pursuit of Kingpin deeper into criminal underworld"
+    },
+    {
+      "technique": "Enemy type variation by location",
+      "example": "Street-level henchmen differ visually from warehouse guards and laboratory operatives, suggesting hierarchical organization and specialized criminal operations"
+    },
+    {
+      "technique": "Environmental hazards as world-building",
+      "example": "Industrial machinery, electrical traps, and structural dangers in later levels suggest Kingpin's base is an active criminal operation rather than static location"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard henchman",
+      "state": "Idle/Patrol",
+      "behavior": "Walks set patrol path; sprite animation loops; no immediate threat posture"
+    },
+    {
+      "entity": "Standard henchman",
+      "state": "Alert",
+      "behavior": "Changes direction toward player; animation quickens; begins pursuit or attack patterns"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Encounter initialization",
+      "behavior": "Large sprite enters screen; unique animation set; music/visual focus change signals critical encounter"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Combat active",
+      "behavior": "Cyclical attack patterns; sprite displays damage state changes; arena boundaries enforced through visual design"
+    }
+  ],
+  "notes": "This 1991 Genesis platformer uses classic 16-bit visual language to communicate danger and progression. Spider-Man's iconic red/blue costume provides immediate player identification. Enemy and environment variety signals narrative escalation from street-level crime to organized criminal infrastructure. The game lacks sophisticated UI but relies on sprite animation, color shifts, and environmental design to communicate state changes. Danger is primarily signaled through enemy presence and hazard placement rather than visual warning systems. Safety emerges through level design (open spaces) and item placement.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:01:17.756Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 924,
+    "output_tokens": 1600,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

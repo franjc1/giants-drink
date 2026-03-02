@@ -1,0 +1,125 @@
+{
+  "game_id": "sqoon-nes",
+  "game_name": "Sqoon",
+  "platform": "nes",
+  "paradigm": "shoot-em-up",
+  "level_count": 8,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Submarine (Sqoon) and basic missile attack",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player controls pink submarine with missile weapons from start"
+    },
+    {
+      "element": "Ice ball bomb attack (facility destruction)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Required to destroy alien facilities and free captured humans"
+    },
+    {
+      "element": "Human rescue mechanic (max 9 capacity)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Must discharge survivors at islands to gain power-ups and fuel replenishment"
+    },
+    {
+      "element": "Fuel management system (60-second depletion cycle)",
+      "first_appears": "Level 1",
+      "introduction_context": "dangerous",
+      "mastery_context": "Constant resource pressure; failure results in life loss"
+    },
+    {
+      "element": "Enemy avoidance (contact damage)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Active threat requiring evasion alongside offensive action"
+    },
+    {
+      "element": "Mermaid collision (hidden bonus trigger)",
+      "first_appears": "Levels 1-7 (discoverable)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Optional; colliding with mermaid reveals hidden banner message from aliens"
+    },
+    {
+      "element": "Level-end alien bases (destruction objective)",
+      "first_appears": "End of Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Destroying all bases across loops triggers regional message variants"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": 60,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully docking at island to discharge human survivors",
+      "Fuel tank replenishment after rescue discharge",
+      "Destroying level-end alien base",
+      "Destroying enemy facilities and freeing captured humans"
+    ],
+    "typical_tension_triggers": [
+      "Fuel depletion warning (60-second cycle)",
+      "Submarine at maximum human capacity (9) unable to collect more",
+      "Active enemy contact avoidance",
+      "Facility defense against ice ball attacks",
+      "Mermaid encounter (alternate tension path with hidden bonus stakes)"
+    ],
+    "pacing_descriptor": "Continuous resource management tension interspersed with facility destruction objectives and rescue discharge relief cycles"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Mermaids present optional hidden bonus messages without blocking progression",
+    "secret_convention": "Collision with mermaid during level triggers banner message from aliens; discoverable across any loop",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of simultaneous resource management (fuel, human capacity) and evasion; manageable alien density",
+    "mid_game": null,
+    "late_game": "Three distinct loops available; escalating challenge implied by multi-loop structure",
+    "notable_spikes": [
+      "Loop transitions (game repeats with sustained difficulty across 3 total loops)",
+      "Level 7 to Level 8 transition (Level 8 functions as final sequence before loop restart)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Rescue-and-Return Cycle",
+      "description": "Collect captured humans from destroyed facilities (max 9), navigate to island discharge point, release to gain power-ups and fuel, repeat per level",
+      "example_level": "All levels 1-7"
+    },
+    {
+      "pattern_name": "Level-End Boss Base",
+      "description": "Culmination of each level involves destroying the alien base command structure; destruction status tracked across loops for ending variant",
+      "example_level": "End of Levels 1-7"
+    },
+    {
+      "pattern_name": "Hidden Mermaid Bonus Path",
+      "description": "Optional collision with mermaid during standard level play triggers hidden alien banner message, available on any difficulty loop",
+      "example_level": "Any level 1-7 (regional message variants on loops 2-3)"
+    },
+    {
+      "pattern_name": "Loop Escalation Structure",
+      "description": "Game completes at Level 7 but restarts; three total loops possible. Final loop completion with all bases destroyed triggers regional surrender message variant (Japan: Ottoto aliens, US: Neptunians)",
+      "example_level": "Level 7 completion triggers loop restart; Level 8 is final sequence"
+    }
+  ],
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:00:25.417Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3157,
+    "output_tokens": 1461,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

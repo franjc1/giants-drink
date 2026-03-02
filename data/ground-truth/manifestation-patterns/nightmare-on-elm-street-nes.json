@@ -1,0 +1,183 @@
+{
+  "game_id": "nightmare-on-elm-street-nes",
+  "game_name": "A Nightmare on Elm Street",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile character sprites (zombies, skeletons, bats, rats, spiders, minotaurs, cats, dogs)",
+      "meaning": "Immediate threat requiring combat or avoidance"
+    },
+    {
+      "signal": "Sleep Meter depletion",
+      "visual_form": "Decreasing meter UI element; automatic drain when stationary",
+      "meaning": "Approaching vulnerability state; character falling asleep"
+    },
+    {
+      "signal": "Dream World transition",
+      "visual_form": "Movielike wavering/distortion of screen visuals",
+      "meaning": "Shift to alternate dangerous state where player is more vulnerable to Freddy Krueger attacks"
+    },
+    {
+      "signal": "Boss encounter readiness",
+      "visual_form": "All bones collected within building area",
+      "meaning": "Imminent confrontation with Freddy Krueger"
+    },
+    {
+      "signal": "Locked area",
+      "visual_form": "Inaccessible building or pathway during midnight setting",
+      "meaning": "Danger or restriction; requires key item to progress"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Coffee item",
+      "visual_form": "Collectible coffee cup sprite scattered throughout levels",
+      "meaning": "Restores Sleep Meter; prevents/delays transition to Dream World"
+    },
+    {
+      "signal": "Boombox item",
+      "visual_form": "Collectible boombox sprite in Dream World areas",
+      "meaning": "Returns player character to default (safer) version of level from Dream World"
+    },
+    {
+      "signal": "Key acquisition",
+      "visual_form": "Collectible key item after defeating Freddy in an area",
+      "meaning": "Unlocks new safe passage to unexplored areas; progression reward"
+    },
+    {
+      "signal": "Power-up icons (Dream World)",
+      "visual_form": "Special collectible icons appearing in Dream World",
+      "meaning": "Grants temporary enhanced abilities (shuriken, javelin, magic projectiles) for survival"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Teenagers",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Bones scattered by Freddy Krueger (collection objective); presence of coffee and boombox items as survival resources"
+    },
+    {
+      "faction": "Freddy Krueger/Supernatural Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Scattered bones as signature/calling card",
+      "enemy_visual_variants": "Freddy Krueger boss entity; Dream World manifestation (more aggressive state)",
+      "environmental_markers": "Dream World environment itself; hostile creature spawns (zombies, skeletons, bats, rats, spiders, minotaurs); locked areas requiring keys"
+    },
+    {
+      "faction": "Neutral Hazards/Environment",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Non-humanoid enemies (cats, dogs, bats, rats, spiders); skeleton and zombie variants",
+      "environmental_markers": "Elm Street vicinity setting; high school furnace (final objective location); buildings with locked access"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal/Waking state",
+      "visual_manifestation": "Standard environment rendering; stable screen presentation; accessible areas",
+      "behavioral_manifestation": "Slower Sleep Meter drain when moving; normal enemy behavior; ability to collect bones and progress"
+    },
+    {
+      "world_state": "Approaching sleep (Low Sleep Meter)",
+      "visual_manifestation": "Sleep Meter UI visibly depleted; visual warning state building",
+      "behavioral_manifestation": "Player character vulnerability increasing; enemies remain standard threat level"
+    },
+    {
+      "world_state": "Dream World (Any player Sleep Meter fully depleted)",
+      "visual_manifestation": "Movielike wavering/distortion filter applied to entire screen; alternate visual rendering of same environment",
+      "behavioral_manifestation": "All players transported to Dream World regardless of individual meter state; Freddy Krueger becomes significantly more dangerous and aggressive; increased attack vulnerability; special power-ups become available"
+    },
+    {
+      "world_state": "Area cleared (All bones collected)",
+      "visual_manifestation": "Environmental change signaling completion; visual readiness indicator",
+      "behavioral_manifestation": "Boss battle with Freddy Krueger triggers; upon victory, new key becomes available; new area becomes accessible"
+    },
+    {
+      "world_state": "Midnight setting (Game temporal context)",
+      "visual_manifestation": "Dark environment palette; nighttime aesthetic; certain buildings appear locked or obscured",
+      "behavioral_manifestation": "Restricted area access; enemy spawns; hostile supernatural presence pervasive"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Scattered narrative artifacts",
+      "example": "Freddy Krueger's bones scattered throughout Elm Street vicinity communicate his defeat/dismemberment and the core objective of recollection and destruction"
+    },
+    {
+      "technique": "Location-based objective design",
+      "example": "High school furnace as final destination for bone disposal creates narrative closure tied to film franchise (Freddy's death method); spatial goal reinforces story"
+    },
+    {
+      "technique": "Environmental restriction as narrative",
+      "example": "Locked buildings and key-gated progression imply supernatural sealing or danger containment; midnight setting creates horror atmosphere through access denial"
+    },
+    {
+      "technique": "Dream/Reality duality visualization",
+      "example": "Screen wavering effect communicates psychological horror; visual distortion serves as both gameplay mechanic and narrative device showing character consciousness state"
+    },
+    {
+      "technique": "Enemy ecosystem as worldbuilding",
+      "example": "Mix of supernatural (zombies, skeletons, bats, spiders) and mundane hostile creatures (cats, dogs, rats) suggests corruption of ordinary environment by Freddy's supernatural influence"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Normal/Waking",
+      "behavior": "Can move freely; collects bones and items; engaged in standard platforming combat"
+    },
+    {
+      "entity": "Player character",
+      "state": "Approaching sleep (Low Sleep Meter)",
+      "behavior": "Remains functionally capable but increasingly vulnerable; visual/audio warnings implied"
+    },
+    {
+      "entity": "Player character",
+      "state": "In Dream World",
+      "behavior": "Significantly increased vulnerability to attacks; access to special power-ups (projectile weapons); behavior shift toward survival-focused gameplay"
+    },
+    {
+      "entity": "Hostile creatures (zombies, skeletons, bats, rats, spiders, minotaurs)",
+      "state": "All gameplay states",
+      "behavior": "Aggressive attack patterns; attempt to drain player life/health; spawned throughout levels as persistent threats"
+    },
+    {
+      "entity": "Freddy Krueger (boss)",
+      "state": "Normal World encounter",
+      "behavior": "Challenging boss battle; appears after bone collection; defeat grants area exit and key"
+    },
+    {
+      "entity": "Freddy Krueger (boss)",
+      "state": "Dream World encounter",
+      "behavior": "Dramatically increased aggression; heightened danger; 'bizarrely weak' characterization noted by critics suggests design disconnect from film threat level"
+    },
+    {
+      "entity": "Coffee items",
+      "state": "Available",
+      "behavior": "Stationary; collectible; immediately restore Sleep Meter upon contact"
+    },
+    {
+      "entity": "Boombox item",
+      "state": "Dream World present",
+      "behavior": "Stationary; collectible; immediately returns player to normal world state upon contact"
+    }
+  ],
+  "notes": "This game employs a unique 'Sleep Meter' mechanic as primary world-state indicator, creating dual-environment horror dynamic (normal Elm Street vs. Dream World). Danger communication relies heavily on UI meter depletion and visual screen distortion rather than environmental color coding. Faction distinction is implicit rather than explicit—teenagers vs. Supernatural threat without clear visual faction identifiers (no colored armor, insignia, or faction-specific environmental markers). The game's manifestation layer depends on item collection (coffee/boombox) as safety signals and screen wavering as the primary world-state visual communication. Environmental storytelling primarily through location design (furnace objective) and enemy ecosystem (supernatural creatures infesting ordinary neighborhood). Critical reception noted the screen wavering effect as effective horror presentation despite overall game weakness.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:15:49.351Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3055,
+    "output_tokens": 2269,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

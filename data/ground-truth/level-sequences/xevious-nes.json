@@ -1,0 +1,148 @@
+{
+  "game_id": "xevious-nes",
+  "game_name": "Xevious",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": 16,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Zapper (anti-air weapon)",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Core mechanic for destroying flying enemies; introduced immediately with no tutorial"
+    },
+    {
+      "element": "Blaster (ground bombing weapon)",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Paired weapon system; reticle shows landing zone; core mechanic from beginning"
+    },
+    {
+      "element": "Flying enemies (basic)",
+      "first_appears": "Game start / early areas",
+      "introduction_context": "moderate",
+      "mastery_context": "Initial threat; game dynamically escalates to harder enemy types once player demonstrates mastery"
+    },
+    {
+      "element": "Ground installations and vehicles",
+      "first_appears": "Game start / early areas",
+      "introduction_context": "moderate",
+      "mastery_context": "Requires blaster targeting; rewards dual-weapon strategy"
+    },
+    {
+      "element": "Advanced enemy types",
+      "first_appears": "Mid-game (triggered by skill)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Dynamically introduced when player excels; skill-based difficulty scaling"
+    },
+    {
+      "element": "Zolback radar (ground target)",
+      "first_appears": "Mid-game",
+      "introduction_context": "moderate",
+      "mastery_context": "Destruction resets enemy difficulty back to easier types; strategic choice point"
+    },
+    {
+      "element": "Andor Genesis mothership",
+      "first_appears": "Certain progression points",
+      "introduction_context": "dangerous",
+      "mastery_context": "Boss encounter; launches endless projectiles and 'Zakatos' spheres; requires targeting core or four blaster receptacles"
+    },
+    {
+      "element": "Sol Citadels (hidden towers)",
+      "first_appears": "Scattered throughout areas",
+      "introduction_context": "safe",
+      "mastery_context": "Secret discovery mechanic; reticle flashes red when overhead; rewards exploration"
+    },
+    {
+      "element": "Special Flags (Rally-X cameo)",
+      "first_appears": "Semi-random location per area",
+      "introduction_context": "safe",
+      "mastery_context": "Extra life reward; semi-random placement encourages thorough area coverage"
+    },
+    {
+      "element": "Geographically distinct areas",
+      "first_appears": "Progression through 16 connected regions",
+      "introduction_context": null,
+      "mastery_context": "Forests, roads, rivers, mechanical structures; visual variety; Nazca line decorations (condor designs)"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Destroying Zolback radars to reset enemy difficulty",
+      "Collecting Special Flags for extra lives",
+      "Discovering hidden Sol Citadels",
+      "Completing an area checkpoint (70% rule allows mid-area respawn)"
+    ],
+    "typical_tension_triggers": [
+      "Advanced enemy type spawning (skill-based escalation)",
+      "Andor Genesis mothership boss encounters",
+      "Endless stream of projectiles and Zakatos during boss phases",
+      "Multi-layered threat (simultaneous flying + ground enemies)"
+    ],
+    "pacing_descriptor": "Dynamic difficulty scaling tied to player performance; tension rises as player demonstrates mastery; punctuated by boss encounters at specific progression points; relief available through strategic radar destruction"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Reticle flashes red when positioned over hidden Sol Citadels; encourages systematic bombing of ground areas",
+    "secret_convention": "Hidden towers (Sol Citadels) require bombing specific unmarked ground locations; discovered via reticle feedback rather than visual cues",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Welcoming to new players; basic enemy types; dual-weapon system teaches itself through immediate feedback",
+    "mid_game": "Gradual escalation to advanced enemy types triggered by player skill; Zolback radars introduce strategic choice (accept harder difficulty or reset)",
+    "late_game": "Sustained advanced enemies; boss encounters with Andor Genesis mothership; 16-area loop structure allows indefinite progression",
+    "notable_spikes": [
+      "First Andor Genesis mothership encounter (endless projectiles + Zakatos)",
+      "Transition to advanced enemy types (dynamically triggered by combat success)",
+      "Loop cycles back to area 1 after area 16 (difficulty maintained)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Skill-based dynamic difficulty",
+      "description": "Game monitors player performance destroying specific enemy types and automatically replaces them with advanced variants; players can manually reset to easier enemies by destroying Zolback radars",
+      "example_level": "All areas"
+    },
+    {
+      "pattern_name": "Dual-weapon area design",
+      "description": "Each area contains both airborne targets (zapper targets) and ground installations (blaster targets); design rewards players who master both weapons",
+      "example_level": "Geographically distinct areas 1-16"
+    },
+    {
+      "pattern_name": "Hidden discovery mechanic",
+      "description": "Sol Citadels exist in unmarked ground locations; reticle provides only feedback (red flash) rather than explicit markers; encourages thorough area bombing",
+      "example_level": "All areas"
+    },
+    {
+      "pattern_name": "Checkpoint respawn rule",
+      "description": "Dying approximately 70% through an area respawns player at beginning of next area; reduces frustration on long areas while maintaining progression stakes",
+      "example_level": "All 16 areas"
+    },
+    {
+      "pattern_name": "Boss encounter pattern",
+      "description": "Andor Genesis mothership appears at certain progression points; player must either destroy four blaster receptacles OR the central core; launches infinite projectiles and explosive spheres",
+      "example_level": "Multiple designated boss areas"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:08:11.432Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5328,
+    "output_tokens": 1696,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

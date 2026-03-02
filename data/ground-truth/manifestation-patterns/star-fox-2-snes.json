@@ -1,0 +1,226 @@
+{
+  "game_id": "star-fox-2-snes",
+  "game_name": "Star Fox 2",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy fighter presence",
+      "visual_form": "Fighter sprites on map screen; enemy ship models in action perspective",
+      "meaning": "Active combat threat requiring interception"
+    },
+    {
+      "signal": "IPBM (interplanetary ballistic missile) trajectories",
+      "visual_form": "Missile paths displayed on strategic map moving toward Corneria",
+      "meaning": "Imminent planetary damage; highest priority threat requiring player intercept"
+    },
+    {
+      "signal": "Battleship deployment",
+      "visual_form": "Large enemy vessel symbols on map; spawns fighter squadrons visually",
+      "meaning": "Major threat asset that generates additional waves of fighters"
+    },
+    {
+      "signal": "Corneria damage meter increase",
+      "visual_form": "Damage percentage rising on UI; visual planetary degradation implied",
+      "meaning": "World-state deterioration; game over at 100% damage"
+    },
+    {
+      "signal": "Pilot shield depletion",
+      "visual_form": "Shield gauge depleting for selected pilot; Arwing visual damage states",
+      "meaning": "Selected pilot approaching incapacitation; death if gauge empties"
+    },
+    {
+      "signal": "Star Wolf mercenary team presence",
+      "visual_form": "Distinctive enemy ship designs and pilot silhouettes",
+      "meaning": "Rival faction encounter; boss-tier threat"
+    },
+    {
+      "signal": "Satellite under attack",
+      "visual_form": "Special enemy units targeting General Pepper's satellite asset on map",
+      "meaning": "Critical defensive infrastructure compromised; loss results in Corneria bombardment"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Map screen presence",
+      "visual_form": "Strategic overhead view of Lylat system with paused game time",
+      "meaning": "Player has tactical control and planning opportunity; not in real-time combat"
+    },
+    {
+      "signal": "Pilot alive and available",
+      "visual_form": "Pilot portrait displayed with active shield gauge on UI",
+      "meaning": "Playable asset intact; can engage enemies"
+    },
+    {
+      "signal": "General Pepper's satellite operational",
+      "visual_form": "Satellite icon present on map; defensive cannon functionality available",
+      "meaning": "Limited but active planetary defense active against incoming threats"
+    },
+    {
+      "signal": "Cleared sector on map",
+      "visual_form": "Map areas with no enemy indicators or missile trajectories",
+      "meaning": "Tactical breathing room; areas safe from immediate attack"
+    },
+    {
+      "signal": "Objective completion",
+      "visual_form": "Return to map screen after action sequence completion",
+      "meaning": "Successful engagement; regain strategic initiative"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Star Fox team (player)",
+      "color_identity": "Primary colors (red/white Arwing visual identity)",
+      "symbol_or_sigil": "Star Fox squadron insignia",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Arwing ship designs; pilot character models (Fox, Falco, Peppy, Slippy, Miyu, Fay)"
+    },
+    {
+      "faction": "Andross forces (primary antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Emperor Andross personal symbol/motif",
+      "enemy_visual_variants": "Battleships, fighter squadrons, IPBMs, planetary bases",
+      "environmental_markers": "Widespread deployment across Lylat system; orbital bombardment assets"
+    },
+    {
+      "faction": "Star Wolf (rival mercenary team)",
+      "color_identity": null,
+      "symbol_or_sigil": "Star Wolf faction insignia",
+      "enemy_visual_variants": "Distinctive mercenary ship designs; boss encounter formations (Wolf O'Donnell, Leon Powalski, Pigma Dengar, Algy)",
+      "environmental_markers": "Mercenary vessels appearing as special encounters; characteristically arrogant/aggressive AI behavior"
+    },
+    {
+      "faction": "Cornerian defense (allied)",
+      "color_identity": null,
+      "symbol_or_sigil": "General Pepper command authority",
+      "enemy_visual_variants": null,
+      "environmental_markers": "General Pepper's satellite defensive installation; planet Corneria as protected asset"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Andross assault active",
+      "visual_manifestation": "Persistent enemy markers across Lylat system map; multiple simultaneous threats",
+      "behavioral_manifestation": "IPBMs advance toward Corneria each turn; enemy fighters patrol assigned sectors; Star Wolf conducts opportunistic raids"
+    },
+    {
+      "world_state": "Corneria under bombardment",
+      "visual_manifestation": "Damage meter displays escalating percentage; visual planetary impact accumulation",
+      "behavioral_manifestation": "Countdown pressure; enemies press attacks; game over condition approaches at 100%"
+    },
+    {
+      "world_state": "Player engages enemy forces",
+      "visual_manifestation": "Transition from map perspective to 3D action perspective; enemy squad composition visible",
+      "behavioral_manifestation": "Time dilation effect—action time slower than map time; allows continued threat advancement during player engagement"
+    },
+    {
+      "world_state": "Satellite compromised by special units",
+      "visual_manifestation": "Satellite icon changes state/visual indicator on map; cannon redirected visually",
+      "behavioral_manifestation": "Satellite switches to hostile fire targeting Corneria instead of enemies; loss of defensive coverage"
+    },
+    {
+      "world_state": "Pilot incapacitated",
+      "visual_manifestation": "Shield gauge depletes to zero; Arwing destruction animation; pilot removed from unit roster",
+      "behavioral_manifestation": "Selected pilot unavailable for remainder of game; swap to surviving pilot mandatory"
+    },
+    {
+      "world_state": "Sector cleared of enemy presence",
+      "visual_manifestation": "Map area displays no enemy icons or threat indicators",
+      "behavioral_manifestation": "Player can traverse that sector without combat; tactical repositioning opportunity"
+    },
+    {
+      "world_state": "Boss encounter triggered (Star Wolf/Andross agents)",
+      "visual_manifestation": "Distinctive large enemy formation; unique ship designs for named antagonists",
+      "behavioral_manifestation": "Heightened enemy aggression; complex attack patterns; signature dialogue/characterization"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Lylat system map as narrative geography",
+      "example": "Physical layout of contested planets and orbital zones communicates scale of Andross invasion; multiple simultaneous threats across map emphasizes overwhelm and urgency"
+    },
+    {
+      "technique": "Corneria as persistent defended asset",
+      "example": "Planet displayed as home world requiring protection; damage meter represents cumulative war attrition; loss condition (100% damage) frames Corneria as strategic objective both sides fight over"
+    },
+    {
+      "technique": "Battleship deployment pattern communication",
+      "example": "Large vessel spawning fighter squadrons visually demonstrates military hierarchy and command structure of Andross forces; battleships function as distributed command nodes"
+    },
+    {
+      "technique": "IPBM trajectory visualization",
+      "example": "Missile paths displayed on map show Andross strategy of bombardment; player must intercept specific launch vectors to prevent damage, creating spatial puzzle of trajectory prediction"
+    },
+    {
+      "technique": "Pilot roster composition",
+      "example": "Six playable characters with distinct visual designs and roles (Fox as leader, Peppy as mentor, Miyu/Fay as new recruits) communicate Star Fox team hierarchy and narrative progression"
+    },
+    {
+      "technique": "General Pepper's satellite as allied infrastructure",
+      "example": "Satellite visual presence on map indicates Allied defensive capability; vulnerability to special enemy units that can hijack it demonstrates war as system of competing assets"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy fighter squad",
+      "state": "Active patrol",
+      "behavior": "Moves toward assigned target on map; engages if player intercepts; advances toward Corneria if unopposed"
+    },
+    {
+      "entity": "Battleship",
+      "state": "Operational",
+      "behavior": "Spawns fighter waves; maintains position; represents high-priority target that must be destroyed to reduce threat generation"
+    },
+    {
+      "entity": "IPBM (missile)",
+      "state": "In flight",
+      "behavior": "Advances deterministically toward Corneria each turn; advances faster during action sequences than during map planning; represents existential threat"
+    },
+    {
+      "entity": "Star Wolf mercenary",
+      "state": "Encounter triggered",
+      "behavior": "Engages player with complex attack patterns; displays signature personality in gameplay (arrogance, precision, deviousness); boss-tier tactical threat"
+    },
+    {
+      "entity": "General Pepper's satellite",
+      "state": "Operational (allied)",
+      "behavior": "Shoots down limited enemies per round; provides marginal but measurable planetary defense"
+    },
+    {
+      "entity": "General Pepper's satellite",
+      "state": "Compromised (hijacked)",
+      "behavior": "Redirects fire toward Corneria; becomes hostile asset; must be recaptured or destroyed"
+    },
+    {
+      "entity": "Player Arwing (piloted)",
+      "state": "Active combat",
+      "behavior": "Responds to player input with arcade-style flight controls; shield gauge depletes from enemy fire; can be swapped with partner pilot"
+    },
+    {
+      "entity": "Player Arwing (piloted)",
+      "state": "Shield depleted",
+      "behavior": "Ship explodes; pilot dies; removed from playable roster permanently; forces swap to remaining pilot or triggers game over if last pilot"
+    },
+    {
+      "entity": "Andross (final antagonist)",
+      "state": "Campaign progression",
+      "behavior": "Appears as final boss encounter; represents culmination of all faction forces; defeat results in campaign victory"
+    }
+  ],
+  "notes": "Star Fox 2 employs a hybrid strategic-tactical communication system: the map screen provides world-state overview with paused strategy, while action sequences provide real-time danger feedback. The semi-real-time system (enemy advancement during player engagement) creates constant pressure communication. Faction identity is primarily behavioral rather than visual; Star Fox = player agency, Andross forces = systematic threat waves, Star Wolf = rival chaotic threat. Corneria damage meter serves as primary world-state metric. The satellite hijacking mechanic communicates warfare as control of infrastructure assets. Pilot death is permanent and irreversible within a playthrough, creating high-stakes resource management messaging.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:15:48.777Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3044,
+    "output_tokens": 2782,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

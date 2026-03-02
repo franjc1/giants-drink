@@ -1,0 +1,148 @@
+{
+  "game_id": "jungle-book-nes",
+  "game_name": "The Jungle Book",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures in level spaces",
+      "meaning": "Collision with enemies results in energy loss; spatial threat indicator"
+    },
+    {
+      "signal": "Energy/Health depletion",
+      "visual_form": "HUD energy meter decrease",
+      "meaning": "Player damage state; proximity to game-over condition"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Countdown timer on HUD",
+      "meaning": "Level failure imminent if time expires"
+    },
+    {
+      "signal": "Fall hazard",
+      "visual_form": "Screen edges, pits, bottomless spaces (unless Solid Bottom Mode enabled)",
+      "meaning": "Level geometry that causes instant death or energy loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible items",
+      "visual_form": "Gems scattered throughout level geometry",
+      "meaning": "Progress indicator; completing gem collection advances to next level"
+    },
+    {
+      "signal": "Bonus level access",
+      "visual_form": "Shovel item pickup in level",
+      "meaning": "Optional progression opportunity; unlocks bonus stage without Shovel requirement"
+    },
+    {
+      "signal": "Power restoration",
+      "visual_form": "Energy recovery items (inferred from energy loss mechanic)",
+      "meaning": "Mitigates danger state; extends survival duration"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (Mowgli)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Jungle antagonists (animals, environmental threats from source material)",
+      "environmental_markers": "Level spaces designed as jungle environments; platform layout represents natural terrain"
+    },
+    {
+      "faction": "Jungle inhabitants (enemies)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Diverse creature designs reflecting Disney Jungle Book cast (presumed: Shere Khan, monkeys, snakes)",
+      "environmental_markers": "Animal-themed sprite designs; environmental placement in jungle biomes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level progression incomplete",
+      "visual_manifestation": "Gems remain visible in level; collectible counter not full",
+      "behavioral_manifestation": "Enemies patrol or move in predictable patterns; level remains playable"
+    },
+    {
+      "world_state": "Level progression complete",
+      "visual_manifestation": "All gems collected; level completion triggered",
+      "behavioral_manifestation": "Transition to next level or bonus stage (if Shovel found)"
+    },
+    {
+      "world_state": "Time expired",
+      "visual_manifestation": "Timer reaches zero on HUD",
+      "behavioral_manifestation": "Automatic level failure; return to level start or game over"
+    },
+    {
+      "world_state": "Energy depleted",
+      "visual_manifestation": "Energy meter shows zero",
+      "behavioral_manifestation": "Player death; loss of life or game over state"
+    },
+    {
+      "world_state": "Bonus level accessible",
+      "visual_manifestation": "Shovel item visible in level; visual distinction from gems",
+      "behavioral_manifestation": "Collecting Shovel triggers bonus stage entry after level completion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Biome theming",
+      "example": "Jungle environment composed of platforms, vegetation, and animal-themed obstacles communicating the Disney film's setting"
+    },
+    {
+      "technique": "Collectible design language",
+      "example": "Gems as primary progression currency; Shovel as secondary optional objective — visual distinction signals different reward tiers"
+    },
+    {
+      "technique": "Spatial level design",
+      "example": "Platform arrangement creates navigational challenge; enemy placement guides player movement patterns and communicates safe/unsafe zones"
+    },
+    {
+      "technique": "HUD information hierarchy",
+      "visual_manifestation": "Energy meter, timer, gem counter displayed simultaneously",
+      "meaning": "Communicates multiple world states (health, time pressure, progress) in single glance"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemies",
+      "state": "Idle/Patrol",
+      "behavior": "Move in predictable patterns; spatial positioning indicates safe approach angles"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Player proximal",
+      "behavior": "Collision detection triggers energy loss; no special attack animation documented"
+    },
+    {
+      "entity": "Player character",
+      "state": "Damage taken",
+      "behavior": "Energy meter decreases; visual knockback or state change (inferred from platformer conventions)"
+    },
+    {
+      "entity": "Collectibles (Gems)",
+      "state": "Available",
+      "behavior": "Stationary; visual clarity indicates pickupability; collection advances progress counter"
+    },
+    {
+      "entity": "Shovel (bonus unlock)",
+      "state": "Available",
+      "behavior": "Stationary; collision triggers bonus level access; optional progression path"
+    }
+  ],
+  "notes": "Source material provides limited direct documentation of visual manifestation systems. Analysis inferred from platformer genre conventions (NES era) and Disney Jungle Book IP context. Game features hidden debug menu enabling world-state manipulation (Solid Bottom Mode, No Energy Loss, Infinite Lives/Time, Single Gem Mode, Force Bonus Level) — these options suggest underlying systems for energy management, gem collection tracking, level completion conditions, and bonus stage gating. No specific color palette, faction symbols, or detailed enemy behavior descriptions available in provided source.",
+  "sources_used": [
+    "tcrf: The Cutting Room Floor - The Jungle Book (NES)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:26:25.448Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1647,
+    "output_tokens": 1700,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

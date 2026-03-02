@@ -1,0 +1,153 @@
+{
+  "game_id": "spot-nes",
+  "game_name": "Spot: The Video Game",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "color_opposition",
+      "visual_form": "player pieces rendered in contrasting colors on game board",
+      "meaning": "visual distinction between competing players; threat posed by opponent-controlled tiles"
+    },
+    {
+      "signal": "piece_adjacency",
+      "visual_form": "opponent pieces placed adjacent to player's pieces",
+      "meaning": "imminent threat of piece conversion/capture on next turn"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "isolated_piece_clusters",
+      "visual_form": "player pieces grouped together without adjacent opponent pieces",
+      "meaning": "territorial security; pieces protected from immediate conversion"
+    },
+    {
+      "signal": "controlled_board_zones",
+      "visual_form": "contiguous regions of same-colored pieces occupying board quadrants",
+      "meaning": "player dominance in specific areas; strategic advantage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "specific NES palette color (likely red or blue)",
+      "symbol_or_sigil": "Spot character animated in player's color",
+      "enemy_visual_variants": "Spot performs different animations when moving opposing pieces",
+      "environmental_markers": "7x7 game board grid with designated player starting positions"
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "contrasting NES palette color",
+      "symbol_or_sigil": "Spot character rendered in this player's color",
+      "enemy_visual_variants": "animation set differs from Player 1's piece movements",
+      "environmental_markers": "opposite board quadrant from Player 1"
+    },
+    {
+      "faction": "Player 3 (optional)",
+      "color_identity": "third distinct NES palette color",
+      "symbol_or_sigil": "Spot character in third faction color",
+      "enemy_visual_variants": null,
+      "environmental_markers": "available in NES and DOS versions supporting 4 players"
+    },
+    {
+      "faction": "Player 4 (optional)",
+      "color_identity": "fourth distinct NES palette color",
+      "symbol_or_sigil": "Spot character in fourth faction color",
+      "enemy_visual_variants": null,
+      "environmental_markers": "available in NES and DOS versions supporting 4 players"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_game_territory_competition",
+      "visual_manifestation": "scattered colored pieces distributed across 7x7 board; multiple empty tiles visible; balanced color distribution",
+      "behavioral_manifestation": "players select pieces to expand outward; Spot performs varied movement animations (dance, roller skate, cartwheel) over medium distances"
+    },
+    {
+      "world_state": "mid_game_territorial_consolidation",
+      "visual_manifestation": "larger contiguous clusters of player colors; fewer empty board spaces; some colors dominating specific quadrants",
+      "behavioral_manifestation": "piece placement increasingly constrained to adjacent or near-adjacent positions; Spot animations shift to shorter-range moves"
+    },
+    {
+      "world_state": "endgame_dominance_state",
+      "visual_manifestation": "board heavily saturated with one or two colors; minimal empty tiles; single color occupying majority of visible board space",
+      "behavioral_manifestation": "final moves result in cascade piece conversions; Spot animations performed on remaining few playable positions"
+    },
+    {
+      "world_state": "player_turn_active",
+      "visual_manifestation": "cursor or highlight indicator on current player's pieces; temporary board state snapshot",
+      "behavioral_manifestation": "controller input accepted; piece selection enabled; Spot animation triggers on selected move"
+    },
+    {
+      "world_state": "player_turn_inactive",
+      "visual_manifestation": "board state frozen; no active piece highlighting; visual focus on opponent's pieces",
+      "behavioral_manifestation": "input blocked for current player; control passed to next player in rotation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "board_grid_structure",
+      "example": "7x7 grid layout communicates balanced competition framework; unavailable board locations in certain variations signal rule constraints and asymmetrical territory"
+    },
+    {
+      "technique": "color_coded_ownership",
+      "example": "continuous colored piece regions tell story of each player's territorial expansion and strategic decisions across game progression"
+    },
+    {
+      "technique": "piece_conversion_cascades",
+      "visual_manifestation": "adjacent pieces changing color after player move communicates game mechanic consequence and immediate strategic impact"
+    },
+    {
+      "technique": "spot_character_animation_variety",
+      "example": "Spot performs different movement styles (dance, roller skate, cartwheel, dive, fall backwards) based on move distance and direction, providing visual feedback on move execution and piece manipulation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Spot character",
+      "state": "move_distance_one_square",
+      "behavior": "creates new piece at destination; Spot performs short-range animation (dance or skate)"
+    },
+    {
+      "entity": "Spot character",
+      "state": "move_distance_two_squares",
+      "behavior": "translates existing piece to new location; Spot performs medium-range animation (cartwheel or flip)"
+    },
+    {
+      "entity": "Spot character",
+      "state": "move_execution_impact",
+      "behavior": "all adjacent pieces convert to player's color; Spot animation accompanies conversion cascade"
+    },
+    {
+      "entity": "CPU player",
+      "state": "active_turn",
+      "behavior": "automated move selection visible as CPU-designated pieces animate; board updates without manual controller input"
+    },
+    {
+      "entity": "player_piece_cluster",
+      "state": "threatened_position",
+      "behavior": "surrounded by opponent pieces on multiple sides; next turn conversion likely unless player moves to block"
+    },
+    {
+      "entity": "player_piece_cluster",
+      "state": "secure_expansion",
+      "behavior": "isolated from opponent pieces; placement options available without immediate counter-threat"
+    }
+  ],
+  "notes": "Spot: The Video Game is a Reversi/Othello variant using 7 Up mascot 'Spot' as animated piece representation. Visual communication relies primarily on color differentiation between players and Spot animation variety to convey game state, move execution, and territorial changes. The game offers no explicit danger/safety communication beyond implicit board position analysis (piece adjacency = threat). Faction identity is purely color-based with animated character variations. World state is communicated through board saturation levels and piece distribution patterns. Regional differences (US vs JP versions) affected copyright graphics and console imagery but not core manifestation layer mechanics. Game designed for 2-4 players with CPU opponent option. NES version developed under tight constraints (six weeks, no development hardware/software per designer Graeme Devine).",
+  "sources_used": [
+    "tcrf - Spot: The Video Game (NES) - The Cutting Room Floor",
+    "wikipedia - Spot: The Video Game"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:56:29.754Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4543,
+    "output_tokens": 1838,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

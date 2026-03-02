@@ -1,0 +1,161 @@
+{
+  "game_id": "wwf-wrestlemania-challenge-nes",
+  "game_name": "WWF WrestleMania Challenge",
+  "platform": "nes",
+  "paradigm": "beat-em-up / professional wrestling",
+  "danger_signals": [
+    {
+      "signal": "Stamina bar depletion",
+      "visual_form": "Empty stamina bar displayed along ring apron",
+      "meaning": "Wrestler is vulnerable to pinfall; loss is imminent"
+    },
+    {
+      "signal": "Opponent positioning advantage",
+      "visual_form": "Isometric view shows spatial dominance in ring",
+      "meaning": "Player wrestler is in danger of being pinned or thrown"
+    },
+    {
+      "signal": "Partner incapacitation (tag modes)",
+      "visual_form": "NPC partner knocked down or outside ring",
+      "meaning": "Player must act quickly or team will be eliminated"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "High stamina bar",
+      "visual_form": "Full stamina bar along ring apron",
+      "meaning": "Wrestler is in strong position; resistant to pinfall"
+    },
+    {
+      "signal": "Ring control",
+      "visual_form": "Player character centered in isometric ring view",
+      "meaning": "Wrestler has positional advantage"
+    },
+    {
+      "signal": "Partner active",
+      "visual_form": "NPC tag partner visible and standing in corner or ring",
+      "meaning": "Team support available; can tag or request assistance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "WWF (World Wrestling Federation)",
+      "color_identity": "Various (wrestler-specific attire)",
+      "symbol_or_sigil": "WWF branding on ring/interface elements",
+      "enemy_visual_variants": "Wrestlers use distinct color-coded trunks/attire to differentiate characters",
+      "environmental_markers": "Professional wrestling ring; ropes, turnbuckles, canvas"
+    },
+    {
+      "faction": "Heroic/Face wrestlers",
+      "color_identity": "Typically patriotic or heroic color schemes (Hulk Hogan: red/yellow; Ultimate Warrior: distinctive feathered attire)",
+      "symbol_or_sigil": "Wrestler-specific entrance gear and visual identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Positive crowd reaction (implied through gameplay advancement)"
+    },
+    {
+      "faction": "Heel/Antagonist wrestlers",
+      "color_identity": "Darker or contrasting color schemes ('Macho King' Randy Savage: regal attire; Rick Rude: provocative gear)",
+      "symbol_or_sigil": "Distinct wrestling attire and accessories (Savage's crown, specific color patterns)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Antagonistic positioning in championship mode progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match initialization",
+      "visual_manifestation": "High-angle isometric view of wrestling ring established; both wrestlers positioned at neutral corners",
+      "behavioral_manifestation": "Both wrestlers start with full stamina; neutral stance waiting for input"
+    },
+    {
+      "world_state": "Active combat engagement",
+      "visual_manifestation": "Wrestlers visible in grappling positions; stamina bars dynamically decrease as moves execute",
+      "behavioral_manifestation": "Input-responsive movement; wrestling move animations play based on player inputs and positioning"
+    },
+    {
+      "world_state": "Fatigue / vulnerability",
+      "visual_manifestation": "Stamina bar visibly depleted; wrestler sprite may show exhaustion animation",
+      "behavioral_manifestation": "Wrestler becomes susceptible to pinfall; opponent gains advantage in grappling exchanges"
+    },
+    {
+      "world_state": "Tag team match (team present)",
+      "visual_manifestation": "NPC partner visible outside ring in corner area",
+      "behavioral_manifestation": "Player can command partner to attack; partner will engage NPC opponent when directed or tagged in"
+    },
+    {
+      "world_state": "Championship progression",
+      "visual_manifestation": "Roster of undefeated wrestlers presented in 'Yourself' championship mode",
+      "behavioral_manifestation": "Player must sequentially defeat all 9 wrestlers; progression tracked implicitly through victory sequence"
+    },
+    {
+      "world_state": "Survivor Series elimination match",
+      "visual_manifestation": "3v3 formation visible in isometric ring; eliminated wrestlers removed from view",
+      "behavioral_manifestation": "Three wrestlers per team; pinfall eliminates one team member; match continues until one team fully eliminated"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Wrestler character authenticity through moveset differentiation",
+      "example": "Each of 9 wrestlers (Hulk Hogan, André the Giant, Ultimate Warrior, etc.) has unique albeit small movesets that reflect their real-world wrestling personas"
+    },
+    {
+      "technique": "Ring setting as neutral battleground",
+      "example": "Professional wrestling ring with ropes, turnbuckles, and apron serves as universal arena; stamina bars displayed on apron reinforce wrestling match rules"
+    },
+    {
+      "technique": "Character roster visual identity",
+      "example": "Cover art featuring Hulk Hogan, André the Giant, 'Macho King' Randy Savage, Ultimate Warrior, Big Boss Man establishes celebrity wrestling lineup as game world context"
+    },
+    {
+      "technique": "Generic 'Yourself' character customization",
+      "example": "Two-player mode allows both players to use 'Yourself' in different color shades with unique theme songs, establishing personal wrestler identity within WWF world"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Active wrestler",
+      "state": "High stamina",
+      "behavior": "Responds quickly to inputs; can execute powerful moves; dominates ring positioning"
+    },
+    {
+      "entity": "Active wrestler",
+      "state": "Low stamina",
+      "behavior": "Slowed response; vulnerable to pinfall; cannot escape grapples easily; prone to being thrown"
+    },
+    {
+      "entity": "NPC tag partner",
+      "state": "In corner (rested)",
+      "behavior": "Standing idle; awaits tag or can be commanded to attack opponent from outside ring"
+    },
+    {
+      "entity": "NPC tag partner",
+      "state": "Active in ring",
+      "behavior": "Engages opponent; can be tagged out; gains/loses stamina based on action"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Pinned (low stamina)",
+      "behavior": "Enters pinfall animation; player has window to perform pin or opponent escapes if stamina recovers"
+    },
+    {
+      "entity": "Championship roster wrestler",
+      "state": "Defeated",
+      "behavior": "Removed from active roster in 'Yourself' championship progression; visual confirmation of advancement"
+    }
+  ],
+  "notes": "WWF WrestleMania Challenge uses a high-angle isometric view as its primary visual communication system. The stamina bar mechanic is the core danger/safety signal—depletion visually indicates vulnerability and imminent loss. The game communicates faction identity primarily through wrestler-specific attire and character roster (real WWF wrestlers with distinct color schemes and accessories). World state is manifested through stamina bar dynamics, wrestler positioning in the isometric ring, and match mode structure (1v1, tag, Survivor Series, championship). Environmental storytelling relies heavily on authentic wrestler representation and familiar professional wrestling match rules presented through the ring setting. The game contains no traditional narrative world-state complexity; instead, it communicates game state entirely through wrestling match mechanics and visual wrestler identity.",
+  "sources_used": [
+    "tcrf - WWF WrestleMania Challenge regional differences and basic info",
+    "wikipedia - WWF WrestleMania Challenge gameplay mechanics, wrestler roster, and match modes"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:44:24.217Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5802,
+    "output_tokens": 2002,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

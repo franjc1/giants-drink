@@ -1,0 +1,147 @@
+{
+  "game_id": "tetris-dr-mario-snes",
+  "game_name": "Tetris & Dr. Mario",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising block stack (Tetris)",
+      "visual_form": "Tetrominoes accumulating toward top of playfield; blocks visually approach the ceiling",
+      "meaning": "Imminent game over; failure state approaching if player cannot clear lines"
+    },
+    {
+      "signal": "Virus presence (Dr. Mario)",
+      "visual_form": "Red, yellow, and blue virus sprites scattered across playfield",
+      "meaning": "Threats to clear; unmatched viruses represent active danger/obstacle"
+    },
+    {
+      "signal": "Pills reaching top (Dr. Mario)",
+      "visual_form": "Colored pill objects accumulating upward toward screen top",
+      "meaning": "Game over condition approaching; player must eliminate viruses before space runs out"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared lines (Tetris)",
+      "visual_form": "Completed horizontal rows flash and disappear; blocks above fall",
+      "meaning": "Successful action; player is managing space effectively"
+    },
+    {
+      "signal": "Virus elimination (Dr. Mario)",
+      "visual_form": "Matched virus+pill combinations vanish from playfield",
+      "meaning": "Progress toward stage completion; threat removal"
+    },
+    {
+      "signal": "Empty playfield bottom (both games)",
+      "visual_form": "Large open space at base of play area",
+      "meaning": "Player has breathing room; no immediate threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dr. Mario (game entity)",
+      "color_identity": "Red, yellow, blue (virus/pill colors)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Viruses in three color variants (red, yellow, blue); single-color and dual-color pills",
+      "environmental_markers": "Medical/pharmaceutical theme (Dr. character theme); playfield represents diagnostic grid"
+    },
+    {
+      "faction": "Tetris (game entity)",
+      "color_identity": "Multi-colored tetrominoes (varied per piece type)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Seven tetromino types with distinct shapes and colors",
+      "environmental_markers": "Grid-based geometric playfield; mechanical/abstract aesthetic"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low difficulty (Dr. Mario)",
+      "visual_manifestation": "Few viruses scattered sparsely across lower portion of playfield",
+      "behavioral_manifestation": "Viruses remain stationary; player has ample space and time to plan moves"
+    },
+    {
+      "world_state": "Mid-game progression (Dr. Mario)",
+      "visual_manifestation": "More viruses populate playfield; increased color variety on screen",
+      "behavioral_manifestation": "Virus density increases; player must work faster to avoid pills reaching top"
+    },
+    {
+      "world_state": "Early game (Tetris, B-Type)",
+      "visual_manifestation": "Tetrominoes fall at moderate speed; playfield mostly empty",
+      "behavioral_manifestation": "Falling blocks descent at standard rate; player has time to rotate and position"
+    },
+    {
+      "world_state": "Critical state (both games)",
+      "visual_manifestation": "Blocks/pills occupy upper half of playfield; stack visibly approaches ceiling",
+      "behavioral_manifestation": "Visual warning of imminent loss; sense of urgency; no recovery margin"
+    },
+    {
+      "world_state": "Stage cleared (Dr. Mario)",
+      "visual_manifestation": "All viruses removed; playfield now empty or minimal objects visible",
+      "behavioral_manifestation": "Transition to next stage with increased virus count/difficulty"
+    },
+    {
+      "world_state": "Mixed Match mode active",
+      "visual_manifestation": "Game switches between Tetris and Dr. Mario visual/rule systems; screen updates to reflect active game type",
+      "behavioral_manifestation": "Players accumulate points across alternating game modes; scoring context shifts per mode"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Color coding (Dr. Mario)",
+      "example": "Red, yellow, blue viruses establish pharmaceutical/medical diagnostic narrative; pills must match virus colors to 'cure' them"
+    },
+    {
+      "technique": "Spatial progression (Dr. Mario)",
+      "example": "Multiple stages with escalating virus density communicate difficulty ramp and sense of deeper viral infection requiring stronger intervention"
+    },
+    {
+      "technique": "Falling mechanics (Tetris)",
+      "example": "Gravity-driven falling tetrominoes create inherent pressure/urgency without explicit narrative; geometry itself communicates challenge"
+    },
+    {
+      "technique": "Playfield grid visualization (both games)",
+      "example": "Gridlines and cell-based layout communicate systematic, ordered world where chaos (unmatched blocks/viruses) must be conquered through precision"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tetromino (Tetris)",
+      "state": "Falling",
+      "behavior": "Descends continuously toward bottom at consistent speed; rotates per player input; locks when colliding with bottom or other blocks"
+    },
+    {
+      "entity": "Virus (Dr. Mario)",
+      "state": "Unmatched",
+      "behavior": "Remains stationary in playfield; visually persists as obstacle/threat until matched with two or more same-colored pills"
+    },
+    {
+      "entity": "Pill (Dr. Mario)",
+      "state": "Falling",
+      "behavior": "Descends under gravity; can be two-colored (one color per half); rotates per player input; stops when colliding with viruses or other pills"
+    },
+    {
+      "entity": "Completed line (Tetris)",
+      "state": "Formed",
+      "behavior": "Flashes/highlights briefly to signal completion; vanishes; blocks above cascade downward"
+    },
+    {
+      "entity": "Virus cluster (Dr. Mario)",
+      "state": "Matched",
+      "behavior": "Disappears when surrounded by same-colored pill matches; visual feedback confirms elimination"
+    }
+  ],
+  "notes": "Tetris & Dr. Mario is a non-narrative puzzle compilation where world-state and danger are communicated purely through mechanical and visual manifestation of game rules. There are no factions in traditional sense (no opposing AI agents or political entities), but the two games function as distinct 'worlds' with different visual identities, rule systems, and threat models. Danger is purely systemic (filling playfield = loss condition). The Mixed Match mode serves as a meta-narrative device by forcing players to alternate between two contrasting puzzle paradigms, creating cognitive tension. Visual communication relies entirely on spatial occupancy, color, and object behavior rather than explicit UI elements or diegetic storytelling. The game uses color as primary information carrier in Dr. Mario (red/yellow/blue viruses and pills), while Tetris uses shape and spatial arrangement.",
+  "sources_used": [
+    "wikipedia: Tetris & Dr. Mario (gameplay section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:40:04.551Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3114,
+    "output_tokens": 1836,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

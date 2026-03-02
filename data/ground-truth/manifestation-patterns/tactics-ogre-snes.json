@@ -1,0 +1,154 @@
+{
+  "game_id": "tactics-ogre-snes",
+  "game_name": "Tactics Ogre: Let Us Cling Together",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit positioning",
+      "visual_form": "Grid-based overhead map with enemy sprites differentiated from allied units",
+      "meaning": "Immediate combat threat; spatial proximity indicates danger level"
+    },
+    {
+      "signal": "Terrain hazards",
+      "visual_form": "Elevated terrain, obstacles, and weather conditions affecting movement visibility",
+      "meaning": "Environmental danger that restricts unit movement and tactical positioning"
+    },
+    {
+      "signal": "Unit health status",
+      "visual_form": "Character sprite condition and HP bar representation in battle",
+      "meaning": "Visual indicator of unit vulnerability and current threat level"
+    },
+    {
+      "signal": "Character death",
+      "visual_form": "Protagonist Denim Powell defeated/removed from field",
+      "meaning": "Game-over state; immediate failure condition communicated through protagonist loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Allied unit presence",
+      "visual_form": "Friendly unit sprites on grid distinct from enemy sprites",
+      "meaning": "Team composition strength and support availability"
+    },
+    {
+      "signal": "Terrain advantage",
+      "visual_form": "High-ground positioning and elevation visualization on grid",
+      "meaning": "Defensive positioning safety; spatial control of battlefield"
+    },
+    {
+      "signal": "Town/settlement nodes",
+      "visual_form": "Worldmap node locations between battles",
+      "meaning": "Safe zones for preparation, equipment management, and narrative progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Valerian Resistance",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Occupying forces distinguished through sprite design and armor coloration",
+      "environmental_markers": "Worldmap nodes representing resistance strongholds and contested territories"
+    },
+    {
+      "faction": "Occupying Powers",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct enemy unit sprites with different armor, weapons, and character designs",
+      "environmental_markers": "Battlemap placement and strategic positioning indicating faction control"
+    },
+    {
+      "faction": "Ethnic/Political Groups",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Character dialogue and unit composition reflect ethnic conflict divisions",
+      "environmental_markers": "Story branching (Law/Neutral/Chaos paths) visually manifests through character relationships and unit recruitment changes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "War-torn Valeria",
+      "visual_manifestation": "Worldmap shows contested nodes, multiple faction territories, and battle-scarred landscapes",
+      "behavioral_manifestation": "NPC behavior and unit allegiances shift based on player moral choices; some characters live or die depending on Law/Neutral/Chaos alignment decisions"
+    },
+    {
+      "world_state": "Ethnic conflict escalation",
+      "visual_manifestation": "Enemy unit diversity increases; character sprite variations reflect cultural/ethnic identities through design",
+      "behavioral_manifestation": "Unit recruitment through 'Persuade' ability changes based on protagonist alignment; dialogue options present ideological choices with visible consequences"
+    },
+    {
+      "world_state": "Weather/environmental cycles",
+      "visual_manifestation": "Daily worldmap transitions alter visual weather conditions (rain, snow, clear skies)",
+      "behavioral_manifestation": "Weather impacts unit movement range and battle mechanics; each in-game day progression triggers environmental state changes"
+    },
+    {
+      "world_state": "Character alignment shifts",
+      "visual_manifestation": "Protagonist alignment meter influences available dialogue options and visual scene framing during story events",
+      "behavioral_manifestation": "Law/Neutral/Chaos paths branch narrative; allied units respond differently to protagonist choices; some units become unavailable or hostile based on ideological divergence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Worldmap node distribution",
+      "example": "Strategic placement of towns and battlefields conveys Valerian geography and factional control; player navigation between nodes reveals territorial conflict"
+    },
+    {
+      "technique": "Battle terrain design",
+      "example": "Overhead grid-based maps with elevation, obstacles, and environmental features telegraph tactical challenges and thematic environmental context"
+    },
+    {
+      "technique": "Character sprite differentiation",
+      "example": "Enemy unit visual design (armor, weapons, color palette) communicates faction identity and cultural background without explicit exposition"
+    },
+    {
+      "technique": "Dialogue branching visual cues",
+      "example": "Cutscene framing and character positioning during pivotal story moments emphasize moral weight of Law/Neutral/Chaos choice sequences"
+    },
+    {
+      "technique": "Unit roster composition",
+      "example": "Available recruitable units reflect protagonist's alignment choices; character appearance and class options shift based on story path taken"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Denim Powell (protagonist)",
+      "state": "Active in battle",
+      "behavior": "Player-controlled movement, action selection, and ability usage; if defeated, immediate game-over triggered"
+    },
+    {
+      "entity": "Allied units",
+      "state": "Combat engagement",
+      "behavior": "AI-controlled positioning and action selection; respond to player commands and tactical situation; recruitment depends on Law/Neutral/Chaos alignment"
+    },
+    {
+      "entity": "Enemy units",
+      "state": "Combat engagement",
+      "behavior": "AI-controlled; positioning and attack patterns reflect faction tactics and unit class abilities; behavior influenced by weather and terrain"
+    },
+    {
+      "entity": "Story NPCs",
+      "state": "Narrative branch points",
+      "behavior": "Dialogue options present Law/Neutral/Chaos moral choices; character survival, recruitment availability, and hostility status changes based on protagonist alignment decisions"
+    },
+    {
+      "entity": "Tarot card drops",
+      "state": "Post-victory",
+      "behavior": "Random drops from defeated enemies; visual reward communicating combat success and bonus mechanic availability"
+    }
+  ],
+  "notes": "Tactics Ogre communicates world-state primarily through grid-based tactical visuals, branching narrative choice visualization, and character sprite differentiation. The game uses alignment mechanics (Law/Neutral/Chaos) as core world-state drivers that manifest through NPC behavior, unit availability, and story outcomes. Political conflict is embedded in dialogue choices rather than explicit faction emblems. Weather cycles and terrain elevation create environmental storytelling that reinforces the war-torn Valerian setting. The protagonistt's death serves as the primary danger signal, while spatial positioning and unit composition provide tactical safety/danger assessment.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:56:44.706Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3181,
+    "output_tokens": 1761,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

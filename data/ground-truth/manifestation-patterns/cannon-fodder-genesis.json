@@ -1,0 +1,192 @@
+{
+  "game_id": "cannon-fodder-genesis",
+  "game_name": "Cannon Fodder",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy infantry presence",
+      "visual_form": "Animated soldier sprites with hostile posture",
+      "meaning": "Active combat threat; player troops vulnerable to single-round kills"
+    },
+    {
+      "signal": "Vehicle enemies",
+      "visual_form": "Jeeps, tanks, helicopters rendered from overhead perspective",
+      "meaning": "Escalating threat level; requires strategic positioning and special weapons"
+    },
+    {
+      "signal": "Armed installations",
+      "visual_form": "Missile-armed turrets and buildings on map",
+      "meaning": "Stationary but persistent threats; require explosive weapons to destroy"
+    },
+    {
+      "signal": "Terrain hazards",
+      "visual_form": "Rivers (slow-movement zones), quicksand, mines visualized on ground",
+      "meaning": "Environmental danger; reduces soldier effectiveness or causes casualties"
+    },
+    {
+      "signal": "Ammunition depletion indicator",
+      "visual_form": "Limited supply crates scattered across map",
+      "meaning": "Resource scarcity creates mission failure risk if weapons depleted"
+    },
+    {
+      "signal": "Squad vulnerability",
+      "visual_form": "Small squad sizes (max 6 soldiers) versus numerous enemies",
+      "meaning": "Outnumbered condition; player is in constant tactical disadvantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Supply crate availability",
+      "visual_form": "Crate objects placed strategically on map",
+      "meaning": "Resource replenishment possible; restores grenades and rocket ammunition"
+    },
+    {
+      "signal": "Squad regrouping areas",
+      "visual_form": "Open terrain without enemy spawners",
+      "meaning": "Safe zones for reorganization and split-squad reunification"
+    },
+    {
+      "signal": "Terrain cover",
+      "visual_form": "Jungle, snow, desert environmental features provide visual obstruction",
+      "meaning": "Natural barriers reduce enemy line-of-sight; temporary respite from fire"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player squad",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player troops distinguished by controllable unit sprites; appear more organized than enemy forces",
+      "environmental_markers": "Squad composition changes per mission; visible as grouped units under player cursor control"
+    },
+    {
+      "faction": "Enemy forces (unnamed antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Generic hostile infantry, vehicles, and installations; power scaling increases across 24 missions (72 levels)",
+      "environmental_markers": "Enemy soldiers spawn from buildings; vehicles patrol designated routes; turrets occupy static positions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early mission (game progression start)",
+      "visual_manifestation": "Player troops possess superior firepower relative to enemy infantry",
+      "behavioral_manifestation": "Soldiers respond quickly to commands; enemy infantry falls easily to machine gun fire"
+    },
+    {
+      "world_state": "Late mission (game progression end)",
+      "visual_manifestation": "Enemy infantry becomes visually more threatening; vehicle and installation density increases",
+      "behavioral_manifestation": "Enemy units require more rounds to kill; coordinated vehicle/turret attacks become frequent"
+    },
+    {
+      "world_state": "Jungle environment (mission setting)",
+      "visual_manifestation": "Dense foliage, vegetation rendering; overhead view maintains tactical clarity",
+      "behavioral_manifestation": "Terrain provides natural cover; movement speed unchanged but visual concealment possible"
+    },
+    {
+      "world_state": "Snow environment (mission setting)",
+      "visual_manifestation": "White/arctic color palette; igloos visible on terrain",
+      "behavioral_manifestation": "Snowmobile vehicles appear; terrain otherwise traversable with standard speed"
+    },
+    {
+      "world_state": "Desert environment (mission setting)",
+      "visual_manifestation": "Sandy/tan color palette; arid landscape rendering",
+      "behavioral_manifestation": "Standard unit behavior; unique terrain hazards (quicksand) present"
+    },
+    {
+      "world_state": "River/water crossing required",
+      "visual_manifestation": "Water barriers rendered across map",
+      "behavioral_manifestation": "Soldiers move slower while crossing rivers; unable to fire during water traversal; vulnerability window"
+    },
+    {
+      "world_state": "Ammunition critical",
+      "visual_manifestation": "Visible depletion of supply crates; fewer explosive weapon pickups available",
+      "behavioral_manifestation": "Player forced to use grenades/rockets conservatively or risk mission failure"
+    },
+    {
+      "world_state": "Squad casualty state",
+      "visual_manifestation": "Visible reduction in on-screen soldier count; squad size diminishes",
+      "behavioral_manifestation": "Remaining troops operate with reduced firepower; tactical positioning becomes more critical"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting variety (jungle, snow, desert, rural)",
+      "example": "Rural level design inspired by Emmerdale Farm; each biome signals different mission context and unique hazards"
+    },
+    {
+      "technique": "Enemy installation placement",
+      "example": "Buildings spawn infantry; turrets occupy high-ground/defensive positions; vehicle patrols suggest organized enemy military structure"
+    },
+    {
+      "technique": "Terrain hazard integration",
+      "example": "Rivers, quicksand, mines embedded in landscape communicate hostile environment beyond enemy forces; world itself is dangerous"
+    },
+    {
+      "technique": "Squad composition variation",
+      "example": "Mission-by-mission squad size changes (max 6 soldiers) suggest escalating difficulty and resource constraints of ongoing campaign"
+    },
+    {
+      "technique": "Weapon availability scarcity",
+      "example": "Limited ammunition in supply crates implies logistical challenge; player must conserve explosives, creating strategic resource tension"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player soldier",
+      "state": "Controlled/commanded",
+      "behavior": "Responds to point-and-click commands; moves to designated location; fires on nearest enemy"
+    },
+    {
+      "entity": "Player soldier",
+      "state": "In river/water",
+      "behavior": "Movement speed reduced; firing disabled; vulnerability increased"
+    },
+    {
+      "entity": "Player soldier",
+      "state": "Under enemy fire",
+      "behavior": "Can be killed by single round from machine gun; fragile despite superior early-game firepower"
+    },
+    {
+      "entity": "Enemy infantry",
+      "state": "Spawning from building",
+      "behavior": "Emerges from installations when proximity triggered or building active; infinite spawn capacity until building destroyed"
+    },
+    {
+      "entity": "Enemy infantry",
+      "state": "Engaged with player",
+      "behavior": "Returns fire; difficulty/damage output scales with mission progression"
+    },
+    {
+      "entity": "Enemy vehicle (jeep, tank, helicopter)",
+      "state": "Patrolling",
+      "behavior": "Follows predetermined route; presents mobile threat; immune to standard machine gun fire in some variants"
+    },
+    {
+      "entity": "Enemy turret",
+      "state": "Positioned",
+      "behavior": "Stationary; missile-armed; fires at player units within range; invulnerable to machine gun fire"
+    },
+    {
+      "entity": "Squad unit",
+      "state": "Split into subunits",
+      "behavior": "Can be divided into smaller groups for flanking, resource conservation, or risk mitigation"
+    }
+  ],
+  "notes": "Cannon Fodder communicates world-state primarily through: (1) enemy composition scaling—early missions show outnumbered but superior player force, late missions invert this through vehicle/installation density; (2) environmental hazards embedded in terrain (rivers, quicksand, mines) that function as secondary threat layer independent of enemy AI; (3) mission setting variety (jungle/snow/desert/rural) that signals campaign progression through visual biome shifts; (4) overhead perspective consistently reveals threat topology, maintaining player tactical awareness; (5) squad fragility (single-round kills, small squad sizes) visually communicates anti-war tone through gameplay mechanic—soldiers are expendable cannon fodder. The game lacks faction sigils or color-coded allegiances; instead, threat is communicated through sprite behavior, weapon loadout visibility, and positioning. Resource scarcity (ammunition limitations) is the primary political/strategic signal—survival depends on conservation, not overwhelming force.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:52:49.061Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3166,
+    "output_tokens": 2212,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

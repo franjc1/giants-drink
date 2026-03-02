@@ -1,0 +1,143 @@
+{
+  "game_id": "gyruss-nes",
+  "game_name": "Gyruss",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": 39,
+  "world_count": 8,
+  "element_introduction_order": [
+    {
+      "element": "Basic spaceship enemies",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Enemies deploy in swirling patterns from center or edges; player learns circular perimeter movement"
+    },
+    {
+      "element": "Satellites (weapon upgrades)",
+      "first_appears": "After basic enemy deployment",
+      "introduction_context": "moderate",
+      "mastery_context": "Three satellites gyrate in small circles; destroying center sun-like satellite grants double guns upgrade"
+    },
+    {
+      "element": "Asteroids (non-destructible obstacles)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Fly straight outward from center at regular intervals; give point bonus if shot but cannot be destroyed"
+    },
+    {
+      "element": "Laser beam generators",
+      "first_appears": "Mid-game stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Two generator segments with beam between; destroying either deactivates beam; lethal on contact"
+    },
+    {
+      "element": "Super phaser attack (energy-based)",
+      "first_appears": "Available via satellite pickups",
+      "introduction_context": "moderate",
+      "mastery_context": "Costs energy; provided alongside standard guns as upgrade option"
+    },
+    {
+      "element": "Smart bomb pickup",
+      "first_appears": "Mid-game via satellite drops",
+      "introduction_context": "moderate",
+      "mastery_context": "Emergency defensive tool for overwhelming enemy waves"
+    },
+    {
+      "element": "Extra life pickups",
+      "first_appears": "Mid-game via satellite drops",
+      "introduction_context": "safe",
+      "mastery_context": "Resource management for extended play; also awarded at score thresholds"
+    },
+    {
+      "element": "Boss encounters",
+      "first_appears": "When reaching each planet (Neptune, Uranus, Saturn, Jupiter, Mars, Earth, Venus, Mercury, Sun)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Culmination of stage patterns; defeat grants access to bonus stage"
+    },
+    {
+      "element": "Bonus stages",
+      "first_appears": "After each planet boss defeat",
+      "introduction_context": "safe",
+      "mastery_context": "Risk-free shooting gallery; enemies cannot destroy player; scoring focus (100 or 10,000 points per ship)"
+    },
+    {
+      "element": "Pluto waypoint",
+      "first_appears": "Between Neptune and Uranus in NES version",
+      "introduction_context": "moderate",
+      "mastery_context": "Additional stage milestone not in arcade original"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Bonus stage after planet boss (safe shooting gallery)",
+      "Enemy waves completing deployment and hovering near center",
+      "Asteroids that cannot damage player"
+    ],
+    "typical_tension_triggers": [
+      "Enemy ships firing while circling perimeter",
+      "Satellite groups appearing and gyrating",
+      "Laser beam generators appearing",
+      "Boss encounters at planet waypoints",
+      "Transitions between 'warps' (2 warps to Neptune, then 3 warps to next planets)"
+    ],
+    "pacing_descriptor": "Escalating intensity with rhythmic deployment patterns; enemies appear in coordinated waves with shooting phases interspersed with travel between celestial bodies; bonus stages provide controlled relief valves between danger phases"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Satellites provide variable weapon upgrades; player choice to pursue or avoid based on position",
+    "secret_convention": "One-point perspective with vanishing point at screen center creates depth tunnel effect; shooting always converges toward center",
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Stage 1 and every 10th stage have enemies that do not fire on player when entering, establishing safe learning phases",
+    "mid_game": "Introduction of laser beam generators and increased enemy coordination; player gains access to energy-based super phaser and smart bomb pickups",
+    "late_game": "Mercury, Venus, and Sun stages with accumulated enemy types; final 3-warp return to Neptune requires sustained high-speed play",
+    "notable_spikes": [
+      "First boss encounter at Neptune",
+      "Transitions between planetary systems requiring faster enemy patterns",
+      "Mercury and Venus stages with compressed enemy deployment windows"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Planetary Progression Gate",
+      "description": "Game structured as journey through solar system: 2 warps to Neptune, then 3 warps each to Uranus, Saturn, Jupiter, Mars, Earth, with bonus stages between bosses serving as tension relief. After Earth, 3-warp accelerated return to Neptune.",
+      "example_level": "Neptune stage 1-2, then Uranus stage 4-6"
+    },
+    {
+      "pattern_name": "Safe Learning Interval",
+      "description": "Stages 1, 11, 21, 31 feature enemies that do not fire when entering screen, allowing player to learn deployment patterns without immediate threat",
+      "example_level": "Stage 1, Stage 11"
+    },
+    {
+      "pattern_name": "Enemy Wave Deployment",
+      "description": "Majority of stage features spaceships appearing from center or edges in swirling patterns, hovering near center after deployment, then occasionally firing outward before gradually flying away",
+      "example_level": "All main stages"
+    },
+    {
+      "pattern_name": "Bonus Stage Respite",
+      "description": "After defeating planet boss, player enters safe bonus round where enemy ships cannot destroy player; scoring-focused with 100 or 10,000 point variations for 40 ships",
+      "example_level": "Neptune Bonus, Jupiter Bonus, etc."
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:11:06.396Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5415,
+    "output_tokens": 1647,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

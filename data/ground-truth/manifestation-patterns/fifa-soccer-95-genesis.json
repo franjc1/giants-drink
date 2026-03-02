@@ -1,0 +1,133 @@
+{
+  "game_id": "fifa-soccer-95-genesis",
+  "game_name": "FIFA Soccer 95",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "opponent_possession",
+      "visual_form": "ball control indicator and player positioning on isometric field",
+      "meaning": "threat to goal; risk of conceding"
+    },
+    {
+      "signal": "defensive_vulnerability",
+      "visual_form": "sparse player positioning near goal area",
+      "meaning": "exposed defensive formation; danger of scoring opportunity for opponent"
+    },
+    {
+      "signal": "set_piece_situations",
+      "visual_form": "free kick or penalty kick setup visualization",
+      "meaning": "high-risk scoring opportunity for opposing team"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "player_control_indicator",
+      "visual_form": "highlight or selection marker on controlled footballer",
+      "meaning": "agency and ability to direct play; safe to execute offensive action"
+    },
+    {
+      "signal": "possession_retention",
+      "visual_form": "ball held by player character; team formation cohesion",
+      "meaning": "control of game tempo; reduced immediate threat"
+    },
+    {
+      "signal": "defensive_depth",
+      "visual_form": "multiple players positioned between ball and goal",
+      "meaning": "defensive stability; reduced vulnerability to counter-attack"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "home_team",
+      "color_identity": "kit color (varies by club selection)",
+      "symbol_or_sigil": "club badge/crest (fictional names used; no real player licenses)",
+      "enemy_visual_variants": "away_team_kit_color",
+      "environmental_markers": "home stadium setting; crowd presence associated with home team"
+    },
+    {
+      "faction": "away_team",
+      "color_identity": "alternate kit color (contrasts with home team)",
+      "symbol_or_sigil": "club badge/crest (fictional names used)",
+      "enemy_visual_variants": "home_team_kit_color",
+      "environmental_markers": "away stadium setting; neutral or opposing crowd context"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "match_in_progress",
+      "visual_manifestation": "isometric field view with 22 players positioned according to formation and play direction",
+      "behavioral_manifestation": "players move toward ball; positioning shifts based on possession and set-piece state"
+    },
+    {
+      "world_state": "set_piece_execution",
+      "visual_manifestation": "ball positioned at penalty mark or free kick location; players arranged in ceremonial formation",
+      "behavioral_manifestation": "AI-controlled players hold position; player gains execution window to attempt kick"
+    },
+    {
+      "world_state": "draw_after_extra_time",
+      "visual_manifestation": "match timer display; penalty shootout mode activation (new feature vs. previous game)",
+      "behavioral_manifestation": "transition from free play to sequential penalty kick execution; alternating team control"
+    },
+    {
+      "world_state": "goal_scored",
+      "visual_manifestation": "net animation; score display update on UI; visual celebration or reset",
+      "behavioral_manifestation": "ball resets to center circle; teams reposition for kick-off"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stadium_differentiation",
+      "example": "clubs from six European leagues (Premier League, Ligue 1, Bundesliga, Serie A, Eredivisie, La Liga) plus Brazilian and US league clubs provide geographic/cultural identity through licensed league inclusion"
+    },
+    {
+      "technique": "kit_color_and_badge_distinction",
+      "example": "home and away kit colors visually distinguish teams; club badges (though fictional due to licensing) serve as faction markers"
+    },
+    {
+      "technique": "crowd_audio_cues",
+      "example": "previous game featured chanting/singing; FIFA '95 reduced this element, changing ambient audio storytelling to convey match atmosphere"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "controlled_footballer",
+      "state": "selected_for_control",
+      "behavior": "responds to player input; highlighted on-field; can pass, shoot, or move directionally"
+    },
+    {
+      "entity": "controlled_footballer",
+      "state": "not_selected",
+      "behavior": "AI-controlled; follows team formation and positioning logic; responds to ball state"
+    },
+    {
+      "entity": "goalkeeper",
+      "state": "normal_play",
+      "behavior": "positioning reflects shot threat; improved shot-stopping mechanics (noted as improvement over FIFA International Soccer)"
+    },
+    {
+      "entity": "opposing_team",
+      "state": "offensive",
+      "behavior": "forward movement toward goal; pressing behavior; increased threat signaling through positioning"
+    },
+    {
+      "entity": "opposing_team",
+      "state": "defensive",
+      "behavior": "withdrawal toward goal; formation tightening; reduced immediate threat posture"
+    }
+  ],
+  "notes": "FIFA Soccer 95 is a sports simulation with limited narrative world-state. Manifestation communication relies entirely on procedural gameplay state (ball possession, formation positioning, set-piece triggers) and visual kit/badge differentiation. No dynamic faction politics or danger escalation beyond match-state mechanics. Improvements in passing, set-pieces, and goalkeeping mechanics were gameplay-facing rather than manifestation-facing. Club licenses from six European leagues plus Brazil and US provide geographic/organizational faction identity, but player names are fictional (no portrait/likeness data). Isometric viewpoint standardizes communication across all match states. Penalty shootout system (new vs. previous game) introduces discrete world-state transition with distinct visual/behavioral manifestation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:43:29.445Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2530,
+    "output_tokens": 1484,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

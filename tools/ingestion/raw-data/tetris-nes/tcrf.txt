@@ -1,0 +1,903 @@
+Tetris (NES, Nintendo) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Tetris (NES, Nintendo)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+This page contains
+
+changes
+
+which are not marked for translation.
+
+Other languages:
+
+English &#160;• ‎ español &#160;• ‎ français &#160;• ‎ italiano &#160;• ‎ lietuvių &#160;• ‎ polski &#160;• ‎ русский &#160;• ‎ 中文（简体）‎ &#160;• ‎ 日本語 &#160;• ‎ 한국어
+
+Tetris
+
+Also known as : Classic Tetris ( Tetris Effect: Connected )  Developer :
+
+Nintendo R&D1
+
+&#91;1&#93;
+
+Publishers :
+
+Nintendo
+
+&#91;2&#93;
+
+(US/EU/AS),
+
+Hyundai
+
+&#91;3&#93;
+
+(KR),
+
+Playtronic
+
+&#91;4&#93;
+
+(BR)  Platform :
+
+NES
+
+Released internationally : December 12,&#160;2024  &#91;5&#93;
+
+( Nintendo Classics )  Released in US : November 1989  &#91;2&#93;
+
+Released in EU : February 23,&#160;1990  &#91;6&#93;
+
+Released in KR :  1990  &#91;3&#93;
+
+Released in BR : September 1994  &#91;4&#93;
+
+Released in AS :  1990  &#91;7&#93;
+
+This game has  unused code .
+
+This game has  unused modes / minigames .
+
+This game has  unused graphics .
+
+This game has  unused music .
+
+This game has  regional differences .
+
+This game has  revisional differences .
+
+This game has  cheat codes .
+
+This game has a bugs page
+
+This game has a Data Crystal page
+
+Nintendo's
+
+Tetris
+
+for the NES is the system's  third  port of the famous puzzle game created by Alexey Pajitnov, following those of  Bullet-Proof Software's Famicom port  and  Tengen's unlicensed NES port , and is by far the most well-known of the three.
+
+In recent years, this particular version of  Tetris  is the go-to version used in competitive play, with the  Classic Tetris World Championship  hosting competitions since 2010. Players have also discovered new ways of playing, such as rolling the back of the controller to move Tetrominoes faster,  &#91;8&#93;
+
+a playstyle that ultimately resulted in a 13-year-old player "beating the game" by crashing the game at Level 157.  &#91;9&#93;
+
+A classic mode would be featured in  Tetris Effectː Connected  which is based on this version of  Tetris , and in 2024 the game would be added as part of the  Nintendo Classics  library for  Nintendo Switch Online .
+
+Contents
+
+1
+
+Unused Sprites
+
+2
+
+Unused Music
+
+3
+
+Two-Player Mode
+
+4
+
+Leftover Demo Recording Code
+
+5
+
+Regional Differences
+
+5.1
+
+European/Asia Version
+
+5.1.1
+
+Speed Differences
+
+5.1.2
+
+Cheat Codes
+
+6
+
+Revisional Differences
+
+6.1
+
+3-in-1 Super Mario Bros. / Tetris / Nintendo World Cup
+
+6.2
+
+Nintendo World Championships 1990
+
+7
+
+References
+
+Unused Sprites
+
+An airplane and helicopter can be found among the ending sprites. These aren't used in any of the endings of the game.
+
+They do have valid sprite indices, and can be made to appear via hacking. To see the airplane, use  Game Genie  code
+
+AUYZLY
+
+(US version) or
+
+ALAXSA
+
+(European version) and finish a Level 0 B-Type game. To see the helicopter, use the code
+
+TOYZLY
+
+(US version) or
+
+TPAXSA
+
+(European version) instead. The helicopter skids are cut off in-game due to a programming error and are thus unused, but the main and tail rotors are nicely animated.
+
+To do:  When using the code
+
+TOYZLY
+
+or
+
+TPAXSA
+
+above, the palette of the helicopter does not match the image above.
+
+(Source:  Applying Artificial Intelligence to Nintendo Tetris , Qalle (the codes))
+
+Unused Music
+
+North America
+
+Europe/Asia
+
+The first track in the NSF is unused, and was presumably intended for the title screen (which is normally silent). It can be heard by setting RAM address
+
+$6F5
+
+to
+
+01
+
+at any time. Alternately, use  Game Genie  code
+
+PEIAZI
+
+(US version) or
+
+PESAZI
+
+(European version) to replace music type 1 with this track.
+
+The European/Asia version doesn't play the song correctly, meaning the notes go out of sync. In particular, the drum track is faster than it should be.
+
+Two-Player Mode
+
+Setting RAM address
+
+$BE
+
+to
+
+02
+
+(or using Game Genie code
+
+ZALAPP  ) activates an unfinished two-player competitive mode, a rather surprising omission that  was  present in Tengen's rendition. The basic rules are in place and garbage attacks are fully implemented, but there are numerous issues:
+
+A-Type setup/high score screen is missing a large chunk of tiles.
+
+Both game types have empty high score tables.
+
+Standard 1P mode screen layout is always used (no 2P mode layout exists in the ROM).
+
+Next piece displayed in wrong location.
+
+Colors are glitchy.
+
+Music alternates between fast and slow when one player nears the top of the playfield.
+
+Crashes to copyright screen when game is over (uses invalid pointer table index
+
+09  ; maximum is
+
+08  ).
+
+Leftover Demo Recording Code
+
+The game has an unused subroutine that records the player's input for use in the gameplay demo. This subroutine is activated when
+
+$00D0
+
+in RAM is set to
+
+$FF  . However, since the game tries to write the captured inputs directly to ROM (  $DD00-$DEFF  ), it doesn't work correctly on actual NES hardware or unmodified emulators. This area may have been mapped to PRG-RAM during development, similar to
+
+Dr. Mario  .
+
+(Source:  Applying Artificial Intelligence to Nintendo Tetris )
+
+Regional Differences
+
+European/Asia Version
+
+Speed Differences
+
+The European/Asia version changes the speed of Tetrominoes to account for the PAL video standard. The drop speed is the number of frames it takes for the tetromino to fall.
+
+Levels
+
+Drop speed
+
+North America
+
+Europe/Asia
+
+00
+
+48
+
+36
+
+01
+
+43
+
+32
+
+02
+
+38
+
+29
+
+03
+
+33
+
+25
+
+04
+
+28
+
+22
+
+05
+
+23
+
+18
+
+06
+
+18
+
+15
+
+07
+
+13
+
+11
+
+08
+
+8
+
+7
+
+09
+
+6
+
+5
+
+10-12
+
+5
+
+4
+
+13-15
+
+4
+
+3
+
+16-18
+
+3
+
+2
+
+19-28
+
+2
+
+1
+
+29+
+
+1
+
+1
+
+(Source:  tetris.wiki )
+
+Cheat Codes
+
+The European/Asia version has cheats not present in the North American version. To activate the cheats, hold  Select  while a piece is landing. In A-Type, you get 10,000 points. In B-Type, you get "Success" and instantly finish the level.
+
+Revisional Differences
+
+3-in-1 Super Mario Bros. / Tetris / Nintendo World Cup
+
+An official multicart released exclusively in Europe and Australia featuring
+
+Super Mario Bros.  ,  Tetris , and
+
+Nintendo World Cup  .
+
+This release of  Tetris  is nearly identical to the original European/Asia version, with one change.
+
+Tetris
+
+3-in-1 Super Mario Bros. / Tetris / Nintendo World Cup
+
+The high score table in A-Type changes the name for the default top score from "HOWARD" to "------". This may have been because "Howard" referred to Nintendo of America consultant  Howard Phillips , who had left the company in 1991.
+
+Nintendo World Championships 1990
+
+Tetris
+
+Nintendo World Championships 1990
+
+The "PUSH START" text is removed from the title screen.
+
+Additionally, pressing  Start  to start the game doesn't work; the game instead starts by itself after a few seconds.
+
+The game automatically starts in Type-A at Level 0.
+
+Levels increase every 5 lines cleared instead of every 10 lines.
+
+The RNG is seeded based on the score achieved in
+
+Super Mario Bros.  .
+
+If the player tops out; the game stops and cannot be restarted.
+
+(Source:  Original TCRF research )
+
+References
+
+↑
+
+Producer was Gunpei Yokoi.
+
+↑
+
+2.0
+
+2.1
+
+NES Games
+
+↑
+
+3.0
+
+3.1
+
+RF Generation: Tetris (Hyundai Comboy)
+
+↑
+
+4.0
+
+4.1
+
+O Estado de S. Paulo - Acervo Estadão
+
+↑
+
+Nintendo – News – Classic Tetris games added to Nintendo Switch Online
+
+↑
+
+www.NINTENDO.se . " Tetris
+
+Mind game 	Nintendo 	1990-02-23"
+
+↑
+
+RF Generation: Tetris (Nintendo NES)
+
+↑
+
+NES Tetris Players Call It 'Rolling,' And They're Setting New World Records  - Kotaku, Apr. 26th, 2021
+
+↑
+
+Oklahoma 13-year-old believed to be first person ever to beat Tetris  - The Guardian, Jan. 3rd, 2024
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Tetris
+
+series
+
+DOS
+
+Tetris (AcademySoft)  ( Prototype )&#160;&#8226;
+
+Tetris (Spectrum HoloByte)
+
+Arcade
+
+Sega:
+
+Tetris (System 16) &#160;&#8226;
+
+Tetris (System E) &#160;&#8226;
+
+Flash Point &#160;&#8226;
+
+Bloxeed (System 18) &#160;&#8226;
+
+Bloxeed (System C)
+
+Arika:
+
+Tetris: The Grand Master &#160;&#8226;
+
+Tetris: The Absolute: The Grand Master 2 PLUS &#160;&#8226;
+
+Tetris: The Grand Master 3 - Terror Instinct‎‎
+
+Tengen (Atari):
+
+Tetris (Atari) &#160;&#8226;
+
+Tetris (Vs. System)
+
+Jaleco:
+
+Tetris Plus &#160;&#8226;
+
+Tetris Plus 2
+
+Success:
+
+Tetris Kiwamemichi
+
+FM77AV
+
+Tetris
+
+Sharp X1
+
+Tetris
+
+Sharp X68000
+
+Tetris
+
+PC-88
+
+Tetris
+
+PC-98
+
+Tetris &#160;&#8226;
+
+Super Tetris 2 + BomBliss
+
+NES
+
+Tetris (BPS) &#160;&#8226;
+
+Tetris (Tengen)  ( Prototypes )&#160;&#8226;
+
+Tetris (Nintendo) &#160;&#8226;
+
+Tetris 2 + BomBliss &#160;&#8226;
+
+Tetris (Retro-Bit)
+
+Genesis
+
+Tetris (1989)
+
+Game Boy (Color)
+
+Tetris (Nintendo) &#160;&#8226;
+
+Tetris DX &#160;&#8226;
+
+Tetris Plus &#160;&#8226;
+
+Tetris (ModRetro)
+
+Windows
+
+Tetris (1990)  ( Prototype )&#160;&#8226;
+
+Super Tetris 2 + BomBliss &#160;&#8226;
+
+The Next Tetris &#160;&#8226;
+
+Tetris Worlds &#160;&#8226;
+
+Tetris Elements &#160;&#8226;
+
+Tetris: The Grand Master 4 -Absolute Eye-
+
+Mac OS Classic
+
+Super Tetris &#160;&#8226;
+
+Super Tetris 2 + BomBliss &#160;&#8226;
+
+Tetris Elements
+
+SNES
+
+Super Tetris 2 + BomBliss &#160;&#8226;
+
+Tetris Battle Gaiden &#160;&#8226;
+
+Tetris & Dr. Mario &#160;&#8226;
+
+Super Tetris 3
+
+CD-i
+
+Tetris  ( Prototype )
+
+Virtual Boy
+
+3-D Tetris
+
+Nintendo 64
+
+Tetris 64 &#160;&#8226;
+
+The New Tetris
+
+PlayStation
+
+Tetris X &#160;&#8226;
+
+The Next Tetris  ( Demo )
+
+PlayStation 2
+
+Tetris Kiwamemichi
+
+Dreamcast
+
+Tetris 4D &#160;&#8226;
+
+The Next Tetris: Online Edition
+
+Game Boy Advance
+
+Tetris Worlds &#160;&#8226;
+
+Tetris Advance
+
+Mac OS X
+
+Tetris Elements
+
+Nintendo DS
+
+Tetris DS (THQ) &#160;&#8226;
+
+Tetris DS (Nintendo) &#160;&#8226;
+
+Tetris Party Deluxe
+
+Plug & Play
+
+Tetris &#160;&#8226;
+
+Minna no Tetris
+
+iOS
+
+Tetris
+
+Android
+
+Tetris
+
+Nintendo 3DS
+
+Tetris: Axis
+
+Nintendo Switch
+
+G-MODE Archives 33: Tetris Diamond
+
+Spin-Offs
+
+Game Boy (Color)
+
+Tetris 2 &#160;&#8226;
+
+Tetris Blast &#160;&#8226;
+
+Tetris Attack
+
+NES
+
+Hatris &#160;&#8226;
+
+Tetris 2
+
+SNES
+
+Wordtris &#160;&#8226;
+
+Tetris 2 &#160;&#8226;
+
+Super Bombliss &#160;&#8226;
+
+Tetris Attack
+
+Mac OS Classic
+
+Welltris
+
+Nintendo 64
+
+Tetrisphere
+
+PlayStation Vita
+
+Puyo Puyo Tetris
+
+PlayStation 4, PlayStation 5, Xbox One, Xbox Series X, Nintendo Switch, Windows, Nintendo Switch 2
+
+Puyo Puyo Tetris 2
+
+Licensed
+
+Game Boy Color
+
+Magical Tetris Challenge
+
+Nintendo 64
+
+Magical Tetris Challenge
+
+PlayStation
+
+Magical Tetris Challenge &#160;&#8226;
+
+Tetris with Cardcaptor Sakura Eternal Heart
+
+Compilations
+
+NES
+
+Nintendo World Championships 1990
+
+Retrieved from " https://tcrf.net/index.php?title=Tetris_(NES,_Nintendo)&oldid=1997839 "
+
+Categories :
+
+Games developed by Nintendo R&D1
+
+Games published by Nintendo
+
+Games published by Hyundai
+
+Games published by Playtronic
+
+NES games
+
+Games released in 1989
+
+Games released in November
+
+Games with unused code
+
+Games with unused game types
+
+Games with unused graphics
+
+Games with unused music
+
+Games with regional differences
+
+Games with revisional differences
+
+Games with cheat codes
+
+Pages with a Data Crystal link
+
+To do
+
+Tetris series
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with cheat codes
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with revisional differences
+
+Games  >  Games by content  >  Games with unused code
+
+Games  >  Games by content  >  Games with unused game types
+
+Games  >  Games by content  >  Games with unused graphics
+
+Games  >  Games by content  >  Games with unused music
+
+Games  >  Games by content  >  Pages with a Data Crystal link
+
+Games  >  Games by developer  >  Games developed by Nintendo  >  Games developed by Nintendo EPD  >  Games developed by Nintendo SPD  >  Games developed by Nintendo R&D1
+
+Games  >  Games by platform
+
+Games  >  Games by publisher  >  Games published by Gradiente  >  Games published by Playtronic
+
+Games  >  Games by publisher  >  Games published by Hyundai
+
+Games  >  Games by publisher  >  Games published by Nintendo
+
+Games  >  Games by release date  >  Games released in 1989
+
+Games  >  Games by release date  >  Games released in November
+
+Games  >  Games by series  >  Tetris series
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 22 December 2025, at 17:31.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

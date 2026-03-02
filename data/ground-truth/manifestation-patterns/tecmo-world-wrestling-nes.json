@@ -1,0 +1,163 @@
+{
+  "game_id": "tecmo-world-wrestling-nes",
+  "game_name": "Tecmo World Wrestling",
+  "platform": "NES",
+  "paradigm": "beat-em-up / professional wrestling",
+  "danger_signals": [
+    {
+      "signal": "Wrestler health depletion",
+      "visual_form": "Character animation becomes slower, stumbling motions; visual damage indicators on character sprite",
+      "meaning": "Opponent or player is weakened and vulnerable to finishing moves"
+    },
+    {
+      "signal": "Count-out warning",
+      "visual_form": "Referee count-up display when wrestler is outside ring (reaches 20-count threshold)",
+      "meaning": "Imminent loss condition if wrestler remains outside ring"
+    },
+    {
+      "signal": "Momentum meter swing",
+      "visual_form": "In two-player mode: momentum meter rapidly swings toward one player",
+      "meaning": "Current grappling advantage held by opponent; danger of being thrown or pinned"
+    },
+    {
+      "signal": "Final boss appearance",
+      "visual_form": "Blue King character introduction after defeating all playable wrestlers",
+      "meaning": "Ultimate challenge and danger threshold in campaign progression"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Training sphere accumulation",
+      "visual_form": "Seven spheres above training meter that fill up during button-mashing exercises",
+      "meaning": "Increased move power and damage output; player is preparing and strengthening"
+    },
+    {
+      "signal": "Match victory conditions met",
+      "visual_form": "Three-count pinfall completion, submission acceptance, or opponent count-out",
+      "meaning": "Wrestler has successfully defeated opponent and advanced"
+    },
+    {
+      "signal": "Momentum meter advantage",
+      "visual_form": "Momentum meter swings toward player's side in two-player mode",
+      "meaning": "Player has grappling advantage and favorable positioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "International wrestlers - national identity system",
+      "color_identity": null,
+      "symbol_or_sigil": "Wrestler birthplace and nationality (Japan, Mexico, Greece, UK, Hong Kong, Soviet Union, West Germany, Ecuador, Venezuela, USA)",
+      "enemy_visual_variants": "Each wrestler has distinct sprite and fighting style reflecting nationality",
+      "environmental_markers": "Wrestler selection screen displays birthplace; commentary references national origin"
+    },
+    {
+      "faction": "Blue King (Earl of Doom) - final antagonist",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Unique non-playable character with distinctive appearance",
+      "enemy_visual_variants": "Blue King uses every wrestler's technique set; visually set apart from playable roster",
+      "environmental_markers": "Appears only after defeating all other wrestlers; positioned as ultimate opposition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player campaign progression",
+      "visual_manifestation": "Wrestler roster cycling through opponents; visual presentation of each international fighter",
+      "behavioral_manifestation": "Each opponent wrestler uses different move sets and specialties; difficulty or strategy adjusts per opponent"
+    },
+    {
+      "world_state": "Player training state",
+      "visual_manifestation": "Seven fillable spheres above training meter; trainer character performing exercises (squats, situps, push-ups with sumo wrestler weight)",
+      "behavioral_manifestation": "Move damage output increases with sphere completion; loss of match results in sphere loss requiring re-training"
+    },
+    {
+      "world_state": "Match momentum",
+      "visual_manifestation": "Two-player mode momentum meter that visually swings between players",
+      "behavioral_manifestation": "Grappling advantage dynamically shifts; player with momentum advantage gains control in holds and throws"
+    },
+    {
+      "world_state": "Regional version differences",
+      "visual_manifestation": "Japanese version: announcer 'Yasushi Geki' with black hair and Japanese features; US/EU version: 'Tom Talker' with different appearance and English commentary",
+      "behavioral_manifestation": "Japanese version uses password system for progress tracking; regional translation differences in move names and announcer speech"
+    },
+    {
+      "world_state": "Wrestler exhaustion/weakening",
+      "visual_manifestation": "Character animation becomes visually slower and stumbling; sprite shows damage accumulation",
+      "behavioral_manifestation": "Weakened wrestler becomes vulnerable to signature finishing moves; action replay cutscenes trigger for signature moves on weakened opponents"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Wrestler specialization through move set",
+      "example": "Akira Dragon (Japan/Samurai) uses Back Brain Kick and German Suplex; El Tigre (Mexico/Striker) uses Back Drop and Northern Right Suplex; Boris Chekov (Soviet Union/Siberian Machine) uses Giant Swing and Power Slam"
+    },
+    {
+      "technique": "Nickname and birthplace worldbuilding",
+      "example": "Wrestlers are identified by international origin and fighting archetype (e.g., Jackie Lee as Kung Fu Master from Hong Kong, Pat Gordon as Greek Warrior, Dr. Guildo as The Technician from USA)"
+    },
+    {
+      "technique": "Training montage gameplay state",
+      "example": "Between-match training sequences show player character performing physical conditioning with visual trainer character; sphere progression system indicates preparation and readiness"
+    },
+    {
+      "technique": "Action replay cinematics",
+      "example": "When signature finishing moves are performed on weakened wrestlers, game cuts to close-up replay view simulating television broadcast presentation, heightening moment significance"
+    },
+    {
+      "technique": "Announcer presence and commentary",
+      "example": "Animated Tom Talker (US) or Yasushi Geki (JP) provides play-by-play commentary through text bubbles, creating broadcast atmosphere and communicating match events"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Playable wrestler",
+      "state": "Fresh/trained",
+      "behavior": "Full speed animations; maximum move damage output when training spheres are full"
+    },
+    {
+      "entity": "Playable wrestler",
+      "state": "Weakened/losing match",
+      "behavior": "Slow stumbling animations; loss of training sphere upon defeat; vulnerable to signature move action replays"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Healthy",
+      "behavior": "Normal grappling speed and throw execution; standard damage output"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Weakened",
+      "behavior": "Visible damage accumulation in sprite; slower animation speed; susceptible to finishing moves triggering action replay cutscenes"
+    },
+    {
+      "entity": "Blue King (final boss)",
+      "state": "Active combat",
+      "behavior": "Uses complete move set from all playable wrestlers; positions as ultimate multi-dimensional threat"
+    },
+    {
+      "entity": "Wrestler in ring",
+      "state": "Outside ring boundary",
+      "behavior": "Count-out timer initiates; visual count display; disqualification if count reaches 20 before return to ring"
+    },
+    {
+      "entity": "Wrestler in grapple",
+      "state": "Two-player momentum advantage",
+      "behavior": "Momentum meter swing indicates which player controls grapple outcome; advantage determines throw and hold success"
+    }
+  ],
+  "notes": "Tecmo World Wrestling is a professional wrestling simulation that communicates world state primarily through wrestler nationality/faction identity, move specialization, visual condition states (health/weakening), and training progression. The game uses international wrestler archetypes as its primary factional system rather than explicit rival organizations. Danger is signaled through health depletion animations and count-out mechanics. World state shifts are communicated through training sphere completion, opponent cycling in campaign mode, and momentum meter visualization in multiplayer. The action replay system for signature moves on weakened opponents creates a dynamic visual response to match state. Regional differences (Japanese vs. US/EU announcer and password system) suggest localization of presentation rather than fundamental world-state changes.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Tecmo World Wrestling article)",
+    "wikipedia (Tecmo World Wrestling - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:45:04.695Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4881,
+    "output_tokens": 2075,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

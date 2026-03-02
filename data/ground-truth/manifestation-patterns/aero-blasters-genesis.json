@@ -1,0 +1,132 @@
+{
+  "game_id": "aero-blasters-genesis",
+  "game_name": "Air Buster",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "incoming fire patterns from mechanical fortress and enemy ships",
+      "meaning": "immediate threat requiring player evasion or defense"
+    },
+    {
+      "signal": "fortress_structure",
+      "visual_form": "large mechanical orbiting structure with distinct architectural sections",
+      "meaning": "primary world threat — mysterious mechanical fortress with plans to take control of Earth"
+    },
+    {
+      "signal": "stage_progression",
+      "visual_form": "horizontally scrolling environment revealing new enemy formations",
+      "meaning": "escalating danger through six sequential stages toward fortress confrontation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "weapon_pickup",
+      "visual_form": "collectible items representing one of seven weapon types (Striker, Reverse shot, Six Way Shot, Homing Shot, Missiles)",
+      "meaning": "enhanced player firepower and tactical options"
+    },
+    {
+      "signal": "power_up_items",
+      "visual_form": "power-up collectibles that increase ship's standard shot power",
+      "meaning": "incremental damage increase for player weaponry"
+    },
+    {
+      "signal": "border_shield",
+      "visual_form": "Border item surrounding front of ship",
+      "meaning": "collision protection against foreground obstacles"
+    },
+    {
+      "signal": "bonus_points",
+      "visual_form": "Dollar sign visual indicators",
+      "meaning": "score accumulation — non-tactical safety but reward signal"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Forces (Blaster Fighters)",
+      "color_identity": null,
+      "symbol_or_sigil": "Blaster Fighter star ships (two variants available for player selection)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player-controlled ships positioned left side of screen during horizontal scroll"
+    },
+    {
+      "faction": "Mechanical Fortress (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "mysterious mechanical orbiting structure",
+      "enemy_visual_variants": "enemies and gun emplacements emerge from fortress architecture across six stages",
+      "environmental_markers": "fortress grows larger/more detailed as stages progress; destination of horizontal scroll"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "pre_invasion_earth_threat",
+      "visual_manifestation": "mechanical fortress orbiting Earth in opening context",
+      "behavioral_manifestation": "static fortress position establishes threat before stage engagement"
+    },
+    {
+      "world_state": "active_combat_engagement",
+      "visual_manifestation": "parallax scrolling environment with enemy formations, projectiles, and destructible stage elements",
+      "behavioral_manifestation": "continuous horizontal scroll; enemies spawn and attack; player navigates and responds with equipped weapons"
+    },
+    {
+      "world_state": "stage_escalation",
+      "visual_manifestation": "six sequential stages with increasing visual detail and architectural complexity of fortress",
+      "behavioral_manifestation": "enemy patterns intensify; fortress sections become visible; final confrontation implied through stage progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "architectural_progression",
+      "example": "six scrolling stages reveal different sections of mechanical fortress, suggesting approach to core structure"
+    },
+    {
+      "technique": "enemy_formation_narrative",
+      "example": "enemy ship types and arrangements emerging from fortress suggest organized defensive systems"
+    },
+    {
+      "technique": "thematic_visual_design",
+      "example": "mechanical aesthetic reinforces 'mysterious fortress' identity through consistent technological imagery"
+    },
+    {
+      "technique": "parallax_depth_signaling",
+      "example": "parallax effects in Genesis port create layered foreground/background distinction, adding environmental context"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Blaster Fighter (player ship)",
+      "state": "equipped_with_weapon",
+      "behavior": "firepower and shot pattern changes based on equipped weapon type (Striker adds Options, Homing Shot tracks targets, Six Way Shot fires in multiple directions)"
+    },
+    {
+      "entity": "Blaster Fighter (player ship)",
+      "state": "equipped_with_border",
+      "behavior": "collision immunity against foreground objects while Border item active"
+    },
+    {
+      "entity": "Enemy ships and fortress guns",
+      "state": "stage_active",
+      "behavior": "attack patterns emerge from fortress architecture; varying projectile trajectories and timing indicate tactical difficulty scaling"
+    },
+    {
+      "entity": "Player ship",
+      "state": "unequipped_alternate_weapons",
+      "behavior": "uses standard shot pattern until weapon pickup collected"
+    }
+  ],
+  "notes": "Air Buster is a purely mechanical shmup with minimal narrative signaling. World-state communication relies entirely on visual progression (horizontal scroll toward fortress) and enemy behavior patterns. Faction distinction is binary: player vs. fortress threat. No environmental dialogue or text-based storytelling; all meaning conveyed through entity design and spatial positioning. The 'mysterious mechanical fortress' framing establishes stakes through premise rather than visual detail. Genesis port enhanced visual communication through detailed graphics and parallax depth cues compared to arcade version.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:30:27.778Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3193,
+    "output_tokens": 1391,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "game_id": "top-gun-second-mission-nes",
+  "game_name": "Top Gun: The Second Mission",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft presence",
+      "visual_form": "Animated sprite opponents in flight arena",
+      "meaning": "Active threat requiring evasion and combat response"
+    },
+    {
+      "signal": "Collision with terrain/obstacles",
+      "visual_form": "Background environment boundaries and structures",
+      "meaning": "Hazard that results in mission failure or damage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Player aircraft stability",
+      "visual_form": "Smooth sprite animation and control responsiveness",
+      "meaning": "Safe operational state; player has tactical advantage"
+    },
+    {
+      "signal": "Safe airspace boundaries",
+      "visual_form": "Defined flight arena edges and non-hostile zones",
+      "meaning": "Designated area where player can operate without environmental threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (US/Allied)",
+      "color_identity": null,
+      "symbol_or_sigil": "Fighter jet aircraft sprite",
+      "enemy_visual_variants": "Distinct enemy aircraft sprites with different designs per round",
+      "environmental_markers": "Military airfield environments; sky-based combat zones"
+    },
+    {
+      "faction": "Enemy Pilots (Multiple Nations/Rounds)",
+      "color_identity": null,
+      "symbol_or_sigil": "Individual pilot character portraits; unique aircraft designs per opponent",
+      "enemy_visual_variants": "Stalin Fortimesky (Round 6 1P VS mode) with regionally-differentiated portrait shading",
+      "environmental_markers": "Enemy aircraft behavior patterns; opponent-specific dogfight arenas"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Campaign progression (stage advancement)",
+      "visual_manifestation": "Stage select functionality (accessible via Game Genie codes); sequential mission briefings with opponent portraits",
+      "behavioral_manifestation": "Player faces progressively challenging enemy pilots across multiple rounds; 1P VS mode tracks opponent progression"
+    },
+    {
+      "world_state": "Player vulnerability status",
+      "visual_manifestation": "Invulnerability mode togglable (Game Genie code XTKLLIAV/XTOUYIAV/XTEUZIAV + A button hold)",
+      "behavioral_manifestation": "Player aircraft becomes immune to collision and enemy attacks; mission can be completed without danger"
+    },
+    {
+      "world_state": "Mission outcome (success/failure)",
+      "visual_manifestation": "Congratulations screen triggers at 50,000+ points; Game Over screen at lower scores (European version conditional display)",
+      "behavioral_manifestation": "Scoring threshold determines narrative closure; regional variant affects end-state visual communication"
+    },
+    {
+      "world_state": "Competitive mode status",
+      "visual_manifestation": "Dogfight mode arena with visible opponent portrait and aircraft; 1P vs CPU or 2P vs player",
+      "behavioral_manifestation": "One-on-one combat format replaces campaign structure; opponent AI or human player behavior determines engagement outcome"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Opponent Portrait Gallery",
+      "example": "Each round (especially 1P VS mode) displays individual enemy pilot character portraits (Stalin Fortimesky for Round 6) with regional shading variations, establishing narrative progression through recognizable antagonists"
+    },
+    {
+      "technique": "Aircraft Design Differentiation",
+      "example": "Distinct enemy aircraft sprites per opponent round signal increasing difficulty and regional/national military identities; visual variety prevents monotonous encounter structure"
+    },
+    {
+      "technique": "Arena Environmental Context",
+      "example": "Flight arenas with implicit military airfield or combat zone settings; background design communicates geopolitical context without explicit dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player Aircraft",
+      "state": "Normal operation",
+      "behavior": "Responsive to directional input; capable of rolling and maneuvering within bounded arena; sprite animation reflects flight dynamics"
+    },
+    {
+      "entity": "Player Aircraft",
+      "state": "Invulnerable (cheat enabled)",
+      "behavior": "Ignores collision damage; immune to enemy projectiles; mission can proceed to guaranteed completion"
+    },
+    {
+      "entity": "Enemy Aircraft",
+      "state": "Engaged in dogfight",
+      "behavior": "Pursues and attacks player; AI follows combat patterns specific to opponent round; visual sprite movement indicates tactical positioning"
+    },
+    {
+      "entity": "Enemy Pilot (Portrait)",
+      "state": "Campaign progression marker",
+      "behavior": "Static display in pre-mission briefing; regional shading and character naming (Stalin Fortimesky) establish individual identity and geopolitical narrative"
+    }
+  ],
+  "notes": "Source material focuses on technical/development data rather than explicit visual communication mechanics. Extraction inferred from gameplay paradigm (action flight combat) and described features (roll mechanics, dogfight mode, opponent progression). Regional differences document minor graphical adjustments (pilot portrait shading) suggesting localization prioritized character identity. World-state communication relies on sprite animation, arena boundaries, score thresholds, and opponent gallery structure rather than UI-heavy state indicators typical of later action games. Game Genie codes reveal debug access to invulnerability and stage select, indicating developer-intentional manifestation layer for testing purposes.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:13:54.969Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2062,
+    "output_tokens": 1411,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

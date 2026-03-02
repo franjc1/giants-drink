@@ -1,0 +1,211 @@
+{
+  "game_id": "magic-sword-snes",
+  "game_name": "Magic Sword: Heroic Fantasy",
+  "platform": "snes",
+  "paradigm": "hack-and-slash / shmup-adjacent",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Enemy sprite density and aggression patterns on-screen",
+      "meaning": "Immediate threat; player must engage or evade"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large, distinctly-designed enemy sprite at floor endpoints",
+      "meaning": "Major threat requiring sustained combat; progression gate"
+    },
+    {
+      "signal": "Drokmar/Dark Lord visual presence",
+      "visual_form": "Final boss at floor 50; associated with Black Orb crystal",
+      "meaning": "Ultimate existential threat to the world; final confrontation"
+    },
+    {
+      "signal": "Magic meter depletion (blue state)",
+      "visual_form": "Magic meter UI indicator turns blue or empty",
+      "meaning": "Reduced combat effectiveness; vulnerability state"
+    },
+    {
+      "signal": "HP bar depletion",
+      "visual_form": "Five-bar HP display diminishing; numeric overflow counter decreasing",
+      "meaning": "Incremental threat to player survival; state degradation"
+    },
+    {
+      "signal": "Ally HP loss",
+      "visual_form": "Separate four-bar ally HP meter depleting",
+      "meaning": "Loss of combat support; increased vulnerability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Full magic meter (red/full state)",
+      "visual_form": "Magic meter UI filled to maximum",
+      "meaning": "Peak combat readiness; strong ranged magical attack available"
+    },
+    {
+      "signal": "Magical book item collection",
+      "visual_form": "Item pickup visual/animation",
+      "meaning": "Instant full-screen attack available; temporary power surge"
+    },
+    {
+      "signal": "Ally presence",
+      "visual_form": "Second character sprite following player with visible HP bar",
+      "meaning": "Combat support active; distributed threat absorption"
+    },
+    {
+      "signal": "High HP reserve (multiple bars visible + overflow counter)",
+      "visual_form": "Full five-bar display plus high numeric counter",
+      "meaning": "Player is in robust defensive state; can absorb damage"
+    },
+    {
+      "signal": "Secret door accessibility",
+      "visual_form": "Hidden progression path visualization",
+      "meaning": "Optional advancement; tactical advantage via level bypass"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "The Brave One / Player Character (Alan in JP)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sword/magical implement; hero archetype",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Occupies left-to-right scroll progression through Dragon Keep tower"
+    },
+    {
+      "faction": "Drokmar (Dark Lord / Dracmar in JP)",
+      "color_identity": "Black/dark tones associated with Black Orb",
+      "symbol_or_sigil": "Black Orb crystal; dark lord archetype",
+      "enemy_visual_variants": "Final boss sprite; distinct from common enemies",
+      "environmental_markers": "Dragon Keep floor 50; tower summit; throne/tower hierarchy"
+    },
+    {
+      "faction": "Allied character classes (Amazon, Big Man, Knight, Lizardman, Ninja, Priest, Thief, Wizard)",
+      "color_identity": null,
+      "symbol_or_sigil": "Class-specific visual differentiation (archer bow, axe, armor variants, magical regalia)",
+      "enemy_visual_variants": "Visually distinct from enemy units; maintain PC-aligned palette",
+      "environmental_markers": "Recruited/rescued throughout tower floors; follow player spatially"
+    },
+    {
+      "faction": "Generic enemies",
+      "color_identity": "Implied hostile palette (contrast to hero/allies)",
+      "symbol_or_sigil": "Non-boss enemy sprite archetypes",
+      "enemy_visual_variants": "Varied floor-specific enemy types; density increases with progression",
+      "environmental_markers": "Distributed across floors 1-50; wave patterns increase in upper floors"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Dark Lord Drokmar in control; Black Orb active",
+      "visual_manifestation": "Dragon Keep tower structure; dark magical aesthetic; enemy saturation throughout levels",
+      "behavioral_manifestation": "All enemies actively hostile; tower is contested space; npcs require rescue"
+    },
+    {
+      "world_state": "Tower ascension progress (floor-by-floor climbing)",
+      "visual_manifestation": "Floor counter/progress UI; vertical or depth-based level progression; increasing visual complexity/darkness in later floors",
+      "behavioral_manifestation": "Enemy density escalates; boss encounters at intervals; ally recruitment opens new tactical options"
+    },
+    {
+      "world_state": "Player combat readiness state",
+      "visual_manifestation": "Magic meter color/fill state (blue empty → red partial → full); HP bar configuration",
+      "behavioral_manifestation": "Attack strength varies by magic meter state; magical allies toggle attack capability based on meter; full-screen attacks available via items or HP sacrifice"
+    },
+    {
+      "world_state": "Post-victory (Drokmar defeated)",
+      "visual_manifestation": "Black Orb available for interaction; dual-outcome scenario presentation",
+      "behavioral_manifestation": "Two alternate endings: destroy Orb (hero outcome) or seize it (dark lord outcome); world state consequences branch"
+    },
+    {
+      "world_state": "Secret door access unlocked",
+      "visual_manifestation": "Hidden progression path becomes visible/accessible via specific maneuver sequence",
+      "behavioral_manifestation": "Player can bypass levels; shortcut through tower; tactical efficiency enabled"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tower hierarchy and vertical progression",
+      "example": "Dragon Keep is structured as 50 ascending floors; Drokmar's throne at summit; visual progression upward communicates increasing threat proximity and world-state danger escalation"
+    },
+    {
+      "technique": "Boss placement at floor endpoints",
+      "example": "8 boss encounters distributed across 51 floors; major narrative beats occur at intervals; visual marker for progression gates and world-state challenges"
+    },
+    {
+      "technique": "Ally rescue and recruitment mechanics",
+      "example": "8 character class variants available for recruitment; each represents a faction/group rescuing during tower ascent; visual presence of ally indicates changing party composition and world-state alliances"
+    },
+    {
+      "technique": "Black Orb as narrative anchor",
+      "example": "Crystal visual represents Drokmar's power source and world threat; player choice at end (destroy vs. seize) communicates moral/political outcome via gameplay-tied decision"
+    },
+    {
+      "technique": "Enemy density as threat visualization",
+      "example": "Higher floors feature increased enemy waves; visual saturation correlates to world-state danger near tower summit; environmental difficulty slope matches narrative tension"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Magic meter full (red)",
+      "behavior": "Performs strong ranged magical attack combined with melee; magical allies also execute ranged attacks; high offensive output"
+    },
+    {
+      "entity": "Player character",
+      "state": "Magic meter partial (red but not full)",
+      "behavior": "Performs weak ranged magical attack combined with melee; reduced effectiveness"
+    },
+    {
+      "entity": "Player character",
+      "state": "Magic meter empty or blue",
+      "behavior": "Performs melee-only attack; magical allies refuse to attack; minimum combat effectiveness state"
+    },
+    {
+      "entity": "Allied character (non-magical class)",
+      "state": "Player attacking",
+      "behavior": "Attack regardless of magic meter state; decoupled from resource management; reliable damage output"
+    },
+    {
+      "entity": "Allied character (magical class: Priest, Wizard)",
+      "state": "Magic meter full",
+      "behavior": "Performs strong ranged magical attack; synchronized with player's offensive power"
+    },
+    {
+      "entity": "Allied character (magical class)",
+      "state": "Magic meter empty or blue",
+      "behavior": "Refuses to attack; only performs actions when player initiates and meter permits; dependent on resource state"
+    },
+    {
+      "entity": "Ally",
+      "state": "Computer-controlled",
+      "behavior": "Follows player diligently; attacks and jumps only when player does; AI synchronization with player input; no independent initiative"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Encountered at floor endpoint",
+      "behavior": "Distinct sprite and attack patterns; major threat; progression gate; unique visual presentation vs. regular enemies"
+    },
+    {
+      "entity": "Drokmar (Final Boss)",
+      "state": "Floor 50 encounter",
+      "behavior": "Ultimate antagonist; controls Black Orb; guards dual-outcome choice; narrative culmination"
+    },
+    {
+      "entity": "Generic enemy",
+      "state": "Various floors",
+      "behavior": "Hostile; attack player on sight; waves increase in frequency and complexity at higher floors; threat density correlates to tower height"
+    }
+  ],
+  "notes": "Magic Sword uses resource management (magic meter) as a core mechanical signal of readiness state. The game communicates world-state primarily through vertical tower progression and enemy density escalation. Faction identity is conveyed via character class visual differentiation rather than explicit color coding. The dual-ending mechanic (destroy vs. seize Black Orb) encodes the player's final political/moral choice into the world-state outcome. Environmental storytelling relies on spatial hierarchy (tower levels) and encounter pacing (boss placement) rather than explicit narrative text or detailed environmental assets.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:20:57.044Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3360,
+    "output_tokens": 2525,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

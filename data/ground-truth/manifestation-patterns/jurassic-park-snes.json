@@ -1,0 +1,139 @@
+{
+  "game_id": "jurassic-park-snes",
+  "game_name": "Jurassic Park",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Dinosaur presence",
+      "visual_form": "Large sprite-based creatures moving across screen",
+      "meaning": "Immediate physical threat; collision = damage/death"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Lava, water, falling debris in level design",
+      "meaning": "Passive world threats independent of faction"
+    },
+    {
+      "signal": "Enemy AI aggression state",
+      "visual_form": "Rapid movement speed increase, directional charging behavior",
+      "meaning": "Dinosaur has detected player; attack imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon pickup",
+      "visual_form": "Item sprites (likely projectile weapons or tools)",
+      "meaning": "Temporary damage capability or utility enhancement"
+    },
+    {
+      "signal": "Health restoration",
+      "visual_form": "Medical or restoration item sprites",
+      "meaning": "Recovery point; sanctuary in immediate vicinity"
+    },
+    {
+      "signal": "Level transition zones",
+      "visual_form": "Doors, exits, or boundary markers in platformer layout",
+      "meaning": "Safe progression; escape from current threat area"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (human survivor)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Lab facilities, control rooms, safe structures implied by platformer progression"
+    },
+    {
+      "faction": "Dinosaur ecosystem",
+      "color_identity": null,
+      "symbol_or_sigil": "Varied creature sprites (T-Rex, Raptors, herbivores)",
+      "enemy_visual_variants": "Multiple dinosaur species as distinct sprite sets, varying size/behavior",
+      "environmental_markers": "Jungle environments, prehistoric terrain, nesting areas"
+    },
+    {
+      "faction": "Park infrastructure (implied InGen authority)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Facility doors, corridors, technological architecture in level design"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Park operational/under control",
+      "visual_manifestation": "Structured facility layouts, organized platformer pathways, controlled environments",
+      "behavioral_manifestation": "Dinosaurs remain in containment areas; player navigates through infrastructure"
+    },
+    {
+      "world_state": "Park system failure/chaos",
+      "visual_manifestation": "Increased dinosaur density on-screen, environmental decay suggested by hazards, broken barriers",
+      "behavioral_manifestation": "Dinosaurs roaming freely; aggressive AI behavior increases; survival-focused gameplay"
+    },
+    {
+      "world_state": "Immediate threat zone",
+      "visual_manifestation": "High sprite density, fast-moving predators, environmental instability",
+      "behavioral_manifestation": "Rapid enemy aggression, need for evasion or combat; player forced into reaction-based platforming"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression",
+      "example": "Level design moves from controlled facility (lab/corridors) to increasingly wild jungle environments, implying loss of infrastructure control"
+    },
+    {
+      "technique": "Dinosaur spawn patterns",
+      "example": "Predators appear more frequently in later levels, visually communicating escalating threat and ecosystem dominance over human space"
+    },
+    {
+      "technique": "Hazard diversity",
+      "example": "Mix of technological (electrical, mechanical) and natural (lava, water) obstacles suggests hybrid world where nature reclaims technology"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Large predators (T-Rex, Raptors)",
+      "state": "Idle/patrolling",
+      "behavior": "Slow movement, standard patrol paths; visual cue of non-alert state"
+    },
+    {
+      "entity": "Large predators",
+      "state": "Player detected",
+      "behavior": "Speed increase, directional charge toward player position; visual acceleration in sprite animation"
+    },
+    {
+      "entity": "Small/medium dinosaurs",
+      "state": "Aggressive",
+      "behavior": "Rapid bouncing/darting patterns; harder to predict trajectory"
+    },
+    {
+      "entity": "Herbivores (if present)",
+      "state": "Passive",
+      "behavior": "Non-hostile movement; visual distinction from predator sprites suggests different threat level"
+    }
+  ],
+  "notes": "Source provided is a Wikipedia disambiguation page with minimal technical detail about the SNES version's visual design. Extraction is based on inferential understanding of 1993 SNES platformer conventions and Jurassic Park thematic elements. Actual sprite designs, color palettes, and detailed behavioral animations cannot be verified from available source. Game likely uses contrasting sprite sizes and movement speeds to signal threat levels. Faction identity is primarily visual differentiation between human player character and multiple dinosaur species rather than traditional political/team affiliations.",
+  "sources_used": [
+    "wikipedia_jurassic_park_disambiguation"
+  ],
+  "TODO": [
+    "Specific color palette analysis for dinosaur species",
+    "Detailed sprite animation frame analysis",
+    "UI/HUD visual communication patterns (health display, weapon indicators)",
+    "Level-specific environmental storytelling details",
+    "NPC/ally visual identification if present",
+    "Detailed predator vs. herbivore visual differentiation",
+    "Audio-visual synchronization for danger cues"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:30:23.019Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1955,
+    "output_tokens": 1618,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

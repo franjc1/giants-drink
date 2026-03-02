@@ -1,0 +1,155 @@
+{
+  "game_id": "baldurs-gate-2-pc",
+  "game_name": "Baldur's Gate II: Shadows of Amn",
+  "platform": "pc",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Hostile creature presence",
+      "visual_form": "Red enemy indicators on screen; creature sprite animations showing aggression; weapon-drawn or spell-casting poses",
+      "meaning": "Combat engagement imminent; area is unsafe"
+    },
+    {
+      "signal": "Fog of war obscuration",
+      "visual_form": "Darkened, unexplored areas at map edges; shadow overlay on previously-visited locations when party moves away",
+      "meaning": "Unknown threats may lurk in unscouted territory; loss of visibility indicates potential danger"
+    },
+    {
+      "signal": "NPC hostility dialog",
+      "visual_form": "Dialog choices presented as red/aggressive tone; NPC refusal to speak peacefully; immediate combat trigger",
+      "meaning": "Social encounter has failed; party alignment or reputation has created threat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared, fog-of-war revealed areas",
+      "visual_form": "Fully visible, well-lit dungeon or outdoor locations; clear sight lines to exits",
+      "meaning": "Area has been scouted; no immediate threats detected in known space"
+    },
+    {
+      "signal": "Friendly NPC presence and dialog",
+      "visual_form": "NPCs display peaceful animations; dialog wheel offers collaborative or recruitment options; party members interject with supportive remarks",
+      "meaning": "Safe social interaction; opportunity for alliance, information, or quests"
+    },
+    {
+      "signal": "Inn/tavern or city district environments",
+      "visual_form": "Warm interior lighting; crowded with neutral NPCs; structured architecture of civilized settlement",
+      "meaning": "Neutral or safe haven; reduced combat expectation in civilian zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Jon Irenicus's forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Associated with mage towers and dark arcane aesthetics",
+      "enemy_visual_variants": "Mage robes, cultist garb, undead minions; magical aura effects",
+      "environmental_markers": "Arcane laboratories, spell-trapped dungeons, shadow-infused architecture"
+    },
+    {
+      "faction": "City of Athkatla authorities",
+      "color_identity": null,
+      "symbol_or_sigil": "Civic guard uniforms and insignia; merchant guild markers",
+      "enemy_visual_variants": "Guard armor; city watch patrols (can be hostile if player has poor reputation)",
+      "environmental_markers": "City streets, guard posts, guild halls, market squares, administrative buildings"
+    },
+    {
+      "faction": "Wilderness/Monster factions",
+      "color_identity": null,
+      "symbol_or_sigil": "Creature type determines allegiance (goblinoids, undead, beasts, etc.)",
+      "enemy_visual_variants": "Monstrous appearance; non-humanoid or undead sprite variants",
+      "environmental_markers": "Dungeons, caves, crypts, wild forests, monster lairs"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (protagonist captured/imprisoned)",
+      "visual_manifestation": "Dark dungeon environments; restricted movement; confinement architecture; drab color palette",
+      "behavioral_manifestation": "Limited NPC interactions; heightened enemy patrol density; escape-focused quest markers"
+    },
+    {
+      "world_state": "Mid-game (Athkatla city exploration)",
+      "visual_manifestation": "Urban environment with mixed safe/danger zones; civic architecture; market stalls and taverns; varied lighting from interior/exterior transitions",
+      "behavioral_manifestation": "Mix of hostile and neutral NPCs; faction-specific guards; social quests alongside combat encounters; reputation affects NPC reactions"
+    },
+    {
+      "world_state": "High stakes (pursuing Jon Irenicus)",
+      "visual_manifestation": "Increasingly dark, arcane-corrupted environments; shadow effects intensify; spell-casting visual effects; mage tower aesthetics",
+      "behavioral_manifestation": "Powerful mage enemies with complex spell patterns; minion swarms; complex multi-phase encounters; dialogue indicates escalating threat"
+    },
+    {
+      "world_state": "Moral/alignment consequences",
+      "visual_manifestation": "NPC appearance may change based on party actions (hostile expressions, distance, refusal to interact); environment may show signs of destruction if party causes collateral",
+      "behavioral_manifestation": "NPCs refuse recruitment if alignment incompatible; guards become hostile if crime detected; quest-givers withdraw quests based on prior choices"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural decay and environment state",
+      "example": "Dungeon conditions reflect history of use—collapsed sections, ritual markings, corpses, and spell damage visible on walls communicate past violence and magical activity"
+    },
+    {
+      "technique": "NPC clustering and conversation patterns",
+      "visual_form": "Groups of NPCs in taverns, markets, or streets; overheard conversations reveal faction tensions, political gossip, and hidden plot threads",
+      "example": "Guards discussing increased monster activity or corruption hints at world threats; merchants gossiping about political instability"
+    },
+    {
+      "technique": "Quest item placement and environmental context",
+      "example": "Found artifacts surrounded by contextual clues—bloodstains, ritual circles, journal entries—that retroactively explain character motivations and factional conflicts"
+    },
+    {
+      "technique": "Faction-specific visual language in areas",
+      "example": "Mage guild areas display magical arcana and spell books; thief guild hideouts show stolen goods and shadowy architecture; temples display religious iconography"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Hostile creature/enemy",
+      "state": "Unaware of party",
+      "behavior": "Patrol routes, idle animations, no combat readiness displayed"
+    },
+    {
+      "entity": "Hostile creature/enemy",
+      "state": "Aware/aggro",
+      "behavior": "Weapon drawn, spell-casting stance, charge animation, red health bar appears; vocalizations (growls, battle cries)"
+    },
+    {
+      "entity": "Friendly NPC",
+      "state": "Safe/peaceful",
+      "behavior": "Relaxed standing pose, smiling or neutral face, willing to engage in dialog; will follow party if recruited"
+    },
+    {
+      "entity": "Friendly NPC",
+      "state": "Threatened/forced hostile",
+      "behavior": "Drawn weapon, retreat animations, conflict dialog; may turn hostile if party reputation is poor"
+    },
+    {
+      "entity": "Jon Irenicus (antagonist)",
+      "state": "Story presence",
+      "behavior": "Appears during scripted confrontations with ominous dialog; visual effects emphasize powerful mage identity (spell auras, magical energy)"
+    },
+    {
+      "entity": "Party member (recruited NPC)",
+      "state": "Loyal/compatible",
+      "behavior": "Close proximity to player; interjections into conversations; romance/bickering dialog with other party members indicates emotional investment"
+    },
+    {
+      "entity": "Party member (recruited NPC)",
+      "state": "Incompatible/conflict",
+      "behavior": "Distance from player; refusal of commands; dialog indicates disapproval; may leave party permanently if mistreated"
+    }
+  ],
+  "notes": "Baldur's Gate II uses isometric perspective to layer environmental threats and social cues. Danger is communicated through creature aggression states, environment obscurity (fog of war), and NPC hostility dialogs. Safety emerges from cleared, visible areas and peaceful NPC presence. Factions are distinguished by creature type (undead/mages for Irenicus, humanoids for city/wilderness) and environmental association rather than explicit color schemes. World-state changes manifest through environment corruption (increasing shadow/arcane effects as player confronts Irenicus), NPC availability (recruitment locked by alignment), and quest availability (reputation-dependent). The game layers mechanical feedback (combat pausing, dialog trees, tooltips) with environmental storytelling to communicate political tension and factional conflict without explicit exposition.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:44:16.326Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2829,
+    "output_tokens": 2103,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

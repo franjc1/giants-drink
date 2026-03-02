@@ -1,0 +1,163 @@
+{
+  "game_id": "devil-world-nes",
+  "game_name": "Devil World",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "The Devil character",
+      "visual_form": "Large winged demon figure displayed at top of screen",
+      "meaning": "Active threat; signals incoming maze wall movement and danger"
+    },
+    {
+      "signal": "Minions patrolling maze",
+      "visual_form": "Monster sprites moving through corridors",
+      "meaning": "Immediate collision hazard; player must avoid or power up to defeat"
+    },
+    {
+      "signal": "Maze wall movement",
+      "visual_form": "Outer boundary of maze shifts direction as Devil points",
+      "meaning": "Environmental hazard; player can be crushed between walls and boundary"
+    },
+    {
+      "signal": "Absence of Cross/Bible",
+      "visual_form": "Dragon character in unpowered state (visual distinction from powered state)",
+      "meaning": "Player is helpless and cannot interact with threat; vulnerability state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cross icon",
+      "visual_form": "Religious cross symbol appearing in maze",
+      "meaning": "Power-up collectible; grants fire-breathing ability and dot-eating capacity"
+    },
+    {
+      "signal": "Bible collectibles",
+      "visual_form": "Four Bible icons scattered in later maze phases",
+      "meaning": "Power-up items with same effect as Crosses; placing all four into seal completes level"
+    },
+    {
+      "signal": "Bonus Box collection phase",
+      "visual_form": "Dedicated maze environment with six boxes and time limit indicator",
+      "meaning": "Safe period between levels; risk-reward scenario for score/progression"
+    },
+    {
+      "signal": "Seal location",
+      "visual_form": "Designated spatial location in maze where Bibles are placed",
+      "meaning": "Goal location; completing this objective advances to next maze"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Devil/Evil forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Winged demon figure; religious/satanic imagery",
+      "enemy_visual_variants": "The Devil (boss); minion monsters (subordinate threats)",
+      "environmental_markers": "Hell-themed maze environments; religious iconography inverted as obstacles"
+    },
+    {
+      "faction": "Player (Tamagon/Dragon)",
+      "color_identity": "Green (player 1); Red (player 2)",
+      "symbol_or_sigil": "Dragon character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Crosses and Bibles serve as alignment symbols; player-collected religious items"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Unpowered/vulnerable phase",
+      "visual_manifestation": "Dragon sprite rendered without power effect; cannot interact with collectibles or enemies",
+      "behavioral_manifestation": "Player movement restricted functionally; cannot defeat minions or progress"
+    },
+    {
+      "world_state": "Powered phase (post-Cross/Bible collection)",
+      "visual_manifestation": "Dragon sprite displays fire-breathing visual effect or enhanced appearance",
+      "behavioral_manifestation": "Player can eat dots, defeat minions, and progress toward seal placement"
+    },
+    {
+      "world_state": "Maze movement active",
+      "visual_manifestation": "Devil points direction; outer maze boundary shifts visually on screen",
+      "behavioral_manifestation": "Environmental walls move; spatial danger zone created between static maze and moving boundary"
+    },
+    {
+      "world_state": "Seal completion (level progression)",
+      "visual_manifestation": "Devil exits current maze; transitions to next maze environment",
+      "behavioral_manifestation": "All four Bibles removed from world; Devil repositions for next encounter"
+    },
+    {
+      "world_state": "Bonus maze active",
+      "visual_manifestation": "Dedicated maze variant with six Bonus Box sprites and visible time constraint",
+      "behavioral_manifestation": "Time-limited collection scenario; different spatial layout than standard mazes"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Religious iconography as power source",
+      "example": "Crosses and Bibles function as collectibles that empower the player; inverts religious symbols as tools against demonic threat"
+    },
+    {
+      "technique": "Boss figure visual dominance",
+      "example": "The Devil displayed prominently at top of screen throughout gameplay; establishes hierarchy and constant threat presence"
+    },
+    {
+      "technique": "Spatial world-state feedback",
+      "example": "Maze wall movement provides dynamic environmental feedback; player's spatial relationship to boundaries communicates danger state"
+    },
+    {
+      "technique": "Character coloration for multiplayer differentiation",
+      "example": "Green vs. Red dragon variants signal player 1 vs. player 2 without text overlay"
+    },
+    {
+      "technique": "Seal as moral/progression landmark",
+      "example": "Placing Bibles into seal serves as level-completion ritual; visual representation of religious theme integration into mechanics"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "The Devil",
+      "state": "Active control phase",
+      "behavior": "Points in direction; commands minions to move maze walls; visual gesture at top of screen guides threat direction"
+    },
+    {
+      "entity": "Minions",
+      "state": "Patrolling",
+      "behavior": "Move through maze corridors; unpowered player cannot engage; visual collision hazard"
+    },
+    {
+      "entity": "Minions",
+      "state": "Powered player present",
+      "behavior": "Can be defeated by fire-breathing attack; removed from world state"
+    },
+    {
+      "entity": "Tamagon (player character)",
+      "state": "Unpowered",
+      "behavior": "Movement only; cannot collect dots or defeat enemies; visual helplessness state"
+    },
+    {
+      "entity": "Tamagon (player character)",
+      "state": "Powered",
+      "behavior": "Can consume dots, defeat minions, and move toward seal; fire-breathing visual effect active"
+    },
+    {
+      "entity": "Maze boundary",
+      "state": "Moving",
+      "behavior": "Shifts in direction signaled by Devil's gesture; creates crushing hazard; dynamic environmental threat"
+    }
+  ],
+  "notes": "Devil World communicates world-state primarily through visual hierarchy and religious iconography. The Devil's prominent screen position establishes narrative authority; his pointing gesture serves dual function as mechanic cue (maze movement direction) and narrative communication (threat manifestation). Power-up system inverts religious symbols—Crosses and Bibles are offensive/defensive tools against demonic forces, creating thematic resonance between mechanics and visual design. The game's religious content prevented North American release despite Miyamoto/Tezuka design; visual communication of good-vs-evil through iconography is core to world-state expression. Unpowered state creates clear visual/mechanical distinction from powered state, communicating vulnerability without text. Multiplayer color differentiation (green/red) establishes faction identity within cooperative/competitive context.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:48:41.766Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4373,
+    "output_tokens": 1837,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

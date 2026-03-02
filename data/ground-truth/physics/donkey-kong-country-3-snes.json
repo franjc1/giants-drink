@@ -1,0 +1,164 @@
+{
+  "_meta": {
+    "game": "Donkey Kong Country 3: Dixie Kong's Double Trouble!",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1996,
+    "publisher": "Nintendo",
+    "developer": "Rare",
+    "sources": [
+      {
+        "name": "Wikipedia — Donkey Kong Country 3",
+        "url": "https://en.wikipedia.org/wiki/Donkey_Kong_Country_3:_Dixie_Kong's_Double_Trouble!",
+        "notes": "Mechanics overview. Kiddy Kong physics, Dixie helicopter spin, animal buddies."
+      },
+      {
+        "name": "DKC Atlas — Donkey Kong Country 3 Studies",
+        "url": "https://www.dkc-atlas.com/",
+        "notes": "DKC series physics reference. DKC1/2/3 use same 8.8 fixed-point engine."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DKC3 is the third game in Rare's DKC trilogy for SNES. Released 1996, one of the last major SNES titles.",
+      "USES SAME ENGINE AS DKC1 AND DKC2. Core physics constants assumed identical.",
+      "Main character: Dixie Kong (same as DKC2 secondary). Secondary: Kiddy Kong (new — large, powerful).",
+      "KIDDY KONG ADDITION: Water skipping. Kiddy can bounce along water surfaces instead of falling in (in specific contexts).",
+      "KIDDY KONG ADDITION: Ground roll. Kiddy's roll is different from DKC1/2 — larger body means it hits more enemies.",
+      "The helicopter spin from DKC2 (Dixie) is retained — same mechanic.",
+      "Features a large overworld map (Northern Kremisphere) with boat and vehicle traversal."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "base_physics": {
+    "_note": "Assumed same as DKC1/DKC2 engine. All values from DKC1 documentation apply.",
+    "jump_velocity_initial": {
+      "hex_value": "0xF9.00",
+      "px_per_frame": -7.0,
+      "confidence": "medium",
+      "source": "DKC1 ROM-confirmed values — assumed same engine in DKC3. VERIFY."
+    },
+    "walk_speed": {
+      "hex_value": "0x02.00",
+      "px_per_frame": 2.0,
+      "confidence": "medium"
+    },
+    "run_speed": {
+      "hex_value": "0x03.00",
+      "px_per_frame": 3.0,
+      "confidence": "medium"
+    },
+    "gravity_holding_jump": {
+      "hex_value": "0x00.48",
+      "px_per_frame_sq": 0.28125,
+      "confidence": "medium",
+      "notes": "Dual gravity system from DKC1 — holding jump button applies this lower gravity."
+    },
+    "gravity_not_holding": {
+      "hex_value": "0x00.70",
+      "px_per_frame_sq": 0.4375,
+      "confidence": "medium",
+      "notes": "Released jump button applies this higher gravity — signature DKC 'tight' fall."
+    }
+  },
+
+  "dixie_kong": {
+    "_note": "Dixie Kong is the PRIMARY character in DKC3 (was secondary in DKC2).",
+    "helicopter_hair_spin": {
+      "description": "Press and hold jump while airborne — Dixie's ponytail spins like a helicopter rotor, slowing descent.",
+      "effect": "Significantly reduced fall speed. Limited horizontal movement control during spin.",
+      "notes": [
+        "Same mechanic as DKC2 — carried forward unchanged.",
+        "Allows crossing wide gaps and reaching elevated platforms inaccessible by standard jump.",
+        "The helicopter spin is the primary aerial traversal tool for Dixie."
+      ],
+      "confidence": "high"
+    },
+    "cartwheel_attack": {
+      "description": "Spinning attack similar to DKC1/2 roll. Hits enemies in front.",
+      "notes": "Lighter than Kiddy's roll — less inertia, easier to control."
+    },
+    "throw_kiddy": {
+      "description": "When Dixie is leading, she can throw Kiddy forward or upward to reach far/high platforms.",
+      "notes": "The throw mechanic from DKC1 (Kong throwing Kong) — same system. Kong toss = traversal tool."
+    }
+  },
+
+  "kiddy_kong": {
+    "_note": "New character in DKC3. Toddler Kong — large, powerful, distinct mechanics.",
+    "water_skip": {
+      "description": "Kiddy can skip along water surfaces if rolling onto water at speed. Bounces several times before sinking.",
+      "notes": [
+        "Unique to Kiddy — Dixie sinks immediately.",
+        "Allows crossing water hazards that would otherwise require a different route.",
+        "Number of skips depends on approach speed and timing."
+      ],
+      "confidence": "high"
+    },
+    "roll_attack": {
+      "description": "Standard DKC roll, but Kiddy's large body gives it a slightly different feel.",
+      "notes": "Larger hitbox than Dixie's cartwheel — may hit more enemies per use."
+    },
+    "throw_dixie": {
+      "description": "When Kiddy is leading, he can throw Dixie upward to reach elevated platforms or far distances.",
+      "notes": "Cooperative traversal — one Kong can reach places the other cannot."
+    }
+  },
+
+  "animal_buddies": {
+    "_note": "DKC3 has new animal buddies not in DKC1/2.",
+    "ellie": {
+      "species": "Elephant",
+      "ability": "Suck up water with trunk, spray forward at enemies. Can also carry barrels.",
+      "notes": [
+        "Ellie is afraid of mice — certain enemies with mouse traits will scare her.",
+        "The water-spray mechanic is new to DKC3 — creates puzzle-solving opportunities."
+      ]
+    },
+    "squitter": {
+      "species": "Spider",
+      "ability": "Shoot webs that become temporary platforms. Same as DKC2.",
+      "notes": "Retained from DKC2."
+    },
+    "parry": {
+      "species": "Parallel Bird",
+      "ability": "Deflects projectiles automatically. Follows the Kongs and blocks incoming shots.",
+      "notes": "Unique to DKC3. Passive defense rather than active attack — changes how projectile enemies are handled."
+    },
+    "benny_and_bjorn": {
+      "species": "Biplane/Helicopter",
+      "ability": "Transportation between overworld areas.",
+      "notes": "Vehicle traversal on the overworld map — not level-internal mechanics."
+    },
+    "funky": {
+      "description": "Funky Kong operates a boat and jetski on the overworld.",
+      "notes": "Vehicle traversal tool for the Northern Kremisphere map."
+    }
+  },
+
+  "overworld": {
+    "description": "Large connected map (Northern Kremisphere) with lakes, forests, and mountains. Travel between areas requires Funky's boat or other vehicles.",
+    "notes": [
+      "The overworld map is more complex than DKC1/2 — not just a world select screen.",
+      "Boat and vehicle sections add traversal variety on the world map itself.",
+      "Some areas are inaccessible without specific vehicles."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "DKC3's Kiddy Kong water-skipping mechanic is a perfect example of physics-based character differentiation: a single property (Kiddy bounces on water, Dixie doesn't) creates completely different level routing options. Same physics engine, different character hitbox/mass properties, wildly different traversal.",
+    "The helicopter spin carried forward from DKC2 to DKC3 demonstrates 'mechanic inheritance' — a beloved traversal tool becomes an expected part of the Dixie Kong identity. Players who learned it in DKC2 have an immediate fluency advantage in DKC3.",
+    "Ellie's fear of mice creates a vulnerability mechanic — normally indestructible animal buddies have a contextual weakness. This makes enemy placement design more interesting: a mouse near Ellie is a high-value threat, creating dynamic threat prioritization.",
+    "Parry the Parallel Bird (passive projectile deflection) shifts defensive strategy: instead of dodging projectiles, players let Parry handle them. This changes spatial attention — stop watching for incoming shots, start managing where Parry is relative to threats.",
+    "The Northern Kremisphere overworld map (with boat navigation) adds a layer of world exploration not present in DKC1/2. The world itself becomes a puzzle with gates and routes — the overworld map as its own game mode within the game."
+  ]
+}

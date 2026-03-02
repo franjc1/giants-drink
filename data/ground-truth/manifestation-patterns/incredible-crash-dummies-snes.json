@@ -1,0 +1,154 @@
+{
+  "game_id": "incredible-crash-dummies-snes",
+  "game_name": "The Incredible Crash Dummies",
+  "platform": "SNES",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy collision",
+      "visual_form": "Junkbots and Junkman character sprites in environment",
+      "meaning": "Contact with enemies causes limb loss; progressive damage state"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Level obstacles and traps (visual design not detailed in sources)",
+      "meaning": "Contact with stage hazards causes limb loss, equivalent threat to enemies"
+    },
+    {
+      "signal": "Limb loss animation",
+      "visual_form": "Slick's body parts become detached and fall away",
+      "meaning": "Damage state reached; visual indicator of health deterioration"
+    },
+    {
+      "signal": "Head separation",
+      "visual_form": "Slick's head falls off after all limbs lost",
+      "meaning": "Imminent death; life loss triggered after this state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Screwdriver pickup",
+      "visual_form": "Screwdriver item sprites in levels",
+      "meaning": "Restores lost limbs; recovery from damage state"
+    },
+    {
+      "signal": "Slick character presence",
+      "visual_form": "Controllable protagonist sprite",
+      "meaning": "Player agency and primary safe interaction point"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Crash Dummies (Player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Slick (protagonist dummy character)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rescue mission objective: freeing Dr. Zub from captivity"
+    },
+    {
+      "faction": "Junkbots / Junkman forces (Antagonist faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Junkman character and Junkbot minions",
+      "enemy_visual_variants": "One Junkbot serves as midlevel boss per area; Junkman as final boss",
+      "environmental_markers": "Five distinct areas each containing Junkbot territory; Junkman's domain represents final confrontation space"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal exploration/platforming",
+      "visual_manifestation": "Slick intact with all limbs; standard level navigation",
+      "behavioral_manifestation": "Slick responds to player input normally; can move, jump, interact with environment"
+    },
+    {
+      "world_state": "Damage taken",
+      "visual_manifestation": "One or more limbs detached from Slick's body; limb still visible in environment",
+      "behavioral_manifestation": "Slick mobility or appearance changed; reduced capability or visual impairment"
+    },
+    {
+      "world_state": "Critical damage (all limbs lost)",
+      "visual_manifestation": "Only Slick's torso and head remain; headless body state imminent",
+      "behavioral_manifestation": "One additional hit triggers head detachment and life loss"
+    },
+    {
+      "world_state": "Death/Life loss",
+      "visual_manifestation": "Slick's head separates from body completely",
+      "behavioral_manifestation": "Life counter decrements; level reset or game over state initiated"
+    },
+    {
+      "world_state": "Recovery",
+      "visual_manifestation": "Screwdriver collected; limbs reattach to Slick",
+      "behavioral_manifestation": "Slick regains full mobility and returns to normal exploration state"
+    },
+    {
+      "world_state": "Boss encounter (Junkbot midlevel / Junkman final)",
+      "visual_manifestation": "Large enemy sprite; distinct arena or encounter space within area",
+      "behavioral_manifestation": "Combat engagement; escalated threat level; different enemy attack patterns"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative framing through level progression",
+      "example": "Five distinct areas serve as stages in rescue mission structure; each area contains one Junkbot guardian, creating hierarchical threat escalation toward final boss"
+    },
+    {
+      "technique": "Character-driven objective setting",
+      "example": "Dr. Zub established as captive/rescue target held by Junkman; player mission framed as liberation narrative"
+    },
+    {
+      "technique": "Enemy faction territorial marking",
+      "example": "Junkbots occupy distinct level areas; final domain controlled by Junkman; spatial layout reflects power structure"
+    },
+    {
+      "technique": "Gameplay mechanic as world-state metaphor",
+      "example": "Limb loss system visualizes vulnerability of crash dummy bodies; screwdriver recovery system reflects repair/maintenance theme inherent to dummy character concept"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Slick (protagonist)",
+      "state": "Healthy/intact",
+      "behavior": "Full movement capability; responsive to player input; can execute platforming actions"
+    },
+    {
+      "entity": "Slick (protagonist)",
+      "state": "Damaged (limbs lost)",
+      "behavior": "Reduced functionality; visual impairment; continued vulnerability to enemy/hazard contact"
+    },
+    {
+      "entity": "Slick (protagonist)",
+      "state": "Critical (all limbs lost)",
+      "behavior": "Extreme vulnerability; one additional hit triggers immediate death; no recovery without screwdriver"
+    },
+    {
+      "entity": "Junkbots",
+      "state": "Active in level",
+      "behavior": "Mobile enemy threat; collision with Slick inflicts limb loss; patrol or engage behavior not detailed"
+    },
+    {
+      "entity": "Junkman",
+      "state": "Final boss encounter",
+      "behavior": "Enhanced threat level; serves as climactic obstacle; defeat required to complete rescue mission"
+    },
+    {
+      "entity": "Screwdriver item",
+      "state": "Available in level",
+      "behavior": "Passive pickup; collection triggers limb reattachment and health recovery"
+    }
+  ],
+  "notes": "Sources provided limited detail on visual manifestation systems. Game uses toy line IP (Crash Dummies action figures) as thematic foundation, influencing dismemberment-based damage model. SNES version specifically uses platformer progression with five-area structure and dual-boss-type hierarchy. Narrative context adapted from 1993 FOX Kids animated TV special suggests light-hearted tone despite damage system. T3 data tier reflects qualitative description rather than empirical measurement; exact visual asset descriptions, color palettes, and sprite designs not documented in available sources.",
+  "sources_used": [
+    "The Cutting Room Floor - The Incredible Crash Dummies (SNES)",
+    "Wikipedia - The Incredible Crash Dummies (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:23:32.803Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4363,
+    "output_tokens": 1787,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

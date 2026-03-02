@@ -1,0 +1,132 @@
+{
+  "_meta": {
+    "game": "DuckTales",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1989,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / DuckTales",
+        "url": "https://tasvideos.org/GameResources/NES/DuckTales",
+        "notes": "Speedrun technique documentation. Confirms Y sub-pixel formula '[current value + 51] mod 256' suggesting 256 sub-pixel system. Walk and pogo physics documented qualitatively."
+      },
+      {
+        "name": "Data Crystal — DuckTales (NES)",
+        "url": "https://datacrystal.tcrf.net/wiki/DuckTales_(NES)",
+        "notes": "RAM map supplemental."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DuckTales is a Capcom NES game — physics share design DNA with Mega Man series (same developer, same era).",
+      "DEFINING MECHANIC: Scrooge McDuck's cane POGO — bouncing on the cane tip provides high jump and damages enemies/breaks blocks.",
+      "Sub-pixel system: TASVideos confirms 256 sub-pixel precision (formula '[current value + 51] mod 256').",
+      "Walk speed not explicitly documented — estimated from Capcom NES standards.",
+      "Pogo height is notably higher than standard jump — the game's traversal is built around the pogo.",
+      "Non-linear level select: 5 stages accessible in any order (Moon, Transylvania, Amazon, Himalayas, African Mines), similar to Mega Man."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "description": "256 sub-pixel precision confirmed by TASVideos Y sub-pixel formula '[current value + 51] mod 256'.",
+      "confidence": "high"
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "medium",
+      "notes": "Approximate based on Capcom NES standard (Mega Man series: 1.5 px/f). Not explicitly documented in reviewed sources. VERIFY against ROM."
+    },
+    "acceleration": null,
+    "notes": "Appears to be instant velocity — consistent with Capcom NES titles of the era."
+  },
+
+  "standard_jump": {
+    "height_px_approx": 32,
+    "confidence": "low",
+    "notes": [
+      "Standard jump (pressing A without cane pogo) is shorter than the pogo jump.",
+      "Approximate from gameplay observation. VERIFY.",
+      "Players rarely use the standard jump for traversal — the pogo is almost always superior for height."
+    ]
+  },
+
+  "pogo": {
+    "_note": "THE DEFINING MECHANIC. Scrooge's cane pogo transforms him from a slow old man into a high-speed platformer protagonist.",
+    "activation": "Press Down + B while in the air, OR pressing B while on ground initiates pogo",
+    "height_px_approx": 64,
+    "confidence": "medium",
+    "notes": [
+      "Pogo height is approximately double the standard jump height.",
+      "Pogo can be performed consecutively — bouncing rapidly allows crossing platforms without touching ground.",
+      "Each pogo bounce maintains or adds to the next bounce height if timed correctly.",
+      "Pogo on an enemy: kills/stuns the enemy and bounces Scrooge upward (same height as environmental pogo).",
+      "Pogo on breakable blocks: breaks the block and bounces Scrooge upward.",
+      "Pogo speed: the horizontal momentum during pogo is maintained from ground speed at pogo initiation."
+    ],
+    "chaining": {
+      "description": "Consecutive pogo bounces can be chained for rapid vertical+horizontal movement.",
+      "notes": "Chain pogoing is the primary speed technique in DuckTales speedruns."
+    }
+  },
+
+  "gravity": {
+    "notes": "Gravity is not explicitly documented in reviewed sources. VERIFY against Data Crystal RAM map.",
+    "confidence": "low",
+    "qualitative": "DuckTales gravity feels 'Capcom-standard' — similar arc weight to Mega Man. The pogo bounce overrides gravity briefly each contact."
+  },
+
+  "cane_attack": {
+    "description": "Scrooge can swing the cane horizontally to hit enemies at head level.",
+    "notes": [
+      "Cane swing is the horizontal attack (B while standing, no down input).",
+      "Cane swing has short reach but is instantaneous — no animation delay like CV whip.",
+      "Can hit chests and blocks horizontally."
+    ]
+  },
+
+  "level_structure": {
+    "type": "non-linear stage select",
+    "stages": ["Moon Stage", "Transylvania", "Amazon", "Himalayas", "African Mines"],
+    "order": "Player selects any stage in any order (like Mega Man)",
+    "notes": [
+      "Each stage has a hidden treasure chest containing a valuable item.",
+      "Final boss available after all 5 stages are cleared.",
+      "Stage difficulty is relatively uniform — no obvious intended order (also like Mega Man)."
+    ]
+  },
+
+  "hitboxes": {
+    "scrooge_standing": {
+      "notes": "Scrooge is shorter than most NES protagonists (elderly, stooped posture). Hitbox narrower than sprite. Exact values need ROM verification.",
+      "confidence": "low"
+    }
+  },
+
+  "_verification_checklist": [
+    "Walk speed (px/frame)",
+    "Standard jump height/velocity",
+    "Pogo height/velocity at bounce",
+    "Gravity constant",
+    "Cane attack reach and hitbox"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The pogo mechanic recontextualizes everything in the level. Surfaces aren't 'floors to land on' — they're 'trampolines to bounce off.' Enemy placement in DuckTales is fundamentally different from Mario because enemies are also pogo surfaces.",
+    "The non-linear stage select mirrors Mega Man's design but with a different feel — Scrooge's wealth-accumulation theme suggests you're exploring for treasure, not defeating bosses in a resistance arc.",
+    "The cane has two uses (pogo for traversal/damage, swing for horizontal hits) that serve different situations. This dual-use tool creates a light systems-thinking layer: 'which mode is better here?'",
+    "Scrooge's short stature and elderly character design in contrast with his extreme athletic pogo capability creates a charming disconnect. The game's aesthetics lean into this — he's a billionaire bouncing on his cane through supernatural environments."
+  ]
+}

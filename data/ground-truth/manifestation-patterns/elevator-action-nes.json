@@ -1,0 +1,187 @@
+{
+  "game_id": "elevator-action-nes",
+  "game_name": "Elevator Action",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy agents",
+      "visual_form": "Humanoid sprites emerging from closed doors; shoot projectiles at player",
+      "meaning": "Active threats present on floor; player must avoid or neutralize"
+    },
+    {
+      "signal": "Open elevator shaft",
+      "visual_form": "Gap in floor where elevator has left or descended; visible drop hazard",
+      "meaning": "Fall damage hazard; impassable unless elevator present above for jumping"
+    },
+    {
+      "signal": "Alarm activation",
+      "visual_form": "Visual/audio cue triggered by time pressure mechanic",
+      "meaning": "World-state shift: enemy aggression increases, elevator response slows"
+    },
+    {
+      "signal": "Darkness/lights out",
+      "visual_form": "Blackened floor sections with reduced visibility",
+      "meaning": "Reduced situational awareness; enemies harder to see approaching"
+    },
+    {
+      "signal": "Player hit/crushed",
+      "visual_form": "Collision with enemy projectile, melee attack, or elevator",
+      "meaning": "Health loss; loss of one life upon hit"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Elevator present on floor",
+      "visual_form": "Elevator car visible in shaft; can be called via controls",
+      "meaning": "Viable escape or vertical movement option available"
+    },
+    {
+      "signal": "Interior building location",
+      "visual_form": "Floor with closed doors and interior architecture",
+      "meaning": "Safe traversal space; enemies only emerge from marked doors"
+    },
+    {
+      "signal": "Basement/ground floor reached",
+      "visual_form": "Lowest level of building with exit car visible",
+      "meaning": "Victory state when all documents collected; escape available"
+    },
+    {
+      "signal": "Cleared red door",
+      "visual_form": "Red door that has been opened and document collected",
+      "meaning": "Objective progress; one fewer mandatory rooms to complete"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Agent 17/Otto)",
+      "color_identity": null,
+      "symbol_or_sigil": "Secret agent role; pistol-equipped",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player sprite; appears at building roof entry point"
+    },
+    {
+      "faction": "Enemy Agents",
+      "color_identity": null,
+      "symbol_or_sigil": "Antagonist agents attempting to stop player; armed with firearms",
+      "enemy_visual_variants": "Emerge from closed doors throughout 30-story building",
+      "environmental_markers": "Door markers (closed doors are spawn points); become more aggressive under alarm state"
+    },
+    {
+      "faction": "Building Infrastructure/Neutral",
+      "color_identity": null,
+      "symbol_or_sigil": "Elevators, escalators, stairways, light fixtures",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Functional architecture; some can be manipulated (lights shot out, elevators called)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal operation (within time limit)",
+      "visual_manifestation": "Standard enemy patrol behavior; elevators respond normally to input; lights on",
+      "behavioral_manifestation": "Enemy agents appear at moderate frequency; elevators respond quickly to directional input; visibility clear"
+    },
+    {
+      "world_state": "Time pressure alarm triggered",
+      "visual_manifestation": "Alarm cue (visual/audio); no specific documented visual change beyond behavior",
+      "behavioral_manifestation": "Enemy agents become more aggressive and spawn more frequently; elevator response time increases (slower)"
+    },
+    {
+      "world_state": "Dark floor section",
+      "visual_manifestation": "Blackened/darkened floor rendering; reduced lighting or near-total darkness",
+      "behavioral_manifestation": "Player vision reduced; enemies harder to anticipate; adds stealth/difficulty element"
+    },
+    {
+      "world_state": "Incomplete document collection + attempted exit",
+      "visual_manifestation": "Player transported back to highest uncompleted floor",
+      "behavioral_manifestation": "Forced progression: cannot escape until all red-door documents collected"
+    },
+    {
+      "world_state": "All documents collected",
+      "visual_manifestation": "Escape path to basement and getaway car becomes active",
+      "behavioral_manifestation": "Victory condition available; player can navigate to ground floor and exit"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural layout as narrative constraint",
+      "example": "30-story building structure communicates espionage mission scope; vertical descent via elevators/stairs reinforces infiltration-and-exfiltration premise"
+    },
+    {
+      "technique": "Door color coding (red doors)",
+      "example": "Red doors mark document locations; visual convention communicates objective without UI; player learns to seek red doors as primary goal markers"
+    },
+    {
+      "technique": "Enemy agent spawning from doors",
+      "example": "Closed doors are potential threat sources; world-state (door opening) signals enemy emergence; teaches spatial awareness"
+    },
+    {
+      "technique": "Light fixture destruction mechanic",
+      "example": "Shootable overhead lights establish player agency over environment; darkness as optional hazard players can create or avoid"
+    },
+    {
+      "technique": "Elevator as core mechanic-narrative anchor",
+      "example": "Elevators are both functional traversal tool and primary world-state controller; their presence/absence, speed, and accessibility communicate mission progress and time pressure"
+    },
+    {
+      "technique": "Getaway car at basement exit",
+      "example": "Visual endpoint showing extraction; car presence communicates escape objective and final safe zone"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy agents",
+      "state": "Normal",
+      "behavior": "Patrol/emerge from doors at moderate frequency; shoot at player on sight; can be killed by gunfire, karate, light drop, or elevator crush"
+    },
+    {
+      "entity": "Enemy agents",
+      "state": "Alarm triggered",
+      "behavior": "Increased aggression; spawn rate increases; more relentless pursuit of player"
+    },
+    {
+      "entity": "Elevator",
+      "state": "Normal",
+      "behavior": "Responds to player input (up/down); moves between floors; can be ridden by player; player can ride on roof"
+    },
+    {
+      "entity": "Elevator",
+      "state": "Alarm triggered",
+      "behavior": "Response time to input increases (slower); player loses temporal control advantage"
+    },
+    {
+      "entity": "Player (Otto)",
+      "state": "With documents",
+      "behavior": "Can exit to basement/car upon collecting all red-door documents"
+    },
+    {
+      "entity": "Player (Otto)",
+      "state": "Without all documents + attempting exit",
+      "behavior": "Teleported back to highest incomplete floor; mission restart forced"
+    },
+    {
+      "entity": "Light fixtures",
+      "state": "Intact",
+      "behavior": "Provide illumination for floor visibility"
+    },
+    {
+      "entity": "Light fixtures",
+      "state": "Destroyed (shot)",
+      "behavior": "Floor darkens; reduces visibility for all entities; can be strategically exploited by player"
+    }
+  ],
+  "notes": "Elevator Action uses a constraint-based world-state system: the 30-story building is a literal and narrative progress ladder. Visual communication is minimal but highly functional—red doors, enemy sprites, and architectural layout convey all necessary information. The alarm mechanic is a key world-state transition that manifests primarily through behavioral change (enemy aggression, elevator lag) rather than visual transformation. The game communicates danger through proximity (enemy spawn zones = doors) and environmental hazards (shafts, crushers). No faction identity system exists beyond player vs. enemy dichotomy; distinction is purely role-based (secret agent vs. antagonist agents). The game's espionage narrative is reinforced entirely through mechanical metaphor: vertical descent, locked doors, timed pressure, and extraction point.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:12:47.916Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3207,
+    "output_tokens": 2107,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

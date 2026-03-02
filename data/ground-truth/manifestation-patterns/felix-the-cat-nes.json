@@ -1,0 +1,161 @@
+{
+  "game_id": "felix-the-cat-nes",
+  "game_name": "Felix the Cat",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures (moles, tree trunks, birds, fish, cannons)",
+      "meaning": "Immediate threat to Felix; collision causes magic power loss or life loss if already depleted"
+    },
+    {
+      "signal": "Magic power depletion",
+      "visual_form": "Magic level indicator decreasing (visual representation not documented but gameplay-critical)",
+      "meaning": "Vulnerability state—next hit results in death rather than power downgrade"
+    },
+    {
+      "signal": "Bottomless pit",
+      "visual_form": "Level geometry extending past the bottom boundary of the screen",
+      "meaning": "Instant death hazard; represents environmental danger distinct from enemies"
+    },
+    {
+      "signal": "Time running out",
+      "visual_form": "Time counter (visual form not specified in sources)",
+      "meaning": "Resource depletion leading to life loss if timer reaches zero"
+    },
+    {
+      "signal": "Boss monsters",
+      "visual_form": "Eight distinct boss entity designs at end of worlds",
+      "meaning": "Escalated threat level; represents world-state progression and danger intensity increase"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Scattered health items",
+      "visual_form": "Pickups placed throughout levels",
+      "meaning": "Resource replenishment; indicates recovery opportunity from damage"
+    },
+    {
+      "signal": "Magic power items",
+      "visual_form": "Pickups placed throughout levels",
+      "meaning": "Resource replenishment; restores magic level and defensive capability"
+    },
+    {
+      "signal": "Solid platform geometry",
+      "visual_form": "Traversable level terrain",
+      "meaning": "Safe passage; lack of this signals danger zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Felix (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Felix the Cat character sprite; magic wand (modified in re-release to face sideways instead of forward)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Locations Felix navigates toward (rescue mission framing)"
+    },
+    {
+      "faction": "The Professor (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Replaced Poindexter in 2024 re-release due to character rights; represents malevolent force",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Final destination; kidnapping of Kitty establishes him as primary opposition"
+    },
+    {
+      "faction": "Kitty (MacGuffin/goal character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Kitty Cat character (replaced Poindexter on 2024 re-release title screen)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "End-goal location; presence/absence signals narrative state"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Narrative setup: Kitty kidnapped",
+      "visual_manifestation": "Title screen displays The Professor as threat; Kitty absent from Felix's side",
+      "behavioral_manifestation": "Felix must traverse nine worlds; enemy placement and boss encounters escalate progression toward rescue"
+    },
+    {
+      "world_state": "Early game (worlds 1-3)",
+      "visual_manifestation": "Smaller, slower-paced enemy encounters; basic projectile-based threats (moles, tree trunks, birds)",
+      "behavioral_manifestation": "Enemies 'follow a regular pace back and forth'; predictable patterns; lower damage pressure"
+    },
+    {
+      "world_state": "Mid-to-late game (worlds 4-9)",
+      "visual_manifestation": "Boss monsters with distinct designs; more complex threat arrangements",
+      "behavioral_manifestation": "Boss encounters require adapted attack strategy; higher lethality"
+    },
+    {
+      "world_state": "Magic power degradation",
+      "visual_manifestation": "Visual indicator of magic level (exact form not documented); sprite changes or HUD representation",
+      "behavioral_manifestation": "Felix's attack capability changes 'depending on the magic level'; reduced offensive effectiveness"
+    },
+    {
+      "world_state": "Palette/aesthetic shift (original vs. re-release)",
+      "visual_manifestation": "Original release: 'aggressively dark palette'; Re-release 2024: corrected, lighter palette",
+      "behavioral_manifestation": "No gameplay difference; visual tone communicates mood—dark palette = threatening, corrected palette = accessible"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character kidnapping premise",
+      "example": "Professor steals Kitty instead of magic bag (narrative shift from previous Felix games); visual absence of Kitty on title screen establishes plot motivation"
+    },
+    {
+      "technique": "Boss character redesigns",
+      "example": "Rock Bottom character modified to remove cigarette in 2024 re-release; cannon redesigned to be less realistic; tank repositioned with Felix behind glass (more 'toy-like'). These changes communicate contextual appropriateness and target audience tone"
+    },
+    {
+      "technique": "Environment-specific threat types",
+      "example": "Enemy variety (moles, tree trunks, birds, fish, cannons) suggests themed world progression; aquatic enemies (fish) appear in water levels; airborne threats (birds) in sky levels (implied by variety)"
+    },
+    {
+      "technique": "Nine-world progression structure",
+      "example": "Nine distinct worlds create narrative escalation; visual progression from starting point toward Professor's location"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemies (moles, tree trunks, birds, fish)",
+      "state": "Normal patrol",
+      "behavior": "Follow regular pace back and forth; predictable movement patterns communicate low-threat routine"
+    },
+    {
+      "entity": "Felix",
+      "state": "Healthy (high magic power)",
+      "behavior": "Full attack capability; sprite displays forward-facing or sideways orientation depending on version"
+    },
+    {
+      "entity": "Felix",
+      "state": "Depleted magic (lowest level)",
+      "behavior": "Extreme vulnerability; next hit causes instant death; must seek magic replenishment items"
+    },
+    {
+      "entity": "Boss monsters",
+      "state": "Encounter initiated",
+      "behavior": "Not specified in sources, but eight distinct designs suggest varied attack patterns and threat signatures"
+    },
+    {
+      "entity": "Cannons",
+      "state": "Active",
+      "behavior": "Fire projectiles (cannonballs); visual threat indicator; can be defeated by Felix's attacks"
+    }
+  ],
+  "notes": "Felix the Cat is a straightforward platformer with minimal visual-world-state complexity. The game does not feature faction systems, political situations, or complex environmental communication. Danger and safety are signaled primarily through enemy presence/absence and resource availability. The 2024 re-release represents a significant visual tone shift (dark palette → light palette) but no gameplay changes. Character substitutions (Poindexter → Kitty, Rock Bottom cigarette removal, gun redesign) reflect licensing/content appropriateness rather than narrative world-state communication. The game prioritizes mechanical clarity (jump, attack, magic levels, health) over environmental storytelling.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:10:33.945Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4809,
+    "output_tokens": 1923,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "game_id": "devil-world-nes",
+  "game_name": "Devil World",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Tamagon (player character)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player controls green dragon navigating maze without initial power"
+    },
+    {
+      "element": "Crosses (power-up)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Grants fire-breathing and dot-eating ability; mandatory for maze completion"
+    },
+    {
+      "element": "Monsters (maze patrols)",
+      "first_appears": "Level 1",
+      "introduction_context": "dangerous",
+      "mastery_context": "Enemies patrolling mazes; threat avoidance is core mechanic"
+    },
+    {
+      "element": "The Devil (moving maze walls)",
+      "first_appears": "Level 1",
+      "introduction_context": "dangerous",
+      "mastery_context": "Demonstrates winged demon at screen top directing minions to move maze via pulleys/ropes; squashing hazard introduced"
+    },
+    {
+      "element": "Bibles (power-up collectibles)",
+      "first_appears": "After first maze completion",
+      "introduction_context": "moderate",
+      "mastery_context": "Post-introductory objective; same powers as Crosses; four required for seal progression"
+    },
+    {
+      "element": "Seal (objective marker)",
+      "first_appears": "After first maze completion",
+      "introduction_context": "moderate",
+      "mastery_context": "Destination for Bible placement; progresses narrative to next maze"
+    },
+    {
+      "element": "Bonus maze",
+      "first_appears": "Between-level sequences",
+      "introduction_context": "moderate",
+      "mastery_context": "Timed collection of six Bonus Boxes; optional enrichment challenge"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting Cross power-up",
+      "Consuming dots in powered state",
+      "Reaching safe zones away from monsters",
+      "Maze wall movement pause between Devil commands"
+    ],
+    "typical_tension_triggers": [
+      "Movement of maze walls (squashing hazard)",
+      "Monster patrol encounters",
+      "Powerless movement without Cross",
+      "Devil pointing minions to move maze in unpredictable directions",
+      "Time pressure in bonus maze"
+    ],
+    "pacing_descriptor": "Alternating pattern of passive maze navigation threat (wall movement) with active evasion threat (monster patrols); power-up dependency creates tension-relief cycles as player seeks Crosses/Bibles to gain temporary invulnerability"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Bonus maze appears between levels as optional enrichment; can be skipped or attempted for extra points",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Tutorial-like introduction of single maze with Crosses as immediate power-ups; manageable monster density",
+    "mid_game": "Introduction of Bible collection objective after first maze; increased spatial complexity as player navigates multiple mazes with dual threat types (monsters + wall movement)",
+    "late_game": null,
+    "notable_spikes": [
+      "First maze-moving wall encounter establishes squashing hazard as permanent threat",
+      "Transition from Crosses to Bibles introduces longer collection sequences",
+      "Bonus maze time pressure creates spike in pacing demand"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard Maze + Power-Up Hunt",
+      "description": "Player navigates Pac-Man-style maze while avoiding monsters; must locate and collect Crosses to gain fire-breathing/dot-eating abilities before maze can be cleared",
+      "example_level": "Level 1"
+    },
+    {
+      "pattern_name": "Multi-Objective Progression",
+      "description": "After initial maze, player must hunt four Bibles scattered across maze and place them into a seal; Bibles function identically to Crosses but exist as persistent post-level objective",
+      "example_level": "Levels 2+"
+    },
+    {
+      "pattern_name": "Bonus Maze Interlude",
+      "description": "Between-level sequences featuring timed collection of six Bonus Boxes; optional but incentivized; appears after Devil transitions between mazes",
+      "example_level": "Between-level sequences"
+    },
+    {
+      "pattern_name": "Dynamic Maze Wall Movement",
+      "description": "Devil at screen top commands minions to move outer maze boundary using pulleys/ropes every four directional commands; creates environmental hazard where player can be squished; constant threat throughout all mazes",
+      "example_level": "All levels"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:54:23.524Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4450,
+    "output_tokens": 1505,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

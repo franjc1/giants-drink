@@ -1,0 +1,154 @@
+{
+  "game_id": "ring-king-nes",
+  "game_name": "Ring King",
+  "platform": "nes",
+  "paradigm": "beat-em-up / boxing sports",
+  "danger_signals": [
+    {
+      "signal": "opponent_stance_change",
+      "visual_form": "boxer animation shift to aggressive posture",
+      "meaning": "opponent preparing or executing attack"
+    },
+    {
+      "signal": "stamina_depletion_visual",
+      "visual_form": "boxer character animation becomes slower, slouched",
+      "meaning": "player boxer vulnerable to knockouts, reduced defensive capability"
+    },
+    {
+      "signal": "knockdown_state",
+      "visual_form": "boxer character knocked to canvas, must recover within round timer",
+      "meaning": "imminent knockout threat if count reaches completion"
+    },
+    {
+      "signal": "special_attack_telegraph",
+      "visual_form": "opponent spinning animation or stance windup (visual tells for special moves)",
+      "meaning": "incoming high-damage attack that can be countered or avoided"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "round_interval_recovery",
+      "visual_form": "transition screen between rounds showing boxer at rest",
+      "meaning": "brief respite period; player can regenerate stamina via button mashing"
+    },
+    {
+      "signal": "successful_block_stance",
+      "visual_form": "boxer holding defensive posture without damage taken",
+      "meaning": "active defense reducing incoming damage"
+    },
+    {
+      "signal": "distance_advantage",
+      "visual_form": "player boxer positioned at optimal range for punch execution",
+      "meaning": "favorable positioning for attack or counter-punch"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_boxer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "player boxer customizable via stats (punch, stamina, speed); opponent boxers feature distinct visual designs and quirky character names",
+      "environmental_markers": "ring floor in arcade features publisher logo (Namcot in JP version, Data East in US version)"
+    },
+    {
+      "faction": "opponent_roster",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "eight unique opponent boxers with distinct character designs: Violence Jo, Brown Pants, White Wolf, Bomba Vern, Beat Brown, Blue Warker, Green Hante, Onetta Yank; each has unique appearance and fighting style",
+      "environmental_markers": "opponent identity communicated through character sprite and arcade-style character portraits"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_career_phase",
+      "visual_manifestation": "facing lower-tier opponents (Violence Jo listed as entry-level champion in NES version)",
+      "behavioral_manifestation": "opponents utilize basic attacks, less aggressive AI patterns"
+    },
+    {
+      "world_state": "championship_progression",
+      "visual_manifestation": "progression through ranked opponent roster; UI stats display (MATCHES, WINS, K.O.'S, LOSSES)",
+      "behavioral_manifestation": "opponent difficulty escalates; higher-ranked boxers employ special attacks more frequently"
+    },
+    {
+      "world_state": "post_championship_cycle",
+      "visual_manifestation": "arcade version cycles through final three opponents (Blue Warker, Green Hante, Onetta Yank) indefinitely",
+      "behavioral_manifestation": "sustained high-difficulty combat state; endless championship defense loop"
+    },
+    {
+      "world_state": "player_boxer_stat_improvement",
+      "visual_manifestation": "UI displays three stat categories (punch, stamina, speed) that increase via power points earned post-match",
+      "behavioral_manifestation": "player boxer attacks and movement become visually faster/more powerful; stamina management becomes less punishing"
+    },
+    {
+      "world_state": "stamina_exhaustion",
+      "visual_manifestation": "character animation slows noticeably; boxer posture becomes defensive/slouched",
+      "behavioral_manifestation": "punch effectiveness reduces; stamina regeneration required via button input between rounds"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "ring_floor_branding",
+      "example": "Japanese arcade/NES version features eagle with 'Namcot' logo on ring floor; US NES version replaces with Data East logo—communicates publisher identity and regional ownership through diegetic environment"
+    },
+    {
+      "technique": "opponent_name_characterization",
+      "example": "quirky character monikers (Violence Jo, Brown Pants, White Wolf, Bomba Vern) create distinct personality/identity for each boxer without extensive dialogue; names suggest fighting styles or appearance traits"
+    },
+    {
+      "technique": "progression_UI_storytelling",
+      "example": "match statistics display (MATCHES, WINS, K.O.'S, LOSSES) reinforces career progression narrative and player achievement; password save system enables persistent career identity"
+    },
+    {
+      "technique": "training_gym_visual_state",
+      "example": "training gym/training session interface differentiates between versions (NES vs VS. System); visual layout and UI elements communicate player agency in boxer development"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "opponent_boxer",
+      "state": "preparing_special_attack",
+      "behavior": "distinctive animation windup (spinning for hook, stance shift for straight punch, loading pose for uppercut); telegraphs attack type to allow counter-play"
+    },
+    {
+      "entity": "opponent_boxer",
+      "state": "exhausted",
+      "behavior": "reduced animation speed, defensive posture; less aggressive attack frequency"
+    },
+    {
+      "entity": "opponent_boxer",
+      "state": "aggressive_offense",
+      "behavior": "rapid punch combinations; frequent special attack attempts at optimal distance"
+    },
+    {
+      "entity": "player_boxer",
+      "state": "low_stamina",
+      "behavior": "visibly slower movement; reduced punch speed and range; increased vulnerability to knockouts"
+    },
+    {
+      "entity": "player_boxer",
+      "state": "knockdown_recovery",
+      "behavior": "character knocked to canvas; must complete recovery animation before returning to neutral stance; failure results in technical knockout"
+    },
+    {
+      "entity": "player_boxer",
+      "state": "successful_special_attack_execution",
+      "behavior": "unique animation sequences (spinning hook, rope collision, aerial launch); instant knockout or massive damage on clean hit"
+    }
+  ],
+  "notes": "Ring King (1987 NES) communicates world-state primarily through character animation, UI statistics display, and opponent roster progression. The game lacks explicit faction/political systems—instead emphasizing individual boxer identity and career advancement. Danger is communicated through animation tells (opponent stance changes, stamina depletion visuals, knockdown states) rather than environmental hazards. Regional differences (JP vs US branding on ring floor) are cosmetic publisher markers rather than diegetic world-state changes. The game's 'comical' tone (per sources) suggests exaggerated animation and character design as primary manifestation tools. Tier T3 data: empirical observation requires actual gameplay footage to verify exact visual manifestation techniques; sources document gameplay mechanics and character roster but lack detailed visual design documentation.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:47:34.811Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4157,
+    "output_tokens": 1873,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

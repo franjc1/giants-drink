@@ -1,0 +1,158 @@
+{
+  "game_id": "top-gun-nes",
+  "game_name": "Top Gun",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft presence",
+      "visual_form": "Sprite-based enemy fighters appearing on screen during dogfight sequences",
+      "meaning": "Active threat requiring immediate evasive action and weapon selection"
+    },
+    {
+      "signal": "Missile lock warning",
+      "visual_form": "Targeting reticle behavior and lock-on indicators during combat",
+      "meaning": "Player aircraft under fire; imminent damage if not evaded"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Fuel gauge visual indicator declining during flight",
+      "meaning": "Time pressure state; limited remaining operational window before forced landing or crash"
+    },
+    {
+      "signal": "Landing sequence difficulty",
+      "visual_form": "Side-view perspective shift showing F-14 approaching carrier; visual angle and speed indicators",
+      "meaning": "High-stakes precision task; failure results in crash and life loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful mission completion",
+      "visual_form": "Score tally screen (JP/VS versions show plane with stars for each kill; US/EU versions show black screen with score)",
+      "meaning": "Mission objective achieved; progression to next stage unlocked"
+    },
+    {
+      "signal": "Successful landing",
+      "visual_form": "F-14 on carrier deck; LSO crew visible; player character waving animation (if all missions completed)",
+      "meaning": "Safe return; mission chain advanced"
+    },
+    {
+      "signal": "Refueling sequence",
+      "visual_form": "Gameplay pause state with music cue (JP/VS) or in-game music loop (US/EU); fuel meter restoration visible",
+      "meaning": "Safe zone; temporary reprieve from combat; resource restoration in progress"
+    },
+    {
+      "signal": "Training mission designation",
+      "visual_form": "Mission select screen labeling first mission as training",
+      "meaning": "Low-stakes introduction; tutorial-level threat environment"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "US Navy (Player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "F-14 Tomcat aircraft; aircraft carrier (USS-class implied)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Aircraft carrier deck; naval fleet staging areas; cockpit instrumentation (US military standard)"
+    },
+    {
+      "faction": "Enemy forces (generic)",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy aircraft (type unspecified in available sources); enemy base installations; enemy aircraft carrier",
+      "enemy_visual_variants": "Sprite-based enemy fighter aircraft with distinct visual profiles from player F-14",
+      "environmental_markers": "Enemy military bases; enemy carrier; space shuttle target (final mission anomaly)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Combat engagement active",
+      "visual_manifestation": "Dogfight perspective; enemy sprites on screen; targeting reticle visible; missile lock indicators",
+      "behavioral_manifestation": "Enemies fire bullets and missiles (frequency increases in VS. System version); player must evade and select counter-missiles"
+    },
+    {
+      "world_state": "Mission briefing/preparation",
+      "visual_manifestation": "Map screen (different between JP and US/EU versions); missile selection menu with timed decision window (10 seconds in VS. version, unlimited in NES version)",
+      "behavioral_manifestation": "Player selects from three missile types with varying lock-on target areas; text typing animation displays mission parameters"
+    },
+    {
+      "world_state": "Refueling/recovery",
+      "visual_manifestation": "Gameplay pause; fuel meter visible and filling; music cue change (plays in JP/VS, stops in US/EU)",
+      "behavioral_manifestation": "Timed refuel mechanic (25 seconds in VS. System with failure penalty; unlimited time in NES); low fuel state persists if time expires in arcade version"
+    },
+    {
+      "world_state": "Landing sequence",
+      "visual_manifestation": "Camera perspective shifts to side-view; F-14 sprite approaches carrier from right side of screen; LSO crew visible on deck; speed and angle indicators displayed",
+      "behavioral_manifestation": "Player must control speed and descent angle precisely; sequence is faster/shorter in VS. System arcade version; failure triggers crash animation and life loss"
+    },
+    {
+      "world_state": "Game over / Continue state",
+      "visual_manifestation": "Game over screen (JP version shows credits after mission completion); continue prompt appears (VS. System only); credit counter visible (VS. System arcade cabinet display)",
+      "behavioral_manifestation": "NES version forces restart from beginning on game over; VS. System arcade version allows continue by inserting additional coins"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Mission objective escalation",
+      "example": "Four missions escalate from training to combat against aircraft carrier, then enemy base, culminating in destruction of space shuttle target (narrative incongruity suggests test/training simulation)"
+    },
+    {
+      "technique": "Cockpit perspective immersion",
+      "visual_form": "First-person view from F-14 cockpit during dogfights conveys pilot agency and situational awareness"
+    },
+    {
+      "technique": "Reward screen diegesis",
+      "example": "JP/VS versions show F-14 with kill-stars; US/EU versions omit visual reward feedback—suggests different narrative framing (celebration vs. silent completion)"
+    },
+    {
+      "technique": "Landing difficulty as dramatic tension",
+      "example": "Complex landing sequence as mission finale communicates that even successful combat requires precision recovery—reflects film narrative where landing is emotionally significant"
+    },
+    {
+      "technique": "Regional score feedback variation",
+      "example": "JP/VS show kill-decorated aircraft; US/EU show black screen—reflects localization philosophy: arcade vs. home console framing of achievement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy aircraft",
+      "state": "Combat engaged",
+      "behavior": "Fire bullets and missiles at player; frequency increases in VS. System version (higher difficulty state); respond to player lock-on attempts"
+    },
+    {
+      "entity": "Player F-14",
+      "state": "Low fuel",
+      "behavior": "Reduced maneuverability implied; forced return to carrier for refueling; failure to refuel within time limit (25 sec VS. / unlimited NES) results in crash on fuel depletion"
+    },
+    {
+      "entity": "Player F-14",
+      "state": "Landing approach",
+      "behavior": "Speed and angle must be synchronized; visual perspective shifts to side-view to communicate precision requirement; misalignment triggers crash animation"
+    },
+    {
+      "entity": "Game difficulty state (arcade vs. home)",
+      "state": "VS. System arcade cabinet",
+      "behavior": "Faster text input during map screen; 10-second missile selection timer; enemies fire more frequently; 25-second refuel window with penalty; faster landing sequence—all communicate increased pressure and time scarcity"
+    },
+    {
+      "entity": "Game difficulty state (arcade vs. home)",
+      "state": "NES home version",
+      "behavior": "Unlimited time for missile selection; unlimited refuel time; slower gameplay pace; music absent during normal gameplay (only during special states)—all communicate leisure/casual play context"
+    }
+  ],
+  "notes": "Top Gun NES communicates world-state primarily through mechanical constraints (time limits, fuel depletion, landing difficulty) rather than explicit visual faction markers. Enemy aircraft are visually distinct sprites but not color-coded or symbolically branded. The game's manifestation layer relies on perspective shifts (cockpit to side-view), gauge/meter visuals (fuel, speed, angle), and audio cues (music presence/absence between versions) to signal state transitions. Regional differences reveal how the same game communicates differently: arcade version (VS. System) emphasizes constant time pressure and arcade challenge feedback; NES version removes music and kill-star rewards, creating more austere, interior player experience. The space shuttle final mission breaks military simulation logic, suggesting meta-narrative context (training simulation, not actual warfare). Landing sequence complexity serves dual function: mechanical difficulty spike + thematic resonance with film's emotional landing emphasis.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Top Gun NES)",
+    "wikipedia (List of Top Gun video games - Konami game section)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:13:39.104Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4590,
+    "output_tokens": 2152,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

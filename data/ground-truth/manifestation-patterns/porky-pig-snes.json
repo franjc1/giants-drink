@@ -1,0 +1,204 @@
+{
+  "game_id": "porky-pig-snes",
+  "game_name": "Porky Pig's Haunted Holiday",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Goblins, ghosts, magical walking cauldrons, spiders, leprechauns, bats, diving turkeys, barracudas",
+      "meaning": "Immediate threat to Porky; collision causes health loss"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Spooky Sid (Haunted Woods), Six Shootin' Sheriff Sam (Dry Gulch), Willie Great White (Atlantis), Hyde Tweety (Mines), Monster Max (Alps), Herman the robot (Castle)",
+      "meaning": "Level-end threat requiring defeat to progress"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Caged hooligans, creatures with rifle barrels, raining cats and dogs and fish skeletons",
+      "meaning": "Passive world dangers that damage on contact"
+    },
+    {
+      "signal": "Vampire-costumed Daffy Duck",
+      "visual_form": "Daffy Duck in vampire costume appearing on certain platforms",
+      "meaning": "Startling threat that propels Porky upward (mechanic threat converted to utility)"
+    },
+    {
+      "signal": "Heart depletion visual",
+      "visual_form": "HUD hearts decreasing when hit by enemies",
+      "meaning": "Direct damage indicator; loss of all hearts = life lost"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Checkpoint markers",
+      "visual_form": "Red X marks placed throughout levels",
+      "meaning": "Safe respawn point; Porky plants flag to resume from this location on life loss"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Fruit bowl, heart items, cupcakes, cake, potion (inflatable state)",
+      "meaning": "Health recovery, temporary invincibility via inflation, life extension, score boost"
+    },
+    {
+      "signal": "Secured platforms",
+      "visual_form": "Solid ground, chains to swing on, doorways to enter, underwater bubbles to ride",
+      "meaning": "Safe traversal zones and progression pathways"
+    },
+    {
+      "signal": "Completion states",
+      "visual_form": "World map showing progress between levels",
+      "meaning": "Safe navigation between level zones; visual indicator of advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Porky Pig (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Porky's character sprite; vulnerable protagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Checkpoints marked with red X flags that Porky plants"
+    },
+    {
+      "faction": "Nightmare Entities (Hostile)",
+      "color_identity": null,
+      "symbol_or_sigil": "Horror-themed creatures (goblins, ghosts, cauldrons, spiders, bats, western outlaws, sea creatures, robots, counts)",
+      "enemy_visual_variants": "Theme-specific variants: Western (moose-trophy creatures, Sheriff Sam), Underwater (diving turkeys, barracudas), Castle (Herman robot, Daffy the Count Duck), Alpine (cat/dog/skeleton rain)",
+      "environmental_markers": "Enemies spawn within thematic level environments"
+    },
+    {
+      "faction": "Daffy Duck (Dual Role)",
+      "color_identity": null,
+      "symbol_or_sigil": "Daffy The Count Duck; vampire-costumed Daffy Duck",
+      "enemy_visual_variants": "Vampire costume variant vs. standard appearance",
+      "environmental_markers": "Appears on specific platforms; final boss in castle level"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Nightmare Dream State (Overarching)",
+      "visual_manifestation": "Surreal, horror-themed environments; Looney Tunes characters as grotesque/scary versions; distorted landscapes (raining cats/dogs/skeletons)",
+      "behavioral_manifestation": "Enemies actively hunt Porky; supernatural mechanics (floating via potion, bubble riding, chain swinging)"
+    },
+    {
+      "world_state": "Haunted Woods Level (Spring/Autumn/Winter/Christmas variants)",
+      "visual_manifestation": "Forest setting with season-specific palette; CMS Global 1 controls tree appearance and swimming pool palette; unused creatures (frog, cuckoo bird) suggest dynamic environmental detail",
+      "behavioral_manifestation": "Goblins, ghosts, cauldrons, spiders, leprechauns, bats spawn; Spooky Sid boss emerges"
+    },
+    {
+      "world_state": "Dry Gulch Town Level (Western Theme)",
+      "visual_manifestation": "Western town environment; tumbleweed decoration; caged hooligans; creatures with moose trophies and rifle barrels",
+      "behavioral_manifestation": "Six Shootin' Sheriff Sam boss encounter; Western-styled threats"
+    },
+    {
+      "world_state": "Atlantis Level (Underwater Ruins)",
+      "visual_manifestation": "Underwater ruins aesthetic; CMS Global 1 set to $03 enables Halloween theme variant; Atlantis billboard",
+      "behavioral_manifestation": "Diving turkeys, barracudas as enemies; Willie Great White boss; bubble-riding mechanics"
+    },
+    {
+      "world_state": "Abandoned Mines Level",
+      "visual_manifestation": "Mine setting; CMS Global 1 $01 enables rain in intro; CMS Global 8 $01 replaces lamps with light bulbs; dark cavern aesthetic",
+      "behavioral_manifestation": "Hyde Tweety boss; TNT boxes present"
+    },
+    {
+      "world_state": "Snowy Alps Level (transitioning to Delusional Landscape)",
+      "visual_manifestation": "Alpine snow environment transitioning to surreal landscape; weather effects with rain, fog intensity (CMS Global 7 ranges $01-$03); CMS Global 8 enables snow; raining cats, dogs, fish skeletons",
+      "behavioral_manifestation": "Monster Max boss; dream-logic environmental shifts"
+    },
+    {
+      "world_state": "Castle of Daffy The Count Duck (Final Level)",
+      "visual_manifestation": "Gothic castle interior; formal throne room for Herman the robot chamber",
+      "behavioral_manifestation": "Herman robot as final boss; Daffy the Count Duck as level thematic authority"
+    },
+    {
+      "world_state": "Weather Variation System",
+      "visual_manifestation": "CMS Global 2 enables unseen graphics when $01; CMS Global 3 affects background decorations; CMS Global 7 controls rain/fog density; weather randomizes each playthrough (rain, snow, clear)",
+      "behavioral_manifestation": "Visual atmosphere changes affect mood/tension without mechanical impact"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic Level Design",
+      "example": "Each level represents a different nightmare archetype (forest horror, western peril, underwater ruin, abandoned mine, alpine wilderness, gothic castle), visually communicating the nightmare's nature through setting aesthetics"
+    },
+    {
+      "technique": "Boss-as-Authority Figure",
+      "example": "Each level's boss embodies the thematic threat: Spooky Sid = haunted woods spirit, Sheriff Sam = western outlaw law, Willie Great White = oceanic predator, Daffy The Count Duck = gothic nobility. Visual design reinforces their domain authority"
+    },
+    {
+      "technique": "Dynamic Environmental Detail",
+      "example": "Unused graphics (frog jumping into pond, cuckoo bird from window, falling bird, TNT-laden creature) suggest developers conceived rich environmental storytelling through background activity, communicating world-life beyond immediate threats"
+    },
+    {
+      "technique": "Seasonal/Temporal Variance",
+      "example": "First level randomizes between Spring, Autumn, Winter, Christmas variants via CMS system, suggesting nightmare recurrence across seasons and holiday disruption themes"
+    },
+    {
+      "technique": "Progressive Surrealism",
+      "example": "Journey escalates from natural horror (forest creatures) through historical/cultural fears (western, ancient civilization, industrial mine, mountain) to pure dream-logic (raining fauna, robotic final guardian, vampire count)"
+    },
+    {
+      "technique": "Environmental Hazards as Narrative",
+      "example": "Caged hooligans, rifle-bearing creatures, and raining cats/dogs/skeletons communicate that Porky's nightmare is populated by hostile, absurd, and increasingly irrational threats"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Porky Pig (Player Character)",
+      "state": "Healthy",
+      "behavior": "Can move, jump, swing on chains, climb, enter doorways, ride bubbles, collect power-ups"
+    },
+    {
+      "entity": "Porky Pig (Player Character)",
+      "state": "Scared (by vampire Daffy)",
+      "behavior": "Propelled upward involuntarily; used as puzzle mechanic to reach high platforms"
+    },
+    {
+      "entity": "Porky Pig (Player Character)",
+      "state": "Inflated (potion effect)",
+      "behavior": "Floats, movable in all directions (up/down/left/right); temporary invincibility period"
+    },
+    {
+      "entity": "Enemies (Generic)",
+      "state": "Active/Patrolling",
+      "behavior": "Spawn in thematic level areas; move toward or near Porky; collision damages player"
+    },
+    {
+      "entity": "Daffy Duck (Vampire Costume)",
+      "state": "Triggered",
+      "behavior": "Appears on specific platforms when stepped on; scares Porky upward; non-lethal interaction converted to mechanic"
+    },
+    {
+      "entity": "Boss Entities",
+      "state": "Level-End Confrontation",
+      "behavior": "Unique per level; require defeat to progress; telegraph their thematic domain through appearance and attack patterns"
+    },
+    {
+      "entity": "Power-up Items",
+      "state": "Available",
+      "behavior": "Scattered in levels; collection grants temporary or permanent benefits (health, ammo, lives, floating)"
+    },
+    {
+      "entity": "Checkpoints (Red X Markers)",
+      "state": "Activated on Pass",
+      "behavior": "Porky plants flag; marks safe respawn location; visual confirmation of progression and safety establishment"
+    }
+  ],
+  "notes": "Porky Pig's Haunted Holiday communicates world-state primarily through thematic environmental design and dynamic visual systems (CMS globals). The game lacks traditional faction conflict—instead, all non-Porky entities are nightmare manifestations with no political dimension. Danger is communicated through visual grotesqueness and enemy presence; safety through checkpoints, power-ups, and environmental structure. The innovative random environment system (seasonal variants, weather effects, optional graphics) suggests the developers conceived the nightmare as procedurally variable, adding replayability through visual iteration rather than mechanical change. The game's narrative—traversing nightmares to wake—uses environmental surrealism to escalate from natural to increasingly absurd threats, with the final boss (Daffy the Count Duck) representing the apex of the nightmare's irrational authority. Unused assets indicate deeper environmental storytelling was planned but cut.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Porky Pig's Haunted Holiday article)",
+    "wikipedia (Porky Pig's Haunted Holiday - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:20:26.405Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5585,
+    "output_tokens": 2951,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

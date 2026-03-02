@@ -1,0 +1,204 @@
+{
+  "game_id": "super-spy-hunter-nes",
+  "game_name": "Super Spy Hunter",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy vehicle approach",
+      "visual_form": "Distinct enemy car sprites moving toward player on vertical scrolling road",
+      "meaning": "Active threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Helicopter presence",
+      "visual_form": "Airborne sprite dropping animated bomb indicators onto road surface",
+      "meaning": "Overhead threat creating destructible road hazards (craters)"
+    },
+    {
+      "signal": "Road crater/blast damage",
+      "visual_form": "Animated tiles showing road deformation where helicopter bombs land",
+      "meaning": "Collision hazard that destroys player vehicle"
+    },
+    {
+      "signal": "Off-road position",
+      "visual_form": "Player car sprite outside road boundaries (terrain or water edges)",
+      "meaning": "Damage state with progressive destruction as distance increases"
+    },
+    {
+      "signal": "Collision impact",
+      "visual_form": "Vehicle sprite contact with enemy or obstacle, accompanied by state change",
+      "meaning": "Hard collision destroys player car; forces off-road lead to destruction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Road continuation",
+      "visual_form": "Continuous scrolling asphalt/road tiles in forward direction",
+      "meaning": "Safe travel zone; score accumulation active"
+    },
+    {
+      "signal": "Civilian vehicle presence",
+      "visual_form": "Non-hostile car sprites on road, distinct from enemy vehicles",
+      "meaning": "Protection objective; destruction halts score counter temporarily"
+    },
+    {
+      "signal": "Weapons van appearance",
+      "visual_form": "Special vehicle sprite appearing periodically in each territory",
+      "meaning": "Entry opportunity grants special weapon pickup (oil slick, smoke screen, missiles)"
+    },
+    {
+      "signal": "Dashboard light activation",
+      "visual_form": "UI lights flashing on dashboard when weapon button available",
+      "meaning": "Special weapon ready to summon via button press"
+    },
+    {
+      "signal": "Boathouse passage",
+      "visual_form": "Structure at road edge allowing vehicle-to-speedboat transformation",
+      "meaning": "Temporary mode shift providing altered tactical landscape"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Spy/Interceptor)",
+      "color_identity": null,
+      "symbol_or_sigil": "G-6155 Interceptor vehicle (technologically advanced sportscar)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Controlled vehicle sprite; occupies center-screen position in top-down view"
+    },
+    {
+      "faction": "Enemy forces (hostile vehicles)",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct enemy car sprite designs (variety of vehicle types)",
+      "enemy_visual_variants": "Multiple enemy vehicle types with different visual profiles; helicopter as aerial variant",
+      "environmental_markers": "Approach from directions on scrolling road; helicopter overhead; spawn from road edges"
+    },
+    {
+      "faction": "Civilian populace",
+      "color_identity": null,
+      "symbol_or_sigil": "Non-hostile car sprites visually distinct from enemies",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Travel on road alongside player; protected status indicated by non-engagement behavior"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Freeway territory (initial)",
+      "visual_manifestation": "Horizontal road scrolling vertically; standard terrain background; typical weather conditions",
+      "behavioral_manifestation": "Standard enemy vehicle attacks; machine gun engagement viable"
+    },
+    {
+      "world_state": "Terrain variation (post-fork)",
+      "visual_manifestation": "Animated background tiles change; road coloring or texture shifts; environmental detail shifts (grass, water proximity)",
+      "behavioral_manifestation": "New enemy vehicle types may appear; tactical options change based on terrain"
+    },
+    {
+      "world_state": "Weather transition",
+      "visual_manifestation": "Background tile animation indicates weather state (rain, snow, or storm visual effects via CHR bank animation)",
+      "behavioral_manifestation": "Road conditions may affect vehicle handling or visibility; enemy behavior patterns may shift"
+    },
+    {
+      "world_state": "Speedboat conversion active",
+      "visual_manifestation": "Player sprite transforms from car to speedboat; road sprite becomes water; visual palette shifts to aquatic theme",
+      "behavioral_manifestation": "Enemy boats replace car enemies; helicopter still present; oil slick becomes flamethrower; movement physics change"
+    },
+    {
+      "world_state": "Special weapon acquired",
+      "visual_manifestation": "Dashboard UI lights illuminate; weapon indicator lights flash on cabinet status display",
+      "behavioral_manifestation": "Player gains access to limited-use weapon (oil slick, smoke screen, missiles); ammunition counter decreases on use"
+    },
+    {
+      "world_state": "Vehicle destroyed",
+      "visual_manifestation": "Player car sprite vanishes or shows destruction animation; extra life counter decrements",
+      "behavioral_manifestation": "Game resets player position; score counter halts if caused by non-enemy collision; special weapons lost"
+    },
+    {
+      "world_state": "Score threshold reached",
+      "visual_manifestation": "Score counter reaches target; visual feedback or UI change signals extra car earned",
+      "behavioral_manifestation": "Extra car awarded; player continues indefinitely rather than entering 'game over' state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Road fork branching",
+      "example": "Periodic road forks present player with directional choice leading to new territories with distinct visual themes (different terrain, weather, or landscape features)"
+    },
+    {
+      "technique": "Territory-specific visual palette",
+      "example": "Each new region accessed via road fork displays distinct animated background tiles and road coloring, communicating geographical progression without narrative text"
+    },
+    {
+      "technique": "Weapons van placement",
+      "example": "Special vehicle appears in each territory as visual landmark; its presence communicates 'support infrastructure' within world without exposition"
+    },
+    {
+      "technique": "Boathouse structure",
+      "example": "Visual building at road edge signals mode transition point; presence indicates hybrid land-water environment without explicit instruction"
+    },
+    {
+      "technique": "Animated tile sequences",
+      "example": "CHR bank animation numbers embedded in Stage 5-6 tiles create illusion of environmental change (weather, time, or damage) through sprite cycling"
+    },
+    {
+      "technique": "Civilian vehicle presence",
+      "example": "Non-hostile cars on road communicate 'safe passage corridor' within larger conflict; their movement patterns show normal traffic flow contrasting with aggressive enemy behavior"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy vehicle",
+      "state": "Active hunt",
+      "behavior": "Approaches player vehicle with intent to collide or force off-road; sprite moves toward player center-screen position"
+    },
+    {
+      "entity": "Enemy vehicle",
+      "state": "Destroyed",
+      "behavior": "Sprite disappears from road; score awarded to player; vehicle removes from threat pool"
+    },
+    {
+      "entity": "Helicopter",
+      "state": "Active bombing run",
+      "behavior": "Sprite remains overhead; animated bomb drops create crater hazards on road surface below; appears in multiple territories"
+    },
+    {
+      "entity": "Civilian car",
+      "state": "Safe transit",
+      "behavior": "Moves on road without attacking; collision with player halts score counter temporarily but does not destroy player vehicle"
+    },
+    {
+      "entity": "Weapons van",
+      "state": "Available for pickup",
+      "behavior": "Appears periodically in each territory; sprite can be entered to grant special weapon; dashboard light flashes to indicate summon availability"
+    },
+    {
+      "entity": "Player car",
+      "state": "Off-road",
+      "behavior": "Takes progressive damage as distance from road increases; sprite visually outside road boundary; eventual destruction if not corrected"
+    },
+    {
+      "entity": "Player car",
+      "state": "Weapon equipped",
+      "behavior": "Dashboard lights illuminate to show active weapon type; sprite gains visual firing indicators when special weapons activated"
+    },
+    {
+      "entity": "Enemy boat",
+      "state": "Speedboat mode active",
+      "behavior": "Replaces car enemies during water sections; attacks from front or rear on water sprite; helicopter continues overhead threat"
+    }
+  ],
+  "notes": "Super Spy Hunter (NES, 1992) is a vertical-scrolling driving game with strong visual communication of threat levels through enemy vehicle types, road states, and environmental hazards. The game uses animated tile sequences (CHR bank cycling) to convey weather and terrain changes without explicit text. Faction distinction is minimal (player vs. generic enemies vs. civilians), but visual sprite differentiation communicates allegiance. The weapons van acts as environmental storytelling—its presence signals support infrastructure. Dashboard UI lights function as manifestation of game state (weapon availability, score milestones). The game lacks narrative exposition, relying entirely on visual and behavioral cues to communicate danger, safety, progression, and world-state shifts. Road fork branching and territory-specific backgrounds suggest geographical narrative without dialogue or text.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:13:57.916Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4449,
+    "output_tokens": 2387,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

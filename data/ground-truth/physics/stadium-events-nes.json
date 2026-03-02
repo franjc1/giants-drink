@@ -1,0 +1,103 @@
+{
+  "game_id": "stadium-events-nes",
+  "game_name": "Stadium Events",
+  "platform": "nes",
+  "year": 1986,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel documentation available for this fitness game"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": "mat_row_dependent"
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Family Fun Fitness Mat Control",
+      "description": "Top speed dependent on which row of buttons on the control mat is used. Left side used for dash and hurdle events; either side for jump events.",
+      "physics_values": {
+        "speed_scaling": "mat_row_indexed"
+      }
+    },
+    {
+      "name": "Jumping in Hurdles/Long Jump",
+      "description": "Players must jump when white box markers appear on screen (hurdles). In long jump and triple jump, players jump and attempt to stay in air as long as possible to maximize distance.",
+      "physics_values": {
+        "jump_timing": "marker_dependent"
+      }
+    },
+    {
+      "name": "False Start Detection",
+      "description": "If player lifts feet before starting signal, it counts as false start. Three false starts result in disqualification in tournament mode.",
+      "physics_values": {
+        "false_start_threshold": "pre_signal_movement"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "fitness-game-based",
+    "mat-controlled",
+    "timing-dependent",
+    "arcade-sports"
+  ],
+  "tier_notes": "Tier 3: This is a fitness game controlled via physical mat rather than standard controller. No ROM-accessible physics parameters documented. Sources contain only gameplay descriptions and release information, with no technical physics specifications. Movement is qualitatively controlled by mat input rows rather than quantifiable velocity values.",
+  "sources_used": [
+    "The Cutting Room Floor - Family Fun Fitness: Stadium Events",
+    "Wikipedia - Stadium Events"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:06:51.485Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4457,
+    "output_tokens": 822,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

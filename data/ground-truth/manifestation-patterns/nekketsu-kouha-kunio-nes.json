@@ -1,0 +1,185 @@
+{
+  "game_id": "nekketsu-kouha-kunio-nes",
+  "game_name": "Nekketsu Kouha Kunio-kun (Renegade)",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "Gang appearance",
+      "visual_form": "Sprite variation by stage/faction; distinct clothing and color palettes for rival gangs",
+      "meaning": "Identifies hostile faction membership and threat level escalation across stages"
+    },
+    {
+      "signal": "Boss character presence",
+      "visual_form": "Larger sprite scale, distinct visual design from standard gang members",
+      "meaning": "Signals heightened threat requiring sustained combo attacks; boss health gating prevents standard stun mechanics"
+    },
+    {
+      "signal": "Enemy crowd density",
+      "visual_form": "Multiple sprites filling arena space; wave-based enemy spawning",
+      "meaning": "Communicates environmental danger through numerical/spatial overwhelm"
+    },
+    {
+      "signal": "Player knockdown state",
+      "visual_form": "Prone sprite animation; temporary vulnerability display",
+      "meaning": "Danger feedback; lost defensive capability until recovery"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear arena space",
+      "visual_form": "Empty isometric arena background with minimal enemy sprites",
+      "meaning": "Momentary respite between enemy waves; window for positional advantage"
+    },
+    {
+      "signal": "Stunned enemy state",
+      "visual_form": "Enemy sprite freeze/dizzy animation after punches",
+      "meaning": "Signals vulnerability window; safe moment to approach for grab/throw mechanics"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Rival Gang 1 (Stage 1)",
+      "color_identity": "Distinct sprite palette variation from protagonist",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Gang members share visual cohesion; distinguishable from other stage gangs",
+      "environmental_markers": "Stage-specific urban street setting; implicit territorial control"
+    },
+    {
+      "faction": "Rival Gang 2 (Stage 2)",
+      "color_identity": "Different palette from Gang 1",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Unique clothing/sprite design indicates different gang identity",
+      "environmental_markers": "Progression through different urban areas implies gang territory shifts"
+    },
+    {
+      "faction": "Rival Gang 3 (Stage 3)",
+      "color_identity": "Third distinct palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visual differentiation from previous gangs",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Rival Gang 4 (Stage 4)",
+      "color_identity": "Fourth distinct palette",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Most visually distinct; final stage escalation",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Mob Boss (Final Antagonist)",
+      "color_identity": "Distinct from all gang members",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Unique boss sprite; cannot be stunned until health depletes sufficiently",
+      "environmental_markers": "Final arena; implies boss territorial stronghold"
+    },
+    {
+      "faction": "Protagonist/Player",
+      "color_identity": "Default sprite color (base palette)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct as non-gang member; underdog positioning",
+      "environmental_markers": "Moves through hostile territories; outsider visual treatment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (escalating threat)",
+      "visual_manifestation": "Gang sprite palette changes with each stage; visual complexity increases; boss character introduction signals final confrontation",
+      "behavioral_manifestation": "Enemy AI aggression scales; boss behavior differs (cannot be stunned until damaged sufficiently); enemy wave patterns intensify"
+    },
+    {
+      "world_state": "Combat engagement active",
+      "visual_manifestation": "Multiple enemy sprites present in arena; collision detection visualized through punch/kick range positioning",
+      "behavioral_manifestation": "Enemies pursue player; attack windows open after hits land; knockdown state triggers recovery animation"
+    },
+    {
+      "world_state": "Enemy stunned/defeated",
+      "visual_manifestation": "Enemy sprite animation freezes or shows knockdown pose; dizzy visual indicator",
+      "behavioral_manifestation": "Enemy cannot defend; grab/throw mechanics become available; defeated enemy sprite exits arena"
+    },
+    {
+      "world_state": "Boss health gating",
+      "visual_manifestation": "Boss sprite remains resistant visually (no stun animation) until health threshold crossed",
+      "behavioral_manifestation": "Boss ignores/resists grab/collar mechanics until severely damaged; requires sustained combo damage"
+    },
+    {
+      "world_state": "Player defeat/life loss",
+      "visual_manifestation": "Player sprite shows knockdown animation; game resets stage or ends game",
+      "behavioral_manifestation": "Loss of active control; life counter decrements; stage restart or game over state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-progression narrative signaling",
+      "example": "Four distinct gang stages establish escalating territorial conflict; player physically moves through hostile gang territories toward girlfriend rescue objective (Western localization framing)"
+    },
+    {
+      "technique": "Sprite visual differentiation as faction identity",
+      "example": "Each rival gang assigned unique color palette and clothing design; visual distinctness communicates independent gang organization and rivalry without textual exposition"
+    },
+    {
+      "technique": "Boss character scale/design as power hierarchy",
+      "example": "Mob boss sprite larger and visually distinct from standard gang members; design indicates authority/power position; mechanical resistance (stun immunity) reinforces hierarchical threat"
+    },
+    {
+      "technique": "Isometric perspective arena as contested space",
+      "example": "Three-quarter perspective allows horizontal and vertical movement; arena design implicitly represents public/street territory; player intrusion into each stage visualizes infiltration narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard gang member",
+      "state": "Healthy/active",
+      "behavior": "Pursues player; attacks when in range; defensive stance"
+    },
+    {
+      "entity": "Standard gang member",
+      "state": "Stunned (after combo hits)",
+      "behavior": "Frozen animation; vulnerable to grab/collar mechanics; cannot defend"
+    },
+    {
+      "entity": "Standard gang member",
+      "state": "Grabbed/grappled",
+      "behavior": "Can be repeatedly kicked or shoulder-thrown; animation shows restraint/submission"
+    },
+    {
+      "entity": "Boss character",
+      "state": "High health",
+      "behavior": "Resists grab/collar; cannot be stunned; attacks with apparent power; actively pursues player"
+    },
+    {
+      "entity": "Boss character",
+      "state": "Low health threshold crossed",
+      "behavior": "Becomes vulnerable to grab/collar mechanics; stun animations trigger; weakness signaled through mechanical change"
+    },
+    {
+      "entity": "Player character",
+      "state": "Active combat",
+      "behavior": "Executes punches, kicks, grabs, throws based on input; runs/charges available; jump-kicks executable"
+    },
+    {
+      "entity": "Player character",
+      "state": "Knockdown",
+      "behavior": "Prone animation; temporary invulnerability until recovery; loss of active input capability"
+    },
+    {
+      "entity": "Player character",
+      "state": "Grapple state (on knocked-down enemy)",
+      "behavior": "Mounted position; repeated punches or shoulder throw as options; offensive momentum maintained"
+    }
+  ],
+  "notes": "Nekketsu Kouha Kunio-kun (Renegade in Western localization) communicates world-state primarily through sprite visual differentiation and behavioral gating mechanics. Faction identity is entirely sprite-based; no textual or symbolic markers present. The game's isometric perspective and arena-style combat create implicit territorial narrative—player physically invades gang-controlled spaces. Boss mechanics (stun resistance until health gating) communicate power hierarchy through mechanical rather than purely visual means. Western version reframed narrative from high school delinquent gang conflict to street brawler mob rescue, though visual faction communication remains consistent. Limited source documentation on specific color palettes and environmental details; analysis based on gameplay mechanic descriptions and genre conventions.",
+  "sources_used": [
+    "wikipedia:Renegade (video game) - Nekketsu Kōha Kunio-kun"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:41:02.928Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2919,
+    "output_tokens": 2219,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

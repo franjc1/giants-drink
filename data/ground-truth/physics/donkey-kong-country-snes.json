@@ -1,0 +1,207 @@
+{
+  "_meta": {
+    "game": "Donkey Kong Country",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Nintendo",
+    "developer": "Rare",
+    "sources": [
+      {
+        "name": "DKC Atlas Forum — Physics Constants",
+        "url": "https://dkcatlas.com/forum",
+        "notes": "ROM-confirmed 8.8 fixed-point values for jump velocity (0xF9.00), walk (0x02.00), run (0x03.00), gravity holding B (0x00.48), gravity not holding B (0x00.70)."
+      },
+      {
+        "name": "TASVideos Game Resources — SNES / Donkey Kong Country",
+        "url": "https://tasvideos.org/GameResources/SNES/DonkeyKongCountry",
+        "notes": "Supplemental mechanics documentation and TAS notes."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "DKC uses an 8.8 fixed-point physics system (256 sub-pixels per pixel), same precision as NES Mega Man.",
+      "All fixed-point hex values use signed 8.8 notation: 0xF9.00 means the integer byte is 0xF9 = 249 unsigned = -7 in two's complement signed 8-bit.",
+      "Jump initial velocity 0xF9.00 = -7.0 px/frame (upward direction is negative Y in this system).",
+      "GRAVITY IS VARIABLE based on jump button hold state — this dual-gravity design is the key to DKC's jump feel.",
+      "Two-character system: Donkey Kong (slower, stronger) and Diddy Kong (faster, weaker). Both use the same base physics.",
+      "DK roll and Diddy cartwheel are separate movement modes with distinct physics.",
+      "Animal buddy mounts change movement capabilities dramatically during their sections."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "format": "8.8 fixed-point signed",
+      "description": "Same 256 sub-pixel system as NES Mega Man. Signed 8.8: integer part is signed two's complement (0xF9 = -7), fractional part is 0–255 (0.00 to 0.99609375)."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 32,
+      "notes": "DKC uses 32×32 pixel tiles for terrain — 2× the standard 16×16. This creates the characteristic large, chunky level geometry. Characters appear large relative to most SNES platformers."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "hex": "0x02.00",
+      "px_per_frame": 2.0,
+      "source": "DKC Atlas Forum — ROM-confirmed",
+      "confidence": "high",
+      "notes": "Base walk speed without holding Y. Instant velocity — no acceleration ramp."
+    },
+    "run_speed": {
+      "hex": "0x03.00",
+      "px_per_frame": 3.0,
+      "source": "DKC Atlas Forum — ROM-confirmed",
+      "confidence": "high",
+      "notes": "Speed when holding Y (run/attack button). Run is immediate — no ramp needed to reach run speed. Run is standard traversal for most players."
+    },
+    "roll_speed": {
+      "px_per_frame_approx": 4.5,
+      "confidence": "medium",
+      "notes": [
+        "DK roll and Diddy cartwheel temporarily exceed run speed.",
+        "Roll can be initiated on ground while running. Maintains higher speed through the roll animation.",
+        "Can roll off ledges — airborne roll maintains momentum.",
+        "Exact roll speed needs ROM verification. Community estimate: ~4-5 px/f.",
+        "VERIFY against DKC Atlas ROM data."
+      ]
+    },
+    "acceleration": null,
+    "notes": "Walk and run are instant velocity. No acceleration curves for standard movement."
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "hex": "0xF9.00",
+      "px_per_frame": 7.0,
+      "direction": "upward (negative Y in signed representation)",
+      "source": "DKC Atlas Forum — ROM-confirmed",
+      "confidence": "high",
+      "notes": [
+        "0xF9 in two's complement signed 8-bit = -7. Jump initial velocity is -7 px/frame (upward).",
+        "This is the highest jump initial velocity in the documented set — DKC jumps are tall.",
+        "At 7 px/frame initial velocity with ~0.28 px/f² gravity (held): peak height ≈ 7² / (2 × 0.28) ≈ 87.5 pixels ≈ 2.73 tiles (32px tiles).",
+        "With unhold gravity (0.4375): peak ≈ 7² / (2 × 0.4375) ≈ 56 pixels ≈ 1.75 tiles."
+      ]
+    },
+    "variable_jump": true,
+    "notes": "Jump height is variable. Holding jump keeps the lower gravity active (0.28125 px/f²). Releasing jump applies the higher gravity (0.4375 px/f²).",
+    "horizontal_speed_during_jump": "maintains ground speed at jump initiation (walk or run)"
+  },
+
+  "gravity": {
+    "_design_note": "DKC's dual-gravity system is the defining physics feature. The ratio between the two gravity states creates the characteristic floaty-on-hold, snappy-on-release jump feel.",
+    "holding_jump_button": {
+      "hex": "0x00.48",
+      "px_per_frame_sq": 0.28125,
+      "source": "DKC Atlas Forum — ROM-confirmed",
+      "confidence": "high",
+      "notes": "0x00.48 = 72/256 = 0.28125 px/frame². Active while the jump button is held. Creates the 'floaty' extended arc."
+    },
+    "not_holding_jump_button": {
+      "hex": "0x00.70",
+      "px_per_frame_sq": 0.4375,
+      "source": "DKC Atlas Forum — ROM-confirmed",
+      "confidence": "high",
+      "notes": "0x00.70 = 112/256 = 0.4375 px/frame². Active when jump button is released. Snaps player down faster for short jumps."
+    },
+    "ratio": {
+      "value": 1.5556,
+      "description": "Not-holding gravity is ~1.56x holding gravity. Releasing jump at different points produces distinctly different arcs — this dynamic range makes DKC jumping feel expressive."
+    }
+  },
+
+  "characters": {
+    "donkey_kong": {
+      "notes": [
+        "Primary character. Slower but has longer reach.",
+        "Can throw barrels as projectiles (requires finding barrel).",
+        "When DK and Diddy are both present: DK leads, one hit loses Diddy. If Diddy already gone, one hit loses a life.",
+        "DK carries Diddy on back when barrel crate of Diddy is broken."
+      ],
+      "roll": {
+        "description": "DK roll: taps jump then left/right while running to initiate a roll on ground or air.",
+        "notes": "Roll maintains momentum and defeats most standard enemies. Can extend horizontal distance by rolling off ledges."
+      }
+    },
+    "diddy_kong": {
+      "notes": [
+        "Faster and slightly higher jumping than DK.",
+        "Cartwheel attack instead of barrel throw.",
+        "Starts as the character in control when the team first enters a stage."
+      ],
+      "cartwheel": {
+        "description": "Diddy cartwheel: equivalent to DK roll but slightly faster. Also usable to defeat enemies."
+      }
+    },
+    "tag_team": {
+      "description": "Both Kongs present = 2-hit buffer before losing a life.",
+      "notes": [
+        "Taking a hit loses the active Kong — the other runs off and must be rescued from a DK/Diddy barrel.",
+        "Two-hit system makes DKC more forgiving than single-hit games like Castlevania.",
+        "Pairs well with the floaty jump — the difficulty comes from precision, and the 2-hit buffer softens mistakes."
+      ]
+    }
+  },
+
+  "animal_buddies": {
+    "_note": "Animal buddies radically change movement physics for their sections. Each creates a mini-paradigm within the level.",
+    "rambi": {
+      "description": "Rhino. Higher run speed, destroys most enemies and some cracked walls on contact.",
+      "speed_approx_px_per_frame": 5.0,
+      "confidence": "low",
+      "notes": "Fastest ground-based buddy. VERIFY speed."
+    },
+    "expresso": {
+      "description": "Ostrich. Can flap wings to glide and slow descent. Cannot stomp normal enemies.",
+      "jump_notes": "Higher jump than standard. Wing flap provides sustained aerial control.",
+      "notes": "Expresso sections are about aerial precision — the glide mechanic creates float-focused challenges."
+    },
+    "winky": {
+      "description": "Frog. Extremely high jump — highest of any buddy or character.",
+      "jump_notes": "Can jump significantly higher than any Kong or other buddy. Can stomp spiky enemies others cannot.",
+      "notes": "Winky sections are about vertical reach and navigating tall cavern structures."
+    },
+    "enguarde": {
+      "description": "Swordfish. Used exclusively in underwater levels. Attacks with bill lunge.",
+      "notes": "Underwater physics apply. Enguarde provides combat capability in underwater sections where standard moves are ineffective."
+    },
+    "squawks": {
+      "description": "Parrot. Carries a lantern in dark cave sections. Cannot be ridden as a mount in DKC1.",
+      "notes": "Squawks illuminates Torchlight Trouble (cave level with near-total darkness). Strictly a visibility mechanic, not a movement change."
+    }
+  },
+
+  "hitboxes": {
+    "donkey_kong_standing": {
+      "notes": "DK is approximately 2×2 tiles in effective size. Hitbox narrower than sprite. Exact values need ROM verification.",
+      "confidence": "low"
+    },
+    "diddy_kong_standing": {
+      "notes": "Diddy is approximately 1×1.5 tiles effective size. Narrower than DK.",
+      "confidence": "low"
+    }
+  },
+
+  "_verification_checklist": [
+    "Confirm roll speed from DKC Atlas ROM data (community estimate ~4-5 px/f)",
+    "Confirm Diddy vs DK jump height difference (if any)",
+    "Confirm terminal velocity",
+    "Confirm animal buddy speed values",
+    "Confirm exact hitbox dimensions"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The dual-gravity system (0.28125 hold / 0.4375 release) is the defining physics feature of DKC. This exact ratio MUST be reproduced for the feel to be right — not just 'variable height jump.' The snappiness of releasing jump vs. the float of holding it is what players feel instinctively.",
+    "The high jump velocity (-7 px/frame) combined with variable gravity produces jumps that reach ~2.7 tiles (at full hold, 32px tiles) — significantly taller than Mario's typical 3-tile jump (16px tiles). Level design places platforms at DKC-appropriate heights.",
+    "DKC's 32×32 tile size reads very differently from 16×16. The world feels large and chunky. Character proportions relative to terrain are different — plan level geometry around the larger tile unit.",
+    "The two-character HP system means level design difficulty targets a 2-hit threshold, not 1-hit. The first hit (losing partner) serves as a warning; the second ends the run. Spiky-bottom pits are absolute because fall death bypasses the HP buffer.",
+    "Animal buddy sections function as mini-paradigm shifts within levels — each buddy has different movement capabilities, so level design becomes buddy-specific. This is a great source of within-level variety.",
+    "The roll/cartwheel as a speed tool (exceeding run speed) creates a risk/reward traversal choice: rolling is faster but harder to stop or redirect precisely."
+  ]
+}

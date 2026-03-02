@@ -1,0 +1,115 @@
+{
+  "game_id": "wwf-super-wrestlemania-snes",
+  "game_name": "WWF Super WrestleMania",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Health depletion",
+      "visual_form": "Character sprite damage states / health bar reduction",
+      "meaning": "Wrestler taking damage from opponent attacks; risk of knockout"
+    },
+    {
+      "signal": "Opponent aggression",
+      "visual_form": "Attack animations and proximity",
+      "meaning": "Active threat from competitor wrestler during match"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Distance from opponent",
+      "visual_form": "Spatial separation on arena floor",
+      "meaning": "Safe moment to execute moves or recover health"
+    },
+    {
+      "signal": "Neutral stance",
+      "visual_form": "Idle wrestling stance",
+      "meaning": "Opponent not actively attacking; window for player action"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "WWF (World Wrestling Federation)",
+      "color_identity": null,
+      "symbol_or_sigil": "WWF branding and arena signage",
+      "enemy_visual_variants": null,
+      "environmental_markers": "WWE/WWF branded wrestling ring, crowd participation, announcer presence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Match in progress",
+      "visual_manifestation": "Active wrestling ring with both wrestlers engaged, referee present, crowd visible",
+      "behavioral_manifestation": "Wrestlers execute moves, block, grapple; referee monitors match rules"
+    },
+    {
+      "world_state": "Pre-match state",
+      "visual_manifestation": "Wrestler selection screen, Howard Finkel announcement sequence (unused interview system)",
+      "behavioral_manifestation": "Howard Finkel announces wrestlers; match initiates after selection"
+    },
+    {
+      "world_state": "Match conclusion",
+      "visual_manifestation": "Defeated wrestler knocked out or pinned; visual match-end confirmation",
+      "behavioral_manifestation": "Winning wrestler stands while defeated wrestler remains down; referee confirms victory"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Arena branding and signage",
+      "example": "WWF logos and wrestling ring setup establish professional wrestling context and league identity"
+    },
+    {
+      "technique": "Crowd presence",
+      "example": "Visible audience in arena communicates scale and legitimacy of match as televised sporting event"
+    },
+    {
+      "technique": "Referee authority",
+      "example": "Referee presence on canvas communicates rule enforcement and professional match structure"
+    },
+    {
+      "technique": "Announcer narration",
+      "example": "Howard Finkel announcements frame matches as broadcast events with individual wrestler identities"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player wrestler",
+      "state": "Active turn",
+      "behavior": "Responds to input; executes selected moves and grapples"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Aggressive",
+      "behavior": "Attacks player; closes distance; executes wrestling moves"
+    },
+    {
+      "entity": "Opponent wrestler",
+      "state": "Damaged/weakened",
+      "behavior": "Reduced attack frequency; vulnerable to finishing moves"
+    },
+    {
+      "entity": "Referee",
+      "state": "Match active",
+      "behavior": "Present on canvas; monitors falls and match legality"
+    },
+    {
+      "entity": "Crowd",
+      "state": "Match ongoing",
+      "behavior": "Reactive audience presence indicating investment in bout outcome"
+    }
+  ],
+  "notes": "Source material provides limited visual/mechanical details. Game uses professional wrestling broadcast convention to communicate match state—wrestlers, ring, referee, announcer, and crowd form the primary manifestation system. Unused pre-match interview text suggests developer intended deeper wrestler personality communication before matches, but final implementation streamlines to announcer-driven match initiation. No faction-vs-faction or political state systems documented; world-state is purely match-progression focused.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:16:10.946Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3429,
+    "output_tokens": 1311,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

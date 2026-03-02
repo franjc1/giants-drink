@@ -1,0 +1,182 @@
+{
+  "game_id": "harvest-moon-snes",
+  "game_name": "Harvest Moon",
+  "platform": "snes",
+  "paradigm": "farm-life-simulation",
+  "danger_signals": [
+    {
+      "signal": "animal_neglect_indicator",
+      "visual_form": "cow appearance/health degradation; chicken vulnerability to storms",
+      "meaning": "failure to maintain care routines results in visible animal deterioration and potential death"
+    },
+    {
+      "signal": "crop_wilting",
+      "visual_form": "visual crop state changes when not watered",
+      "meaning": "lack of daily water prevents crop growth; environmental stress communicated through plant visuals"
+    },
+    {
+      "signal": "darkness_accessibility_restriction",
+      "visual_form": "day/night cycle; limited business availability after dark",
+      "meaning": "nighttime restricts player movement and access to services except the bar; environmental gating of opportunity"
+    },
+    {
+      "signal": "storm_danger",
+      "visual_form": "weather event triggering chickens left outside to die",
+      "meaning": "environmental hazards pose concrete threat to livestock; player must plan around weather"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "festival_attendance",
+      "visual_form": "scheduled village gathering events",
+      "meaning": "festivals represent safe, structured social interaction; predictable community rhythm"
+    },
+    {
+      "signal": "farm_restoration_progress",
+      "visual_form": "visual environmental transformation as player clears land and develops farm",
+      "meaning": "clearing debris and improving farm aesthetics signals player progress and successful stewardship"
+    },
+    {
+      "signal": "villager_relationship_building",
+      "visual_form": "repeated NPC interactions at specific locations (bar, town)",
+      "meaning": "predictable NPC presence and dialogue establishes trust and social safety"
+    },
+    {
+      "signal": "livestock_health_maintenance",
+      "visual_form": "healthy animal appearance when properly fed, brushed, and talked to",
+      "meaning": "visible animal wellness indicates successful care routines and stability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "village_community",
+      "color_identity": null,
+      "symbol_or_sigil": "bar as social hub; church as cultural landmark (with Shinto references in Japanese version, Christian cross in Western versions)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "town layout with accessible buildings; bar as evening gathering point; church representing cultural/spiritual identity"
+    },
+    {
+      "faction": "natural_world",
+      "color_identity": null,
+      "symbol_or_sigil": "farm environment; livestock; crops; weather patterns",
+      "enemy_visual_variants": "wild dogs as predators; storms as environmental threats",
+      "environmental_markers": "foraging opportunities; seasonal crop cycles; day/night transitions; weather events"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "farm_neglect",
+      "visual_manifestation": "overgrown/disrepaired farm environment; degraded animal appearance; crop stagnation",
+      "behavioral_manifestation": "animals become sick and die; crops fail to grow; player character portrayal as failing steward"
+    },
+    {
+      "world_state": "farm_restoration",
+      "visual_manifestation": "cleared land; improved farm aesthetics; healthy livestock appearance; growing crops",
+      "behavioral_manifestation": "animals thrive with proper care; crops flourish with daily watering; villager recognition of improvement"
+    },
+    {
+      "world_state": "seasonal_cycle",
+      "visual_manifestation": "environmental visual changes reflecting seasons; crop growth stages; weather variations",
+      "behavioral_manifestation": "different crops plantable in different seasons; festival calendar changes; NPC activity shifts with season"
+    },
+    {
+      "world_state": "relationship_progression",
+      "visual_manifestation": "marriage milestone represented visually; family formation",
+      "behavioral_manifestation": "increased NPC interaction frequency; marriage as core social goal completion; affection tracking (max 999, unused 1000 state)"
+    },
+    {
+      "world_state": "daily_time_progression",
+      "visual_manifestation": "day/night cycle controlling environment accessibility",
+      "behavioral_manifestation": "business hours restrict player action; bar becomes only accessible location after dark; sleep cycle enforced"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "visual_environment_decay_and_restoration",
+      "example": "farm begins in disrepaired state; player gradually clears land and improves visual aesthetics; progression shown through environment transformation rather than numbers"
+    },
+    {
+      "technique": "animal_state_as_narrative",
+      "example": "cow health visually deteriorates if neglected; requires talking to, brushing, and milking to maintain; sickness and death consequences communicate care simulation stakes"
+    },
+    {
+      "technique": "npc_location_and_routine_as_world_building",
+      "example": "villagers gather at bar after dark; church presence establishes cultural identity (localized between Shinto and Christian versions); locations signal community values"
+    },
+    {
+      "technique": "crop_growth_visual_feedback",
+      "example": "visual crop state changes communicate growth progress without numeric displays; watering necessity shown through plant appearance rather than UI"
+    },
+    {
+      "technique": "weather_and_season_environmental_signals",
+      "example": "storms pose visual and mechanical danger to exposed chickens; seasonal visual changes indicate crop availability; natural environment communicates constraints"
+    },
+    {
+      "technique": "marriage_and_family_as_visual_milestone",
+      "example": "marriage goal provides core social narrative objective; family formation visually represents completion of life-sim progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "cow",
+      "state": "healthy",
+      "behavior": "appears well-maintained; produces milk when regularly talked to, brushed, and fed"
+    },
+    {
+      "entity": "cow",
+      "state": "neglected",
+      "behavior": "becomes sick if not fed for one day; may die if sickness ignored; visual degradation communicates state"
+    },
+    {
+      "entity": "chicken",
+      "state": "secure",
+      "behavior": "safely contained; requires only daily feeding to maintain productivity"
+    },
+    {
+      "entity": "chicken",
+      "state": "exposed",
+      "behavior": "can be blown away in storms or eaten by wild dogs if left outside; death risk forces player to manage enclosure"
+    },
+    {
+      "entity": "crop",
+      "state": "watered",
+      "behavior": "visual growth progression; reaches harvest readiness"
+    },
+    {
+      "entity": "crop",
+      "state": "neglected",
+      "behavior": "visual stagnation; fails to grow despite passage of time; no death penalty but no progress"
+    },
+    {
+      "entity": "villager",
+      "state": "interaction_ready",
+      "behavior": "present at predictable locations; responds to player dialogue; affection system tracks relationship depth"
+    },
+    {
+      "entity": "player_character",
+      "state": "succeeding",
+      "behavior": "farm visually improves; villagers acknowledge progress; marriage becomes achievable goal"
+    },
+    {
+      "entity": "player_character",
+      "state": "neglecting_duties",
+      "behavior": "farm degrades visually; animals sicken/die; crops fail; progression halts"
+    }
+  ],
+  "notes": "Harvest Moon communicates world-state primarily through environmental visuals rather than numeric UI, reflecting design principle to 'reduce digits on screen to help with immersion.' The game uses animal health appearance, crop growth stages, and farm aesthetic degradation as primary feedback mechanisms. Danger signals are mostly environmental (storms, disease, starvation) rather than combat-based, fitting the non-confrontational game design. Faction identity is implicit rather than explicit—the village community (bar, church, NPCs) versus the natural world (livestock, crops, weather). Localization differences (Shinto vs. Christian church symbolism, alcohol vs. juice references) affect cultural world-state interpretation but not core manifestation mechanics. Time-gating (day/night cycle) and resource management (animal care, crop watering) are primary world-state controllers.",
+  "sources_used": [
+    "tcrf_harvest_moon_snes",
+    "wikipedia_harvest_moon_video_game"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:50:04.391Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4974,
+    "output_tokens": 2114,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "game_id": "joe-and-mac-snes",
+  "game_name": "Joe & Mac",
+  "platform": "snes",
+  "paradigm": "platformer / run-and-gun",
+  "danger_signals": [
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large enemy sprites (e.g., Tyrannosaurus Rex) appearing at level endpoints",
+      "meaning": "Critical threat requiring defeat to progress; health depletes over time during boss battles"
+    },
+    {
+      "signal": "Rival cavemen",
+      "visual_form": "Enemy caveman sprites with distinct visual differentiation from player characters",
+      "meaning": "Antagonistic faction threat; kidnapped women held by rival tribe indicates active conflict"
+    },
+    {
+      "signal": "Dinosaur enemies",
+      "visual_form": "Prehistoric creature sprites throughout levels",
+      "meaning": "Environmental/survival threat; core gameplay obstacle"
+    },
+    {
+      "signal": "Health depletion timer",
+      "visual_form": "Health bar mechanic (implied from health system description)",
+      "meaning": "Continuous resource pressure; danger is temporal, not just encounter-based"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon pickups",
+      "visual_form": "Collectible icons: boomerangs, bones, fire, flints, electricity, stone wheels, clubs",
+      "meaning": "Empowerment; access to diverse offensive capabilities increases survivability"
+    },
+    {
+      "signal": "Red eggs",
+      "visual_form": "Red egg visual markers (referenced in debug mode as 'red eggs always available')",
+      "meaning": "Power-up or checkpoint mechanic; safe-state indicator in level progression"
+    },
+    {
+      "signal": "Level branching/choice",
+      "visual_form": "Multiple route selections at end of boss battles; three final exit choices",
+      "meaning": "Agency and path variation; player has narrative/mechanical control, reducing linear threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player characters (Joe & Mac)",
+      "color_identity": "Joe: green hair; Mac: blue hair",
+      "symbol_or_sigil": "Caveman protagonist archetype with prehistoric weapons",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rescue mission framing; allied with kidnapped cavewomen"
+    },
+    {
+      "faction": "Rival caveman tribe",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy caveman sprites with visual distinction from players",
+      "enemy_visual_variants": "Distinct sprite coloring/design differentiates them from Joe and Mac",
+      "environmental_markers": "Hold kidnapped women as captives; represent opposing faction in conflict"
+    },
+    {
+      "faction": "Prehistoric creatures/dinosaurs",
+      "color_identity": null,
+      "symbol_or_sigil": "Dinosaur and animal enemy sprites",
+      "enemy_visual_variants": "Tyrannosaurus Rex (boss-tier); various smaller prehistoric enemies",
+      "environmental_markers": "Inhabit levels; represent environmental threat layer independent of tribal conflict"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level incomplete / active combat",
+      "visual_manifestation": "Dynamic enemy sprite presence; health bar active; weapon availability visual",
+      "behavioral_manifestation": "Enemies patrol and attack; health continuously depletes outside boss encounters; player must navigate and fight"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Large boss sprite (e.g., T-Rex) in dedicated arena",
+      "behavioral_manifestation": "Boss-specific attack patterns; health depletion pauses (only during boss battles); high-intensity combat demands"
+    },
+    {
+      "world_state": "Level cleared / boss defeated",
+      "visual_manifestation": "Route selection screen or branching path UI; multiple exit options appear",
+      "behavioral_manifestation": "Player gains agency to choose next level or alternate route; progression is non-linear"
+    },
+    {
+      "world_state": "Game over / life lost",
+      "visual_manifestation": "Life counter decrements; in JP version two-player mode, 'PUSH BUTTON' prompt shows life-steal opportunity",
+      "behavioral_manifestation": "Game state resets or allows continuation via life mechanic; in JP version, player-vs-player resource competition surfaces"
+    },
+    {
+      "world_state": "Overworld map state (SNES version unique)",
+      "visual_manifestation": "Overworld map UI showing selectable level nodes; red/blue stage differentiation visible",
+      "behavioral_manifestation": "Player can choose level order (unlike other versions); red stages cleared once, blue stages re-playable"
+    },
+    {
+      "world_state": "Mission objective (kidnapped women)",
+      "visual_manifestation": "Female caveman character sprites shown in cutscenes; rescue framing in intro",
+      "behavioral_manifestation": "Story context motivates progression; women appear to be rescued upon game completion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Introductory cutscene narrative",
+      "example": "Japanese version: rival cavemen drag cavewomen out of tent (later censored in international release); establishes kidnapping conflict and tribal antagonism immediately"
+    },
+    {
+      "technique": "Enemy faction visual design",
+      "example": "Rival caveman sprites visually distinct from Joe and Mac; signifies they are organized opponent faction, not just generic enemies"
+    },
+    {
+      "technique": "Dinosaur-populated level design",
+      "example": "Prehistoric creatures inhabit every level; reinforces 'hostile natural world' theme beyond tribal conflict"
+    },
+    {
+      "technique": "Weapon archetype storytelling",
+      "example": "Weapons match caveman aesthetic (bones, stone wheels, clubs, fire); environmental detail supports primitive setting and survival narrative"
+    },
+    {
+      "technique": "Multiple ending paths",
+      "example": "Three different exit choices after final boss; different ending sequences imply multiple narrative resolutions based on player choice"
+    },
+    {
+      "technique": "Regional censorship as political storytelling",
+      "example": "Japanese version shows sexual coercion context; international version replaces with '90s comedy text crawl (cavewomen fled due to poor hygiene); reflects cultural/regulatory values in world-state communication"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Joe (player character)",
+      "state": "Armed with equipped weapon",
+      "behavior": "Can jump, move horizontally, throw/use weapon; weapon determines attack pattern"
+    },
+    {
+      "entity": "Mac (player character)",
+      "state": "Armed with equipped weapon",
+      "behavior": "Mirrors Joe's mechanics; in two-player mode, can damage Joe and vice versa (regional variation)"
+    },
+    {
+      "entity": "Boss enemies (e.g., T-Rex)",
+      "state": "Encountered at level endpoints",
+      "behavior": "Specific attack patterns; health only depletes during boss battles (different from level time pressure)"
+    },
+    {
+      "entity": "Dinosaur enemies",
+      "state": "Present throughout level",
+      "behavior": "Patrol and attack player; contribute to continuous time pressure (health depletion mechanic)"
+    },
+    {
+      "entity": "Rival cavemen",
+      "state": "Faction antagonists",
+      "behavior": "Hold kidnapped women; represent organized opposition faction; presumed hostile on-screen"
+    },
+    {
+      "entity": "Kidnapped women",
+      "state": "Objective targets (story state)",
+      "behavior": "Stationary/passive; visual confirmation of mission context; appear in intro cutscene and end sequences"
+    }
+  ],
+  "notes": "Joe & Mac communicates world-state primarily through enemy presence, weapon availability, and narrative framing rather than environmental color or symbolic systems. The game uses a dual-threat model: (1) rival caveman tribe faction conflict established via intro cutscene and kidnapping narrative, (2) dinosaur/prehistoric survival layer throughout levels. Visual faction identity is minimal—differentiation relies on sprite design rather than color palettes or sigils. The SNES version uniquely uses an overworld map system (red/blue stage distinction) to signal replay mechanics and player agency. Danger signals center on time pressure (health depletion) and boss encounters. Safety signals manifest through weapon pickups and branching route choices. Regional differences (censorship of kidnapping scene, title screen variants, two-player life-steal mechanic removal) indicate how political/cultural contexts reshape world-state communication. The game's manifestation layer is behavioral and encounter-driven rather than ambient or symbolic.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:07:48.571Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5348,
+    "output_tokens": 2183,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

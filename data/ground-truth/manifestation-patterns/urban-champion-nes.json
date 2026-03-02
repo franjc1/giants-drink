@@ -1,0 +1,177 @@
+{
+  "game_id": "urban-champion-nes",
+  "game_name": "Urban Champion",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Police patrol car arrival",
+      "visual_form": "Patrol car sprite passes across screen",
+      "meaning": "Fight interruption; fighters must reset positions or face consequences"
+    },
+    {
+      "signal": "Screen edge proximity",
+      "visual_form": "Fighter position near left or right boundary of play area",
+      "meaning": "Imminent knockoff; loss of current round if pushed further"
+    },
+    {
+      "signal": "Stamina depletion",
+      "visual_form": "Character visual state change to vulnerable stance",
+      "meaning": "Loss of damage mitigation; all incoming attacks deal maximum knockback"
+    },
+    {
+      "signal": "Sewer manhole appearance",
+      "visual_form": "Open manhole sprite materializes on street behind losing fighter",
+      "meaning": "Final round danger; being pushed into manhole results in match loss"
+    },
+    {
+      "signal": "Falling flower pot",
+      "visual_form": "Pot sprite descends from building window into play area",
+      "meaning": "Environmental hazard; temporary stun and damage if struck"
+    },
+    {
+      "signal": "Timer expiration (99 seconds)",
+      "visual_form": "Time counter reaches zero on HUD",
+      "meaning": "Police arrest of fighter closest to screen edge; round loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Center screen position",
+      "visual_form": "Fighter sprite location in middle of sidewalk play area",
+      "meaning": "Maximum distance from knockout; safest tactical position"
+    },
+    {
+      "signal": "High stamina reserves",
+      "visual_form": "Fighter stamina meter in upper ranges",
+      "meaning": "Sustained defensive capability; can absorb damage and maintain block stance"
+    },
+    {
+      "signal": "Successful round victory",
+      "visual_form": "Symbol appears in bottom corner; opponent falls into manhole with confetti celebration from window",
+      "meaning": "Round won; progresses match toward overall victory"
+    },
+    {
+      "signal": "Defensive stance (arms raised)",
+      "visual_form": "Fighter sprite with arms positioned high or low depending on defensive mode",
+      "meaning": "Active damage mitigation; blocking incoming attacks"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Police",
+      "color_identity": null,
+      "symbol_or_sigil": "Patrol car vehicle sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Patrol car traversal of street; arrests fighters exceeding time limits"
+    },
+    {
+      "faction": "Urban Civilians",
+      "color_identity": null,
+      "symbol_or_sigil": "Woman figure in window; flower pot thrower",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Window-based confetti celebration for victor; flower pot hazard; environmental stage setting"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early round (stamina abundant)",
+      "visual_manifestation": "Both fighters in neutral combat stance; full mobility; strong punch execution available",
+      "behavioral_manifestation": "Fighters maintain distance; deliberate attack patterns; block/counter opportunities frequent"
+    },
+    {
+      "world_state": "Mid-round (stamina diminishing)",
+      "visual_manifestation": "Fighters show wear; stamina meters visibly reduced; combat intensity escalates",
+      "behavioral_manifestation": "More aggressive engagement; risky attack patterns; reduced defensive effectiveness"
+    },
+    {
+      "world_state": "Stamina critical (one fighter depleted)",
+      "visual_manifestation": "Vulnerable fighter visual state changes; all knockback attacks equal in effect",
+      "behavioral_manifestation": "Affected fighter becomes easy to push; position rapidly deteriorates toward screen edge"
+    },
+    {
+      "world_state": "Final round (opponent in manhole danger)",
+      "visual_manifestation": "Sewer manhole sprite visible on street behind retreating fighter",
+      "behavioral_manifestation": "Losing fighter avoids manhole; winning fighter attempts pushing maneuver; heightened desperation"
+    },
+    {
+      "world_state": "Police intervention imminent (timer near 0)",
+      "visual_manifestation": "Timer display approaching expiration; patrol car may be visible entering scene",
+      "behavioral_manifestation": "Fighters either retreat or escalate; risk-aware positioning shifts; time pressure manifest"
+    },
+    {
+      "world_state": "Between rounds",
+      "visual_manifestation": "Scene shifts to new city block location; fighters reset to starting positions",
+      "behavioral_manifestation": "Combat interrupts; fresh engagement begins with reset stamina"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Urban setting progression",
+      "example": "Each consecutive round takes place on a different city block, suggesting geographic progression through neighborhood"
+    },
+    {
+      "technique": "Civilian observation",
+      "example": "Woman in window celebrates victor with confetti shower, establishing audience/spectator context for street fighting"
+    },
+    {
+      "technique": "Hazard integration",
+      "example": "Flower pots dropped from windows imply residential building usage; environmental danger reflects urban sidewalk reality"
+    },
+    {
+      "technique": "Law enforcement presence",
+      "example": "Patrol car interruptions establish implicit illegality of street fighting; police presence as constant threat to combatants"
+    },
+    {
+      "technique": "Sewer danger escalation",
+      "example": "Manhole appearance in final rounds suggests underground urban infrastructure; knockout literally into city infrastructure"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player fighter",
+      "state": "Winning position",
+      "behavior": "Advances toward opponent; launches attacks to push enemy toward screen edge"
+    },
+    {
+      "entity": "Player fighter",
+      "state": "Losing position",
+      "behavior": "Retreats toward center; defensive stance priority; attempts to maintain distance from edge"
+    },
+    {
+      "entity": "Player fighter",
+      "state": "Stamina critical",
+      "behavior": "Becomes vulnerable; increased knockback distance per attack; rapid screen edge approach"
+    },
+    {
+      "entity": "Opponent (CPU)",
+      "state": "Active combat",
+      "behavior": "Mirrors player attack/defense patterns; alternates weak/strong punch strategies; blocks high or low reactively"
+    },
+    {
+      "entity": "Opponent (CPU)",
+      "state": "Winning advantage",
+      "behavior": "Pursues player toward screen edge; escalates attack frequency; maintains offensive pressure"
+    },
+    {
+      "entity": "Patrol car",
+      "state": "Passing through",
+      "behavior": "Interrupts fight; forces both fighters to reset starting positions; creates tactical reset window"
+    }
+  ],
+  "notes": "Urban Champion employs minimal but effective visual communication of danger and world-state through screen-space positioning, stamina visualization, and environmental hazard manifestation. The game communicates political situation (illegal street fighting under police surveillance) through patrol car mechanic and law enforcement as periodic threat. Faction identity is suggested through environmental NPCs (woman spectator, implied police authority) rather than explicit allegiance systems. World-state transitions are communicated primarily through spatial progression (block-to-block advancement) and stamina depletion visual feedback. The sewer manhole serves as escalation indicator for match-critical moments.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:14:27.019Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3256,
+    "output_tokens": 1915,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "game_id": "zork-1-pc",
+  "game_name": "Zork I: The Great Underground Empire",
+  "platform": "pc",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "darkness",
+      "visual_form": "textual description of dark areas without light source",
+      "meaning": "imminent danger of being eaten by a grue; player must carry lantern or light source to survive"
+    },
+    {
+      "signal": "thief presence",
+      "visual_form": "textual notification of thief wandering the underground, stealing items from player inventory or found locations",
+      "meaning": "active threat that steals possessions; player can engage in combat or evasion"
+    },
+    {
+      "signal": "antagonist encounters",
+      "visual_form": "textual description of creatures or obstacles in specific locations",
+      "meaning": "locations contain hostile entities requiring combat or avoidance to overcome"
+    },
+    {
+      "signal": "puzzle barriers",
+      "visual_form": "textual description of impassable locations, dams, mazes, or environmental hazards (e.g., 'Loud Room')",
+      "meaning": "world-state blocking progression; requires problem-solving to proceed safely"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "light source acquisition",
+      "visual_form": "textual notification of obtaining lamp or other light-emitting object",
+      "meaning": "player now safe from grue in dark areas; enables exploration of previously dangerous zones"
+    },
+    {
+      "signal": "puzzle solution completion",
+      "visual_form": "textual description of environmental change after solving a puzzle (e.g., dam emptied, maze traversed)",
+      "meaning": "passageway now clear; world-state has shifted to allow progression"
+    },
+    {
+      "signal": "score increase",
+      "visual_form": "textual notification of score increment when treasure collected or task accomplished",
+      "meaning": "progress marker indicating player is advancing through game objectives safely"
+    },
+    {
+      "signal": "thief defeat or avoidance",
+      "visual_form": "textual confirmation of successful combat with thief or successful evasion",
+      "meaning": "threat neutralized; player inventory now secure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player character",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "inventory system, score tracking, treasure collection"
+    },
+    {
+      "faction": "thief",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "wandering antagonist with independent AI behavior",
+      "environmental_markers": "thief's treasure room (location where stolen items accumulate), active theft notifications"
+    },
+    {
+      "faction": "grue",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "creature exclusive to dark areas; eats player if light source absent",
+      "environmental_markers": "dark/unlit locations throughout underground empire"
+    },
+    {
+      "faction": "Great Underground Empire (defunct civilization)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "ruins, abandoned structures, scattered treasures, puzzle mechanisms (dams, buttons), maze systems"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "dark area without light source",
+      "visual_manifestation": "textual descriptions become minimal or warnings; imminent danger text",
+      "behavioral_manifestation": "player character gets eaten by grue; game over state"
+    },
+    {
+      "world_state": "dark area with light source (lantern)",
+      "visual_manifestation": "full location descriptions available; normal exploration text",
+      "behavioral_manifestation": "player can safely navigate, interact with objects, solve puzzles"
+    },
+    {
+      "world_state": "dam intact (Loud Room flooded)",
+      "visual_manifestation": "textual description of overwhelming noise in specific location",
+      "behavioral_manifestation": "player cannot perform actions in Loud Room; must solve dam puzzle first"
+    },
+    {
+      "world_state": "dam destroyed/emptied",
+      "visual_manifestation": "textual notification of environmental change; Loud Room now passable",
+      "behavioral_manifestation": "player can enter and act in Loud Room without sound interference"
+    },
+    {
+      "world_state": "thief active in world",
+      "visual_manifestation": "notifications of thief stealing from locations or player inventory",
+      "behavioral_manifestation": "items disappear from accessible locations; player must fight thief to recover goods"
+    },
+    {
+      "world_state": "inventory at weight capacity",
+      "visual_manifestation": "textual notification when player attempts to carry more",
+      "behavioral_manifestation": "player cannot pick up additional items until weight reduced"
+    },
+    {
+      "world_state": "treasure collected/task completed",
+      "visual_manifestation": "score increment notification displayed as textual feedback",
+      "behavioral_manifestation": "progress toward game completion tracked; measurement of world state advancement"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "ruins and abandonment",
+      "example": "The Great Underground Empire setting itself communicates historical decline; player explores abandoned structures and scattered treasures indicating civilization collapse"
+    },
+    {
+      "technique": "puzzle architecture",
+      "example": "Presence of dams, buttons, mazes, and mechanical systems indicates intentional construction by prior civilization; puzzle design reflects empire's engineering sophistication"
+    },
+    {
+      "technique": "location naming and description",
+      "example": "Distinctive location names (e.g., 'Loud Room') and textual descriptions convey thematic atmosphere and hint at puzzle mechanics or dangers"
+    },
+    {
+      "technique": "creature ecology",
+      "example": "Grue exclusive to darkness suggests evolutionary adaptation; thief presence in underground indicates post-collapse scavenging culture"
+    },
+    {
+      "technique": "treasure distribution",
+      "example": "Hidden treasures scattered throughout world communicate valuable remnants of empire; their locations within puzzles suggest previous civilization's protection mechanisms"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "grue",
+      "state": "player in dark area without light",
+      "behavior": "attacks and kills player; game-ending threat with deterministic outcome"
+    },
+    {
+      "entity": "thief",
+      "state": "wandering through underground empire",
+      "behavior": "steals items from locations and player inventory; moves independently through world; can be fought or evaded"
+    },
+    {
+      "entity": "thief",
+      "state": "defeated by player",
+      "behavior": "items recovered from thief's treasure room; threat neutralized"
+    },
+    {
+      "entity": "player character",
+      "state": "inventory below capacity",
+      "behavior": "can pick up objects; can interact with puzzles and environment"
+    },
+    {
+      "entity": "player character",
+      "state": "inventory at weight capacity",
+      "behavior": "cannot pick up additional items; must drop or use existing inventory"
+    },
+    {
+      "entity": "antagonists (various)",
+      "state": "encountered in locations",
+      "behavior": "require combat or avoidance to overcome; block progression until defeated or avoided"
+    }
+  ],
+  "notes": "Zork I is a text-based adventure game, so all world-state communication occurs through textual description and narrative feedback rather than visual graphics. The game employs a text-parsing system where the narrator describes locations, dangers, and consequences of player actions. Danger is primarily communicated through narrative tension (grue threat in darkness, thief stealing items) and puzzle barriers that block progression. Safety is signaled through successful completion states and score increases. Factions are minimal; the primary antagonism is between the player and environmental threats (grue, thief, antagonists). The Great Underground Empire itself is the dominant environmental storytelling device, with ruins and puzzles communicating a collapsed civilization. World-state changes are explicit—the narrator directly announces when conditions change (dam broken, thief defeated, score increased).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T18:49:47.501Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2772,
+    "output_tokens": 2090,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

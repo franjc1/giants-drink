@@ -1,0 +1,142 @@
+{
+  "game_id": "klax-nes",
+  "game_name": "Klax",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Well filling up",
+      "visual_form": "Tiles accumulating in the playfield well, approaching top boundary",
+      "meaning": "Game over condition approaching; player is losing control of tile placement"
+    },
+    {
+      "signal": "Full paddle",
+      "visual_form": "Paddle holding maximum five tiles with no space for new tiles",
+      "meaning": "Immediate danger of drops; tiles will fall off conveyor uncaught"
+    },
+    {
+      "signal": "Tile falling off screen",
+      "visual_form": "Colored tile sliding past paddle off the bottom of conveyor belt",
+      "meaning": "Missed catch; penalty drop incurred"
+    },
+    {
+      "signal": "Drop meter depletion",
+      "visual_form": "Drop counter visual indicator decreasing",
+      "meaning": "Limited remaining mistakes before game over"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Empty well space",
+      "visual_form": "Unfilled columns in the five-column well grid",
+      "meaning": "Player has room to place tiles; game state remains sustainable"
+    },
+    {
+      "signal": "Successful Klax formation",
+      "visual_form": "Three or more matching colored tiles aligned horizontally/vertically/diagonally disappear with visual feedback",
+      "meaning": "Successful puzzle solving; tiles removed, well space freed, points awarded"
+    },
+    {
+      "signal": "Paddle capacity available",
+      "visual_form": "Paddle display showing fewer than five tiles",
+      "meaning": "Player can safely catch incoming tiles"
+    },
+    {
+      "signal": "Bonus points awarded",
+      "visual_form": "Cascading Klaxes or multi-tile line completions with point display",
+      "meaning": "Player performing well; multiple Klaxes from single tile action"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Atari Games/Tengen (Publisher Identity)",
+      "color_identity": null,
+      "symbol_or_sigil": "Tengen logo on title screen (regional variants: Hudson Soft logo in JP version)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Title screen branding varies by region; US/KR version uses Tengen font; JP version uses Hudson Soft branding in Tengen font"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Wave selection",
+      "visual_manifestation": "Level select screen presents three wave options; player chooses progression difficulty",
+      "behavioral_manifestation": "Tile speed and complexity increase with wave selection; later waves award bonus points but increase challenge"
+    },
+    {
+      "world_state": "Drop meter cleared state",
+      "visual_manifestation": "Drop counter resets to zero after every fifth wave; fresh opportunity presented",
+      "behavioral_manifestation": "Player receives three wave options to continue; gameplay intensity scales with choice"
+    },
+    {
+      "world_state": "Mid-game progression (Waves 1-100)",
+      "visual_manifestation": "Well gradually fills or empties based on player success; tile speed increases gradually",
+      "behavioral_manifestation": "Tiles advance down conveyor belt at variable rates; paddle controls tile placement timing"
+    },
+    {
+      "world_state": "End-game condition reached",
+      "visual_manifestation": "Either: well completely full, all drops exhausted, or all 100 waves completed",
+      "behavioral_manifestation": "Game terminates; final score tallied with bonus points for remaining well capacity and conveyor tiles"
+    },
+    {
+      "world_state": "Bonus point opportunity",
+      "visual_manifestation": "Tiles remaining on conveyor or empty well spaces visible at wave completion",
+      "behavioral_manifestation": "Bonus points awarded for tile count and well efficiency, incentivizing efficient clearing"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Conveyor belt metaphor",
+      "example": "Tiles descend on a conveyor belt visual, establishing time pressure and inevitable progression; paddle at bottom represents player's singular point of intervention"
+    },
+    {
+      "technique": "Well capacity constraint",
+      "example": "Five-column, five-row well grid visually demonstrates space management puzzle; full well signals game failure, creating spatial pressure narrative"
+    },
+    {
+      "technique": "Color tile economy",
+      "example": "Multiple colored tile types create color-matching gameplay; visual repetition of color patterns trains player pattern recognition for Klax formations"
+    },
+    {
+      "technique": "Tile acceleration feedback",
+      "example": "Joystick down accelerates tile motion; visual speed increase communicates player agency in tempo control"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Colored tiles",
+      "state": "On conveyor belt",
+      "behavior": "Advance downward at base speed; player can accelerate with joystick down; player can flip upward with joystick up to reposition"
+    },
+    {
+      "entity": "Paddle",
+      "state": "Operational",
+      "behavior": "Moves left/right via joystick; holds up to five tiles; pressing button drops topmost tile into well; full paddle blocks new catches"
+    },
+    {
+      "entity": "Well column",
+      "state": "Filling",
+      "behavior": "Tiles stack downward; full columns prevent tile placement; tiles fall when matches clear above them; cascade effects create bonus opportunities"
+    },
+    {
+      "entity": "Drop counter",
+      "state": "Active",
+      "behavior": "Decrements when tile falls uncaught; resets every fifth wave; game over when exhausted; visual indicator shows remaining tolerance for error"
+    }
+  ],
+  "notes": "Klax is a pure puzzle game with minimal narrative, faction, or political world-state communication. Visual communication focuses entirely on game state clarity: danger through spatial constraints (well filling), safety through open space and successful pattern completion. Regional differences (title screen logos, button mapping for JP Famicom) reflect publisher identity rather than world-state variation. The game uses abstract colored tiles and geometric well space—no environmental storytelling or faction visual identity systems. Manifestation layer is entirely mechanical/puzzle-state focused rather than narrative or political.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:44:37.549Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4562,
+    "output_tokens": 1629,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

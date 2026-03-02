@@ -1,0 +1,167 @@
+{
+  "game_id": "castlevania-nes",
+  "game_name": "Castlevania",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "level_count": 18,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Whip (basic weapon)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Single-frame timing required for optimal damage; whip can cancel landing lag if timed correctly"
+    },
+    {
+      "element": "Stairs/vertical traversal",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "2x slower than walking; teaches spatial navigation on vertical axes"
+    },
+    {
+      "element": "Bats (enemy, flying)",
+      "first_appears": "Stage 1-2",
+      "introduction_context": "moderate",
+      "mastery_context": "Spawn height tied to Simon's Y position; player can control spawn location through positioning"
+    },
+    {
+      "element": "Candles (item containers)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Drop hearts and subweapons; teaches resource management"
+    },
+    {
+      "element": "Subweapons (axe, cross, holy water, stopwatch)",
+      "first_appears": "Stage 1-2",
+      "introduction_context": "moderate",
+      "mastery_context": "Each consumes hearts; stopwatch freezes enemies; requires tactical selection"
+    },
+    {
+      "element": "Hunchback enemies (jumping, aggressive pursuit)",
+      "first_appears": "Stage 2",
+      "introduction_context": "moderate",
+      "mastery_context": "Two jump types (short, high); manipulable via 7-frame detection window; cannot be outwalked on short jumps"
+    },
+    {
+      "element": "Moving platforms",
+      "first_appears": "Stage 4",
+      "introduction_context": "moderate",
+      "mastery_context": "Movement does not affect Simon's walking speed; erratic timing; waiting required in Stage 10"
+    },
+    {
+      "element": "Hanging bats (stationary, proximity-triggered)",
+      "first_appears": "Stage 4",
+      "introduction_context": "moderate",
+      "mastery_context": "Only Stages 4 and 6; detect from fixed Y-corridor; can be delayed or provoked with timed jumps"
+    },
+    {
+      "element": "Medusa heads (flying, screen-edge spawning)",
+      "first_appears": "Stage 3+",
+      "introduction_context": "dangerous",
+      "mastery_context": "Spawn direction and height tied to Simon's position and orientation"
+    },
+    {
+      "element": "Knockback momentum (damage reaction)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Double-jump exploit: timed damage mid-air gains +14 Y coordinates; used to bypass platform-gap sections"
+    },
+    {
+      "element": "Boss encounters",
+      "first_appears": "Stage 6 (Frankenstein's Monster) onwards",
+      "introduction_context": "dangerous",
+      "mastery_context": "Escalating complexity; final boss (Dracula, Stage 18) requires pattern recognition"
+    },
+    {
+      "element": "Mummy enemies (dual-boss format)",
+      "first_appears": "Stage 12",
+      "introduction_context": "dangerous",
+      "mastery_context": "Share boss HP meter but have independent HP addresses; require sustained whip assault"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Candle destruction (yields hearts/items)",
+      "Whip contact with enemies (immediate feedback)",
+      "Reaching platform safe zones",
+      "Climbing stairs (slowed but predictable enemy behavior)",
+      "Stage transitions (brief respite before new enemy patterns)"
+    ],
+    "typical_tension_triggers": [
+      "Screen edge enemy spawns (bats, medusa heads)",
+      "Hunchback pursuit (relentless, speed-matched to walk)",
+      "Jumping across moving platforms with erratic timing",
+      "Boss encounters (high damage output, pattern-heavy)",
+      "Knockback landing from high jumps (loss of control)",
+      "Fishmen encounter sections (dodge-intensive, limited options)"
+    ],
+    "pacing_descriptor": "Waves of escalating pressure punctuated by candle breaks; early stages introduce mechanics gently with safe-height enemies; mid-stages (4-8) layer moving platforms with airborne pursuits; final third introduces boss battles that consolidate all prior mechanics into pattern-based endurance tests"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Candles positioned off main path or at platform edges signal optional exploration; whip-reach distance reveals hittable objects",
+    "secret_convention": "Certain platforms are reachable only via knockback momentum exploit (Stage 4, Stage 7, pre-boss sections); hanging bats can be jumped over by moving to different Y-corridor; hidden shortcut paths exist via damage-boost timing",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Stages 1-3 teach whip timing, enemy spawn mechanics, and basic platforming with gentle enemy introduction (bats at medium height, slow hunchbacks); ample candle resources",
+    "mid_game": "Stages 4-9 compound mechanics: moving platforms gain erratic timing, airborne enemies spawn more frequently and at variable heights, hunchback packs demand momentum-boost exploitation, subweapon economy tightens; first major skill bottleneck at Stage 4 climbing section",
+    "late_game": "Stages 10-18 abandon gentle pacing; boss encounters (Frankenstein/Mummies/Death/Dracula) demand pattern mastery; moving platform sections become longer and more demanding; enemy density increases; final confrontation consolidates all mechanics",
+    "notable_spikes": [
+      "Stage 4 staircase with hanging bats (introduces momentum-boost requirement)",
+      "Stage 6 (first boss: Frankenstein's Monster; requires sustained focus)",
+      "Stage 12 (Mummy twins; dual-boss mechanic, shared HP pool)",
+      "Stage 15 (Death mini-boss; unpredictable scythe patterns)",
+      "Stage 18 (Dracula final form; multi-phase pattern with limited recovery time)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Candle Economy Pacing",
+      "description": "Candle placement mirrors tension cycles: clustered in open areas during low-pressure sections, sparse during enemy-heavy sequences. Destruction yields hearts (health recovery) or subweapons (tactical tools). This creates resource-driven risk/reward decision points where players choose between healing and weaponizing.",
+      "example_level": "Stage 2 (multiple candle clusters enable subweapon experimentation)"
+    },
+    {
+      "pattern_name": "Vertical Gating via Stairs",
+      "description": "Staircases appear in predictable locations to gate upward progression. Simon's stair-climbing is 2x slower than walking, creating temporal vulnerability windows. Enemies often spawn near stair tops, forcing players to climb defensively or use knockback skips.",
+      "example_level": "Stage 4 (staircase followed by hanging bat, must clip ceiling with momentum boost to proceed efficiently)"
+    },
+    {
+      "pattern_name": "Airborne Enemy Density Scaling",
+      "description": "Early stages (1-3) feature bats spawned singly or in pairs at predictable heights. Mid-stages (5-8) introduce simultaneous spawns of multiple bat and medusa head types. Late stages (10-18) pack screens with overlapping spawn waves, forcing navigation rather than combat.",
+      "example_level": "Stage 7 (sustained bat and medusa spawn concurrent with moving platforms)"
+    },
+    {
+      "pattern_name": "Moving Platform Timing Gates",
+      "description": "Platforms move independently of Simon's movement speed, creating precision timing requirements. Early appearances (Stage 4) are brief and slow-moving; later stages (Stages 5, 10) feature longer sequences with erratic speed variation, demanding frame-perfect jumps or knockback manipulation.",
+      "example_level": "Stage 10 (extended moving platform section with mandatory waiting, Stage 10 noted for 'quite erratic' movement speed)"
+    },
+    {
+      "pattern_name": "Boss Pattern Recognition Gates",
+      "description": "Bosses introduce after Stage 6 with increasing behavioral complexity. Each boss (Frankenstein, Mummy twins, Death, Dracula) has distinct attack patterns (high jump, low jump, scythe arc, fireball spread) requiring player adaptation rather than reflexive whipping. Multi-phase encounters extend endurance requirements.",
+      "example_level": "Stage 18 (Dracula multi-phase; final gate consolidates all prior learning)"
+    }
+  ],
+  "sources_used": [
+    "tasvideos",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:29:26.635Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6932,
+    "output_tokens": 2640,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

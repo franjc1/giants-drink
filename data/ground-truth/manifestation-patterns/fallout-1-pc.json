@@ -1,0 +1,186 @@
+{
+  "game_id": "fallout-1-pc",
+  "game_name": "Fallout",
+  "platform": "pc",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "hostile_creatures",
+      "visual_form": "mutated animals and ghouls rendered in isometric sprite form with aggressive animation states",
+      "meaning": "immediate threat requiring combat or evasion"
+    },
+    {
+      "signal": "radiation_zones",
+      "visual_form": "wasteland areas with scorched/barren environmental textures and altered color palette (yellows, browns)",
+      "meaning": "environmental hazard causing damage over time"
+    },
+    {
+      "signal": "enemy_faction_npcs",
+      "visual_form": "distinct armor/clothing visual variants (raiders, super mutants) with hostile stance animations",
+      "meaning": "hostile human or faction-aligned threat"
+    },
+    {
+      "signal": "time_pressure_ui",
+      "visual_form": "PIP-Boy 2000 display showing quest timers (150 in-game days for main quest)",
+      "meaning": "urgent objective requiring completion before world-state failure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "vault_environment",
+      "visual_form": "underground bunker aesthetic with clean blue/grey technology and orderly layout",
+      "meaning": "starting safe zone, sanctuary from wasteland threats"
+    },
+    {
+      "signal": "allied_npc_presence",
+      "visual_form": "NPCs with friendly stance animations and dialogue options without hostile cues",
+      "meaning": "non-hostile actor available for trade, quests, or companionship"
+    },
+    {
+      "signal": "settlement_areas",
+      "visual_form": "clustered buildings and structures with NPCs conducting non-combat animations",
+      "meaning": "community zones with reduced immediate danger"
+    },
+    {
+      "signal": "dialogue_availability",
+      "visual_form": "'talking head' 3D character portraits appearing during interaction, multiple dialogue options displayed",
+      "meaning": "peaceful interaction mode active, diplomacy possible"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Vault Dweller/Player",
+      "color_identity": "blue and yellow (Vault-Tec aesthetic)",
+      "symbol_or_sigil": "Vault suit appearance, Vault number (Vault 13)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "underground vault with characteristic 1950s retro-futuristic decor"
+    },
+    {
+      "faction": "Super Mutants",
+      "color_identity": "green/brown mutated flesh tones",
+      "symbol_or_sigil": "distinctive humanoid mutant silhouette, oversized build",
+      "enemy_visual_variants": "hostile stance, heavy armor or combat posture",
+      "environmental_markers": "vault installations corrupted by FEV (Forced Evolutionary Virus), mutant strongholds"
+    },
+    {
+      "faction": "Raiders",
+      "color_identity": "brown, leather, rust tones",
+      "symbol_or_sigil": "cobbled armor aesthetic, post-apocalyptic makeshift gear",
+      "enemy_visual_variants": "aggressive animation states, varied crude weapons",
+      "environmental_markers": "camps, settlements taken by force, barricaded structures"
+    },
+    {
+      "faction": "Ghouls",
+      "color_identity": "grey, decayed flesh",
+      "symbol_or_sigil": "skeletal/undead humanoid form, radiation-scarred appearance",
+      "enemy_visual_variants": "feral ghouls vs sentient ghouls (dialogue available for latter)",
+      "environmental_markers": "irradiated zones, vaults contaminated by radiation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "water_chip_not_found",
+      "visual_manifestation": "Vault 13 environment shows signs of resource strain; NPCs may reference water shortage",
+      "behavioral_manifestation": "Vault Overseer maintains urgent quest directive; 150-day time limit enforced via PIP-Boy UI"
+    },
+    {
+      "world_state": "wasteland_unexplored",
+      "visual_manifestation": "unexplored map areas show fog-of-war or blank space on PIP-Boy 2000 display",
+      "behavioral_manifestation": "NPCs unable to provide information about unknown regions; encounter tables favor weaker enemies in starting zone"
+    },
+    {
+      "world_state": "faction_dominance",
+      "visual_manifestation": "particular faction armor/symbols prevalent in specific regions; environmental decay matches faction type (super mutant scorched areas, raider camps)",
+      "behavioral_manifestation": "NPC encounters skewed toward dominant faction; settlement NPCs show fear or hostility toward player based on local faction control"
+    },
+    {
+      "world_state": "radiation_contamination",
+      "visual_manifestation": "color shift in affected areas toward sickly yellows/greens; mutated flora and fauna rendering; environmental detail shows decay",
+      "behavioral_manifestation": "creatures in contaminated zones display mutations; NPCs avoid highly radiated areas; damage tick occurs without protection"
+    },
+    {
+      "world_state": "quest_completion",
+      "visual_manifestation": "PIP-Boy quest log updates; environment may show changes (cleared raider camp becomes safe, settlement rebuilds)",
+      "behavioral_manifestation": "NPC dialogue shifts based on quest state; reputation system adjusts NPC hostility/friendliness; alternative paths unlock via completion state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "settlement_layout_indicates_governance",
+      "example": "orderly vault interior suggests hierarchical, managed society; chaotic raider camp or ghoul-infested area suggests lawlessness and decay"
+    },
+    {
+      "technique": "armor_and_equipment_visual_density",
+      "example": "well-armed super mutant stronghold vs. poorly-equipped settler camp communicates power dynamics and resource distribution"
+    },
+    {
+      "technique": "npc_animation_state_reflects_morale",
+      "example": "NPCs in successful settlements show idle animations of work/socializing; those in threatened settlements show defensive postures or stress behaviors"
+    },
+    {
+      "technique": "environmental_decay_progression",
+      "example": "wasteland areas show increasing structural collapse and radiation scarring as player ventures further from vault; distant regions visually hostile"
+    },
+    {
+      "technique": "dialogue_head_visual_characterization",
+      "example": "significant NPCs rendered with 3D talking heads showing age, scarring, faction-aligned outfit details, communicating character role and background"
+    },
+    {
+      "technique": "faction_architecture_distinctiveness",
+      "example": "Vault-Tec structures maintain 1950s aesthetic; super mutant bases show crude fortification; raider camps use scavenged materials asymmetrically"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Vault Dweller (player character)",
+      "state": "armed and armored",
+      "behavior": "can engage in combat; NPCs display caution or aggression based on reputation and threat assessment"
+    },
+    {
+      "entity": "Hostile NPC/creature",
+      "state": "combat_engaged",
+      "behavior": "sprite animation shifts to aggressive stance; moves toward player; attack indicators display in turn-based combat UI"
+    },
+    {
+      "entity": "Allied NPC/companion",
+      "state": "following",
+      "behavior": "sprite mirrors player movement at offset position; participates in combat against enemies; leaves formation if player enters dialogue or stealth"
+    },
+    {
+      "entity": "Settlement NPC",
+      "state": "peaceful",
+      "behavior": "performs idle animation loops (standing, occasionally moving short distances); displays friendly dialogue options; no combat stance"
+    },
+    {
+      "entity": "Faction-aligned NPC",
+      "state": "alert_to_outsider",
+      "behavior": "may initiate dialogue challenge; hostile stance if player reputation with faction is low; friendly approach if reputation is high"
+    },
+    {
+      "entity": "Ghoul (sentient)",
+      "state": "cooperative",
+      "behavior": "displays dialogue options despite mutated appearance; sprite animation neutral; can become ally or informant"
+    },
+    {
+      "entity": "Super Mutant",
+      "state": "territorial",
+      "behavior": "attacks on sight in stronghold; sprite animation aggressive; will pursue player across multiple tiles; no dialogue option with feral variants"
+    }
+  ],
+  "notes": "Fallout (1997) employs isometric trimetric perspective for world visualization, making faction/danger identification heavily reliant on sprite differentiation, armor/equipment visual design, and environmental color/decay states. The retro-futuristic 1950s Atomic Age aesthetic is fundamental to world-state communication—clean vault interiors contrast sharply with wasteland decay. The PIP-Boy 2000 UI serves dual function as both diegetic character interface and non-diegetic quest/map display, making world-state information accessible without breaking immersion. Reputation system is communicated through NPC dialogue tone and behavioral stance rather than explicit faction bars. The 150-day time limit creates persistent tension signaled through quest log UI rather than environmental visual degradation of vault condition.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": "Additional analysis needed: exact color hex values for faction indicators, complete list of all 48 perks and their visual armor correlates, detailed breakdown of all 18 skill icons and their world-state manifestations, comprehensive NPC behavior tree visualizations, specific dialogue flag visualization methods, detailed map color/biome palette documentation",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:45:07.835Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3162,
+    "output_tokens": 2419,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "game_id": "mario-bros-nes",
+  "game_name": "Mario Bros.",
+  "platform": "nes",
+  "year": 1986,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "POW Block",
+      "description": "Center-screen block that flips all enemies touching platforms or floor when activated. Can only be used three times per phase before disappearing.",
+      "physics_values": {
+        "uses_per_phase": 3,
+        "effect": "flips_grounded_enemies"
+      }
+    },
+    {
+      "name": "Platform Collision Mechanics",
+      "description": "Enemies must be hit from below on platforms to flip them. Once flipped, they can be kicked away. If too much time passes, enemies flip back over and recover.",
+      "physics_values": {
+        "flip_window": "time_limited",
+        "hit_direction": "from_below"
+      }
+    },
+    {
+      "name": "Screen Wraparound",
+      "description": "Characters that go off one side of the screen reappear on the opposite side.",
+      "physics_values": {
+        "wraparound_enabled": true
+      }
+    },
+    {
+      "name": "Icicle Hazards",
+      "description": "In later rounds, icicles form on platform undersides and fall off, acting as hazards.",
+      "physics_values": {
+        "appears_in": "later_rounds",
+        "causes_death": true
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "platformer-focused",
+    "simple_jumping_and_running",
+    "timing-based_combat",
+    "multiple_floor_navigation"
+  ],
+  "tier_notes": "Tier 2: Empirical/Qualitative data only. No precise physics parameters documented in sources. Game mechanics described qualitatively (running, jumping, flipping enemies, platform collision). Arcade version predates NES port (1983 vs 1986). Available sources focus on content, development history, and gameplay mechanics rather than technical physics specifications.",
+  "sources_used": [
+    "tcrf_mario_bros_nes",
+    "wikipedia_mario_bros"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:46:13.358Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6294,
+    "output_tokens": 914,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

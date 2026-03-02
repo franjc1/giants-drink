@@ -1,0 +1,209 @@
+{
+  "game_id": "desert-strike-snes",
+  "game_name": "Desert Strike: Return to the Gulf",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy anti-aircraft installations",
+      "visual_form": "Grounded weapon emplacements visible on isometric map",
+      "meaning": "Active threat zones; player must destroy or avoid"
+    },
+    {
+      "signal": "Scud launchers and chemical weapons facilities",
+      "visual_form": "Distinctive military structures marked on terrain",
+      "meaning": "High-priority targets; mission-critical destruction"
+    },
+    {
+      "signal": "Enemy helicopter and aircraft",
+      "visual_form": "Airborne vehicle sprites engaging player",
+      "meaning": "Active aerial combat threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Armor depletion indicator",
+      "visual_form": "HUD display showing helicopter health",
+      "meaning": "Cumulative damage; zero armor results in craft destruction"
+    },
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Fuel meter on HUD progressively emptying",
+      "meaning": "Resource scarcity danger; craft crashes if depleted"
+    },
+    {
+      "signal": "Tanks and armored vehicles",
+      "visual_form": "Ground-based vehicle sprites with weapon hardpoints",
+      "meaning": "Mobile combat threat; elevated firepower"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Landing zones",
+      "visual_form": "Designated drop-off areas on map",
+      "meaning": "Safe extraction point for hostages/prisoners; healing via rescued personnel"
+    },
+    {
+      "signal": "Fuel barrels",
+      "visual_form": "Collectible power-up sprites on terrain",
+      "meaning": "Resource replenishment; extends operational range"
+    },
+    {
+      "signal": "Ammunition crates",
+      "visual_form": "Collectible power-up sprites distinct from fuel",
+      "meaning": "Weapon replenishment; restores offensive capability"
+    },
+    {
+      "signal": "Armor repair via rescued friendlies",
+      "visual_form": "Health recovery mechanic tied to NPC pickup",
+      "meaning": "Humanitarian objective doubles as survival resource"
+    },
+    {
+      "signal": "Open terrain without emplacements",
+      "visual_form": "Uncluttered map areas in isometric view",
+      "meaning": "Low-threat patrol/transit zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "United States / Player Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Apache AH-64 helicopter",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Landing zones, American embassy locations, rescue objectives marked as allied"
+    },
+    {
+      "faction": "General Kilbaba's Regime",
+      "color_identity": null,
+      "symbol_or_sigil": "Military installations, dictator's private yacht (final stage)",
+      "enemy_visual_variants": "Enemy soldiers, anti-aircraft weapons, tanks, armored vehicles, scud launchers, chemical/biological weapons facilities",
+      "environmental_markers": "Fortified positions, airstrips, weapons plants, nuclear facilities, garbage trucks with nuclear material (obfuscation tactic)"
+    },
+    {
+      "faction": "Neutral / Civilian",
+      "color_identity": null,
+      "symbol_or_sigil": "Hostages, P.O.W.s, U.N. inspection teams, embassy personnel",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rescue mission locations; visual distinction from military combatants"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission 1 (Air Superiority) - Opening invasion phase",
+      "visual_manifestation": "Enemy airstrips and support facilities visible as destructible installations on open desert terrain",
+      "behavioral_manifestation": "Pro-American spy isolated and vulnerable; requires player extraction"
+    },
+    {
+      "world_state": "Mission 2 (Scud Buster) - Chemical weapons proliferation threat",
+      "visual_manifestation": "Chemical weapons plant and scud launcher emplacements displayed on isometric map",
+      "behavioral_manifestation": "Non-combatants and P.O.W.s scattered; require evacuation before plant destruction"
+    },
+    {
+      "world_state": "Mission 3 (Embassy City) - Urban conflict with diplomatic stakes",
+      "visual_manifestation": "U.N. inspection team, American embassy, biological weapons facility, and Kilbaba's yacht marked as distinct structures",
+      "behavioral_manifestation": "Large hostage contingent (embassy personnel); Kilbaba flees when cornered on yacht, escalating threat"
+    },
+    {
+      "world_state": "Mission 4 (Nuclear Storm) - Endgame existential threat",
+      "visual_manifestation": "Nuclear power plant, weapons components, oil facility, and garbage trucks (nuclear material disguised) visible across terrain",
+      "behavioral_manifestation": "Kilbaba has anticipated final strike; nuclear material distribution indicates desperation defense"
+    },
+    {
+      "world_state": "Resource scarcity conditions",
+      "visual_manifestation": "Finite fuel and ammo indicators on HUD; power-up placement requires route optimization",
+      "behavioral_manifestation": "Player must plan mission paths to intercept fuel/ammo before depletion; creates risk-reward tension"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Destructible military infrastructure progression",
+      "example": "Airstrips → chemical plants → biological facilities → nuclear installations; escalating strategic threat level communicated through facility complexity"
+    },
+    {
+      "technique": "Hostage/P.O.W. placement signaling civilian vulnerability",
+      "example": "Scattered rescue objectives communicate Kilbaba's civilian hostage strategy and U.S. humanitarian intervention mandate"
+    },
+    {
+      "technique": "Dictator stronghold visualization",
+      "example": "Private yacht and fortified positions mark Kilbaba's regime; final location (nuclear-equipped yacht) signals ultimate threat concentration"
+    },
+    {
+      "technique": "Terrain as resource manager",
+      "example": "Open desert with scattered fuel/ammo crates and landing zones communicates logistical challenge; no safe bases, player must improvise supply lines"
+    },
+    {
+      "technique": "Weapon facility clustering",
+      "example": "Chemical, biological, and nuclear plants grouped in later missions; spatial density indicates escalating WMD development"
+    },
+    {
+      "technique": "Garbage truck disguise mechanic",
+      "example": "Nuclear material hidden in civilian vehicles; visual deception communicates regime cunning and final desperation tactic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Apache helicopter (player)",
+      "state": "Armor intact",
+      "behavior": "Full offensive capability; aggressive patrolling and targeting optimal"
+    },
+    {
+      "entity": "Apache helicopter (player)",
+      "state": "Armor depleted",
+      "behavior": "Destroyed; mission restart; communicates vulnerability to attrition"
+    },
+    {
+      "entity": "Apache helicopter (player)",
+      "state": "Fuel critical",
+      "behavior": "Forced to seek fuel barrels or landing zone; restricted movement radius"
+    },
+    {
+      "entity": "Hostile aircraft/helicopters",
+      "state": "Airborne",
+      "behavior": "Active engagement of player; requires evasion or air-to-air combat"
+    },
+    {
+      "entity": "Anti-aircraft installations",
+      "state": "Operational",
+      "behavior": "Automated fire on player proximity; creates danger zones on map"
+    },
+    {
+      "entity": "Tanks/armored vehicles",
+      "state": "Stationary or patrolling",
+      "behavior": "Ground-based threats with sustained firepower; slower than helicopter but heavily armored"
+    },
+    {
+      "entity": "Hostages/P.O.W.s",
+      "state": "Unrescued",
+      "behavior": "Stationary at locations; indicate incomplete objectives"
+    },
+    {
+      "entity": "Hostages/P.O.W.s",
+      "state": "Airlifted to landing zone",
+      "behavior": "Heal player armor upon delivery; communicate mission progress"
+    },
+    {
+      "entity": "General Kilbaba",
+      "state": "Mission 3 confrontation",
+      "behavior": "Flees when cornered on yacht; signals evasion and continued threat escalation"
+    },
+    {
+      "entity": "General Kilbaba",
+      "state": "Final mission",
+      "behavior": "Heavily defended with nuclear arsenal; represents existential finale"
+    }
+  ],
+  "notes": "Desert Strike communicates world-state primarily through isometric map layout and mission structure progression. Danger is signaled via destructible target placement, resource scarcity mechanics (fuel/ammo), and escalating facility types (conventional → WMD). Factions are identified implicitly: U.S. through Apache identity and rescue objectives; Kilbaba's regime through fortified installations and WMD development. Political narrative (Gulf War-inspired conflict with dictator, humanitarian rescue mandate, nuclear proliferation threat) is embedded in mission objectives and environmental placement rather than explicit UI messaging. The game uses resource management as a manifestation layer—limited fuel and ammunition force player route optimization, communicating logistical constraints of air-strike operations. Civilian hostages scattered across missions reinforce U.S. intervention legitimacy. Kilbaba's yacht escape and nuclear material disguise in garbage trucks communicate regime desperation in endgame.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:17:49.774Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4093,
+    "output_tokens": 2462,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

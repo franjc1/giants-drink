@@ -1,0 +1,163 @@
+{
+  "game_id": "formation-z-nes",
+  "game_name": "Formation Z",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Fuel depletion",
+      "visual_form": "Numeric fuel counter (100 to 0) at bottom right of screen decreasing while in jet mode",
+      "meaning": "Imminent crash and life loss if jet remains airborne without refueling"
+    },
+    {
+      "signal": "Altitude warning indicator",
+      "visual_form": "Visual cue on screen center top below score indicating safe reversion altitude",
+      "meaning": "Flying too high prevents transformation back to robot; flying too low risks crash even over ground"
+    },
+    {
+      "signal": "Ocean environment",
+      "visual_form": "Water-based terrain replacing grassland/desert",
+      "meaning": "Jet crash over ocean results in immediate life loss (no ground to revert to)"
+    },
+    {
+      "signal": "Enemy projectiles and obstacles",
+      "visual_form": "On-screen enemy attacks and environmental hazards",
+      "meaning": "One-hit death mechanic; any collision is fatal"
+    },
+    {
+      "signal": "Transformation vulnerability",
+      "visual_form": "Animation sequence during robot-to-jet or jet-to-robot conversion",
+      "meaning": "Player cannot shoot during transformation; window of vulnerability to enemy fire"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fuel pickup item",
+      "visual_form": "White sphere emitting electricity on ground terrain",
+      "meaning": "Restores jet fuel; safe to collect in robot mode before transforming"
+    },
+    {
+      "signal": "Ground presence",
+      "visual_form": "Solid terrain (grassland, desert, space ground) visible below player",
+      "meaning": "Safe zone for robot mode; can revert from jet to avoid crashes"
+    },
+    {
+      "signal": "Boss fight arena",
+      "visual_form": "Aerial battleground with safety from fuel depletion",
+      "meaning": "During boss encounters, fuel does not deplete; player can focus on combat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Human forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Robot Ixpel transforming into jet fighter",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Earth (grassland, desert) and artificial space station ground"
+    },
+    {
+      "faction": "Alien invaders",
+      "color_identity": null,
+      "symbol_or_sigil": "Boss entities (STV on Earth; main alien superweapon in space)",
+      "enemy_visual_variants": "Multiple smaller enemy types with varied attack patterns across game progression",
+      "environmental_markers": "Outer space environment; dense enemy formations in later levels"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Earth battle - grassland phase",
+      "visual_manifestation": "Mountainous grassland terrain; standard enemy density",
+      "behavioral_manifestation": "Player navigates mixed robot/jet platforming; can revert to robot on ground"
+    },
+    {
+      "world_state": "Earth battle - desert phase",
+      "visual_manifestation": "Egyptian desert terrain replacing grassland",
+      "behavioral_manifestation": "Similar mechanics with visual environment swap indicating progression"
+    },
+    {
+      "world_state": "Transition zone - ocean crossing",
+      "visual_manifestation": "Water environment between terrain sections",
+      "behavioral_manifestation": "Mandatory jet transformation; jet crash over water = instant death; requires fuel management"
+    },
+    {
+      "world_state": "First boss encounter - STV",
+      "visual_manifestation": "Boss entity in aerial space over ocean at desert's end",
+      "behavioral_manifestation": "Aerial combat with Big-Bang charged weapon required; fuel does not deplete during fight"
+    },
+    {
+      "world_state": "Space battle - outer space phase",
+      "visual_manifestation": "Bottomless sky environment after ground phase; alien superweapon visible",
+      "behavioral_manifestation": "Single long ground phase then transition to space; no fuel depletion concern in aerial portions"
+    },
+    {
+      "world_state": "Second boss encounter - alien superweapon",
+      "visual_manifestation": "Main antagonist entity in space environment",
+      "behavioral_manifestation": "Final aerial combat; Big-Bang required to defeat; no crash risk or fuel drain"
+    },
+    {
+      "world_state": "Game loop restart",
+      "visual_manifestation": "Return to Earth grassland; visual terrain reset",
+      "behavioral_manifestation": "New enemy patterns and increased difficulty; no narrative ending"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Progressive environment design signaling narrative arc",
+      "example": "Journey from Earth (grassland → desert → ocean) establishes human territory under threat; progression to space establishes alien origin point of invasion"
+    },
+    {
+      "technique": "Mechanical storytelling through world affordances",
+      "example": "Ocean terrain forces jet transformation, establishing spatial/mechanical logic that jet is necessary for overwater travel and connecting gameplay to narrative threat"
+    },
+    {
+      "technique": "Boss placement as narrative sentinel",
+      "example": "STV boss positioned at Earth's boundary (ocean/coast); alien superweapon in space establishes invasion hierarchy and two-theater conflict"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player robot (Ixpel)",
+      "state": "Ground-based mode",
+      "behavior": "Can move forward/backward and jump; cannot fly; fires front/diagonal shots"
+    },
+    {
+      "entity": "Player jet fighter",
+      "state": "Airborne mode",
+      "behavior": "Can travel anywhere on screen; fuel depletes over time; limited altitude zone for safe reversion; fires front/diagonal shots relative to direction"
+    },
+    {
+      "entity": "Player during transformation",
+      "state": "Converting between modes",
+      "behavior": "Becomes vulnerable; cannot shoot; susceptible to one-hit death"
+    },
+    {
+      "entity": "Smaller enemies",
+      "state": "Active combat",
+      "behavior": "Defeated by Pulse Laser standard shots; multiple patterns across difficulty loops"
+    },
+    {
+      "entity": "Large enemies and bosses",
+      "state": "Active combat",
+      "behavior": "Requires Big-Bang charged weapon to defeat; cannot be killed with Pulse Laser alone"
+    },
+    {
+      "entity": "Fuel pickup",
+      "state": "Available on ground",
+      "behavior": "Stationary; emits electrical visual effect; restores jet fuel to full"
+    }
+  ],
+  "notes": "Formation Z communicates world-state primarily through environmental progression (Earth terrain → space) and mechanical affordances (fuel system, altitude restrictions, transformation vulnerability). Danger signals are heavily mechanical (fuel depletion, altitude limits, transformation windows) rather than visual faction markers. The game lacks explicit faction color-coding or political context; conflict is presented as simple invasion scenario (aliens vs. human robot). Safety is communicated through fuel pickup visibility and ground presence. Boss encounters reset fuel mechanics, signaling narrative climax zones. Looping structure with pattern changes maintains threat escalation without narrative conclusion.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:16:25.360Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2863,
+    "output_tokens": 1858,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

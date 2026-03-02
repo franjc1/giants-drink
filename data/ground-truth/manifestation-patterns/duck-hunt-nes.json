@@ -1,0 +1,170 @@
+{
+  "game_id": "duck-hunt-nes",
+  "game_name": "Duck Hunt",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Target disappearance",
+      "visual_form": "Ducks/clay pigeons flying off-screen without being shot",
+      "meaning": "Missed shot; round progress threatened; failure state approaching"
+    },
+    {
+      "signal": "Increasing speed",
+      "visual_form": "Targets moving faster across screen in successive rounds",
+      "meaning": "Difficulty escalation; higher skill requirement; approaching failure threshold"
+    },
+    {
+      "signal": "Multiple simultaneous targets",
+      "visual_form": "Two ducks appearing together (Game B) or three targets in arcade version",
+      "meaning": "Increased threat density; narrower margin for error; resource pressure (limited shots per round)"
+    },
+    {
+      "signal": "Game Over state",
+      "visual_form": "Screen transition indicating failure to meet minimum hit quota",
+      "meaning": "Round threshold not met; end of session"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful hit",
+      "visual_form": "Target disappears when struck by light gun crosshair",
+      "meaning": "Correct action completed; points awarded; round progress secured"
+    },
+    {
+      "signal": "Round advancement",
+      "visual_form": "Transition to next numbered round after meeting target quota",
+      "meaning": "Minimum threshold achieved; player safe to continue"
+    },
+    {
+      "signal": "Bonus points indicator",
+      "visual_form": "Visual score reward for completing all ten targets in single round",
+      "meaning": "Perfect execution acknowledged; optional mastery reward"
+    },
+    {
+      "signal": "Remaining attempts",
+      "visual_form": "Visible attempt counter (three shots per round)",
+      "meaning": "Resource availability; player agency maintained as long as attempts remain"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player/Hunter",
+      "color_identity": null,
+      "symbol_or_sigil": "NES Zapper light gun (player-controlled crosshair)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "First-person perspective; screen center focus for aiming"
+    },
+    {
+      "faction": "Hunting Dog",
+      "color_identity": "Brown/tan (arcade version)",
+      "symbol_or_sigil": "Comedic hunting companion; jumps into frame during bonus stages",
+      "enemy_visual_variants": "In arcade bonus stage, dog becomes distraction target (shootable but scoreable as failure); removed from console version for 'family-friendly' positioning",
+      "environmental_markers": "Grass field environment; appears during bonus rounds as ally/obstacle hybrid"
+    },
+    {
+      "faction": "Prey/Game",
+      "color_identity": "Brown/yellow ducks; gray/white clay pigeons",
+      "symbol_or_sigil": "Ducks (flying targets) vs. clay pigeons (stationary launch targets)",
+      "enemy_visual_variants": "Ducks show varied flight patterns; clay pigeons arc predictably; arcade version shows haphazard movement in Round 0 kill screen",
+      "environmental_markers": "Open field/sky in duck modes; distant field perspective in clay pigeon mode (Game C)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Rounds 1-20 approx)",
+      "visual_manifestation": "Single or dual targets appearing at moderate speed; clear sightlines; generous hit windows",
+      "behavioral_manifestation": "Ducks/pigeons follow predictable flight arcs; appear in center-to-medium screen areas; disappear slowly"
+    },
+    {
+      "world_state": "Mid game (Rounds 20-50 approx)",
+      "visual_manifestation": "Targets accelerate; multiple simultaneous targets increase frequency; hit windows narrow",
+      "behavioral_manifestation": "Ducks fly faster; clay pigeons launch with greater arc velocity; targets spend less time on-screen"
+    },
+    {
+      "world_state": "Late game (Rounds 50-99)",
+      "visual_manifestation": "Rapid-fire targets; dense screen occupation; minimal safe space between targets",
+      "behavioral_manifestation": "Targets move near-maximum speed; multiple overlapping flight paths; near-impossible hit quotas"
+    },
+    {
+      "world_state": "Kill screen (Round 0, post-99 completion in Game A)",
+      "visual_manifestation": "Visual glitches; haphazard target placement; erratic behavior; fractured screen logic",
+      "behavioral_manifestation": "Targets appear and disappear unpredictably; hit zones become unreliable; game communicates 'system breakdown' through visual chaos"
+    },
+    {
+      "world_state": "Arcade bonus stage (every 2 rounds in Vs. Duck Hunt)",
+      "visual_manifestation": "Grass field environment; hunting dog prominently displayed; multiple ducks burst from grass simultaneously",
+      "behavioral_manifestation": "Dog jumps into line of fire as distraction mechanic; shooting dog ends bonus stage and penalizes player; frames dog as both ally and obstacle"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Game mode visual differentiation",
+      "example": "Game A/B show open sky environment (duck hunting); Game C shows distant field perspective with clay pigeons launching upward (sport shooting). Visuals establish narrative context without dialogue."
+    },
+    {
+      "technique": "Difficulty-through-density",
+      "example": "Round progression increases target quantity and speed, visually communicating escalating challenge through screen occupation rather than explicit messaging."
+    },
+    {
+      "technique": "Dog as worldbuilding element",
+      "example": "Hunting dog in arcade bonus stages establishes rural/hunting scenario flavor; dog's mocking reaction to being shot (arcade) or absence (console) communicates tone difference between versions without story exposition."
+    },
+    {
+      "technique": "Perspective shift for mode communication",
+      "example": "Clay pigeon mode (Game C) shifts perspective to distant field view, visually distinguishing shooting sport from duck hunting through spatial framing alone."
+    },
+    {
+      "technique": "Kill screen visual decay",
+      "example": "Round 0 intentionally breaks visual logic (erratic target placement, glitched behavior) to communicate 'system failure' or 'natural endpoint.' Visual breakdown communicates narrative closure."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Duck (Game A/B)",
+      "state": "Early rounds",
+      "behavior": "Appears singly or in pairs; flies in wide arcs; remains on-screen for extended periods; predictable trajectory"
+    },
+    {
+      "entity": "Duck (Late rounds)",
+      "state": "High difficulty",
+      "behavior": "Rapid flight speed; erratic path changes; minimal on-screen duration; appears in cluster formations"
+    },
+    {
+      "entity": "Clay pigeon (Game C, early)",
+      "state": "Early rounds",
+      "behavior": "Launches in gentle arc from lower-left area; follows ballistic trajectory; long flight duration before exit"
+    },
+    {
+      "entity": "Clay pigeon (Game C, late)",
+      "state": "High difficulty",
+      "behavior": "Launches with steep velocity; minimal arc duration; exits screen rapidly; multiple simultaneous launches"
+    },
+    {
+      "entity": "Hunting dog (Arcade bonus)",
+      "state": "Bonus stage active",
+      "behavior": "Remains in grass; jumps into firing line as distraction; reacts negatively if shot (scolds player); communicates dual role as companion and obstacle"
+    },
+    {
+      "entity": "Game system (Round 0)",
+      "state": "Post-completion kill screen",
+      "behavior": "Targets spawn unpredictably; hitboxes become unreliable; visual glitches manifest; communicates system has reached failure state or natural conclusion"
+    }
+  ],
+  "notes": "Duck Hunt is a minimal-narrative light gun game that communicates world-state almost entirely through visual mechanics and behavioral patterns. Danger/safety signals are implicit in target visibility, speed, and count rather than explicit UI. The hunting dog in arcade versions serves as the only recurring 'character' element and represents narrative/tone difference between arcade (player can shoot dog; dog reacts) and console (dog immune to shots; family-friendly framing). Environmental storytelling relies on perspective shifts (sky vs. distant field) and mode-specific visual contexts (hunting vs. sport shooting). The kill screen represents unusual deliberate use of visual glitching to communicate narrative endpoint. No faction dynamics or political situations exist in this game; all signaling is difficulty/challenge-focused.",
+  "sources_used": [
+    "wikipedia",
+    "data_crystal"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:19:15.688Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4042,
+    "output_tokens": 2202,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "wikipedia"
+    ]
+  }
+}

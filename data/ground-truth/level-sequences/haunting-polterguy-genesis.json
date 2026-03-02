@@ -1,0 +1,128 @@
+{
+  "game_id": "haunting-polterguy-genesis",
+  "game_name": "Haunting Starring Polterguy",
+  "platform": "genesis",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "Blue Fright 'ems (automatic proximity scares)",
+      "first_appears": "House 1",
+      "introduction_context": "safe",
+      "mastery_context": "Foundation mechanic; player learns object interaction with no timing pressure"
+    },
+    {
+      "element": "Orange Fright 'ems (manual trigger scares)",
+      "first_appears": "House 1",
+      "introduction_context": "safe",
+      "mastery_context": "Teaches timing and positioning; moderate skill requirement"
+    },
+    {
+      "element": "Green Fright 'ems (controlled object possession)",
+      "first_appears": "House 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Active manipulation of possessed objects; adds projectile mechanics"
+    },
+    {
+      "element": "Ecto energy depletion mechanic",
+      "first_appears": "House 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Resource management pressure; creates incentive for efficient scaring"
+    },
+    {
+      "element": "Underworld hazards (bats, bouncing skulls, disembodied hands)",
+      "first_appears": "After House 1 ecto depletion",
+      "introduction_context": "dangerous",
+      "mastery_context": "Direct combat avoidance; health is finite and doesn't regenerate between underworld stages"
+    },
+    {
+      "element": "Ecto Beast boss (family pet transformation)",
+      "first_appears": "After House 1 completion",
+      "introduction_context": "dangerous",
+      "mastery_context": "Combat encounter; appears after each house is cleared"
+    },
+    {
+      "element": "Special spells (underworld collectibles)",
+      "first_appears": "Underworld stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Temporary power-ups found mid-underworld; disappear quickly, require speed to claim"
+    },
+    {
+      "element": "Family dog bark damage",
+      "first_appears": "House 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Passive environmental threat; accelerates ecto tank depletion"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully frightening a family member (partial ecto recovery)",
+      "Exiting underworld stage via found exit",
+      "Collecting rare star-shaped full-heal ecto drop in underworld",
+      "Completing a house (transition to next area)"
+    ],
+    "typical_tension_triggers": [
+      "Ecto tank gradually depleting during house exploration",
+      "Dog bark damage accelerating resource drain",
+      "Entry into underworld with hazards present",
+      "Health portrait shrinking in underworld from hazard hits",
+      "Ecto Beast encounter after house completion",
+      "Spells appearing and disappearing quickly in underworld"
+    ],
+    "pacing_descriptor": "Dual-phase cycle: house exploration with passive resource drain creates slow-burn tension, punctuated by underworld stages with active hazards and health loss. Relief cycles through successful scares and exits. Escalates across four houses as family becomes harder to frighten."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Approximately 400 possessable objects distributed across four houses; not all objects required to complete a level, allowing optional deeper exploration",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "House 1 introduces all three Fright 'em types in single-family-member scenarios; ecto tank still relatively forgiving; underworld hazards minimal initially",
+    "mid_game": "Houses 2-3 escalate family member count and behavioral complexity; ecto drain accelerates; underworld hazards increase in frequency and damage severity",
+    "late_game": "House 4 final challenge with full family present; multiple Ecto Beast encounters; twelve underworld dungeon paths with varied hazard configurations",
+    "notable_spikes": [
+      "First underworld entry (new hazard types introduced)",
+      "First Ecto Beast encounter (combat requirement shift)",
+      "Transition to House 2 (family becomes harder to scare)",
+      "House 4 (peak difficulty; all mechanics converged)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "House Structure Loop",
+      "description": "Each of four houses follows: explore → interact with Fright 'ems → accumulate family fear → drive family out → trigger Ecto Beast → return to underworld. Houses increase in complexity but maintain identical mechanical structure.",
+      "example_level": "House 1 (tutorial house) through House 4 (final house)"
+    },
+    {
+      "pattern_name": "Underworld Recovery Gauntlet",
+      "description": "Resource collection stage with environmental hazards. Player must locate single ecto drops one at a time, navigate to exit with health management, potentially find temporary spell pickups. Direction arrows guide off-screen objectives.",
+      "example_level": "Any underworld transition between houses"
+    },
+    {
+      "pattern_name": "Isometric Room Traversal",
+      "description": "3/4 overhead perspective encourages spatial awareness of object placement and family positioning across connected rooms. Optional backtracking to reuse Fright 'ems on different family members.",
+      "example_level": "Living room → kitchen → bedroom connections within a single house"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:52:08.582Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3133,
+    "output_tokens": 1686,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "game_id": "desert-commander-nes",
+  "game_name": "Desert Commander",
+  "platform": "nes",
+  "paradigm": "turn-based strategy",
+  "danger_signals": [
+    {
+      "signal": "enemy unit proximity",
+      "visual_form": "enemy units displayed on tactical map grid",
+      "meaning": "immediate threat to player forces; distance determines engagement risk"
+    },
+    {
+      "signal": "terrain disadvantage",
+      "visual_form": "terrain type visual representation affecting unit positioning",
+      "meaning": "certain terrain reduces unit mobility, attack power, or defense for terrestrial units"
+    },
+    {
+      "signal": "low unit resources",
+      "visual_form": "unit status at resupply buildings or supply trucks",
+      "meaning": "aircraft fuel/ammo depletion, infantry transport depletion; units become vulnerable without resupply"
+    },
+    {
+      "signal": "headquarters under siege",
+      "visual_form": "enemy units positioned adjacent to player headquarters on map",
+      "meaning": "immediate loss condition threatened; primary objective under direct attack"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "allied unit concentration",
+      "visual_form": "cluster of player-controlled units on tactical map",
+      "meaning": "strength in numbers; mutual defensive positions reduce individual unit vulnerability"
+    },
+    {
+      "signal": "resupply facility control",
+      "visual_form": "airports and supply buildings occupied by player units",
+      "meaning": "ability to restore aircraft fuel/ammo and replenish infantry; sustained combat capability"
+    },
+    {
+      "signal": "terrain advantage",
+      "visual_form": "favorable terrain type occupied by player units",
+      "meaning": "defensive positioning that improves mobility, attack, or defense for terrestrial forces"
+    },
+    {
+      "signal": "unit type coverage",
+      "visual_form": "diverse unit types visible on map (infantry, aircraft, armor, transport)",
+      "meaning": "rock-paper-scissors coverage; strong matchups available against expected enemy types"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Allied Forces (North American version)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "deliberately obscured in NA release; no named faction labels",
+      "environmental_markers": "occupied headquarters and controlled territories on strategic map"
+    },
+    {
+      "faction": "Axis Powers (Afrika Korps in Japanese version)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "CPU-controlled units visually distinct from player units on grid",
+      "environmental_markers": "opponent headquarters location; initial territory control on map"
+    },
+    {
+      "faction": "German Afrika Korps (Japanese version only)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "playable faction with distinct unit set; explicitly named as Erwin Rommel's command",
+      "environmental_markers": "Egyptian campaign theater; desert terrain as primary battle environment"
+    },
+    {
+      "faction": "British Forces (Bernard Montgomery in Japanese version)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "explicitly named opponent in Japanese campaign; enemy faction in Japanese release",
+      "environmental_markers": "North African theater; Egypt defense scenario"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Allied military advantage",
+      "visual_manifestation": "player-controlled units outnumber or match enemy forces on map display",
+      "behavioral_manifestation": "player can execute offensive maneuvers; CPU opponent plays defensively with fixed AI"
+    },
+    {
+      "world_state": "Axis military advantage",
+      "visual_manifestation": "CPU forces outnumber player units (scenario 2-5 difficulty scaling)",
+      "behavioral_manifestation": "player must employ strategic positioning and terrain use to compensate; difficulty increases only through unit quantity, not AI variance"
+    },
+    {
+      "world_state": "Desert campaign stalemate",
+      "visual_manifestation": "no time limit imposed; map control divided between factions",
+      "behavioral_manifestation": "player determines pace of engagement; attrition becomes primary victory path"
+    },
+    {
+      "world_state": "Objective control shift",
+      "visual_manifestation": "headquarters location captured by opposing force on tactical grid",
+      "behavioral_manifestation": "immediate loss condition triggered; alternative: complete destruction of all enemy units required"
+    },
+    {
+      "world_state": "Operational mobility constraint",
+      "visual_manifestation": "terrain type variation displayed on map (affects movement range visualization)",
+      "behavioral_manifestation": "unit movement paths shortened in difficult terrain; unit attack/defense values adjusted by terrain type on battle resolution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "historical theater setting",
+      "example": "North African/Egyptian desert campaign map layout communicates specific WWII theater (1940s conflict context)"
+    },
+    {
+      "technique": "infrastructure control narrative",
+      "example": "airports and supply buildings as interactive map features signal logistics-dependent warfare; resupply mechanic reinforces supply chain vulnerability theme"
+    },
+    {
+      "technique": "terrain as tactical narrator",
+      "example": "desert terrain variations visually convey why North Africa was strategically significant; movement/defense penalties tell story of environmental challenge to mechanized warfare"
+    },
+    {
+      "technique": "unit roster composition",
+      "example": "nine distinct unit types (aircraft, armor, infantry, transport) visually represent WWII combined arms doctrine; rock-paper-scissors matchups communicate historical doctrine complexity"
+    },
+    {
+      "technique": "asymmetric starting positions",
+      "example": "headquarters placement and initial unit distribution on map establish faction territorial claims and reinforce historical campaign narrative (Axis invasion, Allied defense)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Aircraft units",
+      "state": "low fuel/ammunition",
+      "behavior": "must return to airport facility for resupply; cannot engage without visit to resupply building"
+    },
+    {
+      "entity": "Infantry units",
+      "state": "deployed on map",
+      "behavior": "can be transported by transport units; affected by terrain for movement range"
+    },
+    {
+      "entity": "Headquarters unit",
+      "state": "active on map",
+      "behavior": "serves dual role as strategic objective and combat unit; occupancy by enemy triggers loss condition"
+    },
+    {
+      "entity": "CPU opponent",
+      "state": "all scenarios except easiest",
+      "behavior": "receives larger unit allocation than player; fixed AI variance (no scaling complexity), only quantitative advantage changes"
+    },
+    {
+      "entity": "Terrain feature",
+      "state": "occupied by unit",
+      "behavior": "modifies unit mobility range, attack power, and defense rating during battle sequences (terrestrial units only; aircraft exempt)"
+    },
+    {
+      "entity": "Supply truck",
+      "state": "positioned on map",
+      "behavior": "provides mobile resupply alternative to fixed facilities; enables forward unit replenishment without returning to infrastructure"
+    }
+  ],
+  "notes": "Desert Commander uses visual minimalism characteristic of NES strategy games. Faction identity was deliberately obfuscated in North American release (conflict remained opaque; factions unnamed) versus Japanese version which explicitly named Allied/Axis commanders (Patton/Montgomery vs. Rommel). World-state communication relies heavily on: (1) unit positioning on grid, (2) terrain type visual variation, (3) map control/headquarters occupation. Danger/safety signals are primarily spatial and resource-based rather than aesthetic. Political situation (WWII North African campaign) communicated through setting and historical unit types rather than explicit narrative framing in NA version.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:36:43.753Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2794,
+    "output_tokens": 1971,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

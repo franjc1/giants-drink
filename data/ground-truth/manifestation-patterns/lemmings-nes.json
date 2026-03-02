@@ -1,0 +1,208 @@
+{
+  "game_id": "lemmings-nes",
+  "game_name": "Lemmings",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Fall damage threshold",
+      "visual_form": "Vertical distance/height in level geometry",
+      "meaning": "Lemmings die from falling too great a height; visual level design communicates safe vs lethal drop distances"
+    },
+    {
+      "signal": "Hazard traps",
+      "visual_form": "Booby traps, fire, lava pools rendered in level tileset",
+      "meaning": "Spatial obstacles that kill lemmings on contact; environmental visual placement signals danger zones"
+    },
+    {
+      "signal": "Water hazard",
+      "visual_form": "Lava pools and water features in terrain",
+      "meaning": "Lemmings drown or burn in these environments; color/texture distinction from safe ground"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Onscreen timer display in HUD",
+      "meaning": "When timer expires, all lemmings explode regardless of status; visual countdown communicates urgency"
+    },
+    {
+      "signal": "Screen edge boundary",
+      "visual_form": "Bottom edge of visible playfield",
+      "meaning": "Lemmings fall off bottom edge and die; spatial limit communicated through level framing"
+    },
+    {
+      "signal": "Bomber assignment",
+      "visual_form": "Lemming sprite with bomber skill active, 5-second countdown animation",
+      "meaning": "Assigned lemming will self-destruct after visible timer; player-induced danger signal"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit location",
+      "visual_form": "Designated exit point marked in level geometry",
+      "meaning": "Goal destination for lemmings; reaching this space signals level progression"
+    },
+    {
+      "signal": "Flat, unobstructed terrain",
+      "visual_form": "Level ground with no hazards or drops",
+      "meaning": "Safe passage area where lemmings can walk without danger"
+    },
+    {
+      "signal": "Parachute floater ability",
+      "visual_form": "Lemming sprite with parachute deployed during descent",
+      "meaning": "Safe fall mechanic; visual indicator that height danger is negated"
+    },
+    {
+      "signal": "Blocker lemming",
+      "visual_form": "Stationary lemming sprite positioned in path",
+      "meaning": "Creates safe stopping point; other lemmings reverse direction on contact instead of falling"
+    },
+    {
+      "signal": "Bridge/stairway construction",
+      "visual_form": "Builder lemming constructing 12-step stairway, visible brick accumulation",
+      "meaning": "Creates safe elevated passage; visual construction progress shows traversable path forming"
+    },
+    {
+      "signal": "Lemming cohort movement",
+      "visual_form": "Multiple green-haired, blue-robed lemmings moving together in formation",
+      "meaning": "Following behavior; safe to allow passive movement toward exit along established paths"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player-controlled lemmings",
+      "color_identity": "Green hair, blue robes (standard lemming appearance)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spawn from trap doors at level start; exit point is faction destination"
+    },
+    {
+      "faction": "Environmental hazards (implicit antagonistic force)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Traps, lava, fire rendered as level obstacles; no faction identity, pure environmental threat",
+      "environmental_markers": "Scattered throughout level geometry; not faction-aligned but act as opposing force to lemming survival"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level start (initial state)",
+      "visual_manifestation": "Trap doors open from above; steady stream of lemmings begins descending",
+      "behavioral_manifestation": "Lemmings follow each other in procession; default walking behavior without skill assignment"
+    },
+    {
+      "world_state": "Mid-level puzzle solving",
+      "visual_manifestation": "Lemmings interact with assigned skills; terrain changes from skill use (mining, building, bashing)",
+      "behavioral_manifestation": "Modified lemming movement patterns based on active skills; some lemmings climb, dig, or block"
+    },
+    {
+      "world_state": "Hazard encounter",
+      "visual_manifestation": "Trap animations, fire, lava visual effects trigger on contact",
+      "behavioral_manifestation": "Lemmings die or are removed from screen; damage/death animations play"
+    },
+    {
+      "world_state": "Time running out (late game)",
+      "visual_manifestation": "Timer display counts down visibly; urgent audio cues (implied)",
+      "behavioral_manifestation": "Remaining lemmings continue movement; all will explode when timer reaches zero"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "Lemmings reaching exit point; score/evaluation screen display",
+      "behavioral_manifestation": "Lemmings enter exit and disappear; level transition occurs if save threshold met"
+    },
+    {
+      "world_state": "Level failure (time expired or insufficient saves)",
+      "visual_manifestation": "All lemmings explode simultaneously; screen effects and visual chaos",
+      "behavioral_manifestation": "All remaining lemmings removed; level reset or retry prompt shown"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Obstacle placement narrative",
+      "example": "Level geometry itself tells the puzzle story—booby traps, lava pools, and drop distances are arranged to force player creative problem-solving with limited skills"
+    },
+    {
+      "technique": "Spatial difficulty progression",
+      "example": "Levels grouped into four difficulty categories; visual complexity and hazard density increase, signaling difficulty escalation without text"
+    },
+    {
+      "technique": "Lemming behavior as world indicator",
+      "example": "Lemmings' default walking, turning on obstacles, and falling behavior establishes world physics; player learns environmental rules through lemming interaction"
+    },
+    {
+      "technique": "Skill visualization as world alteration",
+      "example": "Mining, bashing, and building skills show terrain destruction and construction in real-time; landscape visually changes in response to player actions"
+    },
+    {
+      "technique": "Trap design as danger signaling",
+      "example": "Unused trap animations and removed traps suggest iteration in level design; remaining traps signal intentional hazard placement for puzzle logic"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard lemming (no skill assigned)",
+      "state": "Default/walking",
+      "behavior": "Walks in one direction, ignores other lemmings (except Blockers), falls off edges, turns around when hitting obstacles"
+    },
+    {
+      "entity": "Climber lemming",
+      "state": "Active climbing",
+      "behavior": "Climbs vertically, but falls if encountering overhang; visual upward movement signals vertical pathway availability"
+    },
+    {
+      "entity": "Floater lemming",
+      "state": "Falling/descending",
+      "behavior": "Deploys parachute and falls safely from heights; visual parachute sprite indicates height danger negation"
+    },
+    {
+      "entity": "Bomber lemming",
+      "state": "Active (5-second countdown)",
+      "behavior": "Explodes after timer expires; destroys destructible landscape nearby but not other lemmings; countdown animation signals imminent self-destruction"
+    },
+    {
+      "entity": "Blocker lemming",
+      "state": "Stationary/blocking",
+      "behavior": "Stands still permanently; incoming lemmings reverse direction on contact; provides safe stopping mechanism"
+    },
+    {
+      "entity": "Builder lemming",
+      "state": "Building stairway",
+      "behavior": "Constructs 12-step stairway upward; stops when hitting overhang or obstacle; visual brick accumulation shows progress"
+    },
+    {
+      "entity": "Basher/Miner/Digger lemming",
+      "state": "Tunneling",
+      "behavior": "Horizontally (basher), diagonally (miner), or vertically (digger) tunnels through terrain; cannot break steel barriers; visual path creation signals terrain destruction capability"
+    },
+    {
+      "entity": "Lemming (general)",
+      "state": "Falling from lethal height",
+      "behavior": "Dies on impact; removal from screen signals failure state"
+    },
+    {
+      "entity": "Lemming (general)",
+      "state": "Contact with hazard (lava, trap, fire)",
+      "behavior": "Dies or is captured; visual hazard animation plays; removal from screen"
+    },
+    {
+      "entity": "All lemmings",
+      "state": "Timer expired",
+      "behavior": "All explode simultaneously regardless of state; visual explosion effects across entire screen"
+    }
+  ],
+  "notes": "Lemmings (NES) is a port of the Amiga original with noted technical limitations ('sluggish reactions, inaccurate gameplay mechanics'). The game communicates world-state entirely through environmental and behavioral visuals without explicit faction systems or political narrative. Danger/safety signals are purely mechanical and spatial. The core manifestation layer relies on: (1) spatial geometry as hazard/safety indicator, (2) lemming sprite and animation states as behavioral communication, (3) skill assignment visual feedback showing world alteration, (4) HUD timer as urgency signal. No color-coded faction systems exist; lemmings are unified player-controlled entities vs. environmental hazards. Unused trap animations and removed traps (documented in TCRF source) suggest original design had more hazard variety, but NES version simplified manifestation language. Manifestation paradigm is entirely mechanical/puzzle-focused rather than narrative or political.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Lemmings NES article)",
+    "wikipedia (Lemmings video game article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:42:21.665Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4612,
+    "output_tokens": 2581,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

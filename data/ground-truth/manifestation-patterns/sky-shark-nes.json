@@ -1,0 +1,164 @@
+{
+  "game_id": "sky-shark-nes",
+  "game_name": "Sky Shark",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectile_fire",
+      "visual_form": "bullets and missiles from ground/air enemies",
+      "meaning": "direct threat requiring evasion; collision causes loss of life and firepower downgrade"
+    },
+    {
+      "signal": "enemy_waves",
+      "visual_form": "colored waves of approaching enemy planes",
+      "meaning": "escalating threat intensity; waves indicate stage progression and difficulty increase"
+    },
+    {
+      "signal": "ground_military_units",
+      "visual_form": "tanks, battleships, artillery positions",
+      "meaning": "stationary and mobile threats that spawn projectiles; concentrated firepower zones"
+    },
+    {
+      "signal": "collision_hazards",
+      "visual_form": "terrain and enemy aircraft in player's flight path",
+      "meaning": "environmental and entity-based immediate danger requiring avoidance"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "runway_checkpoint",
+      "visual_form": "designated landing zone at stage transitions",
+      "meaning": "safe point where player restarts if killed; represents progress save and respawn location"
+    },
+    {
+      "signal": "powerup_drops",
+      "visual_form": "\"S\" icons and point bonuses from destroyed enemies",
+      "meaning": "destroyed enemies are safe targets; item drops indicate successful engagement"
+    },
+    {
+      "signal": "bomb_pickups",
+      "visual_form": "\"B\" icons from ground enemy destruction",
+      "meaning": "resource replenishment; indicates safe weapon availability"
+    },
+    {
+      "signal": "stage_completion",
+      "visual_form": "reaching final runway after all enemies cleared",
+      "meaning": "safe zone transition; no new threats spawn after reaching designated endpoint"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player_Force",
+      "color_identity": null,
+      "symbol_or_sigil": "biplane aircraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "runway takeoff/landing zones; white or neutral color scheme typical of arcade player sprites"
+    },
+    {
+      "faction": "Enemy_Military_Forces",
+      "color_identity": "typically dark/contrasting colors for distinction from player",
+      "symbol_or_sigil": "tanks, battleships, artillery, enemy fighter planes",
+      "enemy_visual_variants": "colored waves of enemy planes suggest different enemy unit types or aircraft variants",
+      "environmental_markers": "ground-based military installations, scattered across scrolling battlefield terrain"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_stage_difficulty",
+      "visual_manifestation": "sparse enemy patterns; slower projectile speed; simpler enemy wave formations",
+      "behavioral_manifestation": "enemies fire at standard rate; first stage designed as tutorial for new players"
+    },
+    {
+      "world_state": "mid_stage_escalation",
+      "visual_manifestation": "increased density of enemy units on screen; more complex layered enemy waves",
+      "behavioral_manifestation": "enemy planes begin aiming shots at player position rather than straight patterns; increased bullet density"
+    },
+    {
+      "world_state": "late_stage_intensity",
+      "visual_manifestation": "maximum sprite count; heavy concentration of ground and air units; dense projectile patterns",
+      "behavioral_manifestation": "enemy fire becomes predictive; bullet speed increases significantly; checkpoints become critical visual markers"
+    },
+    {
+      "world_state": "game_loop_restart",
+      "visual_manifestation": "second loop maintains visual continuity but introduces subtle difficulty increase markers",
+      "behavioral_manifestation": "increased bullet speed returns to normal after overflow; difficulty persists across stage restarts"
+    },
+    {
+      "world_state": "firepower_degradation",
+      "visual_manifestation": "visual feedback on weapon effectiveness; shot range reduction indicated by projectile visual size/distance",
+      "behavioral_manifestation": "after hit, plane returns to base shot; reduced damage output until \"S\" powerups collected"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "scrolling_background_narrative",
+      "example": "left-right scrolling backgrounds convey Thai landscape and warzone geography; constantly moving scenery immerses player in traversal through combat theater (inspired by Apocalypse Now aesthetic)"
+    },
+    {
+      "technique": "military_installation_progression",
+      "example": "stages feature escalating military infrastructure: ground positions evolve from simple batteries to battleships and complex fortifications; visual hierarchy communicates enemy resource commitment"
+    },
+    {
+      "technique": "terrain_as_context",
+      "example": "five increasing difficulty levels marked by distinct environmental visual signatures; runway zones provide clear narrative checkpoints and safe harbor imagery"
+    },
+    {
+      "technique": "enemy_unit_type_variety",
+      "example": "tanks, battleships, artillery, and fighter planes represent different military branches; visual diversity communicates realistic war theater with multiple threat vectors"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_biplane",
+      "state": "healthy",
+      "behavior": "full firepower; extended shot range; faster responsiveness; can absorb hits and maintain capability"
+    },
+    {
+      "entity": "player_biplane",
+      "state": "damaged",
+      "behavior": "firepower downgraded to base shot; reduced effective range; must seek \"S\" powerups to restore capability"
+    },
+    {
+      "entity": "player_biplane",
+      "state": "low_resources",
+      "behavior": "limited bombs remaining; must choose bomb deployment carefully; visual indicator of bomb stock displayed"
+    },
+    {
+      "entity": "enemy_planes",
+      "state": "early_game",
+      "behavior": "non-predictive fire patterns; simple wave formations; wide spacing between units"
+    },
+    {
+      "entity": "enemy_planes",
+      "state": "late_game",
+      "behavior": "aiming behavior activated; shots directed at player position; tighter formation clustering; increased fire rate"
+    },
+    {
+      "entity": "ground_units",
+      "state": "active",
+      "behavior": "consistent outgoing fire; some units spawn powerups when destroyed; stationary positioning with limited movement"
+    },
+    {
+      "entity": "bomb_weapon",
+      "state": "deployed",
+      "behavior": "clears portion of screen of all bullets; damages enemies within blast radius; visual explosion effect communicates safety window"
+    }
+  ],
+  "notes": "Sky Shark (NES 1989) communicates world-state primarily through enemy density escalation, projectile speed increase, and behavioral AI changes rather than explicit visual environmental shifts. The game uses military unit type variety and runway checkpoints to structure narrative progression. Danger signals are heavily weighted toward enemy projectiles and wave formations, reflecting the core SHMUP challenge loop. The Apocalypse Now-inspired aesthetic (mentioned in development) was conveyed through Thai landscape scrolling backgrounds, though NES technical limitations constrain visual storytelling. Firepower degradation serves as a critical player-state signal affecting combat viability. The checkpoint/runway system provides both mechanical and visual safety communication.",
+  "sources_used": [
+    "wikipedia - Flying Shark (describes gameplay, enemy types, level progression, development intent)",
+    "tcrf - Sky Shark NES (credits/developer metadata; limited gameplay documentation)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:07:24.801Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3888,
+    "output_tokens": 1877,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

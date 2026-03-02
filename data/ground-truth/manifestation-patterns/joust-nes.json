@@ -1,0 +1,290 @@
+{
+  "game_id": "joust-nes",
+  "game_name": "Joust",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy knight approach",
+      "visual_form": "Colored enemy knight sprite moving toward player on screen",
+      "meaning": "Immediate threat requiring collision-based combat or evasion"
+    },
+    {
+      "signal": "Lower joust position",
+      "visual_form": "Enemy knight positioned above player character in vertical space",
+      "meaning": "Player is at disadvantage in upcoming collision; defeat is likely"
+    },
+    {
+      "signal": "Lava presence",
+      "visual_form": "Flat island surrounded by lava below floating platforms",
+      "meaning": "Environmental hazard; flying too low results in Lava Troll grab and character death"
+    },
+    {
+      "signal": "Pterodactyl spawn",
+      "visual_form": "Pterodactyl sprite appearing after predetermined time frame",
+      "meaning": "Additional threat hunting the hero; bonus opportunity but adds danger"
+    },
+    {
+      "signal": "Unhatched egg on platform",
+      "visual_form": "Egg sprite resting on platform after enemy defeat",
+      "meaning": "If not collected, will hatch into new enemy knight; delayed threat"
+    },
+    {
+      "signal": "Multiple enemy waves",
+      "visual_form": "Groups of enemy knights with increasing visual complexity per wave",
+      "meaning": "Escalating difficulty and pressure; world state becoming more hostile"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Higher joust position",
+      "visual_form": "Player knight positioned above enemy knight in vertical space",
+      "meaning": "Player advantage in collision; victory likely in engagement"
+    },
+    {
+      "signal": "Floating platforms",
+      "visual_form": "Rock platforms suspended above lava",
+      "meaning": "Safe landing zones; allows repositioning and evasion of lava threat"
+    },
+    {
+      "signal": "Distance from lava",
+      "visual_form": "Vertical clearance above the lava layer",
+      "meaning": "Safety from Lava Troll; character can fly freely without grab threat"
+    },
+    {
+      "signal": "Cooperative ally presence",
+      "visual_form": "Second player character (blue knight on stork) visible on screen",
+      "meaning": "Support for wave completion; shared threat management"
+    },
+    {
+      "signal": "Collected egg reward",
+      "visual_form": "Egg disappearing from platform, score increment",
+      "meaning": "Points gained; prevented enemy respawn"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1 Knight",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Knight with lance mounted on ostrich",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Top-center screen position in opening screen, large bird mount distinguishes from enemies"
+    },
+    {
+      "faction": "Player 2 Knight",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "Knight with lance mounted on stork",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cooperates with Player 1; stork differs visually from ostrich and buzzard mounts"
+    },
+    {
+      "faction": "Bounder Enemy Knight",
+      "color_identity": "Specific color variant (not detailed in sources)",
+      "symbol_or_sigil": "Knight mounted on buzzard",
+      "enemy_visual_variants": "Separate color from other enemy types (Hunter, Shadow Lord)",
+      "environmental_markers": "Value score differs from other enemy types; wave composition"
+    },
+    {
+      "faction": "Hunter Enemy Knight",
+      "color_identity": "Specific color variant (not detailed in sources)",
+      "symbol_or_sigil": "Knight mounted on buzzard",
+      "enemy_visual_variants": "Separate color from Bounder and Shadow Lord types",
+      "environmental_markers": "Distinct point value; tactical behavior in wave"
+    },
+    {
+      "faction": "Shadow Lord Enemy Knight",
+      "color_identity": "Specific color variant (not detailed in sources)",
+      "symbol_or_sigil": "Knight mounted on buzzard",
+      "enemy_visual_variants": "Separate color identifying it as elite/final threat type",
+      "environmental_markers": "Likely appears in later waves; highest point value suggests visual prominence"
+    },
+    {
+      "faction": "Pterodactyl",
+      "color_identity": null,
+      "symbol_or_sigil": "Pterodactyl sprite (prehistoric flying creature)",
+      "enemy_visual_variants": "Distinct from knight+bird pairing",
+      "environmental_markers": "Spawns after predetermined time; hunts hero; non-standard enemy archetype"
+    },
+    {
+      "faction": "Lava Troll",
+      "color_identity": null,
+      "symbol_or_sigil": "Troll creature associated with lava environment",
+      "enemy_visual_variants": "Indestructible; only environmental hazard entity",
+      "environmental_markers": "Occupies lava layer below platforms; grabbing mechanic ties it to lava region"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Wave progression early",
+      "visual_manifestation": "Fewer enemy knights on screen; simpler wave composition with Bounders or Hunters",
+      "behavioral_manifestation": "Enemy knights move with predictable patterns; limited threat density"
+    },
+    {
+      "world_state": "Wave progression mid-game",
+      "visual_manifestation": "Increased number of enemy knight sprites; mixed enemy types visible",
+      "behavioral_manifestation": "Enemy movement becomes more aggressive; coordinated group behavior emerges"
+    },
+    {
+      "world_state": "Wave progression late-game",
+      "visual_manifestation": "Shadow Lord enemy type appears; maximum enemy density on single screen",
+      "behavioral_manifestation": "Enemies coordinate complex attack patterns; pterodactyl adds layer of hunting behavior"
+    },
+    {
+      "world_state": "Enemy defeated",
+      "visual_manifestation": "Knight sprite removed; egg sprite appears on platform with falling trajectory",
+      "behavioral_manifestation": "Egg falls toward bottom of screen; will hatch if not collected within time window"
+    },
+    {
+      "world_state": "Egg uncollected timeout",
+      "visual_manifestation": "Egg hatches into new enemy knight sprite with new mount (buzzard)",
+      "behavioral_manifestation": "New enemy joins active wave; threat level increases without player intervention"
+    },
+    {
+      "world_state": "Player collision advantage",
+      "visual_manifestation": "Player knight sprite positioned higher on screen than enemy during engagement",
+      "behavioral_manifestation": "Collision results in enemy defeat; victorious lance is higher"
+    },
+    {
+      "world_state": "Player collision disadvantage",
+      "visual_manifestation": "Player knight sprite positioned lower than enemy during engagement",
+      "behavioral_manifestation": "Collision results in player life loss; both characters repelled if equal height"
+    },
+    {
+      "world_state": "Character flying too low",
+      "visual_manifestation": "Player or enemy sprite near lava surface; Lava Troll grabbing animation triggers",
+      "behavioral_manifestation": "Character dragged into lava; immediate death for player, enemy removal"
+    },
+    {
+      "world_state": "Game over imminent",
+      "visual_manifestation": "Score and lives displayed at bottom platform; life counter near zero",
+      "behavioral_manifestation": "Next loss results in game end; UI makes remaining lives visually clear"
+    },
+    {
+      "world_state": "Wave completion",
+      "visual_manifestation": "All enemy sprites cleared from screen; transition to next wave",
+      "behavioral_manifestation": "New wave spawns with increased complexity; difficulty escalates visually"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Platform hierarchy and lava underworld",
+      "example": "Rock platforms float above lava; creates vertical danger gradient. Safe zone is elevated; death zone is below. Island surrounded by lava tells story of player as aerial defender protecting island space."
+    },
+    {
+      "technique": "Mount and rider pairing identity",
+      "example": "Player 1 rides ostrich (yellow), Player 2 rides stork (blue), enemies ride buzzards. Mount species visually communicates allegiance and role. Flying ability differentiation implied by bird choice."
+    },
+    {
+      "technique": "Enemy color-coding for threat level",
+      "example": "Bounder, Hunter, and Shadow Lord enemies use distinct colors; visual language communicates power hierarchy without text. Shadow Lord name paired with color suggests darkness/higher threat."
+    },
+    {
+      "technique": "Egg mechanic as consequence visualization",
+      "example": "Defeated enemy transforms into egg on platform, falls toward lava. Egg not collected before hatching shows consequence of incomplete victory; visual reminder of stakes."
+    },
+    {
+      "technique": "Pterodactyl as special event",
+      "example": "Pterodactyl spawns on timer; visually distinct from knight+bird pairing. Bonus point opportunity but added danger; signals world becoming more hostile at specific moment."
+    },
+    {
+      "technique": "Collision-based combat visualization",
+      "example": "Higher lance wins; collision height determines outcome. No hit points, no health bars—visual positioning alone tells combat result. Lance elevation is primary success metric."
+    },
+    {
+      "technique": "Wave difficulty escalation",
+      "visual_example": "Each completed wave introduces more enemy sprites, more complex types, more simultaneous threats. Screen becomes increasingly populated; visual density communicates rising difficulty."
+    },
+    {
+      "technique": "Screen wrapping as world-state indicator",
+      "example": "Characters exiting left/right reappear opposite side. Suggests bounded flying arena; world is cyclical and confined. No escape beyond screen edges."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Yellow Knight (Player 1)",
+      "state": "Ascending",
+      "behavior": "Button mashing increases flap rate; bird gains altitude. Position on screen rises as wing input increases."
+    },
+    {
+      "entity": "Yellow Knight (Player 1)",
+      "state": "Descending",
+      "behavior": "No button input allows gravity; character slowly falls. Descent rate visible through vertical position change."
+    },
+    {
+      "entity": "Yellow Knight (Player 1)",
+      "state": "Collision imminent - higher position",
+      "behavior": "Lance is positioned above enemy lance; collision will defeat enemy. Visual positioning predicts outcome."
+    },
+    {
+      "entity": "Yellow Knight (Player 1)",
+      "state": "Collision imminent - lower position",
+      "behavior": "Lance is below enemy lance; collision will cause player loss. Visual positioning predicts failure."
+    },
+    {
+      "entity": "Yellow Knight (Player 1)",
+      "state": "Near lava",
+      "behavior": "Character sprite proximity to lava triggers Lava Troll grab; character dragged downward into lava and removed."
+    },
+    {
+      "entity": "Blue Knight (Player 2)",
+      "state": "Cooperative",
+      "behavior": "Moves independently on same screen; can attack each other optionally or coordinate against waves."
+    },
+    {
+      "entity": "Bounder Enemy Knight",
+      "state": "Patrolling wave",
+      "behavior": "Moves across screen in predictable pattern; basic AI movement on platforms. Lower threat level than other enemy types."
+    },
+    {
+      "entity": "Hunter Enemy Knight",
+      "state": "Pursuing player",
+      "behavior": "More aggressive movement toward player; active targeting behavior. Mid-threat level; seeks engagement."
+    },
+    {
+      "entity": "Shadow Lord Enemy Knight",
+      "state": "Threatening late-game",
+      "behavior": "Most aggressive movement pattern; coordinates with other enemies. High threat level; elite enemy type behavior."
+    },
+    {
+      "entity": "Enemy Knight - defeated",
+      "state": "Dead / egg form",
+      "behavior": "Knight sprite replaced with egg sprite; egg falls toward lava. If uncollected, egg hatches into new enemy after delay."
+    },
+    {
+      "entity": "Pterodactyl",
+      "state": "Hunting",
+      "behavior": "Spawns after timer; actively pursues player character. Separate AI from knight enemies; bonus threat on timer."
+    },
+    {
+      "entity": "Lava Troll",
+      "state": "Active / grabbing",
+      "behavior": "Remains in lava layer; grabs any character flying too low. Indestructible; environmental hazard behavior."
+    },
+    {
+      "entity": "Enemy wave",
+      "state": "Early wave",
+      "behavior": "Sparse enemy density; simple movement patterns. Low screen congestion; player has spatial advantage."
+    },
+    {
+      "entity": "Enemy wave",
+      "state": "Late wave",
+      "behavior": "High enemy density; complex coordinated patterns. Screen becomes congested; evasion becomes primary challenge."
+    }
+  ],
+  "notes": "Joust communicates world-state primarily through vertical positioning (collision height determines victory), entity color-coding (faction identity), and screen density escalation (wave difficulty). The game lacks explicit UI for danger beyond life counter and score display; world-state is expressed through mechanics (lava threat, egg respawning) and visual entity composition (enemy types per wave). Political situation is minimal—primarily cooperative two-player versus enemy faction with no dialogue or narrative. Safety and danger are communicated through environmental layout (platform safety, lava danger) and spatial relationships (collision positioning). NES version added graphic detail over arcade original but maintained core visual communication methods.",
+  "sources_used": [
+    "wikipedia - Joust gameplay section",
+    "tcrf - Joust (NES) page"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:27:04.270Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4204,
+    "output_tokens": 3477,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "game_id": "herzog-zwei-genesis",
+  "game_name": "Herzog Zwei",
+  "platform": "genesis",
+  "paradigm": "real-time strategy",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit proximity",
+      "visual_form": "On-screen enemy sprites and positions in real-time viewport",
+      "meaning": "Active threat requiring immediate mech response or unit redeployment"
+    },
+    {
+      "signal": "Fuel depletion indicator",
+      "visual_form": "Vehicle sprite behavior change (slowing, stopping)",
+      "meaning": "Units becoming immobilized and vulnerable without resupply"
+    },
+    {
+      "signal": "Ammunition exhaustion",
+      "visual_form": "Unit ceases fire animation",
+      "meaning": "Combat effectiveness lost; unit requires supply vehicle support"
+    },
+    {
+      "signal": "Outpost capture attempt",
+      "visual_form": "Enemy units surrounding/attacking neutral/friendly outpost structures",
+      "meaning": "Loss of resource generation and strategic position imminent"
+    },
+    {
+      "signal": "Mech damage state",
+      "visual_form": "Mech sprite visual degradation or altered coloring",
+      "meaning": "Direct pilot vulnerability; loss of mech = loss of command capability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly outpost control",
+      "visual_form": "Outpost structure colored/marked as player-owned; static indestructible building",
+      "meaning": "Secure revenue generation, repair/refuel station, remote base of operations"
+    },
+    {
+      "signal": "Mech at full health/fuel",
+      "visual_form": "Mech sprite unmarked, full visual representation",
+      "meaning": "Operational capacity for unit command and combat"
+    },
+    {
+      "signal": "Supply vehicle presence",
+      "visual_form": "Dedicated support vehicle sprite near combat units",
+      "meaning": "Active logistics network enabling unit sustainability"
+    },
+    {
+      "signal": "Unit patrol established",
+      "visual_form": "Units following predictable movement patterns in designated areas",
+      "meaning": "Tactical positioning and area denial without active micro"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1 (Herzog)",
+      "color_identity": "Likely blue or primary player color (not explicitly documented)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy units display distinctly from player units through sprite palette/coloring",
+      "environmental_markers": "Outposts change visual state (color/marking) when captured by faction; nine permanent outposts serve as faction control indicators"
+    },
+    {
+      "faction": "Player 2 / AI Opponent",
+      "color_identity": "Contrasting color to player 1 (red or secondary palette assumed)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct sprite rendering from player forces; AI opponent receives visual distinction through palette swap",
+      "environmental_markers": "Outpost control state visually indicates enemy faction occupation; AI difficulty level increases enemy armor/damage (visual balance not communicated to player)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / resource acquisition phase",
+      "visual_manifestation": "Outposts display neutral state; few units visible on battlefield; sparse unit icons in command menu",
+      "behavioral_manifestation": "Mech rapid-deploys basic units to capture outposts; light harassment; focus on economic expansion"
+    },
+    {
+      "world_state": "Mid-game / territorial control",
+      "visual_manifestation": "Multiple outposts under each player's faction control; increasing unit density on battlefield; more varied unit types deployed",
+      "behavioral_manifestation": "Active skirmishing over remaining neutral outposts; patrol patterns establish; resource flow visible through unit purchase rate"
+    },
+    {
+      "world_state": "Late game / military dominance",
+      "visual_manifestation": "Dense concentration of units; most outposts captured; high visual saturation of sprites on screen",
+      "behavioral_manifestation": "Large-scale coordinated attacks; supply lines strained; constant mech micromanagement for unit orders; fuel/ammo scarcity becomes critical"
+    },
+    {
+      "world_state": "Unit under siege",
+      "visual_manifestation": "Unit sprite surrounded by enemy units; potential visual damage indicators",
+      "behavioral_manifestation": "Unit ceases movement orders; defensive posture assumed; mech required for extraction or reinforcement"
+    },
+    {
+      "world_state": "Supply line compromised",
+      "visual_manifestation": "Supply vehicle absence in tactical area; units visually ceasing fire or movement",
+      "behavioral_manifestation": "Affected units immobilize due to fuel depletion; combat effectiveness cascades downward; visual stalling of unit activity"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Outpost permanence and ownership",
+      "example": "Nine fixed outpost structures exist on every map; faction control is immediately visually apparent through structure coloring/marking; destruction is impossible, forcing player to contest through unit control rather than environmental destruction"
+    },
+    {
+      "technique": "Resource scarcity visualization",
+      "example": "Fuel and ammunition limitations are communicated through unit behavioral changes (slowing, stopping, ceasing fire) rather than UI bars; player learns resource management through observable unit degradation"
+    },
+    {
+      "technique": "Unit composition as strategic statement",
+      "example": "Eight different vehicle types with distinct sprites represent visible trade-offs (speed vs. armor, anti-air vs. ground-attack); visual unit selection reveals player strategy to opponent in multiplayer"
+    },
+    {
+      "technique": "Mech as omnipresent authority",
+      "visual_form": "Player-controlled flying mech is always visible and must be physically present to issue orders; its visual position and damage state communicate command authority and vulnerability",
+      "example": "Mech destruction or fuel depletion immediately halts all new unit deployments; visual presence/absence tells players entire battle state"
+    },
+    {
+      "technique": "Real-time simultaneity stress",
+      "example": "No pause menu in multiplayer; visual information updates continuously without interruption; UI and sprite movement create constant pressure conveying urgency of live strategy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ground combat unit",
+      "state": "Full fuel and ammunition",
+      "behavior": "Executes assigned orders (patrol, garrison, capture base) at normal speed; maintains combat stance; visible animation"
+    },
+    {
+      "entity": "Ground combat unit",
+      "state": "Fuel depleted",
+      "behavior": "Slows movement, comes to complete stop; becomes immobilized and vulnerable; sprite may fade or visually indicate inoperability"
+    },
+    {
+      "entity": "Ground combat unit",
+      "state": "Ammunition exhausted",
+      "behavior": "Ceases fire animation; cannot engage enemies; maintains movement if fuel available but is defenseless"
+    },
+    {
+      "entity": "Supply vehicle",
+      "state": "Active in service radius",
+      "behavior": "Follows units; provides refuel/rearm; visible proximity indicates logistics support"
+    },
+    {
+      "entity": "Mech (player avatar)",
+      "state": "Operational",
+      "behavior": "Free flight movement; can airlift units; issues commands through menu system; visible on-screen at all times"
+    },
+    {
+      "entity": "Mech (player avatar)",
+      "state": "Damaged",
+      "behavior": "Visual degradation; continued flight capability but increased vulnerability; communicates weakness to opponent in multiplayer"
+    },
+    {
+      "entity": "Outpost",
+      "state": "Neutral",
+      "behavior": "Static, indestructible; visual neutral coloring; no revenue generation; available for capture"
+    },
+    {
+      "entity": "Outpost",
+      "state": "Player-controlled",
+      "behavior": "Generates visible revenue flow; acts as visible resupply/repair point; sprite displays faction coloring"
+    },
+    {
+      "entity": "Outpost",
+      "state": "Enemy-controlled",
+      "behavior": "Generates enemy revenue (inferred from increasing enemy unit deployment); visual enemy coloring indicates denial of resource"
+    }
+  ],
+  "notes": "Herzog Zwei predates mainstream RTS genre conventions (Dune II, StarCraft). Manifestation patterns rely heavily on real-time sprite behavior and absence of UI abstraction—scarcity and state are communicated through observable unit degradation rather than menu systems. The flying mech's constant visibility establishes it as world-state embodiment: its location, damage, and fuel determine all command capability. Faction identity is communicated through sprite palette swaps rather than sigils. Political/strategic communication occurs through unit deployment density and outpost control visualization in multiplayer context. No faction-specific visual language systems documented beyond color differentiation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:36:53.064Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3227,
+    "output_tokens": 2368,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

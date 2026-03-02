@@ -1,0 +1,201 @@
+{
+  "game_id": "earthbound-snes",
+  "game_name": "EarthBound",
+  "platform": "snes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact from behind",
+      "visual_form": "Red translucent swirl filling screen",
+      "meaning": "Enemy has first-strike advantage; player at tactical disadvantage"
+    },
+    {
+      "signal": "Visible enemy parties on overworld",
+      "visual_form": "Enemy sprites scattered like NPCs in seamless world",
+      "meaning": "Danger present but avoidable; player has visual warning and can navigate around threats"
+    },
+    {
+      "signal": "Weaker enemies fleeing",
+      "visual_form": "Enemy sprites retreating from player party",
+      "meaning": "Power differential acknowledged; player is dominant in local area"
+    },
+    {
+      "signal": "Character unconsciousness",
+      "visual_form": "Character sprite state change (implied visual dimming/graying)",
+      "meaning": "Party member incapacitated; reduced combat effectiveness"
+    },
+    {
+      "signal": "Status effects (poison, cold, sunstroke, sickness)",
+      "visual_form": "Visual indicators on character sprites (status condition displays)",
+      "meaning": "Ongoing damage threat; can trigger game-over if untreated or combined with events"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Enemy contact from front (forward approach)",
+      "visual_form": "Green translucent swirl filling screen",
+      "meaning": "Player has first-strike advantage; tactical superiority in upcoming battle"
+    },
+    {
+      "signal": "Automatic battle resolution",
+      "visual_form": "Battle sequence skipped; enemy defeated instantly on contact",
+      "meaning": "Encounter is trivially safe; no real threat to party"
+    },
+    {
+      "signal": "Town/village environments",
+      "visual_form": "Buildings, NPCs, safe gathering spaces in seamless world",
+      "meaning": "Non-combat zone; restoration and social interaction available"
+    },
+    {
+      "signal": "Accessible shops and healing services",
+      "visual_form": "Storefronts and NPC merchants integrated into village scenes",
+      "meaning": "Resource replenishment available; can restore HP/PP and acquire supplies"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Giygas (universal cosmic destroyer)",
+      "color_identity": null,
+      "symbol_or_sigil": "Starman units (octahedron-shaped enemy sprites)",
+      "enemy_visual_variants": "Starman Jr., Starman Deluxe, Final Starman (capsule-contained entities); increasingly complex visual representations",
+      "environmental_markers": "Eight Sanctuaries scattered across world; player must collect melodies from each to oppose Giygas"
+    },
+    {
+      "faction": "Chosen Four (player party)",
+      "color_identity": null,
+      "symbol_or_sigil": "Ness, Paula, Jeff, Poo (distinct character sprites with direction-facing variants)",
+      "enemy_visual_variants": "Party members rendered with jump sprites, sitting sprites, sleeping sprites showing state variations",
+      "environmental_markers": "Party travels seamlessly through modern Americana setting; Sanctuaries serve as destination waypoints"
+    },
+    {
+      "faction": "Everdred (antagonist NPC)",
+      "color_identity": null,
+      "symbol_or_sigil": "Forward-facing static sprite (ghost variant exists in sprite data)",
+      "enemy_visual_variants": "Unused sprite showing dead/knocked-down state (suggests defeated narrative arc)",
+      "environmental_markers": "Fourside location; visual clarity on whether enemy survives encounter is ambiguous in final game"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Onett, nighttime)",
+      "visual_manifestation": "Ness begins in pajamas; King dog present during daylight sequences (developer notes indicate night setting added late in development)",
+      "behavioral_manifestation": "Weaker enemies present; automatic victories common; enemies flee from party"
+    },
+    {
+      "world_state": "Mid-game progression (multiple towns and dungeons)",
+      "visual_manifestation": "Party expands from Ness to include Paula, Jeff, and Poo; character roster visible in overworld sprite table",
+      "behavioral_manifestation": "Manual battle sequences required; enemy parties have variable composition; RNG determines item drops and SMAAAASH attacks"
+    },
+    {
+      "world_state": "Late game (Moonside, Lost Underworld, endgame areas)",
+      "visual_manifestation": "Surreal environments; in-game hallucinations manifest; crates and unusual enemy designs (octopus statues in JP version); tiny NPC sprites appear (photographer, Escargo Express clerk)",
+      "behavioral_manifestation": "Enemy encounters become mandatory; no automatic victories; strategic PSI use required; final boss preparation phase with Ness' Nightmare and Magicant visit"
+    },
+    {
+      "world_state": "Anti-piracy activation (cartridge tampering detected)",
+      "visual_manifestation": "SRAM check failure triggers increased encounter rates; Layer Three escalates enemy density visually on overworld",
+      "behavioral_manifestation": "Layer Four triggers 'Grand Finale' — repeated forced battles with escalating difficulty; gameplay becomes progressively unplayable"
+    },
+    {
+      "world_state": "Threed underground prison sequence (mostly deleted, sprite evidence remains)",
+      "visual_manifestation": "Ness and Paula sitting with eyes closed sprite (unused but in final ROM)",
+      "behavioral_manifestation": "Cutscene drag-to-prison mechanic (removed before release; sprite data preserved)"
+    },
+    {
+      "world_state": "Dusty Dunes Desert (traffic jam event)",
+      "visual_manifestation": "Honking car emote sprite (unused; intended to show car state via visual indicator)",
+      "behavioral_manifestation": "Environmental congestion visual cue not implemented in final version"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Seamless world without overworld map screen",
+      "example": "No separation between town and outside world; all locations integrated into single massive 10.2 MB map; player navigation communicates unified geography"
+    },
+    {
+      "technique": "Visible enemy placement as world-state indicator",
+      "example": "Enemy sprites scattered like NPCs show local danger level; denser clusters indicate hazardous regions; empty areas signal safety"
+    },
+    {
+      "technique": "Oblique projection perspective for narrative immersion",
+      "example": "2D isometric-like angle differs from standard RPG grid views; creates intimate, exploratory tone matching Americana setting"
+    },
+    {
+      "technique": "Sprite direction-facing variants for character state storytelling",
+      "example": "Jumping party member sprites convey action moments; King escaping boarding school via direction-faced jump sprite; sleeping Ness with hat shows character routine"
+    },
+    {
+      "technique": "Sanctuary locations as visual quest markers",
+      "example": "Eight geographically distinct Sanctuaries serve as narrative waypoints; melody collection visible through story progression"
+    },
+    {
+      "technique": "Unused sprite data as development narrative artifact",
+      "example": "Deleted Threed prison cutscene sprites (sitting Ness/Paula with closed eyes) visible in ROM; indicate cut content scope without textual documentation"
+    },
+    {
+      "technique": "NPC behavioral changes under world-state (RNG-driven)",
+      "example": "NPC behavior determined by 14,592 sequential RNG values; text scrolling advances RNG; loading enemies shifts RNG; creates illusion of living world responding to player presence"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Weak enemies",
+      "state": "Encountered by player party",
+      "behavior": "Auto-flee from Ness and party; automatic victory without battle sequence; grants experience without combat animation"
+    },
+    {
+      "entity": "Enemy party (general)",
+      "state": "Composition randomized",
+      "behavior": "Spawned with RNG-determined makeup; item drops random; SMAAAASH attack frequency RNG-dependent; behavior manipulable via pause-RNG exploit"
+    },
+    {
+      "entity": "Character in party",
+      "state": "HP reaches zero",
+      "behavior": "Rendered unconscious; removed from combat; text notification of critical health triggers game state disruption (can interrupt staircase-locking to enable wall-clipping glitch)"
+    },
+    {
+      "entity": "Ness (player character)",
+      "state": "Staircase interaction",
+      "behavior": "Locked to staircase movement; interrupted by event (health warning or phone call) causes unlock, enabling unintended wall-clipping traversal"
+    },
+    {
+      "entity": "Starman units",
+      "state": "Faction representation",
+      "behavior": "Appear in capsule or octahedron form; increasingly complex variants (Jr., Deluxe, Final); directly oppose Sanctuary melody collection objective"
+    },
+    {
+      "entity": "Everdred",
+      "state": "Post-encounter (narrative ambiguity)",
+      "behavior": "Lies on ground in Fourside; unused knocked-down sprite exists, suggesting intended death state not clearly communicated in final version"
+    },
+    {
+      "entity": "Tenda (NPC)",
+      "state": "Sanctuary access",
+      "behavior": "Rock-lifting animation exists but never displays; intended environmental interaction incomplete"
+    },
+    {
+      "entity": "Pirated cartridge",
+      "state": "SRAM integrity check failure",
+      "behavior": "Layer One region check passes; Layer Two SRAM validation fails; Layer Three escalates visual encounter density; Layer Four triggers unwinnable 'Grand Finale' state"
+    }
+  ],
+  "notes": "EarthBound uses primarily behavioral and composition-based world-state communication rather than explicit visual filters. The seamless world and visible enemy placement create a unified danger landscape where player navigation choices directly interact with threat perception. RNG-driven NPC behavior and enemy composition suggest a world that appears to respond dynamically to player presence. Regional differences (octopus statues in JP vs. pencil erasers in US) indicate cultural localization affecting visual enemy identity without narrative impact. Unused sprite data (Tenda animation, deleted Threed cutscene, Everdred death state) reveals cut narrative beats that would have enriched world-state visual communication. Anti-piracy layers use escalating encounter frequency as punishment mechanic, making visual threat density the primary punitive signal. No explicit faction color-coding or sigil systems documented; faction identity relies on unit types (Starman variants) and location-based sanctuary markers.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:39:37.939Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8487,
+    "output_tokens": 2702,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

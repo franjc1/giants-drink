@@ -1,0 +1,185 @@
+{
+  "game_id": "air-fortress-nes",
+  "game_name": "Air Fortress",
+  "platform": "nes",
+  "paradigm": "action-adventure / scrolling shooter hybrid",
+  "danger_signals": [
+    {
+      "signal": "enemy_approach",
+      "visual_form": "flying enemy sprites moving toward player in scrolling shooter sections",
+      "meaning": "immediate collision threat; single hit destroys lightship"
+    },
+    {
+      "signal": "space_station_debris",
+      "visual_form": "drifting fortress parts in Air Base approach phase",
+      "meaning": "environmental hazard during lightship infiltration"
+    },
+    {
+      "signal": "fortress_core_location",
+      "visual_form": "central structure within maze environment",
+      "meaning": "target marker; destroying it triggers fortress self-destruct sequence"
+    },
+    {
+      "signal": "fortress_explosion_timer",
+      "visual_form": "structural integrity breakdown after core destruction (inferred from gameplay context)",
+      "meaning": "time pressure; player must escape before explosion consumes entire fortress interior"
+    },
+    {
+      "signal": "enemy_robots_and_security",
+      "visual_form": "hostile mechanical entities within fortress interior",
+      "meaning": "active threat requiring beam weapon engagement"
+    },
+    {
+      "signal": "hostile_astronauts",
+      "visual_form": "suited enemy soldiers patrolling fortress corridors",
+      "meaning": "faction resistance; armed opposition to infiltration"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "air_lock_gate",
+      "visual_form": "fortress entry point in scrolling shooter phase",
+      "meaning": "successful penetration; grants access to interior"
+    },
+    {
+      "signal": "energy_pickups",
+      "visual_form": "collectible objects during Air Base approach",
+      "meaning": "resource restoration; sustains lightship integrity"
+    },
+    {
+      "signal": "crash_beam_ammunition",
+      "visual_form": "limited-supply power weapon pickups",
+      "meaning": "tactical advantage; enhanced offensive capability for interior combat"
+    },
+    {
+      "signal": "player_ship_interior",
+      "visual_form": "escape location marker within fortress maze",
+      "meaning": "exit point; extraction route after core destruction"
+    },
+    {
+      "signal": "maze_navigation_passages",
+      "visual_form": "traversable corridors and chambers (inferred from adventure gameplay structure)",
+      "meaning": "safe pathways through fortress structure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Space Federation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Hal Bailman's shielded spacesuit and lightship design (player-controlled assets); fortress interiors contain Federation-incompatible architecture"
+    },
+    {
+      "faction": "Air Fortresses (Locust Horde Enemy)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "flying enemy sprites, security robots, astronaut defenders, fortress structural geometry",
+      "environmental_markers": "fortress mazes, security systems, resource-consuming internal architecture; behave as interstellar locust swarms consuming planets"
+    },
+    {
+      "faction": "Planet Farmel Civilization",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "narrative origin point; civilization threatened by fortress invasion (not visually represented in gameplay)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "pre_infiltration_air_base_approach",
+      "visual_manifestation": "scrolling shooter phase with top-down or side-scrolling perspective; enemies and debris moving toward player; lightship as vulnerable mobile platform",
+      "behavioral_manifestation": "player must navigate defensive gauntlet; single collision failure state triggers restart (Japanese version) or checkpoint respawn (US version); three total attempts before mission abort"
+    },
+    {
+      "world_state": "fortress_interior_active",
+      "visual_manifestation": "shifts to action-adventure maze exploration; stationary fortress corridors and chambers; enemy robots and astronaut patrols; core structure visible or marked as objective",
+      "behavioral_manifestation": "exploration and puzzle-solving mode; players navigate non-linear paths; engage enemies with beam weapon; locate core; destroy core via interaction"
+    },
+    {
+      "world_state": "core_destruction_imminent",
+      "visual_manifestation": "fortress interior begins structural breakdown (inferred); time pressure indicated through gameplay mechanics",
+      "behavioral_manifestation": "explosive chain reaction initiated; player must navigate maze in reverse or find alternative exit; escape window is narrow; failure results in death by explosion"
+    },
+    {
+      "world_state": "fortress_defeated",
+      "visual_manifestation": "player reaches lightship and escapes; fortress explodes in background (inferred); transition to next fortress or victory state",
+      "behavioral_manifestation": "mission success; progression to next more-difficult Air Fortress; difficulty escalates across multiple fortress encounters"
+    },
+    {
+      "world_state": "player_elimination",
+      "visual_manifestation": "lightship destroyed in approach phase OR player character eliminated in fortress interior OR trapped by explosion timer",
+      "behavioral_manifestation": "life counter decreases; restart from checkpoint (US version) or mission restart (JP version); game over when lives exhausted"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "architectural_threat_narrative",
+      "example": "fortress maze design communicates chaotic alien structure; non-euclidean or confusing layout signals this is hostile territory designed by non-human intelligence"
+    },
+    {
+      "technique": "resource_scarcity_signaling",
+      "example": "limited crash beam ammunition and energy pickups during approach phase communicate vulnerability of single infiltrator; player must be tactical with resources"
+    },
+    {
+      "technique": "escalating_complexity",
+      "example": "difficulty increases across multiple fortresses (after first fortress, difficulty spikes); visual fortress designs become more elaborate and maze-like, signaling upgraded or more dangerous variants"
+    },
+    {
+      "technique": "time_pressure_mechanic",
+      "example": "explosion timer after core destruction creates narrative urgency; communicates fortress self-destruct protocols or structural collapse; spatial design of exit location far from core extends escape challenge"
+    },
+    {
+      "technique": "defender_presence",
+      "example": "security robots and astronaut patrols within fortress interiors indicate active occupation and defense systems; enemy sprites communicate this is not abandoned but actively guarded"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_lightship",
+      "state": "approach_phase_vulnerable",
+      "behavior": "single collision with enemy or debris triggers destruction; requires dodging and threading between hazards; no defensive capability in approach phase"
+    },
+    {
+      "entity": "flying_enemies",
+      "state": "active_defense",
+      "behavior": "patrol approach corridor; move toward player; attempt collision; respawn in waves as player progresses"
+    },
+    {
+      "entity": "fortress_robots",
+      "state": "interior_security_patrol",
+      "behavior": "stationary or slow-moving patrol patterns within maze; engage player on sight; require beam weapon engagement; block passages"
+    },
+    {
+      "entity": "fortress_astronaut_defenders",
+      "state": "active_resistance",
+      "behavior": "armed opposition to infiltration; patrol fortress interior; engage player with weapons; indicate faction presence and organized defense"
+    },
+    {
+      "entity": "fortress_core",
+      "state": "inactive_until_targeted",
+      "behavior": "remains stationary as objective marker; once attacked/destroyed, triggers chain reaction (explosion timer); communicates structural vulnerability and mission-critical nature"
+    },
+    {
+      "entity": "player_character_hal_bailman",
+      "state": "infiltrator_mode",
+      "behavior": "interior gameplay grants mobility control; player explores maze; engages enemies; searches for core and escape; beam weapon usage required; actively hunted by security systems"
+    }
+  ],
+  "notes": "Air Fortress employs a dual-phase design paradigm: scrolling shooter (approach/Air Base) and action-adventure (interior/Fortress). Danger signals are primarily kinetic and resource-based in the approach phase, shifting to maze-navigation and time-pressure signals in the interior. Faction identity is communicated through enemy sprite design, architectural inconsistency, and defender presence rather than explicit color or symbol schemes. The game's world state is manifested through genre shifts and environmental complexity escalation. US version introduced checkpoint respawning during approach phase, altering danger signal intensity compared to JP version's mission restart. The core explosion mechanic creates dual threat layers: immediate enemy threats and environmental/temporal threats. Password system (referencing designer Suga) suggests narrative progression across multiple fortress incursions with escalating difficulty.",
+  "sources_used": [
+    "wikipedia - Air Fortress narrative, gameplay mechanics, story context",
+    "tcrf - unused graphics context, regional differences between JP/US versions"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:31:02.135Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6847,
+    "output_tokens": 2278,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

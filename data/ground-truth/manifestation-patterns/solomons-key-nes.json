@@ -1,0 +1,190 @@
+{
+  "game_id": "solomons-key-nes",
+  "game_name": "Solomon's Key",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy spawning",
+      "visual_form": "Demons appear continuously on screen in varied patterns",
+      "meaning": "Unlimited threat; player cannot clear all enemies, must navigate around them"
+    },
+    {
+      "signal": "Fireball projectiles",
+      "visual_form": "Orange/red animated fireballs moving in arcs or spinning patterns",
+      "meaning": "Instant death hazard; any contact with demons or their projectiles kills Dana"
+    },
+    {
+      "signal": "Countdown timer",
+      "visual_form": "Visible timer display decreasing during level progression",
+      "meaning": "Time pressure; level failure if timer expires before reaching the door/key"
+    },
+    {
+      "signal": "Sealed doors",
+      "visual_form": "Locked door graphics requiring acquisition of constellation seals or the main key",
+      "meaning": "Progress blocked until specific items/conditions are met"
+    },
+    {
+      "signal": "Demon visual variants",
+      "visual_form": "Different enemy sprite types with distinct movement patterns and behaviors",
+      "meaning": "Varying threat levels and attack patterns requiring different avoidance strategies"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Orange blocks",
+      "visual_form": "Placeable/destroyable orange cube tiles created by Dana",
+      "meaning": "Player-controlled platforms for navigation, climbing, and blocking enemy movement"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "Collectable icons appearing within levels or hidden rooms",
+      "meaning": "Firepower upgrades, extra lives, bonus points, and seal acquisitions for progression"
+    },
+    {
+      "signal": "Hidden rooms",
+      "visual_form": "Secret areas accessible through specific block-manipulation sequences",
+      "meaning": "Safe zones for bonus items, constellation seals, and alternative progression paths"
+    },
+    {
+      "signal": "Constellation space structure",
+      "visual_form": "Greek mythology-inspired visual aesthetic with zodiac theming",
+      "meaning": "Organized progression system; 12 zodiac constellations each containing 4 levels plus secret rooms"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dana (Player/Protagonist)",
+      "color_identity": "Primary character sprite, contrasted against environment",
+      "symbol_or_sigil": "Sorcerer character; summoner of orange blocks and fireballs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dana's position anchors the playable space; blocks created by Dana maintain consistent visual style"
+    },
+    {
+      "faction": "Demons/Evil Forces",
+      "color_identity": "Distinct enemy sprite colors (varied per demon type)",
+      "symbol_or_sigil": "Generic demon/monster designs; fireballs as signature attack",
+      "enemy_visual_variants": "Multiple demon types with different visual designs, movement patterns, and spawn behaviors",
+      "environmental_markers": "Enemy presence fills rooms; unlimited spawning indicates pervasive threat throughout Constellation Space"
+    },
+    {
+      "faction": "Solomon's Power/Light Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Star-like seal of Solomon; the Key itself as central objective symbol",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Constellation seals hidden throughout levels; final objective is Solomon's room representing restoration of light"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Demon corruption (narrative setup)",
+      "visual_manifestation": "Cosmos presented as threat-filled puzzle space; enemies spawn continuously; Greek mythology aesthetic suggests otherworldly corruption",
+      "behavioral_manifestation": "Enemies manifest as unlimited spawning threats; Dana must navigate chaos rather than defeat all enemies"
+    },
+    {
+      "world_state": "Progression through Constellation Space",
+      "visual_manifestation": "Level organization by zodiac constellation (Aries through Pisces in sequence); each constellation group has 4 main levels plus secret room",
+      "behavioral_manifestation": "Player advances level-to-level; finding constellation seals unlocks secret bonus rooms; mechanics remain consistent across constellations"
+    },
+    {
+      "world_state": "Discovery of hidden knowledge",
+      "visual_manifestation": "Secret rooms and hidden items require specific block-building sequences to reveal",
+      "behavioral_manifestation": "Player must puzzle-solve to access hidden progression; Page of Time, Page of Space, and Princess Room only appear when all Seals of Solomon are acquired"
+    },
+    {
+      "world_state": "Approach to restoration victory",
+      "visual_manifestation": "Solomon's room appears as final level; ending scene varies based on number of secret levels/seals found",
+      "behavioral_manifestation": "Completion of main levels allows access to final level; secret completion provides alternate/extended ending cinematics"
+    },
+    {
+      "world_state": "Timer pressure (immediate moment)",
+      "visual_manifestation": "Countdown timer prominently displayed during gameplay; visual urgency through time-limited access to keys and doors",
+      "behavioral_manifestation": "Player must balance puzzle-solving with speed; failure to reach key/door before timer expires results in level loss"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Mythological visual language",
+      "example": "Greek mythology aesthetic (inspired by Jason and the Argonauts film) establishes tone of ancient curse/mystical peril requiring epic solution"
+    },
+    {
+      "technique": "Constellation-based level structure",
+      "example": "12 zodiac constellations organize progression; implies cosmic/celestial scope of restoration quest; seal collection references ancient mystical knowledge"
+    },
+    {
+      "technique": "Spatial puzzle vocabulary",
+      "example": "Orange blocks function as both narrative tool (player agency in reshaping space) and mechanical tool (navigation/enemy control); visual language unifies story and gameplay"
+    },
+    {
+      "technique": "Hidden room revelation",
+      "example": "Secret rooms accessed only through specific sequences reward exploration and experimentation; seals hidden in final rooms of each constellation encourage thorough play"
+    },
+    {
+      "technique": "Enemy spawn manifestation",
+      "visual_example": "Unlimited enemy spawning visually communicates persistent demonic corruption; enemies represent unending chaos until restoration is achieved"
+    },
+    {
+      "technique": "Ending variation",
+      "example": "Ending cinematics shift based on secret completion; narrative acknowledges player thoroughness; reinforces that hidden seals and rooms contribute to world restoration"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dana (Player character)",
+      "state": "Normal gameplay",
+      "behavior": "Can run, jump, create/destroy orange blocks, cast fireballs; movement responsive to player input; block creation/destruction adjacent to character position"
+    },
+    {
+      "entity": "Dana",
+      "state": "Touching demon or fireball",
+      "behavior": "Instant death; level reset or game over; no damage states or invincibility frames"
+    },
+    {
+      "entity": "Demons (generic)",
+      "state": "Spawned",
+      "behavior": "Unlimited continuous spawning; movement patterns specific to demon type; collision with Dana triggers Dana's death"
+    },
+    {
+      "entity": "Fireballs",
+      "state": "Active",
+      "behavior": "Animated projectile movement in arcs or spinning patterns; lethal on contact with Dana; can be destroyed by Dana's firepower"
+    },
+    {
+      "entity": "Orange blocks",
+      "state": "Created",
+      "behavior": "Act as solid platforms; can be destroyed by Dana or by hitting with head twice; persist until destruction; block enemy movement"
+    },
+    {
+      "entity": "Key/Door",
+      "state": "Available",
+      "behavior": "Appears when timer permits; accessing it advances to next level; visual indicator of level completion path"
+    },
+    {
+      "entity": "Power-up items",
+      "state": "Uncollected",
+      "behavior": "Remain stationary in level; visible but may be hidden in secret rooms; collection upgrades Dana's firepower or provides extra life"
+    },
+    {
+      "entity": "Constellation seals",
+      "state": "Hidden",
+      "behavior": "Appear in final room of each zodiac constellation group only if specific puzzles/conditions are met; collection unlocks secret bonus levels"
+    }
+  ],
+  "notes": "Solomon's Key is a puzzle platformer where visual communication relies on minimalist NES-era sprite graphics supplemented by strong mechanical signals. Danger is conveyed through enemy variety, unlimited spawning, and instant-death mechanics rather than visual damage states. Safety manifests through player-created structures (orange blocks) and hidden power-ups rewarding exploration. The world-state progression uses zodiac constellation organization to structure advancement while maintaining consistent visual language. No faction-based color-coding exists; differentiation is purely enemy-type based. The narrative (demons released, Dana must restore light by obtaining Solomon's Key) is communicated entirely through UI elements, level structure, and ending variations rather than in-game cinematics or NPC dialogue. Environmental storytelling relies on mythological theming and seal/key symbolism.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:41:33.434Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5085,
+    "output_tokens": 2344,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

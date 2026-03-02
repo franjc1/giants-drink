@@ -1,0 +1,177 @@
+{
+  "game_id": "wolfenstein-3d-snes",
+  "game_name": "Wolfenstein 3D",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Nazi guards and soldiers",
+      "visual_form": "2D sprite enemies in distinct uniforms",
+      "meaning": "Primary threat; actively hostile combatants"
+    },
+    {
+      "signal": "Giant rats (censored dogs)",
+      "visual_form": "Animated creature sprites",
+      "meaning": "Environmental hazard; aggressive creatures that attack on sight"
+    },
+    {
+      "signal": "Boss enemies (Death Knight, Dr. Schabbs, Hans Grosse, Trans Grosse, Ubermutant)",
+      "visual_form": "Oversized sprite graphics, distinctive appearance",
+      "meaning": "Major threat; end-of-level confrontations requiring specific tactics"
+    },
+    {
+      "signal": "Weapon fire and muzzle flashes",
+      "visual_form": "Animated sprite effects, auditory cues",
+      "meaning": "Active combat engagement; player is under fire"
+    },
+    {
+      "signal": "Player health percentage display",
+      "visual_form": "Numeric HUD indicator, face graphic at 25% health shows blood",
+      "meaning": "Proximity to death state; visual degradation as danger increases"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health pickups",
+      "visual_form": "Collectible items placed throughout levels",
+      "meaning": "Resource availability; recovery from damage"
+    },
+    {
+      "signal": "Ammunition caches",
+      "visual_form": "Scattered weapon and ammo pickups",
+      "meaning": "Resource security; ability to sustain combat"
+    },
+    {
+      "signal": "Extra-life tokens",
+      "visual_form": "Special collectible items",
+      "meaning": "Life reserve increase; increased resilience"
+    },
+    {
+      "signal": "Secret rooms and hidden areas",
+      "visual_form": "Concealed wall tiles that slide back when activated",
+      "meaning": "Safe zones containing treasure, health, or ammunition"
+    },
+    {
+      "signal": "Closed doors with keys",
+      "visual_form": "Locked passage visuals",
+      "meaning": "Restricted areas; protection from immediate threats"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nazi German forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Swastikas (removed in SNES censorship; replaced with multicolored stone walls and generic red sign text)",
+      "enemy_visual_variants": "Nazi guards, Nazi soldiers, specialized units (Death Knight, Ubermutant), bosses with distinct appearances",
+      "environmental_markers": "Castle Wolfenstein bunker architecture, Nazi-themed level designs, German military aesthetic"
+    },
+    {
+      "faction": "Allied forces (player perspective)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player character B.J. Blazkowicz (sprite with visible face in HUD)",
+      "environmental_markers": "Escape routes, elevators to next levels, safe zones implied through level progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Enemy presence and threat level",
+      "visual_manifestation": "2.5D sprite enemies positioned throughout level grid",
+      "behavioral_manifestation": "Enemies engage player on sight; attack with firearms or melee depending on unit type"
+    },
+    {
+      "world_state": "Player damage and survival status",
+      "visual_manifestation": "Health percentage HUD display; face graphic degrades and shows blood at 25% health",
+      "behavioral_manifestation": "Player movement speed may be affected; continued damage leads to level restart with minimal equipment"
+    },
+    {
+      "world_state": "Resource scarcity",
+      "visual_manifestation": "Visible ammunition and health pickups scattered in levels",
+      "behavioral_manifestation": "Player must manage ammo usage; health recovery requires finding pickups"
+    },
+    {
+      "world_state": "Level progression and mission objectives",
+      "visual_manifestation": "Elevator graphics as level exit; boss encounter chambers",
+      "behavioral_manifestation": "Player must reach elevator or defeat boss to advance; completion displays ratio and speed metrics"
+    },
+    {
+      "world_state": "Mission structure (episodic)",
+      "visual_manifestation": "Episode naming and cutscene briefings (Japanese version uses black splash screens with episode names; US/EU uses text briefings)",
+      "behavioral_manifestation": "Player progresses through named episodes with thematic coherence"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural theming",
+      "example": "Levels themed as Nazi bunkers and buildings establish setting and faction control of space"
+    },
+    {
+      "technique": "Grid-based layout with locked passages",
+      "example": "Keyed doors and wall barriers force player navigation and create sense of infiltration through secured facility"
+    },
+    {
+      "technique": "Enemy placement patterns",
+      "example": "Guard positioning and density communicates security levels within different areas"
+    },
+    {
+      "technique": "Hidden room activation mechanics",
+      "example": "Secret wall tiles that slide back when triggered suggest covert supply caches and hidden military installations"
+    },
+    {
+      "technique": "Treasure placement",
+      "example": "Gold and valuables scattered throughout Nazi facility implies looting of military/administrative assets"
+    },
+    {
+      "technique": "Elevator as escape objective",
+      "example": "Elevator graphics serve as visual goal marker; reaching it represents successful escape or mission completion"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nazi guards and soldiers",
+      "state": "Unaware",
+      "behavior": "Patrol or stand in place within level grid spaces"
+    },
+    {
+      "entity": "Nazi guards and soldiers",
+      "state": "Aware of player",
+      "behavior": "Engage with gunfire; pursue using grid-based pathfinding"
+    },
+    {
+      "entity": "Giant rats",
+      "state": "Aware of player",
+      "behavior": "Aggressive pursuit and melee attack"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Encountered",
+      "behavior": "Significantly elevated health and damage output; occupies dedicated boss arena; requires sustained engagement"
+    },
+    {
+      "entity": "Player character (B.J. Blazkowicz)",
+      "state": "Healthy (100% health)",
+      "behavior": "Normal movement speed and combat capability"
+    },
+    {
+      "entity": "Player character",
+      "state": "Critically wounded (25% health or less)",
+      "behavior": "Visual indicator (blood on face graphic) signals imminent death state; one additional hit triggers level restart"
+    }
+  ],
+  "notes": "Wolfenstein 3D SNES (1994) represents a heavily censored port of the DOS original. Nazi imagery, particularly swastikas, was removed and replaced with generic stone textures and red signs. Hitler (renamed 'Staatmeister') had his iconic mustache removed. Dogs were replaced with giant rats due to Nintendo policies. Despite these changes, the core visual communication system remains intact: grid-based level design, 2.5D sprite-based enemies, HUD-based health display, and elevator-based progression. The game communicates political situation (WWII Allied spy vs. Nazi forces) primarily through environmental architecture, enemy uniforms (though rendered minimally as 2D sprites), and mission context. Regional differences exist between US/EU and Japanese versions primarily in cutscene presentation (Japanese uses black splash screens vs. text briefings). The ending screen anomaly (boss order mismatch) suggests late developmental changes. No detailed color palettes or precise visual specifications are documented in available sources.",
+  "sources_used": [
+    "tcrf - Wolfenstein 3D (SNES) detailed technical analysis including censorship changes, unused graphics, and regional differences",
+    "wikipedia - Wolfenstein 3D general information on gameplay mechanics, plot structure, and character roles"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:17:26.528Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5136,
+    "output_tokens": 2046,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

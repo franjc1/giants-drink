@@ -1,0 +1,213 @@
+{
+  "game_id": "f1-world-championship-genesis",
+  "game_name": "F1 World Championship Edition",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Engine overheat",
+      "visual_form": "Loud squealing noise auditory cue; visual heat indicator or smoke effects (inferred from mechanical failure state)",
+      "meaning": "Rapid downshifting or over-revving causes engine damage; player must manage throttle to avoid forced retirement"
+    },
+    {
+      "signal": "Tire wear",
+      "visual_form": "Tire hardness degradation tracking; worn tires require pit stop replacement",
+      "meaning": "Continued racing without pit stop maintenance leads to forced retirement; visual tire condition deterioration (inferred)"
+    },
+    {
+      "signal": "Collision with track obstacles",
+      "visual_form": "Signs, adboards, and platforms positioned close to track edges; visual impact feedback",
+      "meaning": "Environmental hazards increase difficulty; contact causes damage based on difficulty level (damage tolerance decreases at higher difficulties)"
+    },
+    {
+      "signal": "Damage tolerance threshold",
+      "visual_form": "Difficulty-dependent car damage accumulation; visual damage model or performance degradation",
+      "meaning": "Higher difficulty levels reduce damage tolerance; accumulated damage from collisions forces retirement if threshold exceeded"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Pit stop availability",
+      "visual_form": "Pit lane location marked on track; pit crew station visualization",
+      "meaning": "Player can safely service tires and manage car setup; mandatory pit stop prevents forced retirement"
+    },
+    {
+      "signal": "Open track space",
+      "visual_form": "Clear racing line without obstacles; straightaways and wider track sections",
+      "meaning": "Safe driving zones without collision hazards; player can maintain speed safely"
+    },
+    {
+      "signal": "Optimal engine RPM",
+      "visual_form": "RPM gauge feedback; absence of squealing audio cue",
+      "meaning": "Controlled gear usage maintains engine health; careful throttle management prevents overheat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Benetton Racing",
+      "color_identity": null,
+      "symbol_or_sigil": "Benetton team livery",
+      "enemy_visual_variants": "Driver models: Riccardo Patrese and Michael Schumacher with Benetton-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Ferrari",
+      "color_identity": "Red (traditional Ferrari racing color)",
+      "symbol_or_sigil": "Ferrari prancing horse; Ferrari team livery",
+      "enemy_visual_variants": "Driver models: Jean Alesi and Gerhard Berger with Ferrari-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "McLaren",
+      "color_identity": null,
+      "symbol_or_sigil": "McLaren team livery",
+      "enemy_visual_variants": "Driver models: Michael Andretti and Mika Häkkinen with McLaren-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Williams Racing",
+      "color_identity": null,
+      "symbol_or_sigil": "Williams team livery",
+      "enemy_visual_variants": "Driver models: Damon Hill and Alain Prost with Williams-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Ligier Racing",
+      "color_identity": null,
+      "symbol_or_sigil": "Ligier team livery",
+      "enemy_visual_variants": "Driver models: Mark Blundell and Martin Brundle with Ligier-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Lotus Racing",
+      "color_identity": null,
+      "symbol_or_sigil": "Lotus team livery",
+      "enemy_visual_variants": "Driver models: Johnny Herbert and Alessandro Zanardi with Lotus-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Tyrrell Racing",
+      "color_identity": null,
+      "symbol_or_sigil": "Tyrrell team livery",
+      "enemy_visual_variants": "Driver models: Andrea de Cesaris and Ukyo Katayama with Tyrrell-branded car",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Domark Racing (Player Team)",
+      "color_identity": null,
+      "symbol_or_sigil": "Domark team livery",
+      "enemy_visual_variants": "Player-controlled car with Domark branding; driver: James Tripp",
+      "environmental_markers": "Pit crew station at Silverstone shows 'retired' cars as environmental storytelling"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "1993 F1 Championship Season",
+      "visual_manifestation": "12 tracks representing 1993 F1 calendar (Interlagos, Imola, Barcelona, Monaco, Montreal, Castelet, Silverstone, Hockenheim, Spa, Monza, Estoril, Adelaide); correct race order; licensed drivers and teams with authentic liveries",
+      "behavioral_manifestation": "Competitor AI drivers behave as their real-world counterparts would; dynamic difficulty scaling mimics competitive racing; pit stop requirements reflect 1993 tire technology constraints"
+    },
+    {
+      "world_state": "Race Progression (Pre-Race)",
+      "visual_manifestation": "Setup menu displays before race start; tire hardness, wing angle, transmission configuration screens",
+      "behavioral_manifestation": "Player must configure car before competing; setup choices affect handling and performance during race"
+    },
+    {
+      "world_state": "Race Progression (During Race)",
+      "visual_manifestation": "Split-screen for multiplayer mode; turbo mode reduces sprite/polygon detail to increase perceived speed; track obstacles and adboards position hazards strategically",
+      "behavioral_manifestation": "Competitors overtake/are overtaken; damage accumulates from collisions; engine temperature increases with poor throttle management; tire wear forces pit stop necessity"
+    },
+    {
+      "world_state": "Race Progression (Post-Race)",
+      "visual_manifestation": "Setup menu reappears; pit stop service screen displays; championship standings update",
+      "behavioral_manifestation": "Player can adjust strategy for next race; mandatory pit stops during race prevent continued racing with worn tires"
+    },
+    {
+      "world_state": "Difficulty Scaling (Novice to Expert)",
+      "visual_manifestation": "Identical track layouts but cosmetic damage indicators may vary; obstacle placement constant",
+      "behavioral_manifestation": "Competitor speed increases with difficulty; player car damage tolerance decreases; Expert mode creates higher collision risk and engine failure likelihood"
+    },
+    {
+      "world_state": "Engine Damage State",
+      "visual_manifestation": "Loud squealing audio cue signals overheat; visual engine damage or smoke effects (inferred from mechanical failure)",
+      "behavioral_manifestation": "Over-revving from rapid downshifting or collision-induced jumping causes engine stress; forced retirement if damage threshold exceeded"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Track-specific visual hazards",
+      "example": "Signs, adboards, and platforms positioned near track edges; Silverstone features two 'retired' cars (one at pits, one mid-track) serving as visual metaphor for competition consequence and mechanical failure"
+    },
+    {
+      "technique": "Authentic circuit layouts",
+      "example": "1993-accurate track designs from real F1 venues; track geometry communicates historical racing geography and venue authenticity"
+    },
+    {
+      "technique": "Team livery differentiation",
+      "example": "Each of 8 teams (Benetton, Ferrari, McLaren, Williams, Ligier, Lotus, Tyrrell, Domark) displays distinct car colors and sponsor logos; visual identification allows player to recognize competitors at a glance"
+    },
+    {
+      "technique": "Pit lane placement",
+      "example": "Pit crew station positioned on track map; visual location communicates service zone availability and mandatory pit stop requirement for tire replacement"
+    },
+    {
+      "technique": "Audio-visual damage feedback",
+      "example": "Squealing tire noise from over-revving communicates mechanical stress; auditory signal warns player of imminent engine failure without explicit HUD warning"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "AI Driver (Generic Competitor)",
+      "state": "Normal racing",
+      "behavior": "Maintains position relative to player; overtakes when opportunity arises; defensive positioning on straights and curves"
+    },
+    {
+      "entity": "AI Driver (Specific: Schumacher/Patrese - Benetton)",
+      "state": "Racing against player",
+      "behavior": "Represents competitive Benetton team threat; higher difficulty tiers amplify their speed and aggression"
+    },
+    {
+      "entity": "Player Car",
+      "state": "Normal operation",
+      "behavior": "Responsive to throttle, braking, and steering input; smooth handling physics allow high-speed maneuvers"
+    },
+    {
+      "entity": "Player Car",
+      "state": "Engine over-revving",
+      "behavior": "Loud squealing noise triggers; RPM gauge spikes; continued abuse forces engine failure and retirement; collision knockback amplifies over-rev risk"
+    },
+    {
+      "entity": "Player Car",
+      "state": "Tire wear critical",
+      "behavior": "Handling degrades; pit stop becomes mandatory; continued racing without tire change forces retirement"
+    },
+    {
+      "entity": "Player Car",
+      "state": "Damage accumulation high",
+      "behavior": "Performance degrades with collision damage; at Expert difficulty, threshold to forced retirement becomes very low; visual damage model (inferred) deteriorates"
+    },
+    {
+      "entity": "Track Obstacles (Signs, Adboards, Platforms)",
+      "state": "Present on circuit",
+      "behavior": "Static hazards increase difficulty; collision causes damage; strategic placement near corners and straights creates risk zones"
+    },
+    {
+      "entity": "Pit Crew (Domark Team)",
+      "state": "Race active",
+      "behavior": "Await player pit stop for tire service; mandatory stop required to continue racing; crew visualization at Silverstone includes two retired cars as environmental context"
+    }
+  ],
+  "notes": "F1 World Championship Edition (1993) primarily communicates world-state through authentic team liveries, licensed drivers, and accurate 1993 F1 calendar. Danger signals rely heavily on mechanical failure feedback (audio cues for overheat, tire wear mechanics). Faction identity is purely visual through team car colors and driver rosters—no competitive 'factions' in narrative sense, but racing teams serve as gameplay-relevant entities. Environmental storytelling is minimal but effective: retired cars at Silverstone hint at mechanical failure consequences. The game uses arcade abstraction rather than simulation, so visual manifestations of damage/wear are inferred from gameplay mechanics rather than explicitly documented. The 'Turbo Mode' visual reduction and 'split-screen multiplayer' sprite shrinking are intentional manifestations of hardware speed optimization, not world-state communication.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:38:32.357Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3108,
+    "output_tokens": 2841,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

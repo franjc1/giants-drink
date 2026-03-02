@@ -1,0 +1,127 @@
+{
+  "game_id": "super-mario-bros-nes",
+  "game_name": "Super Mario Bros.",
+  "platform": "nes",
+  "year": 1985,
+  "tier": 1,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Wall Jump",
+      "description": "Mario can walljump by jumping towards a wall with sufficient horizontal speed (>16 px/frame facing right, <240 px/frame facing left) and hitting at block boundaries. Floor check occurs during wall-ejection, allowing re-jump.",
+      "physics_values": {
+        "min_speed_right": 16,
+        "max_speed_left": 240,
+        "wall_boundary_alignment": "16_pixels"
+      }
+    },
+    {
+      "name": "Shell Bouncing",
+      "description": "Mario can bounce on Koopa shells for successive jumps without touching ground to gain extra lives. Landing on shells produces higher bounce than Bullet Bills.",
+      "physics_values": {}
+    },
+    {
+      "name": "Enemy Stomping",
+      "description": "Mario defeats enemies by jumping on them. Goombas flatten, Koopa Troopas retract into shells which can be used as projectiles.",
+      "physics_values": {}
+    },
+    {
+      "name": "Flagpole Glitch",
+      "description": "Mario can glitch into flagpole base block and touch from inside to skip flag-lowering animation, yielding only 100 points but faster completion.",
+      "physics_values": {
+        "glitch_points": 100
+      }
+    },
+    {
+      "name": "Vine Teleport Glitch",
+      "description": "Touching vine at extreme left edge of screen teleports Mario to right edge. Requires precise scrolling distance estimation.",
+      "physics_values": {}
+    },
+    {
+      "name": "Alternate Pipe Glitch",
+      "description": "Game maintains single global entry-point variable per screen. Screen scroll position relative to Mario determines which pipe destination is active, enabling warp to unintended locations.",
+      "physics_values": {
+        "entry_points_per_screen": 1
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "tight",
+    "responsive",
+    "momentum-based",
+    "commitment-based",
+    "precise",
+    "floaty"
+  ],
+  "tier_notes": "Tier 1 rating based on extensive disassembly documentation available (doppelganger disassembly, Data Crystal, TASVideos). However, exact numerical physics values (acceleration, gravity constants, velocities in pixels/frame) are NOT explicitly documented in provided sources—only qualitative descriptions and gameplay mechanics. ROM addresses for physics routines exist but specific parameter values are not extracted in available documentation. Game engine details are well-documented but quantitative movement parameters require ROM analysis beyond current sources.",
+  "sources_used": [
+    "data_crystal",
+    "tasvideos",
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:38:09.930Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 11987,
+    "output_tokens": 1366,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "other",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

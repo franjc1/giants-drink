@@ -1,0 +1,192 @@
+{
+  "game_id": "carmen-sandiego-nes",
+  "game_name": "Where in the World is Carmen Sandiego?",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Thief presence at location",
+      "visual_form": "Brief animation of V.I.L.E. henchman lurking on screen",
+      "meaning": "Player has correctly tracked criminal to current location; danger is imminent"
+    },
+    {
+      "signal": "Final confrontation engagement",
+      "visual_form": "Animations of knife being thrown or gun being fired",
+      "meaning": "Thief is actively defending themselves; player is at immediate risk of attack"
+    },
+    {
+      "signal": "Witness warning state",
+      "visual_form": "Witness dialogue instructing player to 'be careful'",
+      "meaning": "Criminal is present and hostile; normal investigation yields safety warnings instead of clues"
+    },
+    {
+      "signal": "Time pressure (Master System version)",
+      "visual_form": "On-screen clock display advancing toward deadline",
+      "meaning": "Failure to apprehend criminal within time window results in escape"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Correct location reached",
+      "visual_form": "Witness provides clues about thief identity or next destination",
+      "meaning": "Player has traveled to a location where the suspect has been spotted; investigation is productive"
+    },
+    {
+      "signal": "Warrant issued",
+      "visual_form": "Interpol database display confirms arrest warrant for single suspect",
+      "meaning": "Player has gathered sufficient evidence; legal authority to apprehend confirmed"
+    },
+    {
+      "signal": "Successful arrest",
+      "visual_form": "Police chase animation and apprehension sequence",
+      "meaning": "Case solved; player advances in rank and difficulty"
+    },
+    {
+      "signal": "Wrong location",
+      "visual_form": "Witness reports seeing nothing suspicious",
+      "meaning": "Safe to continue investigation; criminal has not visited this location"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "ACME Detective Agency",
+      "color_identity": null,
+      "symbol_or_sigil": "ACME (acronym/organization name)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player's home base; Interpol database terminals at each city location"
+    },
+    {
+      "faction": "V.I.L.E. Organization",
+      "color_identity": null,
+      "symbol_or_sigil": "V.I.L.E. (acronym identifying criminal network)",
+      "enemy_visual_variants": "Henchman sprite animation represents generic V.I.L.E. operatives",
+      "environmental_markers": "Animations of criminal activity (knife throwing, gunfire) at thief locations; criminal presence confirmed by witness sightings"
+    },
+    {
+      "faction": "Carmen Sandiego (Leader/Arch-criminal)",
+      "color_identity": null,
+      "symbol_or_sigil": "Carmen Sandiego name/identity serves as ultimate target",
+      "enemy_visual_variants": "Carmen is final boss; encounters with her operatives precede final confrontation",
+      "environmental_markers": "Final case in game progression; apprehending Carmen grants Hall of Fame status"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Crime committed (initial alert)",
+      "visual_manifestation": "Alert notification describing stolen artifact and initial location",
+      "behavioral_manifestation": "Player must immediately begin investigation and travel sequence"
+    },
+    {
+      "world_state": "Thief at location",
+      "visual_manifestation": "V.I.L.E. henchman lurking animation appears on screen",
+      "behavioral_manifestation": "Witness provides useful clues; player can narrow suspect profile"
+    },
+    {
+      "world_state": "Thief absent from location",
+      "visual_manifestation": "No animation; witness has nothing to report",
+      "behavioral_manifestation": "Player must backtrack and select different travel destination"
+    },
+    {
+      "world_state": "Sufficient evidence gathered",
+      "visual_manifestation": "Interpol database confirms single warrant match",
+      "behavioral_manifestation": "Player gains authorization to apprehend; incorrect entry eliminates all suspects and requires restart"
+    },
+    {
+      "world_state": "Thief cornered at final location",
+      "visual_manifestation": "Knife/gunfire animations; witness warnings instead of clues",
+      "behavioral_manifestation": "Player must select correct investigation site with valid warrant to trigger apprehension"
+    },
+    {
+      "world_state": "Time deadline exceeded",
+      "visual_manifestation": "On-screen clock reaches deadline; thief escapes",
+      "behavioral_manifestation": "Case fails; player must restart with new suspect"
+    },
+    {
+      "world_state": "Sleep/night cycle",
+      "visual_manifestation": "Clock advances to late hour; automatic sleep sequence",
+      "behavioral_manifestation": "Player loses several in-game hours; investigation resumes next morning"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "City/country identification as narrative anchor",
+      "example": "30 countries represented by prominent cities; player must use geographic knowledge to predict criminal's escape route based on real-world geography"
+    },
+    {
+      "technique": "Witness testimony as clue layer",
+      "example": "Each city location contains multiple witnesses with different information; correct locations yield identity/destination clues; wrong locations yield no information"
+    },
+    {
+      "technique": "Artifact theft as world-state driver",
+      "example": "Each case begins with alert of famous artwork theft from specific location; players must understand what makes locations geographically significant to predict criminal movement"
+    },
+    {
+      "technique": "Interpol database as faction authority marker",
+      "example": "Presence of Interpol terminals in every city reinforces ACME Detective Agency's international reach and legitimacy as law enforcement"
+    },
+    {
+      "technique": "Criminal animation as danger presence indicator",
+      "example": "V.I.L.E. henchman lurking animation serves as environmental confirmation that player has correctly deduced criminal location through geographic reasoning"
+    },
+    {
+      "technique": "Rank progression as player legitimacy",
+      "example": "Geography questions at each promotion act as both copy-protection and narrative reinforcement that player's knowledge directly enables career advancement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "V.I.L.E. Henchman",
+      "state": "Present at location",
+      "behavior": "Lurks on screen; animation confirms thief proximity"
+    },
+    {
+      "entity": "V.I.L.E. Criminal (generic)",
+      "state": "Evading capture",
+      "behavior": "Moves between countries; witnesses report sightings; leaves no trace at unvisited locations"
+    },
+    {
+      "entity": "V.I.L.E. Criminal (final confrontation)",
+      "state": "Cornered",
+      "behavior": "Throws knives and fires guns; witnesses warn player to be careful; remains hidden in one of three investigation sites"
+    },
+    {
+      "entity": "Carmen Sandiego",
+      "state": "Final adversary",
+      "behavior": "Operates as ultimate target across all cases; apprehension grants Hall of Fame achievement"
+    },
+    {
+      "entity": "Witness",
+      "state": "At wrong location (criminal absent)",
+      "behavior": "Reports nothing suspicious; refuses to provide clues"
+    },
+    {
+      "entity": "Witness",
+      "state": "At correct location (criminal present)",
+      "behavior": "Provides clues about criminal identity or next destination"
+    },
+    {
+      "entity": "Player (ACME Detective)",
+      "state": "Insufficient evidence",
+      "behavior": "Cannot issue warrant; must continue investigation at other locations"
+    },
+    {
+      "entity": "Player (ACME Detective)",
+      "state": "Evidence sufficient but warrant absent",
+      "behavior": "Can confront thief but apprehension fails; case lost"
+    }
+  ],
+  "notes": "This is an educational geography game where visual manifestations are sparse and minimal. The core communication system relies on text-based witness dialogue and animated confirmations rather than environmental storytelling. The Master System version introduces action-based sprite movement and attack animations, creating more visceral danger signals through player damage and time loss from evasion. V.I.L.E. is depicted as a distributed criminal network rather than a unified faction with consistent visual identity—their presence is communicated through the absence of witnesses and through brief combat animations. The game's political situation is simplified: ACME (law enforcement) vs. V.I.L.E. (criminals), with no faction ambiguity or moral complexity. World-state is primarily communicated through clock mechanics and database UI rather than environmental change.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:33:11.249Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2546,
+    "output_tokens": 2255,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

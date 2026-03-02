@@ -1,0 +1,197 @@
+{
+  "game_id": "times-of-lore-nes",
+  "game_name": "Times of Lore",
+  "platform": "nes",
+  "paradigm": "action-rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster presence",
+      "visual_form": "Sprite-based enemy entities in overworld and dungeons",
+      "meaning": "Active threat to player; encounter risk increases in certain regions"
+    },
+    {
+      "signal": "Barbarian invasion threat",
+      "visual_form": "NPCs mention barbarians; likely visual presence in northern regions",
+      "meaning": "Kingdom-wide political instability; external military threat"
+    },
+    {
+      "signal": "Dragon location (north)",
+      "visual_form": "Dragon sprite in cave on eastern edge of northern mountains",
+      "meaning": "High-danger boss encounter; legendary threat to realm"
+    },
+    {
+      "signal": "Catacomb entrance",
+      "visual_form": "Distinct dungeon structure on map",
+      "meaning": "Entering triggers permanent world state change (unleashes ghouls); increases difficulty significantly"
+    },
+    {
+      "signal": "Night cycle transition",
+      "visual_form": "World color palette gradually shifts from day to night",
+      "meaning": "Time-of-day state change; likely increased danger or NPC behavioral shifts"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Inn presence",
+      "visual_form": "Designated building structure in settlements",
+      "meaning": "Safe rest point; restores health/status; resets NPC memory (crime forgiveness)"
+    },
+    {
+      "signal": "Settlement/town visibility",
+      "visual_form": "Clustered buildings and NPCs in defined areas",
+      "meaning": "Safe zone with quest-givers and services available"
+    },
+    {
+      "signal": "Day cycle transition",
+      "visual_form": "World color palette gradually brightens",
+      "meaning": "Increased safety; NPC availability for quests and interaction"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kingdom of Albareth (Royal Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Settlements, inns, quest-givers representing ducal/baronial power structures"
+    },
+    {
+      "faction": "Barbarian forces (external threat)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Barbarian enemy sprites; distinct from civilian sprites",
+      "environmental_markers": "Presence in northern regions; mentioned by NPCs as invasion threat"
+    },
+    {
+      "faction": "Monster/supernatural forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Dragons, ghouls, generic monsters with distinct sprite designs",
+      "environmental_markers": "Catacombs (ghoul stronghold), northern cave (dragon lair), scattered wilderness encounters"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Political power struggle (High King missing)",
+      "visual_manifestation": "Dukes and barons present as NPCs; unsettled atmosphere in settlements",
+      "behavioral_manifestation": "NPCs discuss conspiracy; quest-givers task player with unraveling power dynamics"
+    },
+    {
+      "world_state": "Barbarian invasion threat (active)",
+      "visual_manifestation": "NPCs dialogue references; likely enemy patrols in northern regions",
+      "behavioral_manifestation": "NPCs warn of danger; possible increased barbarian enemy encounters"
+    },
+    {
+      "world_state": "Monster infestation (ongoing)",
+      "visual_manifestation": "Monster sprites distributed across overworld and dungeons",
+      "behavioral_manifestation": "Random monster encounters; combat encounters scale across map"
+    },
+    {
+      "world_state": "Catacombs sealed (initial state)",
+      "visual_manifestation": "Catacomb structure visible but ghouls contained",
+      "behavioral_manifestation": "No catacomb ghoul encounters in world; normal difficulty"
+    },
+    {
+      "world_state": "Catacombs breached (triggered state)",
+      "visual_manifestation": "Visual indication of released ghouls (sprite presence change or environmental shift)",
+      "behavioral_manifestation": "Ghouls roam world; dramatic difficulty increase; world becomes significantly more dangerous"
+    },
+    {
+      "world_state": "Day cycle (morning/afternoon)",
+      "visual_manifestation": "Bright color palette; clear visibility; animated water visible",
+      "behavioral_manifestation": "NPCs active; quest availability; normal encounter rates"
+    },
+    {
+      "world_state": "Night cycle (evening/night)",
+      "visual_manifestation": "Dark color palette; reduced visual clarity; world becomes darker",
+      "behavioral_manifestation": "NPC behavior changes; likely reduced quest availability or altered encounter types"
+    },
+    {
+      "world_state": "Hidden city discovered (Treela behind forest)",
+      "visual_manifestation": "Forest barrier on map; discovery reveals city structure behind forest",
+      "behavioral_manifestation": "Access to new NPCs; new quests and resources available upon discovery"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "NPC dialogue exposition",
+      "example": "Serfs mention dragon in north, guiding player toward northern mountains where dragon actually sleeps in cave"
+    },
+    {
+      "technique": "Architectural settlement clustering",
+      "example": "Visible towns and villages communicate safe zones; inn structures identify rest points"
+    },
+    {
+      "technique": "Dungeon structure as narrative",
+      "example": "Catacombs visual presence establishes dangerous lore; NPCs warn of consequences; entering triggers world transformation"
+    },
+    {
+      "technique": "Geographic legend markers",
+      "example": "Forest barrier hides Treela; mountain range contains dragon; regional distribution of threats across 13,000-screen map"
+    },
+    {
+      "technique": "Worldscape scale communication",
+      "example": "Massive open world (13,000 screens) without loading conveys kingdom scope and complexity"
+    },
+    {
+      "technique": "Color cycle narrative",
+      "example": "Day-night transition visually marks time passage and associated danger/safety shifts"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Generic peasant NPCs",
+      "state": "After player commits crime",
+      "behavior": "Remember transgression until player rests at inn; inn stay triggers memory reset"
+    },
+    {
+      "entity": "Quest-critical NPCs (dukes, barons, magical item holders)",
+      "state": "Alive",
+      "behavior": "Provide quests and items; essential to game progression"
+    },
+    {
+      "entity": "Quest-critical NPCs",
+      "state": "Killed by player",
+      "behavior": "Permanent loss; can cause unwinnable game state"
+    },
+    {
+      "entity": "Dragon",
+      "state": "Resting in northern cave",
+      "behavior": "Boss encounter; legendarily dangerous threat"
+    },
+    {
+      "entity": "Ghouls (catacomb-trapped)",
+      "state": "Contained before catacomb breach",
+      "behavior": "Remain in catacomb; no world presence"
+    },
+    {
+      "entity": "Ghouls",
+      "state": "Released (after catacomb entry)",
+      "behavior": "Roam overworld; dramatically increase world danger; world difficulty spikes"
+    },
+    {
+      "entity": "Barbarian forces",
+      "state": "Invasion threat",
+      "behavior": "Presence in northern regions; NPCs warn of threat; combat encounters likely"
+    },
+    {
+      "entity": "Player character (barbarian, knight, or valkyrie)",
+      "state": "Active in world",
+      "behavior": "Visual sprite representation shows selected class archetype; different combat/quest engagement"
+    }
+  ],
+  "notes": "Times of Lore uses classic 8-bit RPG visual language with overhead map perspective. World-state communication relies heavily on: (1) NPC dialogue to establish political/danger context; (2) sprite-based entity presence to indicate threat level; (3) color cycling for day/night passage; (4) environmental structure (towns, dungeons, forests) to guide player navigation and establish safety/danger zones. The 13,000-screen persistent world without loading creates continuity of place that reinforces political and geographical world-state. Consequences system (NPCs remembering crimes until inn reset; unwinnable states from killing quest-givers; permanent world change from catacomb breach) embeds behavioral communication of player actions into world state. Hidden city behind forest teaches players to explore environmental boundaries as narrative content. This is foundational design for the later Ultima and Diablo lineages that emphasized environmental storytelling and persistent world consequence.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:02:27.943Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2937,
+    "output_tokens": 2260,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

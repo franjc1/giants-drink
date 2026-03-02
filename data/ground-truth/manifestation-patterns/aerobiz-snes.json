@@ -1,0 +1,163 @@
+{
+  "game_id": "aerobiz-snes",
+  "game_name": "Aerobiz",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "Labor Strike",
+      "visual_form": "World event notification display",
+      "meaning": "Aircraft shipment delays; operational disruption affecting player and competitors"
+    },
+    {
+      "signal": "Natural Disasters",
+      "visual_form": "World event notification display",
+      "meaning": "Unpredictable negative impact on airline operations and passenger demand"
+    },
+    {
+      "signal": "Negative Balance (4+ consecutive quarters)",
+      "visual_form": "Financial status indicator transitioning to red/negative state",
+      "meaning": "Bankruptcy threat; company faces reorganization or failure"
+    },
+    {
+      "signal": "Political Restriction (Cold War era)",
+      "visual_form": "Aircraft procurement menu limited to faction-specific planes; negotiation difficulty indicators",
+      "meaning": "Geographic/ideological constraints on operations; Moscow-based operations limited to Soviet aircraft"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Positive Balance Achievement",
+      "visual_form": "Financial status indicator showing profit accumulation",
+      "meaning": "Airline is operationally stable and growing"
+    },
+    {
+      "signal": "World Events Boost (Olympic Games, etc.)",
+      "visual_form": "World event notification with passenger volume increase indicators",
+      "meaning": "Market opportunity; passenger demand surge in affected cities"
+    },
+    {
+      "signal": "Route Establishment Success",
+      "visual_form": "Route confirmation on world map; passenger flow indicators activating",
+      "meaning": "Successful airport slot negotiation and route viability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Soviet Bloc (Cold War era, pre-Perestroika)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Aircraft procurement restricted to Soviet-manufactured planes only when headquartered in Moscow",
+      "environmental_markers": "Moscow as headquarters triggers ideological faction affiliation; negotiation difficulty with Western nations increases; Western nation routes become restricted or costly"
+    },
+    {
+      "faction": "Western Nations (Cold War era)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Access and aircraft availability dependent on geographic headquarters choice; easier negotiations in Western cities (New York, London)",
+      "environmental_markers": "Western cities (New York, London, Tokyo) offer higher starting capital and aircraft inventory; cultural/political proximity affects negotiation success"
+    },
+    {
+      "faction": "Independent/Neutral Airlines (Charter System)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Stock market interface displays buyable company shares; 51% ownership triggers assimilation visual/mechanical change",
+      "environmental_markers": "Stock ticker displays; company acquisition interface indicates faction shift when controlling majority shares"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Cold War (1963-1989 timeframe window)",
+      "visual_manifestation": "Political restriction overlays on aircraft procurement menus; negotiation difficulty modifiers displayed; geographic faction affiliations visible on map",
+      "behavioral_manifestation": "AI airlines behave according to geopolitical alignment; Soviet-headquartered airlines restricted to Soviet aircraft; Western-aligned airlines restricted from Eastern Bloc markets; passenger demand affected by political tensions"
+    },
+    {
+      "world_state": "Perestroika Initiated (post-1989)",
+      "visual_manifestation": "Cold War restrictions visually removed from UI; aircraft procurement menu expanded globally; negotiation difficulty modifiers normalized",
+      "behavioral_manifestation": "All airlines gain access to global aircraft market; Eastern-Western borders open for competition; passenger demand and market dynamics normalize across ideological boundaries"
+    },
+    {
+      "world_state": "Pre-Jet Age (early 1963)",
+      "visual_manifestation": "Available aircraft inventory limited to shorter-range propeller/early jet aircraft",
+      "behavioral_manifestation": "Pacific Ocean crossing impossible initially; transcontinental routes unavailable; competitive pressure focused on regional dominance"
+    },
+    {
+      "world_state": "Jet/Supersonic Age (1983+ timeframe)",
+      "visual_manifestation": "Aircraft procurement menu includes supersonic aircraft; longer-range jet inventory available",
+      "behavioral_manifestation": "Intercontinental routes become viable and necessary; competition shifts to global dominance; longer routes become economically viable"
+    },
+    {
+      "world_state": "Bankruptcy Threshold",
+      "visual_manifestation": "Balance indicator turns negative; financial display highlights red; reorganization offer dialog appears after 4 consecutive negative quarters",
+      "behavioral_manifestation": "Company operations continue but under reorganization constraint; player retains control but with reduced assets; AI competitors may exploit weakened position"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Headquarters Location as Political/Economic Signal",
+      "example": "Choosing Moscow as headquarters immediately communicates Cold War alignment: Soviet aircraft only, Western negotiation penalties, restricted market access. Choosing New York signals Western alignment with abundant capital and aircraft access. Lima/Nairobi/Honolulu communicate developing-world market challenge with limited starting resources."
+    },
+    {
+      "technique": "World Events as Historical Narrative",
+      "example": "Olympic Games announced → passenger demand spikes to host city visually; Labor strike announced → aircraft delivery delays visible in procurement timeline; Perestroika initiated → visual policy restrictions lifted, market opens; natural disasters → affected regions show passenger/demand reduction"
+    },
+    {
+      "technique": "Aircraft Procurement Menu as Faction Reveal",
+      "example": "Soviet-headquartered airline sees only Cyrillic/Soviet aircraft names and models in procurement interface, making geopolitical affiliation explicit. Western airlines see Western aircraft manufacturers. Perestroika removes this visual faction separation."
+    },
+    {
+      "technique": "City Network Growth as Visual Empire Building",
+      "example": "Win condition displays 22 cities required to be linked; map visually fills with routes; passenger volume accumulates on screen, communicated through quarterly reports showing visual/numerical growth toward 2.5-4.5 million passenger threshold"
+    },
+    {
+      "technique": "Quarterly Financial Reports as World State Indicator",
+      "example": "Sales, expenses, profits, and passenger counts displayed after each quarter; world events that occurred that quarter shown immediately before results, teaching player cause-and-effect relationship between political/natural events and business outcomes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "AI-Controlled Airline",
+      "state": "Cold War Era, Soviet Alignment",
+      "behavior": "Restricted to Soviet aircraft procurement; negotiation success reduced with Western nations; focuses on Eastern Bloc city connectivity; avoids Western city routes unless economically forced"
+    },
+    {
+      "entity": "AI-Controlled Airline",
+      "state": "Cold War Era, Western Alignment",
+      "behavior": "Procures Western aircraft; successful negotiation with Western nations; focuses on Western city dominance and Pacific/Atlantic intercontinental routes; avoids Eastern Bloc cities unless forced by market saturation"
+    },
+    {
+      "entity": "AI-Controlled Airline",
+      "state": "Post-Perestroika",
+      "behavior": "Suddenly gains access to full global aircraft market; begins expanding into previously restricted Eastern Bloc cities; negotiation difficulty globally normalized; market competition intensifies across all geographic zones"
+    },
+    {
+      "entity": "Player Airline",
+      "state": "Bankruptcy Threshold (4 consecutive negative quarters)",
+      "behavior": "Company continues operations under reorganization; reduced operational capacity; reorganization dialog appears offering continued play under constraint; player forced into recovery strategy or loss condition"
+    },
+    {
+      "entity": "Independent Charter Airline",
+      "state": "Available for Acquisition (<51% shares owned)",
+      "behavior": "Displays in stock market interface; behaves as autonomous competitor; AI controls operations independently"
+    },
+    {
+      "entity": "Independent Charter Airline",
+      "state": "Majority Ownership (51%+ shares owned)",
+      "behavior": "Assimilates into player airline; operations merge with player airline; visual interface consolidates company into player corporation; no longer displays as independent entity"
+    }
+  ],
+  "notes": "Aerobiz communicates world-state and geopolitical situation primarily through mechanical and menu-based restrictions rather than explicit visual design. The Cold War is manifested as hard constraints in aircraft procurement and negotiation difficulty rather than visual theming. The game's manifestation layer relies heavily on: (1) procedural world events that interrupt gameplay and force player adaptation, (2) geographic headquarters selection as political affiliation signal, (3) financial UI state (red/negative balance) for danger signaling, and (4) aircraft menu availability as faction indicator. The Perestroika event serves as a dramatic world-state transition that removes mechanical restrictions entirely. Environmental storytelling occurs primarily through the juxtaposition of world events with quarterly financial outcomes, teaching the player to recognize cause-effect between geopolitical changes and business performance.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:27:52.073Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2883,
+    "output_tokens": 2280,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

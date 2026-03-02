@@ -1,0 +1,110 @@
+{
+  "game_id": "kid-klown-snes",
+  "game_name": "Kid Klown in Crazy Chase",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "level_count": 5,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement and bomb-chase mechanic",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns that Kid Klown automatically moves down path and must reach bomb before fuse detonates"
+    },
+    {
+      "element": "Obstacles that slow player on collision",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Multiple collision penalties accumulate; too many hits cause level loss"
+    },
+    {
+      "element": "Card suit orbs (collectibles)",
+      "first_appears": "Stage 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Player must find all 4 card suit orbs on first run to earn Honey heart; rewards perfect-clear runs"
+    },
+    {
+      "element": "Key acquisition at stage end",
+      "first_appears": "End of Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Each stage completion grants a key; keys determine final ending outcome"
+    },
+    {
+      "element": "Lock-selection endgame puzzle",
+      "first_appears": "After Stage 5 completion",
+      "introduction_context": "dangerous",
+      "mastery_context": "Player must select correct lock from 10 options to unlock Princess Honey; wrong choice leads to bad ending"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Reaching bomb before fuse detonates",
+      "Collecting all 4 card suit orbs in single run",
+      "Completing stage and obtaining key",
+      "Successfully selecting correct lock at endgame"
+    ],
+    "typical_tension_triggers": [
+      "Lit fuse automatically advancing toward bomb",
+      "Collision with obstacles slowing progression",
+      "Accumulating multiple hits",
+      "Approaching bomb timer expiration",
+      "Uncertainty before final lock selection",
+      "Missing card orbs on current run (blocks Honey heart)"
+    ],
+    "pacing_descriptor": "High-intensity time-pressure mechanic with automatic downward movement forcing constant vigilance; tension escalates as fuse approaches bomb; relief tied to successful obstacle avoidance and time-critical resource collection"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Card suit orbs positioned as optional collectibles; perfect-run bonus (Honey heart) signals thoroughness-based progression",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Stage 1 introduces basic mechanics with moderate obstacle density; learning curve for timing and collision avoidance",
+    "mid_game": "Stages 2-4 escalate obstacle complexity and arrangement; card collection remains mandatory for optimal endings",
+    "late_game": "Stage 5 culminates core mechanics; endgame lock-selection puzzle introduces binary failure point independent of skill execution",
+    "notable_spikes": [
+      "Endgame lock selection (10 options, only 1 correct; no skill-based mitigation)",
+      "Hard mode requirement for second 50/50 ending chance (all cards must be collected in first run, no continues allowed)",
+      "Accumulated difficulty of perfect-clear requirement across all 5 stages for best ending"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Bomb-Chase Gauntlet",
+      "description": "Each stage tasks Kid Klown with pursuing a lit fuse down an isometric path while avoiding obstacles. Automatic forward movement creates time pressure; obstacles cause collision penalties rather than instant failure. Pattern repeats across 5 stages with escalating obstacle density.",
+      "example_level": "Stages 1-5 (all stages follow this core pattern)"
+    },
+    {
+      "pattern_name": "Card Collection Run",
+      "description": "Within each bomb-chase, 4 card suit orbs are hidden. Collecting all 4 on first attempt grants Honey heart. Missing any blocks perfect ending; pattern reinforces single-life perfectionism across stages.",
+      "example_level": "All 5 stages (integrated into bomb-chase)"
+    },
+    {
+      "pattern_name": "Cumulative Key Endgame",
+      "description": "After completing all 5 stages (with or without all cards), player accumulates 5 keys. Endgame presents 10 locks; only correct 5-lock sequence unlocks Princess Honey. This single binary choice determines final ending quality independent of previous skill.",
+      "example_level": "Post-Stage 5 (singular endgame state)"
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Kid Klown in Crazy Chase article)",
+    "wikipedia (Kid Klown in Crazy Chase article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T02:37:56.388Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6626,
+    "output_tokens": 1562,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

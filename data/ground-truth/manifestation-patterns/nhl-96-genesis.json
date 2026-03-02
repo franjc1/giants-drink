@@ -1,0 +1,186 @@
+{
+  "game_id": "nhl-96-genesis",
+  "game_name": "NHL '96",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Penalty Box Assignment",
+      "visual_form": "Player directed off-ice to penalty box area",
+      "meaning": "Rule violation occurred; team temporarily disadvantaged (2-4 min depending on injury severity)"
+    },
+    {
+      "signal": "Fighting Initiation",
+      "visual_form": "Two players drop gloves and engage in physical combat animation",
+      "meaning": "Heated conflict; 5-minute major penalty consequences incoming"
+    },
+    {
+      "signal": "Player Fatigue State",
+      "visual_form": "Performance quality decline over time during play",
+      "meaning": "Player stamina depleted; offensive/defensive effectiveness reduced until line rotation or timeout called"
+    },
+    {
+      "signal": "Penalty Kill Situation",
+      "visual_form": "Restricted alternate line access during power play",
+      "meaning": "Numerical disadvantage; team operating with fewer substitution options"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fresh Line Rotation",
+      "visual_form": "Manual line cycling before face-off or automatic substitution",
+      "meaning": "Stamina refreshed; player performance quality restored to optimal"
+    },
+    {
+      "signal": "Time-Out Called",
+      "visual_form": "Game pause with timeout option selection",
+      "meaning": "Strategic rest period; team stamina reset (limited to once per game)"
+    },
+    {
+      "signal": "Penalty Box Exit",
+      "visual_form": "Six-tone audio signal marking end of penalty duration",
+      "meaning": "Infraction served; player returns to ice with full roster capability"
+    },
+    {
+      "signal": "Goalie Control Transition",
+      "visual_form": "Manual or auto goalie mode toggle and puck save state",
+      "meaning": "Defensive security; player maintains active control over goal protection"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "1994-95 NHL Teams (Playable Rosters)",
+      "color_identity": "Team-specific color schemes (e.g., Edmonton Oilers visual identity)",
+      "symbol_or_sigil": "Team logos and jersey designs",
+      "enemy_visual_variants": "Opponent team roster displays with distinct uniform coloration",
+      "environmental_markers": "Team-affiliated scoreboard displays, penalty box assignment by team affiliation"
+    },
+    {
+      "faction": "Referee Authority",
+      "color_identity": null,
+      "symbol_or_sigil": "Referee presence and whistle authority",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Penalty call animations, face-off positioning, rule enforcement visualization"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Power Play Active",
+      "visual_manifestation": "Scoreboard display showing numerical advantage; opponent penalty box occupied",
+      "behavioral_manifestation": "Restricted alternate lines for defending team; offensive player mobility increased"
+    },
+    {
+      "world_state": "Player Fatigue Accumulation",
+      "visual_manifestation": "Player performance quality visibly degraded during extended ice time",
+      "behavioral_manifestation": "Reduced speed, accuracy, and defensive positioning effectiveness"
+    },
+    {
+      "world_state": "Penalty Infraction Committed",
+      "visual_manifestation": "Player directed to penalty box; scoreboard penalty indicator updated",
+      "behavioral_manifestation": "Removal from active play for 2-4 minute duration (adjustable by injury state)"
+    },
+    {
+      "world_state": "Game Pause/Timeout",
+      "visual_manifestation": "Scoreboard display with menu options; game clock stopped",
+      "behavioral_manifestation": "Instant replay review accessible; line editing, goalie substitution, game abort options available"
+    },
+    {
+      "world_state": "Fighting Engagement",
+      "visual_manifestation": "Combat animation between two players; physical interaction rendered",
+      "behavioral_manifestation": "Both players receive 5-minute major penalties upon fight resolution"
+    },
+    {
+      "world_state": "Post-Save Goalie State",
+      "visual_manifestation": "Goalie puck possession animation; player control assumption",
+      "behavioral_manifestation": "Clear/pass/flip options available; face-off drawable through input avoidance"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Scoreboard Information Layering",
+      "example": "Scoreboard displays ongoing game information, penalty status, period breaks, instant replays—all communicating current world state without explicit text narration"
+    },
+    {
+      "technique": "Roster Accuracy as Faction Identity",
+      "example": "Real-life 1994-95 NHL season rosters embed historical context; player names and positions authenticate team identity"
+    },
+    {
+      "technique": "Penalty Box as Spatial Consequence",
+      "example": "Physical removal of penalized player to penalty box area; visual isolation communicates temporary roster disadvantage"
+    },
+    {
+      "technique": "Referee Animation Authority",
+      "example": "Referee intervention (whistle, signal, face-off positioning) visualizes rule enforcement and conflict resolution"
+    },
+    {
+      "technique": "Performance Degradation Over Time",
+      "example": "Fatigue mechanic rendered through observable player behavior decline; no stat overlay required—player controls reveal stamina state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player (Offensive Possession)",
+      "state": "Active Stamina",
+      "behavior": "Fluid stick-handling, directional puck movement, dump/pass/shot execution, spin-o-rama execution at full capability"
+    },
+    {
+      "entity": "Player (Offensive Possession)",
+      "state": "Fatigued",
+      "behavior": "Reduced movement speed, degraded shot accuracy, limited agility in stick-handling"
+    },
+    {
+      "entity": "Player (Defensive Engagement)",
+      "state": "Active",
+      "behavior": "Hold, hook, poke check, body check, shot-blocking available at normal responsiveness"
+    },
+    {
+      "entity": "Player (Penalty Box)",
+      "state": "Penalized",
+      "behavior": "Immobilized off-ice; roster unavailable until six-tone audio signal marks penalty expiration"
+    },
+    {
+      "entity": "Player (Fighting)",
+      "state": "Conflict Engaged",
+      "behavior": "Punch throws to head, uppercuts, jersey grab/pull, skating back-forth, punch block attempts"
+    },
+    {
+      "entity": "Goalie (Manual Control)",
+      "state": "Active",
+      "behavior": "Dive, poke check, save attempt execution; post-save transitions to puck management (clear/pass/flip/face-off)"
+    },
+    {
+      "entity": "Goalie (Auto Control)",
+      "state": "Active",
+      "behavior": "Automated save attempts; player assumes control only upon puck save"
+    },
+    {
+      "entity": "Referee",
+      "state": "Rule Violation Detected",
+      "behavior": "Whistle animation, penalty signal, player direction to penalty box, face-off positioning"
+    },
+    {
+      "entity": "Opponent AI",
+      "state": "Rookie Difficulty",
+      "behavior": "Reduced tactical execution, predictable positioning, lower skill check success rate"
+    },
+    {
+      "entity": "Opponent AI",
+      "state": "Pro/All-Star Difficulty",
+      "behavior": "Enhanced tactical execution, improved positioning prediction, higher skill check success rate"
+    }
+  ],
+  "notes": "NHL '96 (Genesis) communicates world-state primarily through real-time behavioral manifestation and spatial positioning rather than explicit UI overlays. Danger is signaled through penalty mechanics (box assignment, fight initiation) and fatigue degradation. Safety is reinforced through stamina management options (line rotation, timeout). Faction identity derives from roster authenticity and team-specific visual branding rather than narrative faction systems. The game's 'Virtual Stadium' technology (DOS version, referenced in source) establishes visual precedent for the Genesis iteration's graphics fidelity. Political/hierarchical dynamics exist implicitly through referee authority enforcement and power-play numerical advantage mechanics.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:42:51.762Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2792,
+    "output_tokens": 2120,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "_meta": {
+    "game": "Castlevania",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1987,
+    "publisher": "Konami",
+    "developer": "Konami",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Castlevania",
+        "url": "https://tasvideos.org/GameResources/NES/Castlevania",
+        "notes": "Primary verified source for movement speeds, jump timer tables, whip mechanics, and invincibility frame count."
+      },
+      {
+        "name": "Data Crystal — Castlevania (NES) Notes",
+        "url": "https://datacrystal.tcrf.net/wiki/Castlevania_(NES,_Famicom_Disk_System)/Notes",
+        "notes": "ROM-level notes. Jump trajectory stored at ROM bytes 0x1002D–0x10037."
+      },
+      {
+        "name": "NES Games Disassembly — cyneprepou4uk",
+        "url": "https://github.com/cyneprepou4uk/NES-Games-Disassembly",
+        "notes": "Annotated 6502 disassembly repository including Castlevania source."
+      },
+      {
+        "name": "Romhacking.net — Castlevania",
+        "url": "https://www.romhacking.net/games/739/",
+        "notes": "Hacking tools and documents. Jump ROM address documentation sourced here."
+      }
+    ],
+    "notes": [
+      "Castlevania has some of the most distinctive physics of the 8-bit era: NO air control once a jump is committed.",
+      "Knockback on hit is severe and sends Simon flying backward regardless of direction.",
+      "Jump follows a PRESET TRAJECTORY stored in ROM — not physics-based. Jump direction cannot be changed mid-air.",
+      "Staircase movement uses a separate movement mode at half speed.",
+      "Simon cannot jump or use his whip while on stairs.",
+      "The 'committed jump' design creates a fundamentally different skill expression than Mario — planning and positioning matter far more than reflex adjustment."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame": 1,
+      "source": "TASVideos: 'Horizontal speed (walking/jumping/knockback): one pixel per frame'",
+      "notes": "Simon always moves at exactly 1 pixel per frame horizontally. There is no acceleration or run button — speed is constant from the first frame of movement. This gives Castlevania a mechanical, deliberate feel."
+    },
+    "stair_speed": {
+      "px_per_frame": 0.5,
+      "description": "Moving on staircases at half the normal walk speed.",
+      "source": "TASVideos: 'Stair climbing: Two times slower than walking or jumping'",
+      "notes": "Stairs are diagonal — Simon moves both left/right and up/down at 0.5 px/frame. He cannot jump or whip on stairs."
+    },
+    "acceleration": null,
+    "notes": "NO acceleration. Simon moves at constant 1 px/frame from the moment a direction is pressed. Stopping is also instant — no deceleration."
+  },
+
+  "jump": {
+    "type": "preset_trajectory",
+    "trajectory_rom_address": "0x1002D–0x10037",
+    "source": "Data Crystal Notes: 'The bytes contained at 0x1002D-0x10037 control the height/trajectory of the character's jump'",
+    "notes": [
+      "Simon's jump does NOT follow a gravity simulation. The Y position follows a preset lookup table of Y offsets.",
+      "This means the jump arc is FIXED — the same shape every time, regardless of physics.",
+      "NO variable jump height: releasing the jump button has no effect on jump arc.",
+      "NO air control: the horizontal direction is locked at the moment of jump. Cannot change direction mid-air.",
+      "This is the single most distinctive physics design choice in Castlevania — every jump requires pre-commitment.",
+      "Jump ROM addresses differ in the Vs. Castlevania version: 0x10557–0x10561."
+    ],
+    "knockback_peak_y": {
+      "y_above_origin": 14,
+      "source": "TASVideos: 'Peak height on knockback: 14 Y coordinates higher than his original position'",
+      "notes": "When Simon is hit, knockback trajectory also follows a preset path. Peak is 14 pixels above ground."
+    },
+    "jump_timer_after_landing_frames": {
+      "description": "Frames before Simon can act after landing (varies by landing height relative to jump origin)",
+      "source": "TASVideos documented jump timer table",
+      "table": [
+        { "height_blocks_above": 2, "frames": 29 },
+        { "height_blocks_above": 1, "frames": 36 },
+        { "same_height": true, "frames": 40 },
+        { "height_blocks_below": 1, "frames": 42 },
+        { "height_blocks_below": 2, "frames": 44 },
+        { "height_blocks_below": 3, "frames": 46 }
+      ],
+      "special_cases": [
+        {
+          "condition": "4+ blocks below jump origin",
+          "whip_timing_frame": 27,
+          "notes": "Can whip at frame 27 of the fall"
+        },
+        {
+          "condition": "6 blocks below jump origin",
+          "whip_timing_frame": 31
+        }
+      ],
+      "notes": "Jump timer determines when Simon can attack, jump, or use items again. Higher landing = less wait. This creates the memorable 'stiff landing' feel."
+    }
+  },
+
+  "knockback": {
+    "description": "When Simon takes damage, he is launched backward (away from the damage source) in a predetermined arc.",
+    "horizontal_speed": {
+      "px_per_frame": 1,
+      "source": "TASVideos: same 1 px/frame as walk speed",
+      "direction": "opposite of current facing direction"
+    },
+    "vertical_peak_above_origin_px": 14,
+    "notes": [
+      "Knockback is one of Castlevania's harshest gameplay elements — being knocked off a platform or into a pit is common.",
+      "Simon cannot cancel knockback by any input. He must ride it out.",
+      "Knockback into pits causes instant death regardless of remaining health.",
+      "The severity of knockback relative to walk speed (1 px/frame vs 1 px/frame) means recovery takes meaningful time.",
+      "Later Castlevania games (Rondo of Blood, Symphony of the Night) made knockback optional or reduced — this version's knockback is iconic and unforgiving."
+    ]
+  },
+
+  "whip": {
+    "animation_total_frames": 22,
+    "hit_connection_frame": 17,
+    "control_regain_frame": 22,
+    "source": "TASVideos: 'Attack animation duration: counts from 1 to 22 frames. Hit connection at frame 17. Control regained at frame 22.'",
+    "notes": [
+      "The whip has a 22-frame animation during which Simon cannot move or jump.",
+      "The hit box is active at frame 17 — the whip connects near the end of the extension.",
+      "After frame 22, Simon can act normally.",
+      "Sub-weapons can be thrown while the whip animation plays, unlike in some later Castlevanias."
+    ],
+    "range_tiles": "approximately 1.5 tiles forward",
+    "range_px": 24,
+    "upgrades": ["leather (default)", "chain whip (+1 tile range)", "morning star (+ 3 tiles range, max)"],
+    "direction": "horizontal only while standing, diagonal on stairs is not possible"
+  },
+
+  "invincibility_frames": {
+    "duration_frames": 96,
+    "counter_initial_value": 48,
+    "counter_decrement_rate": "1 per 2 frames",
+    "calculation": "48 × 2 = 96 frames",
+    "duration_seconds": 1.6,
+    "source": "TASVideos: 'Invincibility: Duration after damage is nearly 100 frames. Countdown starts at 48 and goes down by one unit every two frames. Total duration ~96 frames.'",
+    "visual": "Simon flickers during invincibility"
+  },
+
+  "sub_weapons": {
+    "holy_water": {
+      "notes": "Thrown in arc, spawns fire on ground contact. Fire persists for several frames.",
+      "trajectory": "parabolic arc"
+    },
+    "axe": {
+      "notes": "Thrown in a parabolic arc upward. Good for enemies above Simon.",
+      "trajectory": "high parabolic arc"
+    },
+    "cross": {
+      "notes": "Thrown horizontally, passes through enemies, bounces back.",
+      "trajectory": "horizontal boomerang"
+    },
+    "knife": {
+      "speed_px_per_frame_approx": 4,
+      "trajectory": "horizontal",
+      "notes": "Fast horizontal projectile. Fastest sub-weapon travel speed."
+    },
+    "stopwatch": {
+      "notes": "Freezes all on-screen enemies for several seconds. No projectile.",
+      "freeze_duration_seconds": 5
+    },
+    "cost_hearts": "Each sub-weapon use costs 1 heart (axe costs 3)",
+    "max_hearts": 99
+  },
+
+  "enemy_interactions": {
+    "candle_destruction": {
+      "notes": "Whipping candles/torches destroys them and spawns items or hearts. This is the primary resource collection mechanic."
+    },
+    "boss_mechanics": {
+      "notes": "Bosses at the end of each stage. Have distinct attack patterns. The whip is the primary tool but sub-weapons are often more efficient."
+    }
+  },
+
+  "hitboxes": {
+    "simon_standing": {
+      "width_px": 16,
+      "height_px": 24,
+      "notes": "Simon is 1 tile wide, 1.5 tiles tall. Hitbox approximately matches sprite."
+    },
+    "notes": "Hitboxes in Castlevania are less generous than SMB. Enemy projectiles have relatively precise hit detection."
+  },
+
+  "design_notes_for_giants_drink": [
+    "The committed jump is the defining mechanic. Every level in Castlevania is designed around the player knowing they cannot correct a jump mid-air. Pit placements, enemy positions, and platform sizes all assume this constraint.",
+    "The 22-frame whip animation means Simon cannot defend himself while attacking. Positioning BEFORE attacking matters — you cannot dodge after committing to the whip.",
+    "The preset jump trajectory means jump height is always exactly the same — this predictability is a feature, not a limitation. Players can memorize the arc.",
+    "Knockback severity is intentional difficulty design. The game expects the player to be knocked into pits occasionally — lives and continues are the buffer.",
+    "The 1 px/frame constant speed makes level-segment traversal highly predictable and measurable, enabling careful pattern-based play."
+  ]
+}

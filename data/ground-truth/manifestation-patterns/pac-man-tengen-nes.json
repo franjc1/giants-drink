@@ -1,0 +1,192 @@
+{
+  "game_id": "pac-man-tengen-nes",
+  "game_name": "Pac-Man (Tengen)",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Ghost proximity and pursuit",
+      "visual_form": "Colored ghosts moving toward Pac-Man with animated chasing behavior",
+      "meaning": "Immediate threat to player safety; contact results in loss of life"
+    },
+    {
+      "signal": "Ghost color and form",
+      "visual_form": "Four distinct colored ghosts: red (Blinky), pink (Pinky), cyan (Inky), orange (Clyde)",
+      "meaning": "Each ghost represents active threat with unique behavioral patterns and pursuit strategies"
+    },
+    {
+      "signal": "Ghost convergence",
+      "visual_form": "Multiple ghosts cornering or positioning ahead of Pac-Man",
+      "meaning": "Heightened danger; Pinky and Inky employ coordinated trapping tactics"
+    },
+    {
+      "signal": "Speed increase",
+      "visual_form": "Ghosts moving faster across maze as levels progress",
+      "meaning": "Rising difficulty and escalating threat level as game advances"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power Pellet availability",
+      "visual_form": "Large flashing energizer dots positioned at four corners of maze",
+      "meaning": "Temporary vulnerability window; eating pellet inverts threat dynamic and allows ghost consumption"
+    },
+    {
+      "signal": "Ghost vulnerability state",
+      "visual_form": "Ghosts turn blue with dizzied expression; later flash white before reversion",
+      "meaning": "Safe to approach and consume ghosts for bonus points; temporary invulnerability period"
+    },
+    {
+      "signal": "Ghost regeneration and distance",
+      "visual_form": "Ghost eyes return to center box after consumption; Clyde flees when distant",
+      "meaning": "Temporary relief from specific threats; fleeing ghost indicates reduced immediate danger from that entity"
+    },
+    {
+      "signal": "Tunnel transit",
+      "visual_form": "Warp tunnels on maze sides; ghosts slow when entering/exiting",
+      "meaning": "Escape route with momentary safety advantage through reduced ghost speed"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Pac-Man (player)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Circular entity with wedge-shaped mouth",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Center of maze; dot consumption pattern indicates player presence and progress"
+    },
+    {
+      "faction": "Blinky (Red Ghost)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Ghost form with standard eyes",
+      "enemy_visual_variants": "Blue form when powered-down; white flash before reversion; eye-only form during regeneration",
+      "environmental_markers": "Direct pursuer; maintains aggressive chase regardless of position"
+    },
+    {
+      "faction": "Pinky (Pink Ghost)",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "Ghost form with standard eyes",
+      "enemy_visual_variants": "Blue form when powered-down; white flash before reversion; eye-only form during regeneration",
+      "environmental_markers": "Positioning strategist; moves to intercept Pac-Man ahead of current position"
+    },
+    {
+      "faction": "Inky (Cyan Ghost)",
+      "color_identity": "Cyan",
+      "symbol_or_sigil": "Ghost form with standard eyes",
+      "enemy_visual_variants": "Blue form when powered-down; white flash before reversion; eye-only form during regeneration",
+      "environmental_markers": "Cornering specialist; coordinates with other ghosts to trap player"
+    },
+    {
+      "faction": "Clyde (Orange Ghost)",
+      "color_identity": "Orange",
+      "symbol_or_sigil": "Ghost form with standard eyes",
+      "enemy_visual_variants": "Blue form when powered-down; white flash before reversion; eye-only form during regeneration",
+      "environmental_markers": "Distance-responsive entity; switches between chase and flee based on proximity to Pac-Man"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal gameplay - threat active",
+      "visual_manifestation": "Ghosts display natural colors (red, pink, cyan, orange); standard animated movement patterns",
+      "behavioral_manifestation": "Each ghost exhibits distinct AI behavior - Blinky pursues directly, Pinky/Inky intercept, Clyde distance-toggles"
+    },
+    {
+      "world_state": "Power Pellet consumed - temporary inversion",
+      "visual_manifestation": "All ghosts turn blue with dizzied/confused expression; visual state change signals vulnerability window",
+      "behavioral_manifestation": "Ghosts reverse direction; movement becomes avoidant; Pac-Man becomes predator; ghosts can be consumed for points"
+    },
+    {
+      "world_state": "Powered-down state ending",
+      "visual_manifestation": "Blue ghosts flash white before reverting to original colors",
+      "behavioral_manifestation": "Ghosts return to aggressive AI patterns; threat returns to normal state"
+    },
+    {
+      "world_state": "Ghost consumption",
+      "visual_manifestation": "Ghost becomes eyes-only form; eyes navigate back to center regeneration box",
+      "behavioral_manifestation": "Temporary removal of ghost threat; eyes demonstrate resurrection mechanic through visual navigation"
+    },
+    {
+      "world_state": "Level progression",
+      "visual_manifestation": "Fruit icons appear at bottom of screen indicating level; ghosts increase speed; power pellet duration decreases",
+      "behavioral_manifestation": "Escalating difficulty; longer power-down cooldowns; faster pursuit patterns"
+    },
+    {
+      "world_state": "Game over condition",
+      "visual_manifestation": "Life count at bottom left depleted; final ghost contact triggers state change",
+      "behavioral_manifestation": "Player loses control; game terminates"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Maze geography as tactical space",
+      "example": "Enclosed maze design with specific ghost spawn location (center box) creates consistent threat geography; warp tunnels provide escape routes that ghosts must navigate with reduced speed"
+    },
+    {
+      "technique": "Dot depletion as progress indicator",
+      "example": "Player's consumption of dots visually demonstrates territory control and advancement toward level completion; bonus items appear under center box when threshold reached"
+    },
+    {
+      "technique": "Power Pellet placement as strategic resource",
+      "example": "Four corner-positioned power pellets create safe zones and tactical inversion points; their placement encourages defensive positioning and risk-taking"
+    },
+    {
+      "technique": "Cutscene storytelling",
+      "example": "Inter-level cutscenes feature Pac-Man and Blinky in humorous/comical situations, establishing character personality and relationship narrative between player character and primary antagonist"
+    },
+    {
+      "technique": "UI-based world state communication",
+      "example": "Score display (top), life count (bottom left), and fruit level icons (bottom right) communicate ongoing game state without breaking visual immersion"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Blinky (Red Ghost)",
+      "state": "Active pursuit",
+      "behavior": "Direct chase toward Pac-Man regardless of positioning; primary aggressor"
+    },
+    {
+      "entity": "Pinky (Pink Ghost)",
+      "state": "Active pursuit",
+      "behavior": "Attempts to position ahead of Pac-Man through predictive movement; cornering specialist"
+    },
+    {
+      "entity": "Inky (Cyan Ghost)",
+      "state": "Active pursuit",
+      "behavior": "Coordinates with other ghosts to create trap scenarios; positioning based on interception patterns"
+    },
+    {
+      "entity": "Clyde (Orange Ghost)",
+      "state": "Distance-dependent",
+      "behavior": "Chases when far from Pac-Man; flees when close; toggles behavior based on proximity calculation"
+    },
+    {
+      "entity": "Any Ghost",
+      "state": "Powered-down (blue form)",
+      "behavior": "Reverses direction; exhibits dizzied expression; attempts to flee from Pac-Man; becomes consumable target"
+    },
+    {
+      "entity": "Any Ghost",
+      "state": "Regenerating",
+      "behavior": "Eyes-only form navigates to center box; represents resurrection mechanic; no threat during transit"
+    },
+    {
+      "entity": "Any Ghost",
+      "state": "Tunnel transit",
+      "behavior": "Movement speed reduces significantly when entering/exiting warp tunnels; creates brief safety window"
+    }
+  ],
+  "notes": "Pac-Man (Tengen NES port, 1990) maintains core visual communication from original 1980 arcade design. Game employs simple but effective color-coded faction system where protagonist (yellow) is visually distinct from four antagonistic ghosts with unique color identities. Danger communication relies on ghost proximity, color state changes, and behavioral patterns. Safety signals are primarily the power pellet mechanic (visual: large flashing dots) which inverts threat through ghost color change to blue. World-state changes are communicated through visual transformations (normal colors to blue, blue to white flash to reversion) paired with behavioral AI shifts. No political/faction conflict in traditional sense; instead, the game presents predator-prey dynamic that inverts through power-up mechanics. Environmental storytelling uses maze geometry, dot depletion, and UI placement to reinforce game state and progression. The design exemplifies efficient visual communication of game state through minimal but expressive visual vocabulary.",
+  "sources_used": [
+    "wikipedia - Pac-Man article (Gameplay section covering ghost behaviors, power pellets, visual indicators, and level progression)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:25:53.165Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3052,
+    "output_tokens": 2488,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

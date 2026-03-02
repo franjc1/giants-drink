@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "game": "Ghouls 'n Ghosts",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1989,
+    "publisher": "Sega",
+    "developer": "Capcom (arcade) / Sega (Genesis port)",
+    "sources": [
+      {
+        "name": "Wikipedia — Ghouls 'n Ghosts",
+        "url": "https://en.wikipedia.org/wiki/Ghouls_%27n_Ghosts",
+        "notes": "Genesis port mechanics. Key difference from NES GnG: can fire in reverse direction, Golden Armor magic."
+      },
+      {
+        "name": "TASVideos — Genesis / Ghouls n Ghosts",
+        "url": "https://tasvideos.org/GameResources/Genesis/GhoulsNGhosts",
+        "notes": "Physics and mechanics documentation."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Ghouls 'n Ghosts (GhG) is the 1988 arcade sequel to Ghosts 'n Goblins (1985). The Genesis version is a home port of the arcade game.",
+      "KEY MECHANIC DIFFERENCE FROM NES GnG: Arthur can fire in the REVERSE direction by pressing down+fire while jumping. This allows targeting enemies behind him mid-jump.",
+      "KEY ADDITION: Golden Armor — third armor tier (Bronze → Steel → Golden). Golden Armor allows magic attacks.",
+      "Still uses COMMITTED FIXED ARC jumps — no horizontal air control. Same core limitation as NES GnG.",
+      "Still uses TWO-HIT death system: armor hit → underwear → next hit = death.",
+      "Still requires TWO PLAYTHROUGHS for the true ending — same design lineage as GnG.",
+      "Improved arcade-to-home conversion: Genesis version is considered superior to contemporaneous NES/Famicom GhG ports."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Arthur is not fast. Movement feel inherited from GnG series. VERIFY."
+    }
+  },
+
+  "jump": {
+    "_note": "Same committed arc system as NES GnG. Core limitation unchanged.",
+    "type": "committed_fixed_arc",
+    "height_px_approx": 40,
+    "air_control": "none_horizontal",
+    "variable_height": false,
+    "reverse_fire": {
+      "description": "KEY ADDITION OVER NES GnG: While jumping, press down+fire to fire in the REVERSE direction — the direction Arthur came from.",
+      "activation": "Down + fire button while airborne",
+      "effect": "Arthur fires backward while maintaining his jump arc forward.",
+      "notes": [
+        "This addresses the core vulnerability of the committed jump: enemies approaching from behind.",
+        "In NES GnG, an enemy behind Arthur during a jump was essentially untouchable.",
+        "The reverse fire adds a safety valve without changing the core committed-arc design.",
+        "Directional firing adds a new skill: identifying threats BEHIND you and responding mid-arc."
+      ],
+      "confidence": "high"
+    },
+    "notes": "No horizontal control even in GhG — the committed arc persists. Only the firing direction was added."
+  },
+
+  "armor_system": {
+    "_note": "Three-tier armor system — same concept as NES GnG but with Golden Armor added.",
+    "bronze_armor": {
+      "tier": 1,
+      "description": "Base armor. Arthur's starting protection."
+    },
+    "steel_armor": {
+      "tier": 2,
+      "description": "Second armor. Collected from chests.",
+      "hits_to_lose": 1
+    },
+    "golden_armor": {
+      "tier": 3,
+      "description": "NEW IN GhG (not in NES GnG). Third armor. Enables magical attacks when carrying appropriate weapon.",
+      "upgrade_source": "Chest in level",
+      "magic_attack": {
+        "description": "When wearing Golden Armor, holding fire charges a magic blast that clears the screen or hits multiple enemies.",
+        "notes": [
+          "Magic attack type depends on current weapon.",
+          "The Golden Armor's magic is the power fantasy payoff for mastery — rare to have all three armor upgrades."
+        ]
+      },
+      "hits_to_lose": 1
+    },
+    "underwear_state": {
+      "description": "Losing all armor leaves Arthur in underwear. Same as NES GnG.",
+      "next_hit": "Death"
+    }
+  },
+
+  "weapons": {
+    "_note": "Similar weapon set to NES GnG but with additions.",
+    "lance": "Straight horizontal throw. Default.",
+    "dagger": "Fast forward throw",
+    "torch": "Arcing path — lights enemies on fire",
+    "axe": "Arcing path",
+    "scythe": "Wide arc, multiple hits",
+    "shield": "Horizontal throw that bounces back",
+    "notes": [
+      "Weapon is changed by collecting chests (same as NES GnG).",
+      "Different weapons interact with the Golden Armor's magic in different ways.",
+      "Players often prefer certain weapons and will intentionally avoid chest pickups to keep preferred weapons."
+    ]
+  },
+
+  "knockback": {
+    "description": "Taking damage sends Arthur flying backward.",
+    "notes": [
+      "Same as NES GnG — knockback into a pit = death regardless of armor.",
+      "The knockback during the committed jump arc can create cascading falls.",
+      "Enemies are often positioned to maximize knockback into hazards."
+    ]
+  },
+
+  "two_playthrough_design": {
+    "description": "First playthrough ends with a fake final boss/ending. Arthur must complete the game again (second loop) to reach the true final boss.",
+    "notes": [
+      "Identical design principle to NES GnG — inherited from the arcade era.",
+      "The second loop may have different enemy patterns or requirements (VERIFY for GhG specifically).",
+      "The two-playthrough requirement is the series' most notorious design choice."
+    ]
+  },
+
+  "comparison_to_nes_gng": {
+    "changes": [
+      "Reverse fire (backward shot while jumping) — most significant gameplay change",
+      "Golden Armor added (third tier, magic attacks)",
+      "16-bit hardware — larger sprites, more detailed backgrounds, parallax scrolling",
+      "Different level design (not a port of NES GnG — original arcade sequel)"
+    ],
+    "unchanged": [
+      "Committed fixed arc jump — no horizontal air control",
+      "Two-hit death system (armor → underwear → death)",
+      "Knockback on damage",
+      "Two-playthrough true ending requirement",
+      "Enemy respawn on scroll-back"
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "The reverse-fire addition to GhG is a careful surgical change: it addresses the specific vulnerability of the committed jump (enemies behind you) without altering the core constraint (no horizontal control). This is 'precision addition' — adding exactly enough to fix the specific problem without changing the design philosophy.",
+    "Golden Armor's magic attack creates a reward for mastery: players who navigate three armor upgrades and maintain them get access to a screen-clearing power most players never see. The magic is the reward for surviving long enough to collect three chests while taking no damage — a hidden high-difficulty reward.",
+    "The two-playthrough true ending becomes a tradition in GhG, making it feel intentional rather than cruel by the second game. Arcade players were already used to 'loop' structures. The home console version inherits this — a design choice that made more sense in its original context.",
+    "GhG's jump design gives Arthur a choice on every jump: fire forward (default) or fire backward (down+fire). This creates a read-and-react decision within the fixed arc: is the bigger threat in front of me or behind me? This is micro-strategy within the constrained jump.",
+    "The Ghouls 'n Ghosts series is uniquely committed to its core constraint — the committed arc jump. Three games (GnG, GhG, SGnG) maintained it across two hardware generations. The Super version added a second jump but kept both arcs committed. The series is an argument that a severe constraint can be the game's identity."
+  ]
+}

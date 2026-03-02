@@ -1,0 +1,165 @@
+{
+  "game_id": "jungle-book-snes",
+  "game_name": "The Jungle Book",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated jungle wildlife and antagonist characters (Shere Khan, Kaa)",
+      "meaning": "Active threat requiring avoidance or projectile combat"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Distinctive large character sprite appearing at level transitions",
+      "meaning": "Major narrative obstacle; projectile-only vulnerability signals combat-required state"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Six-minute level timer (implied in HUD)",
+      "meaning": "Failure condition; communicates urgency and restricted exploration window"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Jungle terrain obstacles requiring vine-swinging and platforming navigation",
+      "meaning": "Physical danger requiring precise movement; failure results in damage/death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly character presence",
+      "visual_form": "Named NPC characters (Bagheera, Baloo, King Louie) rendered distinctly from enemies",
+      "meaning": "Level completion objective; safe interaction point marking stage finish"
+    },
+    {
+      "signal": "Collectible items",
+      "visual_form": "Gems scattered throughout levels, banana projectiles, fruit items",
+      "meaning": "Progress markers; gems quantify advancement toward character-finding objective"
+    },
+    {
+      "signal": "Exit sign presence",
+      "visual_form": "Visual exit marker (SNES version alternative to finding friendly character)",
+      "meaning": "Safe passage forward; marks level boundary"
+    },
+    {
+      "signal": "Powerup acquisition",
+      "visual_form": "Invincibility masks, coconuts, double banana shots, boomerang bananas",
+      "meaning": "Temporary threat mitigation; visual abundance indicates safety window"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mowgli (player character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Banana projectile weapon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Human village destination; represents civilization/safety state"
+    },
+    {
+      "faction": "Jungle allies (Bagheera, Baloo, King Louie)",
+      "color_identity": null,
+      "symbol_or_sigil": "Character-specific sprites; friendly animation frames",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Scattered throughout jungle; mark safe zones within hostile landscape"
+    },
+    {
+      "faction": "Jungle threats (wildlife, Shere Khan, Kaa)",
+      "color_identity": null,
+      "symbol_or_sigil": "Antagonist character sprites; Shere Khan (tiger) and Kaa (hypnotist snake) as named bosses",
+      "enemy_visual_variants": "Standard enemies versus distinctive boss sprites for Shere Khan encounters",
+      "environmental_markers": "Concentrated in hostile jungle areas; signal danger zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-hunt (initial safety)",
+      "visual_manifestation": "Jungle environment with scattered friendly NPCs and collectibles; relatively sparse enemy density",
+      "behavioral_manifestation": "Mowgli begins in wolf home; movement is exploratory; no immediate combat pressure"
+    },
+    {
+      "world_state": "Active hunt (Shere Khan threat)",
+      "visual_manifestation": "Increased enemy sprite density; Shere Khan appears as boss encounter; jungle environment darkens or intensifies visually (inferred from narrative framing)",
+      "behavioral_manifestation": "Combat becomes necessary; avoidance patterns shift to confrontation; boss fights require sustained projectile attacks"
+    },
+    {
+      "world_state": "Progress toward village (journey mid-point)",
+      "visual_manifestation": "Chapter transitions with story descriptions; level-to-level progression through jungle stages; gem collection drives forward momentum",
+      "behavioral_manifestation": "Mowgli must collect incremental gem counts (8-12 depending on difficulty) before character-finding objective unlocks"
+    },
+    {
+      "world_state": "Safe interaction",
+      "visual_manifestation": "Friendly character appearance; exit sign visibility; absence of immediate enemy sprites in close proximity",
+      "behavioral_manifestation": "Player can reach completion objective; no projectile attacks required; level finishes"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character-as-objective placement",
+      "example": "Baloo, Bagheera, and King Louie placed in specific level locations as find-targets; their presence signals narrative waypoints in Mowgli's journey toward the village"
+    },
+    {
+      "technique": "Chapter framing with story descriptions",
+      "example": "Each chapter opens with narrative context describing plot progression and stage objectives; verbal storytelling anchors visual exploration"
+    },
+    {
+      "technique": "Boss character encounter design",
+      "example": "Shere Khan appears as named boss every other level; his presence escalates threat narrative; projectile-only vulnerability communicates his danger level"
+    },
+    {
+      "technique": "Jungle terrain as progression metaphor",
+      "example": "Vine-swinging, platforming, and environmental navigation mirror Mowgli's physical journey away from wolf home toward human civilization; terrain difficulty increases narrative tension"
+    },
+    {
+      "technique": "Weapon evolution through collection",
+      "example": "Banana projectile baseline upgraded to double bananas and boomerang variants; powerup collection visually communicates Mowgli's growing capability to survive the hunt"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mowgli",
+      "state": "Safe/allied interaction",
+      "behavior": "Approaches friendly NPCs; movement slows or halts at character location; animation transitions to completion/success state"
+    },
+    {
+      "entity": "Mowgli",
+      "state": "Combat-engaged",
+      "behavior": "Rapid movement; projectile firing animation loops; jumping/dodging patterns intensify in proximity to enemies"
+    },
+    {
+      "entity": "Shere Khan (boss)",
+      "state": "Hunt phase",
+      "behavior": "Appears as distinct large sprite; immune to jumping attacks; only projectile impacts register damage; indicates escalated threat tier"
+    },
+    {
+      "entity": "Jungle wildlife (generic enemies)",
+      "state": "Patrol/idle",
+      "behavior": "Wandering sprite animation; predictable movement patterns; avoidable or defeatable with basic projectiles"
+    },
+    {
+      "entity": "Gem items",
+      "state": "Uncollected",
+      "behavior": "Stationary sprites scattered throughout level; collection audio-visual feedback (score increment) signals progress toward character-finding threshold"
+    },
+    {
+      "entity": "Friendly NPCs",
+      "state": "Quest target",
+      "behavior": "Stationary or minimal animation; awaiting player approach; visual distinctness from enemies (animation frame quality, character recognition)"
+    }
+  ],
+  "notes": "The Jungle Book SNES version uses a primarily single-character (Mowgli) progression system with faction identity rooted in source material (Disney film). World state is communicated through: (1) enemy density and boss encounters indicating hunt escalation, (2) gem collection creating quantified progress feedback, (3) character-as-objective placement marking narrative waypoints, and (4) environmental hazards requiring skill-based navigation. Danger is signaled through sprite distinctness (enemies vs. allies), projectile-immunity patterns (boss-tier threats), and time pressure. The game lacks faction-based visual distinction beyond enemy/ally binary; factions are narratively defined (Mowgli's allies vs. predators/antagonists) rather than visually marked through color or heraldry. Political situation is implicit in plot (Shere Khan hunt, village return) rather than dynamically manifested in world visuals.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:05:58.510Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3949,
+    "output_tokens": 2054,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

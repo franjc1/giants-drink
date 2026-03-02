@@ -1,0 +1,162 @@
+{
+  "game_id": "arch-rivals-genesis",
+  "game_name": "Arch Rivals",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Hazard objects on court",
+      "visual_form": "Soda cans and candy wrappers rendered on basketball court floor",
+      "meaning": "Tripping hazard; ball handler will fall and lose possession if stepped on"
+    },
+    {
+      "signal": "Referee collision",
+      "visual_form": "Referee positioned on court as visual obstacle",
+      "meaning": "Player can fall over referee, resulting in ball loss to opponent"
+    },
+    {
+      "signal": "Opposing player positioning",
+      "visual_form": "Visual proximity and animation of opponent character",
+      "meaning": "Imminent threat of being punched or having ball stolen via flying leap maneuver"
+    },
+    {
+      "signal": "Flying leap animation",
+      "visual_form": "Opponent character jumping forward at ball carrier with tackling motion",
+      "meaning": "High-risk ball theft attempt; successful execution results in knockdown"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ball possession",
+      "visual_form": "Ball held visually by player character sprite",
+      "meaning": "Control state; player can score or pass"
+    },
+    {
+      "signal": "Teammate proximity",
+      "visual_form": "Second team character positioned on court near ball carrier",
+      "meaning": "Available passing option to reset play or create scoring opportunity"
+    },
+    {
+      "signal": "Court clearance",
+      "visual_form": "Absence of hazard objects or opponents in immediate movement path",
+      "meaning": "Safe zone for ball handler movement toward basket"
+    },
+    {
+      "signal": "Distance from opponents",
+      "visual_form": "Visual separation between player character and opposing team sprites",
+      "meaning": "Reduced immediate threat of physical interference or ball theft"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Home Team (Player 1)",
+      "color_identity": "Team-specific color palette (customizable; Chicago, Los Angeles, New York, Denver, Natural High, Brawl State each have distinct hues)",
+      "symbol_or_sigil": "Team name displayed on scoreboard and player uniforms",
+      "enemy_visual_variants": "Away team rendered in contrasting color scheme to distinguish from home team",
+      "environmental_markers": "Team colors reflected in uniform sprites; scoreboard displays home team on left side"
+    },
+    {
+      "faction": "Away Team (Player 2/Computer)",
+      "color_identity": "Contrasting color palette to home team (operator-customizable)",
+      "symbol_or_sigil": "Team name displayed on scoreboard and player uniforms",
+      "enemy_visual_variants": "Distinct sprite coloring and uniform appearance from home team",
+      "environmental_markers": "Team colors reflected in uniform sprites; scoreboard displays away team on right side"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game active / in progress",
+      "visual_manifestation": "Ball visible on court; both player characters animated and responsive; scoreboard displays current score and time",
+      "behavioral_manifestation": "Players move freely, pass, shoot, and punch opponents without referee penalty"
+    },
+    {
+      "world_state": "Shot clock violation occurring",
+      "visual_manifestation": "Referee animation; ball turnover triggered",
+      "behavioral_manifestation": "Possession transfers to opposing team; referee enforces shot clock rule (only penalty called in game)"
+    },
+    {
+      "world_state": "Overtime period (tie after 4 quarters)",
+      "visual_manifestation": "Scoreboard indicates overtime period; court may show visual tension cue",
+      "behavioral_manifestation": "Single-point sudden death scoring; next basket wins; overtime period lasts one minute before repeat if no score"
+    },
+    {
+      "world_state": "Hazard object present on court",
+      "visual_manifestation": "Soda cans or candy wrappers rendered on floor at specific locations",
+      "behavioral_manifestation": "Ball carrier stumbles and falls if stepping on object; opponent gains ball theft opportunity"
+    },
+    {
+      "world_state": "Ball handler knocked down",
+      "visual_manifestation": "Player character sprite transitions to fallen/horizontal animation; ball visible on court floor",
+      "behavioral_manifestation": "Possession becomes vulnerable; opponent can freely steal ball without penalty"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Court hazards as friction agents",
+      "example": "Litter (soda cans, candy wrappers) on floor creates uncontrolled play zones; implies casual/rowdy court environment matching 'Basket Brawl' tagline"
+    },
+    {
+      "technique": "Referee as neutral obstacle",
+      "example": "Referee positioned on court as both authority figure and physical hazard; reinforces that contact is permitted but chaos remains manageable"
+    },
+    {
+      "technique": "Visual team differentiation",
+      "example": "Distinct uniform colors and player sprite variations between home/away teams create immediate faction recognition and rivalry visual narrative"
+    },
+    {
+      "technique": "Character-specific physical traits",
+      "example": "Eight playable characters each with unique characteristics (documented but not detailed in source); implies player identity and playstyle differentiation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Ball carrier",
+      "state": "moving with ball",
+      "behavior": "Can pass to teammate, shoot at basket, or punch opposing player without penalty; animation shows holding/dribbling motion"
+    },
+    {
+      "entity": "Ball carrier",
+      "state": "approaching hazard object",
+      "behavior": "Trips and falls if stepping on soda can or candy wrapper; losing possession"
+    },
+    {
+      "entity": "Ball carrier",
+      "state": "near opposing player",
+      "behavior": "Can be punched freely; opponent can execute flying leap tackle to knock down and steal ball"
+    },
+    {
+      "entity": "Defending player",
+      "state": "approaching ball carrier",
+      "behavior": "Can execute flying leap maneuver; if successful, tackles and steals ball; if missed, rolls along floor (vulnerable state)"
+    },
+    {
+      "entity": "Defending player",
+      "state": "missed flying leap",
+      "behavior": "Rolls helplessly along floor; temporary vulnerability window before regaining control"
+    },
+    {
+      "entity": "Referee",
+      "state": "on court",
+      "behavior": "Acts as passive obstacle; can cause ball carrier to trip and fall; enforces shot clock violations only (no physical contact penalties)"
+    },
+    {
+      "entity": "Teammates",
+      "state": "ball possessed by partner",
+      "behavior": "Can call for pass or direct shot; positions indicate available passing lanes"
+    }
+  ],
+  "notes": "Arch Rivals (Genesis 1992) is a 2v2 arcade-style basketball game emphasizing physical contact and court chaos. Visual communication is straightforward: team colors distinguish factions, hazard objects telegraph danger zones, character proximity indicates threat level, and animations clearly show possession state. The game's 'Basket Brawl' subtitle is reinforced through permissive punch mechanics and hazard-strewn court. No complex political or faction narrative exists; world-state manifestation is purely mechanical (score, time, possession, hazard presence). The Genesis port suffered from a significant gameplay balancing glitch (95% basket success rate from anywhere on court) that visually manifests as constant scoring but was not designed as intentional world-state communication.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:42:33.033Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3010,
+    "output_tokens": 1925,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

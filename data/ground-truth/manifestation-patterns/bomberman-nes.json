@@ -1,0 +1,166 @@
+{
+  "game_id": "bomberman-nes",
+  "game_name": "Bomberman",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated enemy sprites moving through maze corridors",
+      "meaning": "Active threat to player; collision causes damage/death"
+    },
+    {
+      "signal": "Bomb detonation",
+      "visual_form": "Explosion sprite with expanding blast radius animation",
+      "meaning": "Area-of-effect danger; destroys walls, kills enemies, harms player if caught in radius"
+    },
+    {
+      "signal": "Destructible walls",
+      "visual_form": "Soft blocks (visually distinct from hard perimeter walls) scattered throughout maze",
+      "meaning": "Can be destroyed by bombs to reveal items or create pathways; hiding spots for enemies"
+    },
+    {
+      "signal": "Chain reactions",
+      "visual_form": "Sequential explosions propagating across multiple bombs",
+      "meaning": "Uncontrolled escalation of danger; loss of tactical control"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Hard perimeter walls",
+      "visual_form": "Solid outer border blocks and fixed internal structures",
+      "meaning": "Impassable barriers that cannot be destroyed; provide safe cover from explosions"
+    },
+    {
+      "signal": "Empty space/distance",
+      "visual_form": "Clear tile separation between player and enemies/explosions",
+      "meaning": "Spatial buffer reducing immediate threat; allows escape planning"
+    },
+    {
+      "signal": "Exit/Door location",
+      "visual_form": "Designated portal tile (revealed after all enemies defeated)",
+      "meaning": "Safe progression point; signals completion of stage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Bomberman)",
+      "color_identity": "White/light colored robotic sprite",
+      "symbol_or_sigil": "Round robot form with antenna",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Operates within maze corridors; controls bomb placement"
+    },
+    {
+      "faction": "Enemies",
+      "color_identity": "Varied enemy sprite colors (distinct from player)",
+      "symbol_or_sigil": "Multiple distinct enemy creature designs",
+      "enemy_visual_variants": "Different enemy types have unique appearance and movement patterns",
+      "environmental_markers": "Patrol maze corridors; emerge from destructible wall tiles; constrained by hard walls"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level start / enemies alive",
+      "visual_manifestation": "Multiple enemy sprites visible in maze; exit door hidden/not displayed; soft blocks intact",
+      "behavioral_manifestation": "Enemies patrol randomly through corridors using complex AI; player must avoid and eliminate"
+    },
+    {
+      "world_state": "All enemies defeated",
+      "visual_manifestation": "Exit door becomes visible/revealed on screen; remaining soft blocks show as ordinary tiles",
+      "behavioral_manifestation": "Player can safely walk to door to progress; no active threats in maze"
+    },
+    {
+      "world_state": "Active bomb countdown",
+      "visual_manifestation": "Bomb sprite on tile with visual/audio countdown indicator",
+      "behavioral_manifestation": "Explosion occurs after set frames; blast propagates orthogonally until blocked by hard walls"
+    },
+    {
+      "world_state": "Bonus item available (obscure condition)",
+      "visual_manifestation": "Hidden bonus item tile (Goddess Mask, Cola Bottle, Famicom, etc.) briefly revealed in debug mode as red half-destroyed wall",
+      "behavioral_manifestation": "Player has ~8.5 seconds to locate and collect before disappearance; grants massive point bonus"
+    },
+    {
+      "world_state": "Player caught in explosion",
+      "visual_manifestation": "Player sprite death animation; removal from screen",
+      "behavioral_manifestation": "Loss of life/stage restart; visual feedback confirms damage resolution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Maze architecture variability",
+      "example": "Each of 50 stages presents differently-arranged hard walls and soft block placement, creating unique tactical puzzles that suggest progression in difficulty and complexity"
+    },
+    {
+      "technique": "Hidden item encoding",
+      "example": "Bonus items referenced to Hudson Soft games (Star Force sprite, Dezeni World character portrait, programmer Nakamoto-san) embedded as ultra-rare unlocks, creating metagame narrative of developer self-reference"
+    },
+    {
+      "technique": "Enemy behavior pattering",
+      "example": "Random AI movement through procedurally-generated level layout creates perception of intelligent threat; complex random function prevents pattern recognition, maintaining tension"
+    },
+    {
+      "technique": "Door revelation mechanic",
+      "example": "Exit remains invisible until all enemies cleared, visually encoding the narrative: 'escape is only possible after threat elimination'"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy sprites",
+      "state": "Patrolling/alive",
+      "behavior": "Move through corridors using pseudo-random pathing; reverse direction when hitting walls; spawn from destroyed soft blocks"
+    },
+    {
+      "entity": "Enemy sprites",
+      "state": "Hit by explosion",
+      "behavior": "Sprite disappears; removed from threat pool; signals progress toward stage completion"
+    },
+    {
+      "entity": "Bomb",
+      "state": "Placed on tile",
+      "behavior": "Remains stationary; counts down visually/aurally; cannot be moved by player after placement"
+    },
+    {
+      "entity": "Bomb",
+      "state": "Detonating",
+      "behavior": "Explosion animates orthogonally (up/down/left/right) until blocked by hard wall; soft blocks destroyed; enemies killed; player damaged if in blast"
+    },
+    {
+      "entity": "Soft block",
+      "state": "Intact",
+      "behavior": "Occupies tile; blocks movement; can hide items or enemies; destroyable by bombs"
+    },
+    {
+      "entity": "Soft block",
+      "state": "Destroyed",
+      "behavior": "Sprite removed; tile becomes passable; potential item revealed; potential enemy spawn point"
+    },
+    {
+      "entity": "Player",
+      "state": "Moving",
+      "behavior": "Navigates corridors via D-Pad input; constrained to grid movement; cannot occupy soft block or hard wall tiles"
+    },
+    {
+      "entity": "Player",
+      "state": "Bomb placement",
+      "behavior": "Places bomb on current tile; can only hold one active bomb at a time (unless bonus items modify); creates tactical pressure"
+    }
+  ],
+  "notes": "Bomberman NES (1985/1987) establishes the core franchise visual language through minimal sprite-based communication. The game relies on clear tile-state signaling: walls are barriers, soft blocks are destroyables, enemies are moving threats, bombs are time-delayed hazards, and the hidden exit encodes narrative closure. No faction politics or political situational complexity present; this is pure abstract puzzle-action, not a world-state narrative game. Environmental storytelling emerges from meta-references (developer credits as bonus items) rather than world-narrative. The manifestation layer communicates purely through mechanical state: what you see is what mechanical rules allow. Danger signals are isomorphic with game hazards; safety signals are simply absence of hazard. Behavioral tells directly map to game state—enemies move because they're alive, sprites vanish because state changes. The 50-stage progression itself is the only long-form world-state arc.",
+  "sources_used": [
+    "tcrf",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:41:56.751Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6019,
+    "output_tokens": 2161,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

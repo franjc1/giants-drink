@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "game": "Metal Storm",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1991,
+    "publisher": "Irem",
+    "developer": "Irem",
+    "sources": [
+      {
+        "name": "Wikipedia — Metal Storm (video game)",
+        "url": "https://en.wikipedia.org/wiki/Metal_Storm_(video_game)",
+        "notes": "Gravity reversal mechanic confirmed: Up+Jump = instantaneous gravity flip."
+      },
+      {
+        "name": "Speedrun.com — Metal Storm",
+        "url": "https://www.speedrun.com/metal_storm",
+        "notes": "Speedrun community mechanics reference."
+      },
+      {
+        "name": "Hardcore Gaming 101 — Metal Storm",
+        "url": "http://www.hardcoregaming101.net/metal-storm/",
+        "notes": "Gameplay mechanics overview."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Metal Storm is a mech shooter for NES published by Irem in 1991. Notable for its GRAVITY REVERSAL mechanic.",
+      "DEFINING MECHANIC: The M-308 Gunner can flip gravitational polarity, walking on ceilings. Gravity reversal affects enemies too.",
+      "Gravity flip is instantaneous — not a gradual effect. Binary floor/ceiling state.",
+      "Only one gravity flip allowed while airborne — must land before re-flipping. Prevents infinite hovering.",
+      "A rare NES game — cartridges are valuable collector items. Released very late in NES lifecycle.",
+      "Walk speed and jump values not precisely documented from ROM sources — estimates from gameplay observation."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "gravity_system": {
+    "_note": "THE DEFINING FEATURE. Two gravity states: normal (fall down) and reversed (fall up / walk on ceiling).",
+    "states": {
+      "normal": {
+        "description": "Standard gravity. M-308 walks on floors, falls downward.",
+        "activation": "Default state"
+      },
+      "reversed": {
+        "description": "Reversed gravity. M-308 walks on ceilings, falls upward.",
+        "activation": "Press Up + Jump simultaneously",
+        "notes": "Instantaneous flip — not a gradual transition."
+      }
+    },
+    "rules": [
+      "Gravity flip is binary: normal or reversed. No partial states.",
+      "Can only flip once while airborne. Must touch a surface before re-flipping.",
+      "The flip affects the M-308's gravity axis only — does NOT affect projectiles in flight.",
+      "Enemies are also affected by gravity state (floor-walkers become ceiling-walkers after flip).",
+      "Environmental objects respond to the gravity state."
+    ],
+    "strategic_use": [
+      "Dodge floor-based enemies by flipping to ceiling",
+      "Access ceiling-mounted platforms/items",
+      "Crush enemies between gravity flip (flip while above enemy → land on them)",
+      "Some enemies can only be defeated from a specific gravity orientation"
+    ]
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Estimate. Standard Irem NES movement feel. VERIFY from ROM."
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 32,
+    "confidence": "low",
+    "variable_height": false,
+    "air_control": "limited",
+    "notes": [
+      "Jump in the current gravity direction (down normally, up when reversed).",
+      "Standard NES-era fixed arc jump. Not variable height — short press vs long press not confirmed.",
+      "VERIFY jump height from ROM data."
+    ]
+  },
+
+  "weapons": {
+    "primary_cannon": {
+      "description": "Forward-firing weapon. Standard blaster shots.",
+      "direction": "horizontal (facing direction)",
+      "notes": "Multiple weapon upgrades can be collected throughout the game."
+    },
+    "upgrades": {
+      "notes": "Various weapon pickups available. Specific upgrade list not documented in primary sources."
+    }
+  },
+
+  "level_structure": {
+    "description": "7 stages with boss fights. Vertical scrolling and horizontal scrolling sections.",
+    "notes": [
+      "Stages include both horizontal and vertical scrolling sections.",
+      "Boss fights at end of each stage.",
+      "Some sections are auto-scrolling (gravity manipulation becomes critical for survival)."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "Metal Storm's gravity reversal is a binary state toggle — the simplest possible implementation of a spatial inversion mechanic. The constraint (one flip per airborne period) prevents abuse while keeping the system learnable. This is elegant constraint design.",
+    "When gravity is reversed, the player's mental map of 'floor vs ceiling' inverts. This creates a complete cognitive reframe within a standard NES physics engine — no new collision system, no new movement rules, just a negated gravity vector.",
+    "The enemy interaction with gravity (floor-walkers become ceiling-walkers after flip) makes the player's tool into a double-edged sword. Flipping can solve a problem or create a new one, depending on enemy positions. This is situational risk in a single button press.",
+    "Metal Storm's obscurity (rare cartridge, limited release) means its mechanics have been less widely studied than contemporaries. The gravity flip predates many later games that used similar mechanics, making it an important design artifact.",
+    "The 'only one flip per landing' constraint is a perfect example of a freedom-limiter that prevents degenerate play while preserving all interesting play. Unlimited flipping = float through everything. One flip per landing = skilled navigation required."
+  ]
+}

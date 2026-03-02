@@ -1,0 +1,299 @@
+GameResources/SNES/Earthbound - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+SNES
+
+Earthbound
+
+This page documents information about
+
+EarthBound
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+The purpose of this page is to document all of the known tricks
+of Earthbound (Mother 2) for the SNES.
+
+Table of contents
+
+Luck-manipulation
+
+Overworld
+
+Battle
+
+Skipping a trigger spot (Stutter walk)
+
+Walk Through Walls (Staircase glitch)
+
+Walk through cliffs
+
+Go through cliffs by teleporting
+
+"Check area" glitch
+
+Mid battle wrong item equip
+
+Memory addresses
+
+External links
+
+Luck-manipulation
+
+The game uses a flow of 14592 sequent RNG values which it will run through during playing the game. Those values determine the appearance of enemies, item drops, SMAAAASH!! attacks, NPC behavior and other things. Having text being written onscreen will cause the flow of RNG to move with each character written. When the game loads new enemies onto the map, it will shift the flow of RNG too.
+
+Overworld
+
+In order to skip enemies or to have specific enemies appear, one can pause the game by pressing "B" or "select". The RNG will be called each frame during pausing. Unpause the game and move on once the result is desireable. This trick shouldn't be used if enemies can be avoided by walking past them in a clever fashion.
+
+Tip for advanced players:
+If you need to push the RNG for a better set-up for a battle or for an item drop, you can try walking past a barrier that causes enemies to load continously in an area where there are many enemies (You can use the lua-script found at the bottom of this page for this. When the flow of RNG shifts when walking around, you know that you may have crossed a barrier. After the frame it shifts, move back and forth to go across this barrier repeatedly). This has an even greater effect when done on an intersection of barriers.
+
+Battle
+
+In a battle, one wants to use the SMAAAASH!! attack as much as possible without wasting too much time for manipulating it. You can change the RNG by moving the selection in the battle menu. Since you can move the selection only every other frame, it is faster to manipulate the first SMAAAASH!! by pausing before entering the battle.
+
+Skipping a trigger spot (Stutter walk)
+
+You can skip spots which trigger an event by moving through it every other frame. This way you can skip the Starman Jr. battle or the Soundstone from Buzz Buzz.
+
+Walk Through Walls (Staircase glitch)
+
+Everything in Earthbound is on one  big map  (10.2 MB). Whenever you enter a door, a cave-entrance or a hole in the floor, the game warps you to where its destination is.
+
+When Ness and co. step onto a staircase, they will be moved forward and be locked to the staircase. If the game interrupts this locking procedure by telling you that someone's health is getting critical or through a phone call, Ness and co. will be able to walk through walls. You can walk around on the map freely, but most areas will be unloaded and you can't use any doors. You can use the sound stone or the town map in order to load an area. You can also walk out of bounds though the game might freeze if you walk too far.
+
+You can not walk below the point where you activated the glitch as the game tries to lock you onto the staircase. In order to cancel this side-effect, walk on a staircase normally.
+
+This glitch is, obviously, very useful for speedrunning. However, you can't use this trick to go directly to Giygas since the game freezes during the battle. The game unsets flags to check later if you followed the plot.
+So in order to prevent the game freeze, you need to 1) fall through the hole in Lumine Hall and 2) visit Magicant and beat Ness' Nightmare.
+
+An alternative method to do this glitch is to position oneself on a staircase and die by poisoning, cold, sunstroke or sickness. At the game-over sequence, make sure to go back to the title screen. Don't let the gameplay demos at the title screen play or the glitch will fail. Now the next time you load any savefile you can walk through walls.
+
+Walk through cliffs
+
+You can pass the blue spaces and you cannot pass the red spaces.
+
+For this trick to work, there needs to be a passable space which is sandwiched by impassable spaces and which is diagonal to the space you want to go. You can only enter such spaces with proper positioning and by being pushed into it. You might need a Skip sandwich to increase your walking speed.
+
+See  this  for a demonstration of this trick.
+
+TODO : Better explanation of this trick
+
+Go through cliffs by teleporting
+
+TODO : Explain
+
+"Check area" glitch
+
+As mentioned earlier, everything in Earthbound is on one big map. If you "check" an area that is located outside this map, the game will lag for a short while before bringing up a message. At some places it is possible that the game can bring up glitched messages! Such places are inside the  circus tent in Threed  and in the  top-right corner of Onett . The game may rarely crash, warp you somewhere, start an event such as a photo shot or a battle, or bring up menus. The game tries to read text from random places in memory. However, it can't be abused very well nor is it well investigated.
+
+This glitch is useful for tool-assisted speedrunning due to its potential to bring up the otherwise unreachable debug menu which can be used to complete the game very quickly. See  this movie  for a demonstration. Using the debug menu stirred up controversy, so it is hoped that the game can be finished without using the debug menu in the future.
+
+Mid battle wrong item equip
+
+When using an item mid battle to equip it, the game stores the position of the item in the inventory. If an earlier item in the same inventory (such as a teddy bear) is removed from the inventory between issuing the command and the command happening then the new item at the old location in the inventory will be equipped instead.
+
+Memory addresses
+
+Taken from the  discussion thread .
+Sprite tables are 28 bytes long, each slot is a word, so 14 sprite slots.
+
+Memory address  byte range  What it is
+
+7E0024  1x
+
+RNG #1
+
+7E0026  1x
+
+RNG #2
+
+Earthbound
+
+7E0031  2s
+
+Camera x position
+
+7E0033  2s
+
+Camera y position
+
+7E0A62  28u
+
+Sprite ID table
+
+7E0B8E  28u
+
+Sprite x position table
+
+7E0BCA  28u
+
+Sprite y position table
+
+7E4A5C  2u
+
+Spawned enemies counter
+
+7E4A7A  2u
+
+RNG #3
+
+7E9831  3u
+
+Money
+
+7E9835  3u
+
+ATM
+
+7E9875  4x
+
+X-Position
+
+7E9877  2x
+
+X-Pixelposition
+
+7E9875  2x
+
+X-Subposition
+
+7E9879  4x
+
+Y-Position
+
+7E987B  2x
+
+Y-Pixelposition
+
+7E9879  2x
+
+Y-Subposition
+
+7E9E3C  2u
+
+Skip Sandwich
+
+7EA22F  2u
+
+Enemy 1 HP
+
+Mother 2
+
+7E4E00  2u
+
+RNG #3
+
+7E9AE2  3u
+
+Money
+
+7E9AE6  3u
+
+ATM
+
+7E9B26  4x
+
+X-Position
+
+7E9B28  2x
+
+X-Pixelposition
+
+7E9B26  2x
+
+X-Subposition
+
+7E9B2A  4x
+
+Y-Position
+
+7E9B2C  2x
+
+Y-Pixelposition
+
+7E9B2A  2x
+
+Y-Subposition
+
+7EA042  2u
+
+Skip Sandwich
+
+External links
+
+Useful  Lua script for Snes9x  created by pirohiko, and its  BizHawk version  made by BrunoValads.
+
+Starmen.Net's site walkthrough  which contains a lot of useful information.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/SNES/Earthbound last edited by henke37  on 9/5/2022 5:00 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

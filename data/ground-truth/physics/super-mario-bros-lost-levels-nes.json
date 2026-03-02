@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "game": "Super Mario Bros.: The Lost Levels",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "Japan (Famicom Disk System) / North America (SNES All-Stars rerelease)",
+    "year": 1986,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D4 (Miyamoto/Tezuka)",
+    "sources": [
+      {
+        "name": "TASVideos — NES / Super Mario Bros 2 (Japan)",
+        "url": "https://tasvideos.org/GameResources/NES/SuperMarioBros2J",
+        "notes": "Uses exact SMB1 engine. Luigi differences and wind mechanics documented."
+      },
+      {
+        "name": "Wikipedia — Super Mario Bros.: The Lost Levels",
+        "url": "https://en.wikipedia.org/wiki/Super_Mario_Bros.:_The_Lost_Levels",
+        "notes": "Luigi physics confirmed: higher jump, lower traction."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "Originally released in Japan as Super Mario Bros. 2 (FDS, 1986). Not released in North America until Super Mario All-Stars (1993).",
+      "USES THE EXACT SAME ENGINE AS SMB1. All physics constants are identical for Mario.",
+      "KEY ADDITION: Luigi has different physics — higher jump (lower gravity while holding jump) but more slippery (less ground friction).",
+      "KEY ADDITION: Wind zones. Some levels have wind that pushes Mario/Luigi horizontally or vertically.",
+      "KEY ADDITION: Poison mushrooms — look like mushrooms but damage the player.",
+      "KEY ADDITION: Warp zones that send the player backward (anti-warps) as traps.",
+      "This is NOT the American 'Super Mario Bros. 2' (which is Doki Doki Panic). Designed as a hardcore difficulty sequel."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    },
+    "sub_pixel_precision": "16 sub-pixels per pixel (same as SMB1)"
+  },
+
+  "mario_physics": {
+    "_note": "Mario's physics are IDENTICAL to SMB1. All values from SMB1 documentation apply.",
+    "walk_max": {
+      "sub_px_per_frame": 24,
+      "px_per_frame": 1.5,
+      "confidence": "high",
+      "source": "SMB1 ROM disassembly — same engine"
+    },
+    "run_max": {
+      "sub_px_per_frame": 40,
+      "px_per_frame": 2.5,
+      "confidence": "high",
+      "source": "SMB1 ROM disassembly — same engine"
+    },
+    "acceleration_walking": {
+      "sub_px_per_frame_sq": 6,
+      "px_per_frame_sq": 0.375,
+      "confidence": "high",
+      "source": "SMB1 ROM disassembly — same engine"
+    },
+    "jump_velocity_initial": {
+      "sub_px_per_frame": 80,
+      "px_per_frame": 5.0,
+      "confidence": "high",
+      "source": "SMB1 ROM disassembly — same engine"
+    },
+    "jump_height_max_px": 48,
+    "gravity_normal": {
+      "sub_px_per_frame_sq": 7,
+      "px_per_frame_sq": 0.4375,
+      "confidence": "high"
+    },
+    "gravity_holding_jump": {
+      "sub_px_per_frame_sq": 6,
+      "px_per_frame_sq": 0.375,
+      "confidence": "high",
+      "notes": "Reduced gravity when holding jump button — the mechanism for variable height."
+    }
+  },
+
+  "luigi_physics": {
+    "_note": "Luigi has DIFFERENT physics from Mario. Deliberate design to distinguish the characters.",
+    "jump_height_modifier": {
+      "description": "Luigi jumps higher than Mario. Lower gravity applied when holding jump button.",
+      "notes": "Luigi can reach platforms Mario cannot with the same input.",
+      "confidence": "high"
+    },
+    "ground_friction_modifier": {
+      "description": "Luigi has less ground friction (more slippery). Takes longer to decelerate and has more slide when stopping.",
+      "notes": "The reduced traction makes Luigi harder to control precisely — a trade-off for the higher jump.",
+      "confidence": "high"
+    },
+    "practical_difference": [
+      "Luigi is preferred for reaching high platforms or long-distance jumps",
+      "Mario is preferred for precise platform landing (less slide)",
+      "Luigi on ice or moving platforms requires extra caution due to compounded slipperiness"
+    ]
+  },
+
+  "wind_mechanic": {
+    "_note": "New mechanic not in SMB1. Wind zones apply horizontal or vertical forces to the player.",
+    "types": {
+      "horizontal_wind": {
+        "description": "Pushes Mario/Luigi left or right. Can work with or against movement direction.",
+        "effect": "Modifies horizontal velocity — adds to or subtracts from player's own momentum."
+      },
+      "vertical_wind": {
+        "description": "Pushes player up or down while airborne.",
+        "effect": "Modifies jump arc — can make jumps go higher or shorter than expected."
+      }
+    },
+    "notes": [
+      "Wind is invisible — players must learn its presence from experience or positioning cues.",
+      "Wind interacts with standard physics — it adds to/from the existing velocity, not replaces it.",
+      "Critical to speedrun routing — wind-assisted sections allow faster movement.",
+      "The invisible nature of wind forces players to adapt their jumping intuition per-level."
+    ],
+    "confidence": "high"
+  },
+
+  "new_hazards": {
+    "poison_mushroom": {
+      "description": "Appears to be a power-up mushroom but damages the player on contact.",
+      "visual": "Resembles a standard mushroom but with a different color (darker/reddish)",
+      "notes": "A trap for players who reflexively grab all mushrooms. Teaches skepticism of 'safe' objects."
+    },
+    "backward_warp": {
+      "description": "Some warp zones send the player to an earlier world rather than a later one.",
+      "notes": "A cruel reversal of the warp zone power from SMB1. The same mechanic weaponized against the player's expectations."
+    }
+  },
+
+  "difficulty_design": {
+    "notes": [
+      "Lost Levels was rejected by Nintendo of America for North American release because it was considered too difficult for Western markets.",
+      "The game features 9 worlds (Worlds 1-8 + World 9, plus hidden Worlds A-D in later game loops).",
+      "Enemy placement is more aggressive than SMB1. Enemies are placed to punish standard SMB1 movement patterns.",
+      "Some levels include moving platforms that require precise timing — Luigi's slipperiness makes these especially treacherous.",
+      "The game is primarily a 'hard mode' version of SMB1's engine and concepts."
+    ]
+  },
+
+  "design_notes_for_giants_drink": [
+    "The Lost Levels demonstrates 'difficulty as content' — the game's primary offering is a harder version of a known thing. For players who had mastered SMB1, the engine was familiar but the execution demands were higher. This is a pure skill test against a known standard.",
+    "Luigi's different physics create a meaningful character choice from a single physics parameter change: reduce friction and increase jump. The interaction of these two changes produces an entirely different play feel — a character who can reach places Mario can't but who is harder to control precisely.",
+    "The invisible wind mechanic is a lesson in environmental physics. The player's learned intuition ('a 4-tile run-jump always clears this gap') breaks down when wind changes the constants. The environment becomes untrustworthy, which creates a different cognitive state than standard platforming.",
+    "The poison mushroom is a perfect example of 'subverted affordance.' The mushroom shape is an established signal: safe, beneficial, grab it. The poison mushroom uses that established trust against the player. Simple, devastating, and elegant as a difficulty tool.",
+    "The backward warp is similarly a subverted expectation — warp zones have always been helpful shortcuts. Using the same mechanic to punish exploration creates a paranoia about shortcuts that changes how players interact with secret paths."
+  ]
+}

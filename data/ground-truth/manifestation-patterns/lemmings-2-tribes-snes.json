@@ -1,0 +1,153 @@
+{
+  "game_id": "lemmings-2-tribes-snes",
+  "game_name": "Lemmings 2: The Tribes",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Traps and hazards",
+      "visual_form": "Environmental obstacles integrated into level design",
+      "meaning": "Lemmings will die or be blocked if they encounter these without protective skills"
+    },
+    {
+      "signal": "Time limit pressure",
+      "visual_form": "Level timer decreasing",
+      "meaning": "Failure state approaching; lemmings must reach exit before time expires"
+    },
+    {
+      "signal": "Lemming collision with hazards",
+      "visual_form": "Visual feedback when lemmings contact traps",
+      "meaning": "Active danger; lemming death or removal from viable solution state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit point",
+      "visual_form": "Designated level exit location",
+      "meaning": "Safe destination; delivering lemmings here completes level objective"
+    },
+    {
+      "signal": "Protective skills active",
+      "visual_form": "Visual representation of assigned skills (Builder creating terrain, Blocker stopping movement)",
+      "meaning": "Lemmings are protected from specific hazard classes"
+    },
+    {
+      "signal": "Cleared path",
+      "visual_form": "Terrain modifications created by Builder/Planter skills",
+      "meaning": "Safe route established for lemming passage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Highland Tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Highland-themed level environments"
+    },
+    {
+      "faction": "Cavelem Tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cave-themed level environments"
+    },
+    {
+      "faction": "Circus Tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Circus-themed level environments"
+    },
+    {
+      "faction": "Classic Tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visual appearance matches original Lemmings game; behavioral differences (preserves Blocker skill, original behavioral quirks)",
+      "environmental_markers": "Classic-styled level design"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Lemming Island under prophecy of darkness",
+      "visual_manifestation": "Twelve distinct tribal worlds with thematic visual differentiation",
+      "behavioral_manifestation": "Twelve tribes organized by region; each tribe must be guided to collect talisman piece"
+    },
+    {
+      "world_state": "Talisman fragmentation",
+      "visual_manifestation": "Each of twelve worlds represents one talisman piece location",
+      "behavioral_manifestation": "Player must complete all ten levels per world with gold medal ranking to secure talisman piece"
+    },
+    {
+      "world_state": "Level progression locked by difficulty",
+      "visual_manifestation": "Medal ranking system (gold/silver/bronze) displayed after level completion",
+      "behavioral_manifestation": "Gold medal required for world advancement; lower medals unlock next level but not world completion"
+    },
+    {
+      "world_state": "No-win situation encountered",
+      "visual_manifestation": "Game provides 'nuke' option to reset level",
+      "behavioral_manifestation": "Player can restart when lemming population becomes insufficient to solve level"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tribal cultural theming",
+      "example": "Each of twelve worlds visually represents distinct lemming culture (Highland, Cavelem, Circus, etc.) through environmental design rather than mechanical differences"
+    },
+    {
+      "technique": "Narrative context through level progression",
+      "example": "Talisman collection across twelve tribes communicates overall quest to save Lemming Island from prophesied darkness"
+    },
+    {
+      "technique": "Skill variation as cultural expression",
+      "example": "While all skills are mechanically available, certain skills appear more frequently in specific tribal worlds, suggesting cultural preferences without enforcing mechanical exclusivity"
+    },
+    {
+      "technique": "Medal ranking as progression indicator",
+      "example": "Gold/silver/bronze medals communicate skill mastery and world completion status visually"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Lemming (standard)",
+      "state": "Autonomous movement",
+      "behavior": "Walks forward automatically; enters level and seeks exit independently"
+    },
+    {
+      "entity": "Lemming (skill-assigned)",
+      "state": "With assigned skill active",
+      "behavior": "Performs skill function: building terrain, mining, using mobility enhancements, affecting other lemmings' behavior"
+    },
+    {
+      "entity": "Lemming (blocked by Blocker skill)",
+      "state": "Encountering Blocker lemming",
+      "behavior": "Reverses direction; cannot pass Blocker position"
+    },
+    {
+      "entity": "Lemming (affected by Attractor skill)",
+      "state": "In proximity to Attractor",
+      "behavior": "Alters movement toward Attractor lemming"
+    },
+    {
+      "entity": "Fan tool",
+      "state": "Player-controlled mechanism",
+      "behavior": "Propels lemmings with relevant skills (Ballooner, Surfer) and powers level mechanisms based on proximity and positioning"
+    }
+  ],
+  "notes": "Lemmings 2: The Tribes uses visual and mechanical differentiation across twelve tribal worlds to communicate narrative progression (talisman collection) without creating exclusive faction mechanics. Danger signals derive from environmental traps and time pressure. Safety signals emerge through skill assignment and exit location visibility. The medal ranking system (gold/silver/bronze) provides clear visual feedback on world completion status. The 'nuke' reset function communicates game state recovery option when puzzle becomes unsolvable. SNES port suffered technical limitations affecting feature completeness compared to other platforms.",
+  "sources_used": [
+    "tcrf - Lemmings 2: The Tribes (SNES)",
+    "wikipedia - Lemmings 2: The Tribes"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:41:22.049Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4813,
+    "output_tokens": 1658,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

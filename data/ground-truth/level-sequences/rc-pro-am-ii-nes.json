@@ -1,0 +1,147 @@
+{
+  "game_id": "rc-pro-am-ii-nes",
+  "game_name": "R.C. Pro-Am II",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "level_count": 32,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic racing mechanics (steering, acceleration)",
+      "first_appears": "Track 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns control pad steering and acceleration before encountering hazards"
+    },
+    {
+      "element": "Tune-up items (turbo acceleration, hotter engines, sticky tires)",
+      "first_appears": "Early tracks",
+      "introduction_context": "safe",
+      "mastery_context": "Performance upgrades collected to improve vehicle capabilities; displayed on track conditions screen between races"
+    },
+    {
+      "element": "Bonus letters (spell NINTENDO/CHAMPION)",
+      "first_appears": "Early tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Collecting all letters triggers car upgrade chain: truck → 4-wheeler → off-roader"
+    },
+    {
+      "element": "Roll cages (crash protection)",
+      "first_appears": "Early-mid tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Defensive collectible protecting from hazard damage"
+    },
+    {
+      "element": "Hazards: oil slicks, water puddles, rain squalls",
+      "first_appears": "Early-mid tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Terrain obstacles that slow or spin out cars; learned through encounter"
+    },
+    {
+      "element": "Stationary zippers (speed boost stations)",
+      "first_appears": "Mid tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Track-embedded speed boost mechanics"
+    },
+    {
+      "element": "Weapons: missiles (front), bombs (rear)",
+      "first_appears": "Mid tracks",
+      "introduction_context": "moderate",
+      "mastery_context": "Offensive items collected as stars; carried over between races"
+    },
+    {
+      "element": "Hazard: pop-up barriers",
+      "first_appears": "Mid-late tracks",
+      "introduction_context": "dangerous",
+      "mastery_context": "Dynamic obstacles requiring evasion during active race"
+    },
+    {
+      "element": "Skull hazards (ammunition decrease)",
+      "first_appears": "Mid-late tracks",
+      "introduction_context": "dangerous",
+      "mastery_context": "Penalty collectibles that force weapon conservation strategy"
+    },
+    {
+      "element": "AI escalation: yellow car hyperacceleration (127 mph)",
+      "first_appears": "Late tracks (triggered by excessive weapon use)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Dynamic difficulty response; forces player to reconsider weapon spam tactics"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Completing track (placement in top 3)",
+      "Collecting tune-up items (stat screen pause)",
+      "Collecting roll cage (crash protection reset)",
+      "Acquiring bonus letters (progression milestone)"
+    ],
+    "typical_tension_triggers": [
+      "Approaching track 24 (unofficial last track; largest/most complex)",
+      "Track 32+ repetitions with all AI at maximum speed",
+      "Encountering multiple hazards in sequence",
+      "Weapon depletion against unbeatable AI opponents",
+      "Yellow car hyperacceleration trigger"
+    ],
+    "pacing_descriptor": "Gradual escalation from safe mechanical learning (tracks 1-12) through hazard introduction and weapon gameplay (tracks 13-24) to survival-focused attrition phase (tracks 25+). Game has no formal end; players lose when weapons exhaust and cannot compete at maximum AI speed."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Bonus letters scattered across tracks; collecting all letters triggers car upgrade—signals optional collection meta-game",
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Tracks 1-12: Introduction to steering, acceleration, and basic collectible items (tune-ups, letters). Safe mechanical learning phase with minimal hazard density.",
+    "mid_game": "Tracks 13-24: Hazard introduction (oil slicks, puddles, barriers) and weapon acquisition. Player learns to balance item collection with obstacle avoidance. Track 24 marked as largest/most complex configuration.",
+    "late_game": "Tracks 25-32: Infinite loop of 12-track patterns with escalating features. Track 32 forces all AI opponents to maximum speed (127 mph, unbeatable without weapons). Game becomes attrition-based until player weapon supply exhausts.",
+    "notable_spikes": [
+      "Track 24 (complexity spike: largest track layout)",
+      "Track 25+ (feature accumulation: combines all previous hazards + escalated AI)",
+      "Track 32 (difficulty ceiling: AI speed becomes mathematically unbeatable)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Qualification threshold",
+      "description": "Each track forces top-3 placement requirement to progress. Failure results in game over (2 continues available, losing all points). Creates recurring tension/relief rhythm.",
+      "example_level": "All tracks (1-32)"
+    },
+    {
+      "pattern_name": "Infinite loop design",
+      "description": "12 unique track configurations repeat indefinitely after track 24. Each repetition layer adds hazards and escalates AI behavior. Tracks 25-32 are repeats of 1-8 with additional features.",
+      "example_level": "Track 25+ (repeat of 1-8 with escalation)"
+    },
+    {
+      "pattern_name": "Vehicle upgrade cascade",
+      "description": "Collecting all bonus letters spelling NINTENDO triggers three-tier vehicle upgrade (truck → 4-wheeler → off-roader). Encourages optional collection meta-game.",
+      "example_level": "Distributed across tracks 1-24"
+    },
+    {
+      "pattern_name": "Dynamic AI difficulty response",
+      "description": "Yellow opponent car automatically hyperaccelerates to 127 mph if player uses weapons excessively. Forces tactical weapon conservation in late game.",
+      "example_level": "Tracks 20+ (triggered conditionally)"
+    },
+    {
+      "pattern_name": "Attrition endgame",
+      "description": "Game has no formal end. Players eventually exhaust ammunition reserves and cannot match AI maximum speed (track 32+), resulting in inevitable elimination.",
+      "example_level": "Tracks 32+ (mathematically unbeatable)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:24:11.439Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3013,
+    "output_tokens": 2013,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

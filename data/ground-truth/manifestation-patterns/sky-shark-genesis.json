@@ -1,0 +1,148 @@
+{
+  "game_id": "sky-shark-genesis",
+  "game_name": "Sky Shark",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy military vehicles",
+      "visual_form": "Tanks, battleships, airplanes, and artillery sprites rendered on-screen",
+      "meaning": "Active hostile forces; collision or projectile contact results in player death"
+    },
+    {
+      "signal": "Incoming enemy projectiles",
+      "visual_form": "Bullets traveling across screen toward player biplane",
+      "meaning": "Immediate threat requiring evasion; hitting player removes a life and reduces firepower"
+    },
+    {
+      "signal": "Scrolling military terrain",
+      "visual_form": "Constantly moving background depicting war-torn landscape with Thai-inspired scenery",
+      "meaning": "Player is in active combat zone; forward momentum is mandatory"
+    },
+    {
+      "signal": "Increasing bullet speed in higher loops",
+      "visual_form": "Projectile velocity visually accelerates as difficulty increases",
+      "meaning": "Game state escalation; danger intensifies progressively"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Runway landing zones",
+      "visual_form": "Designated landing areas at end of stages where scrolling halts",
+      "meaning": "Temporary reprieve from constant forward movement; stage checkpoint reached"
+    },
+    {
+      "signal": "Bomb weapon availability",
+      "visual_form": "\"B\" icon items spawned from destroyed ground enemies; visual bomb counter",
+      "meaning": "Offensive capability to clear screen of threats; stress relief mechanism"
+    },
+    {
+      "signal": "Power-up items",
+      "visual_form": "\"S\" icons and point bonuses dropped by defeated enemy plane waves",
+      "meaning": "Enhanced firepower and resource accumulation; progression toward bonus lives"
+    },
+    {
+      "signal": "Extra life threshold",
+      "visual_form": "Score multiplier visual feedback; bonus life awarded at 50000 points and intervals thereafter",
+      "meaning": "Resource cushion against player death; continued survival capacity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Biplane aircraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Runway landing zones designated as friendly territory"
+    },
+    {
+      "faction": "Enemy military forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Tanks, battleships, airplanes, artillery as distinct enemy types",
+      "enemy_visual_variants": "Colored waves of enemy planes; ground-based vs. aerial variants",
+      "environmental_markers": "War-torn landscape with scattered military installations"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active combat engagement",
+      "visual_manifestation": "Constant scrolling terrain with visible military vehicles and incoming projectiles",
+      "behavioral_manifestation": "Player must maintain forward momentum while dodging and attacking; enemies actively fire at player position"
+    },
+    {
+      "world_state": "Stage transition / checkpoint reached",
+      "visual_manifestation": "Runway appears on screen; scrolling halts; transition to next level scenery",
+      "behavioral_manifestation": "Player can land safely; bomb stock multiplies by 3000 points; difficulty increases for subsequent stages"
+    },
+    {
+      "world_state": "Increasing difficulty (loop escalation)",
+      "visual_manifestation": "Bullet speed acceleration becomes perceptible; enemy density increases; visual complexity heightens",
+      "behavioral_manifestation": "Enemy aircraft aim more accurately at player; second loop starts at stage 2 rather than stage 1; player firepower management becomes critical"
+    },
+    {
+      "world_state": "Imminent player death",
+      "visual_manifestation": "Player biplane sprite hit by projectile or collision with enemy vehicle",
+      "behavioral_manifestation": "Life counter decreases; firepower resets to original state; respawn at last checkpoint reached"
+    },
+    {
+      "world_state": "War-zone environment",
+      "visual_manifestation": "Thai-inspired scenery in backgrounds; scrolling left-right environmental variety; Apocalypse Now aesthetic",
+      "behavioral_manifestation": "Continuous lateral background movement designed to emotionally engage player with realistic war depiction"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic background design",
+      "example": "Backgrounds depict Thai scenery and war-torn landscape with scrolling left-right movement to immerse player in military conflict setting inspired by Apocalypse Now"
+    },
+    {
+      "technique": "Enemy type variety as world-state indicator",
+      "example": "Progression through stages features different military vehicle types (tanks, battleships, aircraft, artillery) indicating player advancement through distinct battle zones"
+    },
+    {
+      "technique": "Runway checkpoint locations",
+      "example": "Visual designation of safe landing zones at stage completion marks territorial control and progression through hostile airspace"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player biplane",
+      "state": "Armed and operational",
+      "behavior": "Fires continuous shots up to screen height; deploys bombs with blast radius damage; can collect power-ups"
+    },
+    {
+      "entity": "Player biplane",
+      "state": "Hit by enemy fire",
+      "behavior": "Loses one life; firepower resets to base level; respawns at last checkpoint"
+    },
+    {
+      "entity": "Enemy aircraft (colored waves)",
+      "state": "Active combat",
+      "behavior": "Fires projectiles at player with increasing accuracy in higher loops; destroyed planes spawn \"S\" power-ups and point bonuses"
+    },
+    {
+      "entity": "Enemy ground forces (tanks, artillery)",
+      "state": "Active combat",
+      "behavior": "Stationary or moving obstacles; destroyed units spawn \"B\" bomb icons; require player firepower or bombs to eliminate"
+    },
+    {
+      "entity": "Incoming enemy projectiles",
+      "state": "Higher loop difficulty",
+      "behavior": "Bullet speed increases noticeably; projectile density increases; aiming accuracy of enemy aircraft improves"
+    }
+  ],
+  "notes": "Sky Shark (Flying Shark in Japan) is a military-themed vertically scrolling shooter with minimal faction complexity but strong world-state communication through environmental design and difficulty escalation. The game deliberately uses Apocalypse Now aesthetic to convey war-zone immersion. Visual manifestation of danger is primarily through enemy vehicle density, projectile speed, and terrain scrolling. Safety is signaled through runway zones and collectible power-ups. The checkpoint system and firepower reset mechanic create visual/behavioral feedback for player damage state. No explicit political factions are present—combat is framed as generic military conflict with player as allied air force.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:33:34.485Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2878,
+    "output_tokens": 1744,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "game_id": "hexen-pc",
+  "game_name": "Hexen: Beyond Heretic",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Creature sprites with distinct silhouettes and animations; demonic/skeletal designs",
+      "meaning": "Direct threat to player; engage or evade"
+    },
+    {
+      "signal": "Elemental hazards",
+      "visual_form": "Dungeon environments with fire, water, and other elemental visual effects",
+      "meaning": "Environmental damage zones; requires careful navigation"
+    },
+    {
+      "signal": "Boss arena transitions",
+      "visual_form": "Dramatic architectural shifts, portal openings, lighting changes",
+      "meaning": "Escalated threat level; final confrontation imminent"
+    },
+    {
+      "signal": "Low health state",
+      "visual_form": "Character sprite damage overlays, HUD visual degradation (standard FPS convention)",
+      "meaning": "Player vulnerability; seek healing items immediately"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Hub level safe zones",
+      "visual_form": "Central hub architecture with reduced enemy spawn rates, clear pathways",
+      "meaning": "Opportunity to regroup, plan, access side objectives"
+    },
+    {
+      "signal": "Item pickups",
+      "visual_form": "Floating items with distinct visual signatures (health potions, mana, armor)",
+      "meaning": "Resource acquisition; restoration of player capability"
+    },
+    {
+      "signal": "Door access and progression",
+      "visual_form": "Opened doors, cleared pathways, visual markers of level advancement",
+      "meaning": "Safe passage; puzzle solved or objective completed"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Serpent Riders (Korax)",
+      "color_identity": null,
+      "symbol_or_sigil": "Demonic/serpentine imagery; dark citadel architecture",
+      "enemy_visual_variants": "Varied corrupted creature types serving Korax across different domains",
+      "environmental_markers": "Necropolis, dark castle, corrupted dungeon aesthetics; necromantic visual language"
+    },
+    {
+      "faction": "Player heroes (three classes)",
+      "color_identity": null,
+      "symbol_or_sigil": "Class-specific visual identities: Fighter (armored warrior), Cleric (holy vestments), Mage (robes with magical aura)",
+      "enemy_visual_variants": "Not applicable; player faction",
+      "environmental_markers": "Temples, seminaries, mountainside sanctuaries; light/holy architecture contrasts with Korax domains"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Korax invasion of Cronos realm",
+      "visual_manifestation": "Overrun landscapes; demonic corruption spreading through elemental dungeons, wilderness, and castle structures; necropolis as final bastion of dark power",
+      "behavioral_manifestation": "Enemies spawn increasingly in corrupted zones; environmental hazards intensify as player approaches Korax; creature behavior becomes more aggressive in late-game areas"
+    },
+    {
+      "world_state": "Hub progression system",
+      "visual_manifestation": "Central hub areas serve as visual waypoints; side levels branch visually distinct from hubs; polyobject-based puzzle elements (moving walls) create visual feedback of progression",
+      "behavioral_manifestation": "Player can traverse back-and-forth between hub and side missions; completing objectives unlocks new pathways; multi-step puzzles create environmental state changes"
+    },
+    {
+      "world_state": "Class-based progression",
+      "visual_manifestation": "Fighter displays heavier armor, larger physical frame; Cleric shows holy iconography; Mage exhibits magical aura and staff-focused design",
+      "behavioral_manifestation": "Each class moves at different speeds; weapon selection visually distinct; item functionality changes per-class (e.g., flechette behavior differs); combat approach varies by visual capability"
+    },
+    {
+      "world_state": "Puzzle completion and door activation",
+      "visual_manifestation": "Moving walls (polyobjects) shift to reveal new paths; doors open with visual/audio cues; texture changes on sidedefs indicate state changes",
+      "behavioral_manifestation": "Level scripting (ACS) triggers creature spawning, environmental effects (earthquakes), on-screen messages; multi-level puzzle states persist across hub transitions"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural theming",
+      "example": "Elemental dungeons communicate fire/water/earth domains through visual design; mountainside seminary suggests holy resistance to corruption; necropolis at game's end signals final confrontation with death magic"
+    },
+    {
+      "technique": "Creature placement and density",
+      "example": "Enemy encounters escalate in corrupted zones; lesser creatures in wilderness, greater demonic forces in castle and necropolis; boss arena isolation communicates finality"
+    },
+    {
+      "technique": "Hub system spatial design",
+      "example": "Central hub areas act as narrative anchor points; branch level accessibility communicates quest progression; visual locks (blocked pathways) indicate incomplete prerequisites"
+    },
+    {
+      "technique": "Polyobject movement as puzzle feedback",
+      "example": "Moving walls reveal hidden areas and provide immediate visual confirmation of player actions; environmental shifts (floor height changes) caused by scripts communicate state changes to players"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fighter class",
+      "state": "Combat ready",
+      "behavior": "Fast movement, close-quarters melee attacks; visually robust stance; mundane and magical weapon switching"
+    },
+    {
+      "entity": "Cleric class",
+      "state": "Combat ready",
+      "behavior": "Medium movement speed; balanced melee/ranged attack capability; holy magic visual effects; middle-ground positioning"
+    },
+    {
+      "entity": "Mage class",
+      "state": "Combat ready",
+      "behavior": "Slow movement; long-range spell casting with visual projectiles; fragile visual presentation; distance-dependent tactics"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Patrolling/alerted",
+      "behavior": "Sprite-based animation cycles; aggression increases on player detection; varied creature types show distinct attack patterns; behavior scripts tied to area state"
+    },
+    {
+      "entity": "Korax (Serpent Rider boss)",
+      "state": "Final confrontation",
+      "behavior": "Unique sprite design communicating ultimate threat; arena-specific attack patterns; visual dominance through scale and demonic appearance"
+    }
+  ],
+  "notes": "Hexen: Beyond Heretic communicates world-state primarily through environmental architecture, enemy creature design, and class-based visual differentiation. The hub system creates non-linear narrative pacing that is visually reinforced through pathway accessibility. Polyobject technology enables dynamic environmental feedback to player actions. The three-class system provides visual identity beyond gameplay mechanics, allowing players to recognize role-based limitations and capabilities at a glance. The progression from wilderness → castle → necropolis follows a visual corruption gradient, with Korax's domain intensifying visual demonic iconography. Limited faction identity exists (player heroes vs. Serpent Rider corruption), communicated through architectural contrast and creature design rather than explicit symbols. World-state changes are primarily scripted (ACS-based) with visual feedback through moving walls, texture shifts, and enemy spawning patterns.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:38:16.402Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3168,
+    "output_tokens": 1885,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

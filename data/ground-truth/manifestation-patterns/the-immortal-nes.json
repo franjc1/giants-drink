@@ -1,0 +1,197 @@
+{
+  "game_id": "the-immortal-nes",
+  "game_name": "The Immortal",
+  "platform": "nes",
+  "paradigm": "action-adventure",
+  "danger_signals": [
+    {
+      "signal": "Hostile creature presence",
+      "visual_form": "Sprite animations of goblins, trolls, invisible shades, flying lizards, will-o'-the-wisps, flesh-eating slimes, giant worms, spider, water norfalc",
+      "meaning": "Immediate combat threat; player must engage in active dodge/sword mechanics or use fireball spells to dispatch"
+    },
+    {
+      "signal": "Deathtraps",
+      "visual_form": "Environmental hazards scattered throughout labyrinth levels; exact visual representation not documented",
+      "meaning": "Instant death risk if triggered unwisely; requires puzzle-solving and cautious navigation"
+    },
+    {
+      "signal": "Lethal items",
+      "visual_form": "Magical items and objects found in chests or looted from bodies; certain items cause instant death if used incorrectly",
+      "meaning": "Knowledge/skill gate; player must understand item purpose before use or face death penalty"
+    },
+    {
+      "signal": "Combat initiation",
+      "visual_form": "Touching an NPC character triggers transition to 'combat mode' with different mechanics",
+      "meaning": "Combat encounter locked; dodge/swing/stab actions required; higher mechanical pressure than field interaction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Straw beds",
+      "visual_form": "Scattered beds throughout labyrinth levels",
+      "meaning": "Rest/respawn points; transitions to dream sequences; narrative/mechanical safe zones"
+    },
+    {
+      "signal": "Merchant presence",
+      "visual_form": "Mysterious merchant character in certain levels offering potions and magical items",
+      "meaning": "Resource acquisition point; identified as helpful NPC (later revealed as Mordamir in disguise)"
+    },
+    {
+      "signal": "Goblin alliance",
+      "visual_form": "Goblin faction turns from hostile to allied after their king is spared",
+      "meaning": "Player-initiated faction shift through mercy mechanic; goblins provide protection/support"
+    },
+    {
+      "signal": "Ulindor presence",
+      "visual_form": "Warrior NPC accompanying player as loyal bodyguard",
+      "meaning": "Allied companion; assists in combat; signals progression through narrative (absent in later betrayal sequence)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Goblins",
+      "color_identity": null,
+      "symbol_or_sigil": "Goblin king",
+      "enemy_visual_variants": "Initially hostile; visual differentiation as 'king' vs standard goblin troops",
+      "environmental_markers": "Occupy specific levels of labyrinth; engage in war with trolls; respond to mercy/sparing actions"
+    },
+    {
+      "faction": "Trolls",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Hostile creatures engaged in active conflict with goblins",
+      "environmental_markers": "War with goblins; presence indicates contested territory within labyrinth"
+    },
+    {
+      "faction": "Dragons (Ancient)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragon imagery in dream visions",
+      "enemy_visual_variants": "Peaceful in ancient past; final dragon appears as end-game boss confrontation",
+      "environmental_markers": "Caverns beneath dungeon; dragon water control systems; narrative context via dream sequences on straw beds"
+    },
+    {
+      "faction": "City of Erinoch (Historical)",
+      "color_identity": null,
+      "symbol_or_sigil": "Walled city; fountains of youth symbolism",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Revealed through dream visions; city destroyed by dragon retaliation; represents civilizational collapse context"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active conflict: Goblin-Troll war",
+      "visual_manifestation": "Both faction types present and engaged in combat across labyrinth levels",
+      "behavioral_manifestation": "Creatures attack player on sight; factions target each other; player can influence allegiance through sparing goblin king"
+    },
+    {
+      "world_state": "Post-mercy: Goblin alliance shift",
+      "visual_manifestation": "Goblin sprites change from attacking to passive/friendly stance; may differentiate through animation or positioning",
+      "behavioral_manifestation": "Goblins cease hostility; provide support; previously hostile areas become traversable"
+    },
+    {
+      "world_state": "Betrayal sequence: Mordamir's true nature revealed",
+      "visual_manifestation": "Merchant character exposed as Mordamir; Ulindor presence removed; replaced with goblin messenger sent by Mordamir",
+      "behavioral_manifestation": "NPCs shift to hostile; dialogue reveals kidnapping plot; final confrontation boss appears"
+    },
+    {
+      "world_state": "Dream/rest state",
+      "visual_manifestation": "Straw bed triggers narrative flashback sequences showing ancient dragon civilization and Erinoch city",
+      "behavioral_manifestation": "Player enters passive vision mode; receives lore exposition; no immediate danger; mechanical pause from active gameplay"
+    },
+    {
+      "world_state": "Dungeon progression depth",
+      "visual_manifestation": "Labyrinth structured across 7-8 levels (NES: 7; other versions: 8); visual complexity/danger escalates with depth",
+      "behavioral_manifestation": "Enemy types vary by level; puzzle difficulty increases; access to flying carpet, levitation spell, barrel-paddling gated by level progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dream visions on rest beds",
+      "example": "Player witnesses fall of dragon civilization and siege of Erinoch through sleep sequences; establishes that Mordamir murdered dragons 1,000 years ago; reveals kidnapping motivation and final enemy identity"
+    },
+    {
+      "technique": "NPC dialogue exposition",
+      "example": "Ulindor serves as initial trusted companion; Dunric reveals Mordamir's betrayal at labyrinth bottom; Dunric's daughter kidnapping becomes narrative lynchpin"
+    },
+    {
+      "technique": "Mechanic-gated lore",
+      "example": "Sparing goblin king changes faction state; demonstrates player agency affects world; puzzle solutions and item acquisition tied to understanding narrative context"
+    },
+    {
+      "technique": "Environmental hazard density",
+      "example": "Deathtraps scattered throughout labyrinth signal danger escalation; visual placement communicates progression difficulty; unsafe spaces require learned caution"
+    },
+    {
+      "technique": "Merchant disguise concealment",
+      "example": "Merchant appears helpful across multiple levels; visual indistinguishability from other NPCs; betrayal reveal recontextualizes all prior interactions; narrative subversion through visual/behavioral continuity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goblins (hostile state)",
+      "state": "Pre-king-sparing",
+      "behavior": "Attack on sight; engaged in active war with trolls; wander/protect map portions; can be dispatched with fireball spells at range or sword/dodge in combat mode"
+    },
+    {
+      "entity": "Goblins (allied state)",
+      "state": "Post-king-sparing",
+      "behavior": "Cease hostility; may provide passage or support; behavioral shift indicates successful faction diplomacy; presence signals safe territory"
+    },
+    {
+      "entity": "Trolls",
+      "state": "Hostile throughout",
+      "behavior": "Continuous aggression; engaged in conflict with goblins; represent persistent environmental threat; no alliance option documented"
+    },
+    {
+      "entity": "Invisible shades",
+      "state": "Ambient threat",
+      "behavior": "Encounter type not fully detailed; presence signals hidden danger; suggests detection/avoidance mechanics required"
+    },
+    {
+      "entity": "Ulindor (loyal bodyguard)",
+      "state": "Early-mid game",
+      "behavior": "Accompanies player; assists in combat; provides narrative continuity; signals safe allied presence"
+    },
+    {
+      "entity": "Ulindor (absent/replaced)",
+      "state": "Late game / near final levels",
+      "behavior": "Removed from player presence; replaced by goblin messenger revealing Mordamir's orders; signals narrative shift to isolation/betrayal"
+    },
+    {
+      "entity": "Merchant / Mordamir",
+      "state": "Disguised (multiple levels)",
+      "behavior": "Offers potions and magical items for gold; appears helpful; maintains disguise; behavioral consistency hides identity"
+    },
+    {
+      "entity": "Merchant / Mordamir (revealed)",
+      "state": "Final confrontation",
+      "behavior": "Transitions to boss enemy; engages in end-game combat; confirms 1,000-year-old antagonist identity; represents civilizational legacy threat"
+    },
+    {
+      "entity": "Dunric",
+      "state": "Trapped / dying",
+      "behavior": "Provides exposition at labyrinth bottom; reveals kidnapping plot; narrates dragon lore; triggers final narrative revelation before boss confrontation"
+    },
+    {
+      "entity": "Final Dragon",
+      "state": "Boss encounter",
+      "behavior": "Manifestation of Mordamir; retaliation agent against Erinoch's destruction; represents 1,000-year consequence chain; sole dragon survivor; requires end-game combat mechanics"
+    }
+  ],
+  "notes": "The Immortal uses isometric perspective to establish depth cues for environmental danger. Visual communication relies heavily on NPC presence/absence to signal narrative state (Ulindor removal signals betrayal escalation). Dream sequences on straw beds provide diegetic lore exposition without breaking gameplay flow. Faction communication operates through sprite differentiation and behavioral state change rather than color/sigil systems (goblins transition from attack animations to peaceful stance). The game's 'graphic violence' noted in sources suggests high-consequence enemy death animations reinforce danger signaling. Merchant disguise mechanic subverts visual trust—player must infer identity through narrative revelation rather than visual tells. Goblin king sparing mechanic demonstrates moral choice feedback through faction state change, creating emergent world-state communication. No exact color palettes or sprite dimensions provided in sources; analysis based on gameplay mechanics and narrative structure.",
+  "sources_used": [
+    "tcrf - The Immortal (NES) - The Cutting Room Floor",
+    "wikipedia - The Immortal (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:00:12.569Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4208,
+    "output_tokens": 2688,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

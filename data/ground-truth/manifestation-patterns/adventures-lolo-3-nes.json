@@ -1,0 +1,154 @@
+{
+  "game_id": "adventures-lolo-3-nes",
+  "game_name": "Adventures of Lolo 3",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Monster sprites (Moby and other creatures)",
+      "meaning": "Obstacles that block puzzle solution paths; hazards that require avoidance or manipulation"
+    },
+    {
+      "signal": "Crumbling bridge mechanic",
+      "visual_form": "Bridge tile that visually degrades after crossing",
+      "meaning": "Environmental hazard with limited traversal uses (two crossings max); signals constraint and puzzle pressure"
+    },
+    {
+      "signal": "Moby line-of-sight attack",
+      "visual_form": "Underwater enemy with directional suction effect",
+      "meaning": "Danger that sucks player toward enemy; can cause soft-lock requiring room restart"
+    },
+    {
+      "signal": "Petrified allies",
+      "visual_form": "Frozen stone versions of friends in overworld context",
+      "meaning": "Story-level danger state; visual manifestation of the threat (Great King's son's curse)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Training rooms",
+      "visual_form": "Two big trees on overworld map (five rooms each)",
+      "meaning": "Safe learning spaces; lower-stakes practice areas for puzzle mechanics without boss encounters"
+    },
+    {
+      "signal": "Overworld map",
+      "visual_form": "Hub level with tree markers and level connections",
+      "meaning": "Safe navigation space; player agency to select levels and view passwords"
+    },
+    {
+      "signal": "Level restart without death",
+      "visual_form": "Select button triggers 'give up' tune and room reset",
+      "meaning": "Safety mechanic; reduced failure penalty signals low-stress puzzle exploration"
+    },
+    {
+      "signal": "Unlimited lives",
+      "visual_form": "Game design feature (no life counter display/depletion)",
+      "meaning": "Player safety signal; enables repeated attempts without resource loss"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Lolo & Lala (protagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Player-controlled character sprite",
+      "enemy_visual_variants": "Two character models (Lolo/Lala) selectable via A/B buttons; functionally identical but visually distinct for player identity",
+      "environmental_markers": "Starting position on overworld map; position in level rooms"
+    },
+    {
+      "faction": "Great King of Eggerland's son (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Narrative agent (not directly encountered visually in documented gameplay)",
+      "enemy_visual_variants": "No direct visual manifestation described; presence communicated through petrified friends and curse effects",
+      "environmental_markers": "Boss rooms (Levels 4–7, 9–12, 17); implied presence through world-state changes"
+    },
+    {
+      "faction": "Petrified friends (narrative stakes)",
+      "color_identity": null,
+      "symbol_or_sigil": "Stone statue visual forms",
+      "enemy_visual_variants": "Frozen versions of allies; visual state change from living to petrified",
+      "environmental_markers": "Referenced in overworld context; motivation for quest progression"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Quest initiation / curse applied",
+      "visual_manifestation": "Friends transformed to stone; Lolo and Lala return home to see damage",
+      "behavioral_manifestation": "Quest narrative begins; player motivation established through visual story setup"
+    },
+    {
+      "world_state": "Puzzle room active",
+      "visual_manifestation": "Enclosed room environment with monsters, bridges, and collectibles",
+      "behavioral_manifestation": "Player must manipulate objects and navigate hazards; confined space limits movement options"
+    },
+    {
+      "world_state": "Boss encounter triggered",
+      "visual_manifestation": "Special boss room (9 designated boss chambers across levels 4–7, 9–12, 17)",
+      "behavioral_manifestation": "Intensified puzzle mechanics; culmination of level's challenge themes"
+    },
+    {
+      "world_state": "Training mode active",
+      "visual_manifestation": "Tree-marked training rooms (two trees, five rooms each)",
+      "behavioral_manifestation": "Reduced difficulty; mechanics introduction without lethal consequences"
+    },
+    {
+      "world_state": "Underwater environment",
+      "visual_manifestation": "Aquatic tileset; presence of Moby enemies",
+      "behavioral_manifestation": "Unique hazard (suction attack); modified spatial puzzle logic for water medium"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative setup through character transformation",
+      "example": "Friends petrified as visual proof of threat; motivates rescue quest without explicit dialogue"
+    },
+    {
+      "technique": "Overworld as progression map",
+      "example": "Level selection and password reveal via overworld creates persistent world narrative; player can see quest advancement"
+    },
+    {
+      "technique": "Environmental hazard design as story",
+      "example": "Crumbling bridges and Moby suction attacks reflect increasing danger toward quest climax; boss rooms cluster in later levels"
+    },
+    {
+      "technique": "Mechanic introduction through level design",
+      "example": "Training rooms introduce crumbling bridges and Moby behavior before main quest encounters"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Moby (underwater enemy)",
+      "state": "Active / engaged",
+      "behavior": "Uses line-of-sight suction attack; pulls player toward enemy; can cause soft-lock requiring room restart"
+    },
+    {
+      "entity": "Lolo/Lala (player character)",
+      "state": "Failed puzzle attempt",
+      "behavior": "Select button triggers 'give up' tune and room restart; character respawns at room start"
+    },
+    {
+      "entity": "Crumbling bridge",
+      "state": "Crossed once/twice",
+      "behavior": "Visual degradation; bridge weakens; can only support two crossing events before becoming impassable"
+    },
+    {
+      "entity": "Monster obstacles (general)",
+      "state": "Present in room",
+      "behavior": "Block direct paths; require puzzle manipulation (sinking, freezing, or avoidance) to overcome"
+    }
+  ],
+  "notes": "Adventures of Lolo 3 is a puzzle game with minimal faction complexity—narrative conflict is between player-protagonists and a single antagonist (Great King's son). World-state communication relies heavily on environmental design (hazard manifestation, room constraints) and mechanic behavior rather than dynamic visual faction indicators. The game uses 'safety' design patterns (unlimited lives, no death penalty, restart mechanics) to signal player-friendly puzzle difficulty. Political situation is monolithic (curse vs. rescue quest) rather than multi-factional. Danger signals are primarily mechanical (enemies, hazards) rather than visual distinction systems. Character choice (Lolo/Lala) is cosmetic with identical mechanical function, emphasizing inclusivity over faction differentiation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:41:08.038Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2916,
+    "output_tokens": 1995,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

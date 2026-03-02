@@ -1,0 +1,200 @@
+{
+  "game_id": "bionic-commando-nes",
+  "game_name": "Bionic Commando",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldiers in combat areas",
+      "visual_form": "Animated sprite characters with distinct soldier appearance, armed posture",
+      "meaning": "Hostility present; combat required"
+    },
+    {
+      "signal": "Overhead stage vehicle pursuit",
+      "visual_form": "Enemy ground vehicles moving on overworld map toward player helicopter",
+      "meaning": "Interception imminent; forces player into forced overhead combat sequence"
+    },
+    {
+      "signal": "Spiked ball obstacles",
+      "visual_form": "Rolling spiked projectiles thrown by soldier enemies in Area 6",
+      "meaning": "Environmental hazard; damage on contact"
+    },
+    {
+      "signal": "Alarm activation",
+      "visual_form": "Sound cue with behavioral shift in peaceful areas",
+      "meaning": "Weapon fired in neutral zone; all NPCs become hostile"
+    },
+    {
+      "signal": "Electrified floors",
+      "visual_form": "Special room type with visual electrification effects",
+      "meaning": "Lethal environmental hazard in Area 12"
+    },
+    {
+      "signal": "Land mines",
+      "visual_form": "Ground-placed explosive objects (unused in most versions, present in Japanese Area 7)",
+      "meaning": "Step-triggered damage hazard"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Neutral areas",
+      "visual_form": "Designated non-hostile zones within levels, populated by allied and enemy soldiers in peaceful stance",
+      "meaning": "Safe zone where NPCs provide information; no combat unless player fires weapon"
+    },
+    {
+      "signal": "Communication Rooms",
+      "visual_form": "Interior rooms accessible during level progression",
+      "meaning": "Safe checkpoint where player contacts allies or intercepts enemy intelligence"
+    },
+    {
+      "signal": "Allied soldier presence",
+      "visual_form": "Friendly NPCs offering dialogue and items in neutral spaces",
+      "meaning": "Federation presence; source of resources and mission intelligence"
+    },
+    {
+      "signal": "Helicopter on overworld",
+      "visual_form": "Player's mobile transport on area map",
+      "meaning": "Safe staging point; no combat on map screen itself"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Federation (FF Battalion)",
+      "color_identity": null,
+      "symbol_or_sigil": "FF (Double Force) Battalion insignia",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Communication rooms with allied soldiers; Super Joe character presence; Area 1-7 contain Federation-controlled communication infrastructure"
+    },
+    {
+      "faction": "Empire",
+      "color_identity": null,
+      "symbol_or_sigil": "Imperial military insignia; successor to the 'Badds' regime",
+      "enemy_visual_variants": "Soldier sprites with distinct Imperial uniform appearance; heavy object-throwing soldiers in Area 6; Generalissimo Killt as faction leader",
+      "environmental_markers": "Imperial base in Area 12 with generator rooms and computer core; enemy soldiers populate combat areas; detention facilities (POW camp Area 7); Albatros project facility contains Master-D resurrection tank"
+    },
+    {
+      "faction": "Badds/Nazis (Predecessor regime)",
+      "color_identity": null,
+      "symbol_or_sigil": "Historical regime symbolism (removed from Western releases)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Albatros project origin; Master-D (Hitler) corpse in revival tank; Areas contain relics of previous regime's technology"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Federation territory (early Areas 1-7)",
+      "visual_manifestation": "Partially liberated zones with visible Federation communication infrastructure; safer environment aesthetically",
+      "behavioral_manifestation": "Allied soldiers present and willing to communicate; reduced enemy density in neutral areas; missions focus on gathering intelligence"
+    },
+    {
+      "world_state": "Contested/Imperial zones (Areas 8-19)",
+      "visual_manifestation": "Increasing Imperial soldier presence; more austere, military facility aesthetic",
+      "behavioral_manifestation": "Enemy soldiers more aggressive; fewer safe neutral areas; higher combat encounter rate"
+    },
+    {
+      "world_state": "Deep Imperial base (Area 12)",
+      "visual_manifestation": "Specialized generator rooms; unique visual architecture distinct from other areas; holding tank containing Master-D corpse with electrical effects",
+      "behavioral_manifestation": "Mandatory boss encounters; electrified floor hazards; no neutral areas available; pure combat zones"
+    },
+    {
+      "world_state": "Helicopter interception on overworld",
+      "visual_manifestation": "Enemy ground vehicle on collision course with player helicopter",
+      "behavioral_manifestation": "Forced transition to overhead combat stage; game shifts to shooter mechanics; player must defeat soldiers and reach stage end to earn continue"
+    },
+    {
+      "world_state": "Master-D revival attempt",
+      "visual_manifestation": "Electrical effects surrounding resurrection tank in Area 12; incomplete Albatros project structure",
+      "behavioral_manifestation": "Killt activates resurrection device; Master-D revives during final confrontation; endgame scenario triggered"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Infrastructure progression",
+      "example": "Early areas contain functional Federation communication rooms with allied soldier NPCs; later areas show Imperial military installations (generators, computer cores, detention cells); visual architecture shifts from communications-focused to weapons project infrastructure"
+    },
+    {
+      "technique": "NPC dialogue placement",
+      "example": "Neutral area soldiers provide contextual intel about Super Joe's location migration (Area 3 confirms transport to disposal area; later soldiers provide updated intelligence); communicators act as narrative checkpoints"
+    },
+    {
+      "technique": "Boss room design",
+      "example": "Each Area's computer room contains a unique boss guardian; destroying core signals area liberation; progression through areas shows Empire's escalating defensive measures"
+    },
+    {
+      "technique": "Weapon and equipment visibility",
+      "example": "Communicators appear as physical items to collect in specific neutral areas; delta communicator in Area 15; each equipment serves as narrative gate (some vital to progress)"
+    },
+    {
+      "technique": "Architectural context shifts",
+      "example": "Generator rooms unique to Area 12 communicate this as Empire's command hub; electrified floor hazards signal high-security area; resurrection tank visual presence establishes Master-D as central threat"
+    },
+    {
+      "technique": "Captured soldier encounters",
+      "example": "POW camp (Area 7) environment visually communicates enemy captive-holding; rescuing Super Joe triggers major plot revelation about Albatros project nature"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Roaming soldier",
+      "state": "Peaceful",
+      "behavior": "Walks patrol patterns in neutral areas; offers dialogue when approached; becomes hostile only if player fires weapon"
+    },
+    {
+      "entity": "Roaming soldier",
+      "state": "Hostile",
+      "behavior": "Attacks player on sight in combat areas; demonstrates combat stance and weapon readiness"
+    },
+    {
+      "entity": "Heavy object-throwing soldier (Area 6)",
+      "state": "Combat active",
+      "behavior": "Lifts and throws spiked rolling balls (or unspiked variant in Japanese version); creates environmental hazard; positioned to control corridor access"
+    },
+    {
+      "entity": "Suicide bomber",
+      "state": "Deployed",
+      "behavior": "Enters room from door (object variant); identical to suicide bomber enemies found in Areas 2, 8, 19; self-detonation hazard"
+    },
+    {
+      "entity": "Super Joe",
+      "state": "Captured",
+      "behavior": "Immobile in POW camp (Area 7); provides crucial intelligence when rescued; becomes escort/ally in later stages"
+    },
+    {
+      "entity": "Generalissimo Killt",
+      "state": "Pre-confrontation",
+      "behavior": "NPC encounters reference his resurrection attempts; communicator wiretaps reveal his obsession with Albatros completion"
+    },
+    {
+      "entity": "Master-D (Hitler)",
+      "state": "Revival state",
+      "behavior": "Visually present in resurrection tank with electrical effects; becomes active threat when revival sequence completes during Killt confrontation"
+    },
+    {
+      "entity": "Enemy ground vehicle (overworld)",
+      "state": "Pursuit mode",
+      "behavior": "Moves along map toward helicopter; triggers forced transition to overhead combat on intersection; communicates Empire's active air defense presence"
+    },
+    {
+      "entity": "Captain Mack",
+      "state": "NPC interaction (unused/Japanese only)",
+      "behavior": "Imperial commander offering dialogue choice (yes/no prompt); replaced by bullet canisters in Western versions; behavioral tell indicates cut content related to mission branching"
+    }
+  ],
+  "notes": "Bionic Commando (1988 NES) uses a dual-layer world state system: overworld map showing strategic Empire vs. Federation territorial conflict with helicopter interception mechanics, and sidescrolling level zones showing tactical ground infiltration. World state is communicated through progressive zone difficulty escalation, NPC intelligence updates about Super Joe's location, architectural shifts toward Imperial military installations, and equipment gates that prevent backtracking. The game's primary danger signal is enemy soldier presence and behavior shift—friendly NPCs become hostile if weapons discharged in neutral areas, creating a stealth-infiltration communication layer. Faction identity relies heavily on soldier sprite appearance, uniform distinctiveness, and base architecture rather than color-coding. Regional censorship (removal of Hitler/Nazi references from Japanese 'Top Secret' version) eliminated some visual propaganda symbolism, but replaced villain identity (Master-D/Hitler) with functionally identical plot role. Environmental storytelling centers on infrastructure progression—communication rooms transition to military installations to weapons development facility—and NPC dialogue serving as narrative checkpoints confirming plot state and objective location.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:03:46.741Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6027,
+    "output_tokens": 2555,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

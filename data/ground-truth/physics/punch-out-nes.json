@@ -1,0 +1,127 @@
+{
+  "game_id": "punch-out-nes",
+  "game_name": "Punch-Out!!",
+  "platform": "nes",
+  "year": 1990,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Not documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Dodge/Evasion",
+      "description": "Little Mac can dodge left or right to evade opponent attacks",
+      "physics_values": {}
+    },
+    {
+      "name": "Duck",
+      "description": "Little Mac can duck to avoid high punches",
+      "physics_values": {}
+    },
+    {
+      "name": "Block",
+      "description": "Little Mac can block punches by putting up his guard",
+      "physics_values": {}
+    },
+    {
+      "name": "Counter-Punching",
+      "description": "Punching the opponent directly before or after certain attacks launches earns a star (max 3 stars)",
+      "physics_values": {
+        "max_stars": 3,
+        "star_loss_condition": "lost when Mac is hit or knocked down"
+      }
+    },
+    {
+      "name": "Uppercut",
+      "description": "Powerful uppercut attack that requires a star to execute",
+      "physics_values": {
+        "requires_star": true
+      }
+    },
+    {
+      "name": "Knockdown System",
+      "description": "Opponent or player can be knocked down; 10-second recovery window. Third knockdown in one round = TKO. Fourth knockdown = match loss",
+      "physics_values": {
+        "recovery_time_seconds": 10,
+        "tko_threshold": 3,
+        "match_loss_threshold": 4
+      }
+    },
+    {
+      "name": "Heart/Stamina System",
+      "description": "Heart counter decreases when hit, blocking punches, or throwing dodged/blocked punches. At zero hearts, Little Mac becomes exhausted and cannot attack",
+      "physics_values": {
+        "recovery_method": "avoid opponent punches while exhausted"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "pattern-based",
+    "commitment-based",
+    "rhythmic",
+    "defensive-focused",
+    "memorization-heavy"
+  ],
+  "tier_notes": "Tier 2: No quantitative physics parameters documented in Wikipedia source. Game is a boxing game with defensive mechanics and pattern-recognition gameplay rather than traditional platformer physics. Movement parameters (walk speed, jump physics, gravity) are not applicable to this boxing game paradigm.",
+  "sources_used": [
+    "wikipedia: Punch-Out!! (1987 video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T14:03:03.876Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3101,
+    "output_tokens": 1015,
+    "dimension": "physics",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

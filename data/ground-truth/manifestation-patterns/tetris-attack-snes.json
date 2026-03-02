@@ -1,0 +1,149 @@
+{
+  "game_id": "tetris-attack-snes",
+  "game_name": "Tetris Attack / Panel de Pon",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Rising block stack",
+      "visual_form": "Colored blocks advancing toward top of playfield",
+      "meaning": "Imminent game failure if blocks reach top boundary"
+    },
+    {
+      "signal": "Increasing block speed",
+      "visual_form": "Blocks rise faster as stage progresses",
+      "meaning": "Escalating difficulty and time pressure"
+    },
+    {
+      "signal": "Opponent garbage blocks",
+      "visual_form": "Gray blocks with bumped/cratered surface texture",
+      "meaning": "Damage from opponent in competitive modes; blocks opponent must clear"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful chain reaction",
+      "visual_form": "Multiple blocks fall and cascade after initial match",
+      "meaning": "Player momentum and board control; reduces stack height"
+    },
+    {
+      "signal": "Cleared rows disappearing",
+      "visual_form": "Matched blocks (3+) vanish with animation",
+      "meaning": "Progress toward victory condition"
+    },
+    {
+      "signal": "Combo accomplishment",
+      "visual_form": "Multiple simultaneous clears in single move",
+      "meaning": "High-efficiency play; board state manageable"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Yoshi's Island faction (Tetris Attack NA/International)",
+      "color_identity": "Multicolor (Mario universe palette)",
+      "symbol_or_sigil": "Yoshi character portrait; Shy Guy references (unused garbage block graphics with Shy Guy faces)",
+      "enemy_visual_variants": "Computer opponents from Yoshi's Island cast (Lakitu background in Endless mode)",
+      "environmental_markers": "Yoshi's Island-themed backgrounds; pastoral Mario aesthetic"
+    },
+    {
+      "faction": "Fairy faction (Panel de Pon JP original)",
+      "color_identity": "Pastel fantasy palette",
+      "symbol_or_sigil": "Fairy character portraits; Lip as protagonist",
+      "enemy_visual_variants": "Fantasy fairy characters with distinct color schemes",
+      "environmental_markers": "Fantasy/mythical setting backgrounds; magical aesthetic"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage / Low difficulty",
+      "visual_manifestation": "Blocks rise slowly; generous clear space on playfield; enemy garbage blocks minimal or absent",
+      "behavioral_manifestation": "Player has time to plan moves; blocks advance leisurely"
+    },
+    {
+      "world_state": "Mid-stage / Moderate difficulty",
+      "visual_manifestation": "Blocks accelerate rise speed; more garbage blocks appear from opponent",
+      "behavioral_manifestation": "Increased urgency required; combo chains become critical for survival"
+    },
+    {
+      "world_state": "Late stage / High difficulty",
+      "visual_manifestation": "Blocks rise rapidly; large volume of gray garbage blocks on-screen; playfield crowding visible",
+      "behavioral_manifestation": "Player must execute rapid matches; failure imminent if stack reaches boundary"
+    },
+    {
+      "world_state": "Versus opponent engagement",
+      "visual_manifestation": "Opposing player's portrait/character visible; their garbage blocks materialize on player's board",
+      "behavioral_manifestation": "Damage system active; player combos/clears send garbage to opponent"
+    },
+    {
+      "world_state": "Puzzle mode preset",
+      "visual_manifestation": "Static block arrangement; boundary line marks clearance target; blocks do not rise",
+      "behavioral_manifestation": "Limited move count; strategic planning emphasized over reflexes"
+    },
+    {
+      "world_state": "Endless mode infinite play",
+      "visual_manifestation": "Changing background scenery (Lakitu/Windy environment shift) as progression increases",
+      "behavioral_manifestation": "Continuously accelerating block speed; survival duration measures success"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character-specific backgrounds",
+      "example": "Lakitu's background in Tetris Attack Endless Mode; Windy's background in Panel de Pon Endless Mode—establishes opponent identity and world context through visual environment"
+    },
+    {
+      "technique": "Thematic palette swaps",
+      "example": "Mario/Yoshi-universe color scheme vs. fantasy fairy aesthetic—signals franchise/regional identity through visual coherence without narrative exposition"
+    },
+    {
+      "technique": "Unused garbage block imagery",
+      "example": "Gray blocks with Shy Guy faces (unused in final build)—reveals intended visual communication of damage source and enemy presence"
+    },
+    {
+      "technique": "Progressive visual acceleration",
+      "example": "Block rise speed tied to stage progression—communicates difficulty escalation and time pressure through pure visual motion"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Colored block stack",
+      "state": "Rising toward boundary",
+      "behavior": "Advances upward at stage-dependent speed; becomes hazard if reaching top"
+    },
+    {
+      "entity": "Player cursor",
+      "state": "Active control",
+      "behavior": "Selects and swaps adjacent blocks to form matches; determines match timing and combo chains"
+    },
+    {
+      "entity": "Opponent (Story Mode)",
+      "state": "Engaged",
+      "behavior": "Sends garbage blocks to player's board; AI difficulty scales with stage progression"
+    },
+    {
+      "entity": "Matched block group (3+ same color)",
+      "state": "Cleared",
+      "behavior": "Disappears with animation; triggers cascade falling of blocks above; can chain into additional matches"
+    },
+    {
+      "entity": "Garbage blocks (gray, bumped texture)",
+      "state": "On playfield",
+      "behavior": "Occupies space; does not match with colors; must be cleared indirectly by adjacent colored block matches"
+    }
+  ],
+  "notes": "Tetris Attack is a minimal-narrative puzzle game with world-state communication centered entirely on gameplay mechanics and visual progression rather than story. Danger/safety signals are exclusively mechanical (rising blocks = loss condition, chain reactions = success state). Faction identity differs significantly between Panel de Pon (fantasy fairies, Lip as protagonist) and Tetris Attack (Yoshi's Island cast, Lakitu as stage character). Visual manifestation of difficulty is primary world-state indicator: background changes, block rise acceleration, and garbage block volume signal progression without dialogue or explicit narrative. Unused graphics (Shy Guy garbage faces, thicker garbage blocks) suggest original Panel de Pon design included more explicit enemy/damage visualization that was simplified or removed in localization.",
+  "sources_used": [
+    "tcrf - Tetris Attack (SNES) - The Cutting Room Floor",
+    "wikipedia - Tetris Attack"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:39:45.300Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5503,
+    "output_tokens": 1757,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

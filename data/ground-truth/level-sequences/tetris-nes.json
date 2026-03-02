@@ -1,0 +1,151 @@
+{
+  "game_id": "tetris-nes",
+  "game_name": "Tetris",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Single tetromino (I-piece)",
+      "first_appears": "Game start, Level 0",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns basic rotation and placement in first few pieces"
+    },
+    {
+      "element": "Random tetromino sequences",
+      "first_appears": "Immediately after first piece",
+      "introduction_context": "safe",
+      "mastery_context": "Player adapts to unpredictability; learns that I-pieces are scarce relative to demand for Tetrises"
+    },
+    {
+      "element": "Line clearing and scoring",
+      "first_appears": "First complete row filled",
+      "introduction_context": "safe",
+      "mastery_context": "Player discovers Tetris (4-line clear) is worth 1200(n+1) vs single worth 40(n+1); learns value hierarchy"
+    },
+    {
+      "element": "Level advancement (every 10 lines cleared)",
+      "first_appears": "After 10 lines cleared in A-Type",
+      "introduction_context": "moderate",
+      "mastery_context": "Player experiences first speed increase; learns pacing mechanic"
+    },
+    {
+      "element": "Speed increases (Levels 1-10)",
+      "first_appears": "Level 1 onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "Progressive difficulty; each level noticeably faster than previous"
+    },
+    {
+      "element": "Plateau in speed (Levels 11-12)",
+      "first_appears": "After Level 10",
+      "introduction_context": "moderate",
+      "mastery_context": "Brief respite before subsequent speed jumps; teaches player to expect variation in difficulty curve"
+    },
+    {
+      "element": "Secondary speed increases (Levels 13, 16, 19)",
+      "first_appears": "Level 13 onwards",
+      "introduction_context": "dangerous",
+      "mastery_context": "Sparse but significant speed jumps; player must adapt to irregular acceleration pattern"
+    },
+    {
+      "element": "Final speed plateau (Level 29+)",
+      "first_appears": "Level 29",
+      "introduction_context": "dangerous",
+      "mastery_context": "Pieces fall 1 grid cell per frame; game becomes 'kill screen' designed as unplayable ceiling"
+    },
+    {
+      "element": "B-Type mode with preset obstacles",
+      "first_appears": "Available from game start via mode select",
+      "introduction_context": "moderate",
+      "mastery_context": "Alternative challenge: clear 25 lines at fixed level with randomized bottom blocks; rewards spatial problem-solving over endurance"
+    },
+    {
+      "element": "Starting level selection (0-9, extendable to 19)",
+      "first_appears": "Available at game start",
+      "introduction_context": "safe",
+      "mastery_context": "Player agency in difficulty; hidden extension (hold A-button) rewards discovery"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Completing a Tetris (4-line clear) - highest score reward",
+      "Reaching a level plateau (no speed increase for 2-3 levels)",
+      "Clearing lines before field fills to top",
+      "Receiving an I-piece after drought period"
+    ],
+    "typical_tension_triggers": [
+      "Level advancement increasing fall speed",
+      "Extended drought of I-pieces (necessary for Tetrises)",
+      "Field approaching top (topout imminent)",
+      "Speed jumps at Levels 13, 16, 19, 29",
+      "Randomness denying optimal piece for current field state"
+    ],
+    "pacing_descriptor": "Escalating tension with irregular difficulty spikes. Early game (Levels 0-10) features consistent speed increases every level. Mid-game (Levels 11-28) shows varied pacing with plateaus and sudden jumps. Late game (Level 29+) reaches designed unplayability. Overall arc: predictable introduction → unpredictable acceleration → impossible speed. Score incentive (Tetris worth 30x single clear) creates constant tension between safe play and risky high-reward stacking."
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": "Hidden level extension: holding A-button during level select adds 10 additional starting levels (0-19 instead of 0-9)",
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Gentle introduction: Levels 0-2 at slowest speeds; player learns piece mechanics and basic stacking without pressure. Level 0 can be selected to minimize speed concerns.",
+    "mid_game": "Moderate acceleration: Levels 3-9 increase speed linearly with each level. Levels 10-12 plateau briefly. Levels 13-19 introduce irregular speed jumps (only at 13, 16, 19). Player must now balance efficiency (Tetris stacking for score) with safety (avoiding topout).",
+    "late_game": "Extreme difficulty: Levels 20-28 maintain high speed with jumps at 22, 25, 28. Level 29+ reaches 'kill screen' where pieces fall 1 cell/frame—designed as unbeatable. Developers never expected play past Level 29 (display corrupts beyond this point). Modern players extend play via novel rolling techniques discovered in 2020s.",
+    "notable_spikes": [
+      "Level 1 (first speed increase from Level 0)",
+      "Level 10→13 (jump from consistent progression to irregular spacing)",
+      "Level 19→20 (exit last regular jump, enter true endurance zone)",
+      "Level 29 (kill screen: fall speed maxes out, game designed to end)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear Speed Ramp (Levels 0-10)",
+      "description": "Every level increases tetromino fall speed. Player experiences consistent difficulty curve suitable for learning mechanics. Teaches expectation of progression.",
+      "example_level": "Levels 0-10"
+    },
+    {
+      "pattern_name": "Plateau and Jump Pattern (Levels 11-28)",
+      "description": "Levels 11-12 maintain speed of Level 10. Levels 13, 16, 19, 25, 28 introduce sudden jumps. Intervening levels hold constant. Creates unpredictable tension spikes for skilled players.",
+      "example_level": "Levels 11-28"
+    },
+    {
+      "pattern_name": "Kill Screen (Level 29+)",
+      "description": "Speed maxes out at 1 cell/frame. Game display glitches for levels >29. Designed as hard stop; modern techniques bypass this ceiling. Represents designer's intended game endpoint.",
+      "example_level": "Level 29+"
+    },
+    {
+      "pattern_name": "A-Type Scoring Architecture",
+      "description": "Score formula: Single=40(n+1), Double=100(n+1), Triple=300(n+1), Tetris=1200(n+1) where n=level. Tetris is 30x more valuable than Single at equivalent difficulty. Creates constant risk/reward tension: safe single clears vs. precarious high-line stacks.",
+      "example_level": "All A-Type games"
+    },
+    {
+      "pattern_name": "B-Type Fixed Challenge",
+      "description": "Clear 25 lines at fixed player-selected level with randomized obstacle blocks at bottom. No speed increase. Emphasizes spatial problem-solving over endurance. Alternative difficulty curve for players seeking different challenge type.",
+      "example_level": "B-Type mode"
+    }
+  ],
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:46:47.127Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6397,
+    "output_tokens": 2351,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

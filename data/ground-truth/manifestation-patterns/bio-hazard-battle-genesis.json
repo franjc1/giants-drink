@@ -1,0 +1,157 @@
+{
+  "game_id": "bio-hazard-battle-genesis",
+  "game_name": "Bio-Hazard Battle",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "hostile_creatures",
+      "visual_form": "animated enemy sprites with biological/organic appearance",
+      "meaning": "direct threats requiring avoidance or destruction"
+    },
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "fast-moving projectile graphics contrasting with background",
+      "meaning": "incoming damage requiring evasion or blocking"
+    },
+    {
+      "signal": "environmental_hazards",
+      "visual_form": "foreground and background obstacle elements integrated into level scenery",
+      "meaning": "lethal environmental features that signal crushing/screen-edge kill zones"
+    },
+    {
+      "signal": "screen_edge_proximity",
+      "visual_form": "visual boundary and wall placement at screen edges",
+      "meaning": "crushing danger when player ship forced between screen edge and obstacles"
+    },
+    {
+      "signal": "level_progression_intensity",
+      "visual_form": "increasingly complex enemy patterns and denser obstacle layouts across 8 levels",
+      "meaning": "escalating danger as difficulty increases; final 3 levels on higher difficulties only"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open_space",
+      "visual_form": "clear horizontal scrolling corridors with minimal obstacles",
+      "meaning": "safe maneuvering room for player ship movement"
+    },
+    {
+      "signal": "1-UP_icons",
+      "visual_form": "collectible visual pickups scattered throughout stages",
+      "meaning": "life restoration and damage mitigation opportunities"
+    },
+    {
+      "signal": "power_weapon_availability",
+      "visual_form": "weapon upgrade icons/drops visible in playable space",
+      "meaning": "enhanced offensive capability for threat mitigation"
+    },
+    {
+      "signal": "respawn_mechanic",
+      "visual_form": "player ship reappearance after destruction",
+      "meaning": "temporary invulnerability window and life preservation system"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Biowarriors (player forces)",
+      "color_identity": null,
+      "symbol_or_sigil": "four distinct organic ship designs",
+      "enemy_visual_variants": "each of four playable craft has unique silhouette and weapon configuration",
+      "environmental_markers": "player ships operate from O.P. Odysseus orbital platform; sent to hostile planet Avaron"
+    },
+    {
+      "faction": "Avaron biological threat (hostile forces)",
+      "color_identity": null,
+      "symbol_or_sigil": "organic, mutated creature designs created by retrovirus",
+      "enemy_visual_variants": "diverse hostile lifeforms representing 'new and deadly forms of life' unleashed by biowar",
+      "environmental_markers": "creatures inhabit Avaron surface; manifest throughout 8-stage level progression representing different planetary regions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "post-biowar devastation",
+      "visual_manifestation": "hostile planetary environment with organic obstacles, mutated creature designs, and hazardous terrain",
+      "behavioral_manifestation": "high-speed enemy movement and dense attack patterns reflecting aggressive biological adaptation"
+    },
+    {
+      "world_state": "human survival crisis",
+      "visual_manifestation": "small player ship against overwhelming environmental and creature density; limited lives system",
+      "behavioral_manifestation": "player must scout and retreat (mission: ascertain conditions and return to Odysseus)"
+    },
+    {
+      "world_state": "planetary habitability assessment",
+      "visual_manifestation": "eight distinct level environments representing different Avaron regions, each with escalating danger indicators",
+      "behavioral_manifestation": "progression through levels demonstrates increasing hostile conditions; final 3 levels locked behind difficulty threshold"
+    },
+    {
+      "world_state": "biological contamination",
+      "visual_manifestation": "colorful, deep bass-heavy aesthetic with creative artwork emphasizing alien/organic design language",
+      "behavioral_manifestation": "creatures attack relentlessly; environment itself becomes weapon through crushing mechanics and hazard placement"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "foreground/background depth layering",
+      "example": "obstacles in scenery and landscape create visual narrative of complex, layered hostile terrain without blocking player collision"
+    },
+    {
+      "technique": "creature design as world-state indicator",
+      "example": "diverse mutated lifeforms across 8 levels visually communicate different ecological zones and retrovirus adaptation patterns"
+    },
+    {
+      "technique": "level-to-level environmental escalation",
+      "example": "progression from least-hostile to increasingly hostile designated zones; final 3 levels unavailable at lower difficulties signal extreme danger"
+    },
+    {
+      "technique": "color and aesthetic intensity",
+      "example": "deep bass-heavy music paired with colorful, creative artwork emphasizes alien biosphere identity and survival stakes"
+    },
+    {
+      "technique": "obstacle density as narrative tension",
+      "example": "fast scrolling speed combined with increasing foreground/background obstacle complexity communicates planetary conditions deteriorating"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Biowarrior (player ship)",
+      "state": "operational",
+      "behavior": "8-directional movement with independent shot trajectory; can place Power Star to block projectiles"
+    },
+    {
+      "entity": "Biowarrior",
+      "state": "damaged",
+      "behavior": "destroyed and respawns with one less life; visual reset indicates survival system in operation"
+    },
+    {
+      "entity": "Hostile creature",
+      "state": "active threat",
+      "behavior": "extremely fast movement and projectile fire; dense attack patterns increase with level progression"
+    },
+    {
+      "entity": "Environment (walls/obstacles)",
+      "state": "hazard",
+      "behavior": "lethal crushing force when player ship trapped between screen edge and wall; otherwise non-lethal collision"
+    },
+    {
+      "entity": "Power Star",
+      "state": "active defense",
+      "behavior": "placed by player to intercept enemy projectiles; demonstrates active threat mitigation strategy"
+    }
+  ],
+  "notes": "Bio-Hazard Battle communicates world-state primarily through visual density, creature diversity, and environmental complexity rather than explicit UI. The game's core manifestation layer emphasizes biological contamination through organic enemy design and hazardous terrain. Mission narrative (scout Avaron, assess habitability, return to Odysseus) is supported by escalating difficulty and level progression. Four distinct player ships with varying flight speeds and weapons create faction identity differentiation. The fast scrolling speed and deep musical composition reinforce environmental hostility and urgency of the biowar survival scenario.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:27:53.301Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3276,
+    "output_tokens": 1740,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

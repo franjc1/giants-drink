@@ -1,0 +1,143 @@
+{
+  "game_id": "un-squadron-snes",
+  "game_name": "U.N. Squadron",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft approach",
+      "visual_form": "Enemy plane sprites moving toward player from right side of screen",
+      "meaning": "Active threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Projectile fire",
+      "visual_form": "Bullet/missile sprites traveling across screen",
+      "meaning": "Immediate damage risk; requires dodging or shield absorption"
+    },
+    {
+      "signal": "Energy bar depletion",
+      "visual_form": "Health bar decreasing on HUD",
+      "meaning": "Accumulated damage; continued hits will result in pilot loss"
+    },
+    {
+      "signal": "Boss encounter initiation",
+      "visual_form": "Large enemy unit appearing (military vehicle, fortification, or aircraft)",
+      "meaning": "Major threat requiring sustained engagement; stage progression blocked until defeated"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Shop interface access",
+      "visual_form": "Menu screen between levels displaying purchasable weapons and aircraft",
+      "meaning": "Safe zone; player can upgrade defenses and weapons without threat"
+    },
+    {
+      "signal": "Level completion",
+      "visual_form": "Stage end screen with money conversion UI",
+      "meaning": "Safe transition; unused weapons convert to funds for next stage preparation"
+    },
+    {
+      "signal": "Empty airspace",
+      "visual_form": "Clear screen without enemy sprites or projectiles",
+      "meaning": "Temporary safety; enemy spawning patterns allow brief respite"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "U.N. Squadron / Player Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "U.N. designation; military aircraft (F8 Crusader, etc.)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled aircraft with identifying markings"
+    },
+    {
+      "faction": "Project 4 / Terrorist Group",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy military hardware (hostile aircraft, ground vehicles, fortifications)",
+      "enemy_visual_variants": "Distinct enemy sprite designs differentiated from player aircraft",
+      "environmental_markers": "Military installations, airfields, ground-based defensive structures"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active combat zone",
+      "visual_manifestation": "Dense enemy spawning, projectile patterns on screen, explosions visible",
+      "behavioral_manifestation": "Enemy aircraft attack in formation; ground units fire defensively; bosses engage with complex attack patterns"
+    },
+    {
+      "world_state": "Between-stage preparation",
+      "visual_manifestation": "Shop menu with available aircraft and weapons displayed; money counter updated based on stage performance",
+      "behavioral_manifestation": "No enemy threats present; player given agency to select equipment before next engagement"
+    },
+    {
+      "world_state": "Stage progression / Territorial control",
+      "visual_manifestation": "Scrolling environment showing enemy positions, military installations, terrain variety",
+      "behavioral_manifestation": "Boss encounters mark territorial strongholds; defeating bosses advances map progression"
+    },
+    {
+      "world_state": "Pilot health status",
+      "visual_manifestation": "Energy bar on HUD showing current damage absorption capacity",
+      "behavioral_manifestation": "Pilot remains airborne until energy depleted; single energy bar per life (unlike traditional 1-hit systems)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Military infrastructure visibility",
+      "example": "Ground-based defensive structures, airfields, and fortifications appear as stage backgrounds/obstacles, indicating Project 4 territorial presence"
+    },
+    {
+      "technique": "Pilot characterization through aircraft selection",
+      "example": "Three playable pilots (Shin Kazama, Mickey Simon, Greg Gates) each fly distinct aircraft types; SNES version allows all pilots to purchase varied planes, suggesting mercenary flexibility and resource-based progression"
+    },
+    {
+      "technique": "Economic manifestation of conflict",
+      "example": "Money earned from destroying enemy units; unused weapons convert to funds; shop system implies supply-line and logistical gameplay, reinforcing mercenary-for-hire narrative"
+    },
+    {
+      "technique": "Escalating threat visualization",
+      "example": "Boss encounters feature visually larger, more heavily-armed units than standard enemies, indicating command-level targets or strategic chokepoints"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player aircraft",
+      "state": "Active engagement",
+      "behavior": "Responds to input; can move laterally, fire weapons, absorb damage via energy bar system"
+    },
+    {
+      "entity": "Enemy aircraft",
+      "state": "Patrol/Attack",
+      "behavior": "Spawns in patterns; moves toward player; fires projectiles; travels in formations"
+    },
+    {
+      "entity": "Ground-based enemy units",
+      "state": "Defensive",
+      "behavior": "Stationary or semi-mobile; fires at player aircraft; appears in fortified positions"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Aggressive engagement",
+      "behavior": "Large sprite with increased health; complex attack patterns; requires sustained fire; blocks stage progression until defeated"
+    },
+    {
+      "entity": "Destructible environment objects",
+      "state": "Present/Destroyed",
+      "behavior": "Can be attacked for points/items; environmental hazards that signal military installations"
+    }
+  ],
+  "notes": "U.N. Squadron (Area 88 in Japan) communicates threat and world-state primarily through sprite-based visual clarity: enemy types are immediately visually distinct, environmental military infrastructure indicates territorial control, and the shop system between levels reinforces a mercenary narrative where resource management reflects conflict progression. The energy bar system (shared damage pool per life) is a key mechanical-to-visual signal differentiating this from single-hit-death shmups. Pilot selection and aircraft variety suggest tactical choice. No explicit faction color-coding documented in available sources; distinction relies on sprite design and positioning.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:12:04.868Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3580,
+    "output_tokens": 1750,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

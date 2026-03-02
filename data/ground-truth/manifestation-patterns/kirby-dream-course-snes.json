@@ -1,0 +1,177 @@
+{
+  "game_id": "kirby-dream-course-snes",
+  "game_name": "Kirby's Dream Course",
+  "platform": "snes",
+  "paradigm": "mini-golf / sports",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Kirby series enemy characters positioned on course",
+      "meaning": "Obstacles to overcome; targets to hit for progression and power-ups"
+    },
+    {
+      "signal": "Remaining enemies on hole",
+      "visual_form": "Multiple distinct enemy sprites scattered across isometric golf course",
+      "meaning": "Course incomplete; must defeat all enemies before goal hole manifests"
+    },
+    {
+      "signal": "Copy ability absence",
+      "visual_form": "Kirby in base form without visual transformation effects",
+      "meaning": "Limited ability to destroy certain obstacles; inefficient course completion"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Goal hole availability",
+      "visual_form": "Final enemy transforms into visible hole sprite after all others defeated",
+      "meaning": "Safe passage available; course can be completed"
+    },
+    {
+      "signal": "Copy ability acquisition",
+      "visual_form": "Kirby visually transforms (tornado, spark ball, UFO form, etc.)",
+      "meaning": "Enhanced capabilities unlocked; dangerous obstacles now passable"
+    },
+    {
+      "signal": "Star collection",
+      "visual_form": "Stars change to player color (pink or yellow) upon contact",
+      "meaning": "Progress secured; points accumulated toward victory"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kirby (Player 1)",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "Spherical character model",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Course entry point; isometric golf tee position"
+    },
+    {
+      "faction": "Keeby (Player 2)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Identical to Kirby but yellow palette swap",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Multiplayer mode only; alternate starting position"
+    },
+    {
+      "faction": "King Dedede (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Star thief; narrative antagonist",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implied presence through stolen stars plot device"
+    },
+    {
+      "faction": "Kirby series enemies (Course obstacles)",
+      "color_identity": "Varied per enemy type",
+      "symbol_or_sigil": "Distinctive enemy sprites from Kirby universe",
+      "enemy_visual_variants": "Each enemy provides unique Copy ability when hit",
+      "environmental_markers": "Scattered throughout courses; reposition per hole"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Course incomplete (enemies remain)",
+      "visual_manifestation": "Multiple enemy sprites visible on isometric terrain; goal hole absent",
+      "behavioral_manifestation": "Kirby must navigate and target enemies; collision mechanics active"
+    },
+    {
+      "world_state": "Course complete (all enemies defeated)",
+      "visual_manifestation": "Final enemy sprite transforms into goal hole visual; terrain cleared",
+      "behavioral_manifestation": "Goal becomes accessible; hole-in-one mechanics activate"
+    },
+    {
+      "world_state": "Copy ability active",
+      "visual_manifestation": "Kirby sprite displays transformation (tornado swirl, spark particles, UFO silhouette)",
+      "behavioral_manifestation": "Enhanced movement; obstacle destruction possible; temporary ability window"
+    },
+    {
+      "world_state": "Multiplayer star contention",
+      "visual_manifestation": "Stars display player color (pink or yellow); ownership changes on contact",
+      "behavioral_manifestation": "Stars can be stolen; attack Copy abilities force opponent turn skip"
+    },
+    {
+      "world_state": "Course progression (medal system)",
+      "visual_manifestation": "Medal award screen displays grade (gold, silver, bronze) based on performance",
+      "behavioral_manifestation": "Medal tier unlocks alternative course versions; progression gating"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Narrative framing via opening plot",
+      "example": "King Dedede steals stars from night sky; Kirby's quest to return them provides thematic link between golf course design and story"
+    },
+    {
+      "technique": "Enemy placement as world detail",
+      "example": "Kirby series enemies populate courses as both obstacles and power-up sources, maintaining franchise identity within sports context"
+    },
+    {
+      "technique": "Isometric perspective environmental reading",
+      "example": "Miniature golf course layout viewed from fixed isometric angle communicates spatial relationships and obstacle positioning at a glance"
+    },
+    {
+      "technique": "Color coding for player ownership",
+      "example": "In multiplayer, star color shift (pink/yellow) visually tracks territorial control and scoring without UI overlay"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy characters",
+      "state": "Active on course",
+      "behavior": "Stationary obstacles; defeated upon Kirby collision; final remaining enemy transforms into goal"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Normal form",
+      "behavior": "Launched via power/angle/spin input; standard collision physics; no special obstacle interaction"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Copy ability active (Tornado)",
+      "behavior": "Enhanced movement; spiral visual effect; wind mechanics affect trajectory"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Copy ability active (Spark ball)",
+      "behavior": "Destructible obstacle interaction; spark particle effects; selective barrier removal"
+    },
+    {
+      "entity": "Kirby",
+      "state": "Copy ability active (UFO)",
+      "behavior": "Free movement mode; hover capability; temporary flight duration"
+    },
+    {
+      "entity": "Stars",
+      "state": "Unclaimed",
+      "behavior": "Neutral positioning; neutral color; available for collection"
+    },
+    {
+      "entity": "Stars",
+      "state": "Player-claimed",
+      "behavior": "Change to player color; locked to player ownership until stolen or round ends"
+    },
+    {
+      "entity": "Goal hole",
+      "state": "Locked (enemies remain)",
+      "behavior": "Invisible; inaccessible; no visual manifestation"
+    },
+    {
+      "entity": "Goal hole",
+      "state": "Unlocked (final enemy defeated)",
+      "behavior": "Visible sprite appears; worth two stars in multiplayer; round-ending trigger"
+    }
+  ],
+  "notes": "Kirby's Dream Course uses classic mini-golf mechanics applied to Kirby franchise IP. World state communication relies heavily on sprite visibility/transformation, color coding in multiplayer, and enemy presence/absence as progression gates. No explicit danger/safety mechanics beyond obstacle avoidance and stroke economy. Faction communication is minimal—primarily Kirby vs. enemies, with Dedede as narrative-only antagonist. The game's visual language is straightforward: clarity of isometric layout, distinctive enemy sprites, and transformation effects convey all mechanical state. No environmental hazards or dynamic world-state shifts; all state changes are course-specific and deterministic.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:52:09.828Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3205,
+    "output_tokens": 1901,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

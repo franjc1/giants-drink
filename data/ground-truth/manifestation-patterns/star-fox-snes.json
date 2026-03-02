@@ -1,0 +1,173 @@
+{
+  "game_id": "star-fox-snes",
+  "game_name": "Star Fox",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spacecraft appearance",
+      "visual_form": "Polygonal 3D enemy ships with aggressive angular designs, distinct from player's Arwing silhouette",
+      "meaning": "Active hostile threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Shield depletion visual feedback",
+      "visual_form": "HUD shield strength meter decreasing, visual damage indicators on player craft",
+      "meaning": "Cumulative damage taken; craft vulnerability increasing"
+    },
+    {
+      "signal": "Wingman distress call",
+      "visual_form": "Wingman aircraft entering player view under fire or being chased by enemies",
+      "meaning": "Ally in immediate danger; player intervention required to prevent ally loss"
+    },
+    {
+      "signal": "Boss encounter initiation",
+      "visual_form": "Large-scale enemy or creature appearing at level end, distinctive from standard enemies",
+      "meaning": "Critical progression gate; defeat required to advance"
+    },
+    {
+      "signal": "Environmental collision hazards",
+      "visual_form": "Terrain features, obstacles, and structures that can damage the Arwing (wings clipping)",
+      "meaning": "Environmental danger; weapon upgrade loss and handling degradation if struck"
+    },
+    {
+      "signal": "Ammunition depletion",
+      "visual_form": "HUD ammunition counter decreasing",
+      "meaning": "Reduced offensive capability; need to seek power-ups"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up presence",
+      "visual_form": "Distinct visual objects floating in environment, graphically differentiated from enemies",
+      "meaning": "Restorative or enhancement opportunity (shield recovery, ammunition, weapon upgrade)"
+    },
+    {
+      "signal": "Wingman presence",
+      "visual_form": "Three ally aircraft visible during non-boss gameplay, traveling alongside player",
+      "meaning": "Active support available; allies can engage enemies and provide tactical assistance"
+    },
+    {
+      "signal": "Clear flight path",
+      "visual_form": "Visible corridor or space free from immediate enemy fire or obstacles",
+      "meaning": "Momentary respite; safe navigation window"
+    },
+    {
+      "signal": "Boost meter availability",
+      "visual_form": "HUD boost meter filled or available for use",
+      "meaning": "Speed/evasion capability present; tactical maneuver option ready"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Star Fox Team / Corneria Defense Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Star Fox emblem (implied through team identity)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Corneria planet environment; defense installations; General Pepper's command infrastructure"
+    },
+    {
+      "faction": "Andross Forces / Venom Empire",
+      "color_identity": null,
+      "symbol_or_sigil": "Andross as central figurehead; evil scientist aesthetic",
+      "enemy_visual_variants": "Multiple enemy spacecraft types; robotic creatures; large-scale mechanical constructs; Andross as final boss entity",
+      "environmental_markers": "Venom planet (evil/hostile aesthetic); industrial/destructive environments; fortress-like structures; organic-mechanical hybrid enemies"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Corneria under attack / Active invasion",
+      "visual_manifestation": "Corneria landscape populated with enemy forces, combat activity visible, defensive structures engaged",
+      "behavioral_manifestation": "Wingmen actively fighting; General Pepper's forces present but overwhelmed; player serves as intervention force"
+    },
+    {
+      "world_state": "Multiple route availability (branching campaign)",
+      "visual_manifestation": "Three distinct planetary environments corresponding to easy/normal/hard paths; varying terrain and enemy compositions",
+      "behavioral_manifestation": "Enemy density and difficulty scale by chosen route; wingman survival rates vary; different boss encounters per path"
+    },
+    {
+      "world_state": "Progression toward final confrontation",
+      "visual_manifestation": "Movement from outer Lylat system planets toward Venom; increasing enemy sophistication; scale of threats escalates",
+      "behavioral_manifestation": "Boss encounters intensify; wingmen face greater danger; final level stages confrontation with Andross himself"
+    },
+    {
+      "world_state": "Wingman downed / Lost",
+      "visual_manifestation": "Wingman aircraft disappears from player's view; no longer appears in subsequent levels",
+      "behavioral_manifestation": "Ally no longer available for support or tactical assistance; player must complete remaining game without that wingman's aid"
+    },
+    {
+      "world_state": "Craft structural damage",
+      "visual_manifestation": "Arwing wings visually break/detach if clipping too much; visual damage model changes",
+      "behavioral_manifestation": "Handling degradation; loss of weapon upgrade capability; reduced maneuverability"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Planetary design as moral/faction marker",
+      "example": "Corneria depicted as developed, defensible world; Venom depicted as hostile, industrial evil empire stronghold. This binary communicates the good-vs-evil political conflict without explicit narrative exposition."
+    },
+    {
+      "technique": "Enemy force composition as world-state indicator",
+      "example": "Progression from small fighter patrols on Corneria to massive mechanical constructs and creatures on Venom visually demonstrates Andross's escalating military threat"
+    },
+    {
+      "technique": "Wingman presence as alliance/support visibility",
+      "example": "Three allies traveling with player communicates that Corneria has military backing and institutional support structure, reinforcing the faction's legitimacy"
+    },
+    {
+      "technique": "Terrain hazards as environmental danger worldbuilding",
+      "example": "Natural and artificial obstacles (gates, structures, terrain) on various planets establish each location as distinct, hazardous space requiring tactical navigation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wingman (Peppy, Slippy, Falco)",
+      "state": "Under attack",
+      "behavior": "Enters player view fleeing from enemy or being pursued; calls for assistance; will take damage if not aided"
+    },
+    {
+      "entity": "Wingman",
+      "state": "Healthy/operational",
+      "behavior": "Flies alongside player in formation; occasionally engages enemies independently; complains if hit by player fire"
+    },
+    {
+      "entity": "Wingman",
+      "state": "Shot down/destroyed",
+      "behavior": "Disappears from active gameplay; does not return for remainder of campaign"
+    },
+    {
+      "entity": "Enemy spacecraft",
+      "state": "Active/hunting",
+      "behavior": "Pursues player; fires projectiles; attempts to intercept; responds to player evasion"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Engaged",
+      "behavior": "Wingmen absent; large-scale attack patterns; significant health pool; progression gate behavior; unique visual design distinguishing from standard enemies"
+    },
+    {
+      "entity": "Player Arwing",
+      "state": "Damaged but operational",
+      "behavior": "Handles degraded if wings damaged; reduced speed/maneuverability; visual model reflects structural compromise"
+    },
+    {
+      "entity": "Player Arwing",
+      "state": "Shield depleted",
+      "behavior": "Next hit results in craft destruction; increased vulnerability; HUD warning communication"
+    }
+  ],
+  "notes": "Star Fox uses 3D polygonal visuals as primary communication medium. The game establishes a clear good-vs-evil dichotomy through planetary design (Corneria vs. Venom), faction representation through ally presence, and danger communication through enemy density escalation and wingman distress mechanics. The HUD provides quantitative feedback (shield, ammo, lives) while environmental and behavioral manifestations communicate qualitative world-state. The branching path system uses visual route differentiation to communicate difficulty/challenge level. Structural damage (wing breakage) creates persistent visual consequence for player behavior. Wingman survival mechanics make ally preservation a visible strategic element tied to world-state (if a wingman is downed, the world permanently changes by their absence).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:10:25.811Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3037,
+    "output_tokens": 2138,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

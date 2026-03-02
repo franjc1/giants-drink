@@ -1,0 +1,193 @@
+{
+  "game_id": "lode-runner-nes",
+  "game_name": "Lode Runner",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Guard proximity",
+      "visual_form": "Animated guard character moving toward player",
+      "meaning": "Immediate threat of death; contact causes level restart and life loss"
+    },
+    {
+      "signal": "Hole beneath player",
+      "visual_form": "Dug floor cavity, player standing at edge or falling into it",
+      "meaning": "Fatal trap if player falls in before hole refills; guard death if trapped inside"
+    },
+    {
+      "signal": "Guard carrying gold",
+      "visual_form": "Guard sprite with gold bar visual attachment",
+      "meaning": "Guard is a threat multiplier; if trapped with gold, creates level puzzle complexity"
+    },
+    {
+      "signal": "Trapdoor tiles",
+      "visual_form": "Floor tiles with distinct visual marking",
+      "meaning": "Uncontrollable fall hazard for both player and guards"
+    },
+    {
+      "signal": "Guard spawning at top of level",
+      "visual_form": "Guard respawn at screen top after being consumed in hole",
+      "meaning": "Threat regeneration; guards return after environmental death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Gold collection",
+      "visual_form": "Gold bar sprites scattered throughout level",
+      "meaning": "Objective completion marker; collecting all gold is prerequisite for level exit"
+    },
+    {
+      "signal": "Top of screen exit",
+      "visual_form": "Screen top boundary area",
+      "meaning": "Safe zone and level completion point after collecting all gold"
+    },
+    {
+      "signal": "Guard trapped in filled hole",
+      "visual_form": "Guard standing immobilized in dug pit as floor refills",
+      "meaning": "Temporary safety window; guard unable to pursue during entrapment"
+    },
+    {
+      "signal": "Player on guard's head",
+      "visual_form": "Player sprite positioned directly above guard sprite (feet-to-head contact)",
+      "meaning": "Safe contact state; allows traversal over trapped guards without damage"
+    },
+    {
+      "signal": "Ladder or hand-to-hand bar access",
+      "visual_form": "Vertical ladder graphics or suspended horizontal bars",
+      "meaning": "Mobility and escape routes; multiple traversal paths reduce guard encounters"
+    },
+    {
+      "signal": "Bedrock tiles",
+      "visual_form": "Indestructible floor tiles with distinct visual pattern",
+      "meaning": "Impassable barriers that create safe zones guards cannot breach via digging"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Lode Runner)",
+      "color_identity": null,
+      "symbol_or_sigil": "Stick figure sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Gold collection trajectory; dug holes; cleared level paths"
+    },
+    {
+      "faction": "Guards (Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Guard character sprites",
+      "enemy_visual_variants": "Guard carrying gold bar appears distinct from unloaded guard",
+      "environmental_markers": "Guard respawn points at top of screen; pursuit patterns; hole entrapment zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level incomplete (gold remaining)",
+      "visual_manifestation": "Gold bars visible on level platforms",
+      "behavioral_manifestation": "Guards actively patrol and pursue player; exit at top of screen is inaccessible"
+    },
+    {
+      "world_state": "All gold collected",
+      "visual_manifestation": "Gold pieces vanish from level; exit path becomes active",
+      "behavioral_manifestation": "Player can now reach screen top to advance; guard behavior continues but objective shifts"
+    },
+    {
+      "world_state": "Guard trapped in hole",
+      "visual_manifestation": "Guard immobilized in dug pit; hole visibly refilling",
+      "behavioral_manifestation": "Guard ceases pursuit; becomes static obstacle or platform for player to traverse"
+    },
+    {
+      "world_state": "Guard falls through trapdoor",
+      "visual_manifestation": "Guard sprite transitions below trapdoor tiles",
+      "behavioral_manifestation": "Guard falls uncontrollably until hitting floor or terrain; respawns at top if consumed"
+    },
+    {
+      "world_state": "Player in hole before refill",
+      "visual_manifestation": "Player sprite descending into dug pit with floor above refilling",
+      "behavioral_manifestation": "Player death imminent if trapped; hole becomes impassable barrier"
+    },
+    {
+      "world_state": "Guard carrying gold",
+      "visual_manifestation": "Gold bar sprite attached to or carried by guard character",
+      "behavioral_manifestation": "Guard becomes higher-priority target for trapping; gold becomes retrievable after guard falls"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Objective-driven level design",
+      "example": "Gold placement patterns communicate puzzle intent; guards positioned to create combat/evasion paths"
+    },
+    {
+      "technique": "Trap placement narrative",
+      "example": "Trapdoors and bedrock position obstacles and shortcuts, telling story of dungeon layout without text"
+    },
+    {
+      "technique": "Guard respawn as world mechanic",
+      "example": "Guards always respawn at screen top after environmental death, establishing dungeon as cyclic threat system"
+    },
+    {
+      "technique": "Multi-story vertical platforming",
+      "example": "Brick platform motif with ladders and bars creates visual language of vault/mine structure with escape routes"
+    },
+    {
+      "technique": "Guard AI counterintuitive movement",
+      "example": "Guards sometimes repelled or move away despite player proximity; communicates they follow hidden rules, not simple pursuit"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player (stick figure)",
+      "state": "Moving on platform",
+      "behavior": "Can walk, climb ladders, hang from bars, dig holes in adjacent tiles, traverse at variable speed"
+    },
+    {
+      "entity": "Player (stick figure)",
+      "state": "In hole",
+      "behavior": "Cannot climb out; death imminent if hole fills; must escape before refill or lose life"
+    },
+    {
+      "entity": "Player (stick figure)",
+      "state": "Falling",
+      "behavior": "Falls faster than guards; can sustain arbitrary height falls without injury; can use falling guards as bridges"
+    },
+    {
+      "entity": "Guard",
+      "state": "Patrolling freely",
+      "behavior": "Moves in search pattern that does not always follow shortest path to player; sometimes repelled; alternative movement"
+    },
+    {
+      "entity": "Guard",
+      "state": "Carrying gold",
+      "behavior": "Limited to carrying one bar at a time; if trapped in hole, will drop gold upon entrapment"
+    },
+    {
+      "entity": "Guard",
+      "state": "In dug hole",
+      "behavior": "Immobilized until hole refills; cannot escape pit; consumed if refill completes before escape"
+    },
+    {
+      "entity": "Guard",
+      "state": "Consumed in hole",
+      "behavior": "Respawns immediately at random location at top of level; regeneration mechanic"
+    },
+    {
+      "entity": "Guard",
+      "state": "Falling through trapdoor",
+      "behavior": "Falls uncontrollably like player; respawns at top if falls into void"
+    }
+  ],
+  "notes": "Lode Runner communicates world-state primarily through environmental puzzle structure rather than narrative or faction tension. Danger is signaled mechanistically: guards and holes are direct threats with clear visual manifestations. Safety exists in level geometry (bedrock, exit) and strategic guard manipulation (trapping). The game's core loop involves reading guard AI patterns (counterintuitive movement tells) and timing holes/gold collection against pursuit. No political factions exist; the framework is adversarial (player vs. guards) without ideological content. Visual communication relies on sprite distinctiveness (guards vs. player) and environmental affordances (diggable vs. bedrock tiles, trapdoors, ladders). World-state changes are purely mechanical: gold present/absent, guards trapped/free/respawning, level complete/incomplete.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:34:10.961Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4033,
+    "output_tokens": 2153,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

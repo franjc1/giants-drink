@@ -1,0 +1,185 @@
+{
+  "game_id": "rad-gravity-nes",
+  "game_name": "The Adventures of Rad Gravity",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Distinct sprite animations for hostile creatures per planet",
+      "meaning": "Active threat requiring combat or evasion"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Planet-specific visual obstacles (e.g., caustic terrain on Effluvia, jungle barriers on Sauria)",
+      "meaning": "Environmental damage zones requiring navigation skill"
+    },
+    {
+      "signal": "Gravity inversion indicator",
+      "visual_form": "Complete screen inversion with player and enemies drawn upside-down on Turvia",
+      "meaning": "Inverted gravity mechanics requiring reoriented spatial awareness"
+    },
+    {
+      "signal": "Compumind shutdown state",
+      "visual_form": "Missing or disabled Compumind visual presence on each planet",
+      "meaning": "Objective incomplete; danger persists until Compumind located and restored"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Energy container acquisition",
+      "visual_form": "Visual item pickup representing zone-specific power container",
+      "meaning": "Health/resource replenishment; progression security"
+    },
+    {
+      "signal": "Armor pickup",
+      "visual_form": "Colored armor visual variants (pink, green, white armor types)",
+      "meaning": "Temporary damage mitigation; defensive state enhancement"
+    },
+    {
+      "signal": "Weapon availability",
+      "visual_form": "Laser Sword, Power Pistol, Vertigun, Maxigun, Super Sword visual representations",
+      "meaning": "Combat capability upgrade; offensive security"
+    },
+    {
+      "signal": "Ship/Safe zone",
+      "visual_form": "Spacecraft environment for planet selection and teleport navigation",
+      "meaning": "Safe hub space; mission planning area outside hostile planets"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Compuminds (allied sentient beings)",
+      "color_identity": null,
+      "symbol_or_sigil": "Compumind visual representation as recoverable objective entities",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Compumind terminals/structures on each of eight planets; unique per planetary environment"
+    },
+    {
+      "faction": "Kakos (protagonist's sentient ally)",
+      "color_identity": null,
+      "symbol_or_sigil": "Kakos visual presence as discovered Compumind companion",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Initial Compumind location; narrative anchor for mission briefing"
+    },
+    {
+      "faction": "The villain (unnamed antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Represented through shutdown Compuminds and planetary defense systems",
+      "enemy_visual_variants": "Hostile creature designs specific to each planet reflect villain's biotechnology control",
+      "environmental_markers": "Planetary corruption/hazard manifestations; environmental obstacles as antagonist's presence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission (Compumind not recovered)",
+      "visual_manifestation": "Planet environment rendered with active hazards and enemies present",
+      "behavioral_manifestation": "Hostile creatures actively patrol/attack; environmental hazards remain active threat"
+    },
+    {
+      "world_state": "Post-Compumind recovery",
+      "visual_manifestation": "Compumind visual disappears from level; planet environment transitions to cleared state",
+      "behavioral_manifestation": "Enemy activity ceases or reduces; hazards may become navigable without active threat"
+    },
+    {
+      "world_state": "Turvia gravity-reversed zone",
+      "visual_manifestation": "Complete 180-degree screen inversion; character and enemies drawn upside-down; falling becomes upward motion",
+      "behavioral_manifestation": "Gravity mechanics inverted; player must reorient spatial logic; enemies follow inverted gravity rules"
+    },
+    {
+      "world_state": "Cyberia cyberpunk environment",
+      "visual_manifestation": "Technological aesthetic; digital/neon-inflected visual design differentiating from organic planets",
+      "behavioral_manifestation": "Technology-themed enemies; electronic hazards; futuristic obstacle patterns"
+    },
+    {
+      "world_state": "Sauria jungle environment",
+      "visual_manifestation": "Organic green-dominant color palette; vegetation obstacles; natural terrain hazards",
+      "behavioral_manifestation": "Biological enemies; natural environmental mechanics; climbing/navigation challenges"
+    },
+    {
+      "world_state": "Effluvia toxic wasteland",
+      "visual_manifestation": "Caustic visual palette; degraded/corrupted terrain; trash/pollution visual indicators",
+      "behavioral_manifestation": "Toxic damage zones; pollutant-based hazards; environmental contamination mechanics"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Planet-specific aesthetic differentiation",
+      "example": "Each of eight planets (Cyberia, Sauria, Effluvia, Turvia, etc.) has visually distinct environment design communicating world identity and hazard type through color, terrain, and visual theme"
+    },
+    {
+      "technique": "Compumind visual placement as objective markers",
+      "example": "Each planet's Compumind location serves as primary visual goal; its presence/absence communicates mission status through environmental placement"
+    },
+    {
+      "technique": "Gravity inversion as environmental narrative",
+      "example": "Turvia's upside-down screen presentation communicates the planet's unique physics property without explicit text; visual design conveys mechanical difference"
+    },
+    {
+      "technique": "Biotechnology manifestation through enemies",
+      "example": "Hostile creatures designed per-planet reflect the villain's biotechnology control and planetary corruption; enemy visual diversity communicates world-state"
+    },
+    {
+      "technique": "Resource scarcity signaling",
+      "example": "Energy containers and armor pickups distributed across levels; visual presence/absence communicates resource availability and danger progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Rad Gravity (protagonist)",
+      "state": "Armed with Laser Sword (default)",
+      "behavior": "Melee-focused combat animation; lightsaber-style attack visual"
+    },
+    {
+      "entity": "Rad Gravity (protagonist)",
+      "state": "Equipped with Power Pistol/Vertigun/Maxigun",
+      "behavior": "Ranged attack animations; projectile spawn visual distinct from melee"
+    },
+    {
+      "entity": "Rad Gravity (protagonist)",
+      "state": "On Turvia (reversed gravity)",
+      "behavior": "Sprite rendered upside-down; jump direction inverted visually; falling reverses to upward movement"
+    },
+    {
+      "entity": "Rad Gravity (protagonist)",
+      "state": "Equipped with armor",
+      "behavior": "Visual sprite change reflecting armor type (pink/green/white); damage absorption animation distinct"
+    },
+    {
+      "entity": "Hostile creatures",
+      "state": "Patrolling/unaware of player",
+      "behavior": "Routine movement pattern animation; no attack behavior"
+    },
+    {
+      "entity": "Hostile creatures",
+      "state": "Engaged with player",
+      "behavior": "Attack animation triggered; projectile or melee visual indicates threat activation"
+    },
+    {
+      "entity": "Hostile creatures",
+      "state": "On Turvia (reversed gravity)",
+      "behavior": "Enemy sprite rendered upside-down; movement physics inverted; behavioral adaptation to gravity state"
+    },
+    {
+      "entity": "Compumind targets",
+      "state": "Active/recoverable",
+      "behavior": "Static visual presence; pickup-ready animation or glow indicating objective status"
+    }
+  ],
+  "notes": "The Adventures of Rad Gravity employs planet-specific visual design as primary world-state communication mechanism. The game's most distinctive narrative visual is Turvia's inverted gravity rendering, which communicates mechanical uniqueness through pure visual design. Faction communication is minimal; the game presents a binary opposition (protagonist + allied Compuminds vs. villain's biotechnology) communicated through environment design rather than explicit faction markers. The game rewards exploration and bug-testing through visual/mechanical discovery, suggesting intentional communication through unexpected visual states. Manual context (mentioned in TCRF source) indicates additional narrative support through external storytelling, but core world-state communication relies on environmental aesthetics and enemy/obstacle design.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:11:16.954Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4304,
+    "output_tokens": 2209,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

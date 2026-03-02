@@ -1,0 +1,83 @@
+{
+  "game_id": "fire-emblem-gaiden-nes",
+  "game_name": "Fire Emblem Gaiden",
+  "platform": "nes",
+  "year": 1992,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "Not applicable - turn-based tactical RPG, no real-time movement physics"
+  },
+  "player": {
+    "walk_speed": null,
+    "run_speed": null,
+    "max_horizontal_speed": null,
+    "acceleration": null,
+    "deceleration": null,
+    "jump_velocity": null,
+    "gravity": null,
+    "max_fall_speed": null,
+    "air_acceleration": null,
+    "air_friction": null,
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Grid-based Movement",
+      "description": "Turn-based tactical system with grid-based battlefield navigation. Unit class determines movement range on battlefield.",
+      "physics_values": {
+        "movement_type": "grid_based_turn_based",
+        "movement_range": "varies_by_character_class"
+      }
+    },
+    {
+      "name": "Class Promotion System",
+      "description": "Character classes are not fixed and can switch once a character reaches a certain level. Special promotions for main characters: Alm (Fighter→Hero), Celica (Priestess→Princess).",
+      "physics_values": {
+        "affects_movement_range": true,
+        "affects_stats": true
+      }
+    },
+    {
+      "name": "Stat Growth on Level Up",
+      "description": "Each time a unit raises experience level, various stats increase based on a percent chance unique to each character.",
+      "physics_values": {
+        "growth_based_on": "character_unique_percentages"
+      }
+    },
+    {
+      "name": "Magic System with Health Cost",
+      "description": "Spells for magical classes are learned through leveling up. Each spell consumes part of the caster's health when used.",
+      "physics_values": {
+        "magic_learning": "level_based",
+        "casting_cost": "health_points"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "turn-based",
+    "strategic",
+    "character_focused",
+    "overworld_exploration"
+  ],
+  "tier_notes": "Fire Emblem Gaiden is a turn-based tactical RPG with no real-time movement physics. This is fundamentally a grid-based strategy game rather than an action platformer or character action game. No gravity, jump velocity, acceleration, or sub-pixel physics systems apply. Data reflects game mechanics (class movement range, stat growth percentages, character progression) rather than physics parameters. Sources document gameplay systems and character data but contain no movement physics values.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (Fire Emblem Gaiden article)",
+    "wikipedia - Fire Emblem Gaiden article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:56:18.653Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5295,
+    "output_tokens": 911,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

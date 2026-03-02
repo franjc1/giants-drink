@@ -1,0 +1,168 @@
+{
+  "game_id": "qix-nes",
+  "game_name": "Qix",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Qix collision during line drawing",
+      "visual_form": "Colorful geometric figure moving erratically in playfield",
+      "meaning": "Immediate life loss if Qix touches marker while drawing Stix (uncompleted line)"
+    },
+    {
+      "signal": "Sparx enemy movement",
+      "visual_form": "Enemies traversing playfield edges and unfinished Stix",
+      "meaning": "Life loss on contact with marker; escalates to Super Sparx that can chase along incomplete lines"
+    },
+    {
+      "signal": "Fuse burn mechanic",
+      "visual_form": "Visual fuse appearing and burning along drawn line toward marker",
+      "meaning": "Indicates imminent death if marker does not move; triggered by stopping mid-draw or entering dead-end position ('Spiral Death Trap')"
+    },
+    {
+      "signal": "Super Sparx mutation",
+      "visual_form": "Sparx transformation after meter countdown completes",
+      "meaning": "Escalated threat level; enemies gain ability to pursue marker along incomplete Stix, increasing danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Marker on playfield edge",
+      "visual_form": "Diamond-shaped marker positioned on rectangle boundaries or completed captured areas",
+      "meaning": "Safe from Qix collision; Qix does not harm marker when on edges or traversing captured territory"
+    },
+    {
+      "signal": "Completed and filled areas",
+      "visual_form": "Colored regions (orange-red for Slow Draw, other colors for Fast Draw) filling captured sections",
+      "meaning": "Claimed territory; marker can traverse these safely; Qix and Sparx cannot penetrate filled areas"
+    },
+    {
+      "signal": "Fuse disappearance",
+      "visual_form": "Fuse visual retracting when marker resumes movement",
+      "meaning": "Immediate danger averted; continuous movement prevents fuse activation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Marker)",
+      "color_identity": "Diamond-shaped marker; variable fill colors (orange-red for Slow Draw bonus areas)",
+      "symbol_or_sigil": "Diamond shape controller icon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Drawn lines (Stix) representing player territory claims; filled regions showing player control"
+    },
+    {
+      "faction": "Qix",
+      "color_identity": "Colorful geometric figure (multi-colored stick-like entity)",
+      "symbol_or_sigil": "Abstract stick form in graceful, unpredictable motion",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Qix presence throughout unfilled playfield; splits into two Qixes at level three, creating dual-threat zones"
+    },
+    {
+      "faction": "Sparx/Super Sparx",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy entities distinct from Qix",
+      "enemy_visual_variants": "Sparx (normal edge-traversing enemies) vs. Super Sparx (mutated, enhanced-capability variants)",
+      "environmental_markers": "Released on meter countdown; occupy playfield edges and pursue incomplete Stix; signal escalation via transformation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Levels 1-2)",
+      "visual_manifestation": "Single Qix in playfield; Sparx enemies present on edges; relatively sparse threat density",
+      "behavioral_manifestation": "Qix performs graceful, unpredictable motions; Sparx traverse only completed edges; fuse mechanic introduces tension"
+    },
+    {
+      "world_state": "Mid-game escalation (Level 3+)",
+      "visual_manifestation": "Playfield splits into regions with two Qixes; increased Sparx count; visual density increases",
+      "behavioral_manifestation": "Dual Qix require territorial division strategy; additional Sparx spawn; Super Sparx mutations activate on meter completion"
+    },
+    {
+      "world_state": "High-pressure phase",
+      "visual_manifestation": "Multiple Super Sparx visible; meter counts down to new mutations; restricted safe zones as claimed territory increases",
+      "behavioral_manifestation": "Super Sparx actively chase marker along incomplete Stix; reduced maneuverability for player; escalated speed and threat coordination"
+    },
+    {
+      "world_state": "Level completion threshold",
+      "visual_manifestation": "Percentage meter shows progress toward 75% (adjustable 50-90%) capture; bonus scoring visualization",
+      "behavioral_manifestation": "Player incentivized to exceed threshold for bonus; Qix splitting grants multiplier bonus for subsequent levels"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Territory claim visualization",
+      "example": "Filled color regions directly represent player conquest and control expansion; color choice (orange-red for Slow Draw) communicates risk/reward strategy choice"
+    },
+    {
+      "technique": "Threat escalation through visual density",
+      "example": "Sparx count increases and mutates to Super Sparx as levels progress; visual field becomes more crowded, communicating difficulty spike without explicit text"
+    },
+    {
+      "technique": "Meter-driven state changes",
+      "example": "Countdown meter at top of screen visually communicates imminent threat (additional Sparx release, Super Sparx mutation); creates tension through visible timer"
+    },
+    {
+      "technique": "Geometric abstraction for clarity",
+      "example": "Qix and marker rendered as simple geometric forms (stick figure, diamond) in minimalist style; reduces visual noise, emphasizes movement patterns and collision risk"
+    },
+    {
+      "technique": "Fuse as danger affordance",
+      "example": "Fuse visual burning along incomplete line directly communicates consequence for stopping; 'Spiral Death Trap' naming in attract mode primes player expectations for mechanical danger"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Qix",
+      "state": "Normal playfield presence",
+      "behavior": "Graceful, unpredictable motion within rectangle; will not actively seek marker; does not harm marker on edges or completed territory"
+    },
+    {
+      "entity": "Qix",
+      "state": "During player line-drawing",
+      "behavior": "Represents collision hazard if it touches marker or exposed Stix before line completion; immediate life loss"
+    },
+    {
+      "entity": "Qix",
+      "state": "Level 3+ (split state)",
+      "behavior": "Two Qixes appear simultaneously; each occupies separate territorial region; splitting both Qixes into divided sections completes level and grants multiplier bonus"
+    },
+    {
+      "entity": "Sparx",
+      "state": "Early phase (normal Sparx)",
+      "behavior": "Traverses only playfield edges and completed area boundaries; cannot enter incomplete Stix; predictable path-following"
+    },
+    {
+      "entity": "Sparx",
+      "state": "Post-mutation (Super Sparx)",
+      "behavior": "Can pursue marker along incomplete Stix lines; enhanced threat capability; activated on meter countdown completion"
+    },
+    {
+      "entity": "Marker (Player)",
+      "state": "On edge or completed territory",
+      "behavior": "Safe from all threats; can move freely along boundaries and filled regions"
+    },
+    {
+      "entity": "Marker (Player)",
+      "state": "Drawing Stix (incomplete line)",
+      "behavior": "Vulnerable state; subject to collision with Qix, Sparx, Super Sparx, and fuse burn mechanic; cannot cross or backtrack along own line"
+    },
+    {
+      "entity": "Fuse",
+      "state": "Activated (marker stopped during draw)",
+      "behavior": "Burns along drawn line toward marker at constant rate; reaching marker causes life loss; disappears if marker resumes movement"
+    }
+  ],
+  "notes": "Qix uses minimalist abstract visual design to communicate world-state and threat through geometric motion, color-coded territory claims, and escalating enemy density. The game employs no text-based warnings; all danger and safety signals are conveyed through visual mechanics (collision geometry, fuse burn animation, meter countdown). The Qix entity itself is a pure threat indicator—its unpredictable graceful motion contrasts with safe geometric filled regions, creating intuitive visual risk assessment. Difficulty escalation is communicated via enemy count increase, mutation visuals (Super Sparx transformation), and playfield division (dual Qix at level 3), not explicit level markers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:45:25.984Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2962,
+    "output_tokens": 2215,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "game_id": "carmen-sandiego-time-genesis",
+  "game_name": "Where in Time Is Carmen Sandiego?",
+  "platform": "genesis",
+  "paradigm": "educational",
+  "danger_signals": [
+    {
+      "signal": "VILE agent presence",
+      "visual_form": "Short animation of VILE agent upon arrival at location",
+      "meaning": "Confirms player has reached correct destination in criminal's trail; signals criminal activity in that time period"
+    },
+    {
+      "signal": "Time depletion",
+      "visual_form": "Time counter decreasing with each action",
+      "meaning": "Player must solve case before time runs out; represents urgency and danger of criminal escape"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful clue acquisition",
+      "visual_form": "Reception of travel clue from NPC at location",
+      "meaning": "Player is on correct investigative path; location is safe for information gathering"
+    },
+    {
+      "signal": "Warrant acquisition",
+      "visual_form": "Successfully compiled warrant with correct physical attributes and interests",
+      "meaning": "Player has sufficient evidence; next location visit will enable safe arrest"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "ACME Detective Agency",
+      "color_identity": null,
+      "symbol_or_sigil": "ACME Headquarters (San Francisco-based)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "ACME Headquarters location represents player faction base; established as situated in San Francisco"
+    },
+    {
+      "faction": "VILE (Carmen Sandiego's criminal organization)",
+      "color_identity": null,
+      "symbol_or_sigil": "VILE agent visual representation",
+      "enemy_visual_variants": "VILE agents appear as distinct characters with individual physical attributes and interests that distinguish them",
+      "environmental_markers": "Presence indicated by short animation sequences at locations; signifies criminal infiltration across time periods"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Criminal active in historical period",
+      "visual_manifestation": "VILE agent animation plays upon player arrival at correct location",
+      "behavioral_manifestation": "Criminal leaves trail of clues pointing to next temporal destination; player must follow breadcrumb pattern through time stream"
+    },
+    {
+      "world_state": "Incomplete investigation",
+      "visual_manifestation": "Warrant cannot be issued; player lacks sufficient clue information",
+      "behavioral_manifestation": "Player must continue gathering travel clues and culprit attribute clues before attempting arrest"
+    },
+    {
+      "world_state": "Time pressure escalation",
+      "visual_manifestation": "Visible time counter depletion",
+      "behavioral_manifestation": "Each action (travel, questioning, research) consumes time; player must manage time budget to complete case before deadline"
+    },
+    {
+      "world_state": "Successful case closure",
+      "visual_manifestation": "Capture Robot deployment at correct location with correct warrant",
+      "behavioral_manifestation": "Criminal apprehended; player promoted through ranks (Time Cadet → Time Patroller → Time Detective → etc.)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Historical location as narrative context",
+      "example": "Travel destinations span 400 AD to 1950s; each location's historical period provides educational context for criminal's activities and theft significance"
+    },
+    {
+      "technique": "NPC dialogue as clue delivery",
+      "example": "NPCs at each location provide travel clues indicating next destination; suggests local awareness of criminal movement through time"
+    },
+    {
+      "technique": "Chronological artifact theft",
+      "example": "Criminals steal historical items (e.g., Paul Revere's horse) relevant to their location period; theft significance encoded in historical context"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "VILE criminals",
+      "state": "Active in location",
+      "behavior": "Leave trail of clues at visited locations; each clue narrows down next destination in temporal sequence"
+    },
+    {
+      "entity": "VILE criminals",
+      "state": "Hiding/in transit",
+      "behavior": "Only revealed through short animation when player arrives at correct location; indicates they were present but now moving to next destination"
+    },
+    {
+      "entity": "Player character",
+      "state": "Investigating",
+      "behavior": "Clicks on one of 4 travel options based on clue interpretation; correct choice advances to next location, incorrect choice requires backtracking"
+    },
+    {
+      "entity": "NPCs",
+      "state": "Cooperative",
+      "behavior": "Provide clues upon questioning; behavior is consistent and non-hostile, indicating civilian cooperation with law enforcement"
+    }
+  ],
+  "notes": "Educational paradigm prioritizes information gathering and deductive reasoning over visual danger representation. World-state communication relies heavily on clue-based systems and time management mechanics rather than visual threat indicators. Faction identity is expressed through agency affiliation (ACME vs VILE) rather than visual styling. Historical period selection itself becomes a manifestation layer—different time periods visually reinforce where criminals are operating.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:39:42.810Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2788,
+    "output_tokens": 1328,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

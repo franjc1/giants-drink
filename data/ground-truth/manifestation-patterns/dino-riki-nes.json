@@ -1,0 +1,200 @@
+{
+  "game_id": "dino-riki-nes",
+  "game_name": "Adventures of Dino Riki",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Animated projectiles from dinosaur and creature sprites",
+      "meaning": "Immediate threat requiring dodge or defensive action"
+    },
+    {
+      "signal": "Water hazards",
+      "visual_form": "Body of water with lilypads in stage environment",
+      "meaning": "Instant death if player falls in; environmental danger state"
+    },
+    {
+      "signal": "Moving/submerging lilypads",
+      "visual_form": "Platform elements that shift position or disappear beneath surface",
+      "meaning": "Platforming challenge indicating loss of safe ground"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large distinct enemy sprite at end of stage",
+      "meaning": "Stage-culminating threat requiring concentrated combat"
+    },
+    {
+      "signal": "Dinosaur enemies",
+      "visual_form": "Prehistoric creature sprites distinct from player character",
+      "meaning": "Primary hostile agents in prehistoric setting"
+    },
+    {
+      "signal": "Hit taken",
+      "visual_form": "Player sprite damage/knockback animation",
+      "meaning": "Loss of weapon/speed upgrade level; degraded combat capability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Boulder/item tiles",
+      "visual_form": "Destructible terrain elements scattered throughout stages",
+      "meaning": "Reward containers—destroying grants health and power-ups"
+    },
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Visual emergence of weapon upgrade or mobility item from broken boulder",
+      "meaning": "Combat enhancement; weapon progression from rocks → axes → boomerangs → torches"
+    },
+    {
+      "signal": "Flight wings power-up",
+      "visual_form": "Wing sprite dropped as collectible",
+      "meaning": "Mobility enhancement enabling hazard avoidance (water crossing)"
+    },
+    {
+      "signal": "Speed boost",
+      "visual_form": "Collectible speed enhancement item",
+      "meaning": "Movement capability increase; evasion advantage"
+    },
+    {
+      "signal": "Checkpoint activation",
+      "visual_form": "Stage progression marker",
+      "meaning": "Death respawn point; player returns here rather than stage start"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Dino Riki)",
+      "color_identity": null,
+      "symbol_or_sigil": "Primitive human character sprite with weapon (rocks/axes/boomerangs/torches)",
+      "enemy_visual_variants": "Macho Riki transformation—muscular version firing self-clones (Riki Lariat attack); variant differs between JP (Riki Choshu likeness) and US (Takahashi Meijin/Master Higgins likeness)",
+      "environmental_markers": "Player occupies foreground of scrolling stages; central to screen positioning"
+    },
+    {
+      "faction": "Dinosaurs/Prehistoric creatures",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct non-humanoid creature sprites",
+      "enemy_visual_variants": "Variety of dinosaur and prehistoric beast designs; each stage features thematic enemy roster",
+      "environmental_markers": "Populate all stages; primary hostile presence in world"
+    },
+    {
+      "faction": "Environmental/Nature",
+      "color_identity": null,
+      "symbol_or_sigil": "Water bodies, lilypads, hazardous terrain",
+      "enemy_visual_variants": "Non-hostile but lethal; water is uniform kill-hazard regardless of stage",
+      "environmental_markers": "Water and platforming sections occur in Stage 1; represents environmental threat distinct from creature enemies"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Prehistoric setting (Japanese: 'New Humans' era)",
+      "visual_manifestation": "Dinosaurs, primitive weapons (rocks, axes, torches), natural landscape with water hazards, platforming terrain",
+      "behavioral_manifestation": "Player uses melee/thrown weapons; movement limited to jumping and directional locomotion; no technology-based tools"
+    },
+    {
+      "world_state": "Early stage (player weakened)",
+      "visual_manifestation": "Player sprite at base weapon level (rocks); minimal projectile spread",
+      "behavioral_manifestation": "Reduced attack range and damage output; lower combat efficacy against enemies"
+    },
+    {
+      "world_state": "Mid-stage (powered-up)",
+      "visual_manifestation": "Enhanced weapon sprite (axes/boomerangs/torches with wider visual spread)",
+      "behavioral_manifestation": "Increased projectile count, range, and area coverage; improved enemy engagement capability"
+    },
+    {
+      "world_state": "Macho Riki transformation active",
+      "visual_manifestation": "Character sprite changes to muscular variant (JP: Riki Choshu, US: Master Higgins); fires clones of self across screen",
+      "behavioral_manifestation": "Temporary power state with enhanced attack; fires projectiles of player sprite rather than standard weapons; time-limited duration"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Large distinct sprite at stage endpoint; arena-scale positioning",
+      "behavioral_manifestation": "Combat focused on single large threat; requires sustained attack and evasion of boss projectiles"
+    },
+    {
+      "world_state": "Player near death",
+      "visual_manifestation": "Low health indicator at top of screen; accumulated damage visual state",
+      "behavioral_manifestation": "Single hit will kill; all power-ups stripped; reset to checkpoint on death"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Prehistoric setting aesthetic",
+      "example": "Dinosaurs, primitive human protagonist, stone/bone weapons, natural terrain (water, lilypads, rocky landscape) establish 'stone age' world context without narrative exposition"
+    },
+    {
+      "technique": "Stage progression through environment types",
+      "example": "Stage 1 features water/lilypad platforming section; subsequent stages implied to present different prehistoric environments and creature rosters"
+    },
+    {
+      "technique": "Hazard placement as implicit danger zones",
+      "example": "Water bodies positioned as instant-death zones telegraphs environmental lethality; lilypads as traversal puzzle communicate stage design intent"
+    },
+    {
+      "technique": "Boss positioning at stage culmination",
+      "example": "Large distinct enemy at stage end implies 'guardian' or 'apex threat' of that region; visual scale difference signals climactic encounter"
+    },
+    {
+      "technique": "Power-up hiding in breakable terrain",
+      "example": "Boulders containing upgrades suggest resource gathering and environmental interaction; rewards exploration and destruction"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dino Riki (player)",
+      "state": "Normal/unpowered",
+      "behavior": "Throws rocks in spread pattern; moves in all directions; can jump; baseline speed and range"
+    },
+    {
+      "entity": "Dino Riki (powered-up weapon)",
+      "state": "Axes/boomerangs/torches equipped",
+      "behavior": "Throws upgraded projectiles with increased range and spread; higher damage output"
+    },
+    {
+      "entity": "Dino Riki (flight wings)",
+      "state": "Wings power-up active",
+      "behavior": "Can fly across water hazards and elevated terrain; enables vertical movement freedom"
+    },
+    {
+      "entity": "Dino Riki (Macho transformation)",
+      "state": "Rare hidden power-up triggered",
+      "behavior": "Fires clones of player sprite (Riki Lariat attack); temporary enhanced state; high damage output"
+    },
+    {
+      "entity": "Dinosaur enemies",
+      "state": "Patrol/attack",
+      "behavior": "Emit projectiles; move toward or away from player; distinct sprite patterns per type"
+    },
+    {
+      "entity": "Boss",
+      "state": "End-of-stage encounter",
+      "behavior": "Fires projectiles; occupies large screen area; requires focused combat; defeat triggers stage completion"
+    },
+    {
+      "entity": "Lilypads",
+      "state": "Moving/stable",
+      "behavior": "Some move back-and-forth horizontally; others submerge and resurface in timed pattern; contact with water = instant death"
+    },
+    {
+      "entity": "Boulder/item tiles",
+      "state": "Intact/broken",
+      "behavior": "Unbroken: visual terrain obstacle. Broken (hit by player): drops power-up item; visual reward manifestation"
+    }
+  ],
+  "notes": "Dino Riki is a vertically-scrolling shmup with minimalist visual communication. World-state is expressed primarily through enemy roster, weapon visual progression, and environmental hazards rather than explicit UI elements (aside from health/score/lives display at top). The game's core manifestation pattern revolves around weapon upgrade visualization—each tier (rocks → axes → boomerangs → torches) is immediately visually distinct, allowing player to assess combat capability at a glance. The Macho Riki transformation serves as a temporary power-fantasy state with distinct visual identity (character sprite change) and attack pattern (self-cloning projectiles), communicating 'ultimate power' through both visual and behavioral change. Danger is signaled through enemy projectiles, water hazards, and boss presence; safety through power-up collectibles hidden in destructible terrain. The prehistoric setting is communicated entirely through aesthetic—no narrative exposition required. Regional differences in Macho Riki sprite (Riki Choshu vs. Master Higgins) indicate localization adaptation but do not alter mechanical or world-state communication.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:15:47.280Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3711,
+    "output_tokens": 2524,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

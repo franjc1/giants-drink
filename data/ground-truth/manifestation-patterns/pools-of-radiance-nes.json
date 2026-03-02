@@ -1,0 +1,200 @@
+{
+  "game_id": "pools-of-radiance-nes",
+  "game_name": "Advanced Dungeons & Dragons: Pools of Radiance",
+  "platform": "nes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Monster encounter visual representation",
+      "visual_form": "Sprite depictions that appear drawn from AD&D Monster Manual artwork; monsters appear as distinct visual entities in top-down isometric view during combat",
+      "meaning": "Immediate threat requiring combat engagement; visual fidelity to tabletop source material reinforces danger authenticity"
+    },
+    {
+      "signal": "Combat mode perspective shift",
+      "visual_form": "Screen switches from first-person exploration view to top-down dimetric projection isometric view",
+      "meaning": "Transition from exploration to active danger state; perspective shift signals imminent combat encounter"
+    },
+    {
+      "signal": "Character HP depletion visual",
+      "visual_form": "Character hit points displayed in text interface; HP dropping below zero triggers bandaging requirement state",
+      "meaning": "Character incapacitation and death risk; requires immediate party intervention to prevent permanent character loss"
+    },
+    {
+      "signal": "Enemy positioning in tactical space",
+      "visual_form": "Sprite placement in isometric grid view; visual proximity to party members",
+      "meaning": "Tactical threat distance; enemies adjacent to retreating characters trigger opportunity attacks"
+    },
+    {
+      "signal": "Multiple enemy sprite variants by distance",
+      "visual_form": "Three sprite versions per monster type: short-range, medium-range, long-range depictions with increasing visual detail/size",
+      "meaning": "Escalating threat proximity; larger/detailed sprites indicate enemies closing to melee distance"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "First-person exploration perspective",
+      "visual_form": "Rectangle viewport in top-left showing party's current view from first-person camera angle",
+      "meaning": "Safe exploration mode; no immediate combat encounter; player controls movement and interaction freely"
+    },
+    {
+      "signal": "Menu access availability",
+      "visual_form": "Text-based interface menus accessible during exploration; items, spells, party composition visible",
+      "meaning": "Safe state allowing resource management, trading, spell preparation; not in active combat"
+    },
+    {
+      "signal": "NPC presence and dialogue",
+      "visual_form": "Conversation display showing NPC interaction; text-based dialogue interface",
+      "meaning": "Social/commercial safety; NPCs indicate settled areas and civilian zones; potential for commerce and quest information"
+    },
+    {
+      "signal": "Character bandaging aftermath",
+      "visual_form": "Successful bandaging status indicated in character status display; character returns to active roster",
+      "meaning": "Threat mitigated; character stabilized and danger from that specific wound resolved"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Party (Player Characters)",
+      "color_identity": null,
+      "symbol_or_sigil": "Player-customizable character combat icons (colors customizable per character)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "First-person perspective centers on party view; party roster displayed in text interface; characters occupy top-down isometric grid positions during combat"
+    },
+    {
+      "faction": "Evil Forces / Marauding Inhabitants",
+      "color_identity": null,
+      "symbol_or_sigil": "Monster sprites depicting various creature types (visual distinctions by monster type rather than faction color)",
+      "enemy_visual_variants": "Three distance-variant sprites per monster type showing different visual representations at short/medium/long range",
+      "environmental_markers": "Occupy Phlan surroundings and conquered city areas; appear in combat encounters; described as 'marauding inhabitants' controlling territory"
+    },
+    {
+      "faction": "Settled Phlan (Civilian Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "NPCs located in safe dialogue zones; text-based conversation interface indicates civilian settlements; quest-giver presence"
+    },
+    {
+      "faction": "Evil Leader / Primary Antagonist",
+      "color_identity": null,
+      "symbol_or_sigil": "Displayed as powerful dragon encounter in documented screenshot example",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Confronted at narrative climax; visual depiction as significantly distinct monster sprite; dialogue interface shows conversation with dragon entity"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Phlan City - Conquered/Marauded Territory",
+      "visual_manifestation": "First-person exploration showing hostile creature-occupied areas; monster encounters appear in surroundings of port city; graveyard areas visible in exploration UI",
+      "behavioral_manifestation": "Random encounters follow standard AD&D encounter table patterns; monsters initiate combat when party enters their territory; enemies manifest as hostile forces blocking progression"
+    },
+    {
+      "world_state": "Active Combat Engagement",
+      "visual_manifestation": "Isometric top-down dimetric projection grid; party and enemy sprites positioned in tactical space; character and monster action indicators",
+      "behavioral_manifestation": "Characters choose actions per round; actions execute immediately rather than queued; retreating characters trigger opportunity attacks from adjacent enemies; class-specific combat options visible (fighter multi-attacks, magic-user spells, thief backstab positioning)"
+    },
+    {
+      "world_state": "Safe Settlement / NPC Zone",
+      "visual_manifestation": "First-person perspective maintained; NPC dialogue interface overlays exploration view; text-based interaction UI shows conversation options",
+      "behavioral_manifestation": "Party can access menus freely; trade items with NPCs; buy/sell goods; pool money; receive quests; learn new skills; no hostile encounters"
+    },
+    {
+      "world_state": "Character Incapacitation / Wound Status",
+      "visual_manifestation": "Character HP display shows zero or negative values; character status text indicates 'requires bandaging'; character may still appear in roster but marked as incapacitated",
+      "behavioral_manifestation": "Character cannot act in combat; another party member must bandage within combat rounds; successful bandaging restores character to active status; failure results in character death and permanent removal"
+    },
+    {
+      "world_state": "Progression Through Quest Areas",
+      "visual_manifestation": "Movement from one area to another shown through first-person viewport transitions; area names updated in text interface; environment changes (city streets to graveyard, etc.)",
+      "behavioral_manifestation": "Encounter patterns shift based on area; different monster types appear in different territories; party progresses narratively toward confronting evil leader"
+    },
+    {
+      "world_state": "Character Experience Gain / Level Progression",
+      "visual_manifestation": "Character statistics displayed in text interface update; ability scores and level indicators change; character capabilities visibly increase",
+      "behavioral_manifestation": "Fighters gain additional attacks per round as they level; magical capabilities expand; sweeping attacks against low-level creatures become available; class-specific power progression visible in combat options"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Area-based monster distribution",
+      "example": "Graveyard exploration shows undead-themed encounters; city surroundings show humanoid marauders; evil leader's location contains most dangerous creature (dragon); environmental context communicates faction territory and threat escalation"
+    },
+    {
+      "technique": "NPC dialogue and quest directives",
+      "example": "Settled Phlan citizens provide narrative context about marauding forces; quests guide party to clear specific areas; text-based conversations establish political situation (city under threat, party hired to liberate it)"
+    },
+    {
+      "technique": "Monster Manual visual authenticity",
+      "example": "Monster sprites drawn from official AD&D Monster Manual artwork; visual fidelity to tabletop source creates environmental authenticity; players recognize threats from existing fantasy lore"
+    },
+    {
+      "technique": "Viewport perspective messaging",
+      "example": "First-person exploration communicates immersion and safety in discovered areas; shift to isometric combat view signals transition from exploration to contested territory"
+    },
+    {
+      "technique": "Port city setting specificity",
+      "example": "Phlan established as coastal trade city; setting grounds narrative in Forgotten Realms geography; city layout moves from settled core outward to increasingly hostile surroundings"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Fighter class character",
+      "state": "Low level",
+      "behavior": "Single attack per round; melee or ranged weapon options available; can position for basic tactics"
+    },
+    {
+      "entity": "Fighter class character",
+      "state": "High level / Progression",
+      "behavior": "Multiple attacks per round; gains sweep ability to attack multiple low-level creatures in single turn; increased tactical flexibility"
+    },
+    {
+      "entity": "Magic-user character",
+      "state": "Combat ready",
+      "behavior": "Can cast spells; spell options displayed in combat menu; spell selection indicates magical threat capability"
+    },
+    {
+      "entity": "Cleric character",
+      "state": "Party injury state",
+      "behavior": "Can bandage wounded allies to prevent death; bandaging action available in combat; healing capability indicates support role"
+    },
+    {
+      "entity": "Thief character",
+      "state": "Combat positioning available",
+      "behavior": "Can execute backstab attack when strategically positioned relative to enemies; positioning UI shows backstab opportunity; damage scales with positioning advantage"
+    },
+    {
+      "entity": "Monster enemy",
+      "state": "Approaching party",
+      "behavior": "Sprite representation shifts through three distance variants (short/medium/long range); visual scaling indicates closing distance"
+    },
+    {
+      "entity": "Monster enemy",
+      "state": "Retreating character adjacent",
+      "behavior": "Triggers opportunity attack when party member moves next to them while retreating; movement-based threat activation"
+    },
+    {
+      "entity": "Evil leader (Dragon)",
+      "state": "Final encounter",
+      "behavior": "Displayed as unique powerful entity; dialogue interface shows communication capability; confrontation resolves main narrative"
+    },
+    {
+      "entity": "Party character",
+      "state": "Alignment system active",
+      "behavior": "Alignment (moral philosophy) affects how NPCs view character actions; visible alignment indicator influences NPC dialogue and quest acceptance"
+    }
+  ],
+  "notes": "Pool of Radiance communicates world-state primarily through perspective shifts (first-person exploration vs. isometric combat), monster sprite variants indicating distance/threat proximity, and text-based interface information. The game relies heavily on visual and mechanical translation of AD&D tabletop rules—Monster Manual authenticity in creature depiction, D&D alignment system affecting NPC reactions, and class-specific abilities manifesting as distinct tactical options. Faction identity is communicated through creature type distribution (marauders in city, undead in graveyards, powerful dragon as final antagonist) rather than color-coding or heraldry. Environmental storytelling emerges from area progression and NPC dialogue establishing the political situation (Phlan under occupation, party hired to liberate). The NES adaptation (1992) maintains this design language from the original 1988 computer version.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:02:04.696Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2742,
+    "output_tokens": 2797,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

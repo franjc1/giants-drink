@@ -1,0 +1,204 @@
+{
+  "game_id": "jaws-nes",
+  "game_name": "Jaws",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Dorsal fin appearance",
+      "visual_form": "Jaws' dorsal fin breaking the water surface on overhead map",
+      "meaning": "Immediate threat—Jaws is present and will collide with boat, forcing diver into combat"
+    },
+    {
+      "signal": "Receiver beeping acceleration",
+      "visual_form": "Audio cue (beeping speed increases) from tracking device",
+      "meaning": "Proximity warning—Jaws is getting closer to player's boat"
+    },
+    {
+      "signal": "Hostile sea creatures",
+      "visual_form": "Jellyfish, rays, smaller sharks appearing in side-view undersea encounters",
+      "meaning": "Environmental danger—collision causes diver death, power loss, item loss"
+    },
+    {
+      "signal": "Oscillating minor-second music",
+      "visual_form": "Audio signature in 'You've Hit Something!' track",
+      "meaning": "Threat acknowledgment—collision with obstacle or enemy occurred"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Port locations",
+      "visual_form": "Harbor/dock structures on overhead map",
+      "meaning": "Safe zones for equipment upgrades and currency exchange"
+    },
+    {
+      "signal": "Conch shell pickup",
+      "visual_form": "Collectible items in game world",
+      "meaning": "Resource acquisition—currency for purchasing safety upgrades"
+    },
+    {
+      "signal": "Crab item",
+      "visual_form": "Collectible crustacean sprite",
+      "meaning": "Movement speed increase—tactical advantage for evasion"
+    },
+    {
+      "signal": "Submarine acquisition",
+      "visual_form": "Random spawning submarine unit on map",
+      "meaning": "Temporary protection—alternate combat form with reduced inertia and torpedo/depth charge weapons"
+    },
+    {
+      "signal": "Star bonus items",
+      "visual_form": "Collectible star sprites",
+      "meaning": "Score accumulation toward extra life (every 30,000 points)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (human operator)",
+      "color_identity": null,
+      "symbol_or_sigil": "Boat/vessel silhouette",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Overhead map shows boat position; ports serve as allied locations"
+    },
+    {
+      "faction": "Jaws (apex predator)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dorsal fin silhouette",
+      "enemy_visual_variants": "Changes visual representation from dorsal fin (map view) to full creature in side-view combat to close-up first-person perspective during final encounter",
+      "environmental_markers": "Appears randomly on overhead map; receiver device tracks relative location"
+    },
+    {
+      "faction": "Sea ecosystem (neutral/hostile creatures)",
+      "color_identity": null,
+      "symbol_or_sigil": "Various sea creature sprites (jellyfish, rays, smaller sharks)",
+      "enemy_visual_variants": "Different creature types with distinct sprites; jellyfish notably reappear in bonus stage with Galaga-like formation patterns",
+      "environmental_markers": "Randomly encountered during diver side-view sequences"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-encounter (open water patrolling)",
+      "visual_manifestation": "Overhead map view with boat sprite navigating open ocean; no creature contact",
+      "behavioral_manifestation": "Boat moves freely; receiver device (after first port visit) provides only audio beeping at distance"
+    },
+    {
+      "world_state": "Creature encounter (collision/snag)",
+      "visual_manifestation": "Perspective shift to side-view; diver sprite deployed into underwater environment with visible hostile creatures",
+      "behavioral_manifestation": "Player switches from boat control to diver control; diver must combat sea creatures; collision causes instant failure state"
+    },
+    {
+      "world_state": "Jaws encounter (mid-combat)",
+      "visual_manifestation": "Side-view perspective with large Jaws sprite; smaller visual relative to boat but dominates screen space",
+      "behavioral_manifestation": "Jaws collision automatic; player forced into combat; health replenishment for Jaws on failed attack"
+    },
+    {
+      "world_state": "Final confrontation (weakened Jaws)",
+      "visual_manifestation": "Shift to first-person perspective from boat bow; Jaws appears as threatening underwater silhouette breaching surface",
+      "behavioral_manifestation": "Player uses strobe device (three charges) to force breach; timing-based jabbing mechanic; Jaws makes random lateral/forward/backward movements"
+    },
+    {
+      "world_state": "Bonus stage triggered (after defeating multiple smaller sharks)",
+      "visual_manifestation": "Side-view perspective with airplane sprite traveling horizontally; jellyfish enemies in formation patterns (Galaga-inspired)",
+      "behavioral_manifestation": "Player adjusts airplane speed directionally; shooting jellyfish awards conch rewards; perfect clear grants 10,000 bonus points"
+    },
+    {
+      "world_state": "Diver death/equipment loss",
+      "visual_manifestation": "Return to overhead map; receiver device disappears from UI; conch shell count reduced by half; health bars reset",
+      "behavioral_manifestation": "Attack power drops by one level; player must recover and re-engage or visit port for re-equipment"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Audio mimesis of water movement",
+      "example": "Title screen and overwater music swells from soft to loud and back, sonically representing undulating ocean waves and threat proximity through volume dynamics"
+    },
+    {
+      "technique": "Dorsal fin as iconic threat symbol",
+      "example": "Jaws' signature dorsal fin appearance on overhead map visually communicates the specific predator identity without needing detailed creature graphics"
+    },
+    {
+      "technique": "Dual perspective narrative",
+      "example": "Transition from overhead navigation map to side-view combat represents shift from strategic planning to immediate danger; final first-person perspective raises personal stakes"
+    },
+    {
+      "technique": "Equipment progression as survival narrative",
+      "example": "Receiver device (tracks Jaws), upgraded attack power, and submarine unlock represent escalating player capability against increasing threat level"
+    },
+    {
+      "technique": "Port as refuge location",
+      "example": "Two alternating ports on map serve as strategic resource nodes—visually separate from ocean, reinforcing sanctuary function"
+    },
+    {
+      "technique": "Creature variety as ecosystem depth",
+      "example": "Jellyfish, rays, and smaller sharks populate undersea encounters; reuse of jellyfish in bonus stage suggests they are native fauna, not just random obstacles"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Jaws",
+      "state": "Distant/patrolling",
+      "behavior": "Appears randomly as dorsal fin on map; receiver beeps slowly; erratic spawn timing creates tension"
+    },
+    {
+      "entity": "Jaws",
+      "state": "Approaching",
+      "behavior": "Receiver beeping accelerates; will collide with boat if player does not evade or engage"
+    },
+    {
+      "entity": "Jaws",
+      "state": "In side-view combat",
+      "behavior": "Guaranteed collision with player's boat; forces diver into water; regains full health if attack fails"
+    },
+    {
+      "entity": "Jaws",
+      "state": "Weakened (final phase)",
+      "behavior": "Breaches water surface when hit by strobe charge; moves unpredictably left/right/forward; requires precise boat bow timing to deliver killing blow"
+    },
+    {
+      "entity": "Sea creatures (jellyfish, rays, sharks)",
+      "state": "Passive (on map)",
+      "behavior": "Randomly appear in encounter zones; do not pursue player visually"
+    },
+    {
+      "entity": "Sea creatures",
+      "state": "Active (in side-view)",
+      "behavior": "Stationary or slowly drifting; collision instant-kills diver; no apparent AI pathing"
+    },
+    {
+      "entity": "Diver",
+      "state": "Armed with basic weapon",
+      "behavior": "Can attack sea creatures and Jaws; slow movement; vulnerable to collision"
+    },
+    {
+      "entity": "Diver (submarine variant)",
+      "state": "Armed with torpedoes/depth charges",
+      "behavior": "Reduced inertia (faster response); weapons more effective; fragile—one collision destroys unit and releases diver"
+    },
+    {
+      "entity": "Player boat",
+      "state": "Navigating map",
+      "behavior": "Free movement in overhead view; subject to collision with obstacles and Jaws"
+    },
+    {
+      "entity": "Player boat",
+      "state": "Final confrontation",
+      "behavior": "Fixed perspective from bow; player controls jabbing motion; boat bow acts as ramming weapon against breached Jaws"
+    }
+  ],
+  "notes": "Jaws (NES, 1987) employs a three-perspective visual grammar to communicate escalating danger and player agency: overhead map (strategic/safe), side-view (tactical combat/danger), and first-person bow (climactic vulnerability). The receiver device's beeping serves as primary non-visual danger communication. World-state transitions are marked by perspective shifts rather than environmental transformation. No faction diplomacy or politics present—binary hunter/hunted dynamic. Bonus stage (Galaga-inspired jellyfish level) serves as tension break and resource reward. Music composition uses volume swell dynamics to sonically represent water movement and threat proximity, compensating for NES technical limitations in visual detail. Dorsal fin becomes iconic shorthand for Jaws identity across perspectives.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Jaws NES article)",
+    "wikipedia (Jaws video game - Wikipedia article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:16:15.461Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4127,
+    "output_tokens": 2556,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

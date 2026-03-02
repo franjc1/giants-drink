@@ -1,0 +1,211 @@
+{
+  "game_id": "marios-time-machine-nes",
+  "game_name": "Mario's Time Machine",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Bowser presence",
+      "visual_form": "Bowser sprite in museum and boss encounter",
+      "meaning": "Primary antagonist threat; signals imminent confrontation"
+    },
+    {
+      "signal": "Museum setting",
+      "visual_form": "Castle interior with artifact displays",
+      "meaning": "Danger zone where artifacts are held; corrupted historical state"
+    },
+    {
+      "signal": "Incorrect answers",
+      "visual_form": "Return to 1993 (hub state reset)",
+      "meaning": "Failure state; player sent back after 2 wrong answers"
+    },
+    {
+      "signal": "Time paradox implication",
+      "visual_form": "Artifacts out of place in wrong time periods",
+      "meaning": "World-state corruption; history being rewritten"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "1993 hub (Bowser's Museum)",
+      "visual_form": "Main menu/safe area accessible via Timulator",
+      "meaning": "Safe zone where player selects artifacts and missions"
+    },
+    {
+      "signal": "Historical NPCs",
+      "visual_form": "Non-player character sprites in time periods",
+      "meaning": "Helpful information sources; allies in learning objectives"
+    },
+    {
+      "signal": "Artifact recovery",
+      "visual_form": "Successful artifact placement in time period",
+      "meaning": "Mission success; one step toward restoring world-state"
+    },
+    {
+      "signal": "Message blocks",
+      "visual_form": "Static blocks with hint text (NES version)",
+      "meaning": "Safe guidance; contextual hints for artifact placement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario sprite; associated with Timulator device",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Present in 1993 hub; travels to all time periods"
+    },
+    {
+      "faction": "Bowser (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bowser sprite; castle ownership; Timulator control",
+      "enemy_visual_variants": "Boss encounter sprite (final confrontation)",
+      "environmental_markers": "Bowser's Museum in castle; final boss arena"
+    },
+    {
+      "faction": "Historical Figures (Allies)",
+      "color_identity": null,
+      "symbol_or_sigil": "Period-specific NPC sprites (Cleopatra, Einstein, Samurai, etc.)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Inhabit their respective time periods; provide contextual dialogue"
+    },
+    {
+      "faction": "Yoshi (Captive/Allied)",
+      "color_identity": null,
+      "symbol_or_sigil": "Yoshi sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Kidnapped by Bowser; freed upon game completion in NES version"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "History corrupted (artifacts stolen)",
+      "visual_manifestation": "Artifacts displayed in Bowser's Museum instead of historical locations",
+      "behavioral_manifestation": "NPCs in time periods lack their associated artifacts; player must restore them"
+    },
+    {
+      "world_state": "Artifact successfully returned",
+      "visual_manifestation": "Artifact placed in correct historical location; visual confirmation of placement",
+      "behavioral_manifestation": "Progress tracked in museum hub; next artifact becomes available"
+    },
+    {
+      "world_state": "1993 (present/hub)",
+      "visual_manifestation": "Bowser's Museum interior; time machine chamber; artifact selection interface",
+      "behavioral_manifestation": "Player selects missions, learns artifact origins, accesses Timulator"
+    },
+    {
+      "world_state": "Historical time period active",
+      "visual_manifestation": "Period-specific background tiles, environmental details, NPC costumes",
+      "behavioral_manifestation": "Side-scrolling exploration; dialogue with NPCs; artifact location discovery"
+    },
+    {
+      "world_state": "Time travel in progress",
+      "visual_manifestation": "Minigame: Mario surfs through ocean, collects mushrooms",
+      "behavioral_manifestation": "Transition animation between time periods"
+    },
+    {
+      "world_state": "Final confrontation",
+      "visual_manifestation": "Bowser sprite in boss arena; visual distinction from earlier encounters",
+      "behavioral_manifestation": "Boss fight (NES version); Bowser escape attempt"
+    },
+    {
+      "world_state": "Game ending (worst outcome)",
+      "visual_manifestation": "Bowser escapes to Paradise; cutscene showing failure state",
+      "behavioral_manifestation": "Timeline remains corrupted; player did not return artifacts quickly enough"
+    },
+    {
+      "world_state": "Game ending (success outcomes)",
+      "visual_manifestation": "Timulator mechanical overload; Bowser trapped in Jurassic era",
+      "behavioral_manifestation": "World-state restored; history corrected"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Artifact placement in wrong era",
+      "example": "Apple (1687 Cambridge) placed in Bowser's Museum signals history theft; world-state corruption made visible through displaced object"
+    },
+    {
+      "technique": "Period-specific tile sets and backgrounds",
+      "example": "Distinct visual styles for each time period (80 B.C., 776 B.C., 1520, 1602, 1687, 1879, 1903, 1905, 1947, 1989) communicate temporal context without dialogue"
+    },
+    {
+      "technique": "NPC period costume design",
+      "example": "Cleopatra, Samurai, Albert Einstein sprites signal their historical era and relevance to artifacts"
+    },
+    {
+      "technique": "Museum hub design",
+      "example": "Bowser's castle interior housing historical artifacts visualizes antagonist's crime and the game's central conflict"
+    },
+    {
+      "technique": "Message blocks (NES version)",
+      "example": "Static text blocks scattered in time periods provide hints and lore without interrupting exploration flow"
+    },
+    {
+      "technique": "Artifact visibility",
+      "example": "Artifacts visible/invisible depending on whether they've been returned; tracks player progress through world-state changes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario",
+      "state": "exploring time period",
+      "behavior": "Side-scrolling platforming movement; can jump, move left/right; conversing with NPCs"
+    },
+    {
+      "entity": "Mario",
+      "state": "time traveling",
+      "behavior": "Surfs through ocean minigame; collects mushrooms to power Timulator transition"
+    },
+    {
+      "entity": "Mario",
+      "state": "incorrect answer given",
+      "behavior": "Sent back to 1993 hub after 2 wrong answers; artifact mission resets"
+    },
+    {
+      "entity": "Mario",
+      "state": "invulnerable (NES version)",
+      "behavior": "Cannot take damage or lose lives; cannot reach game over state; focuses on puzzle-solving over survival"
+    },
+    {
+      "entity": "Bowser",
+      "state": "antagonist mode",
+      "behavior": "Steals artifacts and Timulator; escapes with machine at game's end"
+    },
+    {
+      "entity": "Bowser",
+      "state": "final boss (NES version)",
+      "behavior": "Engaged in boss fight after player answers 3 historical questions correctly"
+    },
+    {
+      "entity": "Bowser",
+      "state": "defeated",
+      "behavior": "Timulator overloads; Bowser trapped in Jurassic era; world-state restored"
+    },
+    {
+      "entity": "Historical NPCs",
+      "state": "allied",
+      "behavior": "Provide dialogue with missing-term documents; offer hints about artifact origins"
+    },
+    {
+      "entity": "Yoshi",
+      "state": "kidnapped (NES version)",
+      "behavior": "Held captive; freed upon game completion"
+    }
+  ],
+  "notes": "Mario's Time Machine uses artifact displacement as primary world-state signal: objects out of historical context communicate world corruption visually without explicit exposition. The museum hub serves as narrative anchor—a safe space where theft is made visible. Period-specific tile sets and NPC costumes create temporal identity without dialogue. The NES version emphasizes platforming and exploration over point-and-click puzzle-solving, making behavioral tells more action-oriented. Invulnerability mechanic signals educational game design (focus on learning, not survival). Ending outcome variation (Paradise escape vs. Jurassic trap) provides meaningful narrative consequences for player performance. Time travel minigame (surfing for mushrooms) serves as transition ritual, marking state change between eras.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:50:38.827Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5393,
+    "output_tokens": 2360,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

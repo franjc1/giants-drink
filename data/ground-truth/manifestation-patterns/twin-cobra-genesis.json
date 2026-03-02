@@ -1,0 +1,162 @@
+{
+  "game_id": "twin-cobra-genesis",
+  "game_name": "Twin Cobra",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "bullet patterns fired from tanks, battleships, and artillery; denser patterns in second loop",
+      "meaning": "incoming damage threat; collision results in life loss and firepower penalty"
+    },
+    {
+      "signal": "enemy_vehicles",
+      "visual_form": "visible military units (tanks, battleships, artillery) on scrolling battlefield",
+      "meaning": "direct collision hazard and source of projectile fire; must be destroyed or avoided"
+    },
+    {
+      "signal": "environmental_obstacles",
+      "visual_form": "terrain and structures on constantly scrolling background",
+      "meaning": "collision hazard during vertical scroll; no safe pause until helipad reached"
+    },
+    {
+      "signal": "firepower_degradation_visual",
+      "visual_form": "reduced weapon spread/impact after taking damage",
+      "meaning": "state of vulnerability; player is weakened and must rebuild firepower"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "helipad_checkpoint",
+      "visual_form": "helipad landing zone at stage completion",
+      "meaning": "safe respawn point; checkpoint system allows restart from this location on death"
+    },
+    {
+      "signal": "power_up_icons",
+      "visual_form": "color-changing pickup icons (red, blue, green, yellow) released from destroyed carriers",
+      "meaning": "weapon upgrade opportunity; switch between four weapon types for tactical advantage"
+    },
+    {
+      "signal": "bomb_stock_icon",
+      "visual_form": "'B' icon pickups scattered throughout levels",
+      "meaning": "additional bomb ammunition; bombs clear blast radius of threats safely"
+    },
+    {
+      "signal": "firepower_upgrade",
+      "visual_form": "'S' icons appearing as ground pickups",
+      "meaning": "weapon enhancement; increases helicopter's firepower capacity"
+    },
+    {
+      "signal": "bonus_items",
+      "visual_form": "star-shaped gold medals and 1-up pickups",
+      "meaning": "score accumulation and life restoration; visible reward for survival"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_helicopter",
+      "color_identity": null,
+      "symbol_or_sigil": "attack helicopter sprite (protagonist craft)",
+      "enemy_visual_variants": "player helicopter is distinct from all military enemy units",
+      "environmental_markers": "centered vertically on screen during constant scroll; represents allied force"
+    },
+    {
+      "faction": "enemy_military_forces",
+      "color_identity": null,
+      "symbol_or_sigil": "military hardware: tanks, battleships, artillery vehicles",
+      "enemy_visual_variants": "varied enemy unit types represent hostile military formations",
+      "environmental_markers": "scattered across scrolling battlefield terrain; increase in density and aggression per loop"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early_stage_progression",
+      "visual_manifestation": "sparse enemy formations, standard terrain, slower projectile patterns",
+      "behavioral_manifestation": "enemies fire in predictable patterns; manageable difficulty curve"
+    },
+    {
+      "world_state": "late_stage_progression",
+      "visual_manifestation": "dense military formations, complex terrain obstacles, increased visual clutter",
+      "behavioral_manifestation": "enemies fire denser bullet patterns; boss encounters at stage end"
+    },
+    {
+      "world_state": "second_loop_difficulty",
+      "visual_manifestation": "same visual assets with increased enemy density overlay",
+      "behavioral_manifestation": "denser enemy projectile patterns signal heightened danger; same visual battlefield restaged with amplified threat"
+    },
+    {
+      "world_state": "player_damage_state",
+      "visual_manifestation": "visibly reduced firepower spread; weapon intensity diminishes",
+      "behavioral_manifestation": "helicopter shots travel shorter distance; reduced blast coverage indicates vulnerability"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "large singular enemy unit at stage conclusion; stage scroll stops for confrontation",
+      "behavioral_manifestation": "checkpoint/respawn system engages; mandatory defeat before progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "military_hardware_progression",
+      "example": "scrolling reveals advancing military encampments with tanks, then battleships, then artillery; visual escalation of threat density tells story of entrenched hostile force"
+    },
+    {
+      "technique": "terrain_as_narrative",
+      "example": "scrolling background shows devastated landscape, military installations, fortified positions; hand-drawn pixel art depicts active warzone"
+    },
+    {
+      "technique": "bomb_mechanic_as_stress_relief_storytelling",
+      "example": "developers intentionally designed bomb visual/audio feedback to provide cathartic release; stress relief through aggression communicates player fantasy of overwhelming force"
+    },
+    {
+      "technique": "loop_difficulty_as_escalation",
+      "example": "second loop restages identical terrain but with denser enemy projectiles; visual repetition with behavioral intensification tells story of deepening conflict"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "enemy_tank",
+      "state": "active_on_battlefield",
+      "behavior": "fires projectiles at player helicopter; destroyed when shot; represents static military threat"
+    },
+    {
+      "entity": "enemy_battleship",
+      "state": "active_on_battlefield",
+      "behavior": "fires projectiles; larger visual footprint than tank; represents escalated threat tier"
+    },
+    {
+      "entity": "enemy_artillery",
+      "state": "active_on_battlefield",
+      "behavior": "fires projectiles in patterns; represents ranged threat source visible on scrolling field"
+    },
+    {
+      "entity": "power_up_carrier",
+      "state": "destroyed_by_player",
+      "behavior": "releases color-coded weapon icons (red, blue, green, yellow) on destruction; telegraphs weapon upgrade opportunity"
+    },
+    {
+      "entity": "player_helicopter",
+      "state": "hit_by_enemy_fire",
+      "behavior": "loses one life; firepower resets to base state; respawns at checkpoint (regional variant) or death location; visual firepower indicator reduces"
+    },
+    {
+      "entity": "boss_unit",
+      "state": "stage_end_encounter",
+      "behavior": "requires defeat to progress; forces stage scroll halt; represents mandatory gating obstacle with increased durability"
+    }
+  ],
+  "notes": "Twin Cobra uses minimal faction complexity typical of 1987 arcade shmups—binary opposition of player vs. military forces. Visual communication relies on military hardware recognition (tanks, ships, aircraft), projectile density as difficulty indicator, and color-coded power-up system for weapon switching. The constant vertical scroll creates persistent environmental pressure; helipad safety zones provide psychological relief. Bomb mechanic designed for aggressive catharsis rather than defense, creating gameplay feedback that communicates player empowerment. Second loop reuses visuals with behavioral intensification (denser projectiles) rather than new assets, economical for arcade hardware. Hand-drawn art direction emphasizes warzone authenticity through military vehicle silhouettes and terrain detail.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:33:14.673Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2912,
+    "output_tokens": 1872,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

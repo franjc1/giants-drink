@@ -1,0 +1,125 @@
+{
+  "game_id": "klax-genesis",
+  "game_name": "Klax",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "well overflow",
+      "visual_form": "tiles filling up the well columns toward the top",
+      "meaning": "player is losing; if well fills completely, game ends"
+    },
+    {
+      "signal": "paddle full state",
+      "visual_form": "paddle holding maximum five tiles",
+      "meaning": "cannot catch additional tiles without penalty; risk of tiles falling off conveyor"
+    },
+    {
+      "signal": "drop accumulation",
+      "visual_form": "drop meter increasing",
+      "meaning": "uncaught tiles or missed catches; running out of allowed drops ends the game"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "successful Klax formation",
+      "visual_form": "three or more matching colored tiles in horizontal/vertical/diagonal lines disappear with visual feedback",
+      "meaning": "player is succeeding; tiles clear and well space opens up"
+    },
+    {
+      "signal": "empty well space",
+      "visual_form": "gaps and low tile density in the five-column well",
+      "meaning": "player has room to maneuver and catch more tiles safely"
+    },
+    {
+      "signal": "bonus multiplier completion",
+      "visual_form": "multiple Klaxs formed in cascade from single tile drop",
+      "meaning": "optimal play state; cascading matches award increasing points"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": null,
+      "color_identity": "multi-color tile system (player-interacts with 'various colors' of tiles)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early game / low pressure wave",
+      "visual_manifestation": "slower tile descent speed down conveyor belt; fewer tiles flowing",
+      "behavioral_manifestation": "player has time to position paddle and make deliberate matches"
+    },
+    {
+      "world_state": "high difficulty wave / advanced progression",
+      "visual_manifestation": "faster tile descent; higher frequency of colored tiles arriving",
+      "behavioral_manifestation": "player must react quickly; drop penalty risk increases; well fills faster"
+    },
+    {
+      "world_state": "wave selection screen (every fifth wave)",
+      "visual_manifestation": "menu presenting three wave options with difficulty/bonus indicators",
+      "behavioral_manifestation": "player chooses next wave; later waves = higher bonus points but higher risk"
+    },
+    {
+      "world_state": "game over condition",
+      "visual_manifestation": "well completely filled with tiles OR drop meter exhausted",
+      "behavioral_manifestation": "play ceases; game ends; final score calculated"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "conveyor belt mechanics",
+      "example": "tiles physically roll down the belt toward paddle; player learns through spatial interaction that catching and positioning matters"
+    },
+    {
+      "technique": "wave progression structure",
+      "example": "100 waves organized in 20 groups of 5 creates sense of escalating challenge; drop meter resets every 5 waves, signaling checkpoint/rest state"
+    },
+    {
+      "technique": "tile color matching",
+      "example": "colored tiles create visual pattern language; matching three same colors is core objective, teaching pattern recognition as core mechanic"
+    },
+    {
+      "technique": "well capacity constraint",
+      "example": "five-column well with five-tile-height limit visually communicates resource scarcity and spatial puzzle solving"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "colored tile",
+      "state": "on conveyor belt",
+      "behavior": "advances downward at speed determined by wave difficulty; player can flip tile up the belt using up joystick"
+    },
+    {
+      "entity": "paddle",
+      "state": "catching mode",
+      "behavior": "moves left/right along conveyor; holds up to five tiles; pressing button drops topmost tile into well directly below"
+    },
+    {
+      "entity": "tiles in well",
+      "state": "falling after match",
+      "behavior": "any tiles above a cleared Klax pattern fall downward to fill gaps; gravity-based cascade creates potential for chained matches"
+    },
+    {
+      "entity": "game state",
+      "state": "between waves",
+      "behavior": "presents player with three wave options; choosing later wave increments bonus points available and increases drop limit tolerance"
+    }
+  ],
+  "notes": "Klax is a pure puzzle game with no faction, political, or narrative world-state systems. Visual communication is entirely mechanical and rule-based. Danger/safety signals are player-state indicators (well fullness, drop count, paddle capacity) rather than environmental or narrative markers. The game communicates challenge through speed variation and tile frequency, not through visual storytelling or world lore. Color is used for matching mechanics, not faction identification.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:35:48.039Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3142,
+    "output_tokens": 1562,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

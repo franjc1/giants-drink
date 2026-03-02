@@ -1,0 +1,166 @@
+{
+  "game_id": "donkey-kong-3-nes",
+  "game_name": "Donkey Kong 3",
+  "platform": "nes",
+  "paradigm": "shoot 'em up / platformer hybrid",
+  "danger_signals": [
+    {
+      "signal": "Donkey Kong presence",
+      "visual_form": "Large primate sprite hanging from center vines, active animation",
+      "meaning": "Primary threat; rampaging causes insect swarms to emerge"
+    },
+    {
+      "signal": "Flying insects on screen",
+      "visual_form": "Buzzbees, Beespies, inchworms, attacker bees, Kabutomushi beetles, butterflies in motion",
+      "meaning": "Active environmental hazards; some attempt to steal flowers (reduce bonus points)"
+    },
+    {
+      "signal": "Beespie destruction cascade",
+      "visual_form": "Queen Beespies shatter into deadly pieces when hit",
+      "meaning": "Fragmented hazard state; increased threat level after destruction"
+    },
+    {
+      "signal": "Flower loss visual indicator",
+      "visual_form": "Flowers at bottom of screen being carried away by insects",
+      "meaning": "Resource depletion warning; direct loss of end-of-round bonus accumulation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Super Sprayer power-up",
+      "visual_form": "Can object falling from vines when Donkey Kong is sprayed past certain point",
+      "meaning": "Temporary invulnerability/advantage state; accelerates Donkey Kong upward faster, easing level completion"
+    },
+    {
+      "signal": "Stanley on platforms",
+      "visual_form": "Player character positioned on stable ground levels beneath vine structure",
+      "meaning": "Operational base; safe firing position for bug spray offensive"
+    },
+    {
+      "signal": "Level completion threshold",
+      "visual_form": "Donkey Kong forced to top of screen or all insects eliminated",
+      "meaning": "Safe zone achieved; transition to next repeating level sequence"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Stanley (Player/Exterminator)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bug spray can weapon; exterminator profession",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Bottom platform levels; greenhouse garden setting"
+    },
+    {
+      "faction": "Donkey Kong (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Large primate; vine-hanging pose",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Center-screen vine structure; primary vertical axis"
+    },
+    {
+      "faction": "Insect swarm (Environmental hazard)",
+      "color_identity": null,
+      "symbol_or_sigil": "Multiple flying creature types (bees, beetles, butterflies, inchworms)",
+      "enemy_visual_variants": "Queen Beespies spawn fragmented attack pieces; distinct behavioral types per insect species",
+      "environmental_markers": "Airspace between platforms and vines; flower collection points at screen bottom"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level active (insects/DK present)",
+      "visual_manifestation": "Busy screen with multiple animated sprites; insects in flight paths; Donkey Kong animated on vines",
+      "behavioral_manifestation": "Insects attempt flower theft; Donkey Kong hangs and resists spray pressure; Stanley must maintain offensive fire"
+    },
+    {
+      "world_state": "Donkey Kong sprayed upward",
+      "visual_manifestation": "DK sprite position rises on vine structure; Super Sprayer can appears when threshold passed",
+      "behavioral_manifestation": "Forced progression toward level completion; accelerated upward movement when power-up triggered"
+    },
+    {
+      "world_state": "Insects eliminated / DK at top",
+      "visual_manifestation": "Screen clears of flying hazards or DK reaches top boundary",
+      "behavioral_manifestation": "Level complete transition; score bonus calculated from flowers retained; progression to next repeating level"
+    },
+    {
+      "world_state": "Extra life threshold reached (50,000 points)",
+      "visual_manifestation": "Score display milestone; mode transition indicator",
+      "behavioral_manifestation": "Game shifts to 'survival of the fittest' difficulty escalation mode after first extra life earned"
+    },
+    {
+      "world_state": "Greenhouse garden setting",
+      "visual_manifestation": "Natural/plant-based background environment; flowers as collectible/defensive resource",
+      "behavioral_manifestation": "Insect swarm motivated by flower presence; Stanley's exterminator role contextually justified; Donkey Kong rampaging causes ecological disruption"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting-driven narrative",
+      "example": "Greenhouse garden location establishes Stanley's profession context; Donkey Kong's intrusion creates insect pest outbreak rather than kidnapping/platforming conflict"
+    },
+    {
+      "technique": "Resource visibility",
+      "example": "Flowers displayed at screen bottom as visual stake; player can directly observe insect theft, creating tangible loss mechanic and narrative urgency"
+    },
+    {
+      "technique": "Vertical spatial hierarchy",
+      "example": "Vine structure in center with Stanley below and Donkey Kong above creates environmental narrative of invasion from above; platforms represent defensive positions"
+    },
+    {
+      "technique": "Weapon-tool symbolism",
+      "example": "Bug spray can identifies Stanley as pest control professional; spray mechanic communicates extermination gameplay rather than violent confrontation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Donkey Kong",
+      "state": "Hanging from vines (default)",
+      "behavior": "Active threat; resists spray pressure; must be continually sprayed upward to clear level"
+    },
+    {
+      "entity": "Buzzbees / Attacker Bees",
+      "state": "In flight",
+      "behavior": "Patrol airspace; some attempt to intercept and steal flowers from bottom of screen"
+    },
+    {
+      "entity": "Queen Beespies",
+      "state": "Destroyed",
+      "behavior": "Shatter into multiple deadly fragments that become independent hazards"
+    },
+    {
+      "entity": "Inchworms / Kabutomushi",
+      "state": "In flight",
+      "behavior": "Fly autonomous attack patterns; target flower resources"
+    },
+    {
+      "entity": "Butterflies",
+      "state": "In flight",
+      "behavior": "Decorative/minor threat; part of insect swarm composition"
+    },
+    {
+      "entity": "Super Sprayer can",
+      "state": "Dropped from vines",
+      "behavior": "Temporary pickup; increases spray pressure magnitude and speed; limited duration effect"
+    },
+    {
+      "entity": "Stanley",
+      "state": "Platform-based firing",
+      "behavior": "Player-controlled; maintains spray on Donkey Kong while managing insect threats; defends flower resource"
+    }
+  ],
+  "notes": "Donkey Kong 3 represents a tonal departure from series predecessors: the conflict is ecological/pest-control rather than rescue-based. World-state communication relies on resource visibility (flower count), enemy positioning hierarchy (DK above, Stanley below), and insect behavior patterns (theft attempts). The 'survival of the fittest' mode after 50k points suggests escalating difficulty through behavioral intensification rather than visual restructuring. Greenhouse setting functions as primary environmental storytelling device; absence of Mario and shift from platforming to spray-based combat creates distinct faction dynamic from earlier Donkey Kong games.",
+  "sources_used": [
+    "wikipedia: Donkey Kong 3 (gameplay section, plot section)",
+    "tcrf: Donkey Kong 3 (NES) (unused sprites documentation, revisional differences)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:28:42.153Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4672,
+    "output_tokens": 2003,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

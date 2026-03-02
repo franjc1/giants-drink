@@ -1,0 +1,159 @@
+{
+  "game_id": "dig-dug-ii-nes",
+  "game_name": "Dig Dug II",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Pooka presence",
+      "visual_form": "Round red monsters with goggles",
+      "meaning": "Immediate lethal threat via direct contact"
+    },
+    {
+      "signal": "Fygar presence",
+      "visual_form": "Dragon-shaped enemies",
+      "meaning": "Dual threat - lethal on contact AND ranged fire-breathing attack"
+    },
+    {
+      "signal": "Fire breath effect",
+      "visual_form": "Visual projectile from Fygar enemies",
+      "meaning": "Ranged attack requiring spatial awareness and evasion"
+    },
+    {
+      "signal": "Enemy convergence on player",
+      "visual_form": "Multiple Pookas/Fygars moving toward Taizo Hori",
+      "meaning": "Increasing danger as enemy coordination escalates"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Distance from enemies",
+      "visual_form": "Spatial separation on overhead island map",
+      "meaning": "Player safety correlates with physical distance from threat entities"
+    },
+    {
+      "signal": "Water boundary",
+      "visual_form": "Ocean surrounding the island perimeter",
+      "meaning": "Natural barrier that kills all creatures - acts as area containment and escape mechanism"
+    },
+    {
+      "signal": "Fault line creation",
+      "visual_form": "Ground fractures appearing on map via jackhammer",
+      "meaning": "Player agency tool for environmental control and threat elimination"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Taizo Hori)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Active presence with air pump and jackhammer tools - visible on overhead island map"
+    },
+    {
+      "faction": "Pookas (Enemy)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Round body with goggles",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Scattered across island terrain, mobile threat entities"
+    },
+    {
+      "faction": "Fygars (Enemy)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragon morphology",
+      "enemy_visual_variants": "Fire-breathing capability distinguishes from Pookas",
+      "environmental_markers": "Island-distributed enemies with enhanced attack range via fire projection"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Round active - enemies present on island",
+      "visual_manifestation": "Pookas and Fygars visible on overhead map with intact terrain",
+      "behavioral_manifestation": "Enemies patrol/chase player; player must navigate and execute tactics"
+    },
+    {
+      "world_state": "Land mass reduced via fault system",
+      "visual_manifestation": "Portions of island sink into ocean; progressively smaller playable area",
+      "behavioral_manifestation": "Compressed terrain forces closer player-enemy interactions; enemies remain trapped on shrinking islands"
+    },
+    {
+      "world_state": "Bonus state - three land masses separated",
+      "visual_manifestation": "Vegetable item appears on remaining island",
+      "behavioral_manifestation": "Player incentivized to collect bonus while managing threats"
+    },
+    {
+      "world_state": "Round ending condition - one to three enemies remain",
+      "visual_manifestation": "Surviving enemies move toward island edge",
+      "behavioral_manifestation": "Enemies retreat to water and self-eliminate; round automatically concludes"
+    },
+    {
+      "world_state": "High enemy pressure",
+      "visual_manifestation": "Multiple Pookas and Fygars densely distributed on map",
+      "behavioral_manifestation": "Coordinated enemy movement; increased fire-breathing frequency; player must use environmental hazards (fault lines) strategically"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Island geography as narrative constraint",
+      "example": "Overhead island map visually establishes bounded play space; water perimeter serves as both world-state boundary and mechanical hazard, reinforcing isolation theme"
+    },
+    {
+      "technique": "Progressive terrain destruction",
+      "example": "Fault line system creates visual record of player progress - each separated land mass represents completed objective, world visibly transforms with each round"
+    },
+    {
+      "technique": "Enemy behavior change as world state shifts",
+      "example": "When land masses shrink, enemy behavior escalates from patrol to aggressive pursuit, and final enemies flee to water - visual-behavioral feedback loop communicates mounting pressure then collapse"
+    },
+    {
+      "technique": "Bonus item placement",
+      "example": "Vegetable appearance on fragmented terrain signals reward opportunity and reinforces spatial mastery - placement visually acknowledges player's successful island reduction strategy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pooka",
+      "state": "Patrolling",
+      "behavior": "Moves across island terrain seeking player contact"
+    },
+    {
+      "entity": "Pooka",
+      "state": "Engaged",
+      "behavior": "Pursues player with intent to make lethal contact"
+    },
+    {
+      "entity": "Fygar",
+      "state": "Patrolling",
+      "behavior": "Moves across island terrain; intermittently breathes fire in player direction"
+    },
+    {
+      "entity": "Fygar",
+      "state": "Engaged",
+      "behavior": "Pursues player while executing ranged fire attacks; dual threat modality"
+    },
+    {
+      "entity": "Pookas and Fygars combined",
+      "state": "Island collapse imminent",
+      "behavior": "Coordinate movement toward island edge; self-eliminate by jumping into water when few remain"
+    },
+    {
+      "entity": "Taizo Hori (Player)",
+      "state": "Active round",
+      "behavior": "Navigates island, inflates enemies or creates fault lines to eliminate threats and separate terrain"
+    }
+  ],
+  "notes": "Dig Dug II employs a minimalist faction system with clear enemy/player distinction. The core world-state communication occurs through environmental transformation - the shrinking island acts as visual feedback for player progress and increasing pressure. Enemy color-coding (red Pookas vs. dragon-form Fygars) provides immediate threat differentiation. The overhead perspective is critical to manifestation design: it enables simultaneous display of all threats, environmental hazards, and player agency tools. Fire-breathing is the primary visual differentiator for Fygar danger escalation beyond Pooka contact-threat. Water boundary functions as both cosmetic world-edge and active mechanical hazard, reinforcing spatial constraint narrative. Bonus vegetable appearance serves dual function: reward signal and world-state indicator (only appears after successful terrain separation). No faction-based political narrative exists; conflict is purely mechanical/survival-based.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:25:11.120Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3251,
+    "output_tokens": 1807,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "game_id": "micro-machines-snes",
+  "game_name": "Micro Machines",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Track boundary violation",
+      "visual_form": "Player vehicle forced off-screen or reset to track",
+      "meaning": "Straying too far from defined race path results in immediate penalty/repositioning"
+    },
+    {
+      "signal": "Obstacle collision",
+      "visual_form": "Environmental hazards (cereal boxes, pencil sharpeners, etc.) blocking race path",
+      "meaning": "Household items on tables and desks act as navigational dangers requiring avoidance"
+    },
+    {
+      "signal": "Opponent vehicle proximity",
+      "visual_form": "Other racing vehicles visible on shared single-screen view",
+      "meaning": "Close proximity to competitors indicates competitive pressure and collision risk"
+    },
+    {
+      "signal": "Loss of screen position (head-to-head mode)",
+      "visual_form": "Trailing vehicle pushed off-screen by leading vehicle",
+      "meaning": "Spatial separation indicates loss of position and point advancement for opponent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Track centerline adherence",
+      "visual_form": "Vehicle positioned within defined race course boundaries",
+      "meaning": "Staying on established track prevents penalties and maintains forward progress"
+    },
+    {
+      "signal": "Lead position maintenance",
+      "visual_form": "Player vehicle ahead of all opponents on single-screen display",
+      "meaning": "Screen position dominance ensures visibility and prevents point loss in head-to-head mode"
+    },
+    {
+      "signal": "Clear path navigation",
+      "visual_form": "Successful avoidance of environmental obstacles",
+      "meaning": "Obstacle-free zones allow unimpeded vehicle movement and speed maintenance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "Color-coded (specific colors not documented)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinguishable from Player 2 by assigned color",
+      "environmental_markers": "Represented by colored lights on screen (8-light indicator system in head-to-head mode)"
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "Color-coded (contrasting to Player 1)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct vehicle color from Player 1",
+      "environmental_markers": "Represented by opposite-colored lights on screen (8-light indicator system)"
+    },
+    {
+      "faction": "Computer opponents",
+      "color_identity": "Multiple distinct colors for three AI racers",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Each AI opponent has assigned color to distinguish from player and other AI",
+      "environmental_markers": "Visible on-screen during Challenge mode races"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Race in progress",
+      "visual_manifestation": "Top-down single-screen view of miniaturized vehicles navigating household environments",
+      "behavioral_manifestation": "All vehicles remain visible on shared screen; positioning determines advantage"
+    },
+    {
+      "world_state": "Head-to-head competition active",
+      "visual_manifestation": "Colored light indicator (8 lights, 4 per player) shows screen-position advantage",
+      "behavioral_manifestation": "Leading player gains light advancement; trailing player can regain position by reaching same screen area"
+    },
+    {
+      "world_state": "Off-track navigation attempt",
+      "visual_manifestation": "Vehicle approaches or crosses track boundary visualization",
+      "behavioral_manifestation": "Vehicle is immediately repositioned back to track, breaking race momentum"
+    },
+    {
+      "world_state": "Obstacle field present",
+      "visual_manifestation": "Cereal boxes, pencil sharpeners, and other household items scattered on track",
+      "behavioral_manifestation": "Vehicles must navigate around obstacles; collision causes deceleration or route disruption"
+    },
+    {
+      "world_state": "Challenge mode progression",
+      "visual_manifestation": "Three lives/attempts represented as separate race instances",
+      "behavioral_manifestation": "Must place 1st or 2nd to advance; loss of all three attempts triggers game over"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Household-scale track design",
+      "example": "Breakfast tables, pool tables, work desks, and treehouses establish thematic environments; players race through miniaturized domestic spaces with appropriately scaled obstacles"
+    },
+    {
+      "technique": "Toy vehicle theming",
+      "example": "Vehicles include formula one cars, powerboats, helicopters, and tanks—providing environmental context clues about race conditions (water races use boats, sky-based races use helicopters, etc.)"
+    },
+    {
+      "technique": "Environmental obstacle integration",
+      "example": "Pencil sharpeners on desks, cereal boxes on breakfast tables—obstacles match environment aesthetic and reinforce miniaturized toy-scale gameplay setting"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle (head-to-head mode)",
+      "state": "Ahead of opponent",
+      "behavior": "Opponent vehicle pushed off-screen or to screen edge; player gains light indicator; maintains dominant screen position"
+    },
+    {
+      "entity": "Player vehicle (head-to-head mode)",
+      "state": "Behind opponent",
+      "behavior": "Player vehicle visible on-screen but trailing; opponent gains light indicator; must regain screen position to reverse advantage"
+    },
+    {
+      "entity": "Computer opponent (Challenge mode)",
+      "state": "Active in race",
+      "behavior": "Follows AI-directed invisible arrow waypoints; maintains competitive pace; responds to track layout and obstacle field"
+    },
+    {
+      "entity": "Vehicle with handicap",
+      "state": "Applied in two-player unequal match",
+      "behavior": "Adjusted performance parameters (slower speed or delayed response) to balance competitive disparity"
+    },
+    {
+      "entity": "Any vehicle",
+      "state": "Off-track trajectory",
+      "behavior": "Automatically repositioned to track after prolonged out-of-bounds movement; loses momentum and position advantage"
+    }
+  ],
+  "notes": "Micro Machines communicates world-state primarily through position-based mechanics rather than explicit visual danger indicators. The single-screen head-to-head display system is the core communication method: spatial separation (leading vs. trailing) directly maps to gameplay advantage (light progression). Environmental storytelling relies on themed household locations and matched vehicle types (boats for pools, formula cars for desks, etc.). No faction politics or narrative-driven danger signals present; competition is purely spatial and mechanical. The game's visual communication is minimalist due to NES/SNES hardware constraints, relying on color coding and spatial positioning rather than detailed visual effects.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:48:47.920Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3904,
+    "output_tokens": 1782,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

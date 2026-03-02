@@ -1,0 +1,172 @@
+{
+  "game_id": "wolfenstein-3d-full-pc",
+  "game_name": "Wolfenstein 3D",
+  "platform": "pc",
+  "paradigm": "fps",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Nazi guards and soldiers rendered as 2D sprites in military uniforms with rifles",
+      "meaning": "Active combat threat; player must engage or evade"
+    },
+    {
+      "signal": "Guard dogs",
+      "visual_form": "Animated dog sprites, fast-moving enemies in castle corridors",
+      "meaning": "Melee threat; close-range danger"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Health percentage display diminishing visually on HUD",
+      "meaning": "Player vulnerability increasing; death imminent at 0%"
+    },
+    {
+      "signal": "Boss enemy appearance",
+      "visual_form": "Unique, larger enemy sprites at end of levels (distinct from standard guards)",
+      "meaning": "Climactic danger; level-completion obstacle"
+    },
+    {
+      "signal": "Locked doors",
+      "visual_form": "Wall barriers blocking passage without key",
+      "meaning": "Progression gated; hazard or enemies likely beyond"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health pickups",
+      "visual_form": "Collectible items scattered in levels",
+      "meaning": "Restores health percentage; safe resource"
+    },
+    {
+      "signal": "Ammunition caches",
+      "visual_form": "Weapons and ammo sprites placed in rooms and on corpses",
+      "meaning": "Resource availability; sustained combat capability"
+    },
+    {
+      "signal": "Extra-life tokens",
+      "visual_form": "Special collectible sprites",
+      "meaning": "Additional life reserves; death penalty mitigation"
+    },
+    {
+      "signal": "Elevator (level exit)",
+      "visual_form": "Distinct architectural feature marking level completion",
+      "meaning": "Safe progression to next area"
+    },
+    {
+      "signal": "Secret room markers",
+      "visual_form": "Certain wall tiles appear subtly different (activation tiles)",
+      "meaning": "Hidden treasures and supplies; optional safety advantage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Nazi Germany / Castle Wolfenstein",
+      "color_identity": null,
+      "symbol_or_sigil": "Nazi insignia on uniforms, castle architecture",
+      "enemy_visual_variants": "Standard guards in grey/brown military uniforms; officers; mutant/supernatural enemies in later episodes; boss characters in unique armor/appearance",
+      "environmental_markers": "Castle bunker aesthetic; grid-based corridor structure; Nazi-themed level designs; architectural brutalism"
+    },
+    {
+      "faction": "Allied Forces / Player (William Blazkowicz)",
+      "color_identity": null,
+      "symbol_or_sigil": "Implied through player agency (American/Polish spy backdrop)",
+      "enemy_visual_variants": "Player-controlled character implied but not prominently visually distinct in first-person view",
+      "environmental_markers": "Weapons and equipment; strategic positioning within enemy territory"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active enemy patrol/combat engagement",
+      "visual_manifestation": "Animated Nazi guard sprites moving through corridors, firing weapons with visible sprite animations",
+      "behavioral_manifestation": "Enemies actively pursue player, fire projectiles, react to damage"
+    },
+    {
+      "world_state": "Cleared/safe area",
+      "visual_manifestation": "Empty corridors; no active sprite movement",
+      "behavioral_manifestation": "No enemy engagement; player can freely navigate and collect resources"
+    },
+    {
+      "world_state": "Level progression stage",
+      "visual_manifestation": "Gradual traversal through themed bunker rooms; increasing difficulty signaled by enemy density",
+      "behavioral_manifestation": "Boss encounter at end of level signals climax; completion screen shows stats (kill ratio, treasure ratio, speed)"
+    },
+    {
+      "world_state": "Fortified/restricted area",
+      "visual_manifestation": "Locked doors blocking passage; dense guard presence",
+      "behavioral_manifestation": "Player must find key, solve spatial puzzle, or overcome enemy gauntlet"
+    },
+    {
+      "world_state": "Episode narrative arc",
+      "visual_manifestation": "Level theming shifts per episode title (Escape, Operation, Assassination); final boss represents ultimate Nazi threat",
+      "behavioral_manifestation": "Escalating enemy types; climactic boss fight with unique visual/behavioral signature"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic level design",
+      "example": "Castle bunker architecture communicates Nazi military compound; grid-based corridor layout suggests fortified underground facility"
+    },
+    {
+      "technique": "Enemy placement narrative",
+      "example": "Guard density increases toward level exit; boss encounter at end signals narrative climax per episode"
+    },
+    {
+      "technique": "Resource scarcity",
+      "example": "Limited ammunition and health pickups suggest supply constraints; player must manage resources strategically across levels"
+    },
+    {
+      "technique": "Hidden room secrets",
+      "example": "Secret areas reward exploration; treasure caches suggest looting Nazi assets as play progression mechanic"
+    },
+    {
+      "technique": "Episode naming",
+      "example": "Titles ('Escape from Castle Wolfenstein', 'Die, Führer, Die!') frame narrative progression from escape to assassination"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Nazi guard",
+      "state": "Unaware/patrolling",
+      "behavior": "Animated walking sprites moving through corridors in set patterns"
+    },
+    {
+      "entity": "Nazi guard",
+      "state": "Alerted/engaged",
+      "behavior": "Sprite animation changes; enemy fires projectiles at player; pursues or takes cover"
+    },
+    {
+      "entity": "Guard dog",
+      "state": "Active",
+      "behavior": "Fast sprite animation; charges player; delivers melee attacks"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Level climax",
+      "behavior": "Larger sprite with unique animation set; sustained attack pattern; high damage output; distinct death animation"
+    },
+    {
+      "entity": "Player",
+      "state": "Healthy",
+      "behavior": "Full movement speed; access to all weapons; normal HUD display"
+    },
+    {
+      "entity": "Player",
+      "state": "Damaged/low health",
+      "behavior": "Health percentage visibly reduced on HUD; vulnerability increases; potential death upon zero health"
+    }
+  ],
+  "notes": "Wolfenstein 3D uses a 2.5D visual approach: 3D grid-based level geometry with 2D sprite enemies viewed from fixed angles. Danger/safety communication relies heavily on sprite animation, enemy proximity, health display, and architectural design. The game's Nazi-setting establishes clear political faction identity through uniform design, castle thematics, and episode narrative framing (escape→operation→assassination). World-state progression is linear per level; branching comes from optional secret areas. The shareware/episode structure creates narrative pacing where boss encounters mark episode climaxes.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T18:59:13.878Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3152,
+    "output_tokens": 1986,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

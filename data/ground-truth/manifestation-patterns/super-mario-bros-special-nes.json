@@ -1,0 +1,219 @@
+{
+  "game_id": "super-mario-bros-special-nes",
+  "game_name": "Super Mario Bros. Special",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated Goomba and Koopa Troopa sprites with distinct silhouettes and movement patterns",
+      "meaning": "Immediate threat requiring evasion or counter-action via jumping"
+    },
+    {
+      "signal": "Pit hazard",
+      "visual_form": "Empty space/gap in the level terrain where the platform ends",
+      "meaning": "Fatal fall hazard; represents instant death if player moves right into it"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Countdown timer displayed on HUD, decreasing visually",
+      "meaning": "World state under urgency; level failure if timer reaches zero"
+    },
+    {
+      "signal": "Small Mario state",
+      "visual_form": "Reduced sprite size when power-up has been lost",
+      "meaning": "Vulnerability: next hit will result in death rather than size reduction"
+    },
+    {
+      "signal": "Brick obstacles",
+      "visual_form": "Solid brown brick blocks forming walls and platforms",
+      "meaning": "Barriers requiring power-ups to break through or navigation around"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Question mark block",
+      "visual_form": "Brick-textured block with ? symbol visually distinct from solid bricks",
+      "meaning": "Hidden resource container; hitting yields coins or power-ups for progression aid"
+    },
+    {
+      "signal": "Super Mushroom visual",
+      "visual_form": "Red mushroom sprite with distinct shape emerging from questioned brick",
+      "meaning": "Power-up that doubles Mario's size and grants damage absorption"
+    },
+    {
+      "signal": "Fire Flower pickup",
+      "visual_form": "Animated flower sprite in contrasting red/yellow",
+      "meaning": "Offensive power-up enabling ranged attacks against enemies"
+    },
+    {
+      "signal": "Starman invincibility",
+      "visual_form": "Animated star sprite with distinct sparkling visual effect",
+      "meaning": "Temporary invincibility state; enemies can be defeated by direct contact"
+    },
+    {
+      "signal": "1-Up Mushroom",
+      "visual_form": "Green spotted mushroom visually distinct from red Super Mushroom",
+      "meaning": "Extra life resource; hidden reward for exploration or performance"
+    },
+    {
+      "signal": "Coin collection",
+      "visual_form": "Small spinning coin sprites scattered throughout level",
+      "meaning": "Points/score indicator; 100 coins grants extra life (safety resource)"
+    },
+    {
+      "signal": "Solid platform",
+      "visual_form": "Continuous brown brick or green grass terrain under player",
+      "meaning": "Safe traversal surface; enables forward progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario (protagonist)",
+      "color_identity": "Red and brown sprite coloring",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Mario's size and position on screen convey player agency; growth via mushroom shows faction strength increase"
+    },
+    {
+      "faction": "Bowser/Koopa Kingdom (antagonist)",
+      "color_identity": "Dark/black colored enemy sprites (Koopa Troopas, Bowser)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Koopa Troopa (regular enemy with shell), Bowser (boss character, larger scaled sprite)",
+      "environmental_markers": "Castle setting in later worlds; enemy density increases toward final fortress; lava/darker terrain in Bowser's domain"
+    },
+    {
+      "faction": "Mushroom Kingdom (neutral/objective)",
+      "color_identity": "Green grass, blue sky, brown brick architecture",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Grassland terrain, pipes, platforms; visual progression from natural landscape (early worlds) to castle architecture (later worlds)"
+    },
+    {
+      "faction": "Princess Toadstool (damsel/objective)",
+      "color_identity": null,
+      "symbol_or_sigil": "Castle flagpole (level exit marker)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Flagpole at end of each level serves as visual objective marker; castle structure indicates princess location"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal progression state",
+      "visual_manifestation": "Daylit grassland with clear platforms, moderate enemy density, blue sky background",
+      "behavioral_manifestation": "Standard enemy patrol patterns; Mario moves right unobstructed except for hazards"
+    },
+    {
+      "world_state": "Danger escalation (later worlds)",
+      "visual_manifestation": "Darker color palette shift; castle structures replace grassland; increased enemy density; lava/hazard terrain appears",
+      "behavioral_manifestation": "Enemy patterns become more aggressive; pit hazards increase; level layout grows more complex"
+    },
+    {
+      "world_state": "Underground/hidden world",
+      "visual_manifestation": "Black background with brick-only architecture; no sky visible; coins/blocks more densely packed",
+      "behavioral_manifestation": "Enclosed spaces forcing specific navigation paths; different enemy placement patterns than overworld"
+    },
+    {
+      "world_state": "Boss encounter imminent",
+      "visual_manifestation": "Castle interior setting with darker stone textures; Bowser sprite visible on screen",
+      "behavioral_manifestation": "Bowser executes attack patterns (fireballs, jumping); requires specific counter-strategy beyond standard enemy avoidance"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "Flagpole sprite at level end; visual transition/fade when player reaches it",
+      "behavioral_manifestation": "Screen locks; level clears; world/level counter increments; player spawns at next stage"
+    },
+    {
+      "world_state": "Time pressure critical",
+      "visual_manifestation": "Timer display flashing or changing color as countdown nears zero",
+      "behavioral_manifestation": "Level fails immediately if timer reaches zero; player movement must accelerate or risk timeout death"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression",
+      "example": "Early worlds feature natural grassland with simple platforms; middle worlds introduce castle-like structures; final worlds are entirely castle/fortress interior, telegraphing approach to villain's domain"
+    },
+    {
+      "technique": "Enemy placement density",
+      "example": "Worlds 1-2 have sparse, predictable enemy patterns (single Goombas, isolated Koopas); later worlds cluster multiple enemies and force complex navigation, indicating rising opposition strength"
+    },
+    {
+      "technique": "Hazard introduction sequence",
+      "example": "Pits appear first as small gaps in early levels; grow wider in middle sections; become complex obstacle gauntlets in later worlds, showing escalating danger"
+    },
+    {
+      "technique": "Underground/hidden world visual distinction",
+      "example": "Black background with brick-only terrain vs. blue sky grassland; visual cue signals alternate path or secret area without explicit text"
+    },
+    {
+      "technique": "Color temperature shift",
+      "example": "Cool blue/green palette in early worlds transitions to darker reds/blacks in Bowser's castle, suggesting heat/danger and villain's stronghold"
+    },
+    {
+      "technique": "Objective marker visibility",
+      "example": "Flagpole is always visible or quickly accessible; player learns it signals level completion and safety through repeated encounters"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goomba",
+      "state": "Patrol/normal",
+      "behavior": "Walks left-right in predictable pattern; bounces when encountering platform edge; visual animation cycles continuously"
+    },
+    {
+      "entity": "Goomba",
+      "state": "Threatened",
+      "behavior": "No evasion behavior; Mario jumping on it flattens sprite instantly (defeated state)"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Patrol/normal",
+      "behavior": "Walks in directional pattern; turns at platform edges; sprite shows shell and legs clearly"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Jumped on",
+      "behavior": "Retracts into shell; shell becomes projectile usable by player; original enemy sprite disappears into shell sprite"
+    },
+    {
+      "entity": "Bowser",
+      "state": "Boss encounter",
+      "behavior": "Fires fireballs in arcing patterns; jumps across screen at intervals; larger sprite signals boss-level threat; castle setting frames confrontation"
+    },
+    {
+      "entity": "Mario",
+      "state": "Small (normal)",
+      "behavior": "Single-height sprite; can fit through small gaps; cannot break brick blocks above; one hit results in death"
+    },
+    {
+      "entity": "Mario",
+      "state": "Super (powered up)",
+      "behavior": "Double-height sprite; can break brick blocks above by jumping; one hit returns to small state (damage absorption visual)"
+    },
+    {
+      "entity": "Mario",
+      "state": "Fire Flower equipped",
+      "behavior": "Sprite shows flower; pressing attack button fires projectile fireballs in forward direction; enemy sprites show defeat when hit by fire"
+    },
+    {
+      "entity": "Mario",
+      "state": "Starman invincible",
+      "behavior": "Sprite flashes or shows invincibility aura; enemies defeated on contact; temporary state with visual countdown timer effect"
+    }
+  ],
+  "notes": "Super Mario Bros. uses minimal narrative text; world-state communication relies entirely on visual design, sprite behavior, and environmental architecture. The game establishes a 'visual grammar' where color, size, density, and environmental setting cumulatively signal danger, progression, and objective. No faction dialogue or political conflict exists; antagonism is purely environmental/mechanical. The tutorial nature of World 1-1 demonstrates this visual communication system clearly: single enemies, clear platforms, no pits initially. All threat escalation and world-state shifts are conveyed through incremental visual changes rather than explicit UI or dialogue.",
+  "sources_used": [
+    "wikipedia:Super Mario Bros."
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:38:12.680Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3010,
+    "output_tokens": 2890,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

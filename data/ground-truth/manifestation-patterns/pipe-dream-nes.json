@@ -1,0 +1,185 @@
+{
+  "game_id": "pipe-dream-nes",
+  "game_name": "Pipe Dream",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "flooz flow advancement",
+      "visual_form": "green slime/goo moving through pipe grid",
+      "meaning": "time pressure; player must have completed valid pipeline before flooz reaches open end or blocked square"
+    },
+    {
+      "signal": "incomplete pipeline",
+      "visual_form": "gaps or open ends in pipe network visible on grid",
+      "meaning": "imminent failure state if flooz reaches the break"
+    },
+    {
+      "signal": "time delay countdown",
+      "visual_form": "visual timer before flooz begins to flow (game mechanic implied)",
+      "meaning": "escalating pressure; later levels reduce delay, forcing faster decision-making"
+    },
+    {
+      "signal": "high minimum pipeline length requirement",
+      "visual_form": "grid-based visual representation of required length threshold",
+      "meaning": "difficulty escalation; player must extend further across grid to succeed"
+    },
+    {
+      "signal": "pre-placed obstacles on field",
+      "visual_form": "immovable pipe sections or blocked squares visible before level starts",
+      "meaning": "reduced playspace; constraints on player placement options"
+    },
+    {
+      "signal": "one-way pipe sections",
+      "visual_form": "directional pipe pieces with visual indicators (direction markers)",
+      "meaning": "routing constraint; flooz will be blocked if direction is violated"
+    },
+    {
+      "signal": "end piece target",
+      "visual_form": "designated drain/endpoint square on grid",
+      "meaning": "mandatory routing objective; failure to route flooz to endpoint ends game even if length met"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "reservoir sections",
+      "visual_form": "special pipe sections that fill over several seconds once flooz enters",
+      "meaning": "time buffer; gives player grace period to continue building pipeline after flooz enters"
+    },
+    {
+      "signal": "bonus pipes on field",
+      "visual_form": "pre-placed pipe sections marked as bonus targets",
+      "meaning": "score opportunity; routing flooz through them provides point reward without penalty"
+    },
+    {
+      "signal": "wrapping edge openings",
+      "visual_form": "openings at opposite grid edges that connect to each other",
+      "meaning": "route flexibility; allows flooz to traverse off one edge and re-enter from opposite side"
+    },
+    {
+      "signal": "replacement mechanic (unused pieces)",
+      "visual_form": "clickable piece in dispenser before flooz enters it",
+      "meaning": "limited do-over option; player can swap next piece with score/delay penalty"
+    },
+    {
+      "signal": "four-way intersection bonus",
+      "visual_form": "crossing pipe paths on grid where flooz crosses itself",
+      "meaning": "strategic routing reward; five crossings in one level yield large bonus points"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": null,
+      "color_identity": "green (flooz/goo entity)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "grid-based playfield; entry point marked; dispenser column on side showing next five pieces"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "early game (lower difficulty)",
+      "visual_manifestation": "longer time delay before flooz flows; lower minimum pipeline length requirements; fewer obstacles on field",
+      "behavioral_manifestation": "player has more time to plan and place pieces; flooz moves at standard speed once released"
+    },
+    {
+      "world_state": "mid-game escalation",
+      "visual_manifestation": "shorter delay before flooz flows; increased minimum pipeline lengths; introduction of directional constraints and obstacle placement",
+      "behavioral_manifestation": "increased pressure on player decision-speed; flooz may move faster; routing complexity increases"
+    },
+    {
+      "world_state": "late-game (high difficulty)",
+      "visual_manifestation": "minimal delay before flooz flows; maximum pipeline length requirements; high-speed flooz flow; mandatory end-piece targets; multiple directional constraints",
+      "behavioral_manifestation": "player must react quickly; no margin for error; flooz progresses rapidly through pipes"
+    },
+    {
+      "world_state": "bonus round (puzzle mode)",
+      "visual_manifestation": "grid filled with pipe sections except one empty space; pieces adjacent to empty space are clickable/slideable",
+      "behavioral_manifestation": "tile-sliding mechanic replaces placement mechanic; player optimizes existing layout rather than building new one"
+    },
+    {
+      "world_state": "level progression checkpoint",
+      "visual_manifestation": "password displayed after each bonus round",
+      "behavioral_manifestation": "player can save progress and resume at following level; non-linear session restart enabled"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "grid-as-playspace metaphor",
+      "example": "the square grid acts as an implicit infrastructure system; flooz represents resource (liquid/substance) flowing through pipes; entry point marks source; missing connections or blockages represent system failure"
+    },
+    {
+      "technique": "visual difficulty scaling through obstacle density",
+      "example": "early levels show mostly empty grid; later levels fill grid with pre-placed obstacles, visually communicating increased constraint and narrower solution space"
+    },
+    {
+      "technique": "dispenser as resource scarcity indicator",
+      "example": "column of only five available pieces visible at once; new piece drops as old one is placed; communicates that player works with limited, unknown next options (randomization)"
+    },
+    {
+      "technique": "timer/delay as pacing manifestation",
+      "example": "the delay before flooz flows is a visual/temporal signal of world state pressure; shorter delays in later levels visually represent escalating urgency"
+    },
+    {
+      "technique": "score loss on unused pieces",
+      "example": "penalty system visually teaches efficiency; unused grid squares at end of level represent wasted resources, reinforced through point deduction"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "flooz (green slime)",
+      "state": "pre-flow (waiting to be released)",
+      "behavior": "stationary at entry point; player can observe it for several seconds before it begins moving"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "flowing through valid pipeline",
+      "behavior": "moves along pipe sections in connected path; travels until reaching end (open pipe or blocked square); scores points for each section traversed"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "reaching blocked or open end",
+      "behavior": "stops; game evaluates whether pipeline met minimum length requirement; success or failure determined"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "in reservoir section",
+      "behavior": "pauses while reservoir fills; grants player time buffer to continue building; movement resumes once reservoir full"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "encountering one-way pipe (correct direction)",
+      "behavior": "flows through unimpeded in indicated direction"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "encountering one-way pipe (wrong direction)",
+      "behavior": "blocked; cannot flow backward; results in pipeline termination and game failure if this is the only open path"
+    },
+    {
+      "entity": "flooz (green slime)",
+      "state": "at mandatory end piece",
+      "behavior": "must flow into end piece to succeed; failure to route flooz to end piece results in game failure even if minimum length met"
+    },
+    {
+      "entity": "pipe dispenser column",
+      "state": "active/visible",
+      "behavior": "displays five pieces in queue; bottommost placed when player clicks empty grid square; new piece drops from top; order is predetermined/random"
+    }
+  ],
+  "notes": "Pipe Dream is a pure puzzle game with minimal narrative or faction elements. World-state communication is entirely mechanical and visual: difficulty progresses through visible constraints (time delays, obstacle density, speed changes, directional rules, mandatory routing objectives). The 'green slime' (flooz/goo) is the only persistent entity with behavioral manifestation. Danger and safety signals are derived from game mechanic visibility rather than character or environmental storytelling. The game lacks political, social, or faction-based world-state elements. Visual communication relies on grid layout changes, piece availability signaling, and flooz movement behavior to convey difficulty and pressure.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:44:20.037Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3912,
+    "output_tokens": 2191,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

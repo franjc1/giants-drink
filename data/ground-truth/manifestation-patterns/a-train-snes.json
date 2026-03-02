@@ -1,0 +1,143 @@
+{
+  "game_id": "a-train-snes",
+  "game_name": "A-Train (A-Train III)",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "Financial deficit",
+      "visual_form": "Numerical indicators in UI (negative balance display)",
+      "meaning": "Company approaching bankruptcy; requires route optimization or new revenue streams"
+    },
+    {
+      "signal": "Unprofitable route",
+      "visual_form": "Red/negative indicators on financial ledger",
+      "meaning": "Passenger or cargo line not generating sufficient revenue; risk of capital loss"
+    },
+    {
+      "signal": "Low passenger demand",
+      "visual_form": "Sparse populated areas in isometric view; few buildings in zones",
+      "meaning": "Route not yet viable; insufficient population to sustain service"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Profitable route",
+      "visual_form": "Green/positive financial indicators; growing passenger count",
+      "meaning": "Sustainable revenue generation; company financial stability"
+    },
+    {
+      "signal": "Urban growth",
+      "visual_form": "Visible building density increase in isometric tile view; residential and commercial structures appearing",
+      "meaning": "Successful delivery of building materials has triggered city development; future passenger demand increasing"
+    },
+    {
+      "signal": "Material delivery zones",
+      "visual_form": "Highlighted areas in city grid where building materials are deposited; adjacent construction activity",
+      "meaning": "Correct infrastructure placement; city expansion proceeding as intended"
+    },
+    {
+      "signal": "Established infrastructure",
+      "visual_form": "Connected rail network; stations placed in populated areas",
+      "meaning": "Stable operational framework; routes functional and integrated"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Railway Company",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "None—no rival companies exist in game world",
+      "environmental_markers": "Player-constructed tracks, stations, and buildings (hotels, ski resorts); visually distinct from auto-generated city structures"
+    },
+    {
+      "faction": "AI City Development System",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Procedurally generated residential houses, shops, roads responding to material delivery; appears organically in isometric viewport"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (sparse population)",
+      "visual_manifestation": "Isometric grid with isolated buildings; large empty areas; minimal infrastructure",
+      "behavioral_manifestation": "AI city growth halted; no passenger demand on routes; building materials transport only viable revenue"
+    },
+    {
+      "world_state": "Material delivery underway",
+      "visual_manifestation": "Cargo visualization on rails; construction activity visible in delivery zones; new buildings appearing adjacent to depots",
+      "behavioral_manifestation": "Population begins migrating to developed areas; passenger demand increases in connected zones"
+    },
+    {
+      "world_state": "Mature city (high development)",
+      "visual_manifestation": "Dense building clusters in isometric view; extensive road networks; multiple residential and commercial structures; shops and amenities visible",
+      "behavioral_manifestation": "High passenger volumes on established routes; multiple revenue opportunities (passenger service, hotel/resort income); expansion into new zones viable"
+    },
+    {
+      "world_state": "Company financial crisis",
+      "visual_manifestation": "UI displays red balance indicators; routes may appear visually degraded or disconnected if maintenance cannot be funded",
+      "behavioral_manifestation": "Unable to fund new infrastructure; existing services may stall; no new city development triggered"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Responsive urban growth",
+      "example": "Player delivers building materials to a region; within game time, houses and shops visually appear in that area. This signals player success and creates visual reward for correct strategic placement."
+    },
+    {
+      "technique": "Isometric tile-based diorama aesthetic",
+      "example": "Near-isometric dimetric projection (similar to SimCity 2000) creates readable, layered visual presentation of city—player can intuitively understand spatial relationships, population density, and infrastructure connectivity at a glance."
+    },
+    {
+      "technique": "Infrastructure visibility",
+      "example": "Player-built stations and rails are visually prominent in the cityscape; their placement relative to buildings indicates viability of routes. Isolated infrastructure signals poor planning; integrated networks signal success."
+    },
+    {
+      "technique": "Building type diversity",
+      "example": "Residential houses, commercial shops, ski resorts, and hotels each have distinct visual representation. Their presence and clustering communicate city economic function and passenger attractiveness."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Passenger population",
+      "state": "High demand zone",
+      "behavior": "Visually represented by building density and business activity; passengers accumulate at stations in populated areas; routes show high utilization"
+    },
+    {
+      "entity": "Building material delivery system",
+      "state": "Active transport",
+      "behavior": "Cargo trains move along tracks toward designated zones; construction activity spawns visually in delivery zones; buildings materialize over time"
+    },
+    {
+      "entity": "City auto-generator",
+      "state": "Material-triggered growth",
+      "behavior": "Responsive to player delivery placement; generates houses, shops, and roads orthogonally adjacent to material zones; growth intensity correlates with delivery frequency"
+    },
+    {
+      "entity": "Player railway company",
+      "state": "Profitable operation",
+      "behavior": "Can fund new construction (custom hotels, ski resorts); track expansion continues; stations placed strategically; company visually expands infrastructure footprint"
+    },
+    {
+      "entity": "Player railway company",
+      "state": "Financial strain",
+      "behavior": "Infrastructure expansion halts; existing tracks and stations remain static; no new buildings or services constructed; company isolated in cityscape"
+    }
+  ],
+  "notes": "A-Train III (1992 SNES release via Maxis) uses near-isometric dimetric projection to communicate world state through visual density, building distribution, and infrastructure connectivity. The game contains no faction conflict; danger/safety is purely economic. World state is manifest through: (1) City density—sparse = underdeveloped, dense = viable markets; (2) Building type presence—shops/hotels = passenger demand, houses = population base; (3) UI financial indicators—red = crisis, green = success; (4) Infrastructure visibility—isolated tracks = poor routes, integrated networks = strategic success. Environmental storytelling relies heavily on responsive urban generation: player material delivery triggers visible construction, creating reward feedback loop. No combat, faction symbols, or political systems exist; world state is purely economic-infrastructural.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:30:09.823Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3149,
+    "output_tokens": 1990,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

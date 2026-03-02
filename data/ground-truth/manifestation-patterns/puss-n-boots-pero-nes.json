@@ -1,0 +1,128 @@
+{
+  "game_id": "puss-n-boots-pero-nes",
+  "game_name": "Puss 'n Boots: Pero's Great Adventure",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "sprites of hostile entities (cats, ships, planes, balloons, submarines, barrels, wheels, horses)",
+      "meaning": "immediate threat to player; collision causes damage or death"
+    },
+    {
+      "signal": "projectile_hazards",
+      "visual_form": "visual effects from enemies like airborne attack patterns",
+      "meaning": "ranged danger; requires evasion or blocking"
+    },
+    {
+      "signal": "environmental_obstacles",
+      "visual_form": "platforms, gaps, moving hazards rendered in stage tileset",
+      "meaning": "structural danger; collision or falling results in damage/death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "solid_platform",
+      "visual_form": "rendered ground and walkable surface tiles",
+      "meaning": "safe standing zone; player can traverse without falling"
+    },
+    {
+      "signal": "item_pickup",
+      "visual_form": "collectible sprite objects placed in environment",
+      "meaning": "health restoration or power-up acquisition; beneficial interaction"
+    },
+    {
+      "signal": "spawn_zone",
+      "visual_form": "level entry point or safe starting area",
+      "meaning": "temporary invulnerability or safe player positioning at level start"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Pero the Cat)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pero character sprite; Puss 'n Boots mascot identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "protagonist travels across globalized stage environments (Around the World in Eighty Days narrative framing)"
+    },
+    {
+      "faction": "Generic Antagonistic Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "diverse enemy sprite types (cats, mechanical/transport entities: ships, planes, balloons, submarines)",
+      "enemy_visual_variants": "multiple enemy classes differentiated by sprite appearance and behavioral patterns",
+      "environmental_markers": "enemies spawn contextually in stage environments; no clear unified faction branding visible in source data"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "level_progression",
+      "visual_manifestation": "stage themes and tileset changes corresponding to Around the World in Eighty Days journey narrative",
+      "behavioral_manifestation": "enemy types and difficulty curve escalate; new hazard patterns introduced per stage"
+    },
+    {
+      "world_state": "player_health_critical",
+      "visual_manifestation": "character animation or sprite flashing (NES-era convention, not explicitly documented)",
+      "behavioral_manifestation": "player movement or attack capability may be restricted; increased vulnerability window"
+    },
+    {
+      "world_state": "enemy_defeated",
+      "visual_manifestation": "enemy sprite removal or death animation",
+      "behavioral_manifestation": "enemy despawns; potential item drop at location"
+    },
+    {
+      "world_state": "stage_cleared",
+      "visual_manifestation": "transition screen or level completion indicator",
+      "behavioral_manifestation": "progression to next stage; world state resets for new environment"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "narrative_theme_via_level_design",
+      "example": "game's stage progression follows Around the World in Eighty Days narrative arc; visual environment changes (ships, planes, balloons, submarines) reflect travel across different global contexts"
+    },
+    {
+      "technique": "enemy_type_contextual_placement",
+      "example": "specific enemy archetypes (ships, planes, submarines, barrels as cargo/obstacles) placed in thematic stages to reinforce world journey; hazard design reflects transportation/adventure context"
+    },
+    {
+      "technique": "protagonist_identity_via_sprite",
+      "example": "Pero the Cat (Toei Animation mascot) serves as visual anchor for player identity; character design communicates playable entity role in narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Generic Enemy (coded TEKSTS, TEKKND variants)",
+      "state": "active_patrol",
+      "behavior": "entity moves within defined parameters; sprite animates continuously"
+    },
+    {
+      "entity": "Enemy (ship/STSHIP, submarine/STSENSUI, plane/STPLANE, balloon/STBALOON)",
+      "state": "spawned",
+      "behavior": "randomization routine (RANDOM & 11B) determines 1/4 vs 3/4 behavior variance; entity has 3-hit HP pool (TEKHIT=3); timer-based despawn (TEKTIM)"
+    },
+    {
+      "entity": "Hazard Object (barrels/STARU, wheels/SSHA, horses/SUMA)",
+      "state": "active",
+      "behavior": "physics-based or pattern-based movement; collision triggers player damage"
+    },
+    {
+      "entity": "Player Character (Pero)",
+      "state": "combat_active",
+      "behavior": "can initiate attacks against enemies; damage received affects health state; movement restricted during knockback/hit animations"
+    }
+  ],
+  "notes": "Source provides limited visual documentation; primary data derives from code structure and enemy type naming conventions. Game lacks detailed faction/political system—antagonists are generic hazard types without ideological branding. Narrative context (Around the World in Eighty Days) informs environmental theming rather than explicit visual faction markers. NES technical constraints limit detailed manifestation layer. Uncompiled code reveals enemy behavior randomization and hit-point systems but not visual communication specifics.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:32:07.158Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2064,
+    "output_tokens": 1505,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

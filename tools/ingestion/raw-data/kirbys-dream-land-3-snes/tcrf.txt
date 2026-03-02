@@ -1,0 +1,824 @@
+Kirby's Dream Land 3 - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Kirby's Dream Land 3
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Kirby's Dream Land 3
+
+Also known as : Hoshi no Kirby 3 (JP)  Developer :
+
+HAL Laboratory
+
+&#91;1&#93;
+
+Publisher :
+
+Nintendo
+
+&#91;1&#93;
+
+Platform :
+
+SNES
+
+Released internationally : September 5,&#160;2019  &#91;2&#93;
+
+( Nintendo Switch Online )  Released in JP : March 27,&#160;1998  &#91;1&#93;
+
+Released in US : November 17,&#160;1997  &#91;3&#93;
+
+Released in EU : July 24,&#160;2009  &#91;4&#93;
+
+&#91;5&#93;
+
+(Wii VC)  Released in AU : July 24,&#160;2009  &#91;5&#93;
+
+(Wii VC)  Released in BR :  1997  &#91;6&#93;
+
+This game has  unused areas .
+
+This game has  hidden development-related text .
+
+This game has  unused music .
+
+This game has  debugging material .
+
+This game has a  hidden sound test .
+
+This game has a  hidden level select .
+
+This game has  regional differences .
+
+This game has  revisional differences .
+
+To do:
+
+small music oddity
+
+Kirby's Dream Land 3
+
+is the third game in the "Dream Land" series, and the only one to see a release on the SNES. In addition to Kirby's usual arsenal of powers, he also has the aid of Gooey, a strange sentient blob, and six animal friends, who can alter his powers drastically! Also notable for being the last first-party SNES game released in North America.
+
+Contents
+
+1
+
+Debug Mode
+
+1.1
+
+1/7
+
+1.2
+
+2/7
+
+1.3
+
+3/7 4/7 5/7
+
+1.4
+
+6/7 MUSIC ROOM
+
+1.5
+
+7/7 AUTO PLAY DEMO
+
+2
+
+Debug Rooms
+
+2.1
+
+Door Test
+
+2.2
+
+Terrain Test
+
+2.3
+
+Debug Area
+
+3
+
+Early Boss Room
+
+4
+
+Unused Music
+
+5
+
+Oddity
+
+6
+
+Unused Code
+
+7
+
+Unused Tiles
+
+8
+
+Hidden "PERFECT"
+
+9
+
+Internal Name
+
+10
+
+Regional Differences
+
+10.1
+
+Menus
+
+10.2
+
+Credits
+
+10.3
+
+Error Messages
+
+11
+
+Version Differences
+
+12
+
+References
+
+Debug Mode
+
+This needs some investigation.
+
+Discuss ideas and findings on the  talk page .
+
+Change ROM address
+
+$387E
+
+to
+
+01
+
+(code:
+
+00B87E01  ) to enable a rather extensive debug mode, which can be accessed by pressing Select on the title screen. If you press the L and R buttons at the same time on the Title Screen the ROM build date will be shown for as long as you maintain these buttons pressed. The build date does not differ between the Japan and USA versions, and is located in
+
+0x10000
+
+of the ROM.
+
+There are seven pages worth of options, which can be cycled through with the L and R buttons. Pressing A will exit the menu and proceed to the File Select screen, whereas pressing Select/Start will load a stage based on options set in the menu. Options are stored in SRAM (starting near
+
+$5E02  ) and some (such as the current page) persist after restarting, although others (such as sound test values) are cleared when the menu is opened.
+
+1/7
+
+BG  - When this is enabled, sprite collision points used for collision with the background will be displayed in grey in-game. Pressing L and R buttons at the same time will change their color to black until the pause menu is opened or the map is changed.
+
+OBJ  - When this is enabled, sprite hitboxes used for collision with other sprites will be displayed in-game. The hitboxes seem to disappear entirely when there's no other sprites for Kirby to collide with, maybe to save on CPU time.
+
+RENEW  - When this is enabled, more sprite collision points will be displayed in-game. It's unclear what these are used for. Pressing L and R buttons at the same time will change their color to black until the pause menu is opened or the map is changed.
+
+PAUSE  - When this is enabled, pressing Start will halt the game rather than bring up a separate pause screen. The R button can then be used to advance frame-by-frame. The R button can also be used together with the "up" and "down" buttons on the D-Pad to cycle through all abilities. Pressing R and Select buttons at the same time will open the normal pause screen. In this mode, Gooey is displayed with a small star on his head if he is controlled by the CPU. If Start is pressed on the second controller, a black bar will appear on the screen, and can be removed by pressing Start again on the second controller. It seems to grow bigger depending on the amount of content present on the screen, so it might have been used as a test bar. Holding L and R buttons and pressing a direction on the D-Pad of the first controller will move you to another room, though the game will crash if you try to go to the room to the left of the start of the stage.
+
+LEVEL/STAGE  - Chooses the "world" and stage to load when Select/Start is pressed. B stands for boss. Levels 1 through 5 are self-explanatory, while Levels 6 and T contain miscellaneous maps like mini-games and debug rooms.
+
+6-1 - Final Battle
+
+6-2 - MG5 (mini-game)
+
+6-3 - Boss Butch (boss rush mode)
+
+6-4 - Jumping (mini-game), though no items are present and it softlocks when Kirby leaves the screen
+
+6-5 - Door Test
+
+6-6 - Level 1 opening cutscene, except you spawn in as an extra Kirby with glitched graphics
+
+6-B - Terrain Test
+
+T-1 - Debug Area
+
+T-2 - freezes
+
+T-3 - An odd stage that seems to use screens from 1-4 and 1-5
+
+T-4 - freezes
+
+T-5 - freezes
+
+T-6 - freezes
+
+T-B - freezes
+
+2/7
+
+STOCK  - Chooses the number of lives remaining, offset by one. It ranges from 0 to 99, giving you an actual range of -1 to 98 lives. For some reason, -1 displays as 67 in the life counter, but dying will still result in a Game Over.
+
+KIRBY  - Chooses Kirby's starting health in half-units, from 1 to 10. "0" means 10 (i.e. 5 units of health), and "I" means infinite health.
+
+GOOEY  - Chooses Gooey's starting health in half-units, from 1 to 8. "I" means infinite health.
+
+BGBAR  - Pressing X on the second controller will display a bar to test how elements are placed with the background. Pressing X once will make it appear and you will be able to move it by using the D-Pad on the first controller, pressing X a second time will make it automatically move and pressing X a third time will make it disappear as usual. Pressing L and R buttons at the same time on the second controller will make it disappear while held, and will change the color of the bar and of dust visuals to black (like Kirby running or the dust generated by the Broom ability) until the stage is beaten.
+
+UNIT  - Unknown. When set to SLOW, the game seems to experience more slowdown, most noticeable when a stage begins.
+
+3/7 4/7 5/7
+
+These three screens edit each save file. One thing they can't change is which Heart Stars you've collected.
+
+LEVEL/STAGE  - Chooses the latest level and stage to be unlocked.
+
+OPTION  - These can be set to 0, 1, or 3 with the Y button. When set to 1 or 3, they unlock options in the File Select screen. If 3 is chosen, MG5, Boss Butch and Jumping are considered to be completed, as the overall save file completion percentage also increases.
+
+S - Sound Test
+
+M - MG5
+
+B - Boss Butch
+
+G - Jumping
+
+E - Cutscenes
+
+Note that this is different from the order they actually appear in the File Select screen, with Jumping and Boss Butch switched around.
+
+If the given save file does not exist, it can be created with the Y.  File can also be deleted using Select+X+B; however, Select will also load a stage based on the first screen, so this can only be seen when Select is pressed last (and even then, the stage will be loaded).
+
+6/7 MUSIC ROOM
+
+A sound test. You can play every track and sound effect in the game here. The track stays playing while you navigate the other menus, so enjoy your favorite tune!
+
+Choose the song or sound effect to play with Left and Right, and play it with X, Y, or B. This screen also displays a name for each item, which may have been filenames used in development.
+
+BGM  - Background music.
+
+FGM  - Sound effects, or "foreground music".
+
+7/7 AUTO PLAY DEMO
+
+A screen that seems to be used to record the player's movements for the title screen demos, and then play them back. It doesn't appear to be functional anymore, and tends to delete save data.
+
+Debug Rooms
+
+This page or section needs more images.
+
+There's a whole lotta words here, but not enough pictures.  Please fix this .
+
+There are three debug areas, which have a nice variation of the lake background from Level 1-5 that's not used anywhere else in the game. To access them use the codes
+
+4053D328  ,
+
+4053D32A
+
+and
+
+4053D32B
+
+on Level 1 stage select (or use the debug mode described above).
+
+Door Test
+
+The first stage consists of two rooms, and seems to test the fade-outs in doors, or simply having different rooms.
+
+Terrain Test
+
+The second starts in a room with spikes and three doors. They don't really cover entire tiles but Kirby still collides with them.
+The lower left door contains three animal friends and different slopes and platforms. 
+The upper left room has three misaligned Shotzos over three star blocks, water and two enemies. 
+The right room has some platforms, two doors and Nago. The left door takes you back to the spike room, while the right door takes you to a long room with different types of terrain. (Slopes, water, sand, ice, influencing movement, damage...) At the end there's a door, but it doesn't work.
+
+Debug Area
+
+The third stage is much larger than the previous two. It starts with a main room with several doors, and some Japanese text over them (supposedly describing what are the rooms below them are about).
+
+Animal friends test. Takes you to a room with four doors. The one with the stars takes you back to the main room. The two ones at the ground take you to rooms with animal friends and a door back. The right one takes you to 4.
+
+Enemy test. Takes you to a room full of doors, each of them lead to a room with a different set of enemies.
+
+Takes you to a room with an enemy, a door that doesn't work, and two that take you back. (?)
+
+Room with many doors. The left one connects with 1, and the stars one back to the main.
+
+The top left room is a corridor with ice blocks (destroy with fire).
+
+The top right room tests a type of slope.
+
+The middle left room tests enemies that grab/eat the player.
+
+The center and middle right ones test breakable block types (star, specific ability...)
+
+The lower ones test different terrains and such (the two ones after the star door test water currents).
+
+Room with many doors. Tests wind currents.
+
+Three doors (and an exit). First one has slopes and a platform. Second has a bunch of star pieces and 1ups. Third has different items.
+
+Tests the end-of-level jumping minigame. The giant  ゴ  above the door most likely stands for  ゴールゲーム , "goal game".
+
+Miniboss test. A room with many doors, each taking you to a miniboss. The large  中  above the door is probably short for  中ボス , "mid boss".
+
+Boss test. Similar to the above, but they take you to the actual level boss. You don't get to fight them if you have already beaten them. The letter B above the door presumably stands for "Boss".
+
+(Source: Cadohacan)
+
+Early Boss Room
+
+Entering Acro's boss fight from the debug stage loads into an earlier version of his boss room, similar in appearance to its Boss Butch counterpart, with partially broken Sand Canyon tiles and a unique foreground palette.
+
+Unused Music
+
+K3BOSS2
+
+BGM 3, K3BOSS2 (as named in the  Music Room ), is a fast-paced remix of  Egg Catcher  from
+
+Kirby's Adventure  , situated between K3BOSS1 (main boss theme) and K3BOSS3 (mini-boss theme).
+
+Unused Sound Sample
+
+There's an unused sample which is loaded in Ripple Field 2's sample set, being the first instrument loaded with the sample set at slot 28. It's a pulse wave which is not used anywhere in the song. This could suggest that the song was meant to have a more synth-ish or 8-bit approach at some point, as a 50% square wave is already used in the song, while the unused pulse wave is a 25% square wave.
+
+Here's a demo of it in action, replacing the trumpet used in the song:
+
+Oddity
+
+K3EVENT2
+
+BGM 9, K3EVENT2, is only used in the fourth stage of Grass Land (the one with Goku & Chao) in the small room above Boboo rather than the mini-boss theme if the the Heart Star conditions are not met. However, since the preceding track, K3EVENT1, is the "Mission Complete" theme, the title of the track suggests that it was originally the "Mission Failed" theme, which is BGM 29/K3LEVEL5 in the final. Interestingly, the final tracks's name suggests it was once intended to serve as a late-game level map theme.
+
+Also, K3LEVEL3 is used as the map theme for Cloudy Park world while K3LEVEL 4 is used for Sand Canyon, which suggests the levels or maps themes were swapped at some point in development.
+
+Unused Code
+
+In most  Kirby  games, using the Burning ability towards a wall will make Kirby crash and bounce from it, but this game is an exception to this, as Kirby will just awkwardly stick to the wall until the attack ends, however, there's unused code that makes Kirby crash and bounce back just like in other  Kirby  games and will also let him cancel the attack at any moment. This code can be re-enabled by changing ROM address
+
+$04430D
+
+to
+
+9E  . It seems like this was a last minute design choice as this behavior persisted in
+
+Kirby 64  .
+
+(Source:  Pinci )
+
+Unused Tiles
+
+Background Tiles
+
+Description
+
+Background pieces for the Debug stage, while most of them are used in said stage itself, several copies of the moon and star seemingly go entirely unused.
+
+Unused grass tiles resembling those of Ripple Field 1 found in the tile set for Grassland 4, which itself has a surprising lack of grass for a grass stage.
+
+Unused background pieces for the Whispy Woods boss fight, which depict mountains similar to what is seen in his boss fight in
+
+Kirby's Dream Land 2  .
+
+Unused Background pieces for an older non-animated version of the Island background used in Ripple Field 1 and 2.
+
+Grassy pillar tiles found in the tile set for various stages of Ripple Field, Sand Canyon and Iceberg, their palette is the same across every appearance of the tileset.
+
+Pillar tiles found in the tile set for Sand Canyon 2, 4 and 6. Their appearance is similar to those used in Cloudy Park 6, however their mapping and the shading of the top tile differ.
+
+The tile set used in the bad ending contains tiles for slopes, doors and a block that go unused due to never appearing in the game outside of said cutscene.
+
+Hidden "PERFECT"
+
+There's a hidden screen in the game which is only accessible at the end of Boss Butch mode, and even so, it's rather cryptic to find it. To get to it you have to press X+L+R after defeating Zero, just before the screen fades to black. If done correctly, this screen will appear instead of the credits.
+
+Internal Name
+
+The project's internal name is "K3" as seen at the start of the credits and the Debug menu's sound test.
+
+Regional Differences
+
+Surprisingly, the difference between the International version of  Kirby's Dream Land 3  and the later-released Japanese version comes down to just 41 different bytes. All of the graphics (including regional logos) are found within both versions, and most of the changes merely choose different graphics to be loaded.
+
+The byte that controls which assets to load is in the ROM header's region byte (  0x7FD9  ) - $00 for Japanese, $01 for US. $02-$0C will display the region error on the right (also easily observable by attempting to play the game on a PAL console) and anything else will load the US assets (again).
+
+The game's language can be changed using the following  Pro Action Replay  (PAR) codes:
+
+Japanese to English
+
+English to Japanese
+
+00FFD901
+
+00FFD900
+
+Menus
+
+International
+
+Japan
+
+The Japanese title screen adds an animated squiggle effect to the game's logo; the International version, meanwhile, is static.
+
+International
+
+Japan
+
+Weirdly enough, although the International version features the rōmaji pill-shaped Nintendo logo that has continuously been in use since 1975, the Japanese release features the original Kanji logo used from 1889 to 1950. This is rarely seen in Japanese versions of Nintendo games, with most opting for the usual rōmaji logo.
+
+International
+
+Japan
+
+For some reason, the Japanese version refers to sound effects as FGM (foreground music).
+
+International
+
+Japan
+
+The Japanese version adds a "Nintendo 16" logo, parodying the N64 one, to the Boss Butch title screen, playing off of the SNES being 16-bit compared to the 64-bit N64, which had already been out for nearly two years by the time  Kirby's Dream Land 3  came out in Japan.
+
+Credits
+
+When set to Japanese, the end credits has a unique feature. For the main game's good ending, the credits are displayed in kana, featuring a font that mimics the appearance of a child's handwriting and with a doodle of a red star on each side of the credits' headers. For completing Boss Butch, the credits are listed in English and with a more "computerized" font, which is the case for both versions when in the International setting.
+
+Error Messages
+
+International
+
+Japan
+
+This screen appears on start-up if something other than a standard controller is plugged in to any controller port.
+
+Version Differences
+
+In the SNES version of the game, the background clouds in the Boss Butch rematch against Dark Matter/Zero are blue and red. In the Virtual Console re-release, they are orange and green, most likely out of epilepsy concerns due to their scrolling speed. Additionally, when Zero makes his appearance, the rapid white flashing seen in the SNES version is replaced by slower gray flashes in re-releases, also due to epilepsy concerns.
+
+References
+
+↑
+
+1.0
+
+1.1
+
+1.2
+
+星のカービィ3／Kirby’s Dream Land 3 | HAL Laboratory
+
+↑
+
+Super Nintendo Entertainment System™ - Nintendo Switch Online - Nintendo Official Site
+
+↑
+
+Nintendo Source Book 1997 . "Kirby's Dream Land III 11/17/97"
+
+↑
+
+Kirby's Dream Land 3 | Super Nintendo | Games | Nintendo UK
+
+↑
+
+5.0
+
+5.1
+
+Kirby's Dream Land 3 - Game - Nintendo World Report
+
+↑
+
+SuperGamePower - Ano 03 No. 045 (1997-12)(Nova Cultural)(BR)(pt) , p. 29
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Kirby
+
+series
+
+Game Boy
+
+Kirby's Dream Land &#160;&#8226;
+
+Kirby's Dream Land 2
+
+NES
+
+Kirby's Adventure
+
+SNES
+
+Kirby Super Star &#160;&#8226;
+
+Kirby's Dream Land 3
+
+Nintendo 64
+
+Kirby 64: The Crystal Shards
+
+Game Boy Advance
+
+Kirby: Nightmare in Dream Land &#160;&#8226;
+
+Kirby & the Amazing Mirror  ( Demo )
+
+Nintendo DS
+
+Kirby: Squeak Squad &#160;&#8226;
+
+Kirby Super Star Ultra
+
+Wii
+
+Kirby's Return to Dream Land
+
+Nintendo 3DS
+
+3D Classics: Kirby's Adventure &#160;&#8226;
+
+Kirby: Triple Deluxe &#160;&#8226;
+
+Kirby: Planet Robobot
+
+Nintendo Switch
+
+Kirby Star Allies &#160;&#8226;
+
+Kirby and the Forgotten Land &#160;&#8226;  Kirby's Return to Dream Land Deluxe
+
+Side Games
+
+Nintendo DS
+
+Kirby: Canvas Curse &#160;&#8226;
+
+Kirby Mass Attack
+
+Wii
+
+Kirby's Epic Yarn &#160;&#8226;
+
+Kirby's Dream Collection
+
+Nintendo 3DS
+
+Kirby's Extra Epic Yarn
+
+Wii U
+
+Kirby and the Rainbow Curse
+
+Spin-Offs
+
+Game Boy (Color)
+
+Kirby's Pinball Land &#160;&#8226;
+
+Kirby's Block Ball &#160;&#8226;
+
+Kirby's Star Stacker &#160;&#8226;
+
+Kirby Tilt 'n' Tumble &#160;&#8226;
+
+Jaguar Mishin Sashi Senyou Soft: Kirby Family
+
+SNES
+
+Kirby's Dream Course &#160;&#8226;
+
+Kirby's Avalanche &#160;&#8226;
+
+Kirby's Star Stacker
+
+Satellaview  Kirby no Omochabako ( Baseball ,  Pinball ,  Hoshi Kuzushi )
+
+GameCube
+
+Kirby Air Ride
+
+Wii
+
+Kirby TV Channel
+
+Nintendo 3DS
+
+Kirby Fighters Deluxe &#160;&#8226;
+
+Team Kirby Clash Deluxe &#160;&#8226;
+
+Kirby's Blowout Blast &#160;&#8226;
+
+Kirby Battle Royale  ( Demo )
+
+Nintendo Switch
+
+Super Kirby Clash &#160;&#8226;
+
+Kirby Fighters 2 &#160;&#8226;
+
+Kirby's Dream Buffet
+
+Related
+
+Eggerland &#160;&#8226;
+
+Special Tee Shot  ( Prototype )
+
+Retrieved from " https://tcrf.net/index.php?title=Kirby%27s_Dream_Land_3&oldid=1880712 "
+
+Categories :
+
+Games developed by HAL Laboratory
+
+Games published by Nintendo
+
+SNES games
+
+Games released in 1997
+
+Games released in November
+
+Games released on November 17
+
+Games with unused areas
+
+Games with hidden development-related text
+
+Games with unused music
+
+Games with debugging functions
+
+Games with hidden sound tests
+
+Games with hidden level selects
+
+Games with regional differences
+
+Games with revisional differences
+
+To do
+
+To investigate
+
+Needs more images
+
+Kirby series
+
+Cleanup  >  Needs more images
+
+Cleanup  >  To do
+
+Cleanup  >  To investigate
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden development-related text
+
+Games  >  Games by content  >  Games with hidden level selects
+
+Games  >  Games by content  >  Games with hidden sound tests
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with revisional differences
+
+Games  >  Games by content  >  Games with unused areas
+
+Games  >  Games by content  >  Games with unused music
+
+Games  >  Games by developer  >  Games developed by HAL Laboratory
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Nintendo
+
+Games  >  Games by release date  >  Games released in 1997
+
+Games  >  Games by release date  >  Games released in November
+
+Games  >  Games by release date  >  Games released in November  >  Games released on November 17
+
+Games  >  Games by series  >  Kirby series
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 18 July 2025, at 12:53.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

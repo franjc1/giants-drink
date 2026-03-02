@@ -1,0 +1,135 @@
+{
+  "game_id": "chrono-trigger-snes",
+  "game_name": "Chrono Trigger",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy visibility on field map",
+      "visual_form": "Enemies rendered directly on navigation maps rather than hidden; visible sprite representations",
+      "meaning": "Immediate threat indicator—enemies are present and avoidable or confrontable; no random encounter ambiguity"
+    },
+    {
+      "signal": "Combat transition",
+      "visual_form": "Battle occurs on same map as navigation (no separate battle screen); enemies engage in place",
+      "meaning": "Active danger state—gameplay shifts to conflict mode while maintaining spatial context"
+    },
+    {
+      "signal": "Hit point depletion visual",
+      "visual_form": "Character HP bars reduce numerically; fainting animation when HP reaches zero",
+      "meaning": "Direct threat to party survival; visual feedback of damage accumulation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "City/settlement areas",
+      "visual_form": "Designated town locations on overworld map with scaled-down interior maps",
+      "meaning": "Non-hostile space; access to shops, NPCs, services, dialogue opportunities"
+    },
+    {
+      "signal": "Item/equipment availability",
+      "visual_form": "Shops in towns; treasure chests visible on field maps",
+      "meaning": "Resource accumulation possible; preparation for danger is available"
+    },
+    {
+      "signal": "NPC interaction zones",
+      "visual_form": "NPCs positioned in towns and key locations; dialogue prompts accessible",
+      "meaning": "Safe interaction space; information, story progression, and quest opportunities"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Protagonist party (Chrono and companions)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Party members visible in overworld and battle; player-controlled sprites distinguished from NPCs"
+    },
+    {
+      "faction": "Time period factions (implied by setting)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Different visual environments representing different eras (implied by temporal setting); NPCs dressed/designed for their era"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-battle exploration state",
+      "visual_manifestation": "Overworld map showing landscape from overhead perspective; cities, forests, dungeons as distinct scaled-down areas",
+      "behavioral_manifestation": "Free movement, NPC interaction, item collection, puzzle-solving"
+    },
+    {
+      "world_state": "Active combat engagement",
+      "visual_manifestation": "Battle occurs on same map location as navigation; enemy and party sprites visible in tactical positions",
+      "behavioral_manifestation": "Turn-based combat with Active Time Battle 2.0 system; character actions determined by speed stat; tech/magic usage"
+    },
+    {
+      "world_state": "Character incapacity",
+      "visual_manifestation": "Character sprite faints/disappears when HP reaches zero; party composition visually reduced",
+      "behavioral_manifestation": "Incapacitated character cannot act in battle; game over if all party members fall (except story-specific battles)"
+    },
+    {
+      "world_state": "Progression through time periods",
+      "visual_manifestation": "Different environmental graphics for each era; NPCs and architecture reflect temporal setting",
+      "behavioral_manifestation": "Story advancement unlocks new locations and time periods; world state defined by temporal position"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Era-specific visual design",
+      "example": "Different time periods represented through distinct architectural styles, vegetation density, and NPC clothing; visual communication of temporal context without explicit UI"
+    },
+    {
+      "technique": "Spatial organization by safety/danger",
+      "example": "Towns clustered as safe zones with shops and NPCs; forests and dungeons as distinct enemy-populated areas; clear visual separation of zone types"
+    },
+    {
+      "technique": "Treasure chest placement",
+      "example": "Visible treasure chests on field maps signal resource availability and reward exploration; chest visibility communicates 'rewards exist here'"
+    },
+    {
+      "technique": "NPC presence and positioning",
+      "example": "NPCs placed in towns and key story locations; their presence marks narrative significance and safe interaction zones"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Party characters",
+      "state": "Active/combatant",
+      "behavior": "Visible on field map; engaged in turn-based combat when enemies contacted; respond to player input with techs/magic/items"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Visible/lurking",
+      "behavior": "Openly visible on field maps or positioned to ambush; initiate combat on contact; use physical and magical attacks"
+    },
+    {
+      "entity": "NPCs",
+      "state": "Non-hostile",
+      "behavior": "Stationary or patrol limited areas in towns; respond to dialogue interaction; provide items, services, or story information"
+    },
+    {
+      "entity": "All combatants",
+      "state": "HP-dependent",
+      "behavior": "Visual HP bar representation; fainting when HP depletes; equipment affects damage/defense values"
+    }
+  ],
+  "notes": "Chrono Trigger employs a semi-real-time spatial model where enemies are visible before engagement, eliminating traditional JRPG random encounters. This transforms danger signaling from abstract probability to concrete map visibility. The same-map battle system (no separate battle screen) creates continuity between exploration and combat states, making spatial positioning relevant. Temporal setting variation (multiple time periods) appears to be primary world-state differentiator, communicated through environmental graphics. Political/faction systems are not extensively documented in available sources, but the protagonist group vs. enemies model is standard. Character visual representation via 2D sprites conveys party composition; equipment changes appear to be numeric-only, not visually manifested.",
+  "sources_used": [
+    "wikipedia - Chrono Trigger gameplay and story sections",
+    "data_crystal - technical documentation and enemy/location references"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:53:59.627Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4615,
+    "output_tokens": 1590,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

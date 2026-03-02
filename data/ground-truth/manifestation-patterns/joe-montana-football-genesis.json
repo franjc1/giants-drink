@@ -1,0 +1,153 @@
+{
+  "game_id": "joe-montana-football-genesis",
+  "game_name": "Joe Montana Football",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Defensive player proximity",
+      "visual_form": "Opponent positioning on field grid",
+      "meaning": "Risk of tackle or interception"
+    },
+    {
+      "signal": "Pass coverage zones",
+      "visual_form": "Defensive player spacing and movement patterns",
+      "meaning": "Likelihood of incompletion or interception"
+    },
+    {
+      "signal": "Field position loss",
+      "visual_form": "Yardage counter moving backward or stalling",
+      "meaning": "Failed play or turnover occurrence"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Open receiver availability",
+      "visual_form": "Unguarded player position on field",
+      "meaning": "Viable passing target with low interception risk"
+    },
+    {
+      "signal": "Offensive line integrity",
+      "visual_form": "Blocker positioning between quarterback and defense",
+      "meaning": "Protection window for pass development"
+    },
+    {
+      "signal": "Favorable field position",
+      "visual_form": "Yardage counter advancing toward opponent endzone",
+      "meaning": "Scoring opportunity potential"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Team",
+      "color_identity": "Primary team color (varies by selection)",
+      "symbol_or_sigil": "Team uniform and helmet design",
+      "enemy_visual_variants": "Opponent team uses contrasting color palette",
+      "environmental_markers": "Home field or neutral stadium designation"
+    },
+    {
+      "faction": "Opponent Team",
+      "color_identity": "Secondary contrasting color scheme",
+      "symbol_or_sigil": "Defensive player uniform distinct from player team",
+      "enemy_visual_variants": "Jersey color and number assignment differs from player unit",
+      "environmental_markers": "Away field or neutral stadium context"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game in progress - offensive possession",
+      "visual_manifestation": "Offensive player formation displayed on field grid; ball in quarterback or running back control",
+      "behavioral_manifestation": "Player team executes predetermined play calls; defense reacts to formation"
+    },
+    {
+      "world_state": "Game in progress - defensive possession",
+      "visual_manifestation": "Defensive formation orientation; offensive players in transitional state",
+      "behavioral_manifestation": "Defense positions to intercept or tackle; offense adjusts route assignments"
+    },
+    {
+      "world_state": "Turnover event",
+      "visual_manifestation": "Ball possession indicator flips to opposing team; field position may reset",
+      "behavioral_manifestation": "Player control switches to opposing team; formations realign"
+    },
+    {
+      "world_state": "Scoring event",
+      "visual_manifestation": "Score counter increments for active team; visual celebration or score animation triggers",
+      "behavioral_manifestation": "Play pauses; ball returns to starting position for new drive"
+    },
+    {
+      "world_state": "Penalty condition (when enabled)",
+      "visual_manifestation": "Yardage marker moves based on penalty type; penalty indicator displays",
+      "behavioral_manifestation": "Field position adjusts; replay initiates with new starting point"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Scoreboard display",
+      "example": "Real-time score, down marker, and yardage information communicate game momentum and remaining opportunities"
+    },
+    {
+      "technique": "Field position visualization",
+      "example": "Yard-line proximity to endzone indicates scoring potential and drive urgency"
+    },
+    {
+      "technique": "Time remaining indicator",
+      "example": "Clock display in two-minute drill mode signals urgency and play-call constraints"
+    },
+    {
+      "technique": "Roster selection interface",
+      "example": "Team roster display allows player identification and formation strategy customization"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Quarterback",
+      "state": "Pre-snap",
+      "behavior": "Positioning at line of scrimmage; awaiting play execution"
+    },
+    {
+      "entity": "Quarterback",
+      "state": "Post-snap pass play",
+      "behavior": "Drops back into pocket; scans receiver options; releases or scrambles based on coverage"
+    },
+    {
+      "entity": "Quarterback",
+      "state": "Post-snap run play",
+      "behavior": "Hands off to running back or executes keeper; evades defenders"
+    },
+    {
+      "entity": "Running back",
+      "state": "Ball carrier",
+      "behavior": "Navigates field grid toward endzone; avoids defensive tackle zones; cuts based on blocking"
+    },
+    {
+      "entity": "Receiver",
+      "state": "Route execution",
+      "behavior": "Follows assigned route pattern; adjusts for quarterback scramble; becomes vulnerable to coverage"
+    },
+    {
+      "entity": "Defensive player",
+      "state": "Coverage assignment",
+      "behavior": "Maintains zone or man coverage; reacts to ball trajectory; pursues ball carrier or intercepts"
+    },
+    {
+      "entity": "Offensive line",
+      "state": "Protection mode",
+      "behavior": "Blocks designated defenders; collapses if overpowered; allows quarterback pocket time"
+    }
+  ],
+  "notes": "Joe Montana Football is an arcade-style sports simulation with simplified rule set (13 plays vs. 113 in competitor Madden). Game communicates world-state through standard football UI conventions: scoreboard, field grid, team color differentiation, and formation visualization. No narrative elements, factions, danger/safety signals operate within standard gridiron mechanics (coverage vs. route separation, field position advancement, scoring). Visual communication is purely tactical and functional rather than narrative or world-building focused. Game features 16 generic teams without official NFL licensing, reducing faction differentiation beyond color and uniform design.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:41:13.867Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3246,
+    "output_tokens": 1718,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

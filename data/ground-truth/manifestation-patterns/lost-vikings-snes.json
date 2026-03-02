@@ -1,0 +1,150 @@
+{
+  "game_id": "lost-vikings-snes",
+  "game_name": "The Lost Vikings",
+  "platform": "snes",
+  "paradigm": "puzzle-platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile entities in level spaces",
+      "meaning": "Areas marked as unsafe; direct contact causes health loss"
+    },
+    {
+      "signal": "Height/falling hazards",
+      "visual_form": "Vertical drops and chasms in terrain",
+      "meaning": "Environmental danger; falling from great heights deals damage"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Walls, barriers, and locked passages",
+      "meaning": "Progression blocked until specific Viking skill or item used"
+    },
+    {
+      "signal": "Projectile hazards",
+      "visual_form": "Enemy arrows and projectiles in flight",
+      "meaning": "Ranged damage threat; Olaf's shield required for blocking"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items",
+      "visual_form": "Collectible objects placed in level",
+      "meaning": "Restores health points when picked up"
+    },
+    {
+      "signal": "Level exit point",
+      "visual_form": "Designated end-zone location (implied from gameplay description)",
+      "meaning": "Safe completion state when all three Vikings reach it"
+    },
+    {
+      "signal": "Closed/defended spaces",
+      "visual_form": "Shielded or elevated areas",
+      "meaning": "Temporary safety from enemies when using Olaf's shield mechanics"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Croutonian Empire (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Alien enemies representing Tomator's forces across time periods",
+      "environmental_markers": "Futuristic/technological aesthetic in early stages; shifts by level theme"
+    },
+    {
+      "faction": "Vikings (player)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Three distinct character silhouettes: Erik (Swift), Baleog (Fierce), Olaf (Stout)",
+      "environmental_markers": "Scandinavian/Norse thematic elements; escalate through time-displaced worlds"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level progression (37 levels SNES; 42 Genesis)",
+      "visual_manifestation": "Shifting environmental themes: tech-alien, time-period variations, increasingly bizarre locations",
+      "behavioral_manifestation": "Enemy types and obstacle complexity scale; Viking coordination requirements increase"
+    },
+    {
+      "world_state": "Character health status",
+      "visual_manifestation": "Health indicator (3 points per Viking; visual loss when hit)",
+      "behavioral_manifestation": "Damaged Viking shows reduced capability; death removes character from active play, making level potentially unwinnable"
+    },
+    {
+      "world_state": "Item inventory",
+      "visual_manifestation": "Collectible objects (keys, bombs, food) visible in world and carried by Vikings",
+      "behavioral_manifestation": "Items swappable between close characters; certain items required to progress past locked areas"
+    },
+    {
+      "world_state": "Alien captivity/time displacement",
+      "visual_manifestation": "Diverse environmental settings across anachronistic periods",
+      "behavioral_manifestation": "Vikings must escape increasingly complex puzzle-arena spaces designed by Tomator"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character differentiation through visual design",
+      "example": "Three Vikings displayed as distinct sprites with unique identities (Erik the Swift emphasizes speed/agility, Baleog the Fierce carries weapons, Olaf the Stout bears a shield)"
+    },
+    {
+      "technique": "Time-displaced level aesthetics",
+      "example": "Levels traverse 'various periods of time' with visual environment shifts signaling narrative progression through Croutonian kidnapping escape"
+    },
+    {
+      "technique": "Skill-gated exploration",
+      "example": "Walls require Erik's helmet bash, switches need Baleog's bow, heights need Olaf's shield as platform—visual design telegraphs which Viking is needed"
+    },
+    {
+      "technique": "Inter-character dependency visualization",
+      "example": "Game design requires all three Vikings reach exit; spatial level layouts show how each character's unique ability enables others' progression"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Erik the Swift",
+      "state": "Default/active",
+      "behavior": "Runs faster than peers; can bash through destructible walls and weaker enemies with helmet"
+    },
+    {
+      "entity": "Baleog the Fierce",
+      "state": "Default/active",
+      "behavior": "Attacks enemies in melee with sword; engages ranged targets with bow and unlimited arrows; can trigger distant switches"
+    },
+    {
+      "entity": "Olaf the Stout",
+      "state": "Default/active",
+      "behavior": "Blocks enemy attacks and projectiles with shield; converts shield into hang-glider for descent/traversal; shield serves as platform for allies"
+    },
+    {
+      "entity": "Any Viking",
+      "state": "Damaged (health < 3)",
+      "visual_manifestation": "Sprite shows damage indication; health counter decrements",
+      "behavior": "Movement/action capability may reduce; one more hit triggers death and removal from level"
+    },
+    {
+      "entity": "Any Viking",
+      "state": "Dead",
+      "behavior": "Removed from active play; level becomes unwinnable if all three die or if essential skill-user falls; player must restart or continue"
+    },
+    {
+      "entity": "Enemies",
+      "state": "Patrolling/active",
+      "behavior": "Spawn in level spaces with attack patterns; projectile-firing enemies require blocking (Olaf) or evasion; melee enemies fall to Baleog's sword or Erik's bash"
+    }
+  ],
+  "notes": "The Lost Vikings uses high-contrast, vibrant color palette (console television optimization). Visual communication relies on sprite clarity and distinct character silhouettes to convey three-Viking puzzle-platformer identity. World-state shifts through environmental theming (tech/alien → time-period variations → endgame complexity) rather than dynamic visual effects. Danger/safety signals implicit in obstacle placement and enemy type variation per level. No documented faction color schemes; factions distinguished by narrative role (kidnapper vs. escapee) rather than visual insignia. Cooperative mechanics emphasized through shared-exit requirement and spatial skill-gating.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor (Lost Vikings SNES)",
+    "wikipedia - The Lost Vikings (gameplay, character abilities, plot, development)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:26:01.742Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4311,
+    "output_tokens": 1755,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

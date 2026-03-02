@@ -1,0 +1,161 @@
+{
+  "game_id": "mortal-kombat-snes",
+  "game_name": "Mortal Kombat",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "Health bar depletion",
+      "visual_form": "Decreasing colored bar above character sprite",
+      "meaning": "Player or opponent approaching defeat state"
+    },
+    {
+      "signal": "Opponent victory stance",
+      "visual_form": "Character animation transition to idle/taunting pose after health reaches zero",
+      "meaning": "Round loss; transition to Finish Him/Her state"
+    },
+    {
+      "signal": "Finish Him/Her text prompt",
+      "visual_form": "Text overlay appearing when opponent is defeated but alive",
+      "meaning": "Critical danger state—opponent vulnerable to finishing move (Fatality); window for execution present"
+    },
+    {
+      "signal": "Goro's presence",
+      "visual_form": "Large monstrous character sprite with distinct silhouette",
+      "meaning": "Sub-boss danger tier; significantly elevated combat threat"
+    },
+    {
+      "signal": "Shang Tsung final boss arena",
+      "visual_form": "Throne Room stage; distinct visual environment different from tournament stages",
+      "meaning": "Final confrontation; highest narrative and mechanical danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Round victory",
+      "visual_form": "Opponent health bar emptied; character plays victory animation",
+      "meaning": "Temporary safety; player advances to next round or match"
+    },
+    {
+      "signal": "Match progression",
+      "visual_form": "Stage transition, opponent swap in endurance rounds",
+      "meaning": "Safe progression state; player survived tournament bracket advancement"
+    },
+    {
+      "signal": "Test Your Might minigame state",
+      "visual_form": "Transition to bonus challenge screen with material block and meter",
+      "meaning": "Non-combat safe state; opportunity for points without direct threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Earthrealm",
+      "color_identity": null,
+      "symbol_or_sigil": "Tournament arena locations on Shang Tsung's Island",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Seven island stage environments serving as tournament venues; implies controlled/neutral tournament grounds"
+    },
+    {
+      "faction": "Shang Tsung's forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Shang Tsung as tournament organizer/final boss; Goro as enforcer/sub-boss",
+      "enemy_visual_variants": "Goro as monstrous threat distinct from human fighters",
+      "environmental_markers": "Throne Room stage (final arena); implicit control over tournament infrastructure"
+    },
+    {
+      "faction": "Playable character cohort",
+      "color_identity": null,
+      "symbol_or_sigil": "Seven selectable fighter characters (Johnny Cage, Sonya Blade, Liu Kang, Kano, Jax, Sub-Zero, Scorpion)",
+      "enemy_visual_variants": "Mirror Match against player-character duplicate indicates faction self-opposition",
+      "environmental_markers": "Multiple stage locations; suggests distributed fighter origins across Earthrealm"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Tournament in progress",
+      "visual_manifestation": "Arena stages with spectator environments; organized fight brackets",
+      "behavioral_manifestation": "Structured 1v1 matches with defined progression; endurance match sequences with health meter persistence across multiple opponents"
+    },
+    {
+      "world_state": "Shang Tsung's control of tournament",
+      "visual_manifestation": "Goro positioned as undefeated champion; Shang Tsung as final adversary; Throne Room as ultimate stage",
+      "behavioral_manifestation": "Player must defeat all seven characters, then three endurance matches, then sub-boss Goro, then Shang Tsung—hierarchical threat escalation"
+    },
+    {
+      "world_state": "Earthrealm threat level (high)",
+      "visual_manifestation": "Tournament framing as existential stakes; 500-year narrative context of Goro's dominance",
+      "behavioral_manifestation": "Single-player mode narrative structure implies defending realm through tournament victory"
+    },
+    {
+      "world_state": "Censorship constraint (SNES vs. arcade)",
+      "visual_manifestation": "Absence of blood effects; modified or alternative Fatality animations compared to arcade version",
+      "behavioral_manifestation": "Johnny Cage alternate censored super-uppercut Fatality exists in code but disabled; reflects platform-specific world state (Nintendo content policy)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage environments as setting indicators",
+      "example": "Seven distinct island locations serve as tournament arenas; implies Shang Tsung's island is tournament headquarters and controlled territory"
+    },
+    {
+      "technique": "Boss character progression as narrative escalation",
+      "example": "Goro's 500-year undefeated reign communicated through positioning as sub-boss; Shang Tsung as final opponent communicates he is true antagonist and realm threat"
+    },
+    {
+      "technique": "Character selection roster as faction identity",
+      "example": "Seven playable characters represent diverse fighter pool; Mirror Match implies self-doubt or inner conflict theme"
+    },
+    {
+      "technique": "Minigame context (Test Your Might)",
+      "example": "Breaking progressively harder materials (wood→stone→steel→ruby→diamond) represents player skill escalation and tournament preparation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Winning round",
+      "behavior": "Victory animation; health bar remains above zero; opponent health depletes"
+    },
+    {
+      "entity": "Player character",
+      "state": "Losing round",
+      "behavior": "Health bar depletes to zero; character takes damage animations; gameplay control restricted"
+    },
+    {
+      "entity": "Opponent (defeated but alive)",
+      "state": "Finish Him/Her triggered",
+      "behavior": "Character freezes or staggers in vulnerable idle state; accepts incoming Fatality finishing move without defense"
+    },
+    {
+      "entity": "Goro",
+      "state": "Pre-fight presence",
+      "behavior": "Large sprite scale; monstrous appearance; positioned as mandatory encounter after endurance matches—communicates enhanced threat tier"
+    },
+    {
+      "entity": "Shang Tsung",
+      "state": "Final boss engagement",
+      "behavior": "Final tournament match opponent; positioned after Goro defeat; Throne Room arena stage suggests ultimate authority and power"
+    },
+    {
+      "entity": "Game UI",
+      "state": "Match progression",
+      "behavior": "Health bars, timer, round counter, stage/opponent information displayed persistently—communicates match state and tournament structure"
+    }
+  ],
+  "notes": "Mortal Kombat SNES (1993) operates primarily as a mechanical fighting game with minimal explicit world-state narrative integration during gameplay. Danger and faction communication relies heavily on implicit tournament structure and boss positioning rather than explicit visual storytelling. Key manifestation layer insight: the game communicates political/power hierarchy through difficulty curve (7 fighters → 3 endurance → Goro → Shang Tsung) and stage design. Censorship state (absence of blood/gore on SNES vs. arcade) represents a distinct world-state manifestation driven by external policy constraints. Character-level faction identity is weak in sources; most communication occurs at tournament/stage level. Mirror Match and endurance sequences are primary behavioral tells for world-state shifts.",
+  "sources_used": [
+    "tcrf.net/Mortal_Kombat_(SNES)",
+    "wikipedia.org/wiki/Mortal_Kombat_(1992_video_game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:26:32.969Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5576,
+    "output_tokens": 2006,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "game_id": "galaga-nes",
+  "game_name": "Galaga",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy formation descent",
+      "visual_form": "Aliens fly into formation from top and sides of screen, then dive toward player",
+      "meaning": "Imminent threat; enemies actively attacking"
+    },
+    {
+      "signal": "Projectile fire from enemies",
+      "visual_form": "Bullets traveling downward from enemy positions",
+      "meaning": "Direct damage hazard; collision causes life loss"
+    },
+    {
+      "signal": "Boss Galaga tractor beam",
+      "visual_form": "Large circular beam energy connecting Boss Galaga to player ship",
+      "meaning": "Ship capture mechanic; loss of player control and life"
+    },
+    {
+      "signal": "Boss Galaga presence",
+      "visual_form": "Four large aliens positioned at top of enemy formation, distinct visual size",
+      "meaning": "High-threat entity; requires two shots to destroy, can capture ship"
+    },
+    {
+      "signal": "Collision with alien",
+      "visual_form": "Player ship sprite overlap with enemy sprite",
+      "meaning": "Immediate life loss"
+    },
+    {
+      "signal": "Increased enemy aggression per stage",
+      "visual_form": "Higher density of projectiles, faster dive patterns",
+      "meaning": "World state escalation; danger intensifies as game progresses"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Empty formation gaps",
+      "visual_form": "Space between descending enemies",
+      "meaning": "Safe passage for player movement and shooting"
+    },
+    {
+      "signal": "Bonus stage formation",
+      "visual_form": "Aliens fly in preset formation without firing",
+      "meaning": "Temporary safe harvesting period (stages 3, 7, 11, etc.)"
+    },
+    {
+      "signal": "Dual-fighter activation",
+      "visual_form": "Two connected ship sprites moving as single unit with expanded firepower visual",
+      "meaning": "Enhanced player state; increased combat capability and protection"
+    },
+    {
+      "signal": "Stationary player position",
+      "visual_form": "Player ship at bottom of screen, not colliding with threats",
+      "meaning": "Maintained safe state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Galaga forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Alien creature design; Boss Galaga as elite unit variant",
+      "enemy_visual_variants": "Standard aliens vs. Boss Galaga (larger, stronger); morphing enemies with alternate attack patterns including Galaxian Flagship",
+      "environmental_markers": "Formation positioning; alien sprites occupy upper screen area as invading force"
+    },
+    {
+      "faction": "Human/Player",
+      "color_identity": null,
+      "symbol_or_sigil": "Starfighter ship sprite",
+      "enemy_visual_variants": "Single fighter vs. dual-fighter configuration",
+      "environmental_markers": "Player position at bottom screen boundary; defensive posture"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage progression (1-255 maximum)",
+      "visual_manifestation": "Stage emblems displayed at bottom-right of screen; enemy formation transitions",
+      "behavioral_manifestation": "Enemies become more aggressive per stage; increased projectile frequency and dive speed"
+    },
+    {
+      "world_state": "Ship captured by Boss Galaga",
+      "visual_manifestation": "Player ship appears integrated into enemy formation at top of screen",
+      "behavioral_manifestation": "Captured ship becomes part of enemy formation; player loses direct control until rescue"
+    },
+    {
+      "world_state": "Rescue of captured ship successful",
+      "visual_manifestation": "Rescued ship visually attaches to player's remaining ship; dual-fighter sprite appears",
+      "behavioral_manifestation": "Dual-fighter fires with additional firepower; larger hitbox; enhanced combat capability"
+    },
+    {
+      "world_state": "Rescue of captured ship failed",
+      "visual_manifestation": "Rescued ship remains in formation, morphs to enemy appearance",
+      "behavioral_manifestation": "Former player ship acts as hostile alien; will attack player in future stages"
+    },
+    {
+      "world_state": "Bonus stage (stages 3, 7, 11, etc.)",
+      "visual_manifestation": "Aliens fly in preset, non-threatening pattern",
+      "behavioral_manifestation": "No enemy projectiles fired; player can safely harvest points"
+    },
+    {
+      "world_state": "End-game scenario (stage 255 kill screen)",
+      "visual_manifestation": "Stage counter resets to zero; visual glitches possible",
+      "behavioral_manifestation": "Game may reset, play levels incorrectly, lock up, or shift difficulty based on dip switch settings"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Formation hierarchy",
+      "example": "Boss Galaga positioned at apex of enemy formation; visual size and positioning establish command structure"
+    },
+    {
+      "technique": "Stage progression markers",
+      "example": "Emblems at bottom-right indicate stage number; visual communication of temporal progression through war campaign"
+    },
+    {
+      "technique": "Enemy morphing and variants",
+      "example": "Some enemies transform into new types with different attack patterns (Galaxian Flagship); communicates enemy adaptation and increasing sophistication"
+    },
+    {
+      "technique": "Captured asset repurposing",
+      "example": "Player's own ship can turn against them if rescue fails; visual irony of friendly becoming foe"
+    },
+    {
+      "technique": "Difficulty visual escalation",
+      "example": "Increased projectile density and faster dive speeds create visual cacophony indicating world-state danger increase"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Galaga alien",
+      "state": "In formation",
+      "behavior": "Holds position; awaits dive command"
+    },
+    {
+      "entity": "Galaga alien",
+      "state": "Diving",
+      "behavior": "Moves toward player; fires projectiles; collision damages player"
+    },
+    {
+      "entity": "Boss Galaga",
+      "state": "In formation",
+      "behavior": "Positioned at top; may activate tractor beam toward player"
+    },
+    {
+      "entity": "Boss Galaga",
+      "state": "Tractor beam active",
+      "behavior": "Pulls player ship upward into formation; requires two shots to destroy"
+    },
+    {
+      "entity": "Boss Galaga",
+      "state": "Diving with captured ship",
+      "behavior": "Vulnerable to interception; if destroyed during dive, releases captured ship for rescue; if destroyed in formation, captured ship becomes enemy"
+    },
+    {
+      "entity": "Morphing enemy",
+      "state": "Transformation triggered",
+      "behavior": "Changes visual form and attack pattern; increases unpredictability"
+    },
+    {
+      "entity": "Player ship (single)",
+      "state": "Active",
+      "behavior": "Moves laterally at bottom; fires upward; has single hitbox"
+    },
+    {
+      "entity": "Player ship (dual-fighter)",
+      "state": "Rescued and active",
+      "behavior": "Moves as dual unit; fires with enhanced firepower; larger hitbox increases collision risk but improves damage output"
+    },
+    {
+      "entity": "Player ship (captured, failed rescue)",
+      "state": "Turned enemy",
+      "behavior": "Integrates into enemy formation; behaves as hostile alien in subsequent stages"
+    }
+  ],
+  "notes": "Galaga uses minimal visual palette and sprite work typical of early-1980s arcade hardware, yet communicates complex world-state through positional hierarchy, formation patterns, and behavioral transformations. The tractor beam mechanic creates a unique danger signal—the visual beam itself becomes a manifestation of threat and player vulnerability. Enemy morphing and ship transformation mechanics demonstrate how limited sprite animation can convey escalating complexity. Stage emblems provide explicit world-state indexing. The 'kill screen' at stage 255 represents a systemic boundary manifested through cascading visual/behavioral glitches. No explicit faction color-coding or environmental markers exist; faction identity relies entirely on sprite design and positioning paradigms.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:25:30.641Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3400,
+    "output_tokens": 2134,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

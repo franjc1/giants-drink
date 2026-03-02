@@ -1,0 +1,107 @@
+{
+  "game_id": "karate-champ-nes",
+  "game_name": "Karate Champ",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": 12,
+  "element_introduction_order": [
+    {
+      "element": "Basic punch/kick moves",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns dual-joystick 24-move system against CPU opponent in dojo setting"
+    },
+    {
+      "element": "Scoring system (points and half-points)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "No health bar; single successful hit ends round. First to 2 points wins match. Best-of-three format"
+    },
+    {
+      "element": "Location/stage variety",
+      "first_appears": "Round 2+",
+      "introduction_context": "moderate",
+      "mastery_context": "Tournament progression through 12 worldwide locations (harbor, garden, bamboo forest, etc.). Same opponent mechanics, new backgrounds"
+    },
+    {
+      "element": "Bonus rounds",
+      "first_appears": "After successful round",
+      "introduction_context": "moderate",
+      "mastery_context": "Evading potted plants, kicking boards, stopping charging bull to earn bonus points"
+    },
+    {
+      "element": "Difficulty escalation",
+      "first_appears": "Progressive rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "Each new location/round presents more challenging opponent AI"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful hit scoring point",
+      "Round won (2 points scored)",
+      "Bonus round completion",
+      "Location transition"
+    ],
+    "typical_tension_triggers": [
+      "Opponent attack",
+      "Missed move input",
+      "Tied round state",
+      "Location change with stronger opponent"
+    ],
+    "pacing_descriptor": "Episodic: discrete one-on-one matches with clear resolution, followed by bonus challenges, then stage progression. No continuous tension escalation within round—tension resets after each point scored."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Dojo setting (Round 1) introduces dual-joystick mechanics and basic scoring against initial CPU opponent",
+    "mid_game": "Progression through varied tournament locations (6-12 stages) with incrementally stronger AI opponents",
+    "late_game": "Final stages against peak difficulty AI in nighttime forest and looping second cycle through all 12 locations",
+    "notable_spikes": [
+      "Location transition to new opponent AI",
+      "Loop return to location 1 after completing 12-stage cycle (increased opponent difficulty)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Match-Bonus-Progression",
+      "description": "Each level cycle: 3-round best-of match vs opponent → bonus challenge round (plant evasion/board breaking/bull stopping) → transition to next location. Fixed progression through 12 locations.",
+      "example_level": "Round 1 (Dojo) → Round 2 (Harbor) → Round 3 (Mount Fuji Garden)"
+    },
+    {
+      "pattern_name": "Location-as-Stage",
+      "description": "12 distinct worldwide locations serve as visual/thematic level containers. Gameplay mechanics identical per location; visual setting and opponent AI difficulty differentiate stages.",
+      "example_level": "Bamboo Forest, Dutch Windmills, North American Desert, Japanese Garden"
+    },
+    {
+      "pattern_name": "Bonus Challenge Interstitial",
+      "description": "Between match completion and next opponent fight, player faces environment-based bonus challenge (dodge objects, break boards, stop bull). Reward-based, not mandatory-win gates.",
+      "example_level": "Post-match bonus rounds in each of 12 locations"
+    }
+  ],
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:44:17.322Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4000,
+    "output_tokens": 1384,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "game": "Gunstar Heroes",
+    "platform": "Sega Genesis / Mega Drive",
+    "region": "NTSC (North America / Japan)",
+    "year": 1993,
+    "publisher": "Sega",
+    "developer": "Treasure",
+    "sources": [
+      {
+        "name": "TASVideos — Genesis / Gunstar Heroes",
+        "url": "https://tasvideos.org/GameResources/Genesis/GunstarHeroes",
+        "notes": "Mechanics documentation."
+      },
+      {
+        "name": "Wikipedia — Gunstar Heroes",
+        "url": "https://en.wikipedia.org/wiki/Gunstar_Heroes",
+        "notes": "Game mechanics overview."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Gunstar Heroes is a run-and-gun platformer known for technical achievement on Genesis hardware.",
+      "DEFINING MECHANIC: Weapon combination system — 4 base weapons combined in pairs = 14 total weapon combinations.",
+      "Two movement types selectable at start: 'Free Shot' (can shoot in 8 directions) or 'Fixed Shot' (faster movement, locks shoot direction).",
+      "Slide/aerial slide provides fast horizontal movement.",
+      "Can throw and slam enemies — melee-based crowd control.",
+      "Two-player co-op. One of the earliest games to demonstrate what Treasure would become known for: technical showmanship."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 320,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "movement_types": {
+    "_note": "Player selects movement type before starting — not changeable during game.",
+    "free_shot": {
+      "description": "Can aim and shoot in 8 directions independently of movement.",
+      "notes": "More versatile combat but slower movement."
+    },
+    "fixed_shot": {
+      "description": "Shooting direction is locked to movement direction. Enables faster horizontal movement speed.",
+      "notes": "Preferred for speedruns — the faster movement compensates for less flexible aiming."
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed_approx": {
+      "px_per_frame": 2.5,
+      "confidence": "low",
+      "notes": "Approximate. Fixed Shot mode is faster. VERIFY."
+    },
+    "slide": {
+      "description": "Ground slide for quick horizontal movement and avoiding projectiles.",
+      "notes": "Slide can be performed in both ground and air (aerial slide)."
+    }
+  },
+
+  "jump": {
+    "height_px_approx": 48,
+    "confidence": "low",
+    "variable_height": true,
+    "air_control": "full",
+    "aerial_slide": {
+      "description": "Press slide in the air for a fast horizontal aerial dash.",
+      "notes": "Aerial slide is a key traversal tool — allows fast horizontal movement across gaps."
+    }
+  },
+
+  "weapon_system": {
+    "_note": "The weapon combination system is the core design innovation of Gunstar Heroes.",
+    "base_weapons": {
+      "lightning": "Rapid electrical projectile",
+      "fire": "Slower but larger flaming shot",
+      "chaser": "Homing bullets that track enemies",
+      "force": "Unlimited bouncing bullets (as many as you can fire)"
+    },
+    "combination_system": {
+      "description": "Two weapons are combined to create a new weapon type. Each combination creates a unique weapon with properties from both parents.",
+      "total_combinations": 14,
+      "notable_combinations": {
+        "force_plus_force": "The strongest crowd-clearing weapon — infinite bouncing projectiles fill the screen",
+        "lightning_plus_chaser": "Homing electrical shots",
+        "fire_plus_chaser": "Homing fire — very effective against bosses"
+      }
+    }
+  },
+
+  "melee_combat": {
+    "description": "Gunstar Heroes features melee attacks in addition to ranged weapons.",
+    "grab": "Press the melee button near an enemy to grab them",
+    "throw": "After grabbing, throw the enemy as a projectile — damages other enemies on contact",
+    "slam": "Grab + slam into the ground — area damage",
+    "notes": "The grab-and-throw mechanic makes enemies into weapons. This creates a risk-reward: get close (vulnerable) for melee advantage."
+  },
+
+  "rolling": {
+    "description": "Characters can roll on the ground for evasion and collision avoidance.",
+    "notes": "Rolling can be used to avoid projectiles."
+  },
+
+  "design_notes_for_giants_drink": [
+    "The weapon combination system turns item collection into a creative act. Players don't just find 'better weapons' — they experiment with combinations to discover interactions. 14 weapons from 4 components is elegant combinatorial design.",
+    "Free Shot vs Fixed Shot mode selection creates two different games from the same content. Free Shot = combat precision; Fixed Shot = movement speed. This is a difficulty/style choice that lets players self-select their challenge.",
+    "The grab-and-throw mechanic makes every enemy a potential weapon. This creates a positional economy: enemies you kill normally vs. enemies you use as projectiles against other enemies. Using the map dynamically.",
+    "Gunstar Heroes' technical achievement (sprites with rotation/scaling, large boss sprites, smooth frame rate) was a deliberate flex of Genesis hardware capabilities. The game is designed to show off what the hardware can do — and the design choices support that showmanship.",
+    "Two-player co-op changes the game significantly — two players can cover different threat sources, use grab-and-throw cooperatively, and split weapon combination strategies. The co-op is meaningful, not just additive."
+  ]
+}

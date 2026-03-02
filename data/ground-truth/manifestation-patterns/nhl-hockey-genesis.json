@@ -1,0 +1,145 @@
+{
+  "game_id": "nhl-hockey-genesis",
+  "game_name": "NHL Hockey",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "opposing_player_proximity",
+      "visual_form": "player sprite position relative to puck carrier",
+      "meaning": "immediate threat to possession or physical check"
+    },
+    {
+      "signal": "goaltender_positioning",
+      "visual_form": "goalie sprite blocks net opening visually",
+      "meaning": "shot difficulty increases based on visible coverage"
+    },
+    {
+      "signal": "penalty_indicator",
+      "visual_form": "on-screen text/UI flag for infraction",
+      "meaning": "player sent to penalty box; team disadvantaged numerically"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open_ice",
+      "visual_form": "unoccupied sprite space on playing field",
+      "meaning": "opportunity for pass or skating without immediate opposition"
+    },
+    {
+      "signal": "teammate_positioning",
+      "visual_form": "allied player sprite in advantageous formation",
+      "meaning": "receiving option for pass or support play"
+    },
+    {
+      "signal": "friendly_zone_control",
+      "visual_form": "player sprites clustered in defensive end",
+      "meaning": "team defending home territory; lower immediate offensive threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "home_team",
+      "color_identity": "primary jersey color (varies by team roster)",
+      "symbol_or_sigil": "team logo on jersey/scoreboard",
+      "enemy_visual_variants": "away_team uses contrasting jersey color",
+      "environmental_markers": "scoreboard displays team abbreviation and score; bench positioning on designated side"
+    },
+    {
+      "faction": "away_team",
+      "color_identity": "secondary/white jersey color (standard away uniform)",
+      "symbol_or_sigil": "team logo on alternate jersey",
+      "enemy_visual_variants": "home_team uses primary color contrast",
+      "environmental_markers": "opposite bench; displayed in away slot on scoreboard UI"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_play",
+      "visual_manifestation": "puck sprite animates across ice; player sprites move freely in response",
+      "behavioral_manifestation": "game clock counts down; players engage in dynamic positioning and collision detection"
+    },
+    {
+      "world_state": "stopped_play_faceoff",
+      "visual_manifestation": "puck sprite centers on ice; player sprites freeze in formal stance around center circle",
+      "behavioral_manifestation": "input locked until faceoff initiated; visual tension of opposing centers poised"
+    },
+    {
+      "world_state": "penalty_active",
+      "visual_manifestation": "penalty indicator on UI; offending player sprite repositioned to penalty box area off-ice",
+      "behavioral_manifestation": "penalized player unavailable for play; team operates with numerical disadvantage (4v5 or 3v4)"
+    },
+    {
+      "world_state": "goal_scored",
+      "visual_manifestation": "puck animation enters goal aperture; scoreboard updates visually; potential celebration sprite animations",
+      "behavioral_manifestation": "play halts; delayed reset to center-ice faceoff; score reflected in UI"
+    },
+    {
+      "world_state": "game_end",
+      "visual_manifestation": "final score displayed prominently; game clock frozen at 0:00",
+      "behavioral_manifestation": "input disabled; transition to result screen or menu state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "scoreboard_tracking",
+      "example": "real-time display of period, time remaining, and team scores communicates match progression and winning/losing state"
+    },
+    {
+      "technique": "roster_depth_signaling",
+      "example": "jersey numbers and sprite animations indicate which players are active; substitutions communicate strategic lineup changes"
+    },
+    {
+      "technique": "ice_conditions_visual",
+      "example": "puck sprite behavior and skate animation smoothness convey play momentum and ice surface state (implicit)"
+    },
+    {
+      "technique": "possession_indicator",
+      "example": "puck proximity to sprite indicates control; visual trailing or loose puck animation shows contested possession"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "puck",
+      "state": "loose",
+      "behavior": "bounces/slides erratically; neutral sprite movement without directional input; signals scramble for possession"
+    },
+    {
+      "entity": "player_controlled",
+      "state": "active",
+      "behavior": "responds immediately to input; sprite orientation matches intended direction; animation loops for skating/stopping"
+    },
+    {
+      "entity": "player_ai_opponent",
+      "state": "aggressive",
+      "behavior": "sprite moves toward puck carrier; performs body checking animation; closes distance rapidly"
+    },
+    {
+      "entity": "player_ai_opponent",
+      "state": "defensive",
+      "behavior": "sprite maintains position in front of net; reduces forward movement; prioritizes blocking passing lanes visually"
+    },
+    {
+      "entity": "goaltender",
+      "state": "ready",
+      "behavior": "sprite faces play; animation frames show stance variation based on shot proximity; position shifts to block visible openings"
+    },
+    {
+      "entity": "penalized_player",
+      "state": "inactive",
+      "behavior": "sprite remains stationary in penalty box area; removed from animated play loop; grayed or distinct visual presentation (if implemented)"
+    }
+  ],
+  "notes": "NHL Hockey (Genesis, 1992) uses minimalist 16-bit sprite-based visual communication. World-state and danger/safety signals rely on spatial positioning, jersey color contrast, and UI elements rather than complex animation or particle effects. The paradigm is competitive team sports; faction identity is strictly team-based with no narrative political dimension. Environmental storytelling is procedural through match progression rather than narrative world-building. The game communicates state through functional visual hierarchy: scoreboard > active play area > player sprites > puck sprite.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:41:48.098Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 910,
+    "output_tokens": 1644,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

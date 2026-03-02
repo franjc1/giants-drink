@@ -1,0 +1,197 @@
+{
+  "game_id": "popeye-nes",
+  "game_name": "Popeye",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Brutus (antagonist character)",
+      "visual_form": "Large muscular figure chasing player character across platform",
+      "meaning": "Primary threat; collision results in loss of life"
+    },
+    {
+      "signal": "Flying objects (bottles, vultures, skulls)",
+      "visual_form": "Projectiles descending from top of screen toward player",
+      "meaning": "Environmental hazards that deal damage on contact"
+    },
+    {
+      "signal": "Sea Hag presence",
+      "visual_form": "Superimposed figure in top-right area of level (NES version)",
+      "meaning": "Secondary antagonist threat requiring avoidance"
+    },
+    {
+      "signal": "Uncollected dropped items",
+      "visual_form": "Objects (hearts, musical notes, letters) remaining on-screen past timeout threshold",
+      "meaning": "Time pressure mechanic; failure to collect before despawn results in life loss"
+    },
+    {
+      "signal": "Brutus proximity/pursuit animation",
+      "visual_form": "Animated chasing behavior across multiple level tiers",
+      "meaning": "Active threat state; Brutus can traverse down levels and jump upward to attack"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Spinach power-up presence",
+      "visual_form": "Single can of spinach visible on each level",
+      "meaning": "Collectible that grants temporary invincibility and allows counter-attack against Brutus"
+    },
+    {
+      "signal": "Invincibility state (post-spinach consumption)",
+      "visual_form": "Visual effect indicating Popeye's temporary invulnerability",
+      "meaning": "Brief window where Brutus flees and player can eliminate threat via contact"
+    },
+    {
+      "signal": "Punching bag interaction",
+      "visual_form": "Bag object on first screen of each cycle with bucket suspended above",
+      "meaning": "Optional stun mechanic; hitting bag drops bucket to temporarily incapacitate Brutus for score bonus"
+    },
+    {
+      "signal": "Olive Oyl (ally character)",
+      "visual_form": "Figure at top of screen dropping collectible items",
+      "meaning": "Non-hostile entity providing resources; represents objective source"
+    },
+    {
+      "signal": "Item collection UI/progress",
+      "visual_form": "Visual counter for collected items (hearts/notes/letters) per level",
+      "meaning": "Progress toward level completion; safety correlates with collection progress"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Popeye (Player/Hero)",
+      "color_identity": null,
+      "symbol_or_sigil": "Sailor outfit with distinctive pipe",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Occupies platform structures; operates on stairs and ladders"
+    },
+    {
+      "faction": "Brutus/Opponent",
+      "color_identity": null,
+      "symbol_or_sigil": "Muscular antagonist figure, distinctly larger frame than player",
+      "enemy_visual_variants": "Normal chase state vs. stunned state (bucket collision) vs. fleeing state (post-spinach)",
+      "environmental_markers": "Mobile across all platform levels; pursues Popeye aggressively"
+    },
+    {
+      "faction": "Olive Oyl (Neutral/Allied)",
+      "color_identity": null,
+      "symbol_or_sigil": "Female figure positioned at top of screen",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Fixed position source; generates level objectives"
+    },
+    {
+      "faction": "Sea Hag (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Witch character superimposed on level area",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Top-right level position (NES version); alternative threat to Brutus"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-spinach collection (normal difficulty)",
+      "visual_manifestation": "Brutus displayed in active pursuit animation; weapons visible on-screen",
+      "behavioral_manifestation": "Popeye can only defend via punching projectiles; cannot damage Brutus; must evade"
+    },
+    {
+      "world_state": "Post-spinach consumption (invincibility window)",
+      "visual_manifestation": "Popeye visually appears invulnerable; Brutus animation shifts to fleeing behavior",
+      "behavioral_manifestation": "Brutus runs away; contact with Brutus knocks him out temporarily; doubled item point values active"
+    },
+    {
+      "world_state": "Bucket collision with Brutus (stun triggered)",
+      "visual_manifestation": "Brutus stunned animation; temporary immobility visual state",
+      "behavioral_manifestation": "Score bonus awarded; Brutus remains stationary for several seconds before resuming pursuit"
+    },
+    {
+      "world_state": "Item collection near timeout",
+      "visual_manifestation": "Dropped objects visible on lower platform level; visual urgency through positioning",
+      "behavioral_manifestation": "Player must navigate to item before despawn; failure triggers life loss"
+    },
+    {
+      "world_state": "Level completion threshold reached",
+      "visual_manifestation": "Required item count collected (24 hearts / 16 notes / 24 letters HELP depending on level)",
+      "behavioral_manifestation": "Progression to next screen cycle; difficulty escalation through layout variation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character positioning hierarchy",
+      "example": "Olive Oyl positioned at top of screen as objective source; Popeye at middle platform tiers; Brutus pursuing across all accessible levels creates visual narrative of pursuit and resource acquisition under pressure"
+    },
+    {
+      "technique": "Level-specific collectible variation",
+      "example": "Screen 1 features hearts (love/survival theme), Screen 2 features musical notes (entertainment/character), Screen 3 features HELP letters (distress/character vulnerability) — visual thematic progression across arcade cycle"
+    },
+    {
+      "technique": "Environmental interactivity as narrative",
+      "example": "Punching bag on first screen with suspended bucket indicates Popeye's combat capability and environmental mastery; conveyed through interactive object design rather than exposition"
+    },
+    {
+      "technique": "Threat scale through character size",
+      "example": "Brutus rendered visually larger than Popeye, creating immediate visual communication of power differential; spinach acts as temporary equalizer through invincibility visual state"
+    },
+    {
+      "technique": "Architectural constraint as story",
+      "example": "Platform layout forces pursuit into specific pathways; Brutus mobility limitations (must use stairs/ladders like Popeye) creates cat-and-mouse dynamic; no jump mechanic for player emphasizes navigation skill over reflex jumping"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Brutus",
+      "state": "Normal pursuit mode",
+      "behavior": "Chases Popeye across platform tiers; can traverse down to lower levels, reach sideways to adjacent tiers, and jump upward to strike player positioned above"
+    },
+    {
+      "entity": "Brutus",
+      "state": "Stunned (post-bucket collision)",
+      "behavior": "Temporarily immobilized; cannot pursue; remains stationary for several seconds before resuming normal behavior"
+    },
+    {
+      "entity": "Brutus",
+      "state": "Fleeing (post-spinach consumption)",
+      "behavior": "Runs away from Popeye; can be temporarily knocked out via direct contact; returns to normal pursuit after invincibility window expires"
+    },
+    {
+      "entity": "Popeye (player)",
+      "state": "Normal state",
+      "behavior": "Can punch projectiles to destroy them; walks/climbs freely on platforms; cannot damage Brutus without spinach; loses life on contact with threats"
+    },
+    {
+      "entity": "Popeye (player)",
+      "state": "Post-spinach (invincible)",
+      "behavior": "Temporary invulnerability to all threats; can defeat Brutus through contact; item collection point value doubled; behavior reverts after time limit"
+    },
+    {
+      "entity": "Flying threats (bottles, vultures, skulls)",
+      "state": "Active projectile state",
+      "behavior": "Descend from top of screen toward player; can be destroyed by Popeye's punch attack; deal damage on contact if not destroyed"
+    },
+    {
+      "entity": "Olive Oyl",
+      "state": "Dropping items",
+      "behavior": "Remains at top-screen position; generates collectible objects (hearts/notes/letters) that Popeye must retrieve; non-interactive but goal-related"
+    },
+    {
+      "entity": "Sea Hag",
+      "state": "Presence on level",
+      "behavior": "Acts as secondary threat requiring avoidance; positioned superimposed on level area (NES version); exact interaction mechanics less documented than Brutus threat"
+    }
+  ],
+  "notes": "Popeye NES (1986) is a direct port of the 1982 arcade game with minimal visual divergence. Key visual communication relies on character animation states and spatial positioning rather than color coding or complex visual effects (platform limitations). The unused skull graphics noted in TCRF suggest the NES version simplified the Sea Hag visual presentation compared to arcade (removed skull platform stack). The game's core danger/safety communication emerges through behavioral animation changes (Brutus pursuit vs. fleeing) rather than palette swaps. No faction-based visual conflict beyond hero-vs-antagonist binary; world-state changes manifest primarily through collectible presence/absence and enemy behavioral shifts.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:30:37.558Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4084,
+    "output_tokens": 2523,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

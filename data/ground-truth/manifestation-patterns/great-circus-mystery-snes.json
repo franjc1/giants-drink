@@ -1,0 +1,156 @@
+{
+  "game_id": "great-circus-mystery-snes",
+  "game_name": "The Great Circus Mystery Starring Mickey & Minnie",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile characters and creatures in level environments",
+      "meaning": "Areas containing threats that must be avoided or defeated"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Fires, obstacles, and level-specific dangers",
+      "meaning": "Hazards that damage or kill the player character if contact occurs"
+    },
+    {
+      "signal": "Boss encounter zones",
+      "visual_form": "Specific arena spaces with distinct visual markers (e.g., G24 tileset variants in boss areas)",
+      "meaning": "High-danger zones requiring skill and resource management to survive"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health restoration items",
+      "visual_form": "Heart collectibles scattered throughout levels",
+      "meaning": "Player can expand health meter by collecting these items"
+    },
+    {
+      "signal": "Outfit/power-up locations",
+      "visual_form": "Distinct visual markers for magician outfit, firefighter uniform, mountain-climbing gear",
+      "meaning": "Safe zones or reward areas where character gains temporary special abilities and invulnerability to specific hazard types"
+    },
+    {
+      "signal": "Shop locations",
+      "visual_form": "Merchant areas identified in levels",
+      "meaning": "Safe trading zones where coins can be exchanged for items and upgrades"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player characters (Mickey & Minnie)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mickey Mouse iconic silhouette and character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Starting positions in levels; presence in cinematics"
+    },
+    {
+      "faction": "Emperor Pete (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pete's character sprite and presence as boss enemy",
+      "enemy_visual_variants": "Appears as final boss or mini-boss in various contexts",
+      "environmental_markers": "Boss arena zones; throne room or command areas"
+    },
+    {
+      "faction": "Allied NPCs (Goofy, Donald Duck)",
+      "color_identity": null,
+      "symbol_or_sigil": "Character sprite representations",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Story progression cutscenes; outfit reward events (Goofy gives mountain-climbing gear in level 4)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Story progression (game is dream/magical land exploration)",
+      "visual_manifestation": "Six distinct level environments (jungle, circus, various themed zones) with unique tilesets and visual style per stage",
+      "behavioral_manifestation": "Enemy types and difficulty scale change per level; NPCs appear at story-appropriate moments"
+    },
+    {
+      "world_state": "Character outfit equipped",
+      "visual_manifestation": "Sprite changes to display magician robe, firefighter uniform, or climbing gear; visual effects differ (magic blasts, water streams, grappling hook visibility)",
+      "behavioral_manifestation": "Player gains level-specific interaction abilities (underwater breathing in magician form, fire extinguishing in firefighter form, wall-climbing in gear)"
+    },
+    {
+      "world_state": "Health/resource depletion",
+      "visual_manifestation": "Health meter visual feedback; magic meter drains when using magic blasts; water meter drains when using water spray",
+      "behavioral_manifestation": "Character movement may slow or become restricted; magic/water attacks become unavailable until meter refill items are collected"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "Stage clear screen with Japanese 'X Stage' terminology (maintained in Japanese version with color variety)",
+      "behavioral_manifestation": "Transition to next level; story progression cutscene plays"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tileset identification and visual theming",
+      "example": "The Jungle stage uses G22-02 tree tilesets and G24 sets for boss areas, creating visual distinction between exploration and boss encounter zones"
+    },
+    {
+      "technique": "Hidden developer graphics",
+      "example": "Heart hidden in first tileset of The Jungle provides environmental world-building detail and reward discovery"
+    },
+    {
+      "technique": "Outfit-gated progression",
+      "example": "Firefighter outfit allows water interaction and fire extinguishing, signaling level themes and puzzle mechanics through equipment visual presentation"
+    },
+    {
+      "technique": "NPC positioning in narrative moments",
+      "example": "Goofy appears in level 4 to gift mountain-climbing gear, positioning allies as quest-givers and world guides"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mickey/Minnie player character",
+      "state": "Normal movement",
+      "behavior": "Standard platformer locomotion; can grab and spin-throw blocks"
+    },
+    {
+      "entity": "Mickey/Minnie player character",
+      "state": "Magician outfit equipped",
+      "behavior": "Shoots charged magic blasts; controls magic carpets; breathes underwater; magic meter visible and drains with usage"
+    },
+    {
+      "entity": "Mickey/Minnie player character",
+      "state": "Firefighter outfit equipped",
+      "behavior": "Sprays water streams at enemies; extinguishes fires; creates icicles; water meter visible and drains with usage"
+    },
+    {
+      "entity": "Mickey/Minnie player character",
+      "state": "Mountain-climbing gear equipped",
+      "behavior": "Uses grappling hook to attach to objects; hoists/swings upward; grabs and throws enemies with hook"
+    },
+    {
+      "entity": "Enemies (general)",
+      "state": "Unaware of player",
+      "behavior": "Patrol or idle in level areas"
+    },
+    {
+      "entity": "Enemies (general)",
+      "state": "Player detected",
+      "behavior": "Chase or attack player; can be defeated by jumping on them or grabbing/throwing blocks"
+    },
+    {
+      "entity": "Emperor Pete (boss)",
+      "state": "Boss encounter active",
+      "behavior": "Multi-phase combat requiring outfit-specific strategies and resource management"
+    }
+  ],
+  "notes": "The Great Circus Mystery uses a dream-narrative framing where the player-character awakens at the end, suggesting all world-state visuals communicate a magical dreamscape rather than persistent political situation. Danger is signaled through enemy presence and environmental hazards rather than faction conflict. Safety is communicated through outfit acquisition (visual transformation) and item availability. The game employs outfit-gating as both a mechanical progression system and visual world-state indicator — different outfits enable interaction with environmental puzzle elements, making visual presentation directly tied to available actions.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:04:35.611Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5607,
+    "output_tokens": 1809,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

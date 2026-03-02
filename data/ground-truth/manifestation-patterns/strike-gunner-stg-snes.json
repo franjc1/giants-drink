@@ -1,0 +1,141 @@
+{
+  "game_id": "strike-gunner-stg-snes",
+  "game_name": "Strike Gunner S.T.G.",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bright colored bullets/energy bolts contrasting with background",
+      "meaning": "Immediate threat requiring evasion"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Distinct sprite designs for hostile aircraft and ground units",
+      "meaning": "Combat encounter imminent"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large, detailed sprite with multiple attack patterns and visual flourishes",
+      "meaning": "Significant threat escalation requiring focused engagement"
+    },
+    {
+      "signal": "Screen-filling attacks",
+      "visual_form": "Expansive projectile patterns or energy waves filling play area",
+      "meaning": "Critical evasion required; high danger state"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear airspace",
+      "visual_form": "Absence of enemy sprites and projectiles in immediate vicinity",
+      "meaning": "Momentary reprieve for player repositioning"
+    },
+    {
+      "signal": "Power-up appearance",
+      "visual_form": "Glowing collectible items dropped by defeated enemies",
+      "meaning": "Temporary advantage or resource gain available"
+    },
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Distinctive visual pickups (likely cross or plus symbols)",
+      "meaning": "Opportunity to restore player vitality"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled aircraft sprite at screen bottom; positioned centrally or per input"
+    },
+    {
+      "faction": "Enemy military forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple distinct enemy aircraft types with varying sprite sizes and attack patterns; ground-based turrets and installations",
+      "environmental_markers": "Enemy sprites appear from top of screen or sides; concentrated in specific stage zones"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early stage combat intensity",
+      "visual_manifestation": "Sparse enemy placement; smaller projectile counts; cleaner screen composition",
+      "behavioral_manifestation": "Enemies follow predictable patrol patterns; attack with limited frequency"
+    },
+    {
+      "world_state": "Mid-stage escalation",
+      "visual_manifestation": "Increased enemy sprite density; more complex bullet patterns; visual clutter increases",
+      "behavioral_manifestation": "Enemy formations tighten; attack frequency and projectile volume increase; coordinated multi-unit patterns emerge"
+    },
+    {
+      "world_state": "Boss encounter",
+      "visual_manifestation": "Boss sprite dominates screen center or significant portion; elaborate attack visualization with multiple projectile types; background may shift or intensify",
+      "behavioral_manifestation": "Boss executes multi-phase attack patterns; screen-filling projectile waves; vulnerable phases visually distinct"
+    },
+    {
+      "world_state": "Post-stage transition",
+      "visual_manifestation": "Screen clears; brief respite with minimal enemies; visual staging suggests progression or location change",
+      "behavioral_manifestation": "Enemy pressure momentarily reduces; allows player recovery and repositioning"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Enemy type deployment",
+      "example": "Different aircraft and ground installations appear in specific stage zones, implying different military installations or defensive positions"
+    },
+    {
+      "technique": "Bullet pattern complexity",
+      "example": "Boss attack patterns increase in elaboration and screen-filling capacity, communicating escalating threat and enemy adaptation"
+    },
+    {
+      "technique": "Sprite density progression",
+      "example": "Visual crowding increases across stage progression, indicating player advancing into defended territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy aircraft",
+      "state": "Patrol/approach",
+      "behavior": "Follows predetermined flight path; maintains distance until player enters range"
+    },
+    {
+      "entity": "Standard enemy aircraft",
+      "state": "Active combat",
+      "behavior": "Fires projectiles in patterns; may attempt evasion or aggressive positioning"
+    },
+    {
+      "entity": "Ground turret",
+      "state": "Idle",
+      "behavior": "Stationary; sprite visible but not firing"
+    },
+    {
+      "entity": "Ground turret",
+      "state": "Activated",
+      "behavior": "Fires upward projectile streams when player approaches"
+    },
+    {
+      "entity": "Boss unit",
+      "state": "Phase 1",
+      "behavior": "Executes primary attack pattern; limited vulnerable windows"
+    },
+    {
+      "entity": "Boss unit",
+      "state": "Phase 2+",
+      "behavior": "Attack patterns intensify; screen-filling projectile waves; behavior becomes more erratic or multi-directional"
+    }
+  ],
+  "notes": "Strike Gunner S.T.G. is a vertically-scrolling shoot-em-up with military aesthetic. World state is communicated primarily through enemy deployment density, projectile complexity, and sprite scale/visual weight rather than explicit environmental changes. Danger escalation is linear and progression-based. No faction politics or ideological visual markers present; conflict is purely oppositional (player vs. undifferentiated enemy forces). The game lacks narrative or faction differentiation—all visual communication serves mechanical difficulty and player threat assessment.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:16:53.086Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 925,
+    "output_tokens": 1631,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

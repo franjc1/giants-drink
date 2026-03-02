@@ -1,0 +1,170 @@
+{
+  "game_id": "paperboy-nes",
+  "game_name": "Paperboy",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Moving obstacles",
+      "visual_form": "Cars, skateboarders, rolling tires animated across the street",
+      "meaning": "Collision hazard; contact costs player one life"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Walls, ditches, holes rendered in street terrain",
+      "meaning": "Crash obstacles that destroy player momentum and cost lives"
+    },
+    {
+      "signal": "Non-subscriber houses",
+      "visual_form": "Houses without bright color distinction from subscriber homes",
+      "meaning": "Damage to these properties adds points but breaks subscription contracts if hit"
+    },
+    {
+      "signal": "Aggressive NPCs",
+      "visual_form": "Animated characters (angry lady, dog, burglar, motorcyclist) with hostile movement patterns",
+      "meaning": "Mobile obstacles that intercept player or create unpredictable hazards"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Subscriber houses",
+      "visual_form": "Houses decorated in bright colors to distinguish from non-subscribers",
+      "meaning": "Delivery targets; successful throws here maintain/increase subscription count"
+    },
+    {
+      "signal": "Newspaper bundles",
+      "visual_form": "Pickup items placed on ground throughout route",
+      "meaning": "Resource replenishment; player must collect to continue throwing"
+    },
+    {
+      "signal": "Training course",
+      "visual_form": "Dedicated obstacle course section after main route completion",
+      "meaning": "Safe practice area with unlimited papers; crashing here ends course but causes no life loss"
+    },
+    {
+      "signal": "Completion progression",
+      "visual_form": "Advancement from Monday through Sunday levels with visual day markers",
+      "meaning": "Forward movement indicates survival; reaching Sunday endpoint triggers victory bonus"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Subscribers",
+      "color_identity": "Bright colors (exact palette unspecified in sources)",
+      "symbol_or_sigil": "House decoration distinction; mailbox target",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Houses positioned along delivery route; visual distinction from non-subscriber dwellings"
+    },
+    {
+      "faction": "Non-subscribers",
+      "color_identity": null,
+      "symbol_or_sigil": "Undistinguished house appearance (absence of bright color marker)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Default/plain houses; damage bonus points indicate adversarial relationship"
+    },
+    {
+      "faction": "Street hazards (hostile NPCs)",
+      "color_identity": null,
+      "symbol_or_sigil": "Animated character sprites: angry lady, dog, burglar, motorcyclist, skateboarder",
+      "enemy_visual_variants": "Burglar has window-breaking animation; angry lady has running/angry pose; dog has chase behavior; motorcyclist drives between blocks",
+      "environmental_markers": "Mobile hazards appearing contextually on street (house-based lady, yard-based dog, street-crossing motorcyclist)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Subscription active",
+      "visual_manifestation": "House displays bright color; mailbox accessible as throw target",
+      "behavioral_manifestation": "Successful delivery adds subscribers (up to max 10); failed delivery or damage removes subscription"
+    },
+    {
+      "world_state": "Subscription canceled",
+      "visual_manifestation": "House reverts to undistinguished appearance or disappears from delivery route",
+      "behavioral_manifestation": "House no longer counts as delivery target; point value lost"
+    },
+    {
+      "world_state": "Player life lost",
+      "visual_manifestation": "Collision animation; possible explosion graphic (unused but indicates intent)",
+      "behavioral_manifestation": "Player respawns or game-over screen displays; route resets or ends"
+    },
+    {
+      "world_state": "Increasing difficulty progression",
+      "visual_manifestation": "Level advances from Monday to Sunday; Sunday papers render visually heavier/slower trajectory",
+      "behavioral_manifestation": "Throwable papers travel more slowly on Sunday; obstacle patterns intensify across week"
+    },
+    {
+      "world_state": "Training course active",
+      "visual_manifestation": "Obstacle course terrain (targets, ramps, walls, ditches) replaces normal route",
+      "behavioral_manifestation": "Unlimited paper supply; no subscription penalties; crashing ends course without life loss"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Subscription house marking",
+      "example": "Bright color decoration on 10 of 20 houses establishes economic class/affluence status and reading audience identification; non-colored houses suggest poverty or disinterest in newspaper service"
+    },
+    {
+      "technique": "NPC context placement",
+      "example": "Angry lady emerges from house (domestic confrontation); dog chases from yard (territory defense); burglar at window (crime/theft threat); motorcyclist crosses street (reckless youth culture)"
+    },
+    {
+      "technique": "Obstacle thematic cohesion",
+      "example": "Cars, skateboarders, rolling tires convey suburban street dangers familiar to delivery-route children; contextualizes paperboy as vulnerable adolescent in unpredictable environment"
+    },
+    {
+      "technique": "Daily progression visual cycle",
+      "example": "Monday–Sunday level structure with visual day markers and mechanical change (heavier papers on Sunday) establishes work-week fatigue and mounting challenge narrative without dialogue"
+    },
+    {
+      "technique": "Bonus-for-damage inversion",
+      "example": "Point rewards for breaking non-subscriber windows frames vandalism as economically incentivized; communicates world where property damage to 'unworthy' targets is celebrated, establishing morally ambiguous protagonist"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Angry lady NPC",
+      "state": "Subscriber house proximity",
+      "behavior": "Runs out of house in aggressive pose; collision with paperboy costs life; unused graphics show 'downed state' frame suggesting combat intent"
+    },
+    {
+      "entity": "Dog NPC",
+      "state": "Yard territory",
+      "behavior": "Chases paperboy; animated rough sprite shows chase movement; collision hazard"
+    },
+    {
+      "entity": "Motorcyclist NPC",
+      "state": "Street crossing",
+      "behavior": "Drives between blocks in predictable path; collision hazard; unused early sprite shows motorcycle motion"
+    },
+    {
+      "entity": "Burglar NPC",
+      "state": "Non-subscriber house",
+      "behavior": "Attempts window break-in (unused but designed); represents theft threat; contextualizes 'mysterious thief' paperboy supposedly stops"
+    },
+    {
+      "entity": "Paperboy player character",
+      "state": "Successful delivery",
+      "behavior": "Throw animation completes; subscription count increases; unused end-course animation shows cap removal (victory pose)"
+    },
+    {
+      "entity": "Paperboy player character",
+      "state": "Collision state",
+      "behavior": "Crashes into obstacle; collision animation triggers; life lost or course ends"
+    }
+  ],
+  "notes": "Paperboy communicates world-state primarily through visual subscriber/non-subscriber house distinction and NPC hazard placement. The game lacks explicit faction narrative but establishes implicit social structure: subscribers (affluent, protected) vs. non-subscribers (targets for vandalism). Danger manifests through both mechanical obstacles (cars, terrain) and character-based threats (angry lady, dog, burglar). Environmental storytelling relies on NPC context positioning and daily progression cycle. Regional differences (US vs. Japan) show cultural localization of protagonist appearance but no substantive changes to danger/safety/faction signaling. Unused graphics (burglar, expanded NPC roster, explosion effects) suggest original design included more explicit combat/crime narrative, removed in final NES port.",
+  "sources_used": [
+    "tcrf - Paperboy (NES) - The Cutting Room Floor",
+    "wikipedia - Paperboy (video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:24:30.465Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4851,
+    "output_tokens": 2087,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

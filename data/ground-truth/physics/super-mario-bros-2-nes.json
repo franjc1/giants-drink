@@ -1,0 +1,197 @@
+{
+  "_meta": {
+    "game": "Super Mario Bros. 2",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D4",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Super Mario Bros. 2",
+        "url": "https://tasvideos.org/GameResources/NES/SuperMarioBros2",
+        "notes": "Primary source. Documents walk (24 sub-px/frame = 1.5 px/f), run (36 = 2.25 px/f), Toad with item (43 = 2.69 px/f). Sub-pixel system is 16ths."
+      },
+      {
+        "name": "Data Crystal — Super Mario Bros. 2",
+        "url": "https://datacrystal.tcrf.net/wiki/Super_Mario_Bros._2",
+        "notes": "RAM map for physics variables."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "SMB2 is based on Doki Doki Panic (Famicom, 1987), a completely different game. NOT a sequel to SMB1 mechanics.",
+      "The fundamental difference from SMB1/3: NO STOMPING. Combat is throw-based — pick up enemies/items, throw them.",
+      "Four distinct playable characters with different stats. Arguably the first mainstream platformer with this design.",
+      "Jump and gravity values are documented qualitatively ('Luigi jumps highest', 'Toad runs fastest') but exact ROM values need verification.",
+      "Sub-pixel system: 16 sub-pixels per pixel (same as SMB1/SMB3). Confirmed by TASVideos."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 16,
+      "source": "TASVideos SMB2 Game Resources: '16 subpixels = 1 pixel'",
+      "confidence": "high"
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "sub_pixels_per_frame": 24,
+      "px_per_frame": 1.5,
+      "source": "TASVideos SMB2 Game Resources",
+      "confidence": "high",
+      "notes": "Base walk speed. Identical to SMB1 walk speed."
+    },
+    "run_speed": {
+      "sub_pixels_per_frame": 36,
+      "px_per_frame": 2.25,
+      "source": "TASVideos SMB2 Game Resources",
+      "confidence": "high",
+      "notes": "Run speed when holding B. Slightly lower than SMB1 run (2.5 px/f) but higher than SMB1 walk."
+    },
+    "toad_item_carry_speed": {
+      "sub_pixels_per_frame": 43,
+      "px_per_frame": 2.6875,
+      "source": "TASVideos SMB2 Game Resources",
+      "confidence": "high",
+      "notes": "Toad's unique trait: runs faster while carrying heavy items (enemy, mushroom block, key, etc.) than normal. This counter-intuitive mechanic makes Toad a strong speedrun character."
+    }
+  },
+
+  "characters": {
+    "_note": "Four playable characters with meaningfully different physics. This is the key design innovation of SMB2.",
+    "mario": {
+      "description": "Balanced. The 'default' character. Medium jump height, medium speed, medium throw distance.",
+      "jump_height": "medium (baseline)",
+      "run_speed": "medium",
+      "throw_strength": "medium",
+      "item_carry_speed": "standard run speed (no bonus)",
+      "confidence": "medium"
+    },
+    "luigi": {
+      "description": "Highest jump of the four. Slippery — higher inertia, slides more on landing. Runs slower.",
+      "jump_height": "highest (approximately 1.2-1.5x Mario)",
+      "jump_type": "floatier, higher apex than Mario",
+      "run_speed": "slightly slower than Mario",
+      "item_carry_speed": "standard",
+      "inertia": "high — slides noticeably on direction changes and landings",
+      "confidence": "medium",
+      "notes": "Luigi's high jump + high inertia is a tradeoff: he can reach higher platforms but is harder to stop precisely. Experts use his float for extended platform traversal."
+    },
+    "princess_peach": {
+      "description": "Can float briefly by holding jump at peak — unique ability. Slowest runner. Weakest throw.",
+      "jump_height": "medium-low (compensated by float)",
+      "float_mechanic": {
+        "description": "Holding jump at jump apex causes Peach to float horizontally for approximately 1.5 seconds (90 frames).",
+        "notes": "Float halts vertical descent while maintaining horizontal momentum. Allows crossing large horizontal gaps impossible for other characters.",
+        "confidence": "medium"
+      },
+      "run_speed": "slowest of the four",
+      "throw_strength": "weakest",
+      "confidence": "medium",
+      "notes": "Peach's float makes her excellent for precision platforming and gap-crossing. Weakest in combat-heavy sections."
+    },
+    "toad": {
+      "description": "Fastest runner. Weakest jump (lowest, least float). Fastest item pickup and throw. Speed bonus when carrying items.",
+      "jump_height": "lowest of the four",
+      "jump_type": "fast rise, fast fall — almost no float",
+      "run_speed": "fastest (standard)",
+      "item_carry_bonus": {
+        "speed_sub_pixels": 43,
+        "speed_px_per_frame": 2.6875,
+        "source": "TASVideos SMB2",
+        "notes": "Toad's defining stat. Carrying 'heavy' items (enemies, blocks, keys) gives a speed boost over normal running."
+      },
+      "pickup_speed": "fastest — shortest pull animation",
+      "throw_strength": "strongest throw distance",
+      "confidence": "medium"
+    }
+  },
+
+  "jump": {
+    "variable_jump": true,
+    "notes": "Jump height varies by character and by how long jump is held. All characters have variable height jump.",
+    "approximate_heights_px": {
+      "mario": 64,
+      "luigi": "approx 80-96",
+      "peach": "approx 48 + float extension",
+      "toad": "approx 48",
+      "confidence": "low",
+      "notes": "Heights approximate from gameplay observation. VERIFY against ROM."
+    }
+  },
+
+  "gravity": {
+    "notes": "Gravity constant not documented in reviewed sources. VERIFY against Data Crystal RAM map.",
+    "confidence": "low",
+    "qualitative": "Falls feel similar to SMB1 — relatively fast fall. Peach's float mechanic directly counteracts gravity at jump peak."
+  },
+
+  "combat_system": {
+    "_note": "NO STOMPING in SMB2. This is the defining design departure from SMB1/SMB3.",
+    "primary_attack": "Pick up enemy or item, throw it at another enemy",
+    "pickup_mechanic": {
+      "description": "Hold B to 'pull' a vegetable from the ground or grab an enemy from behind. Release B to throw.",
+      "throw_velocity_approx": "8+ px/frame horizontally",
+      "notes": "Different enemies have different throw behavior — some explode, some bounce, some can be ridden."
+    },
+    "exceptions": [
+      "POW Block: throw at the ground to damage all enemies on screen",
+      "Starman: brief invincibility with contact damage (same as SMB1)",
+      "Birdo eggs: Birdo fires eggs that can be caught and thrown back"
+    ],
+    "notable_enemies": {
+      "phanto": "Invincible key-guardian — chases player relentlessly when holding the key. Drop the key and Phanto stops.",
+      "shy_guy": "Can be picked up and thrown. Different colors have different resistances.",
+      "birdo": "Boss that fires eggs. Must throw eggs back at her."
+    }
+  },
+
+  "grab_mechanics": {
+    "item_pull_frames_approx": {
+      "mario": 15,
+      "luigi": 15,
+      "peach": 15,
+      "toad": 10,
+      "confidence": "low",
+      "notes": "Toad picks up items faster. Approximate values from gameplay observation. VERIFY."
+    },
+    "vegetables": {
+      "notes": "Vegetables grow from the ground in specific spots. Pulling one takes a few frames. Throw speed and damage vary by vegetable type."
+    }
+  },
+
+  "level_structure": {
+    "type": "linear stages with sub-areas",
+    "notes": [
+      "7 worlds, each with multiple stages. Some stages have above-ground and underground sections.",
+      "Doors connect areas within a stage (using Potions to create doors).",
+      "Boss at end of each world — all named 'Birdo' (sub-bosses) and Wart (final boss).",
+      "POW blocks and certain items are limited within each stage — resource scarcity creates planning."
+    ]
+  },
+
+  "_verification_checklist": [
+    "Exact jump velocities for all 4 characters (ROM values)",
+    "Gravity constant",
+    "Throw velocity values",
+    "Exact pickup frame counts per character",
+    "Float duration for Peach (confirm ~90 frames)"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The four-character physics differentiation is the core design insight of SMB2. Each character isn't just 'faster' or 'slower' — they represent genuinely different strategies. Toad is for speed routing; Luigi is for gap navigation; Peach is for precision platforming; Mario is the safe default.",
+    "The throw-based combat vs SMB1 stomp combat is a complete combat paradigm shift with the same basic movement system. The same physics engine supports two very different games depending on how enemies respond to contact.",
+    "Toad's item-carry speed bonus is counter-intuitive (carrying = faster) but creates an interesting mechanical consequence: strategic players pick up items NOT to use them but to use the speed boost.",
+    "Peach's float creates a platform-design vocabulary unavailable in other Mario games: 'float gap' — a horizontal distance that only Peach can clear, creating character-specific routing.",
+    "The Phanto key-guardian mechanic is a masterclass in tension design: the reward (key) is immediately stressful to use because carrying it triggers pursuit. This is pure game design elegance."
+  ]
+}

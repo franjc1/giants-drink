@@ -1,0 +1,154 @@
+{
+  "game_id": "karate-champ-nes",
+  "game_name": "Karate Champ",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "opponent_stance_change",
+      "visual_form": "CPU/player 2 character animation shift to attack pose",
+      "meaning": "incoming attack threat; player must defend or dodge"
+    },
+    {
+      "signal": "judge_speech_cue",
+      "visual_form": "digitized voice announces 'Half point' or 'Full point' in Japanese",
+      "meaning": "successful opponent strike landed; round advantage lost"
+    },
+    {
+      "signal": "gi_color_opposition",
+      "visual_form": "red gi (opponent) vs white gi (player)",
+      "meaning": "clear adversarial relationship; visual distinction of player vs enemy"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "successful_hit_animation",
+      "visual_form": "opponent knockback/stagger animation; point awarded visually",
+      "meaning": "player has secured advantage; threat momentarily neutralized"
+    },
+    {
+      "signal": "bonus_round_transition",
+      "visual_form": "scene change to avoid-obstacle minigame (potted plants, boards, bull)",
+      "meaning": "temporary reprieve from direct combat; opportunity to gain safe points"
+    },
+    {
+      "signal": "white_gi_dominance",
+      "visual_form": "player character (white gi) standing while opponent (red gi) is down",
+      "meaning": "player in winning position; temporary safety from counter-attack"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_one",
+      "color_identity": "white",
+      "symbol_or_sigil": "white gi (martial arts uniform)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "positioned on left side of screen in default layout"
+    },
+    {
+      "faction": "player_two_or_cpu_opponent",
+      "color_identity": "red",
+      "symbol_or_sigil": "red gi (martial arts uniform)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "positioned on right side of screen; multiple opponent characters across levels (traveling tournament format)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "round_in_progress",
+      "visual_manifestation": "two karateka facing each other on tournament location background; dojo at level 1, various international venues (harbor, garden, desert, city) in subsequent levels",
+      "behavioral_manifestation": "both players can input attacks; judge announces scores; background remains static"
+    },
+    {
+      "world_state": "player_victory_in_round",
+      "visual_manifestation": "opponent recoils/staggers; point awarded on screen; judge announces point value",
+      "behavioral_manifestation": "player gains 1 point (full) or 0.5 points (half); opponent cannot immediately counter; transition to next round if match not won"
+    },
+    {
+      "world_state": "player_defeat_in_round",
+      "visual_manifestation": "player character recoils; opponent gains point; judge announces opponent's point",
+      "behavioral_manifestation": "game progresses to next match if best-of-three not lost; if match lost, game ends"
+    },
+    {
+      "world_state": "bonus_round_active",
+      "visual_manifestation": "background changes to isolated arena; obstacle visualization (potted plants flying, wooden boards, charging bull sprite)",
+      "behavioral_manifestation": "player must execute evasion/striking mechanics against environmental hazards rather than opponent; successful completion awards bonus points"
+    },
+    {
+      "world_state": "tournament_progression",
+      "visual_manifestation": "background scene transitions to new international location (12 different venues in Player vs Player version); opponent character may change or repeat",
+      "behavioral_manifestation": "difficulty increases subtly; same mechanical ruleset applies across all scenes; narrative framing shifts from dojo training to worldwide tournament competition"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "location_variation_as_narrative",
+      "example": "12 distinct tournament venues (dojo, harbor, Mount Fuji garden, bamboo forest, desert with tipis, Holland windmills, city, Japanese garden, forest path at night) establish a global martial arts competition narrative without explicit dialogue"
+    },
+    {
+      "technique": "gi_color_coding",
+      "example": "white vs red gi creates instant visual storytelling of opposition and tournament bracket convention (common in martial arts media) without requiring text explanation"
+    },
+    {
+      "technique": "background_atmosphere_progression",
+      "example": "day scenes (harbor, gardens, city) shift to night scenes (final forest path) suggesting temporal passage through tournament; environmental mood reinforces competition stakes"
+    },
+    {
+      "technique": "bonus_round_cultural_specificity",
+      "example": "evasion challenge with potted plants, board-breaking, and bull-stopping reflect traditional martial arts demonstration tropes, reinforcing karate cultural context without cutscenes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "idle",
+      "behavior": "stands in neutral karate stance facing opponent; awaits input"
+    },
+    {
+      "entity": "player_character",
+      "state": "attacking",
+      "behavior": "executes one of 24 moves via dual-joystick input; animation plays until move completes or is interrupted"
+    },
+    {
+      "entity": "player_character",
+      "state": "hit",
+      "behavior": "recoils/staggers backward; brief stun window before recovery; opponent gains point"
+    },
+    {
+      "entity": "cpu_opponent",
+      "state": "idle",
+      "behavior": "mirrors neutral stance; awaits player input or executes AI-determined attack pattern"
+    },
+    {
+      "entity": "cpu_opponent",
+      "state": "attacking",
+      "behavior": "executes attack animation at intervals based on difficulty level; no health bar system means hit = point awarded immediately"
+    },
+    {
+      "entity": "cpu_opponent",
+      "state": "hit",
+      "behavior": "recoils; loses positioning advantage; player gains point; recovers to neutral stance"
+    },
+    {
+      "entity": "judge",
+      "state": "active",
+      "behavior": "provides digitized speech announcements ('Half point', 'Full point') to confirm successful strikes; audio-visual confirmation of world-state change"
+    }
+  ],
+  "notes": "Karate Champ uses minimal UI and symbolic communication. The absence of a health bar creates a unique risk-reward dynamic: every landed hit is immediately decisive, making visual opponent positioning and animation cues critical for threat assessment. The game communicates world-state primarily through character animation, background transitions, judge announcements, and point visualization. The white vs. red gi distinction is the core faction/opposition signal. Environmental storytelling through venue changes (dojo → international tournament locations) frames progression narrative. Bonus round alternation between combat and obstacle challenges creates pacing variety and visual world-state shifts.",
+  "sources_used": [
+    "wikipedia - Karate Champ article (gameplay mechanics, locations, character descriptions)",
+    "tcrf - Karate Champ (NES, Famicom Disk System) page (regional differences, technical notes)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:14:46.885Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3923,
+    "output_tokens": 1864,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

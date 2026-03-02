@@ -1,0 +1,169 @@
+{
+  "game_id": "bucky-ohare-nes",
+  "game_name": "Bucky O'Hare",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy sprites",
+      "visual_form": "Distinct alien/mechanical enemy designs per planetary level (Yellow Planet, Blue Planet, Cell level enemies)",
+      "meaning": "Hazards and combat encounters; visual variety signals zone transition and threat escalation"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Ice blocks (Blue Planet), electricity zappers (Cell level), background spikes and obstacles",
+      "meaning": "Traversal danger; zapper polarity and positioning communicate instant-death or damage zones"
+    },
+    {
+      "signal": "Boss arena transitions",
+      "visual_form": "Tank boss (Yellow Planet) with animated rotating wheels; large sprite-based antagonists",
+      "meaning": "Escalated threat level; mechanical complexity signals higher difficulty checkpoint"
+    },
+    {
+      "signal": "Prisoner warthogs (Cell level)",
+      "visual_form": "Caged allies in aggression state; constantly in run cycle rather than idle",
+      "meaning": "Hostile world-state indicator; peaceful entities under duress or mind control"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Collectible sprite items dropped by defeated enemies or found in level geometry",
+      "meaning": "Resource gain; temporary invulnerability or health restoration"
+    },
+    {
+      "signal": "Level progression pathways",
+      "visual_form": "Clear platforming geometry with visual ledges, ramps, and climbing surfaces (Deadeye wall-climbing animations)",
+      "meaning": "Safe traversal routes; mastery signal for skilled players"
+    },
+    {
+      "signal": "Checkpoint/stage boundaries",
+      "visual_form": "Planetary level design distinctly themed (ice/water Blue Planet, volcanic/industrial Yellow Planet, technological Cell)",
+      "meaning": "Safe zone transition; narrative progression into new faction territory"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Bucky O'Hare's faction (protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bucky O'Hare character sprite and allied warthog prisoners",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Natural/organic level geometry mixed with rescue objectives (freeing imprisoned warthogs)"
+    },
+    {
+      "faction": "Toad Wars enemy faction",
+      "color_identity": null,
+      "symbol_or_sigil": "Toad enemy sprites; mechanical variants (Triborg with three-part decomposition)",
+      "enemy_visual_variants": "Multiple planetary-themed enemy types suggesting distributed occupation: Yellow Planet toads, Blue Planet aquatic/mechanical hybrids, Cell-level technologically augmented toads",
+      "environmental_markers": "Industrial level design (Cell with electricity zappers, tanks, mechanical obstacles); planetary conquest aesthetic"
+    },
+    {
+      "faction": "Neutral/environmental",
+      "color_identity": null,
+      "symbol_or_sigil": "Ice blocks, asteroids, environmental hazards",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cracked ice variants, cannonfire patterns, and natural obstacles without faction affiliation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Toad occupation active",
+      "visual_manifestation": "Heavy enemy presence across three distinct planetary zones; mechanical/industrial architecture layered over natural environments",
+      "behavioral_manifestation": "Enemies in alert/patrol state; prisoner warthogs in aggression cycle (mind-controlled state)"
+    },
+    {
+      "world_state": "Rescue/liberation mission in progress",
+      "visual_manifestation": "Imprisoned warthog sprites visible in Cell level cages; breakable environmental elements telegraph interactive rescue points",
+      "behavioral_manifestation": "Warthog prisoners transition from hostility to neutral when freed; level geometry changes to reflect sanctuary creation"
+    },
+    {
+      "world_state": "Escalating conflict (difficulty progression)",
+      "visual_manifestation": "Enemy complexity increases per level (simple toads → Triborg three-part enemies → tank boss); environmental hazards accumulate (ice → electricity → mechanical traps)",
+      "behavioral_manifestation": "Boss encounters signal climactic zone control; enemies spawn in greater density and aggression patterns"
+    },
+    {
+      "world_state": "Anti-piracy enforcement (Hard Mode)",
+      "visual_manifestation": "No visual distinction; mechanical rule change only",
+      "behavioral_manifestation": "Single-hit-kill damage model vs. health system; password 'HARD!' triggers punitive world-state"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Planetary theming",
+      "example": "Yellow Planet with tank boss and asteroid obstacles; Blue Planet with ice blocks and water-based hazards; Cell with electricity zappers and technological infrastructure. Each zone visually communicates Toad occupation strategy and environmental adaptation."
+    },
+    {
+      "technique": "Enemy palette and sprite design",
+      "example": "Distinct enemy types per planetary region signal faction control and resource allocation. Triborg multi-part enemy (middle section with crossed arms) suggests advanced Toad biomechanical engineering; flying insect enemies indicate aerial defense infrastructure."
+    },
+    {
+      "technique": "Prisoner state communication",
+      "example": "Caged warthogs in constant run cycle (never standing still) visually communicate psychological/neurological control without explicit UI. Transition from hostility to neutrality upon rescue shows liberation narrative through behavioral sprite state."
+    },
+    {
+      "technique": "Geometry as political boundary",
+      "example": "Natural ledges and climbing surfaces (Deadeye wall animations) mark safe territory; industrial cracked ice and cannon/tank geometry marks occupied/fortified zones. Visual roughness and mechanical design density correlates with enemy control intensity."
+    },
+    {
+      "technique": "Hazard progression narrative",
+      "example": "Simple ice blocks (environmental, passable) → active electricity zappers (instant-death zones) → rotating tank wheels (mechanical boss) creates visual escalation of Toad technological sophistication and world threat."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bucky O'Hare (protagonist)",
+      "state": "Combat-ready/traversing",
+      "behavior": "Wall-climbing animations, platforming locomotion, active firing stance; sprite animation cycles communicate readiness"
+    },
+    {
+      "entity": "Toad enemies (generic)",
+      "state": "Patrol/alert",
+      "behavior": "Sprite movement patterns and collision behavior signal patrol routes; spawning frequency indicates occupation density"
+    },
+    {
+      "entity": "Triborg enemy",
+      "state": "Intact",
+      "behavior": "Neutral arm position; fires/attacks in coordinated pattern"
+    },
+    {
+      "entity": "Triborg enemy",
+      "state": "Damaged (after sufficient shots)",
+      "behavior": "Splits into three independent parts; part separation signals phase transition in boss encounter"
+    },
+    {
+      "entity": "Prisoner warthogs",
+      "state": "Imprisoned/mind-controlled",
+      "behavior": "Continuous run cycle; attack player on contact; never enter idle standing frames (unused animation suggests original design intent)"
+    },
+    {
+      "entity": "Prisoner warthogs",
+      "state": "Freed/liberated",
+      "behavior": "Behavior state transition implied; no longer hostile (inferred from rescue mechanic narrative)"
+    },
+    {
+      "entity": "Tank boss (Yellow Planet)",
+      "state": "Active/animated",
+      "behavior": "Rotating wheel animations (bank-switched frames) communicate mechanical motion and telegraphed attack patterns; stationary positioning suggests territorial control"
+    },
+    {
+      "entity": "Electricity zappers (Cell level)",
+      "state": "Active hazard",
+      "behavior": "Downward-facing polarity (visual orientation) communicates damage direction; background-only status (not interactive sprite) signals environmental trap rather than enemy"
+    }
+  ],
+  "notes": "Bucky O'Hare NES communicates world-state primarily through environmental theming (planetary zones as faction territories), enemy type variety (Toad occupation footprint), and behavioral sprite states (mind-control vs. freedom). The game lacks explicit UI faction systems but uses visual hierarchy: natural environments with rescue targets → industrial/mechanical occupied zones → boss encounters as climactic control points. Unused assets (cannon/tank variants, flying insects, cracked ice frames) suggest broader occupation warfare originally planned. Hard Mode anti-piracy mechanic is non-visual rule enforcement, not manifestation layer. Cartoon source material (Saturday morning TV show) likely influenced the colorful enemy design and non-grimdark aesthetic despite military occupation narrative.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - Bucky O'Hare NES article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:08:51.853Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3074,
+    "output_tokens": 2430,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

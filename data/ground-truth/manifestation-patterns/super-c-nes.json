@@ -1,0 +1,171 @@
+{
+  "game_id": "super-c-nes",
+  "game_name": "Super C",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Alien creatures and possessed soldiers in varied sprite forms across stages",
+      "meaning": "Active threat; player must engage or avoid"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Large distinctive sprite sprites at stage endpoints; flashing red when near defeat (unused but programmed)",
+      "meaning": "Major danger; stage culmination threat"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Military base structures, jungle terrain, alien lair interior layouts with obstacles",
+      "meaning": "Navigation danger; environmental damage possible"
+    },
+    {
+      "signal": "Possessed comrades",
+      "visual_form": "Human soldier sprites that behave as enemies",
+      "meaning": "Moral/tactical danger; former allies now hostile"
+    },
+    {
+      "signal": "Gun turrets",
+      "visual_form": "Stationary turret sprites with pointing behavior (can face left or right directionally)",
+      "meaning": "Fixed threat; positional danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon power-ups",
+      "visual_form": "Flying item capsules containing actual gun sprites (machine gun, spread gun, bomb gun, laser gun)",
+      "meaning": "Player resource increase; temporary safety advantage"
+    },
+    {
+      "signal": "Hyper shell pickups",
+      "visual_form": "Collectible items in top-down stages",
+      "meaning": "Screen-clear capability; immediate threat elimination"
+    },
+    {
+      "signal": "Stage progression",
+      "visual_form": "Visual transition from one environment to next (base exterior → interior → jungle → alien lair)",
+      "meaning": "Player advancement; checkpoint reached"
+    },
+    {
+      "signal": "Lives indicator",
+      "visual_form": "Medal sprites representing Bill and Lance (EU Probotector version shows miniature robot protagonists)",
+      "meaning": "Remaining player health/continue availability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player forces (Bill Rizer / Lance Bean)",
+      "color_identity": "Bill: green; Lance: purple",
+      "symbol_or_sigil": "Military commando sprites; EU version: robot soldiers RD008 and RC011",
+      "enemy_visual_variants": "In top-down stages, player sprites differ from side-scrolling proportions to match perspective",
+      "environmental_markers": "Military base exteriors and interiors; command presence throughout stages"
+    },
+    {
+      "faction": "Red Falcon alien organization",
+      "color_identity": null,
+      "symbol_or_sigil": "Generic alien creature sprites; mutated forms distinct from original Contra invaders",
+      "enemy_visual_variants": "Standard aliens appear across all stages; boss serpent on level 6 has unused path variants (4 paths, only 2 used)",
+      "environmental_markers": "Alien lair (stages 5-6); possessed military base; jungle corrupted by alien presence"
+    },
+    {
+      "faction": "Possessed military troops",
+      "color_identity": null,
+      "symbol_or_sigil": "Human soldier sprites repurposed as hostile NPCs; visually identical to commando player characters but behavior is enemy",
+      "enemy_visual_variants": "Greeders (level 7 and others) have unused ducking behavior to hide behind sandbags",
+      "environmental_markers": "Military base interiors; areas showing signs of occupation/control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Alien invasion in progress",
+      "visual_manifestation": "Military base exteriors show strategic positioning; alien structures begin appearing in stage backdrops",
+      "behavioral_manifestation": "Enemies patrol and attack aggressively; possessed soldiers behave erratically"
+    },
+    {
+      "world_state": "Military base compromised",
+      "visual_manifestation": "Stage 1 shows exterior defense perimeter; Stage 2 (top-down) reveals base interior complexity; infrastructure appears damaged",
+      "behavioral_manifestation": "Mixed human and alien enemies throughout; turrets defend specific positions"
+    },
+    {
+      "world_state": "Jungle contamination",
+      "visual_manifestation": "Stage 3 shifts environment to jungle terrain; alien presence integrated into natural setting",
+      "behavioral_manifestation": "Enemy spawns change to reflect jungle-adapted aliens; different obstacle types"
+    },
+    {
+      "world_state": "Alien lair approached",
+      "visual_manifestation": "Stages 4-5 feature increasingly alien architecture; bio-organic structures replace mechanical elements",
+      "behavioral_manifestation": "Boss encounters intensify; enemy density increases; final stage shows alien nest interior (NES exclusive)"
+    },
+    {
+      "world_state": "Game loop restart (arcade only)",
+      "visual_manifestation": "Same stages replay after credits; no visual distinction between loop 1 and loop 2",
+      "behavioral_manifestation": "Difficulty increases to maximum; no continues available; weapons/hyper shells carry over"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage progression as narrative",
+      "example": "Five stages trace invasion: military base exterior → base interior (top-down) → jungle → alien lair exterior → alien lair interior, showing escalation from defensive position to enemy stronghold"
+    },
+    {
+      "technique": "Possession as visual corruption",
+      "example": "Human soldiers appear as enemies within military structures, indicating Red Falcon control has reached command personnel"
+    },
+    {
+      "technique": "Weapon pickups as resource narrative",
+      "example": "Flying capsules containing actual gun sprites (not abstract icons like original Contra) emphasize materiality of arms escalation"
+    },
+    {
+      "technique": "Perspective shift for spatial storytelling",
+      "example": "Top-down stages (2, 5) show interior complexity and scale of base/alien lair, contrasting with side-scrolling exterior perspectives"
+    },
+    {
+      "technique": "Regional censorship as world-state indicator",
+      "example": "EU Probotector II replaces human commando violence with robot protagonists and human enemies with robot variants, fundamentally altering the war narrative (human soldiers → combat robots)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Greeders",
+      "state": "Combat alert",
+      "behavior": "Standard running/shooting patterns; unused ducking behavior exists (hiding behind sandbags in areas 1 and 3) showing defensive adaptation capability"
+    },
+    {
+      "entity": "Gun turrets (hidden, level 5 part 2)",
+      "state": "Directional targeting",
+      "behavior": "Can point left or right; normally only approach from left, but rightward-pointing capability programmed but unused"
+    },
+    {
+      "entity": "Boss level 5",
+      "state": "Near-defeat condition",
+      "behavior": "Flashing red when health is critical; functionality programmed but never triggered in final game"
+    },
+    {
+      "entity": "Boss serpent (level 6)",
+      "state": "Path selection",
+      "behavior": "4 movement paths coded; only 2 used in actual gameplay, indicating design simplification or unused difficulty variation"
+    },
+    {
+      "entity": "Player characters (Bill/Lance)",
+      "state": "Jumping mechanics",
+      "behavior": "Jump height now controllable by holding joystick up/down while pressing jump (new to Super Contra); indicates increased player agency in vertical terrain"
+    }
+  ],
+  "notes": "Super C shows world-state primarily through environment transitions (base→jungle→alien lair) rather than dynamic visual corruption. The EU Probotector II regional variant fundamentally alters faction identity by removing human combatants entirely, converting possessed soldiers and protagonists to robots—a political/cultural censorship decision that changes the game's core narrative of humans fighting aliens to robots fighting aliens. Multiple unused behavioral systems (Greeder ducking, turret directionality, boss flashing) suggest more complex enemy AI was prototyped. The arcade version's second-loop mechanic creates world-state through difficulty escalation rather than visual change.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:04:43.031Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5935,
+    "output_tokens": 2098,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

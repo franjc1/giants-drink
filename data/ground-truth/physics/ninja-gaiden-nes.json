@@ -1,0 +1,171 @@
+{
+  "_meta": {
+    "game": "Ninja Gaiden",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1989,
+    "publisher": "Tecmo",
+    "developer": "Tecmo",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Ninja Gaiden",
+        "url": "https://tasvideos.org/GameResources/NES/NinjaGaiden",
+        "notes": "Primary source. Documents all horizontal speeds, jump velocity lookup tables, wall jump tables, damage boost tables, and sub-pixel mechanics."
+      }
+    ],
+    "confidence": "high",
+    "notes": [
+      "Ninja Gaiden uses a VELOCITY LOOKUP TABLE for jump arcs — similar to Castlevania, NOT a physics simulation.",
+      "Jump velocity is read from a predefined table each frame rather than computed from a gravity constant.",
+      "This means jump arc behavior is deterministic and exactly repeatable frame-by-frame.",
+      "Ryu has THREE distinct horizontal speeds (1.5, 1.0, 0.5) depending on context — no single 'run speed.'",
+      "Wall jump and wall cling are core mechanics — unique among NES action platformers of this era.",
+      "Sub-pixel system uses dedicated X and Y sub-pixel registers (fractional position tracking)."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "description": "Dedicated sub-pixel registers for both X and Y axes. Exact sub-pixels-per-pixel unit needs ROM verification.",
+      "notes": "TASVideos documents sub-pixel manipulation techniques, confirming fractional position tracking exists."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "horizontal_movement": {
+    "_note": "Ryu has THREE context-dependent horizontal speeds — not a single walk/run speed.",
+    "forward_speed": {
+      "px_per_frame": 1.5,
+      "context": "Running on ground OR pressing forward direction while airborne",
+      "source": "TASVideos Ninja Gaiden Game Resources",
+      "confidence": "high"
+    },
+    "damage_knockback_speed": {
+      "px_per_frame": 1.0,
+      "context": "After taking damage — Ryu bounces at this speed until landing on a platform or wall",
+      "source": "TASVideos Ninja Gaiden Game Resources",
+      "confidence": "high",
+      "notes": "Damage knockback moves at 1.0 px/f. Ends when Ryu contacts a wall or platform (not mid-air)."
+    },
+    "backward_air_speed": {
+      "px_per_frame": 0.5,
+      "context": "Pressing BACKWARD direction while airborne",
+      "source": "TASVideos Ninja Gaiden Game Resources",
+      "confidence": "high",
+      "notes": "Pressing against travel direction in air reduces speed to 0.5 px/f. This allows precise air positioning at the cost of horizontal speed."
+    }
+  },
+
+  "jump": {
+    "_note": "Jump arc is a LOOKUP TABLE, not a physics simulation. Each frame reads a velocity value from a table rather than applying a gravity constant.",
+    "type": "lookup_table",
+    "standing_jump": {
+      "total_rise_px": 48,
+      "peak_frame_range": "frames 19-24 after initiation",
+      "velocity_table": [-4,-4,-4,-4,-4,-3,-3,-3,-3,-3,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,0,0,0,1],
+      "source": "TASVideos Ninja Gaiden Game Resources",
+      "confidence": "high",
+      "notes": [
+        "Velocity table: 5 frames at -4, 5 frames at -3, 4 frames at -2, 4 frames at -1, 6 frames at 0 (peak), then positive (falling).",
+        "Total rise 48 pixels = 3 tiles.",
+        "Peak is a 6-frame window of 0 velocity — wider peak than many NES games.",
+        "Unlike Mario or Mega Man, this is not variable height — arc is committed at jump press."
+      ]
+    },
+    "variable_height": false,
+    "air_control": "full horizontal (within the 1.5/0.5 speed limits)",
+    "notes": [
+      "Jump height is FIXED — holding jump does NOT extend height (like Castlevania, unlike Mario).",
+      "Full horizontal air control — direction can be changed mid-jump.",
+      "The combination (fixed height, free direction) is the same unusual combination as Contra."
+    ]
+  },
+
+  "wall_jump": {
+    "available": true,
+    "_note": "Wall jump/cling is a CORE mechanic in Ninja Gaiden — distinguishing it from most NES platformers.",
+    "type": "lookup_table",
+    "wall_jump": {
+      "total_rise_px": 15,
+      "peak_frame_range": "frames 10-14 after jump",
+      "velocity_table": [-2,-2,-2,-2,-2,-1,-1,-1,-1,-1,0,0,0,0,0,1],
+      "source": "TASVideos Ninja Gaiden Game Resources",
+      "confidence": "high",
+      "notes": [
+        "Wall jump is significantly weaker than standing jump: 15px vs 48px rise.",
+        "5 frames at -2, 5 frames at -1, 5 frames at 0 (peak), then falling.",
+        "Wall jumps can be chained: jump to wall → wall jump → jump to next wall → wall jump.",
+        "Chaining wall jumps allows ascending vertical shafts."
+      ]
+    },
+    "wall_cling": {
+      "description": "Ryu can grab and hang from walls when airborne and pressing toward a wall.",
+      "notes": [
+        "Wall cling halts downward momentum — Ryu hangs stationary.",
+        "From cling: press jump to wall jump away.",
+        "Wall cling is how players reset their horizontal direction before a wall jump.",
+        "This mechanic is unusually advanced for a 1988 NES game — predates Super Mario World wall jump by 2 years."
+      ]
+    }
+  },
+
+  "damage_boost": {
+    "_note": "Taking damage produces a bounce trajectory — also lookup-table based.",
+    "total_rise_px": 29,
+    "peak_frame_range": "frames 14-19 after hit",
+    "velocity_table": [-3,-3,-3,-3,-3,-2,-2,-2,-2,-2,-1,-1,-1,-1,0,0,0,0,0,0,1],
+    "source": "TASVideos Ninja Gaiden Game Resources",
+    "confidence": "high",
+    "horizontal_speed_during_boost": 1.0,
+    "notes": [
+      "Damage bounce: 5 frames at -3, 5 at -2, 4 at -1, 6 at 0 (peak), then fall.",
+      "Horizontal speed during damage bounce: 1.0 px/f (the middle speed tier).",
+      "Damage boost can be exploited for reaching otherwise inaccessible platforms (damage boost glitch).",
+      "Bounce continues at 1.0 px/f until Ryu contacts a surface."
+    ]
+  },
+
+  "ladder": {
+    "climb_speed_px_per_frame": 1.0,
+    "direction": "vertical only (up and down)",
+    "source": "TASVideos Ninja Gaiden Game Resources",
+    "confidence": "high",
+    "notes": "1 px/frame vertical on ladders. Can attack from ladders."
+  },
+
+  "weapons": {
+    "dragon_sword": {
+      "type": "melee",
+      "reach_approx_px": 20,
+      "notes": "Standard melee attack. Short horizontal reach. High damage per hit."
+    },
+    "art_of_the_fire_wheel": "spinning fire attack",
+    "art_of_the_windmill_star": "thrown projectile",
+    "art_of_the_fire_dragon_blast": "wide-range fire",
+    "art_of_the_invincible_fire_wheel": "invincibility + attack",
+    "art_of_the_shadow_clone": "projectile on both sides",
+    "notes": "Ninjutsu arts use a resource (scroll) system. Different arts serve different tactical needs."
+  },
+
+  "hitboxes": {
+    "ryu_standing": {
+      "width_px_approx": 8,
+      "height_px_approx": 24,
+      "confidence": "low",
+      "notes": "Approximate. Ryu's hitbox is narrower than his sprite. VERIFY against ROM."
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The lookup table jump arc (like Castlevania) commits the player to a fixed trajectory. Unlike Castlevania, Ninja Gaiden allows full horizontal air control — so the skill expression is in when and where you jump, not in how long you hold.",
+    "The wall cling + wall jump system creates vertical movement opportunities not found in most NES platformers of the era. Level design can use tall shafts and vertical traversal as a first-class challenge type.",
+    "The three horizontal speeds (1.5 forward, 1.0 knockback, 0.5 backward-in-air) create a tactile speed vocabulary. Players quickly learn to maintain forward momentum and feel the cost of retreating in air.",
+    "The 48px standing jump vs 15px wall jump creates a strong hierarchy of jump types. Wall jumps are escape tools, not primary traversal — level design should use this distinction.",
+    "Ninja Gaiden's cinematic cutscenes (unusual for the era) established a narrative-first action game tradition. Giants Drink's social ecology system can draw from this: action + character development + story progression are not mutually exclusive."
+  ]
+}

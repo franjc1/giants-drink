@@ -1,0 +1,153 @@
+{
+  "game_id": "plok-snes",
+  "game_name": "Plok!",
+  "platform": "SNES",
+  "year": 1993,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented in available sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Detachable Limbs Attack System",
+      "description": "Plok can launch any of his four limbs (two arms and two legs) as projectiles to attack enemies. Limbs return immediately if they hit an enemy, but take longer to return if they miss. Limbs can pass through specific obstacles.",
+      "physics_values": {
+        "return_speed_on_hit": "immediate",
+        "return_speed_on_miss": "longer_duration"
+      }
+    },
+    {
+      "name": "Speed Blade Secondary Attack",
+      "description": "A buzzsaw-like move that enhances Plok's speed and delivers maximum damage to enemies.",
+      "physics_values": {
+        "effect": "speed_enhancement",
+        "damage": "maximum"
+      }
+    },
+    {
+      "name": "Somersault Movement",
+      "description": "Plok can somersault for movement, but cannot fire limbs while doing so.",
+      "physics_values": {
+        "can_attack_during": false
+      }
+    },
+    {
+      "name": "Bounce Movement (Limbless State)",
+      "description": "When Plok loses all his limbs, he moves by bouncing, which makes him harder to control.",
+      "physics_values": {
+        "controllability": "reduced"
+      }
+    },
+    {
+      "name": "Limb Sacrifice Mechanic",
+      "description": "In later levels, certain puzzles require Plok to sacrifice a limb to activate scenery-changing switches. When a limb strikes a target, it is placed on a hanger near the switch. Some targets require specific limbs.",
+      "physics_values": {
+        "mechanic_type": "puzzle_interaction",
+        "limb_specific_targets": true
+      }
+    },
+    {
+      "name": "Power-up Transformations (Presents)",
+      "description": "Temporary transformations into characters inspired by movies: Plocky (boxing gloves), Vigilante Plok (flamethrower), Squire Plok (blunderbuss), Cowboy Plok (guns), Rocket Plok (rocket launchers).",
+      "physics_values": {
+        "temporary": true,
+        "types": [
+          "boxing",
+          "flamethrower",
+          "blunderbuss",
+          "guns",
+          "rockets"
+        ]
+      }
+    },
+    {
+      "name": "Vehicle Transformations (Fleapit Presents)",
+      "description": "High-tech futuristic vehicles with weapons: unicycle with water cannon, off-road truck with rocket launcher, jetpack with lasers, motorbike with grenades, tank, bomb-dropping helicopter, flying saucer with plasma cannons, spring pogo shoes.",
+      "physics_values": {
+        "vehicle_types": 8,
+        "context": "Fleapit levels only"
+      }
+    },
+    {
+      "name": "Magic Fruit Interaction",
+      "description": "Magic Fruits heal Plok's health. The more he punches a fruit, the larger it grows, restoring additional health. Rare Golden Fruits fully replenish energy.",
+      "physics_values": {
+        "scaling_system": "punch_count_based",
+        "healing_types": [
+          "progressive",
+          "full_restore"
+        ]
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "versatile",
+    "momentum-based",
+    "colorful",
+    "varied gameplay"
+  ],
+  "tier_notes": "Tier 3 (T3) - Empirical/Qualitative data only. No precise physics values documented in available sources. Information derives from gameplay mechanics descriptions rather than technical ROM analysis. Sources provide detailed mechanic explanations but no quantified movement or gravity parameters.",
+  "sources_used": [
+    "The Cutting Room Floor - Plok article",
+    "Wikipedia - Plok! article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T00:00:35.068Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5450,
+    "output_tokens": 1369,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

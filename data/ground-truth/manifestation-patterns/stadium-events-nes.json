@@ -1,0 +1,129 @@
+{
+  "game_id": "stadium-events-nes",
+  "game_name": "Stadium Events",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "False start detection",
+      "visual_form": "Player lifting feet before starting signal on mat",
+      "meaning": "Rule violation; in tournament mode, three false starts result in disqualification"
+    },
+    {
+      "signal": "Hurdle approach",
+      "visual_form": "White box markers appearing along screen edge during 110M hurdles event",
+      "meaning": "Required jump point; failure to jump at correct time results in collision/performance penalty"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ready stance",
+      "visual_form": "Player character in starting block position on mat before 'on your mark' signal",
+      "meaning": "Safe to begin; no false start penalty if feet remain stationary"
+    },
+    {
+      "signal": "Clear track zone",
+      "visual_form": "Track stadium environment with defined running lanes visible on screen",
+      "meaning": "Safe running space; organized competition environment"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Human/Mat User)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Computer-controlled opponent athletes displayed on opposite side of track/field",
+      "environmental_markers": "Left side of Family Fun Fitness mat used for dash and hurdle events; either side for jump events"
+    },
+    {
+      "faction": "Computer Opponents (Tournament Mode)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Six distinct computer-controlled athletes with different visual representations (tournament opponents swapped species across regional versions)",
+      "environmental_markers": "Displayed racing against or competing simultaneously with player character on same track"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Tournament Mode Active",
+      "visual_manifestation": "Stadium background colors and configuration change; opponent athlete species/appearance differs by region (Japanese vs. US/European variants); text layout adjusted for regional copyright",
+      "behavioral_manifestation": "Computer players display competitive racing behavior; false start rule enforcement activated; progression requires beating each of six opponents sequentially at dash and hurdle events"
+    },
+    {
+      "world_state": "Olympics Mode Active",
+      "visual_manifestation": "Track stadium environment displays with multiple player slots registered (up to six alternating players per event); Guinness 1982 world track record reference displayed for scoring context",
+      "behavioral_manifestation": "All four events available consecutively; scoring measured against real-world athletic benchmarks rather than relative competition"
+    },
+    {
+      "world_state": "Regional Version (Japan vs. US vs. Europe)",
+      "visual_manifestation": "Sky color shifts (dark blue in Running Stadium vs. light blue in Stadium Events); national flags change (Japanese to US); stadium background colors recolored; logo styling differs; copyright text positioning and length affects layout; 'Mat B' graphic rebranded to 'Power Pad' in re-release",
+      "behavioral_manifestation": "Tournament opponent character swaps species; UI text localization; sound effect variations ('on your mark' signal differs in US re-release and Europe); Bandai branding removed in World Class Track Meet version"
+    },
+    {
+      "world_state": "Event-Specific Context",
+      "visual_manifestation": "100M Dash: side-by-side racing lanes. 110M Hurdles: identical to dash with white box jump markers overlaid. Long Jump: single runway with sand pit visualization. Triple Jump: runway with three distinct jump marker zones.",
+      "behavioral_manifestation": "Mat input method varies: left side required for dash/hurdles; either side valid for jumps. Top speed controlled by which mat row player activates. Jump duration directly affects distance scoring in jump events."
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stadium architecture consistency",
+      "example": "Background stadium structure (bleachers, field markings, sky) remains consistent across all four event types, establishing cohesive athletic venue identity and legitimacy"
+    },
+    {
+      "technique": "Regional visual identity",
+      "example": "Flag swaps and color palette shifts communicate market-specific branding and cultural localization without changing core gameplay; sky color darkness suggests mood/era differences between Japanese and Western releases"
+    },
+    {
+      "technique": "Track lane definition",
+      "example": "Visible side-by-side running lanes in dash/hurdle events establish fair competition format and spatial separation between player and opponent"
+    },
+    {
+      "technique": "Jump marker visual hierarchy",
+      "example": "White box markers for hurdles appear progressively along screen edge, providing visual pace and rhythm cues for timing-dependent jumps"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player Character",
+      "state": "Pre-competition (false start vulnerable)",
+      "behavior": "Any foot lift before 'on your mark' signal triggers false start penalty; three violations in tournament mode cause disqualification"
+    },
+    {
+      "entity": "Player Character",
+      "state": "100M Dash / 110M Hurdles",
+      "behavior": "Speed determined by which row of mat buttons activated; sustained input maintains velocity; hurdle jumps required at white box marker locations"
+    },
+    {
+      "entity": "Player Character",
+      "state": "Long Jump / Triple Jump",
+      "behavior": "Running velocity builds on approach; jump initiation freezes character in air; duration airborne determines distance score; triple jump requires three sequential jump markers"
+    },
+    {
+      "entity": "Computer Opponent",
+      "state": "Tournament Mode",
+      "behavior": "Each of six sequential opponents displays competitive pacing; attempts to outrun/out-jump player; visual appearance varies by regional version"
+    },
+    {
+      "entity": "Game System",
+      "state": "Rule Enforcement (Tournament)",
+      "behavior": "False start detection active; disqualification on third violation; strict enforcement creates tension and consequence for timing errors"
+    }
+  ],
+  "notes": "Stadium Events is a fitness-focused exergame with minimal narrative world-state complexity. Visual communication is primarily functional—establishing athletic event types, competition framework, and rule enforcement through UI, environmental consistency, and character positioning. Regional variants demonstrate how aesthetic/cultural markers (flags, sky color, logo style, opponent character design) communicate market identity without altering core mechanics. The game communicates world-state primarily through event selection UI and opponent presence rather than dynamic environmental changes. Danger/safety signals are primarily mechanic-based (false starts, hurdle timing) rather than narrative-based.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:26:22.880Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4260,
+    "output_tokens": 1677,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

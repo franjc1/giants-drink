@@ -1,0 +1,219 @@
+{
+  "game_id": "tecmo-bowl-nes",
+  "game_name": "Tecmo Bowl",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "defensive line collapse",
+      "visual_form": "offensive line disruption animation",
+      "meaning": "successful defensive play anticipation; impending sack or tackle"
+    },
+    {
+      "signal": "receiver coverage",
+      "visual_form": "defensive player sprite positioning near receiver",
+      "meaning": "risk of interception or incomplete pass"
+    },
+    {
+      "signal": "ball carrier isolation",
+      "visual_form": "running back surrounded by defensive sprites with few blockers",
+      "meaning": "high probability of tackle imminent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "open receiver",
+      "visual_form": "receiver sprite with clear separation from defenders",
+      "meaning": "successful passing opportunity; safe play completion likely"
+    },
+    {
+      "signal": "running lane",
+      "visual_form": "gap in offensive line with blockers engaged on defenders",
+      "meaning": "viable running play; ball carrier can advance"
+    },
+    {
+      "signal": "play selection match",
+      "visual_form": "smooth animation flow after play call",
+      "meaning": "defensive anticipation was incorrect; offense has advantage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Indianapolis",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI"
+    },
+    {
+      "faction": "Miami",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; three-passing-play emphasis"
+    },
+    {
+      "faction": "Cleveland",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI"
+    },
+    {
+      "faction": "Denver",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI"
+    },
+    {
+      "faction": "Seattle",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI"
+    },
+    {
+      "faction": "Los Angeles (Raiders)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; AFC alignment"
+    },
+    {
+      "faction": "Washington",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; NFC alignment"
+    },
+    {
+      "faction": "San Francisco",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; three-passing-play emphasis; NFC alignment"
+    },
+    {
+      "faction": "Dallas",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; NFC alignment"
+    },
+    {
+      "faction": "New York (Giants)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; NFC alignment"
+    },
+    {
+      "faction": "Chicago",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; NFC alignment"
+    },
+    {
+      "faction": "Minnesota",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "city/state identifier in team selection UI; NFC alignment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "offense possession with play selected",
+      "visual_manifestation": "offensive formation sprites deploy based on play choice (running vs. passing formation)",
+      "behavioral_manifestation": "ball carrier or receiver routes execute predetermined path"
+    },
+    {
+      "world_state": "defense anticipating offense",
+      "visual_manifestation": "defensive line positioning shifts based on play call selection",
+      "behavioral_manifestation": "if correct anticipation: line collapse; if incorrect: defensive gaps appear"
+    },
+    {
+      "world_state": "successful tackle/sack condition",
+      "visual_manifestation": "ball carrier surrounded by defensive sprites with tackle animation trigger",
+      "behavioral_manifestation": "play ends; possession may change"
+    },
+    {
+      "world_state": "successful pass completion",
+      "visual_manifestation": "receiver sprite connects with ball sprite; animation shows catch",
+      "behavioral_manifestation": "yards gained; field position advances"
+    },
+    {
+      "world_state": "incomplete pass / interception",
+      "visual_manifestation": "ball sprite deflects or defender sprite intercepts trajectory",
+      "behavioral_manifestation": "possession turns over or downs increment"
+    },
+    {
+      "world_state": "game progression (password advancement)",
+      "visual_manifestation": "team roster changes display; opponent difficulty increases visually",
+      "behavioral_manifestation": "computer-selected opponent team has different playbook effectiveness"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "team roster composition",
+      "example": "Miami and San Francisco display three passing plays vs. one running play, signaling aggressive aerial offense strategy vs. other teams' balanced approaches"
+    },
+    {
+      "technique": "roster authenticity markers",
+      "example": "player names and 1987-1988 season statistics visible in team rosters communicate 'real NFL context' without full league license; revision differences (Eric Dickerson → Albert Bentley) for Indianapolis reflect legal/licensing world-state changes"
+    },
+    {
+      "technique": "playbook simplification",
+      "example": "four plays per team (mostly two running, two passing) communicate strategic depth via limitation; team effectiveness variance suggests player-quality differences"
+    },
+    {
+      "technique": "field position visualization",
+      "example": "9-10 player count per side (vs. real 11) communicate 'arcade abstraction' while maintaining spatial strategy representation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "ball carrier (running back)",
+      "state": "blocked path vs. open lane",
+      "behavior": "cannot advance if surrounded; advances rapidly if lane exists"
+    },
+    {
+      "entity": "receiver",
+      "state": "covered vs. open",
+      "behavior": "high interception risk if defender nearby; safe completion if isolated"
+    },
+    {
+      "entity": "offensive line",
+      "state": "engaged vs. collapsed",
+      "behavior": "blocks defenders when anticipation is incorrect; collapses when defense reads play correctly"
+    },
+    {
+      "entity": "defensive line",
+      "state": "anticipating vs. surprised",
+      "behavior": "penetrates backfield and collapses plays on correct reads; gaps exposed on incorrect reads"
+    },
+    {
+      "entity": "quarterback (implied)",
+      "state": "pass vs. handoff execution",
+      "behavior": "throw trajectory visible; pass completion/interception determined by receiver/defender proximity"
+    }
+  ],
+  "notes": "Tecmo Bowl uses minimal visual complexity (NES constraints) to communicate sport state through sprite positioning, animation timing, and play outcome feedback. No explicit danger/safety HUD elements documented; communication is implicit in field layout and player sprite proximity. Faction identity relies on city/state naming (not visual color schemes) due to NFL league license restrictions. The game's manifestation layer is purely mechanical: play success/failure determined by defensive anticipation vs. offensive selection, visualized through sprite behavior.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:18:07.567Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4142,
+    "output_tokens": 2171,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

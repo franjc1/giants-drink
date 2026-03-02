@@ -1,0 +1,177 @@
+GameResources/SNES/SoulBlazer - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+SNES
+
+Soul Blazer
+
+This page documents information about
+
+Soul Blazer
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Movement
+
+Speed is 2 pixels per frame.
+
+The character also moves in four frame blocks. Tapping a direction for one frame will have the character move for four frames. You can't interrupt this movement in the other three frames.
+
+No diagonal movement. In the case where a diagonal direction is pressed, the game prioritizes horizontal movement.
+
+Holding the direction continuously will allow the character to walk for 24 frames in 6 different walking images. As long as this direction is held down, the full 24 frame animation will keep the same direction, even the prioritized horizontal movement won't override this. This also interferes with poking with your sword using L or R buttons. After the 24th frame, the game will respond to other controls normally.
+
+Releasing the d-pad, even for a frame, interrupts the 24 frame animation. Any frame will work: Start movement for one frame, then release sometime during the other three frames of forced movement.
+
+No known left+right or up+down glitches.
+
+Swing a sword without meeting level requirement
+
+Begin a swing, then swap to the target sword that you want swung. The new sword will be used in the swing.
+
+The Zantetsu Sword still does only minimal damage against metal enemies, and Pheonix is not cast when swapping to the Soul Blade. However, the Spirit Sword will deal 8 damage with the Power Bracelet at level 16.
+
+Repeat swing without B
+
+Enter the menu while the sword is in mid-swing, preferably at the last possible frame. After leaving the menu, it will be swung again. Only useful to swing swords while too low a level to normally do so. Does not cast Pheonix when swinging the Soul Blade with this trick.
+
+Equip an item ahead of time
+
+Simply set your item to whatever slot the item normally appears in. Once you acquire it, it will already be equipped.
+
+Set the item to the blank spot that would hold Dream Rod, and you don't need a menu transition to equip it later. The Medical Herb doesn't need to be re-equipped when you pick up a second to replace the spent first herb.
+
+Does not work with swords, armors, or magics. The cursor will be reset once you get the relevant equipment.
+
+The RNG
+
+There are sixteen bytes that hold the RNG information. Addresses  7E0302  to  7E0311  are where the RNG is stored. As well, there is a two-byte frame timer at address  7E0312  that is used at every screen transition.
+
+There are two basic ways to affect the RNG:
+
+Change your interaction with enemies that use the RNG
+
+Wait a number of frames before going through a screen transition of some sort
+
+RNG formula
+
+Whenever an enemy is defeated (size of GEM) or picks an action at random:
+
+Add values at  7E0311  and  7E0310  together, store in  7E0310
+
+Add values at  7E0310  and  7E030F  together, plus carry from last addition, store in  7E030F
+
+...  and so on ...
+
+Add values at  7E0303  and  7E0302  together, plus carry from last addition, store in  7E0302
+
+Add 1 to value at  7E0312
+
+The RNG value used for the game's decision making is at address  7E0302 .
+
+Frame timer
+
+One more thing affects the RNG, but only at times you enter a new screen, typically a fade to black is seen. These include walking from one area to another, or releasing someone back at town. These do not include visiting the menu, although the timer still runs while you're in the menu.
+
+Whenever you do go through a screen transition, a two-byte value at  7E0312  is transferred to two bytes at  7E0302 . As well,  7E0312  is reset to -1 (or 65535 if reading as unsigned). A reminder,  7E0312  is a frame timer that increments by 1 every frame.
+
+As changing the number of RNG calls can give a different set of numbers in your next transition, as well as delaying when you enter the next screen, this gives two ways to control the RNG. It is possible to calculate a list of RNG values in the future since the last transition.
+
+GEM sizes
+
+After calling the RNG, the game uses the one-byte value at  7E0302  to determine GEM size. This value, MOD 100, is compared against certain numbers to determine how large the GEM will be. These "certain numbers" depend on what area you're in.
+
+Area  Large  Medium
+
+Grass Valley  1  4
+
+GreenWood  3  8
+
+St. Elles  5  12
+
+Mountain of Souls  7  16
+
+Dr. Leo's Laboratory  9  20
+
+Magridd Castle  11  24
+
+World of Evil  51  100
+
+If wielding the Lucky Blade, these numbers are doubled. If the value MOD 100 is less than the numbers appropriate for the area, a larger GEM will drop. Large ones are worth 10, medium ones 5, and the default small ones are only worth 1.
+
+Enemy actions
+
+There are relatively few enemies that pick actions randomly. The plant enemies in the first areas move in random directions, and will call the RNG frequently to make this decision. All other enemies in the entire area of Grass Valley will not call the RNG as they make no random decisions.
+
+Most enemies that are off-screen won't act. This includes the plant monsters. Therefore, getting them out of sight sooner or later will adjust how many calls are made to the RNG, as well as defeating them at different times.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/SNES/SoulBlazer last edited by FatRatKnight  on 1/27/2014 3:50 AM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

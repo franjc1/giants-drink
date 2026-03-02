@@ -1,0 +1,200 @@
+{
+  "game_id": "tyrian-pc",
+  "game_name": "Tyrian",
+  "platform": "pc",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Colored bullet patterns filling screen space, varying speeds and trajectories",
+      "meaning": "Immediate threat requiring evasion; density indicates danger level"
+    },
+    {
+      "signal": "Shield depletion",
+      "visual_form": "Shield bar reduction on HUD, visual feedback on ship",
+      "meaning": "Player vulnerability increasing; armor exposure imminent"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large enemy sprite with complex attack patterns, screen-filling presence",
+      "meaning": "Major threat encounter; significant damage potential"
+    },
+    {
+      "signal": "Enemy swarms",
+      "visual_form": "Multiple hostile entities coordinating attacks across screen",
+      "meaning": "Overwhelming firepower; difficulty spike indicator"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Fixed/indestructible terrain elements blocking safe passage",
+      "meaning": "Forced navigation challenge; collision = damage"
+    },
+    {
+      "signal": "Red/dark visual palette in level design",
+      "visual_form": "Warm-toned hostile environments, hostile planetary biomes",
+      "meaning": "MicroSol territory or dangerous zone"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Shield regeneration",
+      "visual_form": "Shield bar incrementally restoring over time when not taking damage",
+      "meaning": "Reprieve period; player given brief recovery window"
+    },
+    {
+      "signal": "Powerup drops",
+      "visual_form": "Purple orbs and colored pickup pods from destroyed enemies",
+      "meaning": "Resource gain; weapon upgrade opportunity in arcade mode"
+    },
+    {
+      "signal": "Shop availability",
+      "visual_form": "Safe menu interface allowing customization between levels",
+      "meaning": "Safe haven; moment of planning and resource management"
+    },
+    {
+      "signal": "Open space/clear paths",
+      "visual_form": "Uncluttered screen areas with minimal enemy presence",
+      "meaning": "Navigation opportunity; safe positioning available"
+    },
+    {
+      "signal": "Message cubes collectible",
+      "visual_form": "Story-based narrative pickups available between combat",
+      "meaning": "World context being revealed; brief narrative safety"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "MicroSol megacorporation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Militaristic drone design; industrial/mechanical aesthetic in enemy ships and ground assets",
+      "environmental_markers": "Hostile industrial worlds; Tyrian planet (where MicroSol operates) features industrial/mining environment; militaristic base structures"
+    },
+    {
+      "faction": "Savara (free world)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Not enemy faction; ally destination",
+      "environmental_markers": "Contrasting safer/liberated planetary environments; absence of MicroSol industrial aesthetic"
+    },
+    {
+      "faction": "Trent Hawkins (player character faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragonhead/Dragonwing ship designs in arcade mode",
+      "enemy_visual_variants": "Player-controlled craft; customizable appearance through weapon/component selection",
+      "environmental_markers": "Player ship aesthetic drives visual identity across all modes"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game narrative progression (story mode)",
+      "visual_manifestation": "Level theming shifts from industrial MicroSol territory to liberated Savara regions; environmental aesthetics change",
+      "behavioral_manifestation": "Enemy types and difficulty scale with story progression; boss encounters mark narrative beats"
+    },
+    {
+      "world_state": "Difficulty setting active",
+      "visual_manifestation": "Hard difficulty and above: enemies with enhanced visual presence; possible line-of-sight cone limiting player vision",
+      "behavioral_manifestation": "Enemies fire more projectiles per second; increased health pools visible through prolonged combat; hidden levels only appear at hard difficulty"
+    },
+    {
+      "world_state": "MicroSol threat level",
+      "visual_manifestation": "Industrial drone and ship designs dominate early levels; Tyrian planet shows mining/corporate infrastructure",
+      "behavioral_manifestation": "Hostile drones actively hunt player; militaristic coordinated enemy patterns"
+    },
+    {
+      "world_state": "Player power progression",
+      "visual_manifestation": "Weapon upgrade visual intensity increases; ship customization options expand; sidekick additions add visual bulk to player formation",
+      "behavioral_manifestation": "Player firepower output increases visibly through enhanced projectile effects; ship maneuverability reflected in sprite responsiveness"
+    },
+    {
+      "world_state": "Story branching points",
+      "visual_manifestation": "Message cubes present contextual narrative framing; level selection reflects player choice branches",
+      "behavioral_manifestation": "Enemy encounters and environmental challenges vary based on narrative choice"
+    },
+    {
+      "world_state": "Arcade vs. Story mode",
+      "visual_manifestation": "Arcade mode: minimal narrative UI, emphasis on colorful powerup drops and enemy variety; Story mode: customization menus and message cube presentation",
+      "behavioral_manifestation": "Arcade: rapid pacing, immediate powerup gratification; Story: deliberate progression with ship customization phases"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Planetary biome design",
+      "example": "Tyrian planet shows industrial mining facilities and MicroSol infrastructure; contrasts with Savara's freer aesthetic"
+    },
+    {
+      "technique": "Message cube narrative system",
+      "example": "Collectible story elements scattered through levels; player discovers Buce's death warning and MicroSol's Gravitium conspiracy through environmental pickups"
+    },
+    {
+      "technique": "Enemy design as faction markers",
+      "example": "MicroSol drones visually distinct as militaristic/industrial; enemy variety reflects territorial control and technological sophistication"
+    },
+    {
+      "technique": "Level progression as geographic escape",
+      "example": "Story branches represent player's flight from MicroSol-controlled space toward Savara safety; visual environments transition from hostile industrial to liberated zones"
+    },
+    {
+      "technique": "Shop integration as world-state marker",
+      "example": "Different shops in different levels stock different equipment, suggesting regional variation and story-dependent resource availability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player ship (Dragonhead - arcade mode)",
+      "state": "Standard combat",
+      "behavior": "Responsive maneuvering; forward-focused firepower; picks up front weapon powerups (purple orbs)"
+    },
+    {
+      "entity": "Player ship (Dragonwing - arcade mode)",
+      "state": "Standard combat",
+      "behavior": "Slower, heavily armored; rear weapon focus reoriented forward in arcade mode; picks up rear powerups"
+    },
+    {
+      "entity": "Combined Steel Dragon (arcade mode - two player)",
+      "state": "Cooperative synergy",
+      "behavior": "First player controls combined ship; second player operates turret; visual representation of combined strength"
+    },
+    {
+      "entity": "MicroSol drone",
+      "state": "Hunting player",
+      "behavior": "Aggressive pursuit patterns; eliminates allies (Buce); militaristic coordinated fire"
+    },
+    {
+      "entity": "Enemy swarms",
+      "state": "Coordinated attack",
+      "behavior": "Pattern-based bullet formations; screen-filling presence; scales with difficulty"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Narrative encounter",
+      "behavior": "Complex multi-phase attack patterns; screen-dominant visual presence; story-gated appearance"
+    },
+    {
+      "entity": "Sidekicks (companion weapons)",
+      "state": "Player support",
+      "behavior": "Auxiliary fire synchronized with main weapon; visual flanking formation; some have limited ammunition requiring manual activation"
+    },
+    {
+      "entity": "Shields/Armor system",
+      "state": "Damage absorption",
+      "behavior": "Layered protection visualization; regeneration occurs passively when safe; visual indicator shows health status"
+    }
+  ],
+  "notes": "Tyrian communicates world-state primarily through environmental theming, enemy design language, and narrative progression markers. The MicroSol faction identity is established through industrialized aesthetics and drone design rather than explicit color/symbol systems. Safety vs. danger is conveyed through screen density, enemy behavior patterns, and HUD feedback (shield/armor bars). The story of corporate conspiracy and escape is told through message cube collection and level progression geography rather than cinematic sequences. Arcade and Story modes present different manifestation priorities: arcade emphasizes immediate powerup feedback and visual intensity, while story mode emphasizes customization menus and narrative framing. Difficulty levels alter enemy behavior and visual presentation (line-of-sight mechanics), creating multiple world-state interpretations of the same content.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:40:16.914Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2952,
+    "output_tokens": 2360,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

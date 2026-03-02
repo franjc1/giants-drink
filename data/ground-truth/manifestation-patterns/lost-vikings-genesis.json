@@ -1,0 +1,167 @@
+{
+  "game_id": "lost-vikings-genesis",
+  "game_name": "The Lost Vikings",
+  "platform": "genesis",
+  "paradigm": "puzzle-platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures positioned in pathways and obstacles",
+      "meaning": "Direct threat requiring avoidance or combat response"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Bottomless pits, elevated drops, spike traps",
+      "meaning": "Instant death or health loss if contact made"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Each Viking has 3 health points (visual indicator on HUD)",
+      "meaning": "Character death and level unwinnable state if all Vikings die"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Arrows and projectiles fired by enemies across screen space",
+      "meaning": "Ranged threat requiring shield defense or evasion"
+    },
+    {
+      "signal": "Impassable barriers",
+      "visual_form": "Walls, locked doors, obstacles blocking progression",
+      "meaning": "Requires specific Viking ability or item to overcome"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Level exit point",
+      "visual_form": "Designated exit location all three Vikings must reach",
+      "meaning": "Safe completion zone; level success when all reach it"
+    },
+    {
+      "signal": "Health restoration items",
+      "visual_form": "Food items scattered in levels",
+      "meaning": "Recovery mechanic restoring health points"
+    },
+    {
+      "signal": "Shield protection",
+      "visual_form": "Olaf's shield visual when raised",
+      "meaning": "Temporary invulnerability to projectiles and enemies"
+    },
+    {
+      "signal": "Cooperative positioning",
+      "visual_form": "Vikings standing near each other for item exchange",
+      "meaning": "Ability to transfer equipment between characters"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Vikings",
+      "color_identity": "Vibrant distinct character colors (Erik, Baleog, Olaf each visually differentiated)",
+      "symbol_or_sigil": "Viking aesthetic - helmets, shields, Norse visual design",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Viking-era equipment (swords, shields, axes)"
+    },
+    {
+      "faction": "Croutonian Empire / Tomator",
+      "color_identity": null,
+      "symbol_or_sigil": "Alien/sci-fi aesthetic contrasting with Viking design",
+      "enemy_visual_variants": "Diverse enemy types across time periods (sci-fi enemies, historical creatures)",
+      "environmental_markers": "Alien spacecraft, futuristic technology mixed with temporal settings"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Kidnapped/captured state (opening)",
+      "visual_manifestation": "Vikings appear in alien spacecraft interior environment",
+      "behavioral_manifestation": "Escape sequence; forced progression through hostile alien vessel"
+    },
+    {
+      "world_state": "Time displacement (main gameplay)",
+      "visual_manifestation": "Levels represent different historical periods and bizarre locations",
+      "behavioral_manifestation": "Environment-specific hazards and enemy types per temporal setting"
+    },
+    {
+      "world_state": "Puzzle-lock progression",
+      "visual_manifestation": "Locked doors, blocked passages, switches requiring specific abilities",
+      "behavioral_manifestation": "Player must sequence Viking abilities in correct order to advance"
+    },
+    {
+      "world_state": "Cooperative dependency",
+      "visual_manifestation": "Level design shows physical positions where one Viking must aid another",
+      "behavioral_manifestation": "Mandatory use of all three characters; single character cannot complete level alone"
+    },
+    {
+      "world_state": "Failure state",
+      "visual_manifestation": "Character death animation when health reaches zero",
+      "behavioral_manifestation": "Level becomes unwinnable; player must restart with continue"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Temporal level design",
+      "example": "Levels set in different historical periods (Ancient Egypt, Medieval, Industrial, Sci-Fi) communicate time displacement narrative without exposition"
+    },
+    {
+      "technique": "Ability-gated progression",
+      "example": "Level architecture forces use of specific Viking abilities (Erik's speed/bash, Baleog's ranged attack, Olaf's shield) revealing character roles and story progression"
+    },
+    {
+      "technique": "Visual character differentiation",
+      "example": "Each Viking's distinct appearance and equipment (armor style, weapon type) communicates Norse cultural identity and individual function"
+    },
+    {
+      "technique": "Cooperative space design",
+      "example": "Physical level layout with platforms at different heights requires stacking/positioning Vikings together, reinforcing cooperative narrative"
+    },
+    {
+      "technique": "Enemy and hazard diversity",
+      "example": "Changing enemy types across levels (sci-fi robots, historical creatures, alien forces) communicates passage through different worlds and time periods"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Erik the Swift",
+      "state": "Active/Available",
+      "behavior": "Can dash forward, perform helmet bash through weak walls, jump higher than others"
+    },
+    {
+      "entity": "Baleog the Fierce",
+      "state": "Active/Available",
+      "behavior": "Can attack enemies with sword at melee range, fire arrows from distance, activate distant switches"
+    },
+    {
+      "entity": "Olaf the Stout",
+      "state": "Active/Available",
+      "behavior": "Can raise shield to block projectiles and enemies, deploy shield as hang glider platform, create platform for teammates"
+    },
+    {
+      "entity": "Generic Enemy",
+      "state": "Patrolling/Hunting",
+      "behavior": "Moves in predictable patterns; becomes aggressive when Vikings approach; fires projectiles or charges"
+    },
+    {
+      "entity": "Any Viking",
+      "state": "Damaged/Low health",
+      "behavior": "Visual health indicator reduces; character becomes priority for food item pickup"
+    },
+    {
+      "entity": "Any Viking",
+      "state": "Dead/Eliminated",
+      "behavior": "Removed from active gameplay; remaining Vikings must complete level without that character's ability set"
+    }
+  ],
+  "notes": "The Lost Vikings uses color, character design, and level architecture as primary world-state communication tools. The game lacks explicit dialogue or text-based narrative; instead, it relies on environmental design and character ability manifestation to communicate story (kidnapping, time displacement, cooperative escape). The three-Viking mechanic itself is a form of political/cooperative narrative—each character must contribute or the mission fails. The Genesis version adds extra levels and 3-player simultaneous mode, expanding cooperative visual language. Vibrant colors were deliberately chosen for television display clarity (developer notes indicate console color palette limitations influenced aesthetic choices).",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:15:35.310Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3088,
+    "output_tokens": 1862,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "game_id": "mappy-nes",
+  "game_name": "Mappy",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement (left/right)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player controls two-position joystick to navigate mansion horizontally"
+    },
+    {
+      "element": "Item collection (10 items per round)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Primary objective; stolen items form five pairs for bonus multiplier scoring"
+    },
+    {
+      "element": "Meowky cats (enemy avoidance)",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Smaller blue underlings; player learns basic threat avoidance through contact damage"
+    },
+    {
+      "element": "Goro leader cat",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Large red leader; can be stunned by collecting items behind him for bonus points"
+    },
+    {
+      "element": "Trampolines (vertical traversal)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Bridge gaps in mansion; break after 4 consecutive bounces; provide safe passage during enemy contact"
+    },
+    {
+      "element": "Doors (environmental interaction)",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Open/close with button; briefly stun nearby characters; require facing and button press"
+    },
+    {
+      "element": "Microwave doors (tactical mechanic)",
+      "first_appears": "Early rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "Flashing variant only openable by Mappy; releases horizontal microwave burst to sweep cats for doubled points if Goro caught"
+    },
+    {
+      "element": "Consecutive pair bonus multiplier",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Second item in collected pair multiplied (starts at 2x, increases to max 6x); resets per round/life"
+    },
+    {
+      "element": "Hurry-up timer and increased enemy count",
+      "first_appears": "Mid-round if player delays",
+      "introduction_context": "dangerous",
+      "mastery_context": "Audio warning; additional Meowkies spawn; all enemies accelerate; time pressure intensifies"
+    },
+    {
+      "element": "Gosenzo coin (Goro's face)",
+      "first_appears": "Late in round after extended delay",
+      "introduction_context": "dangerous",
+      "mastery_context": "Large coin immune to microwaves; kills Mappy even in midair; represents ultimate time-pressure threat"
+    },
+    {
+      "element": "Bonus balloon rounds",
+      "first_appears": "At intervals between main rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "Score extra points popping balloons; vertical passage navigation; trampoline bouncing; no enemy contact damage possible"
+    },
+    {
+      "element": "Attic access (expanded mansion area)",
+      "first_appears": "Later game progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Additional vertical space opens; increases level complexity"
+    },
+    {
+      "element": "Bells above trampolines",
+      "first_appears": "Later game progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Knock loose while bouncing; drop on cats to stun and award bonus points; tactical element requiring precise trampoline timing"
+    },
+    {
+      "element": "Vanishing floor sections (flashing tiles)",
+      "first_appears": "Later game progression",
+      "introduction_context": "dangerous",
+      "mastery_context": "Briefly disappear after Mappy steps on them; cats falling through stunned for bonus points; adds spatial puzzle complexity"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Collecting item successfully",
+      "Bouncing on trampoline (invulnerable to cat contact)",
+      "Completing item pair for multiplier bonus",
+      "Entering bonus balloon round (no enemy contact damage)",
+      "Microwave door stun effect on pursuing cats"
+    ],
+    "typical_tension_triggers": [
+      "Meowky cat pursuit (contact damage)",
+      "Goro leader proximity",
+      "Hurry-up timer warning sounding",
+      "Additional cats spawning mid-round",
+      "Gosenzo coin entering screen (indestructible, lethal)",
+      "All enemies accelerating",
+      "Vanishing floor sections creating spatial hazards"
+    ],
+    "pacing_descriptor": "Tension escalates progressively through round duration: initial safe exploration with moderate cat threat → time pressure accumulation → hurry-up warning triggers enemy spawn and acceleration → Gosenzo arrival creates climactic threat. Relief cycles through item collection completions and bonus round interludes."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Goro's position behind items indicates bonus stun opportunity; flashing doors signal microwave mechanic variant",
+    "secret_convention": "No documented secrets in source material",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Moderate: Basic enemy avoidance, straightforward item collection in mansion with trampolines and doors as primary traversal challenges. Single enemy type (Meowkies) at manageable speed.",
+    "mid_game": "Increasing complexity: Attic areas unlock expanding play space. Bells and vanishing floors introduce tactical bouncing mechanics. Enemy count rises and movement speed increases. Multiplier system incentivizes specific routing.",
+    "late_game": "High tension: Multiple Meowkies at accelerated speed, complex spatial layouts with vanishing sections, bells requiring precision timing, constant hurry-up pressure, Gosenzo coin as indestructible lethal threat. Victory requires mastery of all mechanics simultaneously.",
+    "notable_spikes": [
+      "Hurry-up timer warning: Audio cue + enemy spawn + universal acceleration",
+      "Gosenzo coin arrival: Unkillable threat immunity to microwaves, lethal in any contact state",
+      "Attic introduction: Vertical space expansion fundamentally changes movement patterns"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard Collection Round",
+      "description": "Retrieve 10 items (5 pairs) from mansion while avoiding cats. Items scattered across horizontal passages connected by trampolines. Routing for consecutive pair bonuses (2x→6x multiplier) incentivizes specific collection order over pure evasion.",
+      "example_level": "Rounds 1-3 (baseline difficulty)"
+    },
+    {
+      "pattern_name": "Bonus Balloon Interlude",
+      "description": "Vertical passage navigation with trampoline bouncing through balloons. No enemy contact damage. Time-limited scoring opportunity. Resets tension temporarily and provides skill-based high-score potential.",
+      "example_level": "Between main rounds (variable intervals)"
+    },
+    {
+      "pattern_name": "Progressive Mechanic Layering",
+      "description": "Early rounds establish door/microwave/trampoline fundamentals. Mid-rounds add bells and vanishing floors as timing-based obstacles. Late rounds compress all mechanics with increased enemy count and acceleration, requiring integrated mastery.",
+      "example_level": "Cumulative across entire game progression"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:54:21.794Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3061,
+    "output_tokens": 2221,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

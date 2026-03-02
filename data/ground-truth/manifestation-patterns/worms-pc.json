@@ -1,0 +1,198 @@
+{
+  "game_id": "worms-pc",
+  "game_name": "Worms",
+  "platform": "pc",
+  "paradigm": "strategy",
+  "danger_signals": [
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Worm character model degrades or shrinks as health decreases",
+      "meaning": "Immediate threat to individual unit survival"
+    },
+    {
+      "signal": "Explosion effect",
+      "visual_form": "Circular cavities and deformations in terrain from weapon impacts",
+      "meaning": "Active combat danger and terrain instability"
+    },
+    {
+      "signal": "Water hazard",
+      "visual_form": "Water visible at base of map, darker color demarcation",
+      "meaning": "Fatal boundary; worms falling into water die instantly"
+    },
+    {
+      "signal": "Map edge",
+      "visual_form": "Screen boundary or terrain cliff edge",
+      "meaning": "Worms thrown off edges die; spatial danger zone"
+    },
+    {
+      "signal": "Grave marker",
+      "visual_form": "Tombstone or grave symbol placed where worm dies",
+      "meaning": "Permanent loss of unit; visual record of casualties"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Solid terrain",
+      "visual_form": "Intact ground in themed environments (forest, beach, Martian, hell)",
+      "meaning": "Safe positioning for worm placement and movement"
+    },
+    {
+      "signal": "Supply crate",
+      "visual_form": "Reinforcement crate objects deployed on map",
+      "meaning": "Resource availability; weapons and tools access points"
+    },
+    {
+      "signal": "Elevated terrain",
+      "visual_form": "High ground positions, hills, platforms in generated landscape",
+      "meaning": "Tactical advantage; reduced fall damage risk; defensive positioning"
+    },
+    {
+      "signal": "Distance from opponents",
+      "visual_form": "Visual separation between worm teams across terrain",
+      "meaning": "Temporary safety from direct engagement; opportunity for tactical repositioning"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Team (Red/Primary)",
+      "color_identity": "Typically red or distinct primary color per player",
+      "symbol_or_sigil": "Worm character model with team-specific palette",
+      "enemy_visual_variants": "Enemy teams rendered in contrasting colors (blue, green, yellow, etc.)",
+      "environmental_markers": "Team assignment shown in UI; grave markers colored per team"
+    },
+    {
+      "faction": "AI/Computer Opponent",
+      "color_identity": "Distinct from player color; often blue or secondary palette",
+      "symbol_or_sigil": "Worm character with AI team coloring",
+      "enemy_visual_variants": "Visually differentiated from player units through palette swap",
+      "environmental_markers": "Turn indicator shows which team controls current action"
+    },
+    {
+      "faction": "Neutral Elements",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Explosive barrels, land mines rendered in warning colors (typically red/yellow)",
+      "environmental_markers": "Environmental hazards displayed as shared threat across all teams"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active turn phase",
+      "visual_manifestation": "Selected worm highlighted or animated; UI shows active player/team",
+      "behavioral_manifestation": "Worm responds to player input; can move, jump, deploy tools; time limit displayed"
+    },
+    {
+      "world_state": "Waiting for opponent",
+      "visual_manifestation": "Non-active worms appear static or in idle pose; UI dims or grays out player controls",
+      "behavioral_manifestation": "Worms do not respond to input; camera may pan to opponent's worm"
+    },
+    {
+      "world_state": "Weapon fired/impact",
+      "visual_manifestation": "Explosion animation with particle effects; terrain deformation; screen shake possible",
+      "behavioral_manifestation": "Nearby worms react; knockback physics applied; health values update"
+    },
+    {
+      "world_state": "Sudden Death mode active",
+      "visual_manifestation": "Visual indicator (UI message, screen border effect, or color tint change)",
+      "behavioral_manifestation": "Accelerated turn timer; terrain may shrink or hazards increase; heightened urgency"
+    },
+    {
+      "world_state": "Game near conclusion",
+      "visual_manifestation": "Multiple grave markers visible; fewer worms present on map; visual density decreases",
+      "behavioral_manifestation": "Remaining worms become more cautious or aggressive; fewer movement options due to terrain loss"
+    },
+    {
+      "world_state": "Victory state",
+      "visual_manifestation": "Final worm of losing team explodes with grave marker; winning team worms celebrate or idle",
+      "behavioral_manifestation": "Game halts; victory screen displays; surviving worms may perform emotes or animations"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Thematic map generation",
+      "example": "Forest terrain (trees, organic shapes), Martian terrain (alien landscape), Beach (sand, water), Hell (volcanic/hellish elements) — each conveys setting without narrative exposition"
+    },
+    {
+      "technique": "Terrain destruction progression",
+      "example": "As weapons detonate, the landscape becomes increasingly scarred and fragmented, visually narrating the escalation of conflict and environmental devastation"
+    },
+    {
+      "technique": "Grave marker accumulation",
+      "example": "Tombstones left by fallen worms create a visual history of the battle; crowded graveyards indicate lengthy, brutal engagements"
+    },
+    {
+      "technique": "Hazard object placement",
+      "example": "Explosive barrels, land mines positioned in terrain suggest dangerous zones; their presence communicates high-risk areas without explicit warning text"
+    },
+    {
+      "technique": "Crate distribution",
+      "example": "Supply crates scattered across map indicate resource scarcity and competition; placement influences tactical narrative of the battle"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Worm (player-controlled)",
+      "state": "Idle/standing",
+      "behavior": "Stationary pose, awaiting input; may blink or shift weight to show life"
+    },
+    {
+      "entity": "Worm (player-controlled)",
+      "state": "Selected/active",
+      "behavior": "Highlighted or glowing effect; responds to movement commands (walk, jump, tool use)"
+    },
+    {
+      "entity": "Worm (player-controlled)",
+      "state": "Injured",
+      "behavior": "Visual damage indicators; reduced movement speed or altered animation; knockback response to explosions"
+    },
+    {
+      "entity": "Worm (player-controlled)",
+      "state": "Dying",
+      "behavior": "Death animation; self-explosion effect; leaves grave marker; removed from play"
+    },
+    {
+      "entity": "Worm (opponent)",
+      "state": "Idle",
+      "behavior": "Stationary; different color palette; not responsive to current player input"
+    },
+    {
+      "entity": "Worm (opponent)",
+      "state": "Under attack",
+      "behavior": "Knockback physics applied; recoil animation; health value visibly decreases"
+    },
+    {
+      "entity": "Terrain",
+      "state": "Intact",
+      "behavior": "Stable geometry; worms walk/stand without sliding; provides solid movement platform"
+    },
+    {
+      "entity": "Terrain",
+      "state": "Damaged by explosion",
+      "behavior": "Deforms into crater-like cavity; becomes unstable; may cause worms to fall or slide toward water"
+    },
+    {
+      "entity": "Crate",
+      "state": "Unclaimed",
+      "behavior": "Visible on terrain; can be collected by worm contact; disappears upon pickup"
+    },
+    {
+      "entity": "Explosive barrel/land mine",
+      "state": "Armed",
+      "behavior": "Sits passively on terrain; triggers explosion if worm contacts or weapon detonates nearby; poses shared threat"
+    }
+  ],
+  "notes": "Worms (1995) uses minimal explicit narrative to communicate world-state. Instead, it relies heavily on visual design language: team color differentiation, environmental theming, terrain deformation, and symbolic markers (graves, crates, hazards) to convey game state and danger. The procedurally generated levels using alpha-numeric seeds ensure varied but recognizable environmental themes, reinforcing tactical readiness through familiar visual patterns. Danger signals are primarily spatial (edges, water) and consequence-based (graves, health depletion). The game communicates political/faction affiliation through pure color and palette—no logos, sigils, or dialogue present. This minimalist approach was typical of 1995 strategy games and influenced how subsequent Worms titles expanded faction identity.",
+  "sources_used": [
+    "wikipedia: Worms (1995 video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:42:31.468Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3142,
+    "output_tokens": 2301,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "game_id": "super-aleste-snes",
+  "game_name": "Super Aleste / Space Megaforce",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spacecraft presence",
+      "visual_form": "Hostile ships filling screen space, distinctive enemy silhouettes against background",
+      "meaning": "Active threat requiring evasion and counterfire"
+    },
+    {
+      "signal": "Weapon power depletion",
+      "visual_form": "Weapon level indicator dropping (visual HUD element)",
+      "meaning": "Increasing vulnerability; ship one hit away from death at level 0"
+    },
+    {
+      "signal": "Boss encounter initiation",
+      "visual_form": "Large mechanical sphere or renamed stage boss entity entering screen",
+      "meaning": "Major threat requiring sustained combat; world-state escalation"
+    },
+    {
+      "signal": "Environmental collision hazard",
+      "visual_form": "Scrolling background structures approaching screen edges",
+      "meaning": "Crush-damage threat if caught between ship and screen boundary"
+    },
+    {
+      "signal": "Reinforcement waves",
+      "visual_form": "Increased enemy density and spawn patterns during stage progression",
+      "meaning": "Sphere calling for backup; intensity escalation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon power-up collection",
+      "visual_form": "Orange or green chip items dropping from defeated enemies",
+      "meaning": "Health recovery mechanism; weapon level-up restores survivability"
+    },
+    {
+      "signal": "Green chip appearance",
+      "visual_form": "Distinctive green-colored chip pickup",
+      "meaning": "Instant level-up; maximum survivability restoration"
+    },
+    {
+      "signal": "Extra life pickup",
+      "visual_form": "Special item that increases life counter display",
+      "meaning": "Continuation checkpoint; death results in retry at last checkpoint"
+    },
+    {
+      "signal": "Special Life conversion",
+      "visual_form": "Life counter icon becoming red when Special Lives available",
+      "meaning": "Enhanced safety: respawn at exact death location with no progress loss"
+    },
+    {
+      "signal": "Weapon selection pickup",
+      "visual_form": "Numbered items with weapon initials",
+      "meaning": "Tool flexibility; tactical advantage through weapon switching"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Earth Defense / Super Aleste Pilot",
+      "color_identity": null,
+      "symbol_or_sigil": "Super Aleste spacecraft",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player-controlled ship; distinct from enemy vessel designs"
+    },
+    {
+      "faction": "Mechanical Sphere Invader",
+      "color_identity": null,
+      "symbol_or_sigil": "Large mechanical sphere drawing Nazca-line patterns",
+      "enemy_visual_variants": "Reinforcement ships called from deep space by sphere; varied enemy fighter designs",
+      "environmental_markers": "Sphere hovers over jungle environments drawing ground patterns; draws energy from foliage"
+    },
+    {
+      "faction": "Original Aleste (Failed Defense)",
+      "color_identity": null,
+      "symbol_or_sigil": "Original Aleste fighter ship",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Narrative context; visual distinction indicates obsolescence vs. upgraded Super Aleste"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-sphere invasion (narrative setup)",
+      "visual_manifestation": "Earth cities under attack by mechanical sphere; sphere expanding and drawing Nazca-line patterns in jungle terrain",
+      "behavioral_manifestation": "Sphere activates defense systems; military attacks prove ineffective"
+    },
+    {
+      "world_state": "Sphere at full power / mid-campaign",
+      "visual_manifestation": "Increased enemy density and reinforcement wave composition; stage environments show sphere influence or destruction",
+      "behavioral_manifestation": "Enemy spawning intensifies; reinforcement mechanics trigger progressively"
+    },
+    {
+      "world_state": "Boss encounter / stage climax",
+      "visual_manifestation": "Named boss entity dominates screen; distinct visual presentation from regular enemies; arena-like stage layout",
+      "behavioral_manifestation": "Boss follows pattern-based attack sequences; unique vulnerability windows"
+    },
+    {
+      "world_state": "Weapon weakened state",
+      "visual_manifestation": "Weapon level indicator visually diminished; ship sprite may show damage state (implicit through level system)",
+      "behavioral_manifestation": "Reduced offensive capacity; increased fragility (one hit to level 0 = death)"
+    },
+    {
+      "world_state": "Japanese version ending state (narrative divergence)",
+      "visual_manifestation": "Extended ending sequence revealing mystery behind invasion; super-deformed art style on game-over screens",
+      "behavioral_manifestation": "Thi (alien co-pilot) character presence affects narrative pacing; alternate difficulty endings unlock additional lore"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage location thematic design",
+      "example": "South American jungle setting where sphere hovers, drawing Nazca-line patterns; visual metaphor for alien intelligence studying human civilization"
+    },
+    {
+      "technique": "Scrolling background destruction",
+      "example": "Background structures and environments show signs of sphere-caused damage and transformation; visual progression indicates deepening into sphere's influence"
+    },
+    {
+      "technique": "Boss design as world-state indicator",
+      "example": "Different boss encounters across stages represent sphere's expanding reach and escalating defensive measures"
+    },
+    {
+      "technique": "Weapon variety as narrative tool",
+      "example": "Eight weapon types available suggest humanity's improvised technological response to alien threat; each weapon's unique control function implies specialized design for sphere vulnerability exploitation"
+    },
+    {
+      "technique": "Version-specific visual narrative",
+      "example": "Japanese version includes character art (Raz and Thi) and longer ending sequence; removes mystery regarding invasion origins; visual storytelling depth tied to regional release"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player ship (Super Aleste)",
+      "state": "High weapon level (5-6)",
+      "behavior": "Can absorb two hits before death; aggressive play possible; offensive capability maximized"
+    },
+    {
+      "entity": "Player ship (Super Aleste)",
+      "state": "Low weapon level (0-2)",
+      "behavior": "Extreme fragility; defensive evasion-only play required; one hit triggers death"
+    },
+    {
+      "entity": "Enemy spacecraft",
+      "state": "Active in stage",
+      "behavior": "Spawn in waves; follow attack patterns; respond to player position; visually distinct from player ship"
+    },
+    {
+      "entity": "Mechanical sphere",
+      "state": "Boss encounter active",
+      "behavior": "Displays complex attack sequences; activates defense systems; calls reinforcements; dominates visual space"
+    },
+    {
+      "entity": "Weapon power-up (orange chip)",
+      "state": "Collected at high weapon level",
+      "behavior": "Requires more chips for next level-up; diminishing return mechanic; visual progression slower at higher tiers"
+    },
+    {
+      "entity": "Weapon power-up (green chip)",
+      "state": "Collected anytime",
+      "behavior": "Instant level-up regardless of current level; highest priority visual signal for player safety"
+    },
+    {
+      "entity": "Life counter display",
+      "state": "Contains Special Lives",
+      "behavior": "Icon turns red; signals enhanced safety tier available; respawn mechanics change behavior on death"
+    }
+  ],
+  "notes": "Super Aleste is a vertically-scrolling shmup where visual communication of danger/safety is tightly coupled to the weapon level system, which serves dual mechanical and narrative functions. The mechanical sphere threat is communicated through stage progression and boss design. Version differences (Japanese vs. NA/EU) include narrative divergence: Japanese version includes character-driven ending with alien co-pilot Thi and extended narrative revelation; American/European versions removed this content and altered certain music tracks. Environmental storytelling leverages the Nazca-line motif and jungle setting to establish alien intelligence thematic. The weapon-as-health mechanic creates constant visual feedback on survivability state, making the HUD weapon level indicator the primary danger/safety signal. Color-coded chips (orange vs. green) provide intuitive visual hierarchy for power-up priority.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:11:28.613Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3199,
+    "output_tokens": 2156,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

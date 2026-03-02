@@ -1,0 +1,211 @@
+{
+  "game_id": "solar-jetman-nes",
+  "game_name": "Solar Jetman: Hunt for the Golden Warpship",
+  "platform": "nes",
+  "paradigm": "multidirectional shooter / platformer",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "enemy sprites in cavern environments",
+      "meaning": "inhabited hostile caverns; player must avoid or destroy to progress safely"
+    },
+    {
+      "signal": "gravity_variation",
+      "visual_form": "visual feedback through pod inertia behavior; changing environmental layout per planet",
+      "meaning": "each planet presents different gravitational hazards; difficulty escalates with inertia effects"
+    },
+    {
+      "signal": "pod_destruction",
+      "visual_form": "pod explodes; Jetman ejects into space suit state",
+      "meaning": "immediate danger; vulnerable state without pod protection; death if player cannot reach mothership"
+    },
+    {
+      "signal": "fuel_depletion",
+      "visual_form": "fuel meter visual indicator (HUD); pod becomes non-functional",
+      "meaning": "mission failure state; player cannot complete objectives or return to mothership without fuel"
+    },
+    {
+      "signal": "cavern_depth",
+      "visual_form": "deeper cavern environments; enemy density increases",
+      "meaning": "environmental hazard escalation; wormholes and deeper sections are more dangerous"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "mothership_presence",
+      "visual_form": "immobile mothership sprite anchored at launch point",
+      "meaning": "safe haven; location for pod recovery, fuel refueling, score cashing for power-ups"
+    },
+    {
+      "signal": "fuel_collection",
+      "visual_form": "fuel item sprites within caverns",
+      "meaning": "resource availability; fuel replenishment stations for mission continuation"
+    },
+    {
+      "signal": "wormhole_markers",
+      "visual_form": "wormhole visual markers in cavern architecture",
+      "meaning": "safe passage points; allow shortcutting through caverns and delivering items"
+    },
+    {
+      "signal": "power_up_availability",
+      "visual_form": "purchasable power-up menu after every other stage",
+      "meaning": "player agency and progression; defensive/offensive capability enhancement"
+    },
+    {
+      "signal": "map_device",
+      "visual_form": "Mapping Device item; reveals planet layout visually",
+      "meaning": "navigation safety; reduces exploration risk through information provision"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Jetman (player)",
+      "color_identity": null,
+      "symbol_or_sigil": "jet pod; space suit",
+      "enemy_visual_variants": "pod appears as controllable unit; space suit as vulnerable alternate form",
+      "environmental_markers": "launches from mothership; collects items via tow cable"
+    },
+    {
+      "faction": "hostile_cavern_inhabitants",
+      "color_identity": null,
+      "symbol_or_sigil": "generic enemy sprites (planet-specific designs implied)",
+      "enemy_visual_variants": "enemy infested caverns; varied per planet ecology",
+      "environmental_markers": "distributed throughout cavern systems on each planet; density increases with depth"
+    },
+    {
+      "faction": "golden_warpship_guardians",
+      "color_identity": null,
+      "symbol_or_sigil": "Golden Warpship piece (collectible artifact)",
+      "enemy_visual_variants": "piece placement suggests environmental guardianship",
+      "environmental_markers": "located at cavern endpoints; one piece per planet level"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "planet_initial_arrival",
+      "visual_manifestation": "cavern environment with specific gravity visual signature; enemy placement visible",
+      "behavioral_manifestation": "pod launches from mothership with specific inertia behavior; player must adapt to gravity"
+    },
+    {
+      "world_state": "fuel_abundant",
+      "visual_manifestation": "multiple fuel item sprites visible in cavern; HUD fuel meter shows high capacity",
+      "behavioral_manifestation": "player can freely explore; extended flight duration possible"
+    },
+    {
+      "world_state": "fuel_critical",
+      "visual_manifestation": "fuel meter visibly depleted; HUD warning indicator implied",
+      "behavioral_manifestation": "pod performance degraded; player must navigate efficiently back to mothership"
+    },
+    {
+      "world_state": "pod_destroyed",
+      "visual_manifestation": "pod sprite disappears; Jetman space suit sprite appears in cavern",
+      "behavioral_manifestation": "movement speed reduced; vulnerability increased; must reach mothership or die"
+    },
+    {
+      "world_state": "warpship_piece_obtained",
+      "visual_manifestation": "item collected via tow cable; visual weight/drag on pod movement",
+      "behavioral_manifestation": "pod maneuverability reduced; must deliver to mothership or wormhole deposit point"
+    },
+    {
+      "world_state": "gravitational_intensity_low",
+      "visual_manifestation": "pod floats more freely; slower fall speed visual effect",
+      "behavioral_manifestation": "inertia minimized; easier steering; early planet levels"
+    },
+    {
+      "world_state": "gravitational_intensity_high",
+      "visual_manifestation": "pod falls rapidly; sharp inertia visual feedback",
+      "behavioral_manifestation": "difficult maneuverability; late game planets present skill escalation challenge"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "gravity_as_narrative_device",
+      "example": "each planet's unique gravitational pull creates distinct environmental hazards and tells story of alien world physics; progression through planets with increasing gravity establishes world escalation"
+    },
+    {
+      "technique": "cavern_layout_as_progression",
+      "example": "deeper caverns contain wormholes and Golden Warpship pieces; layout progression communicates that valuable artifacts are in dangerous depths"
+    },
+    {
+      "technique": "mothership_anchoring",
+      "example": "immobile mothership at start point establishes safe home base narrative; must return carrying items signals resource gathering quest structure"
+    },
+    {
+      "technique": "enemy_ecology_per_planet",
+      "example": "different enemy types inhabit different planets; enemy-infested caverns communicate that each world has native hostile fauna"
+    },
+    {
+      "technique": "fuel_scarcity_design",
+      "example": "fuel items distributed within caverns; fuel depletion as failure state communicates survival challenge and resource management narrative"
+    },
+    {
+      "technique": "artifact_collection_sequence",
+      "example": "Golden Warpship pieces placed across 12+ planets; sequential collection quest establishes grand journey narrative spanning multiple worlds"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "pod",
+      "state": "normal_operation",
+      "behavior": "responsive steering; subject to planet gravity; can fire weapons; tow cable operational"
+    },
+    {
+      "entity": "pod",
+      "state": "fuel_depleted",
+      "behavior": "becomes non-functional; cannot navigate or return to mothership; mission failure"
+    },
+    {
+      "entity": "pod",
+      "state": "item_towing",
+      "behavior": "maneuverability reduced; drag increases; flight becomes difficult; visual weight indication"
+    },
+    {
+      "entity": "pod",
+      "state": "destroyed",
+      "behavior": "sprite disappears; eject animation; Jetman appears in space suit; player loses pod protection"
+    },
+    {
+      "entity": "jetman_spacewalk",
+      "state": "exposed",
+      "behavior": "agile movement possible; highly vulnerable to damage; must reach mothership or perish"
+    },
+    {
+      "entity": "enemies",
+      "state": "active_patrol",
+      "behavior": "inhabit caverns; threat to pod and spacewalking jetman; can be destroyed for points"
+    },
+    {
+      "entity": "mothership",
+      "state": "awaiting_return",
+      "behavior": "stationary; receives items via tow cable delivery; refuels pod; resets Jetman when destroyed outside pod"
+    },
+    {
+      "entity": "gravity_field",
+      "state": "low_gravity_planet",
+      "behavior": "slow descent; reduced inertia; easier navigation; less skill-dependent"
+    },
+    {
+      "entity": "gravity_field",
+      "state": "high_gravity_planet",
+      "behavior": "rapid descent; strong inertia effects; difficult navigation; high skill requirement"
+    }
+  ],
+  "notes": "Solar Jetman uses gravity variance as primary world-state differentiator across planets. Danger communication relies on enemy placement density, fuel mechanics as existential threat, and gravity difficulty curves. The mothership functions as visual safety anchor. Pod destruction state transition to space suit represents critical vulnerability narrative moment. Item collection with drag penalty creates mechanical tension that communicates environmental hazard. Limited source material on specific visual design; extraction based on gameplay systems and their visual manifestations documented in Wikipedia and TCRF sources.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "TODO": "Additional research needed for: specific enemy sprite design per planet, exact color palettes if any faction coding exists, detailed HUD UI design specifics, unused graphics implications for world-state design, regional differences visual impact",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:11:40.198Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4979,
+    "output_tokens": 2391,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

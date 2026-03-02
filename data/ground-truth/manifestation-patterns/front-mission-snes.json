@@ -1,0 +1,148 @@
+{
+  "game_id": "front-mission-snes",
+  "game_name": "Front Mission",
+  "platform": "snes",
+  "paradigm": "tactical-rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy wanzer presence",
+      "visual_form": "Overhead tactical map showing enemy unit icons in red/contrasting color",
+      "meaning": "Active combat threat; player must engage or retreat"
+    },
+    {
+      "signal": "Destroyed wanzer parts",
+      "visual_form": "Severed arm/leg limbs on battlefield, unit sprite missing limbs",
+      "meaning": "Progressive mechanical failure; loss of weapons or mobility indicates increasing danger"
+    },
+    {
+      "signal": "Mobile weapon platforms",
+      "visual_form": "Single-body large enemy units distinct from multi-part wanzers",
+      "meaning": "High-threat boss-class enemies; significantly stronger than standard wanzers"
+    },
+    {
+      "signal": "Body part destruction",
+      "visual_form": "Center torso of wanzer removed from play field entirely",
+      "meaning": "Unit complete loss; mission failure if allied commander's wanzer destroyed"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town/city location",
+      "visual_form": "Point-and-click world map nodes designated as intermission zones",
+      "meaning": "Safe zone where player can customize units, organize forces, and prepare for next mission"
+    },
+    {
+      "signal": "Mission completion",
+      "visual_form": "Battle zones become visually inaccessible/grayed out after completion",
+      "meaning": "Threat neutralized; area is no longer a danger zone"
+    },
+    {
+      "signal": "Allied unit presence",
+      "visual_form": "Friendly wanzer icons on tactical map (implied color distinction from enemies)",
+      "meaning": "Reinforcement available; reduces tactical pressure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "USN (United States of the New Continent)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "USN has dedicated campaign scenario with distinct unit compositions",
+      "environmental_markers": "Huffman Island as primary operational theater; coastal/volcanic island terrain"
+    },
+    {
+      "faction": "Opposing faction (unnamed in available sources)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Wanzer designs likely differ from player faction; vehicles and aircraft used as support",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission briefing",
+      "visual_manifestation": "World map reveals new accessible locations as plot progresses; briefing UI shows enemy force composition",
+      "behavioral_manifestation": "Player transitions from narrative/dialogue scenes to tactical preparation in intermission zones"
+    },
+    {
+      "world_state": "Active combat engagement",
+      "visual_manifestation": "Overhead tactical grid view with wanzer unit sprites, weapons fire animations, part destruction effects",
+      "behavioral_manifestation": "Turn-based tactical combat; units respond to player commands with movement and attack animations"
+    },
+    {
+      "world_state": "Mission success",
+      "visual_manifestation": "Battle zone becomes inaccessible on world map; UI indicates mission completion",
+      "behavioral_manifestation": "Story progresses; new locations unlock; player returns to town for unit customization"
+    },
+    {
+      "world_state": "Unit damage accumulation",
+      "visual_manifestation": "Wanzer limbs visually disappear from sprite; individual part health bars deplete on UI",
+      "behavioral_manifestation": "Damaged units lose weapon function or movement capability; performance degrades progressively"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting specification (Huffman Island, 2090)",
+      "example": "Island location roughly the size of Oahu, created by volcanic activity, establishes geopolitical significance and resource conflict context"
+    },
+    {
+      "technique": "Faction-specific campaigns",
+      "example": "USN scenario variant allows players to experience conflict from different perspective, implying multi-faction political complexity"
+    },
+    {
+      "technique": "Progressive map revelation",
+      "example": "New world map locations unlock as plot advances, communicating military campaign progression and territorial control shifts"
+    },
+    {
+      "technique": "Battle zone accessibility",
+      "example": "Mission locations become inaccessible after completion, visually marking conquered/secured territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Wanzer (playable)",
+      "state": "Fully equipped (4 parts intact)",
+      "behavior": "Full movement, weapon use, evasion capabilities; can engage in melee and ranged attacks"
+    },
+    {
+      "entity": "Wanzer (arm destroyed)",
+      "state": "Damaged",
+      "behavior": "Loss of weapon functionality; reduced combat effectiveness; continued movement possible"
+    },
+    {
+      "entity": "Wanzer (legs destroyed)",
+      "state": "Severely crippled",
+      "behavior": "Movement reduced to single space per turn; evasion severely compromised; immobile tactical threat"
+    },
+    {
+      "entity": "Wanzer (body destroyed)",
+      "state": "Destroyed",
+      "behavior": "Unit removed from play completely; permanent loss; mission failure if player commander's unit"
+    },
+    {
+      "entity": "Mobile weapon platform",
+      "state": "Active",
+      "behavior": "Single-body structure; significantly higher damage output than standard wanzers; boss-tier threat level"
+    },
+    {
+      "entity": "Enemy AI combatant (Arena)",
+      "state": "Combat ready",
+      "behavior": "Engages player in non-campaign battles; responds to tactical player positioning; fights to destruction"
+    }
+  ],
+  "notes": "Front Mission communicates world-state primarily through overhead tactical map presentation and progressive location unlock mechanics. Danger is conveyed through enemy unit presence, destructible part systems creating visible degradation, and single-body boss-class enemies. Faction identity is implied through campaign variants (USN scenario) rather than explicit visual sigils in available source material. The modular wanzer damage system creates emergent danger communication—destroyed limbs are immediately visible and mechanically restrict unit capabilities, creating intuitive danger escalation without requiring text warnings.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:58:04.056Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3033,
+    "output_tokens": 1638,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

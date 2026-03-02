@@ -1,0 +1,117 @@
+{
+  "game_id": "thinking-rabbit-nes",
+  "game_name": "Sokoban",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Player character",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Movement in four directions (horizontal/vertical) across empty floor squares"
+    },
+    {
+      "element": "Single box",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic push mechanic - player walks up to box and pushes it to adjacent empty square"
+    },
+    {
+      "element": "Storage location (target)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Visual marker (red dot) showing destination for box placement"
+    },
+    {
+      "element": "Walls",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Obstacles that block player and box movement, define puzzle boundaries"
+    },
+    {
+      "element": "Multiple boxes (2+)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Managing box sequencing; understanding that only one box can be pushed at a time"
+    },
+    {
+      "element": "Deadlock conditions",
+      "first_appears": "Early-to-mid levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Learning to recognize permanent traps: boxes against walls, boxes in dead ends, blocked access patterns"
+    },
+    {
+      "element": "Multi-step planning requirement",
+      "first_appears": "Mid levels onward",
+      "introduction_context": "dangerous",
+      "mastery_context": "Planning several moves ahead; considering all possible outcomes to avoid unsolvable states"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully placing a box on storage location",
+      "Completing a level/puzzle",
+      "Undoing moves to recover from mistake"
+    ],
+    "typical_tension_triggers": [
+      "Realizing a careless move created a deadlock",
+      "Box positioned against wall or another box",
+      "Uncertainty about whether remaining boxes can reach storage locations",
+      "Planning complex multi-move sequences"
+    ],
+    "pacing_descriptor": "Self-paced cognitive puzzle rhythm; tension builds through planning burden and deadlock awareness, releases upon successful placement or level completion; intensity depends on player's lookahead capability and puzzle complexity rather than time pressure"
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "frequent",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introduction of core mechanics (movement, single box push, storage location placement) with safe, learnable scenarios; designed to teach push mechanics without deadlock risk",
+    "mid_game": "Multiple boxes introduced; deadlock conditions become active puzzle obstacles; players must develop planning and foresight skills",
+    "late_game": "Complex multi-step planning; high deadlock risk; intricate box sequencing; levels designed to be challenging even for skilled players",
+    "notable_spikes": [
+      "Transition from single-box to multi-box puzzles (risk of permanent box trapping introduced)",
+      "Introduction of narrow corridors and dead-end configurations (spatial constraint complexity spike)",
+      "Late-stage puzzles requiring 10+ move lookahead planning"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear progression with increasing constraint",
+      "description": "Early levels feature open warehouse spaces with clear paths; subsequent levels add walls, narrow corridors, and dead ends to increase spatial complexity and deadlock risk",
+      "example_level": "First level of NEC PC-8801 version (documented as simple introductory level)"
+    },
+    {
+      "pattern_name": "Box sequencing puzzles",
+      "description": "Multiple boxes require careful ordering of placement; moving one box incorrectly can block access to remaining boxes or force suboptimal placement that creates deadlock",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Dead-end trap design",
+      "description": "Spatial design where boxes can be pushed into alcoves or corridors with only one entrance/exit, creating permanent traps if boxes are placed there",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:54:08.165Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3199,
+    "output_tokens": 1499,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

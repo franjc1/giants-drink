@@ -1,0 +1,116 @@
+{
+  "game_id": "othello-nes",
+  "game_name": "Othello",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Game board (8x8 grid)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "spatial awareness of empty squares and piece placement"
+    },
+    {
+      "element": "Disk pieces (light/dark sides)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "understanding piece ownership and color assignment"
+    },
+    {
+      "element": "Four central disks (opening setup)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "recognizing standard board state and initial player positions"
+    },
+    {
+      "element": "Piece placement mechanic",
+      "first_appears": "first player turn",
+      "introduction_context": "safe",
+      "mastery_context": "learning valid empty square placement"
+    },
+    {
+      "element": "Capture/flip mechanic",
+      "first_appears": "first player turn",
+      "introduction_context": "moderate",
+      "mastery_context": "understanding how pieces bounded in straight lines are turned over"
+    },
+    {
+      "element": "Turn-based alternation",
+      "first_appears": "second player turn",
+      "introduction_context": "safe",
+      "mastery_context": "understanding player rotation and pass rule"
+    },
+    {
+      "element": "Scoring (piece count)",
+      "first_appears": "game end",
+      "introduction_context": "safe",
+      "mastery_context": "counting final disks to determine winner"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "successful piece capture (flipping opponent disks)",
+      "gaining piece count advantage",
+      "securing board control in key areas"
+    ],
+    "typical_tension_triggers": [
+      "opponent's move expanding their territory",
+      "limited available move options (approaching pass state)",
+      "opponent flanking multiple pieces in one move",
+      "losing majority piece count"
+    ],
+    "pacing_descriptor": "gradual escalation: early game has many move options, mid-game involves strategic positioning, late-game narrows to forced moves with high consequence"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "low difficulty; multiple valid moves available; board is sparse and capture opportunities are straightforward",
+    "mid_game": "moderate difficulty; move options remain available but consequences become more complex; piece flanking involves multiple directions",
+    "late_game": "high difficulty; board fills up, move options dwindle, single moves have cascading territorial consequences, possible pass states force strategic planning",
+    "notable_spikes": [
+      "endgame when few empty squares remain and each placement triggers cascading flips",
+      "situations where player faces pass (no legal moves available)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Symmetrical opening constraint",
+      "description": "Game always begins with identical setup (4 disks in center square, alternating light/dark). This removes variability and focuses skill on mid-game and endgame strategy rather than opening novelty.",
+      "example_level": "all games"
+    },
+    {
+      "pattern_name": "Territory expansion and contraction",
+      "description": "Single moves can expand player's controlled territory significantly through chaining flips in multiple directions. Dominant strategy shifts from early expansion to late-game containment.",
+      "example_level": "mid to late game phases"
+    },
+    {
+      "pattern_name": "Forced move sequences",
+      "description": "Endgame often presents situations where limited empty squares force specific move sequences with predetermined outcomes, reducing player agency but increasing calculation depth.",
+      "example_level": "final 10-15 moves"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:52:33.341Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2954,
+    "output_tokens": 1237,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

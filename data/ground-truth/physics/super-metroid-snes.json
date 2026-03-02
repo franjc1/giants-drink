@@ -1,0 +1,216 @@
+{
+  "_meta": {
+    "game": "Super Metroid",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1994,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D1",
+    "sources": [
+      {
+        "name": "Super Metroid Wiki — Horizontal Speed",
+        "url": "https://wiki.supermetroid.run/Horizontal_Speed",
+        "notes": "Primary source for horizontal movement constants. Walk max 2.49152 px/f, speed booster max 7.0 px/f, acceleration 0.0625 px/f², ramp frames. High confidence."
+      },
+      {
+        "name": "TASVideos Game Resources — SNES / Super Metroid",
+        "url": "https://tasvideos.org/GameResources/SNES/SuperMetroid",
+        "notes": "Technique documentation: mockball, walljump, bomb jumping, Shinespark. Vertical physics primarily qualitative in available resources."
+      },
+      {
+        "name": "Data Crystal — Super Metroid",
+        "url": "https://datacrystal.tcrf.net/wiki/Super_Metroid",
+        "notes": "RAM map for physics variable addresses. Supplements speedrun wiki."
+      }
+    ],
+    "confidence": "medium-high",
+    "notes": [
+      "Horizontal movement constants (walk max, speed booster, acceleration) are high-confidence from wiki.supermetroid.run.",
+      "Vertical physics (jump initial velocity, gravity) are medium confidence — community-measured, ROM address not confirmed in reviewed sources.",
+      "Super Metroid uses a 16-bit sub-pixel precision system. Exact sub-pixel unit per pixel: acceleration documented as '4096 sub-units' suggesting 65536 sub-pixels/pixel (16.16 fixed-point) or similar.",
+      "Super Metroid is the SNES sequel to NES Metroid (1986). Major additions: wall jump, Space Jump, Grapple Beam, Speed Booster, Charge Beam, Shinespark.",
+      "Level structure inherited from NES Metroid: room-based, not continuous scroll. Rooms are larger than one screen (smooth scroll within room).",
+      "NTSC (60fps) values used throughout."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    },
+    "scrolling_architecture": {
+      "type": "room_based_with_smooth_scroll",
+      "description": "Rooms are larger than one screen. Camera scrolls smoothly within a room following Samus. Transitioning through a door triggers a room load and screen transition. Architecturally similar to NES Metroid's room graph, but rooms are multi-screen-sized."
+    }
+  },
+
+  "ground_movement": {
+    "walk_max_speed": {
+      "px_per_frame": 2.49152,
+      "source": "wiki.supermetroid.run/Horizontal_Speed",
+      "confidence": "high",
+      "notes": "Maximum walking speed — standard horizontal movement cap without Speed Booster. Samus has acceleration to reach this, unlike the instant-velocity Mega Man."
+    },
+    "acceleration": {
+      "px_per_frame_sq": 0.0625,
+      "source": "wiki.supermetroid.run/Horizontal_Speed: 'acceleration 4096'",
+      "confidence": "high",
+      "notes": "4096 sub-units of acceleration per frame. If using 65536 sub-pixels/pixel: 4096/65536 = 0.0625 px/frame². Ramp from standing to walk max takes ~32 frames."
+    },
+    "ramp_frames_to_walk_max": {
+      "frames": 32,
+      "source": "wiki.supermetroid.run/Horizontal_Speed",
+      "confidence": "high"
+    }
+  },
+
+  "speed_booster": {
+    "available": true,
+    "requires_upgrade": true,
+    "max_speed_px_per_frame": 7.0,
+    "source": "wiki.supermetroid.run/Horizontal_Speed",
+    "confidence": "high",
+    "ramp_frames_from_standing": {
+      "frames": 112,
+      "source": "wiki.supermetroid.run/Horizontal_Speed",
+      "confidence": "high",
+      "notes": "Samus must run continuously for ~112 frames to reach Speed Booster max. This creates a significant activation run-up requirement."
+    },
+    "notes": [
+      "Speed Booster is a pickup upgrade — not available at game start.",
+      "At max Speed Booster velocity (7.0 px/frame), Samus destroys Speed Boost blocks on contact.",
+      "Speed Booster speed is 7.0 / 2.49152 = 2.81x normal walk max — nearly triple standard speed.",
+      "The 112-frame ramp requires approximately 1.87 seconds of continuous running — level design must create long-enough corridors for activation."
+    ]
+  },
+
+  "shinespark": {
+    "speed_px_per_frame": 7.0,
+    "description": "After reaching Speed Booster max speed, crouching stores the Shinespark charge. Pressing jump releases it: Samus moves in a locked cardinal or diagonal direction at Speed Booster max velocity.",
+    "direction_set_at": "storage time (direction held when crouching)",
+    "notes": [
+      "Shinespark allows boosting through solid blocks in a fixed trajectory.",
+      "The locked-direction movement after release makes Shinespark a skill-expression tool: players must pre-aim the spark before activating.",
+      "Chains of Shinesparks can be set up for sequence breaks, reaching areas well before intended progression.",
+      "Shinespark is not a base ability — requires Speed Booster upgrade first."
+    ]
+  },
+
+  "jump": {
+    "initial_y_velocity_approx": {
+      "px_per_frame": 5.5,
+      "confidence": "medium",
+      "notes": "Approximate from community documentation and gameplay measurement. Exact ROM value not confirmed in sources reviewed. VERIFY."
+    },
+    "variable_jump": true,
+    "notes": [
+      "Variable height — holding jump longer produces higher apex.",
+      "Samus's jump feel is lighter than NES Metroid's floaty jump — gravity is higher in Super Metroid.",
+      "Spin jump (pressing jump while pressing left or right) initiates a spinning animation that interacts with wall jump and Space Jump."
+    ],
+    "spin_jump": {
+      "description": "Jumping while moving left or right initiates a spinning Samus animation. Required for wall jump and Space Jump activation.",
+      "notes": "Spin jump can also deflect certain projectiles."
+    }
+  },
+
+  "gravity": {
+    "px_per_frame_sq_approx": 0.25,
+    "confidence": "medium",
+    "notes": "Approximate. Super Metroid gravity is higher than NES Metroid (~0.25 px/f² NES) but still on the lighter end for SNES. VERIFY against ROM."
+  },
+
+  "wall_jump": {
+    "available": true,
+    "requires_upgrade": false,
+    "notes": [
+      "Wall jump is always available in Super Metroid — NOT a pickup upgrade. Absent in NES Metroid entirely.",
+      "Technique: spin jump toward a wall, press jump at moment of wall contact while holding away from the wall.",
+      "Wall jump is one of the highest-skill mechanics — timing window is tight but learnable.",
+      "Used in advanced speedruns to access areas without required mobility items (sequence breaks).",
+      "Multiple wall kicks can chain to climb tall shafts."
+    ]
+  },
+
+  "space_jump": {
+    "available": true,
+    "requires_upgrade": true,
+    "notes": [
+      "Space Jump allows infinite mid-air jumps when timed correctly during the spin jump animation.",
+      "Timing: pressing jump at the lowest point of the spin animation cycle extends the jump.",
+      "Space Jump must be obtained as a pickup in Maridia.",
+      "Not present in NES Metroid — introduced in Super Metroid."
+    ]
+  },
+
+  "morph_ball": {
+    "speed_px_per_frame_approx": 2.5,
+    "confidence": "medium",
+    "notes": "Morph ball speed is approximately equal to walk max speed. Allows passage through 1-tile-height tunnels.",
+    "input": "Down to morph, Up to unmorph (or press Up + jump for Spring Ball jump if equipped)",
+    "hitbox": {
+      "width_px_approx": 16,
+      "height_px_approx": 16,
+      "notes": "1 tile × 1 tile. Fits through corridors inaccessible to standing Samus."
+    }
+  },
+
+  "spring_ball": {
+    "available": true,
+    "requires_upgrade": true,
+    "notes": "Spring Ball upgrade allows jumping while in morph ball form (Up + Jump). Without it, Samus must unmorph to jump."
+  },
+
+  "grapple_beam": {
+    "available": true,
+    "requires_upgrade": true,
+    "notes": [
+      "Grapple Beam latches onto designated ceiling tiles.",
+      "Physics: Samus swings in a pendulum arc from the grapple point, gaining momentum.",
+      "Releasing at the swing apex sends Samus in the direction of travel.",
+      "Not in NES Metroid — introduced in Super Metroid."
+    ]
+  },
+
+  "charge_beam": {
+    "available": true,
+    "requires_upgrade": true,
+    "notes": "Charge Beam allows charging the arm cannon for a more powerful shot. Not in NES Metroid — introduced here. Can be combined with beam upgrades (Ice, Wave, Spazer, Plasma)."
+  },
+
+  "hitboxes": {
+    "samus_standing": {
+      "width_px_approx": 8,
+      "height_px_approx": 32,
+      "confidence": "low",
+      "notes": "Approximate. VERIFY against ROM. Samus's hitbox is narrower than her sprite."
+    },
+    "samus_morph_ball": {
+      "width_px_approx": 16,
+      "height_px_approx": 16,
+      "confidence": "medium"
+    }
+  },
+
+  "absent_from_nes_metroid": {
+    "wall_jump": true,
+    "space_jump": true,
+    "speed_booster": true,
+    "shinespark": true,
+    "grapple_beam": true,
+    "charge_beam": true,
+    "spring_ball": true,
+    "notes": "All mechanics listed above are Super Metroid additions. NES Metroid only has: standard jump, morph ball, bombs, missile, ice/wave/long beam variations."
+  },
+
+  "design_notes_for_giants_drink": [
+    "Horizontal acceleration (0.0625 px/frame², 32 frames to max) gives Super Metroid a fluid momentum feel between the instant-velocity Mega Man and the fast-accelerating Mario. It's fast enough to not feel sluggish but slow enough that reversing direction has a 'weight.'",
+    "The Speed Booster + Shinespark system creates a second movement layer: normal exploration (up to 2.49 px/f) vs. high-speed layer (7 px/f). Good Metroid level design hides secrets behind speed booster blocks that casual players may never notice.",
+    "Wall jump and Space Jump are skill-gated, not item-gated — sequence-breaking through skill mastery is a core Super Metroid design value. The game wants expert players to break it.",
+    "Room-based level generation should model a room graph where rooms have multiple connection points (doors at different heights/positions). The graph should have choke points gated by upgrades but also bypass routes gated by skill.",
+    "The gradient from walk → speed booster should manifest in level design: long corridors that look like simple hallways reward the player with activation of the high-speed movement mode, then immediately test the player's ability to use it."
+  ]
+}

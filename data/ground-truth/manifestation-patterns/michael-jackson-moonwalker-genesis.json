@@ -1,0 +1,152 @@
+{
+  "game_id": "michael-jackson-moonwalker-genesis",
+  "game_name": "Michael Jackson's Moonwalker",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Hostile characters (zombies, thugs, police) with distinct sprites",
+      "meaning": "Immediate threat to player progression; combat/avoidance required"
+    },
+    {
+      "signal": "Hazardous terrain",
+      "visual_form": "Spikes, pits, environmental obstacles with contrasting visual design",
+      "meaning": "Collision damage; instant fail zones in platforming segments"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large, uniquely animated sprite with distinct color palette",
+      "meaning": "Major world-state barrier; progression blocked until defeated"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible power-ups",
+      "visual_form": "Glowing items, icons with bright coloration",
+      "meaning": "Temporary invulnerability or enhanced abilities; player empowerment"
+    },
+    {
+      "signal": "Open paths forward",
+      "visual_form": "Clear platform geometry, unobstructed walkways with visual continuity",
+      "meaning": "Safe progression route available"
+    },
+    {
+      "signal": "Rescued civilians/children",
+      "visual_form": "Character sprites with distinct appearance, visual separation from enemies",
+      "meaning": "Mission objective completion; safe zone indicator"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Michael Jackson)",
+      "color_identity": "Red/dark jacket with contrasting pants",
+      "symbol_or_sigil": "Iconic silhouette pose; humanoid character sprite with musical association",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dance floors, performance stages, music-themed level aesthetics"
+    },
+    {
+      "faction": "Enemies (Generic antagonists)",
+      "color_identity": "Varied (zombies green/gray, thugs darker, police uniform colors)",
+      "symbol_or_sigil": "Distinct enemy sprite designs; no unified faction symbol",
+      "enemy_visual_variants": "Multiple enemy types per level with different movement patterns and attack behaviors",
+      "environmental_markers": "Urban/industrial zones; abandoned areas where enemies cluster"
+    },
+    {
+      "faction": "Civilians/Children (Rescue targets)",
+      "color_identity": "Bright, contrasting colors; distinct from enemy palette",
+      "symbol_or_sigil": "Child-sized sprites; vulnerable character appearance",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Confined spaces, rooms requiring navigation; often visually isolated"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal level progression",
+      "visual_manifestation": "Standard enemy patterns; platform geometry fully visible; ambient lighting consistent",
+      "behavioral_manifestation": "Enemies patrol or move in predictable patterns; player movement unimpeded"
+    },
+    {
+      "world_state": "Civilians rescued/objective met",
+      "visual_manifestation": "Level exit becomes accessible; visual transition toward next stage area",
+      "behavioral_manifestation": "Enemies may cease spawning or change patrol patterns; player gains passage forward"
+    },
+    {
+      "world_state": "Boss encounter active",
+      "visual_manifestation": "Arena becomes isolated; boss sprite dominates screen space; unique visual styling for boss character",
+      "behavioral_manifestation": "Boss executes multi-phase attack patterns; player restricted to arena; faster enemy movement/attacks"
+    },
+    {
+      "world_state": "Power-up active (temporary buff)",
+      "visual_manifestation": "Player sprite may change appearance or display visual effect overlay; screen effects/animation changes",
+      "behavioral_manifestation": "Player invulnerability or enhanced attack capability; enemies take damage on contact; changed interaction rules"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage theming through visual design",
+      "example": "Different levels present thematically distinct environments (urban, industrial, fantastical) communicating progression through Michael Jackson's world"
+    },
+    {
+      "technique": "Enemy placement as narrative context",
+      "example": "Specific enemy types appearing in thematic locations (e.g., zombies in spooky areas) reinforcing stage atmosphere and danger context"
+    },
+    {
+      "technique": "Civilian placement as objective markers",
+      "example": "Children positioned in visible but obstructed locations communicates rescue mission structure; their visual vulnerability reinforces stakes"
+    },
+    {
+      "technique": "Level exit gating through visual lockdown",
+      "example": "Forward passage blocked by visual/geometric barriers until rescue objective completed; world-state tied to mission completion"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Zombies",
+      "state": "Idle/patrol",
+      "behavior": "Slow, shambling movement; predictable directional paths"
+    },
+    {
+      "entity": "Zombies",
+      "state": "Alerted to player",
+      "behavior": "Movement speed increases; may lurch toward player position"
+    },
+    {
+      "entity": "Thugs/Enemies",
+      "state": "Hostile",
+      "behavior": "Direct approach toward player; attack execution with melee or projectile patterns"
+    },
+    {
+      "entity": "Police",
+      "state": "Pursuing player",
+      "behavior": "Faster movement than zombies; coordinated patrol patterns suggesting organized opposition"
+    },
+    {
+      "entity": "Player (Michael Jackson)",
+      "state": "Powered-up (invulnerable)",
+      "behavior": "Movement speed may increase; enemies flee or take damage on contact; visual invulnerability indicator active"
+    },
+    {
+      "entity": "Boss",
+      "state": "Combat phase 1",
+      "behavior": "Basic attack patterns; movement telegraphed through animation"
+    },
+    {
+      "entity": "Boss",
+      "state": "Combat phase 2+",
+      "behavior": "Attack frequency increases; movement becomes erratic; visual intensity escalates"
+    }
+  ],
+  "notes": "Michael Jackson's Moonwalker uses straightforward visual communication for a 1990 platformer. Danger is communicated through enemy sprite design and environmental hazards. Faction identity relies on color palette differentiation rather than symbolic markers. World-state changes manifest primarily through enemy behavior modification and level geometry access. The rescue mission structure (collecting children) creates a clear objective visualization system. Power-up states provide positive feedback through visual effect layering. Limited source material available for this T2 extraction.",
+  "sources_used": [],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:55:27.325Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 919,
+    "output_tokens": 1824,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "game_id": "quackshot-genesis",
+  "game_name": "QuackShot Starring Donald Duck",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Undead Vikings, hostile creatures in level environments",
+      "meaning": "Areas contain active threats requiring combat or avoidance"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Larger, distinct enemy sprites (Pete as rival antagonist)",
+      "meaning": "Significant danger threshold; requires skill to progress"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Level design obstacles in overland and dungeon sections",
+      "meaning": "Platforming challenges and traversal dangers"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Heart counter in lower-left corner decreasing",
+      "meaning": "Immediate threat to player character state; death if depleted"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible items",
+      "visual_form": "Popcorn and bubble gum scattered in levels",
+      "meaning": "Resources available for progression and upgrades"
+    },
+    {
+      "signal": "Nephews' biplane availability",
+      "visual_form": "Callable transport at level completion",
+      "meaning": "Safe exit from overland section; checkpoint/respite from danger"
+    },
+    {
+      "signal": "Power-up accessibility",
+      "visual_form": "Spicy jalapeños in overland sections (Duckburg, India, Egypt)",
+      "meaning": "Temporary invincibility and forward momentum available for player advantage"
+    },
+    {
+      "signal": "Puzzle solutions",
+      "visual_form": "Clues found in specific levels that unlock dungeon progression",
+      "meaning": "Knowledge-based safety; proper preparation allows advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Donald's Team",
+      "color_identity": null,
+      "symbol_or_sigil": "Donald Duck character identity; nephews Huey, Dewey, Louie as supporting unit",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Biplane as team transport; represents domestic/familial faction"
+    },
+    {
+      "faction": "Pete's Rival Team",
+      "color_identity": null,
+      "symbol_or_sigil": "Pete as antagonistic character; opposing treasure hunter",
+      "enemy_visual_variants": "Pete appears as boss encounter; visual distinction from other enemies",
+      "environmental_markers": "Pete's hideout as faction stronghold; South Pole location as contested territory"
+    },
+    {
+      "faction": "Environmental Antagonists",
+      "color_identity": null,
+      "symbol_or_sigil": "Count Dracula (Transylvania), Undead Vikings (ship), King Garuzia's guardians",
+      "enemy_visual_variants": "Faction-specific enemies tied to geographic regions and historical themes",
+      "environmental_markers": "Dracula's castle (Transylvania), Viking ship, temple locations indicate faction control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Incomplete map state (early game)",
+      "visual_manifestation": "Donald traverses initial overland sections with fragmentary information",
+      "behavioral_manifestation": "Player can access levels in non-linear order; obstacles block dungeon entry until prerequisites met"
+    },
+    {
+      "world_state": "Map completion (post-Dracula's castle)",
+      "visual_manifestation": "Donald obtains complete map; world becomes more strategically navigable",
+      "behavioral_manifestation": "Specific dungeon progression order becomes possible; world state unlocks new pathways"
+    },
+    {
+      "world_state": "Nephews held for ransom (mid-game crisis)",
+      "visual_manifestation": "Pete's faction controls South Pole location; dungeon threat escalates",
+      "behavioral_manifestation": "Forced pursuit mechanics; boss encounter with Pete becomes mandatory"
+    },
+    {
+      "world_state": "Treasure located (endgame)",
+      "visual_manifestation": "Final dungeon reveals King Garuzia's temple and statue",
+      "behavioral_manifestation": "Culmination level; ultimate boss/puzzle checkpoint before conclusion"
+    },
+    {
+      "world_state": "Post-treasure (narrative resolution)",
+      "visual_manifestation": "Statue's broken state reveals hidden golden necklace",
+      "behavioral_manifestation": "Game conclusion; narrative reward state indicating successful mission completion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic theming with historical/mythological flavor",
+      "example": "Levels modeled after Mexico, Transylvania (Count Dracula), Viking ship, Egypt, India, South Pole; each region carries cultural/historical visual identity that communicates threat type and lore"
+    },
+    {
+      "technique": "Level structure duality (overland + dungeon)",
+      "example": "Overland sections provide puzzle clues and context; dungeons contain Maharajah's palace, temples, and final treasure chamber; structure communicates exploration vs. confrontation phases"
+    },
+    {
+      "technique": "NPC placement and dialogue context",
+      "example": "Gyro Gearloose provides bubble gum upgrades; Daisy's concern communicated through plot; Pete's rivalry established through narrative and encounter design"
+    },
+    {
+      "technique": "Item-based world state signaling",
+      "example": "Incomplete map → complete map progression visually tracks player knowledge gain; diary acquisition in Viking ship signals shift in objective clarity"
+    },
+    {
+      "technique": "Boss placement as faction/thematic anchor",
+      "example": "Undead Vikings in ship, Count Dracula in castle, Pete in hideout; boss locations reinforce faction control over geographic regions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Donald Duck (player character)",
+      "state": "Normal",
+      "behavior": "Standard platforming traversal, plunger-based combat, puzzle interaction"
+    },
+    {
+      "entity": "Donald Duck (player character)",
+      "state": "Jalapeño-powered (quack attack mode)",
+      "behavior": "Invincibility activation, automatic forward momentum, enhanced knockback against enemies; temporary power state"
+    },
+    {
+      "entity": "Plunger weapon",
+      "state": "Early game",
+      "behavior": "Stuns regular enemies; ineffective against bosses; unlimited ammo signal of non-lethal approach"
+    },
+    {
+      "entity": "Plunger weapon",
+      "state": "Late game upgrade",
+      "behavior": "Functions as temporary wall-climbing platform; can attach to birds for traversal extension; mechanic evolution signals progression"
+    },
+    {
+      "entity": "Pete (antagonist)",
+      "state": "Rival treasure hunter",
+      "behavior": "Parallel pursuit of same objective; kidnapping nephews signals escalation; boss confrontation indicates faction conflict"
+    },
+    {
+      "entity": "Undead Vikings",
+      "state": "Environmental antagonists",
+      "behavior": "Defend ship location; guarding diary; regional threat indicator for Viking-themed area"
+    },
+    {
+      "entity": "Nephews (Huey, Dewey, Louie)",
+      "state": "Functional support",
+      "behavior": "Operate biplane for safe level exit; held ransom triggers narrative crisis; non-combat allies indicating domestic faction"
+    }
+  ],
+  "notes": "QuackShot uses Indiana Jones-inspired adventure theming with geographic diversification (Transylvania, Egypt, India, Mexico, South Pole, Viking locale) to communicate world state through environmental design. The dual-phase level structure (overland exploration + dungeon confrontation) creates clear danger/safety transitions. Visual manifestation relies heavily on location-specific enemies (Dracula, Vikings, regional guardians) rather than faction color-coding. The incomplete-to-complete map arc is the primary world-state progression signal. Behavioral tells emphasize non-lethal combat initially (plungers) with power-up alternatives (jalapeños → invincibility), communicating game philosophy through ability evolution.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:47:00.421Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3190,
+    "output_tokens": 2081,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

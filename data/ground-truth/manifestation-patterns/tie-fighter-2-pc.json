@@ -1,0 +1,142 @@
+{
+  "game_id": "tie-fighter-2-pc",
+  "game_name": "Star Wars: X-Wing vs. TIE Fighter",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Enemy craft presence",
+      "visual_form": "TIE Fighter, TIE Bomber, and Assault Gunboat models rendered with texture mapping and dynamic lighting",
+      "meaning": "Active threat requiring evasion or engagement"
+    },
+    {
+      "signal": "Squadron composition mismatch",
+      "visual_form": "Outnumbered allied craft vs. enemy wing formations displayed in real-time HUD",
+      "meaning": "Tactical disadvantage; survival depends on skill or reinforcement"
+    },
+    {
+      "signal": "Craft damage state",
+      "visual_form": "Visual degradation of ship hull textures, smoke/fire particle effects",
+      "meaning": "Escalating vulnerability to destruction"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly squadron presence",
+      "visual_form": "Y-Wing and X-Wing models rendered alongside player craft",
+      "meaning": "Tactical support available; reduced isolation risk"
+    },
+    {
+      "signal": "Base/station proximity",
+      "visual_form": "Capital ship or station silhouettes at mission objective locations",
+      "meaning": "Resupply, repair, or extraction point nearby"
+    },
+    {
+      "signal": "Open space arena",
+      "visual_form": "Clear 3D space with good visibility in all directions",
+      "meaning": "Maneuverability advantage; predictable engagement geometry"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Rebel Alliance",
+      "color_identity": "Red/orange engine glow; lighter hull tones",
+      "symbol_or_sigil": "Rebel insignia on X-Wing and Y-Wing fuselage",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rebel bases, supply vessels, evacuation targets depicted in campaign missions"
+    },
+    {
+      "faction": "Galactic Empire",
+      "color_identity": "Blue/green engine glow; dark hull plating",
+      "symbol_or_sigil": "Imperial insignia on TIE craft; Star Destroyer silhouettes",
+      "enemy_visual_variants": "TIE Fighter (standard), TIE Bomber (bulbous variant), Assault Gunboat (modified craft)",
+      "environmental_markers": "Star Destroyers, Super Star Destroyers (Vengeance), Interdictor Cruisers, Imperial factories"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Rebel campaign active (Balance of Power expansion)",
+      "visual_manifestation": "Missions centered on base evacuation, anti-Empire strikes, capital ship captures; Rebel craft compositions dominate available squadrons",
+      "behavioral_manifestation": "Player flies as Rebel pilot; objectives emphasize defensive and offensive operations against Imperial targets"
+    },
+    {
+      "world_state": "Imperial campaign active (Balance of Power expansion)",
+      "visual_manifestation": "Missions mirror Rebel campaign but show Imperial perspective; Super Star Destroyer Vengeance featured prominently; Rebel factory destruction objectives",
+      "behavioral_manifestation": "Player flies as elite Avenger squadron under Admiral Senn; objectives focus on Imperial superiority and Rebel elimination"
+    },
+    {
+      "world_state": "Multiplayer arena (base game)",
+      "visual_manifestation": "Deep space setting with no narrative context; faction composition determined by player squadron selection at mission start",
+      "behavioral_manifestation": "Free-for-all, team-based, or cooperative modes; all craft information visible to all players in real-time regardless of position"
+    },
+    {
+      "world_state": "Technological parity",
+      "visual_manifestation": "Both Rebel (X-Wing, Y-Wing, B-Wing) and Imperial (TIE Fighter, TIE Bomber, Assault Gunboat) craft available with equivalent visual complexity via texture mapping",
+      "behavioral_manifestation": "Balance of Power expansion added B-Wings and other previously missing vessels to create symmetrical gameplay"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Capital ship scale differentiation",
+      "example": "Super Star Destroyer Vengeance rendered at massive scale vs. smaller Rebel transport vessels; visual hierarchy communicates power imbalance and strategic importance"
+    },
+    {
+      "technique": "Mission objective markers",
+      "example": "Interdictor Cruiser, Imperial factories, and Rebel bases positioned as distinct environmental targets; their visual prominence signals narrative focus"
+    },
+    {
+      "technique": "Parallel campaign narratives",
+      "example": "Balance of Power expansion uses identical mission structure from opposing viewpoints; same events rendered with faction-specific cutscenes and alternate endings show political conflict from both sides"
+    },
+    {
+      "technique": "Dynamic lighting and texture detail",
+      "example": "Engine glow colors, hull texture patterns, and light reflection differentiate Rebel and Imperial craft immediately; creates visual dialect without text overlay"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "X-Wing (Rebel)",
+      "state": "In-formation flight",
+      "behavior": "Maintains visual spacing with squadron mates; coordinated targeting indicators visible in HUD"
+    },
+    {
+      "entity": "TIE Fighter (Imperial)",
+      "state": "Patrol/scanning",
+      "behavior": "Erratic movement patterns to maximize sensor coverage; appears individually or in loose formations"
+    },
+    {
+      "entity": "Y-Wing (Rebel)",
+      "state": "Ground support ready",
+      "behavior": "Slower approach vectors; positioned for bombing run geometry toward capital ship or base target"
+    },
+    {
+      "entity": "TIE Bomber (Imperial)",
+      "state": "Attack vector",
+      "behavior": "Bulbous visual profile signals payload capacity; slower than TIE Fighter but heavier weapons indicated by model silhouette"
+    },
+    {
+      "entity": "B-Wing (Rebel, Balance of Power)",
+      "state": "High-firepower engagement",
+      "behavior": "Distinctive angular design communicates advanced weaponry; rotation mechanics affect visual profile during flight"
+    },
+    {
+      "entity": "Capital ships (both factions)",
+      "state": "Stationary objective",
+      "behavior": "Massive scale; defensive turret fire visible as colored beam effects; destruction triggers mission success/failure state change"
+    }
+  ],
+  "notes": "Wikipedia source provides minimal detail on visual manifestation mechanics. Extraction based on: (1) explicit references to texture mapping, Gouraud shading, dynamic lighting effects as technical visual systems; (2) craft model differentiation by type (bulbous TIE Bomber, distinctive B-Wing angular design); (3) faction association via craft type (X-Wing/Y-Wing = Rebel, TIE variants = Imperial); (4) campaign narrative structure in Balance of Power showing dual-perspective world state; (5) multiplayer arena design requiring real-time information visibility to all players. Game paradigm (simulation) implies realistic visual feedback for flight state and damage. No explicit documentation of HUD design, minimap faction colors, or detailed environmental cues in source material. Inferences drawn from space combat simulation conventions and Star Wars franchise visual canon.",
+  "sources_used": [
+    "Wikipedia: Star Wars: X-Wing vs. TIE Fighter"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:20:15.962Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2835,
+    "output_tokens": 1859,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

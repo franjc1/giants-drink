@@ -1,0 +1,146 @@
+{
+  "game_id": "star-ocean-snes",
+  "game_name": "Star Ocean",
+  "platform": "snes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Random battle encounters",
+      "visual_form": "Transition to 3D isometric battle view; enemy appearance on screen",
+      "meaning": "Player has entered combat; danger is imminent"
+    },
+    {
+      "signal": "Enemy positioning in dungeons",
+      "visual_form": "Enemies visible in dungeon pathways during top-down exploration",
+      "meaning": "Hazard zone; random battles likely to trigger"
+    },
+    {
+      "signal": "Character status in battle",
+      "visual_form": "MP depletion; character position relative to enemies",
+      "meaning": "Resource scarcity; vulnerability to attacks"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town environment",
+      "visual_form": "Populated settlements with NPCs and shops; transition from dungeon to town",
+      "meaning": "Safe zone; no random battles; access to vendors and healing"
+    },
+    {
+      "signal": "Party assembly",
+      "visual_form": "Characters present in party roster (up to 8 recruitable characters visible in UI)",
+      "meaning": "Increased combat capability; safety through numbers"
+    },
+    {
+      "signal": "Item availability in shops",
+      "visual_form": "Consumable items and equipment displayed in town vendors",
+      "meaning": "Opportunity to resupply; preparation possible before danger zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Galactic Federation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Federation forces encountered as hostile entities in conflict zones",
+      "environmental_markers": "Locations associated with space-faring technology and advanced civilization"
+    },
+    {
+      "faction": "Opposing Galactic Power",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct enemy design differentiating them from Federation forces",
+      "environmental_markers": "War-ravaged zones; conflict-marked territories"
+    },
+    {
+      "faction": "Native Roak Population",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Non-combatant NPCs in towns (Kratus and others)",
+      "environmental_markers": "Towns and settled areas; medieval/fantasy aesthetic in contrast to sci-fi elements"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "War between galactic powers in progress",
+      "visual_manifestation": "Presence of advanced technology mixed with medieval civilization; enemy encounters representing conflicting factions",
+      "behavioral_manifestation": "NPCs in towns react to the conflict; characters seek cure for disease caused by war effects"
+    },
+    {
+      "world_state": "Disease epidemic affecting Roak",
+      "visual_manifestation": "Plot-critical story elements communicated through dialogue and NPC interactions; motivation for exploration",
+      "behavioral_manifestation": "Party seeks cure through progression; quest structure drives exploration of dangerous areas"
+    },
+    {
+      "world_state": "Time travel mechanics active",
+      "visual_manifestation": "Narrative exposition through cutscenes and story progression; cause of war revealed through plot development",
+      "behavioral_manifestation": "Story branches based on 'Private Actions' and affection system; character recruitment depends on previous actions"
+    },
+    {
+      "world_state": "Character affection/relationship development",
+      "visual_manifestation": "Private Actions system allows characters to split in towns and pursue individual storylines",
+      "behavioral_manifestation": "Optional character interactions; different party compositions available based on relationship choices"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Town design and NPC density",
+      "example": "Kratus and other towns present as inhabited settlements; contrast between safe town areas and dangerous dungeons/pathways"
+    },
+    {
+      "technique": "Technology juxtaposition",
+      "example": "Medieval fantasy aesthetic of Roak world mixed with sci-fi elements from galactic federation; visual clash communicates collision of worlds"
+    },
+    {
+      "technique": "Exploration-based narrative",
+      "example": "Player must navigate dungeons and interact with NPCs to uncover war cause; world-state revealed through environmental exploration"
+    },
+    {
+      "technique": "Character recruitment constraints",
+      "example": "Only 8 of 10 available characters recruitible per playthrough; party composition reflects story decisions, influencing world-state perception"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "In town",
+      "behavior": "Can move freely, split from party for Private Actions, interact with NPCs and vendors"
+    },
+    {
+      "entity": "Player character",
+      "state": "In dungeon/pathway",
+      "behavior": "Random battle encounters trigger; combat transitions to 3D isometric view"
+    },
+    {
+      "entity": "NPC characters",
+      "state": "Available for recruitment",
+      "behavior": "Join party automatically or conditionally based on party size and story decisions"
+    },
+    {
+      "entity": "Party members (non-controlled)",
+      "state": "In battle",
+      "behavior": "Execute preset strategies automatically; move toward closest enemy; perform attacks without direct player control"
+    },
+    {
+      "entity": "Enemy forces",
+      "state": "Random encounter",
+      "behavior": "Appear in dungeons/pathways; engage in real-time combat; represent faction opposition"
+    }
+  ],
+  "notes": "Star Ocean uses a hybrid communication system: narrative exposition (dialogue, story progression) combined with environmental design (town vs. dungeon contrast) and mechanical signals (random battles, character recruitment). The affection system ('Private Actions') allows optional story branches that manifest as character splits in towns, indicating character agency and relationship depth. World-state regarding the galactic war is communicated primarily through plot and NPC dialogue rather than visual environmental markers. The game's sci-fi/fantasy aesthetic clash visually communicates the premise of advanced civilization encountering a medieval world.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": "Data on specific visual faction colors, sigils, or distinctive enemy designs not documented in available sources. Environmental danger markers (e.g., visual cues for dungeon difficulty levels) not specified. Detailed behavioral changes of NPCs under different world-states would require additional gameplay data.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:44:56.813Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3147,
+    "output_tokens": 1645,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

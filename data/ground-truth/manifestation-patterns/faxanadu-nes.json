@@ -1,0 +1,205 @@
+{
+  "game_id": "faxanadu-nes",
+  "game_name": "Faxanadu",
+  "platform": "nes",
+  "paradigm": "platformer / action-RPG",
+  "danger_signals": [
+    {
+      "signal": "Dwarf enemy presence",
+      "visual_form": "Transformed dwarf sprites (enemy variants)",
+      "meaning": "Town/area under hostile occupation; threat to Elves and water supply"
+    },
+    {
+      "signal": "Poisoned water visual state",
+      "visual_form": "Environmental water discoloration or blocked fountains in town areas",
+      "meaning": "Elf life source corrupted; resource scarcity; world degradation"
+    },
+    {
+      "signal": "Dilapidated town appearance",
+      "visual_form": "Eolis hometown shown in disrepair, abandoned structures",
+      "meaning": "Civilization in decline; danger zone; conflict aftermath"
+    },
+    {
+      "signal": "Enemy projectiles and combat animations",
+      "visual_form": "Magic projectiles from enemies, tentacle variants shooting at higher trajectories",
+      "meaning": "Active threat requiring avoidance or defense"
+    },
+    {
+      "signal": "Dungeon darkness and complexity",
+      "visual_form": "Interior dungeon screens with maze-like layouts (mountain stronghold, tree interior)",
+      "meaning": "High-danger zones; increased enemy concentration; boss territory"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town/Church presence",
+      "visual_form": "Church buildings with religious iconography (crosses, crucifixes, rosaries in Japanese version; removed in international versions)",
+      "meaning": "Safe zone; NPC interaction point; quest/rank progression hub"
+    },
+    {
+      "signal": "Guru/Priest character",
+      "visual_form": "Distinctive NPC portrait; priest-like robes and appearance (called 'Guru' in international versions)",
+      "meaning": "Trustworthy guide; provider of password/mantra salvation system; rank advancement"
+    },
+    {
+      "signal": "Overworld tree areas with Elves",
+      "visual_form": "Elf king character; World Tree visual architecture; buttress and branch areas",
+      "meaning": "Allied faction territory; quest origin; safe passage zones"
+    },
+    {
+      "signal": "NPC townspeople presence",
+      "visual_form": "Blue lady NPC (ID 53, unused) and child NPC (ID 54, unused) suggest planned safe civilian zones",
+      "meaning": "Non-combat interaction areas; information gathering; story progression"
+    },
+    {
+      "signal": "Bread drops from defeated enemies",
+      "visual_form": "Bread item pickup animations",
+      "meaning": "Health restoration opportunity; safe looting confirmation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Elves",
+      "color_identity": null,
+      "symbol_or_sigil": "World Tree (sacred centerpiece); fountain/water imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Tree buttress, tree trunk interior, tree branches; Eolis town; churches with religious iconography"
+    },
+    {
+      "faction": "Dwarves (corrupted/transformed)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mountain stronghold 'Fortress of Zenis'; dwarf king crown/regalia",
+      "enemy_visual_variants": "Transformed dwarf monsters (hostile variants); enemy ID 18, 29, 36, 39, 43, 70 include dwarf-type variants and tentacle enemies",
+      "environmental_markers": "Dwarves' mountain stronghold (final dungeon); Castle of Fraternal (second-to-last dungeon)"
+    },
+    {
+      "faction": "The Evil One / Corruption Force",
+      "color_identity": null,
+      "symbol_or_sigil": "Meteorite origin; possession/transformation magic",
+      "enemy_visual_variants": "All dwarf monster variants are visual manifestations of Evil One's corruption; tentacle enemy represents otherworldly corruption",
+      "environmental_markers": "Poisoned water; dilapidated environments; mountain stronghold interior; dark dungeon areas"
+    },
+    {
+      "faction": "Wanderer/Hero (player-controlled)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dragon Slayer sword (magical artifact); equipment upgrades (Battle Helmet, Battle Suit)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Overworld travel route from Eolis through tree zones to mountain stronghold; shop access; rank progression visible via GUI"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-conflict harmony (lore backstory)",
+      "visual_manifestation": "World Tree in full health; Elves and Dwarves coexisting; fountain flowing",
+      "behavioral_manifestation": null
+    },
+    {
+      "world_state": "Corruption / Evil One emergence",
+      "visual_manifestation": "Poisoned water (environmental discoloration); meteorite impact visual; dwarves transformed into monster sprites with altered animations",
+      "behavioral_manifestation": "Dwarves become hostile; emit projectiles; attack on sight; water sources become blocked or toxic"
+    },
+    {
+      "world_state": "Eolis town under Dwarf siege",
+      "visual_manifestation": "Town buildings in disrepair; abandoned appearance; dwarf enemy sprites present in town areas; structures damaged",
+      "behavioral_manifestation": "Dwarves patrol town; NPCs absent or sheltering; quest-giver Elven King isolated; immediate combat threat"
+    },
+    {
+      "world_state": "Mid-journey: hero gaining strength",
+      "visual_manifestation": "Equipment upgrades visible on hero sprite; rank increases reflected in GUI display; treasure pickups; experience accumulation",
+      "behavioral_manifestation": "Hero can access new armor/weapons; interact with more NPCs; survive higher-damage enemy encounters"
+    },
+    {
+      "world_state": "Final boss approach",
+      "visual_manifestation": "Dwarf King Grieve visual (holding stolen Dragon Slayer sword in body); Fortress of Zenis architecture; final dungeon maze layout",
+      "behavioral_manifestation": "King Grieve boss arena spans multiple screens (planned multi-screen fight); requires Dragon Slayer to defeat; magic less effective per NPC warning"
+    },
+    {
+      "world_state": "Evil One defeated / peace restored",
+      "visual_manifestation": "Return of Dragon Slayer to Elves (narrative goal); implied water restoration; Dwarf transformation reversal",
+      "behavioral_manifestation": "Quest completion; NPC dialogue confirms 'true peace' achieved; hero can no longer wear battle equipment after returning sword"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural decay as timeline marker",
+      "example": "Eolis hometown shows disrepair and abandonment at game start, visually communicating how long the elf/dwarf conflict has lasted"
+    },
+    {
+      "technique": "NPC dialogue to expose hidden world-state",
+      "example": "Guru explains water fountain stopped and remaining water poisoned; reveals systemic life-source failure; each NPC adds lore layers about conflict origins and Evil One emergence"
+    },
+    {
+      "technique": "Dungeon progression as narrative geography",
+      "example": "Journey from tree buttress → tree trunk → tree branches → mountain stronghold physically maps escalating danger and faction territory; each zone represents deeper penetration into corrupted dwarf domain"
+    },
+    {
+      "technique": "Equipment restrictions as political/magical law",
+      "example": "Battle Helmet and Battle Suit only equippable with Dragon Slayer in possession; NPC dialogue states Elves won't return sword until 'true peace here'—gear availability communicates political condition"
+    },
+    {
+      "technique": "Item scarcity and shop economy as world-state indicator",
+      "example": "Hero given 1500 gold at start to prepare; resource management through shopping reflects limited supplies during siege; enemy drops (bread, gold, items) indicate scarcity of normal trade"
+    },
+    {
+      "technique": "Sacred/religious visual markers",
+      "example": "Churches with crosses and crucifixes (Japanese) signal safe spiritual zones; guru portraits and rosaries reinforce faith-based salvation mechanic; international removal of crosses indicates censorship of world-state messaging"
+    },
+    {
+      "technique": "Enemy sprite variation as corruption indicator",
+      "example": "Tentacle enemy (unused variant and placed variant) represents non-dwarf corruption; multiple enemy IDs (18, 29, 36, 39, 43, 70) show Evil One's influence mutates diverse life forms beyond dwarves"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dwarf enemies (transformed/corrupted)",
+      "state": "Hostile / under Evil One control",
+      "behavior": "Attack on sight; emit projectiles; patrol town and dungeons; unable to recognize former allies"
+    },
+    {
+      "entity": "Dwarf King Grieve (final boss)",
+      "state": "Possessed and magically altered",
+      "behavior": "Swallowed Dragon Slayer sword to hide it; controlled by Evil One; multi-screen arena fight; requires non-magic primary strategy per NPC warning"
+    },
+    {
+      "entity": "Elven King",
+      "state": "Desperate alliance-seeker",
+      "behavior": "Grants initial 1500 gold; explains world-state crisis; distributes quest objectives; remains in safe town area"
+    },
+    {
+      "entity": "Guru/Priest NPCs",
+      "state": "Neutral spiritual facilitators",
+      "behavior": "Provide password/mantra salvation; grant rank advancement when experience thresholds met; remain in churches (safe zones)"
+    },
+    {
+      "entity": "Tentacle enemy (projectile variant)",
+      "state": "Environmental corruption hazard",
+      "behavior": "Shoots projectiles at higher Y-axis than dwarf variants; suggests otherworldly origin distinct from dwarf transformation"
+    },
+    {
+      "entity": "Hero/Wanderer (player character)",
+      "state": "Quest-driven alliance builder",
+      "behavior": "Collects equipment and magic to grow stronger; interacts with NPCs for information and rank-up; actively seeks Dragon Slayer as only Dwarf-transformation cure"
+    },
+    {
+      "entity": "Evil One (unseen final antagonist)",
+      "state": "World-corrupting entity",
+      "behavior": "Transforms dwarves into monsters against will; poisons water supply; prevents natural restoration of harmony; uses Dwarf King as proxy vessel"
+    }
+  ],
+  "notes": "Faxanadu uses classical medieval action-RPG visual language to communicate a world in political/magical crisis. The primary manifestation mechanism is environmental degradation (poisoned water, dilapidated architecture) paired with enemy sprite variants (transformed dwarves, tentacle creatures) to signal corruption. Faction identity relies on geography (World Tree for Elves, mountain stronghold for Dwarves) and NPC placement (churches as safe Elf-aligned zones). The game's password/mantra system—tied to Gurus in religious spaces—serves as a meta-narrative signal that spiritual intervention is needed to restore balance. Regional differences (removal of crosses, crucifix, rosary iconography; priest renamed to guru) show how religious visual language was used as primary world-state signifier. Unused NPCs (blue lady, child) and unused dialogue suggest early design included more nuanced civilian impact visualization. The Dragon Slayer sword as a magic artifact that must be recovered from the Dwarf King's body is the central visual quest object symbolizing that the only path to peace is drawing the weapon that can destroy the Evil One—a stark communication that violence is the solution to corruption, not negotiation.",
+  "sources_used": [
+    "tcrf - Faxanadu (unused content, enemy variants, NPC data, dialogue, regional differences, religious imagery changes)",
+    "wikipedia - Faxanadu (story, gameplay mechanics, faction descriptions, world geography, character motivation)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:34:44.243Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4965,
+    "output_tokens": 3007,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

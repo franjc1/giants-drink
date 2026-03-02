@@ -1,0 +1,153 @@
+{
+  "game_id": "life-force-nes",
+  "game_name": "Life Force",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Small bullets/energy bolts contrasting against background",
+      "meaning": "Immediate threat; collision results in ship damage or destruction"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large sprite entities filling significant screen space, distinctly drawn from stage enemies",
+      "meaning": "Major difficulty escalation; boss-specific attack patterns require strategy change"
+    },
+    {
+      "signal": "Organic/biomechanical terrain",
+      "visual_form": "Web-like structures, flesh tones, pulsating biological imagery (in Life Force NES version)",
+      "meaning": "Stage environment itself represents danger context—inside alien organism; collision kills ship"
+    },
+    {
+      "signal": "Stage transition narration",
+      "visual_form": "Text overlay announcing zone entry (e.g., 'Enter stomach muscle zone')",
+      "meaning": "World-state change: player now in new danger context within the alien body"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up capsules",
+      "visual_form": "Collectible sprites dropped by certain defeated enemies",
+      "meaning": "Picking up capsules enhances ship capabilities; temporary safety boost through weapon/defense upgrades"
+    },
+    {
+      "signal": "Option/Multiple followers",
+      "visual_form": "Secondary spacecraft sprites mirroring player's flight path and firepower",
+      "meaning": "Increased firepower and invulnerability through duplicated attack patterns; survive even after ship destruction"
+    },
+    {
+      "signal": "Clear screen space",
+      "visual_form": "Absence of enemy sprites and projectiles in visible play area",
+      "meaning": "Temporary safe passage; safe window for repositioning or power-up collection"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Vic Viper (Player 1 spacecraft) and Lord British (Player 2 spacecraft)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spacecraft sprites with distinctive silhouettes; player projectiles visually distinct from enemy fire"
+    },
+    {
+      "faction": "Hostile forces (alien organism / infection)",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy sprites—mechanical or organic depending on region (arcade Salamander uses mechanical enemies; NES Life Force redraws as biological)",
+      "enemy_visual_variants": "Same enemy types rendered mechanically (arcade) or organically (NES), indicating art style shift without gameplay change",
+      "environmental_markers": "Stage backgrounds: starfield in Salamander; organic web/biomechanical structures in Life Force NES—visually encodes internal-vs-external framing"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Arcade Salamander (original)",
+      "visual_manifestation": "Mechanical enemies, starfield backgrounds on certain stages, space-like aesthetic",
+      "behavioral_manifestation": "Standard scrolling shooter progression; no organic/biological narrative framing"
+    },
+    {
+      "world_state": "Life Force (North American arcade re-release and NES port)",
+      "visual_manifestation": "All backgrounds and enemies completely redrawn with organic/biomechanical appearance; web backgrounds replace starfields; flesh tones and pulsating biological imagery",
+      "behavioral_manifestation": "Stage narration explicitly frames player action as moving through zones inside a giant alien organism ('Enter stomach muscle zone', 'Bio-mechanical brain attack'); creates internal-exploration narrative"
+    },
+    {
+      "world_state": "Boss encounter imminent",
+      "visual_manifestation": "Power meter disappears from HUD before certain boss fights; screen scrolling stops or background changes",
+      "behavioral_manifestation": "Timing varies by stage—signals transition from free-form movement phase to scripted boss battle phase"
+    },
+    {
+      "world_state": "Stage completion",
+      "visual_manifestation": "Ship escapes; planet/organism visually explodes or closes behind player",
+      "behavioral_manifestation": "Progression to next stage or (if final stage) ending sequence triggers"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Background art as world-state indicator",
+      "example": "Salamander arcade uses starfield; Life Force redraws same stages with organic web/biomass backgrounds to recontextualize setting from space combat to internal-organism exploration without changing stage layout"
+    },
+    {
+      "technique": "Enemy visual re-skinning",
+      "example": "Same enemy types rendered mechanically in arcade Salamander, redrawn as biological/organic variants in Life Force NES—same behavior, but visual framing shifts threat context from mechanical invasion to infection/disease"
+    },
+    {
+      "technique": "Stage-entry narration overlay",
+      "example": "Text narration (North American versions) announces anatomical zones ('stomach muscle zone', 'brain attack') to establish narrative frame: player inside infected alien body, not in external space"
+    },
+    {
+      "technique": "HUD disappearance as pacing signal",
+      "example": "Power meter vanishes before boss fights at stage-specific timing—visual removal of normal gameplay UI signals shift to boss encounter phase"
+    },
+    {
+      "technique": "Ending variation by player performance",
+      "example": "Japanese Salamander ending: staff roll image changes based on continues used (pilot helmet, Vic Viper, or pilot alone)—visual distinction signals skill/difficulty achievement to player"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Vic Viper (Player 1)",
+      "state": "Normal flight",
+      "behavior": "Responds to controller input; fires continuous projectiles; can collect power-ups to modify weapon output"
+    },
+    {
+      "entity": "Lord British (Player 2)",
+      "state": "Normal flight",
+      "behavior": "Mirrors Vic Viper behavior in cooperative mode; independent power-up state; destroyed separately"
+    },
+    {
+      "entity": "Options / Multiples",
+      "state": "Active (ship alive)",
+      "behavior": "Follow exact flight path of player ship; fire synchronized with ship; invulnerable to enemy fire"
+    },
+    {
+      "entity": "Options / Multiples",
+      "state": "After ship destruction",
+      "behavior": "Float in space briefly before disappearing; can be reclaimed by respawned ship to restore firepower"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Defeated",
+      "behavior": "Drop power-up capsules; removal from screen indicates score/progression"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Combat",
+      "behavior": "Execute scripted attack patterns; visually distinct from standard enemies; occupy significant screen real estate; defeat gates progression to next stage"
+    }
+  ],
+  "notes": "Life Force represents a notable case of world-state recontextualization through visual art without gameplay change. The North American Life Force versions (arcade re-release and NES port) reframe identical stage layouts and enemy behaviors as internal exploration of an infected alien organism rather than external space combat. This is achieved through background art replacement (starfield → organic web), enemy re-skinning (mechanical → biological), and narration overlays. The Japanese Salamander arcade and NES versions maintain mechanical/space aesthetic. Regional differences in visual presentation create distinct narrative framings of identical mechanical systems—demonstrating how manifestation layer choices communicate world-state without requiring gameplay mechanics revision. HUD behavior (power meter disappearance before bosses) serves as pacing/state-transition signal. Power-up pickup mechanics directly map to safety/danger signals through visual distinction and immediate gameplay impact.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:04:37.171Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5202,
+    "output_tokens": 1988,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

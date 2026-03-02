@@ -1,0 +1,138 @@
+{
+  "game_id": "sky-shark-nes",
+  "game_name": "Sky Shark",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "level_count": 5,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Standard shot weapon",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic mechanic available from start; max distance equals screen height"
+    },
+    {
+      "element": "Bomb weapon (3 stock)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Powerful screen-clearing tool; stress relief mechanic; restocked via 'B' items from ground enemies"
+    },
+    {
+      "element": "Power-up items ('S' icons)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Spawned by destroying colored enemy plane waves; increases firepower"
+    },
+    {
+      "element": "Bomb stock items ('B' icons)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Spawned by ground enemies; increases bomb capacity; multiplied by 3x at runway landings"
+    },
+    {
+      "element": "Point bonus items",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Spawned by colored enemy planes; incentivizes tactical destruction patterns"
+    },
+    {
+      "element": "Checkpoint system",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Death respawns at last reached checkpoint; firepower resets on hit"
+    },
+    {
+      "element": "Runway landing mechanic",
+      "first_appears": "Between levels",
+      "introduction_context": "safe",
+      "mastery_context": "Halts scrolling; multiplies bombs by 3000 points bonus; marks progression"
+    },
+    {
+      "element": "Increased enemy bullet speed",
+      "first_appears": "Level 2+",
+      "introduction_context": "dangerous",
+      "mastery_context": "Applied in loops 2+; requires knowledge-based dodging patterns"
+    },
+    {
+      "element": "Ground-based military vehicles",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Tanks, artillery, battleships; primary sources of 'B' bomb items"
+    },
+    {
+      "element": "Enemy airplanes",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Colored waves; primary sources of 'S' power-ups and point bonuses"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Firing bomb to clear screen and damage clustered enemies",
+      "Reaching runway checkpoint",
+      "Destroying colored enemy plane waves to spawn power-ups",
+      "Landing between stages"
+    ],
+    "typical_tension_triggers": [
+      "Constant vertical scrolling prevents pause",
+      "Increasing bullet speed in loops 2+",
+      "Loss of firepower on hit",
+      "Narrow dodge windows between enemy projectiles",
+      "Collision hazards with ground scenery"
+    ],
+    "pacing_descriptor": "Relentless upward pressure from scrolling; wave-based enemy clusters create tension peaks; bomb deployment provides rhythmic relief; difficulty escalates through speed increases and loop restarts"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Level 1 designed as introduction for beginning players; basic enemy pacing and slower bullets establish shot/bomb mechanics",
+    "mid_game": "Levels 2-4 gradually increase enemy complexity; colored plane waves demand tactical targeting for power-ups",
+    "late_game": "Level 5 presents final military gauntlet; loop restarts increase all difficulty with accelerated bullet speeds",
+    "notable_spikes": [
+      "Loop 2+ onset: bullet speed increases markedly",
+      "Level 5: maximum enemy density and coordination",
+      "Firepower reset penalty: loss of accumulated power-ups on single hit creates risk/reward tension"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Wave Progression Structure",
+      "description": "Each level sequences colored enemy plane waves interspersed with ground vehicle formations; waves spawn item cascades (power-ups, bombs, points) tied to destruction order",
+      "example_level": "All 5 levels follow this structure"
+    },
+    {
+      "pattern_name": "Runway Checkpoint Reset",
+      "description": "Between-level runways function as safe zones where scrolling halts; grants bomb multiplication bonus (3000 pts × bomb count); resets player positioning for next stage",
+      "example_level": "After each level completion"
+    },
+    {
+      "pattern_name": "Loop Difficulty Escalation",
+      "description": "Game restarts after level 5 with same 5-level structure but increased bullet speeds and enemy accuracy; first stage bullet speed returns to normal after overflow condition",
+      "example_level": "Loops 2+"
+    }
+  ],
+  "sources_used": [
+    "wikipedia:Flying Shark (article covers arcade original and all ports including NES 1989)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:08:28.736Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3965,
+    "output_tokens": 1704,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

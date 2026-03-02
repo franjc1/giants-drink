@@ -1,0 +1,130 @@
+{
+  "game_id": "muscle-nes",
+  "game_name": "Tag Team Match: M.U.S.C.L.E.",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic punch attack",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core offensive action available immediately"
+    },
+    {
+      "element": "Jump mechanic (A button)",
+      "first_appears": "Round 1",
+      "introduction_context": "safe",
+      "mastery_context": "Defensive mobility and aerial attack setup"
+    },
+    {
+      "element": "Rope interaction (shove into ropes)",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Environmental collision mechanic for combo extension"
+    },
+    {
+      "element": "Drop kick",
+      "first_appears": "Round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Jump-derived variant move"
+    },
+    {
+      "element": "Energy ball (randomly thrown by trainer)",
+      "first_appears": "Early rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "Resource collection gate for special move activation"
+    },
+    {
+      "element": "Special move activation (B button + energy ball)",
+      "first_appears": "Early rounds",
+      "introduction_context": "moderate",
+      "mastery_context": "High-damage output dependent on resource availability"
+    },
+    {
+      "element": "Flying body attack (rebound from rope)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Advanced rope mechanic requiring spatial awareness"
+    },
+    {
+      "element": "Lariat/clothesline (shove + A button)",
+      "first_appears": "Mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Context-sensitive combo extension"
+    },
+    {
+      "element": "Back drop/suplex (B button behind enemy)",
+      "first_appears": "Mid game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Positioning-dependent high-damage throw mechanic"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Energy ball collection",
+      "Successful opponent knockdown",
+      "Rope rebound sequence completion",
+      "Round victory"
+    ],
+    "typical_tension_triggers": [
+      "Opponent energy ball collection",
+      "Taking consecutive hits",
+      "Special move activation by opponent",
+      "Difficulty increase every 100 rounds"
+    ],
+    "pacing_descriptor": "Escalating intensity: endless procedural rounds with speed scaling; round time compression (30:00 → 10:00 by round 100) creates mounting pressure; difficulty resets at round 255/0 overflow point"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Moderate: basic move pool available; trainer-controlled energy ball frequency allows learning windows; opponent speed normal",
+    "mid_game": "Escalating: opponent AI aggression increases; special move availability becomes critical resource; round time compression begins (rounds 1-100)",
+    "late_game": "Extreme: round time pressure peaks at 10:00 limit; opponent special move frequency high; procedural nature creates indefinite scaling until round 255",
+    "notable_spikes": [
+      "Every 100 rounds: speed increase and difficulty jump",
+      "Round 100 transition: time reduces from 30:00 to 10:00",
+      "Round 255→0 overflow: speed resets but difficulty context suggests continued scaling expected"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Procedural Round Escalation",
+      "description": "Game operates on endless procedural rounds rather than discrete levels. Each round is a combat encounter with increasing opponent stats. Difficulty driven by round number, not spatial progression.",
+      "example_level": "Rounds 1-100: standard pacing; Rounds 100+: compressed time window (10:00); Round 255: overflow point"
+    },
+    {
+      "pattern_name": "Resource-Gated Special Moves",
+      "description": "Special move availability controlled by random energy ball spawns from trainer, creating intermittent power windows. Forces adaptive rhythm of aggression during resource availability and defensive play during scarcity.",
+      "example_level": "Any round where energy ball is present vs. absent"
+    },
+    {
+      "pattern_name": "Environmental Ring Mechanics",
+      "description": "Ropes and ring boundaries create spatial gameplay zones. Shove mechanic redirects opponent into ropes for combo extension and positional advantage. Flying body attack requires rope positioning.",
+      "example_level": "All rounds utilize rope interaction as core loop"
+    }
+  ],
+  "sources_used": [
+    "wikipedia: Tag Team Match: M.U.S.C.L.E."
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:06:29.347Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2888,
+    "output_tokens": 1596,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

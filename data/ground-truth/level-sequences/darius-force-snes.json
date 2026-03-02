@@ -1,0 +1,151 @@
+{
+  "game_id": "darius-force-snes",
+  "game_name": "Darius Force / Super Nova",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "level_count": 15,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic shot (Y button default)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Foundational mechanic present from start; power-up bar absent means progression through collecting bubbles"
+    },
+    {
+      "element": "Bomb dropping (B button default)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Dual-button mechanic introduces risk/reward: holding both buttons powers down shots"
+    },
+    {
+      "element": "Ship formation destruction (complete formations)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Rewards pattern recognition; yields red bubbles (shot/bomb power-up)"
+    },
+    {
+      "element": "Meteor rain with flashing meteors",
+      "first_appears": "Early-to-mid stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces timing-based destruction for power-ups; adds environmental hazard layer"
+    },
+    {
+      "element": "Futuristic cage destruction (floor/ceiling)",
+      "first_appears": "Early-to-mid stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Spatial awareness mechanic; third power-up source requiring environmental interaction"
+    },
+    {
+      "element": "Red bubble (shot and bomb power-up)",
+      "first_appears": "Early stages via formations",
+      "introduction_context": "safe",
+      "mastery_context": "Primary offensive progression; loss of ship resets to minimum power"
+    },
+    {
+      "element": "Blue bubble (shield regenerate and level up)",
+      "first_appears": "Early stages",
+      "introduction_context": "safe",
+      "mastery_context": "Defensive progression; enables sustained play through hit absorption"
+    },
+    {
+      "element": "Green bubble (bonus or extra ship)",
+      "first_appears": "Early stages",
+      "introduction_context": "safe",
+      "mastery_context": "Resource management; randomized reward creates tension"
+    },
+    {
+      "element": "Special screen-clear power-up",
+      "first_appears": "Mid stages",
+      "introduction_context": "dangerous",
+      "mastery_context": "Clutch mechanic for high-danger moments; alternative laser beam power grants sustained offense"
+    },
+    {
+      "element": "Side laser guns (R button switch)",
+      "first_appears": "Mid stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Weapon variety; tactical switching between bombs and side lasers adds complexity"
+    },
+    {
+      "element": "Branching stage progression (forward/up paths)",
+      "first_appears": "Stages A-K",
+      "introduction_context": "moderate",
+      "mastery_context": "Meta-level choice; convergence at stages L, N, O with distinct endings"
+    },
+    {
+      "element": "Boss encounters",
+      "first_appears": "Stages L, N, O (convergence points)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Three divergent final bosses; checkpoint system allows retry from pre-boss state"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Destroying complete ship formations (power-up reward)",
+      "Collecting blue bubbles (shield regeneration)",
+      "Collecting green bubbles (extra life chance)",
+      "Activating screen-clear power-up during heavy enemy density",
+      "Reaching checkpoint before boss"
+    ],
+    "typical_tension_triggers": [
+      "Meteor rain sequences (time-pressure on flashing meteors)",
+      "Loss of ship (power-down reset, checkpoint respawn)",
+      "Power-up bar absence (permanent loss on destruction)",
+      "Boss encounters at stages L, N, O",
+      "Dual-button holding penalty (shot power reduction while maintaining bomb readiness)"
+    ],
+    "pacing_descriptor": "Wave-based tension with progressive complexity; early stages establish mechanics through safe introduction of power-up sources; mid-game adds weapon variety and navigation choice; late-game (stages L/N/O) forces convergence to final bosses with high-stakes no-bar progression system"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": "Caged power-ups on floor/ceiling require spatial scanning; futuristic cage placement telegraphs optional destruction zones",
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Safe introduction of three power-up acquisition methods (formations, meteor rain, cages); checkpoint system allows learning without penalty; three ship choice provides player agency",
+    "mid_game": "Environmental complexity increases via meteor sequences; weapon switching (R button) adds tactical depth; stage branching introduces navigation choice; power-ups remain accessible",
+    "late_game": "Convergence at three final stages (L, N, O); each boss represents distinct difficulty/pattern; permanent power loss on ship destruction becomes critical without power-up bar; checkpoint-before-boss mitigates frustration but raises stakes",
+    "notable_spikes": [
+      "Transition to branching paths (stages K→L/N/O) - navigation choice creates divergent difficulty",
+      "Boss encounters - pattern-based high-intensity sequences",
+      "Power-down spiral potential - loss of ship without bar means significant offense regression"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Linear introduction sequence",
+      "description": "Stages A-K establish all core mechanics (shots, bombs, three power-up sources, weapon switching) with increasing environmental density but consistent safe-to-moderate difficulty",
+      "example_level": "Stages A-E (early formation/meteor/cage introduction)"
+    },
+    {
+      "pattern_name": "Branching convergence",
+      "description": "15-stage structure with forward/up path choices until convergence at exactly three final stages (L, N, O), each containing unique boss and ending; creates replayability without stage repetition",
+      "example_level": "Stages K→L/N/O junction"
+    },
+    {
+      "pattern_name": "Checkpoint-gated boss",
+      "description": "Ship loss during boss returns to checkpoint before boss appearance, not stage start; removes backtracking penalty while maintaining boss retry tension",
+      "example_level": "Final stages L, N, O"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:27:42.689Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2789,
+    "output_tokens": 1920,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

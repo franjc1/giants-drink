@@ -1,0 +1,194 @@
+{
+  "game_id": "battletoads-nes",
+  "game_name": "Battletoads",
+  "platform": "nes",
+  "paradigm": "platformer / beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "Spikes and hazard obstacles",
+      "visual_form": "Yellow spike geometry on platforms (Level 4); death spikes scattered throughout levels",
+      "meaning": "Instant damage or death zones; requires avoidance or specific input states (e.g., holding DOWN to pass through certain spikes)"
+    },
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Walkers, ravens, and other hostile sprites populating the screen",
+      "meaning": "Combat engagement required; defeat or avoidance necessary to progress"
+    },
+    {
+      "signal": "Falling into pit / screen death",
+      "visual_form": "Character sprite falls below onscreen height threshold (255 pixels from depth position); screen scrolls past character",
+      "meaning": "Death condition; must jump or reach vehicle before falling too far out of bounds"
+    },
+    {
+      "signal": "Environmental obstacles in obstacle courses",
+      "visual_form": "Speed-increasing challenge sections with projectiles, platforms, and hazards accelerating difficulty",
+      "meaning": "Timing-based danger; reflexes and precision required"
+    },
+    {
+      "signal": "Boss enemy state",
+      "visual_form": "Large distinctive enemy sprites with elevated complexity (Dark Queen, Rat boss with bomb arena)",
+      "meaning": "Major threat requiring specific attack sequences and state monitoring"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flies / consumable pickups",
+      "visual_form": "Small fly sprites scattered on-level",
+      "meaning": "Health replenishment; restores HP (maximum of 6 HP available)"
+    },
+    {
+      "signal": "Vehicle access points",
+      "visual_form": "Jet, surfboard, unicycle, rope, snake platforms appear as interactive level geometry",
+      "meaning": "Safe transit mode; provides mobility advantage and often temporary invulnerability or damage boost"
+    },
+    {
+      "signal": "Platform solid ground",
+      "visual_form": "Isometric-perspective platforms in side-scrolling levels; 2D solid floor in platforming sections",
+      "meaning": "Safe standing space; collision detection with floor/ceiling prevents falling"
+    },
+    {
+      "signal": "Mega warp points (hidden)",
+      "visual_form": "Unlisted interactive points in 4 designated levels",
+      "meaning": "Progression skip; allows automatic advancement by two levels, indicating optional safe-path availability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Battletoads (player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Three humanoid toad warriors (Rash, Zitz, Pimple); space-faring aesthetic",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Spacecraft Vulture; space-humanoid design consistent across all player characters"
+    },
+    {
+      "faction": "Dark Queen forces (antagonist faction)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dark Queen tower/fortress; enemy sprite types (Walkers, ravens, rats, Intruder Excluder robots)",
+      "enemy_visual_variants": "Diverse enemy roster indicating organized military/robotic force; boss-tier enemies (Rat with bomb arena) suggest command structure",
+      "environmental_markers": "Dark Queen's planet; themed level architecture; fortress tower climb in final levels"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level progression (1-13 sequence)",
+      "visual_manifestation": "Dramatic genre shifts: terrain (Vulture exterior → Turbo Tunnel → Arctic cavern → jungle/swamp → space terrain → underground tubes); background palette and scrolling patterns change per level",
+      "behavioral_manifestation": "Enemy type and attack patterns shift; level geometry and obstacle types change; vehicle-based mechanics appear/disappear based on level design"
+    },
+    {
+      "world_state": "Combat engagement active",
+      "visual_manifestation": "Enemy sprites animate attack frames; player sprite executes attack animations with enlarging body parts (Smash Hit variants show giant fists, horns, etc.)",
+      "behavioral_manifestation": "Player collision enables throw mechanics; defeated enemies disappear or drop legs/beaks as usable weapons; boss enemies follow scripted multi-stage patterns"
+    },
+    {
+      "world_state": "Vehicle-based traverse (Jet, Surfboard, Rope descent, Snake maze, Unicycle, Turbo Cable)",
+      "visual_manifestation": "Player sprite transforms or changes position on vehicle geometry; sprite layers shift to show vehicle interaction; platform-based collision changes",
+      "behavioral_manifestation": "Input shifts to vehicle-specific controls; attacks become vehicle-restricted (kick on cable, shape-shift into wrecking ball); gravity and momentum rules change per vehicle type"
+    },
+    {
+      "world_state": "Falling/pit danger state",
+      "visual_manifestation": "Sprite position calculation based on depth (0x493) minus midair height (0x475); visual indicator is character appearing low on screen",
+      "behavioral_manifestation": "Screen checks if onscreen height exceeds 255 pixels; if so, character dies; can jump from void if reaching exact 255-pixel threshold"
+    },
+    {
+      "world_state": "Boss encounter active (Dark Queen, Rat with bomb)",
+      "visual_manifestation": "Large boss sprite with distinct animation frames; boss sprite may move around screen; bomb arena visible for Rat boss",
+      "behavioral_manifestation": "Boss has infinite or very high HP; specific attack sequences required (Rat must be hard-hit after bomb explosion, then finished with Boot attack); input manipulation can reduce animation time and control boss flight"
+    },
+    {
+      "world_state": "Two-player mode active with interaction",
+      "visual_manifestation": "Two toad sprites on screen simultaneously; vehicle position may shift if one toad knocks other off (e.g., jet stays at position when knocked)",
+      "behavioral_manifestation": "Player 2 can grab/throw Player 1; collisions between players affect level layout (layout of Level 3 changes based on death timing with vehicle); scrolling behavior changes (Level 10 scrolls down if both toads exceed top of screen)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level-by-level genre variation",
+      "example": "Levels shift from action platforming (Vulture exterior, ice cavern) → vehicle racing (Turbo Tunnel) → rope climbing (descent to chasm) → underwater sections → snake maze → tower race descent, communicating world's hostile environmental diversity and testing player adaptability"
+    },
+    {
+      "technique": "Architecture as faction identity",
+      "example": "Dark Queen's planet features fortress tower with flagpole weapons, robot-filled Intruder Excluder sections, and bomb arena with giant rat; architectural theme suggests technological/industrial antagonist faction contrasted with space-faring Battletoads aesthetic"
+    },
+    {
+      "technique": "Enemy type distribution",
+      "example": "Walkers (mechanical), ravens (organic), rats (plague-like), and Intruder Excluder (defense system) suggest a mixed-faction force on Dark Queen's planet; early levels feature simpler enemies, later levels escalate to boss-tier threats"
+    },
+    {
+      "technique": "Vehicle design as world-state indicator",
+      "example": "Jet in Level 3, Surfboard in Level 5, Unicycle maze, Rope descent, and Snake-climb mechanics each reflect the specific terrain/environment; vehicle availability signals what world-state the player is entering"
+    },
+    {
+      "technique": "Obstacle course acceleration",
+      "example": "Obstacle sections increase speed as player progresses through, visually communicating escalating difficulty and danger; no faction identity, pure environmental pressure"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player (Battletoads)",
+      "state": "Running + holding opposite direction + attack",
+      "behavior": "Charges attack while running in reverse direction; allows manipulation of attack angle and timing"
+    },
+    {
+      "entity": "Player (Battletoads)",
+      "state": "Jumping + running",
+      "behavior": "Continues charging attack while airborne; landing continues running state, enabling mid-air attack setup"
+    },
+    {
+      "entity": "Player (Battletoads)",
+      "state": "Holding left+right simultaneously",
+      "behavior": "Plane-change effect varies by level: no effect on Levels 1,3,5,7,11; sprite disappears on Level 2; sprite drawing shifts vertically on Levels 4,6,8,9,12 (collision detection for floor/walls stays fixed, creating floating effect)"
+    },
+    {
+      "entity": "Player (Battletoads)",
+      "state": "Pressing DOWN during obstacle",
+      "behavior": "Bypasses collision on yellow spike (Level 4); ducking running (tap forward while holding DOWN) enables specialized movement"
+    },
+    {
+      "entity": "Player (Battletoads)",
+      "state": "Falling into pit at exact onscreen height of 255 pixels",
+      "behavior": "Can jump from void and escape death; falling speed and frame timing determines success"
+    },
+    {
+      "entity": "Vehicle (Jet, Surfboard)",
+      "state": "Player touching vehicle while performing running jump upward",
+      "behavior": "Grants super high jump; vehicle acts as momentum amplifier (does not work with Level 7 airplane which is not gravity-based)"
+    },
+    {
+      "entity": "Vehicle (Jet on Level 3)",
+      "state": "Hit by walking toad in two-player mode",
+      "behavior": "Toad is knocked off; jet remains at position where hit occurred; allows players to reposition vehicle slowly"
+    },
+    {
+      "entity": "Boss (Rat, Level 10)",
+      "state": "Bomb exploded, then hard-hit by player attack",
+      "behavior": "Enters finish state; only killable with Boot attack after hard-hit following bomb explosion; otherwise has infinite HP; dying without vehicle triggers level restart vs. vehicle course restart"
+    },
+    {
+      "entity": "Boss (Dark Queen)",
+      "state": "Combat active",
+      "behavior": "Input manipulation in first frame of attack can reduce animation time and prevent boss from flying around screen; direct input manipulation overrides character's own animation state"
+    },
+    {
+      "entity": "Environment (snake in Level 6-3)",
+      "state": "Player grabbing side while snake bends",
+      "behavior": "Collision detection experiences major slowdown due to snake bending geometry creating overlapping collision zones; indicates physical strain on game engine"
+    }
+  ],
+  "notes": "Battletoads communicates world-state primarily through dramatic genre shifts and vehicle state changes rather than narrative. Danger is conveyed through hazard geometry (spikes, pits), enemy presence, and speed-based challenge escalation. Factions are minimally developed — the Battletoads are a heroic rescue unit, while Dark Queen's forces are a diverse hostile presence on her planet (mechanical, organic, and system-based enemies). The game relies heavily on visual contrast between safe platforms and hazard zones. Environmental storytelling emerges from level-to-level architectural theme changes. Player behavioral tells are mechanical rather than narrative — attack chains, running states, and vehicle interactions define gameplay, not character dialogue or cutscenes. The game's difficulty curve and obstacle acceleration serve as primary world-state pressure indicators.",
+  "sources_used": [
+    "tasvideos",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:07:41.604Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 7514,
+    "output_tokens": 2880,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

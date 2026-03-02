@@ -1,0 +1,206 @@
+{
+  "game_id": "super-famicom-wars-snes",
+  "game_name": "Super Famicom Wars",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy unit proximity",
+      "visual_form": "Grid-based unit icons in contrasting faction colors on tactical map",
+      "meaning": "Threat to player forces; indicates need for defensive positioning or offensive action"
+    },
+    {
+      "signal": "Low unit health",
+      "visual_form": "Reduced hit points display on unit stat panel",
+      "meaning": "Unit vulnerability; risk of elimination if attacked"
+    },
+    {
+      "signal": "Ammunition depletion",
+      "visual_form": "Primary weapon ammo counter reaching zero on unit interface",
+      "meaning": "Loss of primary offensive capability; unit forced to secondary weapon with reduced effectiveness"
+    },
+    {
+      "signal": "Enemy HQ capture threat",
+      "visual_form": "Enemy units positioned adjacent to or on player's headquarters tile",
+      "meaning": "Imminent strategic defeat; HQ capture results in mission loss"
+    },
+    {
+      "signal": "Terrain disadvantage",
+      "visual_form": "Unit standing on unfavorable terrain (plains vs. woods) with visible defense modifier",
+      "meaning": "Reduced defensive capability; unit takes increased damage in this position"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly unit concentration",
+      "visual_form": "Multiple units of same faction color clustered together on map",
+      "meaning": "Defensive strength through numbers; concentrated forces provide mutual protection"
+    },
+    {
+      "signal": "Terrain advantage",
+      "visual_form": "Unit positioned on woods or mountain terrain with visible defense bonus",
+      "meaning": "Enhanced defensive position; unit takes reduced damage from attacks"
+    },
+    {
+      "signal": "City/Base control",
+      "visual_form": "Friendly faction flag or color overlay on property tile",
+      "meaning": "Resource generation and strategic position held; contributes to unit supply and funding"
+    },
+    {
+      "signal": "High unit health",
+      "visual_form": "Full or near-full hit points on unit stat display",
+      "meaning": "Combat readiness; unit can sustain multiple engagements"
+    },
+    {
+      "signal": "Ammunition reserves",
+      "visual_form": "Primary weapon ammo counter at full capacity",
+      "meaning": "Full offensive capability; unit can engage at maximum effectiveness"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Orange Star",
+      "color_identity": "Orange",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Orange unit sprites and UI elements distinguish from other factions",
+      "environmental_markers": "Orange flag/overlay on captured cities, bases, airports, ports"
+    },
+    {
+      "faction": "Blue Moon",
+      "color_identity": "Blue",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Blue unit sprites and UI elements visually distinct",
+      "environmental_markers": "Blue flag/overlay on controlled properties"
+    },
+    {
+      "faction": "Yellow Comet",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Yellow unit sprites and interface elements",
+      "environmental_markers": "Yellow flag/overlay on captured terrain features"
+    },
+    {
+      "faction": "Green Earth",
+      "color_identity": "Green",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Green unit sprites and UI elements",
+      "environmental_markers": "Green flag/overlay on controlled properties and HQ"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active regional conflict between two nations",
+      "visual_manifestation": "Map displays multiple unit types from both factions positioned across terrain; faction colors indicate territorial control",
+      "behavioral_manifestation": "Units engage in turn-based combat; armies build new units at bases; strategic positioning reflects military campaign progression"
+    },
+    {
+      "world_state": "Multi-national war (post-Andy accusation)",
+      "visual_manifestation": "Four faction colors visible simultaneously on campaign maps; units from Orange Star, Blue Moon, Yellow Comet, and Green Earth co-exist",
+      "behavioral_manifestation": "Alliances and enemies shift; commanding officers from different nations appear; diplomatic narrative reflected in mission briefings"
+    },
+    {
+      "world_state": "Military stalemate or defensive posture",
+      "visual_manifestation": "Units concentrated in woods, mountains, and fortified positions (bases, HQ); minimal unit movement across open terrain",
+      "behavioral_manifestation": "Players adopt defensive strategies; terrain defense bonuses become critical; attrition-based gameplay dominates"
+    },
+    {
+      "world_state": "Economic pressure / supply shortage",
+      "visual_manifestation": "Limited city/port control reduces resource generation; unit ammunition reserves display as depleted",
+      "behavioral_manifestation": "Fewer new units produced per turn; existing units must resort to secondary weapons; strategic focus on capturing income-generating properties"
+    },
+    {
+      "world_state": "Tactical advantage / offensive momentum",
+      "visual_manifestation": "Player faction units spread across map; multiple properties captured and controlled; HQ position secure",
+      "behavioral_manifestation": "Rapid unit production; aggressive movement into enemy territory; frequent successful combat engagements"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Property control as territorial narrative",
+      "example": "Captured cities, ports, airports, and bases display faction colors. The distribution and density of faction-controlled properties on the map tells the story of which nation controls which regions, indicating military progress and strategic dominance"
+    },
+    {
+      "technique": "Unit type diversity reflects military doctrine",
+      "example": "Different unit types (Infantry, Mech, Tank, Helicopter, Lander, Shoal Cruiser) positioned across terrain types communicate faction military capabilities and strategic focus—infantry in urban areas, vehicles on plains, naval units near ports and shoals"
+    },
+    {
+      "technique": "Terrain as strategic narrative",
+      "example": "Woods, mountains, and shoals form defensive chokepoints and strongholds. Their occupation tells the story of fortified positions and contested boundaries between factions. Empty plains indicate uncontested or rapidly-changing territory"
+    },
+    {
+      "technique": "HQ position as political narrative",
+      "example": "The headquarters location is the ultimate prize. Its centrality, remoteness, or isolation on the map communicates strategic vulnerability or safety. Proximity of enemy forces to HQ escalates narrative tension toward decisive victory/defeat"
+    },
+    {
+      "technique": "Resource nodes (cities/ports) as economic power",
+      "example": "Proliferation of captured resource-generating properties indicates which faction has economic dominance. Contested or neutral properties represent economic battlegrounds; their visual appearance signals income generation potential and strategic value"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Infantry unit",
+      "state": "High health, full ammo",
+      "behavior": "Can perform direct or indirect attacks; moves across varied terrain; captures properties; maintains offensive capability"
+    },
+    {
+      "entity": "Infantry unit",
+      "state": "Low health, low ammo",
+      "behavior": "Resorts to secondary weapon (machine gun); reduced threat level; typically held in defensive position; prioritized for repair if near base"
+    },
+    {
+      "entity": "Mech unit",
+      "state": "Full bazooka ammunition",
+      "behavior": "Primary threat to enemy vehicles; direct attack engagement; prioritized targeting of tanks and other mechs"
+    },
+    {
+      "entity": "Tank unit",
+      "state": "Positioned in woods",
+      "behavior": "Significantly enhanced defense stat; acts as mobile fortress; can hold territory against multiple lighter units"
+    },
+    {
+      "entity": "Helicopter unit",
+      "state": "Positioned on plains",
+      "behavior": "No terrain advantage or disadvantage; maintains uniform defense; mobility-focused behavior; used for rapid repositioning or indirect fire support"
+    },
+    {
+      "entity": "Naval unit (Cruiser)",
+      "state": "Positioned in port or shoal",
+      "behavior": "Engaged in territorial water control; indirect fire attack pattern; supports amphibious operations via Lander units"
+    },
+    {
+      "entity": "Lander unit",
+      "state": "Adjacent to shoal",
+      "behavior": "Ferries infantry across water; enables beach landings; vulnerable to naval/air units while in transport mode"
+    },
+    {
+      "entity": "Base/Airport/Port",
+      "state": "Under friendly control",
+      "behavior": "Produces new units each turn; resupplies ammo and repairs units stationed on tile; generates income funds"
+    },
+    {
+      "entity": "Base/Airport/Port",
+      "state": "Under enemy control",
+      "behavior": "No unit production for player; enemy generates income and supplies; strategic priority for capture or destruction"
+    },
+    {
+      "entity": "Headquarters",
+      "state": "Under player control",
+      "behavior": "Cannot be captured; loss results in mission defeat; primary strategic focus of defense; captures provide instant victory condition"
+    }
+  ],
+  "notes": "Super Famicom Wars (1998) predates Advance Wars (2001) in the Wars series. The available sources primarily document Advance Wars, which shares the same tactical grid-based turn-strategy paradigm and visual communication system. Visual faction differentiation through color-coding (Orange Star, Blue Moon, Yellow Comet, Green Earth) is core to player comprehension of battlefield state. The turn-based grid system transforms terrain into visual narrative—woods/mountains become defensive strongholds, plains become vulnerable transition zones. Unit sprite variation by type and faction creates a visual vocabulary where players instantly read threat level, capability, and allegiance. Property control (cities, bases, ports, airports) visualized through faction-color overlay communicates economic and strategic power distribution across the map. The HQ tile functions as the ultimate narrative marker—its safety or threat directly communicates campaign momentum and narrative tension.",
+  "sources_used": [
+    "wikipedia-advance-wars"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:02:58.341Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2980,
+    "output_tokens": 2654,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

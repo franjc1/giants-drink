@@ -1,0 +1,167 @@
+{
+  "game_id": "aero-fighters-snes",
+  "game_name": "Aero Fighters",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft approach",
+      "visual_form": "Incoming sprite animation, screen position movement toward player",
+      "meaning": "Active threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large enemy sprite, distinct visual design compared to standard enemies",
+      "meaning": "Stage completion obstacle, high danger state"
+    },
+    {
+      "signal": "Projectile fire",
+      "visual_form": "Bullet sprites moving across screen from enemy positions",
+      "meaning": "Immediate collision hazard, requires dodging"
+    },
+    {
+      "signal": "Player health depletion",
+      "visual_form": "Health bar reduction or loss of visual integrity on player sprite",
+      "meaning": "Imminent game-over state approaching"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "P items (weapon upgrade), F items (rare), B items (special attack charges) dropping from defeated enemies",
+      "meaning": "Increased player capability and survivability"
+    },
+    {
+      "signal": "Extra life acquisition",
+      "visual_form": "Visual indicator at 200,000 points scored",
+      "meaning": "Increased player resilience, world state less immediately threatening"
+    },
+    {
+      "signal": "Clear screen zones",
+      "visual_form": "Absence of enemy sprites in player vicinity",
+      "meaning": "Temporary safety window for movement and positioning"
+    },
+    {
+      "signal": "Score items from defeated ground enemies",
+      "visual_form": "Currency-like sprites representing nation-specific symbols",
+      "meaning": "Progress toward resource goals, strategic advantage accumulation"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "United States",
+      "color_identity": null,
+      "symbol_or_sigil": "Currency representation (nation-specific visual)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Stage 1-3 randomly selectable from four nation stages; US stage avoided by US characters"
+    },
+    {
+      "faction": "Japan",
+      "color_identity": null,
+      "symbol_or_sigil": "Currency representation (nation-specific visual)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dedicated stage in random selection pool"
+    },
+    {
+      "faction": "Sweden",
+      "color_identity": null,
+      "symbol_or_sigil": "Currency representation (nation-specific visual)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dedicated stage in random selection pool"
+    },
+    {
+      "faction": "United Kingdom",
+      "color_identity": null,
+      "symbol_or_sigil": "Currency representation (nation-specific visual)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dedicated stage in random selection pool"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game - initial progression",
+      "visual_manifestation": "Standard enemy density and behavior patterns",
+      "behavioral_manifestation": "Basic projectile patterns, standard enemy movement speeds"
+    },
+    {
+      "world_state": "Mid-game - stage escalation",
+      "visual_manifestation": "Increased enemy density on screen, more complex visual arrangements",
+      "behavioral_manifestation": "Coordinated multi-enemy attack patterns, boss encounter preparation"
+    },
+    {
+      "world_state": "Boss encounter - stage climax",
+      "visual_manifestation": "Single large enemy sprite with distinct visual design, fills significant screen real estate",
+      "behavioral_manifestation": "Complex attack patterns, multiple phase cycles, telegraphed special attacks"
+    },
+    {
+      "world_state": "Post-game loop - extreme difficulty",
+      "visual_manifestation": "Replication of stages 1-7 with intensified visual density",
+      "behavioral_manifestation": "Enemy behavior becomes more aggressive, attack patterns more complex, spawn rates increase"
+    },
+    {
+      "world_state": "Nation stage exclusion mechanic",
+      "visual_manifestation": "Character's nation stage visually distinct but never appears for that character in random selection",
+      "behavioral_manifestation": "Stage pool restriction creates narrative distance between pilot and homeland"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Character-aircraft pairing",
+      "example": "Blaster Keaton pilots Boeing F/A-18 Hornet (US); Hien pilots Mitsubishi FSX (Japan). Visual distinctiveness of aircraft models communicates national identity"
+    },
+    {
+      "technique": "Nation-specific currency visualization",
+      "example": "Score items dropped by ground enemies appear as nation-specific currency symbols, reinforcing faction identity through resource representation"
+    },
+    {
+      "technique": "Stage geographic exclusion",
+      "example": "Characters never fight in their home nation's stage (stages 1-3), suggesting characters deployed to foreign airspace or theaters"
+    },
+    {
+      "technique": "Pilot character design differentiation",
+      "example": "Each pilot pair visually distinct through character portrait sprites and naming conventions (Kohful 'The Viking' signals Nordic identity)"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard enemy aircraft",
+      "state": "Neutral/active",
+      "behavior": "Approach player position, fire projectiles on schedule or proximity trigger"
+    },
+    {
+      "entity": "Ground enemies",
+      "state": "Engaged",
+      "behavior": "Drop score items (currency) when destroyed, providing resource feedback"
+    },
+    {
+      "entity": "Boss enemy",
+      "state": "Stage climax",
+      "behavior": "Complex multi-phase attack patterns with telegraphed special moves, requires sustained evasion and damage output"
+    },
+    {
+      "entity": "Player character",
+      "state": "Powered up",
+      "behavior": "Weapon enhancement (P items) increases fire rate/damage visual representation; special attack (B items) shows distinct visual effect"
+    },
+    {
+      "entity": "Player character",
+      "state": "Vulnerable",
+      "behavior": "Reduced visual integrity or sprite changes indicate health loss; additional life loss shows character sprite reset to default state"
+    }
+  ],
+  "notes": "Aero Fighters communicates world-state primarily through combat intensity escalation rather than environmental narrative. The four-nation faction system is visualized through character-aircraft pairing and nation-specific currency, but lacks detailed environmental or atmospheric differentiation in available documentation. The game's political dimension (international military pilot competition) is implicit in character selection rather than explicitly manifested through stage design or enemy faction identification. Danger/safety signals rely entirely on standard shmup visual language: projectiles, sprite proximity, health indicators, and power-up drops. No faction-specific enemy visual variants are documented.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:14:46.557Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3275,
+    "output_tokens": 1781,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

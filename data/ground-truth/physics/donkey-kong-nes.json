@@ -1,0 +1,115 @@
+{
+  "game_id": "donkey-kong-nes",
+  "game_name": "Donkey Kong",
+  "platform": "NES",
+  "year": 1986,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel movement documentation found in sources"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Hammer Power-up",
+      "description": "Mario can pick up a hammer to destroy barrels. In Revision 0, Mario can jump while holding the hammer (bug). In Revision 1, hammer jumping is prevented. Hammer has a timer that limits duration of use.",
+      "physics_values": {
+        "destroys_barrels": true,
+        "allows_jump_rev0": true,
+        "allows_jump_rev1": false,
+        "timer_based": true
+      }
+    },
+    {
+      "name": "Barrel Patterns",
+      "description": "Barrels thrown by Donkey Kong follow two main patterns: straight down or alternating left-right. A third unused pattern exists that sends barrels down-right diagonally.",
+      "physics_values": {
+        "pattern_count": 3,
+        "patterns": [
+          "straight_down",
+          "alternating_left_right",
+          "down_right_diagonal_unused"
+        ]
+      }
+    },
+    {
+      "name": "Directional Input Priority (Revision 1)",
+      "description": "Controller input improved in Revision 1. First direction pressed has priority: D-Pad rolled from Up/Down to diagonal prevents walking; rolled from Left/Right to diagonal prevents stopping.",
+      "physics_values": {
+        "revision": 1,
+        "input_priority": "first_direction_pressed",
+        "diagonal_handling": "context_dependent"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "responsive",
+    "arcade-faithful",
+    "tight",
+    "momentum-based"
+  ],
+  "tier_notes": "Tier 2: No exact movement values documented. Sources provide game structure, revisions, and mechanical differences but no quantified physics parameters (speeds, acceleration, gravity values). Game is faithful port of arcade original with some mechanical differences between revisions.",
+  "sources_used": [
+    "data_crystal",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:45:52.883Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 10561,
+    "output_tokens": 897,
+    "dimension": "physics",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

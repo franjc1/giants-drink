@@ -1,0 +1,204 @@
+{
+  "game_id": "sim-tower-pc",
+  "game_name": "SimTower: The Vertical Empire",
+  "platform": "pc",
+  "paradigm": "simulation",
+  "danger_signals": [
+    {
+      "signal": "Terrorist bomb threat",
+      "visual_form": "Text notification/phone call from terrorists; bomb location unknown within building cross-section",
+      "meaning": "Active threat requiring immediate player intervention; potential for building damage if ransom not paid or bomb not found in time"
+    },
+    {
+      "signal": "High tenant stress levels",
+      "visual_form": "Tenant dissatisfaction indicators (inferred from gameplay mechanics)",
+      "meaning": "Building deterioration state; tenants will vacate if stress remains unaddressed"
+    },
+    {
+      "signal": "Elevator congestion/inefficiency",
+      "visual_form": "Visual bottlenecks in elevator traffic on cross-section view",
+      "meaning": "Critical infrastructure failure affecting tenant satisfaction and tower viability"
+    },
+    {
+      "signal": "Building damage from bomb detonation",
+      "visual_form": "Visual destruction of floors/facilities if bomb response fails",
+      "meaning": "Severe consequence state resulting from unresolved danger event"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Efficient elevator system",
+      "visual_form": "Smooth elevator movement patterns visible in cross-section view; express elevators serving full building height",
+      "meaning": "Building infrastructure health; tenant comfort and retention indicator"
+    },
+    {
+      "signal": "Adequate support facilities",
+      "visual_form": "Medical centers, parking lots, recycling facilities visible on floor plan",
+      "meaning": "Tenant needs fulfilled; stress reduction through amenity provision"
+    },
+    {
+      "signal": "Clean, staffed hotel rooms",
+      "visual_form": "Hotel facilities with housekeeping presence indicated on cross-section",
+      "meaning": "High-quality service state; attracts VIP visitors and positive ratings"
+    },
+    {
+      "signal": "Star rating advancement",
+      "visual_form": "Visual tower star level display (1-5 stars, culminating in 'Tower' designation)",
+      "meaning": "Overall building health and prestige state; progression toward victory condition"
+    },
+    {
+      "signal": "VIP visit preparation",
+      "visual_form": "Notification that VIP arrival is imminent; visible prepared facilities",
+      "meaning": "Opportunity for tower advancement through positive visitor experience"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Terrorists",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Bomb object/hidden location within building floors",
+      "environmental_markers": "Bomb location scattered randomly throughout building interior; triggered by player building underground"
+    },
+    {
+      "faction": "VIP Visitors",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Notification event; presence in hotel facilities; movement through tower cross-section"
+    },
+    {
+      "faction": "Tenants (Residential/Commercial/Hotel)",
+      "color_identity": "Color differentiation used between office-type and hotel-type buildings (noted in development)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Stress state visualization (inferred); vacancy indicators",
+      "environmental_markers": "Distributed across floors by type; visible in cross-section with facility icons"
+    },
+    {
+      "faction": "Security Services",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Activated as response agent when bomb threat occurs; must locate bomb before detonation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (1-star tower)",
+      "visual_manifestation": "Limited building options available; basic facilities only; tower appears sparse with few floors",
+      "behavioral_manifestation": "Slow income generation; limited tenant attraction; restricted progression mechanics"
+    },
+    {
+      "world_state": "Mid-game progression (2-4 star tower)",
+      "visual_manifestation": "Expanding facility palette visible; mixed-use building with residential, office, commercial, and hotel floors; elevator system becomes complex",
+      "behavioral_manifestation": "Increased tenant demand variability; VIP visits begin occurring; elevator management becomes critical gameplay focus"
+    },
+    {
+      "world_state": "End-game/Victory state (5-star tower with cathedral)",
+      "visual_manifestation": "Cathedral structure at top of fully-developed tower; maximum floor count (100+ above ground, 9 below); all facility types present",
+      "behavioral_manifestation": "Highest prestige designation ('Tower' rating); stable income generation; no further progression possible"
+    },
+    {
+      "world_state": "Threat active (bomb in building)",
+      "visual_manifestation": "Text alert overlaid on cross-section view; bomb location indicator added to UI; security response visible",
+      "behavioral_manifestation": "Time pressure introduced; player must either pay ransom or coordinate bomb search; failure results in building damage visualization"
+    },
+    {
+      "world_state": "Seasonal celebration (end of Q4)",
+      "visual_manifestation": "Santa Claus and reindeer animation flying across tower skyline",
+      "behavioral_manifestation": "Cosmetic event; no gameplay impact; establishes temporal progression and calendar system"
+    },
+    {
+      "world_state": "Underground development discovery",
+      "visual_manifestation": "Gold treasure discovery notification; below-ground floor development visible in cross-section",
+      "behavioral_manifestation": "Significant funds reward; incentivizes basement construction risk-taking"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cross-sectional building view as narrative window",
+      "example": "Player views entire tower interior simultaneously, observing tenant distribution, facility placement, and traffic flow; this reveals the tower's 'health' through visual density and organization patterns"
+    },
+    {
+      "technique": "Facility type color differentiation",
+      "example": "Office and hotel buildings rendered in distinct colors within cross-section view; communicates functional zoning and building purpose to player at glance"
+    },
+    {
+      "technique": "Elevator traffic as metaphor for building vitality",
+      "example": "Smooth, efficient elevator movement indicates healthy tower; congestion visualizes stress and dysfunction; emphasizes infrastructure as backbone of tower society"
+    },
+    {
+      "technique": "Floor vacancy and tenant visualization",
+      "example": "Absence of visual occupancy indicators (inferred) signals building deterioration and tenant departure; presence indicates health"
+    },
+    {
+      "technique": "Random event notifications as contextual story beats",
+      "example": "Bomb threats, treasure discoveries, and VIP arrivals interrupt normal gameplay flow; function as 'dramatic moments' that punctuate management rhythm and create narrative tension"
+    },
+    {
+      "technique": "Star rating system as visual progression meter",
+      "example": "1-5 star display provides constant feedback on tower prestige; visual feedback loop demonstrates player's cumulative management success"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Tenant (generic)",
+      "state": "Satisfied/Low stress",
+      "behavior": "Remains in residence; continues generating income; contributes to star rating progression"
+    },
+    {
+      "entity": "Tenant (generic)",
+      "state": "Stressed/High demand",
+      "behavior": "Vacates property; stops generating income; damages tower star rating"
+    },
+    {
+      "entity": "Tenant (generic)",
+      "state": "Delayed by elevators",
+      "behavior": "Increases stress level; visible waiting time in elevator queues; contributes to dissatisfaction"
+    },
+    {
+      "entity": "VIP Visitor",
+      "state": "Enjoying stay",
+      "behavior": "Uses hotel facilities; navigates building efficiently; provides positive rating and star advancement"
+    },
+    {
+      "entity": "VIP Visitor",
+      "state": "Dissatisfied",
+      "behavior": "Provides negative rating; withholds star advancement; leaves unfavorable impression"
+    },
+    {
+      "entity": "Terrorist (threat event)",
+      "state": "Active threat",
+      "behavior": "Demands ransom via notification; bomb begins detonation countdown; forces immediate player decision"
+    },
+    {
+      "entity": "Security Services",
+      "state": "Bomb search active",
+      "behavior": "Searches building floors for explosive device; race against detonation timer; succeeds only with player assistance/coordination"
+    },
+    {
+      "entity": "Elevator system",
+      "state": "Understaffed/Inefficient",
+      "behavior": "Long wait times visualized; tenant stress increases; bottleneck visible in cross-section view"
+    },
+    {
+      "entity": "Elevator system",
+      "state": "Well-managed",
+      "behavior": "Rapid floor servicing; express elevators efficiently deployed; tenant stress decreases; smooth traffic patterns visible"
+    }
+  ],
+  "notes": "SimTower uses a side-view cross-section paradigm as its core manifestation layer. All world-state communication occurs through this single visual window—there is no exploration or movement through the building. The game's danger and safety signaling is entirely systemic: danger emerges from unmet tenant needs and random events (bombs), while safety is communicated through infrastructure efficiency and facility availability. Faction communication is minimal; instead, the game emphasizes role-state (tenant, VIP, terrorist, worker) over faction identity. The star rating system serves as both diegetic (in-world prestige) and non-diegetic (player progress feedback) communication. Visual differentiation between office and hotel buildings was a deliberate design choice to aid player cognition at scale. The game's sound design is minimalist ('office buzz' and elevator bells), leaving visuals to carry the primary communicative load.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:17:43.589Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2670,
+    "output_tokens": 2501,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "game_id": "super-monaco-gp-genesis",
+  "game_name": "Super Monaco GP",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Transmission selection (auto/manual)",
+      "first_appears": "Pre-race menu",
+      "introduction_context": "safe",
+      "mastery_context": "Player choice for handling complexity; affects race difficulty and control responsiveness"
+    },
+    {
+      "element": "Qualification lap (45-second timer)",
+      "first_appears": "Practice round before main race",
+      "introduction_context": "moderate",
+      "mastery_context": "Time pressure mechanic; failure results in game over; determines starting grid position"
+    },
+    {
+      "element": "Position limit countdown",
+      "first_appears": "Main race begins",
+      "introduction_context": "dangerous",
+      "mastery_context": "Must maintain minimum position or game ends; creates continuous pressure throughout race"
+    },
+    {
+      "element": "Rear-view mirror display",
+      "first_appears": "During active race",
+      "introduction_context": "moderate",
+      "mastery_context": "Occupies top 20% of screen; spatial awareness mechanic for tracking pursuing AI drivers"
+    },
+    {
+      "element": "19 AI-controlled drivers",
+      "first_appears": "Main race begins",
+      "introduction_context": "dangerous",
+      "mastery_context": "Competitive field; requires racing line optimization and collision avoidance"
+    },
+    {
+      "element": "Wet weather conditions",
+      "first_appears": "Second race (unlock at 3rd place or better)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Increased difficulty variant; traction and braking behavior changes"
+    },
+    {
+      "element": "Team invitations (Genesis World Championship)",
+      "first_appears": "Mid-season progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Reward for performance; unlocks faster car with improved handling"
+    },
+    {
+      "element": "Multiple courses (Genesis World Championship)",
+      "first_appears": "Season mode structure",
+      "introduction_context": "moderate",
+      "mastery_context": "1989 F1 championship tracks; varied circuit layouts require adaptive strategy"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": 45,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully qualifying (passing 45-second timer)",
+      "Maintaining position above countdown limit",
+      "Completing a lap without collision",
+      "Team invitation unlocking faster car"
+    ],
+    "typical_tension_triggers": [
+      "45-second qualification timer running down",
+      "Position limit countdown during race",
+      "AI drivers pursuing from behind",
+      "Wet weather conditions unlocked",
+      "Three-lap race structure with persistent position threat"
+    ],
+    "pacing_descriptor": "High sustained tension with discrete relief points; qualification creates hard time-gate; main race enforces continuous positional pressure without respite"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Qualification lap introduces time pressure mechanic; auto transmission option lowers entry difficulty",
+    "mid_game": "Position countdown threat escalates as player races 19 AI opponents; requires sustained racing line optimization",
+    "late_game": "Wet weather unlocked; team progression mechanic provides power scaling but introduces harder circuits; season completion takes ~2 hours"
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Qualification Gate",
+      "description": "45-second timer on practice lap determines grid position; failure = immediate game over; creates hard skill gate before main race",
+      "example_level": "Arcade mode and all Genesis tracks"
+    },
+    {
+      "pattern_name": "Position Countdown Race Loop",
+      "description": "Main race enforces minimum position threshold with countdown counter; game ends if player drops below threshold; three laps of sustained pressure",
+      "example_level": "All playable races (arcade: Monaco GP circuit; Genesis: 1989 F1 championship tracks)"
+    },
+    {
+      "pattern_name": "Progression Unlock",
+      "description": "Finishing 3rd or better unlocks wet weather variant; team invitations unlock faster cars; password system saves season progress",
+      "example_level": "Genesis World Championship mode"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:34:10.400Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3318,
+    "output_tokens": 1430,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

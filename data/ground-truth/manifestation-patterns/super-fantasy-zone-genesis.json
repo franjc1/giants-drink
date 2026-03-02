@@ -1,0 +1,159 @@
+{
+  "game_id": "super-fantasy-zone-genesis",
+  "game_name": "Super Fantasy Zone",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy spawning",
+      "visual_form": "Enemy generators visible on-screen; enemies emerge and move toward Opa-Opa",
+      "meaning": "Active threat present; player must destroy generator to clear level"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large enemy entity at end of level after all generators destroyed",
+      "meaning": "Escalated danger; final obstacle before level completion"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Bullets/attacks fired by enemies toward player character",
+      "meaning": "Immediate collision hazard; avoidance required"
+    },
+    {
+      "signal": "Dark Menon faction presence",
+      "visual_form": "Enemy minions and invading forces visible in environment",
+      "meaning": "Hostile occupation of Fantasy Zone; direct threat requiring combat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared enemy generators",
+      "visual_form": "Destroyed generators no longer spawn enemies",
+      "meaning": "Zone of level is secure; reduced threat intensity"
+    },
+    {
+      "signal": "Gold coin collection",
+      "visual_form": "Shining coins dropped by defeated enemies, glow/sparkle effect",
+      "meaning": "Resource availability; opportunity to purchase upgrades and gain advantage"
+    },
+    {
+      "signal": "Upgrade purchased",
+      "visual_form": "Opa-Opa visual changes when equipped (weapon glow, speed indicators, lighting aura)",
+      "meaning": "Enhanced capability; improved safety through stronger offensive/defensive posture"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Opa-Opa (Player/Fantasy Zone defender)",
+      "color_identity": null,
+      "symbol_or_sigil": "Winged sentient spaceship character",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Protagonist controls movement left/right; associated with Fantasy Zone restoration"
+    },
+    {
+      "faction": "Dark Menon (Antagonist/Invaders)",
+      "color_identity": null,
+      "symbol_or_sigil": "Enemy minions with distinct designs",
+      "enemy_visual_variants": "Varying enemy types with different visual designs; different gold drop values suggest enemy hierarchy",
+      "environmental_markers": "Present as enemy generators and boss entities; occupy Fantasy Zone as invaders"
+    },
+    {
+      "faction": "Fantasy Zone (Setting/Contested territory)",
+      "color_identity": "Wide, vibrant color palette noted in reviews",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Level environments with distinct visual themes; colorful, cute aesthetic contrasts with dark invasion threat"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level active/under occupation",
+      "visual_manifestation": "Enemy generators visible on-screen; minions actively spawning and patrolling",
+      "behavioral_manifestation": "Enemies move and attack; generators continue producing threats until destroyed"
+    },
+    {
+      "world_state": "Generator destroyed",
+      "visual_manifestation": "Generator entity disappears; enemy spawn ceases in that zone",
+      "behavioral_manifestation": "Enemies stop appearing from that location; area becomes progressively safer"
+    },
+    {
+      "world_state": "All generators cleared",
+      "visual_manifestation": "Boss entity appears at end of level; final confrontation arena",
+      "behavioral_manifestation": "Boss performs unique attack patterns; level progresses to final challenge"
+    },
+    {
+      "world_state": "Opa-Opa upgraded",
+      "visual_manifestation": "Player character displays visual modification (enhanced weapon effects, speed aura, lighting enhancement)",
+      "behavioral_manifestation": "Improved offensive output; faster movement; wider coverage/range depending on upgrade type"
+    },
+    {
+      "world_state": "Level completed",
+      "visual_manifestation": "Boss defeated; transition to next level with new environment and enemies",
+      "behavioral_manifestation": "Fantasy Zone progressively liberated from Dark Menon occupation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level aesthetic variety",
+      "example": "Each level features distinct visual theming/environments suggesting different regions of Fantasy Zone; cute, colorful design establishes peaceful setting invaded by dark forces"
+    },
+    {
+      "technique": "Contextual upgrade availability",
+      "example": "Different enemies drop varying amounts of gold, suggesting enemy importance/threat level; resources scattered across environment indicate ongoing conflict and opportunities for player advantage"
+    },
+    {
+      "technique": "Character design contrast",
+      "example": "Opa-Opa (cute winged spaceship) visually contrasts with Dark Menon minions; hero vs. invader conflict communicated through visual aesthetic difference"
+    },
+    {
+      "technique": "Generator destruction progression",
+      "example": "Visual elimination of threat-spawning structures demonstrates player agency in restoring order; each destroyed generator is visual proof of progress"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Opa-Opa",
+      "state": "Normal movement",
+      "behavior": "Flies or walks on ground; responds to player input; scrolls left/right based on direction"
+    },
+    {
+      "entity": "Opa-Opa",
+      "state": "Combat active",
+      "behavior": "Fires weapons at enemies; collects gold drops; navigates to target generators"
+    },
+    {
+      "entity": "Opa-Opa",
+      "state": "Upgraded",
+      "behavior": "Enhanced weapon firing patterns (wide spread, rear fire, laser); increased speed; improved lighting"
+    },
+    {
+      "entity": "Enemy minions",
+      "state": "Active",
+      "behavior": "Move across screen; fire projectiles at Opa-Opa; drop gold when destroyed"
+    },
+    {
+      "entity": "Enemy generators",
+      "state": "Active",
+      "behavior": "Continuously spawn minions; visible target for player destruction"
+    },
+    {
+      "entity": "Boss",
+      "state": "Confrontation",
+      "behavior": "Unique attack patterns; appears only after all generators destroyed; final obstacle per level"
+    }
+  ],
+  "notes": "Super Fantasy Zone uses colorful, 'cute' aesthetic to establish Fantasy Zone as idyllic setting under invasion by Dark Menon forces. Visual communication relies heavily on environmental contrast (vibrant vs. dark), character design (hero spaceship vs. enemy minions), and destruction progression (eliminated generators = cleared zones). The game's 'laid back' visual style creates tension with its challenging gameplay. Shmup paradigm means danger is communicated primarily through enemy positioning, attack patterns, and collision hazards rather than dramatic environmental changes. World-state is primarily conveyed through entity presence/absence rather than environmental transformation.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:31:58.225Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2831,
+    "output_tokens": 1797,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "game_id": "rampage-nes",
+  "game_name": "Rampage",
+  "platform": "nes",
+  "paradigm": "adventure",
+  "danger_signals": [
+    {
+      "signal": "Military presence",
+      "visual_form": "Helicopters, tanks, police cars visible on screen",
+      "meaning": "Active threat to player; enemy fire incoming"
+    },
+    {
+      "signal": "Explosive items",
+      "visual_form": "Bombs, dynamite visible in broken windows",
+      "meaning": "Damaging hazard; will harm monster if collected"
+    },
+    {
+      "signal": "Electrical hazards",
+      "visual_form": "Electrical appliances (toasters, etc.) in windows",
+      "meaning": "Damage on contact or activation; dangerous food source"
+    },
+    {
+      "signal": "Environmental damage",
+      "visual_form": "Lightning strikes, falling debris",
+      "meaning": "Health loss; monster takes damage"
+    },
+    {
+      "signal": "Photographer presence",
+      "visual_form": "Civilian with camera at window",
+      "meaning": "Flash blinds monster temporarily, causes fall damage if triggered"
+    },
+    {
+      "signal": "Other monsters",
+      "visual_form": "George, Lizzie, or Ralph visible and attacking",
+      "meaning": "Punch damage; direct collision threat in multiplayer"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items",
+      "visual_form": "Fruit, roast chicken visible in broken windows",
+      "meaning": "Restores health; safe to consume"
+    },
+    {
+      "signal": "Soldier NPCs",
+      "visual_form": "Military personnel in windows",
+      "meaning": "Consumable; restores health when eaten"
+    },
+    {
+      "signal": "Money/score items",
+      "visual_form": "Currency or point indicators in windows",
+      "meaning": "Score increase; no health penalty"
+    },
+    {
+      "signal": "Civilians signaling for help",
+      "visual_form": "NPC waving hands from window",
+      "meaning": "High point reward when grabbed; beneficial interaction"
+    },
+    {
+      "signal": "Mega vitamin bonus",
+      "visual_form": "Special item at Plano, Illinois (end of cycle)",
+      "meaning": "Full health restoration for all monsters; major point bonus"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Military/Government Forces",
+      "color_identity": null,
+      "symbol_or_sigil": "Helicopters, tanks, police cars, uniformed soldiers",
+      "enemy_visual_variants": "Helicopters fire projectiles; tanks shell from ground; police cars pursue; soldiers attack on foot",
+      "environmental_markers": "Military vehicles patrol cities; soldiers positioned in buildings"
+    },
+    {
+      "faction": "Civilian Population",
+      "color_identity": null,
+      "symbol_or_sigil": "Human NPCs in windows, pedestrians, photographers",
+      "enemy_visual_variants": "Photographer blinds with flash; some civilians neutral or harmful; taxi drivers attack",
+      "environmental_markers": "Civilians visible in windows; concentrated in populated building interiors"
+    },
+    {
+      "faction": "Player Monsters",
+      "color_identity": null,
+      "symbol_or_sigil": "George (King Kong gorilla), Lizzie (Godzilla reptile), Ralph (werewolf)",
+      "enemy_visual_variants": "Three distinct monster character palettes with different silhouettes",
+      "environmental_markers": "Monsters occupy buildings; visible climbing and destroying infrastructure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Day 1-20, Peoria Illinois start)",
+      "visual_manifestation": "Cities appear standard with intact buildings; military presence moderate",
+      "behavioral_manifestation": "Enemies engage at normal aggression; civilians present in buildings; destruction flows naturally"
+    },
+    {
+      "world_state": "Mid-cycle progression (Days 20-100+)",
+      "visual_manifestation": "Building density increases; varied building layouts in different cities",
+      "behavioral_manifestation": "Military forces intensify; enemy variety expands (helicopters, tanks, dynamite traps)"
+    },
+    {
+      "world_state": "Cycle endpoint (Plano, Illinois)",
+      "visual_manifestation": "Mega vitamin bonus item appears; special visual marker for final level",
+      "behavioral_manifestation": "Full health restoration triggered; major score multiplier; cycle resets after consumption"
+    },
+    {
+      "world_state": "Monster reverted to human form",
+      "visual_manifestation": "Monster transforms into original human character; walks off screen",
+      "behavioral_manifestation": "Player loses current score; can be eaten by other monsters; vulnerable on ground"
+    },
+    {
+      "world_state": "Monster respawn after game-over",
+      "visual_manifestation": "Blimp descends to screen carrying monster; full health bar displayed",
+      "behavioral_manifestation": "Player returns to monster form; scores reset but gameplay continues"
+    },
+    {
+      "world_state": "Geographic progression (North America)",
+      "visual_manifestation": "City names change; starting in Peoria IL, ending in Plano IL; cycle repeats 5 times",
+      "behavioral_manifestation": "28 distinct cities across North America (avoiding 7 specific states); identical building mechanics"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Window contents reveal hazards and resources",
+      "example": "Broken windows show bombs (danger), food (safety), photographers (traps), cigarettes (dual-purpose). Player learns to distinguish safe vs. harmful items through interaction"
+    },
+    {
+      "technique": "Monster origin cutscene",
+      "example": "Opening sequence explains George (scientist with vitamins), Lizzie (radioactive lake contamination), Ralph (hot dog food additive). Establishes 'monster-as-victim' narrative"
+    },
+    {
+      "technique": "Military escalation in response to destruction",
+      "example": "Helicopters, tanks, police, and artillery increase presence as buildings are destroyed. Environmental response signals player actions have consequences"
+    },
+    {
+      "technique": "Cityscape destruction progression",
+      "example": "Intact buildings → rubble piles → cleared zones. Visual accumulation of destruction communicates player impact on environment"
+    },
+    {
+      "technique": "Geographic route storytelling",
+      "example": "128-day journey across North America (Peoria to Plano) positions rampage as continental event; 7 spared states creates alternate-reality USA"
+    },
+    {
+      "technique": "Civilian behavior variety",
+      "example": "Waving NPCs signal distress (point multiplier); photographers actively blind player; soldiers fight back. Each NPC type communicates different world-state response"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "George (Gorilla)",
+      "state": "Healthy",
+      "behavior": "Climbs buildings, punches destructively, engages enemies"
+    },
+    {
+      "entity": "George (Gorilla)",
+      "state": "Damaged/Low Health",
+      "behavior": "Reverts to human form; walks off screen vulnerable"
+    },
+    {
+      "entity": "Lizzie (Reptile)",
+      "state": "Healthy",
+      "behavior": "Scales buildings, attacks with reptilian aggression"
+    },
+    {
+      "entity": "Ralph (Werewolf)",
+      "state": "Healthy",
+      "behavior": "Feral climbing and destruction patterns"
+    },
+    {
+      "entity": "Helicopter",
+      "state": "Active",
+      "behavior": "Fires projectiles downward at monsters; persistent threat while on screen"
+    },
+    {
+      "entity": "Tank",
+      "state": "Active",
+      "behavior": "Shells buildings and monsters from ground level; immobile threat"
+    },
+    {
+      "entity": "Police Car / Taxi",
+      "state": "Active",
+      "behavior": "Pursues monsters; collision damage"
+    },
+    {
+      "entity": "Civilian NPC",
+      "state": "Signaling for help",
+      "behavior": "Hands waving; high point multiplier if grabbed quickly"
+    },
+    {
+      "entity": "Photographer",
+      "state": "Active in window",
+      "behavior": "Must be eaten before flash triggers; flash causes temporary blindness and fall damage"
+    },
+    {
+      "entity": "Soldier",
+      "state": "In building",
+      "behavior": "Consumable for health; represents military presence inside infrastructure"
+    }
+  ],
+  "notes": "Rampage (NES 1988) is a destruction-based action game with minimal narrative complexity but strong implicit world-state communication through hazard/resource visual distinction and military-vs-monster conflict. The game lacks explicit faction diplomacy but establishes clear opposition: player monsters vs. military/civilian resistance. Visual manifestation relies heavily on window contents (safe/dangerous items), military vehicle presence (threat level), and building destruction progression (environmental impact). The geographic 128-day cycle across North America creates implicit political world-building: a multi-state monster rampage treated as inevitable disaster rather than invasion. No explicit dialogue or cutscenes beyond opening sequence. Environmental storytelling primarily through interactive destruction and NPC behavior variety.",
+  "sources_used": [
+    "Wikipedia - Rampage (video game)",
+    "The Cutting Room Floor - Rampage (NES)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:34:12.200Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3940,
+    "output_tokens": 2388,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

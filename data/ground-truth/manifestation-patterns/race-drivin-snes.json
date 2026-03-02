@@ -1,0 +1,142 @@
+{
+  "game_id": "race-drivin-snes",
+  "game_name": "Race Drivin'",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Track obstacles and hazards",
+      "visual_form": "Physical track elements (ramps, loops, inclines, cylindrical tunnel sections)",
+      "meaning": "Environmental challenges that require precise driving; collision results in crash/failure state"
+    },
+    {
+      "signal": "Fuel depletion indicator",
+      "visual_form": "Fuel level gauge on dashboard display",
+      "meaning": "Running out of fuel before completing lap results in failure"
+    },
+    {
+      "signal": "Speed/performance mismatch",
+      "visual_form": "Tachometer and speedometer readings relative to track demands",
+      "meaning": "Excessive speed on technical sections increases crash risk"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Lap timer displayed in cockpit HUD",
+      "meaning": "Allotted time window for course completion creates danger of timeout failure"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear racing line visibility",
+      "visual_form": "Track path rendered clearly from first-person windshield perspective",
+      "meaning": "Visible driving surface indicates safe navigation corridor"
+    },
+    {
+      "signal": "Stable vehicle instrumentation",
+      "visual_form": "Dashboard gauges (oil, temp, amp) displaying normal readings",
+      "meaning": "Vehicle in operational condition; no mechanical failure state"
+    },
+    {
+      "signal": "Controlled speed management",
+      "visual_form": "Speedometer and tachometer within nominal ranges",
+      "meaning": "Appropriate gear selection and throttle control maintains vehicle stability"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Active racing mode",
+      "visual_manifestation": "First-person cockpit view with visible dashboard instruments; track environment rendered with 3D polygon geometry",
+      "behavioral_manifestation": "Player vehicle responds to realistic car physics; steering wheel force feedback communicates road conditions"
+    },
+    {
+      "world_state": "Pre-race idle",
+      "visual_manifestation": "Stationary cockpit view with all dashboard displays initialized; ignition key available",
+      "behavioral_manifestation": "Vehicle remains stationary until ignition activated and transmission engaged"
+    },
+    {
+      "world_state": "Stunt track active",
+      "visual_manifestation": "Track includes enhanced stunt obstacles: corkscrew loop, 45° inclined hill, jump ramps, cylindrical tunnel sections",
+      "behavioral_manifestation": "Vehicle must navigate extreme angles and vertical elements; air-based jumps demonstrate physics simulation"
+    },
+    {
+      "world_state": "High-speed performance mode",
+      "visual_manifestation": "Track environment rendered with faster visual scrolling; speedometer and tachometer readings elevated",
+      "behavioral_manifestation": "Manual 4-speed transmission allows gear optimization; improper shifting risks engine stall"
+    },
+    {
+      "world_state": "Failure/crash state",
+      "visual_manifestation": "Instant Replay feature activated; cockpit view resets",
+      "behavioral_manifestation": "Vehicle returns to starting position; lap timer resets for retry"
+    },
+    {
+      "world_state": "Off-road excursion",
+      "visual_manifestation": "Track boundaries visible; off-road timer activated when vehicle leaves defined racing surface",
+      "behavioral_manifestation": "Time penalty accumulates for driving outside course; incentivizes return to track"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Dashboard instrumentation design",
+      "example": "Each of the seven available cars (three manual transmission, one automatic, three variants in expanded port) displays unique dashboard layouts reflecting individual vehicle identity and performance characteristics"
+    },
+    {
+      "technique": "Track geometry as difficulty narrative",
+      "example": "Stunt track progression from basic obstacles to advanced challenges (dual landing ramps, jump loop, corkscrew) communicates increasing complexity and skill requirements"
+    },
+    {
+      "technique": "Time constraints as pressure narrative",
+      "example": "Variable track lengths (Autocross ~30 seconds, original track ~90 seconds, Super Stunt ~180 seconds) create different tension profiles and communicate track significance through temporal demand"
+    },
+    {
+      "technique": "First-person cockpit perspective",
+      "example": "Windshield framing and dashboard permanence in view establishes player as vehicle operator, not external observer; reinforces simulation authenticity"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle",
+      "state": "Pre-ignition",
+      "behavior": "Stationary; requires ignition key activation to initialize"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Neutral transmission",
+      "behavior": "No movement despite throttle input; requires proper gear selection"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Improper shifting",
+      "behavior": "Engine stall occurs; vehicle loss of control requiring restart"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "On stunt course",
+      "behavior": "Responds to complex track geometry; airborne physics simulated during jumps; forces demonstrate weight and momentum"
+    },
+    {
+      "entity": "Track environment",
+      "state": "Off-road crossing",
+      "behavior": "Timer penalty accumulates; visual/audio cue signals deviation from intended path"
+    },
+    {
+      "entity": "Competing recorded performance",
+      "state": "Buddy Race mode active",
+      "behavior": "Ghost vehicle or time reference appears; communicates baseline for player to beat"
+    }
+  ],
+  "notes": "Race Drivin' is a driving simulation with minimal narrative world-state. Communication is primarily mechanical/automotive rather than political/factional. The game uses first-person cockpit perspective as primary manifestation layer—all world-state information flows through dashboard instrumentation and track geometry. No factions, danger from NPCs, or political situations exist in this paradigm. Danger is entirely environmental (obstacles, time limits, fuel management) and mechanical (transmission, stalling). Safety signals emerge from instrument stability and proper vehicle operation. World-state is communicated through vehicle response to physics simulation and track configuration rather than visual narrative elements.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:50:29.809Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2982,
+    "output_tokens": 1617,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

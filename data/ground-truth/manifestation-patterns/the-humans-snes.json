@@ -1,0 +1,168 @@
+{
+  "game_id": "the-humans-snes",
+  "game_name": "The Humans",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "dinosaur_presence",
+      "visual_form": "animated dinosaur sprites with distinct creature designs (e.g., pterodactylus)",
+      "meaning": "immediate threat; unarmed humans will be eaten if within walking range"
+    },
+    {
+      "signal": "enemy_tribe_members",
+      "visual_form": "humanoid sprites visually distinct from player tribe, armed with spears",
+      "meaning": "hostile entities; rival tribal faction that poses combat threat"
+    },
+    {
+      "signal": "environmental_gaps_and_ledges",
+      "visual_form": "visual depth/height differences in level geometry, impassable spaces",
+      "meaning": "structural hazard; humans cannot cross without tools or cooperation"
+    },
+    {
+      "signal": "time_pressure",
+      "visual_form": "time remaining displayed in UI at bottom of screen",
+      "meaning": "resource scarcity state; level must be completed before time expires"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "goal_tile",
+      "visual_form": "conspicuous colored tile marking end point location",
+      "meaning": "safe completion zone; reaching this with at least one human completes level"
+    },
+    {
+      "signal": "available_tools",
+      "visual_form": "spears, torches, wheels, ropes, witch doctor availability shown in UI action menu",
+      "meaning": "capacity restored; tribe now has capability to overcome specific obstacle types"
+    },
+    {
+      "signal": "tribe_member_presence",
+      "visual_form": "human sprites visible on screen; tribe count displayed in bottom UI",
+      "meaning": "resource available; more humans = more tool-stacking and parallel problem-solving options"
+    },
+    {
+      "signal": "rideable_creatures",
+      "visual_form": "pterodactylus or similar NPC creatures present in level terrain",
+      "meaning": "safe passage route; can be used to reach otherwise unreachable platforms without player control required"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "humanoid sprite design distinct from enemy tribe members via clothing/appearance variation",
+      "environmental_markers": "player humans stack together, use tools cooperatively; visual grouping differentiates from isolated enemy tribe members"
+    },
+    {
+      "faction": "enemy_tribe",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "spear-wielding humanoid sprites with distinct visual differentiation from player tribe (likely different coloring or apparel in pixel art)",
+      "environmental_markers": "positioned as isolated hostile units; branded as adversarial through combat behavior and tool possession"
+    },
+    {
+      "faction": "fauna_predators",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "dinosaur species vary by level (pterodactylus, generic dinosaurs); size and animation convey threat level",
+      "environmental_markers": "positioned in terrain as environmental hazards; behavior-driven identification (patrolling, attacking unarmed humans)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "tribe_vulnerability",
+      "visual_manifestation": "human sprites appear small, exposed in open spaces; low tribe count displayed in UI",
+      "behavioral_manifestation": "humans move cautiously or cluster; dinosaurs more aggressive; enemy tribe members roam uncontested"
+    },
+    {
+      "world_state": "tribe_empowerment",
+      "visual_manifestation": "tool icons populate action menu at bottom UI; humans carry visible weapons/items (spears, torches)",
+      "behavioral_manifestation": "humans can kill dinosaurs, fight enemy tribe members, construct ladders via stacking"
+    },
+    {
+      "world_state": "time_critical",
+      "visual_manifestation": "time remaining counter at bottom UI decreases visibly; level becomes more cluttered/complex as time advances",
+      "behavioral_manifestation": "player must prioritize goal path over exploration; waste of time results in failure state"
+    },
+    {
+      "world_state": "evolution_progression",
+      "visual_manifestation": "levels themed around prehistoric human evolution; increasingly complex tool sets introduced (spears → torches → wheels → ropes → witch doctor)",
+      "behavioral_manifestation": "capabilities expand per level; new abilities unlock, reflecting evolutionary advancement of tribe"
+    },
+    {
+      "world_state": "tribe_restoration",
+      "visual_manifestation": "rescue opportunities appear in levels; NPCs or trapped humans visible as interactive elements",
+      "behavioral_manifestation": "tribe count increases when humans rescued; access to larger labor pool for subsequent level attempts"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "level_design_as_narrative",
+      "example": "prehistoric environment progression communicates evolution theme; early levels feature basic obstacles (gaps, single predators), later levels introduce complex tool requirements and multiple enemy types, reflecting human advancement"
+    },
+    {
+      "technique": "tool_introduction_pacing",
+      "example": "spear introduced in first level as foundational tool; subsequent levels layer new tools (torches, wheels, ropes) to expand player capability and suggest technological progress"
+    },
+    {
+      "technique": "enemy_variety_as_world_state",
+      "example": "dinosaur types and enemy tribe presence vary by level, suggesting different environmental/political conditions; presence of both fauna and rival humans creates tension between natural and social threats"
+    },
+    {
+      "technique": "goal_marker_visibility",
+      "example": "colored tile marking end point is visually conspicuous and placed in complex terrain, communicating both objective clarity and challenge magnitude"
+    },
+    {
+      "technique": "ui_resource_display",
+      "example": "bottom UI panel shows tribe count, time remaining, and available actions—constant visual reminder of resource scarcity and constraints driving player decision-making"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "dinosaur_unarmed_threat",
+      "state": "human_unequipped",
+      "behavior": "dinosaur actively hunts and eats unarmed humans within walking range; indicates predator-prey dynamic tied to tool possession"
+    },
+    {
+      "entity": "dinosaur_armed_threat",
+      "state": "human_equipped_with_spear",
+      "behavior": "dinosaur can be killed or temporarily held off by spear-wielding human; indicates power inversion when tribe gains tool advantage"
+    },
+    {
+      "entity": "pterodactylus_rideable",
+      "state": "level_specific_npc",
+      "behavior": "pterodactylus cannot be controlled but can be used to reach platforms; indicates cooperative environmental use without direct command"
+    },
+    {
+      "entity": "enemy_tribe_member",
+      "state": "spear_armed",
+      "behavior": "actively opposes player tribe; patrols territory and attacks; indicates rival faction with equal tool sophistication"
+    },
+    {
+      "entity": "player_human",
+      "state": "stacking_cooperative",
+      "behavior": "multiple humans can stack vertically to reach high ledges; indicates tribal cooperation mechanic tied to visual geometry"
+    },
+    {
+      "entity": "player_human",
+      "state": "tool_equipped",
+      "behavior": "spear can be thrown across gaps, used for jumping, or held for combat; tool possession expands available actions and communicates capability expansion"
+    }
+  ],
+  "notes": "The Humans communicates world-state primarily through level design complexity, tool availability, and enemy variety. Visual communication relies on pixel art sprite differentiation (player tribe vs. enemy tribe vs. fauna), UI bottom-panel resource tracking, and conspicuous goal marker placement. The game's progression from basic obstacles to complex multi-tool scenarios mirrors human evolution thematically. Danger is signaled through dinosaur presence and enemy tribe member activity; safety through goal tiles, tool acquisition, and tribe size. No explicit faction symbols or color-coded allegiances are documented, but visual sprite differentiation and behavior patterns establish clear tribal and predator hierarchies. The sim-strategy paradigm manifests through resource management (tribe count, time, tools) displayed in the UI and expressed through level-by-level puzzle design.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:32:53.092Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2921,
+    "output_tokens": 2130,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

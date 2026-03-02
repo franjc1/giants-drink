@@ -1,0 +1,190 @@
+{
+  "game_id": "raptor-call-of-shadows-pc",
+  "game_name": "Raptor: Call of the Shadows",
+  "platform": "pc",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft",
+      "visual_form": "Flying sprites moving in predetermined or aggressive patterns toward player",
+      "meaning": "Active threats requiring evasion and destruction for credits"
+    },
+    {
+      "signal": "Ground turrets",
+      "visual_form": "Stationary defensive structures with aiming behavior",
+      "meaning": "Localized threat zones with directional fire patterns"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large-scale enemy structures appearing at wave endpoints or mid-wave in later difficulties",
+      "meaning": "Major threat escalation; modular destruction required"
+    },
+    {
+      "signal": "Crash-intent enemies",
+      "visual_form": "Enemy units on direct collision course with player sprite",
+      "meaning": "Immediate high-damage threat requiring avoidance"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Inbound fire from turrets and aircraft",
+      "meaning": "Passive damage threat; can be cleared by megabomb except during boss phases"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Shield regeneration",
+      "visual_form": "Regular shield pool (100 points) regenerating when player ceases fire",
+      "meaning": "Player durability increases during non-engagement windows"
+    },
+    {
+      "signal": "Phase shield layers",
+      "visual_form": "Purchasable secondary shield barrier (up to 5 stacked layers)",
+      "meaning": "Accumulated defense investment provides buffer against catastrophic damage"
+    },
+    {
+      "signal": "Credit/money drops",
+      "visual_form": "Visual rewards from destroyed enemies, proportional to enemy toughness",
+      "meaning": "Economic progress toward survival upgrades; incentivizes enemy engagement"
+    },
+    {
+      "signal": "Weapon pickups",
+      "visual_form": "Collectible weapons spawned or purchased before/after waves",
+      "meaning": "Tactical advantage gain; enables category-specific targeting (air vs ground)"
+    },
+    {
+      "signal": "Megabomb availability",
+      "visual_form": "One-time use screen-clear item (max 5 carried)",
+      "meaning": "Emergency reset button for overwhelming threat situations"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "MegaCorps (implied player employer)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Raptor jet (player-controlled advanced mercenary craft)",
+      "environmental_markers": "Military bases, oil infrastructure, refineries, airfields"
+    },
+    {
+      "faction": "Lithos Petroleum (Bravo Sector antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Military installations, oil processing facilities, coastal rig platforms",
+      "environmental_markers": "Oil silos, tank farms, petroleum refinery, offshore drilling rig"
+    },
+    {
+      "faction": "Unnamed Tango Sector competitors",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Industrial, agricultural, and urban military infrastructure",
+      "environmental_markers": "Chemical plants, farmland, jungle temples, urban cityscape, military airbase"
+    },
+    {
+      "faction": "Outer Regions extraplanetary entities",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Planetary and space-based military/industrial structures",
+      "environmental_markers": "Lunar bases, Mars-like terrain, ice world installations, volcanic compounds, space station"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early campaign (Bravo Sector)",
+      "visual_manifestation": "Generic barren terrain with occasional forests and rivers; coastal to inland progression; oil/petroleum industry-focused aesthetics",
+      "behavioral_manifestation": "Lower enemy density; basic military and industrial targets; straightforward level progression"
+    },
+    {
+      "world_state": "Mid campaign (Tango Sector)",
+      "visual_manifestation": "Thematically diverse environments cycling through water/chemical plants, farmland, jungle, city, and airbase; distinct visual identity per level; night-time city level with illumination",
+      "behavioral_manifestation": "Increased enemy variety and complexity; boss encounters scale in difficulty; mid-wave boss insertions in later levels"
+    },
+    {
+      "world_state": "Late campaign (Outer Regions)",
+      "visual_manifestation": "Extraplanetary and space settings: lunar body with dark-side night variant, red Mars-analog, ice world, volcanic world, orbital space station",
+      "behavioral_manifestation": "Modular ground-based bosses requiring component destruction; shift from industrial to extraterrestrial threat paradigm"
+    },
+    {
+      "world_state": "Difficulty escalation (replay modes)",
+      "visual_manifestation": "Same environmental assets with intensified threat density",
+      "behavioral_manifestation": "Difficulty tier progression (Rookie → Veteran → Elite); Elite mode removes shield regeneration; boss reappearance at wave midpoints in harder runs"
+    },
+    {
+      "world_state": "Economic progression (upgrade availability)",
+      "visual_manifestation": "Shop menu access with accumulated credits; visible weapon/shield portfolio expansion",
+      "behavioral_manifestation": "Weapon loadout switching; phase shield layer stacking; dynamic weapon selection during combat"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Infrastructure theme progression",
+      "example": "Bravo Sector establishes petroleum/military industrial complex (oil silos, refineries, rigs); Tango introduces civilian/urban targets (cities, farmland, temples); Outer Regions expands to multi-planetary corporate competition"
+    },
+    {
+      "technique": "Lighting and time-of-day variants",
+      "example": "Night waves in Tango Sector (illuminated city) and Outer Regions (lunar dark side) create atmosphere shift and threat density change within thematic continuity"
+    },
+    {
+      "technique": "Terrain progression as narrative mapping",
+      "example": "Coastal-to-inland movement in Bravo Sector suggests systematic takeover; jungle-to-city in Tango implies expanding footprint; planetary migration in Outer Regions indicates corporate scale escalation"
+    },
+    {
+      "technique": "Boss architecture as faction identity",
+      "example": "Industrial modular structures in Outer Regions suggest mechanized corporate entities; large aircraft boss in Tango suggests military infrastructure; rig platforms in Bravo signal resource extraction focus"
+    },
+    {
+      "technique": "Target diversity as world complexity",
+      "example": "Mix of flying enemies, turrets, ground vehicles, and buildings creates layered threat ecosystem reflecting populated/defended territories"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Standard flying enemies",
+      "state": "Patrol/engagement",
+      "behavior": "Predetermined path movement; some attempt collision ramming; destroyed for credit reward proportional to threat level"
+    },
+    {
+      "entity": "Ground turrets",
+      "state": "Active defense",
+      "behavior": "Stationary aim-and-fire targeting; continuous threat during approach phase; destroyable for credits"
+    },
+    {
+      "entity": "Wave-end bosses",
+      "state": "Critical threat",
+      "behavior": "Large health pool; may appear mid-wave in higher difficulties; modular destruction (separate targetable components); megabomb reduces but does not eliminate except at max damage"
+    },
+    {
+      "entity": "Crash-intent units",
+      "state": "Suicide attack",
+      "behavior": "Direct vector toward player; high damage on collision; indicates desperation or designed suicide tactics"
+    },
+    {
+      "entity": "Player Raptor jet",
+      "state": "Healthy/shielded",
+      "behavior": "Rapid shield regeneration when not firing; capable of sustained engagement"
+    },
+    {
+      "entity": "Player Raptor jet",
+      "state": "Damaged",
+      "behavior": "Shield regeneration slows significantly; vulnerability to cascading damage; phase shield layers absorb subsequent hits"
+    },
+    {
+      "entity": "Player Raptor jet",
+      "state": "Elite difficulty mode",
+      "behavior": "No shield regeneration; reliance on phase layers and evasion; increased threat perception"
+    }
+  ],
+  "notes": "Raptor uses implicit factionalism: MegaCorps employs the player as mercenary against competing corporations and entities across three escalating sectors. World-state progression is signaled primarily through environmental theming rather than explicit narrative. Danger scales with sector progression (generic industrial → diverse infrastructure → extraplanetary) and difficulty mode. Safety mechanics (regenerating shields, weapon variety, megabomb) create resource management tension against economic incentive (credits proportional to damage taken). No faction visual identity system (colors, sigils) is documented; distinction relies entirely on environmental context and target architecture. The 'night wave' mechanic serves as world-state marker for threat intensity and thematic variation within sectors.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T19:40:41.901Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2578,
+    "output_tokens": 2353,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

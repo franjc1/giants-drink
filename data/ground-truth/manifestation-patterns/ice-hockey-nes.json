@@ -1,0 +1,172 @@
+{
+  "game_id": "ice-hockey-nes",
+  "game_name": "Ice Hockey",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "puck_movement_velocity",
+      "visual_form": "sprite_speed_and_trajectory_across_rink",
+      "meaning": "indicates risk of scoring against player or collision hazard"
+    },
+    {
+      "signal": "opponent_player_proximity",
+      "visual_form": "opponent_sprite_distance_to_puck_or_player",
+      "meaning": "threat of losing puck possession or being checked"
+    },
+    {
+      "signal": "goalie_positioning",
+      "visual_form": "goalie_sprite_location_relative_to_goal_mouth",
+      "meaning": "defensive readiness; poor positioning increases scoring danger"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "player_control_possession",
+      "visual_form": "player_sprite_holding_puck_visual_indicator",
+      "meaning": "player team controls play; reduced immediate threat"
+    },
+    {
+      "signal": "distance_from_goal",
+      "visual_form": "puck_position_far_from_goal_zone",
+      "meaning": "reduced immediate scoring threat"
+    },
+    {
+      "signal": "goalie_ready_stance",
+      "visual_form": "goalie_sprite_centered_in_goal_frame",
+      "meaning": "defensive preparedness against incoming shots"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "USA",
+      "color_identity": "blue_or_red_jersey_variant",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "opposing_team_jersey_color_distinguishes_opponent",
+      "environmental_markers": "team_name_displayed_on_selection_screen_and_scoreboard"
+    },
+    {
+      "faction": "Sweden",
+      "color_identity": "yellow_or_distinct_jersey_color",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "contrasting_jersey_color_to_player_team",
+      "environmental_markers": "team_name_shown_in_NES_regional_version_team_roster"
+    },
+    {
+      "faction": "Japan",
+      "color_identity": "team_specific_jersey_color",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "FDS_version_only_uses_Japan_team",
+      "environmental_markers": "appears_in_Famicom_Disk_System_version_team_lineup"
+    },
+    {
+      "faction": "Multiple_selectable_teams",
+      "color_identity": "distinct_per_team_jersey_coloring",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "CPU_controlled_teams_have_player_type_visual_indicators_on_selection_screen",
+      "environmental_markers": "team_roster_screen_shows_all_available_opposing_factions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "active_gameplay_normal_friction",
+      "visual_manifestation": "puck_decelerates_naturally_as_it_travels_across_ice",
+      "behavioral_manifestation": "puck_momentum_decreases_over_distance_traveled"
+    },
+    {
+      "world_state": "modified_friction_disabled",
+      "visual_manifestation": "puck_sprite_maintains_velocity_longer_across_rink",
+      "behavioral_manifestation": "puck_does_not_slow_due_to_ice_friction_when_cheat_enabled"
+    },
+    {
+      "world_state": "goalie_presence_active",
+      "visual_manifestation": "goalie_sprite_visible_in_goal_frame",
+      "behavioral_manifestation": "goalie_blocks_shots_and_provides_defensive_challenge"
+    },
+    {
+      "world_state": "goalie_removed_cheat_mode",
+      "visual_manifestation": "goal_area_empty_of_goalie_sprite",
+      "behavioral_manifestation": "scoring_becomes_significantly_easier_no_defensive_block"
+    },
+    {
+      "world_state": "goal_scored",
+      "visual_manifestation": "score_increments_on_scoreboard_display",
+      "behavioral_manifestation": "victory_jingle_plays_traditional_hockey_theme_NES_version"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "team_roster_visual_communication",
+      "example": "team_selection_screen_displays_available_factions_and_player_type_indicators_for_CPU_difficulty"
+    },
+    {
+      "technique": "scoreboard_state_tracking",
+      "example": "numerical_score_display_communicates_match_progress_and_winning_faction"
+    },
+    {
+      "technique": "regional_faction_substitution",
+      "example": "FDS_Japan_team_replaced_by_Sweden_in_NES_localizations_reflecting_market_adaptation"
+    },
+    {
+      "technique": "jersey_color_faction_identity",
+      "example": "distinct_sprite_coloring_instantly_communicates_team_affiliation_across_playfield"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "possession",
+      "behavior": "puck_follows_player_sprite_movement_across_ice"
+    },
+    {
+      "entity": "player_character",
+      "state": "no_possession",
+      "behavior": "player_sprite_moves_independently_seeking_puck_interception"
+    },
+    {
+      "entity": "opponent_cpu",
+      "state": "aggressive",
+      "behavior": "increased_movement_speed_toward_puck_and_player_team_formation"
+    },
+    {
+      "entity": "opponent_cpu",
+      "state": "defensive",
+      "behavior": "positioning_between_puck_and_own_goal_to_block_scoring_attempts"
+    },
+    {
+      "entity": "goalie",
+      "state": "ready",
+      "behavior": "positioned_in_goal_frame_ready_to_block_incoming_shots"
+    },
+    {
+      "entity": "goalie",
+      "state": "removed_cheat",
+      "behavior": "sprite_disappears_goal_becomes_undefended"
+    },
+    {
+      "entity": "puck",
+      "state": "in_play_friction_normal",
+      "behavior": "decelerates_gradually_across_ice_surface_creating_momentum_gameplay"
+    },
+    {
+      "entity": "puck",
+      "state": "friction_disabled_cheat",
+      "behavior": "maintains_velocity_indefinitely_across_playfield"
+    }
+  ],
+  "notes": "Ice Hockey (1988) is a simplified sports simulation with minimal narrative world-state complexity. Manifestation layer consists primarily of team identity through jersey coloring, puck physics visibility, and goalie presence/absence. Regional differences (Japan→Sweden team swap) reflect localization choices rather than in-game world narrative shifts. Hidden cheat mechanics (goalie removal, friction disable) alter core gameplay manifestations but are not narratively integrated. Audio cues (goal jingle) reinforce scoring state changes. The game lacks complex danger/safety communication beyond puck proximity and possession mechanics inherent to sport simulation design.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:18:42.284Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2616,
+    "output_tokens": 1927,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

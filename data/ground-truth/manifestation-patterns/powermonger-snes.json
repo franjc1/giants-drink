@@ -1,0 +1,193 @@
+{
+  "game_id": "powermonger-snes",
+  "game_name": "PowerMonger",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "enemy_captain_presence",
+      "visual_form": "captain unit on map with opposing allegiance indicator",
+      "meaning": "hostile military leadership; threat to player control; must be eliminated to win"
+    },
+    {
+      "signal": "opposing_army_concentration",
+      "visual_form": "grouped soldiers with enemy allegiance color/marking",
+      "meaning": "military threat; potential combat engagement required"
+    },
+    {
+      "signal": "power_balance_scale_shift",
+      "visual_form": "balance scale below mini-map tilting toward opponent",
+      "meaning": "world-state deteriorating; enemy gaining territorial/political control"
+    },
+    {
+      "signal": "captain_separated_from_forces",
+      "visual_form": "isolated captain unit with command lag indicator (homing pigeon animation)",
+      "meaning": "vulnerable command structure; delayed response to orders increases danger"
+    },
+    {
+      "signal": "depleted_food_supply",
+      "visual_form": "low food resource indicator in controlled towns",
+      "meaning": "army starvation risk; loss of manpower and control potential"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "friendly_town_control",
+      "visual_form": "town under player allegiance with local population indicator",
+      "meaning": "secure resource base; can draft soldiers and manufacture equipment"
+    },
+    {
+      "signal": "captain_alive_and_present",
+      "visual_form": "player's main character or subordinate captain on map",
+      "meaning": "maintains army cohesion; loss means disbandment of forces"
+    },
+    {
+      "signal": "food_abundance",
+      "visual_form": "high food supply in friendly towns or slaughtered livestock availability",
+      "meaning": "army sustainability; enables sustained military operations"
+    },
+    {
+      "signal": "player_power_scale_advantage",
+      "visual_form": "balance scale below mini-map tilting heavily toward player side",
+      "meaning": "political/military dominance; path to map victory"
+    },
+    {
+      "signal": "equipped_army",
+      "visual_form": "soldiers carrying weapons (bows, swords, pikes) in army formation",
+      "meaning": "combat readiness; increased battle effectiveness"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "player_faction",
+      "color_identity": "primary player color (varies by campaign)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "opposing factions display contrasting color palette",
+      "environmental_markers": "player-controlled towns show allegiance through building/population state"
+    },
+    {
+      "faction": "enemy_factions",
+      "color_identity": "distinct from player color; multiple enemy factions may use different hues",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "captain units visually distinct from player captains through color/uniform",
+      "environmental_markers": "enemy-controlled towns display hostile visual state; soldiers show enemy affiliation"
+    },
+    {
+      "faction": "neutral_towns",
+      "color_identity": "neutral color palette (likely grey or brown)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "neutral captains exist in some larger towns; visually distinguished from allegiant captains",
+      "environmental_markers": "towns with no active allegiance display independent visual state"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "large_scale_deforestation",
+      "visual_manifestation": "visual reduction of tree sprites in affected regions; environmental barrenness increases",
+      "behavioral_manifestation": "weather pattern change; increased rain or snow fall (depending on season) causes slower unit movement"
+    },
+    {
+      "world_state": "seasonal_change",
+      "visual_manifestation": "map terrain and vegetation display seasonal color shifts (implied by weather/snow references)",
+      "behavioral_manifestation": "movement speed affected by weather; season determines precipitation type and intensity"
+    },
+    {
+      "world_state": "territorial_conquest",
+      "visual_manifestation": "town color allegiance changes; soldier population indicators shift; power balance scale moves",
+      "behavioral_manifestation": "town locals become available for drafting; townspeople transition to military or production labor"
+    },
+    {
+      "world_state": "captain_death",
+      "visual_manifestation": "captain unit disappears from map; army loses command indicator",
+      "behavioral_manifestation": "surviving soldiers disband and return to hometown; army cohesion collapses; control reverts to town"
+    },
+    {
+      "world_state": "army_equipment_status",
+      "visual_manifestation": "soldiers display equipped weapons (bows, swords, pikes) in hand; captain carries excess equipment load",
+      "behavioral_manifestation": "weapon distribution follows priority hierarchy; equipment quality affects combat effectiveness"
+    },
+    {
+      "world_state": "army_posture_setting",
+      "visual_manifestation": "army stance indicator (passive, neutral, aggressive) affects how units display behavior",
+      "behavioral_manifestation": "posture influences resource collection speed and item manufacturing priority; aggressive stance shows combat readiness"
+    },
+    {
+      "world_state": "command_lag_distance",
+      "visual_manifestation": "homing pigeon animation next to subordinate captain command icon; animation intensity or speed indicates lag magnitude",
+      "behavioral_manifestation": "distant captains show delayed command execution; orders take longer to reach distant armies"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "resource_availability_mapping",
+      "example": "Specific towns provide unique equipment types; only one or two towns on map produce valuable items, making these locations strategically important and visually identifiable through production activity"
+    },
+    {
+      "technique": "landscape_deformation_consequence",
+      "example": "Visible deforestation in regions directly causes weather system change (increased precipitation), showing environmental cause-effect that impacts gameplay and movement speed"
+    },
+    {
+      "technique": "population_vitality_indicators",
+      "example": "Individual townspeople display name, sex, age, allegiance, vital stats, hometown, and equipment through query tool; population visuals reflect town allegiance and military readiness"
+    },
+    {
+      "technique": "town_size_hierarchy",
+      "example": "Larger towns visually display neutral captains; town size correlates with strategic importance and resource output"
+    },
+    {
+      "technique": "autonomous_ai_activity",
+      "example": "Townspeople visually perform jobs (fishing, farming, shepherding, wood collection, crafting) without player direction, establishing living economy and settlement autonomy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "townsperson_npc",
+      "state": "peaceful_autonomous",
+      "behavior": "performs assigned job (fishing, farming, shepherding, wood collecting, crafting) visually; displays individual identity (name, sex, age) when queried"
+    },
+    {
+      "entity": "friendly_soldier",
+      "state": "under_player_command",
+      "behavior": "follows captain orders; visually equipped with weapons from assigned equipment pile in priority order"
+    },
+    {
+      "entity": "enemy_soldier",
+      "state": "hostile_under_captain",
+      "behavior": "follows enemy captain's movements and commands; displays enemy allegiance color; engages in combat when encountering player forces"
+    },
+    {
+      "entity": "player_captain",
+      "state": "active_command",
+      "behavior": "main character avatar on map; no command lag; can draft soldiers, order equipment invention, manage army posture"
+    },
+    {
+      "entity": "subordinate_captain",
+      "state": "delegated_command",
+      "behavior": "displays homing pigeon lag indicator; command execution delayed by distance from player main character; carries excess equipment inventory"
+    },
+    {
+      "entity": "enemy_captain",
+      "state": "opposing_leadership",
+      "behavior": "controls enemy army; must be killed to eliminate opposing power; if neutral captain survives battle, comes under player command"
+    },
+    {
+      "entity": "wandering_livestock",
+      "state": "resource_available",
+      "behavior": "sheep visible on map; can be slaughtered by player for food resource; represents mobile food supply"
+    }
+  ],
+  "notes": "PowerMonger uses a hybrid 2D/3D visual system where 3D terrain topography supports 2D sprite entities. Faction identity is primarily communicated through color allegiance rather than symbolic markers. World-state is manifested through four key channels: (1) visual environmental changes (deforestation, weather), (2) behavioral shifts in NPC/soldier activity, (3) power balance scale indicator, (4) individual unit state displays. The game's advanced 'artificial life' engine means visual storytelling includes autonomous NPC behavior as world-state expression. Strategic locations (resource towns, captain positions) are identified through gameplay consequence rather than explicit visual markers. Political control is binary (allegiance to player, enemy, or neutral) communicated through color coding and unit behavior.",
+  "sources_used": [
+    "wikipedia-powermonger"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:31:51.177Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2767,
+    "output_tokens": 2326,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

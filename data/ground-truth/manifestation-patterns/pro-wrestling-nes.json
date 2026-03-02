@@ -1,0 +1,174 @@
+{
+  "game_id": "pro-wrestling-nes",
+  "game_name": "Pro Wrestling",
+  "platform": "NES",
+  "paradigm": "beat-em-up / sports fighting",
+  "danger_signals": [
+    {
+      "signal": "Opponent down on mat",
+      "visual_form": "Wrestler prone/horizontal on ring canvas",
+      "meaning": "Opponent vulnerable to pinfall or further attacks; critical window for match advantage"
+    },
+    {
+      "signal": "Referee positioning and count",
+      "visual_form": "Referee on stomach performing three-count gesture near pinned opponent",
+      "meaning": "Imminent loss if three-count completes; player must break hold or escape"
+    },
+    {
+      "signal": "Opponent outside ring ropes",
+      "visual_form": "Wrestler sprite positioned beyond ring boundary",
+      "meaning": "Risk of count-out loss if wrestler doesn't re-enter before 20-count completes"
+    },
+    {
+      "signal": "Champion title defense requirements",
+      "visual_form": "Match progression UI showing defensive record (e.g., '3 of 10 defenses')",
+      "meaning": "Escalating pressure: must complete 10 consecutive title defenses to advance to final boss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Wrestler standing upright in ring",
+      "visual_form": "Full-height sprite facing opponent in neutral stance",
+      "meaning": "Safe position; ready to engage or execute attacks"
+    },
+    {
+      "signal": "Ring interior (within ropes)",
+      "visual_form": "Defined rectangular canvas area with rope boundaries",
+      "meaning": "Safe zone; no count-out risk while present; referee authority zone"
+    },
+    {
+      "signal": "Successful pinfall escape",
+      "visual_form": "Wrestler sprite breaks from prone position and stands",
+      "meaning": "Danger averted; match continues"
+    },
+    {
+      "signal": "VWA Championship belt possession",
+      "visual_form": "Visual status indicator in championship mode",
+      "meaning": "High prestige status; unlocks access to title defense sequence"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "VWA (Video Wrestling Association)",
+      "color_identity": null,
+      "symbol_or_sigil": "VWA logo centered in ring (US/European version; FWA logo in Japanese version)",
+      "enemy_visual_variants": "All CPU opponents represent VWA roster members",
+      "environmental_markers": "Ring centerpiece logo; championship belt visual; VWA Champion designation for title holder"
+    },
+    {
+      "faction": "VWF (Video Wrestling Federation)",
+      "color_identity": null,
+      "symbol_or_sigil": "VWF logo/championship designation associated with Great Puma",
+      "enemy_visual_variants": "Great Puma appears as inter-promotional rival with distinct visual treatment",
+      "environmental_markers": "Special logo used in Great Puma match; appears only as final boss after 10 VWA title defenses"
+    },
+    {
+      "faction": "King Slender faction (American wrestler/champion)",
+      "color_identity": null,
+      "symbol_or_sigil": "King Slender sprite/character portrait",
+      "enemy_visual_variants": "King Slender as default VWA Champion; if player selects King Slender, Giant Panther becomes champion substitute",
+      "environmental_markers": "King Slender appears as first major milestone opponent (after 5 initial matches); some game versions have bug requiring extra victories if player selects him"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Single-player career progression (matches 1-5)",
+      "visual_manifestation": "Incrementally difficult CPU opponents; character select screen with portrait gallery; ring centerpiece displays VWA logo",
+      "behavioral_manifestation": "CPU opponent difficulty increases; opponent AI execution of special moves becomes more frequent and complex"
+    },
+    {
+      "world_state": "VWA Championship match unlocked (after 5 wins)",
+      "visual_manifestation": "King Slender selected as opponent; championship belt becomes visual focus; special match designation",
+      "behavioral_manifestation": "King Slender executes advanced moves; higher damage output; more aggressive pinfall attempts"
+    },
+    {
+      "world_state": "VWA Champion status (player has won title)",
+      "visual_manifestation": "UI displays title defense counter ('X of 10 defenses'); championship belt visual accompanies player; VWA Champion designation in match intros",
+      "behavioral_manifestation": "CPU opponents cycle through all five roster members; difficulty remains high; opponent selection predetermined in sequence"
+    },
+    {
+      "world_state": "VWF Championship match unlocked (after 10 title defenses)",
+      "visual_manifestation": "Great Puma appears as final opponent; special championship logo replaces standard VWA ring logo; inter-promotional title designation",
+      "behavioral_manifestation": "Great Puma executes most complex move set; highest damage output; match deemed by community as one of NES' most difficult boss encounters"
+    },
+    {
+      "world_state": "Two-player mode (versus mode)",
+      "visual_manifestation": "Character select prevents duplicate selection; ring lacks championship context; no time limit display",
+      "behavioral_manifestation": "Match format changes to best-of-three-falls (vs. single fall in single-player); no five-minute timer; player-vs-player control removes CPU behavior patterns"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Ring centerpiece branding",
+      "example": "FWA logo in Japanese Disk System version; VWA logo in North American/European versions and FamicomBox. Signals regional wrestling association identity and indicates localization scope."
+    },
+    {
+      "technique": "Championship belt visual persistence",
+      "example": "Belt appears in championship mode UI and winner screens; indicates prestige tier and career progression milestone reached."
+    },
+    {
+      "technique": "Referee presence and positioning",
+      "example": "Referee must physically run across ring to reach pinned wrestlers; distance from pin location determines time window for escape. Communicates game physics authenticity and adds spatial tension."
+    },
+    {
+      "technique": "Crowd and commentator staging",
+      "example": "Game features cameraman and commentators at ringside (non-interactive). Establishes professional wrestling broadcast context without mechanically integrating crowd feedback."
+    },
+    {
+      "technique": "Roster geographic/cultural origin signaling",
+      "example": "Character names and origins (Fighter Hayabusa—Japan, Giant Panther—USA, Kin Corn Karn—Korea, Starman—Mexico, The Amazon—Parts Unknown, King Slender—USA) establish international wrestling federation narrative without explicit faction mechanics."
+    },
+    {
+      "technique": "Match progression UI state changes",
+      "example": "Title defense counter ('3 of 10') visually communicates escalating pressure and number of remaining gate matches before final boss access."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Generic CPU opponent (matches 1-5)",
+      "state": "Early career progression",
+      "behavior": "Basic move execution; moderate pinfall attempts; predictable lock-up patterns; lower damage output"
+    },
+    {
+      "entity": "King Slender (VWA Champion)",
+      "state": "Champion defense threshold",
+      "behavior": "Advanced special move execution; frequent pinfall attempts; higher damage per move; aggressive ring control; appears after 5 initial wins"
+    },
+    {
+      "entity": "CPU opponents (title defense rotation)",
+      "state": "Title defense phase (matches 6-15)",
+      "behavior": "Increased move complexity; higher damage threshold; more frequent special move usage; opponents cycle through all five roster members sequentially"
+    },
+    {
+      "entity": "Great Puma (VWF Champion)",
+      "state": "Final boss / inter-promotional title match",
+      "behavior": "Most complex move set in game; maximum damage output per attack; high-frequency special move execution; described as one of NES' most difficult boss encounters; appears only after 10 successful title defenses"
+    },
+    {
+      "entity": "Downed opponent",
+      "state": "Vulnerable (post-attack)",
+      "behavior": "Prone on canvas; susceptible to pinfall; can be hauled upright by opponent (resetting vulnerability window but granting brief counter window)"
+    },
+    {
+      "entity": "Referee",
+      "state": "Pinfall validation",
+      "behavior": "Physically relocates to pinned wrestlers; lies on stomach; performs three-count gesture; count timing depends on referee proximity (spatial delay mechanic)"
+    }
+  ],
+  "notes": "Pro Wrestling (1987 NES) uses minimal explicit faction systems but establishes implicit wrestling promotion hierarchy through UI state progression. VWA/VWF logo distinction signals inter-promotional narrative. Danger/safety signals rely heavily on spatial ring positioning (in-ring vs. out-of-ring) and match state progression (championship vs. non-championship). The game's manifestation layer is primarily behavioral (difficulty escalation, move set complexity) rather than visual thematic variation. Character roster geographic origins provide implicit cultural/regional context without mechanically integrated faction mechanics. Referee positioning introduces spatial tension as a core danger signal. Regional localization (FWA→VWA logo change) reflects commercial/naming adaptation rather than world-state changes.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor): Regional Differences, Revisional Differences, Developer credits",
+    "wikipedia: Gameplay mechanics, Roster details, Championship progression, Referee mechanics, Two-player mode, Development notes"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:41:49.204Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4721,
+    "output_tokens": 2405,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

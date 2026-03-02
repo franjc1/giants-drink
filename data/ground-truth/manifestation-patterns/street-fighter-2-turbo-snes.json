@@ -1,0 +1,162 @@
+{
+  "game_id": "street-fighter-2-turbo-snes",
+  "game_name": "Street Fighter II Turbo: Hyper Fighting",
+  "platform": "snes",
+  "paradigm": "fighting",
+  "danger_signals": [
+    {
+      "signal": "opponent_attack_animation",
+      "visual_form": "character sprite performing striking/projectile motion",
+      "meaning": "immediate threat requiring defensive action"
+    },
+    {
+      "signal": "special_move_startup",
+      "visual_form": "character pose freeze and visual charging effect",
+      "meaning": "high-damage attack incoming, requires block or evasion"
+    },
+    {
+      "signal": "health_bar_depletion",
+      "visual_form": "red health bar segment decreasing in size",
+      "meaning": "cumulative damage taken, approaching knockout state"
+    },
+    {
+      "signal": "knockdown_state",
+      "visual_form": "character sprite on ground in prone position",
+      "meaning": "temporary vulnerability, opponent can press advantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "blocking_stance",
+      "visual_form": "character guard pose with raised arms/weapon",
+      "meaning": "damage reduction active, temporary protection"
+    },
+    {
+      "signal": "distance_spacing",
+      "visual_form": "character positioned at mid-screen range away from opponent",
+      "meaning": "breathing room, can prepare counterattack or recovery"
+    },
+    {
+      "signal": "full_health_bar",
+      "visual_form": "red health bar completely filled",
+      "meaning": "no cumulative damage, competitive stability"
+    },
+    {
+      "signal": "idle_stance",
+      "visual_form": "character in neutral ready position between actions",
+      "meaning": "momentary control, reset opportunity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "character_nation_identity",
+      "color_identity": null,
+      "symbol_or_sigil": "character select screen flags representing country of origin",
+      "enemy_visual_variants": "alternate costume palettes per character for versus differentiation",
+      "environmental_markers": "stage backgrounds representing fighter's homeland (e.g., Japan for Ryu, Soviet Union for Zangief, India for Dhalsim, China for Chun-Li)"
+    },
+    {
+      "faction": "master_tier_fighters",
+      "color_identity": null,
+      "symbol_or_sigil": "Grand Master designation (M. Bison, Sagat, Vega, Balrog)",
+      "enemy_visual_variants": "distinct sprite designs and move sets differentiate bosses from regular roster",
+      "environmental_markers": "final stage backgrounds darker and more imposing than earlier stages"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "character_healthy",
+      "visual_manifestation": "full health bar display, bright character palette, upright stance animations",
+      "behavioral_manifestation": "full mobility, access to all special moves, faster attack recovery"
+    },
+    {
+      "world_state": "character_damaged",
+      "visual_manifestation": "partially depleted health bar with red segment missing, character remains in default palette but animations show wear",
+      "behavioral_manifestation": "same move set available but psychological pressure increases as knockout approaches"
+    },
+    {
+      "world_state": "character_near_knockout",
+      "visual_manifestation": "health bar critically low (final segment), no visual sprite change but status is unambiguous",
+      "behavioral_manifestation": "one combo sequence away from loss, requires defensive play"
+    },
+    {
+      "world_state": "match_progression",
+      "visual_manifestation": "stage background static but distinct per fighter encountered; final bosses fought on darker stages",
+      "behavioral_manifestation": "AI difficulty ramps with each successive opponent; boss characters have unique move sets unavailable to player roster"
+    },
+    {
+      "world_state": "versus_mode_active",
+      "visual_manifestation": "both character palettes available for customization; alternate palettes accessible",
+      "behavioral_manifestation": "special moves can be toggled on/off via cheat codes; speed settings adjustable (up to six levels)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "stage_location_as_identity",
+      "example": "Japan dojo stage for Ryu; Soviet Union industrial backdrop for Zangief; India temple for Dhalsim; China streets for Chun-Li. Each environment reinforces fighter's cultural/national origin."
+    },
+    {
+      "technique": "final_boss_stage_tone",
+      "example": "Grand Master encounters occur on darker, more ominous stage backgrounds compared to regular fighter stages, signaling narrative escalation and increased threat level."
+    },
+    {
+      "technique": "character_palette_storytelling",
+      "example": "Each fighter receives new default palette in Turbo, with original palettes relegated to alternate slots. This visual refresh signals narrative/timeline progression from Champion Edition."
+    },
+    {
+      "technique": "move_set_expansion_as_progression",
+      "example": "Special moves introduced/expanded for each character (e.g., Chun-Li gains Kikoken projectile, Dhalsim gains Yoga Teleport). New abilities visually differentiate Turbo iteration from predecessor."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "ready_to_fight",
+      "behavior": "idle stance with bouncing/breathing animation; responds immediately to input"
+    },
+    {
+      "entity": "player_character",
+      "state": "executing_special_move",
+      "behavior": "specific pose freeze followed by attack sprite; higher input precision required in Turbo due to increased game speed"
+    },
+    {
+      "entity": "player_character",
+      "state": "knocked_down",
+      "behavior": "prone sprite on ground; temporary invulnerability during ground animation before stand-up recovery"
+    },
+    {
+      "entity": "opponent_AI",
+      "state": "aggressive",
+      "behavior": "forward movement, frequent special move attempts, minimal blocking"
+    },
+    {
+      "entity": "opponent_AI",
+      "state": "defensive",
+      "behavior": "blocking stance held longer, spacing control via movement, reactive rather than proactive"
+    },
+    {
+      "entity": "grand_master_boss",
+      "state": "active_fight",
+      "behavior": "unique move set with attacks unavailable to playable roster; specific combo patterns; higher damage output and priority"
+    },
+    {
+      "entity": "announcer_voice",
+      "state": "round_state_change",
+      "behavior": "voice clips call out country names and round progression; sound effects added in SNES version (people/animals shouting) signal emotional/narrative stakes"
+    }
+  ],
+  "notes": "Street Fighter II Turbo is a pure competitive fighting game with minimal narrative world-state. Manifestation patterns are entirely match-mechanical rather than environmental. Danger/safety signals derive from health status, positioning, and animation frames. Faction identity is primarily national/cultural through stage backgrounds and character origin flags. The game communicates state through sprite animation frames, health bar visuals, and sound design (pitch variation in voice clips for special move strength levels, though removed in SNES port). The Turbo iteration's increased game speed fundamentally changes visual read patterns—animations compress, requiring faster visual parsing. Boss encounters use stage background darkness as a tonal signal of increased threat. Alternate palettes serve as cosmetic faction markers in versus mode.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:25:28.731Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2901,
+    "output_tokens": 1902,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

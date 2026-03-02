@@ -1,0 +1,155 @@
+{
+  "game_id": "micro-machines-genesis",
+  "game_name": "Micro Machines",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Track boundary",
+      "visual_form": "Screen edge / defined path perimeter",
+      "meaning": "Leaving the track for too long triggers automatic return to course; visual boundary indicates safe racing zone"
+    },
+    {
+      "signal": "Obstacles on track",
+      "visual_form": "Environmental objects (cereal boxes on breakfast tables, pencil sharpeners on desks)",
+      "meaning": "Collision hazards that impede racing progress; environmental obstacles create danger within safe track boundaries"
+    },
+    {
+      "signal": "Opponent proximity in head-to-head",
+      "visual_form": "Both vehicles visible on same screen",
+      "meaning": "Racing pressure; opponent remaining visible means trailing position and competitive disadvantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Track definition / predefined path",
+      "visual_form": "Clear course layout within household environments",
+      "meaning": "Safe racing corridor; staying within defined path prevents automatic penalty reset"
+    },
+    {
+      "signal": "Open track space ahead",
+      "visual_form": "Clear racing line without obstacles",
+      "meaning": "Safe acceleration zone; absence of environmental hazards permits faster movement"
+    },
+    {
+      "signal": "Single-screen visibility of opponent",
+      "visual_form": "Both racers visible in head-to-head mode",
+      "meaning": "Safe positioning; mutual visibility maintains game state, prevents victory condition"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player 1",
+      "color_identity": "Color-coded (specific hue assigned per source material)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct from Player 2 vehicle; differentiated by color coding",
+      "environmental_markers": "Light indicator on screen displays player's color when ahead; eight lights track faction dominance in head-to-head mode"
+    },
+    {
+      "faction": "Player 2",
+      "color_identity": "Contrasting color-coded identity",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opposing color from Player 1; vehicle appearance differentiated to prevent confusion",
+      "environmental_markers": "Light indicator on screen displays contrasting color; same eight-light victory system tracks position advantage"
+    },
+    {
+      "faction": "Computer-controlled opponents",
+      "color_identity": "Three distinct colors for AI racers",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually differentiated from player vehicle; AI vehicle sprites distinct",
+      "environmental_markers": "Separate on-screen positions; no light indicator system—simple placement-based competition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Player ahead in head-to-head (screen dominance)",
+      "visual_manifestation": "Leading player occupies screen space while trailing player moves off-screen; one light turns to leading player's color",
+      "behavioral_manifestation": "Leading vehicle continues normal movement; trailing vehicle may be invisible or partially off-screen, creating asymmetric visibility"
+    },
+    {
+      "world_state": "Player off-track (boundary violation)",
+      "visual_manifestation": "Vehicle position beyond predefined track path edge",
+      "behavioral_manifestation": "Automatic repositioning back to track after excessive off-track duration; penalties reset racer position"
+    },
+    {
+      "world_state": "Obstacle encounter on track",
+      "visual_manifestation": "Environmental objects (cereal boxes, pencils, etc.) visible within racing corridor",
+      "behavioral_manifestation": "Vehicle collision triggers slowdown or directional disruption; navigating around obstacle required for race continuity"
+    },
+    {
+      "world_state": "Victory condition approaching (head-to-head)",
+      "visual_manifestation": "Light bar predominantly displays one player's color; seven or eight lights show faction dominance",
+      "behavioral_manifestation": "Sudden death playoff triggered if tied; increased pressure on trailing player to regain screen position"
+    },
+    {
+      "world_state": "Household environment context (gameplay setting)",
+      "visual_manifestation": "Breakfast table, pool table, desk, treehouse environments depicted with scaled-down visual perspective",
+      "behavioral_manifestation": "Track design reflects miniaturized scale; toy vehicles navigate human-sized objects as major obstacles"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Miniaturization scale narrative",
+      "example": "Racing on breakfast tables and pool tables establishes world as tiny toy vehicles in normal household spaces; cereal boxes and pencil sharpeners function as landscape-scale obstacles"
+    },
+    {
+      "technique": "Household environments as narrative identity",
+      "example": "Different track environments (breakfast, desk, treehouse) visually communicate varied gameplay contexts without text; each location tells story of where toy vehicles are racing"
+    },
+    {
+      "technique": "Vehicle type to environment matching",
+      "example": "Formula one cars, tanks, powerboats, and helicopters visually adapt to specific environments; selection creates implicit narrative about appropriate racing vessel for each context"
+    },
+    {
+      "technique": "Competition mechanics as visual language",
+      "example": "Light indicator system in head-to-head mode communicates dominance without text; color-coded lights express faction superiority visually"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player-controlled vehicle",
+      "state": "On-track, racing normally",
+      "behavior": "Visible on screen, responds to input controls, navigates between obstacles and track boundaries"
+    },
+    {
+      "entity": "Player-controlled vehicle",
+      "state": "Off-track (boundary violation)",
+      "behavior": "Automatic repositioning to track after excessive duration outside path; penalty resets momentum"
+    },
+    {
+      "entity": "Player-controlled vehicle",
+      "state": "Ahead in head-to-head (screen dominance)",
+      "behavior": "Remains fully visible; opponent vehicle moves off-screen or becomes partially invisible due to single-screen view"
+    },
+    {
+      "entity": "Computer-controlled opponent",
+      "state": "Racing (Challenge mode)",
+      "behavior": "Follows invisible directional arrows (AI pathfinding); maintains competition until player finishes first or second"
+    },
+    {
+      "entity": "Computer-controlled opponent",
+      "state": "Losing in head-to-head",
+      "behavior": "Falls behind leading player on single shared screen; becomes invisible when trailing player distance exceeds screen bounds"
+    },
+    {
+      "entity": "Obstacle (environmental object)",
+      "state": "On track",
+      "behavior": "Static positioning; collision triggers vehicle disruption; creates navigation challenge within racing corridor"
+    }
+  ],
+  "notes": "Micro Machines uses primarily visual communication through color-coding (player faction identification), light indicator systems (dominance tracking), and environmental scale narrative (miniaturized vehicles in household spaces). World-state is communicated through screen position and visibility: head-to-head competition is tracked by player color on light bar, with leading player's color filling lights as they gain screen dominance. Danger is communicated through track boundaries (off-screen penalty) and obstacle positioning. No explicit faction conflict exists—competition is mechanical (color-based player differentiation) rather than narrative-driven. The game's visual language is primarily ludic rather than thematic.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:39:36.783Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3131,
+    "output_tokens": 1880,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

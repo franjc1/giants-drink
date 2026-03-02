@@ -1,0 +1,297 @@
+{
+  "game_id": "mappy-land-nes",
+  "game_name": "Mappy-Land",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence (Goro)",
+      "visual_form": "Cat character in themed costumes matching stage environment",
+      "meaning": "Primary threat; stage-specific danger indicator"
+    },
+    {
+      "signal": "Enemy presence (Meowkies gang)",
+      "visual_form": "Multiple cat enemies pursuing player",
+      "meaning": "Secondary threats requiring avoidance or distraction"
+    },
+    {
+      "signal": "Time pressure warning",
+      "visual_form": "Warning chime sound + music speed increase",
+      "meaning": "Imminent stage failure; player taking too long to collect items"
+    },
+    {
+      "signal": "Goro Coin pursuit",
+      "visual_form": "Additional coin-shaped threat chasing Mappy after time expires",
+      "meaning": "Critical danger state; cannot be distracted or attacked, stage failure imminent"
+    },
+    {
+      "signal": "Trampoline degradation",
+      "visual_form": "Trampolines break after repeated jumps (except Jungle World)",
+      "meaning": "Resource depletion danger; loss of mobility/escape options"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Distraction items (Cat Toys)",
+      "visual_form": "Collectible toy objects in stage",
+      "meaning": "Temporary safety from Meowkies; enemy will dance harmlessly around item"
+    },
+    {
+      "signal": "Distraction items (Gold Coin)",
+      "visual_form": "Collectible coin object",
+      "meaning": "Temporary safety from Goro specifically; primary boss becomes harmless"
+    },
+    {
+      "signal": "Distraction items (Silver Vine Pots)",
+      "visual_form": "Collectible pot objects",
+      "meaning": "Incapacitate Meowkies temporarily via unconsciousness"
+    },
+    {
+      "signal": "Distraction items (Fish)",
+      "visual_form": "Collectible fish bouncing in stage direction",
+      "meaning": "Redirect both Goro and Meowkies away from player"
+    },
+    {
+      "signal": "Bonus exit/subarea access",
+      "visual_form": "Specific trampoline in stage that launches upward when jumped without input",
+      "meaning": "Safe access to bonus area for additional lives and items"
+    },
+    {
+      "signal": "Exit doorway",
+      "visual_form": "Rightmost stage exit after item collection",
+      "meaning": "Safe stage completion when all six target items collected"
+    },
+    {
+      "signal": "Flashlight (Ghost Town only)",
+      "visual_form": "Player-controlled flashlight beam in Ghost Town stage",
+      "meaning": "Ward off ghost enemies; stage-specific safety mechanism"
+    },
+    {
+      "signal": "Balloon (Ghost Town only)",
+      "visual_form": "Balloon vehicle in Ghost Town",
+      "meaning": "Alternative mobility and hazard avoidance in ghost-themed stage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mappy (Player/Law Enforcement)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mouse character; originally police-themed in arcade version",
+      "enemy_visual_variants": "Goro and Meowkies are opposing cat faction",
+      "environmental_markers": "Target item collection missions (presents, wedding rings, Christmas trees, baseballs) indicate law/order objectives"
+    },
+    {
+      "faction": "Goro (Primary Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Cat character wearing stage-themed costumes",
+      "enemy_visual_variants": "Costume changes per environment (Railroad, Western, Tropical, Jungle, Pirate, Ghost, Urban, Space themes)",
+      "environmental_markers": "Goro's costume adaptation to each stage signals faction presence and thematic ownership"
+    },
+    {
+      "faction": "Meowkies (Secondary Antagonists)",
+      "color_identity": null,
+      "symbol_or_sigil": "Cat gang members; visual variants not specified",
+      "enemy_visual_variants": "Responsive to different distraction items (toys, vines) suggesting hierarchy under Goro",
+      "environmental_markers": "Gang presence throughout all stages; expendable compared to Goro"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Story 1 - Mapico's Birthday",
+      "visual_manifestation": "Cheese items appear as collection targets; stage layouts reflect domestic/celebration theme",
+      "behavioral_manifestation": "Mappy navigates to collect cheese; dialogue/narrative frames gift-giving context"
+    },
+    {
+      "world_state": "Story 2 - Wedding Narrative",
+      "visual_manifestation": "Wedding rings replace cheese as collectible items; romantic/ceremonial stage theming",
+      "behavioral_manifestation": "Mappy collects rings; relationship milestone progression"
+    },
+    {
+      "world_state": "Story 3 - Christmas Party",
+      "visual_manifestation": "Christmas trees become target items; holiday visual theming in environments",
+      "behavioral_manifestation": "Seasonal celebration context; same mechanical gameplay with narrative layer"
+    },
+    {
+      "world_state": "Story 4 - Mappy Jr. Birthday",
+      "visual_manifestation": "Baseballs replace other items; child-oriented stage design; family unit established",
+      "behavioral_manifestation": "Paternal responsibility narrative; bonus Milky Town castle finale with family reunion mechanic"
+    },
+    {
+      "world_state": "Railroad Town Stage",
+      "visual_manifestation": "Train/rail-themed stage architecture; Goro wears railroad conductor outfit",
+      "behavioral_manifestation": "Stage-specific enemy costume signals thematic ownership; terrain reflects industrial setting"
+    },
+    {
+      "world_state": "Western World Stage",
+      "visual_manifestation": "Desert/saloon theming; Goro wears western cowboy costume",
+      "behavioral_manifestation": "Thematic enemy adaptation; stage hazards/layout match western environment"
+    },
+    {
+      "world_state": "Tropical World Stage",
+      "visual_manifestation": "Palm trees, beach theming; Goro tropical costume variant",
+      "behavioral_manifestation": "Exotic environment signals faction territorial expansion"
+    },
+    {
+      "world_state": "Jungle World Stage",
+      "visual_manifestation": "Dense vegetation, vine theming; Goro jungle explorer costume; trampolines do not break (exception rule)",
+      "behavioral_manifestation": "Unique stage mechanic signals world-state difference; infinite mobility resource"
+    },
+    {
+      "world_state": "Pirate World Stage",
+      "visual_manifestation": "Ship/nautical theming; Goro wears pirate costume",
+      "behavioral_manifestation": "Aquatic hazard environment; themed enemy costume"
+    },
+    {
+      "world_state": "Ghost Town Stage",
+      "visual_manifestation": "Haunted/spectral theming; ghost enemies replace standard threats; Goro ghost costume; flashlight mechanic present",
+      "behavioral_manifestation": "Supernatural danger state; flashlight as stage-specific tool; balloon transport vehicle available"
+    },
+    {
+      "world_state": "Seventh Avenue Stage",
+      "visual_manifestation": "Urban/city environment theming; Goro urban costume variant",
+      "behavioral_manifestation": "Civilized zone; different threat behavior from wilderness stages"
+    },
+    {
+      "world_state": "Milky Town (Final Stage)",
+      "visual_manifestation": "Space/milk-themed aesthetics; castle finale location established",
+      "behavioral_manifestation": "Bonus castle finale unlocks; must deliver collected items to Mapico/Mappy Jr. before music ends; family reunion mechanic"
+    },
+    {
+      "world_state": "Time Pressure Active",
+      "visual_manifestation": "Visual music acceleration cue; warning chime audio signal",
+      "behavioral_manifestation": "Goro Coin spawns as unstoppable pursuer; stage becomes unwinnable if items not collected"
+    },
+    {
+      "world_state": "Bonus Subarea Access",
+      "visual_manifestation": "Specific trampolines glow/indicate launch capability when approached with zero distraction items",
+      "behavioral_manifestation": "Player launched upward to hidden bonus stage; extra lives and items awarded"
+    },
+    {
+      "world_state": "Later story progression",
+      "visual_manifestation": "Same stage layouts return with visual complexity increase implied",
+      "behavioral_manifestation": "Enemy speed increases; difficulty escalation without new visual assets"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Goro costume adaptation per stage",
+      "example": "Goro wears railroad conductor in Railroad Town, cowboy in Western World, pirate in Pirate World, etc. Signals territorial control and thematic integration"
+    },
+    {
+      "technique": "Target item narrative variation",
+      "example": "Cheese (birthday), wedding rings (marriage), Christmas trees (holiday), baseballs (child). Each story arc uses collectibles to communicate narrative progression"
+    },
+    {
+      "technique": "Stage theme visual design",
+      "example": "Eight distinct visual environments (railroad, western, tropical, jungle, pirate, ghost, urban, space) show world expansion and faction territorial reach"
+    },
+    {
+      "technique": "Distraction item type signaling",
+      "example": "Cat toys affect Meowkies, gold coins affect Goro, silver vines incapacitate, fish redirect both. Item visual type communicates mechanical effect"
+    },
+    {
+      "technique": "Castle finale location",
+      "example": "Milky Town castle represents family home/destination; final stage narrative payoff location where Mapico/Mappy Jr. await item delivery"
+    },
+    {
+      "technique": "Ghost Town special mechanics",
+      "example": "Flashlight and balloon tools appear only in Ghost Town; visual/mechanical differentiation signals supernatural world-state"
+    },
+    {
+      "technique": "Time pressure visual escalation",
+      "example": "Warning chime + music speed increase + Goro Coin spawn create cumulative danger signal chain indicating imminent failure state"
+    },
+    {
+      "technique": "Trampoline resource degradation",
+      "example": "Repeated jumps cause trampolines to break (except Jungle World); visual depletion of mobility assets increases danger"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goro (Primary Boss)",
+      "state": "Active/Hunting",
+      "behavior": "Pursues Mappy; affected only by Gold Coins and Fish distractions; immune to Cat Toys and Silver Vines"
+    },
+    {
+      "entity": "Goro (Primary Boss)",
+      "state": "Gold Coin Active",
+      "behavior": "Stops pursuit and dances around gold coin; harmless to Mappy during effect duration"
+    },
+    {
+      "entity": "Goro (Primary Boss)",
+      "state": "Fish Thrown",
+      "behavior": "Chases fish instead of player; redirected threat"
+    },
+    {
+      "entity": "Goro (Primary Boss)",
+      "state": "Time Expired",
+      "behavior": "Transforms into Goro Coin; becomes unstoppable pursuer that cannot be distracted or attacked"
+    },
+    {
+      "entity": "Meowkies (Gang/Minions)",
+      "state": "Active/Hunting",
+      "behavior": "Pursue Mappy in group; affected by Cat Toys, Silver Vines, and Fish; not affected by Gold Coins"
+    },
+    {
+      "entity": "Meowkies (Gang/Minions)",
+      "state": "Cat Toy Present",
+      "behavior": "Dance around toys harmlessly; unable to pursue"
+    },
+    {
+      "entity": "Meowkies (Gang/Minions)",
+      "state": "Silver Vine Pot Active",
+      "behavior": "Lose consciousness temporarily; incapacitated threat state"
+    },
+    {
+      "entity": "Meowkies (Gang/Minions)",
+      "state": "Fish Thrown",
+      "behavior": "Chase bouncing fish; redirected from player pursuit"
+    },
+    {
+      "entity": "Ghosts (Ghost Town Only)",
+      "state": "Active/Hunting",
+      "behavior": "Replace standard cat enemies in Ghost Town stage; warded off by flashlight mechanic"
+    },
+    {
+      "entity": "Ghosts (Ghost Town Only)",
+      "state": "Flashlight Active",
+      "behavior": "Repelled by flashlight beam; harmless when illuminated"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Item Collection",
+      "behavior": "Can jump to collect target items and activate/trigger stage-specific counterattack items"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Carrying Distraction Items",
+      "behavior": "Can hold up to 15 distraction items; capacity limiting mechanic affects strategy"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Bonus Subarea Attempt",
+      "behavior": "Must have zero distraction items and jump on specific trampoline without input; success launches upward to bonus stage"
+    },
+    {
+      "entity": "Mappy (Player)",
+      "state": "Castle Finale (Milky Town)",
+      "behavior": "Must deliver all collected items to Mapico or Mappy Jr. before music ends; failure triggers retry loop; success grants bonus and story progression"
+    }
+  ],
+  "notes": "Mappy-Land uses stage-themed costume changes for Goro as primary world-state indicator across eight distinct environments. Distraction item types directly communicate enemy-specific vulnerability, creating a systematic threat communication language. The narrative structure (Story 1-4) uses collectible item changes rather than visual world transformation—meaning the world-state is communicated through objectives and dialogue rather than environmental visual change. Family progression narrative (birthday → marriage → holiday → child) frames player advancement. Ghost Town stage is unique departure with supernatural theming, flashlight mechanics, and balloon transport, signaling major world-state transition. Time pressure system uses audio (warning chime, music acceleration) before visual escalation (Goro Coin spawn). Japanese-to-US regional differences noted: title screen color changes (yellow→green), UI additions (collection counter), and ending text rewrite suggest localization impact on narrative communication but minimal impact on core manifestation mechanics.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:37:38.220Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4187,
+    "output_tokens": 3709,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

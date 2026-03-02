@@ -1,0 +1,195 @@
+{
+  "game_id": "knights-of-the-round-snes",
+  "game_name": "Knights of the Round",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence on screen",
+      "visual_form": "Generic enemy sprites spawning from stage edges",
+      "meaning": "Active threat requiring combat or evasion"
+    },
+    {
+      "signal": "Boss character appearance",
+      "visual_form": "Larger, distinctive boss sprite with unique design",
+      "meaning": "Major danger spike; requires blocking and tactical engagement"
+    },
+    {
+      "signal": "Boss vulnerability state",
+      "visual_form": "Visual animation changes after successful block",
+      "meaning": "Danger is temporarily reduced; counter-attack window open"
+    },
+    {
+      "signal": "Health depletion visual",
+      "visual_form": "Character sprite damage state or health bar reduction",
+      "meaning": "Player character approaching defeat state"
+    },
+    {
+      "signal": "Desperation attack usage",
+      "visual_form": "Screen-wide attack animation with visual effect",
+      "meaning": "High-risk maneuver; player health loss occurring"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Successful block animation",
+      "visual_form": "Character enters guard stance with invincibility frames",
+      "meaning": "Temporary invulnerability window; safe to counter-attack"
+    },
+    {
+      "signal": "Enemy defeat",
+      "visual_form": "Enemy sprite disappears from screen",
+      "meaning": "Threat eliminated; brief area safety"
+    },
+    {
+      "signal": "Stage progression",
+      "visual_form": "Scene transition to new arena/boss stage",
+      "meaning": "Previous threats cleared; advancing through narrative"
+    },
+    {
+      "signal": "Level-up acquisition",
+      "visual_form": "Equipment and armor visual upgrades on character sprite",
+      "meaning": "Power increase; player becoming safer/stronger"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Knights (Arthur, Lancelot, Perceval)",
+      "color_identity": "Arthur: chain mail/leather transitioning to silver and gold armor; Lancelot: blue tabard with yellow cross, plate armor; Perceval: light armor with green pants transitioning to heavier armor",
+      "symbol_or_sigil": "Excalibur (Arthur's sword), Sabre (Lancelot's weapon), Battle-axe (Perceval's weapon)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "British medieval setting; horseback combat capability; castle/kingdom stages"
+    },
+    {
+      "faction": "Enemy forces (Garibaldi's army)",
+      "color_identity": null,
+      "symbol_or_sigil": "Generic enemy character designs",
+      "enemy_visual_variants": "Generic enemies with standard medieval combat appearance; boss characters with distinctive individual designs",
+      "environmental_markers": "Opposed to player progression; staged in various locations requiring conquest"
+    },
+    {
+      "faction": "Evil King Garibaldi (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Final stage boss status",
+      "enemy_visual_variants": "Unique boss sprite design representing tyrannical ruler",
+      "environmental_markers": "End-stage encounter; rules the corrupted kingdom requiring liberation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Britain under Garibaldi's evil rule",
+      "visual_manifestation": "Enemy-filled stages; medieval battleground environments; hostile NPCs throughout",
+      "behavioral_manifestation": "Generic enemies actively attack player; bosses present blocking-dependent combat mechanics"
+    },
+    {
+      "world_state": "Player progression through Arthur's destiny",
+      "visual_manifestation": "Character armor and weapon visual upgrades; advancing through sequential stages; mounting horses for traversal",
+      "behavioral_manifestation": "Enemies scaled to player level; new weapon/armor unlocks at progression gates; boss vulnerability patterns emerge"
+    },
+    {
+      "world_state": "Merlin's quest to unite Britain",
+      "visual_manifestation": "Three distinct playable knight characters representing different approaches (balanced/fast/strong); collaborative multiplayer option",
+      "behavioral_manifestation": "Multiple character selection reflects diverse approaches to liberation; cooperative gameplay enables shared victory"
+    },
+    {
+      "world_state": "Tactical combat requirement",
+      "visual_manifestation": "Boss character animations showing attack patterns; blocking stance visuals; invincibility frames after successful blocks",
+      "behavioral_manifestation": "Combat requires blocking timing rather than pure offense; bosses vulnerable only after successful defensive maneuver"
+    },
+    {
+      "world_state": "Mounted combat sequences",
+      "visual_manifestation": "Horse sprites appearing in specific stage sections; character mounted on horse sprite",
+      "behavioral_manifestation": "Ability to stomp enemies with horse; some bosses and enemies also mounted; horseback mechanics provide tactical variety"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Armor progression as visual narrative",
+      "example": "Arthur begins in chain mail/leather, upgrades to increasingly ornate silver and gold armor, visualizing his journey from trained warrior to king-in-waiting"
+    },
+    {
+      "technique": "Character design reflecting stat archetypes",
+      "example": "Lancelot's slender sprite and blue tabard suggest agility/nobility; Perceval's broad-shouldered build and bare chest armor convey raw strength; Arthur's balanced appearance reflects well-rounded capability"
+    },
+    {
+      "technique": "Weapon visual distinction",
+      "example": "Excalibur (sacred legendary sword), Sabre (traveler's blade suggesting wandering), Battle-axe (craftsman's tool repurposed as weapon) each communicate character background and role"
+    },
+    {
+      "technique": "Stage-based kingdom liberation",
+      "example": "Sequential stages represent conquering different regions of Britain; final confrontation with Garibaldi signifies restoring rightful rule"
+    },
+    {
+      "technique": "Horse sequences as power fantasy",
+      "example": "Horseback combat sections provide visual spectacle and mechanical advantage, emphasizing player progression and knight fantasy"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Generic enemies",
+      "state": "Idle/Patrolling",
+      "behavior": "Spawn from stage edges and advance toward player"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Engaged in combat",
+      "behavior": "Attack player character; can be blocked and defeated"
+    },
+    {
+      "entity": "Boss characters",
+      "state": "Pre-block state",
+      "behavior": "Attack with specific patterns; cannot be damaged effectively"
+    },
+    {
+      "entity": "Boss characters",
+      "state": "Post-successful block",
+      "behavior": "Temporarily vulnerable; player gains invincibility window to counter-attack"
+    },
+    {
+      "entity": "Boss characters",
+      "state": "Mounted combat",
+      "behavior": "Can ride horses; adds tactical complexity to boss encounters"
+    },
+    {
+      "entity": "Player character (any)",
+      "state": "Blocking successfully",
+      "behavior": "Gains few seconds of invincibility frames; guard drops if not struck during block window"
+    },
+    {
+      "entity": "Player character (any)",
+      "state": "Desperation attack activation",
+      "behavior": "Clears most screen enemies at health cost; visual indicator of high-risk tactic"
+    },
+    {
+      "entity": "Lancelot",
+      "state": "Any",
+      "behavior": "Performs jumping kick special attack; fastest character movement speed"
+    },
+    {
+      "entity": "Perceval",
+      "state": "Any",
+      "behavior": "Can dash-cancel into Giant Swing attack; slowest character but highest damage output"
+    },
+    {
+      "entity": "Arthur",
+      "state": "Mounted",
+      "behavior": "Most devastating when on horseback; visual indication of superior mounted combat capability"
+    }
+  ],
+  "notes": "Knights of the Round communicates world-state primarily through character visual progression (armor/weapon upgrades), enemy spawning patterns, and combat mechanic disclosure (blocking vulnerability windows). The Arthurian legend setting provides narrative context but visual communication focuses on combat readiness rather than political faction differentiation. The three playable knights visually represent different approaches to the same quest (speed vs. power vs. balance), suggesting a unified but multi-faceted resistance against Garibaldi's rule. Environmental storytelling relies on character design and equipment upgrades rather than environmental props or NPC behavior—typical of beat 'em up genre conventions. The blocking mechanic and boss vulnerability patterns are communicated through animation states rather than UI elements, requiring player observation and learning.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:13:10.875Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4251,
+    "output_tokens": 2230,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

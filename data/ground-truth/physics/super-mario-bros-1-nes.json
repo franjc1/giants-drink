@@ -1,0 +1,217 @@
+{
+  "_meta": {
+    "game": "Super Mario Bros.",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1985,
+    "publisher": "Nintendo",
+    "developer": "Nintendo R&D4",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Super Mario Bros",
+        "url": "https://tasvideos.org/GameResources/NES/SuperMarioBros",
+        "notes": "Primary community resource. Documents 21-frame rule, gravity types, walljump thresholds."
+      },
+      {
+        "name": "Data Crystal — Super Mario Bros. RAM Map",
+        "url": "https://datacrystal.tcrf.net/wiki/Super_Mario_Bros./RAM_map",
+        "notes": "Authoritative ROM address documentation. Source for all $00xx addresses in this file."
+      },
+      {
+        "name": "A Comprehensive Super Mario Bros. Disassembly (doppelganger)",
+        "url": "https://gist.github.com/1wErt3r/4048722",
+        "notes": "Full annotated 6502 assembly disassembly. Primary verification source for all constants."
+      },
+      {
+        "name": "SDA Knowledge Base — Super Mario Bros.",
+        "url": "https://kb.speeddemosarchive.com/Super_Mario_Bros.",
+        "notes": "Speedrunning physics documentation. Walk max 1.5 px/frame, run max 2.5 px/frame confirmed here."
+      }
+    ],
+    "notes": [
+      "SMB1 uses a 16-sub-pixel system for position: 16 sub-pixels = 1 pixel.",
+      "Gravity and acceleration use a 256-sub-pixel internal accumulator.",
+      "The 'feel' of SMB1 physics comes from the 4-state gravity system — which gravity applies depends on how fast Mario was moving when he jumped.",
+      "NES runs at 60.0988 fps NTSC (treated as 60fps). PAL at 50fps.",
+      "Standard NES screen: 256x240 pixels. ~8px overscan top and bottom = 224 visible lines in practice."
+    ],
+    "units": {
+      "speed": "sub-pixels per frame (16 sub-px = 1 pixel for position)",
+      "speed_px": "pixels per frame (for readability)",
+      "gravity": "units of 1/256 pixel per frame squared (gravity accumulator uses 256-sub-px precision)"
+    }
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "frame_rate_pal_hz": 50,
+    "subpixel_system": {
+      "position_sub_pixels_per_pixel": 16,
+      "gravity_accumulator_sub_pixels_per_pixel": 256,
+      "description": "SMB1 uses two different precision levels: 16 sub-pixels for position/speed display, 256 sub-pixels for gravity accumulation. The fractional position byte accumulates gravity in 1/256 increments."
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "visible_height": 224,
+      "tile_size_px": 16,
+      "notes": "Standard NES. 8x8 CHR tiles, but gameplay grid uses 16x16 blocks."
+    }
+  },
+
+  "ground_movement": {
+    "walk_max_speed": {
+      "sub_pixels_per_frame": 24,
+      "px_per_frame": 1.5,
+      "hex": "$18",
+      "source": "SDA Knowledge Base + disassembly. Walk max = 1.5 px/frame confirmed by multiple speedrun sources.",
+      "notes": "B button NOT held. Mario walks at up to 24/16 = 1.5 px/frame."
+    },
+    "run_max_speed": {
+      "sub_pixels_per_frame": 40,
+      "px_per_frame": 2.5,
+      "hex": "$28",
+      "ram_address": "$0700",
+      "source": "Data Crystal RAM map: $0700 'Player speed in either direction (0 - 0x28)'. 0x28 = 40 sub-px/frame = 2.5 px/frame.",
+      "notes": "B button held. 0x28 = 40 sub-pixels = 2.5 px/frame. This is confirmed by both RAM map and community documentation.",
+      "run_button": "B"
+    },
+    "acceleration": {
+      "description": "SMB1 uses three acceleration values depending on speed relative to thresholds.",
+      "values": [
+        {
+          "condition": "Speed below walk threshold, same direction",
+          "accel_subpixels_per_frame_sq": 13,
+          "hex": "$0D"
+        },
+        {
+          "condition": "Speed above walk threshold, same direction",
+          "accel_subpixels_per_frame_sq": 9,
+          "hex": "$09"
+        },
+        {
+          "condition": "Moving opposite to input (skidding)",
+          "accel_subpixels_per_frame_sq": 26,
+          "hex": "$1A",
+          "notes": "Skid deceleration is faster than acceleration — Mario stops quickly when reversing direction."
+        }
+      ],
+      "notes": "Acceleration magnitude also doubles when Mario is NOT facing his direction of movement."
+    },
+    "max_left_speed": {
+      "walk_hex": "$E4",
+      "walk_signed_subpixels": -28,
+      "run_hex": "$D8",
+      "run_signed_subpixels": -40,
+      "ram_address": "$0450",
+      "source": "Data Crystal RAM map: $0450 '$E4 max walk left, $D8 max run left'"
+    }
+  },
+
+  "jump": {
+    "initial_y_velocity": {
+      "ram_address": "$009F",
+      "normal_jump_hex": "$FB",
+      "normal_jump_signed_px_per_frame": -5,
+      "description": "Y velocity stored as signed byte. $FB = 251 unsigned = -5 signed = 5 px/frame upward.",
+      "source": "Data Crystal RAM map: '$009F - Player vertical velocity (whole pixels, signed byte). Upward: 0xFB = normal jump'",
+      "notes": "This is the whole-pixel Y speed. Fractional Y speed also exists at $0433."
+    },
+    "max_fall_speed": {
+      "hex": "$05",
+      "px_per_frame": 5,
+      "description": "Terminal velocity: 5 px/frame downward. Symmetric with jump initial velocity.",
+      "source": "Data Crystal RAM map: '$009F ... Downward: 0x05 = fastest fall'"
+    },
+    "gravity_system": {
+      "description": "SMB1 has 4 distinct gravity states. The state is determined at jump initiation based on Mario's X speed. Mario KEEPS that gravity state until the next jump.",
+      "source": "TASVideos: 'There are 4 types of gravity in SMB. Mario's gravity is affected by his most recent jump. He keeps that gravity state until he jumps again.'",
+      "states": {
+        "standing_or_very_slow": {
+          "condition": "X speed 0-15 at jump initiation",
+          "jump_gravity_hex": "$30",
+          "jump_gravity_value": 48,
+          "jump_gravity_px_per_frame_sq": 0.1875,
+          "fall_gravity_hex": "$A8",
+          "fall_gravity_value": 168,
+          "fall_gravity_px_per_frame_sq": 0.65625,
+          "ram_address_jump_grav": "$0709",
+          "ram_address_fall_grav": "$070A",
+          "source": "Data Crystal: $0709='$30 standing jump gravity', $070A='$A8 standing fall gravity'"
+        },
+        "walking": {
+          "condition": "X speed 16-24 at jump initiation",
+          "jump_gravity_hex": "$2D",
+          "jump_gravity_value": 45,
+          "jump_gravity_px_per_frame_sq": 0.17578,
+          "fall_gravity_hex": "$90",
+          "fall_gravity_value": 144,
+          "fall_gravity_px_per_frame_sq": 0.5625,
+          "source": "Data Crystal: $0709='$2D walking jump gravity', $070A='$90 walking fall gravity'"
+        },
+        "running": {
+          "condition": "X speed 25-40 at jump initiation",
+          "jump_gravity_hex": "$38",
+          "jump_gravity_value": 56,
+          "jump_gravity_px_per_frame_sq": 0.21875,
+          "fall_gravity_hex": "$D0",
+          "fall_gravity_value": 208,
+          "fall_gravity_px_per_frame_sq": 0.8125,
+          "source": "Data Crystal: $0709='$38 running jump gravity', $070A='$D0 running fall gravity'"
+        },
+        "swimming_floating": {
+          "description": "Low gravity used for swimming states and initial spawn/pipe-exit float.",
+          "notes": "Much lower gravity than any land jump state. Responsible for the 'floaty' feel when entering levels via pipes."
+        }
+      },
+      "important_note": "The 'running' jump has HIGHER gravity than the 'walking' jump. This means running jumps are faster-arcing but the horizontal distance from speed compensates. The key insight: run-jumping FEELS higher because horizontal speed carries Mario farther, but the arc is more abrupt."
+    },
+    "variable_jump": {
+      "mechanic": "Holding A while Y velocity is negative (ascending) keeps the lower jump gravity active. Releasing A switches to the higher falling gravity, cutting the jump short.",
+      "notes": "Short hops are possible by tapping A. Full jumps require holding A until apex."
+    }
+  },
+
+  "level_transitions": {
+    "frame_rule": 21,
+    "source": "TASVideos: '21 frame rule: level transitions round up to next 21-frame boundary'",
+    "notes": "This is one of the most famous optimization constraints in speedrunning. Entering a flagpole or pipe rounds the timer up to the nearest 21-frame multiple. Speedrunners optimize to save full 21-frame cycles."
+  },
+
+  "hitboxes": {
+    "small_mario": {
+      "width_px": 8,
+      "height_px": 16,
+      "notes": "Small Mario: 1 tile tall, half tile wide."
+    },
+    "big_mario": {
+      "width_px": 8,
+      "height_px": 32,
+      "notes": "Super Mario: 2 tiles tall."
+    },
+    "notes": "Hitboxes are 8px wide — narrower than the 16px sprite. This gives 4px of forgiveness on each side, a key reason the game feels fair."
+  },
+
+  "underwater_physics": {
+    "gravity_reduction": "Uses the swimming/float gravity state (much lower than land states)",
+    "swim_speed": {
+      "px_per_frame": 1.0,
+      "notes": "Walking underwater speed is 1 px/frame — significantly slower than surface walk max of 1.5 px/frame."
+    },
+    "notes": "Underwater levels have dramatically reduced gravity and max fall speed. Mario swims by repeatedly pressing A (each press applies upward impulse)."
+  },
+
+  "invincibility_frames": {
+    "star_invincibility_duration_frames": 640,
+    "notes": "Star invincibility lasts approximately 10.7 seconds (640 frames at 60fps). Standard hit from enemies: Mario loses size (big→small) or dies (small). No temporary invincibility from a standard hit.",
+    "hit_invincibility": "No invincibility from standard enemy hits — Mario immediately changes state."
+  },
+
+  "design_notes_for_giants_drink": [
+    "The 4-gravity system is the secret ingredient of SMB1's physics feel. Many clones miss this: they implement one gravity value and wonder why it feels wrong. The gravity at jump time must be captured and held.",
+    "Running jumps go FARTHER but not necessarily higher than walking jumps (similar initial Y velocity, but the arc lasts longer due to horizontal carry). This is the correct mental model.",
+    "The 8px hitbox width is what makes SMB1 feel fair — enemies can clip corners of sprites without registering a hit. Preserve this forgiveness.",
+    "The 21-frame rule is a level-transition artifact, not a physics constant. Don't implement it — it's an emergent property of the NES timing loop.",
+    "Mario's acceleration model has three values (slow, medium, skid) — this is what creates the 'weight' feel. Too-simple acceleration produces a floaty, arcade-y Mario that doesn't feel right."
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "game_id": "goof-troop-snes",
+  "game_name": "Goof Troop",
+  "platform": "snes",
+  "paradigm": "action-adventure platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites (enemies on screen)",
+      "meaning": "Active threats requiring evasion or defeat through indirect means"
+    },
+    {
+      "signal": "Boss arena entrance",
+      "visual_form": "Enclosed room with boss sprite and throwable objects",
+      "meaning": "Mandatory combat encounter; player must use environmental objects to damage boss"
+    },
+    {
+      "signal": "Hazardous gaps and pits",
+      "visual_form": "Visual breaks in terrain/bridges",
+      "meaning": "Fall damage or death; requires grappling hook or board placement to cross safely"
+    },
+    {
+      "signal": "Dark areas",
+      "visual_form": "Low-light or black screen sections",
+      "meaning": "Reduced visibility; candle collectible required to navigate and spot hazards"
+    },
+    {
+      "signal": "Blocked passages",
+      "visual_form": "Gates, doors, or ice walls",
+      "meaning": "Progression blocked; requires key item, puzzle solution, or enemy defeat"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Fruit collectibles",
+      "visual_form": "Scattered fruit sprites throughout levels",
+      "meaning": "Protective shield against one hit of damage; accumulation grants extra lives"
+    },
+    {
+      "signal": "Red diamonds",
+      "visual_form": "Red gem sprites",
+      "meaning": "Extra life gain; increases player resilience"
+    },
+    {
+      "signal": "Blue diamonds",
+      "visual_form": "Blue gem sprites",
+      "meaning": "Continue item; allows progression persistence after total party wipe"
+    },
+    {
+      "signal": "Cooperative player presence",
+      "visual_form": "Both Goofy and Max visible on screen simultaneously",
+      "meaning": "Safer play state; multiplayer synergy enables puzzle solutions and enemy crowd control"
+    },
+    {
+      "signal": "Open spaces with minimal enemies",
+      "visual_form": "Clear, well-lit rooms with few or no animated threats",
+      "meaning": "Safe area for item collection, puzzle solving, and regrouping"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Protagonists (Goofy & Max)",
+      "color_identity": null,
+      "symbol_or_sigil": "Disney character designs; cooperative pair dynamic",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Beach fishing trip starting location; home island of Spoonerville"
+    },
+    {
+      "faction": "Pirates (Keelhaul Pete's crew)",
+      "color_identity": null,
+      "symbol_or_sigil": "Pirate ship aesthetic; maritime stronghold architecture",
+      "enemy_visual_variants": "Generic pirate enemies throughout levels; Keelhaul Pete as final boss with distinct pirate captain design",
+      "environmental_markers": "Progression from civilian areas (beach, village) to pirate-controlled zones (haunted castle, cavern, pirate ship); Pete and PJ held captive on ship"
+    },
+    {
+      "faction": "Civilians under siege (Village residents)",
+      "color_identity": null,
+      "symbol_or_sigil": "Village-themed level architecture; non-combatant NPCs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Village level showing civilian settlement under pirate threat; Pete mistaken for pirate captain creates false peace with captors"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal exploration state",
+      "visual_manifestation": "Well-lit areas, visible platforms, collectible items scattered throughout, ambient enemy presence",
+      "behavioral_manifestation": "Enemies patrol slowly or remain stationary; players can collect items freely; puzzles are interactive but non-threatening"
+    },
+    {
+      "world_state": "Alert / enemy engagement",
+      "visual_manifestation": "Enemies become more animated and aggressive; room may shake slightly on collision",
+      "behavioral_manifestation": "Enemies move toward players; players must dodge, throw objects, or activate traps to defeat threats"
+    },
+    {
+      "world_state": "Darkened area (requires candle)",
+      "visual_manifestation": "Dramatically reduced visual field; black or very dark blue screen",
+      "behavioral_manifestation": "Player movement continues but visibility severely limited; hazard avoidance becomes guesswork until candle is used"
+    },
+    {
+      "world_state": "Boss encounter initiated",
+      "visual_manifestation": "Isolated arena with boss sprite, limited exit options, throwable objects arranged in room",
+      "behavioral_manifestation": "Boss executes attack patterns; players must time object throws; arena may have secondary hazards (alligator pit for final boss)"
+    },
+    {
+      "world_state": "Puzzle-locked progression",
+      "visual_manifestation": "Visually sealed doors, ice walls, or enemy blockades; visual cues (sliding blocks, pressure plates) indicate solution requirements",
+      "behavioral_manifestation": "Progression impossible until puzzle solved; bell item may lure enemies to reveal traps; multiple players required for simultaneous activation"
+    },
+    {
+      "world_state": "Post-rescue scenario (story progression)",
+      "visual_manifestation": "Pete and PJ visible in pirate ship level; Keelhaul Pete revealed as distinct final boss; alligator hazard introduced",
+      "behavioral_manifestation": "Rescue mechanics required; players must navigate to Pete/PJ location; final boss fight unavoidable for story conclusion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Progressive location theming",
+      "example": "Game progresses from civilian beach → village under siege → haunted castle → cavern → pirate ship stronghold, visually conveying how deep players penetrate enemy territory and narrative escalation toward Keelhaul Pete"
+    },
+    {
+      "technique": "Captive placement narrative",
+      "example": "Pete and PJ positioned on pirate ship in final level, visible in boss arena context; alligator pit beneath them serves dual purpose: environmental hazard + visual statement of their peril"
+    },
+    {
+      "technique": "Boss identity reveal through sprite design",
+      "example": "Keelhaul Pete's final boss sprite differs from Pete's standard sprite, immediately communicating mistaken identity twist when players encounter the 'real' pirate captain"
+    },
+    {
+      "technique": "Dark area gating",
+      "example": "Candle-dependent sections force players to recognize environmental barriers and resource management; visual darkness itself communicates 'forbidden or dangerous space'"
+    },
+    {
+      "technique": "Puzzle infrastructure as world-state indicator",
+      "example": "Locked gates and ice walls suggest recent pirate fortification; sliding blocks and pressure plates show improvised civilian defenses or ancient cavern mechanisms"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Goofy",
+      "state": "Movement",
+      "behavior": "Moves at 320 sp/f horizontally/vertically (slower than Max); takes longer to pick up items (11 frames for pot pickup, 72 frames for general items); 27-frame block kick"
+    },
+    {
+      "entity": "Goofy",
+      "state": "Combat effectiveness",
+      "behavior": "Deals 5 damage per thrown pot (higher damage output than Max); slower but more powerful, indicating 'tank' role in cooperative play"
+    },
+    {
+      "entity": "Max",
+      "state": "Movement",
+      "behavior": "Moves at 384 sp/f horizontally/vertically (fastest base speed); faster item pickup (13 frames for pot, 74 frames for general items); 28-frame block kick"
+    },
+    {
+      "entity": "Max",
+      "state": "Combat effectiveness",
+      "behavior": "Deals 4 damage per thrown pot (lower damage); faster movement compensates, indicating 'scout/agility' role"
+    },
+    {
+      "entity": "Both players",
+      "state": "Damage recovery",
+      "behavior": "9-frame stun on taking damage; encourages rapid repositioning after hit to avoid follow-up attacks"
+    },
+    {
+      "entity": "Hook gun",
+      "state": "Active use",
+      "behavior": "Travels 4 pixels per frame in both directions; 3-frame hold = 9-frame total freeze (3 forward + 3 return + 3 wait); incentivizes careful timing to avoid immobility"
+    },
+    {
+      "entity": "Generic enemies",
+      "state": "Engagement",
+      "behavior": "Can be knocked off stages, lured with bells, trapped in throwable paths, or defeated by blocks/bombs; never engage in direct combat with players"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Engagement",
+      "behavior": "Execute preset attack patterns; require thrown object hits to damage; typically require 4+ hits to defeat; arena-specific hazards may assist player"
+    },
+    {
+      "entity": "Keelhaul Pete (final boss)",
+      "state": "Arena behavior",
+      "behavior": "Positioned above alligator pit; defeat triggers rescue sequence and game conclusion; visual and mechanical emphasis on 'ultimate threat' status"
+    }
+  ],
+  "notes": "Goof Troop communicates world-state primarily through location progression and visual environment design rather than explicit HUD indicators. The game uses cooperative multiplayer as a core manifestation mechanic: puzzles visually require two players (simultaneous block placement, pressure plates), making single-player feel 'incomplete' despite technical playability. Danger signals rely on enemy sprite animation and environmental hazards rather than color coding. The pirate faction is established through maritime architecture escalation and NPC placement rather than faction insignia or color identity. Character stat differences (Goofy slower/stronger vs. Max faster/weaker) are communicated purely through gameplay response, not visual tells. The story twist (Keelhaul Pete's return) is conveyed through a sprite-swap reveal in the final arena, making visual identity crucial to narrative comprehension.",
+  "sources_used": [
+    "tasvideos",
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:04:17.831Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6267,
+    "output_tokens": 2585,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "game_id": "super-bomberman-snes",
+  "game_name": "Super Bomberman",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "bomb_detonation",
+      "visual_form": "explosion with horizontal and vertical flame spread across grid",
+      "meaning": "immediate lethal hazard; player must evacuate blast radius"
+    },
+    {
+      "signal": "enemy_presence",
+      "visual_form": "themed enemy sprites on grid (varies by world)",
+      "meaning": "hostile entities that deal damage on contact; must be eliminated or avoided"
+    },
+    {
+      "signal": "destructible_soft_walls",
+      "visual_form": "breakable wall blocks filling grid spaces",
+      "meaning": "obstacles blocking passage; destruction reveals items and paths but requires bomb use"
+    },
+    {
+      "signal": "bomb_chain_reaction",
+      "visual_form": "cascading flame-to-bomb ignition across multiple blocks",
+      "meaning": "unpredictable area damage; spatial hazard from player's own bomb placement"
+    },
+    {
+      "signal": "falling_indestructible_walls_(battle_mode)",
+      "visual_form": "walls dropping from screen edges after 90 seconds in battle",
+      "meaning": "playable area shrinkage; instant death on contact; time pressure escalation"
+    },
+    {
+      "signal": "flame_contact",
+      "visual_form": "horizontal/vertical projectile lines from bomb center",
+      "meaning": "collision with flame causes injury or death unless invincible"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "empty_grid_space",
+      "visual_form": "open floor tile without walls or enemies",
+      "meaning": "safe movement corridor; allows player mobility and evasion"
+    },
+    {
+      "signal": "indestructible_walls_(normal_play)",
+      "visual_form": "permanent wall blocks on grid (vs. soft walls)",
+      "meaning": "protective cover; blocks bomb flames and enemy movement"
+    },
+    {
+      "signal": "item_pickup",
+      "visual_form": "icons on screen revealed after wall destruction or enemy defeat",
+      "meaning": "power-ups that enhance player capabilities (firepower, speed, bomb count, invincibility)"
+    },
+    {
+      "signal": "invincibility_state",
+      "visual_form": "temporary protection status (visual indicator on player)",
+      "meaning": "safe from flame/bomb damage; window for aggressive tactics"
+    },
+    {
+      "signal": "exit_door",
+      "visual_form": "hidden door sprite revealed under destructible wall",
+      "meaning": "level completion point; safe progression when all enemies cleared"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Bomberman_(protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bomberman sprite character",
+      "enemy_visual_variants": "Robot Bombermen in World 5 (mechanical variants of player character)",
+      "environmental_markers": "Diamond City setting (far north of Peace Town); themes vary by world"
+    },
+    {
+      "faction": "Carat_Diamond_Organization_(antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Carat Diamond and Dr. Mook represent villain faction",
+      "enemy_visual_variants": "Themed enemy types per world; Robot Combat units designed for offensive capability",
+      "environmental_markers": "Diamond City location; six themed worlds with distinct enemy sets and aesthetic"
+    },
+    {
+      "faction": "Robot_Bombermen_(World_5_conflict)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mechanized Bomberman variants",
+      "enemy_visual_variants": "Progressive robot enemy sets in arena-based combat",
+      "environmental_markers": "World 5 arena environment (no destructible walls or exit doors; continuous battle format)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal_Game_level_start",
+      "visual_manifestation": "Grid partially filled with soft walls; enemies positioned; exit door hidden beneath destructible block",
+      "behavioral_manifestation": "Player must clear enemies and locate exit to progress; cooperative two-player mode possible"
+    },
+    {
+      "world_state": "Battle_Mode_active",
+      "visual_manifestation": "Twelve themed stages with different layouts; player trophy counter displays; round timer visible",
+      "behavioral_manifestation": "All bomb blasts instantly fatal; 1-4 players compete; fast-paced music reflects escalated tension"
+    },
+    {
+      "world_state": "Battle_Mode_mid-round_(90_seconds_elapsed)",
+      "visual_manifestation": "Hurry Up message displayed; indestructible walls begin dropping from screen edges (clockwise from bottom-left)",
+      "behavioral_manifestation": "Playable area shrinks progressively; player must adapt to compressed space; contact with falling walls = instant death"
+    },
+    {
+      "world_state": "World_5_arena_combat",
+      "visual_manifestation": "No destructible walls or exit doors visible; arena environment; robot enemy waves enter progressively",
+      "behavioral_manifestation": "Continuous battle format; player defeats one robot set, next set walks in automatically; different progression model than other worlds"
+    },
+    {
+      "world_state": "Item_revealed_post_destruction",
+      "visual_manifestation": "Power-up icon appears on grid where wall or enemy was destroyed",
+      "behavioral_manifestation": "Player can modify tactics; firepower/speed/bomb-count increases alter gameplay pacing; some items lost on death (Normal Game)"
+    },
+    {
+      "world_state": "Boss_stage_(end_of_world)",
+      "visual_manifestation": "World progression reaches stage 8 per themed world",
+      "behavioral_manifestation": "Boss enemy encounter replaces standard enemy clearance mechanic"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Themed_world_progression",
+      "example": "Six distinct worlds each with own enemy set and visual aesthetic; communicates escalating challenge and narrative scope (from Peace Town to Diamond City)"
+    },
+    {
+      "technique": "Arena_environment_shift_(World_5)",
+      "example": "Removal of soft walls and exit door in World 5 signals transition from exploration/puzzle to pure combat; visual absence of progression mechanic reinforces continuous battle state"
+    },
+    {
+      "technique": "Grid_compression_battle_mechanic",
+      "visual_storytelling": "Falling indestructible walls physically reduce playable space; visual manifestation of time pressure and escalating danger without dialogue"
+    },
+    {
+      "technique": "Robot_enemy_aesthetic_(World_5)",
+      "example": "Mechanical variants of Bomberman character visually communicate the villain's plot (stealing Bomberman's combat capabilities); robot design mirrors protagonist but signals hostile intent"
+    },
+    {
+      "technique": "Item_icon_semiotics",
+      "example": "Different item visual designs (firepower, speed, bomb count) communicate their mechanical effects; ice cream/pancakes/apples visually distinct from gameplay-altering power-ups"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Bomberman_player",
+      "state": "normal_movement",
+      "behavior": "Grid-restricted horizontal/vertical movement; can only move to adjacent squares"
+    },
+    {
+      "entity": "Bomberman_player",
+      "state": "bomb_placement",
+      "behavior": "Drops bomb at feet; must evacuate before detonation; bomb pulses for several seconds before explosion"
+    },
+    {
+      "entity": "Bomb",
+      "state": "pulsing",
+      "behavior": "Visible countdown state; telegraphs detonation; allows player reaction time"
+    },
+    {
+      "entity": "Bomb",
+      "state": "detonated",
+      "behavior": "Shoots flames horizontally and vertically; ignites adjacent bombs (chain reaction); instantly fatal to character contact"
+    },
+    {
+      "entity": "Enemy",
+      "state": "active",
+      "behavior": "Themed enemies per world; roam grid; inflict damage on contact; eliminated by bomb blast"
+    },
+    {
+      "entity": "Robot_Bomberman_(World_5)",
+      "state": "defeated_wave",
+      "behavior": "Next robot set automatically walks into arena; continuous battle cycle without level completion mechanic"
+    },
+    {
+      "entity": "Player_character",
+      "state": "invincibility_active",
+      "behavior": "Immune to flame and bomb damage; enables aggressive positioning"
+    },
+    {
+      "entity": "Indestructible_wall",
+      "state": "falling_(battle_mode_late_game)",
+      "behavior": "Drops from screen edges after 90 seconds; movement direction clockwise from bottom-left; instant kill on contact"
+    }
+  ],
+  "notes": "Super Bomberman communicates world-state primarily through grid-based environmental design and mechanic shifts rather than narrative UI. The transition from Normal Game (with soft walls, exits, enemy variety) to World 5 (arena, no progression mechanics, robot variants) and Battle Mode (instant-death, wall compression, trophy system) demonstrates state changes through visual and rule modifications. Faction identity is minimal but established through setting (Diamond City villains vs. Bomberman protagonist) and World 5's robot aesthetic. Danger signals emphasize spatial hazards (flames, bombs, walls) over narrative threats. Safety relies on empty space, cover, and power-ups. T2 tier: qualitative descriptors used; exact sprite dimensions/pixel values not documented in source.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:14:53.610Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2651,
+    "output_tokens": 2432,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

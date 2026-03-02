@@ -1,0 +1,226 @@
+{
+  "game_id": "ducktales-nes",
+  "game_name": "DuckTales",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Pit/Chasm",
+      "visual_form": "Dark void or gap in terrain; empty space below platform",
+      "meaning": "Non-lethal or lethal hazard; triggers level restart or health loss"
+    },
+    {
+      "signal": "Enemy Sprites",
+      "visual_form": "Distinct animated creature designs positioned in path",
+      "meaning": "Hostile entities requiring avoidance or defeat via cane attack"
+    },
+    {
+      "signal": "Boss Character Design",
+      "visual_form": "Large, unique sprite with animated attack patterns; distinct color palette per boss",
+      "meaning": "Significant threat requiring pattern recognition and multi-hit combat"
+    },
+    {
+      "signal": "Coffins with 'RIP' Text (Transylvania)",
+      "visual_form": "Wooden coffin sprite with 'RIP' letters replacing original cross symbols",
+      "meaning": "Thematic danger zone; signals Transylvania stage hazards and atmospheric threat"
+    },
+    {
+      "signal": "Hazardous Terrain",
+      "visual_form": "Spikes, lava, or stage-specific obstacles with distinct visual patterns",
+      "meaning": "Environmental damage source requiring platforming skill to traverse"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Ice Cream Item",
+      "visual_form": "Collectible sprite; replaced hamburgers in final version",
+      "meaning": "Health restoration; player can safely recover HP during exploration"
+    },
+    {
+      "signal": "Treasure Chests",
+      "visual_form": "Closed chest sprite positioned in accessible locations",
+      "meaning": "Containment of diamonds/currency; safe collection opportunity"
+    },
+    {
+      "signal": "Scrooge McDuck Red Shirt",
+      "visual_form": "Player character sprite with distinct red shirt (changed from blue for visibility)",
+      "meaning": "Player avatar identity; visually 'pops' against blue/dark backgrounds for safe tracking"
+    },
+    {
+      "signal": "NPC Characters (Series Cast)",
+      "visual_form": "Recognizable character sprites (Launchpad, Gizmoduck, etc.)",
+      "meaning": "Ally presence; provides hints, items, or access to new areas"
+    },
+    {
+      "signal": "Solid Platform Sections",
+      "visual_form": "Clearly defined walkable terrain with distinct color separation",
+      "meaning": "Safe traversal space; unambiguous solid ground"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Scrooge McDuck (Player)",
+      "color_identity": "Red shirt (changed from blue in final version for visual pop)",
+      "symbol_or_sigil": "Cane weapon; McDuck family identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in all five level destinations; treasure-seeking narrative presence"
+    },
+    {
+      "faction": "Flintheart Glomgold (Rival)",
+      "color_identity": null,
+      "symbol_or_sigil": "Final treasure contender; appears post-Dracula Duck encounter",
+      "enemy_visual_variants": "Stands alongside Magica DeSpell in final confrontation",
+      "environmental_markers": "Associated with final challenge; competes for ultimate treasure"
+    },
+    {
+      "faction": "Magica DeSpell (Rival Sorceress)",
+      "color_identity": null,
+      "symbol_or_sigil": "Magic-based threat; appears in final treasure sequence",
+      "enemy_visual_variants": "Co-appears with Glomgold in endgame scenario",
+      "environmental_markers": "Thematic tie to Transylvania stage (magic/supernatural)"
+    },
+    {
+      "faction": "Dracula Duck (Boss Authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Vampire duck; final boss before Glomgold/DeSpell",
+      "enemy_visual_variants": "Unique sprite design; multi-phase attack pattern",
+      "environmental_markers": "Transylvania location; coffin/RIP theming; controls final chamber"
+    },
+    {
+      "faction": "Series NPCs (Allied)",
+      "color_identity": null,
+      "symbol_or_sigil": "Launchpad, Gizmoduck (RoboDuck), other cast members",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Distributed across level entrances/key locations; provide access and items"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-Boss Encounter",
+      "visual_manifestation": "Level environment stable; boss not yet visible; stage-specific terrain (mines, jungle, mountains, castles, lunar surface)",
+      "behavioral_manifestation": "Enemies patrol predictable paths; treasure chest location marked; NPC allies present to provide hints or keys"
+    },
+    {
+      "world_state": "Boss Active Combat",
+      "visual_manifestation": "Boss sprite animated with distinct attack patterns; health reduced via visual feedback (sprite damage state or separate boss health indicator)",
+      "behavioral_manifestation": "Boss follows RNG-determined action sequences; player must time cane bounces to deal damage; pattern recognition required"
+    },
+    {
+      "world_state": "Treasure Collected",
+      "visual_manifestation": "Treasure sprite disappears from chamber; level visibly cleared of that objective",
+      "behavioral_manifestation": "Player gains $1,000,000 automatically; progression toward next level or final boss gate unlocked"
+    },
+    {
+      "world_state": "All Five Main Treasures Acquired",
+      "visual_manifestation": "Player automatically redirected to Transylvania for final Dracula Duck confrontation; unique final chamber visual",
+      "behavioral_manifestation": "Game state locks progression; final boss encounter becomes mandatory; subsequent victory unlocks Glomgold/DeSpell confrontation"
+    },
+    {
+      "world_state": "Money Total $0 (Bad Ending Condition)",
+      "visual_manifestation": "Unique ending animation showing Scrooge losing fortune (not seen in other endings); distinct visual narrative sequence",
+      "behavioral_manifestation": "Triggered only when player uses life-restore cheat ($3,000,000 cost) repeatedly before final battle; requires precise RNG-like money manipulation"
+    },
+    {
+      "world_state": "Money Total $10,000,000+ (Great Ending Condition)",
+      "visual_manifestation": "Distinct ending cutscene showing success/wealth celebration",
+      "behavioral_manifestation": "Achieved by collecting all treasures and minimizing cheat usage; positive outcome narrative"
+    },
+    {
+      "world_state": "Regional PAL Version (50 Hz)",
+      "visual_manifestation": "Same visual assets as NTSC (60 Hz)",
+      "behavioral_manifestation": "Scrooge movement speed increased to compensate for lower framerate; allows skipping large Amazon gap without Launchpad assist (mechanical advantage)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-Specific Theming",
+      "example": "African Mines (excavation/colonial wealth theme), The Amazon (jungle/primal treasure), Himalayas (mountain expeditions), Transylvania (gothic/supernatural with coffins marked 'RIP'), Moon (space exploration)"
+    },
+    {
+      "technique": "NPC Placement and Item Gating",
+      "example": "Series characters (Launchpad, Gizmoduck) positioned at level entrances; they provide hints or required items (keys from King of Terra Fermies in African Mines) to progress; communicates social hierarchy and resource control"
+    },
+    {
+      "technique": "Treasure Chest Positioning",
+      "example": "Diamonds and ice cream hidden in specific accessible locations; communicates reward pathfinding and risk/exploration incentive structure"
+    },
+    {
+      "technique": "Boss Chamber Design",
+      "example": "Each boss occupies visually distinctive arena; Dracula Duck in Transylvania castle chamber; communicates thematic consistency (supernatural boss in gothic setting)"
+    },
+    {
+      "technique": "Religious/Cultural Symbol Censoring",
+      "example": "Crosses removed from coffins in Transylvania, replaced with 'RIP' text; reflects localization sensitivity and communicates cultural/regional narrative adaptation without altering gameplay"
+    },
+    {
+      "technique": "Character Color Coding",
+      "example": "Scrooge's red shirt (changed from blue) 'pops' visually against blue/dark backgrounds; improves player tracking and communicates protagonist identity through visual contrast"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Scrooge McDuck",
+      "state": "Idle/Walking",
+      "behavior": "Animated sprite with natural walking cycle; tail animation in prototype removed for final version"
+    },
+    {
+      "entity": "Scrooge McDuck",
+      "state": "Attacking",
+      "behavior": "Swings cane on ground to break objects/attack enemies; bounces on cane mid-air like pogo stick for vertical reach and hazard traversal"
+    },
+    {
+      "entity": "Scrooge McDuck",
+      "state": "Damaged/Low Health",
+      "behavior": "Visual sprite feedback indicates damage state; requires ice cream restoration or Select-button cheat (costs $3,000,000) to recover"
+    },
+    {
+      "entity": "Boss (Generic)",
+      "state": "Pre-Engagement",
+      "behavior": "Stationary or simple patrol pattern; RNG-dependent animation state at moment of player entry determines first action sequence"
+    },
+    {
+      "entity": "Boss (Generic)",
+      "state": "Active Combat",
+      "behavior": "RNG-driven attack patterns; state tracked in memory (e.g., Boss 2 pattern at 0x6BF); player must recognize and counter each action type"
+    },
+    {
+      "entity": "Boss 2 (Magica DeSpell Variant)",
+      "state": "Smoke Puff Transformation",
+      "behavior": "Last frame of smoke animation determines bird-form behavior; three possible flight heights (top 0x48, middle 0x68, low 0x88) RNG-determined"
+    },
+    {
+      "entity": "Boss 3 (Magica Variant)",
+      "state": "Rock Transformation Cycle",
+      "behavior": "Inconsistent X-speed and Y-speed before each transformation; peak jump height varies (~159.000 units); player X-subposition can manipulate outcome"
+    },
+    {
+      "entity": "NPC (Launchpad, Gizmoduck, etc.)",
+      "state": "At Location",
+      "behavior": "Provides hints, items, or access-granting functionality; no hostile behavior; indicates safe interaction zone"
+    },
+    {
+      "entity": "Enemy Patrol",
+      "state": "Standard Patrol",
+      "behavior": "Predictable movement paths; avoidable with jump/platforming skill; cane attack defeats on contact"
+    }
+  ],
+  "notes": "DuckTales communicates world-state and danger primarily through stage-specific environmental theming, visual asset reuse with thematic context, and behavioral RNG patterns in boss fights. The game lacks faction conflict visual markers typical of war/strategy games; instead, it uses character appearance (NPC vs. Boss) and location theming (Transylvania = Dracula danger) to signal threat level. Safety is communicated through healing items (ice cream), NPC presence, and clear platform design. The 'bad ending' condition ($0 money) is an emergent consequence of the health-restoration cheat system, suggesting unintended world-state design. Regional PAL version increases movement speed, illustrating how mechanical changes communicate adaptation to different hardware. Unused graphics (bomb, NES controller) and debug features (controller 2 warp) indicate iterative design and removal of mechanics post-prototype.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia",
+    "tasvideos"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:02:27.581Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 11469,
+    "output_tokens": 3036,
+    "dimension": "manifestation",
+    "sources_available": [
+      "speedrun",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

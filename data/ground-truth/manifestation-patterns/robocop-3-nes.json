@@ -1,0 +1,132 @@
+{
+  "game_id": "robocop-3-nes",
+  "game_name": "RoboCop 3",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite animations and movement patterns in level environments",
+      "meaning": "Signals threat to player; varies by level (Level 3 and 4 share layout but use different enemy sets)"
+    },
+    {
+      "signal": "Level progression timer",
+      "visual_form": "HUD display with time remaining",
+      "meaning": "Indicates urgency; running out of time triggers game over state (unused 'OUT OF TIME' message suggests this was critical feedback)"
+    },
+    {
+      "signal": "Damage accumulation",
+      "visual_form": "Repair lab screen showing progressive leg and arm damage states (8x6 and 4x4 tile graphics)",
+      "meaning": "Visual degradation of RoboCop body indicates vulnerability and need for maintenance"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Repair lab",
+      "visual_form": "Dedicated screen with repair tank and damage state graphics overlay",
+      "meaning": "Safe zone where player can restore RoboCop integrity; visual feedback of healing through removal of damage tiles"
+    },
+    {
+      "signal": "Level completion",
+      "visual_form": "Level transitions and progression to next level",
+      "meaning": "Successfully navigating level layout (bonus room areas) indicates safety advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "RoboCop (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "RoboCop body armor and form (displayed at title screen with overlay sprites for chassis detail)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "HUD displays, repair lab with tank equipment, level-based mission areas"
+    },
+    {
+      "faction": "Enemies/Threats",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Level 3 and Level 4 share identical tilemap layouts but feature different enemy sprite sets and objects, suggesting faction-specific enemy types per level",
+      "environmental_markers": "Varied level room layouts (32x21 tilemaps with attributes); Level 1 contains bonus room areas; unused drug/alcohol reference sign suggests environmental faction storytelling was considered"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mission briefing state",
+      "visual_manifestation": "Pre-level text and message displays (briefings before levels only, per engine limitation)",
+      "behavioral_manifestation": "Game engine transitions to new level; unused final briefing text suggests planned end-game narrative state that was scrapped"
+    },
+    {
+      "world_state": "RoboCop damage/degradation",
+      "visual_manifestation": "Repair lab displays progressive damage through tilemap changes (leg stages 8x5 visible, 8x6 full; arm forearm separate rects; unused left palm 4x3 graphics)",
+      "behavioral_manifestation": "Player must navigate to repair lab to restore function; damage overlay sprites render on HUD"
+    },
+    {
+      "world_state": "Level completion/progression",
+      "visual_manifestation": "Black empty tilemaps with no attributes mark level end boundaries; level number increments (up to level 5 in unused end-game state)",
+      "behavioral_manifestation": "Game advances to next level or triggers game over; final level timer expiration intended to display 'OUT OF TIME' message (implementation incomplete)"
+    },
+    {
+      "world_state": "High-score/arcade standings",
+      "visual_manifestation": "Three distinct hi-score table versions (used final version with low scores; unused realistic score variant; placeholder 'J.BLOGGS' variant)",
+      "behavioral_manifestation": "Different hi-score tables suggest varying difficulty/progression communication; unused versions indicate game difficulty/challenge state iteration"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Tilemap level design with attribute data",
+      "example": "Levels 3 and 4 use identical room layouts (32x21 tilemaps) but opposite movement direction and different enemy/object sets, establishing level-specific threat environments"
+    },
+    {
+      "technique": "Censored environmental elements",
+      "example": "Unused drug/alcohol reference sign in Level 3 Part 1 was removed to meet Nintendo's content guidelines, suggesting developer intent to establish illegal activity world-state through environmental detail"
+    },
+    {
+      "technique": "Repair lab damage visualization",
+      "example": "Progressive damage graphics for legs and arms communicate RoboCop's vulnerability; unused full damage tiles (8x6 and 4x3) suggest over-design was pared back for technical constraints"
+    },
+    {
+      "technique": "HUD messaging system",
+      "example": "Unused 'OUT OF TIME' message and placeholder 'A SAMPLE MESSAGE' indicate time pressure and objective communication mechanic, though not fully implemented in final engine"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "RoboCop (player)",
+      "state": "Undamaged/functional",
+      "behavior": "Full movement and action capabilities; HUD displays normally"
+    },
+    {
+      "entity": "RoboCop (player)",
+      "state": "Damaged",
+      "behavior": "Requires navigation to repair lab; damage overlay sprites appear on repair screen; progressive deterioration of leg/arm graphics"
+    },
+    {
+      "entity": "Level enemies",
+      "state": "Active (Level 3)",
+      "behavior": "Specific enemy sprite set and object placement in shared tilemap layout"
+    },
+    {
+      "entity": "Level enemies",
+      "state": "Active (Level 4)",
+      "behavior": "Different enemy sprite set and object placement in shared tilemap layout; opposite movement direction relative to Level 3"
+    },
+    {
+      "entity": "Game state",
+      "state": "Time expiring",
+      "behavior": "Intended to display 'OUT OF TIME' HUD message, but implementation incomplete; immediately transitions to game over"
+    }
+  ],
+  "notes": "RoboCop 3 NES uses constrained visual communication due to NES technical limitations (256-tile background maximum, sprite buffer overflow). Manifestation layer is primarily tilemap-driven with overlay sprite enhancements. World-state communication relies on level progression, repair mechanics, and HUD text rather than dynamic environmental changes. Unused graphics and text (drug sign, full damage tiles, final briefing, 'OUT OF TIME' message) reveal developer's original intent for richer environmental and state-based storytelling that was cut for technical or content reasons. The game's dual-use of Level 3/4 identical layouts with different enemy sets demonstrates how behavior/object changes communicate faction/threat variations without visual redesign.",
+  "sources_used": [
+    "tcrf (The Cutting Room Floor - RoboCop 3 NES article)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:07:49.091Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2662,
+    "output_tokens": 1756,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

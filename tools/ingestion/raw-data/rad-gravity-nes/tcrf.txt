@@ -1,0 +1,455 @@
+The Adventures of Rad Gravity - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+The Adventures of Rad Gravity
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+The Adventures of Rad Gravity
+
+Developer :
+
+Interplay
+
+Publisher :
+
+Activision
+
+Platform :
+
+NES
+
+Released in US : December 1990  Released in EU : May 30,&#160;1991
+
+This game has  unused graphics .
+
+This game has  unused items .
+
+This game has  debugging material .
+
+The Adventures of Rad Gravity
+
+is an obscure game that has become popular in recent years due to videos mocking its title screen music. The game itself is designed to reward you for trying to bug the game, except that if you prove a cheater in the door maze on the last stage by trying to go out of bounds, you'll get a freeze. Oh, and it features a neat comic in the manual with context as to why you always have an item you can't use with you.
+
+Contents
+
+1
+
+Unused Graphics
+
+2
+
+Unused Items
+
+2.1
+
+Translator
+
+2.2
+
+Star
+
+2.3
+
+Brackets
+
+2.4
+
+Communicator
+
+2.5
+
+Cloner
+
+2.6
+
+Item Giving Equipment
+
+2.6.1
+
+Item List
+
+2.7
+
+Odd Effect Equipment
+
+3
+
+Planet Spawn Shortcuts
+
+3.1
+
+Spawn next to Volcania's energy container
+
+3.2
+
+Ending Clutscene
+
+3.3
+
+Sauria and Odar's shortcut spawn points
+
+3.4
+
+Turvia's shortcut spawn point
+
+Unused Graphics
+
+This star is after the Energy Disk, and before the Brackets used show which item is currently selected in the item menu, in the game's CHR.
+
+Unused Items
+
+By modifying $C5 at the item menu, you can modify the selected item index, this way you can finally get to equip the green item that the manual calls "Translator", claiming that "Gives you the ability to comprehend alien text messages". You can modify the equiped item directly in $C6, there's more item options this way, but the item's color palette doesn't get updated.
+
+Translator
+
+To do:  Find out if the game checks whether you have the Translator at any point.
+
+To do:  An existing sword, or a different one, if the two ones in the game have any gameplay difference.
+
+In the item menu, modify address $C5 with value $03, then press Start to equip it.  Using this item will have the effect of a sword.
+
+You normally start with this "item", and can't interact with it. The game's password system considers this to be an item you can either have or not, and as such you can start a new game without the Translator using the password  T$M0Z C7N3! 6PFL$ DTQ3K .
+
+Star
+
+To do:  Check too if this is an existing sword, if any of them are even different.
+
+To do:  Check if it has a palette that corresponds to it.
+
+In gameplay, edit address $C6 with value $8C to equip it. This item icon is unused, appears after the Energy Disk in the game's graphics, and before the Brackets item graphics. It will have the effect of a sword.
+
+Brackets
+
+Go to the item menu, edit adderss $C5 with value $12, press Start, and go to item menu again, edit address $C5 again, now with value $14, and press Start to equip it.  That, or modify address $C6 with value $8D during gameplay.
+
+It's an item that gives you the energy container that corresponds to the zone you are in, if you haven't obtained it before.  For example, the first room checks address $08's bit 1; if its clear, using this item will set its bit 1 and 2, and add 1 to address $09, which represents the energy containers you have. If it's set, this item will do nothing.
+
+Communicator
+
+Normally you can't equip this item, but you can use it as a normal item by editing address $C6 with value $86. Using it will get you out of the planet like expected, only quicker, with a fadeout.
+
+Cloner
+
+You can equip this by editing address $C6 with value $80, only if address $05's bits 1 and 2 are clear (the pistols must not be adquired). Using it will spawn a copy of you in place, they all can move and jump like you, and they each have separate HP, although only dies if they depleted their health (a explosion sound will mean this) and you get hit afterwards, other weapon can be equiped while the clones are in effect, all of them could be use if they're not many on screen, otherwise the weapon will not spawn, only the player will have their sword spawn, and Energy Disks will only appear on the player even if grabbed by a clone, the clone will still be able to get up the Energy Disk of the player though.
+
+If one of the clones dies, and you enter another room, you may hear an ominous music, the second after of the music may crash the game. You can avoid that by pressing Start and waiting a few seconds before unpausing; the ominous music will continue, and may or may not eventually crash the game.
+
+Item Giving Equipment
+
+By modifying $C6 mid-game to the next values you'll equip an item that using them will give you the following:
+
+$8E = Gives you the Translator if you don't have it (bit 4 at $05).
+
+$8F = Gives you the planet's item if you don't have it (refer to the table below).
+
+$90 = Gives you the armor that corresponds to the zone you are in (refer to the table below).
+
+$91 = Gives you the same energy container as the Brackets item and works as its described too.
+
+Item List
+
+(Note you always have the Laser Sword and Communicator.)
+
+Values for address  $05  (when you start the game, its value is set to $08):
+
+Hex
+
+Binary
+
+Description
+
+$00
+
+%00000000
+
+Nothing (not even the Translator)
+
+$01
+
+%00000001
+
+Power Pistol
+
+$02
+
+%00000010
+
+Vertigun
+
+$03
+
+%00000011
+
+Maxigun
+
+$04
+
+%00000100
+
+Super Sword
+
+$08
+
+%00001000
+
+Translator
+
+$10
+
+%00010000
+
+Crystal Bombs
+
+$20
+
+%00100000
+
+Saurian Crystals
+
+$30
+
+%00110000
+
+Bugged, makes equipping the Saurian Crystals equip the Teleport Beacon instead
+
+$40
+
+%01000000
+
+Teleport Beacon
+
+To have all items, normally $05 has value $6F.
+
+Values for address  $06  (when you start the game, its value is set to $00):
+
+Hex
+
+Binary
+
+Description
+
+$01
+
+%00000001
+
+Energy Disk
+
+$04
+
+%00000100
+
+Pink armor
+
+$08
+
+%00001000
+
+Green armor
+
+$0C
+
+%00001100
+
+White armor
+
+Odd Effect Equipment
+
+To do:  Is $A0's sound effect used in the game normally?
+
+$92 = Crashes the game
+
+$93 = Makes two bullets appear in front of you, going towards you. Some hit sounds will randomly play, you'll get multiple hits, and even after dying.
+
+$98 = Using it in the middle room of the intro stage will give you 2 energy bars for each time you enter and use it, mess up with music, and sometimes teleport you or crash the game.
+
+$A0 = Teleports you, sometimes to another room, play an odd sound effect, messes with enemies, and may throw you to the title screen, may crash the game.
+
+Planet Spawn Shortcuts
+
+To do:  Needs research to know how the Teleport Locations work
+
+Spawn next to Volcania's energy container
+
+On the ship, highlight Volcania, and edit both addresses $02 and $04 with the value $55, and pick the lowest selectable Teleport Location. You'll appear in Volcania, next to the energy container.
+
+Ending Clutscene
+
+On the ship, highlight Volcania and just edit address $04 with value $55, and pick the lower selectable Teleport Location. The ending animation of the ship will play with the ship music briefly before stopping, and the game will remain still after the ship takes the warp.
+
+Sauria and Odar's shortcut spawn points
+
+On the ship, highlight Volcania and edit address $02 and $04 with value $44, pick the lower-left corner one to spawn above the flying enemies in Odar, pick the one at the right of that to spawn at the dinosaur's tail in Sauria, or pick the Teleport Location on the planet to spawn at Sauria's gate maze room.
+
+Turvia's shortcut spawn point
+
+On the ship, highlight Volcania and edit address $02 and $04 with value $77, pick the only Teleport Location available to appear outside the house.
+
+Retrieved from " https://tcrf.net/index.php?title=The_Adventures_of_Rad_Gravity&oldid=1940174 "
+
+Categories :
+
+Games developed by Interplay
+
+Games published by Activision
+
+NES games
+
+Games released in 1990
+
+Games released in December
+
+Games with unused graphics
+
+Games with unused items
+
+Games with debugging functions
+
+To do
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with unused graphics
+
+Games  >  Games by content  >  Games with unused items
+
+Games  >  Games by developer  >  Games developed by Interplay
+
+Games  >  Games by platform
+
+Games  >  Games by publisher  >  Games published by Microsoft  >  Games published by Activision Blizzard  >  Games published by Activision
+
+Games  >  Games by release date  >  Games released in 1990
+
+Games  >  Games by release date  >  Games released in December
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+The Cutting Room Floor  >  Unimportant Awards  >  NES games
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 14 October 2025, at 02:33.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

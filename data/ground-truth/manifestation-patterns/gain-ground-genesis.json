@@ -1,0 +1,152 @@
+{
+  "game_id": "gain-ground-genesis",
+  "game_name": "Gain Ground",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "On-screen antagonist sprites",
+      "meaning": "Active threat requiring evasion or combat; failure to eliminate before time limit results in level failure"
+    },
+    {
+      "signal": "Time limit pressure",
+      "visual_form": "Countdown timer display",
+      "meaning": "Temporal constraint forcing player urgency; represents supercomputer simulation parameters"
+    },
+    {
+      "signal": "Character incapacitation",
+      "visual_form": "Controlled character sprite becomes static captive state",
+      "meaning": "Loss of active control; character must be rescued or permanently lost if next character dies"
+    },
+    {
+      "signal": "Party depletion",
+      "visual_form": "Roster of available characters depletes visually",
+      "meaning": "Approaching game-over state; remaining continues are final safety net"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Exit point location",
+      "visual_form": "Level-specific exit sprite/portal",
+      "meaning": "Safe destination; reaching with at least one character completes level objective"
+    },
+    {
+      "signal": "Captive allies",
+      "visual_form": "Rescuable character sprites scattered throughout level",
+      "meaning": "Resource expansion; can be escorted to exit to build party roster for subsequent levels"
+    },
+    {
+      "signal": "Character variety",
+      "visual_form": "Up to 20 distinct warrior sprites with unique visual designs",
+      "meaning": "Strategic flexibility; different weapon types provide tactical options against varied enemy types"
+    },
+    {
+      "signal": "Continue availability",
+      "visual_form": "Continue counter display (three total per game session)",
+      "meaning": "Second-chance mechanism; allows tactical restart of failed levels with original three-character party"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Federated Government warriors (player faction)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Rescuable captive allies serve as visual indicators of allied presence requiring extraction"
+    },
+    {
+      "faction": "Supercomputer simulation enemies (antagonist force)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Enemy sprite design varies by historical epoch theme (Ancient, Medieval, Modern, Future, Gain Ground System)",
+      "environmental_markers": "Enemy types reflect period-specific warfare aesthetics; thematic consistency reinforces simulation environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Supercomputer simulation active",
+      "visual_manifestation": "Entire game environment framed as digital simulation; level design reflects programmatic organization into four rounds of ten stages with themed historical epochs",
+      "behavioral_manifestation": "Enemies spawn and patrol according to simulation parameters; time limits reflect computational constraints; POW captives indicate simulated hostage scenario"
+    },
+    {
+      "world_state": "Supercomputer malfunction (narrative framing)",
+      "visual_manifestation": "Hostile simulation environment; enemies actively oppose player progression; thematic environmental design emphasizes hostile computational space",
+      "behavioral_manifestation": "All non-player entities function as threats; no neutral NPCs present; rescue mechanics create asymmetric relationship where allies are passive until escorted"
+    },
+    {
+      "world_state": "Historical epoch progression (Ancient → Medieval → Modern → Future → Gain Ground System)",
+      "visual_manifestation": "Level thematics change visually across rounds; environmental sprites, background designs, and architecture shift to reflect period aesthetic",
+      "behavioral_manifestation": "Enemy sprite design and behavior patterns adapt to epoch theme; level design complexity increases through progression; final epoch (Gain Ground System in Genesis version) represents meta-layer showing simulation internals"
+    },
+    {
+      "world_state": "Normal Mode vs Hard Mode",
+      "visual_manifestation": "Roster display differs; Normal shows three starting characters; Hard shows full twenty-character roster available immediately",
+      "behavioral_manifestation": "Normal Mode: captives appear throughout levels as resource collection; Hard Mode: captives removed, requiring strategic character deployment and permanent party composition"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Epoch-based level theming",
+      "example": "Game progresses through Ancient, Medieval, Modern, Future epochs, each with visually distinct environments that communicate historical setting without explicit narrative exposition"
+    },
+    {
+      "technique": "Captive placement narrative",
+      "example": "Scattered POW captives throughout levels reinforce the supercomputer hostage scenario established in opening narrative; their distribution communicates danger and urgency"
+    },
+    {
+      "technique": "Simulation meta-commentary",
+      "example": "Final epoch (Gain Ground System in Genesis version) takes place within the simulation's core infrastructure itself, visually representing the computational nature of the conflict"
+    },
+    {
+      "technique": "Character diversity worldbuilding",
+      "example": "Twenty recruitable warriors with distinct visual designs suggest varied military personnel from different backgrounds; reinforces setting of coordinated rescue operation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player-controlled character",
+      "state": "Active",
+      "behavior": "Responds to player input; can move freely, attack enemies, interact with captives by walking over them"
+    },
+    {
+      "entity": "Player-controlled character",
+      "state": "Incapacitated",
+      "behavior": "Transitions to static captive state; requires active character to escort to exit; disappears if subsequent characters fail level objective"
+    },
+    {
+      "entity": "Captive allies",
+      "state": "Unrescued",
+      "behavior": "Static position; visually distinct from active characters; awaiting player interaction"
+    },
+    {
+      "entity": "Captive allies",
+      "state": "Rescued",
+      "behavior": "Follow escorting character to exit point; become active party members upon level completion"
+    },
+    {
+      "entity": "Enemy combatants",
+      "state": "Active",
+      "behavior": "Patrol level; engage player characters on sight; must be eliminated or avoided to complete level objectives"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Active",
+      "behavior": "Appear as level-10 encounters at end of each round; represent escalated threat requiring strategic character selection and tactical approach"
+    }
+  ],
+  "notes": "Gain Ground's world-state communication relies heavily on thematic environmental design across historical epochs and the framing device of a supercomputer simulation. The game uses visual character variety and captive mechanics to communicate narrative stakes (hostage rescue scenario). Danger signals are primarily temporal (countdown timer) and spatial (enemy presence). Safety is signaled through exit points and ally availability. The paradigm shift from Normal to Hard Mode is communicated through roster display changes. Limited documentation on specific visual design details; analysis based on gameplay mechanics described and narrative framing.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:50:57.497Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2894,
+    "output_tokens": 1799,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

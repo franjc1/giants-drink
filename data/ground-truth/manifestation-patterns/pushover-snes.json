@@ -1,0 +1,225 @@
+{
+  "game_id": "pushover-snes",
+  "game_name": "Pushover",
+  "platform": "snes",
+  "paradigm": "puzzle-platform",
+  "danger_signals": [
+    {
+      "signal": "Falling from height",
+      "visual_form": "G.I. Ant positioned above screen edge or platform edge",
+      "meaning": "Imminent death; player must avoid dropping below safe zones"
+    },
+    {
+      "signal": "Falling domino stack",
+      "visual_form": "Dominos toppling uncontrollably or cascading across screen",
+      "meaning": "Level failure state; unintended domino destruction blocks puzzle solution"
+    },
+    {
+      "signal": "Crushed by domino",
+      "visual_form": "G.I. Ant directly beneath falling domino pieces",
+      "meaning": "Death state; collision with falling dominoes results in failure"
+    },
+    {
+      "signal": "Blocked exit path",
+      "visual_form": "Exit door obscured by fallen dominoes, destroyed ledges, or unbridged gaps",
+      "meaning": "Puzzle unsolvable; player cannot reach goal even if all dominoes fall"
+    },
+    {
+      "signal": "Time expiration warning",
+      "visual_form": "Time counter reaching zero on HUD",
+      "meaning": "Puzzle deadline exceeded; hint system activates but level can still continue"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Stable platform",
+      "visual_form": "Solid ledges and interconnected platforms holding dominoes",
+      "meaning": "Safe movement space for G.I. Ant; allows navigation without falling"
+    },
+    {
+      "signal": "Accessible exit door",
+      "visual_form": "Open doorway visible and reachable after domino chain completes",
+      "meaning": "Level completion is possible; exit path remains clear"
+    },
+    {
+      "signal": "Puzzle token/checkpoint",
+      "visual_form": "Token system UI element",
+      "meaning": "Player can reset to pre-push state; provides safety margin for experimentation"
+    },
+    {
+      "signal": "Correctly positioned dominoes",
+      "visual_form": "Dominoes standing upright in intended configuration matching visual layout",
+      "meaning": "Puzzle setup is valid; ready for single-push completion attempt"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "G.I. Ant (Player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Soldier ant character model",
+      "enemy_visual_variants": null,
+      "environmental_markers": "G.I. Ant is the controllable entity; appears as large ant figure scaled relative to dominoes"
+    },
+    {
+      "faction": "Colin Curly / Quavers mascot (Original branding - Amiga/Atari/DOS)",
+      "color_identity": null,
+      "symbol_or_sigil": "Quavers packet collectible",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Packets retrieved after each themed world; 9 packets total as progression markers"
+    },
+    {
+      "faction": "Captain Rat (SNES-specific branding)",
+      "color_identity": null,
+      "symbol_or_sigil": "Bundles of cash collectible",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Cash bundles dropped down ant hill; substitutes for Quavers in SNES localization"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Industrial complex world",
+      "visual_manifestation": "Factory/mechanical themed level environment with industrial aesthetic",
+      "behavioral_manifestation": "First world; introduces basic domino mechanics and tutorial levels"
+    },
+    {
+      "world_state": "Aztec world",
+      "visual_manifestation": "Ancient Mesoamerican temple architecture and cultural visual identity",
+      "behavioral_manifestation": "Mid-game progression; increasing puzzle complexity with themed domino configurations"
+    },
+    {
+      "world_state": "Space station world",
+      "visual_manifestation": "Futuristic sci-fi environment with technical elements",
+      "behavioral_manifestation": "Advanced puzzle mechanics; spatial navigation challenges"
+    },
+    {
+      "world_state": "Electronic world",
+      "visual_manifestation": "Circuitry and digital visual motifs",
+      "behavioral_manifestation": "Complex domino interaction patterns; puzzle interdependencies"
+    },
+    {
+      "world_state": "Greek temple world",
+      "visual_manifestation": "Classical Grecian architecture and columned environments",
+      "behavioral_manifestation": "High-difficulty progression; multi-stage puzzle solving required"
+    },
+    {
+      "world_state": "Medieval castle world",
+      "visual_manifestation": "Castle fortification architecture with feudal aesthetic",
+      "behavioral_manifestation": "Late-game challenges; complex level layouts and domino types"
+    },
+    {
+      "world_state": "Meccano-inspired world",
+      "visual_manifestation": "Mechanical construction toy aesthetic; modular metal framework visuals",
+      "behavioral_manifestation": "Advanced puzzle mechanics; building/construction themed challenges"
+    },
+    {
+      "world_state": "Dungeon world",
+      "visual_manifestation": "Underground cavern and dungeon stone architecture",
+      "behavioral_manifestation": "Near-end game state; maximum puzzle complexity"
+    },
+    {
+      "world_state": "Japanese temple world",
+      "visual_manifestation": "Eastern religious architecture and Japanese cultural design elements",
+      "behavioral_manifestation": "Final world; level 100 features hidden domino markings requiring special solution methods"
+    },
+    {
+      "world_state": "Level completion",
+      "visual_manifestation": "Exit door opens visually when all dominoes successfully topple",
+      "behavioral_manifestation": "Progression granted; token awarded; next level unlocked"
+    },
+    {
+      "world_state": "Level failure",
+      "visual_manifestation": "G.I. Ant death animation or domino destruction visual feedback",
+      "behavioral_manifestation": "Message displays 'You Failed, You Died'; level reset to initial state or token checkpoint"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Themed world progression",
+      "example": "Nine distinct visual environments (Industrial → Aztec → Space → Electronic → Greek → Medieval → Meccano → Dungeon → Japanese) communicate narrative journey through varied locales where dominoes must be manipulated"
+    },
+    {
+      "technique": "Collectible narrative markers",
+      "example": "Quavers packets (original branding) or cash bundles (SNES) retrieved after each world create tangible progression reward and reinforce recovery/rescue objective"
+    },
+    {
+      "technique": "Level-specific architecture",
+      "example": "Each themed world's environmental visual identity (temple columns, futuristic panels, castle stones) reinforces world-state through visual design without explicit dialogue"
+    },
+    {
+      "technique": "Puzzle failure messaging",
+      "example": "'You Failed, You Died' message paired with visual death animation communicates consequence and narrative stakes for failed attempts"
+    },
+    {
+      "technique": "Hidden level designer commentary",
+      "example": "Level 98 hint revealing designer admits unsolvable state ('I can't find it!') breaks fourth wall; communicates intentional design challenge and world-building quirk"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "G.I. Ant",
+      "state": "Normal movement",
+      "behavior": "Can navigate platforms, carry dominoes one at a time, position for push actions"
+    },
+    {
+      "entity": "G.I. Ant",
+      "state": "Falling",
+      "behavior": "Descends below screen or platform edge; triggers death state and level failure"
+    },
+    {
+      "entity": "G.I. Ant",
+      "state": "Crushed",
+      "behavior": "Directly beneath falling domino; collision results in immediate level failure"
+    },
+    {
+      "entity": "Domino (11 types)",
+      "state": "Standing upright",
+      "behavior": "Stable; waiting to be pushed; identified by red and yellow pattern markings"
+    },
+    {
+      "entity": "Domino (11 types)",
+      "state": "Pushed/toppling",
+      "behavior": "Falls according to type-specific mechanics; initiates chain reaction; different types create different actions (bridge gaps, destroy ledges, etc.)"
+    },
+    {
+      "entity": "Domino (11 types)",
+      "state": "Destroyed/stacked",
+      "behavior": "Landing on another domino causes destruction; registers as level failure condition"
+    },
+    {
+      "entity": "Exit door",
+      "state": "Closed/blocked",
+      "behavior": "Inaccessible; blocks level completion; remains sealed if puzzle unsolved or path obstructed"
+    },
+    {
+      "entity": "Exit door",
+      "state": "Open",
+      "behavior": "Accessible after all dominoes topple; allows G.I. Ant to progress to next level"
+    },
+    {
+      "entity": "Time counter",
+      "state": "Active",
+      "behavior": "Displays remaining time; countdown toward zero triggers hint system when expired"
+    },
+    {
+      "entity": "Time counter",
+      "state": "Expired",
+      "behavior": "Reaches zero; hint system activates on pause; does not force level failure (puzzle can continue)"
+    }
+  ],
+  "notes": "Pushover is a pure domino-chain puzzle game with strong environmental storytelling through themed worlds (9 total). Visual communication relies on: (1) domino pattern identification via red/yellow markings for type recognition; (2) spatial platform layout conveying puzzle complexity; (3) failure states (death message, falling, crushing) providing immediate feedback; (4) world themes providing narrative context without explicit exposition. The SNES version localized branding from Quavers (UK snack mascot Colin Curly) to Captain Rat/cash bundles. Level 100 introduces hidden domino markings as a final difficulty spike. The game's design philosophy emphasizes singular or limited-solution puzzles, with intentional dead-end scenarios teaching players causal domino mechanics. No faction conflict or political systems are present; all narrative is implicit progression through environmental themes.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:43:35.989Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3660,
+    "output_tokens": 2623,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

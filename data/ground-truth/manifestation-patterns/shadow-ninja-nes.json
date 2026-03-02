@@ -1,0 +1,153 @@
+{
+  "game_id": "shadow-ninja-nes",
+  "game_name": "Shadow of the Ninja",
+  "platform": "nes",
+  "paradigm": "beat-em-up / hack-and-slash platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Diverse enemy character sprites scattered throughout levels",
+      "meaning": "Active threats requiring player engagement; different enemy types signal varying difficulty"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Larger, distinctive sprite at level endpoints; explosions upon defeat",
+      "meaning": "Major threat requiring skill to overcome; visual reward (healing explosion) upon success"
+    },
+    {
+      "signal": "Damage taken",
+      "visual_form": "Weapon degradation mechanic; visual reduction in attack power after player takes damage",
+      "meaning": "Cumulative danger state; player becoming progressively weaker without healing intervention"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Vitality meter reduction; limited continues (five total)",
+      "meaning": "Immediate danger of game-over; player vulnerability increasing"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item boxes",
+      "visual_form": "Destructible boxes scattered throughout stages",
+      "meaning": "Resource availability; potential for weapon upgrades, potions, shuriken, grenades"
+    },
+    {
+      "signal": "Boss defeat healing",
+      "visual_form": "Explosion proximity-based health recovery upon boss destruction",
+      "meaning": "Safe momentary state; reward for successful encounter completion"
+    },
+    {
+      "signal": "Vitality potions",
+      "visual_form": "Collectible items from destroyed boxes",
+      "meaning": "Active recovery mechanic; restoration of player health state"
+    },
+    {
+      "signal": "Special attack availability",
+      "visual_form": "Thunderstorm summoning when vitality exceeds half-meter",
+      "meaning": "Powerful defensive/offensive capability available at high health; temporary advantage state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player ninja (Iga clan)",
+      "color_identity": "Purple (Hayate) and Orange (Kaede)",
+      "symbol_or_sigil": "Ninja silhouette; traditional katana/kusarigama weaponry",
+      "enemy_visual_variants": null,
+      "environmental_markers": "No faction-specific environmental markers; players are infiltrators in enemy territory"
+    },
+    {
+      "faction": "Emperor Garuda's regime",
+      "color_identity": null,
+      "symbol_or_sigil": "Futuristic dictatorial stronghold; enemy soldier aesthetics",
+      "enemy_visual_variants": "Multiple enemy types (soldiers, guards, specialized combatants) representing regime's military structure",
+      "environmental_markers": "Well-guarded stronghold in futuristic New York City setting; fortified locations; industrial/urban environment"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "2029 dystopian future under Garuda's rule",
+      "visual_manifestation": "Futuristic New York City setting; stronghold architecture; industrial enemy soldier designs",
+      "behavioral_manifestation": "Enemy patrols and resistance throughout stages; boss encounters representing regime hierarchy"
+    },
+    {
+      "world_state": "Player mission: infiltration and assassination",
+      "visual_manifestation": "Progressive stage movement toward stronghold center; increasing enemy density and difficulty",
+      "behavioral_manifestation": "Escalating enemy encounters; boss battles marking level completions; health carryover between levels indicating resource scarcity"
+    },
+    {
+      "world_state": "Player vulnerability / weakened state",
+      "visual_manifestation": "Weapon downgrade visual feedback after damage; reduced vitality meter display",
+      "behavioral_manifestation": "Decreased attack power; need to seek healing resources; tactical repositioning required"
+    },
+    {
+      "world_state": "Player advantage / powered state",
+      "visual_manifestation": "Weapon upgrade levels (up to three increments); full vitality meter; special attack readiness",
+      "behavioral_manifestation": "Aggressive combat engagement capability; thunderstorm special attack availability at >50% health"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression toward objective",
+      "example": "Five-level structure with fourteen stages progressively moving through Garuda's stronghold; environmental complexity increases toward final confrontation"
+    },
+    {
+      "technique": "Setting context establishment",
+      "example": "Futuristic New York City backdrop with stronghold construction signals dystopian world-state and regime consolidation of power"
+    },
+    {
+      "technique": "Enemy composition variety",
+      "example": "Multiple enemy types throughout stages suggest military hierarchy and regime resource deployment; visual differentiation implies specialized roles"
+    },
+    {
+      "technique": "Resource scarcity communication",
+      "example": "Health carryover between levels (not restored automatically) visually signals wartime/survival conditions; limited continues reinforce high-stakes mission context"
+    },
+    {
+      "technique": "Co-operative mission structure",
+      "example": "Two-player simultaneous gameplay with Iga clan ninja (Hayate and Kaede) visually reinforces team-based infiltration narrative; shared continues emphasize collective mission outcome"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (Hayate/Kaede)",
+      "state": "High vitality (>50%)",
+      "behavior": "Access to thunderstorm special attack; enhanced combat capability; aggressive engagement possible"
+    },
+    {
+      "entity": "Player character (Hayate/Kaede)",
+      "state": "Low vitality (<25%)",
+      "behavior": "Weapon power reduced; vulnerability increased; tactical avoidance necessary; seeking healing items prioritized"
+    },
+    {
+      "entity": "Player character (Hayate/Kaede)",
+      "state": "Weapon upgraded",
+      "behavior": "Increased damage output; more effective range (kusarigama variant); tactical flexibility increased"
+    },
+    {
+      "entity": "Enemies (generic soldiers/guards)",
+      "state": "Patrol/active",
+      "behavior": "Present throughout levels; attack on player proximity; varied difficulty by level progression"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Defeated",
+      "behavior": "Explosion occurs; proximity-based health healing for player; signals level completion and temporary safety window"
+    }
+  ],
+  "notes": "Shadow of the Ninja communicates world-state primarily through environmental setting (futuristic dystopian NYC stronghold), enemy composition (regime military forces), and mechanical systems (health carryover, limited continues, weapon degradation). The game uses color differentiation for player characters (purple/orange ninja) versus regime forces. Danger is signaled through enemy presence, boss encounters, and mechanical vulnerability states. Safety is indicated through item availability and boss-defeat healing. The co-op structure with shared resources (continues, health carryover) reinforces narrative of a joint infiltration mission under resource constraints. Regional censorship differences (ninja references removed in EU version) indicate cultural communication boundaries external to game world-state. No explicit faction insignia or sigils documented; faction identity relies on role (ninja infiltrators vs. regime forces) and environmental context.",
+  "sources_used": [
+    "tcrf: Shadow of the Ninja - The Cutting Room Floor (unused graphics, regional differences, title screen variants)",
+    "wikipedia: Shadow of the Ninja (gameplay mechanics, character descriptions, narrative context, setting details, weapon system)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:41:23.511Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4519,
+    "output_tokens": 1898,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

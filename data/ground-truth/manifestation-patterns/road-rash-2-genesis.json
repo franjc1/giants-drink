@@ -1,0 +1,200 @@
+{
+  "game_id": "road-rash-2-genesis",
+  "game_name": "Road Rash II",
+  "platform": "genesis",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Stamina meter depletion",
+      "visual_form": "Color shift from green to red in bottom-left corner stamina display",
+      "meaning": "Player fatigue from combat; continued depletion results in ejection from bike"
+    },
+    {
+      "signal": "Bike condition deterioration",
+      "visual_form": "Bike condition meter displayed between racer and opponent stamina meters; decreases with crashes",
+      "meaning": "Cumulative vehicle damage; full depletion wrecks bike and ends race participation"
+    },
+    {
+      "signal": "Police officer appearance",
+      "visual_form": "Sporadic appearance of police officers on tracks",
+      "meaning": "Hazard that can apprehend racer post-crash, resulting in fines and potential game-over if funds insufficient"
+    },
+    {
+      "signal": "Financial depletion",
+      "visual_form": "Cash balance deduction for repair bills and fines",
+      "meaning": "Inability to cover repair or fine costs triggers premature game-over"
+    },
+    {
+      "signal": "Environmental obstacles",
+      "visual_form": "Boulders, cars, deer, and cows visible on track",
+      "meaning": "Collision hazards that eject player from bike and trigger stamina/condition penalties"
+    },
+    {
+      "signal": "Opponent weapon visibility",
+      "visual_form": "Visual representation of clubs and chains held by enemy racers",
+      "meaning": "Immediate threat of armed combat; weapons can be seized if attacker is struck first"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "High stamina level",
+      "visual_form": "Green-colored stamina meter in bottom-left corner at full or high capacity",
+      "meaning": "Player capable of sustained combat; low injury risk from further engagement"
+    },
+    {
+      "signal": "Bike structural integrity",
+      "visual_form": "Condition meter showing high status; inverse of crash accumulation",
+      "meaning": "Vehicle stable for continued racing without immediate wreck risk"
+    },
+    {
+      "signal": "Financial surplus",
+      "visual_form": "Accumulated cash balance above minimum required for repair bills/fines",
+      "meaning": "Sufficient economic buffer to continue game despite penalties"
+    },
+    {
+      "signal": "Lead position in race",
+      "visual_form": "Racer position at front of visible race field",
+      "meaning": "Reduced direct combat pressure; fewer opponents ahead to compete with"
+    },
+    {
+      "signal": "Absence of police",
+      "visual_form": "Track segments without visible police officer presence",
+      "meaning": "Temporary reprieve from apprehension hazard; safe passage possible"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player racer",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player motorcycle visually distinct from 14 AI-controlled opponent racers; player stamina displayed bottom-left",
+      "environmental_markers": "Player position highlighted in split-screen multiplayer mode; controllable character with forward-facing perspective"
+    },
+    {
+      "faction": "AI racers (generic competitors)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct motorcycle models and racer appearances; vary in aggression with progression through difficulty levels; some wield weapons",
+      "environmental_markers": "Opponent stamina visible bottom-right corner; increase in number and aggression across five levels (Hawaii → Arizona → Tennessee → Alaska → Vermont)"
+    },
+    {
+      "faction": "Law enforcement",
+      "color_identity": null,
+      "symbol_or_sigil": "Police officer visual identity implied through context",
+      "enemy_visual_variants": "Distinct from racers; static obstacles rather than competing entities; sporadic placement",
+      "environmental_markers": "Appear more frequently and extract higher fines as game progresses through difficulty levels; represent state authority outside racing competition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game (Level 1: Hawaii)",
+      "visual_manifestation": "Tropical environment; lower police frequency; smaller cash prizes visible in UI",
+      "behavioral_manifestation": "AI opponents less aggressive; repair bills and fines lower; racer can recover from mistakes more easily"
+    },
+    {
+      "world_state": "Mid-game progression (Levels 2-3: Arizona, Tennessee)",
+      "visual_manifestation": "Desert and rural environments; increased police presence; longer track layouts",
+      "behavioral_manifestation": "Opponent aggression scales; repair costs and fines increase; combat encounters more frequent and dangerous"
+    },
+    {
+      "world_state": "Late game (Levels 4-5: Alaska, Vermont)",
+      "visual_manifestation": "Arctic and mountainous environments; high police density; extended course complexity",
+      "behavioral_manifestation": "Maximum opponent aggression; substantial financial penalties; cumulative difficulty creates high-stakes racing tension"
+    },
+    {
+      "world_state": "Combat engagement active",
+      "visual_manifestation": "Opponent stamina meter visible bottom-right; weapons displayed in opponent hands; both racer and opponent stamina shift toward red",
+      "behavioral_manifestation": "Both entities engage in punch/kick/weapon attacks; stamina depletion risk increases; tactical combat positioning required"
+    },
+    {
+      "world_state": "Crash or stamina depletion",
+      "visual_manifestation": "Racer ejected from bike; on-foot running animation begins; stamina meter reset or depleted entirely",
+      "behavioral_manifestation": "Player loses combat capability; automatic return-to-bike behavior; vulnerability to incoming traffic and police"
+    },
+    {
+      "world_state": "Police apprehension post-crash",
+      "visual_manifestation": "Police officer encounters ejected racer; fine deduction from cash display",
+      "behavioral_manifestation": "Race participation ended; financial penalty applied; potential game-over if funds insufficient"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Geographic progression as difficulty escalation",
+      "example": "Game traverses five distinct US regions (Hawaii → Arizona → Tennessee → Alaska → Vermont), with each location visually distinct but thematically reinforcing increasing hazard severity and isolation. Arctic environments imply harsher conditions than tropical starting point."
+    },
+    {
+      "technique": "Obstacle type variance by region",
+      "example": "Boulders, cars, deer, and cows serve as regional environmental storytelling—suggesting authentic local hazards (wildlife in rural areas, traffic in populated zones) without explicit narrative exposition."
+    },
+    {
+      "technique": "Police frequency as governance indicator",
+      "visual_manifestation": "Sporadic early, frequent late",
+      "example": "Increasing police presence across levels suggests escalating state enforcement or transition from lawless to lawful jurisdictions, visually communicating world-state shift without dialogue."
+    },
+    {
+      "technique": "Financial cost escalation",
+      "example": "Repair bills and fines grow more expensive with level progression, implying regions with stricter law enforcement, more expensive services, or higher economic stakes—conveyed entirely through numeric and visual cost displays."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player racer",
+      "state": "High stamina (green meter)",
+      "behavior": "Can engage in sustained combat; offensive capability maintained; can pursue or flee opponents effectively"
+    },
+    {
+      "entity": "Player racer",
+      "state": "Low stamina (red meter)",
+      "behavior": "Combat weakened; ejection imminent; defensive positioning required; risk of forced dismount"
+    },
+    {
+      "entity": "Player racer",
+      "state": "Ejected from bike",
+      "behavior": "Automatic return-to-bike behavior; can alter course with directional input; vulnerable to traffic and police; reduced agency until remounted"
+    },
+    {
+      "entity": "AI opponent racer",
+      "state": "Armed (weapon visible)",
+      "behavior": "Offensive threat increased; weapon can be seized if opponent is struck while holding it; indicates aggression"
+    },
+    {
+      "entity": "AI opponent racer",
+      "state": "Early levels (1-2)",
+      "behavior": "Less aggressive engagement; lower stamina depletion rate; beatable with basic tactics"
+    },
+    {
+      "entity": "AI opponent racer",
+      "state": "Late levels (4-5)",
+      "behavior": "Highly aggressive; frequent weapon use; tactical combat positioning; requires sustained engagement"
+    },
+    {
+      "entity": "Police officer",
+      "state": "Post-crash",
+      "behavior": "Apprehends ejected racer; applies financial penalty; ends race participation if player cannot escape"
+    },
+    {
+      "entity": "Police officer",
+      "state": "Early game frequency",
+      "behavior": "Sporadic appearances; low penalty threat; manageable obstacle"
+    },
+    {
+      "entity": "Police officer",
+      "state": "Late game frequency",
+      "behavior": "Frequent appearances; high penalty threat; significant game-over risk if cash insufficient"
+    }
+  ],
+  "notes": "Road Rash II communicates world-state primarily through UI visualization (color-coded stamina meters), environmental variation (geographic progression), and emergent difficulty scaling (opponent aggression, police frequency, financial penalties). No explicit faction conflict or political narrative exists; instead, the game presents a graduated progression from accessible to punishing. The split-screen multiplayer mode reinforces competitive player-vs-player dynamics while maintaining identical visual communication systems. World-state shifts are communicated implicitly through cost escalation and environmental hazard density rather than explicit exposition.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T12:54:49.021Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2700,
+    "output_tokens": 2474,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "game_id": "twinbee-snes",
+  "game_name": "Pop'n TwinBee",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy aircraft presence",
+      "visual_form": "Onscreen enemy sprites with distinct silhouettes moving toward player",
+      "meaning": "Active threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Boss encounter",
+      "visual_form": "Large enemy sprite at end of stage with expanded visual footprint",
+      "meaning": "Major threat requiring sustained combat and pattern recognition"
+    },
+    {
+      "signal": "Projectile fire",
+      "visual_form": "Enemy bullet streams visible against background",
+      "meaning": "Immediate collision hazard requiring navigation skill"
+    },
+    {
+      "signal": "Life meter depletion",
+      "visual_form": "HUD life bar visibly decreasing after damage",
+      "meaning": "Cumulative damage state; continued hits lead to stage restart"
+    },
+    {
+      "signal": "Stage progression",
+      "visual_form": "Seven distinct stage environments with escalating visual complexity",
+      "meaning": "Increasing difficulty and threat intensity as game progresses"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up bell items",
+      "visual_form": "Floating colored bells in stage environment",
+      "meaning": "Collectible upgrades; color variation determines upgrade type"
+    },
+    {
+      "signal": "Companion ship selection",
+      "visual_form": "Three visual formation modes available before stage start",
+      "meaning": "Player-configurable support system for tactical advantage"
+    },
+    {
+      "signal": "Co-op life sharing",
+      "visual_form": "Player 2 can transfer life energy to Player 1 via visual exchange",
+      "meaning": "Cooperative safety mechanism; mutual resource support"
+    },
+    {
+      "signal": "Continue system",
+      "visual_form": "Stage restart checkpoint offered after losing",
+      "meaning": "Limited but present safety valve; not permadeath"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "TwinBee (Player 1)",
+      "color_identity": "Blue",
+      "symbol_or_sigil": "TwinBee aircraft sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player 1 default character; distinct from WinBee through color"
+    },
+    {
+      "faction": "WinBee (Player 2)",
+      "color_identity": "Pink",
+      "symbol_or_sigil": "WinBee aircraft sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player 2 companion character; visually distinguished from TwinBee"
+    },
+    {
+      "faction": "Dr. Mardock (Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Acorn Men army as visual manifestation",
+      "enemy_visual_variants": "Diverse enemy sprite types representing Mardock's forces",
+      "environmental_markers": "Donburi Island setting; hostile airspace controlled by Mardock's machines"
+    },
+    {
+      "faction": "Rescue objective",
+      "color_identity": null,
+      "symbol_or_sigil": "Madoka (young girl) as narrative focal point",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Opening distress signal; granddaughter of Dr. Mardock provides narrative motivation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Initial peace disrupted",
+      "visual_manifestation": "Opening sequence shows TwinBee and WinBee on patrol before distress signal interrupts",
+      "behavioral_manifestation": "Transition from idle patrol to active combat engagement"
+    },
+    {
+      "world_state": "Enemy occupation of airspace",
+      "visual_manifestation": "Each of seven stages filled with enemy aircraft and projectiles; escalating density per stage",
+      "behavioral_manifestation": "Enemy waves increase in complexity and coordination as stages progress"
+    },
+    {
+      "world_state": "Sanity corruption of Dr. Mardock",
+      "visual_manifestation": "Character background shows 'bump in the head' caused transformation from scientist to warlord",
+      "behavioral_manifestation": "Mardock commands increasingly sophisticated Acorn Men army through seven-stage campaign"
+    },
+    {
+      "world_state": "Escalating threat intensity",
+      "visual_manifestation": "Stage environments become more complex visually; boss encounters grow more elaborate",
+      "behavioral_manifestation": "Difficulty settings adjust enemy aggression and attack patterns; 'couple mode' assists less-experienced players"
+    },
+    {
+      "world_state": "Player resource depletion",
+      "visual_manifestation": "Life meter on HUD depletes visibly with each hit; no separate life counter",
+      "behavioral_manifestation": "Accumulative damage model replaces discrete lives; single meter determines stage continuation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Setting as antagonist territory",
+      "example": "Donburi Island depicted as occupied by Dr. Mardock's forces; airspace serves as combat arena"
+    },
+    {
+      "technique": "Character-driven narrative through opening sequence",
+      "example": "Distress signal from Madoka establishes stakes; granddaughter-of-scientist relationship explains Mardock's relevance"
+    },
+    {
+      "technique": "Progressive stage design as world expansion",
+      "example": "Seven distinct stages represent geographical progression through Mardock's controlled territory toward final confrontation"
+    },
+    {
+      "technique": "Boss encounters as world-state culmination",
+      "example": "Each stage-end boss represents escalating manifestation of Mardock's power and control"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "TwinBee (blue aircraft)",
+      "state": "Combat ready",
+      "behavior": "Player-controlled; responsive to input; fires projectiles and bombs; engages in close-range melee attacks via ship punches"
+    },
+    {
+      "entity": "WinBee (pink aircraft)",
+      "state": "Companion support",
+      "behavior": "Player 2 controlled or AI-assisted; follows, engulfs, or surrounds player ship depending on companion mode selection"
+    },
+    {
+      "entity": "Enemy aircraft",
+      "state": "Hostile patrol",
+      "behavior": "Automated movement patterns; fire projectiles at player; destroyed by player fire; provide tactical gameplay challenges"
+    },
+    {
+      "entity": "Acorn Men forces",
+      "state": "Active occupation",
+      "behavior": "Diverse enemy types representing Mardock's army; spawn in waves with increasing coordination"
+    },
+    {
+      "entity": "Boss entities (stage-end)",
+      "state": "Strategic confrontation",
+      "behavior": "Large sprite presence; complex attack patterns requiring pattern recognition; defeat triggers stage completion"
+    },
+    {
+      "entity": "Power-up bells",
+      "state": "Passive availability",
+      "behavior": "Float stationary or drift slowly; change color when shot; provide attribute upgrades when collected"
+    }
+  ],
+  "notes": "Pop'n TwinBee communicates world-state primarily through enemy density and spatial complexity rather than explicit visual HUD indicators. The game uses a health-pool system (life meter) instead of discrete lives, indicating a shift toward cumulative-damage narrative. Faction identity is minimal—no explicit political factions beyond hero vs. antagonist. World-state progression is linear through seven stages with escalating visual and behavioral complexity. The opening cutscene establishes narrative context but the game relies on visual gameplay manifestation rather than environmental storytelling. Companion mechanics (formation types, life-sharing) serve as mechanical expressions of cooperation rather than faction signaling. The 'couple mode' difficulty adjustment indicates the game recognizes varying player skill states and adapts threat communication accordingly.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:16:25.271Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3507,
+    "output_tokens": 2029,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

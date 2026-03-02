@@ -1,0 +1,163 @@
+{
+  "game_id": "wild-gunman-nes",
+  "game_name": "Wild Gunman",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy eyes flash",
+      "visual_form": "Gunslinger character's eyes illuminate/flash on screen",
+      "meaning": "Opponent is about to draw and fire; player must act immediately or lose the duel"
+    },
+    {
+      "signal": "Speech bubble 'FIRE!!'",
+      "visual_form": "Text prompt appearing above or near the gunslinger",
+      "meaning": "Critical moment: player has window to shoot before opponent fires"
+    },
+    {
+      "signal": "Gunslinger drawing weapon",
+      "visual_form": "Opponent animation showing hand moving to gun holster",
+      "meaning": "If player has not yet fired, opponent is executing counter-attack; duel is lost if not already won"
+    },
+    {
+      "signal": "Foul light activation",
+      "visual_form": "On-screen indicator light illuminates after premature fire",
+      "meaning": "Player drew gun before eyes flashed; current duel is now unwinnable, must wait for next opponent"
+    },
+    {
+      "signal": "Funeral march music",
+      "visual_form": "Audio cue (Frédéric Chopin's 'Funeral March') plays",
+      "meaning": "Player has been defeated; duel or game sequence has ended in loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Opponent falls after being shot",
+      "visual_form": "Gunslinger sprite animation shows character falling or collapsing",
+      "meaning": "Player successfully won the duel by shooting fast enough; immediate threat neutralized"
+    },
+    {
+      "signal": "Transition to next opponent",
+      "visual_form": "Screen change to new gunslinger character in saloon or duel setting",
+      "meaning": "Previous duel concluded successfully; player advances to new challenge"
+    },
+    {
+      "signal": "Shooting gallery mode",
+      "visual_form": "Saloon building with windows displaying stationary targets",
+      "meaning": "Low-pressure game mode where opponents appear in windows without time pressure mechanic"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character (unnamed protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Zapper gun / revolver weapon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Positioned at bottom of screen, implied to be standing in saloon or desert duel setting"
+    },
+    {
+      "faction": "Wild Gunmen (enemy gunslingers)",
+      "color_identity": null,
+      "symbol_or_sigil": "Western-style clothing, holstered revolver",
+      "enemy_visual_variants": "Five distinct gunslinger opponents in arcade version; multiple opponents in NES version with varied sprites",
+      "environmental_markers": "Appear in saloon windows or as standalone duel opponents; positioned as threats to player"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-duel standoff",
+      "visual_manifestation": "Gunslinger stands motionless facing player, hand near holster, neutral animated pose",
+      "behavioral_manifestation": "Opponent waits; no aggressive action; player can observe before reacting"
+    },
+    {
+      "world_state": "Duel initiated - opponent draws",
+      "visual_manifestation": "Gunslinger's eyes flash; speech bubble with 'FIRE!!' appears on screen",
+      "behavioral_manifestation": "Opponent prepares to fire; player has narrow time window to shoot first or lose"
+    },
+    {
+      "world_state": "Player premature fire (foul)",
+      "visual_manifestation": "Foul indicator light activates; gunslinger remains unharmed",
+      "behavioral_manifestation": "Player input is ignored; duel continues but is automatically lost; opponent proceeds to fire"
+    },
+    {
+      "world_state": "Successful player shot",
+      "visual_manifestation": "Gunslinger sprite collapses or falls; animation shows defeat",
+      "behavioral_manifestation": "Opponent is eliminated; duel ends; next opponent appears"
+    },
+    {
+      "world_state": "Opponent victory",
+      "visual_manifestation": "Gunslinger fires back at player; screen may show hit feedback or defeat state",
+      "behavioral_manifestation": "Funeral march music plays; duel lost; transition to next round or game over"
+    },
+    {
+      "world_state": "Shooting gallery mode active",
+      "visual_manifestation": "Saloon building facade with multiple windows; targets appear and disappear in windows",
+      "behavioral_manifestation": "Targets emerge from windows briefly; no time-pressure eye-flash mechanic; player can shoot at will"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Western saloon setting",
+      "example": "Game visually establishes Wild West theme through saloon building, wooden structures, and gunslinger character designs; shooting gallery mode explicitly shows saloon windows as target locations"
+    },
+    {
+      "technique": "Period-accurate weapon design",
+      "example": "Zapper light gun peripheral modeled after Colt Single Action Army revolver; reinforces historical Western gunfighter aesthetic and implies player is inhabiting era-appropriate gunslinger role"
+    },
+    {
+      "technique": "Duel confrontation choreography",
+      "visual_form": "Face-to-face standoff pose; opponent positioning suggests classic Western duel framing",
+      "example": "Gunslinger stance and layout communicates this is formal duel scenario rather than ambush or free-fire scenario"
+    },
+    {
+      "technique": "Multiple distinct opponents",
+      "example": "Five unique gunslinger characters in arcade version signal player must overcome series of increasingly difficult or varied opponents; visual differentiation creates sense of progression through 'gauntlet' of foes"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Gunslinger opponent",
+      "state": "Waiting/neutral",
+      "behavior": "Stands motionless with hand near holster; maintains eye contact or neutral forward gaze"
+    },
+    {
+      "entity": "Gunslinger opponent",
+      "state": "About to draw",
+      "behavior": "Eyes flash (visual cue); accompanied by 'FIRE!!' speech bubble; triggers player reaction window"
+    },
+    {
+      "entity": "Gunslinger opponent",
+      "state": "Drawing weapon",
+      "behavior": "Animation shows hand moving to revolver; if player has not fired, opponent will complete draw and fire counter-attack"
+    },
+    {
+      "entity": "Gunslinger opponent",
+      "state": "Defeated",
+      "behavior": "Sprite collapses or falls; animation ends; opponent removed from screen"
+    },
+    {
+      "entity": "Player (via gun response)",
+      "state": "Premature fire",
+      "behavior": "Triggers foul; gun input disabled; duel becomes unwinnable; indicates player mistimed reaction"
+    },
+    {
+      "entity": "Player (via successful shot)",
+      "state": "Quick reflexes",
+      "behavior": "Gun fires during eye-flash window; opponent is hit and falls; duel won; next opponent appears"
+    }
+  ],
+  "notes": "Wild Gunman is a reaction-time light gun game with minimal world-state complexity but highly refined danger/safety signal design. The core communication mechanism is the eye-flash + 'FIRE!!' signal pair, which creates binary tension (shoot now vs. wait). The foul mechanic adds consequence for misreading signals. Visual world-state is static (saloon/desert setting) with primary state changes expressed through opponent animation and audio cues. No faction politics or territorial control; conflict is purely personal duel-based. The game's visual language prioritizes clarity of the single decision point (when to shoot) over environmental narrative.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:19:52.654Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2958,
+    "output_tokens": 2021,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

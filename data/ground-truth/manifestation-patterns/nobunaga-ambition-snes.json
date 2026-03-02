@@ -1,0 +1,196 @@
+{
+  "game_id": "nobunaga-ambition-snes",
+  "game_name": "Nobunaga's Ambition",
+  "platform": "snes",
+  "paradigm": "turn-based grand strategy role-playing simulation",
+  "danger_signals": [
+    {
+      "signal": "Enemy military presence",
+      "visual_form": "Rival daimyo troops on map grid",
+      "meaning": "Immediate threat to player fiefs; invasion risk"
+    },
+    {
+      "signal": "Low peasant loyalty",
+      "visual_form": "Loyalty meter or population status indicator",
+      "meaning": "Risk of rebellion; fief instability and loss of tax revenue"
+    },
+    {
+      "signal": "Depleted supplies/resources",
+      "visual_form": "Rice or gold counter critically low",
+      "meaning": "Cannot sustain military or civilian expansion; vulnerability to economic collapse"
+    },
+    {
+      "signal": "Exhausted army morale",
+      "visual_form": "Troop morale/efficiency metric",
+      "meaning": "Reduced combat effectiveness; units more likely to retreat or fail"
+    },
+    {
+      "signal": "Active hostile alliance",
+      "visual_form": "Enemy faction non-aggression pact broken or marriage alliance severed",
+      "meaning": "Former neutral/allied power now hostile; increased regional instability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "High peasant loyalty",
+      "visual_form": "Loyalty meter in green or high numeric value",
+      "meaning": "Stable fief; no rebellion risk; steady tax and resource flow"
+    },
+    {
+      "signal": "Abundant resources (rice/gold)",
+      "visual_form": "Resource counter display at high levels",
+      "meaning": "Economic stability; capacity for military expansion and training"
+    },
+    {
+      "signal": "Well-trained army",
+      "visual_form": "Army efficiency or training level indicator",
+      "meaning": "Strong combat readiness; improved battle outcomes"
+    },
+    {
+      "signal": "Non-aggression pact or marriage alliance",
+      "visual_form": "Alliance status indicator on map or faction display",
+      "meaning": "Diplomatic security; reduced threat from that faction"
+    },
+    {
+      "signal": "Controlled fiefs with high productivity",
+      "visual_form": "Fief ownership visualization with productivity markers",
+      "meaning": "Stable economic base; sustainable regional power"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Oda Nobunaga",
+      "color_identity": null,
+      "symbol_or_sigil": "Historically associated with conquest and unification goal",
+      "enemy_visual_variants": "Rival daimyo displayed as opposing army units",
+      "environmental_markers": "Fiefs under Nobunaga control shown on strategic map"
+    },
+    {
+      "faction": "Regional Daimyō (various)",
+      "color_identity": null,
+      "symbol_or_sigil": "Each selectable as player faction; historically distinct Japanese warlords",
+      "enemy_visual_variants": "Non-player daimyo displayed as enemy forces on map grid",
+      "environmental_markers": "Fief locations and troop placements indicate territorial control and regional power centers"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early campaign (1560: Battle for the East / Daimyo Power Struggles)",
+      "visual_manifestation": "Multiple fragmented daimyo territories across map; no unified control",
+      "behavioral_manifestation": "Player must allocate resources carefully; military forces are smaller; diplomatic options (pacts, marriages) are primary tools"
+    },
+    {
+      "world_state": "Mid campaign (1571: Ambition Untamed)",
+      "visual_manifestation": "Some territorial consolidation visible; stronger regional powers emerge",
+      "behavioral_manifestation": "Increased military conflict; more fiefs controlled by fewer daimyo; player must balance expansion with defense"
+    },
+    {
+      "world_state": "Late campaign (1582: Road Towards Unification)",
+      "visual_manifestation": "Map shows dominant powers with clear territorial blocs; fewer independent daimyo",
+      "behavioral_manifestation": "Large-scale military campaigns; unification goal becomes achievable; final confrontations with major rivals"
+    },
+    {
+      "world_state": "Fief under player control with high productivity",
+      "visual_manifestation": "Fief displays high tax collection and resource generation rates",
+      "behavioral_manifestation": "Player can allocate soldiers, invest in flood control, expand towns, recruit ninja"
+    },
+    {
+      "world_state": "Fief at risk of rebellion",
+      "visual_manifestation": "Loyalty meter drops; peasant satisfaction low",
+      "behavioral_manifestation": "Player must give food/rice to peasants to restore loyalty; avoid raising taxes; risk of fief loss to rebellion"
+    },
+    {
+      "world_state": "Military campaign active",
+      "visual_manifestation": "Battle map with terrain; turn-based grid movement",
+      "behavioral_manifestation": "Each turn = one day; forces move and engage; victory through retreat forcing, command unit destruction, outlasting, or supply exhaustion"
+    },
+    {
+      "world_state": "Espionage/intelligence gathering",
+      "visual_manifestation": "Spy action selection in turn menu",
+      "behavioral_manifestation": "Player gains information on rival daimyo strength; can influence enemy decisions covertly"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Fief development visualization",
+      "example": "Town expansion, flood control improvements, and productivity changes visually demonstrate economic progress and player investment decisions"
+    },
+    {
+      "technique": "Territorial map display",
+      "example": "Strategic map shows which daimyo control which fiefs; color or symbol coding indicates faction ownership and regional power distribution"
+    },
+    {
+      "technique": "Resource flow mechanics",
+      "example": "Rice and gold transfers between fiefs show economic interconnection; shortages or surpluses signal political stress and military capability"
+    },
+    {
+      "technique": "Army composition and positioning",
+      "example": "Troop counts and unit types (soldiers, ninja) at each fief communicate military readiness and threat level"
+    },
+    {
+      "technique": "Peasant loyalty as world-state indicator",
+      "example": "Declining loyalty signals mismanagement, over-taxation, or crop failure; visual metric reflects fief stability"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Peasants",
+      "state": "High loyalty",
+      "behavior": "Remain in fief; generate tax revenue; do not rebel"
+    },
+    {
+      "entity": "Peasants",
+      "state": "Low loyalty",
+      "behavior": "May rebel if taxes increased; leave fief; loyalty can be stolen by rival daimyo"
+    },
+    {
+      "entity": "Army units",
+      "state": "Well-trained",
+      "behavior": "Higher combat efficiency; better performance in battle; increased morale"
+    },
+    {
+      "entity": "Army units",
+      "state": "Poorly trained or fatigued",
+      "behavior": "Lower combat effectiveness; more likely to retreat; vulnerable to supply exhaustion"
+    },
+    {
+      "entity": "Rival daimyo",
+      "state": "Non-aggression pact active",
+      "behavior": "Will not initiate military action; diplomatic cooperation possible"
+    },
+    {
+      "entity": "Rival daimyo",
+      "state": "Alliance broken",
+      "behavior": "Become hostile; initiate invasions; competitive for resources and territory"
+    },
+    {
+      "entity": "Daimyo (player-controlled)",
+      "state": "Sick or recuperating",
+      "behavior": "Temporary reduction in administrative capacity; affects decision-making options"
+    },
+    {
+      "entity": "Fief",
+      "state": "Expanded town",
+      "behavior": "Increased tax collection; higher peasant engagement; greater military recruitment capacity"
+    },
+    {
+      "entity": "Fief",
+      "state": "Flood control improved",
+      "behavior": "Increased productivity long-term; immediate cost to peasant loyalty"
+    }
+  ],
+  "notes": "Nobunaga's Ambition (SNES, 1992) is a turn-based grand strategy simulation set during Japan's Sengoku period. Visual communication is primarily text-based and numeric (loyalty meters, resource counters, army efficiency ratings) rather than detailed graphics. World-state is communicated through strategic map visualization (fief ownership, troop positioning) and turn-based mechanics (seasonal turns for administration, daily turns for battle). Danger and safety are signaled through resource availability, peasant loyalty metrics, and military readiness indicators. Factions are differentiated by historical daimyo identity and territorial control rather than color-coding or distinctive visual sigils. Political situation (war, alliance, rebellion) is communicated through gameplay state transitions and menu options available to the player each turn.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:01:46.369Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3116,
+    "output_tokens": 2269,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

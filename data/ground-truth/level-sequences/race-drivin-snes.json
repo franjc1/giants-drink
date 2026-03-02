@@ -1,0 +1,107 @@
+{
+  "game_id": "race-drivin-snes",
+  "game_name": "Race Drivin'",
+  "platform": "snes",
+  "paradigm": "racing",
+  "level_count": 3,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic car operation (manual transmission, clutch, shifter)",
+      "first_appears": "Game start / any track selection",
+      "introduction_context": "moderate",
+      "mastery_context": "Players must properly operate realistic transmission mechanics or risk stalling; difficulty increases with manual vs automatic selection"
+    },
+    {
+      "element": "Standard racing track layout",
+      "first_appears": "Original/Stunt track",
+      "introduction_context": "moderate",
+      "mastery_context": "Simulated road course with timed completion (~90 seconds), establishes baseline speed and steering physics"
+    },
+    {
+      "element": "Speed-focused minimalist track",
+      "first_appears": "Autocross track",
+      "introduction_context": "moderate",
+      "mastery_context": "Very short duration (~30 seconds) emphasizes acceleration and quick turns over endurance"
+    },
+    {
+      "element": "Advanced stunt obstacles",
+      "first_appears": "Super Stunt track",
+      "introduction_context": "dangerous",
+      "mastery_context": "Corkscrew loop, cylindrical tunnel, 45° inclined hill, dual landing ramps, mountain road sections; requires precise vehicle control and physics understanding"
+    },
+    {
+      "element": "Jump mechanics",
+      "first_appears": "Stunt track (original Hard Drivin' elements) and Super Stunt track (enhanced versions)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Dual landing ramps and jump loop sections demand timing and trajectory management"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": 30,
+      "max": 180
+    },
+    "typical_relief_triggers": [
+      "Successful stunt completion",
+      "Maintaining speed through corners",
+      "Crossing finish line within time limit",
+      "Smooth landing after jump sections"
+    ],
+    "typical_tension_triggers": [
+      "Approaching stunt obstacle sections",
+      "Time pressure (allotted time countdown)",
+      "Risk of vehicle stall (manual transmission misshift)",
+      "Narrow track sections requiring precision steering",
+      "Jump ramps with landing accuracy requirements"
+    ],
+    "pacing_descriptor": "Time-trial based tension with discrete peaks at stunt sections; relief comes from obstacle completion or maintaining steady pace; overall arc is gradual escalation from short speed-focused Autocross (30s) to endurance-heavy Super Stunt (180s)"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Autocross track provides brief, accessible introduction to vehicle physics and steering responsiveness; 30-second duration allows quick iteration",
+    "mid_game": "Original Stunt track (~90 seconds) introduces standard track navigation with moderate obstacle complexity and time management demands",
+    "late_game": "Super Stunt track (~180 seconds) escalates with enhanced and new stunt obstacles (corkscrew loop, cylindrical tunnel, inclined hill) requiring sustained precision and advanced physics mastery",
+    "notable_spikes": [
+      "Transition from Autocross to original Stunt track triples time commitment and track complexity",
+      "Introduction of corkscrew loop and cylindrical tunnel sections in Super Stunt track",
+      "Manual transmission vehicle selection dramatically increases difficulty via stall risk"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Stunt-focused progression",
+      "description": "Tracks escalate from minimalist speed (Autocross) to moderate obstacles (original Stunt) to elaborate stunt sequences (Super Stunt with loop, tunnel, hill, ramps). Each track isolates different skill requirements.",
+      "example_level": "Super Stunt track"
+    },
+    {
+      "pattern_name": "Linear single-path design",
+      "description": "Autocross and Super Stunt tracks offer only one driving path per course, unlike original Hard Drivin' which had multiple routes. This enforces specific obstacle navigation rather than player choice.",
+      "example_level": "Autocross track, Super Stunt track"
+    },
+    {
+      "pattern_name": "Physics-as-difficulty",
+      "description": "Manual transmission mode with clutch, 4-speed shifter, and stall risk creates a skill ceiling independent of track design. Realistic vehicle modeling (4-wheel instead of 2-wheel simulation) directly impacts control feedback.",
+      "example_level": "All tracks with manual transmission vehicle selection"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T03:09:21.361Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3059,
+    "output_tokens": 1387,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

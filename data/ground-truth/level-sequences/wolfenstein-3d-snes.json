@@ -1,0 +1,162 @@
+{
+  "game_id": "wolfenstein-3d-snes",
+  "game_name": "Wolfenstein 3D",
+  "platform": "snes",
+  "paradigm": "action",
+  "level_count": 30,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Knife (melee weapon)",
+      "first_appears": "level start",
+      "introduction_context": "safe",
+      "mastery_context": "close-quarters fallback when out of ammunition"
+    },
+    {
+      "element": "Pistol (firearm)",
+      "first_appears": "level start / early encounter",
+      "introduction_context": "safe",
+      "mastery_context": "primary ranged weapon for early levels"
+    },
+    {
+      "element": "Nazi guards (enemy type)",
+      "first_appears": "early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "basic enemy type encountered throughout"
+    },
+    {
+      "element": "Dogs/Rats (enemy type)",
+      "first_appears": "early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "fast-moving melee threats requiring evasion"
+    },
+    {
+      "element": "Submachine gun (firearm upgrade)",
+      "first_appears": "mid-game levels",
+      "introduction_context": "moderate",
+      "mastery_context": "improved damage output and fire rate"
+    },
+    {
+      "element": "Chain gun (firearm upgrade)",
+      "first_appears": "late-game levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "rapid-fire weapon for handling multiple threats"
+    },
+    {
+      "element": "Locked doors (obstacle)",
+      "first_appears": "early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "require key collection to progress"
+    },
+    {
+      "element": "Secret areas (optional content)",
+      "first_appears": "early levels",
+      "introduction_context": "safe",
+      "mastery_context": "hidden rooms containing treasure, health, ammunition"
+    },
+    {
+      "element": "Boss encounters (special enemy)",
+      "first_appears": "episode finale levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "particularly difficult enemies ending each episode"
+    },
+    {
+      "element": "Elevator (level exit)",
+      "first_appears": "all levels",
+      "introduction_context": "safe",
+      "mastery_context": "primary objective to complete each level"
+    },
+    {
+      "element": "Health pickups",
+      "first_appears": "early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "manage health resource throughout levels"
+    },
+    {
+      "element": "Ammunition pickups",
+      "first_appears": "early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "resource management alongside enemy encounters"
+    },
+    {
+      "element": "Treasure/scoring items",
+      "first_appears": "early levels",
+      "introduction_context": "safe",
+      "mastery_context": "optional collection for points and completion bonuses"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "reaching elevator/level exit",
+      "finding health pickup after enemy encounter",
+      "discovering secret area with resources",
+      "killing final boss to complete episode"
+    ],
+    "typical_tension_triggers": [
+      "encountering enemy patrol",
+      "running low on ammunition",
+      "health dropping below safe threshold",
+      "entering unknown area with multiple exits",
+      "approaching locked door requiring key search",
+      "facing boss encounter at episode finale"
+    ],
+    "pacing_descriptor": "Fast-paced action with cyclical tension-relief tied to enemy encounters and resource management. Intensity increases toward episode finales with boss fights. Secret areas provide optional relief and resource replenishment."
+  },
+  "spatial_grammar": {
+    "primary_axis": "both",
+    "optional_content_signal": "Wall tiles that slide back when activated reveal hidden rooms containing treasure, health, or ammunition",
+    "secret_convention": "Activatable wall tiles signal hidden areas; secret areas are purely optional and reward exploration",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Gradual introduction of basic enemies (guards) and weapon types (knife, pistol); focus on level navigation and learning controls",
+    "mid_game": "Introduction of faster enemies (dogs/rats), upgraded weapons (submachine gun), locked door mechanics requiring key collection; increased enemy density",
+    "late_game": "Heaviest firepower available (chain gun), toughest boss encounters at episode finales, most complex level layouts",
+    "notable_spikes": [
+      "Episode finale boss fights (particularly difficult single-enemy encounters)",
+      "Transition from submachine gun to chain gun availability signals late-game intensity increase"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Episode Structure",
+      "description": "Game divided into episodes containing multiple standard levels culminating in a boss-fight level. SNES version contains 30 levels total across 6 episodes (2 secret levels)",
+      "example_level": "Each episode finale (levels 10, 20, 30, etc. in original structure)"
+    },
+    {
+      "pattern_name": "Grid-Based Maze Navigation",
+      "description": "All levels are flat planes divided into areas and rooms by grid-based walls and doors of equal height. Player must traverse maze to locate elevator exit",
+      "example_level": "All standard levels follow this structure"
+    },
+    {
+      "pattern_name": "Secret Area Hunting",
+      "description": "Hidden rooms accessible via activated wall tiles; reward-driven exploration offering treasure, health, ammunition, and completion bonuses without mandatory progression impact",
+      "example_level": "Present in all levels per gameplay description"
+    },
+    {
+      "pattern_name": "Nazi Bunker Theming",
+      "description": "Each level themed after Nazi bunkers and buildings; consistent aesthetic supports thematic immersion and enemy type expectations",
+      "example_level": "All levels"
+    }
+  ],
+  "sources_used": [
+    "tcrf - Wolfenstein 3D (SNES) - The Cutting Room Floor",
+    "wikipedia - Wolfenstein 3D"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T01:58:08.716Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5213,
+    "output_tokens": 1648,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

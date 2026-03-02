@@ -1,0 +1,249 @@
+{
+  "game_id": "cossacks-european-wars-pc",
+  "game_name": "Cossacks: European Wars",
+  "platform": "pc",
+  "paradigm": "rts",
+  "danger_signals": [
+    {
+      "signal": "Resource depletion",
+      "visual_form": "Resource indicator UI depletion; unit state changes",
+      "meaning": "Famine state when food depletes; units starve and die from lack of supplies"
+    },
+    {
+      "signal": "Gold shortage",
+      "visual_form": "Gold counter at zero or negative; unit status indicators",
+      "meaning": "Unit mutiny against player; maintenance-requiring units defect to enemy control"
+    },
+    {
+      "signal": "Coal and iron shortage",
+      "visual_form": "Resource counter depletion; ranged unit weapon status",
+      "meaning": "Shooters and cannons cease fire; loss of ranged combat capability"
+    },
+    {
+      "signal": "Enemy army movement",
+      "visual_form": "Isometric unit sprites moving on map; formation groupings",
+      "meaning": "Military threat; potential imminent combat or resource raid"
+    },
+    {
+      "signal": "Peasant capture",
+      "visual_form": "Peasant unit sprite ownership change; color/allegiance shift",
+      "meaning": "Economic workforce loss; enemy gains labor capacity"
+    },
+    {
+      "signal": "Artillery targeting range indicator",
+      "visual_form": "Cannon/mortar fire trajectories; impact debris and shrapnel",
+      "meaning": "Area-of-effect danger zone; collateral damage to nearby units (ally and enemy)"
+    },
+    {
+      "signal": "Morale loss",
+      "visual_form": "Unit formation dissolution; soldiers breaking stance",
+      "meaning": "Combat effectiveness reduction; units vulnerable to counter-attack"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Formation maintenance",
+      "visual_form": "Grouped unit clusters (15, 36, 72, 120, or 196 units); officer and drummer presence",
+      "meaning": "Defensive bonus active; morale improvement; organized unit cohesion"
+    },
+    {
+      "signal": "Stand ground order active",
+      "visual_form": "Unit stationary stance; formation maintained in defensive posture",
+      "meaning": "Defensive bonus granted; morale improvement; reduced vulnerability to charge attacks"
+    },
+    {
+      "signal": "Resource abundance",
+      "visual_form": "Resource counters high; peasants working in designated areas (mills, mines, fishing boats)",
+      "meaning": "Economic stability; no famine risk; unit maintenance sustainable"
+    },
+    {
+      "signal": "Fortified structures",
+      "visual_form": "Upgraded building visuals; wall reinforcements",
+      "meaning": "Reduced vulnerability to artillery; defended territory"
+    },
+    {
+      "signal": "Artillery escort presence",
+      "visual_form": "Guard units surrounding artillery; formation grouping",
+      "meaning": "Protection against melee counter-attack; sustained ranged damage capability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Playable Nations (16 total)",
+      "color_identity": "Nation-specific color palette for unit sprites and building architecture",
+      "symbol_or_sigil": "Architectural style unique per nation (building visual distinctiveness)",
+      "enemy_visual_variants": "Enemy unit sprites rendered in different nation colors; building architecture reflects nation allegiance",
+      "environmental_markers": "Building styles cluster geographically; resource gathering sites tied to nation settlement patterns"
+    },
+    {
+      "faction": "Turkey",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Can build xebecs (unique naval unit equivalent to frigates); restricted to galley-tier ships before xebec tech",
+      "environmental_markers": "Coastal settlements; naval dominance capability; historically contextual positioning"
+    },
+    {
+      "faction": "Western Powers (generic faction grouping)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Access to full ship hierarchy (yacht, galley, frigate, battleship); advanced artillery (multi-barrelled cannons, howitzers)",
+      "environmental_markers": "Advanced military infrastructure; higher tech building availability"
+    },
+    {
+      "faction": "Historically less-developed nations",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Restricted unit build trees; limited to galley-tier naval units; reduced artillery access",
+      "environmental_markers": "Lower-tier building structures; reduced technological complexity"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Famine (food resource depleted)",
+      "visual_manifestation": "Resource indicator shows zero/negative food; peasants cease activity at mills and fishing boats",
+      "behavioral_manifestation": "Units die from starvation; economy collapses; workforce cannot expand"
+    },
+    {
+      "world_state": "Economic instability (gold depleted)",
+      "visual_manifestation": "Gold counter at zero; unit maintenance icons show alert status",
+      "behavioral_manifestation": "Gold-dependent units defect to enemy control; mutiny occurs; loss of expensive unit types (cavalry, artillery crew)"
+    },
+    {
+      "world_state": "Military capability loss (coal/iron depleted)",
+      "visual_manifestation": "Ranged unit weapon indicators show disabled state; cannon/shooter sprites show idle pose",
+      "behavioral_manifestation": "Shooters cannot fire volley; cannons and artillery become decorative structures; melee-only combat mode"
+    },
+    {
+      "world_state": "Active combat engagement",
+      "visual_manifestation": "Isometric unit formations visible on map; artillery fire trajectories traced; impact debris and shrapnel visual effects",
+      "behavioral_manifestation": "Units assume combat formations; morale modifiers visible; wounded unit sprites or death animations"
+    },
+    {
+      "world_state": "Peaceful/expansion phase (early game)",
+      "visual_manifestation": "Peasants visible gathering resources; no enemy units on screen; construction animation for buildings",
+      "behavioral_manifestation": "Resource gathering continues uninterrupted; technology research visible in academy/minaret; unit training ongoing"
+    },
+    {
+      "world_state": "Technological advancement (research complete)",
+      "visual_manifestation": "Building upgrade visual changes; unit sprite variants reflect armor/weapon upgrades; new unit types available in production menus",
+      "behavioral_manifestation": "Damage output increases for affected units; ranged units show improved accuracy/range; artillery reload speed increases"
+    },
+    {
+      "world_state": "Naval dominance",
+      "visual_manifestation": "Ships visible in coastal/water areas; frigate/battleship sprites denote tech level; shore bombardment fire trajectories",
+      "behavioral_manifestation": "Water territory controlled; enemy naval movement restricted; shore structures take damage from cannon fire"
+    },
+    {
+      "world_state": "Morale crisis (formation broken)",
+      "visual_manifestation": "Unit formation dissolves visually; soldiers scatter sprite animation; officer/drummer units separated from formation",
+      "behavioral_manifestation": "Units vulnerable to melee charge; combat effectiveness reduced; defensive bonus lost"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural distinctiveness per nation",
+      "example": "16 playable nations each possess unique building styles; visual landscape communicates political/cultural identity of territory holder"
+    },
+    {
+      "technique": "Resource location clustering",
+      "example": "Designated resource areas (gold mines, stone quarries, fishing zones, forests) concentrate around settlements; visual density indicates economic focus"
+    },
+    {
+      "technique": "Naval unit hierarchy visibility",
+      "example": "Ship types (yacht → galley → frigate → battleship) visible in harbors reflect technological progression and military capability; xebec presence signals Turkish faction"
+    },
+    {
+      "technique": "Unit formation spectacle",
+      "example": "Large grouped formations (up to 196 units) create visual mass on isometric map; player perceives army strength through physical cluster density"
+    },
+    {
+      "technique": "Damage state visuals on structures",
+      "example": "Building upgrades change architectural appearance; walls show reinforcement visuals; artillery-damaged structures display destruction states"
+    },
+    {
+      "technique": "Officer/drummer presence as status indicator",
+      "example": "Academy and minaret buildings require visible presence to enable formations; their absence communicates organizational chaos"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Peasant workforce",
+      "state": "Idle (no resource depletion)",
+      "behavior": "Visible at designated resource sites (mills, mines, quarries, fishing boats); multitasking capability shown through task-switching animation"
+    },
+    {
+      "entity": "Peasant workforce",
+      "state": "Captured by enemy",
+      "behavior": "Sprite color/allegiance changes; unit transitions to enemy control; player loses labor capacity"
+    },
+    {
+      "entity": "Infantry unit in formation",
+      "state": "Combat-ready (stand ground order active)",
+      "behavior": "Maintains tight grouping; displays defensive posture; morale indicator shows elevated state"
+    },
+    {
+      "entity": "Infantry unit in formation",
+      "state": "Morale crisis (formation broken)",
+      "behavior": "Dissolves from tight cluster; soldiers scatter; vulnerable to melee counter-attack; retreats backwards"
+    },
+    {
+      "entity": "Ranged unit (shooter/musketeer/strelets)",
+      "state": "Ready to engage",
+      "behavior": "Maintains distance from melee targets; positioned at range threshold for weapon effectiveness; volley animation triggers"
+    },
+    {
+      "entity": "Ranged unit (shooter/musketeer/strelets)",
+      "state": "Ammunition depleted / coal shortage",
+      "behavior": "Weapon disabled; unit assumes idle pose; cannot fire volleys; retreats when approached"
+    },
+    {
+      "entity": "Cavalry unit",
+      "state": "In formation (without officer/drummer)",
+      "behavior": "Grouped movement; charge capability; faster movement than infantry; melee damage superiority over shooters"
+    },
+    {
+      "entity": "Artillery (cannon/mortar/howitzer)",
+      "state": "Active firing",
+      "behavior": "Fires projectile; arcing trajectory visible; impact debris and shrapnel create area-of-effect damage; friendly fire possible if unit caught in blast radius"
+    },
+    {
+      "entity": "Artillery (cannon/mortar/howitzer)",
+      "state": "Iron/coal shortage",
+      "behavior": "Weapon disabled; unit becomes immobile defensive structure; mutiny risk if gold also depleted"
+    },
+    {
+      "entity": "Ship (frigate/battleship)",
+      "state": "Gold abundant (maintenance paid)",
+      "behavior": "Maintains crew loyalty; active naval combat; can bombard shore structures; controls water territory"
+    },
+    {
+      "entity": "Ship (frigate/battleship)",
+      "state": "Gold depleted",
+      "behavior": "Crew mutiny; ship captured by enemy or becomes uncontrollable; crew defects with vessel"
+    },
+    {
+      "entity": "Officer/Drummer unit",
+      "state": "Present with formation",
+      "behavior": "Enables formation assembly (15/36/72/120/196 unit groupings); grants morale bonus; allows stand ground order effectiveness"
+    },
+    {
+      "entity": "Officer/Drummer unit",
+      "state": "Absent or killed",
+      "behavior": "Formation capability lost; units revert to solo attack mode; morale penalty applied; defensive bonus unavailable"
+    }
+  ],
+  "notes": "Cossacks: European Wars communicates world-state primarily through resource depletion mechanics manifested in unit behavioral changes and UI indicators. The 16-nation faction system uses architectural distinctiveness rather than explicit color identity as the primary visual differentiation. Danger signals are encoded in resource scarcity (famine, mutiny, weapon malfunction) and unit formation dissolution (morale loss). Safety is signaled through formation maintenance, officer presence, and stand ground postures. The isometric perspective allows visual spectacle of large unit clusters, making army strength physically perceivable. Environmental storytelling relies on building-style clustering and resource location patterns. Unit behavioral tells are tightly coupled to resource state (coal/iron shortage disables weapons; gold shortage triggers mutiny). The game's political situation is implicit in historical mission scenarios (Thirty Years' War, War of Austrian Succession) rather than explicit world-state visualization.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T20:00:16.534Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2563,
+    "output_tokens": 3153,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

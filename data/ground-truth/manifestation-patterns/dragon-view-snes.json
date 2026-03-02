@@ -1,0 +1,142 @@
+{
+  "game_id": "dragon-view-snes",
+  "game_name": "Dragon View",
+  "platform": "snes",
+  "paradigm": "rpg",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence in overworld",
+      "visual_form": "Sprite scaling and rendering in first-person pseudo-3D view; enemies approach from horizon",
+      "meaning": "Combat encounter imminent; player must prepare or flee"
+    },
+    {
+      "signal": "Dungeon environments",
+      "visual_form": "Side-scrolling view transition from overworld; darker color palette in detailed areas",
+      "meaning": "High-danger zone; increased enemy density and environmental hazards"
+    },
+    {
+      "signal": "Terrain boundaries and mountainlike enclosures",
+      "visual_form": "Visual barriers rendered in pseudo-3D space; mountain silhouettes and rocky outcrops",
+      "meaning": "Navigation obstacles; marks dangerous or restricted areas of continent"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Town environments",
+      "visual_form": "Side-scrolling detailed view; NPCs present; interior/settlement architecture visible",
+      "meaning": "Safe zone; opportunities for dialogue, trade, and quest information"
+    },
+    {
+      "signal": "Static UI panels",
+      "visual_form": "Top and bottom screen panels remain constant during overworld navigation; clear HUD visibility",
+      "meaning": "Stable world state; player has agency and information accessibility"
+    },
+    {
+      "signal": "Open overworld terrain without enclosure",
+      "visual_form": "Flat, accessible landscape in pseudo-3D view; minimal sprite congestion",
+      "meaning": "Safe passage available; low immediate threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player character/protagonist faction",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "First-person perspective centering; protagonist controls navigation through overworld"
+    },
+    {
+      "faction": "Enemy forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinct sprite designs; appear at varying scales depending on proximity in pseudo-3D space",
+      "environmental_markers": "Concentrated in dungeon areas and certain overworld regions; indicate territorial control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Overworld exploration",
+      "visual_manifestation": "First-person pseudo-3D engine; terrain shading and sprite scaling to simulate depth; mountainous boundaries enclosing navigable areas",
+      "behavioral_manifestation": "Free movement and exploration; encounters triggered by sprite proximity; undirected player agency emphasized"
+    },
+    {
+      "world_state": "Town/dungeon presence",
+      "visual_manifestation": "Transition to side-scrolling detailed 2D view; interior architecture and NPC placement; higher visual fidelity in localized areas",
+      "behavioral_manifestation": "Structured exploration; dialogue and interaction systems active; combat in dungeon subsections"
+    },
+    {
+      "world_state": "Combat encounter",
+      "visual_manifestation": "Sprite scaling indicates enemy proximity; action RPG hybrid gameplay triggers; visual feedback through hit/damage indicators",
+      "behavioral_manifestation": "Real-time beat 'em up mechanics activate; player dodge/attack; enemy AI responds to player position"
+    },
+    {
+      "world_state": "Narrative progression",
+      "visual_manifestation": "Well-translated first-person text overlay; story exposition through dialogue boxes",
+      "behavioral_manifestation": "Player-driven discovery; text directs attention to quest objectives and world lore; NPC interactions reveal political context"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain layout and boundaries",
+      "example": "Mountainlike enclosures partition the continent into distinct regions; visual geography reinforces exploration progression and regional identity"
+    },
+    {
+      "technique": "Architecture in detailed areas",
+      "example": "Town design, dungeon layout, and interior aesthetics communicate safety/danger zones; settlement density indicates civilization centers"
+    },
+    {
+      "technique": "Sprite density and enemy placement",
+      "example": "High sprite congestion in certain regions signals danger zones; sparse enemy presence in others indicates neutral/safe territories"
+    },
+    {
+      "technique": "Perspective shift mechanic",
+      "example": "Transition from first-person pseudo-3D overworld to side-scrolling detailed view marks entry into narrative/action-focused spaces (towns, dungeons)"
+    },
+    {
+      "technique": "Lighting and color palette",
+      "example": "Basic terrain shading in overworld creates visual depth; potential darker tones in dungeons communicate increased threat"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy sprites",
+      "state": "Distant",
+      "behavior": "Small sprite size on horizon; slow approach velocity; low threat"
+    },
+    {
+      "entity": "Enemy sprites",
+      "state": "Approaching",
+      "behavior": "Scaling up in pseudo-3D space; sprite size increases; proximity triggers combat"
+    },
+    {
+      "entity": "Enemy sprites",
+      "state": "Combat",
+      "behavior": "Real-time movement and attack patterns; responsive to player actions; side-scrolling view active"
+    },
+    {
+      "entity": "NPCs in towns",
+      "state": "Idle",
+      "behavior": "Static placement; dialogue prompt available; signals interaction opportunity"
+    },
+    {
+      "entity": "Player avatar",
+      "state": "Overworld navigation",
+      "behavior": "Centered first-person view; controls sprite scaling and terrain interaction; agency-driven movement"
+    }
+  ],
+  "notes": "Dragon View uses a distinctive pseudo-3D overworld system (without dedicated 3D hardware like Super FX) that communicates world-state through sprite scaling and rudimentary rendering. The game's dual-perspective design—first-person overworld vs. side-scrolling detail views—creates clear visual demarcation between exploration and action/narrative spaces. Political/faction information appears to be conveyed primarily through first-person narrative text and NPC dialogue rather than visual iconography. The emphasis on player-driven undirected exploration means world-state is communicated reactively through visual consequence rather than prescriptive UI. Framerates suffer with high sprite density, which may serve as emergent danger signal. Limited source material prevents detailed faction color/symbol extraction.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:02:30.318Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3080,
+    "output_tokens": 1752,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

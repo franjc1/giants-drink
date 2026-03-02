@@ -1,0 +1,123 @@
+{
+  "game_id": "urban-champion-nes",
+  "game_name": "Urban Champion",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "basic weak punch",
+      "first_appears": "round 1",
+      "introduction_context": "safe",
+      "mastery_context": "fast, low damage, harder to block but uses less stamina per execution"
+    },
+    {
+      "element": "basic strong punch",
+      "first_appears": "round 1",
+      "introduction_context": "safe",
+      "mastery_context": "slow, high damage/knockback, easier to defend against, more stamina cost"
+    },
+    {
+      "element": "arm positioning (high/low blocking)",
+      "first_appears": "round 1",
+      "introduction_context": "safe",
+      "mastery_context": "must read opponent positioning and strike undefended areas"
+    },
+    {
+      "element": "stamina depletion mechanic",
+      "first_appears": "during round 1",
+      "introduction_context": "moderate",
+      "mastery_context": "when opponent reaches 0 stamina, all attacks deal strong punch knockback; resource management becomes critical"
+    },
+    {
+      "element": "flower pots (environmental hazard)",
+      "first_appears": "round 1 onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "random hazard dealing 5 stamina damage and temporary stun; introduces unpredictability"
+    },
+    {
+      "element": "patrol car (round reset)",
+      "first_appears": "round 1 onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "resets both fighters to starting positions at random; interrupts momentum"
+    },
+    {
+      "element": "timer mechanic (99 seconds)",
+      "first_appears": "round 1 onwards",
+      "introduction_context": "moderate",
+      "mastery_context": "police arrest fighter nearest edge if time expires; incentivizes aggression"
+    },
+    {
+      "element": "sewer manhole (finishing hazard)",
+      "first_appears": "when opponent has lost 2 rounds",
+      "introduction_context": "dangerous",
+      "mastery_context": "pushes opponent into manhole = round/match win; appears only in endgame scenarios"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": 99
+    },
+    "typical_relief_triggers": [
+      "patrol car arrival (resets fighters, breaks engagement)",
+      "round completion (opponent knocked off sidewalk)",
+      "opponent stamina depletion (victory becomes inevitable)"
+    ],
+    "typical_tension_triggers": [
+      "flower pot drops (unpredictable damage)",
+      "timer approaching expiration (99-second limit)",
+      "opponent pushing player toward screen edge",
+      "stamina approaching depletion (increased vulnerability)"
+    ],
+    "pacing_descriptor": "exchange-based tension: builds through trading hits and position shifts; periodic relief from environmental interrupts (patrol car) or round completion; overall steady rather than pulsing"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "single-player Game A begins with opponent matched to player skill; early matches introduce core mechanics without overwhelming complexity",
+    "mid_game": "after 2 rounds lost, sewer manhole hazard appears; match stakes escalate as player progresses toward 45 consecutive victories for Champion rank",
+    "late_game": "sustained pressure maintaining winning streak; difficulty increases through accumulated opponent variety and stamina management demands",
+    "notable_spikes": [
+      "introduction of sewer manhole (round 3+ of each match)",
+      "cumulative fatigue from consecutive victory requirement (45 wins needed for Champion)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "sequential block progression",
+      "description": "each round shifts to a new block/street location after opponent knocked off sidewalk; creates spatial variety within same core mechanics",
+      "example_level": "game progresses through multiple blocks as player accumulates victories"
+    },
+    {
+      "pattern_name": "3-of-5 round structure",
+      "description": "best-of-five format per match ensures multiple tension cycles per opponent; sewer manhole only appears in final rounds when stakes are highest",
+      "example_level": "all matches follow this bracketing"
+    },
+    {
+      "pattern_name": "environmental hazard layering",
+      "description": "flower pots and patrol cars introduce external disruption without changing core one-on-one combat rules; hazards are random rather than scripted",
+      "example_level": "persistent across all rounds and matches"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:44:01.863Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3333,
+    "output_tokens": 1624,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

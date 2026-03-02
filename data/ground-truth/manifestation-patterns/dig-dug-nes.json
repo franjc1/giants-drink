@@ -1,0 +1,208 @@
+{
+  "game_id": "dig-dug-nes",
+  "game_name": "Dig Dug",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Pooka (red, spherical with large goggles) and Fygar (draconic creature)",
+      "meaning": "Contact with enemy causes loss of life; player must avoid or eliminate"
+    },
+    {
+      "signal": "Fygar fire attack",
+      "visual_form": "Fire breath animation from Fygar enemy",
+      "meaning": "Touching fire results in immediate death; represents active threat state"
+    },
+    {
+      "signal": "Falling rocks",
+      "visual_form": "Rock tiles descending after support is removed",
+      "meaning": "Environmental hazard; crushing player or enemies; danger to all entities including player"
+    },
+    {
+      "signal": "Enemy ghostly form (invulnerability)",
+      "visual_form": "Enemies represented as eyes moving through solid tiles",
+      "meaning": "Enemy is temporarily invulnerable and cannot be attacked; indicates phase of enemy AI behavior"
+    },
+    {
+      "signal": "Increased enemy speed and aggression",
+      "visual_form": "Progressive visual acceleration of enemy movement across stages",
+      "meaning": "Difficulty escalation; later stages have faster, more aggressive enemies"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Empty dug tunnels",
+      "visual_form": "Cleared spaces in dirt maze created by player digging",
+      "meaning": "Safe passage for player movement; areas where enemies cannot reach without special behavior"
+    },
+    {
+      "signal": "Deflating enemy state",
+      "visual_form": "Enemy shrinking after air pump disconnects",
+      "meaning": "Enemy is stunned and temporarily harmless; safe window for repositioning"
+    },
+    {
+      "signal": "Bonus items appear",
+      "visual_form": "Special collectible items on screen after dropping rock pairs",
+      "meaning": "Reward opportunity; indicates positive game state progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dig Dug (player protagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Air pump tool",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dug tunnels and cleared paths in maze"
+    },
+    {
+      "faction": "Pookas",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Spherical body with comically large goggles",
+      "enemy_visual_variants": "Ghostly eye form when moving through solid tiles (invulnerable phase)",
+      "environmental_markers": "Appear in all stages; no specific environmental markers"
+    },
+    {
+      "faction": "Fygars",
+      "color_identity": null,
+      "symbol_or_sigil": "Draconic creature design",
+      "enemy_visual_variants": "Fire-breathing animation; ghostly eye form during phase transitions",
+      "environmental_markers": "Appear in all stages; fire breath indicates stage presence"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Stage start (all enemies alive)",
+      "visual_manifestation": "Full maze with all Pookas and Fygars present and mobile",
+      "behavioral_manifestation": "Enemies patrol and hunt player; can move through tiles to strategically pursue"
+    },
+    {
+      "world_state": "Enemy partially inflated (air pump connected)",
+      "visual_manifestation": "Enemy freezes in place; visible expansion/inflation animation",
+      "behavioral_manifestation": "Enemy cannot move or attack; player must maintain pump connection to prevent deflation"
+    },
+    {
+      "world_state": "Enemy deflating (pump disconnected)",
+      "visual_manifestation": "Enemy shrinks back to normal size",
+      "behavioral_manifestation": "Enemy remains stunned until fully deflated; then resumes normal behavior"
+    },
+    {
+      "world_state": "Enemy crushed by rock",
+      "visual_manifestation": "Enemy disappears; rock lands and becomes stationary",
+      "behavioral_manifestation": "Enemy eliminated from stage; player earns points"
+    },
+    {
+      "world_state": "Last enemy escaping",
+      "visual_manifestation": "Final enemy moves straight upward through tiles toward top screen edge",
+      "behavioral_manifestation": "Last remaining enemy attempts to flee stage; ignores normal hunting behavior"
+    },
+    {
+      "world_state": "Stage cleared (all enemies defeated)",
+      "visual_manifestation": "Empty maze with only player and terrain visible",
+      "behavioral_manifestation": "Progression to next stage; reset of enemy positions and maze"
+    },
+    {
+      "world_state": "Difficulty progression (advancing stages)",
+      "visual_manifestation": "Dirt color variation; visual style shifts in later stages",
+      "behavioral_manifestation": "Enemies increase in number and speed; more aggressive pursuit patterns"
+    },
+    {
+      "world_state": "Kill screen (round 256 overflow bug)",
+      "visual_manifestation": "Corrupted level generation; Pooka spawns directly on player",
+      "behavioral_manifestation": "Unescapable enemy; rapid life drain until game over"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Maze modification as narrative of progress",
+      "example": "Player's digging creates permanent visual tunnels that persist as evidence of traversal; shows player agency in reshaping environment"
+    },
+    {
+      "technique": "Enemy visual design communicates function",
+      "example": "Pookas' large goggles suggest perception/hunting behavior; Fygar's draconic form predicts fire-breathing attack capability"
+    },
+    {
+      "technique": "Rock placement and gravity physics",
+      "example": "Static rocks above empty spaces communicate unstable environment; risk/reward of digging beneath rocks"
+    },
+    {
+      "technique": "Ghostly transparency during phase transitions",
+      "example": "Enemies becoming eyes-only visuals during invulnerability phases clearly communicates rule change without text"
+    },
+    {
+      "technique": "Escalating visual pace and density",
+      "example": "Later stages show increased enemy count and faster movement speeds through visual acceleration; communicates mounting difficulty without explicit message"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pooka (red spherical enemy)",
+      "state": "Normal/hunting",
+      "behavior": "Patrols maze and pursues player when in clear line of movement"
+    },
+    {
+      "entity": "Pooka",
+      "state": "Invulnerable phase",
+      "behavior": "Represented as ghostly eyes; moves through solid tiles unharmed and unslowed; used tactically to reach player or escape stage"
+    },
+    {
+      "entity": "Pooka",
+      "state": "Air pump connected",
+      "behavior": "Freezes in place; cannot move or attack"
+    },
+    {
+      "entity": "Pooka",
+      "state": "Deflating after pump disconnection",
+      "behavior": "Shrinks to normal size; remains stunned until fully deflated"
+    },
+    {
+      "entity": "Fygar (draconic enemy)",
+      "state": "Normal/hunting",
+      "behavior": "Patrols maze; pursues player; breathes fire as attack method"
+    },
+    {
+      "entity": "Fygar",
+      "state": "Fire breath active",
+      "behavior": "Releases fire in direction of player; player death on contact"
+    },
+    {
+      "entity": "Fygar",
+      "state": "Invulnerable phase",
+      "behavior": "Same as Pooka: ghostly eyes form, moves through tiles, tactically positions"
+    },
+    {
+      "entity": "Fygar",
+      "state": "Last remaining enemy",
+      "behavior": "Attempts to escape stage by moving straight up and off-screen; abandons hunting player"
+    },
+    {
+      "entity": "Enemy (both types)",
+      "state": "As stage progresses",
+      "behavior": "Incremental speed and aggression increase; visual manifestation of difficulty curve"
+    },
+    {
+      "entity": "Dig Dug (player)",
+      "state": "Safe (in cleared tunnel)",
+      "behavior": "Can freely move and execute air pump or rock strategy"
+    },
+    {
+      "entity": "Dig Dug",
+      "state": "Rock support removal",
+      "behavior": "Rock falls after adjacent support tile is dug; player can be crushed if touching landing zone"
+    }
+  ],
+  "notes": "Dig Dug communicates world-state primarily through enemy visual design, behavioral variation, and environmental manipulation rather than explicit UI or text. The game uses visual morphing (enemies becoming eyes during invulnerability) and color differentiation (red Pookas) to indicate state changes. Difficulty progression is manifested through visual acceleration of enemies across stages, plus color variation in terrain. The iconic red Pooka with goggles serves as faction identity. Safety signals are implicit: dug tunnels represent traversable space; deflating enemies signal temporary vulnerability windows. The air pump mechanic's visual freeze of enemies communicates state change without text, making the game language-independent. Rock physics and gravity create dynamic environmental storytelling of risk/reward decisions.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:24:52.624Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3113,
+    "output_tokens": 2371,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

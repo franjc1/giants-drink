@@ -1,0 +1,228 @@
+{
+  "game_id": "super-mario-kart-snes",
+  "game_name": "Super Mario Kart",
+  "platform": "snes",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Spin-out state",
+      "visual_form": "Kart rotates uncontrollably on track",
+      "meaning": "Player has been hit by power-up attack or collision; loss of control and momentum"
+    },
+    {
+      "signal": "Coin loss",
+      "visual_form": "Coins scatter from kart or coin counter decreases",
+      "meaning": "Damage taken; reduced speed advantage; vulnerability increases"
+    },
+    {
+      "signal": "Off-track position",
+      "visual_form": "Kart leaves designated racing surface",
+      "meaning": "Risk of respawn penalty; immediate speed reduction; loss of coins"
+    },
+    {
+      "signal": "Incoming projectile",
+      "visual_form": "Shell or banana visual approaching on screen",
+      "meaning": "Attack incoming; need evasion or invincibility power-up"
+    },
+    {
+      "signal": "No coins collected",
+      "visual_form": "Coin counter at zero",
+      "meaning": "Vulnerable state; next hit will cause spin-out instead of coin loss"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Star power-up active",
+      "visual_form": "Kart surrounded by star aura or visual effect",
+      "meaning": "Temporary invincibility; can ram through attacks without consequence"
+    },
+    {
+      "signal": "Coins collected",
+      "visual_form": "Coin counter displays value; coins visible on kart",
+      "meaning": "Damage buffer; protection against next single attack"
+    },
+    {
+      "signal": "Boost panel activation",
+      "visual_form": "Chevron-marked panels on track with directional visual feedback",
+      "meaning": "Speed increase available; advantage opportunity"
+    },
+    {
+      "signal": "Ramp approach",
+      "visual_form": "Elevated track sections visible ahead",
+      "meaning": "Opportunity for air maneuvers; speed maintenance during turn"
+    },
+    {
+      "signal": "Green light at start",
+      "visual_form": "Traffic light turns green via Lakitu's pole",
+      "meaning": "Safe to accelerate; race officially begun"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario",
+      "color_identity": "Red and blue",
+      "symbol_or_sigil": "M emblem; mushroom motif",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Mushroom Cup tracks feature Mario-themed environments"
+    },
+    {
+      "faction": "Bowser",
+      "color_identity": "Dark brown/black with green",
+      "symbol_or_sigil": "Bowser emblem; castle motif",
+      "enemy_visual_variants": "Computer-controlled Bowser kart has distinct visual appearance",
+      "environmental_markers": "Special Cup likely features darker, castle-themed track variants"
+    },
+    {
+      "faction": "Peach",
+      "color_identity": "Pink and white",
+      "symbol_or_sigil": "Crown emblem; castle/royal motif",
+      "enemy_visual_variants": "Computer-controlled Peach kart visually distinct",
+      "environmental_markers": "Flower Cup tracks feature royal/garden-themed environments"
+    },
+    {
+      "faction": "Luigi",
+      "color_identity": "Green and white",
+      "symbol_or_sigil": "L emblem variant of Mario",
+      "enemy_visual_variants": "Computer-controlled Luigi kart distinguishable from Mario",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Yoshi",
+      "color_identity": "Green with red saddle",
+      "symbol_or_sigil": "Dinosaur/egg motif",
+      "enemy_visual_variants": "Computer-controlled Yoshi kart color-distinct",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Donkey Kong",
+      "color_identity": "Brown and black",
+      "symbol_or_sigil": "Gorilla/barrel motif",
+      "enemy_visual_variants": "Computer-controlled Donkey Kong kart visually heavy/distinct",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Toad",
+      "color_identity": "Red cap with white spots",
+      "symbol_or_sigil": "Mushroom/spots motif",
+      "enemy_visual_variants": "Computer-controlled Toad kart smaller/distinct",
+      "environmental_markers": null
+    },
+    {
+      "faction": "Koopa Troopa",
+      "color_identity": "Green with shell",
+      "symbol_or_sigil": "Turtle/shell motif",
+      "enemy_visual_variants": "Computer-controlled Koopa kart shell-based design",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Race begun",
+      "visual_manifestation": "Green traffic light from Lakitu; countdown timer visible",
+      "behavioral_manifestation": "Karts accelerate from starting line; AI racers engage in competitive racing behavior"
+    },
+    {
+      "world_state": "Player ahead in race",
+      "visual_manifestation": "Rear-view mirror shows no opponents immediately behind; position indicator shows first place",
+      "behavioral_manifestation": "Player can focus on optimal line; less frequent attack power-up usage by AI"
+    },
+    {
+      "world_state": "Player behind in race",
+      "visual_manifestation": "Opponents visible ahead in main viewport; mini-map shows distance gap",
+      "behavioral_manifestation": "AI racers employ offensive power-ups more frequently; player has increased attack opportunity"
+    },
+    {
+      "world_state": "Battle mode active",
+      "visual_manifestation": "Balloons visible on karts; different track layout without racing finish line",
+      "behavioral_manifestation": "Karts prioritize attacks over speed; collision/combat focused movement patterns"
+    },
+    {
+      "world_state": "Time trial mode",
+      "visual_manifestation": "Timer prominently displayed; no opponent karts visible; ghost data may appear",
+      "behavioral_manifestation": "Single-player racing against clock; no AI interference or power-up attacks"
+    },
+    {
+      "world_state": "Difficulty escalation (50cc → 100cc → 150cc)",
+      "visual_manifestation": "UI labels show difficulty; track speed perception increases; AI kart behavior more aggressive",
+      "behavioral_manifestation": "AI racers use power-ups more strategically; tighter racing lines; more frequent attacks"
+    },
+    {
+      "world_state": "Cup completion threshold",
+      "visual_manifestation": "New cups unlock visually in menu; Special Cup becomes available after 100cc wins",
+      "behavioral_manifestation": "Access to higher difficulty tracks; progression to more challenging AI opponents"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Cup-themed track design",
+      "example": "Mushroom Cup features mushroom-motif tracks; Flower Cup features garden/floral environments; Star Cup escalates visual complexity"
+    },
+    {
+      "technique": "Track hazards as world-building",
+      "example": "Boost panels and ramps are integrated Mario-universe mechanics; their placement communicates safe vs. risky routing"
+    },
+    {
+      "technique": "Character-to-kart visual mapping",
+      "example": "Each racer's kart directly reflects their character design; Mario's red-blue kart, Bowser's dark kart, Peach's pink kart communicate faction identity at a glance"
+    },
+    {
+      "technique": "Mini-map as spatial narrative",
+      "example": "Bottom-screen map shows relative positions of all racers; visual spread indicates catch-up opportunity or lead security"
+    },
+    {
+      "technique": "Coin distribution as reward topology",
+      "example": "Lines of coins placed strategically on tracks; their location suggests optimal vs. risky paths; collecting indicates smart racing decisions"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Computer AI racer",
+      "state": "Behind player",
+      "behavior": "Uses offensive power-ups (shells, bananas) more frequently to catch up; takes aggressive line choices"
+    },
+    {
+      "entity": "Computer AI racer",
+      "state": "Ahead of player",
+      "behavior": "Prioritizes speed and positioning; fewer attack power-ups deployed; focuses on maintaining lead"
+    },
+    {
+      "entity": "Computer AI racer",
+      "state": "Mid-pack position",
+      "behavior": "Mixed strategy; opportunistic power-up usage; reactive to nearby threats"
+    },
+    {
+      "entity": "Computer AI racer",
+      "state": "Hit by player attack",
+      "behavior": "Kart spins/loses control; temporary disadvantage; recovery attempted via power-up collection"
+    },
+    {
+      "entity": "Lakitu (starter)",
+      "state": "Pre-race",
+      "behavior": "Appears at starting line with traffic light; visual countdown signal; initiates race with green light"
+    },
+    {
+      "entity": "Player kart",
+      "state": "Invincible (star power-up)",
+      "behavior": "Can collide with objects and attacks without penalty; visual star aura indicates state; temporary dominance posture"
+    },
+    {
+      "entity": "Player kart",
+      "state": "No coins (vulnerable)",
+      "behavior": "Next hit causes immediate spin-out; more cautious path selection implied; higher defensive positioning"
+    }
+  ],
+  "notes": "Super Mario Kart uses minimal but effective visual language to communicate game-state and danger. The core manifestation layer relies on: (1) character/kart color identity for faction signaling, (2) coin counter as damage/vulnerability buffer, (3) power-up visual effects (star aura) for invincibility states, (4) traffic light for race start permission, (5) mini-map for positional world-state, and (6) spin-out animation for damage feedback. The game does not implement complex political factions—instead, it uses character-based identity markers to differentiate AI opponents. Danger is communicated through immediate feedback (spin-out, coin loss) rather than environmental threat signals. The paradigm is competitive racing, so 'danger' primarily means 'disadvantage in rank' rather than environmental hazard.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:46:40.055Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2833,
+    "output_tokens": 2670,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

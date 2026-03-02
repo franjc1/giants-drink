@@ -1,0 +1,157 @@
+{
+  "game_id": "populous-snes",
+  "game_name": "Populous",
+  "platform": "snes",
+  "paradigm": "sim-strategy",
+  "danger_signals": [
+    {
+      "signal": "Enemy follower presence",
+      "visual_form": "Opposing deity's followers rendered on isometric map with distinct visual separation from player followers",
+      "meaning": "Active threat to player's civilization; must be eliminated to progress"
+    },
+    {
+      "signal": "Landscape hazards",
+      "visual_form": "Swamps, volcanoes, lava terrain, water barriers rendered in environment",
+      "meaning": "Natural obstacles that impede follower movement and settlement; can be weaponized by either side"
+    },
+    {
+      "signal": "Low mana indicator",
+      "visual_form": "Slider bar measurement of divine power shown on command interface",
+      "meaning": "Reduced ability to cast divine intervention spells; vulnerability window"
+    },
+    {
+      "signal": "Barren/unflat terrain",
+      "visual_form": "Elevated or depressed land with no building space in isometric view",
+      "meaning": "Prevents follower settlement and expansion; indicates unsafe or unusable territory"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Flat buildable terrain",
+      "visual_form": "Level ground space in isometric perspective, larger areas for larger houses",
+      "meaning": "Safe zone for follower settlement and population growth"
+    },
+    {
+      "signal": "Raised mana level",
+      "visual_form": "Full or high slider bar on command interface",
+      "meaning": "Access to full divine power arsenal; strong defensive/offensive capability"
+    },
+    {
+      "signal": "Follower population density",
+      "visual_form": "Visual density of player followers in settled areas on map",
+      "meaning": "Numerical superiority and path to victory; safe position relative to enemy"
+    },
+    {
+      "signal": "Controlled landscape",
+      "visual_form": "Terrain shaped and modified by player interventions (raised/lowered land)",
+      "meaning": "Territory under player influence; safe from natural hazards"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Deity",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player followers visually distinguished from enemy followers on isometric map",
+      "environmental_markers": "Settled flat terrain with player-constructed houses; modified landscape through divine intervention"
+    },
+    {
+      "faction": "Enemy Deity",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct follower rendering to differentiate from player faction",
+      "environmental_markers": "Enemy settlements on landscape; terrain shaped by opposing divine intervention"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / Low mana",
+      "visual_manifestation": "Sparse follower population; limited landscape modification visible; few constructed buildings",
+      "behavioral_manifestation": "Followers wander terrain seeking flat building space; limited divine powers available"
+    },
+    {
+      "world_state": "Mid-game / Rising mana",
+      "visual_manifestation": "Growing follower density; more extensive terrain reshaping; multiple settled areas visible",
+      "behavioral_manifestation": "Followers actively construct houses on available flat land; access to intermediate divine powers (earthquakes, floods, swamps)"
+    },
+    {
+      "world_state": "Late game / High mana victory state",
+      "visual_manifestation": "Dense follower populations on both sides; extensively modified landscape; approach to endgame conflict",
+      "behavioral_manifestation": "Access to knight transformation and catastrophic powers; preparation for final battle between factions"
+    },
+    {
+      "world_state": "Enemy pressure / Losing ground",
+      "visual_manifestation": "Enemy follower density visibly increasing; enemy terrain expansion visible on map; player settlement shrinkage",
+      "behavioral_manifestation": "Enemy divine interventions visible (landscape changes, hazard creation); need for defensive divine powers"
+    },
+    {
+      "world_state": "Terrain type variation",
+      "visual_manifestation": "Desert, rock, lava, snow and ice rendered distinctly in isometric view",
+      "behavioral_manifestation": "Follower development and settlement patterns vary by landscape type; affects game strategy and pacing"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Terrain topology as political boundary",
+      "example": "Raised or lowered land serves as natural border between player and enemy territories; water barriers and swamps define territorial separation"
+    },
+    {
+      "technique": "Settlement density as power indicator",
+      "visual_manifestation": "Visible concentration of houses and followers indicates which deity has stronger presence in a region"
+    },
+    {
+      "technique": "Landscape scars from divine intervention",
+      "example": "Volcanoes, earthquakes, and floods leave visual marks on terrain showing history of divine conflict"
+    },
+    {
+      "technique": "Isometric perspective as god-view",
+      "example": "Overhead tabletop presentation reinforces player role as deity observing civilization from divine vantage point"
+    },
+    {
+      "technique": "Open book interface as world representation",
+      "example": "World depicted as pages in book emphasizes game world as constructed/authored realm under player control"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Follower (basic)",
+      "state": "Idle/undirected",
+      "behavior": "Wanders terrain; seeks barriers as movement limits"
+    },
+    {
+      "entity": "Follower (settling)",
+      "state": "Finding location",
+      "behavior": "Encounters blank flat land and builds house; house size correlates with available land area"
+    },
+    {
+      "entity": "Follower (multiplying)",
+      "state": "Post-settlement",
+      "behavior": "More houses create more followers; increases mana level for player"
+    },
+    {
+      "entity": "Knight (divine transformation)",
+      "state": "Enhanced power",
+      "behavior": "Ordinary followers converted to more powerful knights; indicates late-game aggressive positioning"
+    },
+    {
+      "entity": "Enemy follower",
+      "state": "Threat presence",
+      "behavior": "Visual distinction allows player to identify enemy expansion vectors and threat zones"
+    }
+  ],
+  "notes": "Populous communicates world-state primarily through isometric terrain visualization and follower density clustering. Political situation is manifested through visible separation of follower populations and terrain control. Danger is signaled through enemy presence, hazardous terrain types, and mana depletion. The god-game paradigm positions visual communication around divine intervention effects: terrain reshaping, follower transformation, and catastrophic events. The 'tabletop' interface frame reinforces player omniscience while making faction control graphically legible.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:22:00.597Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3060,
+    "output_tokens": 1753,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,1150 @@
+Final Fight (SNES) - The Cutting Room Floor
+
+If you appreciate the work done within the wiki, please consider supporting The Cutting Room Floor on  Patreon . Thanks for all your support!
+
+Final Fight (SNES)
+
+From The Cutting Room Floor
+
+Jump to navigation
+
+Jump to search
+
+Final Fight
+
+Developer :
+
+Capcom
+
+Publisher :
+
+Capcom
+
+Platform :
+
+SNES
+
+Released in JP : December 21,&#160;1990  Released in US : September 1991  Released in EU : December 10,&#160;1992  Released in AU : December 10,&#160;1992
+
+This game has  unused areas .
+
+This game has  unused enemies .
+
+This game has  unused text .
+
+This game has  debugging material .
+
+This game has a  hidden level select .
+
+This game has  regional differences .
+
+This game has a prerelease article
+
+This game has a notes page
+
+This game has a bugs page
+
+The SNES
+
+Final Fight
+
+is a cut-down port of the  arcade  original, along with being Capcom's first SNES game. Faced with the tight constraints of an eight-megabit ROM (and possibly a looming deadline), Capcom made the rather unpopular decision to excise a number of features, most notably the playable character Guy, the entire Industrial Area stage, and the two-player cooperative mode. Still, it was impressive in its own right as an early SNES game.
+
+Contents
+
+1
+
+Sub-Pages
+
+2
+
+Stage & Area Select
+
+3
+
+Extra Credits
+
+4
+
+Bay Area Dog Bonuses
+
+5
+
+Debug Mode
+
+5.1
+
+TEST MODE
+
+5.1.1
+
+COLOR
+
+5.1.2
+
+I/O
+
+5.1.3
+
+DOT CROSS
+
+5.1.4
+
+CHAR
+
+5.1.5
+
+OBJ
+
+5.1.6
+
+SCROLL
+
+5.2
+
+In-Game Debugging Features
+
+5.2.1
+
+Hitbox Info
+
+5.2.2
+
+Debug Animation Test
+
+6
+
+Demo Recorder
+
+7
+
+Unused Stage
+
+8
+
+Unused Enemy
+
+9
+
+Unused Katana HP
+
+10
+
+Unseen Backgrounds
+
+11
+
+Unused Text
+
+12
+
+Unused Round Progression Table
+
+13
+
+Unused Tile Properties (Collision Data)
+
+13.1
+
+Inaccessible Platform
+
+14
+
+Two Player Mode Remnants
+
+15
+
+Haggar Ending Programming
+
+16
+
+Text Printing Error Handler
+
+17
+
+Easy DifficultyA Bonus
+
+18
+
+Regional Differences
+
+18.1
+
+Japan/International Differences
+
+18.2
+
+Europe Differences
+
+Sub-Pages
+
+Prerelease Info
+
+Notes
+
+Bugs
+
+Stage & Area Select
+
+The options menu once had ROUND and AREA selections. The text and pointers to the settings were deleted, but the programming remains and is located between the EXTRA JOY and EXIT options. Enter  Pro Action Replay  (PAR) code
+
+01E0211B
+
+or  Game Genie  code
+
+F834-DD00
+
+(US version) and highlight the EXIT option as a simple method to access the ROUND portion. Use the  X  button to increase the value and  B  to decrease it. Disable the cheat code when finished in order to exit the menu.
+
+It's also worth noting that this stage/area select treats the Industrial Area as a valid stage and that it consists of two separate areas.
+
+Interestingly,
+
+Final Fight One
+
+for the GBA directly copied chunks of text from the SNES build and included an unused copy of the Option Mode text printing from a prototype build. If imported into the SNES version, the menu can be seen with its missing text.
+
+(Source: JLukas)
+
+Extra Credits
+
+If the initials for the top 3 scores are
+
+CAP ,  COM ,  YLM  (in that order), you'll start with 9 credits, as opposed to the standard 3.
+
+If the initials for the top 3 scores are
+
+CAP ,  COM ,  GUY  (in that order), you'll start with 5 credits, as opposed to the standard 3.
+
+To replace the 3 existing high scores you'll need to score a minimum of 50,001 points three times. This can be accomplished by the time you reach the middle of the storeroom in the first stage.
+
+YLM is likely short for Yoshilim, the nickname of programmer Koji Yoshida.
+
+(Source: JLukas)
+
+Bay Area Dog Bonuses
+
+In the Bay Area stage, each of the barking dogs in the background gives a bonus. Stand underneath them, where your  X  coord overlaps the dog, and your  Y  coord is a step or so down from the top of the screen, as shown in the picture above. Note that the  Y  coord is pixel-precise and will require some practice to position your character correctly. You've found the correct spot when the dog begins barking faster (two rapidly alternating animation frames.)
+
+Dog
+
+Bonus
+
+1st
+
+Add 1000 points every 4 seconds
+
+2nd
+
+Add 1 credit every 60 seconds
+
+3rd
+
+Add 1 life every 60 seconds (disabled at 9 lives)
+
+4th
+
+Restore 1 unit health every second
+
+(Source: JLukas (adapted research from Final Fight Guy)
+
+Debug Mode
+
+To enable the game's debug mode, add one of the following codes:
+
+Region
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+JPN
+
+01805E01
+
+DF69-D760
+
+USA
+
+01806401
+
+DF61-DFD0
+
+European
+
+01807D01
+
+DF65-D700
+
+Immediately after resetting the game, hold  Y  +  B  on Controller 2 until the Capcom logo fades out. This activates the debugging features by setting RAM address
+
+$7EFFFA
+
+to
+
+01  .
+
+TEST MODE
+
+Reset again and hold  Select  to activate a CPS-like TEST MODE menu. Press  Start  to activate the current selection.
+
+COLOR
+
+Shows a few color bars. Likely used to calibrate monitors/TV screens during development. Press  Select  to exit.
+
+I/O
+
+A controller test that shows the states of the buttons on both controllers. Note that it has labels for  four  controllers, even though the final game has no multitap support. Hold  Start  and tap  Select  to exit (may take more than one try).
+
+DOT CROSS
+
+Also known as Dot Cross Hatch. This is supposed to display a simple test screen of a grid with dots, as seen in a number of Capcom arcade games. However, it just shows a blank screen instead as the tilemap is incorrectly loaded into VRAM: it uploads a repeating 8-bit
+
+#$7B
+
+value instead of a 16-bit
+
+#$7B00
+
+pattern. With the correct tilemap in place it appears as follows:
+
+Press  Select  to exit.
+
+CHAR
+
+Opens a buggy graphics viewer. The contents will vary depending on what graphics were loaded into VRAM when you used the  Start  +  Select  debug soft reset. Once you enter this menu, you'll need to reset to exit. You can still leave the submenus by pressing  Select , however. In the submenus, press  Left  or  Right  to change the palette (8 total),  Up  to scroll down, and  Down  to scroll up.
+
+OBJ
+
+Displays sprites such as player characters, enemies, food, and weapons. Sometimes there won't be any display at all, a solid color screen, or glitched tiles surrounding the VRAM display, as shown above.
+
+BG1, BG2
+
+Displays layer 1 and layer 2 graphics. They'll sometimes have the same data; it's not clear what the differences between the two are.
+
+BG3 (VRAM)
+
+This contains the HUD graphics.
+
+BG4
+
+Does not function. It contains no programming except to remain on the CHAR TEST main menu.
+
+OBJ
+
+Does not function. It was meant for a sprite viewer with an animation test (aka OBJ Pattern Test) that wasn't ported from the arcade game. The only programming the subroutine contains is to reset the cursor position on the main menu.
+
+SCROLL
+
+Does not function. It was meant for a map viewer (aka Scroll Test) that also wasn't ported from the arcade game. Points to the same placeholder subroutine used by OBJ.
+
+In-Game Debugging Features
+
+In addition to the TEST MODE menu, enabling debug mode activates a few in-game debugging features as well. The glitched bouncing sprite on the left side of the screen represents the current CPU usage; the lower the sprite, the more CPU time is currently being used. The numbers displayed under the health bar are as follows:
+
+The first byte is the current DifficultyA. It starts out at the same value shown in the Option Mode (except for DifficultyA
+
+$01
+
+in the Option Mode, which will be
+
+$00
+
+here). It will increase as the DifficultyB frame counter rolls over. The maximum value value is
+
+$17  ,
+
+$18  ,
+
+$19  , or
+
+$1A
+
+based on the four possible DifficultyB settings (from low to high).
+
+The second byte is the DifficultyB.  It's the same value shown in the Option Mode - 1 (e.g., DifficultyB
+
+$04
+
+set in the Option Mode will be
+
+$03
+
+here.)
+
+The third value is the DifficultyB frame counter. It rolls over every 10 seconds, 10 seconds, 8 seconds, or 5 seconds based on the four possible DifficultyB settings (from low to high).
+
+On Controller 1:
+
+Hold  L  for 9x slow motion.
+
+Press  R  for... nothing useful. It writes
+
+#$FF
+
+to RAM address
+
+7E0140  , but the routine that checks for it later just increments it back to zero and exits.
+
+Press  Start  +  Select  for a soft reset.
+
+Press  Select  to instantly skip to the next area. The game looks for a non-zero value in
+
+7E0140
+
+in order to activate this feature, but the debug functions assigned to  L  and  R , above, are always making sure it stays at zero. Add one of the following codes to bypass this:
+
+Region
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+Japan
+
+01978800
+
+DDB6-A4D9
+
+USA
+
+0199FF00
+
+DDBE-07A1
+
+Europe
+
+019B5700
+
+DDB9-AFA1
+
+On Controller 2:
+
+Press  X  to enable invincibility. Also allows infinite time in bonus rounds. Press the button again to disable it. Toggles RAM address
+
+7E00CB  . Note that the invincibility doesn't protect against all attacks (e.g., jumping Andores, Belger's arrows, and possibly other projectiles).
+
+Press  A  to make your character fire a bullet from his crotch. While this is an extremely effective (and unpleasant) weapon, don't use it while facing left, or you'll kill yourself (the bullet is always spawned facing to the right). A maximum of 3 bullets can be active at once, less if other weapons are on-screen.
+
+While the game is paused:
+
+Press  X  for a RAM/ROM viewer (doesn't always display the right data).
+
+L  and  R  will change memory banks (  $00-1F  ). Add the codes
+
+01AFAA80
+
+and
+
+01AF9DFF
+
+(US version) to remove the bank
+
+$1F
+
+limit and gain access to the full SNES memory map (including RAM beyond the first
+
+$8000
+
+bytes).
+
+Press  Select  for a palette editor. Holding  L  and pressing  Left  or  Right  will expand or contract the black masking box. Holding  R  and pressing  Left  or  Right  will decrease or increase the value, and holding  R  and pressing  Up  or  Down  will change between the 16 total pages (00-07, S0-S7). The 16-bit values in the left column correspond to the 32-byte palette data in ROM. In the screenshot above, it's showing the palette data located at ROM address
+
+$00617F-00619E  , SNES address
+
+$00E17F-00E19E
+
+(US version). Adjusting the individual RGB values updates the 16-bit value using the following bit pattern:
+
+0bbbbbgggggrrrrr
+
+Changes made in the RGB editor are temporary and will be lost upon switching areas. You can create a custom player palette by changing values on the "00" page. Two examples are shown below, along with a set of game enhancer codes that will allow you to keep a custom player palette between areas and until you run out of lives.
+
+Region
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+Japan
+
+01A3DB07 + 01A3DC8D
+
+D5C2-A4A0 + 62C2-A7D0
+
+USA
+
+01A67E49 + 01A67F8D
+
+0BC5-6769 + 62C5-67A9
+
+Europe
+
+01A7EA6A
+
+1CC3-A469
+
+It's also possible to access the RAM/ROM viewer and palette editor at the Capcom logo. With the debug mode already active, have  L  and  R  held as the game boots. The game will freeze at the Capcom logo, and you can then press  X  or  Select  for the menus.
+
+Hitbox Info
+
+This debug feature, disabled by default, displays collision boxes around the player character and any weapons that are on-screen, like seen in the  arcade version . Enable it with these codes:
+
+Region
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+Japan
+
+01D2ACEA
+
+3C2C-67D0
+
+USA
+
+02894CEA
+
+3C60-07DC
+
+Europe
+
+028964EA
+
+3C61-0FDC
+
+The graphics don't point to the correct tiles in VRAM, though they are present. This was fixed in  Final Fight Guy .
+
+Debug Animation Test
+
+A simple animation frame test that's not connected to anything, but was later mapped to the second controller in  Final Fight Guy . Use the following codes to trigger it while jumping:
+
+Region
+
+Pro Action Replay (PAR)
+
+Game Genie
+
+Japan
+
+02A52924
+
+40C4-040B
+
+USA
+
+02B05724
+
+4089-DFA6
+
+Europe
+
+02B06D24
+
+4081-D706
+
+Press  B  to cycle through frames, and  Y  to resume gameplay.
+
+(Source: Rachel Mae, JLukas)
+
+Demo Recorder
+
+Use Pro Action Replay (PAR) code
+
+00F8E980
+
+(US version) to access a demo recorder. After the Capcom logo, the game checks for bit
+
+$80
+
+in memory address
+
+$7EFFFC  . If set, you're immediately brought to the character select screen. Select a fighter and you're now playing in the demo mode, with your controller input being stored to RAM. Once the demo ends, bit
+
+$80
+
+(record mode) is reset, and bit
+
+$01
+
+(playback mode) is set. Wait for the game to enter demo mode on its own to see your recorded gameplay.
+
+(Source: gedowski, JLukas)
+
+Unused Stage
+
+To do:  This section needs an overhaul: requires individual components of level loading investigated - e.g. uses Stage 5 pointer for the music.
+
+Using the Pro Action Replay (PAR) stage modifier code
+
+7EFFFE03  , you can access the Industrial Area, the level from the arcade version that was removed from this port. The music is the one from the Slum stage, but this possibly was the intention if the Game Boy Advance port is any indication. The graphics are garbled, and when you beat all the enemies in the area, the game will either crash or cut directly to the ending with Edi. E instead of Belger.
+
+This code does not access the proper enemy data (if it even exists) and will reuse the enemy set from the first Slum area of the game.
+
+The collision data pointer is the same as the Bay Area. No unused collision data sets exist in the data.
+
+A valid platform height of
+
+$0040
+
+is set (which is the same for all rounds except the Subway).
+
+If the first area was somehow successfully cleared, the game will skip past the next area, automatically clearing the round. This suggests that the elevator section was in a heavily unfinished state when it was abandoned, assuming work on it even started.
+
+If you use the
+
+7EFFFF01
+
+area modifier in conjunction with the above code, you'll access the elevator section where Rolento was fought in the arcade version. This will also not call upon the correct enemy data or graphics, but the music and scroll parameters appear to be in place, or the graphics merely do not visibly scroll. After defeating all the enemies, the game will try to move you onto the next level but will get stuck doing so.
+
+Music index
+
+0A
+
+in the options menu, which is empty in the final game, was reserved for the deleted Industrial Zone music. It was restored in  Final Fight Guy  as index
+
+0B  .
+
+(Source: Rick, JLukas)
+
+Unused Enemy
+
+An unused but fully functional Andore variant with a light orange palette. This F.ANDORE enemy appears in the West Side level's cage fight on the arcade version, where up to 3 Andores would appear in 2-player mode to provide sufficient challenge. With no 2-player mode in this port, this variant goes unused. This was changed in  Final Fight Guy , where on higher difficulty settings more Andores drop from the ceiling after the first two are defeated. Add the following Pro Action Replay (PAR) codes for the battle pictured above:
+
+078F2A24
+078F3324
+
+Unused Katana HP
+
+Unused
+
+Used
+
+Katana's HP is initially set to 400 (this value is loaded from a table), but immediately after its programming loads a hardcoded 300 value instead (the same amount of HP as Thrasher and Edi.E). While it's possible the developers thought that the original difficulty was too high, it's unknown why the HP table wasn't just updated instead. Use Pro Action Replay (PAR) code
+
+06BB6090
+
+(US version) to fight Katana with the original 400 HP.
+
+Unseen Backgrounds
+
+Scroll End
+
+Full
+
+In the second section of the Slum level, the screen stops scrolling near the end of the storeroom (which is a mirror of the entrance), allowing enemies to rush in from the right side of the screen, but much of the wall (and door) goes unseen. In the arcade version, this part is seen on an intermission to the third section of the level.
+
+Scroll End
+
+Full
+
+Like the Slum storeroom, the scrolling at the end of the first section of the West Side level stops before the entire wall is visible and everything to the right of the green counter goes unseen. In the arcade version, the players had to break down the door and proceed to the next (empty) room where Andore would kidnap them, this sequence is missing in this port, but there is evidence it was planned at one point as the map index values for the empty room exist in the data for the first area of the West Side stage.
+
+Unused Text
+
+GUY
+
+A text string for Guy's name, this is the only thing found of him in this version of the game along with value
+
+$00
+
+in memory address
+
+$7E0D12  , which is reserved for Guy. At least some, if not all, of the pointers tables that rely on this (e.g., loading player graphics, palettes, AI) point to Cody's data.
+
+F. ANDORE
+
+A string for the aforementioned  unused  Andore enemy variant.
+
+ROLENTO
+
+The Industrial Area boss.
+
+BILLBOARD
+DUSTBIN
+TEL.BOOTH
+
+These breakable objects from the arcade version exist as text strings only.
+
+GRANADE
+
+An incorrectly-spelled string for Rolento's grenades.
+
+WHEELCHAIR
+
+This text for Belger's wheelchair appears in the arcade version when it takes damage or breaks, but this string just doesn't appear in this port.
+
+DOOR
+
+This text appears in the arcade version when destroying the doors in the West Side stage, but not here.
+
+GLASS
+
+A string is meant for the glass panes in the second bonus round but is never shown as the bonus round score occupies the slot used to show enemy/breakable item status. This text didn't appear in the arcade version either.
+
+There also text printing exists for various unused screens, with no associated programming found for any of them. The correct palettes for each of them are unknown; the title screen one is used for these screenshots.
+
+Unknown if this refers to the gameplay demos or a demo/sample build of the game itself.
+
+Text for selections on the title screen, including a mysterious BATTLE option. Unlike the other text in this section, it has no pointer table entry, suggesting it's a very old leftover.
+
+Another mention of the unknown BATTLE MODE.
+
+Apparently, a CODDY (Cody) vs. ANDORE one-on-one battle, possibly meant for the Battle Mode. Below the names are supposed to be life bar tiles and three more unknown tiles to the right of those, but the correct graphics are unknown (or if they even exist/are the same as the ones used in the final version).
+
+An early options menu. When compared to the final menu, the three settings in Japanese text are probably the same as DifficultyA, DifficultyB, and Player lives. Nando translates to "degree of difficulty".
+
+Unused Round Progression Table
+
+Two copies of the round progression table exist, one of which is the arcade version's layout (with the Industrial Area included in the correct spot) that goes unused.
+
+Used
+
+Unused
+
+00 - Slum
+
+00 - Slum
+
+01 - Subway
+
+01 - Subway
+
+06 - Break Car
+
+06 - Break Car
+
+02 - West Side
+
+02 - West Side
+
+04 - Bay Area
+
+03 - Industrial Area
+
+07 - Break Glass
+
+04 - Bay Area
+
+05 - Up Town
+
+07 - Break Glass
+
+03 - Industrial Area
+
+05 - Up Town
+
+09 - (unused slot)
+
+08 - (unused slot)
+
+09 - (unused slot)
+
+09 - (unused slot)
+
+09 - (unused slot)
+
+Unused Tile Properties (Collision Data)
+
+Tile types
+
+15, 16, 19, 1A, 1B
+
+for a left-facing platform go unused, exactly like the  arcade original . Although unused, they are fully programmed in and work correctly.
+
+Inaccessible Platform
+
+Unlike the arcade version, the SNES port starts the West Side stage with the player at ground level on the spot shown in the picture, instead of on the purple platform. With the help of a moon jump cheat, it's possible to get up there, and walking around reveals that the path is fully functional; the collision data map is complete.
+
+Two Player Mode Remnants
+
+Throughout the game is  programming leftovers  showing that the game was originally designed with a 2-player mode. Memory range
+
+$7E0D80-7ED0FF
+
+is reserved for the second player's stats. If bit
+
+$02
+
+is set in memory address
+
+$7E00CD
+
+when starting the game (which is never the case, as the game uses a hardcoded
+
+$01
+
+value), the game loads some basic setup for the second player, including AI(?) and damage related pointers and max. HP.
+
+Haggar Ending Programming
+
+In the programming for the ending is some  unused code  to load Haggar into the player 2 slot and use the second controller, which is never called. It's located immediately after Cody's setup for walking away during the credits roll. In the arcade version, Haggar is shown checking on Jessica after Belger's defeat. This may have been intended for that cutscene.
+
+Text Printing Error Handler
+
+When displaying text in the intro cutscenes and elsewhere, hex values
+
+$F2-FF
+
+in the script are reserved for control codes (line break, new page of text, etc.) Of these, only
+
+$FA-FF
+
+contain programming. If any of the unused
+
+$F2-F9
+
+values were to appear in the script, the string  ERROR!!...  is printed.
+
+Easy DifficultyA Bonus
+
+Allowing the Slum/Subway demo gameplay to run before starting a game initializes a random number generator. There's a 1-in-16 chance the game will set the easiest setting for DifficultyA. Whatever result you get, it will stick around for 16 new games started before allowing another chance at the random number generator.
+
+The hidden Option Mode can accomplish the same thing without uncertainty, however. If successful, this bonus will even override what you set there; presumably, the developers thought that someone taking the time to view the demo would be a new player who wouldn't know about the hidden options screen, and created this bonus for them.
+
+Regional Differences
+
+Japan/International Differences
+
+This page or section needs more images.
+
+There's a whole lotta words here, but not enough pictures.  Please fix this .
+
+Specifically:  Needs comparison images.
+
+To do:
+
+Investigate all appearances of 00F7FF being checked in the programming.
+
+Intro story font, title screen text, and more.
+
+There's more differences:  http://rq87.flyingomelette.com/FF/F/1/SNESr.html
+
+The US and European versions (but not the Japanese version) contain programming which treats SNES address
+
+$00F7FF
+
+(ROM address
+
+$0077FF  ) as a region DIP switch, where OFF
+
+$00
+
+is Japan and ON
+
+$01
+
+is International. Simply using Pro Action Replay (PAR) code
+
+00F7FF00
+
+will toggle many of the regional differences. There are some glitches (like the text in the intro cutscenes), and it doesn't cover all the changes that were made (e.g., censored graphics).
+
+In the attract mode, the Japanese version flashes the text "PUSH START", in the international versions it's "PRESS START".
+
+The blood spray when a character is hit by a knife or katana was removed in the international versions.
+
+The Beer and Whisky food items had their names respectively changed to Root Beer and Vitamine.
+
+The Japanese version plays the opening story music immediately. The international versions waits until after the first 4 sentences have passed.
+
+Damnd had his name changed to Thrasher in international releases.
+
+The line after the first bonus round, "OH! MY GOD", was changed in the international versions to "OH! MY CAR".
+
+Sodom's name was changed to Katana on the international releases.
+
+The ending music starts immediately in the Japanese version. On the international versions, it waits until Cody walks away.
+
+Some of the enemy characters, such as Dug, Simons, and Slash, have darker skin tones in the Japanese version and were lightened up in the international versions.
+
+The female enemies from the arcade version, Roxy and Poison, were respectively changed to male characters called Sid and Billy on the international versions. The female defeat sound goes unused as a result.
+
+In the international versions, Belger's wheelchair was changed to a couch, possibly to avoid making it seem like a disabled man is being beaten.
+
+Japan
+
+International
+
+The "bar" sign in the West Side stage was changed to a "club" sign.
+
+Japan
+
+International
+
+This female statue found throughout the Up Town stage had its breasts covered up.
+
+Japan
+
+International
+
+The final screen had some Engrish corrected.
+
+Europe Differences
+
+The Industrial Area music is restored and can be accessed in the Music section of the options menu as track
+
+$0A  , which is silent in the other releases.
+
+Japan/US
+
+Europe
+
+The European release features the updated Capcom logo complete with a jingle on bootup mostly associated with
+
+Street Fighter II  .
+
+Japan/US
+
+Europe
+
+The same new Capcom logo is also present in the ending.
+
+Japan/US
+
+Europe
+
+In the Japanese and US versions, some layering mistakes on the West Side stage resulted in a mostly empty club, along with a couple later in the stage also being affected (but they can still be seen by turning off layer 1 in an emulator). This was corrected for the European release, and in turn  Final Fight Guy .
+
+v
+
+&#32; &#183; &#32;
+
+t
+
+&#32; &#183; &#32;
+
+e
+
+The
+
+Final Fight
+
+series
+
+Arcade
+
+Final Fight
+
+SNES
+
+Final Fight &#160;&#8226;
+
+Final Fight Guy &#160;&#8226;
+
+Final Fight 2 &#160;&#8226;
+
+Final Fight 3
+
+NES
+
+Mighty Final Fight
+
+Amiga
+
+Final Fight
+
+Sega CD
+
+Final Fight CD
+
+Game Boy Advance
+
+Final Fight One
+
+PlayStation 2, Xbox
+
+Final Fight: Streetwise
+
+See Also
+
+Street Fighter &#160;&#8226;
+
+Slam Masters
+
+Retrieved from " https://tcrf.net/index.php?title=Final_Fight_(SNES)&oldid=2007746 "
+
+Categories :
+
+Games developed by Capcom
+
+Games published by Capcom
+
+SNES games
+
+Games released in 1990
+
+Games released in December
+
+Games released on December 21
+
+Games with unused areas
+
+Games with unused enemies
+
+Games with unused text
+
+Games with debugging functions
+
+Games with hidden level selects
+
+Games with regional differences
+
+To do
+
+Needs more images
+
+Final Fight series
+
+Hidden categories:
+
+Pages missing developer references
+
+Pages missing publisher references
+
+Pages missing date references
+
+Cleanup
+
+Cleanup
+
+Cleanup
+
+Cleanup  >  Needs more images
+
+Cleanup  >  To do
+
+Games  >  Games by content  >  Games with debugging functions
+
+Games  >  Games by content  >  Games with hidden level selects
+
+Games  >  Games by content  >  Games with regional differences
+
+Games  >  Games by content  >  Games with unused areas
+
+Games  >  Games by content  >  Games with unused enemies
+
+Games  >  Games by content  >  Games with unused text
+
+Games  >  Games by developer  >  Games developed by Capcom
+
+Games  >  Games by platform  >  SNES games
+
+Games  >  Games by publisher  >  Games published by Capcom
+
+Games  >  Games by release date  >  Games released in 1990
+
+Games  >  Games by release date  >  Games released in December
+
+Games  >  Games by release date  >  Games released in December  >  Games released on December 21
+
+Games  >  Games by series  >  Final Fight series
+
+Hidden categories  >  Pages missing date references
+
+Hidden categories  >  Pages missing developer references
+
+Hidden categories  >  Pages missing publisher references
+
+Navigation menu
+
+Personal tools
+
+English
+
+Create account
+
+Log in
+
+Namespaces
+
+Page
+
+Discussion
+
+Variants
+
+Views
+
+Read
+
+View source
+
+View history
+
+More
+
+Search
+
+Main
+
+Main page
+
+Recent changes
+
+Random page
+
+Rules & Editing Help
+
+FAQ
+
+To-do list
+
+Community + Links
+
+Discord
+
+IRC Channel
+
+Message Board
+
+Bluesky
+
+Patreon
+
+Donate
+
+Data Crystal
+
+Related Sites
+
+Games
+
+By platform
+
+By series
+
+By content
+
+By release date
+
+By developer
+
+By publisher
+
+Featured articles
+
+Tools
+
+What links here
+
+Related changes
+
+Special pages
+
+Printable version
+
+Permanent link
+
+Page information
+
+This page was last edited on 7 January 2026, at 12:18.
+
+Content is available under  Attribution 3.0 Unported  unless otherwise noted.
+
+Privacy policy
+
+About The Cutting Room Floor
+
+Disclaimers

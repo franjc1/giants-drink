@@ -1,0 +1,173 @@
+{
+  "game_id": "fire-shark-genesis",
+  "game_name": "Fire Shark",
+  "platform": "genesis",
+  "paradigm": "shmup",
+  "level_count": 10,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Standard shot weapon",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Basic offense; travels max half screen height"
+    },
+    {
+      "element": "Bomb weapon",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Area-of-effect offense; limited stock requiring collection"
+    },
+    {
+      "element": "Tank enemies",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Ground-based threats; manageable threat profile"
+    },
+    {
+      "element": "Wide shot weapon (pickup)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Dropped by zeppelins; expanded coverage"
+    },
+    {
+      "element": "Laser beam weapon (pickup)",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Dropped by zeppelins; precision offense"
+    },
+    {
+      "element": "Flamethrower weapon (pickup)",
+      "first_appears": "Early-mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Dropped by zeppelins; close-range high damage"
+    },
+    {
+      "element": "Battleship enemies",
+      "first_appears": "Mid levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Larger naval targets with increased firepower"
+    },
+    {
+      "element": "Kamikaze monoplane enemies",
+      "first_appears": "Mid levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Aggressive diving attacks requiring evasion"
+    },
+    {
+      "element": "Artillery enemies",
+      "first_appears": "Mid-late levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Stationary but dense projectile patterns"
+    },
+    {
+      "element": "Speed boost icons (S)",
+      "first_appears": "Throughout game",
+      "introduction_context": "moderate",
+      "mastery_context": "Increases plane velocity; risk/reward of speed"
+    },
+    {
+      "element": "Bomb stock icons (B)",
+      "first_appears": "Throughout game",
+      "introduction_context": "moderate",
+      "mastery_context": "Additional bomb capacity"
+    },
+    {
+      "element": "Power icons (P)",
+      "first_appears": "Throughout game",
+      "introduction_context": "moderate",
+      "mastery_context": "Three in sequence increases firepower; fourth+ grants points"
+    },
+    {
+      "element": "1UP extra lives",
+      "first_appears": "Rare pickups",
+      "introduction_context": "moderate",
+      "mastery_context": "Rare life restoration"
+    },
+    {
+      "element": "Lightning medals (point containers)",
+      "first_appears": "Throughout game",
+      "introduction_context": "safe",
+      "mastery_context": "Secondary scoring mechanic"
+    },
+    {
+      "element": "Dense bullet patterns",
+      "first_appears": "Late levels and loops",
+      "introduction_context": "dangerous",
+      "mastery_context": "Arcade-standard difficulty escalation on loop replay"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Reaching airport checkpoint",
+      "Clearing dense enemy formations",
+      "Collecting power-ups to restore firepower after hit",
+      "Brief scrolling lulls between major enemy groups"
+    ],
+    "typical_tension_triggers": [
+      "Constant vertical scrolling (scenery never stops until airport)",
+      "Dense enemy fire from battleships and artillery",
+      "Kamikaze monoplane dives",
+      "Firepower penalty after taking damage",
+      "Approaching 10-level completion (loop increases difficulty)"
+    ],
+    "pacing_descriptor": "Relentless constant-scroll vertical shmup with escalating enemy density; tension primarily driven by unceasing forward momentum and punishing hit feedback rather than cyclical pacing"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introductory enemy types (tanks) with manageable firepower and spacing; weapons pickups help establish baseline offense",
+    "mid_game": "Battleships and kamikazes introduce sustained pressure and evasion requirements; weapon variety available but firepower loss penalty creates vulnerability windows",
+    "late_game": "Artillery and combined force layouts with denser bullet patterns; final loop restarts with increased difficulty and denser projectiles",
+    "notable_spikes": [
+      "Kamikaze monoplane introduction (requires new evasion patterns)",
+      "Loop 2+ restarts with increased enemy fire density",
+      "Final stage before loop (peak difficulty before restart)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Checkpoint-based progression",
+      "description": "Ten stages with airport checkpoints; arcade version allows mid-stage respawning at checkpoint or immediate death location (configurable). Constant scrolling until checkpoint prevents backtracking.",
+      "example_level": "All 10 stages"
+    },
+    {
+      "pattern_name": "Enemy type introduction",
+      "description": "Ground threats (tanks) → Naval threats (battleships) → Air threats (kamikazes) → Integrated multi-type formations; gradually adds new threat vectors",
+      "example_level": "Stages 1-10"
+    },
+    {
+      "pattern_name": "Weapon progression via pickup",
+      "description": "Three upgradeable weapon variants (wide, laser, flamethrower) available as drops; three P-icons grant one firepower level; visual distinction by color encourages active choice",
+      "example_level": "Stages 1-10"
+    },
+    {
+      "pattern_name": "Consequence-based difficulty scaling",
+      "description": "Hit penalty resets firepower and speed to base state; encourages careful play and creates high-stakes moments. Loop system increases base enemy density each cycle.",
+      "example_level": "All stages, escalates on loop"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:28:45.076Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3255,
+    "output_tokens": 1892,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

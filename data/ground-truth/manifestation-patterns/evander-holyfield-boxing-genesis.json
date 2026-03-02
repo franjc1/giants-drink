@@ -1,0 +1,203 @@
+{
+  "game_id": "evander-holyfield-boxing-genesis",
+  "game_name": "Evander Holyfield's Real Deal Boxing",
+  "platform": "genesis",
+  "paradigm": "sports",
+  "danger_signals": [
+    {
+      "signal": "Energy meter depletion",
+      "visual_form": "Decreasing energy bar display during fight",
+      "meaning": "Boxer is accumulating damage and approaching knockdown threshold"
+    },
+    {
+      "signal": "Head/body damage meters depleted",
+      "visual_form": "Separate head and body damage indicators reaching zero",
+      "meaning": "Localized vulnerability — continued hits to damaged area trigger TKO"
+    },
+    {
+      "signal": "Visible cuts on head",
+      "visual_form": "Visual scarring/wound sprites on boxer's head",
+      "meaning": "Severe head damage sustained; boxer approaching critical condition"
+    },
+    {
+      "signal": "Knockdown count (1-3)",
+      "visual_form": "Knockdown counter or referee animation",
+      "meaning": "Third knockdown ends fight immediately; progressive danger escalation"
+    },
+    {
+      "signal": "Boxer posture/stagger",
+      "visual_form": "Character animation showing defensive or unbalanced stance",
+      "meaning": "Boxer is weakened and vulnerable to finishing combinations"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Full energy meter",
+      "visual_form": "Complete/near-complete energy bar at start of round or after rest",
+      "meaning": "Boxer is fresh and at peak defensive capability"
+    },
+    {
+      "signal": "Intact head/body damage meters",
+      "visual_form": "Head and body meters showing minimal or no damage",
+      "meaning": "No localized vulnerability; boxer can absorb distributed damage evenly"
+    },
+    {
+      "signal": "Zero knockdown count",
+      "visual_form": "No knockdowns registered at start of fight or after recovery",
+      "meaning": "Boxer has margin for safety; can absorb one-two more knockdowns"
+    },
+    {
+      "signal": "Aggressive stance/movement",
+      "visual_form": "Forward-leaning posture, active footwork animation",
+      "meaning": "Boxer is in offensive position and maintaining control"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player boxer",
+      "color_identity": "Selectable from: red, green, gold, purple, dark blue, cyan, yellow, or silver (The Beast)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Distinguishable by custom coloring vs. preset opponent color schemes",
+      "environmental_markers": "Ring position displayed on overhead tactical map; sprite renders from side-on camera view"
+    },
+    {
+      "faction": "Opponent boxers (28 fictional roster)",
+      "color_identity": "Preset color schemes per fighter (contextually distinct from player color)",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Each opponent has distinct name, nation attribution, and sprite variation; ranking system (Champion at rank 1 down to rank 28) creates visual hierarchy",
+      "environmental_markers": "Career mode progression displays opponent rank and nation; overhead map shows opponent position and movement relative to player"
+    },
+    {
+      "faction": "Champion tier (Evander Holyfield)",
+      "color_identity": null,
+      "symbol_or_sigil": "Title holder status indicated by ranking position (Rank 1 / Champion)",
+      "enemy_visual_variants": "Holyfield has maximum attributes (power, speed, stamina, defense) compared to all other boxers; sprite reflects champion tier",
+      "environmental_markers": "Final boss encounter in career mode; defeats Holyfield results in title acquisition and transition to 'challenge matches' phase"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early career (low rank, new boxer)",
+      "visual_manifestation": "Lower-ranked opponents appear in career ladder; player boxer sprite shows user-selected appearance",
+      "behavioral_manifestation": "Opponents have lower AI difficulty; attribute gains through training visible in progression system"
+    },
+    {
+      "world_state": "Mid-career (climbing toward championship)",
+      "visual_manifestation": "Opponent rank numbers decrease (higher position in ladder); rank displays change as boxer ascends",
+      "behavioral_manifestation": "Opponent difficulty increases; training effects become more noticeable in stat distribution"
+    },
+    {
+      "world_state": "Championship challenge (fighting Holyfield)",
+      "visual_manifestation": "Opponent is Holyfield with maximum-tier sprite and styling; World Heavyweight Title on display",
+      "behavioral_manifestation": "Holyfield behaves with maximum attributes (speed, power, stamina, defense); near-unbeatable baseline opponent"
+    },
+    {
+      "world_state": "Post-championship (holding title)",
+      "visual_manifestation": "Title holder status reflected in UI; challenge match opponents have higher visual distinctiveness",
+      "behavioral_manifestation": "High-ranked contenders appear with elevated AI difficulty; player boxer subject to age/fatigue degradation after 20-25 fights"
+    },
+    {
+      "world_state": "Late career (boxer aging, 40+ fights)",
+      "visual_manifestation": "Opponent roster gradually replaces aging boxers with new ones; ranking structure shifts dynamically",
+      "behavioral_manifestation": "Player boxer attributes decline; training becomes less effective; mandatory retirement triggered at 40 fights"
+    },
+    {
+      "world_state": "Holyfield defeat (champion loses title)",
+      "visual_manifestation": "Holyfield's ranking drops visibly in career progression display",
+      "behavioral_manifestation": "Holyfield declines in rankings and eventually retires; only resetting internal game memory restores him to optimum form"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Overhead tactical map",
+      "example": "Ring navigation displayed from above showing both fighters' positions; allows 360-degree spatial awareness and communicates ring control/positioning without explicit UI text"
+    },
+    {
+      "technique": "Damage localization visualization",
+      "example": "Separate head and body meters communicate targeted injury; visible cuts on head sprite show cumulative damage story without text narration"
+    },
+    {
+      "technique": "Ranking system progression",
+      "example": "Numbered opponent roster (1-28) visually represents climb through boxing hierarchy; ascending numbers-to-names progression tells career narrative"
+    },
+    {
+      "technique": "Sprite condition changes",
+      "example": "Boxer appearance reflects damage state (stagger, cuts, bruising); posture shifts communicate story of punishment without dialogue"
+    },
+    {
+      "technique": "Attribute degradation over time",
+      "example": "Training effects plateau and reverse after 20-25 fights, visually communicating aging boxer decline without explicit narrative"
+    },
+    {
+      "technique": "Champion tier distinctiveness",
+      "example": "Holyfield maximum attributes and final-boss positioning in career ladder communicate title significance through game systems rather than storytelling"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player boxer",
+      "state": "Fresh/full health",
+      "behavior": "Responsive controls, full energy meter, capable of landing powerful combinations"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "Damaged (head or body meter depleted)",
+      "behavior": "Takes amplified damage to that specific area; continued hits to damaged zone trigger TKO progression"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "Knocked down (1-2 times)",
+      "behavior": "Recovery animation plays; boxer returns to ring but knockdown counter increments; behavioral vulnerability increases"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "On third knockdown",
+      "behavior": "Fight ends immediately; no recovery possible; boxing match decision rendered"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "High-rank (low number, near champion)",
+      "behavior": "Elevated attribute values; faster, more powerful, better stamina and defense AI routines"
+    },
+    {
+      "entity": "Computer opponent",
+      "state": "Low-rank (high number, early career)",
+      "behavior": "Lower attribute values; slower AI movement, weaker punch impact, reduced defense patterns"
+    },
+    {
+      "entity": "Evander Holyfield (champion)",
+      "state": "Undefeated champion",
+      "behavior": "Maximum attributes across all four categories (power, speed, stamina, defense); behaves as final-boss-tier opponent"
+    },
+    {
+      "entity": "Evander Holyfield",
+      "state": "Post-defeat (after loss to player)",
+      "behavior": "Ranking declines; eventually exits roster and retires; no longer appears in career progression unless game memory reset"
+    },
+    {
+      "entity": "Any boxer",
+      "state": "Clinching/close-quarters",
+      "behavior": "Digitized audio 'Break' command triggers; referee animation separates boxers; communicates round pacing and clinch rules"
+    },
+    {
+      "entity": "Any boxer",
+      "state": "Taunting",
+      "behavior": "Computer boxer triggers pause and delivers digitized speech insult ('come on and fight you wimp!'); communicates personality/confidence state"
+    }
+  ],
+  "notes": "Evander Holyfield's Real Deal Boxing is a sports simulation with minimalist narrative design. World-state and danger communication rely entirely on mechanical systems (meters, counters, attributes) and sprite-based visual feedback rather than explicit HUD text or dialogue. The game communicates political hierarchy (boxer rankings, champion tier) through progression structure and attribute distribution. Faction identity is minimal — the game distinguishes player vs. opponent through color selection and sprite rendering, with no true faction systems. Environmental storytelling operates through damage visualization (cuts, stagger) and ranking dynamics (opponent progression, champion decline). The game's core manifestation layer communicates state change through energy depletion, damage localization, knockdown counting, and attribute degradation over career time.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:46:04.377Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3031,
+    "output_tokens": 2546,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

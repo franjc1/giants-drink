@@ -1,0 +1,133 @@
+{
+  "game_id": "cool-world-genesis",
+  "game_name": "Cool World",
+  "platform": "SNES",
+  "paradigm": "action-adventure platformer",
+  "danger_signals": [
+    {
+      "signal": "Popper Police presence",
+      "visual_form": "Cartoon police force characters in game world",
+      "meaning": "Law enforcement threat; player risks arrest if surrounded"
+    },
+    {
+      "signal": "Law-breaking accumulation",
+      "visual_form": "Hidden counter tracking player infractions",
+      "meaning": "Escalating danger state; more violations increase arrest likelihood and bail amounts"
+    },
+    {
+      "signal": "Detective Frank Harris appearance",
+      "visual_form": "Named authority figure NPC encounter",
+      "meaning": "Escalation from generic police to direct confrontation; player must pay bail or receive lecture"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Currency collection (nickels/coins)",
+      "visual_form": "Collectible items scattered through game world",
+      "meaning": "Resource accumulation for bail payment; mitigates arrest consequences"
+    },
+    {
+      "signal": "Cool World bank access",
+      "visual_form": "Safe location for currency storage",
+      "meaning": "Protected financial state; allows players to secure bail money against arrest"
+    },
+    {
+      "signal": "Slash Club social space",
+      "visual_form": "Named entertainment venue location",
+      "meaning": "Neutral zone for arranging favorable social outcomes (date with Holli Would)"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Popper Police",
+      "color_identity": null,
+      "symbol_or_sigil": "Police uniform/authority insignia (inferred from 'cartoon police force' description)",
+      "enemy_visual_variants": "Generic police officers vs. Detective Frank Harris (named authority figure)",
+      "environmental_markers": "Patrol areas throughout game world; presence indicates law enforcement jurisdiction"
+    },
+    {
+      "faction": "Criminal/Law-breaking Player State",
+      "color_identity": null,
+      "symbol_or_sigil": "Accumulated infractions counter (visual representation unknown)",
+      "enemy_visual_variants": "Player persona shifts from law-abiding to wanted based on violations",
+      "environmental_markers": "Restricted access zones (malt shop entry requires candy collection); bail system enforces class distinction"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Low law-breaking count + sufficient currency",
+      "visual_manifestation": "Free movement; Popper Police encounters avoidable",
+      "behavioral_manifestation": "Police maintain patrol patterns; player can navigate safely with evasion"
+    },
+    {
+      "world_state": "High law-breaking count + insufficient bail money",
+      "visual_manifestation": "Detective Frank Harris summoned; arrest sequence triggered",
+      "behavioral_manifestation": "Forced dialogue/lecture; player tossed back to ground level or forced payment"
+    },
+    {
+      "world_state": "Mid-progression (date arranged with Holli Would)",
+      "visual_manifestation": "Access to Holli's apartment building exterior becomes critical progression path",
+      "behavioral_manifestation": "Vertical navigation challenge; failure results in ejection back to ground level"
+    },
+    {
+      "world_state": "Currency-dependent access gates",
+      "visual_manifestation": "Malt shop entrance restricted; pawn shop transactions gated by nickel possession",
+      "behavioral_manifestation": "Player must farm Las Vegas location for currency before accessing candy/restricted areas"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-based consequence system",
+      "example": "Las Vegas serves as economic hub for coin farming; Cool World bank provides safe storage; Slash Club mediates social advancement; pawn shop enables economic trades—all reinforce capitalist/urban commerce narrative parallel to movie source"
+    },
+    {
+      "technique": "Spatial restriction as narrative gating",
+      "example": "Malt shop entry requires candy collection; Holli's apartment requires successful date arrangement—restricted spaces communicate progression requirements and social hierarchy"
+    },
+    {
+      "technique": "NPC-driven world state communication",
+      "example": "Holli Would represents the goal/temptation; Detective Frank Harris embodies law enforcement consequence; Jack Deebs' avoidance of both creates central tension"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Popper Police (generic)",
+      "state": "Patrolling/neutral",
+      "behavior": "Maintain predictable patrol patterns; player can avoid via evasion and positioning"
+    },
+    {
+      "entity": "Popper Police (alerted)",
+      "state": "Player surrounded/cornered",
+      "behavior": "Initiate arrest sequence; force confrontation"
+    },
+    {
+      "entity": "Detective Frank Harris",
+      "state": "Activated (high law-breaking count)",
+      "behavior": "Deliver lecture or demand bail payment; escalation from generic police to named authority"
+    },
+    {
+      "entity": "Jack Deebs (player character)",
+      "state": "Law-abiding (low infractions)",
+      "behavior": "Can move freely; police avoidable through spatial awareness"
+    },
+    {
+      "entity": "Jack Deebs (player character)",
+      "state": "Wanted (high infractions, no bail)",
+      "behavior": "Forced arrest; dialogue sequence; currency penalty; ground-level reset"
+    }
+  ],
+  "notes": "Cool World SNES version diverges from other platform ports by functioning as adventure game with Jack Deebs as protagonist avoiding both law enforcement and romantic entanglement. Visual communication emphasizes economic gatekeeping (currency collection), spatial restriction (location access), and law enforcement threat escalation (generic police → Detective Harris). World state manifests through dual consequence systems: legal (arrest/bail) and romantic (date arrangement requiring social hub access). The game communicates societal structure through capitalist transactions (nickels, bail, pawn shop trades) and authority presence (Popper Police patrols). Limited source material prevents detailed color/symbol extraction; design relies on familiar urban/game-world archetypes rather than distinctive faction visual identity.",
+  "sources_used": [
+    "wikipedia: Cool World (SNES video game)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:02:45.557Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2349,
+    "output_tokens": 1806,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

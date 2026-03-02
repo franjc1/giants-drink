@@ -1,0 +1,157 @@
+{
+  "game_id": "pipe-dream-nes",
+  "game_name": "Pipe Dream",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic straight and L-bend pipe pieces",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns to place pieces and form unbroken pipelines"
+    },
+    {
+      "element": "T-junction and 4-way intersection pieces",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns complex routing; bonus awarded for crossing flooz through 4-way intersections"
+    },
+    {
+      "element": "Flow initiation mechanic (flooz/goo)",
+      "first_appears": "Level 1 (after set time delay)",
+      "introduction_context": "moderate",
+      "mastery_context": "Player must complete pipeline before flooz flows; timing pressure increases"
+    },
+    {
+      "element": "Minimum pipeline length requirement",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Later levels increase minimum length demands"
+    },
+    {
+      "element": "Pre-placed obstacles and fixed pipe sections",
+      "first_appears": "Mid-game levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Player must navigate around unmovable pieces; reduces available space"
+    },
+    {
+      "element": "End piece (drain requirement)",
+      "first_appears": "Mid-game levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Flooz must reach designated end or game ends immediately, even if length met"
+    },
+    {
+      "element": "Wrap-around openings (opposite edge connections)",
+      "first_appears": "Later levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Adds spatial complexity; flooz can exit and re-enter at opposite boundaries"
+    },
+    {
+      "element": "One-way pipe sections",
+      "first_appears": "Later levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Flow direction is constrained; player must plan routes respecting directional restrictions"
+    },
+    {
+      "element": "Reservoirs (timed fill mechanic)",
+      "first_appears": "Later levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Provides brief time extension; bonus points for filling them"
+    },
+    {
+      "element": "Increased flow speeds",
+      "first_appears": "Mid-to-late game levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Reduces reaction time; increases pressure to pre-plan pipelines"
+    },
+    {
+      "element": "Shortened flow delay timers",
+      "first_appears": "Mid-to-late game levels",
+      "introduction_context": "dangerous",
+      "mastery_context": "Less time to complete pipeline before flooz begins moving"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully routing flooz through entire pipeline",
+      "Reaching minimum length requirement before flooz gets stuck",
+      "Bonus round after every 4th level (grid-sliding puzzle, lower stakes)",
+      "Earning password for level skip"
+    ],
+    "typical_tension_triggers": [
+      "Flooz flow initiation (timer countdown)",
+      "Increasing flow speed in later levels",
+      "Shortened delays before flooz begins moving",
+      "Appearance of drain piece requirement (game-ending penalty if missed)",
+      "Limited dispenser column (5-piece queue visible)",
+      "Pre-placed obstacles reducing available grid space",
+      "Wrap-around openings requiring spatial awareness"
+    ],
+    "pacing_descriptor": "Escalating pressure cycle: preparation phase (place pipes freely) transitions to execution phase (flooz flows). Early levels allow generous placement time; mid-to-late levels compress decision windows through faster flow speeds and shorter delays. Tension releases temporarily every 4th level via bonus round."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": "Bonus points available for exceeding minimum pipeline length; dispensed pieces encourage strategic length exploration beyond requirements",
+    "secret_convention": "Four-way intersections grant large bonuses when flooz crosses itself exactly 5 times in a single level; encourages specific routing patterns",
+    "dead_end_frequency": "frequent",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Generous time windows, basic piece types (straight, L-bends), high tolerance for suboptimal routing. Focus on learning placement mechanics.",
+    "mid_game": "Introduction of T-junctions and 4-way pieces; first appearance of pre-placed obstacles and drain pieces. Minimum lengths increase. Flow speeds increase moderately.",
+    "late_game": "Wrap-around edges, one-way restrictions, multiple obstacles, compressed timers, high flow speeds. Spatial planning becomes critical. Each mistake ends run.",
+    "notable_spikes": [
+      "First appearance of drain piece (immediate game-over if missed)",
+      "Introduction of wrap-around edge mechanics (spatial disorientation)",
+      "One-way pipe restrictions (planning complexity spike)",
+      "Compressed flow delay timers (reaction pressure increase)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Standard progression level",
+      "description": "Entry point marked on grid, random pipe pieces from dispenser, flooz flow after delay. Goal: reach minimum length before flooz gets blocked or exits improperly.",
+      "example_level": "Levels 1-3 (foundational)"
+    },
+    {
+      "pattern_name": "Obstacle navigation level",
+      "description": "Pre-placed fixed pipe sections occupy grid squares, cannot be replaced. Reduces available routing space; forces optimization.",
+      "example_level": "Mid-game (exact level not specified)"
+    },
+    {
+      "pattern_name": "Drain piece requirement level",
+      "description": "Designated end piece appears on field. Flooz must be routed to this specific endpoint. Missing it fails the level immediately, regardless of length met.",
+      "example_level": "Mid-to-late game (exact level not specified)"
+    },
+    {
+      "pattern_name": "Bonus round (every 4th level)",
+      "description": "Grid of pre-placed pipe sections with one empty space. Player slides pieces into the gap (Fifteen Puzzle mechanic). Build longest pipeline possible from the configuration. Awards password for level skip.",
+      "example_level": "After levels 4, 8, 12, etc."
+    },
+    {
+      "pattern_name": "Wrap-around edge level",
+      "description": "Grid openings at opposite boundaries allow flooz to exit one side and re-enter the other. Adds spatial complexity and non-intuitive routing possibilities.",
+      "example_level": "Later levels (exact level not specified)"
+    }
+  ],
+  "sources_used": [
+    "wikipedia - Pipe Mania article (gameplay mechanics, level progression details, obstacles, reservoirs, one-way pipes, bonus rounds)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:50:35.888Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3989,
+    "output_tokens": 1857,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

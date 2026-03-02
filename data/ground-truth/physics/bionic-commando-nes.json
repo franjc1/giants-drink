@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "game": "Bionic Commando",
+    "platform": "Nintendo Entertainment System (NES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1988,
+    "publisher": "Capcom",
+    "developer": "Capcom",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — NES / Bionic Commando",
+        "url": "https://tasvideos.org/GameResources/NES/BionicCommando",
+        "notes": "Mechanics documentation. Walk speed, grapple mechanics."
+      },
+      {
+        "name": "Data Crystal — Bionic Commando (NES)",
+        "url": "https://datacrystal.tcrf.net/wiki/Bionic_Commando_(NES)",
+        "notes": "RAM map reference for physics variable addresses."
+      },
+      {
+        "name": "Speed Demos Archive — Bionic Commando",
+        "url": "https://speeddemosarchive.com/BionicCommando.html",
+        "notes": "Speedrun notes on movement optimization."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "DEFINING MECHANIC: Nathan Spencer CANNOT JUMP. He has NO jump ability.",
+      "The grappling arm (bionic arm) is the ONLY way to gain height or cross gaps. Every vertical movement is a swing.",
+      "This is one of the earliest mainstream games built entirely around a traversal tool instead of a standard jump.",
+      "Walk speed and grapple mechanics are primary movement data. Exact px/frame values not confirmed from reviewed sources — marked medium confidence.",
+      "Capcom game — physics may share design DNA with Mega Man (same era, same developer).",
+      "The game has both side-scrolling action stages and an overhead map stage for traveling between areas."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 240,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "medium",
+      "notes": "Approximate. Capcom NES standard of era (same as Mega Man walk speed). VERIFY against ROM."
+    },
+    "acceleration": null,
+    "notes": "Walk appears to be instant velocity — consistent with other Capcom NES titles of the era."
+  },
+
+  "jump": {
+    "available": false,
+    "_note": "THIS IS THE DEFINING FEATURE. Nathan Spencer CANNOT JUMP.",
+    "notes": [
+      "The inability to jump is not a limitation — it's the core design. Every vertical challenge must be solved with the bionic arm.",
+      "This makes Bionic Commando a completely different design space from standard platformers.",
+      "Falling off a platform without the arm attached = falling to your death."
+    ]
+  },
+
+  "bionic_arm": {
+    "_note": "The bionic arm is Nathan's primary traversal tool. It replaces the jump entirely.",
+    "extension": {
+      "description": "Nathan extends his arm at an angle (roughly 45 degrees upward). The arm hook latches onto any platform surface it contacts.",
+      "extension_speed_approx_px_per_frame": 6.0,
+      "confidence": "low",
+      "notes": "Approximate. Grapple extends quickly. VERIFY."
+    },
+    "aiming": {
+      "directions": 3,
+      "available_angles": ["upper-left (~45°)", "directly right or left", "upper-right (~45°)"],
+      "notes": "The arm fires at 45-degree upward diagonals or horizontally. Cannot fire straight up or downward. Direction determined by player's current facing + D-pad input."
+    },
+    "swing_mechanics": {
+      "type": "pendulum",
+      "description": "Once attached, Nathan swings on the arm like a pendulum. The arm is a fixed-length cable — Nathan swings on an arc defined by the attachment point.",
+      "release": "Press arm button again or jump button to release and fly in the direction of swing momentum",
+      "notes": [
+        "Optimal swing technique: release at the apex of the forward swing to maximize horizontal + vertical distance.",
+        "The pendulum physics mean timing the release determines the trajectory.",
+        "Chaining swings: release → fly → fire arm at next platform → attach → swing again. This is the core traversal loop.",
+        "Master players can chain swings through complex environments with minimal ground contact."
+      ]
+    },
+    "arm_length": {
+      "notes": "Arm length appears fixed per extension. The platform attachment point determines the swing radius. Vertical distance from ground to attachment = pendulum arm length.",
+      "confidence": "medium"
+    },
+    "retraction": {
+      "description": "Nathan can pull himself up by retracting the arm — allowing vertical ascent to an attached platform.",
+      "notes": "Retraction is the way to reach platforms directly above. Extend arm to overhead platform → retract to pull Nathan up."
+    }
+  },
+
+  "combat": {
+    "standard_weapon": {
+      "description": "Machine gun that fires horizontally or diagonally upward",
+      "fire_rate": "semi-auto to auto depending on weapon upgrade",
+      "notes": "Weapons are scattered throughout stages. Default weapon has limited bullets in some configurations."
+    },
+    "special_weapons": {
+      "notes": "Multiple weapon types available as pickups: machine gun, bazooka, eagle (three-way shot). Ammo is limited for most."
+    },
+    "while_swinging": {
+      "notes": "Nathan can fire during swings — this is important for combat while traversing."
+    }
+  },
+
+  "level_structure": {
+    "overworld": {
+      "type": "top-down map",
+      "description": "Between side-scrolling stages, Nathan drives a vehicle on an overhead map to reach the next area.",
+      "notes": "The overhead segments have their own vehicle physics (not documented here)."
+    },
+    "action_stages": {
+      "type": "side-scrolling",
+      "notes": "Stages contain floors at multiple heights connected by gaps. ALL vertical traversal uses the bionic arm."
+    },
+    "neutral_areas": {
+      "notes": "Some areas are 'neutral' — neither enemy nor friendly territory. Can radio for supply information."
+    }
+  },
+
+  "hitboxes": {
+    "nathan_standing": {
+      "notes": "Approximate. Nathan is a standard-height NES protagonist. VERIFY.",
+      "confidence": "low"
+    }
+  },
+
+  "_verification_checklist": [
+    "Walk speed in px/frame",
+    "Arm extension speed",
+    "Exact arm extension angle(s)",
+    "Swing arc calculation (pendulum period at various heights)",
+    "Retraction speed"
+  ],
+
+  "design_notes_for_giants_drink": [
+    "The 'no jump' design is one of the most audacious constraints in NES game design. It forces the player to fundamentally reconceptualize what 'getting somewhere' means. Every gap is solvable by a different means than expected.",
+    "The bionic arm creates a design space where 'what can you attach to?' is the core question. Level designers in Bionic Commando must think about ceiling and wall geometry first — the question isn't 'is there a platform' but 'is there a surface the arm can reach?'",
+    "Chained swings create a 'flow state' traversal where expert players develop a rhythm of extend-swing-release-extend. This is comparable to Sonic's momentum-based traversal — mastery creates a distinct feel.",
+    "The arm is also a combat tool and puzzle tool — the same mechanic used for movement is used to cross electric floors and reach enemies at range. Single-mechanic depth.",
+    "The contrast between the side-scrolling action stages and the overhead map stage creates a two-register experience — the fast, skill-intensive swinging sections vs. the strategic, exploration-based overworld."
+  ]
+}

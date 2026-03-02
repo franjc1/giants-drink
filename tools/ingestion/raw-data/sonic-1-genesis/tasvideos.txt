@@ -1,0 +1,735 @@
+GameResources/Genesis/SonicTheHedgehog - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+Genesis
+
+Sonic The Hedgehog
+
+This page documents information about
+
+Sonic the Hedgehog 2
+
+,
+
+Sonic the Hedgehog
+
+,
+
+Sonic 3 & Knuckles
+
+,
+
+Sonic Boom
+
+,
+
+Sonic Classic Heroes
+
+,
+
+Tails in Sonic The Hedgehog
+
+,
+
+S3K: The Challenges
+
+,
+
+Sonic 1: Return to the Origin
+
+,
+
+Sonic Turbo
+
+,
+
+Sonic 3 & Amy Rose
+
+,
+
+Lose Tails or Else
+
+,
+
+Robotnik&#x27;s Revenge
+
+,
+
+Knuckles in Sonic the Hedgehog
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Table of contents
+
+Sonic 1
+
+RAM Values
+
+Notes
+
+Position
+
+Sprites
+
+Event Triggers
+
+Jumping
+
+Gravity
+
+Rolling
+
+Sprite Ejection
+
+Terrain Ejection
+
+Ducking
+
+Slope
+
+Terrain Collision
+
+"Corner"ing
+
+Lag
+
+Tricks
+
+Start faster
+
+Loop jumping
+
+Loop breaking
+
+Sonic 2
+
+RAM Values
+
+Notes
+
+Ducking
+
+Spindashing
+
+Lag
+
+Tricks
+
+Spindash through solid objects (but not terrain)
+
+Sonic 3 & Knuckles
+
+RAM Values
+
+Notes
+
+Double-Jump Actions
+
+Tricks
+
+Crumbling Platforms
+
+Hydrocity Slides
+
+Signpost Monitors
+
+Scroll Glitch
+
+Level Wrapping Glitch
+
+Camera Based Teleportation
+
+Character stats
+
+Sonic
+
+Tails
+
+Knuckles
+
+Note: Although the physics engine was largely unchanged between all of the 16-bit Sonic games, there is no guarantee that any specific values listed for one game will apply to any other.
+
+Note: However, unless otherwise stated, the engine notes for one game apply to all later games.
+
+Sonic 1
+
+RAM Values
+
+X Velocity  word @ FFD010
+ Y Velocity  word @ FFD012
+ Speed Value (on ground)  word @ FFD014 (signed)
+ X Pixel Position  word @ FFD008 (unsigned)
+ X Subpixel Position  byte @ FFD00A (unsigned)
+ Y Pixel Position  word @ FFD00C (unsigned)
+ Y Subpixel Position  byte @ FFD00E (unsigned)
+ Slope Gradient  byte @ FFD026 (signed)
+ Camera X Position  dword @ FFF700 (also at F710, FDB8, F61A)
+ Camera Y Position  dword @ FFF704 (also at F714, F616)
+ Timer frames  byte @ FFFE25 (undisplayed portion of the in-game timer, 0 to 59)
+
+Notes
+
+Position
+
+The game stores X and Y subpixel positions, each with a range of 256. Subpixel positions are only used to determine changes in pixel position when speed is not an integer multiple of 256 (and collisions with landscape?). Everything else, such as changes in velocity due to slope, the current angle of the slope, and collisions, are determined by pixel position. Of course, all of those things can be affected indirectly by the subpixel position because that affects the pixel position. The subpixel position is the sum of the character's speed across all previous frames in the current zone, mod 256. Unless directly monitored, this will appear as a source of random variation in the character's movement, and it will often do so regardless of being monitored because it is difficult to reach any specific subpixel position while continuing to accomplish anything in the game.
+
+Because the game ignores subpixel position when determining collisions, pressing into a wall while apparently already stopped against it may in fact cause the character to accumulate speed for when the wall is cleared or removed, as well as moving slightly forward.
+
+Pixel position is stored in a 2-byte variable, which can be overflowed or underflowed. Most levels have walls, or invisible barriers that don't allow the player to pass, or even reach, the 0 point on the x or y axis. However, if this can be overcome, by zipping (see terrain ejection) for instance, the player's position will immediately be set to 32767 along that axis, and the camera will begin scrolling to find the player.
+Subpixel position can also be overflowed or underflowed. Normally this results in the player moving 1 pixel, but when pressing against a wall, simply resets the subpixel position.
+
+Sprites
+
+Sprite-based objects (spikes, switches, moving platforms, breakable walls, certain event triggers, etc.) that are not within a certain range of the camera are not rendered and cannot interact with the character in any way. Some objects use the timer for their position and thus continue moving even when they don't exist. Different types of objects seem to have different loading distances. Rings and monitors have the largest loading distances, and enemies with AIs have the smallest.
+
+Event Triggers
+
+Some events, such as ones that load bosses, trigger based on the camera position, and not the player position. If these events cause the camera to lock, and the player is not on-screen at the time, the player will be teleported to the nearest horizontal edge of the locked camera zone. Other events are placed in the level and activate based on the character's position, such as loading new graphics while passing through a loop or changing the active layer so that the player can pass behind part of the level.
+
+Jumping
+
+Jumping is a function of vector addition. When a character jumps, a vector of their jump height is added to their current x & y velocities at a 90 degree angle to the slope they are currently standing on.
+During a jump, air drag occurs whenever the character has an (upward)
+y velocity between 0 and 1024 subpixels (0-4 pixels), and happens at a rate of 1/32nd the current horizontal velocity per frame. So, for instance if you have a horizontal speed of 3072 subpixels (12 pixels) per frame at the start of a jump, once you start to reach its peak, you'll lose 96 subpixels the first frame, 93 the second, 90 the third, and so on, until your vertical speed reaches 0, or your horizontal speed is below 32 subpixels per frame.
+Releasing the jump button when upward velocity is more than 1024 subpixels (3 & 5/32 pixels) per frame causes the upward velocity to drop to 968 subpixels per frame on the next frame. One frame's worth of airdrag will occur at the same time as the drop to 968 subpixels upward.
+Holding the jump button when upward velocity is less than 1024 subpixels per frame has no effect on the game.
+If the character was rolling before jumping, player control of left and right movement is disabled until landing.
+
+Gravity
+
+In free-fall, there is a constant downward acceleration of 56 subpixels (7/32 pixels) per frame per frame.
+
+Rolling
+
+Rolling is a form of movement which attacks nearby enemies, and can break through some walls, but causes the player to decelerate on a level surface.
+Rolling allows the player to gain speed faster on downhill slopes than running does; however, rolling caps the players x-velocity at 4096 subpixels (16 pixels) per frame. 
+Interestingly, when on ground, both deceleration and y-velocity are based on the player's speed variable, not velocity, and the player's speed variable continues to increase as normal on a downhill, even when the x velocity cap has been reached. Rolling does not cap y velocity.
+
+Sprite Ejection
+
+If a player character becomes partially lodged in a sprite in a manner that does not cause the player damage, or destroy the sprite, the game begins an ejection routine. This ejection routine works by checking the lower left corner of the player's hitbox against the left edge of the sprite's hitbox, the lower right corner of the player's hitbox against the right edge of the sprite's hitbox, and the bottom edge of the player's hitbox against both the top edge and the bottom edge of the sprite's hitbox.  If any of the points of the player's bounding box are close enough to the points checked on the sprite's hitbox, the player is ejected from the sprite in that direction. Up-down ejection takes priority over left-right ejection; however, the player must have some speed along the Y axis for up-down ejection to be tested. Ejection is accomplished by changing the relevant pixel position of the player so that the opposing edge of the player's hit-box is adjacent to the sprite, and reducing the player's speed and velocities to 0. IE: when the player is ejected to the left, the player will be positioned so that the right edge of his hitbox is directly touching the left edge of the sprite.
+Sprites are "hollow" -- only the edges can be collided with. If, after the first frame, the game cannot determine which direction to eject the player, the player can walk around inside the sprite until he is near enough an edge to be ejected. Note that if the sprite is adjacent to another sprite, the player will collide with the other sprite's bounding box before he can be ejected from the sprite he is currently in. If the sprite is adjacent to (but not partially inside) terrain, the player will be ejected from the sprite before he can collide with the terrain.
+
+Terrain Ejection
+
+If a player character becomes partially lodged in terrain, there are two separate ejection mechanisms. First, it runs the same set of tests as sprite-based ejection. If that test fails, it checks to see if the player is holding left or right, and, if the player is holding left or right, it gives the player a variable speed (based on distance from the edge of the terrain tile) between 16 and 32 pixels per frame, in the direction opposite the one they are holding. This ejection routine (commonly known as zipping) will not trigger if the player is falling. Certain terrain tiles are hollow, and will trap a player rather than eject them. Terrain tiles may block, or not block any given direction of movement. Some tiles, for instance, block movement right, left, or upward, but not downward.
+
+Ducking
+
+Ducking is accomplished by holding down while standing still on the ground. Ducking causes the camera to pan downwards, and slightly decreases Sonic's hitbox.
+
+Slope
+
+Slope is stored as a 1 byte signed value (-128 ... 127). Negative slopes mean that the terrain rises to the right. Positive slopes mean that the terrain falls to the right. Players will lose speed traveling up any slope, and will be actively propelled downwards on slopes with absolute value of 16 or higher.
+Slope seems to come in multiples of 2, which would indicate 128, or fewer, slope gradations, but this has yet to be verified.
+
+Terrain Collision
+
+Terrain will only act solid if the player is moving toward it: IE: floors only obstruct downward movement, ceilings only obstruct upward movement.
+
+"Corner"ing
+
+To save time, the collision engine only checks collisions from the player's midpoint to the edge of the hitbox in the directions that the player is moving. Therfore, while moving upward in a jump, you can pass through objects as long as the midpoint of your hitbox is above the top edge of the object's hitbox, similarly, you can pass through objects moving downward if your midpoint is below the bottom edge of the object's hitbox, rightward if your midpoint is further right than the right edge of the object, and leftward if your midpoint is further left than the left edge of the object. This also works with terrain collision, and can be abused in certain circumstances to embed the lower part of your hitbox in the floor.
+
+Lag
+
+In this game, there are occasional frames of lag during graphics or CPU intensive operations. However, unlike most games, objects, including the player and the camera, will still move during lag frames (although Sonic 1 generally does not update the screen during lag frames), but any applicable changes to their speed or state will not be applied until the next frame, and certain changes will be discarded entirely. As a result, lag management is largely unnecessary in Sonic games, and in many cases, lag can even be beneficial to a speed runner, as the player may get an extra frame without any deceleration applied. However, input on a lag frame is completely ignored, which makes it detrimental when zipping, spindashing, or when a jump or double jump is necessary.
+
+In Sonic 1, the music is handled by the 68000 processor, rather than the z80, so lag is much more prevalent here than in the sequels. However, the game always catches up from music related lag the next frame, so the additional lag is almost strictly visual.
+
+Tricks
+
+Start faster
+
+When traveling at a speed of less than 128 subpixels per frame and braking, Sonic's speed is set to 128 subpixels per frame in the opposite direction. Holding left+right causes the game to think Sonic is traveling left at a speed of 0, and braking. This can shorten the process of acceleration from standstill by up to 10.75 frames (or 9.75 frames if accelerating leftward, as 1 frame of rightward motion is necessary first)
+
+Loop jumping
+
+Because the jump routine is a product of vector addition, jumping on the way up a loop (up-loop jumping) can result in a higher speed at the top of the loop than Sonic had at the bottom. Similarly, jumping on the way back down (down-loop jumping) can result in a higher speed than rolling normally would provide. Additionally, jumping from the curve at the bottom (out-loop jumping) can provide a much higher horizontal speed than Sonic would attain normally, but is generally only helpful if it does not cause Sonic to move upward at all.
+Also, even if the speed is not enhanced, loop jumping results in Sonic traversing the loop in a straighter path, and may shave frames off because of that.
+
+Loop breaking
+
+If a loop has very thin sides, it may be possible to skip the loop entirely by jumping at the loop with a very high speed. Even if this results in a lower speed compared to traveling through the loop, this trick is likely to save approximately 30 frames whenever it can be performed, due to reducing redundant motion.
+
+Sonic 2
+
+RAM Values
+
+P1 X Velocity  word @ FFB010
+ P1 Y Velocity  word @ FFB012
+ P1 Speed Value (on ground)  word @ FFB014 (signed)
+ P1 X Pixel Position  word @ FFB008 (unsigned)
+ P1 X Subpixel Position  byte @ FFB00A (unsigned)
+ P1 Y Pixel Position  word @ FFB00C (unsigned)
+ P1 Y Subpixel Position  byte @ FFB00E (unsigned)
+ P1 Slope Gradient  byte @ FFB026 (signed)
+ P2 X Velocity  word @ FFB050
+ P2 Y Velocity  word @ FFB052
+ P2 Speed Value (on ground)  word @ FFB054 (signed)
+ P2 X Pixel Position  word @ FFB048 (unsigned)
+ P2 X Subpixel Position  byte @ FFB04A (unsigned)
+ P2 Y Pixel Position  word @ FFB04C (unsigned)
+ P2 Y Subpixel Position  byte @ FFB04E (unsigned)
+ P2 Slope Gradient  byte @ FFB066 (signed)
+ Camera X Position  dword @ FFEE00
+ Camera Y Position  dword @ FFEE04
+ Timer frames  byte @ FFFE25 (undisplayed portion of the in-game timer, 0 to 59)
+
+Notes
+
+Ducking
+
+Ducking (not rolling) is the only way to perform a spindash.
+Ducking for a few seconds causes the camera to start scrolling downward.
+
+Despite what you would normally expect, ducking does  not 
+give the character a smaller hitbox whatsoever (although rolling does),
+which means that ducking to avoid damage is futile.
+
+Spindashing
+
+While holding a spindash, the character will not move relative to the surface
+he is on. Each press of A, B, or C while holding Down increases the speed that
+the character will reach upon releasing the spindash,
+the maximum occurring after only six presses.
+They may happen on consecutive frames (ABCABC).
+When a spindash is released, 1 frame worth of deceleration from rolling is applied before the first frame of movement.
+If the character somehow falls while holding a spindash, most likely because of
+starting a spindash on a crumbling platform or wheel switch, normal falling
+movement and controls take over until landing, at which point the spindash
+continues.
+
+Lag
+
+Sonic 2 generally updates the screen during lag frames. Sonic 2 also has much less lag than Sonic 1.
+In extreme cases, which are more likely to occur in a Sonic and Tails game, the game may lag normally (with 1-frame pauses as often as every other frame). The in-game timer does not increase during these lag frames.
+
+Tricks
+
+Spindash through solid objects (but not terrain)
+
+Because of camera panning, and camera-based sprite loading, it is possible to pass through sprite based obstacles by running into them with sufficient speed from far enough away, and then immediately performing a 1 rev spindash, followed by a 2 rev spindash. Depending on the speed the character had before hitting the obstacle, it may be possible to perform a spindash of 3 or more revs -- in some rare cases, up to a full rev spindash is possible.
+
+Sonic 3 & Knuckles
+
+RAM Values
+
+P1 X Velocity  word @ FFB018 (signed)
+ P1 Y Velocity  word @ FFB01A (signed)
+ P1 Speed Value (on ground)  word @ FFB01C (signed)
+ P1 X Pixel Position  word @ FFB010 (unsigned)
+ P1 X Subpixel Position  byte @ FFB012 (unsigned)
+ P1 Y Pixel Position  word @ FFB014 (unsigned)
+ P1 Y Subpixel Position  byte @ FFB016 (unsigned)
+ P1 Slope Gradient  byte @ FFB026 (signed)
+ P1 Status  byte @ FFB004 (known values: 0=not in level, 2=normal, 4=being damaged, 6=dying, 8=dead)
+ P2 X Velocity  word @ FFB062 (signed)
+ P2 Y Velocity  word @ FFB064 (signed)
+ P2 Speed Value (on ground)  word @ FFB066 (signed)
+ P2 X Pixel Position  word @ FFB05A (unsigned)
+ P2 X Subpixel Position  byte @ FFB05C (unsigned)
+ P2 Y Pixel Position  word @ FFB05E (unsigned)
+ P2 Y Subpixel Position  byte @ FFB060 (unsigned)
+ P2 Slope Gradient  byte @ FFB070 (signed)
+ P2 Status  byte @ FFB04E (known values: 0=not in level, 2=normal, 4=being damaged, 6=dying, 8=dead)
+ Camera X Position  3 bytes @ FFEE78 (also at EE80, A80C, A814)
+ Camera Y Position  3 bytes @ FFEE7C (also at EE84, A810, A818)
+ Camera Lock  byte @ FFEE0B (0 is normal. 1 means character camera modifiers and events such as boss fights will leave the camera alone, and is set when the main character dies)
+ Ring animation frame  byte @ FFFEB2
+ Selected character  byte @ FFFF0A (0 means Sonic+Tails, 1 means Sonic, 2 means Tails, 3 means Knuckles) (also at FF08 when in a level)
+ Timer frames  byte @ FFFE25 (undisplayed portion of the in-game timer, 0 to 59)
+
+Notes
+
+Double-Jump Actions
+
+Double-jump actions are actions which are unique to each character, and can be performed by pressing a jump button in the air, when the player's upward velocity is less than 968 subpixels per frame and the player has not already performed the action since touching the ground.
+Performing a double-jump action allows the player to regain control after jumping from a roll, even if the character's double-jump action does nothing else (IE: super sonic).
+ More to be added
+
+Tricks
+
+Crumbling Platforms
+
+The crumbling platforms in Angel Island can be passed through before they crumble by falling at them in a very specific way. Details are currently unknown, but it may be related to the game skipping a calculation during lag frames which gives a 1-frame window to pass below the collision area of the platform. Other platforms, such as the ones in Hydrocity, can be passed through simply by falling through them anywhere and at any point in time after they begin to crumble.
+The crumbling platforms in Lava Reef cannot be passed through until they have crumbled past a certain point.
+
+Hydrocity Slides
+
+The slides in Hydrocity 2 are normal sloped terrain, and can (therefore) be passed through whenever the character is moving at all upward. Also, some slides are on layer B (like the second part of loops) and won't be solid until you hit an invisible layer-swapping object (at which point, some slides that were solid before will cease to be). Additionally, because they have such a thin collision area, it is relatively easy to get enough velocity to pass through one in one frame, although in practice this is more difficult than it sounds, as you need to be moving about 16 pixels per frame downward, from a position above the slide, where 16 pixels will be below the slide. Obviously, the faster you can get moving, the easier it becomes.
+
+Signpost Monitors
+
+Turning off the foreground graphics (layer 3 in Gens) at the end of any Act 1 will reveal where the bonus monitors are that can be unearthed by a properly placed signpost, although it will not show what the monitors contain.
+
+Scroll Glitch
+
+On levels that wrap vertically (Marble Garden 1, Icecap 1, Sandopolis 2, Sky Sanctuary) jumping above the top of the screen will cause the camera to scroll downward until it reaches the main character again. This is easy to do by holding down until the screen scrolls as far down as it will go, then releasing down and jumping. Because, as noted in the "Sprites" section, sprites are loaded and unloaded based on camera position, this can allow for traveling through some types of obstacles.
+
+Level Wrapping Glitch
+
+Most levels have some means to prevent the player from walking off the left edge. But, on most levels, this can be bypassed by zipping past the left edge. When this happens, the player is then teleported to the far right edge of the currently loaded level data, and the camera begins to scroll right in a mad effort to catch up. While the camera is scrolling right, the player can move about, unaffected by sprites. If the player was unable to get off the left edge of the level within about 8 seconds of the act starting, the player will probably be transported far past the right-hand level boundary. However, if the player is somehow able to initiate a levelwrap immediately after the level loads, he can then teleport just about anywhere in the level at the same horizontal position -- levels load at a rate of about half a screenful per frame.
+
+Camera Based Teleportation
+
+Many events (cutscenes, boss battles, etc) are triggered based on camera position. Often these events will lock the camera within certain boundaries. When this happens, the player is locked within these boundaries as well. If the player was outside the boundaries, horizontally, he will be immediately transported to the edge nearest him. If the player was below the lower vertical boundary, he will die. If the player was above the upper vertical boundary, either he will remain at his height, and fall into the screen, or he will be teleported downward to be within the upper-edge of the camera, depending on the type of lock that has been set.
+
+More To be added
+
+Character stats
+
+Sonic
+
+Normal
+
+Jump Strength  1664 subpixels (6.5 pixels) per frame
+ Running Speed  1536 subpixels (6 pixels) per frame
+ Running Acceleration  12 subpixels (3/64 pixels) per frame per frame
+ Running Braking Rate (holding backward)  128 subpixels (1/2 pixels) per frame per frame
+ Running Deceleration (holding nothing)
+
+12 subpixels (3/64 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, movement above Running Speed)
+
+32 subpixels (1/8 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, at or below Running Speed)
+
+20 subpixels (5/64 pixels) per frame per frame
+ Max Spindash Speed  3072 subpixels (12 pixels) per frame
+ Rolling Deceleration  6 subpixels (3/128 pixels) per frame per frame
+ Rolling Braking rate  32 subpixels per frame per frame + Rolling Deceleration
+ Air Acceleration  24 subpixels (3/32 pixels) per frame per frame
+ Flame Dash Speed  2048 subpixels (8 pixels) per frame
+ Bubble Bounce Drop Speed  2048 subpixels (8 pixels) per frame downward + Gravity.
+ Bubble Bounce Bounce Strength  2048 subpixels (8 pixels) per frame upward - Gravity.
+ Lightning Jump Strength
+
+1408 subpixels (5.5 pixels) per frame upward - Gravity.
+
+Ability Notes :
+
+Sonic can use shield actions for his double-jump
+
+With no shield, Sonic can generate an "insta-shield" which protects him from all damage for about a half-second
+
+Flame Dash sets Sonic's x-speed to 2048 in the direction faced, and y-speed to 0
+
+Bubble bounce sets Sonic's y-speed to 2048 downward, and x-speed to 0
+
+Lightning jump does not affect Sonic's horizontal motion except for the standard speed loss when vertical speed is between 1024 and 0 upwards
+
+Note : For the following status effects, values not noted are unchanged from normal.
+
+With Speed Shoes
+
+Double the following values  Running Speed, Running Acceleration, Air Acceleration
+
+Note : Transforming (super/hyper) or entering water will instantly cancel any active speed shoes.
+
+When Underwater
+
+Halve the following values  Gravity, Running Acceleration, Running Braking Rate, Running Deceleration, Air Acceleration, Rolling Deceleration, Bubble Bounce Bounce Strength
+ Jump Strength  896 subpixels (3.5 pixels) per frame
+
+When Super
+
+Running Speed  2560 subpixels (10 pixels) per frame
+ Running Braking rate  256 subpixels (1 pixel) per frame per frame
+ Running Acceleration (vertical)  16 subpixels (1/16 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, movement above Running Speed)  48 subpixels (3/16 pixels) per frame per frame
+ Max Spindash Speed  3840 subpixels (15 pixels) per frame
+ Jump Strength  2048 subpixels (8 pixels) per frame
+ Quadruple the following values  Running Acceleration, Air Acceleration
+
+Ability Notes :
+
+Super Sonic has no double jump action, but can still regain control after a rolling jump by pressing jump again in mid-air
+
+Super Sonic is invulnerable to attack
+
+Super Sonic has a greatly reduced deceleration due to gravity when running up a sloped surface.
+
+Super Sonic loses rings at a rate of 1 ring every 61 frames
+
+Super Sonic reverts to standard Sonic when his ring count reaches 0
+
+When Hyper
+
+Ability Notes :
+
+Hyper Sonic has all the abilities and statistics of Super Sonic
+
+Hyper Sonic can breathe underwater without a water shield or bubbles. Due to a coding bug in the game, Tails, if present, will also not drown for as long as Sonic is in hyper form.
+
+Hyper Sonic's double jump action is a flash jump which provides a speed of 2048 in any direction (or combination of directions) held
+
+Flash jump defaults to 2048 forward if no direction is pressed, or if both left and right are pressed simultaneously. If both up and down are pressed, flash jump sets speed vertical speed to 0.
+
+Flash jump sets speed to 0 along "unused" axes.
+
+Flash jump destroys all enemies onscreen, and will also enter active star rings, but does not damage bosses. Some types of obstacles (such as Carnival Night zone balloons) will also cause Hyper Sonic to bounce as if he had hit them directly.
+
+Flash jump causes the camera to hold position momentarily, and a jump to the left or the right can bring hyper sonic off-camera
+
+Tails
+
+Normal
+
+Jump Strength  1664 subpixels (6.5 pixels) per frame
+ Running Speed  1536 subpixels (6 pixels) per frame
+ Running Acceleration  12 subpixels (3/64 pixels) per frame per frame
+ Running Braking Rate (holding backward)  128 subpixels (1/2 pixels) per frame per frame
+ Running Deceleration (holding nothing)
+
+12 subpixels (3/64 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, movement above Running Speed)
+
+32 subpixels (1/8 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, at or below Running Speed)
+
+20 subpixels (5/64 pixels) per frame per frame
+ Max Spindash Speed  3072 subpixels (12 pixels) per frame
+ Rolling Deceleration  6 subpixels (3/128 pixels) per frame per frame
+ Rolling Braking rate  32 subpixels per frame per frame + Rolling Deceleration
+ Air Acceleration  24 subpixels (3/32 pixels) per frame per frame
+ Flight Acceleration (vertical, unpowered)  8 subpixels (1/32 pixels) per frame per frame downward.
+ Flight Acceleration (vertical, powered)  32 subpixels (1/8 pixels) per frame per frame upward for up to 30 frames after the jump button is pressed, and as long as vertical speed is either downward or between 0 and 256 subpixels (1 pixel) per frame upward.
+
+Ability Notes :
+
+Tails can fly for his double jump
+
+Flight does not modify Tails' horizontal speed except for the standard speed loss when vertical speed is between 1024 and 0 upwards
+
+During flight, Tails' tails can knock away certain projectiles.
+
+While flying, Tails can "boost" up by pressing the jump button if the vertical speed is either downward or between 0 and 256 subpixels (1 pixel) per frame upward. It is possible to get Tails to accelerate upward for up to 28 frames  after  Tails is supposed to get tired by boosting when there are 2 frames of flight left.
+
+If Tails is flying above the top of screen limits, his vertical velocity is set to zero whenever something happens to make it negative. This can be used to avoid the standard horizontal speed loss from having vertical speed between 1024 and 0 upwards.
+
+Tails can swim underwater. It is the same mechanism as flight, except that Tails cannot boost if he is carrying Sonic.
+
+Note : For the following status effects, values not noted are unchanged from normal.
+
+With Speed Shoes
+
+Double the following values  Running Speed, Running Acceleration, Air Acceleration
+
+Note : Transforming (super) or entering water will instantly cancel any active speed shoes.
+
+When Underwater
+
+Halve the following values  Gravity, Running Acceleration, Running Braking Rate, Running Deceleration, Air Acceleration, Rolling Deceleration
+ Jump Strength  896 subpixels (3.5 pixels) per frame
+
+When Super
+
+Running Speed  2048 subpixels (8 pixels) per frame
+ Running Braking rate  192 subpixels (3/4 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, at or below Running Speed)
+
+8 subpixels (1/32 pixels) per frame per frame
+ Max Spindash Speed  3584 subpixels (14 pixels) per frame
+ Double the following values  Running Acceleration, Air Acceleration
+
+Ability Notes :
+
+Super Tails has all abilities of Tails
+
+Super Tails is invulnerable to attack
+
+Super Tails has a greatly reduced deceleration due to gravity when running up a sloped surface.
+
+Super Tails loses rings at a rate of 1 ring every 61 frames
+
+Super Tails reverts to standard Tails when his ring count reaches 0
+
+Super Tails is surrounded by four invulnerable flickies that actively attack nearby bosses and other badniks
+
+Super Tails requires 7 super emeralds to obtain
+
+Knuckles
+
+Normal
+
+Jump Strength  1536 subpixels (6 pixels) per frame
+ Running Speed  1536 subpixels (6 pixels) per frame
+ Running Acceleration  12 subpixels (3/64 pixels) per frame per frame
+ Running Braking Rate (holding backward)  128 subpixels (1/2 pixels) per frame per frame
+ Running Deceleration (holding nothing)
+
+12 subpixels (3/64 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, movement above Running Speed)
+
+32 subpixels (1/8 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, at or below Running Speed)
+
+20 subpixels (5/64 pixels) per frame per frame
+ Max Spindash Speed  3072 subpixels (12 pixels) per frame
+ Rolling Deceleration  6 subpixels (3/128 pixels) per frame per frame
+ Rolling Braking rate  32 subpixels per frame per frame + Rolling Deceleration
+ Air Acceleration  24 subpixels (3/32 pixels) per frame per frame
+ Initial Glide Speed  1024 subpixels (4 pixels) per frame
+ Maximum Glide Speed  6144 subpixels (24 pixels) per frame
+ Gliding X Acceleration  4 subpixels (1/64 pixels) per frame per frame
+ Gliding Initial Downward Boost  512 subpixels (2 pixels) per frame downward + Gravity, to a minimum of 56 subpixels (7/32 pixels) per frame downward.
+ Gliding stabilized fall speed
+
+~112 subpixels (7/16 pixels) per frame
+ Falling From Glide Initial X Speed
+
+256 + (Glide Speed + Gliding X Acceleration - 1024) / 4
+ Climbing rate
+
+1 pixel per frame
+ Walljump Initial Y Velocity  896 subpixels (3 & 1/2 pixels) per frame, upward
+ Walljump Initial X Velocity  1024 subpixels (4 pixels) per frame, away from the wall
+
+Ability Notes :
+
+Knuckles can glide as his double jump action
+
+Knuckles receives a small boost to his downward speed when he begins gliding, which then stabilizes
+
+Knuckles will glide until the player stops holding the jump button, he glides into a wall he cannot stick to, he reaches the floor and slides to a halt, he takes damage, or he lands on a sprite-based platform
+
+Maximum gliding speed is only attainable by gliding while something holds Knuckles in place for several seconds
+
+Gliding has a maximum speed of 4 subpixels (1/64 pixels) per frame when vertical position is below 0
+
+When Knuckles glides onto normal terrain, he begins sliding to a halt
+
+If Knuckles slides off the edge of terrain before coming to a halt, he resumes gliding
+
+Knuckles can glide up terrain at his x-velocity, immune to its slope, unless it is a "slide".
+
+When Knuckles glides onto a sprite-based platform, he does not slide, but instead begins running immediately.
+
+Knuckles will stick to most walls when he glides into them
+
+Knuckles can climb walls once stuck to them
+
+Knuckles can perform a small jump from a wall climb
+
+Sticking to a wall resets Knuckles' horizontal subpixel position to a value specific to that wall, or at least to that wall's horizontal pixel position
+
+Swinging onto a ledge or dropping from a wall without jumping resets Knuckles' vertical subpixel position to a value specific to that floor, or at least that floor's vertical pixel position.
+
+Note : For the following status effects, values not noted are unchanged from normal.
+
+With Speed Shoes
+
+Double the following values  Running Speed, Running Acceleration, Air Acceleration
+
+Note : Transforming (super/hyper) or entering water will instantly cancel any active speed shoes.
+
+When Underwater
+
+Halve the following values  Gravity, Jump Strength, Running Acceleration, Running Braking Rate, Running Deceleration, Air Acceleration, Rolling Deceleration
+
+When Super
+
+Running Speed  2048 subpixels (8 pixels) per frame
+ Running Braking rate  192 subpixels (3/4 pixels) per frame per frame
+ Running Deceleration (vertical, holding forward, at or below Running Speed)
+
+8 subpixels (1/32 pixels) per frame per frame
+ Max Spindash Speed  3840 subpixels (15 pixels) per frame
+ Gliding X Acceleration  12 subpixels (3/64 pixels) per frame per frame
+ Double the following values  Running Acceleration, Air Acceleration, Climbing Rate
+
+Ability Notes :
+
+Super Knuckles has all the abilities of Knuckles
+
+Super Knuckles is invulnerable to attack
+
+Super Knuckles has a greatly reduced deceleration due to gravity when running up a sloped surface... at a low speed.
+
+Super Knuckles loses rings at a rate of 1 ring every 61 frames
+
+Super Knuckles reverts to standard Knuckles when his ring count reaches 0
+
+When Hyper
+
+Ability Notes :
+
+Hyper Knuckles has all the abilities and statistics of Super Knuckles
+
+Hyper Knuckles can breathe underwater without a water shield or bubbles
+
+By gliding into a wall when either his horizontal or vertical velocity exceed a certain value, Hyper Knuckles can cause an earthquake which destroys all enemies within rendering range of the camera. This will also enter any active star rings for bonus stages within rendering range.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/Genesis/SonicTheHedgehog last edited by
+
+on 1/1/2022 6:13 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

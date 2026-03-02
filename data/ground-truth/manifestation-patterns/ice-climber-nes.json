@@ -1,0 +1,214 @@
+{
+  "game_id": "ice-climber-nes",
+  "game_name": "Ice Climber",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "White Bear appearance",
+      "visual_form": "Polar bear sprite wearing sunglasses and pink speedo, appears on screen when player delays progression",
+      "meaning": "Time pressure danger — screen will force upward, crushing player if they cannot keep pace"
+    },
+    {
+      "signal": "Falling icicles",
+      "visual_form": "Icicle sprites forming and falling from platform bottoms",
+      "meaning": "Environmental hazard — instant death threat from above"
+    },
+    {
+      "signal": "Topi enemy presence",
+      "visual_form": "Blue seal (JP) or yeti-like creature (Western), moving horizontally on ice layers",
+      "meaning": "Mobile threat — can fill floor openings with ice, blocking escape routes and forcing player into hazardous jumping"
+    },
+    {
+      "signal": "Nitpicker bird",
+      "visual_form": "Small mountain bird sprite swooping from cave edges, can cross multiple ice layers",
+      "meaning": "Unpredictable vertical threat — moves across multiple platforms, harder to predict than confined enemies"
+    },
+    {
+      "signal": "Hatched/lined ice pattern",
+      "visual_form": "Ice blocks rendered with cross-hatch visual texture",
+      "meaning": "Conveyor belt hazard — will slide player left or right uncontrollably"
+    },
+    {
+      "signal": "Detailed square ice blocks",
+      "visual_form": "Ice blocks with higher detail/shading than standard blocks",
+      "meaning": "Impassable obstacle — forces alternate route, prevents direct vertical climb"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Standard dull ice blocks",
+      "visual_form": "Plain, low-detail ice blocks rendered uniformly",
+      "meaning": "Safe platform — destructible barrier and reliable foothold"
+    },
+    {
+      "signal": "Moving cloud platforms",
+      "visual_form": "Cloud-shaped platforms resembling cumulus clouds, moving in predictable patterns",
+      "meaning": "Safe navigation aid — reliable moving platform for climbing, alternative to ice destruction"
+    },
+    {
+      "signal": "Bonus stage peaks",
+      "visual_form": "Level summit area with vegetable/food sprites visible",
+      "meaning": "Safe zone with resource reward — no enemies spawn here, only environmental platforming challenges"
+    },
+    {
+      "signal": "Vegetable/food items",
+      "visual_form": "Corn, eggplant, and other produce sprites at peak locations",
+      "meaning": "Resource reward — especially eggplant and corn signal extra lives and progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Ice Climbers (Popo and Nana)",
+      "color_identity": "Popo: blue parka; Nana: pink parka",
+      "symbol_or_sigil": "Wooden mallet as primary tool/weapon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Summit peaks, vegetable collection points, bonus stage zones"
+    },
+    {
+      "faction": "Topi (seal/yeti creatures)",
+      "color_identity": "Blue (seal, JP version) or brown/tan (yeti, Western versions)",
+      "symbol_or_sigil": "Icicle-pushing behavior, ice-filling mechanic",
+      "enemy_visual_variants": "Regional variant: seal vs. yeti reflects cultural taboo (clubbing seals controversial in West)",
+      "environmental_markers": "Topi caves on level edges, icicle construction sites, ice layers they defend"
+    },
+    {
+      "faction": "Condor (final boss/goal character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Flies overhead at mountain peak, steals vegetables (establishes climber motivation)",
+      "enemy_visual_variants": "VS. Ice Climber replaces with giant butterfly in later stage cycles",
+      "environmental_markers": "Appears only at peak summit location, marks level completion goal"
+    },
+    {
+      "faction": "Nitpicker birds",
+      "color_identity": "Small bird sprite (specific color not detailed)",
+      "symbol_or_sigil": "Swooping attack pattern from cave edges",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Icy caves on level edges, vertical flight paths across layers"
+    },
+    {
+      "faction": "White Bear (time pressure enforcer)",
+      "color_identity": "Polar bear white fur",
+      "symbol_or_sigil": "Sunglasses and pink speedo (humorous visual identifier)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears off-screen, forces upward screen scroll when player delays"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / low difficulty",
+      "visual_manifestation": "Enemies move at standard speed, ice block patterns are simpler, fewer icicle hazards",
+      "behavioral_manifestation": "Topis move slowly, Nitpickers have predictable sweep patterns, White Bear does not appear"
+    },
+    {
+      "world_state": "Mid-to-late game / increasing difficulty",
+      "visual_manifestation": "All enemy sprites display increased animation frames, move faster across screen, more dense icicle spawning",
+      "behavioral_manifestation": "All enemies accelerate speed, Topi ice-filling becomes more aggressive, Nitpickers swoop more frequently, White Bear begins appearing if player stalls"
+    },
+    {
+      "world_state": "Bonus stage reached",
+      "visual_manifestation": "Screen transitions to peak location, all enemies disappear, vegetable items become visible and selectable",
+      "behavioral_manifestation": "Timer appears (40-second limit), only environmental platforming hazards active, no hostile enemies"
+    },
+    {
+      "world_state": "Player time pressure / stalling too long",
+      "visual_manifestation": "White Bear appears on-screen with visible aggressive pose, screen begins scrolling upward",
+      "behavioral_manifestation": "Forced upward scroll speed increases, player must climb faster or lose life"
+    },
+    {
+      "world_state": "Topi territorial control established",
+      "visual_manifestation": "Ice floor openings are progressively filled with icicles by Topi (visual closure of gaps)",
+      "behavioral_manifestation": "Topi scouts opening, retreats to cave, returns with icicle to block passage; cycle repeats until no openings remain"
+    },
+    {
+      "world_state": "VS. Ice Climber campaign progression (8 mountains cleared)",
+      "visual_manifestation": "Level coloration scheme changes (different color palette), Super Bonus Stage occurs, Condor replaced by giant butterfly sprite",
+      "behavioral_manifestation": "Player must reach high platform in Super Bonus, then second set of 48 mountains begins"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Enemy type as world narrative",
+      "example": "Topi filling ice holes communicates hostile territory defense — Topis own the mountains, Ice Climbers invade to retrieve stolen vegetables"
+    },
+    {
+      "technique": "Boss character motivation placement",
+      "example": "Condor appears only at peak with stolen vegetables — visual confirmation of antagonist and objective"
+    },
+    {
+      "technique": "Regional visual substitution for cultural context",
+      "example": "Seal (JP) vs. Yeti (West) — reflects cultural attitudes; seal-clubbing taboo communicated through sprite swap without narrative change"
+    },
+    {
+      "technique": "Time pressure enforcer appearance",
+      "example": "White Bear with sunglasses/speedo signals humorous-but-deadly time limit; absurd outfit contrasts with genuine danger"
+    },
+    {
+      "technique": "Environmental obstacle as level storytelling",
+      "example": "Hatched conveyor ice and unbreakable detailed blocks force specific climbing routes — communicates mountain topography and difficulty progression"
+    },
+    {
+      "technique": "Bonus stage isolation from enemies",
+      "example": "Peak location with no enemy spawns and visible food items tells player 'this is the goal, now claim the reward'"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Topi",
+      "state": "idle or patrolling",
+      "behavior": "Moves horizontally on single ice layer, confined to that level"
+    },
+    {
+      "entity": "Topi",
+      "state": "detecting floor opening",
+      "behavior": "Scouts the gap, runs back toward cave entrance"
+    },
+    {
+      "entity": "Topi",
+      "state": "construction active",
+      "behavior": "Returns from cave pushing icicle block to fill the gap (repeats until all openings sealed)"
+    },
+    {
+      "entity": "Nitpicker",
+      "state": "hunting",
+      "behavior": "Swoops down from cave edge in curved arc, can traverse multiple ice layers, unpredictable entry point"
+    },
+    {
+      "entity": "White Bear",
+      "state": "dormant",
+      "behavior": "Off-screen, does not appear if player maintains pace"
+    },
+    {
+      "entity": "White Bear",
+      "state": "activated (player delay)",
+      "behavior": "Appears on-screen, audibly pounds ice, forces screen upward at increasing speed"
+    },
+    {
+      "entity": "Falling icicles",
+      "state": "forming",
+      "behavior": "Materialize on platform bottoms after platform has been present for short duration"
+    },
+    {
+      "entity": "Condor",
+      "state": "goal state",
+      "behavior": "Flies at peak, player jumps to grab it for bonus score; signals level completion"
+    }
+  ],
+  "notes": "Ice Climber uses minimal visual language to communicate world-state, relying on sprite swapping (Topi seal/yeti), color/parka distinction (Popo blue/Nana pink), and enemy behavior patterns (Topi scout-retreat-push cycle) to establish faction and danger. No explicit HUD or UI elements communicate story. Regional censorship (seal to yeti swap) demonstrates how visual identity can be altered without narrative change. Time pressure is manifested through the White Bear's absurd appearance (sunglasses/speedo) contrasting with deadly function. Difficulty scaling is communicated purely through enemy speed increase and icicle spawn density, not visual aesthetic shifts. The game's visual grammar is minimal: ice texture variants (dull/detailed/hatched) encode traversal rules; sprite presence indicates threat type; color indicates player identity. Faction conflict is implicit rather than explicit—Topis defend their territory through ice-filling; Condor steals vegetables; climbers ascend to recover them. No political situation complexity exists; conflict is purely goal-driven.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:29:51.786Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5078,
+    "output_tokens": 2748,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

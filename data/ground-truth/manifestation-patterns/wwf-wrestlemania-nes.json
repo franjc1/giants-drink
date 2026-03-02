@@ -1,0 +1,141 @@
+{
+  "game_id": "wwf-wrestlemania-nes",
+  "game_name": "WWF WrestleMania",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "opponent_aggression",
+      "visual_form": "opponent movement toward player, attack animations",
+      "meaning": "immediate threat requiring defensive action or counterattack"
+    },
+    {
+      "signal": "health_depletion",
+      "visual_form": "health bar reduction during combat exchanges",
+      "meaning": "player character taking damage; continued damage leads to match loss"
+    },
+    {
+      "signal": "referee_proximity",
+      "visual_form": "referee positioned near downed wrestler",
+      "meaning": "count-down to loss; imminent match end if not risen in time"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "ring_control",
+      "visual_form": "player character positioned in center of ring with space from opponent",
+      "meaning": "advantageous position; opportunity to attack or evade"
+    },
+    {
+      "signal": "opponent_down",
+      "visual_form": "opponent on canvas, not attacking",
+      "meaning": "temporary vulnerability window; safe moment to recover or setup next move"
+    },
+    {
+      "signal": "successful_hold",
+      "visual_form": "wrestler locked in submission hold animation",
+      "meaning": "dominant position; damage applied to opponent"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "WWF",
+      "color_identity": null,
+      "symbol_or_sigil": "WWF logo/branding on ring canvas and wrestlers",
+      "enemy_visual_variants": "opponent wrestlers display unique sprite designs and color palettes distinguishing them from player",
+      "environmental_markers": "WWF WrestleMania branded ring setting; crowd audience indicates professional wrestling venue"
+    },
+    {
+      "faction": "individual_wrestlers",
+      "color_identity": "distinct wrestler color schemes (sprite palette variants)",
+      "symbol_or_sigil": "wrestler-specific appearance and character design",
+      "enemy_visual_variants": "each opponent wrestler has unique visual identity—different body type sprites, costume colors, move animations",
+      "environmental_markers": "character name displayed above ring; wrestler entrance associates them with WWF brand"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "match_in_progress",
+      "visual_manifestation": "active ring combat with two wrestlers visible; health bars displayed; crowd visible in background; referee present",
+      "behavioral_manifestation": "AI opponent continuously pursues, attacks, and responds to player actions; wrestler moves fluidly through grapple and strike animations"
+    },
+    {
+      "world_state": "wrestler_knocked_down",
+      "visual_manifestation": "wrestler sprite transitions to prone position on canvas; referee enters ring and begins count animation",
+      "behavioral_manifestation": "downed wrestler must press button to rise before referee count completes; opponent may perform follow-up attacks"
+    },
+    {
+      "world_state": "match_won",
+      "visual_manifestation": "opponent remains down as count completes; victory animation or pose displayed for player character",
+      "behavioral_manifestation": "match ends; transition to next opponent or champion selection"
+    },
+    {
+      "world_state": "match_lost",
+      "visual_manifestation": "player character remains down as referee count completes; opponent celebration or victory pose",
+      "behavioral_manifestation": "match ends; player returns to roster selection or tournament bracket reset"
+    },
+    {
+      "world_state": "championship_progression",
+      "visual_manifestation": "ladder of increasing difficulty opponents; advancement through tournament bracket structure",
+      "behavioral_manifestation": "successive opponents become faster, more aggressive; AI applies more complex attack patterns"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "wrestler_roster_hierarchy",
+      "example": "player begins against lower-tier opponents (weaker AI, slower moves) before facing WWF champions; visual progression in opponent sprite complexity and animation fluidity communicates competitive tier"
+    },
+    {
+      "technique": "ring_authenticity",
+      "visual_form": "professional wrestling ring setting with ropes, canvas, corner posts, and crowd; referee officiating matches",
+      "narrative_implication": "establishes professional wrestling context; legitimizes combat as sport rather than street violence"
+    },
+    {
+      "technique": "character_silhouette_identification",
+      "example": "each wrestler has distinct sprite appearance and color scheme; player learns to identify upcoming opponent by visual design before name confirmation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "opponent_wrestler",
+      "state": "aggressive",
+      "behavior": "charges toward player, executes grapple or strike moves, maintains forward momentum"
+    },
+    {
+      "entity": "opponent_wrestler",
+      "state": "retreating",
+      "behavior": "moves away from player, creates distance, executes defensive animations"
+    },
+    {
+      "entity": "opponent_wrestler",
+      "state": "knocked_down",
+      "behavior": "remains prone on canvas; AI pauses attack behavior until attempting to rise"
+    },
+    {
+      "entity": "referee",
+      "state": "active_count",
+      "behavior": "stands over downed wrestler with counting animation; countdown gesture toward player/opponent"
+    },
+    {
+      "entity": "player_wrestler",
+      "state": "input_responsive",
+      "behavior": "executes moves matching controller input; recovery mechanics triggered by button press during knockdown"
+    }
+  ],
+  "notes": "Source material from TCRF provides minimal detail on actual visual communication mechanics. This extraction is heavily inferred from beat-em-up genre conventions and professional wrestling game standards of the era (1989 NES). The game communicates world-state primarily through sprite animation states, health bar feedback, referee positioning, and opponent movement patterns. Faction identity in WWF WrestleMania is expressed through individual wrestler differentiation rather than faction-vs-faction conflict; the 'WWF' itself is the unified league context. Visual danger signals rely on opponent proximity, animation state transitions, and health bar depletion. Safety signals emerge from ring control positioning and opponent downed state. The game's political situation (wrestler hierarchy, championship progression) is manifested through tournament bracket structure and opponent difficulty scaling.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "data_tier": "T3",
+  "confidence_notes": "Extraction based on limited documentary evidence. TCRF article does not detail visual communication systems; inferences drawn from game genre paradigm (beat-em-up) and professional wrestling simulation standards. Actual sprite/animation analysis would require direct gameplay observation.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:44:03.666Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3099,
+    "output_tokens": 1874,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

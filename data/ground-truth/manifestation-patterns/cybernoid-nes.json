@@ -1,0 +1,157 @@
+{
+  "game_id": "cybernoid-nes",
+  "game_name": "Cybernoid: The Fighting Machine",
+  "platform": "nes",
+  "paradigm": "shoot_em_up",
+  "danger_signals": [
+    {
+      "signal": "Enemy pirate ships",
+      "visual_form": "Hostile craft on screen during flip-screen traversal",
+      "meaning": "Direct combat threat requiring evasion or destruction"
+    },
+    {
+      "signal": "Homing missiles",
+      "visual_form": "Projectiles that track player position",
+      "meaning": "Persistent threat that cannot be outrun; requires strategic positioning or defensive measures"
+    },
+    {
+      "signal": "Gun turrets",
+      "visual_form": "Stationary defensive installations",
+      "meaning": "Area denial hazards; positioned threats that control screen zones"
+    },
+    {
+      "signal": "Indestructible enemies on fixed paths",
+      "visual_form": "Obstacles moving in predictable patterns that cannot be destroyed",
+      "meaning": "Environmental hazards requiring timing and precise navigation rather than combat"
+    },
+    {
+      "signal": "Time limit counter",
+      "visual_form": "Countdown timer display during gameplay",
+      "meaning": "Pressure mechanic; world-state of urgency and resource scarcity (temporal)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Items dropped by defeated pirate ships or scattered in environment",
+      "meaning": "Temporary safety enhancement; player agency in risk mitigation"
+    },
+    {
+      "signal": "Rear-gun power-up",
+      "visual_form": "Weapon modification pickup",
+      "meaning": "Enhanced defensive capability; extends player threat envelope backward"
+    },
+    {
+      "signal": "Giant spiked ball companion",
+      "visual_form": "Orbiting hazard absorption entity",
+      "meaning": "Damage buffer and area control tool; proxy for player protection"
+    },
+    {
+      "signal": "Shield special weapon",
+      "visual_form": "Built-in defensive system activation",
+      "meaning": "Active protection state; temporary invulnerability or damage reduction"
+    },
+    {
+      "signal": "Homing missiles (player weapon)",
+      "visual_form": "Player-deployed guided projectiles",
+      "meaning": "Offensive safety through eliminating threats before contact"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Federation",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Player-controlled Cybernoid ship (allied faction marker through protagonist role)",
+      "environmental_markers": "Storage depots and Federation military infrastructure as protected spaces"
+    },
+    {
+      "faction": "Pirates",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Pirate ships (primary hostile visual form); enemies drop loot when destroyed",
+      "environmental_markers": "Raided storage depots; planetary defense systems under pirate control; stolen merchandise scattered across levels"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pirate raid in progress",
+      "visual_manifestation": "Storage depots emptied; stolen minerals, jewels, ammunition visible in enemy-controlled zones",
+      "behavioral_manifestation": "Cybernoid must retrieve and transport booty; enemies actively defend stolen goods"
+    },
+    {
+      "world_state": "Federation counterattack underway",
+      "visual_manifestation": "Cybernoid ship deployed as primary military response; progression through pirate-held territory",
+      "behavioral_manifestation": "Time-limited mission structure; increasing enemy density and complexity across three levels"
+    },
+    {
+      "world_state": "Enemy territory (per-screen hazard variation)",
+      "visual_manifestation": "Screen-by-screen environmental change showing different defensive configurations",
+      "behavioral_manifestation": "Hazards shift from pure enemy encounters to missile swarms to turret fields to navigation puzzles; requires tactical adaptation"
+    },
+    {
+      "world_state": "Mission success/failure condition",
+      "visual_manifestation": "Time limit status; collected booty counter; level progression",
+      "behavioral_manifestation": "Temporal pressure increases as timer decreases; player forced toward riskier engagement strategies"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Loot-as-narrative",
+      "example": "Stolen minerals, jewels, and ammunition visible in pirate-controlled zones; player must physically collect and transport these to tell the story of Federation recovery"
+    },
+    {
+      "technique": "Hazard-as-worldbuilding",
+      "example": "Different screen configurations (missile swarms vs. turrets vs. fixed obstacles) imply different planetary defense strategies and pirate operational doctrine"
+    },
+    {
+      "technique": "Progressive difficulty-as-territory-resistance",
+      "example": "Three-level structure with increasing complexity suggests deeper penetration into pirate stronghold; outer zones easier, inner zones heavily fortified"
+    },
+    {
+      "technique": "Power-up scarcity-as-supply-line-communication",
+      "example": "Limited power-up frequency reinforces Federation resource constraints and survival mission framing"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Pirate ships",
+      "state": "Active combat",
+      "behavior": "Patrol screen; engage Cybernoid on sight; drop loot on destruction"
+    },
+    {
+      "entity": "Homing missiles",
+      "state": "Launched",
+      "behavior": "Track player position; persistent threat requiring active evasion"
+    },
+    {
+      "entity": "Gun turrets",
+      "state": "Operational",
+      "behavior": "Fire in fixed arcs or patterns; immobile; requires navigation around kill zones"
+    },
+    {
+      "entity": "Indestructible obstacles",
+      "state": "Active",
+      "behavior": "Move in fixed predictable paths; cannot be destroyed; require precise timing to navigate past"
+    },
+    {
+      "entity": "Cybernoid ship",
+      "state": "Equipped with power-up",
+      "behavior": "Enhanced offensive/defensive capability; visual indicator of temporary advantage state"
+    }
+  ],
+  "notes": "Cybernoid uses flip-screen architecture rather than scrolling, which creates discrete tactical zones. Each screen is a contained threat landscape, making environmental variation a primary communication method for world-state. The game's core manifestation strategy relies on hazard type variation rather than color/faction visual coding—enemy identity is functionally communicated through behavior pattern rather than cosmetic marking. The time-limit mechanic is a critical world-state signal, converting narrative urgency (Federation mission timeframe) into direct player pressure. Political context (Federation vs. Pirates) is established through narrative briefing rather than visual in-game indicators.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:53:22.321Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2694,
+    "output_tokens": 1746,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

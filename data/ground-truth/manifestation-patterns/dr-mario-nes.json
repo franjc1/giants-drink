@@ -1,0 +1,155 @@
+{
+  "game_id": "dr-mario-nes",
+  "game_name": "Dr. Mario",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Bottle filling with capsules",
+      "visual_form": "Colored pill halves accumulating toward the narrow neck of the medicine bottle",
+      "meaning": "Imminent game over; playfield saturation indicates loss condition"
+    },
+    {
+      "signal": "Virus presence",
+      "visual_form": "Three distinct colored viruses (red, yellow, blue) positioned in the bottle",
+      "meaning": "Active threat requiring elimination; each virus is an objective obstacle"
+    },
+    {
+      "signal": "Unmatched capsule halves",
+      "visual_form": "Single-colored pill halves unsupported or falling without matching counterparts",
+      "meaning": "Failed alignment; wasted space and reduced playfield efficiency"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Cleared playfield sections",
+      "visual_form": "Empty spaces in the bottle where viruses have been eliminated",
+      "meaning": "Progress toward level completion; reduced threat density"
+    },
+    {
+      "signal": "Chain reactions",
+      "visual_form": "Multiple 4-in-a-row matches cascading as capsules fall and realign",
+      "meaning": "Positive momentum; bonus points and efficient virus elimination"
+    },
+    {
+      "signal": "Level progression cutscenes",
+      "visual_form": "Victory animations showing virus trio in pastoral settings with flying objects",
+      "meaning": "Milestone achieved; transition to next level; world-state advancement"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dr. Mario (player-controlled)",
+      "color_identity": null,
+      "symbol_or_sigil": "Mario character identity; medical authority through doctor role",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Medicine bottle as the arena; capsules as tools of intervention"
+    },
+    {
+      "faction": "Viruses (enemy)",
+      "color_identity": "Three-color system: red, yellow, blue",
+      "symbol_or_sigil": "Distinct virus sprites occupying specific positions",
+      "enemy_visual_variants": "Color differentiation serves as faction/type identifier",
+      "environmental_markers": "Viruses remain stationary in bottle until matched and destroyed"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Level start (low threat)",
+      "visual_manifestation": "Fewer viruses distributed across the bottle; more empty space; narrow neck clearly visible and unobstructed",
+      "behavioral_manifestation": "Capsules fall at slower speed (selectable); player has strategic flexibility"
+    },
+    {
+      "world_state": "Mid-game progression (moderate threat)",
+      "visual_manifestation": "Increasing virus density; partial bottle fill; emerging capsule accumulation",
+      "behavioral_manifestation": "Falling speed increases with difficulty; chain reactions become more critical"
+    },
+    {
+      "world_state": "Level completion (threat eliminated)",
+      "visual_manifestation": "All viruses removed; bottle cleared; cutscene trigger shows pastoral scene with virus characters safe distance away",
+      "behavioral_manifestation": "Game transitions to next level; score calculation; difficulty increase on subsequent levels"
+    },
+    {
+      "world_state": "Game over condition (total threat)",
+      "visual_manifestation": "Bottle neck completely blocked by unmatched capsules; playfield saturation with mixed colors",
+      "behavioral_manifestation": "Game halts; player loses round; multiplayer opponent gains advantage or wins"
+    },
+    {
+      "world_state": "Multiplayer mode active",
+      "visual_manifestation": "Dual playfields displayed side-by-side; penalty capsules visually differ from standard falling capsules when sent to opponent",
+      "behavioral_manifestation": "Successful chain reactions trigger opponent field changes; competitive interaction manifests through visual pollution"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Medico-thematic visual language",
+      "example": "Medicine bottle container, colored capsules resembling pharmaceutical pills, virus adversaries positioned as medical pathogens—all communicate the implicit narrative that gameplay is a medical intervention"
+    },
+    {
+      "technique": "Cutscene world-building between milestones",
+      "example": "After each 5th level (up to level 20), cutscenes depict the three-colored virus characters in pastoral settings—suggesting peaceful existence before and after medical intervention, establishing loose narrative context without dialogue"
+    },
+    {
+      "technique": "Color-coding as faction/type hierarchy",
+      "example": "Red, yellow, and blue virus variants establish three distinct threat categories; matching capsule colors to viruses creates implicit understanding of targeting and resolution mechanics through visual language alone"
+    },
+    {
+      "technique": "Playfield geometry as narrative constraint",
+      "example": "The medicine bottle's narrow neck serves both mechanical function (lose condition) and environmental storytelling—visually communicates containment failure as the game-over state"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Viruses",
+      "state": "Active (level start)",
+      "behavior": "Stationary; positioned in fixed locations within bottle; visually inert until matched"
+    },
+    {
+      "entity": "Viruses",
+      "state": "Matched (4-in-a-row alignment)",
+      "behavior": "Disappear with visual effect (starburst animation); removed from playfield"
+    },
+    {
+      "entity": "Capsules",
+      "state": "Falling",
+      "behavior": "Descend vertically; respond to left/right movement input; rotate 90 degrees on command; fall speed varies by difficulty setting"
+    },
+    {
+      "entity": "Capsules",
+      "state": "Matched",
+      "behavior": "Vanish; trigger chain reaction if adjacent matches exist; surviving halves fall to re-establish support"
+    },
+    {
+      "entity": "Capsules",
+      "state": "Unsupported after partial match",
+      "behavior": "Physics-based drop until hitting supported object or bottle floor; create cascading match potential"
+    },
+    {
+      "entity": "Playfield fill",
+      "state": "Approaching bottle neck",
+      "behavior": "Visual tension increases; player loses when neck becomes blocked; game-over condition triggers immediately"
+    },
+    {
+      "entity": "Opponent field (multiplayer)",
+      "state": "Chain reaction triggered on player side",
+      "behavior": "Penalty capsules automatically sent to opponent; visible in opponent's playfield as unwanted additions; manifests as a tangible competitive consequence"
+    }
+  ],
+  "notes": "Dr. Mario uses minimalist visual communication typical of 1990 NES puzzle games. The game world has no faction-based conflict in a narrative sense—instead, viruses and capsules represent medical problem/solution duality. Visual manifestation of world-state relies entirely on playfield saturation, color alignment, and cutscene interludes. The game lacks explicit danger or safety UI elements; all information is conveyed through core gameplay visuals. Multiplayer mode introduces competitive state-sharing through opponent field pollution, creating implicit 'attack' visuals without explicit conflict animation. The three-color virus system and matching mechanic create non-narrative 'faction' distinction through color-coding alone.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:40:07.827Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5818,
+    "output_tokens": 1866,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

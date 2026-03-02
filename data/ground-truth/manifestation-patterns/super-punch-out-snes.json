@@ -1,0 +1,185 @@
+{
+  "game_id": "super-punch-out-snes",
+  "game_name": "Super Punch-Out!!",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Opponent aggression/attack telegraph",
+      "visual_form": "Opponent stance changes and positioning shifts before launching attacks",
+      "meaning": "Indicates incoming threat requiring dodge, duck, or block response"
+    },
+    {
+      "signal": "Stamina meter depletion",
+      "visual_form": "Stamina bars at top of screen decrease when player or opponent gets hit",
+      "meaning": "Critical health state; knockdown at meter exhaustion results in KO/TKO"
+    },
+    {
+      "signal": "Knockdown state",
+      "visual_form": "Boxer falls to canvas, opponent stands over; timer counts down from ten",
+      "meaning": "Immediate danger of match loss if boxer cannot stand before count reaches ten"
+    },
+    {
+      "signal": "Triple knockdown rule",
+      "visual_form": "Visual knockdown counter (implicit through match progression)",
+      "meaning": "Third knockdown in a single match results in automatic TKO loss regardless of stamina"
+    },
+    {
+      "signal": "Opponent guard positioning",
+      "visual_form": "Opponent gloves raised or positioned to defend specific zones (head/body)",
+      "meaning": "Indicates which attack angles are defended; punches targeting covered areas will be deflected"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power meter charging",
+      "visual_form": "Power meter at bottom of screen fills as player lands successful punches",
+      "meaning": "Accumulated offensive advantage; enables powerful knockout punches when full"
+    },
+    {
+      "signal": "Power-Up status activation",
+      "visual_form": "Background color behind player's face on upper left transitions from blue → green → yellow → red",
+      "meaning": "Red indicates 'Power-Up' state where punch speed and power increase; tactical advantage window"
+    },
+    {
+      "signal": "Opponent 'dizzy' state",
+      "visual_form": "Brief stunning/shaken animation after consecutive punches land; match timer freezes temporarily",
+      "meaning": "Opponent vulnerability window enabling instant knockdown with well-timed knockout punch"
+    },
+    {
+      "signal": "Successful counter-attack opportunity",
+      "visual_form": "Immediate aftermath of successful dodge/duck/block, opponent briefly exposed",
+      "meaning": "Safe moment to launch counter-punches with reduced risk of deflection"
+    },
+    {
+      "signal": "Stamina recovery during opponent knockdown",
+      "visual_form": "Player can press controller buttons while opponent is down",
+      "meaning": "Stamina meter recovers while opponent is incapacitated; tactical recovery opportunity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "W.V.B.A. Champion Boxers (opposing fighters)",
+      "color_identity": null,
+      "symbol_or_sigil": "Individual fighter silhouettes/caricatures (e.g., Mr. Sandman, Bald Bull, Super Macho Man)",
+      "enemy_visual_variants": "Each opponent has distinct cartoon-like visual design with outlandish appearance; fighting style and stance variations",
+      "environmental_markers": "Opponent positioned in boxing ring across from player; each match occurs in standard boxing arena setting"
+    },
+    {
+      "faction": "Player boxer/protagonist",
+      "color_identity": null,
+      "symbol_or_sigil": "Translucent player character model displayed from 'behind the back' perspective",
+      "enemy_visual_variants": "Player character remains consistent; visual feedback through stamina meter and power-up coloring",
+      "environmental_markers": "Lower portion of screen showing player's translucent figure; upper left corner displays power-up status via background color"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Minor Circuit progression",
+      "visual_manifestation": "Sequence of opponent faces displayed on selection screen; difficulty escalation",
+      "behavioral_manifestation": "Opponent AI complexity and attack patterns increase; new attack types introduced"
+    },
+    {
+      "world_state": "Major Circuit progression",
+      "visual_manifestation": "Champion-tier opponents introduced with more detailed animations",
+      "behavioral_manifestation": "Opponents employ more sophisticated defensive strategies; faster attack sequences"
+    },
+    {
+      "world_state": "World Circuit completion",
+      "visual_manifestation": "Anti-piracy checkpoint triggers; game verifies cartridge legitimacy via ROM checksum",
+      "behavioral_manifestation": "Special Circuit unlocks if anti-piracy passes; continued gameplay blocked if piracy detected"
+    },
+    {
+      "world_state": "Special Circuit availability",
+      "visual_manifestation": "New tier of opponents becomes selectable; indicates legitimate cartridge status",
+      "behavioral_manifestation": "Most difficult opponents available for challenge; highest skill threshold matches"
+    },
+    {
+      "world_state": "Match timer active",
+      "visual_manifestation": "Three-minute match duration; timer counts down visually",
+      "behavioral_manifestation": "Player must achieve knockout before time expires; timeout results in match loss"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Opponent visual caricature design",
+      "example": "Mr. Sandman, Bald Bull, Super Macho Man each have exaggerated cartoon features and silhouettes that communicate fighting style (e.g., Bald Bull's massive frame suggests power-based offense)"
+    },
+    {
+      "technique": "Boxing ring setting consistency",
+      "example": "All matches occur in standard boxing arena; opponent positioning and ring mechanics create world coherence"
+    },
+    {
+      "technique": "Progression through championship tiers",
+      "example": "Minor → Major → World → Special Circuits create narrative arc of protagonist climbing boxing ranks toward championship status"
+    },
+    {
+      "technique": "Power meter as progression indicator",
+      "visual_form": "Bottom-screen power meter accumulates as player lands strikes; full meter unlocks high-damage moves",
+      "meaning": "Communicates risk-reward: aggressive play builds power; defensive play loses meter on hits"
+    },
+    {
+      "technique": "Color-coded power-up state",
+      "visual_form": "Background behind player face transitions blue → green → yellow → red as match progresses",
+      "meaning": "Visual heat indicator: red = maximum advantage state, communicating momentum shift in player's favor"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Opponent boxer",
+      "state": "Pre-attack stance",
+      "behavior": "Changes stance/positioning before launching attack; signals incoming threat requiring defensive response"
+    },
+    {
+      "entity": "Opponent boxer",
+      "state": "Guard position",
+      "behavior": "Raises or repositions gloves to defend specific zones; indicates which attack angles are currently blocked"
+    },
+    {
+      "entity": "Opponent boxer",
+      "state": "Dizzy/stunned",
+      "behavior": "Brief shaken animation with match timer freeze; brief vulnerability window for instant knockdown"
+    },
+    {
+      "entity": "Opponent boxer",
+      "state": "Knockdown",
+      "behavior": "Falls to canvas; opponent stands over; countdown timer begins from ten; cannot act until recovery"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "Successful punch landing",
+      "behavior": "Power meter increases; stamina meter impact applied to opponent"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "Taking damage",
+      "behavior": "Power meter decreases; stamina meter depletes; visual knockdown at meter exhaustion"
+    },
+    {
+      "entity": "Player boxer",
+      "state": "Power-Up active (red background)",
+      "behavior": "Punch speed and power increase; tactical advantage window until next knockdown"
+    },
+    {
+      "entity": "Opponent boxer",
+      "state": "Knockdown state",
+      "behavior": "Player can press buttons to recover stamina while opponent is incapacitated"
+    }
+  ],
+  "notes": "Super Punch-Out!! communicates world-state primarily through HUD elements (stamina bars, power meter, power-up background color) and opponent visual/behavioral telegraphs. The game lacks faction/political complexity; opposition is purely competitive boxing. Danger signals center on opponent guard positioning and stamina depletion. Safety signals emphasize meter accumulation and opponent vulnerability states. The progression through circuit tiers (Minor → Major → World → Special) creates implicit narrative hierarchy. Cartoon visual style and outlandish opponent designs carry personality but limited environmental storytelling. The 'dizzy' mechanic provides critical feedback for skilled play windows.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:14:29.273Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5285,
+    "output_tokens": 2202,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

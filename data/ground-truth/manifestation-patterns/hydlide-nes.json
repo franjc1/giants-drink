@@ -1,0 +1,151 @@
+{
+  "game_id": "hydlide-nes",
+  "game_name": "Hydlide",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Monster presence",
+      "visual_form": "Sprite-based enemy characters scattered across wilderness areas",
+      "meaning": "Active threats to player safety; indicates hostile zones requiring combat or avoidance"
+    },
+    {
+      "signal": "Bee enemies",
+      "visual_form": "Small animated insect sprites",
+      "meaning": "Particularly dangerous hazards; source of frequent player death according to cultural documentation"
+    },
+    {
+      "signal": "Varalys demon realm manifestation",
+      "visual_form": "Horde of monsters unleashed across kingdom landscape",
+      "meaning": "World-state change: magical seal broken, chaos and danger now pervade previously safe areas"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Stationary position (standing still)",
+      "visual_form": "Player character in idle state without movement input",
+      "meaning": "Health regeneration mechanic activates; visual indicator of recovery in progress"
+    },
+    {
+      "signal": "Armor equipping",
+      "visual_form": "Player character Jim depicted in full armor sprite state",
+      "meaning": "Defensive readiness; protection status against monster encounters"
+    },
+    {
+      "signal": "Defense mode toggle",
+      "visual_form": "Mechanical mode switch between attack and defense postures",
+      "meaning": "Visual state change indicating defensive stance, reduced offensive capability but increased protection"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Kingdom/Fairyland (Good)",
+      "color_identity": null,
+      "symbol_or_sigil": "Magic jewels (three enshrined jewels as symbols of peace)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Palace location; organized kingdom structures; presence of Princess Ann before corruption"
+    },
+    {
+      "faction": "Varalys/Demon forces (Evil)",
+      "color_identity": null,
+      "symbol_or_sigil": "Varalys demon entity; stolen magic jewels as corrupted artifacts",
+      "enemy_visual_variants": "Horde of monsters with distinct sprite designs indicating demonic origin",
+      "environmental_markers": "Wilderness areas overrun with monsters; corrupted landscape; demon-ruled kingdom territories"
+    },
+    {
+      "faction": "Player/Knight Jim (Hero)",
+      "color_identity": null,
+      "symbol_or_sigil": "Young knight protagonist in full armor",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player's traversal through wilderness; areas of exploration and reclamation"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Peace and order (initial kingdom state)",
+      "visual_manifestation": "Three magic jewels enshrined in palace; organized kingdom structure",
+      "behavioral_manifestation": "NPCs and environment reflect stability; minimal enemy presence"
+    },
+    {
+      "world_state": "Theft and spell breaking (turning point)",
+      "visual_manifestation": "Jewels stolen; magical sparkle lost from remaining jewels; visual dimming or desaturation of magical elements",
+      "behavioral_manifestation": "Varalys seal weakens; transition to chaos state"
+    },
+    {
+      "world_state": "Corruption and demon rule (current world state)",
+      "visual_manifestation": "Horde of monsters spread across wilderness; Princess Ann transformed into three fairies (visual mutation); landscape overrun with hostile entities",
+      "behavioral_manifestation": "Constant monster spawning and activity; aggressive enemy patrols; kingdom under demonic control"
+    },
+    {
+      "world_state": "Player restoration progress",
+      "visual_manifestation": "Gradual recovery of jewels reflected in changing enemy density and landscape state",
+      "behavioral_manifestation": "Monster encounters decrease; areas cleared of threats; environmental recovery"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Open world exploration rewards",
+      "example": "Player discovers Princess Ann's transformation and fairy locations through exploration, piecing together story through environmental discovery rather than exposition"
+    },
+    {
+      "technique": "Monster distribution as world-state indicator",
+      "example": "Dense monster presence in wilderness communicates Varalys's dominion; monster-free palace areas would indicate reclaimed territory"
+    },
+    {
+      "technique": "Palace architecture as narrative anchor",
+      "example": "Central palace location serves as visual representation of kingdom authority; jewel placement within palace grounds communicates seat of power"
+    },
+    {
+      "technique": "Sprite-based character transformation",
+      "example": "Princess Ann's visual mutation into three separate fairy sprites communicates magical corruption; visual change tells story of curse without text"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (Jim)",
+      "state": "Combat ready",
+      "behavior": "Switches to attack mode; actively engages monsters; armor fully visible"
+    },
+    {
+      "entity": "Player character (Jim)",
+      "state": "Recovering",
+      "behavior": "Stands still; health meter regenerates visually; avatar in static idle pose"
+    },
+    {
+      "entity": "Player character (Jim)",
+      "state": "Defensive",
+      "behavior": "Switches to defense mode; reduced attack capability; protective posture indicated by sprite positioning"
+    },
+    {
+      "entity": "Monsters",
+      "state": "Roaming",
+      "behavior": "Spread across wilderness; animated movement patterns; patrolling behavior indicates active threat presence"
+    },
+    {
+      "entity": "Monsters",
+      "state": "Aggressive",
+      "behavior": "Engage player on sight; pursue and attack; collision detection triggers combat"
+    },
+    {
+      "entity": "Bees",
+      "state": "Hazardous",
+      "behavior": "Frequent encounter leading to player death; positioned as particularly dangerous subset of monster threats"
+    }
+  ],
+  "notes": "Hydlide is an early action-RPG with minimalist visual communication. World-state changes are primarily conveyed through sprite density (monster presence), palette/visual clarity (jewel sparkle states), and character transformation (Princess Ann to fairies). The game lacks explicit UI elements for faction communication—instead relying on enemy sprite design and environmental clustering. Safety is communicated through game mechanics (regeneration when still) rather than environmental visual cues. The narrative of demon-ruled chaos vs. kingdom order is expressed through wilderness environment saturation with hostile entities. Open-world design itself functions as a storytelling mechanism, allowing player discovery of narrative elements through exploration.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:28:05.609Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4474,
+    "output_tokens": 1691,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

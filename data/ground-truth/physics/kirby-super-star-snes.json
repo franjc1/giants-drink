@@ -1,0 +1,157 @@
+{
+  "_meta": {
+    "game": "Kirby Super Star",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1996,
+    "publisher": "Nintendo",
+    "developer": "HAL Laboratory",
+    "sources": [
+      {
+        "name": "TASVideos Game Resources — SNES / Kirby Super Star",
+        "url": "https://tasvideos.org/GameResources/SNES/KirbySuperStar",
+        "notes": "Confirms sub-pixel system: X Position (2 bytes at 0988), X Sub-position (1 byte at 0A7D), Y Position, Y Sub-position. X/Y velocity stored at 16BF and 0BEA. Specific numerical values not documented in reviewed page."
+      },
+      {
+        "name": "Kirby's Adventure NES (predecessor)",
+        "url": "https://tasvideos.org/GameResources/NES/KirbysAdventure",
+        "notes": "Reference: KA walk speed 332 sub-px/frame = 1.297 px/f (256 sub-px/pixel). KSS likely uses different values."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Kirby Super Star is an SNES anthology: 8 separate game modes in one cartridge.",
+      "Sub-pixel system confirmed by TASVideos: 2-byte position + 1-byte sub-position for X and Y (256 sub-pixels/pixel).",
+      "Core Kirby mechanics: walk, run, float (unlimited), inhale, swallow (copy ability), throw enemy.",
+      "25 COPY ABILITIES — the largest ability set in the series to this point.",
+      "HELPER SYSTEM: New in KSS. Kirby can give a copy ability to a CPU or second-player partner (Helper).",
+      "Float is UNLIMITED in KSS (unlike earlier Kirby games where float had limited puffs).",
+      "Walk and float speeds not confirmed from reviewed sources. Values below from KA predecessor context + community."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "subpixel_system": {
+      "sub_pixels_per_pixel": 256,
+      "description": "Confirmed by TASVideos: separate X/Y Position (2-byte) and X/Y Sub-position (1-byte) registers.",
+      "confidence": "high"
+    },
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 1.5,
+      "confidence": "low",
+      "notes": "Approximate from gameplay. KA predecessor had 332 sub-px/frame = 1.297 px/f. KSS likely similar. VERIFY."
+    },
+    "run_speed": {
+      "px_per_frame_approx": 2.5,
+      "confidence": "low",
+      "notes": "Approximate. Kirby runs when holding B or after accelerating. VERIFY."
+    },
+    "acceleration": {
+      "notes": "Kirby has a short acceleration ramp — slides slightly on direction reversal. Not instant like Mega Man.",
+      "confidence": "medium"
+    }
+  },
+
+  "float": {
+    "_note": "Unlimited float — the core mobility tool. Kirby can float indefinitely by repeatedly pressing jump.",
+    "activation": "Press jump while airborne",
+    "duration": "unlimited (press jump repeatedly to maintain)",
+    "method": "Each jump press causes Kirby to puff up and gain height",
+    "vertical_speed_while_floating_approx": 0.5,
+    "confidence": "low",
+    "horizontal_speed_maintained": "Yes — Kirby maintains horizontal momentum while floating",
+    "exhale": {
+      "description": "Pressing B while floating causes Kirby to exhale air — a star projectile that damages enemies.",
+      "notes": "Exhaling ends the float. Must land or re-puff to float again."
+    },
+    "notes": [
+      "Unlimited float changes the difficulty model entirely from Mario-style games. Vertical challenge isn't about 'can you reach this platform' but 'can you navigate while floating.'",
+      "Floating Kirby is vulnerable — enemies can hit him mid-float and knock him down.",
+      "The exhale attack creates a tradeoff: attack vs. continue floating."
+    ]
+  },
+
+  "inhale_system": {
+    "description": "Kirby opens his mouth and holds it to create a suction force. Enemies and items get pulled toward him.",
+    "range_tiles_approx": 3,
+    "confidence": "low",
+    "actions_after_inhale": {
+      "swallow": {
+        "description": "Swallow the inhaled enemy/item to copy its ability (if it has one).",
+        "notes": "Swallowing is how copy abilities are obtained."
+      },
+      "spit": {
+        "description": "Press B to spit the inhaled enemy as a projectile — the star spit. Deals damage to other enemies on contact.",
+        "spit_speed_approx_px_per_frame": 8,
+        "confidence": "low"
+      }
+    }
+  },
+
+  "copy_abilities": {
+    "total_count": 25,
+    "notes": "25 copy abilities in KSS — the largest set in Kirby history at this point. Each fundamentally changes Kirby's attack style.",
+    "movement_affecting_abilities": {
+      "jet": "Jet: Charge up a jet burst for high-speed flight. The fastest horizontal movement in the game.",
+      "wheel": "Wheel: Kirby becomes a wheel for extremely fast ground movement.",
+      "wing": "Wing: Kirby gets wings for sustained directional flight — faster and more controlled than puffed float.",
+      "suplex": "Suplex: Grab-and-throw mechanics — repositions enemies rather than projectile damage.",
+      "helper": "Any ability can be given to a Helper (CPU or second player partner)."
+    },
+    "key_abilities_list": [
+      "Cutter", "Hammer", "Sword", "Burning", "Ice", "Parasol", "Beam", "Hi-Jump",
+      "Stone", "Ninja", "Cook", "Tornado", "Mike", "Crash", "Laser", "UFO",
+      "Suplex/Backdrop", "Wheel", "Wing", "Jet", "Fighter", "Sleep",
+      "Missile", "Paint", "Ball"
+    ]
+  },
+
+  "helper_system": {
+    "description": "New in KSS: Kirby can throw a copy ability to create a Helper — a CPU-controlled partner that fights alongside him.",
+    "helper_creation": "Hold B while holding a copy ability → ability bubble appears → CPU takes control as Helper.",
+    "second_player": "In 2-player mode, Player 2 controls the Helper directly.",
+    "notes": [
+      "The Helper changes the game from single-player to asymmetric co-op.",
+      "Helpers have the same moveset as the ability type they represent.",
+      "Helper can absorb hits to save Kirby — essentially a second HP bar.",
+      "Different abilities create different Helper archetypes (Sword = melee, Laser = ranged, etc.)."
+    ]
+  },
+
+  "game_modes": {
+    "_note": "KSS is an anthology. Physics core is the same across modes but each mode has a different structure.",
+    "spring_breeze": "Abbreviated remake of Kirby's Dream Land 1. Linear stages.",
+    "gourmet_race": "Race Kirby against King Dedede through 3 stages. Time + food collection.",
+    "great_cave_offensive": "Non-linear exploration for 60 treasures. Metroidvania-adjacent.",
+    "revenge_of_meta_knight": "Linear aerial battle stages on the Halberd airship.",
+    "milky_way_wishes": "Non-linear star-based world selection. No copy abilities from enemies — must find Copy Essences.",
+    "the_arena": "Boss rush — fight all bosses consecutively.",
+    "megaton_punch": "Timing minigame.",
+    "samurai_kirby": "Reaction-time dueling minigame."
+  },
+
+  "hitboxes": {
+    "kirby": {
+      "radius_px_approx": 8,
+      "notes": "Kirby is round — hitbox is approximately circular with radius ≈ 8 pixels. VERIFY.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The anthology structure of KSS is a design statement: 'Here are 8 different games using the same physics engine and character.' Each mode has a different structure (linear, non-linear, boss rush, minigame) but the underlying movement is shared. This is exactly the 'paradigm swap' philosophy in Giants Drink.",
+    "The unlimited float fundamentally changes the difficulty design contract. In Kirby games, you never need to worry about 'can I reach that platform' — the float guarantees it. Difficulty comes from navigating while being bombarded by enemies, not from precision jumping.",
+    "The 25 copy abilities create a game with enormous mechanical variety within a single physics framework. Each ability is essentially a different weapon loadout that changes your approach to every enemy. This is the 'same body, different tools' design philosophy.",
+    "The Helper system is early cooperative gaming design done thoughtfully: two players with asymmetric capabilities (Kirby hosts the body/float; Helper provides the combat ability) create interesting coordination dynamics.",
+    "KSS's Milky Way Wishes (no abilities from enemies) forces players to think about which Copy Essence locations they've found — it's light resource management layered on top of the platforming."
+  ]
+}

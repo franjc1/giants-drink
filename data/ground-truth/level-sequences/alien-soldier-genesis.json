@@ -1,0 +1,170 @@
+{
+  "game_id": "alien-soldier-genesis",
+  "game_name": "Alien Soldier",
+  "platform": "genesis",
+  "paradigm": "action",
+  "level_count": 25,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Buster Force (basic rapid fire)",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Weak baseline weapon, establishes fundamental shooting mechanic"
+    },
+    {
+      "element": "Ranger Force (spread weapon)",
+      "first_appears": "Early stages",
+      "introduction_context": "safe",
+      "mastery_context": "Easier to land hits, weak damage output"
+    },
+    {
+      "element": "Fixed-fire vs Free-moving aiming",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Fixed-fire offers quick aiming but immobility; free-moving trades accuracy for mobility"
+    },
+    {
+      "element": "Double jump and hover",
+      "first_appears": "Stage 1",
+      "introduction_context": "safe",
+      "mastery_context": "Core mobility—single hover per jump, essential for navigation and boss avoidance"
+    },
+    {
+      "element": "Flame Force (high power, organic only)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Short range, high power against living enemies, useless vs machines; requires close positioning"
+    },
+    {
+      "element": "Sword Force (short-range rapid fire)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Weak output, short range, blocked by some organic enemies; risk/reward positioning tool"
+    },
+    {
+      "element": "Homing Force (lock-on projectile)",
+      "first_appears": "Early-mid game",
+      "introduction_context": "moderate",
+      "mastery_context": "Cannot be blocked by bosses; extremely weak, requires patience"
+    },
+    {
+      "element": "Lancer Force (long-range laser)",
+      "first_appears": "Mid-game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Most powerful weapon, 4160 DMG/shot, high ammo cost; requires tactical positioning and camera manipulation"
+    },
+    {
+      "element": "Counter move (bullet-to-health conversion)",
+      "first_appears": "Early stages",
+      "introduction_context": "moderate",
+      "mastery_context": "Timing-based mechanic; turns enemy fire into healing; can be chained for air mobility"
+    },
+    {
+      "element": "Phoenix Force (full-health dash)",
+      "first_appears": "Mid-game",
+      "introduction_context": "dangerous",
+      "mastery_context": "18200 DMG/part at full health, consumes 50 HP, creates slow-motion; best vs edge-of-screen targets with multiple parts"
+    },
+    {
+      "element": "Zero Force (ammo-depleted attack)",
+      "first_appears": "When ammunition runs out",
+      "introduction_context": "dangerous",
+      "mastery_context": "Extremely weak fallback; signals need to manage ammo carefully"
+    },
+    {
+      "element": "Weapon switching (pre-game loadout)",
+      "first_appears": "Pre-game menu",
+      "introduction_context": "safe",
+      "mastery_context": "Only 4 of 6 weapons equippable; strategic selection required for stage composition and boss weaknesses"
+    },
+    {
+      "element": "Boss encounters",
+      "first_appears": "After Stage 1",
+      "introduction_context": "dangerous",
+      "mastery_context": "26 total bosses; each has multiple vulnerable parts with varying damage profiles; core challenge loop"
+    },
+    {
+      "element": "Weak minion stages (downtime)",
+      "first_appears": "Interspersed throughout",
+      "introduction_context": "safe",
+      "mastery_context": "Short, easy stages with weak enemies; provide resource recovery and practice opportunity before boss pressure"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Weak enemy stages (downtime between bosses)",
+      "Successful counter moves (convert danger to healing)",
+      "Ammo replenishment",
+      "Phoenix Force completion (slowdown effect provides breathing room)"
+    ],
+    "typical_tension_triggers": [
+      "Boss encounter initiation",
+      "Depleting ammunition (forces Zero Force fallback)",
+      "Multi-part bosses (each part requires different strategy)",
+      "Lancer ammo depletion (forces lower-damage weapon switching)",
+      "Taking damage below full health (locks out Phoenix Force access)"
+    ],
+    "pacing_descriptor": "Boss-centric rhythm: short weak stages serve as low-tension breathers and resource management periods, followed by intense boss battles. Tension escalates through boss health depletion requiring sustained damage output and weapon switching. Relief comes from clearing weak stages and successful defensive counters. 26 bosses create cumulative fatigue—difficulty remains high throughout rather than easing."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": "Phoenix Force best exploited at screen edges; camera manipulation used to keep lancer projectiles tracking targets",
+    "dead_end_frequency": "rare",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Weak enemy stages establish mechanics (basic weapons, aiming styles, hover/double-jump) with minimal threat. Introduces boss encounters progressively to teach pattern recognition.",
+    "mid_game": "Boss complexity increases; introduction of Lancer Force (highest damage) and Phoenix Force mechanics; weak stages provide less downtime relative to boss encounters. Multi-part boss encounters demand strategic weapon switching and positioning.",
+    "late_game": "Sustained boss pressure with minimal stage breaks. Later bosses exploit all introduced mechanics simultaneously. No difficulty scaling on hard mode beyond increased enemy resilience.",
+    "notable_spikes": [
+      "First boss encounter (introduces damage model and vulnerable parts system)",
+      "Lancer introduction (forces tactical ammo management and camera control)",
+      "Multi-part bosses mid-game (require cumulative damage tracking across vulnerable sections)",
+      "End-game boss gauntlet (sustained boss encounters with no weak stages for recovery)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Weak enemy stage (downtime interstitial)",
+      "description": "Short stage populated with weak enemies. Serves as resource recovery period, ammo replenishment, and practice ground for weapon mechanics. Resets player tension before next boss.",
+      "example_level": "Stages between boss encounters (unspecified in sources)"
+    },
+    {
+      "pattern_name": "Single-part boss encounter",
+      "description": "Boss with one primary vulnerable section. Introduces basic boss mechanics: learning attack patterns, weapon effectiveness, positioning, and sustained damage output.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Multi-part boss encounter",
+      "description": "Boss with multiple vulnerable parts, each taking different damage amounts. Requires cumulative damage tracking, adaptive positioning (moving to screen edge for Phoenix abuse), and potentially camera manipulation for Lancer tracking. Exemplifies mid-to-late game complexity.",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Weapon restriction scenario",
+      "description": "Bosses or stages that counter specific weapons (Flame Force vs machines, Sword/Lancer vs organic enemies). Forces player to pre-select loadout strategically and adapt weapon switching based on enemy composition.",
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "tasvideos (weapon damage, mechanics, boss strategy)",
+    "wikipedia (gameplay loop structure, level/boss count, pacing design philosophy)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:33:22.083Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4335,
+    "output_tokens": 2245,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

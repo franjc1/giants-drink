@@ -1,0 +1,165 @@
+{
+  "game_id": "guerrilla-war-nes",
+  "game_name": "Guerrilla War",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy soldiers",
+      "visual_form": "Sprite-based hostile NPCs with simplified death animation",
+      "meaning": "Active threat requiring combat engagement"
+    },
+    {
+      "signal": "Turrets on roof",
+      "visual_form": "Stationary defensive structures in final area",
+      "meaning": "Environmental hazard blocking path to final boss; must be destroyed before progression"
+    },
+    {
+      "signal": "Tank enemies",
+      "visual_form": "Larger vehicle sprites in arcade version; set of 4 sequential turret placements in NES version",
+      "meaning": "Major obstacle requiring sustained offensive action"
+    },
+    {
+      "signal": "Dictator/Batista",
+      "visual_form": "Final boss sprite with combat animations; originally depicted fleeing after turrets destroyed",
+      "meaning": "Ultimate threat and mission objective"
+    },
+    {
+      "signal": "Hostage presence",
+      "visual_form": "Civilian sprites in combat zones",
+      "meaning": "Collateral damage penalty—danger to non-combatants indicated by large score reduction mechanic"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Weapon pickups",
+      "visual_form": "Collectible sprites dropped by defeated soldiers",
+      "meaning": "Power-up availability increases player offensive capability and survivability"
+    },
+    {
+      "signal": "Tank acquisition",
+      "visual_form": "Operable vehicle sprites",
+      "meaning": "Temporary armored protection and increased firepower"
+    },
+    {
+      "signal": "Minecart section (bonus level)",
+      "visual_form": "Rail-based transition sequence with unique graphics",
+      "meaning": "Safe passage/respite zone with reduced or no combat pressure"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Rebel Commandos (Player 1 & 2)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Japanese version explicitly names them Guevara and Castro; international versions anonymize as Player 1/Player 2 to obscure Cuban Revolutionary connection",
+      "environmental_markers": "Players are mobile, active initiators moving through enemy-controlled Caribbean island terrain"
+    },
+    {
+      "faction": "Tyrannical Dictator's Forces",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Generic enemy soldiers with standardized sprite; Batista dictator as named final boss in Japanese version only; 'Dictator' in international releases",
+      "environmental_markers": "Occupy fortified positions, rooftop turrets, vehicle patrols; control island infrastructure"
+    },
+    {
+      "faction": "Hostage/Civilian Population",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Visually distinct from soldiers (sprite differentiation); rescued/eliminated status affects score",
+      "environmental_markers": "Scattered throughout combat zones; presence indicates contested territory and moral dimension of conflict"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Island under tyrannical control (opening state)",
+      "visual_manifestation": "Enemy soldiers occupy all terrain; civilians present but threatened; fortified structures visible; title screen background (teal in Guevara, blue in Guerrilla War) establishes location",
+      "behavioral_manifestation": "Continuous enemy patrol and combat engagement; hostages require rescue interaction"
+    },
+    {
+      "world_state": "Progressive liberation (mid-game)",
+      "visual_manifestation": "Stages advance through different island locations (map screen with horizontal movement graphics planned but unused upward variant suggests multi-directional traversal design)",
+      "behavioral_manifestation": "Increased enemy density and weapon availability as player advances; boss encounters mark area completion"
+    },
+    {
+      "world_state": "Final confrontation (Stage 10)",
+      "visual_manifestation": "Dictator/Batista sprite with fleeing animation (unused) indicating original defeat sequence; rooftop turret emplacements; final boss arena design",
+      "behavioral_manifestation": "Turrets must be cleared before dictator engages; dictator originally fled after turrets destroyed, later revised to fight to death"
+    },
+    {
+      "world_state": "Victory achieved (post-game)",
+      "visual_manifestation": "Credits roll with regional variations (North American version changed 'Fly Garuda' to 'Ninja Sasuke' and added 'Uncle Boo Boo'); Japanese version includes epilogue sequence",
+      "behavioral_manifestation": "Game state transitions to non-playable narrative conclusion"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location naming and visual distinction",
+      "example": "10 distinct areas/stages represent progression through island geography; minecart section in Area 5 (with unused larger sprite variants for player boarding) suggests traversal of varied terrain types"
+    },
+    {
+      "technique": "Enemy type placement",
+      "example": "Standard soldiers vs. tank enemies vs. turret placements indicate escalating defensive infrastructure; larger tanks planned for arcade version replaced by sequential turret sets in NES port"
+    },
+    {
+      "technique": "Architectural obstruction",
+      "example": "Rooftop turrets on final area building block vertical progression; minecart passage requires different interaction mode (bonus level) rather than combat"
+    },
+    {
+      "technique": "Weapon availability",
+      "example": "Soldier drop-pickups (K, N, S, T powerups, with SNK/KNT easter egg arrangement in Stage 3) indicate equipment scavenging from defeated enemy forces"
+    },
+    {
+      "technique": "Civilian presence",
+      "example": "Hostages scattered throughout indicate oppressed population; rescue vs. casualty scoring system implies occupying force holds them as human shields or bargaining leverage"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Enemy Soldiers",
+      "state": "Active patrol",
+      "behavior": "Engage player on sight; yield weapons when defeated"
+    },
+    {
+      "entity": "Enemy Soldiers",
+      "state": "All enemies on screen",
+      "behavior": "Killed instantly by 'K' powerup, indicating group elimination mechanic"
+    },
+    {
+      "entity": "Dictator/Batista",
+      "state": "Post-turret destruction (original design, unused graphics)",
+      "behavior": "Fleeing sprite animations indicate escape sequence rather than combat"
+    },
+    {
+      "entity": "Dictator/Batista",
+      "state": "Current final phase design",
+      "behavior": "Fights to death after turret phase completion"
+    },
+    {
+      "entity": "Hostages",
+      "state": "Present in combat zone",
+      "behavior": "Can be killed in crossfire (large score penalty) or rescued (score reward); indicates vulnerability to player negligence"
+    },
+    {
+      "entity": "Player Characters",
+      "state": "Movement",
+      "behavior": "Horizontal traversal with separate sprite (vertical variant unused); can enter/fall into minecart with unique animation frames"
+    }
+  ],
+  "notes": "Guerrilla War uses regional sanitization to obscure political content: Japanese 'Guevara' / 'Castro' character names became 'Player 1/Player 2' in Western releases; Dictator instead of Batista; unnamed island instead of Cuba. Visual communication relies on standard action-game hazard/safety iconography (enemies=danger, weapons=safety) rather than nuanced political symbology. The game's world-state progression is primarily narrative-driven (area-to-area advancement) with limited environmental visual shifts between states. Unused graphics (fleeing dictator, upward movement sprite, larger tanks, boss tank variant, expanded death animation, Sasuke vs. Commander minigame) indicate original vision included more environmental and behavioral variety than final NES version. Sprite reuse and palette limitations forced compromises (Castro lacks unique minecart tiles like Guevara; multi-directional movement visualized but not implemented). Enemy soldiers serve as generic threat indicators without faction-specific visual differentiation beyond placement context.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:09:59.754Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5620,
+    "output_tokens": 2110,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

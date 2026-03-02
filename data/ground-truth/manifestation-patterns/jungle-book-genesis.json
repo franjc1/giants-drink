@@ -1,0 +1,180 @@
+{
+  "game_id": "jungle-book-genesis",
+  "game_name": "The Jungle Book",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Jungle wildlife sprites (animated animals in side-scrolling environment)",
+      "meaning": "Active threats to avoid or defeat; blocking progression"
+    },
+    {
+      "signal": "Boss character encounters",
+      "visual_form": "Larger, distinct enemy sprite appearing at level midpoints and endpoints",
+      "meaning": "Major danger requiring projectile attacks to defeat; cannot be jumped on"
+    },
+    {
+      "signal": "Shere Khan (tiger antagonist)",
+      "visual_form": "Central antagonist character placed in jungle environment",
+      "meaning": "Primary threat driving narrative; Mowgli hunted and must reach human village to escape"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Six-minute timer per level (UI-based, not visual environment)",
+      "meaning": "Environmental danger of time constraint; failure to complete level within window"
+    },
+    {
+      "signal": "Platforming obstacles",
+      "visual_form": "Level geometry requiring jumping, climbing vines, navigating terrain",
+      "meaning": "Environmental hazards; failed navigation leads to damage/death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Friendly character NPCs",
+      "visual_form": "Bagheera, Baloo, King Louie, Kaa placed as discoverable characters in levels",
+      "meaning": "Safe encounter; characters to locate after gem collection; narrative progression allies"
+    },
+    {
+      "signal": "Gem collection",
+      "visual_form": "Collectible items scattered throughout levels (8-12 required per level)",
+      "meaning": "Progress marker; accumulation signals readiness to find friendly character and advance"
+    },
+    {
+      "signal": "Powerups and weapons",
+      "visual_form": "Invincibility masks, coconuts, double banana shots, boomerang bananas as pickups",
+      "meaning": "Temporary safety enhancement; banana projectile is base weapon; powerups amplify capability"
+    },
+    {
+      "signal": "Human village destination",
+      "visual_form": "Narrative endpoint; goal state after defeating Shere Khan",
+      "meaning": "Ultimate safety; successful escape from jungle threat"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mowgli (player character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Young boy protagonist sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Jungle environment; travels through forests, vines, platforming terrain"
+    },
+    {
+      "faction": "Shere Khan (antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Tiger enemy sprite",
+      "enemy_visual_variants": "Boss-class rendering; larger sprite than regular enemies",
+      "environmental_markers": "Hunting throughout jungle; primary threat driving plot"
+    },
+    {
+      "faction": "Jungle allies (Bagheera, Baloo, King Louie, Kaa)",
+      "color_identity": null,
+      "symbol_or_sigil": "Individual character sprites from Disney film",
+      "enemy_visual_variants": "Kaa noted as 'hypnotist snake' but treated as character to meet, not enemy",
+      "environmental_markers": "Placed within levels as discovery objectives; friendly encounter markers"
+    },
+    {
+      "faction": "Jungle wildlife (non-boss enemies)",
+      "color_identity": null,
+      "symbol_or_sigil": "Generic animal sprites (unnamed jungle creatures)",
+      "enemy_visual_variants": "Varied enemy types requiring projectile combat",
+      "environmental_markers": "Scattered throughout jungle levels; blocking platforming paths"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mowgli hunted and unsafe in jungle",
+      "visual_manifestation": "Shere Khan present as antagonist; jungle wildlife enemies throughout levels; danger-heavy environment",
+      "behavioral_manifestation": "Player must avoid/defeat enemies; must collect gems to progress; must reach friendly characters; six-minute time pressure enforces urgency"
+    },
+    {
+      "world_state": "Gem collection insufficient for progression",
+      "visual_manifestation": "Gems scattered as collectible items (8-12 required depending on difficulty)",
+      "behavioral_manifestation": "Level incomplete until gem threshold reached; friendly character NPC cannot be accessed without gem collection"
+    },
+    {
+      "world_state": "Boss encounter phase",
+      "visual_manifestation": "Boss character sprite appears at level midpoints and endpoints; larger than standard enemies",
+      "behavioral_manifestation": "Combat required; projectile attacks only damage (jumping ineffective); defeat necessary to progress"
+    },
+    {
+      "world_state": "Mowgli approaching safety (human village)",
+      "visual_manifestation": "Narrative progression through chapters; sequential stage descriptions advancing plot toward escape",
+      "behavioral_manifestation": "Chapters sequentially structure gameplay; player advances through story stages toward village endpoint"
+    },
+    {
+      "world_state": "Powerup active (temporary advantage)",
+      "visual_manifestation": "Invincibility masks, coconuts, double banana shots, boomerang bananas as pickup items",
+      "behavioral_manifestation": "Enhanced combat capability; temporary safety improvement; weapon variants available during play"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Chapter-based narrative framing",
+      "example": "Each stage opens with description of story context and objectives, communicating plot progression from jungle danger toward village escape"
+    },
+    {
+      "technique": "Character placement as objective markers",
+      "example": "Bagheera, Baloo, King Louie, Kaa positioned as discoverable NPCs within levels, embedding narrative allies as gameplay goals"
+    },
+    {
+      "technique": "Jungle environment as hostile space",
+      "example": "Platforming terrain (vines, obstacles), wildlife enemies, and Shere Khan threat collectively establish jungle as dangerous zone requiring escape"
+    },
+    {
+      "technique": "Boss-encounter narrative punctuation",
+      "example": "Boss characters appearing every other level serve as story beats reinforcing escalating threat until final Shere Khan confrontation"
+    },
+    {
+      "technique": "Weapon variety as character expression",
+      "example": "Banana projectile as base weapon with powerup variants (coconuts, boomerangs) reflect Mowgli's jungle survival toolkit"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mowgli (player character)",
+      "state": "Active danger (enemies/obstacles present)",
+      "behavior": "Can run, jump, climb vines, shoot projectiles; must avoid enemies or defeat via weapons"
+    },
+    {
+      "entity": "Mowgli (player character)",
+      "state": "Gem collection phase",
+      "behavior": "Explores level terrain to accumulate required gem count (8-12 based on difficulty)"
+    },
+    {
+      "entity": "Mowgli (player character)",
+      "state": "Objective completion",
+      "behavior": "Seeks friendly character NPC after gem threshold reached; triggers level completion"
+    },
+    {
+      "entity": "Boss characters",
+      "state": "Combat encounter",
+      "behavior": "Engage Mowgli; damage only from projectile attacks; jumping ineffective; defeat required to progress"
+    },
+    {
+      "entity": "Regular jungle enemies",
+      "state": "Patrol/threat",
+      "behavior": "Block platforming paths; require avoidance or projectile defeat; scattered throughout levels"
+    },
+    {
+      "entity": "Friendly NPCs (Bagheera, Baloo, King Louie, Kaa)",
+      "state": "Discoverable",
+      "behavior": "Remain stationary within level as objectives; safe encounters; narrative progression triggers"
+    }
+  ],
+  "notes": "Wikipedia source provides narrative context and gameplay structure but limited detail on specific visual manifestation systems. The game uses platformer conventions (side-scrolling terrain, collectibles, timed progression) to communicate danger and story state. Visual communication relies heavily on character sprite presence (allies vs. antagonists), environmental platforming design, and collectible-gating mechanics. Boss encounters serve as narrative punctuation. The jungle setting itself functions as primary danger communicator—hostile terrain requiring navigation skill. Powerup system communicates temporary advantage states. Six-minute timer imposes narrative urgency around escape from Shere Khan threat. Chapter structure with opening descriptions provides explicit narrative framing that contexualizes visual/mechanical danger.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:48:44.929Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2825,
+    "output_tokens": 2184,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

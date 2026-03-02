@@ -1,0 +1,143 @@
+{
+  "game_id": "battleship-nes",
+  "game_name": "Battleship",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Enemy ship placement",
+      "visual_form": "Grid coordinates marked after successful hit",
+      "meaning": "Player has located hostile vessel position"
+    },
+    {
+      "signal": "Incoming attack indicator",
+      "visual_form": "Grid marker showing opponent's targeting attempt",
+      "meaning": "Player's fleet is under threat at specific coordinates"
+    },
+    {
+      "signal": "Ship sinking",
+      "visual_form": "Visual elimination of ship sprite from player's fleet display",
+      "meaning": "Loss of asset; reduced defensive capability"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Missed attack",
+      "visual_form": "Grid marker indicating no hit (typically blank or distinct color)",
+      "meaning": "Safe zone; no threat at that coordinate"
+    },
+    {
+      "signal": "Intact ship presence",
+      "visual_form": "Ship sprite visible and undamaged in fleet display",
+      "meaning": "Continued asset availability and defensive/offensive capacity"
+    },
+    {
+      "signal": "Unprobed grid areas",
+      "visual_form": "Unexplored coordinates in opponent's grid",
+      "meaning": "Unknown threat state; exploration opportunity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player Fleet",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Opponent fleet displayed on separate grid or screen",
+      "environmental_markers": "Grid layout showing player-controlled ships; typically top or left portion of screen"
+    },
+    {
+      "faction": "Opponent Fleet",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Mirror grid display showing only hit/miss markers, not ship positions",
+      "environmental_markers": "Grid layout separated from player fleet; represents unknown enemy disposition"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-battle (placement phase)",
+      "visual_manifestation": "Static ship placement grid; player positioning vessels before engagement",
+      "behavioral_manifestation": "Turn-based pause state; no active targeting or movement"
+    },
+    {
+      "world_state": "Active engagement",
+      "visual_manifestation": "Both grids visible; marked coordinates showing hits/misses accumulating",
+      "behavioral_manifestation": "Alternating turn execution; grid updates after each player action"
+    },
+    {
+      "world_state": "Fleet damaged",
+      "visual_manifestation": "Visual damage markers on ship sprites or grid positions",
+      "behavioral_manifestation": "Reduced ship count or visible hit accumulation on vessels"
+    },
+    {
+      "world_state": "Victory condition",
+      "visual_manifestation": "Opponent's entire fleet eliminated from grid display",
+      "behavioral_manifestation": "Game progression halts; victory screen or end-game state triggered"
+    },
+    {
+      "world_state": "Defeat condition",
+      "visual_manifestation": "Player's entire fleet eliminated from display",
+      "behavioral_manifestation": "Game progression halts; defeat screen or restart prompt"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Grid-based spatial representation",
+      "example": "Coordinate system (alphanumeric or numeric grid) communicates naval combat abstraction; encodes unknown threat geometry"
+    },
+    {
+      "technique": "Hit/miss visual differentiation",
+      "example": "Distinct markers (X for hit, O for miss, or color coding) convey success/failure of intelligence gathering about enemy position"
+    },
+    {
+      "technique": "Fleet inventory display",
+      "example": "Ship roster visible during gameplay indicates remaining assets and strategic options available to player"
+    },
+    {
+      "technique": "Turn structure visualization",
+      "example": "Sequential grid updates communicate turn economy and symmetry of advantage in naval engagement"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player Ship",
+      "state": "Undamaged",
+      "behavior": "Remains visible on grid; functional for strategic defense"
+    },
+    {
+      "entity": "Player Ship",
+      "state": "Damaged/Hit",
+      "behavior": "Visual marker applied (typically hit indicator); reduced or eliminated from active roster"
+    },
+    {
+      "entity": "Enemy Ship",
+      "state": "Unknown (unprobed)",
+      "behavior": "No visual representation; coordinates unexplored on player's targeting grid"
+    },
+    {
+      "entity": "Enemy Ship",
+      "state": "Located (hit)",
+      "behavior": "Grid coordinate marked as hit; enemy vessel confirmed at location"
+    },
+    {
+      "entity": "Enemy Ship",
+      "state": "Sunk",
+      "behavior": "Complete grid area marked as destroyed; ship removed from enemy roster visibility"
+    }
+  ],
+  "notes": "Battleship NES (1993) is a digital adaptation of the classic guessing game paradigm. Visual communication is minimal and abstracted: the core manifestation system relies on grid-state (coordinates marked as hit/miss) and ship inventory visibility rather than cinematic or thematic visual styling. No faction identity exists beyond player vs. opponent symmetry. World state communicates through presence/absence of ship sprites and accumulation of hit markers. This is a pure puzzle/strategy game with no environmental storytelling or thematic visual language—communication occurs entirely through game-mechanic state visualization.",
+  "sources_used": [
+    "wikipedia-battleship-disambiguation"
+  ],
+  "TODO": "Direct gameplay footage or manual screenshots would be required to extract: exact color schemes, precise grid visualization style, hit/miss marker designs, NES-specific UI elements, opponent AI behavioral tells, sound design correlates to danger signals, menu state visuals, and any NES-platform-specific graphical manifestations not covered in disambiguation source.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:47:24.871Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1596,
+    "output_tokens": 1685,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

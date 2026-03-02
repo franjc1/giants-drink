@@ -1,0 +1,121 @@
+{
+  "game_id": "mappy-land-nes",
+  "game_name": "Mappy-Land",
+  "platform": "nes",
+  "year": 1986,
+  "tier": 3,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel system data documented"
+  },
+  "player": {
+    "walk_speed": {
+      "value": null,
+      "unit": null
+    },
+    "run_speed": {
+      "value": null,
+      "unit": null
+    },
+    "max_horizontal_speed": {
+      "value": null,
+      "unit": null
+    },
+    "acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "deceleration": {
+      "value": null,
+      "unit": null
+    },
+    "jump_velocity": {
+      "value": null,
+      "unit": null
+    },
+    "gravity": {
+      "value": null,
+      "unit": null
+    },
+    "max_fall_speed": {
+      "value": null,
+      "unit": null
+    },
+    "air_acceleration": {
+      "value": null,
+      "unit": null
+    },
+    "air_friction": {
+      "value": null,
+      "unit": null
+    },
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": true,
+    "has_variable_jump_height": true,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Trampoline Jumping",
+      "description": "Mappy can jump on trampolines that break after being jumped on multiple times before landing. Jungle World is an exception where trampolines do not break.",
+      "physics_values": {
+        "break_threshold": "multiple bounces",
+        "jungle_world_exception": true
+      }
+    },
+    {
+      "name": "Short Jump",
+      "description": "Mappy can perform a short jump to trigger stage-specific counterattack items and collect target items.",
+      "physics_values": {
+        "jump_type": "short_jump"
+      }
+    },
+    {
+      "name": "Bonus Subarea Access",
+      "description": "Must jump on particular trampolines with no controller input while carrying zero distraction items to access bonus subareas. Successful input sends Mappy upward.",
+      "physics_values": {
+        "requires_no_items": true,
+        "requires_no_input": true
+      }
+    },
+    {
+      "name": "Enemy Avoidance Mechanics",
+      "description": "Mappy can jump over Meowkies and Goro if timed well. Goro becomes faster in later stories.",
+      "physics_values": {
+        "enemy_speed_increases": "progressive",
+        "goro_coin_speed": "cannot be distracted or attacked"
+      }
+    },
+    {
+      "name": "Balloon Movement (Ghost Town)",
+      "description": "In Ghost Town, Mappy can travel with a balloon for alternative movement.",
+      "physics_values": {
+        "stage": "Ghost Town"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "platformer-classic",
+    "trampoline-based",
+    "collectathon",
+    "evasion-focused",
+    "responsive-jump"
+  ],
+  "tier_notes": "Tier 3 - Empirical/Qualitative data only. Sources contain gameplay descriptions and mechanics but no quantitative physics values (pixel measurements, frame data, acceleration/gravity constants, or sub-pixel precision details). Jump mechanics and movement are described qualitatively through gameplay mechanics rather than numerical parameters.",
+  "sources_used": [
+    "The Cutting Room Floor - Mappy-Land article",
+    "Wikipedia - Mappy-Land article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T13:49:13.894Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4384,
+    "output_tokens": 996,
+    "dimension": "physics",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

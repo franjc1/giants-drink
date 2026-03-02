@@ -1,0 +1,123 @@
+{
+  "game_id": "predator-nes",
+  "game_name": "Predator",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Sprite-based hostile entities on screen",
+      "meaning": "Active threat requiring evasion or combat"
+    },
+    {
+      "signal": "Mode transition",
+      "visual_form": "Level number screen appearance",
+      "meaning": "Shift to different difficulty/challenge state (Normal Mode vs Big Mode)"
+    },
+    {
+      "signal": "Screen flash/transition",
+      "visual_form": "Visual change between level states",
+      "meaning": "Environmental hazard or challenge escalation"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Level completion",
+      "visual_form": "Progression to next level screen",
+      "meaning": "Safe advancement; threat cleared"
+    },
+    {
+      "signal": "Title screen presence",
+      "visual_form": "Main menu state with two alternative screens (Schaefer or Predator)",
+      "meaning": "Safe, non-active gameplay state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Schaefer/Dutch)",
+      "color_identity": null,
+      "symbol_or_sigil": "Human soldier sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Featured on alternate title screen"
+    },
+    {
+      "faction": "Predator/Alien threat",
+      "color_identity": null,
+      "symbol_or_sigil": "Predator creature sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Featured on alternate title screen; represents primary antagonistic force"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal Mode active",
+      "visual_manifestation": "Standard difficulty level layout and enemy placement",
+      "behavioral_manifestation": "Player encounters manageable enemy patterns; progression-focused gameplay"
+    },
+    {
+      "world_state": "Big Mode active",
+      "visual_manifestation": "Level number screen appears with distinct visual cue",
+      "behavioral_manifestation": "Increased difficulty, altered enemy behavior, modified level structure; requires expanded skill"
+    },
+    {
+      "world_state": "Japanese version (harder)",
+      "visual_manifestation": "Game starts in Big Mode 1 with Japanese text on Predator title screen",
+      "behavioral_manifestation": "Higher challenge from outset; different level ordering"
+    },
+    {
+      "world_state": "International version (easier)",
+      "visual_manifestation": "Game starts in normal action level with English text",
+      "behavioral_manifestation": "Reduced initial difficulty; adjusted level progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Title screen duality",
+      "example": "Two title screens (Schaefer vs Predator) communicate narrative tension and protagonist/antagonist dynamic"
+    },
+    {
+      "technique": "Regional visual localization",
+      "example": "Japanese version displays Japanese text on Predator title screen; international versions use English, signaling market-specific framing"
+    },
+    {
+      "technique": "Level structure communication",
+      "example": "Different level ordering between regions suggests altered narrative or difficulty progression pacing"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (Schaefer)",
+      "state": "Active gameplay",
+      "behavior": "Platforming movement, enemy avoidance/combat"
+    },
+    {
+      "entity": "Predator/enemies",
+      "state": "Normal Mode",
+      "behavior": "Standard patrol and attack patterns"
+    },
+    {
+      "entity": "Predator/enemies",
+      "state": "Big Mode",
+      "behavior": "Altered behavior patterns; increased aggression or complexity"
+    },
+    {
+      "entity": "Game system",
+      "state": "Level transition",
+      "behavior": "Screen display of level number; brief pause in action"
+    }
+  ],
+  "notes": "Predator NES is a platformer adaptation with dual world-states (Normal Mode vs Big Mode) communicated primarily through screen transitions and difficulty escalation rather than environmental color or faction-specific visual markers. The game uses title screen imagery (Schaefer vs Predator) to establish narrative duality. Regional differences in difficulty and level ordering suggest world-state variations based on release territory. The source data does not document specific visual color schemes, environmental hazard indicators, or detailed faction visual differentiation beyond sprite-based entity presence.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:35:23.257Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2354,
+    "output_tokens": 1188,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

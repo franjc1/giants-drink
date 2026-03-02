@@ -1,0 +1,108 @@
+{
+  "game_id": "terminator-2-nes",
+  "game_name": "Terminator 2: Judgment Day",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Terminator and hostile unit sprites",
+      "meaning": "Immediate threat to player character"
+    },
+    {
+      "signal": "Health depletion indicator",
+      "visual_form": "Health bar or numeric display (unused score display code suggests alternative UI considered)",
+      "meaning": "Player approaching death state; world becoming hostile to survival"
+    },
+    {
+      "signal": "Hospital environment hazards",
+      "visual_form": "Level-specific obstacle sprites and environmental collision",
+      "meaning": "Structural danger within Skynet-controlled/infiltrated facility"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up collection",
+      "visual_form": "Collectible sprites during platforming",
+      "meaning": "Temporary safety enhancement or health restoration"
+    },
+    {
+      "signal": "Level progression",
+      "visual_form": "Stage clear transitions",
+      "meaning": "Distance from immediate threat; advancement toward objective"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Skynet/Terminators",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Terminator unit sprites; varying hostile AI archetypes across stages",
+      "environmental_markers": "Hospital level with graffiti (unused prototype feature) suggesting infiltration and control of human structures"
+    },
+    {
+      "faction": "Human Resistance",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player character positioning and level design implies survival narrative; hospital as contested human sanctuary"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Skynet threat active / Judgment Day imminent",
+      "visual_manifestation": "Terminator enemy presence in human environments (hospital); hostile architecture and obstacles",
+      "behavioral_manifestation": "Player must navigate platforming challenges while evading enemies; level design enforces evasion/combat pressure"
+    },
+    {
+      "world_state": "Human facility compromised / Infiltration occurred",
+      "visual_manifestation": "Hospital level layout; graffiti marks on walls (prototype graphics still in ROM, suggesting marking of territory or sabotage)",
+      "behavioral_manifestation": "Player navigates corridors as if through enemy-controlled space; survival platforming mechanics"
+    },
+    {
+      "world_state": "Game Over / Mission failure",
+      "visual_manifestation": "Unused downbeat jingle in ROM suggests audio-visual transition state; main BGM continues in released version (incomplete implementation)",
+      "behavioral_manifestation": "Continue/retry prompt; score display unavailable in final build despite code support"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Facility infiltration through level design",
+      "example": "Hospital stage demonstrates Skynet control over human infrastructure; graffiti in prototype version marks contested space and AI presence"
+    },
+    {
+      "technique": "Platforming as survival narrative",
+      "example": "Level geometry and enemy placement communicate world-state of human evasion through hostile territory"
+    },
+    {
+      "technique": "Unused audio cue for world state",
+      "example": "Downbeat jingle intended for death/Game Over sequence would audibly mark failure state; absence in final version suggests incomplete world-state communication"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Terminator units",
+      "state": "Active patrol / engaged",
+      "behavior": "Sprite animation and collision detection drive player evasion mechanics; threat presence alters safe traversal paths"
+    },
+    {
+      "entity": "Player character",
+      "state": "Health compromised",
+      "visual_behavior": "Health bar depletion (or alternative score display mode via RAM manipulation) signals critical world-state transition toward failure"
+    }
+  ],
+  "notes": "Source material (TCRF) documents development history and unused assets but contains minimal explicit information on visual communication systems for danger/safety/faction identity. Extraction relies on inferred game design from platformer paradigm, Terminator IP context, and remnant code/graphics. Hospital level with graffiti (unused prototype graphics) and intended high-score UI suggest designers planned richer world-state visualization than final build delivered. Incomplete audio implementation (unused jingle, continued BGM on death) indicates manifestation layer was partially implemented.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:35:11.667Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2502,
+    "output_tokens": 1499,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

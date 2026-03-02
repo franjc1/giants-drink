@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "game": "Super Mario World 2: Yoshi's Island",
+    "platform": "Super Nintendo Entertainment System (SNES)",
+    "region": "NTSC (North America / Japan)",
+    "year": 1995,
+    "publisher": "Nintendo",
+    "developer": "Nintendo EAD",
+    "sources": [
+      {
+        "name": "Yoshi's Island Speedrunning Wiki — Fluttering",
+        "url": "https://yoshispeedruns.fandom.com/wiki/Advanced_Tricks",
+        "notes": "Flutter timing: 9 frames to maintain height, 6 frames to gain height, 1-frame release+repress for optimal flutter. Speed measurement: 808 sub-pixels/frame at ~3.156 px/frame."
+      },
+      {
+        "name": "yoshi.science wiki — Movement",
+        "url": "https://yoshi.science/wiki/index.php/Movement",
+        "notes": "Navigation hub — references Frame Data and Disassembly wiki for detailed values."
+      },
+      {
+        "name": "Yoshi's Island Disassembly — Raidenthequick / Arnethegreat",
+        "url": "https://github.com/Raidenthequick/yoshisisland-disassembly/wiki",
+        "notes": "ROM-level disassembly reference. Specific values not extracted in current review."
+      }
+    ],
+    "confidence": "medium",
+    "notes": [
+      "Yoshi's Island uses a SNES-native physics engine significantly different from Super Mario World.",
+      "Yoshi is the protagonist — Baby Mario rides on his back and acts as the hit detection system.",
+      "The flutter jump is the defining unique mechanic — mid-air flapping extends the jump.",
+      "Speed measurement from speedrunning community: 808 sub-pixels/frame ≈ 3.156 px/f (run speed estimate).",
+      "Flutter timing: 9-frame window to maintain height, 6-frame window to gain height.",
+      "Egg throw is 8-directional aiming with a targeting cursor.",
+      "Ground pound (press down in air) allows attacking from above and activating certain blocks."
+    ]
+  },
+
+  "system": {
+    "frame_rate_ntsc_hz": 60,
+    "display": {
+      "native_resolution_w": 256,
+      "native_resolution_h": 224,
+      "tile_size_px": 16
+    },
+    "subpixel_system": {
+      "notes": "Sub-pixel system confirmed by speedrunning community (808 sub-px/frame measurement). Exact sub-pixels-per-pixel unit needs ROM verification.",
+      "confidence": "medium"
+    }
+  },
+
+  "ground_movement": {
+    "walk_speed": {
+      "px_per_frame_approx": 2.0,
+      "confidence": "low",
+      "notes": "Approximate. Yoshi is more agile than Mario. VERIFY."
+    },
+    "run_speed": {
+      "sub_pixels_per_frame_measured": 808,
+      "px_per_frame_estimated": 3.156,
+      "confidence": "medium",
+      "source": "Speedrunning community: 'Gets 808 subpixels per frame while traveling at full run speed'",
+      "notes": "If sub-pixels-per-pixel = 256: 808/256 = 3.156 px/f. If 320: 808/320 = 2.525 px/f. VERIFY sub-pixel unit."
+    }
+  },
+
+  "jump": {
+    "initial_y_velocity_approx": {
+      "px_per_frame": 4.5,
+      "confidence": "low",
+      "notes": "Approximate from gameplay observation. VERIFY against ROM."
+    },
+    "variable_jump": true,
+    "notes": "Standard variable height jump before flutter kicks in."
+  },
+
+  "flutter_jump": {
+    "_note": "THE DEFINING MECHANIC. The flutter extends jump height significantly and is the primary Yoshi traversal skill.",
+    "activation": "Hold jump button after the initial jump reaches apex — Yoshi starts fluttering.",
+    "timing": {
+      "frames_to_maintain_height": 9,
+      "frames_to_gain_height": 6,
+      "optimal_reflutter": {
+        "description": "Release jump and repress within 1 frame at the right moment to restart the flutter at maximum efficiency.",
+        "source": "Yoshi speedrunning community",
+        "confidence": "high"
+      },
+      "max_height_technique": {
+        "description": "Release B 8 frames before the float sprite appears for 1 frame, then hold.",
+        "source": "Speedrunning wiki",
+        "confidence": "high"
+      }
+    },
+    "extra_height_px_approx": 32,
+    "confidence": "low",
+    "notes": [
+      "Flutter provides meaningful additional height — enough to reach platforms just out of range of the standard jump.",
+      "Experienced players chain flutter timing optimally (1-frame repress technique) for maximum height.",
+      "The flutter animation shows Yoshi flapping rapidly — the visual feedback matches the mechanical timing window.",
+      "Flutter does not cancel horizontal momentum — Yoshi continues moving horizontally while fluttering."
+    ]
+  },
+
+  "egg_mechanics": {
+    "carrying": {
+      "capacity": 6,
+      "notes": "Yoshi can carry up to 6 eggs. Eggs are acquired by swallowing certain enemies."
+    },
+    "aiming": {
+      "type": "targeting cursor",
+      "directions": 8,
+      "description": "Hold Y to aim with a crosshair cursor. Press R to throw in cursor direction.",
+      "cursor_range_tiles_approx": 5,
+      "confidence": "low",
+      "notes": [
+        "The aiming cursor can be positioned anywhere within range.",
+        "8-directional targeting allows hitting enemies above, below, and diagonally.",
+        "Eggs bounce off walls and terrain, allowing indirect hits.",
+        "Different egg types (normal, watermelon, fire, ice) have different behaviors."
+      ]
+    },
+    "trajectory": {
+      "type": "arcing (gravity-affected)",
+      "notes": "Eggs arc downward after throwing — like a real thrown projectile with gravity."
+    }
+  },
+
+  "ground_pound": {
+    "activation": "Press down while airborne",
+    "description": "Yoshi slams downward, crashing into the ground with impact force.",
+    "speed_downward_approx_px_per_frame": 6,
+    "confidence": "low",
+    "notes": [
+      "Ground pound damages enemies directly below on contact.",
+      "Activates certain level triggers and flip panels.",
+      "Can break certain floor types."
+    ]
+  },
+
+  "baby_mario_system": {
+    "_note": "Baby Mario is on Yoshi's back. His presence or absence is the health system.",
+    "normal_state": "Baby Mario rides on Yoshi's back",
+    "hit_state": {
+      "description": "When Yoshi takes damage, Baby Mario falls off and floats in a bubble, crying. The Star Counter begins counting down.",
+      "star_counter": {
+        "description": "Upon losing Baby Mario, stars begin counting down from the current count (up to 30). Must catch Baby Mario before stars reach 0 to rescue him.",
+        "rescue_mechanic": "Jump into the bubble to recatch Baby Mario",
+        "fail_condition": "Stars hit 0 = stage fail (Baby Mario is gone)"
+      }
+    },
+    "notes": [
+      "This system is unique in platformer design — losing a life isn't instant. Players have a countdown to recover.",
+      "The star count creates tension proportional to how exposed you've left Baby Mario floating in a bubble.",
+      "Getting hit repeatedly (losing stars from being hit while already in danger) creates compounding stress.",
+      "Stars can be collected to build up the countdown buffer (up to 30 stars max)."
+    ]
+  },
+
+  "tongue": {
+    "description": "Yoshi can extend his tongue to grab enemies and items from range.",
+    "range_tiles_approx": 1.5,
+    "confidence": "low",
+    "direction": "horizontal forward",
+    "notes": "Swallowing an enemy converts it to an egg. Some enemies cannot be swallowed."
+  },
+
+  "hitboxes": {
+    "yoshi": {
+      "notes": "Yoshi's hitbox is his body — approximately 16×16 pixels. VERIFY.",
+      "confidence": "low"
+    }
+  },
+
+  "design_notes_for_giants_drink": [
+    "The Baby Mario bubble/star-counter damage system is a design innovation that makes 'getting hit' interesting rather than just punishing. The countdown period after losing Mario creates active recovery gameplay — the miss doesn't end the run, it creates urgency.",
+    "The flutter jump's 1-frame optimal timing creates a skill ceiling that reveals itself gradually. Casual players use the flutter as a safety net; expert players time it precisely for maximum reach. Same mechanic, two different mastery levels.",
+    "The egg targeting cursor is the most 'aim-and-fire' mechanic in the documented set. Unlike most platformers where projectiles go straight, Yoshi's eggs require aim selection before throwing. This slows combat down intentionally — contemplative rather than reactive.",
+    "Yoshi's Island's visual aesthetic (crayon/paint texture) combined with the infant-and-baby-on-back narrative create a unique emotional register. The level design uses this — levels feel like they're drawn by a child who imagined a fantastic world.",
+    "The ground pound mechanic pre-dates its use in later Mario games (SM64's stomp was influenced by this). YI's ground pound is combat + puzzle tool: stomp enemies, trigger switches, break floors."
+  ]
+}

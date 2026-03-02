@@ -1,0 +1,207 @@
+{
+  "game_id": "rc-pro-am-nes",
+  "game_name": "R.C. Pro-Am",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Oil slicks",
+      "visual_form": "Dark liquid patches on track surface",
+      "meaning": "Hazard that causes vehicles to spin out of control"
+    },
+    {
+      "signal": "Water puddles and rain squalls",
+      "visual_form": "Blue/wet visual overlays on track",
+      "meaning": "Environmental hazard that slows vehicle movement"
+    },
+    {
+      "signal": "Pop-up barriers",
+      "visual_form": "Sudden vertical obstacles appearing on track",
+      "meaning": "Crash hazard that damages vehicle if struck"
+    },
+    {
+      "signal": "Skull pickups",
+      "visual_form": "Skull icon on track",
+      "meaning": "Negative power-up that decreases ammunition count"
+    },
+    {
+      "signal": "Yellow opponent car acceleration",
+      "visual_form": "Yellow car sprite moving at extreme speed visibly faster than player",
+      "meaning": "Indicates opponent car has reached maximum speed (127 mph) due to weapon overuse, cannot be outrun"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Roll cage pickups",
+      "visual_form": "Roll cage icon collectible on track",
+      "meaning": "Protective power-up that shields vehicle from crash damage"
+    },
+    {
+      "signal": "Zipper stationary items",
+      "visual_form": "Zipper-marked ground patches on track",
+      "meaning": "Speed boost zones providing temporary acceleration advantage"
+    },
+    {
+      "signal": "Turbo acceleration pickups",
+      "visual_form": "Turbo boost icon collectible",
+      "meaning": "Temporary speed enhancement power-up"
+    },
+    {
+      "signal": "Traction/tire upgrades",
+      "visual_form": "Tire icon collectible",
+      "meaning": "Improved cornering and traction performance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player vehicle (Red truck)",
+      "color_identity": "Red",
+      "symbol_or_sigil": "Truck sprite centered on screen",
+      "enemy_visual_variants": "Red truck upgrades to 4-Wheeler, then Off Roader as progression visual",
+      "environmental_markers": "Player always centered in isometric view; other racers positioned relative to player"
+    },
+    {
+      "faction": "Computer-controlled opponent 1 (Yellow car)",
+      "color_identity": "Yellow",
+      "symbol_or_sigil": "Yellow vehicle sprite",
+      "enemy_visual_variants": "Yellow car visibly accelerates to maximum speed at later tracks",
+      "environmental_markers": "Spawns on track competing for position; most dangerous at track 32"
+    },
+    {
+      "faction": "Computer-controlled opponent 2 (Unknown color)",
+      "color_identity": null,
+      "symbol_or_sigil": "Vehicle sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Competes alongside other opponents"
+    },
+    {
+      "faction": "Computer-controlled opponent 3 (Unknown color)",
+      "color_identity": null,
+      "symbol_or_sigil": "Vehicle sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Competes alongside other opponents"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game progression (tracks 1-23)",
+      "visual_manifestation": "Twelve unique track layouts with varying hazard distributions; player vehicle as standard red truck",
+      "behavioral_manifestation": "Opponents are beatable; weapons and power-ups provide meaningful advantage; races are competitive but winnable"
+    },
+    {
+      "world_state": "Mid-game progression (track 24, described as largest)",
+      "visual_manifestation": "Most complex track layout displayed",
+      "behavioral_manifestation": "Represents unofficial game peak difficulty before mechanic repetition begins"
+    },
+    {
+      "world_state": "Late game escalation (tracks 25-31)",
+      "visual_manifestation": "Repeating track layouts from tracks 1-11 but with additional hazard features overlaid",
+      "behavioral_manifestation": "Difficulty increases through environmental complexity rather than new track design; player vehicle potentially upgraded"
+    },
+    {
+      "world_state": "Maximum difficulty state (track 32 and beyond)",
+      "visual_manifestation": "Same track layouts with maximum hazard density; yellow opponent car visually accelerated to max speed",
+      "behavioral_manifestation": "All computer opponents run at maximum speed; player cannot win through racing alone, must use weapons continuously; visual indication that weapons become mandatory"
+    },
+    {
+      "world_state": "Player ammunition depletion",
+      "visual_manifestation": "Ammunition counter on HUD decreases; visual feedback on weapon availability",
+      "behavioral_manifestation": "Once weapons exhausted, player is eliminated from race; skull pickups decrease ammunition visibility"
+    },
+    {
+      "world_state": "Vehicle upgrade acquisition",
+      "visual_manifestation": "Player truck sprite changes from standard truck to 4-Wheeler to Off Roader as NINTENDO letters collected",
+      "behavioral_manifestation": "Vehicle performance increases visibly; faster acceleration and top speed as car upgrades through collecting bonus letters"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Track hazard clustering",
+      "example": "Oil slicks, water puddles, and barriers placed strategically on tracks communicate dangerous racing conditions requiring skill and caution"
+    },
+    {
+      "technique": "Isometric perspective world state",
+      "example": "Overhead isometric view shows all four racers simultaneously on track, communicating competitive positioning and relative standing in race at all times"
+    },
+    {
+      "technique": "HUD track conditions screen",
+      "example": "Post-race screen displays collected tune-up items (turbo, engine, tires) visually, showing progression of vehicle capabilities across race series"
+    },
+    {
+      "technique": "Pickup letter collection arc",
+      "example": "Spelling 'NINTENDO' through collected letter pickups creates visual progression goal; incomplete spelling communicates incomplete achievement state"
+    },
+    {
+      "technique": "Opponent vehicle color coding",
+      "example": "Yellow car sprite distinctly colored to identify most dangerous opponent; visual differentiation communicates threat level"
+    },
+    {
+      "technique": "Trophy display system",
+      "example": "Each completed track awards visible trophy; larger 'High Score Trophies' communicate achievement progression and mastery level"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player vehicle (red truck)",
+      "state": "Normal racing",
+      "behavior": "Responds to directional input; collects pickups on path; loses to weapons when unprepared; can fire weapons to disable opponents"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Upgraded to 4-Wheeler",
+      "behavior": "Visibly faster movement; improved acceleration and top speed performance compared to initial truck"
+    },
+    {
+      "entity": "Player vehicle",
+      "state": "Upgraded to Off Roader",
+      "behavior": "Fastest vehicle option; further improved acceleration and top speed; sprite change signals maximum upgrade state"
+    },
+    {
+      "entity": "Yellow computer opponent",
+      "state": "Normal race (tracks 1-31)",
+      "behavior": "Races competitively against player; can be defeated with weapons or racing skill; speed matches player capability"
+    },
+    {
+      "entity": "Yellow computer opponent",
+      "state": "Maximum acceleration (track 32+)",
+      "behavior": "Moves visibly faster than player; sprite movement noticeably accelerated; cannot be outpaced by racing alone; indicates weapon use is mandatory"
+    },
+    {
+      "entity": "Computer opponents generally",
+      "state": "Race elimination",
+      "behavior": "Visually disappear from track when disabled by player weapons; temporary elimination before respawning or race reset"
+    },
+    {
+      "entity": "Computer opponents",
+      "state": "Missile/bomb impact",
+      "behavior": "Visibly slowed or stopped momentarily; sprites show damage/stun animation; temporary disable before recovery"
+    },
+    {
+      "entity": "Oil slick hazard",
+      "state": "Vehicle collision",
+      "behavior": "Vehicle sprite spins out of control; movement becomes erratic; visual feedback of loss of traction"
+    },
+    {
+      "entity": "Water puddle/rain hazard",
+      "state": "Vehicle collision",
+      "behavior": "Vehicle movement visibly slows; sprite velocity decreases; temporary speed penalty display"
+    }
+  ],
+  "notes": "R.C. Pro-Am uses isometric perspective to communicate racing world state. Visual differentiation through color (red player, yellow dangerous opponent) and sprite changes (truck upgrades to faster vehicles) conveys progression and threat. Hazard visibility (oil slicks, water, barriers) directly communicates danger. The yellow car's visible speed increase at track 32 is a key behavioral tell that world state has shifted to 'unwinnable without weapons.' Weapon pickups and ammunition counter are core manifestations of combat state. Track layout repetition after track 24 with added hazards communicates escalating difficulty through environmental complexity rather than novelty. The HUD elements (track conditions, high score trophies, pause screen) provide quantitative manifestation of game state progression.",
+  "sources_used": [
+    "wikipedia",
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:15:10.744Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5172,
+    "output_tokens": 2403,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

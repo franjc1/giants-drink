@@ -1,0 +1,154 @@
+{
+  "game_id": "super-hang-on-genesis",
+  "game_name": "Super Hang-On",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "danger_signals": [
+    {
+      "signal": "Collision with obstacles",
+      "visual_form": "Track-side barriers, oncoming traffic, environmental hazards",
+      "meaning": "Loss of speed, damage to bike, stage failure if collision severe"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Timer display counting down during stage progression",
+      "meaning": "Must complete stage within time limit or lose opportunity to advance"
+    },
+    {
+      "signal": "Opponent positioning",
+      "visual_form": "Rival motorcyclists visible ahead on track",
+      "meaning": "Must overtake and maintain lead position to win race"
+    },
+    {
+      "signal": "Speed degradation",
+      "visual_form": "Bike slowing visually on screen, speed gauge dropping",
+      "meaning": "Rider is losing velocity due to track conditions, collision, or poor handling"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Clear track ahead",
+      "visual_form": "Open road with minimal obstacles, smooth terrain",
+      "meaning": "Safe to accelerate and maintain high speed"
+    },
+    {
+      "signal": "Turbo mode activation",
+      "visual_form": "Visual effect when reaching 280 km/h threshold, speed gauge enhancement",
+      "meaning": "Bike enters enhanced performance state allowing 324 km/h maximum speed"
+    },
+    {
+      "signal": "Favorable course conditions",
+      "visual_form": "Wide track sections, good visibility, minimal traffic",
+      "meaning": "Easier terrain for stage progression, lower collision risk"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player motorcycle team/sponsor",
+      "color_identity": "Rothmans Honda NSR500 color scheme (cover art reference)",
+      "symbol_or_sigil": "Motorcycle design and livery matching real-world racing aesthetics",
+      "enemy_visual_variants": "Rival motorcycle riders with distinct bike designs and colors",
+      "environmental_markers": "Billboards featuring sponsor brands (Cibie, Sega game references in VC version)"
+    },
+    {
+      "faction": "Course region/continent identity",
+      "color_identity": "Varied by track region (Africa, Asia, Americas, Europe)",
+      "symbol_or_sigil": "Environmental theming distinct to continental setting",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Track-specific visual design, terrain type, obstacle placement, architectural style"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early game / easier course (Africa)",
+      "visual_manifestation": "Simpler track layout, wider roads, fewer obstacles, shorter stage progression (6 stages)",
+      "behavioral_manifestation": "Opponent AI less aggressive, collision consequences less severe"
+    },
+    {
+      "world_state": "Mid-game / moderate difficulty (Asia, Americas)",
+      "visual_manifestation": "Increased track complexity, more environmental hazards, narrower passages, stage count increases (10-14 stages)",
+      "behavioral_manifestation": "Opponent positioning more competitive, tighter margins for error"
+    },
+    {
+      "world_state": "Late game / hardest course (Europe)",
+      "visual_manifestation": "Maximum track complexity, dense obstacles, challenging terrain, longest progression (18 stages)",
+      "behavioral_manifestation": "Opponents race most aggressively, collision risk highest, time pressure most intense"
+    },
+    {
+      "world_state": "High speed achieved (Turbo mode active)",
+      "visual_manifestation": "Speed gauge visual enhancement, screen scrolling speed increases, visual effects intensify",
+      "behavioral_manifestation": "Track hazards become more dangerous at higher velocity, precision handling critical"
+    },
+    {
+      "world_state": "Genesis/Mega Drive sponsor mode progression",
+      "visual_manifestation": "Bike component upgrades reflected in visual appearance and performance indicator changes",
+      "behavioral_manifestation": "Enhanced handling, acceleration, and top speed based on purchased components"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Continental track theming",
+      "example": "Four distinct race courses (Africa, Asia, Americas, Europe) each with unique visual identity, terrain type, architecture, and difficulty progression that tells story of global motorcycle racing championship"
+    },
+    {
+      "technique": "Billboard/sponsor signage",
+      "visual_form": "Real-world brand names and Sega game references on track-side billboards establish racing world authenticity and game universe connectivity"
+    },
+    {
+      "technique": "Track design difficulty escalation",
+      "example": "Stage count progression (6→10→14→18 stages) visually communicated through course selection menu, showing player's journey from beginner to elite racer"
+    },
+    {
+      "technique": "Real motorcycle aesthetic",
+      "example": "Cover art featuring Shinichi Itoh's Rothmans Honda NSR500 colorway establishes grounding in authentic motorcycle racing culture and sponsors"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player motorcycle",
+      "state": "Accelerating",
+      "behavior": "Screen scrolls faster, bike sprite leans forward, speed gauge rises visually"
+    },
+    {
+      "entity": "Player motorcycle",
+      "state": "Braking/Decelerating",
+      "behavior": "Screen scroll slows, bike sprite becomes more upright, speed gauge drops"
+    },
+    {
+      "entity": "Player motorcycle",
+      "state": "Cornering",
+      "behavior": "Bike sprite leans into turn, handling becomes more sensitive, risk of losing control increases"
+    },
+    {
+      "entity": "Opponent motorcycles",
+      "state": "Aggressive racing",
+      "behavior": "Maintain close proximity to player, aggressive line positioning, attempt to block player advancement"
+    },
+    {
+      "entity": "Opponent motorcycles",
+      "state": "Losing race",
+      "behavior": "Fall behind player bike, become less aggressive, reduce screen presence"
+    },
+    {
+      "entity": "Track obstacles",
+      "state": "Imminent collision",
+      "behavior": "Visual scaling indicates proximity, collision audio cues, screen shake effect on impact"
+    }
+  ],
+  "notes": "Super Hang-On uses pseudo-3D scaling technology (Sega Super Scaler) to create illusion of depth. Danger and safety signals are primarily conveyed through track layout design, obstacle placement, and speed mechanics rather than explicit UI warnings. The game communicates world-state through continental theming and progressive difficulty rather than narrative factions. Genesis version includes sponsor mode adding progression narrative through bike customization. Danger is implicit in collision physics and time pressure rather than explicit enemy threat.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T17:35:22.225Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3655,
+    "output_tokens": 1738,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

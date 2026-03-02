@@ -1,0 +1,100 @@
+{
+  "game_id": "james-bond-jr-nes",
+  "game_name": "James Bond Jr.",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "enemy_presence",
+      "visual_form": "animated adversary sprites",
+      "meaning": "hazard zone; player must avoid or engage"
+    },
+    {
+      "signal": "environmental_hazard",
+      "visual_form": "unknown (insufficient source data)",
+      "meaning": "static or dynamic level obstacles"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "collectible_items",
+      "visual_form": "power-up sprites (ammo, grenades, glow effects indicated by debug passwords)",
+      "meaning": "temporary advantage state; player is resourced"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "James Bond Jr. (Player)",
+      "color_identity": null,
+      "symbol_or_sigil": "protagonist character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": null
+    },
+    {
+      "faction": "Antagonists (game adversaries)",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "multiple enemy sprite types implied by level design",
+      "environmental_markers": null
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "armed_resourced",
+      "visual_manifestation": "player inventory shows grenades, glow effect active (visible from debug content)",
+      "behavioral_manifestation": "player can deal enhanced damage; altered combat capability"
+    },
+    {
+      "world_state": "depleted",
+      "visual_manifestation": "absence of weapon indicators; no glow effect",
+      "behavioral_manifestation": "limited offensive options; evasion-based gameplay required"
+    },
+    {
+      "world_state": "time_pressure",
+      "visual_manifestation": "time counter visible on HUD",
+      "behavioral_manifestation": "accelerated level progression required; failure state if timer expires"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "level_progression_narrative",
+      "example": "platformer stages structured around spy mission contexts (implied by Bond Jr. IP; specific level themes not detailed in source)"
+    },
+    {
+      "technique": "sprite_based_characterization",
+      "example": "player character sprite conveys juvenile Bond identity via visual design differentiation from classic Bond franchise"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_character",
+      "state": "armed",
+      "behavior": "capable of grenades and extended ammunition use; glow effect indicates power augmentation"
+    },
+    {
+      "entity": "player_character",
+      "state": "unarmed",
+      "behavior": "limited to basic evasion and platforming mechanics"
+    },
+    {
+      "entity": "enemies",
+      "state": "active",
+      "behavior": "patrol and engage player; sprite animation indicates patrol or chase states"
+    }
+  ],
+  "notes": "Source material (TCRF) contains primarily development/archival data rather than gameplay manifestation analysis. Visual communication systems must be inferred from platform capabilities (NES sprite/tile limitations) and spy-genre conventions. Debug passwords reveal weapon variety (grenades, glow effects) and unlimited resource states, indicating resource scarcity was primary world-state differentiator. Unused parachute sprite suggests cut infiltration/escape mechanic. Game designed by Eurocom for animated series IP; visual language adapted for NES technical constraints.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "TODO": "Requires gameplay video/ROM analysis to extract: specific enemy sprite designs and color palettes, HUD visual language for resource/state indication, environmental color coding for danger/safety zones, faction-specific level aesthetics, boss character visual signatures, power-up sprite designs and their visual effects on player character, tile-based level design patterns indicating mission type or location, cutscene visual language for narrative/political context",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:36:08.598Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2256,
+    "output_tokens": 1260,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

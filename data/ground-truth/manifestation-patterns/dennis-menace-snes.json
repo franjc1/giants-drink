@@ -1,0 +1,164 @@
+{
+  "game_id": "dennis-menace-snes",
+  "game_name": "Dennis the Menace",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact",
+      "visual_form": "Unspecified hostile entities in each stage environment",
+      "meaning": "Collision with enemies reduces health by one heart"
+    },
+    {
+      "signal": "Health depletion",
+      "visual_form": "Heart meter visual indicator",
+      "meaning": "All hearts lost triggers level restart"
+    },
+    {
+      "signal": "Time pressure",
+      "visual_form": "Clock countdown (999 seconds per stage)",
+      "meaning": "Time expiration causes immediate game over and complete level loss"
+    },
+    {
+      "signal": "Burglar presence",
+      "visual_form": "Switchblade Sam as final stage antagonist",
+      "meaning": "Boss encounter represents primary threat to town safety"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Candy pickups",
+      "visual_form": "Candy items scattered throughout levels",
+      "meaning": "Full health restoration upon collection"
+    },
+    {
+      "signal": "Objective completion",
+      "visual_form": "Collection of five large coins per stage",
+      "meaning": "Progress toward victory condition and stage completion"
+    },
+    {
+      "signal": "Friendly NPCs",
+      "visual_form": "Joey and Margaret (Dennis' friends) locations",
+      "meaning": "Rescue objectives that contribute to winning condition"
+    },
+    {
+      "signal": "Collectible asset",
+      "visual_form": "Mr. Wilson's coin collection throughout levels",
+      "meaning": "Recovery of property indicates world restoration progress"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dennis (Player Character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Dennis Mitchell protagonist identity",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Home base: Mr. Wilson's house (Stage 1)"
+    },
+    {
+      "faction": "Antagonist - Switchblade Sam",
+      "color_identity": null,
+      "symbol_or_sigil": "Burglar identity / weapon (switchblade implied)",
+      "enemy_visual_variants": "Boss encounter final stage",
+      "environmental_markers": "Arrives via railroad connection to town"
+    },
+    {
+      "faction": "Civilian/Safe Zone",
+      "color_identity": null,
+      "symbol_or_sigil": "Mr. Wilson and neighborhood residents",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Mr. Wilson's house, outdoor town areas"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Burglar intrusion / Town under threat",
+      "visual_manifestation": "Switchblade Sam accessible as boss encounter; enemies present in stages",
+      "behavioral_manifestation": "Player must progress through four sequential stages to confront antagonist and rescue civilians"
+    },
+    {
+      "world_state": "Property theft / Disruption",
+      "visual_manifestation": "Mr. Wilson's coin collection scattered and unavailable in natural locations",
+      "behavioral_manifestation": "Mandatory collection objective requires systematic stage traversal to recover stolen assets"
+    },
+    {
+      "world_state": "Friends in danger",
+      "visual_manifestation": "Joey and Margaret positioned as rescue objectives within levels",
+      "behavioral_manifestation": "Player locates and retrieves both friends as part of victory condition"
+    },
+    {
+      "world_state": "Environmental variety (narrative progression)",
+      "visual_manifestation": "Four distinct stage settings: Mr. Wilson's house, great outdoors, boiler room, boss chamber",
+      "behavioral_manifestation": "Each environment contains thematically appropriate enemies and collectibles"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Location-based narrative",
+      "example": "Mr. Wilson's house as opening stage establishes burglar entry point and neighborhood setting"
+    },
+    {
+      "technique": "Asset scattering",
+      "example": "Coin collection distributed across stages communicates theft and dispersal of property"
+    },
+    {
+      "technique": "Environmental progression",
+      "example": "Sequence from residential (house) → natural (outdoors) → industrial (boiler room) → confrontation (final boss) creates narrative escalation"
+    },
+    {
+      "technique": "NPC positioning",
+      "example": "Joey and Margaret placement within dangerous stages visually communicates kidnapping situation"
+    },
+    {
+      "technique": "Antagonist introduction",
+      "example": "Railroad connection detail establishes how external threat infiltrated peaceful town"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Dennis (Player)",
+      "state": "Hit by enemy",
+      "behavior": "Temporary stun effect and loss of one health heart"
+    },
+    {
+      "entity": "Dennis (Player)",
+      "state": "Health depleted",
+      "behavior": "Level restart with retained collected coins"
+    },
+    {
+      "entity": "Dennis (Player)",
+      "state": "Time expired",
+      "behavior": "Immediate game over; complete stage progress loss"
+    },
+    {
+      "entity": "Enemies (Generic)",
+      "state": "Present in environment",
+      "behavior": "Patrolling/stationary threat that triggers contact damage"
+    },
+    {
+      "entity": "Switchblade Sam",
+      "state": "Boss encounter",
+      "behavior": "Final stage confrontation as culmination threat"
+    },
+    {
+      "entity": "Candy pickups",
+      "state": "Collected",
+      "behavior": "Immediate full health restoration"
+    }
+  ],
+  "notes": "Dennis the Menace SNES lacks detailed visual communication documentation in available sources. The Wikipedia article focuses on gameplay mechanics rather than visual manifestation patterns. World-state communication inferred from game structure (four stages with escalating threat, protagonist journey from home through outdoors to industrial setting toward final confrontation). The game represents a straightforward rescue/recovery narrative with danger indicated through health system and time pressure mechanics rather than sophisticated visual semiotics. Environmental storytelling relies on stage selection and objective placement rather than dynamic visual indicators. No documented faction color schemes, detailed enemy visual variants, or sophisticated environmental hazard signals are available from sources.",
+  "sources_used": [
+    "wikipedia: Dennis the Menace (video game)"
+  ],
+  "TODO": null,
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:19:34.930Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2691,
+    "output_tokens": 1856,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

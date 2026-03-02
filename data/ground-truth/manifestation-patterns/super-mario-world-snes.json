@@ -1,0 +1,247 @@
+{
+  "game_id": "super-mario-world-snes",
+  "game_name": "Super Mario World",
+  "platform": "snes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy contact while Small Mario",
+      "visual_form": "Collision with visible enemy sprites (Koopas, Goombas, etc.)",
+      "meaning": "Loss of life or power-down state"
+    },
+    {
+      "signal": "Lava/hazard terrain",
+      "visual_form": "Red/orange animated liquid graphics in level environment",
+      "meaning": "Instant death on contact"
+    },
+    {
+      "signal": "Falling off-screen",
+      "visual_form": "Screen boundary visual limit, bottomless pit below platform",
+      "meaning": "Loss of life"
+    },
+    {
+      "signal": "Crushing hazard",
+      "visual_form": "Moving solid blocks (Smashers) with visual animation",
+      "meaning": "Instant death from compression"
+    },
+    {
+      "signal": "Time depletion",
+      "visual_form": "Timer display in HUD counting down, changes color/urgency as time runs low",
+      "meaning": "Level failure and life loss"
+    },
+    {
+      "signal": "Boss enemy presence",
+      "visual_form": "Large distinct enemy sprite in fortress/castle level, different from standard enemies",
+      "meaning": "Mandatory combat encounter required to progress"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up acquisition",
+      "visual_form": "Super Mushroom, Fire Flower, Cape Feather pickup items with distinct sprites",
+      "meaning": "Temporary increased capacity to survive threats or gain new movement abilities"
+    },
+    {
+      "signal": "Star/Invincibility item",
+      "visual_form": "Spinning star sprite pickup",
+      "meaning": "Temporary invincibility from minor dangers"
+    },
+    {
+      "signal": "Yoshi mount availability",
+      "visual_form": "Yoshi dinosaur sprite appearing in level or egg sprite",
+      "meaning": "Extra hit protection; enemy absorption capability"
+    },
+    {
+      "signal": "Checkpoint/Save completion",
+      "visual_form": "Castle/Fortress/Ghost House completion visual (level clear screen)",
+      "meaning": "Continue point established; progress saved"
+    },
+    {
+      "signal": "Goal post at level end",
+      "visual_form": "Distinctive flag/post sprite at far right of level",
+      "meaning": "Safe zone; level completion imminent"
+    },
+    {
+      "signal": "Coin collection",
+      "visual_form": "Circular yellow coin sprites scattered in level",
+      "meaning": "Resource accumulation; 100 coins grants extra life"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mario (Player)",
+      "color_identity": "Red and brown (Mario sprite coloring)",
+      "symbol_or_sigil": "M emblem on cap",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Playable character position; HUD displays Mario's item box and power state"
+    },
+    {
+      "faction": "Luigi (Player 2)",
+      "color_identity": "Green and brown (Luigi sprite coloring)",
+      "symbol_or_sigil": "L emblem on cap",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Alternative player character; takes turns in multiplayer mode"
+    },
+    {
+      "faction": "Bowser (Antagonist)",
+      "color_identity": "Dark brown/black with green shell",
+      "symbol_or_sigil": "King Koopa crown; large spiked shell",
+      "enemy_visual_variants": "Boss battle sprite in final castle; larger and more dangerous than standard Koopa enemies",
+      "environmental_markers": "Final world castle; throne room architecture; lava surroundings in Bowser's Castle"
+    },
+    {
+      "faction": "Koopalings (Bowser's Minions)",
+      "color_identity": "Varied colored shells (purple, red, yellow, white, orange, blue, green)",
+      "symbol_or_sigil": "Individual crown per Koopaling; unique shell coloring scheme",
+      "enemy_visual_variants": "Fortress boss sprites; each world's fortress controlled by one named Koopaling",
+      "environmental_markers": "Fortress environments; each world's fortress entrance marked on overworld map"
+    },
+    {
+      "faction": "Peach/Dinosaur Land Inhabitants (Allies)",
+      "color_identity": "Pink (Princess Peach); varied dinosaur colors (Yoshi in green, red, yellow variants)",
+      "symbol_or_sigil": "Princess crown imagery",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Castle presence on overworld; Yoshi eggs and mounts in levels"
+    },
+    {
+      "faction": "Generic Enemies (Koopa Troopas, Goombas, etc.)",
+      "color_identity": "Green/red (Koopa variants), brown (Goomba)",
+      "symbol_or_sigil": "Standard turtle/mushroom creature designs",
+      "enemy_visual_variants": "Winged variants (Koopa Paratroopas); spiked variants; color-coded behavior differences",
+      "environmental_markers": "Scattered throughout action panels and courses; density increases in dangerous areas"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mario powered-down (Small Mario state)",
+      "visual_manifestation": "Smaller Mario sprite; no cape or power-up equipped; item box empty or showing stored power-up",
+      "behavioral_manifestation": "One hit from enemy causes immediate life loss; cannot perform certain moves requiring power-ups"
+    },
+    {
+      "world_state": "Mario powered-up (Super Mario or Cape Mario state)",
+      "visual_manifestation": "Larger Mario sprite; cape equipped for Cape Feather state; visible power-up in HUD item box",
+      "behavioral_manifestation": "Can survive one additional hit; can fly/glide with cape; can break certain blocks with spin jump"
+    },
+    {
+      "world_state": "Mario invincible state",
+      "visual_manifestation": "Rapid sprite flashing/blinking animation; star visual effect overlay",
+      "behavioral_manifestation": "Temporary immunity from enemy contact damage; can defeat enemies on contact"
+    },
+    {
+      "world_state": "Yoshi mounted state",
+      "visual_manifestation": "Yoshi sprite visible underneath Mario; color-coded Yoshi variants (green, red, yellow)",
+      "behavioral_manifestation": "Extra hit protection (Yoshi takes hit instead); Yoshi can eat enemies and spit as projectiles; enhanced jumping capability"
+    },
+    {
+      "world_state": "Low time remaining",
+      "visual_manifestation": "Timer display in HUD visually changes urgency cues; flashing or color shift as seconds deplete",
+      "behavioral_manifestation": "Time-pressure gameplay; forced level restart if reaches zero before level completion"
+    },
+    {
+      "world_state": "World progression (accessing new worlds)",
+      "visual_manifestation": "Overworld map shows branching paths unlocking; new world castle/fortress icons appear as paths open",
+      "behavioral_manifestation": "New level sets become accessible; escalating difficulty visual design in subsequent worlds"
+    },
+    {
+      "world_state": "Boss encounter active",
+      "visual_manifestation": "Fortress or castle interior visual theme; large boss sprite presence; arena-style level layout",
+      "behavioral_manifestation": "Boss executes scripted attack patterns; cannot progress without boss defeat; boss health may be indicated visually"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Overworld map level gating",
+      "example": "Paths on the overworld connect sequentially to worlds 1-7, with branching optional routes. Fortresses and Ghost Houses mark mini-boss/challenge locations. This visual progression system communicates narrative flow and world geography."
+    },
+    {
+      "technique": "Architecture and setting theming",
+      "example": "Each world features distinct visual themes (grassland, forest, cave, etc.). Fortresses have imposing fortress architecture; Ghost Houses have haunted mansion design. Bowser's Castle features lava moats and dark stone, communicating danger and the final antagonist's lair."
+    },
+    {
+      "technique": "Enemy population density variation",
+      "example": "Dangerous areas (fortresses, late-world levels) show higher enemy sprite density and more varied enemy types. Safe areas and early levels have sparse enemy placement. Visual enemy clustering signals difficulty escalation."
+    },
+    {
+      "technique": "Environmental hazard visibility",
+      "example": "Lava appears as animated red/orange liquid in specific fortress/volcanic levels. Spikes, crushers, and bottomless pits are clearly rendered graphically. Visual hazard design communicates threat without requiring text explanation."
+    },
+    {
+      "technique": "Power-up placement as difficulty signaling",
+      "example": "Cape Feathers and Super Mushrooms appear visually in levels before dangerous sections, suggesting those items are needed. Their placement is visually telegraphed to the player through sprite positioning."
+    },
+    {
+      "technique": "Boss sprite distinctiveness",
+      "example": "Koopalings and Bowser are rendered with larger sprites, unique coloring, and crown imagery distinct from standard enemies. Visual scale and design communicate their special antagonist status."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Mario",
+      "state": "Standing on ground with full P-meter",
+      "behavior": "Can sprint at maximum speed; sprite shows ready stance"
+    },
+    {
+      "entity": "Mario",
+      "state": "Cape equipped",
+      "behavior": "Sprite displays cape; can fly by holding jump; floats/glides through air"
+    },
+    {
+      "entity": "Mario",
+      "state": "Small (powered-down)",
+      "behavior": "Reduced sprite size; single hit causes death; cannot break blocks or perform spin jumps"
+    },
+    {
+      "entity": "Yoshi",
+      "state": "Mounted beneath Mario",
+      "behavior": "Follows Mario's movement; sprite stays below Mario; accepts input to eat enemies or spit projectiles"
+    },
+    {
+      "entity": "Koopa Troopa (standard)",
+      "state": "Patrolling level",
+      "behavior": "Walks back and forth in predictable pattern; turtle shell sprite animated with walking cycle"
+    },
+    {
+      "entity": "Koopa Troopa",
+      "state": "Shell kicked by player",
+      "behavior": "Shell slides rapidly across level; can damage other enemies on contact; hazardous to player"
+    },
+    {
+      "entity": "Koopa Paratroopa (winged variant)",
+      "state": "Flying",
+      "behavior": "Sprite visible with wings attached; follows bouncing/flying patrol patterns; more challenging to avoid than grounded variant"
+    },
+    {
+      "entity": "Goomba",
+      "state": "Walking",
+      "behavior": "Brown mushroom sprite walks in straight line; simple movement pattern; defeated by jump"
+    },
+    {
+      "entity": "Fortress Boss (Koopaling)",
+      "state": "Battle active",
+      "behavior": "Large distinct sprite; executes attack patterns; takes multiple hits; visible in fortress interior"
+    },
+    {
+      "entity": "Bowser",
+      "state": "Final boss battle",
+      "behavior": "Massive sprite; lava arena environment; complex attack pattern; final antagonist encounter requiring defeat to complete game"
+    }
+  ],
+  "notes": "Super Mario World communicates danger primarily through visual enemy design, environmental hazards (lava, spikes, crushers), and sprite-based power states. Faction communication is minimal in traditional political sense but clear through character coloring (Mario red, Luigi green, Bowser dark brown). The game uses visual progression on the overworld map to communicate world-state and narrative flow. Danger escalates visually through increased enemy density in later worlds and fortress environments. Safety is signaled through power-up appearance, item box storage display, and checkpoint/castle completion visuals. The game relies entirely on sprite rendering, color-coding, and spatial layout to communicate meaning—no text-based UI except score/time/lives display.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "TODO": "Additional manifestation patterns for: color-coded Yoshi variants' gameplay differences; block types and what they communicate visually; coin/dragon coin collection feedback; level-specific environmental storytelling per world theme; ghost house visual communication; secret exit indicators; visual feedback for special jumps/techniques",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:51:42.936Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5893,
+    "output_tokens": 3165,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

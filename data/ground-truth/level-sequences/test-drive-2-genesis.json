@@ -1,0 +1,132 @@
+{
+  "game_id": "test-drive-2-genesis",
+  "game_name": "Test Drive II: The Duel",
+  "platform": "genesis",
+  "paradigm": "racing",
+  "level_count": 4,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Vehicle selection (Porsche 959, Ferrari F40, Lamborghini Diablo)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "player chooses car and difficulty before any driving begins"
+    },
+    {
+      "element": "Difficulty setting (determines automatic vs manual transmission)",
+      "first_appears": "game start",
+      "introduction_context": "safe",
+      "mastery_context": "affects transmission mechanics and handling throughout course"
+    },
+    {
+      "element": "Basic highway driving with traffic",
+      "first_appears": "Desert Blast (Easy)",
+      "introduction_context": "moderate",
+      "mastery_context": "player learns throttle control, steering, avoiding other cars"
+    },
+    {
+      "element": "Radar detector (police detection)",
+      "first_appears": "game start (standard in all vehicles)",
+      "introduction_context": "moderate",
+      "mastery_context": "player learns to anticipate and avoid police pursuits via speed management"
+    },
+    {
+      "element": "Police pursuit mechanics",
+      "first_appears": "first encounter when exceeding speed limit",
+      "introduction_context": "dangerous",
+      "mastery_context": "crashing into police car ends game immediately; must maintain speed while avoiding collision"
+    },
+    {
+      "element": "Terrain obstacles (trees, off-road damage)",
+      "first_appears": "Desert Blast course",
+      "introduction_context": "moderate",
+      "mastery_context": "staying off-road too long causes damage; crashing adds 30 seconds to time"
+    },
+    {
+      "element": "Mountain terrain (cliffs, sheer walls, tunnels)",
+      "first_appears": "higher difficulty courses (City Bound onwards)",
+      "introduction_context": "dangerous",
+      "mastery_context": "falling off cliffs results in crash; narrow passages require precision"
+    },
+    {
+      "element": "Manual transmission redline mechanic",
+      "first_appears": "available on harder difficulties",
+      "introduction_context": "dangerous",
+      "mastery_context": "overrevving engine causes catastrophic failure and loss of life"
+    },
+    {
+      "element": "Gas station checkpoint (mandatory to avoid fuel loss)",
+      "first_appears": "end of each course",
+      "introduction_context": "moderate",
+      "mastery_context": "must reach station or run out of fuel; penalty for missing it is loss of car"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "reaching gas station checkpoint",
+      "completing course without police apprehension",
+      "slowing down before police radar detection",
+      "finding open road with minimal traffic"
+    ],
+    "typical_tension_triggers": [
+      "police car appearing and matching player speed",
+      "entering mountain tunnel sections with narrow lanes",
+      "encountering oncoming traffic at high speeds",
+      "approaching cliff edges on mountain levels",
+      "fuel gauge running low near end of course",
+      "accumulating damage from off-road driving"
+    ],
+    "pacing_descriptor": "escalating pressure: player must maintain high speed to beat time and evade police, but speed increases collision risk and police detection likelihood; relief comes only at course completion"
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "none",
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Desert Blast (Easy) - flat terrain, cacti obstacles, wide highways allow player to learn basic controls and police evasion without severe elevation hazards",
+    "mid_game": "City Bound (Medium) - varied terrain with multiple car types and moderate turns; introduces sustained navigation complexity",
+    "late_game": "East Coast (Hard) and West Coast (Hardest) - extended mountain sections with cliffs, tunnels, narrow passages; mandatory high speeds create unavoidable police confrontation at end",
+    "notable_spikes": [
+      "First police pursuit encounter (immediate game-over threat if player crashes into patrol car)",
+      "Transition to mountain courses (cliff obstacles permanently alter failure condition from time penalty to instant crash)",
+      "West Coast course (longest course with most complex terrain requiring sustained precision at high speeds)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Terrain-based progression",
+      "description": "Each of four console courses represents a different US region with distinct environmental hazards: desert (simple obstacles), midwest (moderate turns), east coast (elevation), west coast (extreme complexity)",
+      "example_level": "Desert Blast to West Coast progression"
+    },
+    {
+      "pattern_name": "Police confrontation inevitability",
+      "description": "Game design makes collision-free police evasion nearly impossible at course end due to required speed maintenance; forces player to accept apprehension or risk crash",
+      "example_level": "all courses, especially hard/hardest"
+    },
+    {
+      "pattern_name": "Hazard type escalation",
+      "description": "Early courses feature traffic and trees; later courses add cliffs, tunnels, and narrow mountain passages that create permanent failure states",
+      "example_level": "Easy to Hard course sequence"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T11:35:08.049Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2760,
+    "output_tokens": 1441,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

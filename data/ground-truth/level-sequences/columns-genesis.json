@@ -1,0 +1,107 @@
+{
+  "game_id": "columns-genesis",
+  "game_name": "Columns",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Single falling column (3 stacked symbols)",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns basic movement and rotation mechanics before any pressure"
+    },
+    {
+      "element": "Match-three mechanic (horizontal, vertical, diagonal)",
+      "first_appears": "First column lands",
+      "introduction_context": "safe",
+      "mastery_context": "Natural discovery through first placement; reinforced immediately"
+    },
+    {
+      "element": "Gravity cascade (chain reactions)",
+      "first_appears": "After first match clears",
+      "introduction_context": "moderate",
+      "mastery_context": "Player learns that matches trigger resettlement and potential chain clears"
+    },
+    {
+      "element": "Increased fall speed",
+      "first_appears": "Progressive during gameplay",
+      "introduction_context": "moderate",
+      "mastery_context": "Gradual difficulty scaling; no discrete introduction"
+    },
+    {
+      "element": "Magic Jewel (multicolor, destroys matching color)",
+      "first_appears": "Occasional random spawn",
+      "introduction_context": "moderate",
+      "mastery_context": "Power-up appears unpredictably; player recognizes value through gameplay"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful match-three clears pieces",
+      "Chain reaction resolves board state",
+      "Magic Jewel activates and clears color group",
+      "Board settlement completes without cascade"
+    ],
+    "typical_tension_triggers": [
+      "Well fills toward top",
+      "Pieces land without matching",
+      "Fall speed increases",
+      "No valid moves visible (board deadlock potential)"
+    ],
+    "pacing_descriptor": "Continuous escalation: columns fall faster over time, creating mounting pressure. Relief cycles are brief—each match clears pieces but new columns immediately continue falling. Tension builds from slow initial play toward frenetic endgame. No discrete level-based reset; continuous tension ramp until failure (well full)."
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Very low friction: columns fall slowly, player has ample time to position and rotate. Focus on understanding match-three mechanics.",
+    "mid_game": "Moderate pressure: fall speed increases noticeably, chains become more frequent. Player must develop faster decision-making.",
+    "late_game": "High pressure: pieces fall rapidly, board density increases, one mistake can cause cascade failure. Endgame is frenetic.",
+    "notable_spikes": [
+      "Transition from slow to medium fall speed (approximately mid-session)",
+      "Transition from medium to fast fall speed (late session)",
+      "Board density reaching 50%+ of well height (exponential difficulty jump)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Continuous arcade rhythm (no discrete levels)",
+      "description": "Columns uses a single, unbroken playfield with parametric difficulty scaling (fall speed only). No level boundaries, checkpoints, or resets. Game ends when well fills. This contrasts sharply with level-based paradigms.",
+      "example_level": "N/A—single continuous session"
+    },
+    {
+      "pattern_name": "Well-fill as implicit pacing",
+      "description": "The filling well itself serves as visual and mechanical tension feedback. As pieces accumulate toward the top, player anxiety increases proportionally. Board state communicates difficulty without explicit level indicators.",
+      "example_level": "Well at 75% full signals endgame imminent"
+    },
+    {
+      "pattern_name": "Chain reaction snowballing (optional)",
+      "description": "Cascade mechanics create moments of explosive relief when chains clear large swaths. This pseudo-random reward structure keeps early/mid-game engaging despite repetitive core loop.",
+      "example_level": "Multi-stage cascade event"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:47:36.128Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3558,
+    "output_tokens": 1267,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

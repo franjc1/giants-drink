@@ -1,0 +1,137 @@
+{
+  "game_id": "super-sokoban-snes",
+  "game_name": "Super Sokoban",
+  "platform": "snes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Box against wall",
+      "visual_form": "Box sprite positioned flush with wall tiles",
+      "meaning": "Permanent trap—box cannot be retrieved if pushed here without exit path"
+    },
+    {
+      "signal": "Box in dead-end corridor",
+      "visual_form": "Box surrounded by walls on three sides with only one entry",
+      "meaning": "High risk of deadlock if player enters and box blocks exit"
+    },
+    {
+      "signal": "Multiple boxes adjacent",
+      "visual_form": "Two or more box sprites touching or in close proximity",
+      "meaning": "Cannot push the inner box without moving outer box first; risk of cascading deadlock"
+    },
+    {
+      "signal": "Player boxed in by boxes",
+      "visual_form": "Player sprite surrounded by boxes with no empty floor squares to move to",
+      "meaning": "Immediate loss state—movement impossible, puzzle unsolvable"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Empty floor squares visible",
+      "visual_form": "Unoccupied tile space with no box or wall",
+      "meaning": "Safe movement available; player has options to reposition"
+    },
+    {
+      "signal": "Storage location marker visible",
+      "visual_form": "Designated spot tile (described as red dots in source) distinct from floor",
+      "meaning": "Valid target position; box placed here solves that objective"
+    },
+    {
+      "signal": "Open corridor",
+      "visual_form": "Multiple consecutive empty floor squares forming a path",
+      "meaning": "Safe navigation route; allows player repositioning without box contact"
+    },
+    {
+      "signal": "Box on storage location",
+      "visual_form": "Box sprite overlapping or positioned on target marker",
+      "meaning": "Partial goal achievement; one objective complete"
+    }
+  ],
+  "faction_indicators": [],
+  "world_state_to_visual": [
+    {
+      "world_state": "Puzzle unsolved",
+      "visual_manifestation": "Boxes not on all storage location markers; some red dot targets empty",
+      "behavioral_manifestation": "Player retains full movement freedom; boxes respond to push input"
+    },
+    {
+      "world_state": "Puzzle in deadlock state",
+      "visual_manifestation": "Box visually trapped (against wall, in corner, or blocked by other boxes) with no push vector available",
+      "behavioral_manifestation": "Puzzle becomes unsolvable regardless of future moves; player must undo steps to recover"
+    },
+    {
+      "world_state": "Puzzle solved",
+      "visual_manifestation": "All boxes positioned on all storage location markers simultaneously",
+      "behavioral_manifestation": "Level completion triggered; progression to next level or level select available"
+    },
+    {
+      "world_state": "Player attempting illegal move",
+      "visual_manifestation": "Box against wall or second box; no movement occurs",
+      "behavioral_manifestation": "Input rejected; player sprite does not advance; box does not move"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial constraint design",
+      "example": "Warehouse layout with walls forming dead-ends and narrow corridors visually tells player 'planning required'—the physical environment enforces consequence for careless moves"
+    },
+    {
+      "technique": "Visual box-target coupling",
+      "example": "Storage location markers (red dots) positioned in specific layout relative to boxes; their placement hints at intended solution path and spatial relationships"
+    },
+    {
+      "technique": "Symmetry and asymmetry",
+      "example": "Some warehouse rooms are symmetrical (suggesting multiple solution paths) while others are asymmetrical (suggesting single optimal path); layout tells story of puzzle difficulty"
+    },
+    {
+      "technique": "Density progression",
+      "example": "Early levels show sparse box/target distribution; later levels pack more boxes into tighter spaces, visually communicating increasing difficulty"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Box",
+      "state": "Pushable",
+      "behavior": "Moves one square when player character moves into it from the opposite side; stops if target square is wall or another box"
+    },
+    {
+      "entity": "Box",
+      "state": "On storage location",
+      "behavior": "Remains stationary; may have visual indicator (color change, overlap with target sprite) showing completion"
+    },
+    {
+      "entity": "Box",
+      "state": "Trapped against wall",
+      "behavior": "Cannot be pushed; becomes immobile deadlock indicator"
+    },
+    {
+      "entity": "Player character",
+      "state": "Free movement",
+      "behavior": "Moves one square per input (horizontal or vertical) onto empty floor squares"
+    },
+    {
+      "entity": "Player character",
+      "state": "Blocked",
+      "behavior": "Cannot move; input rejected if target square occupied by box or wall"
+    },
+    {
+      "entity": "Wall",
+      "state": "Obstacle",
+      "behavior": "Static; blocks both player and box movement; defines spatial boundary"
+    }
+  ],
+  "notes": "Super Sokoban (SNES, 1995) is a pure logic puzzle with minimal narrative framing. World-state communication relies entirely on spatial/visual arrangement of entities (player, boxes, walls, storage markers). No faction system, danger/safety signals are purely mechanical—derived from puzzle topology rather than aesthetic design. The warehouse setting provides minimal environmental storytelling; focus is on abstract puzzle state. Danger emerges from irreversible moves (deadlock) communicated through box position relative to walls/other boxes. Safety signals indicate reversibility and viable move options. Visual vocabulary is minimal: player sprite, box sprite, wall tile, floor tile, storage marker.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T06:44:50.116Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3119,
+    "output_tokens": 1495,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

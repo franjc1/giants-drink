@@ -1,0 +1,84 @@
+{
+  "game_id": "soul-blazer-snes",
+  "game_name": "Soul Blazer",
+  "platform": "SNES",
+  "year": 1992,
+  "tier": 2,
+  "sub_pixel_system": {
+    "sub_pixels_per_pixel": null,
+    "format": null,
+    "notes": "No sub-pixel movement documented"
+  },
+  "player": {
+    "walk_speed": {
+      "value": 2,
+      "unit": "pixels/frame"
+    },
+    "run_speed": null,
+    "max_horizontal_speed": {
+      "value": 2,
+      "unit": "pixels/frame"
+    },
+    "acceleration": null,
+    "deceleration": null,
+    "jump_velocity": null,
+    "gravity": null,
+    "max_fall_speed": null,
+    "air_acceleration": null,
+    "air_friction": null,
+    "jump_hold_gravity_modifier": null,
+    "can_change_direction_mid_air": null,
+    "has_variable_jump_height": null,
+    "coyote_time_frames": null
+  },
+  "special_mechanics": [
+    {
+      "name": "Movement Input Locking",
+      "description": "Tapping a direction for one frame forces character to move for four frames total. Player cannot interrupt this movement during the last three frames.",
+      "physics_values": {
+        "forced_movement_frames": 4,
+        "input_buffer_frames": 1
+      }
+    },
+    {
+      "name": "Continuous Walking Animation",
+      "description": "Holding direction continuously allows character to walk for 24 frames with 6 different walking sprites. Direction is locked for full 24-frame animation cycle. Releasing d-pad interrupts animation.",
+      "physics_values": {
+        "animation_cycle_frames": 24,
+        "animation_sprites": 6,
+        "input_lock_duration": 24
+      }
+    },
+    {
+      "name": "No Diagonal Movement",
+      "description": "Game does not support diagonal movement. When diagonal direction pressed, prioritizes horizontal movement over vertical.",
+      "physics_values": {
+        "diagonal_movement": false,
+        "priority": "horizontal"
+      }
+    }
+  ],
+  "feel_descriptors": [
+    "grid-based movement",
+    "input-locked",
+    "discrete animation cycles",
+    "momentum-free",
+    "turn-based feel"
+  ],
+  "tier_notes": "Tier 2 data based on empirical documentation from TASVideos game resource page. Only movement speed precisely documented (2 pixels/frame). No jump physics, gravity, or sub-pixel data found in available sources. No vertical movement parameters documented. Movement system is highly constrained with forced input locking and animation cycles.",
+  "sources_used": [
+    "TASVideos - Soul Blazer Game Resources page"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T23:58:27.269Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6686,
+    "output_tokens": 734,
+    "dimension": "physics",
+    "sources_available": [
+      "tasvideos",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

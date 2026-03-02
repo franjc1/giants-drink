@@ -1,0 +1,161 @@
+{
+  "game_id": "panic-restaurant-nes",
+  "game_name": "Panic Restaurant",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Sentient food enemies",
+      "visual_form": "Animated food creatures (apples, toasters, etc.) with hostile behavior patterns",
+      "meaning": "Restaurant is cursed/invaded; danger comes from corrupted culinary elements"
+    },
+    {
+      "signal": "Boss encounters at stage end",
+      "visual_form": "Large-scale food enemy variants positioned as stage barriers",
+      "meaning": "Escalating threat progression; player must defeat increasingly dangerous manifestations"
+    },
+    {
+      "signal": "Health depletion UI",
+      "visual_form": "Status bar display showing health/vitality meter",
+      "meaning": "Player vulnerability state; visual feedback on cumulative damage"
+    },
+    {
+      "signal": "Weapon absence",
+      "visual_form": "Cookie armed only with basic attack (headbutt in JP, pan-smash in western version)",
+      "meaning": "Vulnerability periods between weapon pickups create danger windows"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Health recovery items",
+      "visual_form": "Health candy and health-extending lollipops scattered through levels",
+      "meaning": "Safe zones contain restorative resources; visual markers of respite opportunities"
+    },
+    {
+      "signal": "Weapon pickups",
+      "visual_form": "Kitchen utensil items (spoon, fork, plate, frying pan, cooking pot)",
+      "meaning": "Empowerment moments; armed state provides safety advantage against enemies"
+    },
+    {
+      "signal": "Extra life items",
+      "visual_form": "Life-granting collectibles positioned strategically through levels",
+      "meaning": "Second-chance insurance; safety net against resource depletion"
+    },
+    {
+      "signal": "Restaurant interior",
+      "visual_form": "Final stage location representing owned/controlled space",
+      "meaning": "Destination safety; progression toward reclamation of homeland"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Cookie (Player Character)",
+      "color_identity": null,
+      "symbol_or_sigil": "Chef/cook identity (young in JP, older man in western version)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Kitchen utensils as weapon extensions; restaurant ownership identity"
+    },
+    {
+      "faction": "Ohdove (Villain/Antagonist)",
+      "color_identity": null,
+      "symbol_or_sigil": "Rival chef; curse-caster identity",
+      "enemy_visual_variants": "Commands corrupted sentient food as proxy army",
+      "environmental_markers": "Presence marked by food infestation throughout six level progression"
+    },
+    {
+      "faction": "Corrupted Food (Enemy Force)",
+      "color_identity": null,
+      "symbol_or_sigil": "Animated culinary elements (apples, toasters, bubble vats, ice platforms)",
+      "enemy_visual_variants": "Multiple food-type enemies with distinct behaviors per level theme",
+      "environmental_markers": "Level theming: Appetizer → Soup → Salad → Fish → Meat → Dessert creates faction visual hierarchy"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Restaurant cursed/invaded",
+      "visual_manifestation": "Six themed level stages representing corrupted food categories; sentient food enemies populate each",
+      "behavioral_manifestation": "Enemies actively patrol and attack; Cookie must fight through each themed area to progress"
+    },
+    {
+      "world_state": "Escalating danger toward final confrontation",
+      "visual_manifestation": "Stage layouts modified between JP and western versions to increase difficulty; item placement shifts create resource scarcity",
+      "behavioral_manifestation": "Boss encounters require specific weapon strategies; regional difficulty adjustments change threat intensity"
+    },
+    {
+      "world_state": "Reclamation progression",
+      "visual_manifestation": "Final stage set inside EatEn restaurant (owned space); Ohdove confrontation as narrative climax",
+      "behavioral_manifestation": "Victory condition unlocks ending sequence; regional variants show credits or immediate end state"
+    },
+    {
+      "world_state": "Localization/cultural adaptation",
+      "visual_manifestation": "Character redesign (young chef → older man); weapon changes (headbutt → pan smash); attack power-up variants (black frying pan → cooking pot)",
+      "behavioral_manifestation": "Title screen graphics modified; Disco credit removal; western-specific difficulty tuning; PAL overscan accommodation"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Level theming by food category",
+      "example": "Six stages named Appetizer, Soup, Salad, Fish, Meat, Dessert create narrative of progressing through restaurant menu structure; each level visually represents its food type through enemy and obstacle design"
+    },
+    {
+      "technique": "Restaurant interior as narrative endpoint",
+      "example": "Final boss encounter occurs inside the EatEn restaurant itself, signaling that player has fought through external contamination to reach the core conflict location"
+    },
+    {
+      "technique": "Kitchen utensil weapon identity",
+      "example": "Spoon, fork, plate, pan, and pot as combat tools reinforce chef/culinary theme; weapons are environmental tools repurposed for battle, embedding world logic into mechanics"
+    },
+    {
+      "technique": "Cursed food as visual invasion metaphor",
+      "example": "Sentient food enemies represent corruption of chef's domain; food becoming hostile inverts the safe/nourishing kitchen space into threatening territory"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Cookie (Player)",
+      "state": "Armed with weapon",
+      "behavior": "Capable of offensive action against enemies; can defeat food enemies and progress through levels"
+    },
+    {
+      "entity": "Cookie (Player)",
+      "state": "Unarmed (basic attack only)",
+      "behavior": "Vulnerable; basic attack less effective; should seek weapon pickups to restore combat effectiveness"
+    },
+    {
+      "entity": "Food enemies",
+      "state": "Active/patrolling",
+      "behavior": "Pursue and attack Cookie; force player to engage combat or navigate around them"
+    },
+    {
+      "entity": "Food enemies",
+      "state": "Defeated",
+      "behavior": "Remove threat; potentially drop health or weapon items upon destruction"
+    },
+    {
+      "entity": "Boss (stage-end food variant)",
+      "state": "Encountered",
+      "behavior": "Requires sustained combat engagement; blocks progression to next level; indicates stage completion threshold"
+    },
+    {
+      "entity": "Ohdove (final antagonist)",
+      "state": "Encountered in restaurant interior",
+      "behavior": "Ultimate threat requiring defeat to achieve game victory; represents narrative climax and curse-breaking moment"
+    }
+  ],
+  "notes": "Panic Restaurant is a simple platformer with minimal political/faction complexity. World-state communication relies heavily on thematic coherence (food-based enemies, culinary setting) and difficulty progression rather than faction signaling or geopolitical messaging. Regional localization differences are primarily cosmetic (character age, weapon names) rather than mechanically altering world-state communication. Danger/safety signals are communicated through standard platformer conventions: health bars, enemy presence, item availability. The 'world state' is essentially binary: restaurant cursed (stages 1-6) → restaurant reclaimed (ending). No dynamic faction allegiances or political alignment systems present.",
+  "sources_used": [
+    "tcrf_panic_restaurant",
+    "wikipedia_panic_restaurant"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:10:14.386Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5105,
+    "output_tokens": 1940,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

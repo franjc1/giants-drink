@@ -1,0 +1,143 @@
+{
+  "game_id": "chessmaster-nes",
+  "game_name": "Chessmaster",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Piece under attack",
+      "visual_form": "Opponent piece positioned to capture",
+      "meaning": "Material loss threat; tactical danger"
+    },
+    {
+      "signal": "King exposure",
+      "visual_form": "Royal piece lacking defensive coverage on board",
+      "meaning": "Checkmate threat; game-ending danger"
+    },
+    {
+      "signal": "Weak pawn structure",
+      "visual_form": "Pawns with gaps or advanced isolated formation",
+      "meaning": "Strategic vulnerability; positional disadvantage"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Piece defended",
+      "visual_form": "Own piece covered by ally piece",
+      "meaning": "Protected material; tactical security"
+    },
+    {
+      "signal": "King castled",
+      "visual_form": "King moved to corner, rook repositioned",
+      "meaning": "Defensive positioning; king safety established"
+    },
+    {
+      "signal": "Material advantage",
+      "visual_form": "More pieces on board than opponent",
+      "meaning": "Resource superiority; winning position trajectory"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "White pieces (player)",
+      "color_identity": "White",
+      "symbol_or_sigil": "Standard chess piece set (King, Queen, Rooks, Bishops, Knights, Pawns)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Bottom of 8x8 board grid; player-controlled perspective"
+    },
+    {
+      "faction": "Black pieces (opponent/AI)",
+      "color_identity": "Black",
+      "symbol_or_sigil": "Standard chess piece set in opposing color",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Top of 8x8 board grid; AI-controlled or opponent-controlled"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Opening phase (early game)",
+      "visual_manifestation": "Pieces in starting positions; board mostly empty in center",
+      "behavioral_manifestation": "Both players developing pieces; slow pacing; educational guidance available"
+    },
+    {
+      "world_state": "Middlegame (active tactics)",
+      "visual_manifestation": "Pieces spread across board; multiple pieces positioned aggressively",
+      "behavioral_manifestation": "Rapid exchanges; tension increases; opponent makes aggressive captures"
+    },
+    {
+      "world_state": "Endgame (few pieces remain)",
+      "visual_manifestation": "Sparse board; kings become active; pawns advance toward promotion",
+      "behavioral_manifestation": "Strategic long-term planning; king activity determines outcome"
+    },
+    {
+      "world_state": "Checkmate/Game over",
+      "visual_manifestation": "King piece highlighted or designated as trapped",
+      "behavioral_manifestation": "Game halts; victory/defeat screen displays; Chessmaster personality character may appear"
+    },
+    {
+      "world_state": "AI personality active",
+      "visual_manifestation": "Named opponent personality displayed (e.g., 'Stanley the Chimpanzee', 'Grandmaster')",
+      "behavioral_manifestation": "AI adapts play style: random moves (Stanley), conservative play (defensive personalities), aggressive tactics (master personalities)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Board state history",
+      "example": "Move notation and captured pieces displayed track the game narrative—what was sacrificed, what was defended, showing player strategic intent"
+    },
+    {
+      "technique": "Personality anthropomorphization",
+      "example": "Chessmaster character mascot on packaging and title screens humanizes the engine opponent, creating narrative of 'playing against a character' rather than pure algorithm"
+    },
+    {
+      "technique": "Difficulty progression through opponent selection",
+      "example": "190+ selectable opponent personalities (ranging from chimpanzee strength to Grandmaster level) tell a story of skill advancement and mastery journey"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Opponent AI (variable personalities)",
+      "state": "Stanley the Chimpanzee personality active",
+      "behavior": "Plays mostly random moves in most situations; unpredictable pattern; lowest difficulty tier"
+    },
+    {
+      "entity": "Opponent AI (variable personalities)",
+      "state": "Defensive personality active",
+      "behavior": "Prioritizes King Safety setting; avoids risky positions; conservative move selection"
+    },
+    {
+      "entity": "Opponent AI (variable personalities)",
+      "state": "Aggressive personality active",
+      "behavior": "High Mobility setting; seeks tactical opportunities; initiates attacks; high piece activity"
+    },
+    {
+      "entity": "Opponent AI (variable personalities)",
+      "state": "Grandmaster personality active",
+      "behavior": "Optimal move selection; positional mastery; exploits weaknesses; adapts to player strategy"
+    },
+    {
+      "entity": "Player king",
+      "state": "Uncastled and exposed",
+      "behavior": "Vulnerable to back-rank tactics; opponent AI prioritizes attacking threats"
+    },
+    {
+      "entity": "Player king",
+      "state": "Castled (defensive position)",
+      "behavior": "Safer position reduces opponent AI aggressive focus; game typically transitions to middlegame complexity"
+    }
+  ],
+  "notes": "Chessmaster NES (1990) is a pure abstract puzzle/strategy game with no narrative world-state, factions, or danger/safety in traditional sense. Communication occurs entirely through game board state (piece positions) and move consequences. The game uses 'personality' system to create behavioral variety in AI opponents—this is the primary manifestation layer. The mascot character 'Chessmaster' provides anthropomorphic framing on UI/packaging but does not interact with gameplay. World-state is purely game-theoretic (position evaluation, material count, tactical threats). No environmental storytelling in traditional sense; all meaning derives from abstract piece placement and move notation. Data tier T3 due to lack of available gameplay documentation; extraction based on chess game universal mechanics and Wikipedia series overview.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:46:46.015Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3145,
+    "output_tokens": 1604,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

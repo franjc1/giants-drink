@@ -1,0 +1,129 @@
+{
+  "game_id": "greendog-genesis",
+  "game_name": "Greendog: The Beached Surfer Dude!",
+  "platform": "genesis",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile creatures in level spaces",
+      "meaning": "Areas with enemies signal hazard zones requiring evasion or combat"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Spikes, pits, and obstacle formations",
+      "meaning": "Lethal stage architecture that damages player on contact"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Large, distinctly animated adversary sprite",
+      "meaning": "End-of-level threat requiring defeat to progress"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Collectible items",
+      "visual_form": "Power-ups and health restoration objects",
+      "meaning": "Resource availability for player resilience"
+    },
+    {
+      "signal": "Open pathways",
+      "visual_form": "Clear platform routes without obstruction",
+      "meaning": "Safe traversal zones with no immediate threat"
+    },
+    {
+      "signal": "Level completion areas",
+      "visual_form": "Goal zone or exit marker",
+      "meaning": "Safe destination signaling stage clearance"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (Greendog)",
+      "color_identity": "Green",
+      "symbol_or_sigil": "Surfing dude character sprite",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Beach-themed starting zones"
+    },
+    {
+      "faction": "Hostile creatures",
+      "color_identity": null,
+      "symbol_or_sigil": "Distinct enemy sprite designs per level theme",
+      "enemy_visual_variants": "Theme-appropriate adversaries (aquatic enemies, stage-specific antagonists)",
+      "environmental_markers": "Enemy spawn points correlate with level architecture"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal gameplay progression",
+      "visual_manifestation": "Standard platformer level layout with enemies, platforms, and collectibles",
+      "behavioral_manifestation": "Enemies patrol or attack on player proximity; platforms remain stable"
+    },
+    {
+      "world_state": "Boss encounter phase",
+      "visual_manifestation": "Large boss sprite dominates screen space; arena constricts or features specialized arena design",
+      "behavioral_manifestation": "Boss executes distinctive attack patterns; player must adapt strategy"
+    },
+    {
+      "world_state": "Level theme progression",
+      "visual_manifestation": "Environmental aesthetics shift (beach→underwater→urban, etc.) with corresponding visual palette changes",
+      "behavioral_manifestation": "Enemy types, hazard configurations, and difficulty scaling adjust to theme"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Theme-based level design",
+      "example": "Beach setting establishes casual surfing context; subsequent levels reveal escalating adventure scope through visual environment transitions"
+    },
+    {
+      "technique": "Enemy type storytelling",
+      "example": "Aquatic enemies in water-themed stages; terrestrial/mechanical enemies in urban zones suggest world progression narrative"
+    },
+    {
+      "technique": "Visual progression markers",
+      "example": "Stage-to-stage background and palette shifts communicate narrative geography without dialogue"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Greendog (player)",
+      "state": "Normal movement",
+      "behavior": "Platform traversal, jumping, running; sprite animation reflects direction and speed"
+    },
+    {
+      "entity": "Greendog",
+      "state": "Damaged",
+      "behavior": "Knockback animation; temporary invulnerability flash; reduced mobility"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Idle/Patrolling",
+      "behavior": "Animated loop movement within designated patrol zone"
+    },
+    {
+      "entity": "Standard enemies",
+      "state": "Aggro/Chase",
+      "behavior": "Accelerated movement toward player; attack animation triggered on proximity"
+    },
+    {
+      "entity": "Boss",
+      "state": "Combat phase",
+      "behavior": "Cyclical attack patterns; phase transitions on damage thresholds; screen-dominant positioning"
+    }
+  ],
+  "notes": "Greendog operates within classic 16-bit platformer visual language. World-state communication relies on environmental theming and enemy type variation rather than explicit UI indicators. Danger/safety signals are implicit in platformer conventions (hazard placement, enemy positioning). Limited faction complexity—primarily player vs. hostile world entities. Manifestation layer emphasizes visual theme consistency and behavioral enemy AI patterns.",
+  "sources_used": [
+    "Game context (platform, year, paradigm inference)"
+  ],
+  "TODO": "Detailed sprite analysis, exact color palettes, specific level names and boss designs require access to game assets or comprehensive documentation not available in provided source. Enemy animation frame counts and attack hitbox visualizations would require technical analysis.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T16:56:12.441Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 922,
+    "output_tokens": 1385,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "game_id": "elevator-action-nes",
+  "game_name": "Elevator Action",
+  "platform": "nes",
+  "paradigm": "action",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Basic movement (left/right)",
+      "first_appears": "Level 1 / Building entry",
+      "introduction_context": "safe",
+      "mastery_context": "Traversal across floors with elevators"
+    },
+    {
+      "element": "Jumping mechanic",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Crossing elevator shafts and gaps"
+    },
+    {
+      "element": "Enemy agents (basic)",
+      "first_appears": "Level 1 / Early floors",
+      "introduction_context": "moderate",
+      "mastery_context": "Avoiding or eliminating threats via shooting/melee"
+    },
+    {
+      "element": "Pistol shooting (up to 3 shots)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Primary combat against enemy agents"
+    },
+    {
+      "element": "Secret documents (red doors)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Mandatory collection objective, marked locations"
+    },
+    {
+      "element": "Elevator system (directional control)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Floor navigation, timing with moving platforms"
+    },
+    {
+      "element": "Ducking mechanic",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Dodging enemy fire, avoiding hazards"
+    },
+    {
+      "element": "Karate/jump-kick combat",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Close-range enemy elimination alternative"
+    },
+    {
+      "element": "Elevator roof riding",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Strategic positioning on moving platforms"
+    },
+    {
+      "element": "Light fixtures (destructible/dropping hazard)",
+      "first_appears": "Early levels",
+      "introduction_context": "moderate",
+      "mastery_context": "Environmental damage to enemies or light control"
+    },
+    {
+      "element": "Darkness sections (lights out)",
+      "first_appears": "Mid-game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Heightened difficulty, limited visibility for enemy detection"
+    },
+    {
+      "element": "Elevator crushing mechanic",
+      "first_appears": "Throughout game",
+      "introduction_context": "dangerous",
+      "mastery_context": "Hazard avoidance or tactical enemy elimination"
+    },
+    {
+      "element": "Time pressure / alarm escalation",
+      "first_appears": "During extended level play",
+      "introduction_context": "dangerous",
+      "mastery_context": "Increased enemy aggression, slower elevator response"
+    },
+    {
+      "element": "Basement exit / getaway car",
+      "first_appears": "Level completion",
+      "introduction_context": "safe",
+      "mastery_context": "Final objective after all documents collected"
+    },
+    {
+      "element": "Document collection enforcement",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Mandatory backtracking to highest uncollected floor if exit attempted early"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successfully collecting document from red door",
+      "Eliminating enemy agent",
+      "Reaching safe elevator platform",
+      "Entering darkness section and surviving it",
+      "Completing floor descent safely"
+    ],
+    "typical_tension_triggers": [
+      "Enemy agent emergence from closed doors",
+      "Enemy agent shooting at player",
+      "Alarm activation (time pressure)",
+      "Open elevator shaft crossing",
+      "Entering darkened floor section",
+      "Elevator arriving with enemies present",
+      "Mandatory backtracking to uncollected documents"
+    ],
+    "pacing_descriptor": "Progressive tension escalation: initial safe descent interrupted by scattered enemy encounters, intensifying as alarm triggers mid-level forcing completion under time pressure with heightened enemy aggression and sluggish elevator response"
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": "Red-marked doors indicate secret documents; non-red doors lead to secondary areas",
+    "secret_convention": "Light fixtures can be shot to disable overhead lighting, creating tactical darkness zones",
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Moderate introduction with basic enemies and simple elevator/stair traversal, safe descent opportunity before alarm pressure begins",
+    "mid_game": "Escalating enemy density and aggression, introduction of darkness sections reducing visibility, time pressure via alarm system triggering",
+    "late_game": "Sustained high aggression, mandatory document collection enforcement forcing revisits to earlier floors, combined hazards (darkness + enemies + elevator timing)",
+    "notable_spikes": [
+      "Alarm trigger (enemy aggression increase, elevator slowdown)",
+      "Darkness floor sections (reduced enemy visibility)",
+      "Document collection enforcement (backtracking requirement)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Vertical descent with horizontal escape",
+      "description": "30-story building navigation from roof to ground via elevators/stairs, forced vertical progression interrupted by horizontal floor exploration for document collection",
+      "example_level": "Any standard level 1-10"
+    },
+    {
+      "pattern_name": "Document collection gating",
+      "description": "All documents must be collected before exit is available; incomplete collection forces player back to highest uncollected floor, creating mandatory replay loop",
+      "example_level": "Throughout all levels"
+    },
+    {
+      "pattern_name": "Elevator as moving platform hazard",
+      "description": "Elevators serve triple purpose: transportation, moving platform for combat positioning, and crushing hazard for both player and enemies",
+      "example_level": "Levels 1-10"
+    },
+    {
+      "pattern_name": "Darkness visibility challenge",
+      "description": "Designated floors with lights out reduce sight range, forcing adapted enemy detection strategies without visual confirmation",
+      "example_level": "Mid-game levels"
+    },
+    {
+      "pattern_name": "Time pressure escalation",
+      "description": "Alarm system activates during extended play, increasing enemy aggression and reducing elevator responsiveness, forcing speed-focused decision-making",
+      "example_level": "All levels after prolonged play"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T15:42:55.197Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3284,
+    "output_tokens": 1822,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

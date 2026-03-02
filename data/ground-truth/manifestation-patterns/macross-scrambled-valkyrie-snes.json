@@ -1,0 +1,138 @@
+{
+  "game_id": "macross-scrambled-valkyrie-snes",
+  "game_name": "Macross: Scrambled Valkyrie",
+  "platform": "snes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "enemy_projectiles",
+      "visual_form": "contrasting colored bullets/energy bolts on screen",
+      "meaning": "immediate threat requiring evasion"
+    },
+    {
+      "signal": "enemy_presence",
+      "visual_form": "Zentradi mecha and fighter craft sprites entering screen space",
+      "meaning": "combat encounter initiated"
+    },
+    {
+      "signal": "health_depletion",
+      "visual_form": "player Valkyrie sprite damage animation or HUD health bar reduction",
+      "meaning": "player vulnerability increasing"
+    },
+    {
+      "signal": "screen_edge_spawning",
+      "visual_form": "enemies rapidly appearing from screen borders",
+      "meaning": "high-intensity wave attack incoming"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "clear_screen",
+      "visual_form": "absence of enemy sprites in play area",
+      "meaning": "temporary respite between waves"
+    },
+    {
+      "signal": "power_up_items",
+      "visual_form": "collectible sprite drops from defeated enemies",
+      "meaning": "opportunity for offensive or defensive enhancement"
+    },
+    {
+      "signal": "HUD_stability",
+      "visual_form": "steady health/ammo display with no flash or warning indicators",
+      "meaning": "player in stable operational state"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "UN Spacy / Macross Forces",
+      "color_identity": "white, light blue, red accents",
+      "symbol_or_sigil": "Macross insignia on player Valkyrie",
+      "enemy_visual_variants": null,
+      "environmental_markers": "player-controlled Valkyrie in fighter/battroid modes"
+    },
+    {
+      "faction": "Zentradi",
+      "color_identity": "purple, dark red, dark blue",
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "distinctive angular mecha silhouettes, organic-looking design aesthetic",
+      "environmental_markers": "large enemy spacecraft, alien fighter formations, mechanical behemoth sprites"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "open_space_combat",
+      "visual_manifestation": "black/starfield background, minimal environmental obstacles",
+      "behavioral_manifestation": "Zentradi enemies patrol and attack in formation patterns"
+    },
+    {
+      "world_state": "intense_battle",
+      "visual_manifestation": "screen filled with projectiles, enemy sprites dense and aggressive, possible screen shake/flashing",
+      "behavioral_manifestation": "enemy fire rate increases, evasion patterns become erratic and dangerous"
+    },
+    {
+      "world_state": "boss_encounter",
+      "visual_manifestation": "large sprite-scaled enemy mecha dominating upper screen area, distinct color differentiation from regular enemies",
+      "behavioral_manifestation": "predictable attack patterns with telegraphed projectile waves, health bar or visual damage indicators"
+    },
+    {
+      "world_state": "stage_progression",
+      "visual_manifestation": "background parallax changes, new enemy types introduced, possibly different colored space sectors",
+      "behavioral_manifestation": "enemy variety increases, attack complexity scales upward"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "enemy_type_progression",
+      "example": "introductory stages feature small Zentradi fighters; later stages introduce heavy mecha and capital-class vessels, suggesting escalating conflict intensity"
+    },
+    {
+      "technique": "stage_theming",
+      "example": "background visuals and enemy positioning convey location context (space near Macross, deep space engagement, fortified positions)"
+    },
+    {
+      "technique": "sprite_scale_hierarchy",
+      "example": "larger enemy sprites signal higher tactical threat level and importance, creating implicit strategic narrative"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "player_Valkyrie",
+      "state": "normal_flight",
+      "behavior": "responsive to directional input, weapon fire on command, smooth sprite animation"
+    },
+    {
+      "entity": "player_Valkyrie",
+      "state": "damaged",
+      "behavior": "sprite flashing/color inversion, potential movement slowdown or stutter, visual impact feedback"
+    },
+    {
+      "entity": "Zentradi_fighter",
+      "state": "patrol",
+      "behavior": "steady sweeping patterns across screen, periodic defensive maneuvers"
+    },
+    {
+      "entity": "Zentradi_fighter",
+      "state": "attack",
+      "behavior": "converging trajectories toward player, synchronized or staggered projectile fire, erratic evasion"
+    },
+    {
+      "entity": "Zentradi_boss",
+      "state": "active_combat",
+      "behavior": "telegraphed attack patterns, large-arc projectile waves, visible damage accumulation through sprite modification"
+    }
+  ],
+  "notes": "Macross: Scrambled Valkyrie is a vertically-scrolling shmup that communicates world-state primarily through enemy density, sprite scale, and formation patterns rather than explicit HUD elements. Faction identity relies on sprite design language (human Valkyrie vs. angular Zentradi mecha) and color palette differentiation. The game employs classic shmup danger signaling through on-screen projectile density and enemy proximity. World state transitions (waves, boss encounters, stage changes) are communicated through visual composition and enemy behavior pattern shifts rather than narrative exposition.",
+  "sources_used": [
+    "tcrf.net (limited access - site content access restricted)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T07:15:01.538Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 928,
+    "output_tokens": 1579,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

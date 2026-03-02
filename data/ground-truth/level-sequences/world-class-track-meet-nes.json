@@ -1,0 +1,101 @@
+{
+  "game_id": "world-class-track-meet-nes",
+  "game_name": "World Class Track Meet / Stadium Events",
+  "platform": "NES",
+  "paradigm": "sports-racing / exergaming",
+  "level_count": null,
+  "world_count": 4,
+  "element_introduction_order": [
+    {
+      "element": "100M dash event",
+      "first_appears": "Tournament mode / Olympics mode available from start",
+      "introduction_context": "safe",
+      "mastery_context": "Basic running mechanics; player learns mat sensitivity and speed control via button row selection"
+    },
+    {
+      "element": "110M hurdles event",
+      "first_appears": "Tournament mode / Olympics mode available from start",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces timing-based obstacle avoidance; white box markers signal when to jump"
+    },
+    {
+      "element": "Long jump event",
+      "first_appears": "Olympics mode available from start",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduces run-up + sustained air time mechanics; single jump marker"
+    },
+    {
+      "element": "Triple jump event",
+      "first_appears": "Olympics mode available from start",
+      "introduction_context": "dangerous",
+      "mastery_context": "Combines running with three separate timed jump markers; requires rhythmic coordination"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Event completion / score display",
+      "Tournament opponent defeat",
+      "Return to selection menu"
+    ],
+    "typical_tension_triggers": [
+      "Opponent appearance in dash/hurdles",
+      "White box hurdle markers approaching",
+      "Jump timing windows in long jump / triple jump",
+      "False start penalty (3 false starts = disqualification in tournament)"
+    ],
+    "pacing_descriptor": "Event-based rhythm with discrete tension spikes per race. Tournament mode creates mounting pressure through sequential opponent matchups (6 opponents × 2 events each). Olympics mode distributes tension across 4 consecutive event types with difficulty escalation."
+  },
+  "spatial_grammar": {
+    "primary_axis": "horizontal",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "100M dash establishes baseline mat control and speed ramping via button row selection",
+    "mid_game": "110M hurdles introduces reactive timing; long jump adds sustained input mechanics",
+    "late_game": "Triple jump combines all prior skills: running speed + three distinct timed jump windows; tournament progression faces increasingly difficult CPU opponents",
+    "notable_spikes": [
+      "Triple jump event complexity jump",
+      "Tournament mode: final opponents (computer players 5-6) in both dash and hurdles",
+      "False start mechanic creates sudden failure states in tournament mode"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Event Sequence Progression",
+      "description": "Four distinct event types arranged by complexity. Dash/hurdles use single-axis timing on left mat side. Jump events use either mat side with sustained input windows. Olympics mode chains all four events sequentially; tournament mode alternates dash and hurdles across 6 CPU opponents.",
+      "example_level": "Olympics mode (all 4 events in sequence) vs Tournament mode (dash, then hurdles, repeating)"
+    },
+    {
+      "pattern_name": "CPU Opponent Escalation",
+      "description": "Tournament mode creates mounting difficulty by stacking six sequential computer opponents. Each opponent must be defeated at both dash and hurdles before progressing. Three false starts result in instant disqualification.",
+      "example_level": "Tournament mode opponent 1 through opponent 6"
+    },
+    {
+      "pattern_name": "Timing Window Variation",
+      "description": "Hurdles use reactive white box markers. Long jump uses single jump marker at distance. Triple jump uses three separate jump markers. Difficulty increases with marker frequency and precision requirements.",
+      "example_level": "110M hurdles (variable marker frequency) vs triple jump (three markers in rapid succession)"
+    }
+  ],
+  "sources_used": [
+    "tcrf - Family Fun Fitness: Stadium Events (gameplay mechanics, events list, tournament mode details)",
+    "wikipedia - Stadium Events (gameplay section with event descriptions, tournament and Olympics modes, false start mechanics)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:19:35.161Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 4360,
+    "output_tokens": 1351,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

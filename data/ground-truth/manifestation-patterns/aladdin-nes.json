@@ -1,0 +1,160 @@
+{
+  "game_id": "aladdin-nes",
+  "game_name": "Aladdin",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence",
+      "visual_form": "Animated hostile sprites (guards, palace creatures)",
+      "meaning": "Active threat requiring evasion or combat avoidance"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Spike traps, falling platforms, lava/water obstacles",
+      "meaning": "Instant death or damage zones requiring precise platforming"
+    },
+    {
+      "signal": "Boss encounters",
+      "visual_form": "Larger, more ornate enemy sprites with distinct animation patterns",
+      "meaning": "Major threat checkpoint; progression gate"
+    },
+    {
+      "signal": "Red/dark color palette shifts",
+      "visual_form": "Stage backgrounds transition to darker reds and blacks",
+      "meaning": "Escalating danger or progression into enemy strongholds"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Item pickups",
+      "visual_form": "Glowing collectibles (apples, gems, magic items)",
+      "meaning": "Health recovery or power-up acquisition"
+    },
+    {
+      "signal": "Clear pathways",
+      "visual_form": "Platform chains without obstacles in immediate line of travel",
+      "meaning": "Safe passage available; momentary reprieve from threat"
+    },
+    {
+      "signal": "Checkpoint areas",
+      "visual_form": "Stage transitions and enclosed safe rooms",
+      "meaning": "Progress saved; new section beginning"
+    },
+    {
+      "signal": "Bright stage lighting",
+      "visual_form": "Blue and yellow-dominant backgrounds (outdoor markets, palace courtyards)",
+      "meaning": "Lower immediate danger; exploration/narrative zones"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Aladdin (Player)",
+      "color_identity": "Blue/red street clothes with white accents",
+      "symbol_or_sigil": "Distinctive tunicked silhouette with curved sword",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Appears in marketplace and commoner-accessible areas"
+    },
+    {
+      "faction": "Palace Guards/Jafar's Forces",
+      "color_identity": "Red, gold, and purple armor palette",
+      "symbol_or_sigil": "Ornate turbans, ornamental spears, palace insignia",
+      "enemy_visual_variants": "Guard sprites increase in armor complexity/size as stages progress; boss variants feature supernatural elements (Jafar's sorcery)",
+      "environmental_markers": "Concentrated in palace interior stages; red-tinted backgrounds signal faction control"
+    },
+    {
+      "faction": "Magical Threats",
+      "color_identity": "Purple and dark blue (Jafar's magic influence)",
+      "symbol_or_sigil": "Stylized magical effects, serpent motifs (Jafar's cobra form reference)",
+      "enemy_visual_variants": "Abstract magical creatures; less grounded visual design than guards",
+      "environmental_markers": "Appear in later stages; darker atmospheric transitions"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Early narrative (marketplace/escape phase)",
+      "visual_manifestation": "Bright blue skies, sandy marketplace textures, minimal guard presence in backgrounds",
+      "behavioral_manifestation": "Scattered enemies; player-initiated encounters; open movement space"
+    },
+    {
+      "world_state": "Palace infiltration begins",
+      "visual_manifestation": "Interior architecture appears; gold and red color palette dominates; ornate backgrounds signal wealth/power",
+      "behavioral_manifestation": "Increased guard density; forced progression through threat zones; less freedom of movement"
+    },
+    {
+      "world_state": "Jafar's influence grows",
+      "visual_manifestation": "Purple overlay effects; darker stage lighting; supernatural visual distortions",
+      "behavioral_manifestation": "Magic-based enemies replace regular guards; stage mechanics become more hazardous; increased environmental threats"
+    },
+    {
+      "world_state": "Final confrontation",
+      "visual_manifestation": "Dramatic lighting shift; black/dark purple backgrounds; large ornate boss arena",
+      "behavioral_manifestation": "Single dominant enemy (Jafar); complex attack patterns; multiple phase transitions"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Architectural progression",
+      "example": "Movement from street-level marketplace (humble, accessible) through palace courtyards to interior chambers (ornate, restricted) communicates power hierarchy and Aladdin's transgressive journey"
+    },
+    {
+      "technique": "Color-coded danger levels",
+      "example": "Stage backgrounds shift from warm yellows/blues (safety) to deep reds/purples (Jafar's domain), visually tracking player proximity to antagonist power"
+    },
+    {
+      "technique": "Enemy design as worldbuilding",
+      "example": "Guard sprites transition from human soldiers to magical constructs, showing Jafar's increasing supernatural influence over the world"
+    },
+    {
+      "technique": "Hazard placement as narrative",
+      "example": "Spike traps and environmental obstacles cluster near palace interiors, suggesting mechanical/magical defenses protecting stolen power"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Basic Palace Guard",
+      "state": "Patrol",
+      "behavior": "Predictable left-right walking patterns with simple sprite flipping"
+    },
+    {
+      "entity": "Basic Palace Guard",
+      "state": "Alerted",
+      "behavior": "Turns toward player and charges with faster animation speed"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Combat",
+      "behavior": "Complex multi-frame attack animations; telegraphed strike patterns; visible health state through animation intensity"
+    },
+    {
+      "entity": "Magical enemies",
+      "state": "Active",
+      "behavior": "Erratic movement patterns; projectile spawning; visual effects (sparkles, auras) indicate active threat state"
+    },
+    {
+      "entity": "Player (Aladdin)",
+      "state": "Healthy",
+      "behavior": "Full-height sprite; brisk animation frames during movement"
+    },
+    {
+      "entity": "Player (Aladdin)",
+      "state": "Damaged/Low Health",
+      "behavior": "Sprite may show visual injury; movement animation slows; knockback effects more pronounced"
+    }
+  ],
+  "notes": "The Aladdin NES port exists in at least two versions (Virgin and unlicensed Hummer Team). This extraction is generalized to the platformer paradigm and thematic elements common to Disney's Aladdin adaptations. Visual communication relies on classic NES-era techniques: limited palette shifts for emotional/danger states, sprite size/detail as threat indicator, and architectural progression as narrative metaphor. The game communicates political/faction hierarchy primarily through environment (marketplace = common space; palace = restricted/guarded) and color language (Jafar's influence = purple/dark corruption). Danger signals are highly explicit due to platformer genre conventions (spikes, enemies, hazards must be visually clear).",
+  "sources_used": [
+    "tcrf (Aladdin NES disambiguation page) - confirmed two versions exist; limited detailed visual data available from source"
+  ],
+  "TODO": "Full game analysis requires gameplay video or detailed stage-by-stage breakdown. Source material was minimal (disambiguation page only). Recommend acquiring: (1) gameplay footage from both versions, (2) detailed stage maps, (3) enemy sprite sheets, (4) developer interviews on visual design choices. Current extraction relies on platformer genre conventions and Aladdin IP standard visual themes.",
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:26:46.953Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 953,
+    "output_tokens": 2090,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

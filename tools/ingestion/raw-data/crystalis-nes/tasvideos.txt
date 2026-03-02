@@ -1,0 +1,341 @@
+GameResources/NES/Crystalis - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Crystalis
+
+This page documents information about
+
+Crystalis
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+Table of contents
+
+Glitches
+
+Charge While Moving
+
+Price Swapping
+
+Prevent Events with Menu
+
+Ice Climbing
+
+Level 2 Charge without the Ball
+
+Walk Through Guards
+
+Skip Some Events by Warping
+
+Skip Leaf Kidnapping
+
+Ghetto Flight
+
+Dolphin Warp
+
+Moonjumping
+
+Paralyzed Skeletons don't Collapse
+
+Quirks and Tricks
+
+No Subpixels
+
+Hit Detection
+
+Fake 3D
+
+Damage Boosting
+
+Damage from Shots
+
+Duel with Stom
+
+Poison Damage in the Swamp
+
+Filling Teleport Slots
+
+Barrier Flicker
+
+Changed Form is Slower
+
+Dolphin Moves Fast by Shore
+
+Dismiss Dialog Faster
+
+Luck Manipulation
+
+Draygon Fights
+
+Tower Robots
+
+DYNA
+
+Spawning
+
+Lag
+
+Interrupt Stabs
+
+Screen Scrolling
+
+Menu
+
+Slowing Down
+
+Glitches
+
+Charge While Moving
+
+You can charge the sword while moving if you release B for one frame at the right time. That time comes every four counts of the global counter at $0008.
+
+Price Swapping
+
+While shopping for items or armor, move the cursor and then immediate hit A to select the item. You'll buy the item you moved to but pay the price for the item you moved from. If the cursor was on a blank, you get the item for free.
+
+Prevent Events with Menu
+
+When you hit select to bring up the menu, the global counter advances but the game engine will not processing some events. Some spells have the same effect. Events skipped include enemies spawning and enemies making a roll to shoot.
+
+Ice Climbing
+
+A very cool instance of event prevention. There is a counter that increments every 16 counts when you are on the ice and the global counter has a lower nibble of 0. Preventing this event will keep the counter from incrementing, making it possible to climb up the slopes indefinitely.
+
+On the other hand if you want to slide down faster then move down when the counter increments. It will jump to 16 instead of increment by one.
+
+Level 2 Charge without the Ball
+
+Discovered by tmont. The key to this glitch is that the game has a separate state that tracks what level you can charge to and this state only updates on unpausing. In order to execute this glitch, you need to have at least one sword you can charge to level 2. Equip that sword and ball (or some other configuration that lets you charge to level 2 or 3). Hit select to bring up the menu again and switch to a sword for which you don't have the ball, but keep the menu up. Now save your game. Hit reset and load the game you just saved. You'll have the second sword but still be able to charge to level 2.
+
+Previously this glitch was executed by dying and reloading, but the reset button is much faster. The fact that saving and loading is required limits where this glitch can be performed. Another problem is that bringing up the menu again will cancel out the glitch. But this is still useful enough to skipping the big bug fight for the ball of fire. The ball of water can't be skipped because getting it is a necessary plot trigger. Skipping the ball of thunder is possible but requires a completely impractical route.
+
+Walk Through Guards
+
+Discovered by tmont. There are several plot points where an NPC is in your way or otherwise prevents you from entering a door. On talking to them, you get pushed backwards. Since you get pushed backwards relative to the direction you are facing and you can move on top of them, it is possible to go through them gradually. Approach the NPC from the east and move diagonally southwest. The hero faces south, so after talking with them, he gets pushed north. Continue moving southwest and the overall effect will be to move west and eventually pushed north past the guard.
+
+This can be used in several places. It only saves time in the waterfall cave because then there is no need to get the flute of lime from Portoa.
+
+It will not work on invisible plot-point barriers (for example on entering Mt Sabre North) because they push the hero south regardless of which direction he is facing.
+
+Skip Some Events by Warping
+
+There are several points where a non-interactive sequence plays out after interacting with an NPC. For example, the NPC will walk out of the room after accepting an item. In this case there is a one-frame window between the dialog and the event where input is still accepted. If you warp at that instant, the event can be skipped.
+
+Skip Leaf Kidnapping
+
+There are two trigger blocks that prevent you from going up Mt Sabre North early. One activates on the Cordel side and the other is on the mountain side. The Cordel side block deactivates once you get teleport from Tornel on Mt Sabre South. The mountain side requires talking to the dog in Leaf after the kidnapping has occurred. However, the mountain side block can be skipped. There are actually two hitboxes with a gap between them big enough for the hero to walk through. So it is not necessary to trigger the Leaf kidnapping by walking over a trigger block in Zebu's cave (Blowing up the wall or talk to Zebu is not necessary). Nor is it necessary to make another trip to Leaf to talk with the dog.
+
+When doing Sabre North without the Leaf kidnapping, the Leaf villagers will not be in the jail and the elder will not be in the room past Kelbesque.
+
+Ghetto Flight
+
+The rabbit boots normally allow just for a short jump with a preset arc. But if the hero is on top of water, he'll fly. The game engine is pretty robust about not allowing you to get into this state, but it is possible by using the dolphin. On dismounting the dolphin the hero may be partly over the water for a step or two. Jumping then can initiate ghetto flight which can be used to climb the waterfall and skip the entire Evil Island sequence.
+
+Dolphin Warp
+
+A side effect of ghetto flight is that the dolphin might disappear. He will reappear in a number of different locations and definitely on going back over land. This can be used to get the dolphin back at the top of the falls where his extra speed can save time.
+
+Moonjumping
+
+Using the rabbit boots, jump into a pit. Jump again immediately after landing and you'll jump rather than fall. No more waiting for moving platforms!
+
+Paralyzed Skeletons don't Collapse
+
+The skeleton enemies in Karmine's lair near the end of the Goa fortress normally collapse after each hit. This delay would make it impractical to kill them. But when paralyzed they do not collapse and can be taken out with a few stabs from the thunder sword. As a side effect, they do not have any knockback at all.
+
+Quirks and Tricks
+
+No Subpixels
+
+The movement engine does not use subpixels. Instead, there is a counter that increments every step. The number of pixels moved can vary depending on this counter. In particular, when moving diagonally over normal terrain, step size alternates between 1 pixel and two pixels in each direction every frame. A manhattan step on normal terrain is always 2 pixels. So very often it is possible to get through an area faster by alternating between manhattan and diagonal steps every other frame.
+
+There is a different sequence of movement amounts when slogging through grass/swamp terrain, in changed form or when on the dolphin. These are all more complex than normal terrain but can still be tweaked for faster overall movement.
+
+Hit Detection
+
+Understanding hit detection is probably the most important aspect of general optimization in this game.
+
+Hit detection between your sword and the enemy only happens on odd global counter frames. Hit detection for sword charge shots happens on even frames. The enemy can hit you on any frame, however. If the hero and his sword both appear on top of the enemy at the same time, both player and hero get hit.
+
+In most cases the enemy will have 8 frames of invincibility after being hit. During that time they can't hit you either, so you can walk through them.
+
+When stabbing, the hitbox of your attack will extend 3 pixels further on the last frame of the swing or on interrupting the stab by pressing B. This extended attack will be in the direction you were facing the frame before. So this is convenient because you can stab an enemy from further away and move away a frame earlier. Since the extension is 3 pixels and normal movement is only 2 pixels it can sometimes let you hit an enemy earlier.
+
+Fake 3D
+
+The game engine doesn't really work in 3 dimensions. While airborne with flight or rabbit boots, your bodily hitbox and sword are where they appear to be. This can be abused to hit enemies to the north. While airborne a flag is set. Some enemies and projectiles can't hurt you, but others still can.
+
+Damage Boosting
+
+On taking a hit, the hero is pushed back 5 pixels/frame for 8 frames (on normal terrain). The direction is determined by the direction the enemy is facing.
+
+Damage from Shots
+
+The damage inflicted by your shots is usually more than the damage from a stab of your sword. Higher level sword attacks are also more powerful. The exception is the thunder sword level 1 attack that is slightly weaker than a stab.
+
+Duel with Stom
+
+When duelling with Stom, your hits push you both up and his hits push you down. The number of hits needed to move depends on the value of counter. This counter increments when Stom beats you, making subsequent fights easier. The pattern of Stom's attacks is based on the $000E RNG seed. However, regardless of the setup you cannot win by button-mashing until the third fight.
+
+The duel can be won on the first try if a bit of finesse is used. The trick is easy to see when hitboxes are displayed. Your sword is much fatter than Stom's, so you just need to sidestep Stom's attack and counter with your own. This is difficult unassisted because there is some randomness in his attack pattern and only a 2-pixel margin for the position to stand and counter. But it is possible.
+
+Poison Damage in the Swamp
+
+The poison damage hits every 4 frames. The event-skip glitch works and you can also just heal the damage. So it's possible to get through the swamp without the gas mask but very costly.
+
+Filling Teleport Slots
+
+Each town has one or more invisible trigger hitboxes that make the town available for teleport when you hit them. In most cases these hitboxes are right by the entrance and will be triggered immediately on entry. The exception is Oak, where the hitbox is at the opening to the north of the entrance.
+
+Barrier Flicker
+
+The barrier spell produces a barrier around your hero. Projectiles that hit this barrier are vaporized. If a projectile hits the hero and the barrier on the same frame, the hero takes damage. If you activate the barrier by pressing A for one frame, it appears for 8 frames. It can't be reactivated until it has been down for a frame. Even if you hold the A button, the barrier flickers off every 8th frame. This can be a problem for fast-moving projectiles, particularly coming from north or south of the hero where the barrier isn't as thick. In particular, this needs to be considered during the big dragon fight because the laser beams move fast enough to break through this one-frame gap. It is possible to get around this by changing position or making sure not to be in the direct path of the laser during the flicker.
+
+Changed Form is Slower
+
+You move a little bit slower after changing forms with the change spell. So it's best to spend as little time as possible in changed form.
+
+Dolphin Moves Fast by Shore
+
+When riding the dolphin, you can move very quickly along the shoreline.
+
+Dismiss Dialog Faster
+
+Alternate A and B to skip through dialog faster.
+
+Luck Manipulation
+
+The main RNG seed is at $000E. It cycles from 0 to 63. This is used for all sorts of things.
+
+Many enemies have some sort of random action, usually shooting. This is controlled by grabbing a random number every 32 counts and shooting on certain values. They won't shoot if they are offscreen or being knocked back from a hit and the roll can also be prevented by hitting select. This is also how morph blobs decide when to take form.
+
+Each enemy has a different movement method. Most enemies meander towards you, adjusting every so often. But some enemies move completely randomly based on this mechanism. On spawning or picking a new direction, they grab two random numbers. One is used to determine direction and the other how long they move in that direction. Examples include the waterfall cave medusas and the floating eyes on Mt Hydra. Enemies that move like this are always moving offscreen, but slower than when onscreen (most enemies don't move offscreen). So these enemies are continuing to grab more random numbers while offscreen, affecting luck on everything else.
+
+Some enemies cause a status effect randomly on hitting you. That randomness is controlled by this seed.
+
+Draygon Fights
+
+Emperor Draygon's human form is different from other enemies. There is no invincibility period after he takes damage. In the second battle this is the same as is his behavior. But on each frame the game tops his HP back up to 255. So although the hits register, he will never die. In fact, since damage is a single byte and enemies with 0 hp are still alive (the game looks for an underflow when it subtracts damage from current hp) he can't be killed with one hit. So he is effectively invincible. But if he could be killed then the big dragon fight would be skipped and the bow of truth would not be needed.
+
+The big dragon form moves back and forth and grabs a random number every 16 frames. On certain values it will do an action. The action is determined by the high nibble of the $0008 global counter value. Normally the laser attack that makes him vulnerable will not be chosen. But if the hero takes damage he behaves differently. When the high nibble is 8-F he will use his bouncy ball attack and when the high nibble is 0-7 he will use lasers. This laser attack does not last as long as the non-damage version; it is not possible to finish him with stabs. Luckily, his behavior does not revert after one laser attack and it is possible that he will use another after moving a bit.
+
+Tower Robots
+
+The brown robots in the tower must be defeated before the blue robots come out of the doorways. More accurately, every 16 counts there is an event that can spawn blue robots if the brown robots are completely out of the enemy table.
+
+DYNA
+
+Although beating DYNA is very easy with the barrier spell, it is also very laggy. Lag can be reduced by timing hits to land when the lower nibble of the counter is 0 or 8. When this is done DYNA does not fire the crescent shot as a counterattack. DYNA's attack sequence is based on the counter. When the counter underflows DYNA stops using its spread shots and fires its laser. The laser is much less laggy though waiting for it may not be practical. Also, it can be less laggy to avoid using barrier and simply stand in a blind spot where shots go right by.
+
+Spawning
+
+The game stores data on anything that can interact with the hero in a table that can hold up to 32 entries. This includes enemies, enemy projectiles, coins, NPCs and plot trigger hitboxes. Data on your body and attacks are in a different table.
+
+Each area has a number of spawn points where enemies appear. Some spawn points spawn an enemy right away and others don't. Some spawn points respawn periodically and others don't. Each spawn point is associated with one index in the table. The enemy that spawns there will always appear in that slot.
+
+The counter at $0008 controls spawning (among many other things). It counts down every non-lag frame. Every 16 counts when the lower nibble is 0, a spawn event is triggered for one of the spawn points. If that spawn point spawns periodically, is offscreen and its slot is free, it will spawn an enemy.
+
+While each enemy always occupies a particular slot, projectiles and coins can pop up in any open slot. If they take up a slot where enemies spawn periodically it will prevent that enemy from spawning.
+
+These mechanics have huge implications for a TAS. Often we want enemies to spawn to kill them for experience. But sometimes it is better not to spawn an enemy to avoid lag. Here are some things this leads to:
+
+Obviously, you need to kill the enemy before it can respawn. But more specifically, you need to free up the slot. The slot is not free until the dust clears after the enemy's death. So you actually need to deal the finishing blow some time before the respawn triggers.
+
+If you collect the coin, its slot is cleared immediately. Coins also disappear after some time, freeing the slot.
+
+Sometimes killing an enemy slightly later can help a spawn happen. The idea is to let the second enemy spawn before the coin appears and takes its slot.
+
+You may need to prevent an enemy from shooting so its shot doesn't take up a slot you need open. Or you can set it up so the shot is offscreen and out of the table on time.
+
+Flail-wielding enemies take up a second slot for their weapon which spawns the frame after they do. The flail stays around as long as the wielder. This is a problem even when it happens offscreen. If the flail is preventing spawns then one solution is to use select to prevent the flail wielder from spawning.
+
+Lag
+
+Interrupt Stabs
+
+When the stab counter gets down to 11 you can interrupt it and start another stab. Keeping your sword out less can often cut lag.
+
+Screen Scrolling
+
+Scrolling the screen is a big issue for lag. Horizontal scrolling is worse because it's more complicated. But the worse is probably when you try to scroll in two directions at once.
+
+Menu
+
+Bringing up the menu can cut lag. For example, hitting select during an explosion clears out the explosion sprites and so it can cut the explosion lag quite a bit. Useful when destroying walls or after bosses because this is often a time when something is needed in the menu.
+
+Slowing Down
+
+It is often possible to cut lag by slowing down. That is, wait a frame instead of taking a lag. In the short term this takes the same time but it may benefit overall time if there is some event ahead where you would need to wait anyway. In some cases when there are many enemies around it can be best to just move on quickly; getting them offscreen sooner will cut more lag than waiting.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/Crystalis last edited by TheAxeMan  on 2/13/2012 11:00 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

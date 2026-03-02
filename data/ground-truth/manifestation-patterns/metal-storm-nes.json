@@ -1,0 +1,166 @@
+{
+  "game_id": "metal-storm-nes",
+  "game_name": "Metal Storm",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Laser emitters",
+      "visual_form": "Stationary or moving beam hazards in environment",
+      "meaning": "Environmental threat that activates/deactivates based on gravity orientation; avoid or time movement"
+    },
+    {
+      "signal": "Crushing blocks",
+      "visual_form": "Heavy mechanical blocks that compress when player is in range",
+      "meaning": "Lethal environmental hazard; gravity flip required to escape or bypass"
+    },
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Incoming fire from hostile entities",
+      "meaning": "Direct combat threat; requires spatial awareness and gravity switching to dodge"
+    },
+    {
+      "signal": "Screen-wrapping corridors",
+      "visual_form": "Narrow passages that loop horizontally; exit one side to reappear opposite",
+      "meaning": "Disorienting navigation hazard combined with gravity mechanics; tests concentration and spatial reasoning"
+    },
+    {
+      "signal": "Malfunction state indicators",
+      "visual_form": "Robotic laser cannon at Pluto base (inferred from plot context)",
+      "meaning": "World-state danger: the station's self-destruct system is failing; player must manually intervene"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power Beam pickup",
+      "visual_form": "Collectible power-up item in level",
+      "meaning": "Temporary offensive capability; limited ammunition, emphasizes positioning over firepower"
+    },
+    {
+      "signal": "Shield pickup",
+      "visual_form": "Defensive power-up item",
+      "meaning": "Temporary invulnerability or damage reduction; allows brief safety window"
+    },
+    {
+      "signal": "Gravity Fireball pickup",
+      "visual_form": "Special power-up that activates during gravity flip",
+      "meaning": "Invincibility frames during gravity transition; provides momentary protection and offensive capability"
+    },
+    {
+      "signal": "Stable platforming surfaces",
+      "visual_form": "Floor or ceiling geometry that does not have active hazards",
+      "meaning": "Momentary rest point; safe to reorient before next hazard"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Earth Defense Forces / Humanity",
+      "color_identity": null,
+      "symbol_or_sigil": "M-308 Gunner mech (player-controlled combat unit)",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Pluto defense outpost; characterized as 'most sophisticated combat mech available'"
+    },
+    {
+      "faction": "Rogue AI / Malfunctioning Laser Cannon",
+      "color_identity": null,
+      "symbol_or_sigil": "Automated robotic cannon system on Pluto base",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Self-destruct system failure; cannon has turned against creators; destroyed Neptune, targeting Earth"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Pre-mission: Cannon malfunction in progress",
+      "visual_manifestation": "Pluto base interior with active hazards (lasers, crushers); environmental threats are expressions of the cannon's failing systems",
+      "behavioral_manifestation": "Hazards activate/deactivate unpredictably; enemy patterns reflect chaotic AI behavior; bosses escalate difficulty reflecting weapon system degradation"
+    },
+    {
+      "world_state": "Gravity reversal active",
+      "visual_manifestation": "Player sprite flips orientation; visual perspective inverts; hazards that were on ceiling become floor-based threats",
+      "behavioral_manifestation": "Enemy projectile patterns shift; platform-jumping becomes ceiling-jumping; layout interpretation changes; same physical space becomes strategically different"
+    },
+    {
+      "world_state": "Stage progression (6 stages + climax)",
+      "visual_manifestation": "Penetrating deeper into Pluto facility; visual design escalates technical complexity; parallax scrolling intensifies to show depth",
+      "behavioral_manifestation": "Enemy and hazard complexity increases; boss encounters become more elaborate; pattern recognition demands grow; Expert Mode completely reconfigures all elements"
+    },
+    {
+      "world_state": "Mission complete / Post-victory",
+      "visual_manifestation": "Facility self-destructed (implied); cannon neutralized",
+      "behavioral_manifestation": "Earth leaders reward M-308 Gunner with immortality and new mission: perpetual protector of mankind against future threats"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hazard design as narrative",
+      "example": "Laser emitters and crushing blocks are visual manifestations of the malfunctioning cannon system; their chaotic activation patterns tell the story of a rogue AI without cutscenes"
+    },
+    {
+      "technique": "Spatial progression as story arc",
+      "example": "Moving from outer Pluto base toward the cannon core; environmental complexity increases, visually communicating deeper infiltration and escalating danger"
+    },
+    {
+      "technique": "Parallax scrolling as environmental depth",
+      "example": "Multiple background layers scrolling at different speeds create sense of vast facility interior; technical achievement reinforces sci-fi setting and scale of the installation"
+    },
+    {
+      "technique": "Gravity mechanic as thematic expression",
+      "example": "Constant orientation reversals mirror the disorienting effect of a rogue automated system; gameplay communicates the alien, mechanical nature of the threat"
+    },
+    {
+      "technique": "Boss encounters as cannon subsystem confrontations",
+      "example": "Final stage boss rush represents encounters with different weapon systems or defensive mechanisms; visual variety of bosses tells of a multi-layered installation"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "M-308 Gunner (player mech)",
+      "state": "Standard orientation (floor-based)",
+      "behavior": "Moves horizontally on floor; jumps upward; fires Power Beam; uses gravity flip to reverse polarity"
+    },
+    {
+      "entity": "M-308 Gunner (player mech)",
+      "state": "Inverted orientation (ceiling-based)",
+      "behavior": "Moves horizontally on ceiling; jumps 'downward' (toward floor); weapon trajectory inverts; environmental threats appear from different angles"
+    },
+    {
+      "entity": "Enemy units",
+      "state": "Combat-active",
+      "behavior": "Fire projectiles in patterns designed around gravity states; attack patterns change based on player's current orientation; position themselves relative to hazards"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Stage encounter (Standard mode)",
+      "behavior": "Predictable pattern recognition; learnable attack sequences; defeat grants stage completion"
+    },
+    {
+      "entity": "Boss entities",
+      "state": "Expert Mode encounter",
+      "behavior": "Completely new attack patterns; increased complexity; removal of most power-ups; demands perfect memorization and execution; mirrors arcade difficulty"
+    },
+    {
+      "entity": "Hazard systems (lasers, crushers)",
+      "state": "Floor-gravity active",
+      "behavior": "Activate/deactivate based on gravity orientation; player must predict which surface is safe; timing and positioning are critical"
+    },
+    {
+      "entity": "Screen-wrapping corridors",
+      "state": "Navigation phase",
+      "behavior": "Exiting left side causes reappearance on right; spatial continuity breaks; combined with gravity reversal, creates disorientation effect"
+    }
+  ],
+  "notes": "Metal Storm uses its core gravity-reversal mechanic as both gameplay and narrative device. The world-state of the malfunctioning cannon is expressed through environmental hazards that activate unpredictably, mirroring AI failure. Danger signals are almost entirely environmental (lasers, crushers, projectiles) rather than faction-based, reflecting a mission against a facility rather than against organized enemies. The two-faction structure (Humanity vs. Rogue AI) is implicit in narrative rather than visually distinguished in-game. The parallax scrolling technical achievement serves narrative purpose by emphasizing the vast, deep nature of the Pluto facility. Expert Mode functions as a world-state change where difficulty systems are completely reconfigured, reflecting hypothetical escalation of threat. Safety signals are minimal (power-ups only), forcing reliance on movement skill and spatial mastery. The game communicates state primarily through mechanical and environmental changes rather than color coding or symbolic markers.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:09:34.859Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2865,
+    "output_tokens": 2161,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

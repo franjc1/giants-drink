@@ -1,0 +1,146 @@
+{
+  "game_id": "klax-genesis",
+  "game_name": "Klax",
+  "platform": "genesis",
+  "paradigm": "puzzle",
+  "level_count": 100,
+  "world_count": 20,
+  "element_introduction_order": [
+    {
+      "element": "Basic tile catching (single color)",
+      "first_appears": "Wave 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player learns paddle control and basic tile mechanics in early waves"
+    },
+    {
+      "element": "Horizontal line matching (Klax formation)",
+      "first_appears": "Early waves",
+      "introduction_context": "safe",
+      "mastery_context": "Core mechanic - forming unbroken horizontal lines of 3+ same-colored tiles"
+    },
+    {
+      "element": "Vertical line matching",
+      "first_appears": "Early-mid waves",
+      "introduction_context": "moderate",
+      "mastery_context": "Adds complexity to spatial awareness within the well columns"
+    },
+    {
+      "element": "Diagonal line matching",
+      "first_appears": "Mid waves",
+      "introduction_context": "moderate",
+      "mastery_context": "Requires advanced pattern recognition and well planning"
+    },
+    {
+      "element": "Cascading tile matches (chain reactions)",
+      "first_appears": "Early-mid waves",
+      "introduction_context": "moderate",
+      "mastery_context": "Bonus points for Klaxs formed by falling tiles after prior matches"
+    },
+    {
+      "element": "Wave selection and difficulty choice",
+      "first_appears": "After every 5th wave",
+      "introduction_context": "moderate",
+      "mastery_context": "Player can choose progression difficulty and earn bonus points for later wave selection"
+    },
+    {
+      "element": "Drop penalties and well-fill management",
+      "first_appears": "Wave 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Core resource management - tiles missed result in 'drops'; well fills from bottom up"
+    },
+    {
+      "element": "Multi-tile Klax (lines of 4-5)",
+      "first_appears": "Mid waves",
+      "introduction_context": "dangerous",
+      "mastery_context": "Advanced scoring mechanic requiring precise tile placement"
+    },
+    {
+      "element": "Wave-specific objectives (varied goals)",
+      "first_appears": "Throughout progression",
+      "introduction_context": "moderate",
+      "mastery_context": "Each wave has unique win condition (Klax count, points, tile survival threshold)"
+    },
+    {
+      "element": "Accelerated tile speed",
+      "first_appears": "Mid-late waves",
+      "introduction_context": "dangerous",
+      "mastery_context": "Player can pull down joystick to speed up tile descent; speed increases with wave difficulty"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful Klax formation (tiles disappear)",
+      "Cascading matches reducing well fill",
+      "Wave completion and objective achievement",
+      "Bonus tile catch before well full",
+      "Wave selection pause (player choice moment)"
+    ],
+    "typical_tension_triggers": [
+      "Tiles approaching paddle while full",
+      "Well filling toward capacity",
+      "Drop meter accumulating",
+      "Objective threshold approaching",
+      "Fast tile conveyor speed",
+      "Rapid tile sequence without pause",
+      "Well configuration blocking optimal placement"
+    ],
+    "pacing_descriptor": "Rhythmic tension-release cycle driven by tile flow rate and well fill state. Early waves allow deliberate placement with relief pauses; mid-to-late waves accelerate tile descent and objective difficulty, forcing reactive play with tighter windows between Klax completions and well overflow. Wave completion provides distinct relief beats every 5 waves with player agency in difficulty selection."
+  },
+  "spatial_grammar": {
+    "primary_axis": "vertical",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Introductory waves (1-20) teach basic tile catching and single-line Klax formation. Drop meter resets frequently; objective requirements are modest (low Klax count or point thresholds). Player learns paddle control and well column mechanics with low penalty pressure.",
+    "mid_game": "Waves 21-60 introduce diagonal matching, cascading chains, and increasingly aggressive tile speeds. Objectives diversify (specific Klax types, tile survival counts). Drop penalties accumulate faster. Well management becomes critical as placement errors compound. Wave selection decisions impact progression path and bonus point opportunities.",
+    "late_game": "Waves 61-100 feature rapid tile descent, complex objective combinations (simultaneous point and Klax targets), and severe well-fill consequences. Cascading mechanics become essential for score and objective completion. Drop meter becomes limiting resource; player must maintain near-perfect tile catch and placement efficiency. Final waves demand mastery of all mechanics and spatial prediction.",
+    "notable_spikes": [
+      "First introduction of diagonal Klax patterns (mid-early waves)",
+      "Wave speed acceleration threshold (approximately wave 30-40 region)",
+      "Objective complexity increase when tile survival becomes primary condition (mid-late transition)",
+      "Final wave group (95-100) combines all mechanics at maximum speed with compound objectives"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Objective-based wave structure",
+      "description": "100 waves organized into 20 groups of 5, with wave selection decision points. Each wave presents distinct objective types: (1) Klax count targets, (2) point thresholds, (3) tile survival minimums. Objectives increase in stringency per group.",
+      "example_level": "Waves 1-5 (group 1) versus waves 96-100 (group 20)"
+    },
+    {
+      "pattern_name": "Drop meter reset cycle",
+      "description": "Drop penalties accumulate throughout 5-wave groups but reset to zero after each group completion. Wave selection decision offers player agency to pursue later (harder) waves for bonus points or earlier (safer) waves to maintain penalty buffer.",
+      "example_level": "After wave 5, 10, 15, etc."
+    },
+    {
+      "pattern_name": "Speed scaling within groups",
+      "description": "Tile descent speed increases within each 5-wave group and again between groups, creating micro and macro difficulty curves. Player can push down to accelerate further for tighter control but increased input demand.",
+      "example_level": "Wave 1 baseline speed → wave 5 elevated → wave 6 reset but higher baseline → escalation continues"
+    },
+    {
+      "pattern_name": "Well capacity constraint",
+      "description": "Well holds 25 tiles (5 columns × 5 rows). Geometry of Klax formations (horizontal, vertical, diagonal) creates puzzle sub-patterns requiring spatial planning. Filled well ends the run; empty spaces provide bonus points at wave end.",
+      "example_level": "Any wave requiring specific pattern formation before well fills"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T10:48:52.997Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3219,
+    "output_tokens": 1822,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

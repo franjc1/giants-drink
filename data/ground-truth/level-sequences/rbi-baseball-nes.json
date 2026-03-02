@@ -1,0 +1,155 @@
+{
+  "game_id": "rbi-baseball-nes",
+  "game_name": "R.B.I. Baseball",
+  "platform": "nes",
+  "paradigm": "sports",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Team Selection",
+      "first_appears": "Game Start",
+      "introduction_context": "safe",
+      "mastery_context": "Player chooses from 8 location-based teams or 2 all-star teams before match begins"
+    },
+    {
+      "element": "Player Roster Management",
+      "first_appears": "Pre-game Setup",
+      "introduction_context": "safe",
+      "mastery_context": "Select starting pitcher, batting order, manage 8 starters + 4 bench players per team"
+    },
+    {
+      "element": "Pitcher Selection & Stamina",
+      "first_appears": "Game Start / Mid-game",
+      "introduction_context": "moderate",
+      "mastery_context": "Starting pitchers available all game; relievers have low stamina requiring strategic substitution"
+    },
+    {
+      "element": "Batting - Contact & Power",
+      "first_appears": "First Inning",
+      "introduction_context": "moderate",
+      "mastery_context": "Hitters vary in solid contact ability and power; demonstrated immediately through early at-bats"
+    },
+    {
+      "element": "Base Running Speed",
+      "first_appears": "First Inning (after hit)",
+      "introduction_context": "moderate",
+      "mastery_context": "Player speed variation becomes apparent when advancing bases; Vince Coleman notably fastest"
+    },
+    {
+      "element": "Stealing Bases",
+      "first_appears": "Mid-game (strategic opportunity)",
+      "introduction_context": "moderate",
+      "mastery_context": "Speed-dependent mechanic; difficult to execute with slow runners, trivial with Coleman"
+    },
+    {
+      "element": "Pitching Accuracy & Steering",
+      "first_appears": "First Pitcher Turn",
+      "introduction_context": "moderate",
+      "mastery_context": "Steer ball left/right during flight; effectiveness varies by pitcher (Ryan/Clemens fast, Valenzuela deceptive movement)"
+    },
+    {
+      "element": "Pitcher Fatigue",
+      "first_appears": "Mid-game (cumulative)",
+      "introduction_context": "moderate",
+      "mastery_context": "Pitcher stamina decreases over innings; ball speed and steerability degrade, requiring relief pitcher substitution"
+    },
+    {
+      "element": "Fielding",
+      "first_appears": "First Inning (automated)",
+      "introduction_context": "safe",
+      "mastery_context": "Non-player-controlled; occurs automatically with no documented individual player variation"
+    },
+    {
+      "element": "Error Mechanics",
+      "first_appears": "Mid-game (conditional)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Fielding errors advance runners and credit hitter with hit; creates momentum shifts"
+    },
+    {
+      "element": "Pinch Hitters",
+      "first_appears": "Late-game (strategic)",
+      "introduction_context": "moderate",
+      "mastery_context": "Substitutable for any position mid-game; allows flexibility in roster management"
+    },
+    {
+      "element": "Mercy Rule (10+ run lead)",
+      "first_appears": "Mid-game (conditional)",
+      "introduction_context": "dangerous",
+      "mastery_context": "Game ends immediately if one team ahead by 10+ runs after any completed inning"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Successful hit advances runner",
+      "Strikeout ends batter without scoring risk",
+      "Score milestone reached (runs batted in)",
+      "Inning completed without runs allowed",
+      "Double play eliminates base runners"
+    ],
+    "typical_tension_triggers": [
+      "Runners on base with less than two outs",
+      "Close score entering late innings",
+      "Pitcher fatigue accumulating (stamina decline)",
+      "Full count at-bat (3-2)",
+      "Approaching mercy rule threshold (9+ run deficit)"
+    ],
+    "pacing_descriptor": "Inning-based cycle rhythm; tension builds through baserunner accumulation and pitcher fatigue; relief occurs via outs and defensive plays. Each full game contains 9 innings of tension/release cycles with variable duration per at-bat."
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Accessible baseline; player learns hitting and pitching mechanics during first inning at-bats",
+    "mid_game": "Difficulty escalates through pitcher fatigue mechanics requiring strategic relief pitcher management; opponent adaptation increases",
+    "late_game": "Cumulative stamina effects force substitutions; closer margins heighten tension as mercy rule threshold approaches",
+    "notable_spikes": [
+      "First at-bat against high-speed pitcher (Ryan, Clemens)",
+      "Pitcher fatigue point (typically innings 5-7) forces suboptimal relief pitcher use",
+      "Opponent mercy rule window (trailing by 8-10 runs after inning 5+)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Inning Structure",
+      "description": "Game divided into 9 innings; each inning contains potential for multiple at-bats (tension cycles) followed by side-out (relief). Inning-based pacing creates predictable rhythm with variable execution time per batter.",
+      "example_level": "Standard 9-inning match"
+    },
+    {
+      "pattern_name": "Pitcher Fatigue Arc",
+      "description": "Starting pitcher enters at full stamina; declining stamina across innings reduces ball speed and steerability. Forces player to strategically deploy relievers (with low stamina) before starter becomes ineffective.",
+      "example_level": "Mid-game pitcher substitution point (innings 5-7)"
+    },
+    {
+      "pattern_name": "Mercy Rule Endpoint",
+      "description": "10+ run differential after completed inning triggers immediate game end; creates hard constraint on comeback potential. Shapes late-game urgency and decision-making.",
+      "example_level": "Late-game trailing scenario (inning 7+, down 10+ runs)"
+    },
+    {
+      "pattern_name": "Player Asymmetry",
+      "description": "Significant variation in player attributes (Vince Coleman speed, Nolan Ryan fastball, Fernando Valenzuela breaking ball movement) creates asymmetric matchup scenarios. Same roster selection yields different difficulty profiles.",
+      "example_level": "Any matchup leveraging speed differential or pitcher specialty"
+    }
+  ],
+  "sources_used": [
+    "wikipedia: R.B.I. Baseball - Gameplay section, History section"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T17:19:54.312Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2840,
+    "output_tokens": 2028,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

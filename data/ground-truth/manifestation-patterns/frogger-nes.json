@@ -1,0 +1,218 @@
+{
+  "game_id": "frogger-nes",
+  "game_name": "Frogger",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "danger_signals": [
+    {
+      "signal": "Road vehicles",
+      "visual_form": "Animated sprites of race cars, dune buggies, trucks, and bulldozers moving horizontally across screen in lanes",
+      "meaning": "Immediate lethal threat; collision results in death (skull and crossbones indicator)"
+    },
+    {
+      "signal": "Alligator open mouth",
+      "visual_form": "Animated alligator sprite with visibly open jaws",
+      "meaning": "Predatory threat; jumping into open mouth causes death"
+    },
+    {
+      "signal": "Snake",
+      "visual_form": "Animated snake sprite on river logs",
+      "meaning": "Environmental hazard; contact causes death"
+    },
+    {
+      "signal": "Otter",
+      "visual_form": "Animated otter sprite on river logs",
+      "meaning": "Environmental predator; contact causes death"
+    },
+    {
+      "signal": "Diving turtle",
+      "visual_form": "Turtle sprite that descends/sinks into water",
+      "meaning": "Sinking platform hazard; standing on diving turtle causes drowning death"
+    },
+    {
+      "signal": "River water (open)",
+      "visual_form": "Blue water area without platform",
+      "meaning": "Fall-through zone; jumping into river without platform causes death"
+    },
+    {
+      "signal": "Timer countdown",
+      "visual_form": "Numerical timer display at top of screen counting down from 60 or 30",
+      "meaning": "Time pressure threat; reaching zero before reaching home causes death"
+    },
+    {
+      "signal": "Occupied home",
+      "visual_form": "Frog home space already containing another frog or alligator",
+      "meaning": "Invalid landing zone; jumping into occupied space causes death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Frog home",
+      "visual_form": "Outlined rectangular spaces at top of screen (5 total); at least one always visibly open/empty",
+      "meaning": "Goal location; successfully reaching home scores 50 points and completes frog objective"
+    },
+    {
+      "signal": "Log or turtle platform",
+      "visual_form": "Horizontal brown/tan colored sprites moving across river area",
+      "meaning": "Safe riding surface; standing on moving log or turtle prevents drowning"
+    },
+    {
+      "signal": "Alligator (closed mouth)",
+      "visual_form": "Alligator sprite with mouth closed/not visibly open",
+      "meaning": "Rideable platform; can safely stand on closed-mouth alligator back"
+    },
+    {
+      "signal": "Median strip",
+      "visual_form": "Horizontal safe zone between road and river sections",
+      "meaning": "Rest area with no active hazards; temporary safety location"
+    },
+    {
+      "signal": "Female frog",
+      "visual_form": "Brightly colored frog sprite (distinct visual appearance from player frog) on a log",
+      "meaning": "Bonus objective; carrying to home scores 200 points"
+    },
+    {
+      "signal": "Fly",
+      "visual_form": "Insect sprite in center frog home",
+      "meaning": "Bonus collectible; eating fly scores 200 points"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player frogs",
+      "color_identity": "Green (player frog) and brightly colored variant (female frog, possibly pink/magenta)",
+      "symbol_or_sigil": "Frog sprite shape; five homes at top of screen serve as faction base",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Five frog homes at top of screen represent faction territory; filled homes show active members"
+    },
+    {
+      "faction": "Traffic/Road hazards",
+      "color_identity": "Multiple vehicle colors (varied)",
+      "symbol_or_sigil": "Vehicle sprites: race cars, dune buggies, trucks, bulldozers",
+      "enemy_visual_variants": "Different vehicle types moving in same direction lanes",
+      "environmental_markers": "Bottom half of screen (road section); horizontal lane structure"
+    },
+    {
+      "faction": "River/Natural hazards",
+      "color_identity": "Blue (water), browns/tans (logs and turtle), reptile tones (alligators)",
+      "symbol_or_sigil": "Logs, turtles, alligators, snakes, otters",
+      "enemy_visual_variants": "Closed-mouth vs open-mouth alligators; diving vs non-diving turtles",
+      "environmental_markers": "Upper half of screen (river section); horizontal log/creature lane structure"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game start / New level",
+      "visual_manifestation": "Screen displays full road section, median strip, and river; five empty frog homes visible at top; timer displays 60 seconds; one frog positioned at bottom of screen",
+      "behavioral_manifestation": "Vehicles move in regular pattern; river creatures move in horizontal lanes; frog is stationary awaiting player input"
+    },
+    {
+      "world_state": "Frog in progress (moving toward goal)",
+      "visual_manifestation": "Frog sprite moves incrementally up screen; timer counts down continuously; vehicles and river creatures animate in their lanes",
+      "behavioral_manifestation": "Traffic maintains consistent speed and direction; river platforms continue horizontal movement; no pause in hazard behavior"
+    },
+    {
+      "world_state": "Frog death / Loss of life",
+      "visual_manifestation": "Frog sprite replaced by skull and crossbones symbol at location of death; timer resets to 60 seconds; visual feedback depends on death type (splat for vehicles, sink for water, etc.)",
+      "behavioral_manifestation": "Music cue or sound effect; brief pause; new frog appears at bottom; life counter decreases visually"
+    },
+    {
+      "world_state": "Frog reaches home successfully",
+      "visual_manifestation": "Frog sprite enters home space; home becomes visibly 'filled'; timer resets; score increases on display",
+      "behavioral_manifestation": "Musical note or positive sound effect; new empty frog appears at bottom of screen; difficulty may subtly increase"
+    },
+    {
+      "world_state": "All five frogs reach home (level complete)",
+      "visual_manifestation": "All five home spaces filled; level counter advances; screen refreshes with new configuration",
+      "behavioral_manifestation": "Celebratory music; 1,000 point bonus awarded; difficulty increases; traffic/river patterns change"
+    },
+    {
+      "world_state": "Time running out",
+      "visual_manifestation": "Timer counts down visibly to final seconds; may flash or change color/intensity to show urgency",
+      "behavioral_manifestation": "Frog still controllable; hazards continue normal behavior; if timer reaches zero before home, death occurs"
+    },
+    {
+      "world_state": "Game over (all lives lost)",
+      "visual_manifestation": "Screen displays 'GAME OVER' or returns to title/attract mode; final score displayed",
+      "behavioral_manifestation": "Music stops or plays game-over theme; player loses control; high score may be saved/displayed"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Hazard density escalation",
+      "example": "Road section at bottom with multiple vehicle lanes moving in alternating directions creates implicit narrative of 'dangerous urban environment'; river section above with predatory creatures and sinking platforms suggests 'wild nature equally dangerous'; progression through 5 levels with increasing difficulty implies escalating environmental hostility"
+    },
+    {
+      "technique": "Goal visualization",
+      "example": "Five frog homes positioned at top of screen as distinct goal zones; always having at least one open home visually communicates 'objective is achievable but competitive'; filled homes show progress and provide sense of escalating challenge as fewer options remain"
+    },
+    {
+      "technique": "Reward item placement",
+      "example": "Female frog appears randomly on logs in river; fly appears in center home; both are visually distinct and bonus-valued, communicating 'nature provides rare opportunities for extra gain' alongside base survival objective"
+    },
+    {
+      "technique": "Death communication through symbolism",
+      "example": "Skull and crossbones symbol replacing frog sprite at death location immediately communicates 'permanent failure' and 'danger manifest'; different death contexts (vehicle, water, time, occupancy) all use same symbol, creating unified danger language"
+    },
+    {
+      "technique": "Median strip as narrative respite",
+      "example": "Safe zone between road and river visually implies 'natural world has rest points'; this small island of safety in sea of hazards creates rhythm of danger-safety-danger that structures the play experience and environmental storytelling"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Road vehicles",
+      "state": "Active/threatening",
+      "behavior": "Continuous horizontal movement in lanes at consistent speed; vehicles wrap around screen edges and respawn; never stop or pause regardless of frog position"
+    },
+    {
+      "entity": "Logs",
+      "state": "Active/neutral platform",
+      "behavior": "Continuous horizontal movement across river in set lanes; move opposite direction from vehicles in adjacent lanes; carry frog with them if frog stands on surface"
+    },
+    {
+      "entity": "Alligator (closed mouth)",
+      "state": "Passive/rideable",
+      "behavior": "Horizontal movement like logs; frog can stand and be carried; alligator does not attack while closed mouth"
+    },
+    {
+      "entity": "Alligator (open mouth)",
+      "state": "Active/predatory",
+      "behavior": "Horizontal movement; mouth position signals active threat; contact with open mouth causes frog death; implies alligator is 'hunting' or 'attacking'"
+    },
+    {
+      "entity": "Turtle",
+      "state": "Active/sinking",
+      "behavior": "Horizontal movement; some turtles periodically dive underwater; frog standing on diving turtle will sink and drown; sinking behavior signals imminent platform loss"
+    },
+    {
+      "entity": "Snake",
+      "state": "Stationary/threatening",
+      "behavior": "Positioned on logs in river; does not move; contact with snake sprite causes frog death; implies passive danger or alert predator"
+    },
+    {
+      "entity": "Otter",
+      "state": "Active/predatory",
+      "behavior": "Moves on river logs; contact causes death; behavior and placement suggest active hunting threat in water environment"
+    },
+    {
+      "entity": "Player frog",
+      "state": "Controlled/exploring",
+      "behavior": "Moves one grid space per joystick input in four directions; continuous timer runs down; death resets frog position; reaching home fills that space and spawns new frog at start"
+    }
+  ],
+  "notes": "Frogger uses a simple but effective visual language: distinct spatial zones (road, median, river) each with characteristic hazards create environmental storytelling through area design. The skull-and-crossbones death indicator is a universal danger signal. Color differentiation (green frog, vehicle colors, blue water, brown platforms) creates visual clarity critical to the arcade puzzle paradigm. Timer visibility and countdown rhythm communicate time pressure as a primary world-state condition. The game's famous 'most ways to die' design is visually expressed through hazard variety and environmental complexity—different visual scenarios (vehicle vs. alligator vs. time) communicate contextually different failure modes. The female frog and fly serve as rare visual rewards that add narrative depth: frog chivalry goal and insect sustenance goal add implicit world-context beyond pure survival.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T20:45:54.760Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3150,
+    "output_tokens": 2977,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

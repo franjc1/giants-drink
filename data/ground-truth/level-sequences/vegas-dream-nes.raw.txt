@@ -1,0 +1,163 @@
+```json
+{
+  "game_id": "vegas-dream-nes",
+  "game_name": "Vegas Dream",
+  "platform": "nes",
+  "paradigm": "casino-gambling",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Airplane arrival sequence",
+      "first_appears": "Game start",
+      "introduction_context": "safe",
+      "mastery_context": "Narrative framing, no interaction required"
+    },
+    {
+      "element": "Casino location selection (HAL/Epic Palace)",
+      "first_appears": "After arrival cutscene",
+      "introduction_context": "safe",
+      "mastery_context": "Menu navigation, establishes setting"
+    },
+    {
+      "element": "Game mode selection (Vegas Dream vs One Spot)",
+      "first_appears": "Before gameplay",
+      "introduction_context": "safe",
+      "mastery_context": "Determines narrative presence and difficulty"
+    },
+    {
+      "element": "Starting bankroll ($700)",
+      "first_appears": "Game begins",
+      "introduction_context": "safe",
+      "mastery_context": "Resource management foundation"
+    },
+    {
+      "element": "Keno game",
+      "first_appears": "First of four casino games available",
+      "introduction_context": "moderate",
+      "mastery_context": "Introduced as one of four equal options"
+    },
+    {
+      "element": "Blackjack game",
+      "first_appears": "Concurrent with Keno",
+      "introduction_context": "moderate",
+      "mastery_context": "Available from game start alongside other games"
+    },
+    {
+      "element": "Roulette game",
+      "first_appears": "Concurrent with Keno/Blackjack",
+      "introduction_context": "moderate",
+      "mastery_context": "Available from game start alongside other games"
+    },
+    {
+      "element": "Slot machines",
+      "first_appears": "Concurrent with other games",
+      "introduction_context": "moderate",
+      "mastery_context": "Available from game start, becomes final resource option"
+    },
+    {
+      "element": "Social interactions with NPCs",
+      "first_appears": "Between casino rounds (Vegas Dream mode only)",
+      "introduction_context": "moderate",
+      "mastery_context": "Random encounters with pickpockets, lucky strangers, casino staff; consequences vary"
+    },
+    {
+      "element": "Character dating/marriage system",
+      "first_appears": "During gameplay (Vegas Dream mode)",
+      "introduction_context": "moderate",
+      "mastery_context": "Relationship outcomes affect cash flow positively or through theft"
+    },
+    {
+      "element": "News station reporting",
+      "first_appears": "After significant events",
+      "introduction_context": "moderate",
+      "mastery_context": "Feedback mechanism for social interaction outcomes; auditory cues signal positive/negative results"
+    },
+    {
+      "element": "Lucky Slot machine",
+      "first_appears": "After losing all money",
+      "introduction_context": "dangerous",
+      "mastery_context": "Final chance mechanic; one pull determines continuation or game over"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Winning casino rounds",
+      "Positive NPC interaction outcomes",
+      "Marriage partner rewards",
+      "Cheery music accompanying cash rewards",
+      "Successful Lucky Slot pull on final chance"
+    ],
+    "typical_tension_triggers": [
+      "Losing casino rounds",
+      "Bankroll depletion approaching zero",
+      "Pickpocket/theft encounters with NPCs",
+      "Somber music accompanying injuries or thefts",
+      "Marriage partner theft outcomes",
+      "Final Lucky Slot pull when bankrupt"
+    ],
+    "pacing_descriptor": "Cyclical risk-reward with random encounter interruptions; tension builds as bankroll depletes, relieved by successful gambling outcomes or character interactions; Vegas Dream mode interleaves narrative events between casino sessions"
+  },
+  "spatial_grammar": {
+    "primary_axis": null,
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": null,
+    "backtracking_required": false
+  },
+  "difficulty_curve": {
+    "early_game": "Starting with $700 bankroll allows learning casino mechanics with moderate stake; multiple game options available simultaneously",
+    "mid_game": "Bankroll fluctuations create variable difficulty as player attempts to accumulate wealth; random NPC encounters introduce unpredictability",
+    "late_game": "Wealth accumulation slows; approaching $10 million win condition requires sustained profitable play; alternatively, bankroll depletion triggers final Lucky Slot mechanism",
+    "notable_spikes": [
+      "Encountering pickpocket NPCs (unexpected loss events)",
+      "Marriage partner theft outcomes (variable financial impact)",
+      "Lucky Slot pull when bankrupt (binary outcome, high stakes)"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Casino session loop",
+      "description": "Player selects one of four casino games, plays until deciding to switch games or encounter narrative interruption; outcomes directly affect bankroll",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Random encounter interruption",
+      "description": "Between casino rounds, NPC social interactions occur with unidentified results; player response determines positive (reward) or negative (theft/loss) outcome; reported via news station with musical feedback",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Final chance recovery",
+      "description": "When bankroll reaches zero, player receives one Lucky Slot machine pull; success allows resumption of play, failure triggers game over and ending sequence",
+      "example_level": null
+    },
+    {
+      "pattern_name": "Win condition progression",
+      "description": "Two distinct ending paths: accumulate over $10 million for mansion/limousine ending, or lose all money and depart Las Vegas by plane"
+      "example_level": null
+    }
+  ],
+  "sources_used": [
+    "tcrf (The Cutting Room Floor) - Vegas Dream article",
+    "wikipedia - Vegas Dream article"
+  ]
+}
+```
+
+### Data Quality Notes:
+
+**Limitations of T3 data for this title:**
+- Vegas Dream is a casino gambling game without traditional level design; spatial grammar patterns (axis, dead ends, backtracking) are not applicable
+- Rhythm timing (tension cycle durations) not documented in sources
+- This game paradigm (menu-driven casino simulation) differs fundamentally from platformer/action games the extraction schema anticipates
+- Element introduction follows game state progression rather than spatial level sequencing
+- Sources do not detail difficulty balancing decisions or game feel timing
+
+**What worked well:**
+- Element introduction order reconstructed from gameplay flow description
+- Tension/relief rhythm inferred from game mechanics (gambling outcomes, NPC encounters, cash flow) and documented audio feedback system
+- Difficulty curve derived from bankroll mechanics and stated endings/win conditions

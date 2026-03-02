@@ -1,0 +1,157 @@
+{
+  "game_id": "dance-aerobics-nes",
+  "game_name": "Dance Aerobics",
+  "platform": "nes",
+  "paradigm": "other",
+  "danger_signals": [
+    {
+      "signal": "Score depletion",
+      "visual_form": "Numeric counter decreasing on screen",
+      "meaning": "Player failure state approaching; mistakes accumulate as penalty"
+    },
+    {
+      "signal": "Incorrect step execution",
+      "visual_form": "Instructor animation mismatch or visual feedback negation",
+      "meaning": "Player out of sync with choreography; immediate danger to score"
+    },
+    {
+      "signal": "Counter reaching zero",
+      "visual_form": "Score display hits 0 threshold",
+      "meaning": "Failure condition triggered; song/routine terminated in Normal Mode"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Correct routine completion",
+      "visual_form": "Score increase or maintenance; instructor animation reinforcement",
+      "meaning": "Player synchronized with choreography; safe progression state"
+    },
+    {
+      "signal": "Instructor visual feedback",
+      "visual_form": "On-screen aerobics instructor performing moves",
+      "meaning": "Guidance present; player has reference for correct action"
+    },
+    {
+      "signal": "Music continuity",
+      "visual_form": "Audio/visual sync in Aerobics Mode despite score zero",
+      "meaning": "Safe failure state; game permits continued play without harsh termination"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player (self-representation)",
+      "color_identity": null,
+      "symbol_or_sigil": "Power Pad foot position on mat",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Central two buttons as standing position; surrounding 10 pads as action zones"
+    },
+    {
+      "faction": "Instructor (authority/guide)",
+      "color_identity": null,
+      "symbol_or_sigil": "Aerobics instructor character animation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Studio environment (Studio 5, Studio 10, Studio 15, Studio 20 locations)"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal Mode active",
+      "visual_manifestation": "Score counter displayed, decrements on error, increments on success",
+      "behavioral_manifestation": "Instructor performs choreography; player must mirror movements; failure terminates at zero score"
+    },
+    {
+      "world_state": "Aerobics Mode active",
+      "visual_manifestation": "Same studio environments and instructor animation as Normal Mode",
+      "behavioral_manifestation": "Score counter reaches zero but game continues; music persists; no level progression or unlocks"
+    },
+    {
+      "world_state": "Pad Antics Mode / Tune Up active",
+      "visual_manifestation": "Central pads deactivated; surrounding 10 pads mapped to musical notes",
+      "behavioral_manifestation": "Freeform composition; player generates melodies; no failure condition"
+    },
+    {
+      "world_state": "Pad Antics Mode / Mat Melodies active",
+      "visual_manifestation": "Game displays short musical sequence; player stands on center pads",
+      "behavioral_manifestation": "Player must reproduce exact sequence order; memory-based challenge"
+    },
+    {
+      "world_state": "Pad Antics Mode / Ditto active",
+      "visual_manifestation": "Game displays hand/foot instructions; Twister-like spatial constraints",
+      "behavioral_manifestation": "Player executes mixed limb commands; coordination challenge"
+    },
+    {
+      "world_state": "Content unlocked",
+      "visual_manifestation": "New aerobics classes become selectable in Normal Mode menu",
+      "behavioral_manifestation": "Player progression allows access to 4 additional classes beyond initial 4"
+    },
+    {
+      "world_state": "Difficulty escalation",
+      "visual_manifestation": "Instructor choreography increases in tempo and complexity",
+      "behavioral_manifestation": "Song difficulty rises as levels progress; harder routines require faster response"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Studio naming convention",
+      "example": "Four numbered studio environments (Studio 5, 10, 15, 20) suggest progressive difficulty/intensity tiers"
+    },
+    {
+      "technique": "Instructor as authority figure",
+      "example": "Aerobics instructor leads player through choreography, establishing power dynamic of guidance/compliance"
+    },
+    {
+      "technique": "Scoring as implicit narrative",
+      "example": "Score starting at 100 and decreasing creates implicit risk/failure narrative; player must maintain health/performance metric"
+    },
+    {
+      "technique": "Mode separation as world-state variation",
+      "example": "Three distinct modes (Normal, Pad Antics, Aerobics) represent different studio environments/teaching methods without explicit story"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Instructor",
+      "state": "Active choreography",
+      "behavior": "Performs aerobics moves; provides visual reference for player mirroring"
+    },
+    {
+      "entity": "Instructor",
+      "state": "Song progression",
+      "behavior": "Animation complexity increases with difficulty; tempo accelerates"
+    },
+    {
+      "entity": "Player (mechanical representation)",
+      "state": "Correct execution",
+      "behavior": "Score points accumulate; instructor animation reinforces synchronization"
+    },
+    {
+      "entity": "Player (mechanical representation)",
+      "state": "Error state",
+      "behavior": "Score decreases by 10-point penalty; visual/audio feedback indicates missed step"
+    },
+    {
+      "entity": "Game system",
+      "state": "Normal Mode failure",
+      "behavior": "Music stops; routine terminates when score reaches zero"
+    },
+    {
+      "entity": "Game system",
+      "state": "Aerobics Mode failure",
+      "behavior": "Music continues; no termination penalty; player may resume attempts indefinitely"
+    }
+  ],
+  "notes": "Dance Aerobics is a non-narrative fitness/rhythm game with minimal world-building. Communication of state relies entirely on mechanical feedback (scoring, instructor animation, audio sync) rather than environmental narrative or faction conflict. The game lacks danger/safety dynamics in traditional game sense; instead, communication centers on performance metrics (score degradation as 'danger') and instructor presence as 'safety' (guidance). Faction indicators are minimal: only instructor vs. player relationship exists. Power Pad interface design creates the primary world-state communication method. Game paradigm is 'other' (fitness/exercise) rather than traditional action/narrative.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:49:37.381Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2046,
+    "output_tokens": 1717,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

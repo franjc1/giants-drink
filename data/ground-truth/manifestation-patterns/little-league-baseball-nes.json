@@ -1,0 +1,132 @@
+{
+  "game_id": "little-league-baseball-nes",
+  "game_name": "Little League Baseball: Championship Series",
+  "platform": "nes",
+  "paradigm": "sports-racing",
+  "danger_signals": [
+    {
+      "signal": "Opposing team presence",
+      "visual_form": "Opposing team uniforms and sprites on field",
+      "meaning": "Active threat to scoring; defensive positioning required"
+    },
+    {
+      "signal": "Strike count indicator",
+      "visual_form": "Scoreboard strike display",
+      "meaning": "Increasing proximity to batter elimination"
+    },
+    {
+      "signal": "Runner on base positioning",
+      "visual_form": "Base occupancy visual state on field",
+      "meaning": "Risk of runs being scored against player's team"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Own team roster selection",
+      "visual_form": "Team uniform and color identity during selection screens",
+      "meaning": "Confirmed control and allegiance; player agency established"
+    },
+    {
+      "signal": "Home plate positioning",
+      "visual_form": "Central field landmark on sandlot",
+      "meaning": "Safe zone; scoring objective location"
+    },
+    {
+      "signal": "Successful hit animation",
+      "visual_form": "Ball contact and trajectory away from pitcher",
+      "meaning": "Positive action outcome; offensive advantage"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Player's Team",
+      "color_identity": "Region-specific uniform color (JP vs US variants suggest distinct palette)",
+      "symbol_or_sigil": "Team uniform sprite and emblem",
+      "enemy_visual_variants": "Opposing team rendered in contrasting uniform colors",
+      "environmental_markers": "Team dugout position; home plate association"
+    },
+    {
+      "faction": "Opposing Team",
+      "color_identity": "Contrasting uniform palette to player team",
+      "symbol_or_sigil": "Alternative uniform sprite design",
+      "enemy_visual_variants": "Field positioning as away/defending team",
+      "environmental_markers": "Pitcher's mound; opposing dugout"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Game in progress",
+      "visual_manifestation": "Active scoreboard display; players on field; inning counter visible",
+      "behavioral_manifestation": "Teams alternate between offensive and defensive positioning; batter awaits pitch"
+    },
+    {
+      "world_state": "Regional/Cultural context (Japan vs US)",
+      "visual_manifestation": "Drastically different UI layouts, sandlot field size, opening ceremony presence, title screen imagery, scoreboard design",
+      "behavioral_manifestation": "Japanese version uses Rock-Paper-Scissors for first-to-bat determination; US version uses bat grab mechanic. Game length differs (variable vs 7 innings)"
+    },
+    {
+      "world_state": "Tournament progression",
+      "visual_manifestation": "Team bracket display (smaller in US version); visual indication of remaining competitors",
+      "behavioral_manifestation": "Bracket shrinks as teams are eliminated; winner advancement visualization"
+    },
+    {
+      "world_state": "End of game",
+      "visual_manifestation": "Game Over screen with victory/defeat designation; ending cutscene (content varies by region)",
+      "behavioral_manifestation": "Game state transition to results screen; player progression tracking via password system (US only)"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Sandlot field design variance",
+      "example": "Japanese version features larger sand area in field, suggesting different aesthetic/cultural emphasis on field composition vs US minimalist approach"
+    },
+    {
+      "technique": "Opening ceremony presence/absence",
+      "example": "Japanese version displays opening ceremony, establishing tournament formality and cultural significance; US version omits this, emphasizing quick-play gameplay"
+    },
+    {
+      "technique": "UI scale and complexity",
+      "example": "Team bracket size reduction in US version and scoreboard redesign communicates streamlined competitive structure for Western audience"
+    },
+    {
+      "technique": "First-to-bat determination ritual",
+      "example": "Rock-Paper-Scissors (Japan) vs bat grab (US) reflects cultural game-decision conventions and accessibility preferences"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Batting team",
+      "state": "Offensive turn",
+      "behavior": "Batter positioned at home plate awaiting pitch; runners may occupy bases; dugout positioned as active command zone"
+    },
+    {
+      "entity": "Pitching team",
+      "state": "Defensive turn",
+      "behavior": "Pitcher positioned at mound; fielders distributed across field; dugout positioned as secondary zone"
+    },
+    {
+      "entity": "Baserunner",
+      "state": "On base",
+      "behavior": "Visible occupancy of base positions; ready state for advancing on hit; vulnerability to out plays"
+    },
+    {
+      "entity": "Batter",
+      "state": "Strike accumulation",
+      "behavior": "Visual persistence at plate until three strikes; dismissal from game upon strike-out"
+    }
+  ],
+  "notes": "Little League Baseball: Championship Series demonstrates significant regional visual communication strategies. The Japanese version emphasizes ceremonial/cultural elements (opening ceremony, Rock-Paper-Scissors determination, larger sandlot) while US version prioritizes streamlined gameplay efficiency (password saves, 7-inning regulation, bat grab mechanic, reduced bracket). Danger/Safety signals are sport-inherent rather than narrative—conveyed through game state visualization (scoreboard, field positioning, strike count). Faction identity communicated purely through uniform color differentiation and field positioning. World-state manifestation is highly visual, with UI design itself serving as cultural/regional storytelling. The unused Dugout mascot sprite suggests licensing constraints shaped final visual identity. No explicit political situation communication detected; factions are purely competitive sports teams without ideological dimension.",
+  "sources_used": [
+    "tcrf - Little League Baseball: Championship Series (The Cutting Room Floor)"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:21:54.999Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 1896,
+    "output_tokens": 1513,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf"
+    ]
+  }
+}

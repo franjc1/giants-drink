@@ -1,0 +1,322 @@
+GameResources/NES/Battletoads - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+NES
+
+Battletoads
+
+This page documents information about
+
+Battletoads
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+This page is dedicated to NES Battletoads and NES Battletoads & Double Dragon. Both games do have identical tricks.
+
+Table of contents
+
+Run and charge in the opposite direction
+
+Run(and charge) while jumping.
+
+Walk Plane Changing
+
+Knock the toad off the jet
+
+Manipulating attack animation
+
+Jumping from the void
+
+Super high jump on jet and surfboard
+
+Quick finishing level 10
+
+Level 10 scrolling down with 2 players
+
+Ducking running
+
+Go through Sprite walls (not real walls)
+
+Go through the yellow spike on level 4
+
+Start level Jumping or ducking
+
+Major slowdown on level 6-3
+
+How walls and Floor work on levels with no Z-depth (4,6,8,9 and 12)
+
+Pass through floor in stage 4.
+
+Changing the layout of Level 3
+
+Glitch stick in Levels 4 and 9.
+
+Out of Bounds glitch in Level 9
+
+Doing 15 times more damage
+
+Heavy weigh champion
+
+Warps
+
+Warp to Level 3
+
+Warp to Level 5
+
+Warp to Level 6
+
+Warp to Level 8
+
+Memory corrupting glitches
+
+Level end
+
+Game end
+
+RAM addresses
+
+Run and charge in the opposite direction
+
+While running, simultaneously press opposite direction and attack.
+
+Run(and charge) while jumping.
+
+For running while jumping, tap a direction, let go, then tap the same direction + jump and hold that direction.
+While in the air, you are considered running so you can charge.
+And when the toad lands, it continues running. This trick is very useful.
+
+Walk Plane Changing
+
+Done by holding left+right. Depending on the level, it generates different effects:
+
+at levels 1,3,5,7,11 nothing happens
+
+at level 2, if you hold up+down, the toad disappears and loses functionality, so its impossible to continue
+
+at levels 4,6,8,9 and 12 the toad's drawing sprite moves up for as long as you hold it until falling down again after some height. The "sprite for collision detection with other sprites" move together with it. The collision with the floor, walls and ceiling doesn't move, so the toad appears to be floating. This can be usefull to avoid other sprites or to force the screen to scroll up.
+
+Knock the toad off the jet
+
+When doing 2 players at level 3, it is possible to use a walking toad to hit a toad that is riding the jet. That will make the toad get off the jet, and the jet will stay on whatever position it was when knocked. It is possible by doing this to slowly move the jets to the right, advancing on the 3rd level on bare feet (very slow process).
+
+Manipulating attack animation
+
+This is used for bosses fights to reduce time of these animations and to prevent bosses from flying around the screen. You hit at the first possible frame, and at the previous frame you try to add different buttons for the attacking player. If this doesn't help, use another pad on this frame too. This is direct input manipulation, so even if a character is in his own animation at the moment, random input will still take effect.
+
+Jumping from the void
+
+When you are falling into a pit, the screen can kill you if it is not scrolling down. Whether you shall die is checked by your onscreen height. It isn't tracked derectly in RAM and is calculated this way:  if depth pos (0x493) - midair height (0x475) > 255, then you die . That means if your onscreen height = 255, you can press A and jump out of nowhere. But because your falling speed is not 1 pixel per frame, you may sometimes miss 255. Try different input to influence it.
+
+HUD script ,  video demo .
+
+Super high jump on jet and surfboard
+
+To do this, touch the jet or the surfboard while going up a running jump. Basically, run and jump right before hitting the vehicle. Doesn't work with level 7's airplane because it's not gravity based.
+
+Quick finishing level 10
+
+It's possible to end level 10 quickly by finishing off any of the rats. To do this, the rat must be hard hit after the bomb is exploded, and then finished off with a Boot attack. The rat has infinite HP (or higher than was tested), and this is the only way to kill him. The rat seems to have a "boss" flag set to him. So if a boss is killed, the level ends.
+
+Level 10 scrolling down with 2 players
+
+If both toads go over the top of the screen on level 10, the screen starts to scroll down and will only stop if one of the toads somehow falls faster than the other. It will go past the bomb, however, and knocking off the bomb is needed or else the rat will do it. One way to do it is to have player 2 grabbing player 1 at start of the level and doing a jump, then throwing player 1 at the right moment at the bomb. Player 1 grabbing player 2 doesn't seem to work.
+
+Ducking running
+
+Hold down and keep tapping forward
+
+Go through Sprite walls (not real walls)
+
+Must touch the wall and press forward direction every other frame. Must start on the correct position or the toad wont get through, he will be standing still. In this case, alternate the every other frame.
+
+Go through the yellow spike on level 4
+
+The way the game detects the collision to this pike (non hazardous, it just blocks) is actually way too simple. If the player is holding "DOWN" then its not a collision. If not, it is a collision. So it doesn't matter if you are ducking, as long as you hold down, the pike will ignore the toad.
+
+Start level Jumping or ducking
+
+Possible at the first frame of most of the levels, including the Dark Queen fight (level 13). Just start holding "A" or "DOWN" before the first frame of the level.
+
+Major slowdown on level 6-3
+
+There is a section that can cause a big slowdown on level 6, 3rd section because of the snake bending in a such a way that by grabbing on it's side there's another part of it going behind, causing a difficult collision detection for the game to handle.
+
+How walls and Floor work on levels with no Z-depth (4,6,8,9 and 12)
+
+The height or horizontal values are, apparently, what tells if the toad should be allowed to fall or get through. It's not a collision detection. This seems to be the case because it's not possible to go through it. It doesn't even budge while trying. So it must be some hard-coded way to say "dead-end" for that direction.
+
+Pass through floor in stage 4.
+
+Must press left+right when on an ascending slope and release after some seconds. You'll start sliding down. It you start falling and press that while behind the background rock, you will be pushed right extremely fast and either fall out of it (if you get to the thin part of it) or die (if there are spikes on the same horizontal level with you loaded into RAM).
+
+Changing the layout of Level 3
+
+Theory: done by getting on a vehicle and dying before it activates the vehicle course.
+
+Reason: when the toad dies without the vehicle, it restarts from the same screen. But when dying with the vehicle, the level restarts. Since it has died out of the vehicle course, it starts on the "walk" course, but with some of the vehicle course features activated. This has only been verified at level 3.
+
+How to do: must have 2 players. one toad holds the screen, so the jet barely appears. The second toad gets on it, then jumps at the hole on the left, dying. The level restarts, in auto scrolling. Each toad produces a separate effect, just change them over.
+
+Various glitches appear, if toads die and act different ways. In some case, such glitch even can  end the level .
+
+Glitch stick in Levels 4 and 9.
+
+By some laggy action you can get a stick & become nearly invincible (except to death spikes). Also the graphics get screwed up. You can break checkpoints with this stick, but this means you don't activate them. But if you then activate some of them twice, the game continues normally.
+
+YouTube playlist  with several emulator movies & one console video.
+
+Out of Bounds glitch in Level 9
+
+Take your opponent on your hands & throw him just near the upper border of the tube. He will get out of it. But this outside area still has water and air places separated, just not visual. So you either fall back into the tube, or keep swimming out of it.
+
+The other way to get off the tube is pressing left + right until the bottom of the tube loads off the memory and you can jump over its vertical borders. So, you can get  both toads out of bounds .
+
+However, you can't pass checkpoints, you have to activate each one to be able to finish the level.
+
+Doing 15 times more damage
+
+Hit an enemy or another player until he's almost dying, and prepare the final hit on him, but miss him and hit the enemy that has full health. This last blow is quite powerfull. This doesn't work on bosses (a boss is any "enemy" that will end the level when defeated. This is not the case for Big Blarg).
+
+Heavy weigh champion
+
+It's possible to lift a toad while he's carrying something or someone.
+
+Warps
+
+Warp to Level 3
+
+When you begin the game, quickly headbutt the psycho pig on the left, then the one on the right, proceed to where the Walker appears, you should see a platform and a pulsating warp. Jump up there quickly!!!
+
+Warp to Level 5
+
+In Level 3 (The turbo tunnel) in the last section of the speed bike obstacle course (where the walls pass REALLY fast) slam headfirst into the 10th wall. That should be a warp. (The correct wall is on the bottom of the island BTW)
+
+Warp to Level 6
+
+In Level 4 (Ice Caverns) when you find the platform that falls when you stand on it, go down near the bottom, then jump repeatedly so it goes back up. There should be a warp formed at the top.
+
+Warp to Level 8
+
+In Level 6 (Karnaths Lair) in the 2nd Snake pit, climb on the first snake and run to the right all the way down when the snake reaches the highest point of it's path (don't hit the spikes) there should be a warp on the other side. You must go over there quickly because the warp will disappear before the snake gets there.
+
+Memory corrupting glitches
+
+Level end
+
+The intended logic is to restart level 3 only if the race track checkpoint has been activated. When it has, config pointer (loading level objects from the ROM) gets written to $E5-$E6, and it's copied to $B7-$B8 when the toad dies. If one dies while on the bike, but not having activated the checkpoint, $B7-$B8 gets written with 0! Which means objects are loaded right from the start of RAM.
+
+In the beginning of each level, several objects get loaded every time: toads load during lag frames, right after lag frame the game loads the restart point object, some enemies, one at a time, and that's it, config pointer won't change until you reach some new gameplay elements. So at the start of every level, it increments for a few times by the object descriptor length (11).
+
+Since the initial config pointer value is now 0, it starts switching from $0B (that gets written right after initialization, during lag), and then it goes $16, $21, $2C, and $37.
+
+It so happened that $15 and $16 are used for temporary controller values, used for registering the tap'n'hold pattern. The standard subroutine moves 1 bit at a time from the controller port to the corresponding zero page address, using carry flag and ROR/ROL, done 8 times.
+
+A  bit  lot of luck, and we end up having config pointer telling the game to load an object specified by the second controller value, which is $7F.
+
+The game starts looking for an empty object slot. The first 2 are busy with toads, the third one is a bike, the fourth is free. Object with ID=0x7F spawns, its job is to create explosions and end the level.
+
+Game end
+
+After you break the config pointer like right above, you need to load an object with ID=0 and X=$C8.
+
+Objects with ID=1 and ID=2 are players. They are tied to slots 0 and 1 (1 gets subtracted from the object type).
+
+Zero object doesn't exist normally, in this case, such is treated like a player, like anything below 3. So to get a slot to spawn such an object, the game also subtracts 1 from 0. The result treated as a slot (or offset) is $FF.
+
+The game checks if the object has any lives, which is normally $11 and $12. When $FF is used as an offset, the address to check lives against becomes $110. So it should contain a positive value for the glitch to work.
+
+The config gets actually read, loading X=$C8 to what it believes to be the appropriate address for the low byte of the X coordinate, considering the slot. The base of the X position addresses is $3FD, so $FF is added to that, resulting in $C8 getting written to $4FC. That address is in fact responsible for something related to animation (Hit ID).
+
+After wrong value is written as Hit ID, it gets processes by loading a pointer for that hit, whose animation doesn't exist. Irrelevant data generates a broken pointer $2207.
+
+Animation gets read from there: $FE, $90, $18...
+
+It tries to process the animation, doing $FE AND $1F => $1E. This is supposed to be pointing to animation code, but there are only $16 actual pointers there, so we get another overflow, loading $75BD from the ROM address $DB76.
+
+The game does a jump to $75BD, ending up in open bus.
+
+Due to how open bus works, the last value on the data bus repeats infinitely, producing opcodes out of nowhere, depending on what value was last read by the CPU. In this case it's $6F, which is an undocumented RRA opcode, that rotates one bit right in memory, then add memory to accumulator (with carry). Basically, nothing changes, and the PC is still in the open bus, it keeps rolling through.
+
+When PC gets to $8000, there's a jump that brings us to the ending function:
+
+$8000:6C 13 00  JMP ($0013) = $8045
+
+A:06 X:45 Y:06 S:FA 
+$8045:4C 24 AC  JMP $AC24
+; Y register is the bank, each bank starts with a 3-byte jump table
+; $45 is the 23rd function in bank 6
+
+RAM addresses
+
+BizHawk .wch file:  UserFiles/Info/637936906469759936
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/NES/Battletoads last edited by adelikat  on 9/2/2023 2:52 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

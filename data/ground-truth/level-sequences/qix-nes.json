@@ -1,0 +1,126 @@
+{
+  "game_id": "qix-nes",
+  "game_name": "Qix",
+  "platform": "nes",
+  "paradigm": "puzzle",
+  "level_count": null,
+  "world_count": null,
+  "element_introduction_order": [
+    {
+      "element": "Player marker (diamond-shaped)",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Player controls marker along playfield edges with joystick; learns directional movement before drawing"
+    },
+    {
+      "element": "Slow Draw button mechanic",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Drawing lines in unclaimed territory to create closed shapes; worth double points; teaches core loop"
+    },
+    {
+      "element": "Fast Draw button mechanic",
+      "first_appears": "Level 1",
+      "introduction_context": "safe",
+      "mastery_context": "Alternative drawing speed with standard point value; introduces risk/reward decision-making"
+    },
+    {
+      "element": "Qix (single)",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Abstract entity with unpredictable motion; collision while drawing = life loss; teaches avoidance timing"
+    },
+    {
+      "element": "Fuse mechanic",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Triggered when marker stops drawing; burns along line toward marker; introduces time pressure element"
+    },
+    {
+      "element": "Sparx enemies",
+      "first_appears": "Level 1",
+      "introduction_context": "moderate",
+      "mastery_context": "Traverse playfield edges; collision = life loss; meter tracks release of additional Sparx"
+    },
+    {
+      "element": "Dual Qix mechanic",
+      "first_appears": "Level 3",
+      "introduction_context": "dangerous",
+      "mastery_context": "Two Qixes in single playfield; must split them into separate regions to complete level; introduces bonus multiplier system"
+    },
+    {
+      "element": "Super Sparx mutation",
+      "first_appears": "Level 3 or later",
+      "introduction_context": "dangerous",
+      "mastery_context": "Sparx transform into faster, smarter variants that can chase marker along uncompleted Stix; escalates difficulty"
+    }
+  ],
+  "rhythm_pattern": {
+    "tension_cycle_seconds": {
+      "min": null,
+      "max": null
+    },
+    "typical_relief_triggers": [
+      "Completing closed shape (area capture)",
+      "Reaching 75% playfield threshold to complete level",
+      "Marker returning safely to playfield edge",
+      "Fuse disappearing when marker moves"
+    ],
+    "typical_tension_triggers": [
+      "Qix moving toward player's uncompleted Stix",
+      "Fuse appearing and burning toward marker",
+      "Sparx appearing on countdown meter",
+      "Sparx mutating into Super Sparx",
+      "Marker trapped in spiral (cannot proceed further)",
+      "Marker drawing in open territory with multiple threats active"
+    ],
+    "pacing_descriptor": "Escalating tension with cumulative threat introduction; levels build difficulty through multiple simultaneous hazards rather than linear progression"
+  },
+  "spatial_grammar": {
+    "primary_axis": "omnidirectional",
+    "optional_content_signal": null,
+    "secret_convention": null,
+    "dead_end_frequency": "occasional",
+    "backtracking_required": true
+  },
+  "difficulty_curve": {
+    "early_game": "Single Qix with basic Sparx; focus on learning draw mechanics and avoidance patterns; 75% completion threshold",
+    "mid_game": "Increased Sparx count and release frequency; fuse timing becomes more challenging; bonus multiplier introduced at Level 3 with dual Qix",
+    "late_game": "Dual or multiple Qixes; Super Sparx variants that chase along uncompleted lines; combination of simultaneous threats; higher playfield percentage requirements possible",
+    "notable_spikes": [
+      "Level 3: Introduction of dual Qix mechanic and bonus multiplier system",
+      "Super Sparx mutation point: Sparx transition from edge-only movement to line-tracking capability",
+      "Cumulative point: Late levels with multiple Super Sparx + dual Qixes create compounding difficulty"
+    ]
+  },
+  "notable_level_patterns": [
+    {
+      "pattern_name": "Single Qix containment",
+      "description": "Early levels (1-2) focus on capturing area percentages while avoiding single Qix; marker must draw closed shapes without collision during line creation",
+      "example_level": "Level 1"
+    },
+    {
+      "pattern_name": "Dual Qix separation",
+      "description": "From Level 3 onward, player must strategically split playfield into two regions, each containing one Qix; completion triggers bonus multiplier escalation",
+      "example_level": "Level 3+"
+    },
+    {
+      "pattern_name": "Threat escalation layering",
+      "description": "Multiple hazard types operate simultaneously: Qix movement, Sparx patrol, fuse mechanics, and Super Sparx chasing; creates compound decision-making complexity",
+      "example_level": "Late levels"
+    }
+  ],
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T16:51:35.895Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 3039,
+    "output_tokens": 1586,
+    "dimension": "level_sequences",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

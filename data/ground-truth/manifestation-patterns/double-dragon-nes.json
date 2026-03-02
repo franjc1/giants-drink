@@ -1,0 +1,180 @@
+{
+  "game_id": "double-dragon-nes",
+  "game_name": "Double Dragon",
+  "platform": "nes",
+  "paradigm": "beat-em-up",
+  "danger_signals": [
+    {
+      "signal": "Boss character appearance",
+      "visual_form": "Music change + unique larger sprite with distinct appearance",
+      "meaning": "Stage culmination threat; player must defeat to progress"
+    },
+    {
+      "signal": "Environmental hazards",
+      "visual_form": "Spikes, holes, rivers, beds of spikes in level geometry",
+      "meaning": "Instant death zones; avoid or lose life"
+    },
+    {
+      "signal": "Enemy weapon carry",
+      "visual_form": "Enemy sprite holding visible melee weapon (bat, whip, knife)",
+      "meaning": "Increased threat level; disarm or take damage"
+    },
+    {
+      "signal": "Time limit pressure",
+      "visual_form": "Timer display on HUD reaching zero",
+      "meaning": "Stage failure imminent; forces progression pace"
+    },
+    {
+      "signal": "Life gauge depletion",
+      "visual_form": "Health bar visual reduction on screen",
+      "meaning": "Player vulnerability; death imminent if depleted"
+    },
+    {
+      "signal": "Screen edge hazard",
+      "visual_form": "Bottom of screen boundary with bottomless pit visual",
+      "meaning": "Knockback danger; fall causes instant death"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Stage transition sequence",
+      "visual_form": "Automatic walking animation into next area after boss defeat",
+      "meaning": "Temporary reprieve; enemies retreat, level progressing safely"
+    },
+    {
+      "signal": "Extra lives gained",
+      "visual_form": "Life counter increase (implied HUD mechanic)",
+      "meaning": "Buffer against death; temporary invulnerability purchased"
+    },
+    {
+      "signal": "Weapon pickup availability",
+      "visual_form": "Rocks, oil drums, boxes visible in environment; melee weapons disarmed from enemies",
+      "meaning": "Resource abundance; player can escalate offensive capability"
+    },
+    {
+      "signal": "Cooperative gameplay space",
+      "visual_form": "Two-player co-op positioning on screen (Mode A); alternating turn gameplay",
+      "meaning": "Shared threat; allies reduce individual vulnerability"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Black Warriors gang",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": "Multiple enemy types with distinct sprites: Jack (stage 1 boss), Chin (stage 2 boss), Abobo (large muscular boss variant), Willy (final boss, gang leader), Linda (unique female fighter variant), generic underlings",
+      "environmental_markers": "Gang hideout (stage 4) - interior fortress structure with traps; gang-controlled turf in city slum, factory, forest areas indicating territorial occupation"
+    },
+    {
+      "faction": "Player protagonists (Lee brothers)",
+      "color_identity": null,
+      "symbol_or_sigil": "Twin martial artists (Billy and Jimmy Lee, also known as Hammer and Spike in supplementary materials)",
+      "enemy_visual_variants": "Selectable character sprites in Mode B (Duel mode) with distinct appearance; Mode B features bigger sprites for selected character",
+      "environmental_markers": "Progression through enemy territory indicates invasion/rescue mission narrative; starting from city slum moving inward toward hideout shows spatial hierarchy of enemy control"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Normal enemy patrol state",
+      "visual_manifestation": "Standard enemy sprites positioned throughout scrolling level; multiple enemy types visible simultaneously",
+      "behavioral_manifestation": "Enemies engage player on contact; can grab player from behind, enabling coordinated attacks; can disarm and use weapons"
+    },
+    {
+      "world_state": "Boss encounter initiated",
+      "visual_manifestation": "Music changes; boss sprite appears (larger, distinct design); remaining underlings retreat from screen",
+      "behavioral_manifestation": "All enemies except boss disengage; focus narrows to single threat; boss uses enhanced move set including potential throwing attacks (Abobo planned atomic throw)"
+    },
+    {
+      "world_state": "Stage completion",
+      "visual_manifestation": "Automatic transition cutscene; player character sprite walks forward into next stage; background shifts to new location",
+      "behavioral_manifestation": "Player gains passive momentum; no enemy interaction during transition; brief safety window before next stage threat"
+    },
+    {
+      "world_state": "Mission 4 - Final hideout",
+      "visual_manifestation": "Interior fortress setting (separate map from open-world stages); structural traps visible in geometry; final boss chamber with Willy waiting",
+      "behavioral_manifestation": "Concentrated gauntlet of underlings; environmental hazards (dragon head statue with cracks, wall traps, falling stalactites implied); escalating danger progression"
+    },
+    {
+      "world_state": "Two-player versus mode (Mode B)",
+      "visual_manifestation": "Larger character sprites; selected character model appears for both P1 and P2 (except Abobo uses standard size); dedicated duel arena",
+      "behavioral_manifestation": "Character stat differentiation: CPU opponents (except Linda) possess extra health; Abobo has substantially increased durability; player-vs-player symmetrical mechanics"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Spatial progression hierarchy",
+      "example": "Level sequence (city slum → factory → forest → hideout) visually communicates enemy territory expansion; hideout as final interior space suggests gang command center; rescue mission through occupied territory"
+    },
+    {
+      "technique": "Boss character visual design differentiation",
+      "example": "Jack, Chin, Abobo, Willy, Linda all have distinct sprite designs indicating rank/role within Black Warriors; larger/more ornate designs suggest leadership; Abobo's massive frame signals brute strength threat type"
+    },
+    {
+      "technique": "Environmental hazard placement",
+      "example": "Stage 3 forest includes holes and rivers (natural obstacles); Stage 4 hideout includes constructed traps (spikes, falling hazards, dragon head statue) indicating deliberate fortress design and gang engineering capability"
+    },
+    {
+      "technique": "Weapon availability as resource storytelling",
+      "example": "Baseball bats, whips, throwing knives, dynamite scattered throughout suggest gang armament; rocks, oil drums, boxes as makeshift weapons indicate improvised lower-tier threats vs equipped soldiers"
+    },
+    {
+      "technique": "Music state-change indicators",
+      "example": "Background music shift marks boss arrival without explicit narrative; intermission theme (cut off at 6 seconds) provides psychological tension before stage transitions; sonic pacing reinforces narrative momentum"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Jack (Stage 1 boss)",
+      "state": "Encounter state",
+      "behavior": "Unique boss sprite appears after music change; other enemies retreat; boss uses enhanced move set distinct from underlings"
+    },
+    {
+      "entity": "Chin (Stage 2 boss)",
+      "state": "Ladder encounter",
+      "behavior": "Has unused ladder-climbing animations; at stage end on construction site, if player climbs down, Chin remains still (behavioral artifact; likely incomplete AI for multi-level navigation)"
+    },
+    {
+      "entity": "Abobo (Boss variant)",
+      "state": "Combat state",
+      "behavior": "Massive sprite size indicates power; planned genbaku nage (atomic throw) move in promotional materials but cut from final build; in Mode B duel, Abobo retains standard size but CPU variant has substantially increased health compared to other characters"
+    },
+    {
+      "entity": "Willy (Final boss, gang leader)",
+      "state": "Hideout confrontation",
+      "behavior": "Awaits player in main hall of hideout; unique narrative position as kidnapper/antagonist; visual centrality in fortress final chamber"
+    },
+    {
+      "entity": "Linda (Female fighter variant)",
+      "state": "Mode B duel opponent",
+      "behavior": "Unique female sprite design; in CPU encounters, has standard health (not increased like other CPU opponents); visual differentiation suggests character role distinction within faction"
+    },
+    {
+      "entity": "Generic underlings (Black Warriors foot soldiers)",
+      "state": "Patrol/engagement",
+      "behavior": "Can grab player from behind in pairs, enabling coordinated multi-enemy attacks; can carry weapons (bats, whips, knives, dynamite); retreat when boss encounter initiates; reduced behavior complexity vs boss entities"
+    },
+    {
+      "entity": "Player character (Billy/Jimmy Lee)",
+      "state": "Co-op paired state (Mode A)",
+      "behavior": "Turn-based alternating control (not simultaneous co-op); when one player grabs enemy from behind, second player can attack unimpeded; represents mechanical cooperation without full screen presence"
+    }
+  ],
+  "notes": "Double Dragon NES deviates from arcade original with added EXP system (Mode A) and one-on-one duel mode (Mode B). Visual communication relies heavily on sprite differentiation, music state-changes, and environmental hazard design. Faction identity less about color/sigil and more about territorial spatial occupation and enemy type hierarchy. World-state shifts are communicated through automatic transitions and music cues rather than explicit narrative text. Unused graphics (staff roll, dragon head, Abobo throwing move) suggest richer environmental storytelling was planned but cut.",
+  "sources_used": [
+    "tcrf",
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:38:07.619Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 8529,
+    "output_tokens": 2404,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "speedrun",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

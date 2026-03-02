@@ -1,0 +1,175 @@
+{
+  "game_id": "mega-man-2-nes",
+  "game_name": "Mega Man 2",
+  "platform": "nes",
+  "paradigm": "platformer",
+  "danger_signals": [
+    {
+      "signal": "Robot Master stage environments",
+      "visual_form": "Thematic hazards matching boss weapon type (heat, ice, wind, water, etc.)",
+      "meaning": "Environmental danger scaled to boss threat level; Air Man's sky stage features wind hazards; Heat Man's stage features fire obstacles"
+    },
+    {
+      "signal": "Enemy sprite patterns",
+      "visual_form": "Small robotic enemies with distinct animations and trajectories",
+      "meaning": "Minion threats that telegraph attack patterns through movement; hitbox danger communicated through sprite boundaries"
+    },
+    {
+      "signal": "Wily fortress aesthetic",
+      "visual_form": "Industrial, mechanical environment with spikes, platforms, and moving obstacles",
+      "meaning": "Final danger zone; escalated threat level signaled through denser hazard placement"
+    },
+    {
+      "signal": "Spike tiles and falling platforms",
+      "visual_form": "Distinct tileset graphics showing obvious hazard geometry",
+      "meaning": "Instant-death or damage threats; visual clarity prevents unfair punishment"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Energy Tank item",
+      "visual_form": "Collectible item icon dropped by bosses after defeat",
+      "meaning": "Resource availability; signals progression checkpoint and health resource abundance"
+    },
+    {
+      "signal": "Weapon platforms (special items)",
+      "visual_form": "Unique floating platform objects granted after each Robot Master defeat",
+      "meaning": "Access to previously unreachable safe zones; tactical progression signal"
+    },
+    {
+      "signal": "Stable ground and platforms",
+      "visual_form": "Solid terrain without animated hazards or destructible elements",
+      "meaning": "Safe traversal space; rest areas between combat encounters"
+    },
+    {
+      "signal": "Stage select menu",
+      "visual_form": "UI display with eight boss portraits arranged in grid",
+      "meaning": "Player agency and safety; ability to choose order of engagement reduces forced progression"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Dr. Wily (antagonist/creator)",
+      "color_identity": null,
+      "symbol_or_sigil": "Robot Master designs (8 distinct mechanical enemy types); Wily fortress architecture",
+      "enemy_visual_variants": "Eight Robot Masters each with unique visual design reflecting their weapon theme: Metal Man (metallic silver), Air Man (aerodynamic blue), Bubble Man (aquatic blue-green), Quick Man (sleek yellow), Crash Man (heavy brown), Flash Man (gold/bright yellow), Heat Man (red/orange), Wood Man (green/brown)",
+      "environmental_markers": "Fortress stages feature industrial aesthetic with mechanical hazards; stage themes directly reflect boss weapon functionality"
+    },
+    {
+      "faction": "Mega Man (player character/Dr. Light's creation)",
+      "color_identity": "Blue (primary protagonist color)",
+      "symbol_or_sigil": "Humanoid robot design with distinctive helmet and arm cannon",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Dr. Light's lab implied as safe zone; no explicit environmental faction markers beyond stage progression"
+    },
+    {
+      "faction": "Dr. Light (ally/implied authority)",
+      "color_identity": null,
+      "symbol_or_sigil": "Creator/sender of Mega Man; referenced in plot but minimal visual representation",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implicit starting point; mission briefing authority"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Initial state (game start)",
+      "visual_manifestation": "Title screen with stage select menu showing 8 unopened Robot Master stages; all stages available with no visual progression indicators",
+      "behavioral_manifestation": "Player can select any stage in any order; no gating mechanism; complete strategic freedom"
+    },
+    {
+      "world_state": "Robot Master defeated",
+      "visual_manifestation": "Stage select menu updates to show defeated boss (crossed out or dimmed visual); weapon becomes available in HUD; new special platform item appears in levels",
+      "behavioral_manifestation": "Previously impassable areas become accessible via new weapon or platform tool; difficulty curve adjusted through player choice of next stage"
+    },
+    {
+      "world_state": "All 8 Robot Masters defeated",
+      "visual_manifestation": "Stage select transitions to Wily fortress levels; new tileset aesthetic (industrial fortress); escalated visual complexity",
+      "behavioral_manifestation": "Linear progression enforced; no stage select option; increased enemy density and hazard complexity; rematch encounters with Robot Masters in single rooms"
+    },
+    {
+      "world_state": "Final boss confrontation",
+      "visual_manifestation": "Wily Machine visual design; mechanical amalgamation showing threat escalation; holographic alien holdup variant appears mid-fight",
+      "behavioral_manifestation": "Distinct multi-phase fight pattern; Wily attempts deception with alien impersonation; mercy mechanic available upon victory"
+    },
+    {
+      "world_state": "Password system active",
+      "visual_manifestation": "Password display screen after each Robot Master defeat; cryptographic character grid shown",
+      "behavioral_manifestation": "Game state persistently saveable without continuous play; allows non-linear return to checkpoint progression"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage theme matching boss identity",
+      "example": "Heat Man's stage features fire/lava obstacles; Air Man's stage is set in sky with wind hazards; Bubble Man's stage contains water mechanics and aquatic aesthetic. Thematic coherence communicates boss domain and weapon utility."
+    },
+    {
+      "technique": "Robot Master visual design reflecting function",
+      "example": "Metal Man has metallic appearance suggesting durability; Air Man has aerodynamic silhouette; Wood Man features organic vegetation. Visual design predicts weapon type and stage environment without explicit UI."
+    },
+    {
+      "technique": "Fortress escalation aesthetic",
+      "example": "Final fortress levels use denser tileset patterns, more animated hazards, and industrial architecture compared to thematic Robot Master stages. Visual progression from diverse themed areas to unified fortress communicates narrative climax."
+    },
+    {
+      "technique": "Minion variety as threat indicator",
+      "example": "Different enemy types populate different stages; Friender enemies in specific zones; Acid enemy in Wily Stage 6. Enemy sprite variation communicates environmental faction control and danger diversity."
+    },
+    {
+      "technique": "Item placement as progression signal",
+      "example": "Energy Tanks and special platform items appear as rewards, not pickup litter. Strategic placement guides player attention to accomplishment moments and safe resource availability."
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Metal Man",
+      "state": "Combat active",
+      "behavior": "Fires metal blade projectiles in predictable arcs; movement pattern telegraphs attack timing; weak to Crash Man's weapon"
+    },
+    {
+      "entity": "Quick Man",
+      "state": "Combat active",
+      "behavior": "Rapid movement with jumping pattern; can block projectiles before launching attacks; single-frame standing sprite during block recovery indicates vulnerability window"
+    },
+    {
+      "entity": "Flash Man",
+      "state": "Combat active",
+      "behavior": "Uses time-freeze weapon on Mega Man; no mid-air shooting behavior in final game (despite unused sprite); stage features light-based hazards matching weapon theme"
+    },
+    {
+      "entity": "Wily (boss form)",
+      "state": "First phase",
+      "behavior": "Operates Wily Machine with ball projectile; attacks from mechanical platform; malfunctioning device shows damage progression"
+    },
+    {
+      "entity": "Wily (boss form)",
+      "state": "Deception phase",
+      "behavior": "Attempts holographic alien disguise; alien sprite differs from robot master designs; hologram failure reveals Wily at controls; mercy trigger activated upon defeat"
+    },
+    {
+      "entity": "Generic enemy (Friender)",
+      "state": "Idle/patrolling",
+      "behavior": "Static or looping movement pattern; front paw animation unused in final game (sprite detail removed); telegraphs threat through animation clarity"
+    },
+    {
+      "entity": "Mega Man (player)",
+      "state": "Weapon equipped",
+      "behavior": "Arm cannon visual changes to reflect active weapon; HUD displays current weapon selection; fire pattern varies by equipped weapon type"
+    }
+  ],
+  "notes": "Mega Man 2 communicates world-state primarily through stage selection freedom and progressive environmental complexity. The game uses thematic coherence (boss weapon type = stage environment type) as core storytelling method. Faction identity is minimal—Dr. Wily's threat is expressed through his Robot Masters' distinct visual designs and stage domination rather than environmental faction markers. The password system creates visual progression checkpoints. Safety is signaled through resource item placement (Energy Tanks) and player agency (stage select). Danger manifests through environmental hazards matched to thematic context and enemy behavior patterns. The final fortress represents world-state shift from choice-based to linear narrative progression, visually communicated through aesthetic escalation and enemy density increase. Holographic alien deception in final boss shows narrative complexity through sprite substitution mechanics.",
+  "sources_used": [
+    "tcrf"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:59:31.107Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 6720,
+    "output_tokens": 2344,
+    "dimension": "manifestation",
+    "sources_available": [
+      "data_crystal",
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

@@ -1,0 +1,877 @@
+GameResources/SNES/SuperMarioWorld - TASVideos
+
+TASVideos
+
+Tool-assisted game movies
+
+When human skills are just not enough
+
+Home
+
+Games
+
+Movies
+
+Movie Classes
+
+Publications
+
+Submissions
+
+User Files
+
+Forum
+
+Chat
+
+Articles
+
+Article Index
+
+Game Resources
+
+Emulators
+
+Staff
+
+About
+
+Dark
+
+Light
+
+Auto
+
+Register
+
+Log in
+
+Game Resources
+
+SNES
+
+Super Mario World
+
+This page documents information about
+
+Super Mario World
+
+,
+
+Kaizo Mario World 2
+
+,
+
+Super Demo World: The Legend Continues
+
+,
+
+Janked Up Mario Party
+
+,
+
+Kaizo Mario World
+
+,
+
+Super Mario World: The Second Reality Project Reloaded
+
+,
+
+Kaizo Mario World 3
+
+,
+
+Super Mario Bros. Enhanced
+
+. Many of the tricks demonstrated here are near impossible in real time and documented for the purposes of creating  Tool-assisted Speedruns .
+
+The purpose of this page is to document information relevant to TASing for the SNES Super Mario World game.
+
+Because of the nature of this site, the focus here is on tricks that are nearly difficult to play in real play, but are useful in the making of tool-assisted speedruns. For some of the tricks, the  frame advance  feature in an emulator is required, and it's highly recommended using the  utility script  to see positions, speeds, timers, etc.
+
+There are some tricks explained in a deep level of detail on  Amaraticando's blog , with some explanations in Brazilian Portuguese. There are also blog posts by  ISM  and  shikipaRiKo  regarding game mechanics and glitches, although they are in Japanese. Lastly, there's a  discussion thread here  with useful discoveries since 2004.
+
+Table of contents
+
+Explanation of terms to be used on this page
+
+Running / Sprinting
+
+Explanation of oscillating speeds
+
+Hopping glitch
+
+6/5
+
+Corner Boost
+
+-1 Trick
+
+Rope Boost
+
+Flying
+
+Oscillating flight speed
+
+Fast air-catching
+
+Keeping flight after exiting a pipe / entering a door
+
+Gain extra height during takeoff
+
+Turn around while flying
+
+Control flight speed during flight
+
+Diving quickly
+
+Diving quickly without slowdown
+
+Rise Cancel
+
+Perpetual Air Catch
+
+Spin jump flying
+
+Vertical scrolling
+
+Fly stuck to the ceiling
+
+Flying invincibility
+
+Fly with an item
+
+Release an item and remain flying
+
+Catch less air
+
+Keeping flight after climbing
+
+Jump or fly through inclines
+
+Fast climbing
+
+Movement in water
+
+1/1 Swimming
+
+Corner Boost
+
+Floating through upward slopes
+
+Yoshi
+
+Double Yoshi
+
+Eat Cancel
+
+Item Swap
+
+Variant #1: Goal Point Swap
+
+Variant #2: Yoshi Licks Nothing
+
+Variant #3: Yoshi Sacrifice
+
+Null Sprites
+
+Stunned Sprites
+
+Stunning "unstunnable" sprites
+
+Holding Items on Yoshi
+
+Yoshi flight
+
+Springboard jumping abuse with Yoshi [2]
+
+Going through solid objects
+
+Lateral Clip
+
+Passing through solid yellow blocks (Smashola)
+
+Pass through floors
+
+Faster floating speed
+
+Survive underneath Smashers
+
+Corner Clip
+
+Item abuse
+
+Jump off a P-Switch
+
+Land on a midair P-switch
+
+Springboard clipping abuse
+
+Keyjumping
+
+Using a key to enter mid-air pipes
+
+Using a key to pass through invisible coin blocks
+
+Hit a block while moving downwards
+
+Duplicating blocks
+
+Duplication away from blocks
+
+Duplicating a block on the ground
+
+New items from old blocks
+
+Duplicating into a dragon coin
+
+Other stuff
+
+Platform Boost
+
+Walljumping
+
+Entering pipes without ground
+
+Fadeout lag
+
+Utility lua scripts
+
+Memory addresses
+
+Footnotes
+
+Movies
+
+TODO
+
+To see these tricks used, you can watch any
+of these movies:
+
+[4144] SNES Super Mario World "warps" by BrunoVisnadi in 09:54.35
+
+[2307] SNES Super Mario World "all 96 exits" by bahamete, kaizoman666 & Masterjun in 1:14:37.63
+
+[3989] SNES Super Mario World "game end glitch" by Doomsday31415, BrunoVisnadi & Masterjun in 00:41.68
+
+[1868] SNES Super Mario World "no powerups, maximum exits" by PangaeaPanga in 1:18:23.22
+
+[2784] SNES Super Demo World: The Legend Continues "warps" by BrunoVisnadi & Amaraticando in 16:52.90
+
+[2639] SNES Super Demo World: The Legend Continues "all 120 exits" by PangaeaPanga in 2:02:04.49
+
+[2967] SNES Super Mario World: The Second Reality Project Reloaded by IgorOliveira66X in 34:25.93
+
+[2317] SNES Kaizo Mario World 3 by ISM & Mister in 17:11.23
+
+Add:
+
+A lot more tricks
+
+Some simple SMV demonstrations of these tricks
+
+Some more/updated animated GIFs
+
+Explanation of terms to be used on this page
+
+← and → will be used for "left" and "right" on the directional pad.
+
+All explanations on this page assume Mario is facing to the right. (→)
+
+All explanations assume the Y button to be used for all purposes, at all times unless both X and Y need to be pressed.
+
+Walking speed
+
+Mario's speed when holding →.
+
+Running speed
+
+Mario's speed when first holding → together with Y.
+
+Sprinting speed
+
+Mario's speed when holding → together with Y while the P-meter is is full.
+
+Flying speed
+
+Mario's top speed when flying with a cape.
+
+P-meter
+
+The value in  $7E13E4  that increases as Mario runs. Once this reaches its 112 peak, Mario begins to sprint.
+
+Pixel
+
+One graphical "block" on the screen.  Used to determine Mario's position on screen.
+
+Subpixel
+
+A smaller unit of measure used in internal game calculations for a more precise measuring system. In this game, subpixels are measured in sixteenths of a pixel.
+
+Running / Sprinting
+
+Explanation of oscillating speeds
+
+The algorithm for Mario's sprinting speed does not actually give him a constant speed.  Instead, his speed varies between five different values (48, 47, 48, 47, 49).  Releasing → will stop this oscillation on whatever speed Mario is traveling that frame.  By releasing → on the right frame while in mid-air, this oscillation will stop on a speed faster than Mario runs on average.  This trick is fully utilized with  continuous jumping , as detailed below.
+
+Mario's running speed also oscillates (36, 35, 36, 35, 37).  So even in situations where there isn't enough space to run to sprinting speed, this technique can still be used to gain a bit of ground.
+
+Hopping glitch
+
+When traveling forward in mid-air after either (1) releasing → in mid-air as detailed above, or (2) releasing Y when flying, Mario will travel forward at his current speed until he touches the ground (if → is not pressed again), at which point he begins to slow down.  However, by jumping on the first frame allowed after touching the ground, Mario does not lose any speed.  Using this technique, jumping over and over through a level can be faster than running, or can allow traveling at flight speeds through terrain that may not be able to be flown through without stopping or slowing down.
+
+Other ways to quickly get up to speed in order to take advantage of this glitch include sliding, hitting an enemy that changes Mario's velocity, and entering a pipe cannon.
+
+6/5
+
+A way to gain some of the advantage of oscillating speeds without losing a full running meter is known as 6/5.  Since  sprinting speed oscillates  every five frames, the trick is to jump, and while in the air, release → on the maximum speed for the maximum number of frames allowed so that pressing → together with Y for five frames will oscillate the speed back to the fastest value, refill the running meter to full, and consider the overall speed.
+
+The pattern to fully optimize forward speed in mid-air while keeping a full P-meter is to release → for six frames, then press → together with Y for five frames, and repeat.  It was previously (erroneously) thought that eight frames of releasing was the most optimal way to improve forward speed (and thus, the trick was called "8/5"), but the speed of the frames when recharging the P-meter was not considered in this analysis.  Looking at average speeds, the 6/5 wins out.
+
+Average speed using 6/5 : (49 * 6 + (49 + 48 + 47 + 48 + 47) ) / 11 = 48.45454...
+
+Average speed using 8/5 : (49 * 8 + (49 + 48 + 47 + 46 + 47) ) / 13 = 48.38462...
+
+Thus, when in the air, releasing → on the fastest speed for six frames, then holding → together with Y for five frames allows for the most optimal (though very slight) boost compared to running normally.  The pattern can be done multiple times before touching the ground, depending on the height of the jump.  The only requirement is that every frame that releases → has Mario in the air, so jumps must be timed correctly to allow this.
+
+Corner Boost
+
+There is a 5 pixels distance between Mario's 'hand' hibox, and Mario's head hitbox. So, in every block, there is a space 5 pixels long in which Mario's head can't touch the block, but Mario's 'side' can. If during Mario's run he stays in this area for 2 frames, it is possible to perform a corner boost. It happens when Mario jumps against the bottom left corner of the block which a Y speed of at least 50 (or 58 if Mario is big, and 57 if Mario is flying). It pushes Mario 1 pixels forward, which is about 1/3 of a frame if Mario has sprinting speed. Sometimes, it is worth losing some subpixels before reaching the block, to adequate Mario's position to the corner boost.
+
+-1 Trick
+
+When accelerating from a stop, Mario's speed increases in this sequence: 0 1 3 4 6 7 9 and continues. If you go the opposite direction first by pressing ← for 1 frame, Mario's speed increases in this sequence instead: 0 -2 3 5 6 8 9 and continues. This is because Mario decelerates faster than he accelerates, so the "extra" deceleration pushes Mario forward a little bit. This method sometimes saves a frame but  does not  work in slippery levels.
+
+Rope Boost
+
+When going past a rope mechanism, such as those found in Cheese Bridge Area or Way Cool, pressing ↑ for one frame gives Mario a horizontal boost without actually grabbing onto the rope.  The amount of boost given depends on when Mario grabs the rope, but generally it's best to grab the rope as early as possible.  Mario can also jump off of these ropes, but jumping too early can negate the boosting effect. This trick can be combined with other circumstances to  prevent spawning a sprite .
+
+Flying
+
+Oscillating flight speed
+
+When flying, pressing → accelerates Mario. However, once top speed is reached, the speed begins to oscillate, repeating its cycle of (51, 50, 49, 48, 47) every 5 frames. If → is released when this value is at its highest, Mario keeps that speed instead.
+
+Fast air-catching
+
+When flying, pressing ← for one frame, releasing it for one frame, and pressing it again on the third frame will catch air faster than the normal 11 frames required when holding ← continuously.
+
+Keeping flight after exiting a pipe / entering a door
+
+When Mario makes a jump while sprinting, the game sets the takeoff meter to 80, and decrements it by 1 each frame until it returns to zero. When this value is positive, a few things react differently.  First off, the screen will scroll up to follow Mario.  Secondly, if Mario is caped, he will be able to ascend until this value reaches zero, at which point he will catch air and start flying.
+
+Since this value decrements at this fixed speed, it's possible to land immediately after taking off, jumping again without running to speed, and still catch air.  This happens because the value is not reset when Mario lands on solid ground, and during the second jump, the value is still positive.
+
+A useful application of this is possible due to the fact that this value does not decrement between rooms that are connected by pipes or doors. In this way, Mario can begin flying at the end of one room, enter a pipe or door, and simply jump in the next room to enter flight mode, as long as Mario's vertical speed reaches a non negative value before the takeoff meter hits 1.
+
+Gain extra height during takeoff
+
+Normally, liftoff should be kept as short as possible, because the sooner the liftoff phase ends, the sooner Mario can reach his top flying speed of 51. However, sometimes even higher heights are desired near takeoff.
+
+To accomplish this, release Y after reaching top speed at the beginning of flight, and start holding Y again a bit later, during the fall. Because the takeoff meter is still above zero, Mario will re-gain flight, and depending on how far he's fallen, will gain quite a bit of height without any horizontal slowdown. This can also be used to avoid obstacles in Mario's flight path just after liftoff.
+
+Turn around while flying
+
+The X and Y buttons have the same function in this game.  One must be held to remain flying, so pressing the other will cause Mario to spin.  Sometimes the spin will not turn Mario around, but by varying the frame Mario spins on, this can be manipulated.  Also, while spinning, you can control Mario's speed with ← and →. Keep in mind that Mario can only catch air if he is moving in the direction that he is facing.
+
+Control flight speed during flight
+
+When flying, pressing ← and B will slow Mario down without changing his animation.  Press B repeatedly to slow Mario down more.
+
+Diving quickly
+
+When flying, putting Mario into diving animation will increase the amount of air he can catch.  A way to take advantage of the added height without having to waste time diving is to press → every other frame.  After five presses of forward, Mario will be in swoop animation very quickly, and can lift off very high.  Also, you will still have fast flying because → was pressed for 5 frames, which cycles the speed back to its original value.  The only speed loss will be the few frames that Mario's speed oscillated due to pressing →.
+
+Diving quickly without slowdown
+
+This trick only works when Mario is flying and facing left . Normally when diving, each frame that forward is pressed will affect Mario's horizontal speed. However, when flying to the left, pressing ← and → simultaneously will behave just like pressing ← only, except that horizontal speed is not affected.  When traveling to the left, this means Mario can get into a dive animation without losing any speed.  When traveling to the right (but facing left), Mario can enter a left-facing dive animation while still traveling to the right, which sets the next air-catch to be higher.
+
+Rise Cancel
+
+When flying, making Mario face the opposite direction will not allow him to catch air. By abusing the cape-spin, we can regain Mario's potential to catch air by facing the opposite direction during a rise. For example, assume Mario is flying to the right. After a dive, perform a cape-spin in such a way that Mario faces to the left. If you catch air during this spin, he will rise anywhere from a tiny amount to a large amount depending on when you pressed the input to catch air. Afterwards, Mario will be able to catch air again either by spinning during the rise, or just retaining the potential to catch air. Mario's direction, 7E0076, is most useful to watch here.
+
+Perpetual Air Catch
+
+Another way to cancel a rise is to make Mario's x velocity non-positive (or positive when facing to the left). Let's assume Mario is facing to the right. During the rise, pressing ← and B on alternate frames will cause him to lose momentum quickly. With good timing, he can catch air but regain the potential to catch air again soon after by making his momentum positive. This can be repeated indefinitely by gaining air, cancelling it, gaining etc. repeatedly using good timing. This is useful for such circumstances as when we want to gain lots of air very quickly, such as after the door in Donut Ghost House (normal exit). A good demonstration of this is in  gocha's demo .
+
+Spin jump flying
+
+By using the A button to start flight instead of B, Mario will spin-jump very high, following the physics of initial flight while holding an item or riding Yoshi.  An advantage of this is that Mario is still running full speed after landing.  A disadvantage is that this technique is not horizontally faster than running.
+
+6/5  can be done while using this technique to move faster horizontally.
+
+Mario can get boosts in mid-air several times if A is released and pressed again after he begins to drop.
+
+Vertical scrolling
+
+When Mario is flying (after takeoff), the screen will not follow him upwards if he continues to catch air.  This normally is not too much of a problem, but there also is a limit to how high Mario can go above the screen.  There are three ways to get the screen to begin scrolling upwards:
+
+Touch the ground for more than 1 frame
+
+Snag the wall (but do not  walljump )
+
+Grab onto a  rope /vine/fence
+
+The last technique has the advantage of  keeping flight after jumping off .
+
+Fly stuck to the ceiling
+
+If Mario can catch air very close to the ceiling, continue holding ← and Mario will stick to the ceiling, flying along it as long as the environment allows.  This can only happen by either bouncing off an enemy to the ceiling, or by a lower ceiling that Mario can approach from above.
+
+Flying invincibility
+
+Whenever Mario gets hit while flying, he loses his flying state and is invincible for a short time (shorter than normal hit-invincibility).  At this point, flying speed can be kept by immediately starting the  hopping glitch .  If flying again is required, Mario will have to run back up to sprinting speed.
+
+Fly with an item
+
+While flying, guide Mario into an item that can be carried, and he will automatically grab it.  Although he'll no longer have the flying animation, flying physics are still maintained.
+
+This technique can be extended to spinning while in mid-air to hit a Koopa with Mario's cape, and grabbing the resulting shell in mid-air without losing speed.
+
+Release an item and remain flying
+
+Releasing Y while carrying an item will drop it or kick it, depending on the object.  Releasing Y during flight will normally cause Mario to stop flying, but there are certain points of flight that are safe to drop an item by releasing Y for one frame and also remain flying afterwards.  Examples include the first few frames after catching air, and the very top height of an air-catch, as the animation frame changes.
+
+Catch less air
+
+By pressing X around the same frame that Mario catches air, the height of the arc will be substantially less.  This can be useful in very specific circumstances, for example, when flying through a very small area.  The exact frame of pressing X can vary depending upon unknown factors.
+
+Keeping flight after climbing
+
+When flying by a vine, chain, or fence, press ↑ to grab it.  Hold Y when jumping off the object to continue flying.  The direction you face after jumping off the vine is manipulatable by jumping off at different frames.
+
+Jump or fly through inclines
+
+Stairs and other 45-degree inclines are a one way platform at an angle. The game decides if Mario should land on it based only on his vertical speed. So, if Mario runs into the stairs while moving upwards, the game will determine that he is passing through them in the correct direction. This can be done without a cape by running and spin-jumping at the right time. With a cape, it can be done by flying through at a more shallow angle than the stairs.
+
+Fast climbing
+
+Pressing ↑ and B together every other frame will climb vines and chains at the same speed as the initial ascent of flight.  The drawback is that the screen does not begin following Mario.  This can be circumvented by landing on solid ground for more than one frame while above the screen - then the game will scroll upward until it catches up to him, and he can continuously climb above it quickly.
+
+Movement in water
+
+1/1 Swimming
+
+Even Mario's swimming speed oscillates - between 15 and 17 (or 31 and 33 if carrying an item underwater).  This can be abused by pressing back and forth when reaching the highest oscillation point.  This way, swimming speed can be improved from (15 + 15 + 16 + 16 + 17) / 5 = 15.8 subpixels per frame, to (15 + 17) / 2 = 16 subpixels per frame.  The technique works similarly when swimming with an item.
+
+Corner Boost
+
+When swimming underneath a square corner, swimming upward against it can push Mario forward, reaching a destination 2 frames sooner (per boost).  This trick does not apply when carrying an item underwater, but it can be done simultaneously with  1/1 swimming .
+
+Floating through upward slopes
+
+By holding an item and floating up at an angle shallower than the angle of the slope, it can be passed through in the same way as an  incline above water .
+
+This can also be done without an item; however, it requires greater precision, and can only be done on every 16-pixel "block" boundary of the slope.
+
+Yoshi
+
+The amount of glitches involving Yoshi is so vast, that a seperate section seems more appropriate. When riding Yoshi, the gameplay changes dramatically too.
+
+Double Yoshi
+
+Normally, two Yoshis cannot be anywhere in the level at the same time. However, if their eggs are spawned at the same time, the game skips the check to see if there is an already spawned Yoshi. However, one Yoshi (the one that spawned first) will be invisible. Riding an invisible Yoshi has some advantages:
+
+If we jump off of him, we will jump from his  original  position. This can be used to pass through solid objects.
+
+If the normal Yoshi despawns with an item in his mouth, the invisible Yoshi will become visible holding a null sprite. More on this soon.
+
+If the normal Yoshi despawns, the invisible Yoshi will appear one tile below where Mario is standing, so we can fall through the ground.
+
+The exact mechanics of multiple Yoshis are explained in a deeper level in this video by nathanisbored:  https://www.youtube.com/watch?v=UGJ6-CcPDHg
+
+Eat Cancel
+
+If Yoshi has a sprite on his tongue and receives damage while doing it, the sprite will move to where it was on his tongue when he got hit. This gives the sprite weird properties, such as losing vertical interaction with ground and being unable to harm the player.
+
+In the case of berries, we can eat-cancel them without taking a hit by timing a turn as it hits his tongue or by licking other sprite one frame after licking the berry.
+
+Item Swap
+
+It is strongly advised to use the  utility script  to assist in performing this bug.
+
+SMW allows for 12 sprites to be on screen at any time. Traditionally, we call these the first and second  divisions . Division one is sprite slot #00 to slot #09. The second division is therefore #10 and #11.
+
+Typically, with a few exceptions, sprites in SMW are spawned in descending order into the first division. So the first sprite spawned will go into #09, the next into #08. Once these despawn, their slots are freed, and sprites will 'compete' for the highest slot. The only time slots are not freed are with permanant sprites, such as P-Switches, Keys, etc. In the first division, no sprites will replace others with the exception of the goal point. Note: Some level options will have the first division as low as 6 or so sprites. One such example is Yoshi's Island 1. Be careful when trying to fill sprite slots; if in doubt, check the Sprite Header settings in Lunar Magic.
+
+The second division is reserved only for berries, sprites coming out of the reserve item box, or items out of blocks. If this division is full, sprites will go into the first division if there is free slots. If there is not, they will begin to replace sprites top-down.
+
+I have briefly mentioned two ways to swap sprites, but this has no benefit at all until Yoshi is introduced. If you observe a sprite being swapped, all that happens is that the original vanishes. If the original is on Yoshi's tongue, the new sprite will zip to Yoshi's tongue too.  todo: explain why.
+
+Variant #1: Goal Point Swap
+
+Because of the nature of the goal point, as mentioned before, it will replace sprites in the first division if there no free slots. Thus, we only have to fill slots #00 - #09 with permanent sprites (or, have the sprites all on screen at once: very difficult) and take a sprite with us near the goal. In the case of Yoshi's Island 2, we can  eat-cancel  berries turning them into sprites while taking a shell with us. If Yoshi licks the shell as the goal point spawns, the goal point will warp to Yoshi's tongue. With luck, Mario will hit the goal as opposed to Yoshi swallowing it. Similarly, we can also item swap sprites that take the second division when they replace each other.
+
+Variant #2: Yoshi Licks Nothing
+
+Sometimes, the item on Yoshi's tongue can despawn, leaving Yoshi having nothing on it. Then, a sprite taking that slot will zip to Yoshi's tongue. This can be done in the following ways:
+
+Sprite collected by Mario: If Yoshi holds a sprite coin or a power-up on his tongue and it is collected by Mario, Yoshi will temporarily hold nothing.
+
+Double-eating : Timing Yoshi's tongue when passing a coin sprite or power-up means we can collect the sprite, but Yoshi will have it in a 'nulled' state on his tongue. If a sprite takes that slot, it will zip to Yoshi's tongue. Incidentally, if we do not spawn a new sprite in that slot, we get the coin or power-up twice. This method has the advantage of being much faster. In the case of powerups we must only fill the second division. In the case of sprite coins, they are already in the first.
+
+Licking a naked koopa as it enters a shell: The naked koopa sprite is despawned when it enters a shell, allowing Yoshi to have nothing in his tongue if he licks it right before.
+
+Licking a throw block as it is destroyed: The throw block sprite disappears immediately when it is destroyed, allowing Yoshi to have nothing in his tongue if he licks it right before.
+
+Despawning  sprite in Yoshi's tongue: If a sprite goes below the death line while it is on Yoshi's tongue, it will despawn, and Yoshi stays with nothing in his tongue. If we don't perform the item swap, the item reappears on Yoshi's mouth, but it also states as 'despawned', which means it will respawn if you go back to its spawn point. So, it is possible to duplicate itens with this technique.
+
+Eating a sprite as Yoshi dies in Lava: If Yoshi is sinking in Lava with his tongue spit out, he won't retract it. So, you will have time to kill whatever sprite is on Yoshi's tongue, and an item swap will occur after another sprite takes that slot, as long as Yoshi hasn't despanwed yet.
+
+Variant #3: Yoshi Sacrifice
+
+Due to Yoshi's properties, if he despawns and a new sprite takes his slot the frame after, the item will zip to underneath or near Mario. The easiest way to do this is to drop Yoshi into a pit as a new sprite spawns. This will only work with certain sprites.
+If a new room is loaded, Mario recovers Yoshi. It might have a different color (such as gray or golden) and its graphics can also be glitchy.
+
+This glitch has multiple interesting consequences and variants which are explained in this video by nathanisbored:  https://www.youtube.com/watch?v=2fLOZrQzDnQ
+
+Null Sprites
+
+Sometimes, there are circumstances where Yoshi will have a null sprite in his mouth (literally nothing), but is still referenced by the sprite table as ID #FF. It is difficult to word but Yoshi will have  nothing  in his mouth but still have  something , because ths swallow timer is reset. This can be performed two ways:
+
+As mentioned before, if we spawn two Yoshis and despawn the first one with an item in its mouth, the new one will become visible with a null sprite.
+
+Double tongue method. Yoshi can stick out his tongue twice, and a sprite caught on the first lick will then be nullified when he sticks out his tongue the second time. This can be performed in two ways. Firstly, by using Double Yoshi glitch and despawning the first Yoshi with an item in its mouth. Secondly, by sticking out Yoshi's tongue when Mario collects a powerup, a Yoshi egg hatches, or during a room transition.
+
+When spitting out a null sprite, it has some strange effects and advantages:
+
+Whatever sprite is in ID #3 will be have the bits "Being eaten" set and "Interaction with Objects" cleared. Thus, the sprite #3 will be able to pass through ground, walls and ceilings, and will lose interaction with other sprites. This can be useful in the case of Yoshi or Springboard; if we land on them as they pass through the ground, Mario will move with them.
+
+Whatever sprite is in ID #1 will have all of its bits cleared (with the exception of bit 0, depending on Yoshi facing direction). This can cause weird effects such as infinitely usable P-Switches, or burnable sprites that normally aren't.
+
+todo: spitting out on platforms...
+
+Stunned Sprites
+
+A sprite has a few states it can be in. See  SMWiki . One of these sprite states is a "stunned" state. Normally, this is the state the game uses for the sprites Mario can carry. For example, a green shell and a green koopa are the same sprite, but in different states: the koopa is in the normal routine, and the shell, in the stunned state. Same for goombas, and bob-ombs. Sprites that Mario can always carry, such as keys and P-witches, are always in the stunned state, and get glitchy if you make them to enter in the normal routine.
+
+There is an important timer called 'stun timer', which is used by different sprites for different purposes. It's called this way because koopas use this timer to spawn naked koopas. When you jump on a koopa or hit it with the cape, not only it goes to the stunned state (turns into a shell), but it also sets the stun timer to some value (a small value in the first case, and a big value in the second). This timer decreases in 1 every other frame. When it reaches 0, the naked koopa is spawned from the shell. Normally, it only happens with koopas, but the developers coded that every time a sprite is in the stunned state, and its stun timer reaches 0, another sprite is spawned from it. The stun timer is used for many other purposes, for example, for a stomped sprite to disappear. So, if an item can be held on Yoshi's mouth and is stompable, and we eat it at the same time Yoshi stomps it, Yoshi will be able to drop back the item in the stunned state, but it will also have its stun timer set to a non zero value, and decreasing every other frame. When it hits 0, a sprite will be spawned from it. This allows one to spawn infinite naked koopas from a non-red shell. In the case of P-Switch, we can spawn fish.
+
+Stunning "unstunnable" sprites
+
+Some sprites aren't meant to be stunned and thus have no stun routine. We can force a sprite into its stunned state via double-tongue glitch. In this circumstance three steps must be followed:
+
+Perform double-tongue glitch.
+
+On the first lick, catch a sprite that remains in Yoshi's mouth: a koopa/shell, P-Switch, key or springboard.
+
+On the second lick, catch a sprite you wish to be stunned and  take damage while it is on Yoshi's tongue , so that Yoshi doesn't swallow it. Then, Yoshi's mouth will be full, and despite the second sprite doesn't seem to be in his mouth, the game actually considers it is. It can be dropped out of Yoshi's mouth, even if it isn't meant to stay there, and if it's stun timer is non zero when that happens, it will overflow the SpriteKoopasSpawn table and spawn some sprite. The sprite it will spawn depends only of what sprite you stunned.
+
+The stun timer of a sprite can be set to a non zero value in various ways. One way is stomp on it. The dust/cloud it leaves behind uses the stun timer to determine how long to display the effect. Some sprites use the timer for other things, such as when they first spawn, or for an action to take. For example, the goal point uses the timer to determine when to change direction.
+
+We can get very weird effects with this glitch. The most useful cases are:
+
+Naked Blue Sliding Koopa: When stunned, will spawn a Koopa Kid. This Koopa Kid, when killed, will end the level.
+
+Pokey: When stunned, will spawn a Goal Point. To get the goal point we must go to X Position between 0 and 15 and Y Position = 0.
+
+Dino Rhino: When stunned, will spawn a keyhole. A Dino Torch will cause the game to crash, however.
+
+Fish that moves horizontally and Para-bomb: When stunned, these sprites will spawn a Reznor. If Reznor spawns into slot 7, the level can be finished: the following RAM memory addresses values - $7E:1520, $7E:1521, $7E:1522 and $7E:1523 - must sum up to 4. Each sprite use these addresses in a different way, many of them for 'vertical directions'. The 4 cited addresses are used by sprites between slots 4 and 7.
+
+Diggin' Chuck: When stunned, will spawn a Clappin' Chuck. It's known as the 'orb chuck', as if you get Yoshi to eat this chuck via item swap as Fire Mario, you will get an orb in the item box.
+
+There are other useful sprites to stun. For example, a boo creates a Koopa Kid, and an eerie creates a keyhole. You can't benefit from this in the original Super Mario World because Yoshi can't enter ghost houses, but in some ROM hacks, he can. Also, some sprite, when stunned, will create some sprite from this list: for example, stunning the rock of a Diggin' Chuck provides a sliding blue koopa, which provides the Koopa Kid. So, sometimes a double stun or even a triple stun can be useful. There are too many 'patches' to put them all here, but you can see what each sprite provides, when stunned, in this table on Pastebin:  http://pastebin.com/cyS0DVh2
+
+Holding Items on Yoshi
+
+If an item is in a slot lower than Yoshi, it is possible to hold it while riding Yoshi. This is performed by landing on him at the same time an item is grabbed. If you perform a double grab in the frame you mount Yoshi, then you will carry 2 items while riding him. Since there's no limit of springboards Mario can carry, you can carry many of them on Yoshi too. They also exclusively don't need to be in a lower slot than Yoshi.
+
+Yoshi flight
+
+Normally, flying while riding Yoshi is the same as flying while holding an item - just a long jump, and the same oscillating speeds as sprinting. However, it is possible to trick the game into applying regular flight physics while riding Yoshi.  Whenever Mario lands on Yoshi during flight, Yoshi flight is started.  However, in most cases, Yoshi touches the ground a couple frames later.  If air is caught immediately after landing, or something else keeps Yoshi from touching the ground, the flight can continue.
+
+One problem is that although pressing ← will catch air, it will also turn Yoshi and Mario around.  In order to take advantage of the flight like normal,  fast air-catching  must be used, followed by turning back around.  You can even get a  dive  (without the animation) to catch a large amount of air by using ← and → simultaneously, while facing left.
+
+Ways to initiate Yoshi flight:
+
+Fly onto Yoshi while maintaining a rise.
+
+While flying under a ceiling on Yoshi, dismount in mid-air
+
+Fly onto Yoshi and an enemy or shell at the same time
+
+Fly onto Yoshi while he is placed on the very edge of a platform
+
+Fly onto Yoshi while he is placed on a purple triangle
+
+[ 1 ]  (the kind that let you run up the wall)
+
+Springboard jumping abuse with Yoshi
+
+[ 2 ]
+
+If Yoshi licks a springboard on the same frame he steps on it, he will soar upwards very fast, ignoring most boundaries.  The speed and duration of takeoff can be tweaked with the ↑ and B buttons. Normally, this is done either in the first or in the last frame that Yoshi's tongue is out of Yoshi's mouth. However, it's possible to get extra height by performing this when it's in the second or second last frame, which requires much more precision and some horizontal speed.
+
+Going through solid objects
+
+Lateral Clip
+
+Mario's hitbox with blocks is not a rectangle. Instead, it is made of small dots of interaction. If Mario is big and riding Yoshi, the distance between the dot that corresponds to Mario's shoulder and the dot that corresponds to Mario's leg is slightly bigger then the size of a block. Thus, as there are no other dots between his legs and shoulder, with a precise Y position manipulation, it is possible to go through a block horizontally. This boosts Mario forward a bit.
+
+Passing through solid yellow blocks (Smashola)
+
+This is a strange glitch that lets Mario move very rapidly downwards though the solid yellow blocks that spin.  When his cape hits the blocks at his side, they begin to spin.  However, the game only allows 4 spinning blocks at once in memory, so when a fifth block is caused to start spinning, it immediately stops the first. By placing Mario over the block that stops, the game will start to push him downwards at a very fast rate.  The glitch can continue itself in a domino-effect.  As Mario moves downwards, he's still spinning, which causes new blocks to start spinning, which stops others, and the glitch continues.
+
+While doing this glitch, Mario is considered overlapping with the blocks, so in addition to moving down quickly, he will move to the left slowly as well.  Also, if Mario goes too far below the screen, he can die.
+
+Pass through floors
+
+In very specific instances, ducking in a space that is too small for full-size Mario and spin-jumping can push Mario through the floor.  See Valley of Bowser 2 for an example of this.
+
+Faster floating speed
+
+Pressing ← and → simultaneously while Mario has a P-Balloon or is riding a Lakitu cloud will send him to the right oscillating at speeds much faster than the normal speed of travel for these objects (52, 51, 50, ..., 38, 37, 36).
+
+This form of travel will partially ignore many barriers, and so it can be used to go through some solid objects.
+
+In a cloud, Mario can jump out at any time, so a speed of 52 can be achieved and kept using the  hopping glitch .
+
+Survive underneath Smashers
+
+In some castles, it's possible to be crushed by a Layer 3 Smasher (sprite $89) and not take damage.  As the Smasher lowers onto Mario, alternate between pressing A and B every frame, and Mario will be in a constant state of jumping without being hit.
+
+Corner Clip
+
+"Corner Clip" refers to moving through solid ground, which can only be done when ground meets at a corner (either a convex or concave corner; the former is described here). This bug requires an X speed of at least 49 and a Y speed of at least 33.
+
+A speed of 49 means Mario's subpixel moves his position like 0.00 -> 3.10 -> 6.20 -> 9.30, because 49 speed just means 49 subpixels per frame. Under these conditions a corner clip is not possible because to pass through the ground, a 4 pixel change is required. Eventually, this cycle reaches 36.e0 -> 39.f0 ->  43.00 . The subpixel wraps around, increasing Mario's position by  4  pixels.
+
+One way to set this up is to stand against the left side of the block (assuming we will be flying to the right), and noting down Mario's x-position. So, we'll say a block is at x-position 42. This means Mario's x position must move such as (with a speed of 49):
+
+38.d0 -> 41.e0 -> 44.f0 ->  48.00
+
+Mario moves two pixels inside the block (44.f0) then is boosted 4 pixels further (48.00). Knowing this, we need only to adjust the x speed/position of Mario as he approaches the corner, in such a way that his speed follows this pattern, and then adjust y position too, until the bug succeeds. This bug has the advantage of, not only allowing access to places much faster, but also boosting Mario some pixels while he is inside the block. Typically, a corner clip on a single block will save anything up to 3 pixels or so.
+
+In the above example, if Mario moves faster than 49 speed then the 44.f0 can take on other subpixel values. At a speed of 51, this part can be either 44.d0, 44.e0 or 44.f0, because the next frame will increase subpixel by 3 (51 subpixels/frame = 3 pixels 3 subpixels).
+Because of how 'pressure' works in this game (when inside a block, Mario is pushed to the left), corner clips to the right can not be consecutive. If there are two horizontal blocks in a row, they cannot both be passed. This is not the case when travelling to the left (see  Donut Secret House of the current "warps" TAS ).
+
+Item abuse
+
+Jump off a P-Switch
+
+By jumping at the exact frame Mario lands on a P-Switch, it can be used as a platform to jump off.  Note that the Y button cannot be held on this frame - otherwise, Mario will just pick up the P-Switch again.  Because of that, either the P-meter must be recharged after landing, or the jump should be followed by the  hopping glitch .
+
+Land on a midair P-switch
+
+When dropping a P-switch, it will travel with the same horizontal speed that Mario does. To land on it, Mario must slow down a bit before releasing it, and then, regain the lost speed to catch up. The best way to do this is by dropping the P-switch at a low point of Mario's  oscillating sprinting speed , and then using the high point of the oscillation to catch up to it in mid-air.
+
+Note: When dropping the P-Switch, it must be dropped, not  kicked . This is done by not holding → when releasing Y.
+
+Springboard clipping abuse
+
+When Mario jumps on a springboard to compress it, the game ignores most kill triggers, including walls.  In addition to this, Mario will remain "stuck" to the spring while it is compressing.  With these properties, Mario can go through solid objects
+
+[ 3 ]  by throwing a springboard in the air, and jumping on it as it falls past a corner.
+
+Keyjumping
+
+The key is a unique object - it can be stood on, and it cannot be destroyed. Because of these two properties, it can be jumped off of, and also carried with in the same jump. When near a wall, this process can be repeated:
+
+Jump with the key.
+
+Drop the key near the peak of the jump (but not at the very peak).
+
+Land on the key in mid-air (without holding Y).
+
+Jump off of the key, and start holding Y on the same frame.
+
+You will now have jumped in mid-air and be holding the key.  Repeat.
+
+By this process, walls can be scaled and jumping can pretty much go anywhere, as long as a key is handy.  Note that if the key has too much downward momentum, it can be jumped off of, but not carried at the same time.
+
+Using a key to enter mid-air pipes
+
+The key can be used as a temporary platform to fool the game into thinking that there is ground near the pipe, and enter it in mid-air.  It's also possible to bring the key with you through the pipe by holding Y on the frame before heading into the pipe.
+
+Using a key to pass through invisible coin blocks
+
+By standing on the key as it bounces, the height can lift Mario up far enough to jump above invisible coin blocks that would otherwise appear when jumped from the ground.
+
+Hit a block while moving downwards
+
+If Mario passes though the corner of a block enough, the game will think he is far enough inside of it that it gets hit.
+
+Duplicating blocks
+
+By throwing a carriable enemy or an item at a block while close to it, we can duplicate a block to the side, upwards, or upwards-diagonally. For this to occur, the projectile must have an x velocity of 0, a y velocity of at least 97 and it must go into the block at least 7 pixels from the bottom. The direction in which the item is forced out of the block determines how the block will be duplicated; if the item goes into the block by 15-16 pixels from the bottom, the block is duplicated upwards. If the item goes into the block by 7-10 pixels from the side, then the block is duplicated to sideways; if both conditions are met, the block will be duplicated upwards diagonally.
+
+Duplication away from blocks
+
+When we cannot get close to a block, certain conditions allow us to duplicate a block to the side by throwing an item upwards. After throwing up an item, its y velocity moves in the sequence: -112 -109 -106 -103 -100 -97 -94, so there remains only 7 frames in which it can go into the block by 7 pixels after it gets thrown. The following table shows when you should throw up an item to get block duplication; distance means “how far an item is from the block”, and subpixel “subpixel of the item”. Note that an item follows mario while he is holding it, and also that after he releases it there is a 1-frame delay on the item's following mario.
+
+Distance  0  7  13  14  20  26  27  33
+
+Subpixel  00-F0  00-C0  D0-F0  00-60  70-D0  E0-F0  00-10  20
+
+Duplicating a block on the ground
+
+Occasionally, a block desired to be duplicated is on the floor. Such situations do not allow for an item to be thrown upwards to duplicate it. In this circumstance, we can duplicate a turn block by dropping an item while it stops turning, in such a way so it bounces off the ground inside the block. See  ISM's Demo .
+
+New items from old blocks
+
+The game differentiates certain items by the block's horizontal position in the level.  For example, blue P-switches and gray P-switches are actually the same object in the game, but determined by an odd/even horizontal position of the question block which contains it.  Thus, by duplicating a block to the side with a p-switch inside, it will give a P-switch of the other color.
+
+An interesting item-group abused by this trick is the group which contains keys, p-balloons, and yoshi wings.  See Super Demo World's Crystal Star World level in the short run for an example of this.
+
+Yoshi Wings ↔ P-Balloon ↔ Shell ↔ Key ↔ Yoshi Wings
+
+Duplicating into a dragon coin
+
+If the block duplication glitch is used over half of a dragon coin and Mario collects the remaining half of the dragon coin afterward, the part of the coin the block was duplicated on will become a key/wings/balloon/shell block.
+
+This happens because of how the block IDs were set up in the coding of the game (see the "Direct MAP16 Access" pages in Lunar Magic). Dragon coins are set up to change to tile 25 (essentially a block of nothingness) of whatever page the tiles are on. Because the bottom half becomes a tile on MAP16 page 0x1 rather than 0x0 when you duplicate into it, it turns into tile 125 instead, which happens to be the key/wings/balloon/shell block.
+
+Other stuff
+
+Platform Boost
+
+Horizontal boosts can be achieved from line guided and hammer bros' platforms, such as the ones found in Donut Plains 3, Donut Plains 4, Star World 4 and Gnarly.  Hopping onto the platform will boost Mario to the left or right a bit. The amount of distance boosted depends on the amount of pixels covered by the platform in the frame Mario touches it.
+If Mario is 6/5ing and runs thought the whole platform, he will be boosted much more, since all the displacement of the platform will be converted as a boost to Mario. Which this method, Mario can also get boosts in the rotating platforms in Yoshi's Island 3.
+
+Walljumping
+
+Walljumping happens when Mario jumps towards a wall, and his foot catches the wall, stops his falling speed, and allows him to jump again in mid-air.  In order to pull off a walljump, Mario needs at least a speed of 33 going toward a wall, and must run into the wall at exactly a block boundary (every 16 pixels).  If Mario "catches" the wall, then conditions are good for a walljump - simply press jump a couple frames before he snags it.
+
+The wall catch happens when Mario moves 3 pixels inside the wall (it's the same principle of the corner clip, but it requires a 3 pixels displacement instead of 4). If you RAM watch Mario's position, you will see that most of the times in which a wall catch happens he moves only 2 pixels inside the wall. That happens because the wall immediately pushes Mario out in 1 pixel, but the wall jump is still possible in this condition.
+
+Entering pipes without ground
+
+By "catching" the wall at the right spot, the same way the wall is caught when performing a  walljump , the game treats that state as Mario standing on solid ground.  If this is done near a pipe that can be entered, but doesn't normally have ground below it (the higher pipe in Gnarly, for example), the pipe can be entered in mid-air.
+
+Fadeout lag
+
+There are three different kinds of fadeout.  The first is after completing a normal level, when the black circle closes around Mario.  The amount of lag here is based on Camera's Y position, the frame the circle starts closing, Mario's score, life count and coin count. The higher the sum of the digits of the score is, the bigger is the amount of lag.  By poking zero into the 2-byte RAM address 7E0F34, the score will be zero, and the lag given is the best that the particular exit can get. For the life and coin count, only the digit of the tens mater. The bigger they are, the bigger is the amount of lag.
+The way Camera's Y position interferes in lag is still not well known.
+
+The second is after completing a boss level.  This is not score dependent and can't be controlled or minimized, except for delaying the frame the boss is killed.
+
+The third is a secret exit.  This depends on some things: Mario's score, coin and life count; camera's position (especially Y position), the sprites on-screen (especially the ones around the edge of the keyhole at its largest position), Mario's position, Mario's 'state' (if he is jumping or not, ducking or not, etc. Jumping can slightly increase lag, spin jumping or cape spinning can significantly increase lag, and ducking can slightly decrease lag, except if it creates little 'smokes' in the ground.
+
+Utility lua scripts
+
+A  Lua utility script  displays useful info such as velocity, position and P-meter on screen, can show the hitbox area of the player and enemies, allows more advanced cheats, and other tools that are useful to investigate the game. You will definitely need a lua script if you want to make a TAS of Super Mario World or one of its hacks. There are scripts available for all the allowed emulators of TASVideos:
+
+Script  Emulator  Description  Author
+
+smw-tas
+
+lsnes and Snes9x  Many options, some cheats and predictors. Shows info about many types of objects and has many kinds of hitboxes. It's the most complete lua script, and the recommended version for TASing.  Amaraticando
+
+SMW-BizHawk
+
+BizHawk
+
+smw-tas  version for BizHawk, so has almost the same features. Suitable for TASing and research. -  More info
+
+BrunoValads and Amaraticando
+
+SMWUtils
+
+Snes9x  Displays info about the player, sprites, item box and timers. Has various cheats. It's an incremented version of  gocha's script .  gocha, Mister and BrunoValads
+
+SWMPlayer_display
+
+Snes9x  Similar to SMWUtils, with different displacement of info. Has walljump predictor.  ShadowDragon121
+
+SMW Atlas
+
+lsnes  Displays offscreen objects to make an  atlas-encode . You might need to increase the amount of RAM that can be used by Lua for this.  Masterjun
+
+Memory addresses
+
+This is a list with the most useful Super Mario World memory addresses. You can find the whole RAM map on  SMWCentral .
+
+Address  Description
+
+7E007B (1-byte signed)  Player x speed, in subpixels/frame
+
+7E007D (1-byte signed)  Player y speed, in subpixels/frame
+
+7E0094 (2-byte)  Player x position (pixel)
+
+7E13DA (1-byte)  Player x sub-pixel
+
+7E0096 (2-byte)  Player y position (pixel)
+
+7E13DC (1-byte)  Player y sub-pixel
+
+7E13E4 (1-byte)  P-meter
+
+7E149F (1-byte)  Takeoff Meter
+
+7E1462 (2-byte)  Camera x position
+
+7E1464 (2-byte)  Camera y position
+
+7E0076 (1-byte)  Player direction
+
+7E0019 (1-byte)  Powerup status
+
+7E0077 (1-byte)  Player blocked status
+
+7E0100 (1-byte)  Game mode (possible values  here )
+
+7E0013 (1-byte)  Frame counter
+
+7E0014 (1-byte)  Effective frame counter
+
+7E148D (2-byte)  RNG
+
+7E14C8 (12-byte)  Sprite status table (possible values  here )
+
+7E009E (12-byte)  Sprite ID table (possible values  here )
+
+7E14E0 (12-byte)  Sprite x position table, high byte
+
+7E00E4 (12-byte)  Sprite x position table, low byte
+
+7E14F8 (12-byte)  Sprite x sub-pixel table
+
+7E14D4 (12-byte)  Sprite y position table, high byte
+
+7E00D8 (12-byte)  Sprite y position table, low byte
+
+7E14EC (12-byte)  Sprite y sub-pixel table
+
+7E00B6 (12-byte)  Sprite x speed table, in subpixels/frame
+
+7E00AA (12-byte)  Sprite y speed table, in subpixels/frame
+
+Footnotes
+
+[
+
+1 ]:  skamastaG  says these look like watermelons. 
+[
+
+2 ]: This trick can also be referred to as "Dinosoar" (Dino-soar, hyphen optional).  It's a play on words. -  JXQ
+
+[
+
+3 ]: "Objects" refers to sprite-objects - blocks that sprites can go through, but Mario cannot, such as a message box.
+
+See also
+
+Game Resources  - we have resource pages for other games too!
+
+Common Tricks  - tricks common to many games
+
+Boss Fighting Guide  - tricks specific to boss fights
+
+GameResources/SNES/SuperMarioWorld last edited by adelikat  on 4/15/2024 9:40 PM
+
+Page History
+
+Latest diff
+
+List referrers
+
+View Source
+
+&copy; 2026 - TASVideos v2.6-db6dfdb
+
+Terms
+
+API

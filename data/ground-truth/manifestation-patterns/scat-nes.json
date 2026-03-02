@@ -1,0 +1,178 @@
+{
+  "game_id": "scat-nes",
+  "game_name": "S.C.A.T.: Special Cybernetic Attack Team",
+  "platform": "nes",
+  "paradigm": "shmup",
+  "danger_signals": [
+    {
+      "signal": "Enemy projectiles",
+      "visual_form": "Colored bullets fired from enemy positions",
+      "meaning": "Active threat requiring evasion; player takes damage on contact"
+    },
+    {
+      "signal": "Boss appearance",
+      "visual_form": "Large distinctive enemy sprite at stage conclusion",
+      "meaning": "Stage climax; heightened danger requiring pattern recognition"
+    },
+    {
+      "signal": "Enemy spawn patterns",
+      "visual_form": "Waves of smaller enemies advancing toward player",
+      "meaning": "Escalating pressure; coordinated threat requiring tactical repositioning"
+    },
+    {
+      "signal": "Terrain hazards",
+      "visual_form": "Environmental obstacles (astrotube structures, battleship geometry)",
+      "meaning": "Collision damage; terrain can eliminate all remaining lives if player gets squeezed (JP version mechanic)"
+    },
+    {
+      "signal": "Hit feedback",
+      "visual_form": "Character death animation (disintegration in JP, blue ball explosion in US/EU)",
+      "meaning": "Life loss; visual distinction between versions emphasizes severity"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Power-up containers",
+      "visual_form": "Destructible letter-marked containers in environment",
+      "meaning": "Weapon upgrades (Laser, Wide Beam, Bomb) or support items (speed boost, life recovery)"
+    },
+    {
+      "signal": "Clear spaces",
+      "visual_form": "Open flight corridors between enemy clusters",
+      "meaning": "Safe navigation routes; designed evasion paths"
+    },
+    {
+      "signal": "Satellite modules",
+      "visual_form": "Two orbiting defensive units above and below player",
+      "meaning": "Increased firepower and coverage; protective formation"
+    },
+    {
+      "signal": "Stage map display",
+      "visual_form": "Pre-stage screen showing level layout, score, lives, future stages (US/EU versions)",
+      "meaning": "Contextual safety briefing; player orientation and resource awareness"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "SCAT (Special Cybernetic Attack Team) / SAT (European version)",
+      "color_identity": "Red and blue palette-swapped characters (Arnold/male soldier vs Sigourney/female soldier or Silver Man/Sparks in EU)",
+      "symbol_or_sigil": "Character designs as part-human part-machine soldiers",
+      "enemy_visual_variants": "No visual faction variants; enemy types are universal alien/mechanical designs",
+      "environmental_markers": "Futuristic military aesthetic in stage progression (urban ruins, battleship, astrotube station)"
+    },
+    {
+      "faction": "Alien Invaders (led by Vile Malmort)",
+      "color_identity": null,
+      "symbol_or_sigil": "Diverse enemy sprite designs representing extraterrestrial/mechanical origin",
+      "enemy_visual_variants": "Various enemy types with different movement patterns and projectile styles per stage",
+      "environmental_markers": "Astrotube structure (space station connection); sci-fi technology aesthetic; stage 5 astrotube, stage 4 battleship settings"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Alien invasion active; Earth under attack (year 2029)",
+      "visual_manifestation": "Urban decay environments; ruins of New York City as opening stages; progression toward alien space station",
+      "behavioral_manifestation": "Enemy waves escalate; bosses represent command hierarchy of invasion force"
+    },
+    {
+      "world_state": "Military response deployed",
+      "visual_manifestation": "SCAT team characters in combat armor; two-player simultaneous action emphasizing team coordination",
+      "behavioral_manifestation": "Players control cybernetic soldiers with dual-satellite weapon systems; demonstrates advanced human-machine integration"
+    },
+    {
+      "world_state": "Stage progression = territorial advance",
+      "visual_manifestation": "Map screen (US/EU) shows future stages; each completed stage visually transitions environment from urban to military structures to alien installations",
+      "behavioral_manifestation": "Boss encounters mark territorial control points; defeating bosses unlocks access to next invasion stage"
+    },
+    {
+      "world_state": "Japanese version = higher threat (original design)",
+      "visual_manifestation": "Players start with 3 hit points vs 6 in US/EU; weapon loss on any single hit vs only on game over",
+      "behavioral_manifestation": "Satellite behavior differs: auto-orbiting vs player-directed alignment; terrain collision causes total life loss vs single life loss"
+    },
+    {
+      "world_state": "Difficulty balancing for Western market",
+      "visual_manifestation": "US/EU versions feature character select screen for 1-player mode (Arnold/Sigourney or Silver Man/Sparks); Russian-coded character removed",
+      "behavioral_manifestation": "Gentler difficulty curve; extended resource pool encourages progression over precision"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage setting progression",
+      "example": "Stages transition from New York ruins → battleship arena → astrotube space station, visually narrating the invasion route and player's counter-invasion path"
+    },
+    {
+      "technique": "Opening cutscene differences",
+      "example": "Japanese version shows obliteration of cities before invasion begins (apocalyptic framing); US/EU versions show text-based briefing (tactical framing)"
+    },
+    {
+      "technique": "Character design as lore",
+      "example": "Part-human, part-machine soldier designs (visible in sprite work) communicate cybernetic enhancement theme; different regional names (Arnold/Sigourney vs Silver Man/Sparks) reflect localization but maintain visual character consistency"
+    },
+    {
+      "technique": "Enemy type diversity",
+      "example": "Different enemy sprites per stage represent alien hierarchy and technological progression; bosses are visually distinct, larger entities suggesting command authority"
+    },
+    {
+      "technique": "Visual feedback on threat scale",
+      "example": "Satellite module positioning (orbiting vs static) and firepower differences between versions communicate escalation of player capability relative to enemy waves"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character",
+      "state": "Normal flight",
+      "behavior": "Eight-directional movement; continuous screen scroll forces forward momentum; weapon fires left/right only"
+    },
+    {
+      "entity": "Player character",
+      "state": "Hit (Japanese version)",
+      "behavior": "Character disintegrates animation; loses equipped weapon; loses one life; pushed along by scrolling screen if terrain-squeezed"
+    },
+    {
+      "entity": "Player character",
+      "state": "Hit (US/EU version)",
+      "behavior": "Character explodes into blue balls (Mega Man-style); loses weapon only on game over, not single hit; terrain squeeze causes immediate game over"
+    },
+    {
+      "entity": "Satellite modules",
+      "state": "Default (Japanese version)",
+      "behavior": "Auto-orbit above/below player; fire in sync with player weapon; bullets are uncolored"
+    },
+    {
+      "entity": "Satellite modules",
+      "state": "Default (US/EU version)",
+      "behavior": "Align based on player horizontal movement; can be locked in position via A button; bullets match player color; positioned more responsively to player input"
+    },
+    {
+      "entity": "Enemy waves",
+      "state": "Stage middle",
+      "behavior": "Coordinated patterns requiring tactical evasion; intensity scales within stage"
+    },
+    {
+      "entity": "Boss enemies",
+      "state": "Stage end",
+      "behavior": "Large sprite; distinctive movement and attack patterns; multiple hit requirement; incomplete graphics set exists (Level 3 boss), suggesting design iteration"
+    },
+    {
+      "entity": "Power-up containers",
+      "state": "Intact",
+      "behavior": "Visible in environment; require destruction to activate; reward risk-taking by player"
+    }
+  ],
+  "notes": "S.C.A.T. demonstrates sophisticated version localization affecting both mechanical and narrative manifestation layers. The Japanese 'Final Mission' uses visual feedback (disintegration death, weapon loss on hit, auto-orbiting satellites) to communicate higher world-state threat. US/EU 'S.C.A.T.' and EU 'Action in New York' soften this through explosion death, retained weapons on hit, and player-controlled satellite alignment. The astrotube setting (alien space station connection) and progression from urban ruins through battleship to space installation creates environmental narrative of invasion. Character customization (male/female vs palette-swapped soldiers) was localized for market reception. Faction distinction relies on visual contrast: human-machine cybernetic soldiers vs diverse alien enemy types, with boss encounters marking territorial control points. Pre-stage maps (US/EU only) provide world-state context absent in Japanese version.",
+  "sources_used": [
+    "tcrf - The Cutting Room Floor S.C.A.T. article",
+    "wikipedia - S.C.A.T.: Special Cybernetic Attack Team article"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T21:12:03.955Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5066,
+    "output_tokens": 2320,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}

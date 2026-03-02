@@ -1,0 +1,144 @@
+{
+  "game_id": "hogans-alley-nes",
+  "game_name": "Hogan's Alley",
+  "platform": "nes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "gangster_cutout",
+      "visual_form": "cardboard cutout depicting a criminal character",
+      "meaning": "target that must be shot; shooting results in points; failure to shoot results in life loss"
+    },
+    {
+      "signal": "armed_stance",
+      "visual_form": "gangster cutout positioned with weapons or threatening posture",
+      "meaning": "immediate threat requiring player response"
+    },
+    {
+      "signal": "emerging_from_environment",
+      "visual_form": "cutouts appearing from behind urban structures in city block rounds",
+      "meaning": "unexpected threat; requires rapid threat assessment"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "police_officer_cutout",
+      "visual_form": "cardboard cutout depicting uniformed law enforcement",
+      "meaning": "friendly/allied non-target; shooting results in life loss penalty"
+    },
+    {
+      "signal": "civilian_cutout",
+      "visual_form": "cardboard cutout depicting women and innocent bystanders",
+      "meaning": "protected non-combatant; shooting results in life loss penalty"
+    },
+    {
+      "signal": "blank_wall_backdrop",
+      "visual_form": "plain, featureless background in wall rounds",
+      "meaning": "controlled, safe environment for threat assessment; maximum visibility; reduced environmental complexity"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "law_enforcement",
+      "color_identity": null,
+      "symbol_or_sigil": "police uniform visual markers on cutouts",
+      "enemy_visual_variants": null,
+      "environmental_markers": "represented as protected targets alongside gangsters in mixed threat scenarios"
+    },
+    {
+      "faction": "criminals",
+      "color_identity": null,
+      "symbol_or_sigil": "gangster clothing and weapon imagery on cutouts",
+      "enemy_visual_variants": null,
+      "environmental_markers": "primary targets in wall and city block environments; depicted as urban threats"
+    },
+    {
+      "faction": "civilian_population",
+      "color_identity": null,
+      "symbol_or_sigil": "everyday clothing and civilian appearance on cutouts",
+      "enemy_visual_variants": null,
+      "environmental_markers": "integrated into urban backdrop; presented as collateral risk in city block rounds"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "training_scenario_early_stage",
+      "visual_manifestation": "blank wall backdrop with three cardboard cutouts in static positions",
+      "behavioral_manifestation": "cutouts turn to face player after positioning; slower presentation rate; clear visual isolation of targets"
+    },
+    {
+      "world_state": "urban_patrol_difficulty_increase",
+      "visual_manifestation": "city block backdrop with building structures; cutouts pre-exposed as they emerge from environment",
+      "behavioral_manifestation": "five cutouts per round instead of three; faster emergence rate; targets partially hidden behind urban structures"
+    },
+    {
+      "world_state": "difficulty_escalation",
+      "visual_manifestation": "same environmental layouts (wall and city) but visual presentation speed increases after bonus round completion",
+      "behavioral_manifestation": "cutout emergence and positioning occurs at accelerated pace; reduced reaction time available to player"
+    },
+    {
+      "world_state": "bonus_phase",
+      "visual_manifestation": "environmental shift to open space with tin cans as objects of focus; ledges and throwing mechanism visible",
+      "behavioral_manifestation": "limited ammunition supply; cans thrown from side of screen; player must arc shots to land targets on opposite ledges"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "backdrop_progression",
+      "example": "transition from blank wall (controlled training) to city block (realistic urban scenario) signals narrative progression from isolated drills to field-relevant situations"
+    },
+    {
+      "technique": "target_mixture_composition",
+      "example": "presentation of gangsters alongside police officers and civilians communicates rules of engagement: must distinguish between threat and protected persons in shared spaces"
+    },
+    {
+      "technique": "structural_occlusion",
+      "example": "city block round cutouts positioned behind or emerging from building structures visually establishes urban environment complexity and reduced visibility conditions"
+    },
+    {
+      "technique": "gameplay_mode_naming",
+      "example": "modes titled 'Hogan's Alley' reference real FBI training range, establishing law enforcement training context through nomenclature"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "gangster_cutout",
+      "state": "pre_engagement",
+      "behavior": "moves into position against backdrop and turns to face player; signals readiness as threat"
+    },
+    {
+      "entity": "gangster_cutout_city_block",
+      "state": "emergence",
+      "behavior": "appears from behind urban structures already exposed; creates urgency and surprise factor"
+    },
+    {
+      "entity": "police_officer_cutout",
+      "state": "present",
+      "behavior": "static position alongside gangsters; serves as visual constraint on player action"
+    },
+    {
+      "entity": "civilian_cutout",
+      "state": "present",
+      "behavior": "static position alongside gangsters; communicates non-threat status through civilian appearance; visual penalty mechanism if targeted"
+    },
+    {
+      "entity": "tin_can_bonus_round",
+      "state": "mid_flight",
+      "behavior": "thrown across screen; requires arc trajectory for ledge landing; communicates skill-based reward mechanic separate from threat elimination"
+    }
+  ],
+  "notes": "Hogan's Alley communicates world-state through progressive environmental complexity (blank wall → urban setting) and behavioral acceleration (speed increases per round cycle). The core manifestation system operates through visual target classification: gangsters (shoot) vs. police/civilians (don't shoot). This binary distinction is the game's primary world-state communication mechanism. The bonus round with tin cans establishes secondary skill expression outside threat elimination. No color-coding or complex faction symbolism present; identification relies on silhouette, clothing, and contextual positioning.",
+  "sources_used": [
+    "wikipedia"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-01T19:19:32.788Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 2972,
+    "output_tokens": 1601,
+    "dimension": "manifestation",
+    "sources_available": [
+      "wikipedia"
+    ]
+  }
+}

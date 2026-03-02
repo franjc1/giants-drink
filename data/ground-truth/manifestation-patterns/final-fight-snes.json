@@ -1,0 +1,181 @@
+{
+  "game_id": "final-fight-snes",
+  "game_name": "Final Fight",
+  "platform": "snes",
+  "paradigm": "action",
+  "danger_signals": [
+    {
+      "signal": "Enemy presence and positioning",
+      "visual_form": "Gang members appearing in stage areas, increasing density toward bosses",
+      "meaning": "Escalating threat level; player approaching dangerous encounters"
+    },
+    {
+      "signal": "Boss character appearance",
+      "visual_form": "Larger, distinctly designed enemy sprites at stage endpoints",
+      "meaning": "Critical danger; mandatory combat encounter"
+    },
+    {
+      "signal": "Health bar depletion",
+      "visual_form": "Player health indicator below character sprite decreasing",
+      "meaning": "Immediate physical threat; damage being taken"
+    },
+    {
+      "signal": "Stage environment hazards",
+      "visual_form": "Environmental obstacles and destructible objects in foreground",
+      "meaning": "Contextual danger from surroundings (Metro City urban decay)"
+    }
+  ],
+  "safety_signals": [
+    {
+      "signal": "Food items and pickups",
+      "visual_form": "Visible food sprites, health restoration items scattered in stages",
+      "meaning": "Resource availability; opportunity to recover health"
+    },
+    {
+      "signal": "Weapon pickups",
+      "visual_form": "On-screen weapons (pipes, knives) lying in accessible locations",
+      "meaning": "Tactical advantage; increased combat capability"
+    },
+    {
+      "signal": "Bay Area hidden dog bonuses",
+      "visual_form": "Barking dogs in background animation, specific Y-coord positioning triggers",
+      "meaning": "Hidden safety mechanisms; rewards for exploration and positioning (health restore, credit/life recovery)"
+    },
+    {
+      "signal": "Stage clearance checkpoint",
+      "visual_form": "Reaching stage endpoints; boss defeat transitions",
+      "meaning": "Progress; temporary reprieve before next danger phase"
+    }
+  ],
+  "faction_indicators": [
+    {
+      "faction": "Mad Gear Gang",
+      "color_identity": null,
+      "symbol_or_sigil": "Gang member character designs and clothing styles",
+      "enemy_visual_variants": "Multiple enemy types (standard thugs, armored variants, specialized units like Sodom, Damnd, Edi. E, Rolento) with distinct sprite designs",
+      "environmental_markers": "Urban Metro City locations (Bay Area, Downtown, Industrial Area) serving as gang territory; stage progression represents pushing through Mad Gear-controlled zones"
+    },
+    {
+      "faction": "Metro City Police/Authority",
+      "color_identity": null,
+      "symbol_or_sigil": null,
+      "enemy_visual_variants": null,
+      "environmental_markers": "Implicit presence through absence; player characters (Haggar, Cody) fighting to reclaim city control; bonus stage shows car vandalism conflict with gang enforcement"
+    },
+    {
+      "faction": "Protagonists (Vigilantes)",
+      "color_identity": null,
+      "symbol_or_sigil": "Playable character sprites; distinct from enemy designs",
+      "enemy_visual_variants": null,
+      "environmental_markers": "Player movement through stages represents reclamation of Metro City from gang control; progression narrative of taking back territory"
+    }
+  ],
+  "world_state_to_visual": [
+    {
+      "world_state": "Mad Gear Gang control active in stage",
+      "visual_manifestation": "High density of gang enemies; stage environment shows urban decay and criminal occupation",
+      "behavioral_manifestation": "Enemies actively patrol and engage player; stage layout presents obstacles designed to slow progression"
+    },
+    {
+      "world_state": "Player approaching stage boss",
+      "visual_manifestation": "Distinct boss sprite appears at stage endpoint; larger frame and unique design differentiate from standard enemies",
+      "behavioral_manifestation": "Boss engages in scripted attack patterns; increased difficulty and health pool; mandatory encounter to progress"
+    },
+    {
+      "world_state": "Stage cleared/Territory reclaimed",
+      "visual_manifestation": "Stage endpoint reached; boss defeated; visual transition to next stage",
+      "behavioral_manifestation": "Enemy spawn ceases; player advances to new area with fresh challenge"
+    },
+    {
+      "world_state": "High player health",
+      "visual_manifestation": "Health bar under character sprite shows full/near-full indicator",
+      "behavioral_manifestation": "Player has tactical advantage; can engage multiple enemies simultaneously"
+    },
+    {
+      "world_state": "Low player health/Critical state",
+      "visual_manifestation": "Health bar significantly depleted; visual warning",
+      "behavioral_manifestation": "Urgency to seek food pickups or avoid damage; increased vulnerability to enemy attacks"
+    },
+    {
+      "world_state": "Difficulty scaling during progression",
+      "visual_manifestation": "DifficultyA and DifficultyB parameters (visible only in debug mode) affect enemy behavior and spawn rates",
+      "behavioral_manifestation": "Enemy patterns become more aggressive; damage output increases; frame counter affects difficulty ramping"
+    }
+  ],
+  "environmental_storytelling": [
+    {
+      "technique": "Stage-based narrative progression",
+      "example": "Metro City locations (Bay Area, Downtown, Industrial Area) represent territory taken from Mad Gear Gang; player movement through these stages visually demonstrates reclamation of city control"
+    },
+    {
+      "technique": "Enemy type placement and density",
+      "example": "Specific enemy types (standard thugs, armored units, named bosses like Sodom, Damnd) appear in thematic stages; Industrial Area would house industrial-themed enemies if included in final version"
+    },
+    {
+      "technique": "Bonus stage integration",
+      "example": "Car vandalism bonus stage contextualizes gang criminal activity; player vandalizes gang property, showing active resistance to Mad Gear occupation"
+    },
+    {
+      "technique": "Urban decay visual design",
+      "example": "Background and foreground assets depict deteriorated Metro City infrastructure; communicates systemic gang control and crime effects on city"
+    },
+    {
+      "technique": "Hidden collectible mechanics",
+      "example": "Bay Area dog bonuses use background animation (barking dogs) as interactive storytelling; requires spatial awareness and positioning knowledge; rewards exploration and environmental interaction"
+    }
+  ],
+  "entity_behavioral_tells": [
+    {
+      "entity": "Player character (Haggar/Cody)",
+      "state": "High health",
+      "behavior": "Can engage multiple enemies; aggressive tactics available; stage progression possible"
+    },
+    {
+      "entity": "Player character (Haggar/Cody)",
+      "state": "Low health",
+      "behavior": "Movement prioritizes resource gathering; avoidance tactics become primary strategy; vulnerability increases"
+    },
+    {
+      "entity": "Standard Mad Gear enemy",
+      "state": "Idle/Patrolling",
+      "behavior": "Moves through stage area; positions as obstacle to player progression; represents territorial occupation"
+    },
+    {
+      "entity": "Standard Mad Gear enemy",
+      "state": "Engaged with player",
+      "behavior": "Attacks player; uses basic combat patterns; can be defeated to clear area"
+    },
+    {
+      "entity": "Boss enemy (stage endpoint)",
+      "state": "Initial encounter",
+      "behavior": "Larger sprite; distinct attack patterns; higher health pool; must be defeated to advance stage"
+    },
+    {
+      "entity": "Bay Area background dogs",
+      "state": "Barking (triggered)",
+      "visual_form": "Animation frame rate increases from slow to rapid alternation; signal player has achieved correct positioning",
+      "behavior": "Awards bonus: 1st dog (1000 points/4s), 2nd (1 credit/60s), 3rd (1 life/60s), 4th (health restore/s)"
+    },
+    {
+      "entity": "CPU usage indicator (debug mode)",
+      "state": "Various processing states",
+      "behavior": "Bouncing sprite position indicates current CPU usage; lower position = higher usage; communicates real-time performance metrics"
+    }
+  ],
+  "notes": "Final Fight SNES is a cut-down port of the arcade original; removed two-player mode, playable character Guy, and Industrial Area stage due to ROM constraints. Visual communication relies heavily on: (1) enemy density and type progression to signal danger escalation; (2) stage location as faction territory marker (Mad Gear control); (3) health bar as primary player state indicator; (4) boss appearance as visual checkpoint/danger signal; (5) background animation (Bay Area dogs) for hidden interactive storytelling. Game world state communicated primarily through enemy behavior patterns and stage layout rather than explicit HUD elements. Difficulty scaling (DifficultyA/B parameters) affects behavioral manifestation but not visual presentation in standard play.",
+  "sources_used": [
+    "tcrf - Final Fight (SNES) - The Cutting Room Floor",
+    "wikipedia - Final Fight series overview and character descriptions"
+  ],
+  "_extraction_metadata": {
+    "extracted_at": "2026-03-02T05:11:47.686Z",
+    "model_used": "claude-haiku-4-5-20251001",
+    "input_tokens": 5071,
+    "output_tokens": 2216,
+    "dimension": "manifestation",
+    "sources_available": [
+      "tcrf",
+      "wikipedia"
+    ]
+  }
+}
