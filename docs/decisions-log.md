@@ -1,3 +1,4 @@
+# Two Fires — Decisions Log
 
 ---
 
@@ -20,6 +21,8 @@
 **Decision:** Seven primitives: `cohesion`, `morale`, `loyalty`, `awareness_of_player`, `disposition_to_player`, `internal_dissent`, `resources`. Fear dropped. `information_about_regime` moved to entity knowledge layer.
 
 **Rationale:** Resources is genuinely primitive — a hard constraint on action (like energy in physics). Fear is a composite that should emerge from threat perception + power asymmetry + negative disposition. Barrett: fear is a constructed category, not a primitive. If the CAS doesn't produce fear-like behavior from these primitives during testing, we add it then. Start without, test empirically. `information_about_regime` is distributed knowledge data across entity knowledge blocks, not an aggregate number.
+
+**⚠️ SUPERSEDED by Decision 17 (Thread 3 CAS Redesign).** Faction state primitives replaced: morale, loyalty, awareness_of_player, disposition_to_player, internal_dissent all dropped. Replaced by aggregates computed from entity affect primitives. Only cohesion (recomputed as inverted std dev of member valence), bond_density, member_count, and resources survive.
 
 ---
 
@@ -61,6 +64,8 @@
 
 **Rationale:** Barrett: reputation is a perception constructed by the perceiver, not a property of the perceived. Two factions can have completely opposite perceptions of the same player based on different information packets reaching them. This prevents the "universal reputation" problem and creates emergent situations where the player discovers entities believe wrong things about them.
 
+**⚠️ REFINED by Decision 23 (Thread 3 CAS Redesign).** Disposition to player is no longer a stored field on entities or factions. It is constructed by Claude from the entity's affect state, bond to player (if any), knowledge about the player, and personality. Attribution-gated: entities only form dispositions based on information that has actually reached them.
+
 ---
 
 ### Decision 7: Identity Stable, Expression Dynamic
@@ -83,17 +88,17 @@
 
 ---
 
-### Decision 9: Overseer Keyed to Model Confidence, Not Game Count
+### Decision 9: Overseer Activation by Model Confidence, Not Game Count
 
-**Context:** When should the Overseer activate? What counts as "enough data"?
+**Context:** When does the Overseer (the Giant) begin actively engaging with the player? Fixed game count vs. behavioral assessment.
 
-**Decision:** Overseer escalation is keyed to `model_confidence` computed from `total_meaningful_decisions` across all games, not games completed. Meaningful decisions = sparing vs. defeating, conversation choices, path selection, alliance formation. The session is the behavioral data unit, not the game. Abandoned games contribute data.
+**Decision:** Overseer escalation keyed to `model_confidence`, which is a function of `total_meaningful_decisions` across all games. One deeply social 50-hour game > five speedruns.
 
-**Rationale:** "Beat a game" is the wrong unit. Players may play for dozens of sessions without completing a game. A player with one deeply social 50-hour game has a richer Overseer profile than someone speedrunning five games. The Overseer doesn't care about game completion — it cares about social engagement depth. The first hints (escalation level 1) should be ambiguous enough that the player isn't sure something is happening. Only around escalation level 2-3 does the pattern become undeniable.
+**Rationale:** The Overseer's interventions need to be calibrated to what it knows about the player. Acting on insufficient data produces poor interventions that feel arbitrary rather than targeted. The player who is mechanically skilled but socially uninvolved (speedrunner) encounters the Overseer much later than the player who builds deep alliances and explores social dynamics across fewer games. This rewards social engagement organically.
 
 ---
 
-### Decision 10: Player as Extraordinary Catalyst — Event Magnitude Calibration
+### Decision 10: Player as Catalyst — CAS Sensitivity Tuning
 
 **Context:** In traditional retro games, the player's killing spree is invisible to the world. In Two Fires, the world has a nervous system. The player is generally doing something incredible — conquering worlds, destroying castles, defeating hundreds. This needs to be reflected in CAS sensitivity.
 
@@ -163,15 +168,149 @@
 
 **Rationale:** Clean handoff between threads. Thread 2 defines WHAT behaviors manifest per paradigm. Thread 3 defines the EXACT CAS state values at which those behaviors trigger. No future session should hardcode "loyalty < 0.4 → visible wavering" as if 0.4 is a tested threshold — it's a structural placeholder showing that a threshold goes in that slot.
 
+**⚠️ SUPERSEDED by Decision 17 (Thread 3 CAS Redesign).** There are no longer exact CAS state values that trigger specific behaviors. Behavioral legibility tables are eliminated entirely. Claude constructs situated behavioral expressions from affect primitives + context. Thread 2's behavior descriptions remain useful as examples of what Claude might produce, but they are not lookup targets.
+
 ---
 
-### Open Design Work (Carried Forward + New)
+## Session: 2026-03-03 — CAS Engine Redesign (Thread 3)
 
-1. CAS engine parameter tuning — exact thresholds for behavioral legibility (Thread 3, next)
-2. MVP definition — minimum compelling first level
-3. Granular constraint relationships between primitives (answers from building/testing)
-4. Visual Manifestation Engine specification
-5. ~~Multi-paradigm shift mapping mechanics~~ → Partially addressed (intra-cluster vs. cross-cluster, shift triggers per paradigm). Remaining: exact transition animation/loading specs.
-6. Behavioral stress response modifier function design
-7. Event magnitude calibration per paradigm and game length
-8. Overseer model confidence thresholds for escalation levels
+### Decision 17: Two-Layer Architecture — Deterministic CAS + Claude Interpretation
+
+**Context:** Thread 3 started as reconciliation between Threads 1, 2, and initial CAS spec. Discussion revealed that essentialist threshold tables (loyalty < 0.2 = defection) impose a behavioral ceiling — players learn the lookup table, entities feel mechanical, and situations we didn't anticipate can't emerge. Joe proposed: keep primitives as pure ingredients, let Claude construct all meaning from them in context.
+
+**Decision:** Two cleanly separated layers. Layer 1: deterministic CAS engine running simple math on a social graph — affect propagation, information flow, bond dynamics, decay. No interpretation, no thresholds, no categories. Layer 2: Claude reads CAS state at episode boundaries and constructs situated narrative, behavioral directives, and visual/audio specs. Claude directs NPC behavior → behavior creates events → events enter CAS → CAS updates → Claude interprets.
+
+**Critical constraint:** Claude never modifies CAS state directly. The CAS is a closed deterministic system. Its behavior is a pure function of its rules, initial conditions, and agent actions. This keeps the system honest — if something dramatic emerges, it emerged from the dynamics, not from Claude deciding it should happen.
+
+**Rationale:** This is Barrett's constructionist framework applied to game architecture. No entity "is" afraid or loyal — those are constructed by Claude from primitives in context. Same ingredients produce different constructions in different situations. The ceiling is removed: any social dynamic Claude can recognize can emerge. And the CAS remains reproducible and honest because it's just math.
+
+---
+
+### Decision 18: Entity State Reduced to Two Affect Primitives (Valence + Arousal)
+
+**Context:** Thread 1 specified 7 entity state variables (loyalty, morale, stress, disposition_to_player, awareness_of_player, information_quality). The initial Thread 3 spec used these. Discussion revealed these are high-level constructs, not primitives — "loyalty" is a category constructed from bond patterns, shared history, perceived reciprocity, and current affect.
+
+**Decision:** Entity dynamic state is exactly two numbers: affect valence (-1.0 to 1.0, positive to negative) and affect arousal (0.0 to 1.0, activated to quiescent). These are Barrett's core affect dimensions — the raw substrate from which Claude constructs situated emotional/social experience. Everything else (loyalty, morale, fear, courage, trust) is constructed by Claude from valence + arousal + OCEAN personality + knowledge + bonds + context.
+
+**Rationale:** Valence and arousal are the most empirically grounded primitives of affective experience (Russell's circumplex, Barrett's conceptual act theory). They provide the dynamic substrate; OCEAN provides heterogeneity; the social graph provides interaction complexity. Two numbers per entity × 50-100 entities × rich bond topology = enormous emergent complexity. Like letters of the alphabet creating infinite stories — the complexity is in the combination, not the primitives. Flagged as a risk: if two dimensions prove insufficient during testing, a third can be added without restructuring.
+
+---
+
+### Decision 19: OCEAN Retained, Custom Traits Dropped
+
+**Context:** Initial Thread 3 spec proposed custom five traits (aggression, courage, independence, empathy, cunning). Thread 1 proposed OCEAN. Need to resolve.
+
+**Decision:** OCEAN personality as offsets from faction personality_center. Custom traits like courage, empathy, deception propensity emerge from OCEAN + situation — they're not stored. High-O + low-N + threat context = effective courage. High-A + high-O + suffering context = effective empathy. Low-A + low-C + valuable info = deception propensity.
+
+**Rationale:** OCEAN is more primitive and more empirically grounded. Custom traits are composites that should emerge, not be encoded. This aligns with the non-essentialist philosophy — there's no essential "courage" trait, just personality configurations that produce courageous behavior in certain contexts and non-courageous behavior in others. Fleeson's work on within-person personality variability directly supports this: stable traits produce variable behavior because expression is always situated.
+
+---
+
+### Decision 20: Fear Is Not a Primitive, Not Even a Computed Value
+
+**Context:** Transfer doc included fear as faction state variable. Thread 1 dropped it (Barrett: fear is constructed, not primitive). Initial Thread 3 spec proposed fear as either stored state or computed value. Discussion pushed further: even computing fear from other values re-introduces essentialism.
+
+**Decision:** Fear doesn't exist in the CAS at any level. Not stored, not computed, not derived. An entity with negative valence, high arousal, and knowledge of an approaching threat is experiencing a *configuration of primitives*. Claude might interpret that as fear. Or rage. Or grim determination. Or something without a clean label. The CAS doesn't know and doesn't care. Only Claude constructs the category.
+
+**Rationale:** Barrett's core argument: fear (and all emotions) are a social ontology, not natural kinds with essential features. There aren't necessary and sufficient conditions for "fear" — it varies in valence, arousal, behavioral expression, and subjective quality across situations. If we compute it, we're hardcoding one theory of what fear is. If Claude constructs it, we get the full variability of real social ontology. This is where Joe is most excited about the project's potential — Claude enacting social ontology from basic ingredients produces variability that no essentialist system can match.
+
+---
+
+### Decision 21: Five Event Categories With Full OCEAN Modulation
+
+**Context:** Need to define all the ways entity primitives can change, ensuring the rules are complete enough that simple local rules can produce all needed dynamics.
+
+**Decision:** Five event categories cover everything: (1) Direct harm/threat to self, (2) Bond change (formed/strengthened/weakened/severed), (3) Information/experience event (direct experience or received information), (4) Attention from player (pure arousal spike), (5) Passage of time (drift toward baselines, decay). Each has defined valence/arousal effects with all five OCEAN factors modulating the response.
+
+Information/experience is the broadest — covers everything from direct sensory experience to thirdhand rumors. Environmental shifts, faction actions, witnessing events — all are information/experience events at different magnitudes and accuracies. Player attention was separated because the player's extraordinary status creates a pure arousal effect independent of whatever information is exchanged.
+
+**Rationale:** Tested against many scenarios: entity attacked, witnessing friends killed, home territory conquered, crackdown ordered, discovering a lie, slow relationship building, covert action. All decompose into these five categories. The categories are primitive (not compound) and complete (no scenario requires a sixth). OCEAN modulation ensures heterogeneous responses to identical events.
+
+---
+
+### Decision 22: Affect Contagion + Information Propagation — Two Mechanisms Only
+
+**Context:** How do state changes spread through the social graph? Original spec had separate propagation rules for loyalty, morale, fear, disposition, and awareness.
+
+**Decision:** Exactly two propagation mechanisms. (1) Affect contagion: valence and arousal changes spread through bonds continuously, modulated by bond strength/valence and OCEAN factors. Consensus multiplier (squared ratio) for nonlinear social pressure when multiple bonds send same-direction signal. (2) Information propagation: knowledge packets travel along bonds discretely with accuracy degradation, emotional charge decay, and E-modulated speed.
+
+Everything else emerges. Cascades, tipping points, faction fragmentation — all are consequences of these two mechanisms operating on graph topology. No special cascade logic needed.
+
+**Rationale:** Real CAS theory: complex macro behavior from simple local rules. These two mechanisms are sufficient because they capture the two fundamental ways social influence works — emotional contagion (fast, unconscious, non-specific) and information transmission (slow, deliberate, specific). The consensus multiplier captures nonlinear social pressure without special threshold logic.
+
+---
+
+### Decision 23: Attribution-Gated Reputation System
+
+**Context:** When something happens in the CAS, who gets credit or blame? Original spec assumed entities automatically knew who caused events. Discussion revealed this is unrealistic and removes strategic depth.
+
+**Decision:** Attribution travels with information, not with affect. Events carry causal agent tags. Witnesses get immediate attribution (bond to causal agent updates). Information packets carry causal agent with degrading accuracy. Affect contagion carries NO attribution — entity B feels worse because bonded entity A feels worse, but B doesn't know why unless information reaches them.
+
+This creates fundamental timing asymmetry: feelings spread fast without explanation, understanding spreads slow with attribution.
+
+**Rationale:** This is how real social systems work — mood is contagious but knowledge is scarce. After a dramatic event, nearby entities feel the emotional impact immediately but only witnesses know the cause. Strategic implications are profound: stealth limits attribution, public action maximizes it, proxy operations manipulate the attribution layer, disrupting intelligence networks prevents attribution from reaching the antagonist.
+
+---
+
+### Decision 24: Bond Dynamics — One Core Rule
+
+**Context:** Bonds need to change in response to game events, but the mechanism must be general enough to handle infinite scenarios without enumeration.
+
+**Decision:** One core rule: when entity A experiences a valence shift and attributes it to entity B, bond(A→B) updates. Valence shift direction determines bond valence shift. Absolute magnitude determines bond strength change (both love and hate strengthen connection). Attribution strength modulates effect (1.0 for witnesses, degraded for info-propagated events). Plus shared experience strengthening (co-presence during events strengthens bonds regardless of affect direction), and natural decay (unreinforced bonds weaken).
+
+**Rationale:** This handles every scenario through one mechanism. Player protects family → family's positive valence attributed to player → bond strengthens. Player kills enemies → enemies' allies' negative valence attributed to player → bond shifts negative. Covert assassination → no witnesses → no attribution → no bond changes to player (but affect still propagates). The rule is general, the specificity comes from the situation. No scenario-specific logic needed.
+
+---
+
+### Decision 25: Social Timer Independent of Paradigm
+
+**Context:** An RTS ticking every 30 seconds and a platformer ticking between levels would produce wildly different social evolution rates if propagation is coupled to tick frequency.
+
+**Decision:** The CAS runs on its own heartbeat — a social timer with a base interval of ~2 minutes real time, adjustable per game by the Dramaturgical Agent. This is independent of paradigm ticks. Paradigm ticks determine when the player perceives CAS changes (episode boundaries, social encounters), but the social graph evolves continuously on its own clock.
+
+**Rationale:** This means a player who takes a long time on one level returns to a social graph that evolved more than if they'd speedrun it — time matters. And different paradigms produce similar social evolution rates per real-time-minute despite wildly different tick frequencies. The social timer is a game-level setting, not a paradigm-level one, allowing per-game pacing control.
+
+---
+
+### Decision 26: Resources as Abstract Capacity, Not Economy
+
+**Context:** Faction resources constrain action and create scarcity pressure. But a full economy system turns every game into resource management.
+
+**Decision:** Resources exist as a single faction-level stored value (0.0-1.0) representing abstract capacity to act. Updated by territory control, member count, operations cost, and passive regeneration. Claude interprets low resources narratively (stretched thin, desperate, degraded). No economy UI, trade system, or resource management gameplay unless the paradigm is a management sim or RTS.
+
+**Rationale:** Resources serve one critical social function: constraining faction action and creating scarcity-driven dramatic pressure. A faction at low resources can't sustain crackdowns or military operations. This forces desperate decisions, which are dramatically interesting. But this doesn't require a visible economy — it just needs a constraint that Claude can interpret.
+
+---
+
+### Decision 27: Claude Interprets at Multiple Scales Simultaneously
+
+**Context:** How does Claude interpret a complex social graph with 50-100 entities? Can't interpret every entity individually. Need a structure.
+
+**Decision:** Claude interprets at four scales in a single call: ecology-wide (macro situation from all faction aggregates), faction-scale (within/between faction dynamics), cluster-scale (sub-faction group dynamics from graph topology), and player-sphere (specific entities the player interacts with). Each scale provides context for the others — macro constrains how individuals are interpreted, individuals reveal what's actually happening at the macro level.
+
+**Rationale:** This mirrors how social reality actually works — macro forces constrain micro interactions and vice versa. And it's the multi-scale version of Barrett's framework: context shapes construction at every level simultaneously. Practically, it also controls Claude API cost — Claude interprets the narratively relevant slice at each scale, not every entity individually.
+
+---
+
+### Decision 28: Narrative Continuity as Delta-From-Previous
+
+**Context:** If Claude interprets the CAS state fresh each time, it might produce inconsistent or jarring narrative shifts.
+
+**Decision:** Claude's interpretation is always a delta from the previous interpretation, not a fresh read. The narrative has inertia — a faction "restless" last episode doesn't become "triumphant" unless the CAS values shifted dramatically. Claude receives the previous narrative as context and updates based on what changed.
+
+**Rationale:** This mirrors how CAS values work — each value is strongly linked to its prior value, changing incrementally. The narrative does the same. Combined with the social timer's continuous evolution, this produces a world that feels like it's always been alive and changing — not recalculated each time the player looks.
+
+---
+
+### Open Design Work (Updated)
+
+1. **Behavioral implementation** — how Claude's narrative directives become rendered game content (dedicated thread needed)
+2. **Game state schema update** — Thread 1 schema needs revision for valence/arousal replacing 7 state variables. Faction state block, entity mind block, CAS engine state block, behavioral override format, visual manifestation cas_source format, event log effects format, and System Read/Write Reference all need updates.
+3. Visual Manifestation Engine specification
+4. CAS rate constant calibration (diagnostic framework, testing phase)
+5. MVP definition — minimum compelling first level
+6. Two-primitive sufficiency validation (optimistic, flagged as risk)
+7. ~~Behavioral legibility threshold tables~~ → Eliminated by architectural redesign
+8. ~~Behavioral stress response modifier function~~ → Eliminated (constructed by Claude)
+9. ~~Event magnitude calibration~~ → Folded into drama density signals + Claude interpretation
+10. Overseer model confidence thresholds for escalation levels

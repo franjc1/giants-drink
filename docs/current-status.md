@@ -1,37 +1,54 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-02
+**Last updated:** 2026-03-03
 
 ---
 
 ## What Just Happened
 
-### Paradigm Specifications Complete (Thread 2)
+### CAS Engine Redesigned From First Principles (Thread 3)
 
-Full paradigm specification document created covering the complete landscape of retro game types from NES through early PC.
+Major architectural redesign of the social ecology engine. Started as a reconciliation session between Threads 1, 2, and the initial Thread 3 spec, evolved into a fundamental rethinking grounded in Barrett's constructionist framework and CAS theory (Kauffman, Holland, Axelrod, Santa Fe Institute).
 
-**Key insight:** Player-facing paradigms (what the game feels like) and engine clusters (what's actually rendering) are different things. Many paradigms that feel completely different to players share an engine — the differences are parameters, interaction grammars, and social surface design.
+**The key architectural shift:** Two-layer architecture replacing essentialist threshold-based systems.
 
-**7 Engine Clusters defined:**
-1. **Side-View Tile World** — platformer, beat-em-up, run-and-gun, cinematic action
-2. **Top-Down Tile World** — action-adventure, RPG overworld, top-down action/racing/sports
-3. **Stage/Arena Screen** — fighting, RPG combat, fixed-screen arcade, puzzle, boss encounters
-4. **Scrolling Shooter** — horizontal shmup, vertical shmup
-5. **Pseudo-3D / Mode 7** — behind-view racing, driving action
-6. **Raycasting First-Person** — FPS, first-person adventure, dungeon crawler
-7. **Strategic Map** — RTS, tactics/SRPG, management sim
+**Layer 1 — CAS Engine (deterministic JS).** Entities have only two dynamic state values: affect valence (-1.0 to 1.0) and arousal (0.0 to 1.0). Plus OCEAN personality (stable), knowledge (accumulated), and bonds (structural, mutable). No loyalty, morale, fear, or stress variables. No threshold tables. No behavioral lookup. Just simple math propagating numbers through a social graph.
 
-**12 full player-facing paradigm specs** populated with consistent template: temporal structure, sequencing grammar, social surface, CAS integration, physics & mechanics, aesthetics, genre shift interface.
+**Layer 2 — Claude Interpretation.** At episode boundaries, Claude reads the full CAS state and constructs situated narrative interpretations. Claude determines what entities are experiencing (fear? rage? grief? grudging respect?), what they would do, and what the player sees. No essentialist categories — Claude constructs meaning from primitives in context, exactly as Barrett argues human minds do.
 
-**10 additional paradigms** documented as parameter variants of parent paradigms (don't need separate specs).
+**Claude never modifies CAS state directly.** Claude directs NPC behavior → behavior creates events → events enter the CAS through deterministic rules → CAS updates → Claude interprets.
 
-**Cross-cluster relationship mapping:** Intra-cluster shifts (parameter swaps, seamless) vs. cross-cluster shifts (rendering core switches, require transitions). Shift triggers and what carries across all shifts documented.
+**Key design decisions made (Decisions 17-28):**
 
-**Build priority order** established: Cluster 1 first (platformer launch), then 3, 2, 7, 5, 4, 6.
+1. Two-layer architecture: deterministic CAS + Claude interpretation
+2. Entity state reduced to two affect primitives (valence, arousal)
+3. OCEAN retained, custom traits dropped (emerge from OCEAN + situation)
+4. Fear eliminated entirely — not stored, not computed, constructed by Claude
+5. Five event categories with full OCEAN modulation
+6. Two propagation mechanisms only: affect contagion + information propagation
+7. Attribution-gated reputation: affect spreads fast (no attribution), understanding spreads slow (with attribution)
+8. Bond dynamics via one core rule: attributed affect change = bond change
+9. Social timer independent of paradigm ticks (~2 min heartbeat)
+10. Resources as abstract capacity, not economy
+11. Multi-scale Claude interpretation (ecology → faction → cluster → player sphere)
+12. Narrative continuity as delta-from-previous
 
-**Prompt handling pattern established:** "Mario characters playing quidditch" → Experience Interpreter maps the *activity* (quidditch = flying + dodging + scoring) to the engine cluster that delivers that feel (Cluster 4 shmup mechanics or Cluster 1 with flight physics), then maps *characters* onto the social ecology. The system serves any prompt by finding the right engine, not by matching to a genre label.
+**Full claude.md rewrite completed** to propagate changes across all affected sections: JSON Game State Schema (specific field changes documented), Conversation System Design, Manifestation Layer, Quality Evaluation System, Social Hook Design, and Paradigm Architecture.
 
-**Critical safeguard added:** All numerical values (thresholds, ranges, frame counts, tile distances) are explicitly marked as illustrative placeholders. Behavior descriptions are authoritative design intent. Actual thresholds come from Thread 3 (CAS Engine Parameters). Warning at top of document prevents future sessions or agents from treating placeholder values as implementation-ready.
+**Estimated implementation:** 430-610 lines JS. <10ms per cycle for 50-100 entities.
+
+## What Changed in claude.md
+
+All sections revised for CAS redesign impact:
+- **CAS Engine Architecture** — new section replacing scattered CAS references
+- **JSON Game State Schema** — specific diffs for faction state, entity mind, CAS block, behavioral overrides, visual manifestation cas_source, event log effects, System Read/Write Reference
+- **Conversation System Design** — entities speak from affect + personality + knowledge + bonds, not from disposition/emotional_state
+- **Manifestation Layer** — Claude produces visual specs directly from interpretation, not from threshold → lookup → override pipeline
+- **Quality Evaluation System** — tuning targets shift from threshold tables to CAS_CONFIG rates + Claude prompt quality
+- **Social Hook Design** — hooks are Claude-constructed from narrative context, not threshold-triggered
+- **Paradigm Architecture** — behavioral legibility tables eliminated, paradigm specs define social surfaces + witness rules + propagation rates instead
+- **Lore System** — confirmed unchanged, already aligned with new architecture
+- **Agent Execution Order** and **Generation Flow** — updated to reflect two-layer loop
 
 ## Current Agent Execution Order
 
@@ -40,77 +57,63 @@ Pre-game:
   Experience Interpreter
     → Artistic Director
     → Design Philosopher
-    → Dramaturgical Agent (setup: initial conditions, pressure ramp,
-                           social hooks, drama density threshold, catalysts)
+    → Dramaturgical Agent (setup: CAS initial conditions, social graph topology,
+                           personality distributions, social timer pace, drama calibration,
+                           initial narrative)
     → Grammarian → Rhythmist → Game Compiler → Cartographer
     → Provocateur → Coherence Auditor
 
-Runtime (per episode):
-  CAS engine ticks (per paradigm spec)
-  Drama density monitor (threshold check, catalyst trigger)
-  Claude interprets CAS state → narrative
-  Visual Manifestation Engine (narrative → scene spec → assets)
-  Visibility manager (CAS state → observable behaviors)
-  Content agents generate next episode
+Runtime loop:
+  CAS engine ticks on social timer (deterministic, continuous)
+    → affect propagation through bonds
+    → information propagation through bonds
+    → bond dynamics (attribution-based changes, shared experience, decay)
+    → faction aggregate computation
+    → drama density evaluation
+  
+  At paradigm tick (episode boundary, social encounter):
+    → Claude receives CAS snapshot + previous narrative + drama signal
+    → Claude interprets at multiple scales (ecology → faction → cluster → player sphere)
+    → Claude produces: narrative update, entity behavioral directives,
+        faction leadership decisions, visual/audio/aesthetic specs
+    → Leadership decisions become CAS events → processed next cycle
+    → Behavioral directives → paradigm engine renders behavior
+    → Visual specs → Visual Manifestation Engine renders scene
+  
+  Player acts → events enter CAS → cycle continues
 
 Diagnostic wrapper (per generated game):
   Simulated Player Agent → Gate 1 auto-checks
   → Moment Extractor clips diagnostic moments
   → Testing UI presents clips to Joe
   → Joe rates (👎/👍/🔥) → Pattern Distiller processes
-  → Approved principles feed back into pipeline agents
-```
-
-## Generation Flow
-
-```
-Player prompt
-  → Experience Interpreter maps activity to engine cluster + paradigm
-  → Skeleton (~10-15s): paradigm, CAS initial conditions, aesthetics,
-    narrative premises, social hooks, pressure ramp, catalysts
-  → Episode 1 generates (content agents + prompt-time character/environment sprites)
-  → Player plays Episode 1
-  → CAS ticks at episode boundary
-  → Between-episode window (triple duty):
-      1. Player social interaction surface
-      2. CAS narrative delivery (cutscenes, dialogue, reveals)
-      3. Generation masking (next episode content + new visual assets from CAS changes)
-  → Episode 2 generates incorporating CAS state + new visuals
-  → [repeat]
+  → Approved principles feed back into CAS_CONFIG tuning + Claude prompt refinement
 ```
 
 ## What's Next
 
 ### Immediate: Repo Sync
-1. Drop new docs into repo:
-   - `docs/design/paradigm-specs.md` (this session's output)
-   - `docs/current-status.md` (this file)
-   - `docs/decisions-log.md` (updated with this session's decisions)
-2. Commit and push
+1. Replace `claude.md` with full rewrite
+2. Drop `docs/design/cas-engine-spec.md` into repo
+3. Replace `docs/current-status.md` with this file
+4. Replace `docs/decisions-log.md` with full merged version (Decisions 1-28)
+5. Commit and push
 
-### Then: Thread 3 — CAS Engine Parameters
-Thread 3 takes the behavioral legibility rules from the paradigm specs and makes them machine-readable:
-- Exact thresholds for all CAS state → observable behavior mappings
-- Tick timing specifications per engine cluster
-- Drama density calibration values
-- Event magnitude sensitivity curves
-- CAS state → aesthetic/audio modifier functions
+### Flagged for future threads:
+- **Behavioral Implementation Thread:** How Claude's narrative directives ("goombas form guerrilla faction, kidnap Bowser's general") translate into actual on-screen game content. Touches VME spec, content generation pipeline, paradigm-specific rendering.
+- **Game State Schema Update:** Apply the specific diffs documented in claude.md to the actual game-state-schema.md document
+- **Visual Manifestation Engine Specification:** Scene spec format, composition system, sprite variants, retro effects
+- **CAS Tuning:** All rate constants are starting estimates. Real calibration through diagnostic framework during testing.
 
-This is where the placeholder values in the paradigm specs get replaced with real numbers.
-
-### Parallel work still available:
-- Thread 4: Dramaturgical Agent ingredients + CAS initial conditions
-- Visual Manifestation Engine specification
-- Phase 1 implementation in Claude Code (can begin — game state schema + paradigm specs provide enough structure)
+### Build: Phase 1 — Paradigm Engine
+Ready to begin. CAS engine spec + game state schema + paradigm specs provide sufficient structure for Claude Code implementation.
 
 ---
 
 ## Key Open Questions
-1. CAS engine parameter tuning — exact thresholds for behavioral legibility (Thread 3)
-2. MVP definition — minimum compelling first level
-3. Granular constraint relationships between primitives (answers come from building/testing)
-4. Visual Manifestation Engine specification
-5. Multi-paradigm shift mapping mechanics (partially addressed in paradigm specs cross-cluster section)
-6. Behavioral stress response modifier function design
-7. Event magnitude calibration per paradigm and game length
-8. Overseer model confidence thresholds for escalation levels
+1. Behavioral implementation — how Claude's narrative directives become rendered game content (dedicated thread needed)
+2. Game state schema document update — apply diffs from claude.md to actual schema doc
+3. Visual Manifestation Engine specification
+4. CAS rate constant calibration (testing phase)
+5. MVP definition — minimum compelling first level
+6. Two-primitive sufficiency validation (optimistic, flagged as risk)
