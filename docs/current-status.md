@@ -1,33 +1,44 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-04 (Thread 7.6: Sequencing Grammar Refinement)
+**Last updated:** 2026-03-04 (Thread 8: Multi-Paradigm Shift Mechanics — Principles Only)
 
 ---
 
 ## What Just Happened
 
-### Thread 7.6: Sequencing Grammar Refinement — Interface Specified, Document Updated
+### Thread 8: Multi-Paradigm Shift Mechanics — Principles Established, Implementation Deferred
 
-Thread 6 was originally scoped as a full sequencing grammar refinement session. Audit of Threads 4, 5, and 7 revealed that most of the original scope was already resolved. The original four gaps:
+Thread 8 was originally scoped as a full specification of paradigm shift mechanics (triggers, state transfer, entity crosswalks, transition experience). Before diving in, audit of Threads 1-5, 7, and 7.6 revealed:
 
-1. ~~Agent stack outdated in sequencing grammar doc~~ → Resolved by Thread 4 (Dramaturgical Agent eliminated, paradigm grammar + skeleton + override conditions established)
-2. ~~Missing paradigm grammar seeds~~ → Correctly deferred to "before Phase 2, leveraging ingestion data + Phase 1 playtesting" (Decision 33)
-3. ~~Cumulative vocabulary tracking across episodes~~ → Partially resolved by skeleton's vocabulary budget (Thread 4), fully resolved this session via Episode Brief + behavioral delta model
-4. ~~Paradigm shift sequencing~~ → Phase 7 territory (sessions 34-38), premature to specify now
+- **CAS state carryover:** Already solved. The CAS engine (Thread 3) is paradigm-independent by design. Entity state, social graphs, knowledge, reputation — all live in the CAS layer, not the paradigm layer. Carries over by default.
+- **Schema support:** Already solved. Decision 11 (paradigm-flexible spatial format) ensures the schema accommodates multiple paradigms without restructuring.
+- **Episode generation:** Already solved. The Episode Brief (Decision 46) generates dynamically at each episode boundary, reading from the appropriate paradigm grammar seed. A paradigm-shifted episode just gets a Brief from the new paradigm's seed.
+- **What's genuinely missing:** Implementation-level specification (detection mechanisms, crosswalk mappings, damping parameters, transition experience design) that requires empirical grounding from Phases 1-6.
 
-The genuine remaining gap was the **interface between the across-episode skeleton and the within-episode sequencing agents**. This session specified:
+**Decision:** Establish design principles as constraints for Phase 7 implementation. Defer all implementation specification.
 
-**Episode Brief (Decision 46):** A structured object produced by the Game Compiler at each episode boundary, containing eight fields: available vocabulary (established/new/variant with behavioral delta), complexity ceiling, difficulty target, punctuation type, zone identity, mechanical thesis, narrative context, override flags. Generated dynamically at episode entry, not pre-computed. The sequencing agents read the Brief, never the skeleton directly.
+**10 principles established (Decisions 50-52):**
 
-**Mechanical Thesis (Decision 47):** The field that separates "competent procedural generation" from "feels like a designer had a vision." Claude identifies the productive friction in available vocabulary (e.g., "patience vs. urgency") at each episode boundary interpretation call. The Grammarian uses this as an organizing principle. Also enables CAS-to-feel influence: same enemies, different thesis, different experience.
+1. Shifts are consequences, not requests
+2. Player prompts are ingredients, not contracts (multi-paradigm prompts shape initial conditions but CAS can override)
+3. CAS state is paradigm-independent and carries over completely
+4. Identity persists, capability transforms
+5. Transitions are narrative moments, not loading screens
+6. Shifts occur only at episode boundaries, no exceptions
+7. Oscillation damping is required
+8. The Overseer can weaponize paradigm shifts
+9. Deliberate shift-triggering is deep mastery
+10. First-time paradigm introductions get extended teachability
 
-**Behavioral Delta on Variants (Decision 48):** CAS-driven entity variants carry a behavioral delta rather than genealogy. Teachability investment scales with how different the variant is from what the player knows. No variant chain tracking needed.
+**Key design insight:** The multi-paradigm prompt case (e.g., "Mega Man but dungeons are Doom") doesn't violate the consequences principle — it reframes it. The prompt becomes the skeleton's paradigm map. The Experience Interpreter picks the dominant paradigm and skeletonizes reasonable requests. But emergent CAS shifts can override or supplement the prompted structure. The system honors prompt intent without being bound by it.
 
-**Vocabulary Record Update (Decision 49):** Tracks what was placed, not what was experienced. Structural completeness verified by Coherence Auditor = established. Clean separation between design quality (system's job) and player mastery (player's job).
+**New document:** `docs/design/paradigm-shift-principles.md` — constraint document for Phase 7.
 
-**Sequencing grammar framework document updated** to reflect Thread 4 architecture, Episode Brief, and current agent responsibilities.
+---
 
 ## Current Agent Execution Order
+
+*(Unchanged from Thread 7.6)*
 
 ```
 Pre-game:
@@ -83,6 +94,8 @@ Diagnostic wrapper (unchanged):
 
 ## Generation Flow
 
+*(Unchanged from Thread 7.6)*
+
 ```
 Player prompt
   → Skeleton (~10-15s): paradigm grammar instantiation
@@ -109,14 +122,14 @@ Player prompt
 
 ### Immediate: Repo Sync
 1. Drop into repo:
-   - `docs/design/sequencing-grammar-framework.md` — updated framework with Episode Brief
+   - `docs/design/paradigm-shift-principles.md` — new constraint document for Phase 7
    - `docs/current-status.md` — this file
-   - Append Thread 7.6 decisions (46-49) to `docs/decisions-log.md`
-2. Update `claude.md` — add Episode Brief reference to Paradigm Grammar Framework section, update open design work list
+   - Append Thread 8 decisions (50-52) to `docs/decisions-log.md`
+2. Update `claude.md` — add paradigm-shift-principles.md to key documents table, update open design work list
 3. Commit and push
 
 ### Then: Phase 1 — Paradigm Engine (Sessions 2-8)
-Phase 1 remains unblocked. Threads 1-5, 7, and 7.6 provide comprehensive specification. The Episode Brief is a Phase 2 deliverable (when sequencing agents come online), but its structure informs Phase 1 game state design.
+Phase 1 remains unblocked. All design threads (1-5, 7, 7.6, 8) are complete or appropriately deferred. The paradigm shift principles inform Phase 1 schema design (paradigm-independent CAS, flexible spatial format) but require no Phase 1 implementation.
 
 ### Before Phase 2: Paradigm Grammar Buildout
 Extend each paradigm spec with full-game structural grammar. Leverage ingestion pipeline data + Phase 1 playtesting experience.
@@ -131,7 +144,7 @@ Extend each paradigm spec with full-game structural grammar. Leverage ingestion 
 ## Key Open Questions
 1. Paradigm grammar specifics per paradigm (before Phase 2)
 2. CAS state → level content translation per paradigm
-3. Multi-paradigm shift mapping mechanics
+3. ~~Multi-paradigm shift mapping mechanics~~ → Principles established (Thread 8), implementation deferred to Phase 7
 4. Game state schema document update (Thread 3 CAS diffs + Thread 5 VME state + Thread 7 entity population fields)
 5. Asset resolution strategy update (reference Game Visual Identity)
 6. Social hook pattern library
