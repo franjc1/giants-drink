@@ -1,7 +1,7 @@
 # Two Fires — Architectural Blueprint (claude.md)
 ## Source of truth for all Claude Code and Claude.ai sessions
 
-**Last updated:** 2026-03-03 (Thread 3: CAS Engine Redesign)
+**Last updated:** 2026-03-04 (Thread 4: Dramaturgical Agent Resolution + Paradigm Grammar Framework)
 
 ---
 
@@ -28,7 +28,7 @@
 | `docs/decisions-log.md` | Append-only decision record with full rationale | When decisions are made |
 | `docs/design/cas-engine-spec.md` | CAS engine specification — primitives, rules, interpretation layer | When CAS design changes |
 | `docs/design/game-state-schema.md` | JSON data structures between all systems | When schema changes |
-| `docs/design/paradigm-specs.md` | Engine clusters + player-facing paradigm specs | When paradigms are added/modified |
+| `docs/design/paradigm-specs.md` | Engine clusters + player-facing paradigm specs + full-game paradigm grammars (when built) | When paradigms are added/modified |
 | `docs/design/build-plan-v2.md` | Current build plan (45 sessions, includes diagnostic framework) | When plan changes |
 | `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
 | `docs/design/sequencing-grammar-framework.md` | Intermediate layer theory + grammar seeds | When sequencing logic evolves |
@@ -94,7 +94,7 @@ One core rule: bond changes when entity attributes an affect change to another e
 
 ### Social Timer
 
-CAS runs on independent ~2-minute heartbeat (adjustable per game by Dramaturgical Agent). Paradigm ticks determine when player perceives changes. Social graph evolves continuously.
+CAS runs on independent ~2-minute heartbeat (adjustable per game by Game Compiler at creation time). Paradigm ticks determine when player perceives changes. Social graph evolves continuously.
 
 ### Faction State
 
@@ -109,6 +109,7 @@ This architecture replaces:
 - Initial Thread 3's cascade formulas with trigger thresholds → eliminated (cascades emerge from propagation)
 - Transfer doc's antagonist response menu → eliminated (Claude constructs faction leadership decisions from personality + information + situation)
 - Dramaturgical Agent's deterministic catalyst trigger system → replaced by drama density signals to Claude
+- Dramaturgical Agent as discrete agent → eliminated entirely (Decision 29, Thread 4). Functions distributed to Game Compiler, CAS engine, Claude interpretation, paradigm grammar framework
 
 ---
 
@@ -442,6 +443,79 @@ Two Fires organizes game types into two layers: **engine clusters** (what gets b
 
 ---
 
+## Paradigm Grammar Framework (Full-Game Arc)
+
+The Sequencing Grammar Framework handles *within-episode* quality (teachability, rhythm, directionality). The Paradigm Grammar Framework handles *across-episode* quality — the full-game mechanical arc.
+
+### The Dialectic
+
+The CAS produces infinite emergent social possibilities. But a game also needs to *feel like a great game* mechanically — authored, shaped, progressing toward something. Pure emergence risks shapelessness. Pure structure risks feeling scripted and static. The resolution: firm but bendable structural constraints that serve as additional variables in the constraint surface equation. The paradigm grammar constrains the CAS (social dynamics express through paradigm-appropriate channels). The CAS constrains the grammar (social reality may override structural plans). Mutual constraint, same philosophy as the CAS itself.
+
+### Three Layers
+
+**Layer 1 — Paradigm Grammar.** Each paradigm has a native full-game structural grammar. This is NOT a universal template — it's fundamentally different per paradigm because different game types have fundamentally different structures.
+
+Each paradigm grammar defines:
+- **Structural units** — what are the building blocks? (levels, cups, missions, dungeons, stages)
+- **Organization pattern** — how are units arranged? (linear worlds, stage-select, branching missions, tournament brackets)
+- **Punctuation** — what marks boundaries? (bosses, championships, fortress sequences, final exams)
+- **Progression shape** — how does complexity/intensity evolve? (steady escalation, difficulty valleys, cup-based plateaus)
+- **Non-negotiable paradigm features** — what makes this paradigm recognizable? (bosses at end of Mega Man stages, castles in Mario worlds, cups in racing, dungeon items in Zelda)
+- **Vocabulary accumulation pattern** — how does the mechanical repertoire grow? (one weapon per stage in Mega Man, gradual within worlds in Mario, unit unlocks per mission in RTS)
+
+These are paradigm properties derived from ingestion pipeline data (~1,350 games), not invented from first principles. Players who prompt "a Mega Man game" expect boss stages and a stage select. That's what the paradigm *is*.
+
+**Layer 2 — Skeleton.** At game creation time, the Game Compiler instantiates the paradigm grammar for this specific game. The skeleton is shaped by: prompt intent, narrative premises, intended length, and CAS initial conditions.
+
+The skeleton includes:
+- **Vocabulary budget** — the complete set of mechanical elements, tiered by complexity (tier 1 = available from episode 1, tier 2 = available after N episodes, etc.)
+- **Zone/environment progression** — the sequence of environmental contexts with their mechanical identities (ice = momentum, water = different movement, fortress = tight spaces)
+- **Boss placement** — where bosses appear, what zone they punctuate, how their design reflects the zone's vocabulary
+- **Complexity ceiling per episode** — max new elements introduced per episode, minimum reuse of established elements
+- **Difficulty shape** — the intended tension-relief pattern across the full game (e.g., 3:1 escalation-to-valley ratio)
+
+The skeleton is stored as part of `meta` (immutable at creation) and consulted by content agents at each episode boundary. Content agents generating episode N read: skeleton constraints + CAS state + sequencing grammar + Claude interpretation + previous vocabulary record.
+
+**Layer 3 — Override Conditions.** The skeleton is a default plan that knows it might be overridden. When CAS-driven events make the structural plan disconnected from world reality, Claude's interpretation layer can adapt.
+
+Override conditions are **indeterminate and open to Claude's constructionist interpretation** — not a deterministic lookup. Claude reads CAS state + skeleton + current game reality and constructs the appropriate adaptation. Examples of legitimate overrides: faction collapse makes a planned zone empty (compress or skip), player earns a paradigm shift (current zone ends early, new grammar takes over), player social-engineers a shortcut to the antagonist (compression toward resolution accelerates), extended social engagement makes the game longer than planned (additional episodes within the grammar's structure).
+
+When overriding, the five experience primitives must still be satisfied: vocabulary accumulation continues, consequentiality escalates, environment remains legible, the transformation feels earned, and the overall vector compresses toward resolution.
+
+### Five Experience Primitives (Quality Checks)
+
+These are emergent properties of well-designed systems, used for diagnostic evaluation — not calibration targets:
+
+1. **Vocabulary accumulation** — player's mechanical repertoire grows. Emergent from paradigm grammar's vocabulary budget.
+2. **Consequentiality escalation** — player actions have increasingly large consequences. Emergent from CAS bond accumulation + mechanical progression.
+3. **Environmental legibility** — player understands the current context's rules. Emergent from zone design + teachability.
+4. **Earned transformation** — when the game changes, it feels caused. Emergent from CAS causal chains + override condition requirements.
+5. **Compression toward resolution** — experience vector points toward climax. Emergent from win condition + skeleton progression + CAS escalation.
+
+### Status
+
+**Framework: defined (this section).** Specific paradigm grammars: to be built before Phase 2, extending `docs/design/paradigm-specs.md`. Will leverage ingestion pipeline structural data + Phase 1 playtesting experience.
+
+---
+
+## Dramaturgical Agent — Superseded
+
+**⚠️ The Dramaturgical Agent has been eliminated as a discrete agent (Decision 29, Thread 4).** All references to it in other documents should be understood as historical. Its functions are distributed:
+
+| Original Function | Now Handled By |
+|---|---|
+| Fertile CAS initial conditions | Game Compiler (setup instructions) |
+| Prompt → CAS parameter translation | Game Compiler (OCEAN offset generation) |
+| Social hook placement | Game Compiler + paradigm spec hook patterns |
+| External pressure ramp | Architectural (`pressure_ramp: "player_driven"`) + Claude interpretation |
+| Drama density monitoring | CAS engine (stagnation/melodrama signals → Claude) |
+| Catalytic perturbations | Claude interpretation layer (NPC actions in response to stagnation) |
+| Mechanical game arc | Paradigm grammar + skeleton + override conditions |
+
+**One designed social ingredient survives:** An early social hook placed at the episode 1-2 boundary. Encounter guaranteed, outcome emergent. Paradigm-appropriate pattern selected by Game Compiler from hook pattern library in paradigm spec.
+
+---
+
 ## Diagnostic & Tuning Framework Summary
 
 ### Testing & Tuning Infrastructure (threaded through all phases)
@@ -477,10 +551,11 @@ Pre-game:
   Experience Interpreter
     → Artistic Director
     → Design Philosopher
-    → Dramaturgical Agent (setup: CAS initial conditions, social graph topology,
-                           personality distributions, social timer pace, drama calibration,
-                           initial narrative)
-    → Grammarian → Rhythmist → Game Compiler → Cartographer
+    → Game Compiler (expanded role: CAS initial conditions, social graph topology,
+                     personality distributions, social timer pace, drama calibration,
+                     skeleton instantiation from paradigm grammar, social hook placement,
+                     initial narrative, vocabulary budget, zone/boss structure)
+    → Grammarian → Rhythmist → Cartographer
     → Provocateur → Coherence Auditor
 
 Runtime loop:
@@ -493,9 +568,11 @@ Runtime loop:
   
   At paradigm tick (episode boundary, social encounter):
     → Claude receives: CAS snapshot + previous narrative + drama signal
+        + skeleton context (current zone, vocabulary budget, difficulty phase)
     → Claude interprets at multiple scales (ecology → faction → cluster → player sphere)
     → Claude produces: narrative update, entity behavioral directives,
         faction leadership decisions, visual/audio/aesthetic specs
+    → Claude evaluates: does skeleton still fit world reality? (override conditions)
     → Leadership decisions become CAS events → processed next cycle
     → Behavioral directives → paradigm engine renders behavior
     → Visual specs → Visual Manifestation Engine renders scene
@@ -516,19 +593,25 @@ Diagnostic wrapper (per generated game):
 
 ```
 Player prompt
-  → Skeleton (~10-15s): paradigm, CAS initial conditions, aesthetics,
-    narrative premises, social hooks, social timer pace, initial narrative
-  → Episode 1 generates (content agents + prompt-time character/environment sprites)
+  → Skeleton (~10-15s): paradigm grammar instantiation → skeleton
+      (vocabulary budget, zone progression, boss placement, difficulty shape,
+       CAS initial conditions, social graph, personality distributions,
+       aesthetics, narrative premises, social hooks, social timer pace)
+  → Episode 1 generates (content agents read skeleton + sequencing grammar
+      + CAS state + prompt-time character/environment sprites)
   → Player plays Episode 1 (CAS evolving on social timer)
+  → Social hook at episode 1-2 boundary (designed encounter, emergent outcome)
   → At episode boundary:
     → CAS snapshot taken
-    → Claude interpretation call (multi-scale: ecology → faction → cluster → player sphere)
+    → Claude interpretation call (multi-scale + skeleton context)
+    → Override condition evaluation (does skeleton still fit world reality?)
     → Claude produces: narrative update, behavioral directives, visual/audio specs,
         faction leadership decisions (→ CAS events)
   → Between-episode window (triple duty):
       1. Player social interaction surface (conversations = CAS events)
       2. CAS narrative delivery (cutscenes, dialogue, reveals — from Claude interpretation)
       3. Generation masking (next episode content + new visual assets from interpretation)
-  → Episode 2 generates incorporating Claude interpretation + CAS state
-  → [repeat]
+  → Episode 2+ generates incorporating: skeleton constraints + CAS state
+      + Claude interpretation + sequencing grammar
+  → [repeat, with skeleton adapting if override conditions met]
 ```

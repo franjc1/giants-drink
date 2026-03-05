@@ -268,6 +268,8 @@ This creates fundamental timing asymmetry: feelings spread fast without explanat
 
 **Decision:** The CAS runs on its own heartbeat — a social timer with a base interval of ~2 minutes real time, adjustable per game by the Dramaturgical Agent. This is independent of paradigm ticks. Paradigm ticks determine when the player perceives CAS changes (episode boundaries, social encounters), but the social graph evolves continuously on its own clock.
 
+**⚠️ UPDATED by Decision 29 (Thread 4).** Social timer pace now set by Game Compiler at creation time, not by Dramaturgical Agent (which has been eliminated).
+
 **Rationale:** This means a player who takes a long time on one level returns to a social graph that evolved more than if they'd speedrun it — time matters. And different paradigms produce similar social evolution rates per real-time-minute despite wildly different tick frequencies. The social timer is a game-level setting, not a paradigm-level one, allowing per-game pacing control.
 
 ---
@@ -314,3 +316,100 @@ This creates fundamental timing asymmetry: feelings spread fast without explanat
 8. ~~Behavioral stress response modifier function~~ → Eliminated (constructed by Claude)
 9. ~~Event magnitude calibration~~ → Folded into drama density signals + Claude interpretation
 10. Overseer model confidence thresholds for escalation levels
+11. ~~Dramaturgical Agent ingredient specification~~ → Resolved by Thread 4 (agent eliminated, functions distributed)
+
+---
+
+## Session: 2026-03-04 — Thread 4: Dramaturgical Agent Resolution + Paradigm Grammar Framework
+
+### Decision 29: Dramaturgical Agent Eliminated as Discrete Agent
+
+**Context:** Thread 4 was scoped as the Dramaturgical Agent ingredient specification — how to design fertile initial conditions, translate prompts into CAS parameters, create social hooks, calibrate drama density, build a catalyst library, and design the external pressure ramp. The Thread 3 CAS redesign (two-layer architecture, valence/arousal replacing 7 state variables, Claude interpretation replacing threshold tables) invalidated many of the original Thread 4 specifics. Deeper analysis revealed that the Dramaturgical Agent's *functions* were already handled by other components, making a discrete agent redundant.
+
+**Decision:** The Dramaturgical Agent is eliminated as a discrete agent with its own Claude call. Its functions are distributed across existing components:
+
+| Original Function | Now Handled By |
+|---|---|
+| Fertile CAS initial conditions | Game Compiler (setup instructions) |
+| Prompt → CAS parameter translation | Game Compiler (OCEAN offset generation) |
+| Social hook at episode 1-2 boundary | Game Compiler places it; paradigm spec defines patterns |
+| External pressure ramp | Already architectural (`pressure_ramp: "player_driven"`, Claude interprets faction response from CAS state) |
+| Drama density monitoring | Already in CAS engine (stagnation/melodrama signals passed to Claude interpretation layer) |
+| Catalytic perturbations | Claude's interpretation layer responding to stagnation signals — Claude directs NPC actions that inject events into CAS |
+| Mechanical game arc | Paradigm grammar + skeleton (see Decision 31) |
+
+**Rationale:** The CAS redesign made drama density monitoring and catalyst triggers native to the CAS engine + Claude interpretation loop. The social dimension doesn't need a separate drama designer because: (a) the player is a constant extreme perturbation generating cascading social consequences, (b) fertile initial conditions are a Game Compiler setup task not a separate agent, (c) Claude's interpretation layer already responds to stagnation/melodrama signals and directs NPC behavior. The mechanical game dimension is handled by the paradigm grammar framework (Decision 31). There is no remaining function that requires a discrete Dramaturgical Agent call.
+
+---
+
+### Decision 30: Social Drama Handled by CAS + Player + Claude Interpretation
+
+**Context:** With the Dramaturgical Agent eliminated, needed to confirm that social drama quality is architecturally guaranteed without a dedicated drama system.
+
+**Decision:** Social drama emerges reliably from three interacting systems, no dedicated drama agent required:
+
+1. **CAS engine** — deterministic social physics producing cascading affect propagation, information flow with attribution, bond dynamics, faction aggregation. Includes built-in drama density signals (stagnation/melodrama) sent to Claude.
+2. **Player as extraordinary catalyst** — the player constantly perturbs the system through combat, territory conquest, social interaction, and information manipulation. `event_magnitude_sensitivity` (calibrated by intended_length) ensures CAS reacts proportionally.
+3. **Claude interpretation layer** — constructs situated narrative from CAS primitives, directs NPC behavior (including faction leadership decisions), responds to stagnation signals by having NPCs act on latent tensions.
+
+**One designed social ingredient survives: the early social hook.** Placed at the episode 1-2 boundary by the Game Compiler. Paradigm-appropriate pattern (behavioral signal in action games, encounter in RPGs, etc.). Encounter guaranteed, outcome emergent. Purpose: introduce the social dimension before the player has organically accumulated enough bonds for the CAS to produce visible drama on its own.
+
+**Rationale:** Analysis of five properties of great narrative experiences (tension signature, escalating stakes through connection, reframes, meaningful choice under uncertainty, contrast/variation) showed that four are structurally produced by the CAS + player architecture. The fifth (contrast/variation) comes from Claude interpretation quality and paradigm design. The early hook addresses the one genuine gap: the CAS needs the player to have bonds before it produces visible social drama, but the player starts with none.
+
+---
+
+### Decision 31: Paradigm Grammar + Skeleton + Override Conditions for Mechanical Game Arc
+
+**Context:** With social drama resolved, the question became: what ensures the *mechanical* game experience (platforming, racing, fighting) feels like a great, authored game rather than a tech demo? The Sequencing Grammar Framework handles within-episode quality (teachability, rhythm, directionality). Nothing currently handles across-episode arc — vocabulary progression, zone structure, boss placement, difficulty shape.
+
+**Decision:** Three-layer framework for mechanical game quality:
+
+**Layer 1 — Paradigm Grammar.** Each paradigm has a native full-game structural grammar defining: structural units (levels, cups, missions, dungeons), organization pattern (linear, selectable, branching), punctuation (bosses, championships, fortress sequences), progression shape, non-negotiable paradigm features (bosses at end of Mega Man stages, castles in Mario worlds, cups in racing), and vocabulary accumulation pattern. These are paradigm properties, not per-game decisions. Derived from ingestion pipeline data (1,350+ games). Extends the existing paradigm specs.
+
+**Layer 2 — Skeleton.** At game creation time, the Game Compiler instantiates the paradigm grammar for this specific game, shaped by: prompt intent, narrative premises, intended length, and CAS initial conditions. The skeleton is a *default plan* — "this is a 4-world, 3-levels-per-world platformer with bosses at world boundaries, set in this narrative, heading toward this resolution." It includes: vocabulary budget (tiered by complexity), zone/environment progression, boss placement, complexity ceiling per episode, difficulty shape. Stored in `meta.mechanical_arc` (or equivalent), immutable at creation but consultable by content agents.
+
+**Layer 3 — Override Conditions.** The skeleton is a default, not a mandate. When CAS-driven events produce situations where the structural plan no longer fits the world's reality (faction collapse, paradigm shift earned, player resolves the game faster/differently than expected), Claude's interpretation layer can adapt the skeleton. Override conditions are indeterminate and open to Claude's constructionist interpretation — not a deterministic lookup table. Claude reads CAS state + skeleton + current game reality and constructs the appropriate structural adaptation.
+
+**Rationale:** The dialectic between CAS flexibility (infinite emergent possibilities) and game structure (guaranteed quality experience) is resolved by the constraint surface model: the paradigm grammar and skeleton are firm but bendable constraint surfaces. They're additional variables in the "X + Y + Z + W = great experience" equation. The CAS constrains the grammar (social reality may override structural plans). The grammar constrains the CAS (social dynamics express through paradigm-appropriate channels). The specific experience is unpredictable. The quality is guaranteed by constraint design.
+
+---
+
+### Decision 32: Five Experience Primitives as Quality Checks
+
+**Context:** Discussion of what makes any narrative experience great across media (games, film, novels). Identified five properties. Question: are these skeleton parameters to calibrate, or emergent properties to check?
+
+**Decision:** Five experience primitives identified as emergent properties of well-designed paradigm grammars, not independent calibration targets:
+
+1. **Vocabulary accumulation** — player's mechanical repertoire grows over time. Emergent from paradigm grammar's vocabulary budget and complexity tiering.
+2. **Consequentiality escalation** — player actions have increasingly large consequences. Emergent from CAS bond accumulation + expanding social network + mechanical progression through the game world.
+3. **Environmental legibility** — player always understands the current context's rules. Emergent from paradigm grammar's zone design + sequencing grammar's teachability primitive.
+4. **Earned transformation** — when the game changes, it feels caused. Emergent from CAS causal chains + override conditions requiring Claude to justify structural adaptation.
+5. **Compression toward resolution** — the experience vector points toward a climax. Emergent from win condition design + skeleton's default progression + CAS escalation dynamics.
+
+These serve as diagnostic checks (does the game exhibit these properties?) not as design inputs (set vocabulary_accumulation_rate to 0.7). The diagnostic framework evaluates them.
+
+**Rationale:** Defining these as independent parameters would re-create the essentialist trap the CAS redesign eliminated. They're constructed properties — they emerge when the system's primitives (CAS, paradigm grammar, sequencing grammar, player action) are well-calibrated. Making them explicit as quality checks ensures they don't get lost while keeping them at the right level of abstraction.
+
+---
+
+### Decision 33: Paradigm Grammar Framework Defined Now, Specific Grammars Built Before Phase 2
+
+**Context:** When should the specific paradigm grammars (Mega Man's stage-select structure, Mario's world-level-castle structure, etc.) be defined?
+
+**Decision:** The *framework* (what paradigm grammars are, what they contain, how skeletons instantiate them, how override conditions work) is defined now and captured in claude.md. The *specific grammars* for each paradigm are built before Phase 2 (Experience Intelligence), leveraging: (a) ingestion pipeline structural data from 1,350+ games, (b) hands-on experience from Phase 1 playtesting. Specific grammars extend the existing paradigm specs document.
+
+**Rationale:** The framework is architectural — it affects how the Game Compiler works and how content agents generate episodes. Must be captured now so future sessions don't reinvent a drama agent or come up with contradictory structural approaches. The specific grammars benefit from data (ingestion pipeline) and experience (Phase 1 playtesting) that aren't available yet. Defining them now would mean working from memory rather than evidence.
+
+---
+
+### Open Design Work (Updated)
+
+1. **Paradigm grammar buildout** — extend each paradigm spec with full-game structural grammar, vocabulary inventory, boss/punctuation rules, progression shape. Leverage ingestion pipeline data. Needed before Phase 2.
+2. Behavioral implementation — how Claude's narrative directives become rendered game content
+3. Game state schema update — apply Thread 3 diffs to actual schema document
+4. Visual Manifestation Engine specification
+5. CAS rate constant calibration (diagnostic framework, testing phase)
+6. MVP definition — minimum compelling first level
+7. Two-primitive sufficiency validation
+8. Overseer model confidence thresholds for escalation levels
+9. Social hook pattern library (compact, paradigm-specific, placed by Game Compiler at episode 1-2 boundary)
