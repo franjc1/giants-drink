@@ -413,3 +413,131 @@ These serve as diagnostic checks (does the game exhibit these properties?) not a
 7. Two-primitive sufficiency validation
 8. Overseer model confidence thresholds for escalation levels
 9. Social hook pattern library (compact, paradigm-specific, placed by Game Compiler at episode 1-2 boundary)
+# Decisions Log — Thread 5 Addition
+## Append this content to the existing `docs/decisions-log.md`
+
+---
+
+## Session: 2026-03-04 — Visual Manifestation Engine Specification (Thread 5)
+
+### Decision 34: VME Design Approach — Semantic-But-Specific (Approach B)
+
+**Context:** Three possible approaches for how Claude communicates visual changes to the VME. Approach A (highly semantic — "territory should feel threatening") requires VME intelligence. Approach B (moderately concrete — "add mushroom cloud over fortress, shift palette toward dark industrial") makes VME a mechanical resolver. Approach C (fully concrete — exact asset IDs, pixel coordinates) bloats Claude's prompt with rendering details.
+
+**Decision:** Approach B. Claude speaks in semantic-but-specific visual directives. The VME resolves them mechanically without creative judgment. Claude never specifies pixels or asset IDs. The VME never interprets narrative or decides what should change.
+
+**Rationale:** Consistent with the Barrett-grounded architecture — Claude constructs meaning from CAS primitives, other systems resolve mechanically. Same pattern as CAS engine (deterministic math) + Claude interpretation (meaning construction). The VME is a resolver, not a creative agent.
+
+---
+
+### Decision 35: Seven Directive Types with 39 Primitives
+
+**Context:** Needed to identify the atomic visual/audio changes the CAS can produce, working from concrete examples (bob-omb nuke, foot clan protest, faction territory decay, novel entities, Kenny Powers on a jet ski).
+
+**Decision:** Seven directive types:
+
+1. **Entity Visual Modifier** (8 primitives: size, color/palette, added element, removed element, animation state, transparency/visibility, silhouette change, entity replacement)
+2. **Scene Composition** (5 primitives: elements, spatial arrangement, scale context, temporal nature, trigger context)
+3. **Environment Modifier** (6 primitives: palette shift, tile replacement, added detail, removed detail, lighting change, weather/atmospheric — scope: local or global)
+4. **Scene-Level Effect** (4 primitives: screen shake, screen flash, transition effect, UI-level overlay)
+5. **Novel Entity Spec** (6 primitives: distinguishing features, size class, palette constraints, style era reference, animation states needed, role/archetype reference)
+6. **Text Content** (4 primitives: text string, display method, visual style, language/legibility)
+7. **Audio/Music Modifier** (6 primitives: tonal shift, instrumentation change, tempo change, volume/dynamics, sound effect trigger, ambient texture — scope: local or global)
+
+**Key design decisions within this:**
+- Entity Pose/State was eliminated as a separate type — covered by Entity Visual Modifier primitives (silhouette change + added element + animation state). VME decides whether to fulfill via Layer 1 or Layer 2.
+- Entity replacement covers full transformations (werewolf, transfiguration) as a primitive rather than requiring composition from all other primitives simultaneously.
+- Audio/Music Modifier included alongside visual types — CAS state changes that warrant visual changes often warrant audio changes too.
+- Scene-Level Effects kept separate from Environment Modifiers despite small primitive count — they operate on the screen/camera (cinematographic), not on locations (environmental). Architecturally distinct rendering target.
+
+---
+
+### Decision 36: Seven Cross-Cutting Fields + Directive Stack Model
+
+**Context:** Needed fields that apply across all directive types, plus a model for how directives accumulate and interact over time.
+
+**Decision — Cross-cutting fields:** target, persistence (permanent/episode/momentary), priority (critical→ambient), narrative context (free text for debugging/coherence), timing/sequencing (group ID + sequence order), intensity/magnitude (subtle→extreme, VME resolves to values), layering behavior (additive vs replacement).
+
+**Decision — Directive stack model:** VME maintains a stack of active directives per target.
+- Claude is the only system that adds or removes directives
+- Nothing auto-reverts — recovery requires an explicit counter-directive from Claude
+- Additive directives accumulate (rain + darkness + debris stack)
+- Replacement directives replace only their own primitive type (new palette shift replaces old palette shift, doesn't affect rain)
+- Priority resolves conflicts; recency breaks ties
+- Stack is serializable as game state
+
+**Rationale:** Claude-only stack modification keeps Claude as sole meaning-maker, consistent with the two-layer architecture. No auto-revert prevents the VME from making implicit narrative judgments about when visual changes should end. Serializable stack enables save/restore.
+
+---
+
+### Decision 37: Three-Layer Capability Model
+
+**Context:** VME directives need to be resolved to actual pixels. Different directives require different levels of capability — some are pure canvas operations, others need new pixel content, others need entirely new assets.
+
+**Decision:**
+- **Layer 1 (Compositional):** Canvas operations on existing library assets — scaling, palette remap, compositing, flipping, tiling, opacity/blending, color shifting, positional composition. Zero AI cost. ~40-50% of directives.
+- **Layer 2 (Sprite Variant):** Modifications to existing sprites — pose adjustment, held object insertion, integrated status overlays, partial transformation, pixel text, expression/face change. Programmatic for simple cases, AI-assisted for complex. ~30-40% of directives.
+- **Layer 3 (Novel Generation):** New assets from scratch, constrained by Game Visual Identity. AI image generation required. ~10-20% of runtime directives; 100% of Track B initial asset population.
+
+**Routing rule:** Always try cheapest capable layer first. Layer 1 → Layer 2 → Layer 3.
+
+**Layer 2 boundary:** Start conservative (send more to AI), gradually migrate operations to programmatic as rules prove reliable. Exact boundary tuned during development.
+
+---
+
+### Decision 38: Game Visual Identity System (Track B Architecture)
+
+**Context:** Track B (generated assets for public release) risks visual incoherence — each sprite looking like it came from a different game. Naive generation with text descriptions + style constraints produces individually acceptable but collectively incoherent assets.
+
+**Decision:** Track B generates a complete **visual system** before generating any individual asset. The Game Visual Identity contains six components:
+
+1. **Palette architecture** — ~20-25 master colors organized into primary (player, key NPCs), secondary (enemies, environments), accent (collectibles, UI, danger) palettes
+2. **Proportion grid** — exact pixel dimensions for every entity role (player, small enemy, large enemy, boss, collectible, tile, etc.)
+3. **Detail density rules** — how much visual information per pixel area (eye size, outline treatment, interior detail colors)
+4. **Animation budget** — exact frame count per action type per era
+5. **Visual shorthand dictionary** — how this game communicates concepts visually (danger, collectible, friendly, impassable)
+6. **Silhouette distinctiveness rules** — every entity identifiable by silhouette alone, checked against existing roster
+
+Every asset is generated within the identity. Quality gates validate compliance. Failures trigger regeneration.
+
+**The ingestion library provides distributional knowledge and relational constraints — never pixel data:**
+- Distributional: sprite sizes, palette counts, frame counts per era/paradigm/role
+- Relational: color distance between player and enemies, boss-to-enemy size ratios, environment-entity palette overlap
+- Platform-level: Genesis high contrast vs NES subtlety, SNES RPG gradients vs SNES platformer crispness
+
+**Legal principle:** Copyright protects specific pixel arrangements (expression). It does not protect distributional knowledge, relational constraints, or design patterns (facts/ideas). Every Track B pixel is novel. Cohesion comes from the system.
+
+**Rationale:** This mirrors how real art teams work — shared style guide ensures cohesion without any one asset being derived from another. The ingestion library's value is maximized for Track B quality without copying expression.
+
+---
+
+### Decision 39: Claude's Dual Output Streams
+
+**Context:** When CAS produces novel interactive objects (weapons, vehicles, tools), the VME needs to know what they look like, and the paradigm engine needs to know how they behave. These are two different systems consuming two different kinds of specification.
+
+**Decision:** Claude's runtime interpretation call produces two parallel output streams:
+1. **Visual/audio directives** → consumed by VME
+2. **Mechanical directives** → consumed by paradigm engine / Game Compiler
+
+Novel interactive objects require both. Neither system sees the other's output. Claude is the only system that reasons about both visual and mechanical aspects.
+
+**Rationale:** Clean separation of concerns. VME owns appearance, paradigm engine owns behavior. Consistent with the overall architecture where Claude is the meaning-maker and downstream systems are mechanical resolvers.
+
+**Flag for future sessions:** The mechanical directive format has not been specified. When Game Compiler / paradigm engine work resumes, this format needs definition — it's the behavioral counterpart to the VME's scene spec.
+
+---
+
+### Open Design Work (Updated)
+
+**Resolved by Thread 5:**
+- ~~Visual Manifestation Engine full specification~~ ✅
+- ~~Prompt-time character/environment generation pipeline~~ ✅ (Game Visual Identity system)
+
+**Remaining:**
+1. CAS state → level content translation per paradigm
+2. Multi-paradigm shift mapping mechanics
+3. Paradigm grammar specifics per paradigm (before Phase 2)
+4. Social hook pattern library
+5. Game state schema document update (apply Thread 3 CAS diffs + Thread 5 `vme_state` section for directive stack)
+6. Asset resolution strategy document update (reference Game Visual Identity system)
+7. Mechanical directive format specification (flagged by Decision 39)
