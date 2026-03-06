@@ -1,6 +1,8 @@
 # Two Fires — Game State JSON Schema
 ## The Contract Between Every System
 
+**Last updated:** 2026-03-05 (Reconciled: Threads 1, 3, 5, 7, 8, 9)
+
 ---
 
 ## What This Document Is
@@ -12,11 +14,13 @@ This is the single source of truth for the data structures that flow between all
 **Design principles:**
 - **Flat where possible, nested only where ownership is clear.** Flat dictionaries of typed values make it trivial to add new fields later without restructuring. Missing fields fall back to defaults, so old saves remain compatible.
 - **Every field has a single writer.** One system produces it, others read. If two systems need to modify the same data, that's a design problem — resolve it by splitting the field or routing through one system.
-- **CAS state is sacred.** Nothing except the CAS engine modifies faction state, entity minds, or the social graph at runtime.
+- **CAS state is sacred.** Nothing except the CAS engine modifies faction aggregates, entity affect, or the social graph at runtime.
 - **Asset references are always semantic specs, never filenames.** Track A/B resolution happens downstream.
-- **All float values are 0.0–1.0 unless explicitly noted.** Disposition values range -1.0 to 1.0.
+- **All float values are 0.0–1.0 unless explicitly noted.** Affect valence and bond valence range -1.0 to 1.0.
 - **Identity is stable, expression is dynamic.** The game knows what it IS (immutable meta), but how it looks/sounds/feels responds to CAS state (dynamic modifiers in episodes).
 - **Forward-compatible by default.** Flat dicts, typed items in lists, version field. Adding a new primitive or knowledge type is a new field or tag, never a restructure.
+- **No essentialist emotional categories.** Entities have affect primitives (valence + arousal). All higher-level constructs (fear, loyalty, courage) are constructed by Claude from primitives in context (Barrett's constructionist framework).
+- **Reputation is constructed by the perceiver.** No entity carries a reputation score. Each perceiver constructs reputation from their own knowledge and affect state.
 
 ---
 
@@ -39,11 +43,11 @@ A running game instance has one `GameState` object. This is the entire truth of 
 | Block | Written By | Read By | Persistence |
 |-------|-----------|---------|-------------|
 | `meta` | Experience Intelligence agents (pre-game) | Everything | Per-game, immutable after creation |
-| `world` | Game Compiler (initial), CAS Engine (runtime) | Paradigm Engine, Visual Manifestation, Entity Minds, Claude narrative | Per-game, evolves at episode boundaries |
-| `cas` | CAS Engine exclusively | Dramaturgical monitor, Visual Manifestation, content agents | Per-game, ticks per paradigm spec |
-| `episode` | Content agents (per episode) | Paradigm Engine (renderer + physics) | Per-episode, regenerated each episode |
-| `player` | Paradigm Engine (position/actions), Game Mind (behavioral model) | CAS Engine (as input to disposition updates), Overseer, Diagnostics | Per-game + cross-game (behavioral model) |
-| `overseer` | Overseer system | Experience Interpreter (for later games), Dramaturgical Agent | Cross-game persistent (Cloudflare KV/R2) |
+| `world` | Game Compiler (initial), CAS Engine (runtime) | Paradigm Engine, VME, Entity Minds, Claude interpretation | Per-game, evolves continuously on social timer |
+| `cas` | CAS Engine exclusively | Claude interpretation, diagnostic systems | Per-game, ticks on social timer |
+| `episode` | Construction pipeline: Designer + Builder + Validator (per episode) | Paradigm Engine (renderer + physics) | Per-episode, regenerated each episode |
+| `player` | Paradigm Engine (position/actions), Game Mind (behavioral model) | CAS Engine (as input to events), Overseer, Diagnostics | Per-game + cross-game (behavioral model) |
+| `overseer` | Overseer system | Experience Interpreter (for later games) | Cross-game persistent (Cloudflare KV/R2) |
 | `diagnostics` | Simulated Player, Moment Extractor, Gate checks | Testing UI, Pattern Distiller | Per-generation, dev only, never shipped |
 
 ---
@@ -57,7 +61,7 @@ Created by the pre-game agent pipeline. Immutable after game creation (with one 
 ```json
 {
   "meta": {
-    "schema_version": "0.1.0",
+    "schema_version": "0.2.0",
     "game_id": "tf_29a7c3",
     "created_at": "2026-03-01T14:22:00Z",
     "prompt": "Mario but the goombas are sentient and have a labor movement",
@@ -90,7 +94,9 @@ Created by the pre-game agent pipeline. Immutable after game creation (with one 
       "dramatic_question": "can collective action survive co-optation?"
     },
 
-    "dramaturgical_setup": {
+    "game_visual_identity": null,
+
+    "game_setup": {
       "intended_length": "medium",
       "event_magnitude_sensitivity": 0.6,
       "initial_conditions_summary": "goombas near revolt threshold, koopa army overextended, player enters at inflection point",
@@ -102,15 +108,42 @@ Created by the pre-game agent pipeline. Immutable after game creation (with one 
           "description": "injured goomba blocks path, can be stomped or spoken to"
         }
       ],
-      "catalysts": [
+      "drama_density_defaults": {
+        "min_significant_changes_per_cadence": 1,
+        "max_significant_changes_per_cadence": 4
+      },
+      "social_timer_pace": 1.0,
+      "forgiveness": {
+        "checkpoint_max_loss_seconds": 75,
+        "death_cost": "time_only",
+        "enemy_telegraph_ms": 500,
+        "teachability_zone_screens": 3,
+        "complexity_ceiling_simultaneous": 3,
+        "ramp_shape": "concave",
+        "difficulty_override": null
+      }
+    },
+
+    "skeleton": {
+      "paradigm_grammar_id": "platformer_standard",
+      "total_episodes": 8,
+      "zones": [
         {
-          "id": "catalyst_1",
-          "type": "defection_event",
-          "trigger_condition": "drama_density_below_threshold_for_3_episodes",
-          "description": "high-ranking koopa troopa defects publicly"
+          "zone_id": "grassland",
+          "episodes": [1, 2],
+          "vocabulary_budget": ["goomba_patrol", "pit", "koopa_troopa", "coin_block"],
+          "complexity_ceiling": 0.3,
+          "punctuation": null
+        },
+        {
+          "zone_id": "underground",
+          "episodes": [3, 4],
+          "vocabulary_budget": ["piranha_plant", "moving_platform", "thwomp"],
+          "complexity_ceiling": 0.5,
+          "punctuation": { "type": "mid_boss", "episode": 4 }
         }
       ],
-      "drama_density_threshold": 0.3
+      "override_conditions": []
     }
   }
 }
@@ -122,17 +155,25 @@ Created by the pre-game agent pipeline. Immutable after game creation (with one 
 
 **`aesthetic` and `audio_profile`** — the *home state*. The game's visual and audio identity at equilibrium. Episode generation applies CAS-driven mood modifiers that push expression away from home during crisis and back toward it during stability. Modifiers live in the episode block, not here.
 
-**`philosophy`** — genuinely immutable. The soul of the game. Informs how Claude interprets CAS events, how the Dramaturgical Agent calibrates ingredients, what kind of post-game reading the Game Mind produces.
+**`game_visual_identity`** — Track B only. Complete visual system specification (palette architecture, proportion grid, detail density, animation budget, visual shorthand dictionary, silhouette distinctiveness rules). Null for Track A games. See VME spec for full structure.
 
-**`dramaturgical_setup.intended_length`** — short / medium / long / epic. Calibrates `event_magnitude_sensitivity`. Shorter games need higher sensitivity so the CAS ramps meaningfully in the available window. Longer games can afford lower sensitivity for gradual unfolding.
+**`philosophy`** — genuinely immutable. The soul of the game. Informs how Claude interprets CAS events, what kind of post-game reading the Game Mind produces.
 
-**`dramaturgical_setup.pressure_ramp: "player_driven"`** — difficulty escalation is keyed to the player's own impact on the world, not a fixed curve. The player IS the catalyst (see Player as Catalyst below).
+**`game_setup`** — formerly `dramaturgical_setup`. Written by the Game Compiler (which absorbed the Dramaturgical Agent's functions per Decision 29). Contains all initial condition parameters.
+
+**`game_setup.intended_length`** — short / medium / long / epic. Calibrates `event_magnitude_sensitivity`. Shorter games need higher sensitivity so the CAS ramps meaningfully in the available window.
+
+**`game_setup.pressure_ramp: "player_driven"`** — difficulty escalation is keyed to the player's own impact on the world, not a fixed curve. The player IS the catalyst (see Player as Catalyst below).
+
+**`game_setup.forgiveness`** — SNES Comfort Model defaults (Decision 53). Applied unless `difficulty_override` is set by explicit player prompt language ("hard," "punishing," "arcade difficulty"). See claude.md for full forgiveness philosophy.
+
+**`skeleton`** — the paradigm grammar instantiated for this specific game. Vocabulary budget per zone, complexity ceiling per zone, punctuation placement, override conditions for CAS-driven adaptation. Produced by Game Compiler from paradigm grammar + prompt + narrative.
 
 ### Player as Catalyst Principle
 
 The player is an extraordinary force. Conquering a world, destroying a castle, defeating hundreds of soldiers — these are seismic events. The CAS is calibrated to treat the player as the most disruptive force in the ecology. `event_magnitude_sensitivity` tunes how strongly the CAS reacts.
 
-This creates the natural dual ramp: non-social challenge increases because the antagonist rationally responds to a genuine threat, and social opportunity expands because entities have heard of this extraordinary being and want to ally, defect, or negotiate. The better you are at the mechanical game, the faster the social game becomes essential.
+This creates the natural dual ramp: non-social challenge increases because factions rationally respond to a genuine threat, and social opportunity expands because entities have heard of this extraordinary being and want to ally, defect, or negotiate. The better you are at the mechanical game, the faster the social game becomes essential.
 
 ---
 
@@ -148,6 +189,7 @@ Everything that persists across episodes: who exists, where they are, what they 
     "current_paradigm": "platformer",
     "factions": { },
     "entities": { },
+    "population_templates": { },
     "locations": { },
     "information_packets": [ ],
     "event_log": [ ]
@@ -155,11 +197,11 @@ Everything that persists across episodes: who exists, where they are, what they 
 }
 ```
 
-`current_paradigm` — usually matches `meta.paradigm.id`, but updates during paradigm shifts (Layer 7).
+`current_paradigm` — usually matches `meta.paradigm.id`, but updates during paradigm shifts (Phase 7).
 
 ### `world.factions`
 
-Keyed by faction ID. Initial values from Game Compiler, runtime updates by CAS Engine exclusively.
+Keyed by faction ID. Initial values set by Game Compiler, runtime updates by CAS Engine exclusively.
 
 ```json
 {
@@ -169,16 +211,6 @@ Keyed by faction ID. Initial values from Game Compiler, runtime updates by CAS E
       "name": "Koopa Army",
       "role": "antagonist_primary",
 
-      "state": {
-        "cohesion": 0.65,
-        "morale": 0.55,
-        "loyalty": 0.70,
-        "awareness_of_player": 0.20,
-        "disposition_to_player": -0.60,
-        "internal_dissent": 0.35,
-        "resources": 0.75
-      },
-
       "personality_center": {
         "openness": 0.25,
         "conscientiousness": 0.75,
@@ -187,69 +219,79 @@ Keyed by faction ID. Initial values from Game Compiler, runtime updates by CAS E
         "neuroticism": 0.40
       },
 
+      "resources": 0.75,
+
       "leader_entity_id": "bowser_01",
       "territory": ["world_1", "world_2", "fortress_1"],
 
-      "relationships": {
-        "goomba_union": {
-          "disposition": -0.30,
-          "bond_strength": 0.20,
-          "type": "subordinate_resentful"
-        }
+      "computed_aggregates": {
+        "avg_valence": 0.10,
+        "avg_arousal": 0.35,
+        "cohesion": 0.65,
+        "bond_density": 0.42,
+        "member_count": 47
       }
     }
   }
 }
 ```
 
-**Seven faction state primitives** (grounded in CAS social system theory — Kauffman, Holland, Axelrod, Santa Fe Institute):
+**Faction state model (Thread 3 redesign):** Factions have ONE stored value: **`resources`** (0.0–1.0, abstract capacity to act — not a full economy). Everything else is **computed from member entities** each CAS tick:
 
-| Primitive | Range | Why Primitive | Thresholds |
-|-----------|-------|---------------|------------|
-| `cohesion` | 0.0–1.0 | Internal unity. Emergent from bond density but tracked as aggregate for CAS efficiency. | < 0.3 → splinter risk |
-| `morale` | 0.0–1.0 | Collective will. Emergent from resources + recent outcomes + leadership quality. | < 0.2 → surrender/collapse |
-| `loyalty` | 0.0–1.0 | Allegiance to current power structure. | < 0.3 → defection cascade |
-| `awareness_of_player` | 0.0–1.0 | How much the faction knows about the player. Spikes with major events. | — |
-| `disposition_to_player` | -1.0–1.0 | The faction's *perception* of the player, constructed from available information. Not carried by the player. | — |
-| `internal_dissent` | 0.0–1.0 | Disagreement within. Distinct from low cohesion — unified disagreement with leadership. | > 0.7 → splinter risk |
-| `resources` | 0.0–1.0 | Material capacity to act. Hard constraint — without resources, strategies can't execute. | < 0.2 → desperation |
+| Computed Aggregate | Derivation |
+|---|---|
+| `avg_valence` | Mean of member affect valence values |
+| `avg_arousal` | Mean of member affect arousal values |
+| `cohesion` | 1.0 minus weighted standard deviation of member valence. High = unified, low = fractured |
+| `bond_density` | Ratio of actual intra-faction bonds to possible bonds |
+| `member_count` | Active members |
 
-**Why fear is NOT included:** Fear is a composite emerging from threat perception + power asymmetry + negative disposition. If the CAS doesn't produce fear-like behaviors from these primitives during testing, we add it then. Start without, test empirically. Barrett: fear is a constructed category, not a primitive.
-
-**Why `information_about_regime` is NOT included:** It's knowledge-layer data distributed across entity knowledge blocks, not a faction state number.
+**Why no stored morale, loyalty, awareness, disposition, or dissent:** Thread 3 (Decisions 14-22) eliminated these as stored primitives. They were essentialist categories that prescribed what entities "should" feel. Under Barrett's constructionist framework, these are interpretations Claude constructs from primitives in context:
+- "Morale" emerges from avg_valence + avg_arousal + resources + recent events
+- "Loyalty" emerges from bond valence toward leader + cohesion + knowledge about alternatives
+- "Dissent" emerges from low cohesion + negative avg_valence + knowledge of grievances
+- "Awareness of player" emerges from which entities have player_related knowledge items
+- "Disposition to player" emerges from knowledge + affect + bonds (constructed per-entity, not per-faction)
 
 **`personality_center`** — OCEAN factors for the faction. Individual entities are offsets from this. Koopa Army: low-O (rigid), high-C (disciplined), low-A (uncompromising). Goomba Workers: high-A (cooperative), high-N (anxious), high-O (open to change).
 
+**Resources:** Hard constraint — without resources, strategies can't execute. Updated by CAS: +territory +members -operations +passive_regen.
+
 ### `world.entities`
 
-Keyed by entity ID. Every being with a mind.
+Keyed by entity ID. Every being with a mind. Two populations: **named entities** (individually generated) and **population entities** (batch-generated from templates, promoted to named on first player contact).
+
+#### Named Entity Structure
 
 ```json
 {
   "entities": {
     "goomba_07": {
       "id": "goomba_07",
-      "name": "Goomba #7",
-      "display_name": "Grim",
+      "name": "Grim",
+      "entity_type": "named",
       "faction_id": "goomba_union",
       "role": "foot_soldier",
       "rank": "low",
       "status": "active",
       "location_id": "world_1_3",
 
-      "mind": {
-        "personality": {
-          "openness": 0.20,
-          "conscientiousness": -0.10,
-          "extraversion": -0.05,
-          "agreeableness": 0.15,
-          "neuroticism": 0.10
-        },
-        "disposition_to_player": 0.00,
-        "motivations": ["survive", "protect_family", "end_forced_labor"],
-        "emotional_state": "anxious",
-        "conversation_state": "never_contacted"
+      "personality": {
+        "openness": 0.20,
+        "conscientiousness": -0.10,
+        "extraversion": -0.05,
+        "agreeableness": 0.15,
+        "neuroticism": 0.10
       },
+
+      "affect": {
+        "valence": -0.15,
+        "arousal": 0.45
+      },
+
+      "motivations": ["survive", "protect_family", "end_forced_labor"],
+      "conversation_state": "never_contacted",
+      "communication_willingness": 0.50,
 
       "knowledge": [
         {
@@ -257,7 +299,9 @@ Keyed by entity ID. Every being with a mind.
           "type": "spatial",
           "content": "layout of world_1_1 through world_1_3",
           "accuracy": 1.0,
+          "emotional_charge": 0.0,
           "source": "direct_observation",
+          "causal_agent": null,
           "acquired_tick": 0
         },
         {
@@ -265,7 +309,9 @@ Keyed by entity ID. Every being with a mind.
           "type": "social",
           "content": "goomba_foreman_01 is frustrated with koopa_army leadership",
           "accuracy": 0.75,
+          "emotional_charge": 0.3,
           "source": "goomba_06",
+          "causal_agent": "goomba_foreman_01",
           "acquired_tick": 2
         },
         {
@@ -273,18 +319,22 @@ Keyed by entity ID. Every being with a mind.
           "type": "special",
           "content": "ancient legends speak of two lights stolen from the sky",
           "accuracy": 0.40,
+          "emotional_charge": 0.1,
           "source": "faction_folklore",
+          "causal_agent": null,
           "acquired_tick": 0,
           "resolution_level": "ambient",
           "propagation_resistance": 0.1
         }
       ],
 
-      "social_graph": [
-        { "entity_id": "goomba_06", "strength": 0.70, "valence": 0.80, "asymmetry": 0.0, "type": "friend" },
-        { "entity_id": "goomba_08", "strength": 0.40, "valence": 0.50, "asymmetry": 0.0, "type": "acquaintance" },
-        { "entity_id": "goomba_foreman_01", "strength": 0.55, "valence": 0.60, "asymmetry": 0.3, "type": "mentor" }
+      "bonds": [
+        { "target_id": "goomba_06", "strength": 0.70, "valence": 0.80, "asymmetry": 0.0, "type": "friend" },
+        { "target_id": "goomba_08", "strength": 0.40, "valence": 0.50, "asymmetry": 0.0, "type": "acquaintance" },
+        { "target_id": "goomba_foreman_01", "strength": 0.55, "valence": 0.60, "asymmetry": 0.3, "type": "mentor" }
       ],
+
+      "event_history": [],
 
       "behavioral": {
         "patrol_range": 64,
@@ -292,8 +342,7 @@ Keyed by entity ID. Every being with a mind.
         "awareness_radius": 48,
         "response_behavior": "approach_cautious",
         "contact_damage": 1,
-        "capture_window_ms": 2000,
-        "communication_willingness": 0.50
+        "capture_window_ms": 2000
       },
 
       "asset_spec": {
@@ -320,29 +369,150 @@ Keyed by entity ID. Every being with a mind.
 }
 ```
 
-#### Entity Mind
+#### Population Entity Structure
+
+```json
+{
+  "entities": {
+    "goomba_pop_14": {
+      "id": "goomba_pop_14",
+      "name": null,
+      "entity_type": "population",
+      "faction_id": "goomba_union",
+      "template_id": "goomba_patrol_template",
+      "role": "foot_soldier",
+      "rank": "low",
+      "status": "active",
+      "location_id": "world_1_2",
+
+      "affect": {
+        "valence": -0.10,
+        "arousal": 0.38
+      },
+
+      "communication_willingness": 0.35
+    }
+  }
+}
+```
+
+Population entities inherit personality, knowledge, behavioral parameters, and asset_spec from their `template_id` in `world.population_templates`. They store only: id, affect (with minor random perturbation from template baseline), location, status, and communication_willingness. On first player conversation, promoted to named: Claude generates individual OCEAN offsets, name, knowledge list, bonds, and motivations. The entity gets a full named entry and the population entry is removed.
+
+### `world.population_templates`
+
+```json
+{
+  "population_templates": {
+    "goomba_patrol_template": {
+      "id": "goomba_patrol_template",
+      "faction_id": "goomba_union",
+      "role": "foot_soldier",
+      "rank": "low",
+
+      "personality_baseline": {
+        "openness": 0.0,
+        "conscientiousness": 0.0,
+        "extraversion": 0.0,
+        "agreeableness": 0.0,
+        "neuroticism": 0.0
+      },
+
+      "affect_baseline": {
+        "valence": -0.10,
+        "arousal": 0.35
+      },
+
+      "knowledge": [
+        {
+          "id": "tk_001",
+          "type": "spatial",
+          "content": "general layout of assigned zone",
+          "accuracy": 0.4,
+          "emotional_charge": 0.0,
+          "source": "faction_common",
+          "causal_agent": null,
+          "acquired_tick": 0
+        },
+        {
+          "id": "tk_002",
+          "type": "special",
+          "content": "ancient legends speak of two lights stolen from the sky",
+          "accuracy": 0.25,
+          "emotional_charge": 0.05,
+          "source": "faction_folklore",
+          "causal_agent": null,
+          "acquired_tick": 0,
+          "resolution_level": "ambient",
+          "propagation_resistance": 0.1
+        }
+      ],
+
+      "behavioral": {
+        "patrol_range": 64,
+        "patrol_speed": 1.0,
+        "awareness_radius": 48,
+        "response_behavior": "patrol",
+        "contact_damage": 1,
+        "capture_window_ms": 2000
+      },
+
+      "communication_willingness_baseline": 0.35,
+
+      "asset_spec": {
+        "visual": {
+          "dimensions": [16, 16],
+          "color_count": 3,
+          "palette_profile": "warm_dark",
+          "silhouette_class": "round_short",
+          "style_era": "nes_late",
+          "animation": { "frames": 2, "type": "walk_cycle", "speed": "slow" }
+        },
+        "narrative": { "role": "foot_soldier", "faction": "goomba_union" },
+        "reference": { "style_reference": "goomba", "primary_game": "super_mario_bros" }
+      }
+    }
+  }
+}
+```
+
+Population templates are compact — one template covers an entire class of entities. The `personality_baseline` is (0,0,0,0,0) by default (meaning entities use the faction center directly). On promotion, Claude generates individual offsets.
+
+#### Entity Affect (Thread 3)
+
+Two dynamic values updated every CAS tick:
+
+**`affect.valence`** (-1.0 to 1.0) — how positive or negative the entity's current state is.
+**`affect.arousal`** (0.0 to 1.0) — how activated/agitated the entity is.
+
+These are NOT emotions. They're the raw substrate from which Claude constructs situated emotional experience. Same valence + arousal in different contexts → different emotional interpretations. High arousal + negative valence near a threat → Claude might construct "fear." Same numbers after a betrayal → Claude might construct "rage." Barrett's constructionism in action.
+
+Personality-determined baselines (drift targets during routine):
+```
+valence_baseline = 0.0 + (E-0.5)×0.15 + (A-0.5)×0.10 + (N-0.5)×-0.15
+arousal_baseline = 0.3 + (N-0.5)×0.20 + (E-0.5)×0.10
+```
+
+#### Entity Personality
 
 **`personality`** — OCEAN offsets from faction `personality_center`. Entity's absolute personality = faction center + offset. Five factors, typically -0.3 to +0.3.
 
-| Factor | In-Game Behavioral Driver |
-|--------|--------------------------|
-| **Openness** | Curiosity, willingness to consider new ideas (like allying with player), receptivity to information |
-| **Conscientiousness** | Reliability, patrol discipline, follow-through. High-C = better soldiers AND better allies once turned |
-| **Extraversion** | Social reach, information propagation speed, visibility. High-E = faster influence, more connections |
-| **Agreeableness** | Disposition flexibility, persuasion susceptibility. High-A = easier to sway in both directions |
-| **Neuroticism** | Emotional volatility, stress response magnitude. High-N = stronger reactions to events, more drama, less stability |
+| Factor | CAS Role |
+|--------|----------|
+| **Openness (O)** | Receptivity to novelty, cross-group bonds, worldview flexibility |
+| **Conscientiousness (C)** | Composure under pressure, reliability, discounting low-accuracy info |
+| **Extraversion (E)** | Information propagation speed, bond formation rate, social centrality |
+| **Agreeableness (A)** | Susceptibility to affect contagion, bond influence, pro-social receptivity |
+| **Neuroticism (N)** | Affect magnitude, arousal baseline, recovery speed from negative states |
 
 **Why deception, courage, empathy are NOT explicit traits:** They emerge from OCEAN + situation. Low-A + low-C + negative disposition + valuable info = likely to deceive. Low-N + threat = courage. High-A + high-O + exposure to suffering = empathy. Let them emerge from primitives.
-
-**`disposition_to_player`** — this entity's personal perception, constructed from whatever information reached them. NOT a property the player carries. Barrett: reputation is a perception constructed by the perceiver.
-
-**`conversation_state`** values: `never_contacted`, `hailed_rejected`, `spoken_once`, `spoken_multiple`, `allied`, `betrayed`.
 
 #### Entity Knowledge
 
 Flat list of tagged items. **This is the architectural enforcement of bounded knowledge.** Claude dialogue generation receives ONLY items in this list. The entity cannot reference information it doesn't possess.
 
-All knowledge enters through information propagation — direct observation (highest accuracy), told by connected entity (degrades per hop), or faction channels (lowest accuracy, most delayed).
+All knowledge enters through: direct observation (highest accuracy), told by connected entity (degrades per hop), faction channels (lowest accuracy, most delayed), or initial distribution by Game Compiler.
+
+**Knowledge item fields:** `id`, `type`, `content`, `accuracy`, `emotional_charge`, `source`, `causal_agent`, `acquired_tick`. Special knowledge adds `resolution_level` and `propagation_resistance`.
 
 **Knowledge item types:** `spatial`, `social`, `factual`, `special`, `player_related`.
 
@@ -352,11 +522,9 @@ All knowledge enters through information propagation — direct observation (hig
 |-------|----------------------|---------|---------------------|
 | `ambient` | Low (0.1–0.3) | "Legends speak of two lights stolen from the sky" | Many entities, vague and degraded |
 | `structural` | High (0.6–0.8) | "There IS a way to reach another world" | High-ranking or well-connected figures |
-| `actionable` | Near-total (0.9+) | "HERE is how you bridge worlds, HERE is the artifact" | One special entity per world — a sage, hermit, elder. Set apart from faction structure. Deliberately placed by Dramaturgical Agent |
+| `actionable` | Near-total (0.9+) | "HERE is how you bridge worlds, HERE is the artifact" | One special entity per world — a sage, hermit, elder. Deliberately placed by Game Compiler |
 
-The seed entity for actionable knowledge is not random — it's a key character somehow set apart (a version of Toad who's a sage, an oracle, a figure outside the faction structure). The Dramaturgical Agent authors their placement as part of game setup.
-
-#### Entity Social Graph
+#### Entity Bonds
 
 **Mutable list** — the CAS engine adds and removes connections at runtime.
 
@@ -390,9 +558,10 @@ Flat dictionary of floats. Combinations produce behaviors — not an enum of nam
 | `response_behavior` | On detection: approach, flee, hold_position, alert_others, approach_cautious |
 | `contact_damage` | Damage on physical contact |
 | `capture_window_ms` | Post-defeat approachability window |
-| `communication_willingness` | 0.0–1.0, from personality + disposition |
 
-**Stress response** is a modifier function in CAS engine code (not schema data) that reads personality + faction state and adjusts these parameters at episode generation. High-N + low morale → shrink patrol_range + increase awareness_radius (nervous, hypervigilant). Low-N + low morale → reduce patrol_speed (demoralized but steady). Novel behaviors emerge from parameter combinations nobody designed.
+**Stress response** is computed by Claude's interpretation layer (not schema data). Claude reads personality + affect + faction context and produces behavioral directives that adjust these parameters at episode boundaries. High-N + negative valence + high arousal → Claude might direct: shrink patrol_range + increase awareness_radius (nervous, hypervigilant). Low-N + negative valence → reduce patrol_speed (demoralized but steady). Novel behaviors emerge from parameter combinations nobody designed.
+
+**`communication_willingness`** — computed from personality + affect + faction context. For named entities, individually calculated. For population entities, inherited from template with perturbation. An entity that refuses to communicate is making a choice, not hitting a system limitation.
 
 Adding new parameters: add field, set default. No restructuring.
 
@@ -403,13 +572,13 @@ Semantic description for Track A/B resolution. Three layers:
 - **`narrative`** — Track B generation guidance: role, faction, emotional tone
 - **`reference`** — Track A lookup hints: "like a goomba." Track B ignores completely
 
-**Not static.** Base spec lives on entity, but visual manifestation events generate *modified* specs for specific episodes. CAS state → visual changes (resources < 0.2 + leader + formal aesthetic → degraded appearance).
+**Not static.** Base spec lives on entity, but VME directives generate *modified* visual states for specific episodes. CAS state → Claude interpretation → VME directives → modified appearance.
 
-Handles novel characters: Uncle Baby Billy = heavyset + white pompadour + suit/robe + cross + arrogant posture. At 32x32 pixels, 4-5 distinguishing features is enough. Player imagination fills the rest. This is why retro resolution makes the system tractable.
-
-**Entity `rank`** values: `leader`, `lieutenant`, `specialist`, `mid`, `low`. Determines CAS cascade impact magnitude.
+**Entity `rank`** values: `leader`, `lieutenant`, `specialist`, `mid`, `low`. Determines CAS event impact magnitude and information access level.
 
 **Entity `status`** values: `active`, `defeated`, `captured`, `defected`, `dead`, `fled`, `allied_with_player`.
+
+**`conversation_state`** values: `never_contacted`, `hailed_rejected`, `spoken_once`, `spoken_multiple`, `allied`, `betrayed`. Mechanical state for gating conversation depth, NOT emotional state.
 
 ### `world.locations`
 
@@ -422,13 +591,11 @@ Handles novel characters: Uncle Baby Billy = heavyset + white pompadour + suit/r
       "type": "level_section",
       "controlling_faction": "koopa_army",
       "contested": false,
-      "entities_present": ["goomba_07", "goomba_08", "koopa_troopa_12"],
+      "entities_present": ["goomba_07", "goomba_08", "koopa_troopa_12", "goomba_pop_14"],
       "connected_to": ["world_1_2", "world_1_4"],
       "state": {
         "fortification": 0.3,
-        "damage": 0.0,
-        "propaganda_present": true,
-        "morale_atmosphere": "tense"
+        "damage": 0.0
       }
     }
   }
@@ -451,6 +618,7 @@ Discrete information traveling through the social graph.
       "emotional_charge": 0.60,
       "origin_entity_id": "goomba_07",
       "origin_tick": 3,
+      "causal_agent": "player_01",
       "current_holders": ["goomba_07", "goomba_06"],
       "propagation_speed": "between_episode",
       "hops": 1,
@@ -462,11 +630,13 @@ Discrete information traveling through the social graph.
 
 **`magnitude`** values: `minor`, `moderate`, `major`, `seismic`. Calibrated by `event_magnitude_sensitivity`. Castle conquered = seismic (fast propagation, high charge, slow degradation). Single enemy spared = minor.
 
-**`accuracy`** — degrades ~15% per hop. Below 0.5 → rumor. Below 0.3 → potential misinformation.
+**`accuracy`** — degrades ~18% per hop (×0.82). Below 0.5 → rumor. Below 0.3 → potential misinformation.
 
 **`propagation_speed`** — paradigm-dependent: `immediate` (RTS), `between_episode` (platformer), `slow_ambient` (RPG).
 
-**`emotional_charge`** — amplifies initial spread speed, decays with repetition.
+**`emotional_charge`** — amplifies initial spread speed, decays per hop (×0.85).
+
+**`causal_agent`** — attribution travels with information. Recipients update bonds to causal agent when packet arrives.
 
 **Antagonist is NOT omniscient.** Reads from same packet system. Disrupting intelligence network is valid strategy.
 
@@ -480,17 +650,22 @@ Append-only. The causal chain for post-game reading.
     {
       "tick": 3,
       "event_type": "player_action",
+      "event_category": 3,
       "magnitude": "minor",
       "description": "player_spared_goomba_07",
+      "causal_agent": "player_01",
       "caused_by": null,
       "effects": [
-        { "target_type": "entity", "target_id": "goomba_07", "field": "disposition_to_player", "delta": 0.30 },
+        { "target_type": "entity", "target_id": "goomba_07", "field": "affect.valence", "delta": 0.25 },
+        { "target_type": "entity", "target_id": "goomba_07", "field": "affect.arousal", "delta": 0.15 },
         { "target_type": "info_packet", "target_id": "info_001", "field": "created" }
       ]
     }
   ]
 }
 ```
+
+**`event_category`** — maps to the five CAS event types: (1) direct harm/threat, (2) bond change, (3) information/experience, (4) player attention, (5) passage of time.
 
 ---
 
@@ -502,45 +677,48 @@ CAS engine's internal bookkeeping. **No other system writes here.**
 {
   "cas": {
     "tick_count": 4,
-    "tick_spec": {
-      "type": "episode_boundary",
-      "full_eval_on": "episode_end",
-      "light_tick_on": "social_encounter",
-      "tick_weight_full": 1.0,
-      "tick_weight_light": 0.3
+    "social_timer": {
+      "base_interval_seconds": 120,
+      "game_pace_modifier": 1.0,
+      "last_tick_timestamp": 1709312520000
     },
     "drama_density": {
       "current_rate": 0.25,
-      "threshold": 0.30,
-      "below_threshold_count": 1,
-      "catalyst_armed": false
-    },
-    "phase_transitions_pending": [],
-    "cascade_in_progress": false,
-    "antagonist": {
-      "last_action": null,
-      "action_cooldown": 0,
-      "threat_assessment_of_player": 0.15,
-      "strategy_posture": "ignore"
+      "cadence_window": 3,
+      "significance_threshold": 0.15,
+      "recent_significant_changes": []
     }
   }
 }
 ```
 
-**`antagonist.threat_assessment_of_player`** — aggregate factoring rate of progress, not just current state. Three worlds in three sessions ≠ three worlds in thirty sessions.
+**Social timer** runs on independent heartbeat (~120s real time × game_pace_modifier). CAS evolves continuously — time on a level matters.
 
-**`antagonist.strategy_posture`** values: `ignore` → `monitor` → `allocate_resources` → `prioritize` → `existential_threat`.
+**Drama density** tracks significant state changes per cadence window. Below paradigm minimum → stagnation signal to Claude ("consider NPC action"). Above paradigm maximum → melodrama signal ("consider consolidation"). Signals inform Claude's interpretation, not deterministic triggers. No `catalyst_armed` flag — Claude decides what to do with the signal.
+
+**No antagonist block in CAS state.** The antagonist's threat assessment, strategy, and actions are Claude-constructed at episode boundaries from: faction leader personality + available information + CAS context. Antagonist actions enter the CAS as standard events (faction leadership decisions). The antagonist operates under the same information constraints as every other entity.
 
 ---
 
 ## `episode` — Current Renderable Content
 
-Regenerated each episode by content agents reading `world` and `cas`.
+Regenerated each episode by the construction pipeline (Designer → Builder → Validator) reading `world` and `cas`.
 
 ```json
 {
   "episode": {
     "episode_number": 3,
+    "episode_brief": {
+      "vocabulary_available": ["goomba_patrol", "pit", "koopa_troopa", "coin_block", "piranha_plant"],
+      "vocabulary_new": ["piranha_plant"],
+      "complexity_ceiling": 0.4,
+      "difficulty_target": 0.35,
+      "punctuation_type": null,
+      "zone_identity": "underground",
+      "mechanical_thesis": "piranha plants create vertical awareness — player must think up/down, not just left/right",
+      "narrative_context": "goomba union tensions rising after player spared Grim in episode 2",
+      "override_flags": []
+    },
 
     "physics": {
       "gravity": 0.55,
@@ -605,8 +783,8 @@ Regenerated each episode by content agents reading `world` and `cas`.
         "position": { "x": 720, "y": 192 },
         "active": true,
         "behavioral_override": {
-          "source": "cas_behavioral_legibility",
-          "reason": "faction morale 0.35, entity neuroticism +0.15",
+          "source": "claude_interpretation",
+          "reason": "entity affect strongly negative, high arousal, high neuroticism",
           "patrol_range": 32,
           "patrol_speed": 0.6,
           "awareness_radius": 72,
@@ -650,9 +828,11 @@ Regenerated each episode by content agents reading `world` and `cas`.
           "narrative": { "disposition": "protest" },
           "reference": { }
         },
-        "cas_source": "goomba_union.internal_dissent > 0.4"
+        "cas_source": "goomba_union avg_valence < -0.3 and cohesion > 0.6"
       }
     ],
+
+    "vme_directive_stack": [],
 
     "music": {
       "track_spec": {
@@ -664,20 +844,13 @@ Regenerated each episode by content agents reading `world` and `cas`.
       }
     },
 
-    "sequence_record": {
+    "vocabulary_record": {
       "element_introductions": [
-        { "element": "goomba_patrol", "position_x": 160, "context": "safe_flat_ground" }
+        { "element": "goomba_patrol", "section": 1, "context": "safe_flat_ground", "episode_introduced": 1 },
+        { "element": "piranha_plant", "section": 2, "context": "single_pipe_safe_distance", "episode_introduced": 3 }
       ],
-      "rhythm_map": [
-        { "type": "relief", "start_x": 0, "end_x": 200, "duration_est_s": 5 },
-        { "type": "tension", "start_x": 200, "end_x": 560, "duration_est_s": 12 }
-      ],
-      "spatial_grammar": ["gauntlet", "platform_puzzle", "safe_room"],
-      "provocateur_moment": {
-        "position_x": 820,
-        "violation_type": "enemy_in_unexpected_position",
-        "description": "koopa on ceiling — shell drops when player passes"
-      }
+      "cumulative_vocabulary": ["goomba_patrol", "pit", "koopa_troopa", "coin_block", "piranha_plant"],
+      "mastered_vocabulary": ["goomba_patrol", "pit"]
     }
   }
 }
@@ -687,13 +860,19 @@ Regenerated each episode by content agents reading `world` and `cas`.
 
 **Physics are fixed per game.** Player's contract with controls never changes. Exception: paradigm-authored modifiers (underwater, damaged vehicle) taught through teachability primitive — these are game design features, not CAS interventions.
 
-**`aesthetic_modifiers` and `audio_modifiers`** — computed from CAS state, push expression away from `meta` home state. Can be nonlinear — thresholds and phase transitions, not smooth gradients. The aesthetic system behaves like a CAS responding to the social CAS. World at 90% entity death: `saturation: 0.3`, `darkness: 0.6`, `decay: 0.8`, `sparseness: 0.7`.
+**`aesthetic_modifiers` and `audio_modifiers`** — produced by Claude's interpretation of CAS state. Push expression away from `meta` home state. Can be nonlinear — thresholds and phase transitions, not smooth gradients. World at 90% entity death: `saturation: 0.3`, `darkness: 0.6`, `decay: 0.8`, `sparseness: 0.7`.
 
 **`spatial.format`** — varies by paradigm: `tilemap_2d_scrolling`, `room_graph`, `terrain_map`, `track_layout`, etc. Paradigm Engine reads its paradigm's format. Schema not locked to platformer assumptions.
 
-**`behavioral_override`** — bridge between CAS and visible gameplay. `source` and `reason` trace WHY for debugging and post-game reading.
+**`behavioral_override`** — bridge between Claude's CAS interpretation and visible gameplay. `source` is always `claude_interpretation` (Thread 3 eliminated deterministic CAS-to-behavior mappings). `reason` traces WHY for debugging and post-game reading.
 
-**`visual_manifestations`** — CAS-generated scene elements. `generation_layer`: `layer_1_compositional` (assets recombined), `layer_2_contextual_variant` (modified pose/state/text), `layer_3_novel` (AI-generated). `cas_source` traces the triggering condition.
+**`visual_manifestations`** — CAS-generated scene elements. `generation_layer`: `layer_1_compositional` (assets recombined), `layer_2_contextual_variant` (modified pose/state/text), `layer_3_novel` (AI-generated). `cas_source` traces the triggering condition using computed aggregates and entity affect, not stored faction primitives.
+
+**`vme_directive_stack`** — serialized VME directives for this episode. See VME spec for directive types and format.
+
+**`episode_brief`** — the interface between Game Compiler and the construction pipeline. Eight fields specifying what the Designer and Builder should produce for this episode. Generated dynamically at each episode boundary.
+
+**`vocabulary_record`** — replaces `sequence_record`. Tracks what gameplay elements have been introduced, in what context, at what episode, and what the player has mastered. The `cumulative_vocabulary` field tracks across episodes (Decision 49). The Validator checks teachability arcs against this record.
 
 ---
 
@@ -737,6 +916,12 @@ Regenerated each episode by content agents reading `world` and `cas`.
       "alliances_formed": 0
     },
 
+    "exchange_budget": {
+      "remaining": 10,
+      "max_daily": 10,
+      "reset_timestamp": null
+    },
+
     "behavioral_model": {
       "action_tendencies": {
         "aggression_ratio": null,
@@ -765,7 +950,9 @@ Regenerated each episode by content agents reading `world` and `cas`.
 }
 ```
 
-**No reputation field.** Each faction/entity has its own `disposition_to_player`, constructed from available information. Barrett: reputation is a perception constructed by the perceiver, not a property of the perceived.
+**No reputation field.** Each faction/entity constructs its own perception of the player from available knowledge and affect state. Barrett: reputation is a perception constructed by the perceiver, not a property of the perceived.
+
+**`exchange_budget`** — visible UI counter. X exchanges per 24-hour period. Each exchange = one player message + one entity response. Tierable for monetization. The constraint is a game mechanic creating strategic resource management (Decision 41).
 
 **`behavioral_model`** — starts null, populated by Game Mind. `meaningful_decision_count` tracks reliability. Meaningful = sparing vs. defeating, conversation choices, path selection, alliance formation — not frame-level input. Somewhat reliable after ~40-50 meaningful decisions.
 
@@ -860,11 +1047,13 @@ Cloudflare KV/R2, keyed by player account.
     },
     "moment_clips": [ ],
     "generation_metadata": {
-      "agent_calls": 10,
-      "total_tokens": 12400,
-      "generation_time_s": 8.3,
-      "revision_loops": 1,
-      "auditor_result": "pass"
+      "agent_calls": 4,
+      "total_tokens": 8200,
+      "generation_time_s": 6.1,
+      "designer_vision_calls": 1,
+      "builder_calls": 3,
+      "validator_passes": 3,
+      "taste_rejections": 0
     }
   }
 }
@@ -878,17 +1067,15 @@ Cloudflare KV/R2, keyed by player account.
 |--------|-------|--------|
 | **Experience Interpreter** | prompt, overseer (games 3+) | `meta.paradigm`, `meta.aesthetic`, `meta.philosophy` |
 | **Artistic Director** | `meta`, asset library | `meta.aesthetic`, entity `asset_spec`s |
+| **Game Visual Identity** (Track B) | `meta.aesthetic`, ingestion distributions | `meta.game_visual_identity` |
 | **Design Philosopher** | `meta` | `meta.philosophy` |
-| **Dramaturgical Agent (setup)** | `meta`, paradigm spec | `meta.dramaturgical_setup` |
-| **Dramaturgical Agent (runtime)** | `cas.drama_density` | catalyst triggers → CAS processes |
-| **Grammarian** | `meta`, pattern library | `episode.sequence_record.element_introductions` |
-| **Rhythmist** | `meta`, paradigm cadence | `episode.sequence_record.rhythm_map` |
-| **Game Compiler** | `meta` | `episode.physics`, `world.factions` (initial), `world.entities` (initial) |
-| **Cartographer** | sequence_record, physics, patterns | `episode.spatial`, `episode.entity_placements`, `episode.items`, `episode.hazards` |
-| **Provocateur** | completed episode | `episode.sequence_record.provocateur_moment` + one modification |
-| **Coherence Auditor** | episode + sequence_record | pass/fail + revision requests |
-| **CAS Engine** | `world`, `player.social_stats`, tick spec | `cas.*`, `world.factions.*.state`, `world.entities.*.mind`, `world.entities.*.knowledge`, `world.entities.*.social_graph`, `world.information_packets`, `world.event_log` |
-| **Visual Manifestation Engine** | `cas`, `world`, Claude narrative | `episode.visual_manifestations`, `episode.aesthetic_modifiers` |
+| **Game Compiler** | `meta`, paradigm spec, paradigm grammar | `meta.game_setup`, `meta.skeleton`, `world.factions` (initial), `world.entities` (initial), `world.population_templates`, `world.locations` (initial), `world.information_packets` (initial), `episode.episode_brief` |
+| **Designer** | `episode.episode_brief`, taste profile, game context | Episode Vision (internal to construction pipeline) |
+| **Builder** | Designer's section spec, paradigm spatial grammar, vocabulary | `episode.spatial`, `episode.entity_placements`, `episode.items`, `episode.hazards` |
+| **Validator** | episode content, vocabulary_record | pass/fail + specific constraint violations |
+| **CAS Engine** | `world`, `player.social_stats`, social timer | `cas.*`, `world.factions.*.computed_aggregates`, `world.factions.*.resources`, entity `affect`, entity `bonds`, entity `knowledge`, `world.information_packets`, `world.event_log` |
+| **Claude Interpretation** | `cas`, `world`, previous narrative, drama signal | behavioral directives → `episode.entity_placements.*.behavioral_override`, VME directives → `episode.vme_directive_stack`, aesthetic/audio modifiers → `episode.*_modifiers`, faction leadership decisions → CAS events, mechanical thesis → `episode.episode_brief` |
+| **VME** | `episode.vme_directive_stack`, `meta.game_visual_identity`, asset library | `episode.visual_manifestations`, rendered assets |
 | **Paradigm Engine** | `episode`, `player` | `player.position`, `player.velocity`, `player.state` |
 | **Game Mind** | `player`, `world.event_log` | `player.behavioral_model` |
 | **Overseer** | `player.behavioral_model` | `overseer.*` |
@@ -910,5 +1097,6 @@ Cloudflare KV/R2, keyed by player account.
 - **Adding fields:** Add to flat dict, set default. Old saves get default on load.
 - **Removing fields:** Ignore on load. Dead weight is harmless.
 - **Restructuring:** Bump `schema_version`, migration function. The flat-dict design minimizes this need.
-- **Paradigm shifts:** `world.current_paradigm` changes, `cas.tick_spec` reloads, `episode` regenerates in new format. `world` and `player` carry over.
+- **Paradigm shifts:** `world.current_paradigm` changes, `cas.social_timer` reloads, `episode` regenerates in new format. `world` and `player` carry over completely (Decision: Principle 3 from paradigm shift principles).
 - **New paradigms:** New `spatial.format` type + paradigm spec. No schema changes needed.
+- **Entity promotion:** Population entity removed from `entities`, named entity added. Template remains for other population entities sharing it.
