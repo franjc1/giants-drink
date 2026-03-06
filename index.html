@@ -295,17 +295,12 @@ async function init() {
     tileset[parseInt(k)] = { color: v.color, collision: v.collision === true };
   }
 
-  // Build tilemap from sparse_tiles
-  tilemap = new Uint8Array(MAP_W * MAP_H); // 0 = sky (default)
-  for (const entry of episode.episode.spatial.layers[0].sparse_tiles) {
-    if (entry._comment !== undefined) continue;
-    if (entry.range === 'row') {
-      for (let c = entry.col_start; c <= entry.col_end; c++)
-        tilemap[entry.row * MAP_W + c] = entry.tile;
-    } else if (entry.col !== undefined) {
-      tilemap[entry.row * MAP_W + entry.col] = entry.tile;
-    }
-  }
+  // Build tilemap from base64_uint8
+  const layer0 = episode.episode.spatial.layers[0];
+  const b64 = layer0.data;
+  const binary = atob(b64);
+  tilemap = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) tilemap[i] = binary.charCodeAt(i);
 
   // Player
   const ps = episode.player.position;
