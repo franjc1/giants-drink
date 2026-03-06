@@ -1,4 +1,3 @@
-# Two Fires — Decisions Log
 
 ---
 
@@ -21,8 +20,6 @@
 **Decision:** Seven primitives: `cohesion`, `morale`, `loyalty`, `awareness_of_player`, `disposition_to_player`, `internal_dissent`, `resources`. Fear dropped. `information_about_regime` moved to entity knowledge layer.
 
 **Rationale:** Resources is genuinely primitive — a hard constraint on action (like energy in physics). Fear is a composite that should emerge from threat perception + power asymmetry + negative disposition. Barrett: fear is a constructed category, not a primitive. If the CAS doesn't produce fear-like behavior from these primitives during testing, we add it then. Start without, test empirically. `information_about_regime` is distributed knowledge data across entity knowledge blocks, not an aggregate number.
-
-**⚠️ SUPERSEDED by Decision 17 (Thread 3 CAS Redesign).** Faction state primitives replaced: morale, loyalty, awareness_of_player, disposition_to_player, internal_dissent all dropped. Replaced by aggregates computed from entity affect primitives. Only cohesion (recomputed as inverted std dev of member valence), bond_density, member_count, and resources survive.
 
 ---
 
@@ -64,8 +61,6 @@
 
 **Rationale:** Barrett: reputation is a perception constructed by the perceiver, not a property of the perceived. Two factions can have completely opposite perceptions of the same player based on different information packets reaching them. This prevents the "universal reputation" problem and creates emergent situations where the player discovers entities believe wrong things about them.
 
-**⚠️ REFINED by Decision 23 (Thread 3 CAS Redesign).** Disposition to player is no longer a stored field on entities or factions. It is constructed by Claude from the entity's affect state, bond to player (if any), knowledge about the player, and personality. Attribution-gated: entities only form dispositions based on information that has actually reached them.
-
 ---
 
 ### Decision 7: Identity Stable, Expression Dynamic
@@ -88,17 +83,17 @@
 
 ---
 
-### Decision 9: Overseer Activation by Model Confidence, Not Game Count
+### Decision 9: Overseer Keyed to Model Confidence, Not Game Count
 
-**Context:** When does the Overseer (the Giant) begin actively engaging with the player? Fixed game count vs. behavioral assessment.
+**Context:** When should the Overseer activate? What counts as "enough data"?
 
-**Decision:** Overseer escalation keyed to `model_confidence`, which is a function of `total_meaningful_decisions` across all games. One deeply social 50-hour game > five speedruns.
+**Decision:** Overseer escalation is keyed to `model_confidence` computed from `total_meaningful_decisions` across all games, not games completed. Meaningful decisions = sparing vs. defeating, conversation choices, path selection, alliance formation. The session is the behavioral data unit, not the game. Abandoned games contribute data.
 
-**Rationale:** The Overseer's interventions need to be calibrated to what it knows about the player. Acting on insufficient data produces poor interventions that feel arbitrary rather than targeted. The player who is mechanically skilled but socially uninvolved (speedrunner) encounters the Overseer much later than the player who builds deep alliances and explores social dynamics across fewer games. This rewards social engagement organically.
+**Rationale:** "Beat a game" is the wrong unit. Players may play for dozens of sessions without completing a game. A player with one deeply social 50-hour game has a richer Overseer profile than someone speedrunning five games. The Overseer doesn't care about game completion — it cares about social engagement depth. The first hints (escalation level 1) should be ambiguous enough that the player isn't sure something is happening. Only around escalation level 2-3 does the pattern become undeniable.
 
 ---
 
-### Decision 10: Player as Catalyst — CAS Sensitivity Tuning
+### Decision 10: Player as Extraordinary Catalyst — Event Magnitude Calibration
 
 **Context:** In traditional retro games, the player's killing spree is invisible to the world. In Two Fires, the world has a nervous system. The player is generally doing something incredible — conquering worlds, destroying castles, defeating hundreds. This needs to be reflected in CAS sensitivity.
 
@@ -168,8 +163,18 @@
 
 **Rationale:** Clean handoff between threads. Thread 2 defines WHAT behaviors manifest per paradigm. Thread 3 defines the EXACT CAS state values at which those behaviors trigger. No future session should hardcode "loyalty < 0.4 → visible wavering" as if 0.4 is a tested threshold — it's a structural placeholder showing that a threshold goes in that slot.
 
-**⚠️ SUPERSEDED by Decision 17 (Thread 3 CAS Redesign).** There are no longer exact CAS state values that trigger specific behaviors. Behavioral legibility tables are eliminated entirely. Claude constructs situated behavioral expressions from affect primitives + context. Thread 2's behavior descriptions remain useful as examples of what Claude might produce, but they are not lookup targets.
+---
 
+### Open Design Work (Carried Forward + New)
+
+1. CAS engine parameter tuning — exact thresholds for behavioral legibility (Thread 3, next)
+2. MVP definition — minimum compelling first level
+3. Granular constraint relationships between primitives (answers from building/testing)
+4. Visual Manifestation Engine specification
+5. ~~Multi-paradigm shift mapping mechanics~~ → Partially addressed (intra-cluster vs. cross-cluster, shift triggers per paradigm). Remaining: exact transition animation/loading specs.
+6. Behavioral stress response modifier function design
+7. Event magnitude calibration per paradigm and game length
+8. Overseer model confidence thresholds for escalation levels
 ---
 
 ## Session: 2026-03-03 — CAS Engine Redesign (Thread 3)
@@ -402,20 +407,6 @@ These serve as diagnostic checks (does the game exhibit these properties?) not a
 
 ---
 
-### Open Design Work (Updated)
-
-1. **Paradigm grammar buildout** — extend each paradigm spec with full-game structural grammar, vocabulary inventory, boss/punctuation rules, progression shape. Leverage ingestion pipeline data. Needed before Phase 2.
-2. Behavioral implementation — how Claude's narrative directives become rendered game content
-3. Game state schema update — apply Thread 3 diffs to actual schema document
-4. Visual Manifestation Engine specification
-5. CAS rate constant calibration (diagnostic framework, testing phase)
-6. MVP definition — minimum compelling first level
-7. Two-primitive sufficiency validation
-8. Overseer model confidence thresholds for escalation levels
-9. Social hook pattern library (compact, paradigm-specific, placed by Game Compiler at episode 1-2 boundary)
-# Decisions Log — Thread 5 Addition
-## Append this content to the existing `docs/decisions-log.md`
-
 ---
 
 ## Session: 2026-03-04 — Visual Manifestation Engine Specification (Thread 5)
@@ -541,8 +532,204 @@ Novel interactive objects require both. Neither system sees the other's output. 
 5. Game state schema document update (apply Thread 3 CAS diffs + Thread 5 `vme_state` section for directive stack)
 6. Asset resolution strategy document update (reference Game Visual Identity system)
 7. Mechanical directive format specification (flagged by Decision 39)
-# Decisions Log — Thread 9 Addition
-## Append this content to the existing `docs/decisions-log.md`
+
+---
+
+## Session: 2026-03-04 — Entity Minds & Communication (Thread 7)
+
+### Decision 40: No Artificial Conversation Soft Caps — Natural Character Play
+
+**Context:** Thread 7 needed to specify how conversation length is managed. Earlier proposals included per-entity exchange limits and injected "wrap it up" instructions at soft cap thresholds. Joe pushed back: entities should respond naturally, not be artificially constrained.
+
+**Decision:** No artificial soft caps on conversations. Claude plays each character naturally — conversation length emerges from the entity's knowledge depth, personality (especially extraversion), affect state, and the situation. An entity with three knowledge items and low E will naturally give terse, sparse answers. A faction leader in a complex negotiation will sustain long exchanges because the content supports it. Claude is trusted to play the character honestly, including responding appropriately to irrelevant prompts (a goomba asked about music responds with confusion, not a pre-scripted refusal).
+
+**Rationale:** Artificial limits create unnatural conversation endings and require tuning per entity type. Natural character play is self-regulating: entities with little to say will say little. The constraint surface philosophy applies — design the ingredients (knowledge depth, personality) correctly and the right conversation length emerges without prescription.
+
+---
+
+### Decision 41: Player Exchange Budget as Visible Game Mechanic
+
+**Context:** API cost control is necessary but shouldn't feel like a system limitation. Joe wanted the constraint to be transparent and gamified, eventually tierable for monetization.
+
+**Decision:** Cost control is entirely player-side via a visible exchange counter in the game UI (displayed alongside existing game counters like score, lives, time). The player receives X conversation exchanges per 24-hour period. Each exchange (one player message + one entity response) decrements the counter by 1. Counter resets daily. Exact budget numbers TBD during testing and economics analysis. Tierable: free tier gets a modest budget, paid tiers get larger budgets.
+
+**Rationale:** This transforms an API cost constraint into a game mechanic — resource scarcity creates strategic decisions. Players learn to spend exchanges on high-value conversations rather than idle chat. Wasting an exchange on an irrelevant prompt costs the player, teaching them to engage meaningfully. Same principle as limited lives or ammunition: constraints that create gameplay.
+
+---
+
+### Decision 42: Named + Population Entity Architecture with Runtime Promotion
+
+**Context:** Games can have thousands of entities (RTS armies, dense platformer worlds, management sim populations). Individually populating a full mind for every entity is prohibitively expensive. But Joe pushed back on a simple "mind vs. no-mind" binary — an entity that refuses to communicate is more interesting than one that can't.
+
+**Decision:** Two entity populations, one schema:
+
+- **Named entities** (~60-100 per game regardless of total count): Individually generated by Game Compiler with unique OCEAN offsets, individual knowledge lists, specific motivations, explicit social graph connections. Game Compiler decides which entities are named based on narrative/structural importance (commanders, scouts, diplomats, specialists, sage/oracle, social graph bridge nodes).
+
+- **Population entities** (remainder): Generated in batches from compact templates. Template contains: faction OCEAN center, shared minimal knowledge list, shared `communication_willingness` baseline, behavioral parameter baselines, perturbation ranges for individuality. One template covers an entire class (e.g., "goomba patrol unit").
+
+- **Runtime promotion:** When the player initiates conversation with a population entity, it's promoted to named in real time. Claude generates unique OCEAN offsets, name, specific knowledge, personality quirks — all constructed from the population template + current CAS state + conversational context. From that point forward, the entity has a persistent individual mind.
+
+**Rationale:** Barrett's constructionism applied literally — entity identity is constructed at the moment of social interaction, not predetermined. Before engagement, they're a statistical member of a population. After engagement, they're a person. Cost scales with player engagement, not world size. A 2,000-entity game costs barely more than a 100-entity game to generate.
+
+**Note:** The Dramaturgical Agent is NOT involved in this process — per Decision 29 (Thread 4), all its functions are distributed to Game Compiler, paradigm specs, CAS engine, and Claude interpretation layer.
+
+---
+
+### Decision 43: Knowledge Distribution as Game Compiler Sub-Step (Deterministic Algorithm)
+
+**Context:** The principle "knowledge is architecturally enforced" was established early but the actual distribution mechanism was unspecified. Options: separate Knowledge Distributor agent (Claude-powered), or deterministic algorithm within Game Compiler.
+
+**Decision:** Knowledge distribution is a deterministic sub-step within the Game Compiler, not a separate agent. After generating the complete world truth (master fact list), the Game Compiler runs a distribution algorithm:
+
+1. **Location match** → entity's zone overlaps fact's source location → high accuracy (0.8-1.0)
+2. **Role match** → fact domain matches entity role (guards→military, cooks→social, scouts→geographic) → moderate accuracy (0.6-0.8)
+3. **Rank filter** → facts above entity's clearance excluded entirely
+4. **Social graph seeding** → one propagation pass through closest connections (bond strength > 0.5) with accuracy degradation → secondhand knowledge at game start
+5. **Lore placement** → actionable→sage/oracle, structural→high-rank, ambient→scattered widely
+6. **Misinformation injection** → Game Compiler (Claude) generates false facts with high confidence, injected into specific entity knowledge lists
+
+Population entities receive only: zone-matched facts at low accuracy, ambient lore, 1-2 role-appropriate facts.
+
+**Rationale:** Distribution rules are mechanical, not creative. They don't require Claude's judgment — they need an algorithm. Running this deterministically within the Game Compiler avoids an additional agent/API call while producing correct knowledge distribution. All runtime knowledge changes are handled by CAS information propagation — no further distribution steps needed.
+
+---
+
+### Decision 44: No Lie Detector — Contradictions Surface Through CAS Information Propagation
+
+**Context:** Joe flagged uncertainty about how the game would detect player lies. Needed a mechanism that fits the existing architecture without adding a new system.
+
+**Decision:** No lie detection system. Player statements become knowledge items in the spoken-to entity's knowledge list, tagged `source: player`. Contradictory statements to different entities propagate through the social graph via normal CAS information propagation. When contradictory player-sourced claims reach the same entity (or Claude interprets the CAS state for entities in a cluster where contradictions exist), Claude constructs the appropriate social response (suspicion, confrontation, reputation damage). Bond valence toward player drops via normal attribution mechanics.
+
+Detection speed is governed by existing CAS factors: social graph topology, entity extraversion, information emotional charge. Lies told to closely connected entities surface fast. Lies told to isolated clusters may never surface.
+
+**Rationale:** This requires zero new code — it's a natural consequence of the existing information propagation system. It's also more realistic than a lie detector: some lies work because the social graph doesn't connect the targets. Strategic lying (telling different things to isolated groups) is a valid player strategy with real risks. The system rewards social intelligence, not just honesty.
+
+---
+
+### Decision 45: Emissary Conversations as Single API Call with Dual Entity Schemas
+
+**Context:** Joe wanted delegation mechanics where the player sends an ally to negotiate on their behalf. Needed a mechanism that creates strategic depth without complex new systems.
+
+**Decision:** Emissary interaction = one Claude API call with both entity mind schemas (emissary + target) plus the player's instructions as context. Claude generates the conversation between them. The emissary reports back to the player, but the report is filtered through the emissary's own personality:
+
+- High-N emissary may overstate threats
+- Low-A, low-C emissary may cut a side deal
+- Duplicitous emissary may misrepresent player's instructions
+- High-C, strong-bond emissary reports faithfully
+
+Player never receives ground truth about what happened — only the emissary's filtered account. The emissary-to-target conversation generates normal CAS events (information transfer, affect changes, bond updates).
+
+**Cost model:** Player's daily exchange budget is charged for the instructing conversation with the emissary, but NOT for the emissary-to-target conversation. This means delegation extends the player's reach beyond their direct budget at the cost of trust mediation.
+
+**Rationale:** Falls naturally out of the existing conversation system — it's just two entities talking instead of player and entity. Creates a trust-mediated strategic layer where choice of emissary matters as much as the message. Emissaries can be intercepted or compromised through CAS dynamics (enemy entities encountering the emissary). One additional API call per delegation — manageable cost.
+
+
+---
+
+## Session: 2026-03-04 — Sequencing Grammar Refinement (Thread 7.6)
+
+### Decision 46: Episode Brief as Skeleton-to-Sequencing Interface
+
+**Context:** Thread 4 established the paradigm grammar + skeleton + override conditions framework for across-episode game structure. The original sequencing grammar framework (Thread 2 era) specified within-episode quality through three primitives (teachability, rhythm, directionality) and five agents (Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor). But no interface was specified between these two layers. What does the Grammarian actually receive when generating an episode?
+
+**Decision:** The **Episode Brief** — a structured object produced by the Game Compiler at each episode boundary — is the interface. The sequencing agents read the Episode Brief, never the skeleton directly.
+
+The Episode Brief contains eight fields: available vocabulary (established/new/variant with behavioral delta), complexity ceiling, difficulty target (0.0–1.0), punctuation type (normal/mini-boss/boss/breather/finale), zone identity (environment + mechanical meaning), mechanical thesis (from Claude), narrative context (relevant CAS state), override flags.
+
+The Brief is generated **dynamically at episode entry**, not pre-computed. The Game Compiler reads skeleton + CAS state + Claude interpretation + previous vocabulary record and produces the Brief for this specific episode at this moment. This is critical for non-linear paradigms: a Mega Man stage produces different Briefs depending on which stages were already completed. An RPG dungeon produces different Briefs depending on the player's accumulated vocabulary.
+
+**Rationale:** The Episode Brief is a constraint surface, not a prescription. It constrains what vocabulary is available and what structural role the episode plays. It does not constrain how the Grammarian sequences vocabulary, where the Rhythmist places tension peaks, or what spatial configuration the Cartographer builds. Analogous to telling a jazz musician "12-bar blues in Bb, medium tempo, these instruments available" — defining the space, not the music.
+
+---
+
+### Decision 47: Mechanical Thesis as Episode Brief Field
+
+**Context:** Stress-testing the Episode Brief against "does it produce great games, not just competent ones?" The best retro levels have a *thesis* — Heat Man's stage is about the tension between patience (disappearing blocks) and urgency (fire environment). A correctly sequenced vocabulary list doesn't produce this quality. Something needs to identify the productive friction in available elements and give the Grammarian an organizing principle.
+
+**Decision:** The Episode Brief includes a **mechanical thesis** field — a short semantic statement from Claude's interpretation identifying the productive friction in this episode's available vocabulary. Examples: "patience vs. urgency," "precision under environmental pressure," "familiar enemies in unfamiliar spatial configuration."
+
+The thesis is produced by Claude at the episode boundary interpretation call (Option C from three candidates evaluated). Claude is already the meaning-maker in the architecture — the system that constructs interpretation from primitives. Adding mechanical thesis to Claude's output is consistent with Barrett's constructionism: the thesis is a constructed perception arising from the combination of available primitives in context.
+
+The Grammarian uses the thesis as an organizing principle for the vocabulary sequence. It doesn't constrain *what* appears, but *what relationship between elements* the sequence foregrounds.
+
+The thesis also enables CAS-to-feel influence without changing mechanical vocabulary. If a faction is in disarray, the thesis might shift from "coordinated assault" to "desperate ambush tactics" — same enemies, different organizing principle, different experience.
+
+**Alternatives considered:**
+- Option A (Grammarian responsibility): Thesis emerges from Grammarian's analysis of vocabulary friction. Elegant but requires expensive intelligence in the Grammarian.
+- Option B (Skeleton field): Game Compiler pre-authors thesis at game creation. Consistent with skeleton's authorial role but pushes skeleton toward over-prescription.
+- Option C (Claude interpretation — chosen): Most consistent with existing architecture. Claude already interprets CAS state at episode boundaries. Thesis is one more constructed perception.
+
+---
+
+### Decision 48: Vocabulary Tracking via Behavioral Delta, Not Variant Chains
+
+**Context:** CAS-driven entity variants create a tracking problem. Goombas militarize (armored), then develop ranged attacks (rock-throwing). How deep does the variant chain go? Does the Grammarian need to track genealogy?
+
+**Decision:** Variant depth doesn't matter. Teachability investment scales with **behavioral delta** — how different this variant is from what the player already knows — not with taxonomic distance from the base element.
+
+Small behavioral delta (helmet = one extra hit): minimal teachability, one safe encounter showing the difference. Large behavioral delta (new attack pattern): full introduction arc, effectively treated as new element that happens to look familiar.
+
+The Grammarian doesn't track variant chains. Each variant in the Episode Brief carries a behavioral delta value, and the Grammarian allocates teachability proportionally.
+
+**Rationale:** This is what real game designers do. Zelda's blue Darknut vs. red Darknut: teachability investment scales with behavioral difference, not with whether it's technically a "variant." Cleaner architecture, avoids genealogy tracking complexity, produces correct player-facing results.
+
+---
+
+### Decision 49: Vocabulary Record Tracks Placement, Not Player Experience
+
+**Context:** After an episode, the vocabulary record needs updating for the next Episode Brief. Question: does it track what was *placed* (structurally complete teachability arcs verified by Coherence Auditor) or what the player *actually encountered* (dependent on whether they died before reaching certain sections)?
+
+**Decision:** The vocabulary record tracks what was **placed**. If the Coherence Auditor verified that a teachability arc is structurally complete, the element is marked as "established" regardless of whether the player personally completed the arc.
+
+**Rationale:** The sequencing grammar guarantees structural completeness. Whether the player learned through success or failure is a player skill question, not a design quality question. Death teaches — that's fundamental to retro games. Tracking player experience would create a messy dependency on behavioral telemetry and could lead to re-teaching elements the player already understands (they saw the death screen, they know what killed them). Clean separation: design quality is the system's responsibility, player mastery is the player's.
+
+---
+## Append this to the existing `docs/decisions-log.md`
+
+---
+
+## Session: 2026-03-04 — Multi-Paradigm Shift Mechanics (Thread 8)
+
+### Decision 50: Paradigm Shift Design Principles Established (Implementation Deferred)
+
+**Context:** Thread 8 (Multi-Paradigm Shift Mechanics) was scoped to specify shift triggers, state transfer, entity crosswalks, and transition experience. Audit of existing specs (Threads 1-5, 7, 7.6) revealed the architecture already supports paradigm shifts — paradigm-independent CAS, flexible spatial format (Decision 11), dynamic Episode Brief generation (Decision 46). What's missing is implementation-level specification that requires empirical grounding from Phases 1-6.
+
+**Decision:** Establish 10 design principles as constraints for Phase 7 implementation. Defer all implementation specification (detection mechanisms, crosswalk mappings, transition design, damping parameters) to Phase 7 when working paradigms and CAS tuning data exist.
+
+The 10 principles:
+1. Shifts are consequences, not requests
+2. Player prompts are ingredients, not contracts
+3. CAS state is paradigm-independent and carries over completely
+4. Identity persists, capability transforms
+5. Transitions are narrative moments, not loading screens
+6. Shifts occur only at episode boundaries, no exceptions
+7. Oscillation damping is required
+8. The Overseer can weaponize paradigm shifts
+9. Deliberate shift-triggering is deep mastery
+10. First-time paradigm introductions get extended teachability
+
+**Rationale:** Specifying shift mechanics now would produce placeholder numbers with no empirical basis. The principles capture the design intent that must survive into Phase 7 without over-constraining implementation details that depend on how the system actually feels when played. The architecture is already shift-ready; what's needed is taste-level guidance, not engineering specification.
+
+---
+
+### Decision 51: Player Prompts Are Ingredients, Not Contracts
+
+**Context:** Players can prompt for multi-paradigm games ("Mega Man but dungeons are Doom and final boss is Mario Kart style"). How binding is that request?
+
+**Decision:** The Experience Interpreter picks the dominant paradigm; the Game Compiler skeletonizes reasonable paradigm requests into the game structure. But CAS-driven emergent shifts can override or supplement the prompted structure. The player's prompt shapes initial conditions, not outcomes. A prompted finale paradigm may never materialize if the social ecology evolves elsewhere.
+
+**Rationale:** Consistent with the core design philosophy: ingredient design over outcome prescription. The prompt is the strongest ingredient in initial conditions, but the system's commitment is to emergent quality, not prompt fidelity. Locking paradigm structure to prompts would subordinate the CAS to player expectations — the opposite of the project's thesis.
+
+---
+
+### Decision 52: Strict Episode-Boundary Paradigm Shifts
+
+**Context:** Should paradigm shifts ever occur mid-episode? Initial proposal included "rare climactic exceptions."
+
+**Decision:** No mid-episode shifts, no exceptions. If CAS produces shift-worthy conditions mid-episode, that drama becomes the current episode's climax content. The shift takes effect at the next episode boundary.
+
+**Rationale:** The entire sequencing pipeline (Episode Brief, Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor) assumes episode-level coherence. Mid-episode shifts would violate the Auditor's structural guarantees. The between-episode window is specifically designed for transitions, making it the natural home for paradigm shifts. Forcing the drama into the episode's conclusion is narratively stronger than an abrupt mid-level genre change.
+
 
 ---
 
@@ -696,17 +883,10 @@ Game Compiler produces Episode Brief
 
 **Rationale:** Eight components consolidated to three. Fewer boundaries = fewer translation losses = more coherent levels. The Designer's continuous taste evaluation catches the "syntactically correct but soulless" failure mode that no amount of syntactic agents could prevent. Claude calls are minimized (two roles, not eight). The Validator handles all non-creative verification as fast, cheap code. The architecture is as simple as it needs to be (parsimony) with no unnecessary moving parts.
 
----
-
-### Updated Agent Execution Order
-
-**Note:** Decision 52 (Thread 8) references "Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor" in its rationale. These agents are now consolidated per Decisions 55-61. Decision 52's principle (no mid-episode shifts) still holds — the Designer + Builder + Validator pipeline assumes episode-level coherence, same as the prior pipeline.
-
-**Note:** Decision 49 (Thread 7.6) references the Coherence Auditor verifying teachability arcs. This function is now performed by the Validator. The principle (vocabulary record tracks placement, not player experience) is unchanged.
 
 ---
 
-### Open Design Work (Updated)
+### Open Design Work (Current as of Thread 9)
 
 **Resolved by Thread 9:**
 - ~~Difficulty philosophy / target audience calibration~~ ✅ (SNES Comfort Model)
@@ -717,11 +897,11 @@ Game Compiler produces Episode Brief
 1. Paradigm grammar specifics per paradigm (before Phase 2) — now also includes game-type taste profiles
 2. CAS state → level content translation per paradigm
 3. Social hook pattern library
-4. Game state schema document update (apply Thread 3 CAS diffs + Thread 5 VME state + Thread 7 entity population fields)
-5. Asset resolution strategy document update (reference Game Visual Identity)
+4. ~~Game state schema document update~~ ✅ (Reconciled, Thread 10)
+5. ~~Asset resolution strategy document update~~ ✅ (Updated, Thread 10)
 6. Mechanical directive format specification (flagged by Decision 39)
 7. CAS rate constant calibration (testing phase)
 8. MVP definition — minimum compelling first level
 9. Exact exchange budget numbers per tier (testing/economics)
-10. **Design move library** — extract transferable design moves from ingestion pipeline at the right grain size (complete micro-experiences, not abstract arcs or literal tile patterns), organized by paradigm, intention type, and quality weight. Feeds the Designer's vision generation.
-11. **Living Taste Document bootstrap** — initial taste criteria for Designer evaluation before Joe's 🔥 ratings accumulate. Derived from ingestion pipeline quality-weighted patterns + SNES Comfort Model defaults.
+10. Design move library — extract transferable design moves from ingestion pipeline
+11. Living Taste Document bootstrap — initial taste criteria before Joe's ratings accumulate
