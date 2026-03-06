@@ -1,44 +1,37 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-04 (Thread 8: Multi-Paradigm Shift Mechanics — Principles Only)
+**Last updated:** 2026-03-05 (Thread 9: Gameplay Quality, Difficulty & Level Construction Architecture)
 
 ---
 
 ## What Just Happened
 
-### Thread 8: Multi-Paradigm Shift Mechanics — Principles Established, Implementation Deferred
+### Thread 9: Gameplay Quality, Difficulty Philosophy & Level Construction Architecture
 
-Thread 8 was originally scoped as a full specification of paradigm shift mechanics (triggers, state transfer, entity crosswalks, transition experience). Before diving in, audit of Threads 1-5, 7, and 7.6 revealed:
+Thread 9 addressed two critical product concerns: (1) will the generated games feel fun and engaging for a casual/broad audience, and (2) will they feel authored rather than soullessly generated. This led to both a difficulty philosophy and a major architectural simplification of the level construction pipeline.
 
-- **CAS state carryover:** Already solved. The CAS engine (Thread 3) is paradigm-independent by design. Entity state, social graphs, knowledge, reputation — all live in the CAS layer, not the paradigm layer. Carries over by default.
-- **Schema support:** Already solved. Decision 11 (paradigm-flexible spatial format) ensures the schema accommodates multiple paradigms without restructuring.
-- **Episode generation:** Already solved. The Episode Brief (Decision 46) generates dynamically at each episode boundary, reading from the appropriate paradigm grammar seed. A paradigm-shifted episode just gets a Brief from the new paradigm's seed.
-- **What's genuinely missing:** Implementation-level specification (detection mechanisms, crosswalk mappings, damping parameters, transition experience design) that requires empirical grounding from Phases 1-6.
+**Key outcomes:**
 
-**Decision:** Establish design principles as constraints for Phase 7 implementation. Defer all implementation specification.
+1. **SNES Comfort Model established as default difficulty philosophy (Decision 53).** Games default to SNES-era forgiveness: frequent checkpoints, low death cost, generous teachability, thoughtful reaction windows (not reflex-dependent), concave difficulty ramp. The player should feel competent and want to make progress, not feel punished. This is both a taste preference and an architectural requirement — the social ecology needs cognitive bandwidth to land, which only exists when the player isn't in pure survival mode.
 
-**10 principles established (Decisions 50-52):**
+2. **Aesthetic era decoupled from difficulty (Decision 54).** "NES style" = 8-bit visuals, not NES-hard difficulty. Only explicit difficulty language ("hard," "punishing," etc.) overrides the SNES Comfort default. The full retro aesthetic palette is available to all audiences.
 
-1. Shifts are consequences, not requests
-2. Player prompts are ingredients, not contracts (multi-paradigm prompts shape initial conditions but CAS can override)
-3. CAS state is paradigm-independent and carries over completely
-4. Identity persists, capability transforms
-5. Transitions are narrative moments, not loading screens
-6. Shifts occur only at episode boundaries, no exceptions
-7. Oscillation damping is required
-8. The Overseer can weaponize paradigm shifts
-9. Deliberate shift-triggering is deep mastery
-10. First-time paradigm introductions get extended teachability
+3. **"Soul" problem identified and addressed.** The gap between "syntactically valid game" and "authored-feeling game" was identified as the absence of authorial vision and iterative taste evaluation during construction. Syntax ensures correctness; soul requires intention and judgment. The solution: Claude as both designer and tastemaker in the construction loop.
 
-**Key design insight:** The multi-paradigm prompt case (e.g., "Mega Man but dungeons are Doom") doesn't violate the consequences principle — it reframes it. The prompt becomes the skeleton's paradigm map. The Experience Interpreter picks the dominant paradigm and skeletonizes reasonable requests. But emergent CAS shifts can override or supplement the prompted structure. The system honors prompt intent without being bound by it.
+4. **Level construction pipeline radically simplified (Decisions 55-61).** Eight components (Author Agent, Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor, Simulated Player, Taste Agent) consolidated to three:
+   - **Designer** (Claude) — creates Episode Vision + evaluates each section for taste during construction. Maintains cumulative player experience model. Uses game-type taste profiles.
+   - **Builder** (Claude, Sonnet) — constructs each section as an integrated design problem (vocabulary + rhythm + spatial layout). Same author for all sections.
+   - **Validator** (deterministic code) — pathfinding, reachability, teachability verification, softlock detection. No Claude calls.
 
-**New document:** `docs/design/paradigm-shift-principles.md` — constraint document for Phase 7.
+5. **Provocateur eliminated (Decision 55).** Surprise and delight emerge from the Designer's vision and taste, not from injected violations. Random pattern-breaking is more likely noise than genius.
+
+6. **Game-type taste profiles established (Decision 59).** The Designer evaluates with paradigm-specific sensibility (Mario values flow; Mega Man values mastery; Zelda values mystery). Profiles derived from ingestion pipeline data weighted toward high-quality games.
+
+7. **Design move library identified as key future work.** The right grain size for extractable game design patterns is the "design move" — a complete transferable micro-experience, not an abstract arc or a literal tile pattern. To be extracted from the ingestion pipeline.
 
 ---
 
 ## Current Agent Execution Order
-
-*(Unchanged from Thread 7.6)*
 
 ```
 Pre-game:
@@ -46,38 +39,46 @@ Pre-game:
     → Artistic Director
     → Game Visual Identity generator (Track B only)
     → Design Philosopher
-    → Game Compiler (expanded: CAS initial conditions, social graph, personality
-                     distributions, social timer pace, drama calibration, skeleton
-                     instantiation, social hook placement, initial narrative,
+    → Game Compiler (CAS initial conditions, social graph topology,
+                     personality distributions, social timer pace, drama calibration,
+                     skeleton instantiation, social hook placement, initial narrative,
                      knowledge distribution, population template generation,
                      named entity individuation)
-    → Grammarian → Rhythmist → Cartographer
-    → Provocateur → Coherence Auditor
-    → Layer 3 asset generation (under Game Visual Identity)
-    → Assets enter game-instance library
+
+  Per-episode level construction:
+    → Game Compiler produces Episode Brief
+        (vocabulary budget, complexity ceiling, difficulty target,
+         punctuation type, zone identity, mechanical thesis,
+         narrative context, override flags)
+    → Designer produces Episode Vision
+        (emotional arc, signature moments, hidden intentionality,
+         connective logic, section-by-section specs)
+    → For each section:
+        → Builder constructs (integrated vocabulary + rhythm + spatial)
+        → Validator checks feasibility (pathfinding, reachability, teachability)
+        → Designer evaluates taste (cumulative experience model + taste profile)
+        → Retry loop if Validator or Designer rejects
+    → Episode served; Vocabulary Record Update written
 
 Runtime loop:
   CAS engine ticks on social timer (deterministic, continuous)
   
   At paradigm tick (episode boundary):
-    → Claude receives: CAS snapshot + previous narrative + drama signal + skeleton context
+    → Claude receives: CAS snapshot + previous narrative + drama signal
+        + skeleton context
     → Claude interprets at multiple scales
     → Claude produces:
         Visual/audio directives → VME directive stack
         Mechanical directives → paradigm engine
         Mechanical thesis → Episode Brief (via Game Compiler)
         Narrative update, faction leadership decisions → CAS events
-    → Game Compiler produces Episode Brief from skeleton + CAS + Claude interpretation
-        + previous vocabulary record
-    → Grammarian → Rhythmist → Cartographer → Provocateur → Coherence Auditor
+    → Next episode enters construction pipeline (Designer → Builder → Validator)
     → VME resolves directives via Layer 1/2/3
-    → Episode served; Vocabulary Record Update written
-    → Next episode renders with updated visual state + sequenced content
 
   Player conversation:
     → Player hails entity (costs 1 exchange from daily budget)
     → If entity willing: conversation opens (multi-turn Claude API call)
-    → If entity unwilling: rejection displayed (manner communicates CAS state)
+    → If entity unwilling: rejection displayed
     → Post-conversation: events enter CAS, bonds update, knowledge propagates
     → If population entity: promoted to named on first exchange
 
@@ -92,63 +93,75 @@ Diagnostic wrapper (unchanged):
   → Moment Extractor → Testing UI → Joe rates → Pattern Distiller
 ```
 
-## Generation Flow
+**Note on Simulated Player Agent:** The Simulated Player Agent still exists in the diagnostic wrapper for automated playtesting/clip generation. Its *level verification* function (pathfinding, reachability) was absorbed into the Validator within the construction pipeline. These are separate uses of similar technology — the Validator runs during construction, the Simulated Player Agent runs after construction for diagnostic purposes.
 
-*(Unchanged from Thread 7.6)*
+---
+
+## Generation Flow
 
 ```
 Player prompt
   → Skeleton (~10-15s): paradigm grammar instantiation
       + Game Visual Identity (Track B)
-      + Knowledge distribution (master fact list → entity knowledge lists)
-      + Population templates generated for batch entity classes
-      + Named entities individually realized
+      + Knowledge distribution
+      + Population templates + named entity individuation
+      + SNES Comfort Model defaults applied to forgiveness parameters
+        (unless explicit difficulty override in prompt)
       + Layer 3 generates initial assets
-  → Episode 1: Game Compiler produces Episode Brief from skeleton
-      + Grammarian → Rhythmist → Cartographer → Provocateur → Auditor
-      + Episode served; Vocabulary Record Update written
+  → Episode 1: 
+      Game Compiler produces Episode Brief from skeleton
+      → Designer produces Episode Vision (taste profile loaded)
+      → Builder constructs sections → Validator → Designer taste check
+      → Episode served; Vocabulary Record Update written
   → Player plays Episode 1 (CAS evolving on social timer)
   → Player conversations (if any) consume exchange budget, generate CAS events
   → At episode boundary: Claude interpretation → Episode Brief for next episode
   → Between-episode window (triple duty):
       1. Player social interaction surface
       2. CAS narrative delivery
-      3. Generation masking (sequencing agents + VME + any Layer 2/3 assets)
+      3. Generation masking (construction pipeline + VME + any Layer 2/3 assets)
   → Episode 2+ with accumulated state + updated vocabulary record
   → [repeat]
 ```
+
+---
 
 ## What's Next
 
 ### Immediate: Repo Sync
 1. Drop into repo:
-   - `docs/design/paradigm-shift-principles.md` — new constraint document for Phase 7
-   - `docs/current-status.md` — this file
-   - Append Thread 8 decisions (50-52) to `docs/decisions-log.md`
-2. Update `claude.md` — add paradigm-shift-principles.md to key documents table, update open design work list
-3. Commit and push
+   - Append Thread 9 decisions (53-61) to `docs/decisions-log.md`
+   - Replace `docs/current-status.md` with this file
+   - Replace `claude.md` with updated architectural blueprint
+2. Commit and push
 
 ### Then: Phase 1 — Paradigm Engine (Sessions 2-8)
-Phase 1 remains unblocked. All design threads (1-5, 7, 7.6, 8) are complete or appropriately deferred. The paradigm shift principles inform Phase 1 schema design (paradigm-independent CAS, flexible spatial format) but require no Phase 1 implementation.
+Phase 1 remains unblocked. All design threads (1-5, 7, 7.6, 8, 9) are complete or appropriately deferred. Thread 9's simplification reduces Phase 2's agent count (3 level construction components instead of 8).
 
-### Before Phase 2: Paradigm Grammar Buildout
-Extend each paradigm spec with full-game structural grammar. Leverage ingestion pipeline data + Phase 1 playtesting experience.
+**Phase 1 builds:** Core game loop, canvas rendering, entity system, input manager, collision, physics parameter table (with SNES Comfort Model defaults), 2D tile-based rendering core, JSON-to-game machine, Validator (pathfinding + reachability + teachability verification), Moment Extractor v1, Testing UI v1, Gate 1 auto-checks.
 
-### Parallel design threads (if desired):
-- Social hook pattern library
-- Remaining paradigm spec completion
-- Game state schema document update (apply all thread diffs)
+**First milestone:** Hand-authored GameState JSON → playable platformer level with SNES-grade forgiveness, auto-validated, diagnostic clips for Joe's review.
+
+### Before Phase 2: Paradigm Grammar Buildout + Taste Profiles
+- Extend each paradigm spec with full-game structural grammar
+- Build game-type taste profiles from ingestion pipeline data (quality-weighted)
+- Begin design move library extraction from ingestion data
+- Bootstrap Living Taste Document with initial criteria
+
+### Build Plan Impact
+The build plan (v2) references agents that are now consolidated. Phase 2 scope simplifies: instead of building Grammarian + Rhythmist + Cartographer + Provocateur + Coherence Auditor as separate agents, Phase 2 builds Designer + Builder + Validator. Net reduction in Phase 2 engineering complexity. Diagnostic systems unchanged.
 
 ---
 
 ## Key Open Questions
-1. Paradigm grammar specifics per paradigm (before Phase 2)
+1. Paradigm grammar specifics per paradigm (before Phase 2) — now includes taste profiles
 2. CAS state → level content translation per paradigm
-3. ~~Multi-paradigm shift mapping mechanics~~ → Principles established (Thread 8), implementation deferred to Phase 7
-4. Game state schema document update (Thread 3 CAS diffs + Thread 5 VME state + Thread 7 entity population fields)
+3. Social hook pattern library
+4. Game state schema document update (Thread 3/5/7 diffs)
 5. Asset resolution strategy update (reference Game Visual Identity)
-6. Social hook pattern library
-7. Mechanical directive format specification (flagged by Decision 39)
-8. CAS rate constant calibration (testing phase)
-9. MVP definition — minimum compelling first level
-10. Exact exchange budget numbers per tier (testing/economics)
+6. Mechanical directive format specification (Decision 39)
+7. CAS rate constant calibration (testing phase)
+8. MVP definition — minimum compelling first level
+9. Exact exchange budget numbers per tier (testing/economics)
+10. Design move library extraction from ingestion pipeline
+11. Living Taste Document bootstrap

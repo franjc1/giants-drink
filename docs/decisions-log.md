@@ -541,3 +541,187 @@ Novel interactive objects require both. Neither system sees the other's output. 
 5. Game state schema document update (apply Thread 3 CAS diffs + Thread 5 `vme_state` section for directive stack)
 6. Asset resolution strategy document update (reference Game Visual Identity system)
 7. Mechanical directive format specification (flagged by Decision 39)
+# Decisions Log — Thread 9 Addition
+## Append this content to the existing `docs/decisions-log.md`
+
+---
+
+## Session: 2026-03-05 — Gameplay Quality, Difficulty Philosophy & Level Construction Architecture (Thread 9)
+
+### Decision 53: SNES Comfort Model as Default Difficulty Philosophy
+
+**Context:** Two Fires targets a broad audience including casual players and people accustomed to modern game forgiveness. NES-era difficulty (quarter-eating arcade psychology, high punishment, reflex-dependent) is hostile to this audience and, critically, hostile to the social ecology — a player dying every 15 seconds is in pure reflex mode and won't notice social hooks. Joe identified SNES-era games (Super Mario World, Link to the Past, Mega Man X, F-Zero, Mario Kart, Turtles in Time) as the right difficulty model: manageable, great controls, slow ramp, teach-then-challenge, competence over reflex.
+
+**Decision:** Two Fires defaults to SNES-era difficulty philosophy. The core principle: **the game respects your time and assumes you want to make progress, not prove yourself.** Difficulty comes from complexity layering (more elements interacting) and spatial pressure (tighter windows), not from punishment severity (instant death, long setbacks, scarce checkpoints).
+
+Default forgiveness parameters:
+- **Checkpoint philosophy:** Player never loses more than ~60-90 seconds of progress on death. Frequent implicit checkpoints.
+- **Death cost:** Low. Primary cost is time, not accumulated progress. No permadeath, no item loss, no save state resets.
+- **Enemy telegraph duration:** Long enough to react thoughtfully, not just reflexively. 400-600ms for standard attacks, longer for heavy attacks.
+- **Teachability generosity:** Every new mechanic/enemy gets a consequence-free introduction *zone*, not just one safe encounter. Multiple safe encounters before challenging use.
+- **Complexity ceiling per episode:** Conservative — player can track everything happening simultaneously. Two to three simultaneous challenge types in hardest moments.
+- **Ramp shape:** Concave (fast early progress, slow difficulty increase, hardest sections concentrated near end). Compression toward resolution provides the late-game spike.
+
+The prompt can push harder ("brutal," "challenging," "punishing," "arcade difficulty"), but the default is SNES-generous. The Experience Interpreter must receive an explicit difficulty signal to deviate from the comfort model.
+
+**Rationale:** The SNES games Joe identified share a specific contract with the player: graduated competence. They teach through level design (not punishment), let you feel skilled before layering complexity, and never rely on exceptional hand-eye coordination to progress. This creates the exact cognitive headspace where social hooks land — a competent, relaxed player notices that a goomba hesitated. A dying, frustrated player notices nothing. The Competence Bias is both a difficulty preference AND an architectural requirement for the social layer.
+
+---
+
+### Decision 54: "NES Style" Is an Aesthetic Signal, Not a Difficulty Signal
+
+**Context:** When a player prompts for "NES-style game" or "8-bit adventure," should the difficulty match NES-era punishing design?
+
+**Decision:** No. The Experience Interpreter treats era-style prompts as aesthetic signals (limited palette, chiptune, 8-bit sprites, specific screen resolution constraints), not difficulty signals. A game prompted as "NES style" looks NES but plays SNES. Forgiveness parameters are decoupled from aesthetic era parameters.
+
+The only way to get NES-hard difficulty is to explicitly request it with difficulty-specific language: "hard," "challenging," "punishing," "arcade difficulty," "old-school hard," etc. The Experience Interpreter must identify an explicit difficulty intent, not infer it from aesthetic era.
+
+**Rationale:** Most players requesting "NES style" want the aesthetic nostalgia, not the quarter-eating punishment. Players who DO want punishing difficulty will say so. Decoupling aesthetic from difficulty prevents the system from alienating casual players who just want the look and feel of classic games. This also means the full palette of retro aesthetics is available to the broadest audience.
+
+---
+
+### Decision 55: Provocateur Agent Eliminated
+
+**Context:** The Provocateur was originally designed to inject one "grammar violation" per episode — a surprising moment that disrupts established patterns. Discussion revealed this is more likely to feel like noise or bad design than intentional surprise. If the base game experience is well-designed, random pattern-breaking is redundant at best and disruptive at worst. The great SNES moments (hidden star road in Super Mario World, weapon-gated revisits in Mega Man X) weren't violations of grammar — they were expressions of deeper authorial vision.
+
+**Decision:** The Provocateur is eliminated as a discrete agent. Surprise and delight emerge from the Designer's vision and taste evaluation (see Decision 58), not from injected violations. If an episode lacks surprise, that's a taste failure to be addressed by tuning the Designer's prompt and taste profile, not by a separate surprise-injection system.
+
+**Rationale:** The Provocateur was a crutch for bland base experiences. The new level construction architecture (Decisions 57-60) addresses blandness at the source — through authorial vision and taste evaluation — rather than papering over it with random disruptions. Parsimony: fewer agents, fewer boundaries, fewer places for coherence to leak.
+
+---
+
+### Decision 56: Grammarian, Rhythmist, Cartographer Consolidated into Builder
+
+**Context:** The Grammarian (vocabulary sequencing), Rhythmist (tension/relief pacing), and Cartographer (spatial layout) operated as separate agents with separate concerns. But these functions are deeply interdependent — vocabulary sequencing affects rhythm (new elements need safe zones), rhythm affects spatial layout (tension peaks need different geometry than breathers), spatial layout affects vocabulary (can't teach wall-jump without walls). Separation meant each agent made decisions without full awareness of the others, requiring the Coherence Auditor to catch conflicts after the fact.
+
+**Decision:** All three functions are consolidated into a single **Builder** that considers vocabulary sequencing, tension/relief, and spatial layout as an integrated construction problem. The Builder receives the Designer's section specification and produces a section where all three dimensions are coherent by construction, not by post-hoc auditing.
+
+**Rationale:** Fewer boundaries = fewer translation losses. An integrated Builder converges faster because there's no inter-agent negotiation. A section where rhythm, vocabulary, and spatial layout are designed together feels more coherent than one where three separate agents independently optimized their own concern. Same voice throughout — consistent with Decision 60 (Claude as Builder for all sections).
+
+---
+
+### Decision 57: Coherence Auditor and Simulated Player Merged into Validator
+
+**Context:** The Coherence Auditor checked structural validity (pathability, teachability completeness, no softlocks). The Simulated Player Agent pathfound through levels, recorded timelines, and logged deaths. Both are verification functions — "is this physically feasible?" — not creative functions.
+
+**Decision:** Both are merged into a single **Validator** — entirely deterministic code (no Claude calls). The Validator runs pathfinding, reachability analysis, timing verification, teachability arc completeness checks, and softlock detection. If validation fails, the section goes back to the Builder with the specific constraint violation.
+
+The Validator does NOT evaluate taste, quality, or experiential properties. It only checks physical feasibility and structural constraint satisfaction.
+
+**Rationale:** Parsimony. Both components answer the same question: "can a player physically complete this?" Merging them eliminates a redundant boundary. Making it deterministic code eliminates Claude calls for work that doesn't require intelligence — pathfinding and constraint checking are computational, not creative. Fast and cheap.
+
+---
+
+### Decision 58: Designer Agent — Unified Author + Tastemaker
+
+**Context:** The discussion identified two missing capabilities: top-down authorial vision (the "wouldn't it be cool if..." quality that makes levels feel intentional) and iterative taste evaluation during construction (catching soullessness before it ships). Initially proposed as separate Author Agent and Taste Agent. Discussion revealed these are the same function — a human designer both envisions and evaluates, adjusting the vision based on what emerges.
+
+**Decision:** A single **Designer** (Claude call) that both creates and evaluates. The Designer:
+
+1. **Receives:** Episode Brief from Game Compiler + game-type taste profile + Living Taste Document + full game context (skeleton, CAS state, prior episodes, narrative position).
+
+2. **Produces Episode Vision:** Emotional arc for the episode, signature design moments ("wouldn't it be cool if..." ideas), hidden intentionality (secrets, curiosity rewards, things that make the player feel anticipated), connective logic to prior and future episodes, and section-by-section specifications including emotional target, key moments, vocabulary allocation, and intended player psychological state at entry/exit.
+
+3. **Evaluates each section after construction:** Maintains a running model of the player's cumulative psychological experience (confidence, momentum, attention, expectation, curiosity). Evaluates each built section against the Vision, the accumulated experience, and the game-type taste profile. Can approve, request revision with specific feedback, or revise remaining-section specs if the emerging level suggests a better direction than the original plan.
+
+The Designer's evaluation is qualitative taste judgment, not constraint checking (that's the Validator's job). It catches the "syntactically correct but soulless" failure mode — the exact gap between "valid level" and "authored level."
+
+**Rationale:** The best levels come from a designer who has a vision, starts building, evaluates as they go, and adjusts based on what's emerging. Separating vision from evaluation creates a translation boundary that loses nuance. A unified Designer can say "my original vision isn't working with these elements, but here's what IS emerging, and it's interesting in a different way." This is how real design works — intention and material in conversation.
+
+---
+
+### Decision 59: Game-Type Taste Profiles for Designer Evaluation
+
+**Context:** Different game types have different definitions of "good." A slow, puzzle-like section is brilliant in a Zelda-like game and momentum-killing in a Mario-like game. The Designer needs to evaluate with the right sensibility for the game being made.
+
+**Decision:** The Designer's taste evaluation is shaped by a **game-type taste profile** — a set of evaluative criteria specific to the paradigm. The taste profile defines what this type of game values:
+
+- **Mario-like (platformer):** Values flow, momentum, discovery, playful exploration. "Does the player want to keep moving?"
+- **Mega Man-like (action-platformer):** Values mastery, precision, pattern recognition, tool selection. "Does the player understand the challenge?"
+- **Zelda-like (action-adventure):** Values mystery, spatial puzzles, discovery arcs, spaces revealing their logic. "Is the player forming hypotheses about the space?"
+- **Racing:** Values speed sensation, risk/reward in line choice, rivalry expression. "Does the player feel fast and competitive?"
+- **Shmup:** Values pattern density, flow state, escalating visual spectacle. "Is the player in the zone?"
+- **RTS/Tactics:** Values strategic clarity, meaningful tradeoffs, information-driven decisions. "Does the player feel clever?"
+
+Profiles are built from the ingestion pipeline — extracting common structural and experiential patterns from the highest-rated games in each paradigm, weighted by quality (popular and well-reviewed games weighted higher; obscure and poorly-reviewed games weighted lower). The ingestion pipeline's ~1,600 games across 6 dimensions provide the ground truth for what "good taste" means in each genre context.
+
+**Rationale:** Taste is contextual. The Designer must evaluate "is this good FOR THIS TYPE OF GAME," not "is this good in the abstract." Taste profiles prevent the mash-up problem — sections that are individually well-designed but wrong for the game type get flagged. Anchoring profiles in real game data (weighted toward great games) ensures the system's taste is grounded in proven quality, not invented from principles.
+
+---
+
+### Decision 60: Claude as Builder for All Sections
+
+**Context:** Should the Builder be deterministic code (fast, cheap per attempt, but no taste) or Claude (slower, costlier per attempt, but understands design intention)? The key tradeoff: deterministic code produces valid layouts but frequently gets taste-rejected by the Designer (leading to multiple retry loops), while Claude understands the Designer's feedback directly and converges faster.
+
+**Decision:** Claude (Sonnet-level) as the Builder for all sections, with no deterministic shortcuts. Every section is built by the same intelligence, producing consistent design sensibility throughout. The Builder receives the Designer's section specification and produces an integrated section where vocabulary sequencing, tension/relief, and spatial layout are coherent.
+
+Three reasons for no deterministic shortcuts:
+1. **Parsimony in routing logic.** Determining which sections are "simple enough" for deterministic code adds complexity that outweighs the cost savings.
+2. **Fewer loops.** Claude understands why the Designer rejected a section and revises intelligently; deterministic code retries are essentially random search within the valid space. Total cost per approved section may be comparable or lower with Claude despite higher per-call cost.
+3. **Same author for all sections.** A level where some sections are built by Claude and others by deterministic code would have subtle inconsistencies in design sensibility. One voice throughout is better.
+
+**Rationale:** The difference between "technically valid" and "intentionally designed" is exactly the difference between deterministic code and Claude. The Builder isn't just placing elements at valid positions — it's making design decisions about *how* elements relate to each other, which requires understanding the Designer's intention. Cost is managed by using Sonnet-level calls (sufficient for informed execution rather than complex creative generation) and by converging in fewer loops.
+
+---
+
+### Decision 61: Simplified Level Construction Architecture — Designer, Builder, Validator
+
+**Context:** The previous level construction pipeline had eight components: Author Agent, Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor, Simulated Player Agent, and (proposed) Taste Agent. Each boundary between components was a place where coherence could leak. The "Claude as Tastemaker" design principle (established earlier in this session) enabled radical consolidation.
+
+**Decision:** Level construction uses three components:
+
+1. **Designer** (Claude) — produces Episode Vision, then evaluates each section for taste during construction. Maintains cumulative player experience model. Can revise vision mid-construction. Uses game-type taste profile. (Consolidates: Author Agent + Taste Agent + Provocateur quality signal)
+
+2. **Builder** (Claude, Sonnet-level) — constructs each section as an integrated design problem (vocabulary + rhythm + spatial layout). Receives Designer's section spec, produces section layout. Retries with Designer feedback when taste evaluation flags problems. (Consolidates: Grammarian + Rhythmist + Cartographer)
+
+3. **Validator** (deterministic code) — checks physical feasibility. Pathfinding, reachability, timing, teachability arc completeness, softlock detection. No Claude calls. Fast. (Consolidates: Coherence Auditor + Simulated Player Agent)
+
+**The construction loop per episode:**
+```
+Game Compiler produces Episode Brief
+  → Designer produces Episode Vision (1 Claude call)
+  → For each section:
+      → Builder constructs section (1 Claude call)
+      → Validator checks feasibility (deterministic, fast)
+      → If Validator fails → Builder retries with constraint violation feedback
+      → If Validator passes → Designer evaluates taste (1 Claude call)
+      → If Designer flags problems → Builder retries with Designer feedback
+      → If Designer approves → move to next section
+      → Designer can revise remaining-section specs based on emerging level
+```
+
+**Typical cost:** ~10-12 Claude calls per episode (1 Vision + ~4-5 Builder calls + ~4-5 Designer taste calls, assuming most sections pass on first or second attempt). Worst case ~20 if several sections are difficult.
+
+**What's eliminated:** Provocateur (surprise comes from Designer's taste and vision), separate Grammarian/Rhythmist/Cartographer (integrated into Builder), Simulated Player as separate component (physical simulation in Validator), Coherence Auditor as separate agent (constraint checks in Validator).
+
+**Rationale:** Eight components consolidated to three. Fewer boundaries = fewer translation losses = more coherent levels. The Designer's continuous taste evaluation catches the "syntactically correct but soulless" failure mode that no amount of syntactic agents could prevent. Claude calls are minimized (two roles, not eight). The Validator handles all non-creative verification as fast, cheap code. The architecture is as simple as it needs to be (parsimony) with no unnecessary moving parts.
+
+---
+
+### Updated Agent Execution Order
+
+**Note:** Decision 52 (Thread 8) references "Grammarian, Rhythmist, Cartographer, Provocateur, Coherence Auditor" in its rationale. These agents are now consolidated per Decisions 55-61. Decision 52's principle (no mid-episode shifts) still holds — the Designer + Builder + Validator pipeline assumes episode-level coherence, same as the prior pipeline.
+
+**Note:** Decision 49 (Thread 7.6) references the Coherence Auditor verifying teachability arcs. This function is now performed by the Validator. The principle (vocabulary record tracks placement, not player experience) is unchanged.
+
+---
+
+### Open Design Work (Updated)
+
+**Resolved by Thread 9:**
+- ~~Difficulty philosophy / target audience calibration~~ ✅ (SNES Comfort Model)
+- ~~Level construction agent architecture~~ ✅ (Designer + Builder + Validator)
+- ~~Provocateur necessity~~ ✅ (Eliminated)
+
+**Remaining:**
+1. Paradigm grammar specifics per paradigm (before Phase 2) — now also includes game-type taste profiles
+2. CAS state → level content translation per paradigm
+3. Social hook pattern library
+4. Game state schema document update (apply Thread 3 CAS diffs + Thread 5 VME state + Thread 7 entity population fields)
+5. Asset resolution strategy document update (reference Game Visual Identity)
+6. Mechanical directive format specification (flagged by Decision 39)
+7. CAS rate constant calibration (testing phase)
+8. MVP definition — minimum compelling first level
+9. Exact exchange budget numbers per tier (testing/economics)
+10. **Design move library** — extract transferable design moves from ingestion pipeline at the right grain size (complete micro-experiences, not abstract arcs or literal tile patterns), organized by paradigm, intention type, and quality weight. Feeds the Designer's vision generation.
+11. **Living Taste Document bootstrap** — initial taste criteria for Designer evaluation before Joe's 🔥 ratings accumulate. Derived from ingestion pipeline quality-weighted patterns + SNES Comfort Model defaults.
