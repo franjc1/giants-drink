@@ -1,0 +1,946 @@
+{
+  "meta": {
+    "schema_version": "0.2.0",
+    "game_id": "tf_test_001",
+    "created_at": "2026-03-05T20:00:00Z",
+    "prompt": "Mario but the goombas are sentient and have a labor movement",
+
+    "paradigm": {
+      "id": "platformer",
+      "rendering_core": "2d_tile_scrolling",
+      "interaction_grammar": "direct_action"
+    },
+
+    "aesthetic": {
+      "style_era": "nes_late",
+      "palette_id": "smb3_grassland",
+      "palette_colors": [
+        "#5C94FC", "#A4E4FC", "#88D800", "#005800",
+        "#FCE4A0", "#E45C10", "#883800", "#000000"
+      ],
+      "crt_intensity": 0.3,
+      "pixelation_scale": 3
+    },
+
+    "audio_profile": {
+      "tempo_bpm": 140,
+      "key": "C",
+      "mode": "major",
+      "waveforms": ["square", "triangle", "noise"],
+      "style_reference": "koji_kondo_upbeat"
+    },
+
+    "philosophy": {
+      "conviction": "solidarity under oppression is the only real power",
+      "tone": "darkly comic",
+      "dramatic_question": "can collective action survive co-optation?"
+    },
+
+    "game_visual_identity": null,
+
+    "game_setup": {
+      "intended_length": "medium",
+      "event_magnitude_sensitivity": 0.6,
+      "initial_conditions_summary": "goombas near revolt threshold, koopa army overextended, player enters at inflection point",
+      "pressure_ramp": "player_driven",
+      "social_hooks": [
+        {
+          "trigger": "episode_2_start",
+          "type": "forced_encounter",
+          "description": "injured goomba blocks path, can be stomped or spoken to"
+        }
+      ],
+      "drama_density_defaults": {
+        "min_significant_changes_per_cadence": 1,
+        "max_significant_changes_per_cadence": 4
+      },
+      "social_timer_pace": 1.0,
+      "forgiveness": {
+        "checkpoint_max_loss_seconds": 75,
+        "death_cost": "time_only",
+        "enemy_telegraph_ms": 500,
+        "teachability_zone_screens": 3,
+        "complexity_ceiling_simultaneous": 3,
+        "ramp_shape": "concave",
+        "difficulty_override": null
+      }
+    },
+
+    "skeleton": {
+      "paradigm_grammar_id": "platformer_standard",
+      "total_episodes": 8,
+      "zones": [
+        {
+          "zone_id": "grassland",
+          "episodes": [1, 2],
+          "vocabulary_budget": ["goomba_patrol", "pit", "koopa_troopa", "coin_block"],
+          "complexity_ceiling": 0.3,
+          "punctuation": null
+        },
+        {
+          "zone_id": "underground",
+          "episodes": [3, 4],
+          "vocabulary_budget": ["piranha_plant", "moving_platform", "thwomp"],
+          "complexity_ceiling": 0.5,
+          "punctuation": { "type": "mid_boss", "episode": 4 }
+        },
+        {
+          "zone_id": "factory",
+          "episodes": [5, 6],
+          "vocabulary_budget": ["conveyor_belt", "crusher", "bob_omb"],
+          "complexity_ceiling": 0.7,
+          "punctuation": null
+        },
+        {
+          "zone_id": "fortress",
+          "episodes": [7, 8],
+          "vocabulary_budget": ["fire_bar", "lava_pit", "dry_bones"],
+          "complexity_ceiling": 0.9,
+          "punctuation": { "type": "final_boss", "episode": 8 }
+        }
+      ],
+      "override_conditions": []
+    }
+  },
+
+  "world": {
+    "current_paradigm": "platformer",
+
+    "factions": {
+      "koopa_army": {
+        "id": "koopa_army",
+        "name": "Koopa Army",
+        "role": "antagonist_primary",
+        "personality_center": {
+          "openness": 0.25,
+          "conscientiousness": 0.75,
+          "extraversion": 0.50,
+          "agreeableness": 0.20,
+          "neuroticism": 0.40
+        },
+        "resources": 0.75,
+        "leader_entity_id": "bowser_01",
+        "territory": ["grassland", "underground", "factory", "fortress"],
+        "computed_aggregates": {
+          "avg_valence": 0.10,
+          "avg_arousal": 0.35,
+          "cohesion": 0.65,
+          "bond_density": 0.42,
+          "member_count": 47
+        }
+      },
+      "goomba_union": {
+        "id": "goomba_union",
+        "name": "Goomba Workers' Collective",
+        "role": "potential_ally",
+        "personality_center": {
+          "openness": 0.55,
+          "conscientiousness": 0.40,
+          "extraversion": 0.65,
+          "agreeableness": 0.70,
+          "neuroticism": 0.60
+        },
+        "resources": 0.20,
+        "leader_entity_id": "grim_01",
+        "territory": [],
+        "computed_aggregates": {
+          "avg_valence": -0.30,
+          "avg_arousal": 0.55,
+          "cohesion": 0.72,
+          "bond_density": 0.68,
+          "member_count": 12
+        }
+      }
+    },
+
+    "entities": {
+      "goomba_01": {
+        "id": "goomba_01",
+        "name": null,
+        "type": "population",
+        "template_id": "goomba_standard",
+        "faction_id": "goomba_union",
+        "rank": "low",
+        "status": "active",
+        "location_id": "grassland",
+        "personality": {
+          "openness": 0.50,
+          "conscientiousness": 0.35,
+          "extraversion": 0.60,
+          "agreeableness": 0.65,
+          "neuroticism": 0.55
+        },
+        "affect": {
+          "valence": -0.20,
+          "arousal": 0.40
+        },
+        "bonds": [
+          {
+            "target_id": "goomba_02",
+            "strength": 0.50,
+            "valence": 0.60,
+            "asymmetry": 0.0,
+            "type": "kin"
+          }
+        ],
+        "knowledge": [
+          {
+            "id": "k_g01_001",
+            "type": "social",
+            "content": "goomba_union_exists",
+            "accuracy": 0.90,
+            "emotional_charge": 0.40,
+            "source": "faction_channel",
+            "causal_agent": null,
+            "acquired_tick": 0
+          },
+          {
+            "id": "k_g01_002",
+            "type": "factual",
+            "content": "koopa_army_overworks_goombas",
+            "accuracy": 0.85,
+            "emotional_charge": 0.55,
+            "source": "direct_observation",
+            "causal_agent": null,
+            "acquired_tick": 0
+          }
+        ],
+        "behavioral_params": {
+          "patrol_range": 64,
+          "patrol_speed": 0.5,
+          "awareness_radius": 48,
+          "response_behavior": "approach",
+          "contact_damage": 1,
+          "capture_window_ms": 0
+        },
+        "conversation_state": "never_contacted",
+        "communication_willingness": 0.30,
+        "asset_spec": {
+          "visual": {
+            "dimensions": [16, 16],
+            "color_count": 4,
+            "palette_profile": "warm_dark",
+            "silhouette_class": "round_short",
+            "style_era": "nes_late",
+            "animation": {
+              "walk": { "frames": 2, "speed": "medium" },
+              "stomp": { "frames": 1 }
+            }
+          },
+          "narrative": { "role": "grunt", "faction": "goomba_union", "tone": "weary" },
+          "reference": { "style_reference": "goomba_smb3" }
+        }
+      },
+
+      "goomba_02": {
+        "id": "goomba_02",
+        "name": null,
+        "type": "population",
+        "template_id": "goomba_standard",
+        "faction_id": "goomba_union",
+        "rank": "low",
+        "status": "active",
+        "location_id": "grassland",
+        "personality": {
+          "openness": 0.45,
+          "conscientiousness": 0.40,
+          "extraversion": 0.55,
+          "agreeableness": 0.70,
+          "neuroticism": 0.50
+        },
+        "affect": {
+          "valence": -0.25,
+          "arousal": 0.35
+        },
+        "bonds": [
+          {
+            "target_id": "goomba_01",
+            "strength": 0.50,
+            "valence": 0.60,
+            "asymmetry": 0.0,
+            "type": "kin"
+          }
+        ],
+        "knowledge": [
+          {
+            "id": "k_g02_001",
+            "type": "social",
+            "content": "goomba_union_exists",
+            "accuracy": 0.88,
+            "emotional_charge": 0.35,
+            "source": "faction_channel",
+            "causal_agent": null,
+            "acquired_tick": 0
+          }
+        ],
+        "behavioral_params": {
+          "patrol_range": 48,
+          "patrol_speed": 0.5,
+          "awareness_radius": 48,
+          "response_behavior": "approach",
+          "contact_damage": 1,
+          "capture_window_ms": 0
+        },
+        "conversation_state": "never_contacted",
+        "communication_willingness": 0.25,
+        "asset_spec": {
+          "visual": {
+            "dimensions": [16, 16],
+            "color_count": 4,
+            "palette_profile": "warm_dark",
+            "silhouette_class": "round_short",
+            "style_era": "nes_late",
+            "animation": {
+              "walk": { "frames": 2, "speed": "medium" },
+              "stomp": { "frames": 1 }
+            }
+          },
+          "narrative": { "role": "grunt", "faction": "goomba_union", "tone": "weary" },
+          "reference": { "style_reference": "goomba_smb3" }
+        }
+      },
+
+      "koopa_troopa_01": {
+        "id": "koopa_troopa_01",
+        "name": null,
+        "type": "population",
+        "template_id": "koopa_troopa_standard",
+        "faction_id": "koopa_army",
+        "rank": "low",
+        "status": "active",
+        "location_id": "grassland",
+        "personality": {
+          "openness": 0.30,
+          "conscientiousness": 0.70,
+          "extraversion": 0.45,
+          "agreeableness": 0.25,
+          "neuroticism": 0.35
+        },
+        "affect": {
+          "valence": 0.10,
+          "arousal": 0.30
+        },
+        "bonds": [],
+        "knowledge": [
+          {
+            "id": "k_kt01_001",
+            "type": "social",
+            "content": "goombas_are_subordinate_workers",
+            "accuracy": 0.80,
+            "emotional_charge": 0.10,
+            "source": "faction_channel",
+            "causal_agent": null,
+            "acquired_tick": 0
+          }
+        ],
+        "behavioral_params": {
+          "patrol_range": 80,
+          "patrol_speed": 0.6,
+          "awareness_radius": 56,
+          "response_behavior": "approach",
+          "contact_damage": 1,
+          "capture_window_ms": 0
+        },
+        "conversation_state": "never_contacted",
+        "communication_willingness": 0.15,
+        "asset_spec": {
+          "visual": {
+            "dimensions": [16, 24],
+            "color_count": 4,
+            "palette_profile": "cool_green",
+            "silhouette_class": "humanoid_short_shell",
+            "style_era": "nes_late",
+            "animation": {
+              "walk": { "frames": 2, "speed": "medium" },
+              "shell": { "frames": 1 },
+              "shell_slide": { "frames": 1 }
+            }
+          },
+          "narrative": { "role": "soldier", "faction": "koopa_army", "tone": "dutiful" },
+          "reference": { "style_reference": "koopa_troopa_smb3" }
+        }
+      }
+    },
+
+    "population_templates": {
+      "goomba_standard": {
+        "template_id": "goomba_standard",
+        "faction_id": "goomba_union",
+        "personality_center": {
+          "openness": 0.50,
+          "conscientiousness": 0.38,
+          "extraversion": 0.58,
+          "agreeableness": 0.68,
+          "neuroticism": 0.53
+        },
+        "personality_variance": 0.10,
+        "behavioral_params_base": {
+          "patrol_range": 56,
+          "patrol_speed": 0.5,
+          "awareness_radius": 48,
+          "response_behavior": "approach",
+          "contact_damage": 1,
+          "capture_window_ms": 0
+        },
+        "asset_spec": {
+          "visual": {
+            "dimensions": [16, 16],
+            "color_count": 4,
+            "palette_profile": "warm_dark",
+            "silhouette_class": "round_short",
+            "style_era": "nes_late",
+            "animation": {
+              "walk": { "frames": 2, "speed": "medium" },
+              "stomp": { "frames": 1 }
+            }
+          },
+          "narrative": { "role": "grunt", "faction": "goomba_union", "tone": "weary" },
+          "reference": { "style_reference": "goomba_smb3" }
+        }
+      },
+      "koopa_troopa_standard": {
+        "template_id": "koopa_troopa_standard",
+        "faction_id": "koopa_army",
+        "personality_center": {
+          "openness": 0.28,
+          "conscientiousness": 0.72,
+          "extraversion": 0.48,
+          "agreeableness": 0.28,
+          "neuroticism": 0.38
+        },
+        "personality_variance": 0.08,
+        "behavioral_params_base": {
+          "patrol_range": 80,
+          "patrol_speed": 0.6,
+          "awareness_radius": 56,
+          "response_behavior": "approach",
+          "contact_damage": 1,
+          "capture_window_ms": 0
+        },
+        "asset_spec": {
+          "visual": {
+            "dimensions": [16, 24],
+            "color_count": 4,
+            "palette_profile": "cool_green",
+            "silhouette_class": "humanoid_short_shell",
+            "style_era": "nes_late",
+            "animation": {
+              "walk": { "frames": 2, "speed": "medium" },
+              "shell": { "frames": 1 },
+              "shell_slide": { "frames": 1 }
+            }
+          },
+          "narrative": { "role": "soldier", "faction": "koopa_army", "tone": "dutiful" },
+          "reference": { "style_reference": "koopa_troopa_smb3" }
+        }
+      }
+    },
+
+    "locations": {
+      "grassland": {
+        "id": "grassland",
+        "name": "Mushroom Grasslands",
+        "type": "zone",
+        "controlling_faction": "koopa_army",
+        "contested": false,
+        "entities_present": ["goomba_01", "goomba_02", "koopa_troopa_01"],
+        "connected_to": ["underground"],
+        "state": {
+          "fortification": 0.1,
+          "damage": 0.0
+        }
+      }
+    },
+
+    "information_packets": [],
+    "event_log": []
+  },
+
+  "cas": {
+    "tick_count": 0,
+    "social_timer": {
+      "base_interval_seconds": 120,
+      "game_pace_modifier": 1.0,
+      "last_tick_timestamp": null
+    },
+    "drama_density": {
+      "current_rate": 0.0,
+      "cadence_window": 3,
+      "significance_threshold": 0.15,
+      "recent_significant_changes": []
+    }
+  },
+
+  "episode": {
+    "episode_number": 1,
+
+    "episode_brief": {
+      "vocabulary_available": ["goomba_patrol", "pit", "coin_block"],
+      "vocabulary_new": ["goomba_patrol", "pit", "coin_block"],
+      "complexity_ceiling": 0.2,
+      "difficulty_target": 0.15,
+      "punctuation_type": null,
+      "zone_identity": "grassland",
+      "mechanical_thesis": "establish ground movement and jumping — player learns run, jump, and stomp through safe encounters before any real danger",
+      "narrative_context": "player arrives in grassland controlled by the koopa army, goombas patrol wearily",
+      "override_flags": []
+    },
+
+    "physics": {
+      "gravity": 0.55,
+      "jump_velocity": -12.0,
+      "jump_hold_bonus": -2.0,
+      "max_fall_speed": 8.0,
+      "run_speed": 4.5,
+      "run_acceleration": 0.35,
+      "run_deceleration": 0.55,
+      "air_control": 0.65,
+      "coyote_time_ms": 83,
+      "friction_ground": 0.85,
+      "friction_air": 0.98
+    },
+
+    "aesthetic_modifiers": {
+      "palette_shift": 0.0,
+      "saturation_modifier": 1.0,
+      "darkness_modifier": 0.0,
+      "decay_level": 0.0
+    },
+
+    "audio_modifiers": {
+      "tension_level": 0.0,
+      "tempo_modifier": 1.0,
+      "mode_shift": "none",
+      "sparseness": 0.0
+    },
+
+    "spatial": {
+      "format": "tilemap_2d_scrolling",
+      "width": 210,
+      "height": 15,
+      "tile_size": 16,
+      "scroll_speed": 0,
+      "camera": {
+        "type": "follow_player",
+        "lead_pixels": 48,
+        "vertical_deadzone": 32
+      },
+      "layers": [
+        {
+          "name": "background",
+          "data_format": "sparse_tile_array",
+          "default_tile": 0,
+          "tileset_spec": {
+            "tiles": {
+              "0": { "id": "sky", "visual": "solid_color", "color": "#5C94FC", "collision": false },
+              "1": { "id": "ground_top", "visual": "ground_surface", "color": "#88D800", "collision": true },
+              "2": { "id": "ground_fill", "visual": "ground_body", "color": "#883800", "collision": true },
+              "3": { "id": "brick", "visual": "brick_block", "color": "#E45C10", "collision": true, "breakable": true },
+              "4": { "id": "question_block", "visual": "question_block", "color": "#FCE4A0", "collision": true, "contains": "coin" },
+              "5": { "id": "pipe_top_left", "visual": "pipe_top_l", "color": "#005800", "collision": true },
+              "6": { "id": "pipe_top_right", "visual": "pipe_top_r", "color": "#005800", "collision": true },
+              "7": { "id": "pipe_body_left", "visual": "pipe_body_l", "color": "#005800", "collision": true },
+              "8": { "id": "pipe_body_right", "visual": "pipe_body_r", "color": "#005800", "collision": true },
+              "9": { "id": "cloud", "visual": "cloud_puff", "color": "#A4E4FC", "collision": false },
+              "10": { "id": "hill_body", "visual": "hill", "color": "#88D800", "collision": false },
+              "11": { "id": "bush", "visual": "bush_sprite", "color": "#005800", "collision": false },
+              "12": { "id": "flag_pole", "visual": "flag_pole", "color": "#883800", "collision": true, "interaction": "level_end" },
+              "13": { "id": "flag_top", "visual": "flag_ball", "color": "#FCE4A0", "collision": false },
+              "14": { "id": "platform", "visual": "floating_platform", "color": "#E45C10", "collision": true }
+            }
+          },
+          "data_comment": "Level layout: 210 tiles wide × 15 tiles tall. Row 0 = top (sky), Row 14 = bottom. Ground surface at row 13, ground fill at row 14. Coordinates are [col, row, tile_id]. Only non-sky tiles listed.",
+          "sparse_tiles": [
+            {"_comment": "=== SECTION 1: SAFE LANDING (cols 0-24) — flat ground, bushes, learn to move ==="},
+
+            {"_comment": "Ground surface row 13, full ground"},
+            {"range": "row", "row": 13, "col_start": 0, "col_end": 24, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 0, "col_end": 24, "tile": 2},
+
+            {"_comment": "Decorative bushes"},
+            {"col": 5, "row": 12, "tile": 11},
+            {"col": 12, "row": 12, "tile": 11},
+
+            {"_comment": "Clouds"},
+            {"col": 8, "row": 3, "tile": 9},
+            {"col": 19, "row": 2, "tile": 9},
+
+            {"_comment": "Background hill"},
+            {"col": 2, "row": 12, "tile": 10},
+            {"col": 3, "row": 11, "tile": 10},
+            {"col": 3, "row": 12, "tile": 10},
+            {"col": 4, "row": 12, "tile": 10},
+
+            {"_comment": "=== SECTION 2: FIRST QUESTION BLOCKS (cols 25-44) — learn to jump for rewards ==="},
+
+            {"_comment": "Ground continues"},
+            {"range": "row", "row": 13, "col_start": 25, "col_end": 44, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 25, "col_end": 44, "tile": 2},
+
+            {"_comment": "Question block cluster at height player naturally jumps to"},
+            {"col": 30, "row": 9, "tile": 4},
+            {"col": 32, "row": 9, "tile": 3},
+            {"col": 33, "row": 9, "tile": 4},
+            {"col": 34, "row": 9, "tile": 3},
+
+            {"_comment": "Cloud"},
+            {"col": 38, "row": 2, "tile": 9},
+
+            {"_comment": "=== SECTION 3: FIRST GOOMBA ENCOUNTER (cols 45-69) — safe, flat, learn to stomp ==="},
+
+            {"_comment": "Ground continues — intentionally flat for safe first enemy encounter"},
+            {"range": "row", "row": 13, "col_start": 45, "col_end": 69, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 45, "col_end": 69, "tile": 2},
+
+            {"_comment": "Decorative bush near goomba spawn"},
+            {"col": 52, "row": 12, "tile": 11},
+
+            {"_comment": "Pipe after goomba (visual landmark)"},
+            {"col": 63, "row": 11, "tile": 5},
+            {"col": 64, "row": 11, "tile": 6},
+            {"col": 63, "row": 12, "tile": 7},
+            {"col": 64, "row": 12, "tile": 8},
+
+            {"_comment": "Cloud"},
+            {"col": 56, "row": 3, "tile": 9},
+
+            {"_comment": "=== SECTION 4: FIRST PIT (cols 70-99) — small gap, very forgiving ==="},
+
+            {"_comment": "Ground before pit"},
+            {"range": "row", "row": 13, "col_start": 70, "col_end": 79, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 70, "col_end": 79, "tile": 2},
+
+            {"_comment": "GAP at cols 80-82 (3 tiles wide = very jumpable)"},
+
+            {"_comment": "Ground after pit"},
+            {"range": "row", "row": 13, "col_start": 83, "col_end": 99, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 83, "col_end": 99, "tile": 2},
+
+            {"_comment": "Question block just before pit — reward for exploring, also hints 'jump here'"},
+            {"col": 78, "row": 9, "tile": 4},
+
+            {"_comment": "Coin block on landing side — reward for making the jump"},
+            {"col": 84, "row": 9, "tile": 4},
+
+            {"_comment": "Cloud"},
+            {"col": 75, "row": 2, "tile": 9},
+            {"col": 92, "row": 3, "tile": 9},
+
+            {"_comment": "=== SECTION 5: SECOND GOOMBA + ELEVATED PLATFORM (cols 100-134) — combine learned skills ==="},
+
+            {"_comment": "Ground continues"},
+            {"range": "row", "row": 13, "col_start": 100, "col_end": 134, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 100, "col_end": 134, "tile": 2},
+
+            {"_comment": "Elevated platform with question block — optional exploration reward"},
+            {"col": 108, "row": 7, "tile": 14},
+            {"col": 109, "row": 7, "tile": 14},
+            {"col": 110, "row": 7, "tile": 14},
+            {"col": 109, "row": 4, "tile": 4},
+
+            {"_comment": "Brick row forming a small barrier — introduces vertical thinking"},
+            {"col": 118, "row": 9, "tile": 3},
+            {"col": 119, "row": 9, "tile": 3},
+            {"col": 120, "row": 9, "tile": 4},
+            {"col": 121, "row": 9, "tile": 3},
+
+            {"_comment": "Pipe"},
+            {"col": 128, "row": 11, "tile": 5},
+            {"col": 129, "row": 11, "tile": 6},
+            {"col": 128, "row": 12, "tile": 7},
+            {"col": 129, "row": 12, "tile": 8},
+
+            {"_comment": "Bush and clouds"},
+            {"col": 115, "row": 12, "tile": 11},
+            {"col": 105, "row": 2, "tile": 9},
+            {"col": 125, "row": 3, "tile": 9},
+
+            {"_comment": "=== SECTION 6: KOOPA + WIDER PIT (cols 135-169) — mild escalation ==="},
+
+            {"_comment": "Ground before pit"},
+            {"range": "row", "row": 13, "col_start": 135, "col_end": 149, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 135, "col_end": 149, "tile": 2},
+
+            {"_comment": "GAP at cols 150-153 (4 tiles wide = needs a running jump)"},
+
+            {"_comment": "Ground after pit"},
+            {"range": "row", "row": 13, "col_start": 154, "col_end": 169, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 154, "col_end": 169, "tile": 2},
+
+            {"_comment": "Staircase hint before pit — 2 blocks high, teaches running jump approach"},
+            {"col": 147, "row": 12, "tile": 2},
+            {"col": 148, "row": 12, "tile": 2},
+            {"col": 148, "row": 11, "tile": 1},
+
+            {"_comment": "Clouds"},
+            {"col": 140, "row": 2, "tile": 9},
+            {"col": 162, "row": 3, "tile": 9},
+
+            {"_comment": "=== SECTION 7: REWARD AREA + FLAG (cols 170-209) — cooldown and finish ==="},
+
+            {"_comment": "Ground to end"},
+            {"range": "row", "row": 13, "col_start": 170, "col_end": 209, "tile": 1},
+            {"range": "row", "row": 14, "col_start": 170, "col_end": 209, "tile": 2},
+
+            {"_comment": "Small celebration staircase leading to flag"},
+            {"col": 195, "row": 12, "tile": 2},
+            {"col": 196, "row": 12, "tile": 2},
+            {"col": 196, "row": 11, "tile": 2},
+            {"col": 197, "row": 12, "tile": 2},
+            {"col": 197, "row": 11, "tile": 2},
+            {"col": 197, "row": 10, "tile": 2},
+            {"col": 198, "row": 12, "tile": 2},
+            {"col": 198, "row": 11, "tile": 2},
+            {"col": 198, "row": 10, "tile": 2},
+            {"col": 198, "row": 9, "tile": 2},
+
+            {"_comment": "Flag pole"},
+            {"col": 200, "row": 4, "tile": 13},
+            {"col": 200, "row": 5, "tile": 12},
+            {"col": 200, "row": 6, "tile": 12},
+            {"col": 200, "row": 7, "tile": 12},
+            {"col": 200, "row": 8, "tile": 12},
+            {"col": 200, "row": 9, "tile": 12},
+            {"col": 200, "row": 10, "tile": 12},
+            {"col": 200, "row": 11, "tile": 12},
+            {"col": 200, "row": 12, "tile": 12},
+
+            {"_comment": "Final decorative bush"},
+            {"col": 185, "row": 12, "tile": 11},
+            {"col": 175, "row": 12, "tile": 11}
+          ]
+        },
+        {
+          "name": "collision",
+          "data_format": "derived_from_tileset",
+          "data_comment": "Collision is derived from tileset_spec collision flags. No separate collision data needed — the engine reads tile.collision from the background layer tileset."
+        }
+      ]
+    },
+
+    "entity_placements": [
+      {
+        "_comment": "First goomba — safe flat ground encounter (Section 3). Player's first enemy. SNES-generous: appears on flat ground with clear sightline, no time pressure.",
+        "entity_id": "goomba_01",
+        "position": { "x": 864, "y": 192 },
+        "active": true,
+        "behavioral_override": null
+      },
+      {
+        "_comment": "Second goomba — near elevated platform (Section 5). Tests stomping while navigating verticality. Still on flat ground, just near interesting geometry.",
+        "entity_id": "goomba_02",
+        "position": { "x": 1760, "y": 192 },
+        "active": true,
+        "behavioral_override": null
+      },
+      {
+        "_comment": "Koopa troopa — between sections 5 and 6. Introduces a new enemy type AFTER player has mastered goomba stomping. On flat ground before the wider pit — separate challenges, not combined.",
+        "entity_id": "koopa_troopa_01",
+        "position": { "x": 2272, "y": 192 },
+        "active": true,
+        "behavioral_override": null
+      }
+    ],
+
+    "items": [
+      {
+        "item_id": "coin_01",
+        "type": "collectible",
+        "subtype": "coin",
+        "position": { "x": 480, "y": 128 },
+        "collected": false,
+        "asset_spec": {
+          "visual": { "dimensions": [8, 16], "color_count": 3, "palette_profile": "gold", "style_era": "nes_late", "animation": { "spin": { "frames": 4, "speed": "medium" } } },
+          "reference": { "style_reference": "coin_smb3" }
+        }
+      },
+      {
+        "item_id": "coin_02",
+        "type": "collectible",
+        "subtype": "coin",
+        "position": { "x": 496, "y": 128 },
+        "collected": false,
+        "asset_spec": {
+          "visual": { "dimensions": [8, 16], "color_count": 3, "palette_profile": "gold", "style_era": "nes_late", "animation": { "spin": { "frames": 4, "speed": "medium" } } },
+          "reference": { "style_reference": "coin_smb3" }
+        }
+      },
+      {
+        "item_id": "coin_03",
+        "type": "collectible",
+        "subtype": "coin",
+        "position": { "x": 512, "y": 128 },
+        "collected": false,
+        "asset_spec": {
+          "visual": { "dimensions": [8, 16], "color_count": 3, "palette_profile": "gold", "style_era": "nes_late", "animation": { "spin": { "frames": 4, "speed": "medium" } } },
+          "reference": { "style_reference": "coin_smb3" }
+        }
+      }
+    ],
+
+    "hazards": [
+      {
+        "hazard_id": "pit_01",
+        "type": "pit",
+        "position": { "x": 1280, "y": 224 },
+        "width": 48,
+        "damage": "instant_death",
+        "respawn_point": { "x": 1232, "y": 192 }
+      },
+      {
+        "hazard_id": "pit_02",
+        "type": "pit",
+        "position": { "x": 2400, "y": 224 },
+        "width": 64,
+        "damage": "instant_death",
+        "respawn_point": { "x": 2336, "y": 192 }
+      }
+    ],
+
+    "triggers": [],
+
+    "visual_manifestations": [],
+
+    "vme_directive_stack": [],
+
+    "music": {
+      "track_spec": {
+        "tempo_bpm": 140,
+        "key": "C",
+        "mode": "major",
+        "energy_curve": [0.5, 0.6, 0.6, 0.7, 0.7, 0.6, 0.8],
+        "instrumentation": ["square_lead", "triangle_bass", "noise_percussion"]
+      }
+    },
+
+    "vocabulary_record": {
+      "element_introductions": [
+        { "element": "goomba_patrol", "section": 3, "context": "safe_flat_ground", "episode_introduced": 1 },
+        { "element": "coin_block", "section": 2, "context": "overhead_reachable_from_ground", "episode_introduced": 1 },
+        { "element": "pit", "section": 4, "context": "narrow_gap_flat_approach", "episode_introduced": 1 }
+      ],
+      "cumulative_vocabulary": ["goomba_patrol", "coin_block", "pit"],
+      "mastered_vocabulary": []
+    }
+  },
+
+  "player": {
+    "entity_id": "player_01",
+    "position": { "x": 48, "y": 192 },
+    "velocity": { "x": 0, "y": 0 },
+    "facing": "right",
+    "state": "idle",
+    "health": 3,
+    "max_health": 3,
+    "powerups": [],
+    "inventory": [],
+
+    "asset_spec": {
+      "visual": {
+        "dimensions": [16, 24],
+        "color_count": 4,
+        "palette_profile": "mario_classic",
+        "silhouette_class": "humanoid_short",
+        "style_era": "nes_late",
+        "animation": {
+          "idle": { "frames": 1 },
+          "run": { "frames": 3, "speed": "fast" },
+          "jump": { "frames": 1 },
+          "fall": { "frames": 1 }
+        }
+      },
+      "narrative": { "role": "protagonist", "tone": "determined" },
+      "reference": { "style_reference": "mario_smb3" }
+    },
+
+    "social_stats": {
+      "conversation_count": 0,
+      "entities_spared": 0,
+      "entities_defeated": 0,
+      "alliances_formed": 0
+    },
+
+    "exchange_budget": {
+      "remaining": 10,
+      "max_daily": 10,
+      "reset_timestamp": null
+    },
+
+    "behavioral_model": {
+      "action_tendencies": {
+        "aggression_ratio": null,
+        "exploration_thoroughness": null,
+        "risk_tolerance": null,
+        "persistence": null,
+        "speed_preference": null
+      },
+      "social_tendencies": {
+        "first_contact_approach": null,
+        "persuasion_style": null,
+        "loyalty_to_allies": null,
+        "information_handling": null,
+        "mercy_rate": null,
+        "trust_baseline": null
+      },
+      "decision_making": {
+        "deliberation_time_avg_ms": null,
+        "consistency": null,
+        "response_to_failure": null,
+        "planning_horizon": null
+      },
+      "meaningful_decision_count": 0
+    }
+  },
+
+  "overseer": {
+    "player_account_id": "acct_test_001",
+    "total_meaningful_decisions": 0,
+    "model_confidence": 0.0,
+    "escalation_level": 0,
+    "cumulative_behavioral_model": {
+      "action_tendencies": {},
+      "social_tendencies": {},
+      "decision_making": {},
+      "comfort_strategies": [],
+      "pattern_signatures": []
+    },
+    "game_history": [],
+    "lore_fragments_revealed": [],
+    "cross_world_state": {
+      "worlds_bridged": [],
+      "artifacts_obtained": [],
+      "giant_dimension_accessible": false
+    },
+    "intervention_log": []
+  },
+
+  "diagnostics": {
+    "gate_1": {
+      "runs": null,
+      "spawns_correctly": null,
+      "assets_resolve": null,
+      "latency_ms": null,
+      "completable": null,
+      "schema_valid": null,
+      "passed": null
+    },
+    "simulated_player": {
+      "path_found": null,
+      "completion_time_s": null,
+      "deaths": null,
+      "death_locations": [],
+      "element_encounter_order": [],
+      "timeline": []
+    },
+    "moment_clips": [],
+    "generation_metadata": {
+      "agent_calls": 0,
+      "total_tokens": 0,
+      "generation_time_s": 0,
+      "designer_vision_calls": 0,
+      "builder_calls": 0,
+      "validator_passes": 0,
+      "taste_rejections": 0
+    }
+  }
+}
