@@ -1,10 +1,28 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-05 (Phase 1, Session 2)
+**Last updated:** 2026-03-06 (Phase 1, Session 3)
 
 ---
 
 ## What Just Happened
+
+### Phase 1 Session 3: Base64 Tilemap, Physics Tuning, Module Split
+
+**Task 1 — Tilemap converted to base64.** New tool `tools/build-tilemap-base64.js` builds the 210×15 Uint8Array from sparse_tiles and writes base64 to `episode1.json`. Layer now has `data_format: "base64_uint8"` and a 4200-char `data` field. Verified: ground rows, pit gaps, flag pole all decode correctly. Engine updated to use `atob()` instead of sparse_tiles parsing.
+
+**Task 2 — Physics tuned.** `jump_velocity` reduced from -12 to -9.0, `jump_hold_bonus` scaled from -2 to -1.5. Max jump height: was ~153px (9.6 tiles), now ~88px (5.5 tiles). Question blocks at row 9 still reachable from flat ground; row 7 platform requires stepping on question blocks first (intended multi-step discovery). Gravity unchanged at 0.55 (matches SMW's ~0.5625).
+
+**Task 3 — Modular structure.** `index.html` is now a thin shell. Engine split into 8 ES modules in `src/`:
+- `state.js` — shared mutable state + constants
+- `input.js` — keyboard events
+- `collision.js` — getTile, isSolid, moveAndCollide
+- `physics.js` — updatePlayer, respawnPlayer
+- `entities.js` — buildEntities, updateEntities
+- `camera.js` — smooth camera follow
+- `renderer.js` — tilemap + entity + player + HUD rendering
+- `game-loop.js` — init + rAF loop (entry point)
+
+---
 
 ### Phase 1 Session 2: Test Fixture + First Playable Level
 
@@ -43,10 +61,21 @@ Includes two factions (Koopa Army, Goomba Workers' Collective), three entities w
 
 ```
 giants-drink/
-  index.html                         ← NEW: single-file platformer engine
+  index.html                         ← thin shell, loads src/game-loop.js
+  src/
+    game-loop.js                     ← NEW: entry point, init, rAF loop
+    state.js                         ← NEW: shared mutable state + constants
+    input.js                         ← NEW: keyboard events
+    collision.js                     ← NEW: getTile, isSolid, moveAndCollide
+    physics.js                       ← NEW: updatePlayer, respawnPlayer
+    entities.js                      ← NEW: buildEntities, updateEntities
+    camera.js                        ← NEW: smooth camera follow
+    renderer.js                      ← NEW: tilemap + entity + HUD rendering
+  tools/
+    build-tilemap-base64.js          ← NEW: converts sparse_tiles → base64 in episode1.json
   data/test-fixtures/
-    episode1.json                    ← NEW: Phase 1 test fixture
-    level-visual-reference.txt       ← NEW: ASCII art level map (dev reference)
+    episode1.json                    ← UPDATED: tilemap now base64_uint8; physics tuned
+    level-visual-reference.txt       ← ASCII art level map (dev reference)
   claude.md                          ← needs update to Thread 9 version
   docs/
     current-status.md                ← this file
@@ -70,15 +99,15 @@ giants-drink/
 
 ## What's Next
 
-### Tomorrow: Phase 1 Session 3
+### Phase 1 Session 4
 
-**Priority 1 — Convert fixture to base64 tilemap.** The schema specifies base64, the engine should read base64. Tell Claude Code: "Convert `data/test-fixtures/episode1.json` to use base64-encoded tilemap data instead of sparse_tiles. Update `index.html` to decode base64 instead of reading sparse_tiles. The tilemap is 210×15, 1 byte per tile, row-major order."
+**Priority 1 — Gate 1 foundations.** Automated checks: does it run without errors? Does the player spawn at the right position? Can a simulated player reach the flag? Start with a headless Node test or a browser automation pass.
 
-**Priority 2 — Physics tuning.** Play the level and identify what feels wrong. Jump height too high is already known. Adjust physics values in the fixture and iterate until movement feels SNES-comfortable. Reference: Super Mario World, Mega Man X feel.
+**Priority 2 — Physics iteration.** Play the deployed level. If jump still feels off, tweak `jump_velocity` and `gravity` in `episode1.json`. The first guess is -9 / 0.55 — play it and see.
 
-**Priority 3 — Structure the codebase.** The single index.html works but won't scale. Claude Code should split into modules: game loop, renderer, physics, input, entities, collision, camera. Still vanilla JS, no frameworks — just separate files with clear responsibilities.
+**Priority 3 — Enemy polish.** Enemies currently fall off platforms. Add pit-edge turning (check for solid tile ahead AND solid tile underfoot — reverse if either fails). This is a fix to `entities.js`.
 
-**Priority 4 — Gate 1 foundations.** Start on automated checks: does it run without errors? Does the player spawn? Can a simple pathfinding agent reach the flag?
+**Priority 4 — Stomp bounce tuning.** Stomp bounce is hardcoded to -7 in `entities.js`. Should read from physics config or be proportional to `jump_velocity`.
 
 ### Deferred
 - Update repo's claude.md to Thread 9 version (the project files in claude.ai have it, but the repo still has the Thread 3 version)
@@ -90,3 +119,4 @@ giants-drink/
 - Point it at specific files with explicit instructions
 - For physics tuning, iterate in the fixture JSON values, not in code
 - Use `/clear` between major tasks to keep context clean
+- The codebase is now modular (src/). Changes go in the relevant module, not index.html
