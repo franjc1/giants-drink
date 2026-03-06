@@ -1,152 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jump</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      width: 100%; height: 100%;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    canvas { display: block; }
-  </style>
+<meta charset="UTF-8">
+<title>Two Fires — Episode 1</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
+  canvas { display: block; image-rendering: pixelated; }
+</style>
 </head>
 <body>
-<canvas id="c"></canvas>
+<canvas id="c" width="800" height="480"></canvas>
 <script>
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
-const W = canvas.width = 800;
-const H = canvas.height = 500;
 
-const SIZE = 40;
-const GROUND = H - 80;
-const BASE_Y = GROUND - SIZE / 2;
-const MOVE_SPEED = 7;
-const JUMP_HEIGHT = 210;
-const JUMP_DURATION = 560; // ms
+const W = 800, H = 480;
+const TILE = 16;
+const MAP_W = 210, MAP_H = 15;
 
-const sq = {
-  x: W / 2,
-  y: BASE_Y,
-  vx: 0,
-  jumping: false,
-  jumpT: 0,
-  jumpStart: 0,
-  squash: 0,
-};
+let episode = null;
+let tilemap = null;   // Uint8Array, row-major
+let tileset = null;   // int id → {color, collision}
+let player = null;
+let entities = [];
+const keys = {};
+let cameraX = 0;
 
-const held = new Set();
-
+// ── Input ──────────────────────────────────────────────────────────────────
 window.addEventListener('keydown', e => {
-  if (['ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
-  if (!held.has(e.code)) {
-    held.add(e.code);
-    if (e.code === 'Space' && !sq.jumping) {
-      sq.jumping = true;
-      sq.jumpStart = performance.now();
-    }
-  }
+  keys[e.code] = true;
+  if (['Space','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.code))
+    e.preventDefault();
 });
-window.addEventListener('keyup', e => held.delete(e.code));
+window.addEventListener('keyup', e => { keys[e.code] = false; });
 
-function update(now) {
-  // Horizontal — snappy with just enough easing to not feel choppy
-  const dir = (held.has('ArrowRight') ? 1 : 0) - (held.has('ArrowLeft') ? 1 : 0);
-  sq.vx += (dir * MOVE_SPEED - sq.vx) * 0.28;
-  if (!dir && Math.abs(sq.vx) < 0.2) sq.vx = 0;
-  sq.x = Math.max(SIZE / 2 + 5, Math.min(W - SIZE / 2 - 5, sq.x + sq.vx));
-
-  // Jump — sine arc: eases out going up, eases in coming down
-  if (sq.jumping) {
-    const elapsed = now - sq.jumpStart;
-    sq.jumpT = Math.min(elapsed / JUMP_DURATION, 1);
-    sq.y = BASE_Y - JUMP_HEIGHT * Math.sin(Math.PI * sq.jumpT);
-    if (sq.jumpT >= 1) {
-      sq.jumping = false;
-      sq.y = BASE_Y;
-      sq.squash = 1;
-    }
-  }
-
-  // Squash decays exponentially after landing
-  if (sq.squash > 0.01) sq.squash *= 0.72;
-  else sq.squash = 0;
+// ── Tilemap helpers ────────────────────────────────────────────────────────
+function getTile(col, row) {
+  if (col < 0 || col >= MAP_W || row < 0) return 0;
+  if (row >= MAP_H) return 1; // below map = solid
+  return tilemap[row * MAP_W + col];
+}
+function isSolid(id) {
+  return tileset[id] && tileset[id].collision === true;
 }
 
-function draw() {
-  ctx.fillStyle = '#000';
+// ── Move + tile collision ──────────────────────────────────────────────────
+// Applies vx, resolves X, applies vy, resolves Y. Sets obj.onGround.
+// obj.onWall is set if horizontal collision occurred (for enemy AI).
+function moveAndCollide(obj) {
+  // X
+  obj.x += obj.vx;
+  {
+    const cl = Math.floor(obj.x / TILE);
+    const cr = Math.floor((obj.x + obj.w - 1) / TILE);
+    const rt = Math.floor(obj.y / TILE);
+    const rb = Math.floor((obj.y + obj.h - 1) / TILE);
+    if (obj.vx > 0) {
+      for (let r = rt; r <= rb; r++) {
+        if (isSolid(getTile(cr, r))) {
+          obj.x = cr * TILE - obj.w;
+          obj.vx = 0;
+          if ('onWall' in obj) obj.onWall = true;
+          break;
+        }
+      }
+    } else if (obj.vx < 0) {
+      for (let r = rt; r <= rb; r++) {
+        if (isSolid(getTile(cl, r))) {
+          obj.x = (cl + 1) * TILE;
+          obj.vx = 0;
+          if ('onWall' in obj) obj.onWall = true;
+          break;
+        }
+      }
+    }
+  }
+
+  // Y
+  obj.y += obj.vy;
+  obj.onGround = false;
+  {
+    const cl = Math.floor(obj.x / TILE);
+    const cr = Math.floor((obj.x + obj.w - 1) / TILE);
+    const rt = Math.floor(obj.y / TILE);
+    const rb = Math.floor((obj.y + obj.h - 1) / TILE);
+    if (obj.vy >= 0) {
+      for (let c = cl; c <= cr; c++) {
+        if (isSolid(getTile(c, rb))) {
+          obj.y = rb * TILE - obj.h;
+          obj.vy = 0;
+          obj.onGround = true;
+          break;
+        }
+      }
+    } else {
+      for (let c = cl; c <= cr; c++) {
+        if (isSolid(getTile(c, rt))) {
+          obj.y = (rt + 1) * TILE;
+          obj.vy = 0;
+          break;
+        }
+      }
+    }
+  }
+}
+
+// ── Player update ──────────────────────────────────────────────────────────
+const COYOTE_FRAMES = 5;
+
+function updatePlayer() {
+  const ph = episode.episode.physics;
+  const leftHeld = keys['ArrowLeft']  || keys['KeyA'];
+  const rightHeld = keys['ArrowRight'] || keys['KeyD'];
+  const jumpHeld  = keys['Space'] || keys['ArrowUp'];
+
+  // Horizontal
+  const accel = ph.run_acceleration * (player.onGround ? 1.0 : ph.air_control);
+  if (rightHeld) {
+    player.vx = Math.min(player.vx + accel, ph.run_speed);
+  } else if (leftHeld) {
+    player.vx = Math.max(player.vx - accel, -ph.run_speed);
+  } else {
+    const fric = player.onGround ? ph.friction_ground : ph.friction_air;
+    player.vx *= fric;
+    if (Math.abs(player.vx) < 0.05) player.vx = 0;
+  }
+
+  // Jump: trigger on fresh press only
+  const jumpPressed = jumpHeld && !player.prevJumpHeld;
+  if (jumpPressed && (player.onGround || player.coyote > 0)) {
+    player.vy = ph.jump_velocity;
+    player.holdFrames = 10;
+    player.onGround = false;
+    player.coyote = 0;
+  }
+  // Variable height: extra force while held and ascending
+  if (jumpHeld && player.holdFrames > 0 && player.vy < 0) {
+    player.vy += ph.jump_hold_bonus / 10;
+    player.holdFrames--;
+  }
+  if (!jumpHeld) player.holdFrames = 0;
+  player.prevJumpHeld = jumpHeld;
+
+  // Gravity
+  player.vy = Math.min(player.vy + ph.gravity, ph.max_fall_speed);
+
+  // Coyote
+  if (player.onGround) player.coyote = COYOTE_FRAMES;
+  else if (player.coyote > 0) player.coyote--;
+
+  // Left world boundary
+  player.x = Math.max(0, player.x);
+
+  moveAndCollide(player);
+
+  // Fell into pit
+  if (player.y > MAP_H * TILE + 32) respawnPlayer();
+}
+
+function respawnPlayer() {
+  const ps = episode.player.position;
+  player.x = ps.x; player.y = ps.y;
+  player.vx = 0;   player.vy = 0;
+  player.coyote = 0; player.holdFrames = 0;
+}
+
+// ── Entity update ──────────────────────────────────────────────────────────
+function updateEntities() {
+  const ph = episode.episode.physics;
+
+  for (const e of entities) {
+    if (!e.alive) continue;
+
+    e.vy = Math.min((e.vy || 0) + ph.gravity, ph.max_fall_speed);
+    e.onWall = false;
+    moveAndCollide(e);
+
+    // Reverse at patrol limits or walls
+    if (e.onWall || e.x <= e.patrolMin) e.vx =  e.speed;
+    if (e.x + e.w >= e.patrolMax)       e.vx = -e.speed;
+
+    if (e.y > MAP_H * TILE + 32) { e.alive = false; continue; }
+
+    // Player AABB
+    if (player.x < e.x + e.w && player.x + player.w > e.x &&
+        player.y < e.y + e.h && player.y + player.h > e.y) {
+      // Stomp: player falling, feet above enemy midpoint
+      if (player.vy > 0 && player.y + player.h < e.y + e.h * 0.6) {
+        e.alive = false;
+        player.vy = -7;
+      } else {
+        respawnPlayer();
+      }
+    }
+  }
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────
+function render() {
+  // Camera: smooth follow
+  const target = player.x - W * 0.35;
+  cameraX += (target - cameraX) * 0.15;
+  cameraX = Math.max(0, Math.min(cameraX, MAP_W * TILE - W));
+
+  // Sky
+  ctx.fillStyle = '#5C94FC';
   ctx.fillRect(0, 0, W, H);
 
-  const airFrac = Math.max(0, (BASE_Y - sq.y) / JUMP_HEIGHT);
+  // Tilemap
+  const c0 = Math.max(0, Math.floor(cameraX / TILE));
+  const c1 = Math.min(MAP_W - 1, Math.ceil((cameraX + W) / TILE));
 
-  // Ground line
-  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(0, GROUND);
-  ctx.lineTo(W, GROUND);
-  ctx.stroke();
-
-  // Shadow — shrinks and fades as square rises
-  {
-    const t = 1 - airFrac;
-    const sW = SIZE * 0.55 * t + SIZE * 0.12;
-    const sH = 5 * t + 1;
-    const sA = 0.45 * t;
-    const g = ctx.createRadialGradient(sq.x, GROUND + 2, 0, sq.x, GROUND + 2, sW);
-    g.addColorStop(0, `rgba(255,255,255,${sA})`);
-    g.addColorStop(1, `rgba(255,255,255,0)`);
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.ellipse(sq.x, GROUND + 2, sW, sH, 0, 0, Math.PI * 2);
-    ctx.fill();
+  for (let row = 0; row < MAP_H; row++) {
+    const sy = row * TILE;
+    for (let col = c0; col <= c1; col++) {
+      const id = tilemap[row * MAP_W + col];
+      if (id === 0) continue;
+      const t = tileset[id];
+      if (!t) continue;
+      const sx = Math.round(col * TILE - cameraX);
+      ctx.fillStyle = t.color;
+      ctx.fillRect(sx, sy, TILE, TILE);
+      // Light border to distinguish adjacent same-color tiles
+      if (t.collision) {
+        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+        ctx.lineWidth = 0.5;
+        ctx.strokeRect(sx + 0.5, sy + 0.5, TILE - 1, TILE - 1);
+      }
+    }
   }
 
-  // Squash/stretch
-  let sx = 1, sy = 1;
-  if (sq.jumping) {
-    // Stretch tall and thin during arc, peaking at apex
-    const stretch = 0.22 * Math.sin(Math.PI * sq.jumpT);
-    sx = 1 - stretch * 0.55;
-    sy = 1 + stretch;
-  }
-  if (sq.squash > 0) {
-    // Landing: wide and squat, recovers quickly
-    sx = 1 + sq.squash * 0.55;
-    sy = 1 - sq.squash * 0.38;
+  // Entities
+  for (const e of entities) {
+    if (!e.alive) continue;
+    const ex = Math.round(e.x - cameraX);
+    const ey = Math.round(e.y);
+    ctx.fillStyle = e.color;
+    ctx.fillRect(ex, ey, e.w, e.h);
+    // Simple eyes
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(ex + 2, ey + 3, 3, 3);
+    ctx.fillRect(ex + e.w - 5, ey + 3, 3, 3);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(ex + 3, ey + 4, 2, 2);
+    ctx.fillRect(ex + e.w - 4, ey + 4, 2, 2);
   }
 
-  // Draw square with subtle glow while airborne
-  ctx.save();
-  ctx.translate(sq.x, sq.y);
-  ctx.scale(sx, sy);
-  if (airFrac > 0.05) {
-    ctx.shadowColor = 'rgba(255,255,255,0.22)';
-    ctx.shadowBlur = 14 * airFrac;
-  }
+  // Player (red figure)
+  const px = Math.round(player.x - cameraX);
+  const py = Math.round(player.y);
+  // Body
+  ctx.fillStyle = '#CC2200';
+  ctx.fillRect(px, py + 10, player.w, player.h - 10);
+  // Head
+  ctx.fillStyle = '#FFAA80';
+  ctx.fillRect(px + 2, py + 4, player.w - 4, 8);
+  // Hat
+  ctx.fillStyle = '#CC2200';
+  ctx.fillRect(px, py, player.w, 6);
+  ctx.fillRect(px - 1, py + 4, player.w + 2, 3);
+  // Eye
+  ctx.fillStyle = '#000';
+  ctx.fillRect(px + player.w - 5, py + 6, 2, 2);
+
+  // HUD bar
+  ctx.fillStyle = 'rgba(0,0,0,0.55)';
+  ctx.fillRect(0, 0, 210, 22);
   ctx.fillStyle = '#fff';
-  ctx.fillRect(-SIZE / 2, -SIZE / 2, SIZE, SIZE);
-  ctx.restore();
-
-  // Hint
-  ctx.fillStyle = 'rgba(255,255,255,0.18)';
-  ctx.font = '12px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('← → to move   SPACE to jump', W / 2, H - 18);
+  ctx.font = '11px monospace';
+  ctx.fillText('← → move   SPACE / ↑ jump', 8, 15);
 }
 
-function loop(now) {
-  update(now);
-  draw();
+// ── Game loop ──────────────────────────────────────────────────────────────
+function loop() {
+  if (episode) {
+    updatePlayer();
+    updateEntities();
+    render();
+  }
   requestAnimationFrame(loop);
 }
-requestAnimationFrame(loop);
+
+// ── Load + init ────────────────────────────────────────────────────────────
+async function init() {
+  const res = await fetch('data/test-fixtures/episode1.json');
+  if (!res.ok) throw new Error(`HTTP ${res.status} loading episode1.json`);
+  episode = await res.json();
+
+  // Tileset
+  const rawTiles = episode.episode.spatial.layers[0].tileset_spec.tiles;
+  tileset = {};
+  for (const [k, v] of Object.entries(rawTiles)) {
+    tileset[parseInt(k)] = { color: v.color, collision: v.collision === true };
+  }
+
+  // Build tilemap from sparse_tiles
+  tilemap = new Uint8Array(MAP_W * MAP_H); // 0 = sky (default)
+  for (const entry of episode.episode.spatial.layers[0].sparse_tiles) {
+    if (entry._comment !== undefined) continue;
+    if (entry.range === 'row') {
+      for (let c = entry.col_start; c <= entry.col_end; c++)
+        tilemap[entry.row * MAP_W + c] = entry.tile;
+    } else if (entry.col !== undefined) {
+      tilemap[entry.row * MAP_W + entry.col] = entry.tile;
+    }
+  }
+
+  // Player
+  const ps = episode.player.position;
+  player = {
+    x: ps.x, y: ps.y,
+    vx: 0, vy: 0,
+    w: 16, h: 24,
+    onGround: false,
+    coyote: 0,
+    holdFrames: 0,
+    prevJumpHeld: false,
+  };
+
+  // Entities from entity_placements
+  entities = episode.episode.entity_placements
+    .filter(p => p.active)
+    .map(p => {
+      const ent = episode.world.entities[p.entity_id];
+      const [ew, eh] = ent.asset_spec.visual.dimensions;
+      const speed = ent.behavioral_params.patrol_speed;
+      const range = ent.behavioral_params.patrol_range;
+      return {
+        id: p.entity_id,
+        x: p.position.x, y: p.position.y,
+        vx: -speed, vy: 0,
+        w: ew, h: eh,
+        speed,
+        patrolMin: p.position.x - range,
+        patrolMax: p.position.x + range,
+        onGround: false,
+        onWall: false,
+        alive: true,
+        color: ent.faction_id === 'goomba_union' ? '#7B4A1E' : '#2D6A2D',
+      };
+    });
+
+  requestAnimationFrame(loop);
+}
+
+init().catch(err => {
+  ctx.fillStyle = '#5C94FC';
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#fff';
+  ctx.font = '16px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Failed to load episode1.json', W / 2, H / 2 - 12);
+  ctx.font = '13px monospace';
+  ctx.fillText(err.message, W / 2, H / 2 + 12);
+  console.error(err);
+});
 </script>
 </body>
 </html>
