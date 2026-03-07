@@ -40,6 +40,13 @@ function loop() {
     // Blit offscreen → display at integer scale (crisp pixels)
     displayCtx.imageSmoothingEnabled = false;
     displayCtx.drawImage(offscreen, 0, 0, state.nativeW * scale, NATIVE_H * scale);
+    // HUD drawn on display canvas AFTER blit — renders at screen resolution, no blur
+    const s = scale;
+    displayCtx.fillStyle = 'rgba(0,0,0,0.55)';
+    displayCtx.fillRect(0, 0, 210 * s, 22 * s);
+    displayCtx.fillStyle = '#fff';
+    displayCtx.font = `${11 * s}px monospace`;
+    displayCtx.fillText('← → move   SPACE / ↑ jump', 8 * s, 15 * s);
   }
   requestAnimationFrame(loop);
 }

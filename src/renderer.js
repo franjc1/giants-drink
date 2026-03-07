@@ -39,8 +39,8 @@ export function render() {
   // Entities
   for (const e of state.entities) {
     if (!e.alive) continue;
-    const ex = Math.round(e.x - cameraX);
-    const ey = Math.round(e.y);
+    const ex = Math.floor(e.x - cameraX);
+    const ey = Math.floor(e.y);
     ctx.fillStyle = e.color;
     ctx.fillRect(ex, ey, e.w, e.h);
     ctx.fillStyle = '#fff';
@@ -52,8 +52,8 @@ export function render() {
   }
 
   // Player (red figure)
-  const px = Math.round(player.x - cameraX);
-  const py = Math.round(player.y);
+  const px = Math.floor(player.x - cameraX);
+  const py = Math.floor(player.y);
   ctx.fillStyle = '#CC2200';
   ctx.fillRect(px, py + 10, player.w, player.h - 10);
   ctx.fillStyle = '#FFAA80';
@@ -64,10 +64,4 @@ export function render() {
   ctx.fillStyle = '#000';
   ctx.fillRect(px + player.w - 5, py + 6, 2, 2);
 
-  // HUD
-  ctx.fillStyle = 'rgba(0,0,0,0.55)';
-  ctx.fillRect(0, 0, 210, 22);
-  ctx.fillStyle = '#fff';
-  ctx.font = '11px monospace';
-  ctx.fillText('← → move   SPACE / ↑ jump', 8, 15);
 }

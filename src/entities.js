@@ -33,7 +33,7 @@ export function updateEntities() {
   for (const e of state.entities) {
     if (!e.alive) continue;
 
-    e.vy = Math.min((e.vy || 0) + ph.gravity, ph.max_fall_speed);
+    e.vy = Math.min((e.vy || 0) + ph.gravity_falling, ph.max_fall_speed);
     e.onWall = false;
     moveAndCollide(e);
 
