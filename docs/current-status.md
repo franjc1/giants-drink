@@ -1,10 +1,18 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-06 (Phase 1, Session 3)
+**Last updated:** 2026-03-07 (Phase 1, Session 4)
 
 ---
 
 ## What Just Happened
+
+### Phase 1 Session 4: SMW Two-Phase Gravity + Integer-Scaled Display
+
+**Task 1 — Two-phase gravity (SMW ROM-accurate).** Replaced single `gravity` + `jump_hold_bonus` system with two-phase gravity matching Super Mario World's ROM disassembly. Jump held while ascending: gravity_ascending = 0.19 (long hang time at apex). Any other state: gravity_falling = 0.5 (quick drop on release or during fall). Removed `holdFrames` entirely. Updated episode1.json physics to full SMW ground-truth values: jump_velocity -5.0, run_speed 3.0, run_acceleration 0.15, run_deceleration 0.25, air_control 1.0, max_fall_speed 4.5. Jump arc should now feel distinctly SMW: long float on hold, crisp cut on release.
+
+**Task 2 — Integer-scaled display.** Game now renders to a 256×240 offscreen canvas (SNES native resolution), then blits to the display canvas at the largest integer scale factor that fits the window. `imageSmoothingEnabled = false` keeps pixels crisp. Resize handler recalculates scale on window resize. Black body background provides letterboxing. `state.js` W/H changed from 800×480 to 256×240; camera and renderer both use this correctly.
+
+---
 
 ### Phase 1 Session 3: Base64 Tilemap, Physics Tuning, Module Split
 
@@ -99,15 +107,15 @@ giants-drink/
 
 ## What's Next
 
-### Phase 1 Session 4
+### Phase 1 Session 5
 
-**Priority 1 — Gate 1 foundations.** Automated checks: does it run without errors? Does the player spawn at the right position? Can a simulated player reach the flag? Start with a headless Node test or a browser automation pass.
+**Priority 1 — Physics feel check.** Play the deployed level with the new SMW values. The tuning knobs if needed: `gravity_ascending` (apex hang time), `gravity_falling` (fall speed), `jump_velocity` (max height). Do NOT change jump_velocity to compensate for feel — adjust gravity values first.
 
-**Priority 2 — Physics iteration.** Play the deployed level. If jump still feels off, tweak `jump_velocity` and `gravity` in `episode1.json`. The first guess is -9 / 0.55 — play it and see.
+**Priority 2 — Enemy polish.** Enemies fall off platforms. Add pit-edge turning: check solid tile ahead AND solid tile underfoot — reverse if either fails. Fix in `entities.js`.
 
-**Priority 3 — Enemy polish.** Enemies currently fall off platforms. Add pit-edge turning (check for solid tile ahead AND solid tile underfoot — reverse if either fails). This is a fix to `entities.js`.
+**Priority 3 — Stomp bounce tuning.** Stomp bounce is hardcoded to -7 in `entities.js`. Should be proportional to `jump_velocity` (e.g., `jump_velocity * 0.5`).
 
-**Priority 4 — Stomp bounce tuning.** Stomp bounce is hardcoded to -7 in `entities.js`. Should read from physics config or be proportional to `jump_velocity`.
+**Priority 4 — Gate 1 foundations.** Automated checks: does it run without errors? Does the player spawn at the right position? Can a simulated player reach the flag?
 
 ### Deferred
 - Update repo's claude.md to Thread 9 version (the project files in claude.ai have it, but the repo still has the Thread 3 version)
