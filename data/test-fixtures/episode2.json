@@ -3,7 +3,7 @@
     "schema_version": "0.2.0",
     "game_id": "tf_test_002",
     "created_at": "2026-03-07T00:00:00Z",
-    "prompt": "Mario but gravity is twice as heavy and the caves are alive",
+    "prompt": "Mario but gravity is deliberate and every jump is a commitment",
     "paradigm": {
       "id": "platformer",
       "rendering_core": "2d_tile_scrolling",
@@ -45,7 +45,7 @@
     "game_setup": {
       "intended_length": "short",
       "event_magnitude_sensitivity": 0.7,
-      "initial_conditions_summary": "iron caves, heavier gravity, tighter geometry",
+      "initial_conditions_summary": "iron caves, deliberate movement, constant gravity",
       "pressure_ramp": "constant",
       "social_hooks": [],
       "drama_density_defaults": {
@@ -494,23 +494,23 @@
       "difficulty_target": 0.4,
       "punctuation_type": null,
       "zone_identity": "iron_caves",
-      "mechanical_thesis": "heavy gravity demands deliberate timing — pits are wider, jumps are lower, every decision counts",
+      "mechanical_thesis": "deliberate movement — half the speed of the grasslands, constant gravity, every jump is a commitment. plan before you leap.",
       "narrative_context": "player descends into the iron caves — gravity presses harder here, the air tastes of rust",
       "override_flags": []
     },
     "physics": {
-      "gravity_ascending": 0.28,
-      "gravity_release": 0.6,
-      "gravity_falling": 0.6,
-      "jump_velocity": -5,
-      "max_fall_speed": 5.5,
-      "run_speed": 2.5,
-      "run_acceleration": 0.12,
-      "run_deceleration": 0.3,
-      "air_control": 0.85,
-      "coyote_time_ms": 60,
-      "friction_ground": 0.82,
-      "friction_air": 0.97
+      "gravity_ascending": 0.25,
+      "gravity_release": 0.5,
+      "gravity_falling": 0.25,
+      "jump_velocity": -5.5,
+      "max_fall_speed": 4,
+      "run_speed": 1.5,
+      "run_acceleration": 0.75,
+      "run_deceleration": 0.75,
+      "air_control": 1,
+      "coyote_time_ms": 50,
+      "friction_ground": 0.2,
+      "friction_air": 1
     },
     "aesthetic_modifiers": {
       "palette_shift": 0,
@@ -560,13 +560,6 @@
                 "color": "#334455",
                 "collision": true
               },
-              "3": {
-                "id": "iron_brick",
-                "visual": "iron_brick",
-                "color": "#554433",
-                "collision": true,
-                "breakable": false
-              },
               "12": {
                 "id": "flag_pole",
                 "visual": "flag_pole",
@@ -588,18 +581,18 @@
               }
             }
           },
-          "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAODg4ODgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAA4ODg4OAAAAAAAAAAAAAAAAAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAODg4ODgAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgICAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgICAgICAgICAQEBAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAgICAgICAgICAQEBAQEBAQEBAQEAAAABAQEBAQEBAQEBAQEAAAAAAgICAgICAgICAgICAgAAAAAAAAEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgIAAAAAAgICAgICAgICAgICAgAAAAAAAAICAgICAgICAgICAgICAgICAAAAAAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgIAAAAAAgICAgICAgICAgICAgAAAAAAAAICAgICAgICAgICAgICAgICAAAAAAAAAgICAgICAgICAgICAgICAgIC"
+          "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADg4ODgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAA4ODg4OAAAAAAAAAAAAAAAAAQEBAQEBAAAAAAAADg4AAAAAAAAAAAAAAA4ODg4OAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEBAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAODgAAAAAAAAAAAAAAAgICAgICAgICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgICAgICAgICAQEBAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAgICAgICAgICAQEBAQEBAQEBAQEAAAABAQEBAQEBAQEBAQEAAAACAgICAgICAgICAgICAgAAAAAAAAEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAQEBAQEBAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgIAAAACAgICAgICAgICAgICAgAAAAAAAAICAgICAgICAgICAgICAgICAAAAAAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgIAAAACAgICAgICAgICAgICAgAAAAAAAAICAgICAgICAgICAgICAgICAAAAAAAAAgICAgICAgICAgICAgICAgIC"
         },
         {
           "name": "collision",
           "data_format": "derived_from_tileset",
-          "data_comment": "Collision derived from tileset_spec collision flags."
+          "data_comment": "Collision derived from tileset_spec."
         }
       ]
     },
     "entity_placements": [
       {
-        "_comment": "Cave goomba #1 — safe flat spawn zone (col 7). Faster than episode1 goombas.",
+        "_comment": "Cave goomba #1 — safe flat spawn zone (col 7). First enemy, gentle intro.",
         "entity_id": "cave_goomba_01",
         "position": {
           "x": 112,
@@ -609,7 +602,7 @@
         "behavioral_override": null
       },
       {
-        "_comment": "Cave koopa #1 — guards the platform after pit #1 (col 19). Forces use of the platform.",
+        "_comment": "Cave koopa #1 — Segment B after pit #1 (col 19). Guards before the optional platform.",
         "entity_id": "cave_koopa_01",
         "position": {
           "x": 304,
@@ -619,7 +612,7 @@
         "behavioral_override": null
       },
       {
-        "_comment": "Cave goomba #2 — deep in the cave (col 55). Guards the second platform section.",
+        "_comment": "Cave goomba #2 — Segment C deep in caves (col 55). Guards near optional mid-platform.",
         "entity_id": "cave_goomba_02",
         "position": {
           "x": 880,
@@ -629,11 +622,11 @@
         "behavioral_override": null
       },
       {
-        "_comment": "Cave koopa #2 — elevated end zone (col 83, ground row 9). Tests elevation + combat combined.",
+        "_comment": "Cave koopa #2 — elevated end zone (col 83, row 9 ground). Tests elevation + combat.",
         "entity_id": "cave_koopa_02",
         "position": {
           "x": 1328,
-          "y": 128
+          "y": 120
         },
         "active": true,
         "behavioral_override": null
@@ -662,10 +655,10 @@
           "x": 416,
           "y": 224
         },
-        "width": 64,
+        "width": 48,
         "damage": "instant_death",
         "respawn_point": {
-          "x": 352,
+          "x": 368,
           "y": 176
         }
       },
@@ -680,7 +673,7 @@
         "damage": "instant_death",
         "respawn_point": {
           "x": 672,
-          "y": 176
+          "y": 160
         }
       },
       {

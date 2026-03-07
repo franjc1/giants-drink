@@ -143,7 +143,9 @@ document.querySelectorAll('#level-select button[data-level]').forEach(btn => {
     hideLevelSelect();
     try {
       await loadLevel(btn.dataset.level);
-      requestAnimationFrame(loop);
+      // Do NOT call requestAnimationFrame(loop) here — the loop is already
+      // running from init. Starting a second loop doubles the physics update
+      // rate and makes everything move at 2× speed.
     } catch (err) {
       showError(err);
     }
@@ -156,21 +158,21 @@ async function init() {
   updateScale();
   initInput();
 
+  // Start the loop exactly once. It runs perpetually; state.episode being
+  // null just means physics/render are skipped until a level is loaded.
+  requestAnimationFrame(loop);
+
   const params     = new URLSearchParams(window.location.search);
   const levelParam = params.get('level');
 
   if (levelParam) {
-    // URL param provided — load directly
     try {
       await loadLevel(levelParam);
-      requestAnimationFrame(loop);
     } catch (err) {
       showError(err);
     }
   } else {
-    // No URL param — show level select
     showLevelSelect();
-    requestAnimationFrame(loop);  // keep loop running so canvas is visible behind select
   }
 }
 
