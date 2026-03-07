@@ -1,6 +1,8 @@
-import { state, MAP_W, MAP_H, TILE } from './state.js';
+import { state } from './state.js';
 
 export function getTile(col, row) {
+  const MAP_W = state.mapW;
+  const MAP_H = state.mapH;
   if (col < 0 || col >= MAP_W || row < 0) return 0;
   if (row >= MAP_H) return 1; // below map = solid
   return state.tilemap[row * MAP_W + col];
@@ -13,6 +15,8 @@ export function isSolid(id) {
 // Applies vx then vy, resolves tile collisions for each axis.
 // Sets obj.onGround. Sets obj.onWall if horizontal collision and obj has that property.
 export function moveAndCollide(obj) {
+  const TILE = state.tileSize;
+
   // X
   obj.x += obj.vx;
   {

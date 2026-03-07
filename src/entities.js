@@ -1,4 +1,4 @@
-import { state, MAP_H, TILE } from './state.js';
+import { state } from './state.js';
 import { moveAndCollide } from './collision.js';
 import { respawnPlayer } from './physics.js';
 
@@ -7,9 +7,10 @@ export function buildEntities() {
     .filter(p => p.active)
     .map(p => {
       const ent = state.episode.world.entities[p.entity_id];
-      const [ew, eh] = ent.asset_spec.visual.dimensions;
-      const speed = ent.behavioral_params.patrol_speed;
-      const range = ent.behavioral_params.patrol_range;
+      const dims = ent?.asset_spec?.visual?.dimensions ?? [16, 16];
+      const [ew, eh] = dims;
+      const speed = ent?.behavioral_params?.patrol_speed ?? 0.5;
+      const range = ent?.behavioral_params?.patrol_range ?? 48;
       return {
         id: p.entity_id,
         x: p.position.x, y: p.position.y,
@@ -21,7 +22,7 @@ export function buildEntities() {
         onGround: false,
         onWall: false,
         alive: true,
-        color: ent.faction_id === 'goomba_union' ? '#7B4A1E' : '#2D6A2D',
+        color: (ent?.faction_id === 'goomba_union') ? '#7B4A1E' : '#2D6A2D',
       };
     });
 }
@@ -29,6 +30,7 @@ export function buildEntities() {
 export function updateEntities() {
   const ph = state.episode.episode.physics;
   const player = state.player;
+  const fallLimit = state.mapH * state.tileSize + 32;
 
   for (const e of state.entities) {
     if (!e.alive) continue;
@@ -41,7 +43,7 @@ export function updateEntities() {
     if (e.onWall || e.x <= e.patrolMin) e.vx =  e.speed;
     if (e.x + e.w >= e.patrolMax)       e.vx = -e.speed;
 
-    if (e.y > MAP_H * TILE + 32) { e.alive = false; continue; }
+    if (e.y > fallLimit) { e.alive = false; continue; }
 
     // Player AABB
     if (player.x < e.x + e.w && player.x + player.w > e.x &&

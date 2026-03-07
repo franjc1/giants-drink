@@ -1,4 +1,4 @@
-import { state, W, H, MAP_W, MAP_H, TILE } from './state.js';
+import { state, W, H } from './state.js';
 
 export const offscreen = document.createElement('canvas');
 offscreen.width = W;
@@ -9,9 +9,13 @@ export function render() {
   const cameraX = Math.round(state.cameraX);  // integer snap — prevents 1px jitter from float lerp
   const nativeW = state.nativeW;
   const player = state.player;
+  const TILE = state.tileSize;
+  const MAP_W = state.mapW;
+  const MAP_H = state.mapH;
 
-  // Sky
-  ctx.fillStyle = '#5C94FC';
+  // Sky / background — read from episode palette if available
+  const skyColor = state.episode?.meta?.aesthetic?.palette_colors?.[0] ?? '#5C94FC';
+  ctx.fillStyle = skyColor;
   ctx.fillRect(0, 0, nativeW, H);
 
   // Tilemap

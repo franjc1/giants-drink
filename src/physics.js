@@ -1,4 +1,4 @@
-import { state, MAP_H, TILE } from './state.js';
+import { state } from './state.js';
 import { keys } from './input.js';
 import { moveAndCollide } from './collision.js';
 
@@ -58,5 +58,5 @@ export function updatePlayer() {
 
   moveAndCollide(p);
 
-  if (p.y > MAP_H * TILE + 32) respawnPlayer();
+  if (p.y > state.mapH * state.tileSize + 32) respawnPlayer();
 }
