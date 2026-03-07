@@ -1,6 +1,41 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-07 (Phase 1, Session 3)
+**Last updated:** 2026-03-07 (Phase 1, Session 4)
+
+---
+
+## What Just Happened (Session 4)
+
+### Generalized level loader + episode2 fixture
+
+**`loadLevel(url)` function:**
+- Fetches any conforming GameState JSON fixture, initializes all engine systems
+- Reads tilemap (base64), tileset, physics, entities, camera bounds from JSON
+- All fields have sensible defaults — won't crash on minimal fixtures
+- Missing entity `asset_spec`, `behavioral_params`, `dimensions` → fallbacks
+
+**Dynamic level dimensions:**
+- `state.js`: removed hardcoded `MAP_W=210`, `MAP_H=15`, `TILE=16` exports
+- Added `state.mapW`, `state.mapH`, `state.tileSize` — read from JSON at load time
+- All modules (renderer, camera, collision, entities, physics) updated to use state values
+- Renderer sky color reads from `episode.meta.aesthetic.palette_colors[0]` with fallback
+
+**URL parameter + level select:**
+- `?level=path/to/fixture.json` loads any fixture directly (no UI)
+- No URL param → level select overlay with buttons for both fixtures
+- Level select styled over canvas, styled in monospace/retro theme
+
+**episode2.json:**
+- `tools/gen-episode2.js` — generator script; run to rebuild
+- 90×15 tiles (vs episode1's 210×15) — shorter, more compact
+- Heavier physics: `gravity_falling: 0.6` (vs 0.5), `jump_velocity: -5.0` (vs -5.5), `air_control: 0.85`, shorter coyote time
+- Dark cave palette: void `#0A0A2A`, stone `#667788`/`#334455`
+- 4 enemies (vs 3) — faster patrol speeds (0.7–0.85 vs 0.5–0.6)
+- 4 pits (vs 2), staircase section, 2 sets of floating platforms at varying heights
+
+**Test URLs (after deploy):**
+- `/?level=data/test-fixtures/episode1.json` — grassland, SMW physics
+- `/?level=data/test-fixtures/episode2.json` — iron caves, heavy physics
 
 ---
 
@@ -103,6 +138,7 @@ giants-drink/
   tools/
     scrape-sprites.js                ← sprite scraper (resumable)
     scrape-music.js                  ← music scraper (resumable)
+    gen-episode2.js                  ← generates data/test-fixtures/episode2.json
   docs/
     current-status.md
     decisions-log.md
@@ -113,7 +149,10 @@ giants-drink/
 ```
 
 ### Deployed
-- Vercel: playable platformer with SMW physics, integer scaling, 3 enemies
+- Vercel: playable platformer with SMW physics, integer scaling
+- Level select screen on load; URL param ?level= loads any fixture
+- Episode1: grassland, 3 enemies, SMW physics (210×15)
+- Episode2: iron caves, 4 enemies, heavy physics (90×15)
 
 ---
 
@@ -131,7 +170,7 @@ giants-drink/
 - Update repo `docs/decisions-log.md` with decisions from this session
 - Update repo `docs/current-status.md` with this file
 
-### Next Session (Phase 1, Session 4): Asset Resolver
+### Next Session (Phase 1, Session 5): Asset Resolver
 - Build Track A Asset Resolver module — takes semantic asset specs, searches sprite library, returns sprite data
 - Requires: sprite scrape complete + tagging pipeline complete
 - The resolver makes the level render with real sprites instead of colored rectangles
