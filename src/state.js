@@ -6,6 +6,7 @@ export const state = {
   player: null,
   entities: [],
   cameraX: 0,
+  nativeW: 256,    // dynamic viewport width, updated on resize
 };
 
 export const MAP_W = 210;

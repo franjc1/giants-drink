@@ -6,16 +6,17 @@ offscreen.height = H;
 const ctx = offscreen.getContext('2d');
 
 export function render() {
-  const cameraX = state.cameraX;
+  const cameraX = Math.round(state.cameraX);  // integer snap — prevents 1px jitter from float lerp
+  const nativeW = state.nativeW;
   const player = state.player;
 
   // Sky
   ctx.fillStyle = '#5C94FC';
-  ctx.fillRect(0, 0, W, H);
+  ctx.fillRect(0, 0, nativeW, H);
 
   // Tilemap
   const c0 = Math.max(0, Math.floor(cameraX / TILE));
-  const c1 = Math.min(MAP_W - 1, Math.ceil((cameraX + W) / TILE));
+  const c1 = Math.min(MAP_W - 1, Math.ceil((cameraX + nativeW) / TILE));
 
   for (let row = 0; row < MAP_H; row++) {
     const sy = row * TILE;

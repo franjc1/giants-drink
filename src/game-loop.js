@@ -5,7 +5,10 @@ import { updatePlayer } from './physics.js';
 import { updateCamera } from './camera.js';
 import { render, offscreen } from './renderer.js';
 
-// Display canvas — sized dynamically to integer multiple of 256×240
+const NATIVE_H   = 240;   // level height fixed at 15 tiles × 16px
+const MIN_NATIVE_W = 256; // minimum native viewport width (16 tiles)
+const MAX_SCALE  = 3;     // cap: tiles never larger than 48px on screen
+
 const displayCanvas = document.getElementById('c');
 const displayCtx = displayCanvas.getContext('2d');
 displayCtx.imageSmoothingEnabled = false;
@@ -13,9 +16,17 @@ displayCtx.imageSmoothingEnabled = false;
 let scale = 1;
 
 function updateScale() {
-  scale = Math.max(1, Math.floor(Math.min(window.innerWidth / 256, window.innerHeight / 240)));
-  displayCanvas.width = 256 * scale;
-  displayCanvas.height = 240 * scale;
+  // Largest integer scale that still keeps tiles ≤ MAX_SCALE × 16px on screen
+  scale = Math.max(1, Math.min(MAX_SCALE,
+    Math.floor(Math.min(window.innerWidth / MIN_NATIVE_W, window.innerHeight / NATIVE_H))
+  ));
+  // Use remaining screen space for a wider native viewport (show more level)
+  const nativeW = Math.floor(window.innerWidth / scale);
+  state.nativeW = nativeW;
+  offscreen.width  = nativeW;
+  offscreen.height = NATIVE_H;
+  displayCanvas.width  = nativeW * scale;
+  displayCanvas.height = NATIVE_H * scale;
 }
 
 window.addEventListener('resize', updateScale);
@@ -26,9 +37,9 @@ function loop() {
     updateEntities();
     updateCamera();
     render();
-    // Blit offscreen to display canvas at integer scale (crisp pixels)
+    // Blit offscreen → display at integer scale (crisp pixels)
     displayCtx.imageSmoothingEnabled = false;
-    displayCtx.drawImage(offscreen, 0, 0, 256 * scale, 240 * scale);
+    displayCtx.drawImage(offscreen, 0, 0, state.nativeW * scale, NATIVE_H * scale);
   }
   requestAnimationFrame(loop);
 }
