@@ -45,7 +45,7 @@ function loop() {
     displayCtx.fillRect(0, 0, state.nativeW * s, 22 * s);
     displayCtx.fillStyle = '#fff';
     displayCtx.font = `${11 * s}px monospace`;
-    displayCtx.fillText('← → move   SPACE / ↑ jump', 8 * s, 15 * s);
+    displayCtx.fillText('← → move   SPACE / ↑ jump   ` level select', 8 * s, 15 * s);
   }
   requestAnimationFrame(loop);
 }
@@ -112,6 +112,18 @@ function showLevelSelect() {
 function hideLevelSelect() {
   document.getElementById('level-select').style.display = 'none';
 }
+
+// Backtick toggles level select while playing
+window.addEventListener('keydown', e => {
+  if (e.code === 'Backquote') {
+    const sel = document.getElementById('level-select');
+    if (sel.style.display === 'none') {
+      showLevelSelect();
+    } else {
+      hideLevelSelect();
+    }
+  }
+});
 
 function showError(err) {
   displayCtx.fillStyle = '#0A0A2A';
