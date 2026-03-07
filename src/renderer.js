@@ -1,7 +1,9 @@
 import { state, W, H, MAP_W, MAP_H, TILE } from './state.js';
 
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
+export const offscreen = document.createElement('canvas');
+offscreen.width = W;
+offscreen.height = H;
+const ctx = offscreen.getContext('2d');
 
 export function render() {
   const cameraX = state.cameraX;

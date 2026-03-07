@@ -3,7 +3,22 @@ import { initInput } from './input.js';
 import { buildEntities, updateEntities } from './entities.js';
 import { updatePlayer } from './physics.js';
 import { updateCamera } from './camera.js';
-import { render } from './renderer.js';
+import { render, offscreen } from './renderer.js';
+
+// Display canvas — sized dynamically to integer multiple of 256×240
+const displayCanvas = document.getElementById('c');
+const displayCtx = displayCanvas.getContext('2d');
+displayCtx.imageSmoothingEnabled = false;
+
+let scale = 1;
+
+function updateScale() {
+  scale = Math.max(1, Math.floor(Math.min(window.innerWidth / 256, window.innerHeight / 240)));
+  displayCanvas.width = 256 * scale;
+  displayCanvas.height = 240 * scale;
+}
+
+window.addEventListener('resize', updateScale);
 
 function loop() {
   if (state.episode) {
@@ -11,11 +26,15 @@ function loop() {
     updateEntities();
     updateCamera();
     render();
+    // Blit offscreen to display canvas at integer scale (crisp pixels)
+    displayCtx.imageSmoothingEnabled = false;
+    displayCtx.drawImage(offscreen, 0, 0, 256 * scale, 240 * scale);
   }
   requestAnimationFrame(loop);
 }
 
 async function init() {
+  updateScale();
   initInput();
 
   const res = await fetch('data/test-fixtures/episode1.json');
@@ -43,7 +62,6 @@ async function init() {
     w: 16, h: 24,
     onGround: false,
     coyote: 0,
-    holdFrames: 0,
     prevJumpHeld: false,
   };
 
@@ -51,18 +69,14 @@ async function init() {
   requestAnimationFrame(loop);
 }
 
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-
 init().catch(err => {
-  const W = 800, H = 480;
-  ctx.fillStyle = '#5C94FC';
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = '#fff';
-  ctx.font = '16px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('Failed to load episode1.json', W / 2, H / 2 - 12);
-  ctx.font = '13px monospace';
-  ctx.fillText(err.message, W / 2, H / 2 + 12);
+  displayCtx.fillStyle = '#5C94FC';
+  displayCtx.fillRect(0, 0, displayCanvas.width, displayCanvas.height);
+  displayCtx.fillStyle = '#fff';
+  displayCtx.font = '16px monospace';
+  displayCtx.textAlign = 'center';
+  displayCtx.fillText('Failed to load episode1.json', displayCanvas.width / 2, displayCanvas.height / 2 - 12);
+  displayCtx.font = '13px monospace';
+  displayCtx.fillText(err.message, displayCanvas.width / 2, displayCanvas.height / 2 + 12);
   console.error(err);
 });

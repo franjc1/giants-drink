@@ -9,7 +9,7 @@ export function respawnPlayer() {
   const p = state.player;
   p.x = ps.x; p.y = ps.y;
   p.vx = 0;   p.vy = 0;
-  p.coyote = 0; p.holdFrames = 0;
+  p.coyote = 0;
 }
 
 export function updatePlayer() {
@@ -36,20 +36,18 @@ export function updatePlayer() {
   const jumpPressed = jumpHeld && !p.prevJumpHeld;
   if (jumpPressed && (p.onGround || p.coyote > 0)) {
     p.vy = ph.jump_velocity;
-    p.holdFrames = 10;
     p.onGround = false;
     p.coyote = 0;
   }
-  // Variable height: extra force while held and ascending
-  if (jumpHeld && p.holdFrames > 0 && p.vy < 0) {
-    p.vy += ph.jump_hold_bonus / 10;
-    p.holdFrames--;
-  }
-  if (!jumpHeld) p.holdFrames = 0;
   p.prevJumpHeld = jumpHeld;
 
-  // Gravity
-  p.vy = Math.min(p.vy + ph.gravity, ph.max_fall_speed);
+  // Two-phase gravity (SMW-accurate):
+  // ascending + held  → low gravity (long hang time)
+  // ascending + released → high gravity (quick cut)
+  // falling → high gravity
+  const ascending = p.vy < 0;
+  const gravity = (ascending && jumpHeld) ? ph.gravity_ascending : ph.gravity_falling;
+  p.vy = Math.min(p.vy + gravity, ph.max_fall_speed);
 
   // Coyote
   if (p.onGround) p.coyote = COYOTE_FRAMES;

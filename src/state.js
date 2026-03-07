@@ -11,5 +11,5 @@ export const state = {
 export const MAP_W = 210;
 export const MAP_H = 15;
 export const TILE = 16;
-export const W = 800;
-export const H = 480;
+export const W = 256;   // SNES native width
+export const H = 240;   // SNES native height
