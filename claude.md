@@ -29,7 +29,7 @@
 | `docs/design/cas-engine-spec.md` | CAS engine specification — primitives, rules, interpretation layer | When CAS design changes |
 | `docs/design/game-state-schema.md` | JSON data structures between all systems | When schema changes |
 | `docs/design/paradigm-specs.md` | Engine clusters + player-facing paradigm specs | When paradigms are added/modified |
-| `docs/design/build-plan-v2.md` | Current build plan (45 sessions, includes diagnostic framework) | When plan changes |
+| `docs/design/build-plan-v4.md` | Current build plan (~55-60 sessions, all 7 clusters in Phase 1) | When plan changes |
 | `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
 | `docs/design/sequencing-grammar-framework.md` | Intermediate layer theory + grammar seeds | When sequencing logic evolves |
 | `docs/design/asset-resolution-strategy.md` | Two-track asset architecture | When asset approach changes |
@@ -461,6 +461,8 @@ Two Fires organizes game types into two layers: **engine clusters** (what gets b
 5. Pseudo-3D / Mode 7 (racing)
 6. Raycasting First-Person (FPS, adventure, dungeon crawler)
 7. Strategic Map (RTS, tactics, management sim)
+
+**Build scope (Decision 71):** All 7 engine clusters are built in Phase 1 (Sessions 2-18), not deferred. Clusters 1-4 share 2D tile infrastructure and are built as variations (~1-2 sessions each). Clusters 5-7 require new rendering cores (~2-3 sessions each). This surfaces cross-cluster architectural issues before CAS, agents, and diagnostics are layered on top.
 
 **12 Full Paradigm Specs** — each defines temporal structure, sequencing grammar, social surface, CAS integration, physics, aesthetics, and genre shift interface. See `docs/design/paradigm-specs.md`.
 

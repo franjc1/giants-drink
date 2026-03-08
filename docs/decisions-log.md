@@ -950,3 +950,20 @@ Critically: mechanical difficulty that exceeds what the player can solve solo is
 The meta-game structure requires its own specification thread. This decision captures the principle; the mechanics are unspecified.
 
 **Rationale:** Ending the game at the win condition wastes the most valuable thing Two Fires produces — living social worlds with real relationship history. The post-game is where the CAS shines hardest: familiar characters making new choices, the consequences of your leadership style rippling forward, worlds you "beat" presenting new challenges from within. It also gives the Two Fires lore its narrative function — the meta-objective is the reason to keep playing across worlds, and the difficulty of the meta-quest provides late-game challenge that's entirely social/strategic rather than mechanical.
+### Decision 71: All 7 Engine Clusters in Phase 1
+
+**Context:** Phase 1 was originally scoped as "platformer engine only." Session 4 demonstrated that the generalized JSON loader makes a new paradigm's fixture trivially easy to create (10 minutes for a Mega Man 2-style fixture with different physics). The question: should additional engine clusters be built now or deferred to later phases?
+
+**Decision:** Build all 7 engine clusters in Phase 1, before CAS, agent pipeline, or diagnostic infrastructure are layered on. Clusters 1-4 (Side-View Tile, Top-Down Tile, Stage/Arena, Scrolling Shooter) share 2D tile infrastructure and are built first as variations. Clusters 5-7 (Mode 7/racing, Raycasting FPS, Strategic Map) are genuinely different rendering cores and are built after, specifically to test whether the engine's module architecture supports multiple renderers cleanly.
+
+Phase 1 grows from ~7 sessions to ~16-18 sessions. Total project grows from ~45 to ~55-60 sessions. All subsequent phases shift but internal structure unchanged.
+
+**Rationale:** Three reasons, in order of importance:
+
+1. **Architectural risk reduction.** If Cluster 6 (raycasting) reveals that the renderer module architecture needs restructuring, discovering that before CAS, agents, and diagnostics are built on top is dramatically cheaper than discovering it after. The platformer-only approach deferred this risk to Phase 7 (Genre Transformation), where the cost of architectural changes would be highest.
+
+2. **Demo breadth.** A demo that produces platformers, shmups, Zelda-likes, fighting games, and racing from prompts communicates "new category of product." A demo that only produces platformers communicates "level generator."
+
+3. **Marginal cost is low.** Session 4 proved the generalized architecture works. Clusters 2-4 are parameter variations of Cluster 1. Even Clusters 5-7, while requiring new rendering cores, benefit from shared infrastructure (level loader, input, entity system, Asset Resolver, display scaling). Estimated 1-2 sessions per cluster for the 2D family, 2-3 for the different-renderer family.
+
+See `docs/design/build-plan-v4.md` for the updated session plan.
