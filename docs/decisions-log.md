@@ -905,3 +905,48 @@ Game Compiler produces Episode Brief
 9. Exact exchange budget numbers per tier (testing/economics)
 10. Design move library — extract transferable design moves from ingestion pipeline
 11. Living Taste Document bootstrap — initial taste criteria before Joe's ratings accumulate
+## Session: 2026-03-08 — Phase 1 Session 5 (Difficulty Philosophy, Social Difficulty, Meta-Objective)
+
+### Decision 67: Social Dynamics as Primary Difficulty Vector
+
+**Context:** Decision 53 established the SNES Comfort Model — mechanical difficulty defaults to SNES-era forgiveness (SMW, LttP, Mario Kart). But the question remained: if mechanical difficulty is lowered, what provides the challenge that keeps the 200-hour experience compelling? Most of Two Fires' target audience aren't retro gamers and will bounce off NES-era or even high-SNES-era mechanical demands before ever reaching the social layer.
+
+**Decision:** Mechanical difficulty is texture, not content. The primary difficulty vector is the social ecology and the Two Fires meta-narrative. The calibration range is Super Mario World (baseline comfortable) to A Link to the Past (hard edge). Mega Man X is slightly beyond range. NES Mega Man and DKC2 are well out of range. The analogy: Mario Kart 50cc (entry) to 150cc (ceiling).
+
+Social dynamics create felt difficulty through Claude's interpretation layer translating CAS states into mechanical consequences. When the social world turns against the player, the game gets harder in ways that can't be solved mechanically — pushing toward social engagement as the resolution path. When social dynamics favor the player, the game gets mechanically easier while growing socially more complex. This self-balancing loop always draws the player toward the social layer.
+
+Critically: mechanical difficulty that exceeds what the player can solve solo is a *signal*, not a wall. It prompts the player to engage socially (recruit allies, negotiate defections, seek intelligence) rather than demanding they "git gud."
+
+**Rationale:** This extends Decision 53 from "lower mechanical difficulty" to "redirect difficulty to the social layer." The SNES Comfort Model was motivated by "players won't notice social hooks while dying every 15 seconds." This decision goes further: the social dynamics ARE the difficulty. The mechanical layer is the medium through which social consequences are felt, not the challenge itself. This makes Two Fires feel like a modern personal epic (accessible, progressible, 200 hours) rather than a retro gauntlet.
+
+---
+
+### Decision 68: CAS-to-Mechanical Manifestation — Creative Latitude, Not Taxonomy
+
+**Context:** If social dynamics manifest as mechanical gameplay consequences, how prescriptively should those manifestations be specified? Initial discussion generated categories (force consolidation, denial of support, betrayal, environmental hostility, etc.) which risked becoming a lookup table — exactly what Thread 3 eliminated.
+
+**Decision:** Claude's interpretation layer has full creative latitude to translate CAS states into mechanical manifestations. No fixed taxonomy. The same CAS state could manifest many different ways depending on narrative context, paradigm, and dramatic timing. The spec provides mild-to-extreme examples on both favorable and unfavorable sides as illustrations of the creative range, not as an exhaustive menu.
+
+**Rationale:** Consistent with the entire architectural philosophy — define constraint surfaces, not outcomes. A taxonomy of manifestation types would become a de facto behavioral legibility table. Claude interpreting CAS states into mechanically-felt consequences is the same pattern as Claude interpreting CAS states into narrative and visual consequences — it's already the architecture. The examples serve to prompt creative range in Claude's interpretation, not to limit it.
+
+---
+
+### Decision 69: Paradigm Migration as Expected Emergent Pattern
+
+**Context:** Discussion of social difficulty revealed an expected pattern: as social complexity increases, games should naturally migrate from solo paradigms (platformer) toward multi-character paradigms (beat-em-up with allies, tactical encounters, RTS-like moments). This follows from the existing paradigm shift trigger principle — shifts occur when the current genre can't represent what the CAS has produced.
+
+**Decision:** Paradigm migration toward collaborative/multi-character formats is an expected emergent pattern, not a prescribed sequence. It should arise naturally from existing shift triggers. If testing reveals every game following the same migration path (always platformer → beat-em-up → RTS), that's a tuning signal, not confirmation the system works — it means the shift triggers lack variety. The system should produce diverse migration paths.
+
+**Rationale:** Prescribing the migration would contradict the CAS philosophy. But ignoring the expected pattern means we can't diagnose if the system is underperforming. Naming it as "expected but not prescribed" gives us a diagnostic baseline without adding a new system.
+
+---
+
+### Decision 70: Post-Game Continuation and Meta-Objective as Primary Late-Game Driver
+
+**Context:** Open question: what happens when a generated game's win condition is met? The CAS is still running, the social graph is alive, relationships exist. Does the game just end?
+
+**Decision:** "Winning" a generated game is a transition, not an endpoint. The game's primary antagonist is defeated, but the CAS continues. The world persists and evolves. The player's relationship to the world shifts — they are now leveraging it for the Two Fires meta-objective: reaching the giant, recovering the two stolen fires. This requires cross-world achievements (raising armies from won worlds, developing key allies, finding artifacts, making sacrifices). The meta-game is the "personal epic" structure that justifies 200+ hours of play.
+
+The meta-game structure requires its own specification thread. This decision captures the principle; the mechanics are unspecified.
+
+**Rationale:** Ending the game at the win condition wastes the most valuable thing Two Fires produces — living social worlds with real relationship history. The post-game is where the CAS shines hardest: familiar characters making new choices, the consequences of your leadership style rippling forward, worlds you "beat" presenting new challenges from within. It also gives the Two Fires lore its narrative function — the meta-objective is the reason to keep playing across worlds, and the difficulty of the meta-quest provides late-game challenge that's entirely social/strategic rather than mechanical.

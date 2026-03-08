@@ -1,7 +1,7 @@
 # Two Fires — Architectural Blueprint (claude.md)
 ## Source of truth for all Claude Code and Claude.ai sessions
 
-**Last updated:** 2026-03-05 (Thread 9: Gameplay Quality, Difficulty & Level Construction Architecture)
+**Last updated:** 2026-03-08 (Phase 1, Session 5: Difficulty Philosophy & Meta-Objective)
 
 ---
 
@@ -33,7 +33,6 @@
 | `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
 | `docs/design/sequencing-grammar-framework.md` | Intermediate layer theory + grammar seeds | When sequencing logic evolves |
 | `docs/design/asset-resolution-strategy.md` | Two-track asset architecture | When asset approach changes |
-| `docs/design/paradigm-shift-principles.md` | Constraint document for Phase 7 paradigm shifts | When shift principles evolve |
 | `docs/lore/two-fires.md` | Mythology, endgame mechanics, narrative backbone | When lore decisions are made |
 | `giants-drink-transfer.md` | Original complete transfer document (historical reference) | Rarely — superseded by specific docs |
 
@@ -56,21 +55,37 @@ Two Fires produces emergent game experiences from the mutual constraint of primi
 
 See `docs/decisions-log.md` Decision 1 (Constraint Surface Model) for full rationale.
 
-### SNES Comfort Model (Default Difficulty Philosophy)
+### Difficulty Philosophy: Mechanical Texture, Social Challenge
 
-Two Fires defaults to SNES-era difficulty: the game respects your time and assumes you want to make progress, not prove yourself. Difficulty comes from complexity layering and spatial pressure, not punishment severity.
+Two Fires targets a broad audience. Mechanical difficulty is **texture** — it creates moment-to-moment tension and engagement — but it is not the primary challenge. The primary challenge comes from the social ecology and the Two Fires meta-narrative.
 
-**Default forgiveness parameters:**
-- Checkpoints: player never loses more than ~60-90s of progress
-- Death cost: low (time, not accumulated progress)
-- Enemy telegraphs: 400-600ms (thoughtful reaction, not reflex)
-- Teachability: consequence-free introduction *zones* for every new element
-- Complexity ceiling: conservative (2-3 simultaneous challenge types max)
-- Ramp shape: concave (fast early progress, slow difficulty increase, hardest sections near end)
+**Calibration range:** Super Mario World (baseline) to A Link to the Past (hard edge). Mega Man X is slightly beyond range. NES Mega Man and DKC2 are well out of range. Think Mario Kart 50cc (entry) to 150cc (ceiling) — the player is always working, never walled. See Decision 53 (SNES Comfort Model) for forgiveness parameters and Decision 67 for the full rationale.
 
-**Era-style prompts are aesthetic signals, not difficulty signals.** "NES style" = 8-bit visuals, SNES-grade forgiveness. Only explicit difficulty language ("hard," "punishing," etc.) overrides the comfort model.
+**Social dynamics as the difficulty vector:** CAS states manifest as mechanical consequences through Claude's interpretation layer. When social dynamics oppose the player, the game gets harder *in ways that can't be solved mechanically alone* — pushing the player toward social engagement as the resolution path. When social dynamics favor the player, the game gets mechanically easier in some dimensions while growing socially more complex. This creates a self-balancing loop: the player is always being drawn toward the social layer, which is Two Fires' core differentiator.
 
-**Rationale:** The social ecology requires cognitive bandwidth to land. A competent, relaxed player notices social hooks. A dying, frustrated player notices nothing. The Competence Bias is both a taste preference and an architectural requirement.
+**How CAS states become gameplay consequences:** Claude's interpretation layer has full creative latitude to translate CAS states into mechanical manifestations. The same underlying social state (e.g., a faction consolidating against the player) could manifest as reinforcements mid-level, terrain becoming hostile, allied information drying up, environmental traps activating, or something entirely unanticipated. There is no fixed taxonomy — Claude reads the CAS state in narrative context and constructs the most dramatically appropriate consequence.
+
+Examples across the spectrum (illustrations of creative range, not an exhaustive menu):
+
+*Mild favorable:* An enemy hesitates, pauses patrol, lets you pass. An NPC mentions a shortcut. A locked door is unlocked by a faction ally you never met.
+
+*Extreme favorable:* Former enemies join you as CPU teammates, shifting the paradigm toward beat-em-up or tactical play. An entire faction defects, opening a previously hostile region. A key enemy surrenders and offers intelligence.
+
+*Mild unfavorable:* Information sources dry up — NPCs who would have helped don't appear. A path that was open is now guarded. Enemies coordinate slightly better.
+
+*Extreme unfavorable:* Boss-tier enemies appear mid-stage because faction leadership declared a crackdown. Multiple enemy types combine forces in encounters designed for solo combat. The environment itself turns hostile (a faction controls infrastructure). But crucially: these escalations signal the player toward social solutions — you need allies, defectors, intelligence. The mechanical pressure is the *prompt* to engage socially, not a wall to overcome through reflexes.
+
+**Paradigm migration expectation:** As social complexity increases across a game's arc, paradigms are expected to naturally shift toward formats that can represent multi-character dynamics — beat-em-up with allies, tactical encounters, RTS-like command moments. This should emerge from existing paradigm shift triggers (the current genre can no longer represent what the CAS has produced), not be scripted. If testing reveals every game following the same migration path (e.g., always platformer → beat-em-up → RTS), that's a tuning signal for the shift trigger system to introduce more variety.
+
+### Post-Game and Meta-Objective Structure
+
+"Winning" a generated game is a transition, not an endpoint. When the game's primary objective is met and the antagonist is defeated, the CAS continues running. The world persists and evolves. The player's relationship to the world shifts: they are no longer trying to beat it — they are leveraging it for the meta-objective.
+
+The meta-objective is the Two Fires quest: reaching the giant, recovering the two stolen fires. This requires achievements that span multiple "won" worlds — raising armies, developing cross-world alliances, finding specific artifacts, making sacrifices. The post-game social dynamics are inherently harder than the main game because the player is operating across multiple living worlds simultaneously with higher-stakes social decisions.
+
+This gives the "personal epic" its structural shape: a constellation of worlds, each one beaten and then recruited into a larger campaign, building toward a confrontation with the giant. See `docs/lore/two-fires.md` for mythology details.
+
+**⚠️ The meta-game structure requires its own specification thread.** The principle is decided; the mechanics (how worlds interconnect, what the giant confrontation looks like, what constitutes "winning" the meta-game) are unspecified.
 
 ---
 
@@ -111,7 +126,7 @@ One core rule: bond changes when entity attributes an affect change to another e
 
 ### Social Timer
 
-CAS runs on independent ~2-minute heartbeat (adjustable per game by Game Compiler). Paradigm ticks determine when player perceives changes. Social graph evolves continuously.
+CAS runs on independent ~2-minute heartbeat (adjustable per game by Dramaturgical Agent). Paradigm ticks determine when player perceives changes. Social graph evolves continuously.
 
 ### Faction State
 
@@ -133,118 +148,304 @@ This architecture replaces:
 
 Full specification: `docs/design/game-state-schema.md`
 
-**⚠️ SCHEMA NEEDS UPDATE.** The game-state-schema.md document was written before the Thread 3 CAS redesign and contains structures that are now superseded. See the CAS Engine Architecture section above and `docs/decisions-log.md` for the specific diffs that need to be applied.
+**⚠️ SCHEMA NEEDS UPDATE.** The game-state-schema.md document was written before the Thread 3 CAS redesign and contains structures that are now superseded. The following changes are required when updating the schema:
+
+### `world.factions.*.state` — Replace Entirely
+
+**Old (7 stored primitives):**
+```json
+"state": {
+  "cohesion": 0.65, "morale": 0.55, "loyalty": 0.70,
+  "awareness_of_player": 0.20, "disposition_to_player": -0.60,
+  "internal_dissent": 0.35, "resources": 0.75
+}
+```
+
+**New (1 stored + 5 computed):**
+```json
+"state": {
+  "resources": 0.75
+},
+"aggregates": {
+  "avg_valence": -0.12,
+  "avg_arousal": 0.45,
+  "cohesion": 0.58,
+  "bond_density": 0.42,
+  "member_count": 23
+}
+```
+
+`resources` is the only stored faction-level value. All others are computed from members each social timer cycle. `morale`, `loyalty`, `awareness_of_player`, `disposition_to_player`, `internal_dissent` are eliminated — Claude constructs these concepts from entity-level affect + knowledge + bonds.
+
+### `world.entities.*.mind` — Replace Dynamic State
+
+**Old:**
+```json
+"mind": {
+  "personality": { ... },
+  "disposition_to_player": 0.00,
+  "motivations": ["survive", "protect_family"],
+  "emotional_state": "anxious",
+  "conversation_state": "never_contacted"
+}
+```
+
+**New:**
+```json
+"mind": {
+  "personality": {
+    "openness": 0.20, "conscientiousness": -0.10,
+    "extraversion": -0.05, "agreeableness": 0.15,
+    "neuroticism": 0.10
+  },
+  "affect": {
+    "valence": -0.15,
+    "arousal": 0.40
+  },
+  "conversation_state": "never_contacted"
+}
+```
+
+`disposition_to_player` is eliminated — it's constructed by Claude from bond to player (if any) + knowledge about player + affect + personality. `motivations` and `emotional_state` are eliminated — Claude constructs these from primitives in context. `conversation_state` retained (tracks mechanical interaction history). OCEAN personality retained unchanged.
+
+### `world.entities.*.knowledge` — Add Attribution Fields
+
+Knowledge items gain `causal_agent` and `emotional_charge` fields:
+```json
+{
+  "id": "k_002",
+  "type": "social",
+  "content": "player spared goomba_06 in world_1_2",
+  "accuracy": 0.75,
+  "emotional_charge": 0.6,
+  "source": "goomba_06",
+  "causal_agent": "player",
+  "acquired_tick": 5
+}
+```
+
+`causal_agent` enables the attribution-gated reputation system. `emotional_charge` decays over time (facts remain, feelings fade).
+
+### `world.information_packets` — Add Causal Agent
+
+Information packets gain explicit `causal_agent` field for attribution tracking:
+```json
+{
+  "id": "info_001",
+  "content": "player_spared_goomba_07",
+  "content_type": "player_action",
+  "magnitude": "minor",
+  "accuracy": 0.95,
+  "emotional_charge": 0.60,
+  "causal_agent": "player",
+  "origin_entity_id": "goomba_07",
+  "origin_tick": 3,
+  "current_holders": ["goomba_07", "goomba_06"],
+  "propagation_speed": "between_episode",
+  "hops": 1,
+  "max_hops": 5
+}
+```
+
+### `cas` Block — Replace Entirely
+
+**Old:**
+```json
+"cas": {
+  "tick_count": 4,
+  "tick_spec": { "type": "episode_boundary", ... },
+  "drama_density": { "current_rate": 0.25, "threshold": 0.30, ... },
+  "phase_transitions_pending": [],
+  "cascade_in_progress": false,
+  "antagonist": { "last_action": null, "strategy_posture": "ignore", ... }
+}
+```
+
+**New:**
+```json
+"cas": {
+  "social_timer": {
+    "tick_count": 4,
+    "base_interval_seconds": 120,
+    "game_pace_modifier": 1.0,
+    "last_tick_timestamp": 1709312520
+  },
+  "drama_density": {
+    "significant_changes_recent": 3,
+    "cadence_window_ticks": 3,
+    "signal": null
+  },
+  "previous_narrative": "The Koopa Army is consolidating after...",
+  "config": "CAS_CONFIG object reference"
+}
+```
+
+`antagonist` block eliminated — Claude constructs faction leadership decisions as part of the interpretation layer, not from a stored strategy posture. `cascade_in_progress` and `phase_transitions_pending` eliminated — cascades emerge from propagation rules, thresholds are not programmed. `previous_narrative` added — Claude's last interpretation, used as continuity anchor for delta-from-previous interpretation.
+
+### `episode.entity_placements.*.behavioral_override` — Change Source
+
+**Old:**
+```json
+"behavioral_override": {
+  "source": "cas_behavioral_legibility",
+  "reason": "faction morale 0.35, entity neuroticism +0.15",
+  "patrol_range": 32, "patrol_speed": 0.6, ...
+}
+```
+
+**New:**
+```json
+"behavioral_override": {
+  "source": "claude_interpretation",
+  "reason": "Claude interpretation: entity showing signs of stress and withdrawal...",
+  "patrol_range": 32, "patrol_speed": 0.6, ...
+}
+```
+
+Source changes from `cas_behavioral_legibility` to `claude_interpretation`. Reason changes from formula reference to natural language Claude interpretation trace. The override parameters themselves (patrol_range, patrol_speed, etc.) remain — they're the interface between Claude's directives and the paradigm engine.
+
+### `episode.visual_manifestations.*.cas_source` — Change Format
+
+**Old:** `"cas_source": "goomba_union.internal_dissent > 0.4"`
+
+**New:** `"cas_source": "Claude interpretation: goomba faction showing internal fracture based on divergent affect clusters"`
+
+No longer references specific CAS threshold values (there are none). References Claude's narrative interpretation of CAS state.
+
+### `world.event_log` Effects — Change Format
+
+**Old:**
+```json
+"effects": [
+  { "target_type": "entity", "target_id": "goomba_07", "field": "disposition_to_player", "delta": 0.30 }
+]
+```
+
+**New:**
+```json
+"effects": [
+  { "target_type": "entity", "target_id": "goomba_07", "field": "affect.valence", "delta": 0.15 },
+  { "target_type": "entity", "target_id": "goomba_07", "field": "affect.arousal", "delta": 0.25 },
+  { "target_type": "bond", "source_id": "goomba_07", "target_id": "player", "field": "valence", "delta": 0.30 },
+  { "target_type": "info_packet", "target_id": "info_001", "field": "created" }
+]
+```
+
+Effects reference valence/arousal (not disposition/loyalty/morale), and include bond changes and info packet creation as explicit effects.
+
+### System Read/Write Reference — Update CAS Engine Row
+
+**Old:** CAS Engine writes `world.factions.*.state`, `world.entities.*.mind`, `world.entities.*.knowledge`, `world.entities.*.social_graph`, `world.information_packets`, `world.event_log`
+
+**New:** CAS Engine writes `world.factions.*.aggregates`, `world.entities.*.mind.affect`, `world.entities.*.knowledge`, `world.entities.*.social_graph`, `world.information_packets`, `world.event_log`, `cas.*`. Add new row: **Claude Interpretation Layer** reads `cas`, `world`, `episode` context, writes `episode.entity_placements.*.behavioral_override`, `episode.visual_manifestations`, `episode.aesthetic_modifiers`, `episode.audio_modifiers`, NPC decisions (→ events → CAS).
+
+### Entity Behavioral Parameters — Change Stress Response
+
+**Old:** "Stress response is a modifier function in CAS engine code (not schema data) that reads personality + faction state and adjusts these parameters."
+
+**New:** Stress response is constructed by Claude during interpretation. Claude reads entity affect (valence, arousal), personality, knowledge, bonds, and faction context, then produces behavioral override parameters. No CAS engine modifier function — Claude is the modifier function.
 
 ---
 
-## Level Construction Architecture
+## Conversation System Design
 
-**Three components, designed for parsimony and coherent output (Thread 9, Decisions 55-61).**
+The conversation system connects to the CAS through the two-layer architecture:
 
-### Designer (Claude)
+**What entities know:** Bounded by their knowledge list. Claude dialogue generation receives ONLY the entity's knowledge items + personality + affect state + bond to player (if any). The entity cannot reference information it doesn't possess. This is architecturally enforced, not prompt-managed.
 
-The Designer is the soul of the level construction system — both author and tastemaker in a single Claude call. It creates the vision for an episode and then evaluates each section as it's built, maintaining a running model of the player's cumulative psychological experience.
+**What entities feel:** Constructed by Claude from affect primitives in context. An entity with negative valence, high arousal, personality high-N, and knowledge that the player killed their friend might express rage, terror, grief, or accusation — Claude constructs the appropriate emotional expression situationally. The same entity in a different context (positive valence from recent positive events, despite the old grief knowledge) might express cautious hopefulness or conflicted gratitude.
 
-**Inputs:** Episode Brief from Game Compiler + game-type taste profile + Living Taste Document + full game context (skeleton, CAS state, prior episodes, narrative position).
+**What entities say:** Claude generates dialogue grounded in: (1) the entity's current affect state (valence/arousal), (2) their OCEAN personality, (3) their knowledge list, (4) their bond to the player (strength/valence/asymmetry, if bond exists), (5) their faction context and role, (6) the previous narrative interpretation (continuity anchor), (7) the paradigm's conversation surface (between-level dialogue vs. real-time chat vs. formal audience).
 
-**Produces Episode Vision:**
-- Emotional arc for the episode
-- Signature design moments ("wouldn't it be cool if..." ideas)
-- Hidden intentionality (secrets, curiosity rewards, things that make the player feel anticipated)
-- Connective logic to prior and future episodes
-- Section-by-section specifications (emotional target, key moments, vocabulary allocation, intended player psychological state at entry/exit)
+**Conversation outcomes as CAS events:** When the player talks to an entity, the conversation itself generates events. What the player says is information the entity receives (category 3 event). The player's attention is an arousal event (category 4). If the player reveals new information, shares intel, makes promises, or threatens — each of these is an information/experience event with the player as causal agent. The entity's affect updates through normal CAS rules, and bond to player updates through attribution. Conversation is not a separate system — it's a specific type of CAS interaction.
 
-**Evaluates each section after construction:**
-- Maintains cumulative player experience model (confidence, momentum, attention, expectation, curiosity)
-- Evaluates against Vision, accumulated experience, and game-type taste profile
-- Can approve, request revision with specific feedback, or revise remaining-section specs if the emerging level suggests a better direction
-- Catches the "syntactically correct but soulless" failure mode — the gap between valid and authored
-
-### Builder (Claude, Sonnet-level)
-
-The Builder constructs each section as an integrated design problem. Vocabulary sequencing, tension/relief pacing, and spatial layout are considered together, not as separate concerns.
-
-**Receives:** Designer's section specification + paradigm spatial grammar + available vocabulary.
-
-**Produces:** A complete section with entities placed, geometry defined, and all three dimensions (vocabulary, rhythm, space) coherent by construction.
-
-**On rejection:** Receives specific feedback from Designer (taste) or Validator (feasibility) and revises intelligently — not random retry.
-
-Claude as Builder for ALL sections, no deterministic shortcuts. Same author = consistent design sensibility throughout.
-
-### Validator (deterministic code, no Claude calls)
-
-Physical feasibility verification. Fast and cheap.
-
-**Checks:** Pathfinding (can player reach exit?), reachability (all elements accessible?), timing (reaction windows meet SNES Comfort Model?), teachability arc completeness (every new element has safe introduction?), softlock detection.
-
-**Does NOT evaluate:** Taste, quality, experiential properties. Only physical constraint satisfaction.
-
-### The Construction Loop
-
-```
-Game Compiler produces Episode Brief
-  → Designer produces Episode Vision (1 Claude call)
-  → For each section:
-      → Builder constructs section (1 Claude call, Sonnet)
-      → Validator checks feasibility (deterministic, fast)
-      → If Validator fails → Builder retries with constraint violation
-      → If Validator passes → Designer evaluates taste (1 Claude call)
-      → If Designer flags problems → Builder retries with feedback
-      → If Designer approves → next section
-      → Designer can revise remaining specs based on emerging level
-```
-
-Typical cost: ~10-12 Claude calls per episode. Worst case ~20.
-
-### Game-Type Taste Profiles
-
-The Designer evaluates with paradigm-specific sensibility:
-- **Mario-like:** Values flow, momentum, discovery. "Does the player want to keep moving?"
-- **Mega Man-like:** Values mastery, precision, tool selection. "Does the player understand the challenge?"
-- **Zelda-like:** Values mystery, spatial puzzles, discovery arcs. "Is the player forming hypotheses?"
-- **Racing:** Values speed sensation, risk/reward, rivalry. "Does the player feel fast?"
-- **Shmup:** Values pattern density, flow state, escalation. "Is the player in the zone?"
-- **RTS/Tactics:** Values strategic clarity, meaningful tradeoffs. "Does the player feel clever?"
-
-Profiles derived from ingestion pipeline data, weighted toward popular and well-reviewed games.
-
-### Superseded Agents
-
-Thread 9 consolidates the following into Designer + Builder + Validator:
-- **Grammarian** → Builder (vocabulary sequencing integrated into construction)
-- **Rhythmist** → Builder (tension/relief integrated into construction)
-- **Cartographer** → Builder (spatial layout integrated into construction)
-- **Provocateur** → Eliminated (surprise emerges from Designer's taste, not injected violations)
-- **Coherence Auditor** → Validator (constraint checking as deterministic code)
-- **Simulated Player Agent** (level verification function) → Validator (pathfinding/reachability)
-
-**Note:** The Simulated Player Agent still exists in the diagnostic wrapper for automated playtesting and clip generation. Its verification function was absorbed into the Validator; its diagnostic function remains separate.
+**`conversation_state`** tracking: `never_contacted`, `hailed_rejected`, `spoken_once`, `spoken_multiple`, `allied`, `betrayed`. This is a mechanical state for gating conversation depth (first conversations are tentative; deep conversations require relationship history). It is NOT an emotional state — the entity's actual feelings about the player come from their affect + bond + knowledge.
 
 ---
 
-## Paradigm Grammar Framework
+## The Lore System
 
-Full-game structural quality is handled by three layers:
+The Two Fires lore system is **unchanged** by the CAS redesign. Full lore document: `docs/lore/two-fires.md`.
 
-**Layer 1 — Paradigm Grammar.** Each paradigm's native structural grammar: units (levels, cups, missions), organization (linear, selectable, branching), punctuation (bosses, championships), progression shape, non-negotiable features. Paradigm property, not per-game. Derived from ingestion pipeline data. Extends paradigm specs.
+The lore propagation mechanics are already aligned with the new architecture:
 
-**Layer 2 — Skeleton.** Game Compiler instantiates the grammar for this specific game/prompt/narrative/intended length. Default plan with vocabulary budget, zone progression, boss placement, complexity ceiling, difficulty shape. Stored in `meta`, consultable by construction pipeline.
+**Knowledge resolution layers** (ambient/structural/actionable) work through the information propagation mechanism. `propagation_resistance` maps directly to the information propagation rules — high resistance means lower probability of packet transmission per tick, effectively limiting how far and fast lore spreads. This is CAS math, untouched by the redesign.
 
-**Layer 3 — Override Conditions.** When CAS events produce situations where the skeleton no longer fits, Claude's interpretation layer can adapt it. Indeterminate — Claude constructs adaptation from CAS state + skeleton + game reality. Not a deterministic lookup.
+**The Giant/Overseer** operates through the same two-layer architecture as everything else. The Giant is an entity (or operates through entities) whose actions create CAS events. The Giant's manipulations are Claude-directed NPC actions — feeding misinformation (information packets with low accuracy, Giant as hidden causal agent), reinforcing wrong interpretations (new knowledge items for faction leaders), disrupting social networks (creating events that weaken bonds between the player's allies). All processed through standard CAS rules.
 
-### Five Experience Primitives (Quality Checks)
+**Lore discovery experience** is enhanced by the attribution system. When the player hears "legends speak of two lights stolen from the sky," that's an ambient knowledge item with no specific causal agent. When they hear "there is a way to bridge worlds" from a high-ranking figure, that's a structural knowledge item with attribution to the source entity. When they receive actionable knowledge, the entity sharing it has made a choice to share — which is Claude constructing a decision from that entity's affect state, personality, bond to player, and knowledge. The sharing IS the evidence of trust, not a disposition threshold being crossed.
 
-Emergent properties of well-designed systems, not calibration targets:
-1. **Vocabulary accumulation** — player's repertoire grows
-2. **Consequentiality escalation** — actions have increasingly large consequences
-3. **Environmental legibility** — player understands current context's rules
-4. **Earned transformation** — when the game changes, it feels caused
-5. **Compression toward resolution** — experience vector points toward climax
+---
 
-### Episode Brief
+## Manifestation Layer
 
-The interface between Game Compiler and the construction pipeline. Eight fields: available vocabulary (with behavioral delta), complexity ceiling, difficulty target (0.0-1.0), punctuation type, zone identity, mechanical thesis (from Claude), narrative context, override flags. Generated dynamically at each episode boundary.
+The Visual Manifestation Engine's relationship to the CAS is restructured:
+
+**Old pipeline:** CAS state → threshold-based behavioral legibility → lookup tables → visual/behavioral overrides → separate Claude call for narrative → separate Claude call for visuals
+
+**New pipeline:** CAS state → Claude interprets at multiple scales in single call → produces unified output: narrative update + behavioral directives + visual manifestation specs + audio/aesthetic modifiers
+
+Claude's interpretation produces `visual_manifestation_specs` directly. Instead of "goomba_union.internal_dissent > 0.4 → protest sign," Claude reads the CAS state (cluster of goomba entities with negative valence, high arousal, weakening bonds to koopa_army faction members, recent knowledge of crackdown) and constructs: "goombas in world_1_3 are showing signs of organized resistance — crude graffiti, lookouts posted, patrol routes that avoid koopa checkpoints." This becomes concrete visual manifestation specs for the VME to render.
+
+**Three generation layers remain:**
+- `layer_1_compositional` — recombining existing assets (a goomba sprite + a protest sign prop)
+- `layer_2_contextual_variant` — modified pose/state/text (a goomba sprite with altered animation, a sign with specific text)
+- `layer_3_novel` — AI-generated assets for situations with no existing match
+
+**`cas_source` field** now references Claude's narrative interpretation rather than CAS threshold values. This means the causal chain for post-game reading goes: CAS state → Claude interpretation → visual manifestation, with both the CAS state and the interpretation logged for reconstruction.
+
+**Aesthetic and audio modifiers** are also produced by Claude's interpretation rather than computed from CAS formulas. Claude reads faction aggregates, player sphere state, and drama density signal, and outputs aesthetic_modifiers (palette_shift, saturation, darkness, decay) and audio_modifiers (tension, tempo, mode_shift, sparseness) as part of the unified interpretation. The principle from Decision 7 (identity stable, expression dynamic) still holds — modifiers push away from the meta home state and return to it, but the mapping from CAS state to modifier values is Claude-constructed rather than formula-computed.
+
+---
+
+## Quality Evaluation System
+
+Full specification: `docs/design/diagnostic-framework.md`
+
+The diagnostic framework is **largely unchanged** by the CAS redesign. The fast-fail funnel, Simulated Player Agent, Moment Extractor, Testing UI, and Pattern Distiller all work the same way.
+
+**What changes:**
+
+**Gate 1 (automated) adjustments:** Schema validation checks need updating to validate the new entity mind structure (affect.valence/arousal instead of disposition/emotional_state/motivations), the new faction state structure (resources only + computed aggregates), and the new CAS block structure (social_timer, previous_narrative).
+
+**Gate 2/3 behavioral conditions:** The conditions that evaluate entity behavior no longer reference CAS threshold crossings. Instead, they evaluate whether Claude's behavioral interpretations produce visible, legible, and dramatically interesting entity behavior. The same quality question applies ("does this entity's behavior feel motivated and alive?") but the answer comes from Claude's interpretation quality rather than threshold calibration.
+
+**Pattern Distiller tuning targets:** Instead of tuning threshold tables and behavioral legibility mappings, the Distiller tunes: (1) CAS_CONFIG rate constants (propagation rates, decay rates, consensus exponent, etc.), (2) Claude interpretation prompt quality (does Claude produce compelling situated interpretations from the primitive state?), (3) drama density calibration (are stagnation/melodrama signals firing at the right times?).
+
+**Diagnostic `cas_source` in visual manifestations:** Now logs Claude's interpretation text rather than threshold values, which actually makes post-hoc analysis richer — you can see exactly what Claude saw and how it interpreted it.
+
+---
+
+## Social Hook Design
+
+Social hooks are the mechanisms that draw the player from mechanical gameplay into social engagement. The CAS redesign changes HOW they're triggered but not WHAT they are or WHY they work.
+
+**Old trigger model:** CAS state crosses a threshold → social hook fires → entity does something unusual that catches the player's attention.
+
+**New trigger model:** Claude reads CAS state at episode boundary → Claude's multi-scale interpretation identifies narratively interesting entity states → Claude constructs behavioral directives that include social hooks as natural expressions of entity state. The hook is not "fired" by a threshold — it emerges from Claude recognizing that an entity's combination of affect, personality, and situation makes them ripe for player interaction.
+
+**Examples (unchanged, but now Claude-constructed rather than threshold-triggered):**
+- A goomba who stops patrolling and stands still, facing the player → Claude interprets: entity with near-zero arousal, negative valence, depleted social bonds. Behavioral directive: stop patrol, face player, posture defeated.
+- An enemy who flinches instead of attacking → Claude interprets: high arousal, negative valence, knowledge that player is extremely powerful, high-N personality. Behavioral directive: approach but hesitate, flinch on proximity, open to capture.
+- A koopa lieutenant who approaches the player cautiously during the between-episode window → Claude interprets: entity with mixed valence (negative about faction, tentatively positive about player from secondhand information), moderate arousal, high-C personality (deliberate, not impulsive). Behavioral directive: initiate contact during social surface window.
+
+**Social hooks in episode triggers** remain as the mechanical interface:
+```json
+{
+  "trigger_id": "social_hook_01",
+  "type": "entity_encounter",
+  "position": { "x": 475, "y": 192 },
+  "radius": 32,
+  "target_entity_id": "goomba_07",
+  "condition": "entity_alive_and_player_near",
+  "visual_cue": {
+    "type": "behavioral",
+    "description": "goomba stops patrol, faces player, posture uncertain"
+  }
+}
+```
+
+The difference is that these trigger specs are now produced by Claude's interpretation layer rather than by a deterministic CAS-to-behavior mapping. Claude decides which entities should be hook candidates based on the full narrative context.
 
 ---
 
@@ -265,76 +466,39 @@ Two Fires organizes game types into two layers: **engine clusters** (what gets b
 
 **Key rule:** The Experience Interpreter maps prompt *activities* to engine clusters based on mechanical feel, not genre labels. Any prompt can be served by finding the right engine cluster.
 
-**Shift mechanics:** Intra-cluster shifts (platformer → beat-em-up) = parameter swap, seamless. Cross-cluster shifts (platformer → racing) = rendering core switch, requires transition. All shifts at episode boundaries only (Decision 52).
+**Shift mechanics:** Intra-cluster shifts (platformer → beat-em-up) = parameter swap, seamless. Cross-cluster shifts (platformer → racing) = rendering core switch, requires transition.
 
-**CAS integration per paradigm:** Each paradigm spec defines social surface, social timer pace, drama density defaults, witness rules, and information propagation speed defaults.
+**CAS integration per paradigm (revised):** Paradigm specs no longer contain behavioral legibility threshold tables. Instead, each paradigm spec defines: (1) the **social surface** — where and how social interaction happens within that paradigm's mechanics, (2) the **social timer pace** — default game_pace_modifier for that paradigm type, (3) **drama density defaults** — min/max significant changes per cadence window, (4) **witness rules** — what constitutes line-of-sight/awareness for that paradigm (same screen in platformer, same room in RPG, visual range in RTS), (5) **information propagation speed** defaults — paradigm-specific rates for how fast knowledge packets travel.
 
-**⚠️ All numerical values in paradigm specs are starting estimates.** Calibrated through the diagnostic framework during testing.
-
----
-
-## Conversation System Design
-
-The conversation system connects to the CAS through the two-layer architecture:
-
-**What entities know:** Bounded by their knowledge list. Claude dialogue generation receives ONLY the entity's knowledge items + personality + affect state + bond to player (if any). Architecturally enforced, not prompt-managed.
-
-**What entities feel:** Constructed by Claude from affect primitives in context. Same entity, different context → different emotional expression.
-
-**What entities say:** Claude generates dialogue grounded in: (1) affect state, (2) OCEAN personality, (3) knowledge list, (4) bond to player, (5) faction context and role, (6) previous narrative interpretation, (7) paradigm's conversation surface.
-
-**Conversation outcomes as CAS events:** What the player says = information the entity receives (category 3 event). Player attention = arousal event (category 4). Promises, threats, intel sharing — each generates events with player as causal agent. Bond updates through attribution. Conversation is a CAS interaction, not a separate system.
-
-**`conversation_state`** tracking: `never_contacted` → `hailed_rejected` / `spoken_once` → `spoken_multiple` → `allied` / `betrayed`. Mechanical state for gating conversation depth, NOT emotional state.
-
-**No artificial conversation soft caps (Decision 40).** Claude plays each character naturally — length emerges from knowledge depth, personality, affect, and situation.
-
-**Player exchange budget (Decision 41).** Visible UI counter, X exchanges per 24 hours, tierable for monetization. Transforms API cost constraint into strategic game mechanic.
-
-**Named + Population entity architecture (Decision 42).** Named entities have full mind schemas. Population entities share faction template + minor variation. Population entities promote to named on first player conversation.
-
-**Emissary conversations (Decision 45).** Player instructs ally → single Claude API call with both entity schemas → emissary reports filtered through own personality. Extends player reach beyond exchange budget at cost of trust mediation.
-
----
-
-## The Lore System
-
-The Two Fires lore system is **unchanged** by recent redesigns. Full lore document: `docs/lore/two-fires.md`.
-
-Knowledge resolution layers (ambient/structural/actionable) work through CAS information propagation. The Giant/Overseer operates through the two-layer architecture — actions create CAS events, manipulations are Claude-directed NPC actions. Lore discovery is enhanced by the attribution system.
-
----
-
-## Manifestation Layer
-
-CAS state → Claude interprets at multiple scales in single call → produces unified output: narrative update + behavioral directives + visual manifestation specs + audio/aesthetic modifiers.
-
-**Three generation layers:**
-- `layer_1_compositional` — recombining existing assets
-- `layer_2_contextual_variant` — modified pose/state/text
-- `layer_3_novel` — AI-generated assets
-
-**Aesthetic and audio modifiers** produced by Claude's interpretation. Identity stable, expression dynamic (Decision 7).
-
-Full specification: `docs/design/vme-spec.md`
+**⚠️ All numerical values in paradigm specs are starting estimates.** Calibrated through the diagnostic framework during testing. Paradigm behavioral descriptions ("visible wavering," "patrol gaps") are examples of what Claude MIGHT produce, not deterministic mappings.
 
 ---
 
 ## Diagnostic & Tuning Framework Summary
 
-Full specification: `docs/design/diagnostic-framework.md`
+### Testing & Tuning Infrastructure (threaded through all phases)
+Two Fires uses a fast-fail diagnostic funnel to evaluate generated game quality efficiently. Full specification in `docs/design/diagnostic-framework.md`.
 
 **Fast-fail funnel:**
-- **Gate 1 (automated):** Does it run? Pathable? Latency OK? Schema valid?
-- **Gate 2 (Joe reviews clips, ~30-45s):** 5 Necessary Conditions — readable opening, physics character, teachability integrity, visual coherence, rhythm heartbeat. Any 👎 = fast fail.
-- **Gate 3 (Joe reviews clips, ~45-60s):** INUS Conditions — provocateur moment (now: Designer signature moment), aesthetic personality, social hook (Phase 5+), entity behavior (Phase 5+). Only if Gate 2 passes.
-- **Gate 4 (periodic):** Holistic playthroughs, 5-15 minutes.
+- **Gate 1 (automated):** Does it run? Is it pathable? Latency OK? Schema valid?
+- **Gate 2 (Joe reviews clips, ~30-45s):** 5 Necessary Conditions — readable opening, physics character (comparison clip), teachability integrity, visual coherence, rhythm heartbeat. Any 👎 = fast fail.
+- **Gate 3 (Joe reviews clips, ~45-60s):** INUS Conditions — provocateur moment, aesthetic personality, social hook (Phase 5+), entity behavior (Phase 5+). Only evaluated if Gate 2 passes.
+- **Gate 4 (periodic):** Holistic playthroughs, 5-15 minutes. Calibration and spot-checks.
 
-**Rating system:** 👎 / 👍 / 🔥 + optional text
+**Rating system:** 👎 (below threshold) / 👍 (above threshold) / 🔥 (exceptional) + optional text rationale
 
-**Diagnostic agents:** Simulated Player Agent, Moment Extractor, Comparative Diagnostician, Archetype Stress-Tester, Pattern Distiller (→ Living Taste Document).
+**Diagnostic agents:**
+- Simulated Player Agent — automated pathfinding + timeline recording
+- Moment Extractor — clips diagnostically meaningful moments for Joe's review
+- Comparative Diagnostician — variance analysis across multiple generations of same prompt
+- Archetype Stress-Tester — canonical prompt battery, regression detection
+- Pattern Distiller — converts Joe's ratings into transferable design principles (Living Taste Document)
 
-**Primary tuning targets:** CAS_CONFIG rate constants, Claude interpretation prompt quality, drama density calibration, Designer vision quality, Builder construction quality, game-type taste profile calibration.
+**Primary tuning targets:** CAS_CONFIG rate constants, Claude interpretation prompt quality, drama density calibration per paradigm.
+
+**Testing UI:** Zero-navigation card-based web interface. Phase-aware. Two modes: Review (pre-generated queue) and Generate (type prompt → evaluate). Principles tab for approving/rejecting distilled taste principles.
+
+**Phase-gating:** Conditions activate as systems come online. Phase 1 has 3 NCs. Phase 2 has 5 NCs + 2 INUS. Phase 5+ adds social conditions. Each phase starts with more holistic playthroughs to calibrate, then shifts to the faster clip-based funnel.
 
 ---
 
@@ -344,52 +508,38 @@ Full specification: `docs/design/diagnostic-framework.md`
 Pre-game:
   Experience Interpreter
     → Artistic Director
-    → Game Visual Identity generator (Track B only)
     → Design Philosopher
-    → Game Compiler (expanded: CAS initial conditions, social graph,
-                     personality distributions, social timer pace,
-                     drama calibration, skeleton instantiation,
-                     social hook placement, initial narrative,
-                     knowledge distribution, population templates,
-                     named entity individuation,
-                     SNES Comfort Model forgiveness parameters)
-
-Per-episode level construction:
-  Game Compiler produces Episode Brief
-    → Designer produces Episode Vision
-    → For each section:
-        Builder constructs → Validator verifies → Designer evaluates taste
-    → Episode served; Vocabulary Record Update written
+    → Dramaturgical Agent (setup: CAS initial conditions, social graph topology,
+                           personality distributions, social timer pace, drama calibration,
+                           initial narrative)
+    → Grammarian → Rhythmist → Game Compiler → Cartographer
+    → Provocateur → Coherence Auditor
 
 Runtime loop:
   CAS engine ticks on social timer (deterministic, continuous)
-    → affect propagation, information propagation, bond dynamics,
-       faction aggregates, drama density evaluation
+    → affect propagation through bonds
+    → information propagation through bonds
+    → bond dynamics (attribution-based changes, shared experience, decay)
+    → faction aggregate computation
+    → drama density evaluation
   
-  At paradigm tick (episode boundary):
+  At paradigm tick (episode boundary, social encounter):
     → Claude receives: CAS snapshot + previous narrative + drama signal
-        + skeleton context
-    → Claude interprets at multiple scales
-    → Claude produces: narrative update, behavioral directives,
-        visual/audio/aesthetic specs, faction leadership decisions (→ CAS events),
-        mechanical thesis
-    → Game Compiler produces Episode Brief
-    → Construction pipeline: Designer → Builder → Validator
-    → VME resolves visual/audio directives
-    → Next episode rendered
+    → Claude interprets at multiple scales (ecology → faction → cluster → player sphere)
+    → Claude produces: narrative update, entity behavioral directives,
+        faction leadership decisions, visual/audio/aesthetic specs
+    → Leadership decisions become CAS events → processed next cycle
+    → Behavioral directives → paradigm engine renders behavior
+    → Visual specs → Visual Manifestation Engine renders scene
+  
+  Player acts → events enter CAS → cycle continues
 
-  Player conversations:
-    → Exchange budget system, CAS events generated
-    → Population → named promotion on first contact
-
-  Emissary delegation:
-    → Single API call, personality-filtered report
-
-Diagnostic wrapper:
+Diagnostic wrapper (per generated game):
   Simulated Player Agent → Gate 1 auto-checks
-  → Moment Extractor → Testing UI → Joe rates (👎/👍/🔥)
-  → Pattern Distiller → Living Taste Document
-  → Feeds back into taste profiles + Designer prompts + CAS_CONFIG
+  → Moment Extractor clips diagnostic moments
+  → Testing UI presents clips to Joe
+  → Joe rates (👎/👍/🔥) → Pattern Distiller processes
+  → Approved principles feed back into CAS_CONFIG tuning + Claude prompt refinement
 ```
 
 ---
@@ -398,63 +548,19 @@ Diagnostic wrapper:
 
 ```
 Player prompt
-  → Skeleton (~10-15s): paradigm grammar instantiation
-      + SNES Comfort Model defaults (forgiveness parameters)
-      + Game Visual Identity (Track B)
-      + Knowledge distribution + population templates + named entities
-      + Layer 3 initial assets
-  → Episode 1:
-      Game Compiler produces Episode Brief from skeleton
-      → Designer produces Episode Vision (with taste profile)
-      → Builder constructs sections (Claude, Sonnet)
-      → Validator checks each section (deterministic)
-      → Designer taste-checks each section (cumulative experience model)
-      → Episode served; Vocabulary Record Update written
+  → Skeleton (~10-15s): paradigm, CAS initial conditions, aesthetics,
+    narrative premises, social hooks, social timer pace, initial narrative
+  → Episode 1 generates (content agents + prompt-time character/environment sprites)
   → Player plays Episode 1 (CAS evolving on social timer)
-  → Social hook at episode 1-2 boundary
-  → Player conversations consume exchange budget, generate CAS events
   → At episode boundary:
-      CAS snapshot → Claude interpretation → Episode Brief → construction pipeline
+    → CAS snapshot taken
+    → Claude interpretation call (multi-scale: ecology → faction → cluster → player sphere)
+    → Claude produces: narrative update, behavioral directives, visual/audio specs,
+        faction leadership decisions (→ CAS events)
   → Between-episode window (triple duty):
-      1. Player social interaction surface
-      2. CAS narrative delivery
-      3. Generation masking (construction + VME + Layer 2/3 assets)
-  → Episode 2+ with accumulated state + vocabulary record
-  → [repeat, with skeleton adapting if override conditions met]
+      1. Player social interaction surface (conversations = CAS events)
+      2. CAS narrative delivery (cutscenes, dialogue, reveals — from Claude interpretation)
+      3. Generation masking (next episode content + new visual assets from interpretation)
+  → Episode 2 generates incorporating Claude interpretation + CAS state
+  → [repeat]
 ```
-
----
-
-## Quality Evaluation System
-
-The diagnostic framework evaluates Designer + Builder output quality:
-
-**Gate 2/3 conditions updated for Thread 9:**
-- NC2 (physics character): Does the game feel SNES-comfortable? Forgiveness parameters within comfort model?
-- INUS-1 (previously "provocateur moment"): Now evaluates **Designer signature moment** — does the episode have at least one moment that feels intentionally surprising or delightful?
-- Entity behavior conditions (Phase 5+): Unchanged — evaluates Claude's behavioral interpretations.
-
-**Pattern Distiller tuning targets updated:**
-- CAS_CONFIG rate constants (unchanged)
-- Claude interpretation prompt quality (unchanged)
-- Drama density calibration (unchanged)
-- **Designer Episode Vision quality** — does the Designer produce compelling, specific visions?
-- **Builder construction quality** — does the Builder produce sections that serve the Designer's vision?
-- **Taste profile calibration** — are the right things valued for each game type?
-- **Living Taste Document** — accumulates from Joe's 🔥 ratings into transferable design principles that feed the Designer
-
----
-
-## Social Hook Design
-
-Social hooks draw the player from mechanical gameplay into social engagement. Claude reads CAS state at episode boundary → identifies narratively interesting entity states → constructs behavioral directives as natural expressions of entity state. One designed hook at episode 1-2 boundary, placed by Game Compiler.
-
----
-
-## Entity Population Architecture
-
-**Named entities:** Full mind schema (OCEAN, affect, knowledge, bonds, conversation_state). Individually realized by Game Compiler at creation.
-
-**Population entities:** Share faction template + minor OCEAN variation. No individual knowledge beyond faction defaults. On first player contact, promoted to named: assigned unique name, individual OCEAN offsets calculated, initial knowledge populated, bond to player created. Population entities can also be promoted by Claude's interpretation when narratively significant events occur near them.
-
-**Emissary system:** Player delegates conversations through allies. Single API call with dual schemas. Personality-filtered reports. Extends reach beyond exchange budget.
