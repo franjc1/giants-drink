@@ -1,73 +1,49 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-08 (Phase 1, Session 6)
+**Last updated:** 2026-03-09 (Phase 1, Session 6)
 
 ---
 
 ## What Just Happened (Session 6)
 
-### Engineering session: Track A/B Asset Resolver + sprite rendering
+### Massive infrastructure session: Complete audio-visual foundation + asset pipeline + R2 deployment
 
-**New files:**
-- `src/asset-resolver.js` — full three-layer resolver with Track A/B toggle
+**Scrapers completed:**
+- Sprite scraper finished: 55,679 sheets across 12 platforms (NES, SNES, Genesis, Game Boy, GBA, Master System, Sega CD, Game Gear, TurboGrafx-16, Neo Geo, Arcade, DOS)
+- Music scraper finished: 7,068 games, 103,262 tracks across 7 platforms
+- Both indexes committed to git
 
-**Updated files:**
-- `src/renderer.js` — sprite sheet rendering via drawImage; colored rect fallback unchanged
-- `src/entities.js` — calls resolveAsset() for each entity at build time; stores resolvedAsset on entity
-- `src/game-loop.js` — reads ?track=a|b URL param; inits resolver before level load; resolves player asset
-- `data/test-fixtures/episode1.json` — added asset_context (SMW/SNES), asset_spec to entity_placements
-- `data/test-fixtures/episode2.json` — added asset_context (MM2/NES), asset_spec to entity_placements
-- `index.html` — hint text updated to mention ?track= param
+**Four-script asset pipeline built and run:**
+1. `tools/enrich-sheet-names.js` — fetched TSR game pages for all 6,699 games, recovered human-written sheet names for 55,721/55,722 sheets (99.998% coverage). Writes `asset-catalog.json` as the single source of truth.
+2. `tools/analyze-music.js` — parsed NSF/SPC/VGM/GBS headers and M3U playlists for all 7,068 games. Extracted track names, composers, durations, chip types. Classified 51,931 tracks into functional roles (stage, boss_battle, title, victory, etc.). Writes `music-catalog.json`.
+3. `tools/analyze-sprites.js` — programmatic image analysis of all 55,722 sprite sheets via `sharp`. Extracted color counts, dominant palettes, palette temperature, grid spacing, transparency type. Updates `asset-catalog.json` programmatic_tags field.
+4. `tools/tag-sprites.js` — Claude Haiku vision API tagging for entity identification, bounding boxes, named characters, animation states. Scoped to essential+nice categories (player, enemy, boss, npc, item, tileset, background, character, portrait) for all games PLUS stage maps for top 500 games = ~26,640 sheets at ~$106 estimated cost. **Currently running** with 5 concurrent requests, ~15 hour estimated completion.
 
-**Asset resolver: three-layer lookup**
-- Layer 1: vision_tags named_character match within specified game slug
-- Layer 2: semantic match within game (category + style_reference)
-- Layer 3: platform + category fallback, prefers sheets with vision_tags, returns null if no vision_tags
-- Track B: always returns null → renderer draws colored rects (correct dimensions)
+**Track A/B Asset Resolver built (Claude Code Session 6):**
+- `src/asset-resolver.js` — three-layer lookup: Layer 1 (named_character match), Layer 2 (semantic tag match), Layer 3 (platform/category fallback)
+- `ASSET_MODE` toggle via `?track=a` or `?track=b` URL param
+- Track A returns real sprite sheet URL + bounding box from vision_tags
+- Track B returns null → renderer draws colored rectangles (stub for Phase 3 generation)
+- Resolved assets stored on entity at build time, not per-frame
 
-**Current resolution behavior (tagging pipeline still in progress):**
-- SNES (episode1): 0 vision_tags → Track A falls back to null → colored rects (same as Track B)
-- NES (episode2): 896 NES entries with vision_tags → Track A Layer 3 WILL find real NES sprites
-  - 43 enemy sheets, 289 player sheets with vision_tags on NES platform
-  - Will not find Mega Man 2 specifically (no vision_tags yet) but will find closest NES enemy/player
-- When vision_tags arrive for SMW and MM2, Layers 1+2 will activate automatically — no code changes needed
+**Renderer updated for sprite sheets:**
+- `src/renderer.js` — loads sprite sheet PNGs as Image objects with caching
+- Draws entity sprites using `drawImage` with source rectangle clipping
+- Falls back to colored rectangles if sprite not loaded or Track B mode
 
-**Architecture decision:** resolvedAsset stored on entity at build time (not per-frame). Re-builds when loadLevel() called. This keeps the hot render loop clean.
+**Fixtures updated:**
+- Both episode1.json and episode2.json now include `asset_context` and per-entity `asset_spec` fields
 
----
+**Cloudflare R2 deployed:**
+- R2 bucket `two-fires-assets` created and activated
+- Public URL: `https://pub-ecf4e311bd274041bb08e03235ca660e.r2.dev/`
+- `asset-catalog.json` uploaded and accessible
+- `tools/upload-to-r2.cjs` — upload script for bulk sprite upload
+- NES sprites uploading (~5,177 PNGs, in progress)
+- Resolver fetches catalog and sprite sheets from R2, not local filesystem
+- This is the permanent asset storage solution (Decision 64 fulfilled)
 
-## What Just Happened (Session 5)
-
-### Design session: Difficulty philosophy and meta-objective structure
-
-No engineering this session — this was a design conversation that produced foundational principles affecting the entire system.
-
-**Difficulty philosophy refined (Decision 67):**
-- Extended Decision 53 (SNES Comfort Model) with a stronger claim: mechanical difficulty is texture, not content. Social dynamics are the primary difficulty vector.
-- Calibration range: Super Mario World (baseline) to A Link to the Past (hard edge). Mario Kart 50cc→150cc as the mental model. Mega Man X slightly out of range; NES Mega Man and DKC2 well out of range.
-- Self-balancing loop: social opposition → game gets mechanically harder → pushes player toward social solutions. Social success → game gets mechanically easier → social complexity increases. Player always drawn toward Two Fires' core differentiator.
-
-**Social-to-mechanical manifestation (Decision 68):**
-- CAS states manifest as gameplay consequences through Claude's interpretation layer with full creative latitude.
-- No fixed taxonomy — explicitly rejected building a manifestation lookup table.
-- Mild-to-extreme examples provided as illustrations of creative range, not an exhaustive menu.
-- Key principle: mechanical difficulty that exceeds solo capability is a signal prompting social engagement, not a wall.
-
-**Paradigm migration expectation (Decision 69):**
-- Games expected to naturally migrate toward multi-character paradigms (beat-em-up, tactical, RTS-like) as social complexity increases.
-- Should emerge from existing shift triggers, not be prescribed.
-- Variety is critical — if every game follows the same migration path, that's a tuning signal.
-
-**Post-game continuation (Decision 70):**
-- "Winning" a generated game is a transition, not an endpoint. CAS continues, world persists.
-- Meta-objective (reaching the giant, recovering the two fires) becomes the primary driver.
-- Requires cross-world achievements: raising armies, alliances, artifacts, sacrifices.
-- Meta-game structure flagged as needing its own specification thread.
-
-**claude.md updated:**
-- New "Difficulty Philosophy" subsection in Design Philosophy
-- New "Post-Game and Meta-Objective Structure" subsection
-- Both reference relevant decisions
+**Asset-catalog.json is gitignored** — at 105MB it exceeds GitHub's file size limit. Lives on R2 as the canonical location. The resolver loads it from R2 at runtime.
 
 ---
 
@@ -76,77 +52,100 @@ No engineering this session — this was a design conversation that produced fou
 ### File Structure
 ```
 giants-drink/
-  claude.md                          ← UPDATED Session 5 (difficulty + meta-objective)
-  .gitignore                         ← sprites + music gitignored
-  index.html                         ← entry point (hint updated for ?track= param)
+  claude.md                          ← P1S5 version (needs Decision 71 edits)
+  .gitignore                         ← sprites, music, asset-catalog.json gitignored
+  package.json                       ← type: "module", sharp installed
+  index.html                         ← entry point, ?track= hint text
   src/
-    game-loop.js                     ← loadLevel(url), URL params, level select overlay, resolver init
-    renderer.js                      ← offscreen canvas + sprite sheet rendering (Track A/B)
+    asset-resolver.js                ← NEW: three-layer resolver, Track A/B toggle
+    game-loop.js                     ← UPDATED: reads ?track= param, inits resolver
+    renderer.js                      ← UPDATED: sprite sheet rendering via drawImage
     physics.js                       ← two-phase gravity, reads from fixture
     input.js                         ← keyboard input
-    entities.js                      ← enemy patrol + resolveAsset() at build time
+    entities.js                      ← UPDATED: calls resolveAsset() per entity
     collision.js                     ← tilemap + entity collision
     camera.js                        ← smooth follow with integer rounding
-    state.js                         ← dynamic mapW/mapH/tileSize set at load time
-    asset-resolver.js                ← NEW: Track A/B resolver, 3-layer catalog lookup
+    state.js                         ← dynamic mapW/mapH/tileSize
   data/
     test-fixtures/
-      episode1.json                  ← SMW physics, 210×15, 3 entities, asset_context (SMW/SNES)
-      episode2.json                  ← Mega Man 2 physics, 90×15, 4 entities, asset_context (MM2/NES)
+      episode1.json                  ← UPDATED: asset_context (SMW/SNES) + asset_specs
+      episode2.json                  ← UPDATED: asset_context (MM2/NES) + asset_specs
     ground-truth/                    ← Phase 0.5 ingestion (~37MB JSON/text)
     assets/
-      sprites/                       ← [gitignored PNGs — scraper complete, 55K+ sheets]
-      music/                         ← [gitignored chiptune files]
-      asset-catalog.json             ← 55,722 entries, 1,296 with vision_tags (NES+arcade only so far)
-      asset-index.json               ← committed
-      tag-log-all.txt                ← tagging pipeline progress log
+      sprites/                       ← [local only, gitignored] 55K+ PNGs
+      music/                         ← [local only, gitignored] chiptune files
+      asset-index.json               ← scraper's index (committed)
+      asset-catalog.json             ← [local + R2, gitignored] 105MB master catalog
+      music-index.json               ← committed
+      music-catalog.json             ← NEW: enriched music data (committed)
+      game-list.json                 ← master game list (committed)
   tools/
-    scrape-sprites.js                ← sprite scraper (resumable)
-    scrape-music.js                  ← music scraper (resumable)
+    scrape-sprites.js                ← sprite scraper (complete)
+    scrape-music.js                  ← music scraper (complete)
+    enrich-sheet-names.js            ← NEW: TSR sheet name fetcher
+    analyze-music.js                 ← NEW: music header/playlist parser
+    analyze-sprites.js               ← NEW: programmatic image analysis
+    tag-sprites.js                   ← NEW: Claude Haiku vision tagger (v2)
+    upload-to-r2.cjs                 ← NEW: bulk R2 upload script
     gen-episode2.js                  ← episode 2 level generator
   docs/
-    current-status.md                ← UPDATED this session
-    decisions-log.md                 ← UPDATED Session 5 (Decisions 67-70)
+    current-status.md                ← THIS FILE
+    decisions-log.md                 ← UPDATED: Decisions 67-73
     design/
+      game-state-schema.md
       asset-resolution-strategy.md
+      build-plan-v4.md               ← NEEDS UPDATE (Decision 71)
       ... (other design docs)
 ```
 
 ### Deployed
-- Vercel: two-fixture platformer with level select, SMW + Mega Man 2 physics, Track A/B toggle
+- Vercel: two-fixture platformer with level select, Track A/B toggle
+- Cloudflare R2: `two-fires-assets` bucket with asset-catalog.json + sprites (uploading)
+
+### In Progress (background)
+- Vision tagger: running NES → SNES → Genesis → all remaining platforms (~15 hours, ~$106)
+- NES sprite upload to R2: ~5,177 PNGs uploading
 
 ---
 
 ## What's Next
 
-### Immediate
-- Deploy to Vercel: verify ?track=a and ?track=b both work in browser
-- Test episode2 with ?track=a — should show real NES sprites (Layer 3 NES enemy/player from catalog)
-- Test episode1 with ?track=a — should show colored rects (SNES has no vision_tags yet)
+### Immediate: When Vision Tagger Finishes
+1. Check error rate: should be <5%
+2. Re-upload updated `asset-catalog.json` to R2: `wrangler r2 object put two-fires-assets/asset-catalog.json --file data/assets/asset-catalog.json --remote`
+3. Upload SNES and Genesis sprites to R2 (same upload script, different platform arg)
+4. Verify Track A rendering with tagged sheets (episode2 + NES sprites should show real pixel art)
 
-### When Vision_Tags Pipeline Finishes for SNES/MM2
-- No code changes needed — Layer 1 will activate automatically when SMW/MM2 get vision_tags
-- Track A episode1 will then show real SMW sprites; episode2 will show real MM2 sprites
+### Immediate: Repo Maintenance
+- Apply Decision 71 edits to `claude.md` (build-plan-v4 reference + cluster scope note)
+- Commit `music-catalog.json`
+- Commit all new tools
 
-### Next Engineering Session (Phase 1, Session 7): Options
-1. **Real SMW level layout as fixture 3** — parse stage map PNGs or use ground-truth data
-2. **Tileset sprite rendering** — apply Track A to tile rendering (currently solid colors)
-3. **Animation frames** — cycle through animationFrames[] in renderer for walk cycles
-4. **Audio stub** — Web Audio API, play a simple chiptune loop from audio_profile params
+### Next Engineering Work (Phase 1, Sessions 7-8): Diagnostic Pipeline
+- Validator — deterministic pathfinding, reachability, teachability arc checks
+- Simulated Player Agent — automated play-through, death logging, timeline recording
+- Moment Extractor v1 — auto-clip diagnostic moments
+- Testing UI v1 — card-based clip review app
+- Gate 1 auto-checks — runs? spawns? completable? latency?
+
+### Remaining Phase 1 (Sessions 9-18, per Decision 71)
+- Engine clusters 2-4: Top-Down Tile World, Stage/Arena, Scrolling Shooter (~1-2 sessions each)
+- Engine clusters 5-7: Pseudo-3D, Raycasting, Strategic Map (~2-3 sessions each)
 
 ### Future Design Work
-- **Meta-game specification thread** — how worlds interconnect, what the giant confrontation looks like, what cross-world achievements entail, how the post-game CAS evolves
-- Per-paradigm difficulty calibration (Phase 1 playtesting)
-- Social-to-mechanical manifestation tuning (Phase 1+ playtesting)
-- Paradigm migration variety diagnostics (later phases)
+- Meta-game specification thread (Decision 70)
+- Per-paradigm grammar specs (deferred from Thread 4)
+- Upload remaining platforms to R2 as tagger completes them
 
 ---
 
 ## Key Open Questions
-1. Cloud storage for sprite/music library — Cloudflare R2 vs S3, when to upload
+1. ~~Cloud storage~~ → Cloudflare R2 deployed (RESOLVED)
 2. Track B distributional analysis — how to extract statistical models from sprite library
 3. Real SMW level as test fixture — parsing stage map PNGs into tilemap data
-4. Asset Resolver matching strategy — Layer 1 (name match), Layer 2 (semantic tags), Layer 3 (Claude runtime)
-5. claude.md repo sync — now includes Thread 3→9 + difficulty philosophy + meta-objective
+4. ~~Asset Resolver matching strategy~~ → Three-layer lookup built (RESOLVED)
+5. ~~claude.md repo sync~~ → Current through P1S5 (RESOLVED, pending Decision 71 edit)
 6. Physics fidelity — current values are from ROM data but engine feel doesn't match 1:1 yet
 7. Meta-game specification — flagged as needing its own thread (Decision 70)
+8. R2 upload automation — remaining platforms (SNES, Genesis, etc.) need uploading after tagger completes
+9. Vision tagger error handling — arcade platform has higher error rate (~2.4%), may need retry pass

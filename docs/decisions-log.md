@@ -967,3 +967,58 @@ Phase 1 grows from ~7 sessions to ~16-18 sessions. Total project grows from ~45 
 3. **Marginal cost is low.** Session 4 proved the generalized architecture works. Clusters 2-4 are parameter variations of Cluster 1. Even Clusters 5-7, while requiring new rendering cores, benefit from shared infrastructure (level loader, input, entity system, Asset Resolver, display scaling). Estimated 1-2 sessions per cluster for the 2D family, 2-3 for the different-renderer family.
 
 See `docs/design/build-plan-v4.md` for the updated session plan.
+## Session: 2026-03-08/09 — Phase 1 Session 6 (Asset Pipeline, Resolver, R2 Deployment)
+
+### Decision 72: Single Canonical Asset Catalog (asset-catalog.json)
+
+**Context:** The sprite scraper produces `asset-index.json` (structural: file paths, dimensions, platform). The sheet name enrichment adds TSR metadata. The programmatic analyzer adds color/palette data. The vision tagger adds entity identification and bounding boxes. These could be separate files or layered onto one.
+
+**Decision:** One file rules them all. `asset-catalog.json` is the single source of truth for the entire asset pipeline. All four analysis scripts write to it (structural metadata, sheet names, programmatic tags, vision tags). The Asset Resolver reads this one file. No parallel indexes.
+
+Each entry has `programmatic_tags` and `vision_tags` fields that start null and get populated as the respective pipelines run. The resolver degrades gracefully — Layer 1 needs vision_tags, Layer 2 needs vision_tags, Layer 3 falls back to programmatic_tags and structural metadata.
+
+**Rationale:** Non-spaghetti principle. Multiple parallel index files drift, get out of sync, and create "which file has the real data" confusion downstream. One file, one schema, one place to look. The tradeoff (105MB file) is handled by hosting on R2 rather than in git.
+
+---
+
+### Decision 73: Cloudflare R2 as Permanent Asset Storage
+
+**Context:** `asset-catalog.json` is 105MB (exceeds GitHub's 100MB file limit). Sprite PNGs total ~15-20GB across all platforms. Both need to be accessible at runtime for the game to render real sprites. Decision 64 flagged cloud storage as needed; this session implements it.
+
+**Decision:** Cloudflare R2 bucket `two-fires-assets` is the canonical storage for all asset data:
+- `asset-catalog.json` — the master catalog (loaded by resolver at runtime)
+- `data/assets/sprites/{platform}/{game}/{category}/{id}.png` — all sprite sheets
+- Music files deferred to R2 until needed at runtime (Phase 3)
+
+Public URL: `https://pub-ecf4e311bd274041bb08e03235ca660e.r2.dev/`
+
+The Asset Resolver in `src/asset-resolver.js` fetches the catalog and sprite sheets from R2. Local files are for development and pipeline processing only. Git tracks code and committed indexes but NOT the large catalog or sprite PNGs.
+
+Upload workflow: `wrangler r2 object put two-fires-assets/{key} --file {local-path} --remote`. Bulk upload via `tools/upload-to-r2.cjs`.
+
+**Rationale:** R2 free tier (10GB storage, 10M reads/month) covers current and near-future needs with zero cost. No egress fees (unlike S3). Public bucket URL means no authentication needed — the game fetches assets directly. Separating asset storage from git keeps the repo clean and deployable while making the full sprite library available at runtime.
+
+---
+
+### Decision 74: Vision Tagging Scope — Essential+Nice Categories + Top 500 Stage Maps
+
+**Context:** 55,722 sprite sheets could all be vision-tagged via Claude Haiku, but at ~$0.004/sheet that's ~$223. Budget is $150 in API credits. Need to prioritize.
+
+**Decision:** Tag 26,640 sheets (~$106 estimated):
+- **Essential categories** (all games): player, enemy, boss, npc, item, tileset — 13,058 sheets. These are the sprites the game needs to identify by entity name and provide bounding boxes for.
+- **Nice-to-have categories** (all games): background, character, portrait — 7,845 sheets. Useful for visual identity knowledge and Track B distributional data.
+- **Stage maps** (top 500 games only): 5,737 sheets. Level design structural knowledge for the most referenced games.
+
+Skipped: misc (26,435 sheets — mostly UI fonts, title screen variants, animation frame dumps), stage maps for non-top-500 games, cutscenes, UI elements. These can be tagged later if needed.
+
+**Rationale:** Essential+Nice categories across ALL games gives broad entity identification for Track A matching and Track B distributional knowledge. Stage maps for top 500 games adds level design knowledge for the most-referenced titles. The 35K skipped sheets are predominantly low-value for entity identification ("Title Screen Font Variant 3" doesn't help make better games). Budget stays within the $150 credit balance.
+
+---
+
+### Decision 75: Music Catalog with Functional Role Classification
+
+**Context:** The music library has 103,262 tracks across 7,068 games. Track filenames and M3U playlists contain rich metadata (track names, composers, durations). This data needs to be structured for the Asset Resolver to answer queries like "give me a boss battle theme from an NES action platformer."
+
+**Decision:** `music-catalog.json` enriches the raw `music-index.json` with per-track data extracted from file headers (NSF, SPC, VGM, GBS) and playlists (M3U). Each track gets a `role` classification: title, stage_generic, stage_dungeon, stage_ice, boss_battle, victory_jingle, game_over, ending, shop, battle, etc. Classification is programmatic pattern matching on track names. 51,931 tracks classified; ~26,000 remain "unknown" (mostly numeric names or non-English titles — refinable later).
+
+**Rationale:** The functional role classification is the key enabler for music selection in generated games. Without it, the system can find "a track from Mega Man 2" but not "a boss battle theme from an NES platformer." The programmatic classification covers the majority of English-named tracks at zero API cost. The "unknown" bucket can be refined with Haiku later if needed.
