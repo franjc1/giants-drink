@@ -157,12 +157,62 @@ function hexToBytes(hex) {
 //   - Attr bits [1:0] = palette (0-3), bit 5 = priority, bits 6-7 = flip
 // ---------------------------------------------------------------------------
 
-// SMB1 uses PPUCTRL=$90: BG pattern table at $1000, sprite pattern table at $0000.
-// TODO: read DATA_PPUCTRL from extraction to detect automatically.
-const BG_PATTERN_TABLE    = 0x1000; // CHR byte offset for background tiles
-const SPRITE_PATTERN_TABLE = 0x0000; // CHR byte offset for sprite tiles
+// Derive pattern table bank offsets from PPUCTRL.
+// Bit 4 = BG pattern table: 0 → $0000, 1 → $1000
+// Bit 3 = sprite pattern table: 0 → $0000, 1 → $1000
+//
+// HEURISTIC: Mesen's nesPpuDebug[0] doesn't reliably return PPUCTRL for all games.
+// When the raw value is 0, we check which bank has an all-zero tile 0 (the blank tile).
+// Nearly every game uses tile 0 as blank in the active BG bank.
+function ppuctrlToBanks(ppuctrl, chr, nametable) {
+  let ppuVal = typeof ppuctrl === 'string' ? parseInt(ppuctrl, 10) : ppuctrl;
+  if (isNaN(ppuVal)) ppuVal = 0;
 
-function renderNESScreen(palette, nametable, oam, chr, nesPalette) {
+  // If PPUCTRL reads as 0, the register may not have been captured correctly.
+  // Apply heuristic using nametable tile coverage:
+  //   For each non-zero tile index used in the nametable, check which CHR bank
+  //   has non-zero pixel data for that tile. The bank with more hits = BG bank.
+  //   Fallback: if nametable is unavailable, check which bank has blank tile 0.
+  if (ppuVal === 0 && chr && chr.length >= 8192) {
+    let bank0Score = 0, bank1Score = 0;
+    if (nametable && nametable.length >= 960) {
+      const usedTiles = new Set();
+      for (let i = 0; i < 960; i++) { if (nametable[i] !== 0) usedTiles.add(nametable[i]); }
+      for (const ti of usedTiles) {
+        const off0 = ti * 16, off1 = 4096 + ti * 16;
+        const nz0 = off0 + 16 <= 4096 ? chr.slice(off0, off0 + 16).some(b => b !== 0) : false;
+        const nz1 = off1 + 16 <= chr.length ? chr.slice(off1, off1 + 16).some(b => b !== 0) : false;
+        if (nz0) bank0Score++;
+        if (nz1) bank1Score++;
+      }
+      console.log(`  PPUCTRL heuristic (nametable coverage): bank0=${bank0Score} bank1=${bank1Score} of ${usedTiles.size} tiles`);
+    } else {
+      // Fallback: blank tile 0 heuristic
+      const tile0bank0 = chr.slice(0, 16).every(b => b === 0);
+      const tile0bank1 = chr.slice(4096, 4112).every(b => b === 0);
+      bank0Score = tile0bank0 ? 1 : 0;
+      bank1Score = tile0bank1 ? 0 : 1; // prefer bank1 if its tile0 is blank
+      console.log(`  PPUCTRL heuristic (tile0 fallback): bank0blank=${tile0bank0} bank1blank=${tile0bank1}`);
+    }
+    if (bank1Score > bank0Score) {
+      ppuVal = 0x10; // BG at $1000
+      console.log('  → BG at $1000');
+    } else if (bank0Score >= bank1Score) {
+      ppuVal = 0x00; // BG at $0000
+      console.log('  → BG at $0000');
+    } else {
+      console.warn('  PPUCTRL heuristic inconclusive — defaulting BG=$0000');
+    }
+  }
+
+  const bgBase  = (ppuVal & 0x10) ? 0x1000 : 0x0000;
+  const sprBase = (ppuVal & 0x08) ? 0x1000 : 0x0000;
+  console.log(`  PPUCTRL=$${ppuVal.toString(16).toUpperCase().padStart(2,'0')}: BG=$${bgBase.toString(16).toUpperCase().padStart(4,'0')}, sprites=$${sprBase.toString(16).toUpperCase().padStart(4,'0')}`);
+  return { bgBase, sprBase };
+}
+
+function renderNESScreen(palette, nametable, oam, chr, nesPalette, ppuctrl) {
+  const { bgBase, sprBase } = ppuctrlToBanks(ppuctrl, chr, nametable);
   const W = 256, H = 240;
   // RGBA pixel buffer
   const pixels = new Uint8Array(W * H * 4);
@@ -198,8 +248,8 @@ function renderNESScreen(palette, nametable, oam, chr, nesPalette) {
       const subY = Math.floor(ty / 2) % 2; // 0=top,  1=bottom
       const paletteNum = (attrByte >> ((subY * 2 + subX) * 2)) & 3;
 
-      // CHR tile data: BG pattern table (SMB1: bank 1 at $1000)
-      const chrBase = BG_PATTERN_TABLE + tileIdx * 16;
+      // CHR tile data: BG pattern table (PPUCTRL bit 4 selects bank)
+      const chrBase = bgBase + tileIdx * 16;
 
       for (let py = 0; py < 8; py++) {
         const plane0 = chr[chrBase + py];
@@ -238,8 +288,8 @@ function renderNESScreen(palette, nametable, oam, chr, nesPalette) {
 
       if (sprY >= 240) continue; // off-screen
 
-      // Sprite tiles: sprite pattern table (SMB1: bank 0 at $0000)
-      const chrBase = SPRITE_PATTERN_TABLE + sprTile * 16;
+      // Sprite tiles: sprite pattern table (PPUCTRL bit 3 selects bank)
+      const chrBase = sprBase + sprTile * 16;
 
       for (let py = 0; py < 8; py++) {
         const srcPy = flipV ? 7 - py : py;
@@ -307,7 +357,21 @@ async function main() {
   const oam       = hexToBytes(raw.DATA_OAM);       // 256 bytes
   const chr       = hexToBytes(raw.DATA_CHR);       // 8192 bytes
 
+  const chrSource = raw.DATA_CHR_SIZE ? (hexToBytes(raw.DATA_CHR).length > 0 ? 'VRAM/CHR' : 'empty') : 'none';
   console.log(`\nDecoded: palette=${palette.length}B nametable=${nametable.length}B oam=${oam.length}B chr=${chr.length}B`);
+  console.log(`CHR source: ${parseInt(raw.DATA_CHR_SIZE || '0') > 0 ? chr.length + 'B' : 'EMPTY — CHR-RAM tiles may not be populated yet'}`);
+  // Print first 16 CHR bytes as sanity check (all-zero = tiles not loaded)
+  const chrPreview = Array.from(chr.slice(0, 16)).map(b => b.toString(16).padStart(2,'0')).join(' ');
+  console.log(`CHR[0..15]: ${chrPreview}`);
+
+  // Save capture metadata
+  writeFileSync(join(OUT_DIR, 'capture-info.json'), JSON.stringify({
+    rom: ROM,
+    frame: raw.DATA_FRAME,
+    ppuctrl: raw.DATA_PPUCTRL,
+    chrSizeBytes: chr.length,
+    chrFirstNonZeroOffset: Array.from(chr).findIndex(b => b !== 0),
+  }, null, 2));
 
   // Save raw JSON files for inspection
   writeFileSync(join(OUT_DIR, 'palette.json'), JSON.stringify(Array.from(palette)));
@@ -336,7 +400,7 @@ async function main() {
   const nesPalette = loadNesPalette();
   console.log('Rendering NES screen from PPU data...');
 
-  const pixels = renderNESScreen(palette, nametable, oam, chr, nesPalette);
+  const pixels = renderNESScreen(palette, nametable, oam, chr, nesPalette, raw.DATA_PPUCTRL);
 
   // Write PNG via sharp
   const screenPath = join(OUT_DIR, 'screen.png');
