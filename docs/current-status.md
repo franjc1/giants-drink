@@ -1,151 +1,138 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-09 (Phase 1, Session 6)
+**Last updated:** 2026-03-09 (Phase 1, Session 7)
 
 ---
 
-## What Just Happened (Session 6)
+## What Just Happened (Session 7)
 
-### Massive infrastructure session: Complete audio-visual foundation + asset pipeline + R2 deployment
+### Strategic pivot: ROM extraction replaces TSR sprite sheet pipeline
 
-**Scrapers completed:**
-- Sprite scraper finished: 55,679 sheets across 12 platforms (NES, SNES, Genesis, Game Boy, GBA, Master System, Sega CD, Game Gear, TurboGrafx-16, Neo Geo, Arcade, DOS)
-- Music scraper finished: 7,068 games, 103,262 tracks across 7 platforms
-- Both indexes committed to git
+This session was a deep investigation and strategic redesign of the entire asset pipeline. The conclusion: the TSR sprite sheet approach (55K scraped composite sheets → vision tagging → bounding box extraction) cannot hit the fidelity bar Two Fires requires. The replacement: direct ROM extraction producing pixel-perfect visual assets, reconstructed level layouts, and automated mechanical parameter extraction.
 
-**Four-script asset pipeline built and run:**
-1. `tools/enrich-sheet-names.js` — fetched TSR game pages for all 6,699 games, recovered human-written sheet names for 55,721/55,722 sheets (99.998% coverage). Writes `asset-catalog.json` as the single source of truth.
-2. `tools/analyze-music.js` — parsed NSF/SPC/VGM/GBS headers and M3U playlists for all 7,068 games. Extracted track names, composers, durations, chip types. Classified 51,931 tracks into functional roles (stage, boss_battle, title, victory, etc.). Writes `music-catalog.json`.
-3. `tools/analyze-sprites.js` — programmatic image analysis of all 55,722 sprite sheets via `sharp`. Extracted color counts, dominant palettes, palette temperature, grid spacing, transparency type. Updates `asset-catalog.json` programmatic_tags field.
-4. `tools/tag-sprites.js` — Claude Haiku vision API tagging for entity identification, bounding boxes, named characters, animation states. Scoped to essential+nice categories (player, enemy, boss, npc, item, tileset, background, character, portrait) for all games PLUS stage maps for top 500 games = ~26,640 sheets at ~$106 estimated cost. **Currently running** with 5 concurrent requests, ~15 hour estimated completion.
+**The problem identified:**
+- TSR sheets are community-assembled composites with text labels baked in, colored backgrounds, irregular layouts, missing coverage (~50% of MM2's sheets were missing)
+- Vision tagger bounding boxes were never validated end-to-end — no single sprite had been cleanly extracted and rendered
+- The approach ceiling was "vaguely recognizable sprites at wrong sizes" — firmly in slop territory
+- This was insufficient for both Track A (needs pixel-perfect reproduction) and Track B (needs precise distributional knowledge from clean source data)
 
-**Track A/B Asset Resolver built (Claude Code Session 6):**
-- `src/asset-resolver.js` — three-layer lookup: Layer 1 (named_character match), Layer 2 (semantic tag match), Layer 3 (platform/category fallback)
-- `ASSET_MODE` toggle via `?track=a` or `?track=b` URL param
-- Track A returns real sprite sheet URL + bounding box from vision_tags
-- Track B returns null → renderer draws colored rectangles (stub for Phase 3 generation)
-- Resolved assets stored on entity at build time, not per-frame
+**The replacement architecture — Universal Extractor:**
+- Direct ROM extraction using emulator instrumentation (FCEUX Lua scripting for NES, bsnes/RetroArch for SNES, MAME Lua for arcade)
+- Two-pass approach: Pass 1 generates an automated exploration TAS per game (multi-strategy chaos player with level-select codes), Pass 2 replays with full instrumentation (RAM logging, VRAM capture, nametable recording, palette capture, OAM logging)
+- Produces three categories of ground truth per game: visual assets (tiles, sprites, palettes), structural data (level layouts from nametable reconstruction), and mechanical data (physics parameters, enemy behavior, item effects, ability definitions from RAM state analysis)
+- Supplemented by community tool extraction for top ~25-30 titles where dedicated editors exist (Lunar Magic for SMW, SMILE for Super Metroid, etc.)
 
-**Renderer updated for sprite sheets:**
-- `src/renderer.js` — loads sprite sheet PNGs as Image objects with caching
-- Draws entity sprites using `drawImage` with source rectangle clipping
-- Falls back to colored rectangles if sprite not loaded or Track B mode
+**Scope:**
+- ~550 NES games (~450 CHR-ROM bulk extraction + ~100 CHR-RAM via Universal Extractor)
+- ~200 SNES games (community tools for top ~25, Universal Extractor for remaining ~175)
+- ~30 arcade games (via MAME Universal Extractor)
+- ~20 Genesis games (via Genesis Universal Extractor)
+- ~20 PC games (Doom WAD extraction, Wolf3D, Build engine, RTS archives)
+- **Total: ~820 games at pixel-perfect fidelity for visuals, Tier 1-2 for mechanics**
 
-**Fixtures updated:**
-- Both episode1.json and episode2.json now include `asset_context` and per-entity `asset_spec` fields
+**Fidelity guarantee:** ROM-extracted data IS the game — identical pixels to what the hardware displayed. When someone asks for "Mega Man 2 but in Super Mario World universe," the system serves MM2's actual level structures with SMW's actual sprites, at perfect fidelity. The only creative element is the combination, which is what Two Fires' intelligence layer is designed to do.
 
-**Cloudflare R2 deployed:**
-- R2 bucket `two-fires-assets` created and activated
-- Public URL: `https://pub-ecf4e311bd274041bb08e03235ca660e.r2.dev/`
-- `asset-catalog.json` uploaded and accessible
-- `tools/upload-to-r2.cjs` — upload script for bulk sprite upload
-- NES sprites uploading (~5,177 PNGs, in progress)
-- Resolver fetches catalog and sprite sheets from R2, not local filesystem
-- This is the permanent asset storage solution (Decision 64 fulfilled)
+**What stays from the old pipeline:**
+- Cloudflare R2 as asset storage (Decision 73 — still valid, new data is ~500MB-1GB vs old 15-20GB)
+- Music catalog (Decision 75 — untouched, already good)
+- Asset Resolver Track A/B toggle architecture (still valid, different data source)
+- Phase 0.5 ground truth library (physics data for ~1,300 games — still valid, supplemented by new mechanical extraction)
+- TSR sheets retained as supplementary reference for Track B distributional knowledge
 
-**Asset-catalog.json is gitignored** — at 105MB it exceeds GitHub's file size limit. Lives on R2 as the canonical location. The resolver loads it from R2 at runtime.
+**What gets deprecated:**
+- Vision tagger pipeline (tag-sprites.js) — no longer needed
+- TSR-based asset-catalog.json as primary asset source — replaced by ROM extraction manifests
+- The four-script enrichment pipeline (enrich-sheet-names.js, analyze-sprites.js, analyze-music.js, tag-sprites.js) — analyze-music.js stays, others deprecated
 
 ---
 
 ## Current Repo State
 
-### File Structure
+### File Structure (unchanged from Session 6 — no code written this session)
 ```
 giants-drink/
-  claude.md                          ← P1S5 version (needs Decision 71 edits)
-  .gitignore                         ← sprites, music, asset-catalog.json gitignored
-  package.json                       ← type: "module", sharp installed
-  index.html                         ← entry point, ?track= hint text
+  claude.md                          ← Needs update for ROM extraction strategy
   src/
-    asset-resolver.js                ← NEW: three-layer resolver, Track A/B toggle
-    game-loop.js                     ← UPDATED: reads ?track= param, inits resolver
-    renderer.js                      ← UPDATED: sprite sheet rendering via drawImage
-    physics.js                       ← two-phase gravity, reads from fixture
-    input.js                         ← keyboard input
-    entities.js                      ← UPDATED: calls resolveAsset() per entity
-    collision.js                     ← tilemap + entity collision
-    camera.js                        ← smooth follow with integer rounding
-    state.js                         ← dynamic mapW/mapH/tileSize
+    asset-resolver.js                ← Needs update to read ROM extraction manifests
+    game-loop.js, renderer.js, etc.  ← Unchanged
   data/
     test-fixtures/
-      episode1.json                  ← UPDATED: asset_context (SMW/SNES) + asset_specs
-      episode2.json                  ← UPDATED: asset_context (MM2/NES) + asset_specs
+      episode1.json, episode2.json   ← Unchanged
     ground-truth/                    ← Phase 0.5 ingestion (~37MB JSON/text)
     assets/
-      sprites/                       ← [local only, gitignored] 55K+ PNGs
+      sprites/                       ← [local only, gitignored] TSR sheets (kept as reference)
       music/                         ← [local only, gitignored] chiptune files
-      asset-index.json               ← scraper's index (committed)
-      asset-catalog.json             ← [local + R2, gitignored] 105MB master catalog
-      music-index.json               ← committed
-      music-catalog.json             ← NEW: enriched music data (committed)
-      game-list.json                 ← master game list (committed)
+      asset-catalog.json             ← [local + R2, gitignored] TSR catalog (deprecated as primary)
+      music-catalog.json             ← Committed, still valid
   tools/
-    scrape-sprites.js                ← sprite scraper (complete)
-    scrape-music.js                  ← music scraper (complete)
-    enrich-sheet-names.js            ← NEW: TSR sheet name fetcher
-    analyze-music.js                 ← NEW: music header/playlist parser
-    analyze-sprites.js               ← NEW: programmatic image analysis
-    tag-sprites.js                   ← NEW: Claude Haiku vision tagger (v2)
-    upload-to-r2.cjs                 ← NEW: bulk R2 upload script
-    gen-episode2.js                  ← episode 2 level generator
+    (existing tools unchanged — new extraction tools to be built)
   docs/
     current-status.md                ← THIS FILE
-    decisions-log.md                 ← UPDATED: Decisions 67-73
+    decisions-log.md                 ← Updated with Decisions 76-79
     design/
-      game-state-schema.md
-      asset-resolution-strategy.md
-      build-plan-v4.md               ← NEEDS UPDATE (Decision 71)
-      ... (other design docs)
+      rom-extraction-strategy.md     ← NEW: comprehensive strategy doc
+      (other design docs unchanged)
 ```
 
 ### Deployed
-- Vercel: two-fixture platformer with level select, Track A/B toggle
-- Cloudflare R2: `two-fires-assets` bucket with asset-catalog.json + sprites (uploading)
-
-### In Progress (background)
-- Vision tagger: running NES → SNES → Genesis → all remaining platforms (~15 hours, ~$106)
-- NES sprite upload to R2: ~5,177 PNGs uploading
+- Vercel: two-fixture platformer (unchanged)
+- Cloudflare R2: TSR catalog + partial sprites (will be supplemented with ROM extraction data)
 
 ---
 
 ## What's Next
 
-### Immediate: When Vision Tagger Finishes
-1. Check error rate: should be <5%
-2. Re-upload updated `asset-catalog.json` to R2: `wrangler r2 object put two-fires-assets/asset-catalog.json --file data/assets/asset-catalog.json --remote`
-3. Upload SNES and Genesis sprites to R2 (same upload script, different platform arg)
-4. Verify Track A rendering with tagged sheets (episode2 + NES sprites should show real pixel art)
+### Immediate: Session 8 — NES CHR-ROM Bulk Extractor
+1. Claude Code builds Node.js script to parse iNES headers and extract CHR-ROM tile data
+2. Acquire NES ROM set (Joe to source)
+3. Run on entire CHR-ROM library (~450 games) — produces PNG tile sheets + manifest.json per game
+4. Update Asset Resolver to read from new extraction format
+5. **Pressure test:** render a level using real extracted tiles from two different games
 
-### Immediate: Repo Maintenance
-- Apply Decision 71 edits to `claude.md` (build-plan-v4 reference + cluster scope note)
-- Commit `music-catalog.json`
-- Commit all new tools
+### Next: Session 9 — NES Universal Extractor v1
+1. Build FCEUX Lua script suite: exploration chaos player + RAM logger + VRAM capturer
+2. Build Node.js orchestrator for batch processing
+3. Test on 3 NES games (one CHR-ROM for validation, two CHR-RAM)
+4. Validate: does the automated exploration achieve good game coverage? Are the extracted mechanical parameters accurate?
 
-### Next Engineering Work (Phase 1, Sessions 7-8): Diagnostic Pipeline
-- Validator — deterministic pathfinding, reachability, teachability arc checks
-- Simulated Player Agent — automated play-through, death logging, timeline recording
-- Moment Extractor v1 — auto-clip diagnostic moments
-- Testing UI v1 — card-based clip review app
-- Gate 1 auto-checks — runs? spawns? completable? latency?
+### Following: Sessions 10-11 — SMW Community Tool Extraction + SNES Universal Extractor
+1. Extract SMW via Lunar Magic or custom LC_LZ2 decompressor (visual + structural + mechanical)
+2. Port Universal Extractor concepts to SNES emulator scripting
+3. **Key milestone:** render actual Yoshi's Island 1 in our engine with correct tiles, enemies, and layout
 
-### Remaining Phase 1 (Sessions 9-18, per Decision 71)
-- Engine clusters 2-4: Top-Down Tile World, Stage/Arena, Scrolling Shooter (~1-2 sessions each)
-- Engine clusters 5-7: Pseudo-3D, Raycasting, Strategic Map (~2-3 sessions each)
+### Then: Sessions 12+ — Scale and Resume Engine Work
+1. Run Universal Extractor on full NES library (background compute)
+2. Run on SNES library (background compute)
+3. Resume Phase 1 engine cluster work with real ROM-extracted assets
+4. Community tool extractions for top titles (parallel track)
+5. PC game extractions (low effort, high payoff, whenever convenient)
+6. Arcade + Genesis extractions
 
-### Future Design Work
-- Meta-game specification thread (Decision 70)
-- Per-paradigm grammar specs (deferred from Thread 4)
-- Upload remaining platforms to R2 as tagger completes them
+### Ongoing: Mechanical Data Ingestion
+- For each game extracted, also ingest available community documentation for mechanical parameters
+- Supplement automated RAM analysis with frame data from FGC wikis, ROM hacking docs, etc.
+- Build mechanical manifest JSON alongside visual extraction
+
+---
+
+## Key Decisions This Session
+
+- **Decision 76:** ROM extraction replaces TSR sheet extraction as primary asset pipeline
+- **Decision 77:** Universal Extractor architecture — two-pass automated exploration + instrumented extraction
+- **Decision 78:** Three categories of ground truth — visual, structural, mechanical — extracted together
+- **Decision 79:** Extraction scope — ~820 games across NES, SNES, Genesis, arcade, PC
 
 ---
 
 ## Key Open Questions
-1. ~~Cloud storage~~ → Cloudflare R2 deployed (RESOLVED)
-2. Track B distributional analysis — how to extract statistical models from sprite library
-3. Real SMW level as test fixture — parsing stage map PNGs into tilemap data
-4. ~~Asset Resolver matching strategy~~ → Three-layer lookup built (RESOLVED)
-5. ~~claude.md repo sync~~ → Current through P1S5 (RESOLVED, pending Decision 71 edit)
-6. Physics fidelity — current values are from ROM data but engine feel doesn't match 1:1 yet
-7. Meta-game specification — flagged as needing its own thread (Decision 70)
-8. R2 upload automation — remaining platforms (SNES, Genesis, etc.) need uploading after tagger completes
-9. Vision tagger error handling — arcade platform has higher error rate (~2.4%), may need retry pass
+
+1. ~~Cloud storage~~ → R2 stays, new data ~500MB-1GB (RESOLVED)
+2. ~~Asset fidelity approach~~ → ROM extraction (RESOLVED)
+3. FCEUX Lua scripting — need to validate chaos player + RAM logging approach works as theorized (Session 9)
+4. SNES emulator scripting — which emulator has best scripting API for our needs? (Session 10-11)
+5. Game Genie / level-select code database — need to source comprehensive code lists for NES + SNES
+6. ROM sourcing — need NES and SNES ROM sets available locally for extraction
+7. Lunar Magic on macOS — may need Wine or alternative approach for SMW extraction
+8. Physics fidelity — current engine values are from ROM data but feel doesn't match 1:1 yet (ongoing)
+9. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
+10. API key rotation — Joe's Anthropic key was exposed in Session 6 chat, still needs rotation

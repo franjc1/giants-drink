@@ -278,20 +278,73 @@ function loadExistingCatalog() {
 // ---------------------------------------------------------------------------
 
 function normalizeCategory(rawCategory) {
-  const lower = rawCategory.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+  // Normalize: strip diacritics (é→e), lowercase, replace punctuation with space, collapse whitespace
+  const lower = rawCategory.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  if (/playable.character|player/.test(lower)) return 'player';
-  if (/^enemies$|^enemy|enemies.and.bosses|enemies.and.other/.test(lower)) return 'enemy';
-  if (/^bosses$|^boss/.test(lower)) return 'boss';
-  if (/non.playable|npc|friendly/.test(lower)) return 'npc';
+  // --- NPCs first — must come before player/playable checks ---
+  if (/non.?playable|non.?player/.test(lower)) return 'npc';
+  if (/\bnpc\b/.test(lower)) return 'npc';
+  if (/friendly/.test(lower)) return 'npc';
+
+  // --- Player / playable ---
+  if (/playable/.test(lower)) return 'player';
+  if (/\bplayers?\b/.test(lower)) return 'player';
+  if (/^main characters?$/.test(lower)) return 'player';
+
+  // --- Named boss types (before generic enemy check) ---
+  if (/robot master/.test(lower)) return 'boss';
+  if (/\bnetnavis?\b/.test(lower)) return 'boss';
+  if (/\bmavericks?\b/.test(lower)) return 'boss';
+
+  // --- Enemies (broad — "Enemies & Bosses" counts as enemy for asset retrieval) ---
+  if (/\benemies?\b/.test(lower)) return 'enemy';
+  if (/\bmonsters?\b/.test(lower)) return 'enemy';
+  if (/\bviruses?\b/.test(lower)) return 'enemy';
+  if (/\bcreatures?\b/.test(lower)) return 'enemy';
+  if (/^mobs?$/.test(lower)) return 'enemy';
+
+  // --- Bosses (remaining, after enemy check so "Enemies & Bosses" stays enemy) ---
+  if (/\bboss(es)?\b/.test(lower)) return 'boss';
+
+  // --- NPCs / friendly (additional patterns after boss/enemy checks) ---
+  if (/^animals?$/.test(lower)) return 'npc';
+
+  // --- Generic characters (fighters, units, robots, etc.) ---
+  if (/\bcharacters?\b/.test(lower)) return 'character';
+  if (/kombatant|fighter|\bunits?\b|\brobots?\b|\bpilots?\b/.test(lower)) return 'character';
+  if (/\bracers?\b|\bcars?\b|\bvehicles?\b/.test(lower)) return 'character';
+  if (/\bpokemon\b|\bcaptains?\b|\bboxers?\b/.test(lower)) return 'character';
+  if (/\bhumans?\b/.test(lower)) return 'npc';
+
+  // --- Tilesets ---
   if (/tileset/.test(lower)) return 'tileset';
-  if (/background/.test(lower)) return 'background';
-  if (/stage|level|world|map|area|zone|castle|fortress|dungeon|forest|cave|island|plains|dome/.test(lower)) return 'stage_map';
-  if (/hud|menu|ui|title|interface|font/.test(lower)) return 'ui';
-  if (/item|object|weapon|power.up|collectible/.test(lower)) return 'item';
+
+  // --- Backgrounds ---
+  if (/background|foreground/.test(lower)) return 'background';
+
+  // --- Stage / map / level content (plurals included) ---
+  if (/\bstages?\b|\blevels?\b|\bworlds?\b|\bmaps?\b|\bareas?\b|\bzones?\b/.test(lower)) return 'stage_map';
+  if (/overworld|castle|fortress|dungeon|forest|cave|island|plains|dome|arena/.test(lower)) return 'stage_map';
+  if (/^courses?$|^tracks?$|^locations?$|^missions?$/.test(lower)) return 'stage_map';
+
+  // --- UI / HUD ---
+  if (/\bhud\b|\bmenus?\b|\bui\b|\btitle\b|interface|\bfonts?\b/.test(lower)) return 'ui';
+
+  // --- Items / weapons / power-ups ---
+  if (/\bitems?\b|\bobjects?\b|\bweapons?\b|power.?up|collectible/.test(lower)) return 'item';
+
+  // --- Visual effects ---
+  if (/\beffects?\b/.test(lower)) return 'effect';
+
+  // --- Cutscenes / endings ---
   if (/cutscene|ending|intro|cinema/.test(lower)) return 'cutscene';
-  if (/fighter|racer|car|vehicle/.test(lower)) return 'character';
-  if (/portrait|face/.test(lower)) return 'portrait';
+
+  // --- Portraits ---
+  if (/portrait|\bface\b|mugshot/.test(lower)) return 'portrait';
 
   return 'misc';
 }
