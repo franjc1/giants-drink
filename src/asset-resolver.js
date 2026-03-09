@@ -8,7 +8,8 @@
 //
 // Track B (generated): always returns null → renderer draws colored rectangles
 
-const CATALOG_URL = 'data/assets/asset-catalog.json';
+const R2_BASE_URL = 'https://pub-ecf4e311bd274041bb08e03235ca660e.r2.dev';
+const CATALOG_URL = `${R2_BASE_URL}/asset-catalog.json`;
 
 // Normalize a style reference string for comparison.
 // "goomba_smb3" → "goomba", "Mario (Small)" → "mario small", etc.
@@ -84,7 +85,7 @@ function makeResult(entry, entity) {
   const bb = entity.bounding_box || { x: 0, y: 0, w: entry.width, h: entry.height };
   const region = { x: bb.x, y: bb.y, w: bb.w, h: bb.h };
   return {
-    sheetUrl: entry.file,
+    sheetUrl: `${R2_BASE_URL}/${entry.file}`,
     region,
     animationFrames: [region],   // single frame for now; expanded when per-frame data arrives
     entityName: entity.named_character || entity.name || null,
