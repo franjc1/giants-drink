@@ -1,86 +1,43 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-09 (Phase 0.5, Sessions 8-9)
-
----
-
-## What Just Happened (Session 7)
-
-### Strategic pivot: ROM extraction replaces TSR sprite sheet pipeline
-
-This session was a deep investigation and strategic redesign of the entire asset pipeline. The conclusion: the TSR sprite sheet approach (55K scraped composite sheets → vision tagging → bounding box extraction) cannot hit the fidelity bar Two Fires requires. The replacement: direct ROM extraction producing pixel-perfect visual assets, reconstructed level layouts, and automated mechanical parameter extraction.
-
-**The problem identified:**
-- TSR sheets are community-assembled composites with text labels baked in, colored backgrounds, irregular layouts, missing coverage (~50% of MM2's sheets were missing)
-- Vision tagger bounding boxes were never validated end-to-end — no single sprite had been cleanly extracted and rendered
-- The approach ceiling was "vaguely recognizable sprites at wrong sizes" — firmly in slop territory
-- This was insufficient for both Track A (needs pixel-perfect reproduction) and Track B (needs precise distributional knowledge from clean source data)
-
-**The replacement architecture — Universal Extractor:**
-- Direct ROM extraction using emulator instrumentation (FCEUX Lua scripting for NES, bsnes/RetroArch for SNES, MAME Lua for arcade)
-- Two-pass approach: Pass 1 generates an automated exploration TAS per game (multi-strategy chaos player with level-select codes), Pass 2 replays with full instrumentation (RAM logging, VRAM capture, nametable recording, palette capture, OAM logging)
-- Produces three categories of ground truth per game: visual assets (tiles, sprites, palettes), structural data (level layouts from nametable reconstruction), and mechanical data (physics parameters, enemy behavior, item effects, ability definitions from RAM state analysis)
-- Supplemented by community tool extraction for top ~25-30 titles where dedicated editors exist (Lunar Magic for SMW, SMILE for Super Metroid, etc.)
-
-**Scope:**
-- ~550 NES games (~450 CHR-ROM bulk extraction + ~100 CHR-RAM via Universal Extractor)
-- ~200 SNES games (community tools for top ~25, Universal Extractor for remaining ~175)
-- ~30 arcade games (via MAME Universal Extractor)
-- ~20 Genesis games (via Genesis Universal Extractor)
-- ~20 PC games (Doom WAD extraction, Wolf3D, Build engine, RTS archives)
-- **Total: ~820 games at pixel-perfect fidelity for visuals, Tier 1-2 for mechanics**
-
-**Fidelity guarantee:** ROM-extracted data IS the game — identical pixels to what the hardware displayed. When someone asks for "Mega Man 2 but in Super Mario World universe," the system serves MM2's actual level structures with SMW's actual sprites, at perfect fidelity. The only creative element is the combination, which is what Two Fires' intelligence layer is designed to do.
-
-**What stays from the old pipeline:**
-- Cloudflare R2 as asset storage (Decision 73 — still valid, new data is ~500MB-1GB vs old 15-20GB)
-- Music catalog (Decision 75 — untouched, already good)
-- Asset Resolver Track A/B toggle architecture (still valid, different data source)
-- Phase 0.5 ground truth library (physics data for ~1,300 games — still valid, supplemented by new mechanical extraction)
-- TSR sheets retained as supplementary reference for Track B distributional knowledge
-
-**What gets deprecated:**
-- Vision tagger pipeline (tag-sprites.js) — no longer needed
-- TSR-based asset-catalog.json as primary asset source — replaced by ROM extraction manifests
-- The four-script enrichment pipeline (enrich-sheet-names.js, analyze-sprites.js, analyze-music.js, tag-sprites.js) — analyze-music.js stays, others deprecated
+**Last updated:** 2026-03-09 (Phase 1, Sessions 8-9)
 
 ---
 
 ## What Just Happened (Sessions 8-9)
 
-### Session 8 — NES CHR-ROM Bulk Extractor (COMPLETED)
+### Session 8: NES CHR-ROM Bulk Extraction — Complete
 
-Built `tools/extract-chr-rom.js` — Node.js ESM script that:
-- Parses iNES headers from any NES ROM (16-byte header: magic, PRG banks, CHR banks, mapper, flags)
-- Extracts CHR-ROM tile data (2bpp NES format) and decodes to grayscale PNG tile sheets
-- Runs on entire ROM library: 3,146 ROMs scanned, 2,383 CHR-ROM extracted, 763 CHR-RAM skipped, 0 errors
-- Output per game: `~/nes-extracted/{slug}/tiles.png` + `manifest.json`
-- 15,790,592 total tiles extracted
+Built and ran the NES CHR-ROM bulk extractor (`tools/extract-chr-rom.js`). Results:
 
-Key correction: Strategy doc listed Castlevania I and DuckTales as "MMC1 128k CHR" — both are CHR-RAM (Mapper 2/UNROM, byte 5 = 0). Fixed in spot-check.
+- **3,146 ROMs scanned** from the full No-Intro NES library (downloaded from archive.org)
+- **2,383 CHR-ROM games extracted** — zero errors
+- **763 CHR-RAM games correctly skipped** (byte 5 = 0 in iNES header)
+- **15,790,592 total tiles extracted** to `~/nes-extracted/`
+- Each game gets a `tiles.png` (grayscale tile sheet, 16 tiles wide) and `manifest.json`
 
-### Session 9 — Mesen2 Headless Extraction + Screen Renderer (COMPLETED)
+Spot check passed on Super Mario Bros (512 tiles), Super Mario Bros 3 (8,192 tiles), Little Nemo (8,192 tiles), and Kirby's Adventure (16,384 tiles — one of the largest).
 
-Pivoted from FCEUX to **Mesen2** (better headless support via `--testrunner` flag). Discovered Mesen2's Lua environment strips `io` and `os` libraries — output via `print()` to stdout instead. Built complete proof-of-concept pipeline:
+**Correction to strategy doc:** Castlevania (USA) and DuckTales (USA) are both CHR-RAM (UNROM Mapper 2, byte 5 = 0), not CHR-ROM as the strategy doc listed. They load tiles from compressed PRG-ROM data at runtime. Moved to Universal Extractor target list.
 
-**`tools/mesen-extract.lua`** — runs inside Mesen2 headless:
-- Simulates Start button press at frame 80 to skip title screen
-- At frame 600 (~10 seconds = World 1-1 gameplay): reads PPU state
-- Outputs hex-encoded data lines to stdout: `DATA_PALETTE`, `DATA_NAMETABLE`, `DATA_OAM`, `DATA_CHR`, `DATA_PNG`
-- Also calls `emu.takeScreenshot()` for a Mesen-rendered reference image
+### Session 9: Mesen2 Headless Extraction + Screen Render — Complete
 
-**`tools/render-screen.js`** — Node.js orchestrator + renderer:
-- Spawns Mesen2 headless, captures stdout DATA_* lines
-- Decodes hex → raw byte arrays, saves JSON files to `~/nes-extracted/smb-capture/`
-- Renders 256×240 NES screen PNG using sharp + NES master palette from `data/ground-truth/palettes/nes-palette.json`
-- Correct NES 2bpp pipeline: nametable tile index → attribute palette → CHR tile decode → palette lookup → RGB
+Built the end-to-end proof-of-concept: emulator-based PPU state extraction → screen rendering.
 
-**Key discovery — pattern table:** SMB1 uses PPUCTRL=$90 (BG at $1000, sprites at $0000) — opposite of assumed. Fixed: `BG_PATTERN_TABLE = 0x1000`, `SPRITE_PATTERN_TABLE = 0x0000`. The rendered screen matches Mesen's reference exactly (World 1-1, correct colors/tiles/HUD/sprites).
+**Key pivot: Mesen2 replaces FCEUX.** Research revealed FCEUX's macOS SDL port has a broken `--loadlua` CLI flag (buffer overflow bug) and is Windows-centric. Mesen2 offers:
+- Native macOS support
+- Headless CLI mode via `--testrunner` flag (runs at max speed, no GUI)
+- Lua scripting with full PPU/CPU/OAM memory access
+- Multi-system: NES, SNES, GB, GBA, PCE, SMS — one emulator for all platforms
+- Actively maintained (FCEUX's own repo suggests "you might like Mesen more")
 
-**Outputs at `~/nes-extracted/smb-capture/`:**
-- `mesen-reference.png` — Mesen2's rendered screenshot (ground truth)
-- `screen.png` — Our NES renderer output (matches reference)
-- `palette.json`, `nametable.json`, `oam.json`, `chr.json`
+**Key technical discovery: Mesen2's Lua sandbox strips `io` and `os` libraries.** Scripts cannot write files directly. Workaround: `print()` outputs to stdout, captured by Node.js orchestrator that spawns the Mesen2 process. All extraction data is hex-encoded and printed as `DATA_*` lines to stdout.
+
+**Proof-of-concept result:** Rendered `screen.png` of Super Mario Bros World 1-1 from ROM-extracted data. Pixel-perfect match to Mesen2's own reference screenshot — correct sky, ground tiles, question blocks, pipes, HUD, and Mario in correct NES colors.
+
+**PPUCTRL fix:** Initial render had backgrounds and sprites swapped. NES PPUCTRL register ($2000) bit 4 selects which CHR bank is used for background tiles. SMB sets PPUCTRL=$90, meaning BG tiles come from CHR $1000 (bank 1), sprite tiles from $0000 (bank 0) — opposite of the naive assumption. Renderer now reads PPUCTRL from the captured PPU state to select the correct banks. This is a per-game value that must be captured during extraction.
+
+**What this proves:** The complete pipeline works end-to-end. ROM → Mesen2 headless extraction → PPU state capture (palettes, nametables, OAM, CHR data) → Node.js renderer → pixel-perfect game screen. This validates the entire ROM extraction approach established in Session 7.
 
 ---
 
@@ -89,79 +46,80 @@ Pivoted from FCEUX to **Mesen2** (better headless support via `--testrunner` fla
 ### File Structure
 ```
 giants-drink/
-  claude.md                          ← Needs update for ROM extraction strategy
+  claude.md                              ← Needs update for Mesen2 pivot
+  tools/
+    extract-chr-rom.js                   ← NEW: NES CHR-ROM bulk extractor (Session 8)
+    mesen-extract.lua                    ← NEW: Mesen2 Lua extraction script (Session 9)
+    render-screen.js                     ← NEW: NES screen renderer (Session 9)
   src/
-    asset-resolver.js                ← Needs update to read ROM extraction manifests
-    game-loop.js, renderer.js, etc.  ← Unchanged
+    asset-resolver.js                    ← Not yet updated for extraction manifests
+    game-loop.js, renderer.js, etc.      ← Unchanged
   data/
     test-fixtures/
-      episode1.json, episode2.json   ← Unchanged
-    ground-truth/                    ← Phase 0.5 ingestion (~37MB JSON/text)
+      episode1.json, episode2.json       ← Unchanged
+    ground-truth/                        ← Phase 0.5 ingestion (~37MB JSON/text)
     assets/
-      sprites/                       ← [local only, gitignored] TSR sheets (kept as reference)
-      music/                         ← [local only, gitignored] chiptune files
-      asset-catalog.json             ← [local + R2, gitignored] TSR catalog (deprecated as primary)
-      music-catalog.json             ← Committed, still valid
-  tools/
-    extract-chr-rom.js               ← Session 8: bulk CHR-ROM extractor
-    mesen-extract.lua                ← Session 9: Mesen2 headless PPU extraction
-    render-screen.js                 ← Session 9: NES screen renderer (Node.js + sharp)
-    test-chr-parser.cjs              ← Session 8: 20 unit tests for iNES parser
+      music-catalog.json                 ← Committed, still valid
   docs/
-    current-status.md                ← THIS FILE
-    decisions-log.md                 ← Updated with Decisions 76-79
+    current-status.md                    ← THIS FILE
+    decisions-log.md                     ← Updated with Decisions 80-82
     design/
-      rom-extraction-strategy.md     ← Comprehensive strategy doc
+      rom-extraction-strategy.md         ← Session 7 (needs Castlevania/DuckTales correction)
       (other design docs unchanged)
 ```
 
-### Local Data (not committed)
-- `~/nes-extracted/` — 2,383 CHR-ROM tile PNGs + manifests (Session 8 output)
-- `~/nes-extracted/smb-capture/` — SMB1 PPU state + rendered screens (Session 9 output)
-- `~/nes-roms/` — No-Intro NES ROM set (3,146 ROMs)
-- `~/mesen2/` — Mesen2 2.1.1 ARM64 macOS build
+### External (not in repo)
+```
+~/nes-roms/                              ← No-Intro NES ROM set (~3,146 .nes files)
+~/nes-extracted/                         ← CHR-ROM tile sheets + manifests (2,383 games)
+~/nes-extracted/smb-capture/             ← Session 9 proof-of-concept output
+  screen.png                             ← Rendered SMB World 1-1 (pixel-perfect)
+  palette.json, nametable.json, etc.     ← Captured PPU state
+~/mesen2/                                ← Mesen2 emulator installation
+```
 
 ### Deployed
-- Vercel: two-fixture platformer (unchanged)
+- Vercel: two-fixture platformer (unchanged from earlier sessions)
 - Cloudflare R2: TSR catalog + partial sprites (will be supplemented with ROM extraction data)
 
 ---
 
 ## What's Next
 
-### Immediate: Session 10 — NES Universal Extractor v1 (Batch Mode)
-Session 9 proved the single-game proof-of-concept works. Session 10 builds the batch extraction pipeline:
-1. Extend `mesen-extract.lua` to support a configurable `CAPTURE_FRAME` and input sequence
-2. Build Node.js batch orchestrator that runs Mesen2 on multiple games (priority: CHR-RAM games that need emulator capture)
-3. Handle PPUCTRL detection properly (either via Mesen `getState()`, or read the game's PPUCTRL shadow copy from known RAM addresses)
-4. For each extracted game: save palette.json, nametable.json, oam.json, chr.json, screen.png
-5. Test on 5 CHR-RAM games (Castlevania, DuckTales, Contra, Bionic Commando, Batman)
+### Session 10: CHR-RAM Validation + Batch Orchestrator
 
-### Following: Sessions 11-12 — SMW Community Tool Extraction + SNES Universal Extractor
-1. Extract SMW via Lunar Magic or custom LC_LZ2 decompressor (visual + structural + mechanical)
-2. Port Universal Extractor concepts to SNES emulator scripting
-3. **Key milestone:** render actual Yoshi's Island 1 in our engine with correct tiles, enemies, and layout
+**Primary goal:** Validate that the extraction pipeline works for CHR-RAM games — games where tiles are NOT in the ROM file and can only be captured via emulator VRAM extraction at runtime.
 
-### Then: Sessions 12+ — Scale and Resume Engine Work
-1. Run Universal Extractor on full NES library (background compute)
-2. Run on SNES library (background compute)
-3. Resume Phase 1 engine cluster work with real ROM-extracted assets
-4. Community tool extractions for top titles (parallel track)
-5. PC game extractions (low effort, high payoff, whenever convenient)
-6. Arcade + Genesis extractions
+1. Run Mesen2 extraction on 2-3 CHR-RAM games: Mega Man 2, Castlevania, and Legend of Zelda
+2. Render screens for each — do they look correct?
+3. If yes: the Universal Extractor approach works for the ENTIRE NES library, not just CHR-ROM games
+4. Build Node.js batch orchestrator that loops through ROMs and runs Mesen2 headless on each
 
-### Ongoing: Mechanical Data Ingestion
-- For each game extracted, also ingest available community documentation for mechanical parameters
-- Supplement automated RAM analysis with frame data from FGC wikis, ROM hacking docs, etc.
-- Build mechanical manifest JSON alongside visual extraction
+**Why this matters:** CHR-ROM games are the easy case (tiles sit uncompressed in the file). CHR-RAM games are the hard case — tiles are compressed in PRG-ROM and only appear in VRAM at runtime. If Mesen2 captures correct VRAM tiles for CHR-RAM games, we've proven the approach works universally. If not, we need to debug before scaling.
+
+### Session 11: Feed Extracted Data into Game Engine
+
+Take SMB extraction data and wire it into the platformer engine. Render World 1-1 playable in the browser using ROM-extracted tiles, palettes, and layout. This is the "close the loop" moment where extraction meets the actual Two Fires engine.
+
+### Session 12: SNES Extraction via Mesen2
+
+Mesen2 emulates SNES. Test the same headless + Lua extraction approach on Super Mario World. If it works, we have NES + SNES coverage from a single tool.
+
+### Session 13+: Scale and Resume Engine Work
+
+- Batch-extract full NES library (~550 CHR-RAM games via Universal Extractor)
+- Batch-extract SNES library
+- Resume Phase 1 diagnostic pipeline with real ROM-extracted assets
+- Build chaos player for automated game exploration (deeper state coverage)
 
 ---
 
-## Key Decisions / Discoveries (Sessions 8-9)
+## Key Decisions This Session
 
-- **Decision 76-79:** ROM extraction strategy (from Session 7 — see decisions-log.md)
-- **Session 8:** CHR-ROM extractor confirmed: 763 of 3,146 NES ROMs are CHR-RAM (need emulator capture)
-- **Session 9:** Pivoted from FCEUX to Mesen2 for emulator capture. Key finding: Mesen2 Lua strips `io`/`os` but `print()` goes to stdout. Pattern table discovery: SMB1 BG=$1000, sprites=$0000.
+- **Decision 80:** Mesen2 replaces FCEUX as the emulator platform for Universal Extraction
+- **Decision 81:** Stdout-based data capture workaround for Mesen2's sandboxed Lua
+- **Decision 82:** PPUCTRL-aware bank selection in screen rendering
+- **Correction:** Castlevania and DuckTales reclassified as CHR-RAM (moved to Universal Extractor list)
 
 ---
 
@@ -169,11 +127,11 @@ Session 9 proved the single-game proof-of-concept works. Session 10 builds the b
 
 1. ~~Cloud storage~~ → R2 stays (RESOLVED)
 2. ~~Asset fidelity approach~~ → ROM extraction (RESOLVED)
-3. ~~NES emulator scripting~~ → Mesen2 `--testrunner` + print() to stdout (RESOLVED Session 9)
-4. PPUCTRL detection in Mesen2 — `nesPpuDebug` address 0 ≠ PPUCTRL; need correct address mapping or alternative (open)
-5. SNES emulator scripting — Mesen2 also supports SNES via `--testrunner` (same approach should work)
-6. Game Genie / level-select code database — need for batch extraction across many games
-7. Lunar Magic on macOS — may need Wine or alternative approach for SMW extraction
-8. Physics fidelity — current engine values are from ROM data but feel doesn't match 1:1 yet (ongoing)
+3. ~~Emulator choice~~ → Mesen2 with --testrunner headless mode (RESOLVED)
+4. ~~Lua I/O in Mesen2~~ → stdout capture workaround (RESOLVED)
+5. **CHR-RAM extraction** — does Mesen2 VRAM capture work for compressed-tile games? (Session 10)
+6. **SNES extraction** — does Mesen2's SNES Lua API provide equivalent PPU access? (Session 12)
+7. Game Genie / level-select code database — needed for chaos player (Session 13+)
+8. Extracted data → engine integration — schema reconciliation needed (Session 11)
 9. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
-10. API key rotation — Joe's Anthropic key was exposed in Session 6 chat, still needs rotation
+10. ~~API key rotation~~ → Rotated (RESOLVED)
