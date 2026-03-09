@@ -4,6 +4,7 @@ import { buildEntities, updateEntities } from './entities.js';
 import { updatePlayer } from './physics.js';
 import { updateCamera } from './camera.js';
 import { render, offscreen } from './renderer.js';
+import { initResolver, resolveAsset } from './asset-resolver.js';
 
 const DEFAULT_LEVEL   = 'data/test-fixtures/episode1.json';
 const NATIVE_H        = 240;   // level height fixed at 15 tiles × 16px
@@ -97,10 +98,28 @@ export async function loadLevel(url) {
     onGround: false,
     coyote: 0,
     prevJumpHeld: false,
+    resolvedAsset: resolvePlayerAsset(data),
   };
 
   state.cameraX = 0;
   buildEntities();
+}
+
+function resolvePlayerAsset(data) {
+  const assetContext = data.asset_context || {};
+  const playerRef    = data.player?.asset_spec?.reference || {};
+  const playerVisual = data.player?.asset_spec?.visual    || {};
+
+  const styleRef = playerRef.style_reference || null;
+  const spec = {
+    style_reference: styleRef ? styleRef.replace(/_(smb\d*|smw|mm\d*)$/i, '') : null,
+    category:  'player',
+    game:      assetContext.game     || null,
+    platform:  assetContext.platform || null,
+    style_era: playerVisual.style_era || null,
+    dimensions: playerVisual.dimensions || [16, 24],
+  };
+  return resolveAsset(spec);
 }
 
 // ─── Level select UI ──────────────────────────────────────────────────────────
@@ -158,11 +177,17 @@ async function init() {
   updateScale();
   initInput();
 
+  // Read ?track=a|b URL param (default: 'a')
+  const params = new URLSearchParams(window.location.search);
+  const track  = params.get('track') || 'a';
+
+  // Init resolver before level loads so resolveAsset() works immediately
+  await initResolver(track);
+
   // Start the loop exactly once. It runs perpetually; state.episode being
   // null just means physics/render are skipped until a level is loaded.
   requestAnimationFrame(loop);
 
-  const params     = new URLSearchParams(window.location.search);
   const levelParam = params.get('level');
 
   if (levelParam) {

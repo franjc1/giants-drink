@@ -1,8 +1,11 @@
 import { state } from './state.js';
 import { moveAndCollide } from './collision.js';
 import { respawnPlayer } from './physics.js';
+import { resolveAsset } from './asset-resolver.js';
 
 export function buildEntities() {
+  const assetContext = state.episode.asset_context || {};
+
   state.entities = state.episode.episode.entity_placements
     .filter(p => p.active)
     .map(p => {
@@ -11,6 +14,19 @@ export function buildEntities() {
       const [ew, eh] = dims;
       const speed = ent?.behavioral_params?.patrol_speed ?? 0.5;
       const range = ent?.behavioral_params?.patrol_range ?? 48;
+
+      // Build semantic spec for asset resolver
+      const placementSpec = p.asset_spec || {};
+      const entRef = ent?.asset_spec?.reference || {};
+      const semanticSpec = {
+        style_reference: placementSpec.style_reference || normStyleRef(entRef.style_reference),
+        category:        placementSpec.category        || guessCategory(ent),
+        game:            placementSpec.game            || assetContext.game            || null,
+        platform:        placementSpec.platform        || assetContext.platform        || null,
+        style_era:       placementSpec.style_era       || ent?.asset_spec?.visual?.style_era || null,
+        dimensions:      dims,
+      };
+
       return {
         id: p.entity_id,
         x: p.position.x, y: p.position.y,
@@ -23,6 +39,7 @@ export function buildEntities() {
         onWall: false,
         alive: true,
         color: (ent?.faction_id === 'goomba_union') ? '#7B4A1E' : '#2D6A2D',
+        resolvedAsset: resolveAsset(semanticSpec),
       };
     });
 }
@@ -57,4 +74,19 @@ export function updateEntities() {
       }
     }
   }
+}
+
+// Strip game suffix from a style reference: "goomba_smb3" → "goomba"
+function normStyleRef(ref) {
+  if (!ref) return null;
+  return ref.replace(/_(smb\d*|smw|mm\d*|smb\d_\w+)$/i, '');
+}
+
+// Guess asset category from entity data
+function guessCategory(ent) {
+  if (!ent) return 'enemy';
+  if (ent.type === 'player') return 'player';
+  const role = ent.asset_spec?.narrative?.role;
+  if (role === 'protagonist') return 'player';
+  return 'enemy';
 }

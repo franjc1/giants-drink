@@ -1,6 +1,38 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-08 (Phase 1, Session 5)
+**Last updated:** 2026-03-08 (Phase 1, Session 6)
+
+---
+
+## What Just Happened (Session 6)
+
+### Engineering session: Track A/B Asset Resolver + sprite rendering
+
+**New files:**
+- `src/asset-resolver.js` — full three-layer resolver with Track A/B toggle
+
+**Updated files:**
+- `src/renderer.js` — sprite sheet rendering via drawImage; colored rect fallback unchanged
+- `src/entities.js` — calls resolveAsset() for each entity at build time; stores resolvedAsset on entity
+- `src/game-loop.js` — reads ?track=a|b URL param; inits resolver before level load; resolves player asset
+- `data/test-fixtures/episode1.json` — added asset_context (SMW/SNES), asset_spec to entity_placements
+- `data/test-fixtures/episode2.json` — added asset_context (MM2/NES), asset_spec to entity_placements
+- `index.html` — hint text updated to mention ?track= param
+
+**Asset resolver: three-layer lookup**
+- Layer 1: vision_tags named_character match within specified game slug
+- Layer 2: semantic match within game (category + style_reference)
+- Layer 3: platform + category fallback, prefers sheets with vision_tags, returns null if no vision_tags
+- Track B: always returns null → renderer draws colored rects (correct dimensions)
+
+**Current resolution behavior (tagging pipeline still in progress):**
+- SNES (episode1): 0 vision_tags → Track A falls back to null → colored rects (same as Track B)
+- NES (episode2): 896 NES entries with vision_tags → Track A Layer 3 WILL find real NES sprites
+  - 43 enemy sheets, 289 player sheets with vision_tags on NES platform
+  - Will not find Mega Man 2 specifically (no vision_tags yet) but will find closest NES enemy/player
+- When vision_tags arrive for SMW and MM2, Layers 1+2 will activate automatically — no code changes needed
+
+**Architecture decision:** resolvedAsset stored on entity at build time (not per-frame). Re-builds when loadLevel() called. This keeps the hot render loop clean.
 
 ---
 
@@ -44,66 +76,63 @@ No engineering this session — this was a design conversation that produced fou
 ### File Structure
 ```
 giants-drink/
-  claude.md                          ← UPDATED this session (difficulty + meta-objective)
+  claude.md                          ← UPDATED Session 5 (difficulty + meta-objective)
   .gitignore                         ← sprites + music gitignored
-  index.html                         ← entry point
+  index.html                         ← entry point (hint updated for ?track= param)
   src/
-    game-loop.js                     ← loadLevel(url), URL params, level select overlay
-    renderer.js                      ← offscreen canvas rendering (dynamic dimensions)
+    game-loop.js                     ← loadLevel(url), URL params, level select overlay, resolver init
+    renderer.js                      ← offscreen canvas + sprite sheet rendering (Track A/B)
     physics.js                       ← two-phase gravity, reads from fixture
     input.js                         ← keyboard input
-    entities.js                      ← enemy patrol + rendering (dynamic dimensions)
-    collision.js                     ← tilemap + entity collision (dynamic dimensions)
-    camera.js                        ← smooth follow with integer rounding (dynamic dimensions)
+    entities.js                      ← enemy patrol + resolveAsset() at build time
+    collision.js                     ← tilemap + entity collision
+    camera.js                        ← smooth follow with integer rounding
     state.js                         ← dynamic mapW/mapH/tileSize set at load time
+    asset-resolver.js                ← NEW: Track A/B resolver, 3-layer catalog lookup
   data/
     test-fixtures/
-      episode1.json                  ← SMW physics, 210×15, 3 entities
-      episode2.json                  ← Mega Man 2 physics, 90×15, 4 entities, cave palette
+      episode1.json                  ← SMW physics, 210×15, 3 entities, asset_context (SMW/SNES)
+      episode2.json                  ← Mega Man 2 physics, 90×15, 4 entities, asset_context (MM2/NES)
     ground-truth/                    ← Phase 0.5 ingestion (~37MB JSON/text)
     assets/
-      sprites/                       ← [gitignored PNGs — check scraper status]
-      music/                         ← [gitignored chiptune files — check scraper status]
-      asset-index.json               ← committed, updated after scrape
-      music-index.json               ← committed, updated after scrape
-      game-list.json                 ← master game list from scraper
+      sprites/                       ← [gitignored PNGs — scraper complete, 55K+ sheets]
+      music/                         ← [gitignored chiptune files]
+      asset-catalog.json             ← 55,722 entries, 1,296 with vision_tags (NES+arcade only so far)
+      asset-index.json               ← committed
+      tag-log-all.txt                ← tagging pipeline progress log
   tools/
     scrape-sprites.js                ← sprite scraper (resumable)
     scrape-music.js                  ← music scraper (resumable)
     gen-episode2.js                  ← episode 2 level generator
   docs/
     current-status.md                ← UPDATED this session
-    decisions-log.md                 ← UPDATED this session (Decisions 67-70)
+    decisions-log.md                 ← UPDATED Session 5 (Decisions 67-70)
     design/
-      game-state-schema.md
       asset-resolution-strategy.md
       ... (other design docs)
 ```
 
 ### Deployed
-- Vercel: two-fixture platformer with level select, SMW + Mega Man 2 physics
+- Vercel: two-fixture platformer with level select, SMW + Mega Man 2 physics, Track A/B toggle
 
 ---
 
 ## What's Next
 
-### Immediate: Repo Sync (Still Pending from Session 4)
-- Update repo `claude.md` to current version (now includes difficulty philosophy + meta-objective)
-- Update repo `docs/decisions-log.md` with Sessions 3-5 decisions
-- Update repo `docs/current-status.md` with this file
+### Immediate
+- Deploy to Vercel: verify ?track=a and ?track=b both work in browser
+- Test episode2 with ?track=a — should show real NES sprites (Layer 3 NES enemy/player from catalog)
+- Test episode1 with ?track=a — should show colored rects (SNES has no vision_tags yet)
 
-### Immediate: When Scrapers Finish (Carried from Session 4)
-1. Check scrape logs for errors
-2. Rebuild indexes
-3. Commit indexes
-4. Run tagging pipeline
-5. Upload sprite library to Cloudflare R2
+### When Vision_Tags Pipeline Finishes for SNES/MM2
+- No code changes needed — Layer 1 will activate automatically when SMW/MM2 get vision_tags
+- Track A episode1 will then show real SMW sprites; episode2 will show real MM2 sprites
 
-### Next Engineering Session (Phase 1, Session 6): Asset Pipeline
-- Check scraper status — if complete, run tagging pipeline
-- Build Track A Asset Resolver module
-- Get real sprites rendering in the engine
-- If scrapers still running: real SMW level layout as fixture 3
+### Next Engineering Session (Phase 1, Session 7): Options
+1. **Real SMW level layout as fixture 3** — parse stage map PNGs or use ground-truth data
+2. **Tileset sprite rendering** — apply Track A to tile rendering (currently solid colors)
+3. **Animation frames** — cycle through animationFrames[] in renderer for walk cycles
+4. **Audio stub** — Web Audio API, play a simple chiptune loop from audio_profile params
 
 ### Future Design Work
 - **Meta-game specification thread** — how worlds interconnect, what the giant confrontation looks like, what cross-world achievements entail, how the post-game CAS evolves

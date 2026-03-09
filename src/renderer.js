@@ -5,6 +5,32 @@ offscreen.width = W;
 offscreen.height = H;
 const ctx = offscreen.getContext('2d');
 
+// ─── Image cache ──────────────────────────────────────────────────────────────
+
+const imageCache = new Map(); // url → HTMLImageElement
+
+function getImage(url) {
+  if (!imageCache.has(url)) {
+    const img = new Image();
+    img.src = url;
+    imageCache.set(url, img);
+  }
+  return imageCache.get(url);
+}
+
+// Draw from a resolved asset. Returns true if sprite was drawn, false if image not ready.
+function drawSprite(resolvedAsset, dx, dy, dw, dh) {
+  if (!resolvedAsset?.sheetUrl) return false;
+  const img = getImage(resolvedAsset.sheetUrl);
+  if (!img.complete || img.naturalWidth === 0) return false;
+  const r = resolvedAsset.region;
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(img, r.x, r.y, r.w, r.h, dx, dy, dw, dh);
+  return true;
+}
+
+// ─── Main render ─────────────────────────────────────────────────────────────
+
 export function render() {
   const cameraX = Math.round(state.cameraX);  // integer snap — prevents 1px jitter from float lerp
   const nativeW = state.nativeW;
@@ -45,27 +71,39 @@ export function render() {
     if (!e.alive) continue;
     const ex = Math.floor(e.x - cameraX);
     const ey = Math.floor(e.y);
-    ctx.fillStyle = e.color;
-    ctx.fillRect(ex, ey, e.w, e.h);
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(ex + 2, ey + 3, 3, 3);
-    ctx.fillRect(ex + e.w - 5, ey + 3, 3, 3);
-    ctx.fillStyle = '#000';
-    ctx.fillRect(ex + 3, ey + 4, 2, 2);
-    ctx.fillRect(ex + e.w - 4, ey + 4, 2, 2);
+
+    // Try Track A sprite first
+    const spriteDrawn = drawSprite(e.resolvedAsset, ex, ey, e.w, e.h);
+
+    if (!spriteDrawn) {
+      // Track B / fallback: colored rectangle with eye dots
+      ctx.fillStyle = e.color;
+      ctx.fillRect(ex, ey, e.w, e.h);
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(ex + 2, ey + 3, 3, 3);
+      ctx.fillRect(ex + e.w - 5, ey + 3, 3, 3);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(ex + 3, ey + 4, 2, 2);
+      ctx.fillRect(ex + e.w - 4, ey + 4, 2, 2);
+    }
   }
 
-  // Player (red figure)
+  // Player
   const px = Math.floor(player.x - cameraX);
   const py = Math.floor(player.y);
-  ctx.fillStyle = '#CC2200';
-  ctx.fillRect(px, py + 10, player.w, player.h - 10);
-  ctx.fillStyle = '#FFAA80';
-  ctx.fillRect(px + 2, py + 4, player.w - 4, 8);
-  ctx.fillStyle = '#CC2200';
-  ctx.fillRect(px, py, player.w, 6);
-  ctx.fillRect(px - 1, py + 4, player.w + 2, 3);
-  ctx.fillStyle = '#000';
-  ctx.fillRect(px + player.w - 5, py + 6, 2, 2);
 
+  const playerSpriteDrawn = drawSprite(player.resolvedAsset, px, py, player.w, player.h);
+
+  if (!playerSpriteDrawn) {
+    // Track B / fallback: red figure
+    ctx.fillStyle = '#CC2200';
+    ctx.fillRect(px, py + 10, player.w, player.h - 10);
+    ctx.fillStyle = '#FFAA80';
+    ctx.fillRect(px + 2, py + 4, player.w - 4, 8);
+    ctx.fillStyle = '#CC2200';
+    ctx.fillRect(px, py, player.w, 6);
+    ctx.fillRect(px - 1, py + 4, player.w + 2, 3);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(px + player.w - 5, py + 6, 2, 2);
+  }
 }
