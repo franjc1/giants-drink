@@ -631,7 +631,7 @@ The remaining phases keep their goals but benefit from the manifest foundation:
 
 ## 9. Decisions
 
-### Decision 83: Universal Extraction via RAM Mutation Content Enumeration
+### Decision 85: Universal Extraction via RAM Mutation Content Enumeration
 
 **Context:** The chaos player approach (Session 7, Decision 77) required automated gameplay to explore game content. This is inherently game-specific (different timings, different boot sequences) and incomplete (unreached content is missing). Session 10 CHR-RAM validation proved Mesen2 can capture runtime VRAM state, but the frame-timing approach needed per-game debugging.
 
@@ -639,7 +639,7 @@ The remaining phases keep their goals but benefit from the manifest foundation:
 
 **Rationale:** 100% generalizable (hardware behavior, not game convention), fast (~3 minutes per game), captures content the chaos player would miss (secret levels, late-game content). Zero per-game human effort. The same algorithm works identically on every NES, SNES, and Genesis game because the PPU/VRAM architecture mandates the relationship between RAM state and displayed content.
 
-### Decision 84: Unified Engine with Configurable Rendering Modes
+### Decision 86: Unified Engine with Configurable Rendering Modes
 
 **Context:** Build plan v4 (Decision 71) called for 7 separate engine clusters built across 16-18 sessions. The manifest-based extraction approach changes the engine's job from "generate and render paradigm content" to "load manifest data and render it." Most rendering differences between paradigms reduce to camera, physics direction, and draw order — parameters, not separate engines.
 
@@ -647,7 +647,7 @@ The remaining phases keep their goals but benefit from the manifest foundation:
 
 **Rationale:** Reduces Phase 1 from ~16-18 sessions to ~8 sessions. More importantly, it makes paradigm shifts a rendering mode swap rather than a whole-engine restart, which directly enables the Thread 8 paradigm shift principles (especially Principle 5: transitions are narrative moments, not loading screens).
 
-### Decision 85: Manifest as Ingredient Library, Not Game State Replacement
+### Decision 87: Manifest as Ingredient Library, Not Game State Replacement
 
 **Context:** The manifest contains complete game data (visuals, structure, mechanics). It would be tempting to make the manifest the game state format, replacing the existing schema.
 
@@ -655,7 +655,7 @@ The remaining phases keep their goals but benefit from the manifest foundation:
 
 **Rationale:** The game state schema was designed to accommodate both extracted data and generated content. The CAS social ecology, player behavioral model, and Overseer system are runtime constructs that don't come from ROM extraction. Keeping the manifest as an ingredient library preserves full creative flexibility — Claude can use 100% of a manifest, 0% of a manifest, or any blend.
 
-### Decision 86: Extraction Scope Expanded to ~1,605 Games
+### Decision 88: Extraction Scope Expanded to ~1,605 Games
 
 **Context:** Decision 79 scoped extraction at ~820 games. The RAM mutation approach reduces per-game extraction cost to ~3 minutes compute + ~$0.03 API, making marginal cost of additional games negligible.
 
