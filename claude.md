@@ -1,7 +1,7 @@
 # Two Fires — Architectural Blueprint (claude.md)
 ## Source of truth for all Claude Code and Claude.ai sessions
 
-**Last updated:** 2026-03-08 (Phase 1, Session 5: Difficulty Philosophy & Meta-Objective)
+**Last updated:** 2026-03-10 (Session 11: Universal Extraction & Manifest Architecture)
 
 ---
 
@@ -28,13 +28,18 @@
 | `docs/decisions-log.md` | Append-only decision record with full rationale | When decisions are made |
 | `docs/design/cas-engine-spec.md` | CAS engine specification — primitives, rules, interpretation layer | When CAS design changes |
 | `docs/design/game-state-schema.md` | JSON data structures between all systems | When schema changes |
-| `docs/design/paradigm-specs.md` | Engine clusters + player-facing paradigm specs | When paradigms are added/modified |
-| `docs/design/build-plan-v4.md` | Current build plan (~55-60 sessions, all 7 clusters in Phase 1) | When plan changes |
+| `docs/design/paradigm-specs.md` | Player-facing paradigm specs (12 paradigms). Engine architecture moved to unified engine. | When paradigms are added/modified |
+| `docs/design/universal-extraction-spec.md` | Universal extraction pipeline + manifest architecture + build plan v5 (Section 8) | When extraction/manifest approach changes |
 | `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
 | `docs/design/sequencing-grammar-framework.md` | Intermediate layer theory + grammar seeds | When sequencing logic evolves |
-| `docs/design/asset-resolution-strategy.md` | Two-track asset architecture | When asset approach changes |
+| `docs/design/asset-resolution-strategy.md` | Two-track asset architecture (now a continuous blend spectrum via manifests) | When asset approach changes |
 | `docs/lore/two-fires.md` | Mythology, endgame mechanics, narrative backbone | When lore decisions are made |
 | `giants-drink-transfer.md` | Original complete transfer document (historical reference) | Rarely — superseded by specific docs |
+| `tools/extract-chr-rom.js` | NES CHR-ROM bulk extractor — parses iNES headers, extracts 2bpp tile data | Stable |
+| `tools/mesen-extract.lua` | Mesen2 Lua extraction script — captures PPU state in headless mode | Active development |
+| `tools/render-screen.js` | NES screen renderer — combines extracted PPU data into 256×240 PNG | Active development |
+| `docs/design/rom-extraction-strategy.md` | **SUPERSEDED** by `universal-extraction-spec.md` | Historical reference only |
+| `docs/design/build-plan-v4.md` | **SUPERSEDED** — build plan v5 is in Section 8 of `universal-extraction-spec.md` | Historical reference only |
 
 ### Cross-environment sync:
 - **Claude.ai → repo:** Joe downloads docs from Claude.ai, drops them in repo folders, tells Claude Code to commit and push (or does it manually)
@@ -449,30 +454,124 @@ The difference is that these trigger specs are now produced by Claude's interpre
 
 ---
 
+## Universal Extraction & Manifest Architecture
+
+Full specification: `docs/design/universal-extraction-spec.md`
+
+### Overview
+
+Two Fires extracts complete game data from ~1,605 retro games (all US NES ~680, all US SNES ~725, 100 Genesis, 50 arcade, 50 PC) into per-game manifest files. Manifests are the ingredient library — they provide real tiles, real physics, real level layouts, and real enemy behaviors. Claude's creative layer generates CAS setup, narrative, social ecology, and aesthetic direction on top of manifest ingredients.
+
+### RAM Mutation Content Enumerator (Decision 85)
+
+Instead of playing games to discover content (chaos player), the system systematically mutates every candidate RAM byte and observes VRAM/PPU changes. Content-switching variables (level ID, room ID, game phase) are identified by which RAM addresses cause the PPU to load different tile data. All values of these variables are enumerated to capture all game content in ~3 minutes per game with zero per-game configuration.
+
+Five phases: (1) boot to gameplay, (2) identify volatile RAM candidates, (3) mutation sweep scoring unique VRAM states per address, (4) deep enumeration of content variables with full state capture, (5) physics sampling via controlled input sequences.
+
+### Manifest Format
+
+Each game produces a `manifest.json` containing three ground truth categories:
+
+- **Visual:** tile dictionary (unique 8×8 tiles), sprite dictionary (multi-tile arrangements with context), background sets (nametables per content variable value), palette sets
+- **Structural:** level layouts (tilemap grids, collision grids), entity placements per level, progression structure (linear, stage select, open world)
+- **Mechanical:** player physics (gravity, walk speed, jump velocity, friction, coyote time, variable jump), enemy behaviors (patrol patterns, attack patterns, speeds), game rules (HP, lives, damage, invincibility frames)
+
+### Manifest → Game State Schema Mapping
+
+Manifests populate the game state schema — they don't replace it.
+
+| Manifest Section | Populates | Notes |
+|-----------------|-----------|-------|
+| `visual.*` | `episode` (tiles, sprites, backgrounds) | Direct data load |
+| `structural.levels` | `episode.spatial` + `episode.entities` | Level layout + entity placements |
+| `structural.progression` | `meta` (game structure) | Claude interprets into skeleton |
+| `mechanical.player_physics` | `episode.physics` | Direct parameter load |
+| `mechanical.enemy_behaviors` | `world.entities[].behavioral_parameters` | Maps to flat float dict |
+| `mechanical.game_rules` | `meta` + `episode` | Rules populate both |
+| — | `world.factions`, `cas`, `player`, `overseer` | Claude's creative layer (NOT from manifest) |
+
+### Emulator: Mesen2 (Decision 80)
+
+Mesen2 (`--testrunner` headless mode) is the extraction emulator for NES and SNES. FCEUX is no longer used.
+
+- **Binary:** `~/mesen2/Mesen.app/Contents/MacOS/Mesen`
+- **Headless mode:** `./Mesen --testrunner <rom-path> <lua-script-path>` — runs at max speed, exits on `emu.stop()`
+- **Lua sandbox:** `io` and `os` libraries stripped. All data export via `print()` to stdout, captured by Node.js orchestrator (Decision 81)
+- **Key API:** `emu.read()/write()` for memory, `emu.getState()` for full state, `emu.saveSavestate()/loadSavestate()` for state management, `emu.setInput()` for controller input, `emu.addEventCallback()` for frame hooks
+- **Multi-system:** NES, SNES, GB, GBA, PCE, SMS/Game Gear
+- **PPUCTRL (Decision 82):** Renderer must read PPUCTRL to determine CHR bank assignment. No safe default.
+
+### Extraction Pipeline Status
+
+| Component | Status | Location |
+|-----------|--------|----------|
+| CHR-ROM bulk extractor | ✅ Complete (2,383 NES games) | `tools/extract-chr-rom.js` → `~/nes-extracted/` |
+| Mesen2 PPU capture | ✅ Validated (SMB, MM2, Castlevania) | `tools/mesen-extract.lua` |
+| Screen renderer | ✅ Validated (CHR-ROM + CHR-RAM) | `tools/render-screen.js` |
+| RAM mutation content enumerator | 🔨 Session 11 | `tools/mesen-extract.lua` (enhanced) |
+| Physics sampling | 🔨 Session 11 | Part of enumerator |
+| Node.js orchestrator | 🔨 Session 11 | `tools/orchestrator.js` |
+| Recording analyzer + manifest gen | ❌ Session 12 | — |
+| Batch pipeline + scale run | ❌ Session 13 | — |
+| SNES extraction | ❌ Session 13 (ROM set needed) | — |
+
+### Mesen2 Lua Development Pattern
+
+1. `print()` goes to stdout — primary data export channel
+2. `io.open()` will crash (`io` is nil) — never use file I/O in Lua
+3. `emu.stop()` exits the emulator — call at end of every script
+4. Hex-encode binary data with structured prefixes: `DATA_RAM:`, `DATA_VRAM:`, `DATA_OAM:`, etc.
+5. Node.js orchestrator spawns Mesen2, captures stdout, parses prefixed lines
+
+### Local Data Locations (not in repo)
+
+| Path | Contents |
+|------|----------|
+| `~/nes-roms/` | No-Intro NES ROM set (~3,146 .nes files) |
+| `~/nes-extracted/` | CHR-ROM tile sheets (2,383 games) + capture tests |
+| `~/mesen2/` | Mesen2 emulator binary |
+
+### Cost Model
+
+| Resource | Budget |
+|----------|--------|
+| Emulator compute (full library) | ~9 hours (8 parallel instances) |
+| Claude API (manifest interpretation) | ~$50 (Haiku bulk, Sonnet complex) |
+| Storage (all manifests) | ~5-10GB |
+
+---
+
 ## Paradigm Architecture
 
-Two Fires organizes game types into two layers: **engine clusters** (what gets built) and **player-facing paradigms** (what agents read).
+Two Fires organizes game types into two layers: a **unified engine with rendering modes** (what gets built) and **player-facing paradigms** (what agents read).
 
-**7 Engine Clusters** — each defined by a unique rendering core + camera + collision + input combination:
-1. Side-View Tile World (platformer, beat-em-up, run-and-gun)
-2. Top-Down Tile World (action-adventure, RPG overworld, top-down action/racing)
-3. Stage/Arena Screen (fighting, RPG combat, fixed-screen, puzzle)
-4. Scrolling Shooter (shmups)
-5. Pseudo-3D / Mode 7 (racing)
-6. Raycasting First-Person (FPS, adventure, dungeon crawler)
-7. Strategic Map (RTS, tactics, management sim)
+### Unified Engine + 7 Rendering Modes (Decision 86)
 
-**Build scope (Decision 71):** All 7 engine clusters are built in Phase 1 (Sessions 2-18), not deferred. Clusters 1-4 share 2D tile infrastructure and are built as variations (~1-2 sessions each). Clusters 5-7 require new rendering cores (~2-3 sessions each). This surfaces cross-cluster architectural issues before CAS, agents, and diagnostics are layered on top.
+One core engine (~80% shared code: tile/sprite rendering, entity system, collision, input abstraction, CAS integration, game state management) with 7 swappable rendering modes (~20%):
 
-**12 Full Paradigm Specs** — each defines temporal structure, sequencing grammar, social surface, CAS integration, physics, aesthetics, and genre shift interface. See `docs/design/paradigm-specs.md`.
+1. `tile_2d_sideview` — platformer, beat-em-up, run-and-gun
+2. `tile_2d_topdown` — action-adventure, RPG overworld, top-down action/racing
+3. `stage_arena` — fighting, RPG combat, fixed-screen, puzzle
+4. `scrolling_shooter` — shmups
+5. `pseudo_3d` — Mode 7-style racing
+6. `raycast_3d` — FPS, adventure, dungeon crawler
+7. `strategic_map` — RTS, tactics, management sim
 
-**Key rule:** The Experience Interpreter maps prompt *activities* to engine clusters based on mechanical feel, not genre labels. Any prompt can be served by finding the right engine cluster.
+Rendering modes are hot-swappable at runtime for CAS-driven paradigm shifts. All modes share the entity system, collision, CAS integration, and game state — only camera, physics direction, draw order, and input mapping differ.
 
-**Shift mechanics:** Intra-cluster shifts (platformer → beat-em-up) = parameter swap, seamless. Cross-cluster shifts (platformer → racing) = rendering core switch, requires transition.
+**This replaces the previous "7 Engine Clusters" architecture.** The 7 game type categories are identical — what changed is that they're rendering mode configurations of one engine, not 7 separate codebases. (Decision 86)
+
+### 12 Player-Facing Paradigm Specs
+
+Each paradigm defines temporal structure, sequencing grammar, social surface, CAS integration, physics, aesthetics, and genre shift interface. See `docs/design/paradigm-specs.md`. These are UNCHANGED by the unified engine decision — the player-facing paradigm layer is a design concept, not an implementation concept.
+
+**Key rule:** The Experience Interpreter maps prompt *activities* to rendering modes based on mechanical feel, not genre labels.
+
+**Shift mechanics:** Intra-mode shifts (platformer → beat-em-up within `tile_2d_sideview`) = parameter swap, seamless. Cross-mode shifts (platformer → racing) = rendering mode hot-swap at runtime. CAS state, entity state, and narrative carry over because they live above the rendering layer.
 
 **CAS integration per paradigm (revised):** Paradigm specs no longer contain behavioral legibility threshold tables. Instead, each paradigm spec defines: (1) the **social surface** — where and how social interaction happens within that paradigm's mechanics, (2) the **social timer pace** — default game_pace_modifier for that paradigm type, (3) **drama density defaults** — min/max significant changes per cadence window, (4) **witness rules** — what constitutes line-of-sight/awareness for that paradigm (same screen in platformer, same room in RPG, visual range in RTS), (5) **information propagation speed** defaults — paradigm-specific rates for how fast knowledge packets travel.
 
-**⚠️ All numerical values in paradigm specs are starting estimates.** Calibrated through the diagnostic framework during testing. Paradigm behavioral descriptions ("visible wavering," "patrol gaps") are examples of what Claude MIGHT produce, not deterministic mappings.
+**⚠️ All numerical values in paradigm specs are starting estimates.** Calibrated through the diagnostic framework during testing.
 
 ---
 
@@ -550,9 +649,14 @@ Diagnostic wrapper (per generated game):
 
 ```
 Player prompt
-  → Skeleton (~10-15s): paradigm, CAS initial conditions, aesthetics,
-    narrative premises, social hooks, social timer pace, initial narrative
-  → Episode 1 generates (content agents + prompt-time character/environment sprites)
+  → Claude selects source manifests + generates creative delta (~2-5s):
+    - Identify source game manifests (from prompt activities/references)
+    - Load manifest data (tiles, physics, layouts, behaviors — instant file read)
+    - Claude generates ONLY the creative layer:
+      theme/narrative wrapper, CAS initial conditions, social ecology setup,
+      visual reskinning direction, aesthetic/music style, faction definitions
+  → Skeleton assembled: manifest mechanical data + Claude creative layer
+  → Episode 1 assembled from manifest layouts + creative direction
   → Player plays Episode 1 (CAS evolving on social timer)
   → At episode boundary:
     → CAS snapshot taken
@@ -562,7 +666,15 @@ Player prompt
   → Between-episode window (triple duty):
       1. Player social interaction surface (conversations = CAS events)
       2. CAS narrative delivery (cutscenes, dialogue, reveals — from Claude interpretation)
-      3. Generation masking (next episode content + new visual assets from interpretation)
-  → Episode 2 generates incorporating Claude interpretation + CAS state
+      3. Generation masking (next episode content — may load different manifest data
+         if paradigm shifting, or rearrange manifest ingredients for variety)
+  → Episode 2 assembled incorporating Claude interpretation + CAS state
   → [repeat]
+
+Prompt cost spectrum:
+  "Mega Man 2, exactly"           → 100% manifest, ~$0.00, <1s
+  "MM2 but Harry Potter theme"    → manifest mechanics + Claude theme, ~$0.03, 2-3s
+  "MM2 + Mario Kart + TMNT"      → multi-manifest composition, ~$0.08, 3-5s
+  "Feels like Metroid but new"    → manifest-informed generation, ~$0.15, 5-8s
+  "Something never seen before"   → full generation, manifests as statistical reference, ~$0.30, 8-12s
 ```
