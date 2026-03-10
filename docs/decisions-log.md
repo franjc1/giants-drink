@@ -1162,3 +1162,33 @@ Estimated time: ~3 minutes per game. Zero per-game configuration. 100% generaliz
 
 **Rationale:** Completeness is a product feature — never saying "sorry, we don't have that game." Marginal cost is negligible (~$30 additional API, ~5 hours additional compute). Larger library provides richer distributional knowledge for Track B generation. Every additional extracted game is a potential composition ingredient for the creative layer.
 
+
+---
+
+## Session: 2026-03-10 (Session 11b) — Phase 1 Boot Detection Rewrite
+
+### Decision 89: Bidirectional Control Test as Primary Phase 1 Detection
+
+**Context:** Session 11a built Phase 1 with passive sprite-count heuristics: detecting no-sprite windows (title screen), nametable density checks, and fallback timers. In testing, these heuristics failed to reliably distinguish gameplay from SMB1's attract demo (which has the same OAM and nametable density as gameplay). BASELINE was being captured during the demo, causing Phase 3 to find no real content variables.
+
+**Decision:** Replace all passive heuristics with an active bidirectional control test as the sole gameplay detection mechanism. Each ~75-frame cycle: (1) press Start or A alternately for 10 frames, (2) wait 40 frames, (3) snapshot all 64 OAM sprite X positions, (4) hold Right 10 frames, snapshot, (5) hold Left 10 frames, snapshot, (6) check each slot for dxRight > 0 AND dxLeft < 0. Any slot passing both = player sprite, gameplay confirmed, BASELINE saved. Timeout at 1800 frames if no slot confirms.
+
+**Rationale:** Attract demos use pre-recorded input. The demo moves Mario right on a scripted path — pressing Right shows movement (false positive on right-only test). But the demo ignores our Left input entirely, so pressing Left shows the sprite continuing its scripted rightward path. The bidirectional test exploits this: only real gameplay responds to BOTH directions independently. Alternating Start and A handles games that require different buttons to advance menus.
+
+**Results:** Confirmed on SMB1 (cycle 10, frame 710), Mega Man 2 (cycle 9, frame 639), Contra (cycle 4, frame 284). Legend of Zelda times out at 1800 frames due to name-entry screen (game-specific issue, not bidirectional test failure).
+
+### Decision 90: Phase 3 Needs Constant-Address Second Pass
+
+**Context:** Phase 2 identifies "volatile candidates" — RAM addresses that change during gameplay. Level ID / area pointer variables in SMB1 are CONSTANT during active play (you're in World 1-1, that value doesn't change). Phase 2 correctly classifies them as constant and excludes them from Phase 3's mutation sweep. Result: the content variables most important for capturing different levels (0x075C, 0x075F in SMB1) are never found.
+
+**Decision:** Phase 3 needs a second pass that sweeps ALL 2048 RAM addresses (not just Phase 2 candidates), with P3_SAMPLE_STEP=32 (8 sampled values per address). Expected additional cost: ~2048 × 8 × 5 frames ≈ 82,000 frames per game (~1.4 minutes at 1000x). This pass will catch level/room variables that are constant during gameplay but produce distinct VRAM states when mutated from BASELINE.
+
+**Rationale:** The Phase 2 filter was designed to skip addresses that are either constant (no signal) or monotonically ticking (frame counters). Level variables ARE constant during play — they're the stable state variables that define "which level you're in." The mutation sweep's whole purpose is to discover these by testing what happens when you CHANGE them from their stable value. The Phase 2 filter is counterproductive for this use case.
+
+### Decision 91: Phase 5 BASELINE Quality and OAM Slot Tracking
+
+**Context:** Phase 5 physics tests (all 6: WALK_RIGHT, FRICTION, JUMP_TAP, JUMP_HOLD, RUNNING_JUMP, DUCK) produce identical trajectories for SMB1. Root causes: (1) BASELINE was captured while Mario was mid-jump (Phase 1 cycle 10 pressed A = jump button, 40-frame wait may catch Mario entering a pipe rather than standing). (2) OAM slot multiplexing — SMB1 uses slot 52 for multiple sprites on a 3-frame cycle; the slot that confirmed bidirectional control doesn't reliably track Mario across multiple frames. Pipe-entry animations ignore all player input, producing identical trajectories regardless of what we press.
+
+**Decision:** Two fixes required for Phase 5 physics reliability: (1) BASELINE quality gate — before saving BASELINE, verify the player sprite is on the ground (OAM Y stable in ground range for N frames). Discard and retry if Mario is mid-air or mid-animation. (2) OAM multi-slot probe — scan ALL 64 OAM slots every frame and identify the slot with consistent directional response, rather than locking in one slot from Phase 1's single bidirectional test.
+
+**Rationale:** These are correctness requirements. The physics data (walk speed, jump arc, friction) is the mechanical ground truth for the entire extraction pipeline. Noisy data here propagates to all downstream uses. Better to retry BASELINE capture than to lock in a bad state.

@@ -1,43 +1,60 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-09 (Phase 1, Session 10)
+**Last updated:** 2026-03-10 (Session 11b)
 
 ---
 
-## What Just Happened (Session 10)
+## What Just Happened (Session 11b)
 
-### CHR-RAM Extraction Validated
+### Phase 1 Boot Detection — Rewritten and Validated
 
-Ran Mesen2 extraction pipeline on Mega Man 2 (CHR-RAM/UNROM) and Castlevania (CHR-RAM/UNROM). Both render pixel-perfectly. Two bugs fixed in render-screen.js:
-1. Hardcoded SMB1 BG bank — now derived from PPUCTRL at render time
-2. `nesPpuDebug[0]` unreliable for CHR-RAM games — replaced with nametable coverage heuristic
+**The problem:** Session 11a's Phase 1 used passive sprite-count heuristics (no-sprite-window detection, nametable density) to detect when the game reached gameplay. SMB1's attract demo looks identical to gameplay from those metrics — BASELINE was being captured during the demo, causing Phase 3 to find no real content variables.
 
-**Result:** The extraction pipeline works for the entire NES library — both CHR-ROM (tiles in file) and CHR-RAM (tiles only in runtime VRAM).
+**The fix:** Replaced all passive heuristics with an active bidirectional control test as the PRIMARY detection mechanism. Each ~75-frame cycle:
+1. Press Start (odd cycles) or A (even cycles) for 10 frames
+2. Wait 40 frames for the game to react
+3. Snapshot all 64 OAM sprite X positions (pre-test)
+4. Hold Right 10 frames, snapshot again (mid-test)
+5. Hold Left 10 frames, snapshot (post-test)
+6. Any sprite where mid > pre (moved right) AND post < mid (moved left) = player confirmed
 
-### Architectural Redesign: Universal Extraction + Manifest Architecture
+This correctly rejects attract demos (pre-recorded input ignores Left button). Only real gameplay responds to both directions.
 
-Major design session producing `docs/design/universal-extraction-spec.md`. This reshapes Two Fires' foundation:
+**Results on 4 games:**
 
-**1. RAM Mutation Content Enumerator (Decision 83)**
-Replaces the chaos player. Instead of simulating gameplay to explore content, systematically mutates every candidate RAM byte and observes VRAM changes. Content-switching variables (level ID, room ID) are identified by which mutations cause the PPU to load different tiles. All values of these variables are enumerated, capturing the entire game's content in ~3 minutes with zero per-game configuration.
+| Game | Result | Frame | Cycle | Slot | dxRight / dxLeft |
+|------|--------|-------|-------|------|-----------------|
+| SMB1 | ✅ | 710 | 10 (A) | 52 | 36 / -44 |
+| Mega Man 2 | ✅ | 639 | 9 (Start) | 57 | 105 / -105 |
+| Contra | ✅ | 284 | 4 (A) | 18 | 44 / -105 |
+| Legend of Zelda | ❌ TIMEOUT | 1800 | 26 | — | — |
 
-**2. Unified Engine with Rendering Modes (Decision 84)**
-Replaces 7 separate engine clusters with one configurable engine + 7 swappable rendering modes. Modes share ~80% of code (tile/sprite rendering, entity system, collision, input, CAS integration). Paradigm shifts become rendering mode hot-swaps.
+**Zelda timeout:** Zelda's new-game boot sequence requires navigating a name-entry screen (type your name, press Start). Button-mashing Start/A doesn't resolve it — needs Down+A to select "End" and register a blank name. Game-specific issue, not a fundamental failure of the bidirectional test.
 
-**3. Manifest as Ingredient Library (Decision 85)**
-Extraction produces a per-game manifest.json containing complete visual (tiles, sprites, palettes), structural (level layouts, entity placements, progression), and mechanical (physics constants, enemy behaviors, game rules) ground truth. Manifests populate the existing game state schema — they don't replace it. Claude's creative layer generates CAS setup, narrative, social ecology on top of manifest data.
+---
 
-**4. Expanded Scope (Decision 86)**
-~1,605 games: all US NES (~680), all US SNES (~725), 100 Genesis, 50 arcade, 50 PC. Total extraction cost: ~9 hours compute + ~$50 API.
+### Phase 3 Content Variables — Working, With Architectural Limitation
 
-**Downstream impact:**
-- Generation latency drops 60-80% (manifest loads replace generation)
-- Generation cost drops proportionally (Claude composes, doesn't invent)
-- Track A/B becomes a continuous blend spectrum, not a binary toggle
-- CAS modulates real extracted parameters (not abstract values)
-- Paradigm shifts use rendering mode swaps with manifest data
-- Sequencing grammar seeds grounded in real game teachability arcs
-- Build plan reduced from ~55-60 sessions to ~45
+Phase 3 found 2 content variables in SMB1: `0x06D4` (unique=5) and `0x073D` (unique=5). Phase 4 captured 10 distinct states. Pipeline structurally complete.
+
+**The limitation:** Expected level variables (`0x075C` area pointer, `0x075F` world number) were NOT found. Reason: Phase 2 classifies these as CONSTANT (they don't change while playing World 1-1) and excludes them from the mutation sweep. The Phase 2 candidate filter removes exactly the variables we need.
+
+**Fix needed (Session 12):** Phase 3 should also sweep constant addresses. Option: after the candidate-only sweep, do a second pass over ALL 2048 addresses with a larger P3_SAMPLE_STEP to catch constant level variables without blowing up runtime.
+
+---
+
+### Phase 5 Physics — Structurally Complete, Data Unreliable
+
+All 6 physics tests run and produce output. But all 6 tests produce **identical trajectories** — inputs are not affecting the game state after savestate load, OR the OAM slot from Phase 1 is unreliable.
+
+**Identified issues:**
+1. **BASELINE captured mid-jump:** Phase 1 cycle 10 pressed A (jump button in SMB1), waited 40 frames, saved BASELINE. At the 40-frame mark, Mario may be mid-air and about to enter a pipe. Pipe entry animations (~33 frames) ignore all player input → all tests produce the same pipe-entry trajectory.
+2. **OAM sprite multiplexing:** SMB1 uses slot 52 for multiple sprites on alternating frames (3-frame cycling visible in data). The slot that passed Phase 1's bidirectional test doesn't reliably track Mario in Phase 5.
+3. **Post-savestate input initialization:** Added 5-frame input warmup after loadstate (P5_WARMUP_FRAMES=5) but identical trajectories persist. Suggests the state issue is BASELINE quality (#1), not input timing.
+
+**Fix needed (Session 12):**
+- For BASELINE quality: before saving BASELINE, verify Mario is on the ground (OAM Y ≈ 175 for SMB) and not in a transition animation. Or: save BASELINE only AFTER the Right directional test (use a second savestate in Phase 1).
+- For OAM slot tracking: probe multiple slots per frame to find which one tracks a moving entity, rather than locking in one slot from Phase 1.
 
 ---
 
@@ -46,97 +63,56 @@ Extraction produces a per-game manifest.json containing complete visual (tiles, 
 ### File Structure
 ```
 giants-drink/
-  claude.md                              ← Needs update for manifest architecture
+  claude.md                              ← Architectural blueprint (current)
   tools/
-    extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (Session 8)
-    mesen-extract.lua                    ← Mesen2 Lua extraction script (Session 9-10)
-    render-screen.js                     ← NES screen renderer (Session 9-10, bugs fixed)
-  src/
-    asset-resolver.js                    ← Needs update for manifest queries
-    game-loop.js, renderer.js, etc.      ← Will be rebuilt as unified engine
-  data/
-    test-fixtures/                       ← Unchanged
-    ground-truth/                        ← Phase 0.5 ingestion (~37MB)
+    extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (✅ complete)
+    extraction-enumerator.lua            ← Session 11b: Phase 1 rewritten
+    mesen-extract.lua                    ← Older single-frame capture (superseded)
+    render-screen.js                     ← NES screen renderer (✅ validated)
   docs/
     current-status.md                    ← THIS FILE
-    decisions-log.md                     ← Needs Decisions 83-86 appended
+    decisions-log.md                     ← Decisions 83-88
     design/
-      universal-extraction-spec.md       ← NEW: definitive extraction + manifest architecture
-      rom-extraction-strategy.md         ← SUPERSEDED by universal-extraction-spec.md
-      build-plan-v4.md                   ← SUPERSEDED — v5 in extraction spec
-      (other design docs unchanged)
+      universal-extraction-spec.md       ← Extraction + manifest architecture
 ```
 
 ### External (not in repo)
 ```
 ~/nes-roms/                              ← No-Intro NES ROM set (~3,146 .nes files)
-~/nes-extracted/                         ← CHR-ROM tile sheets (2,383 games) + capture tests
-~/mesen2/                                ← Mesen2 emulator installation
+~/nes-extracted/                         ← CHR-ROM tile sheets (2,383 games)
+~/mesen2/                                ← Mesen2 emulator
 ```
-
-### Deployed
-- Vercel: two-fixture platformer (unchanged)
-- Cloudflare R2: TSR catalog + partial sprites (will be replaced by manifest library)
 
 ---
 
 ## What's Next
 
-### Immediate: Session 11 — Universal Extraction Pipeline Build (Session UE-1)
+### Immediate: Session 12 — Phase 3 + Phase 5 Fixes
 
-This is the highest-priority engineering session. Build the core extraction pipeline:
+**Priority 1 — Phase 3: sweep constant addresses**
+Add second pass in Phase 3 to test ALL 2048 RAM addresses (not just volatile candidates). Use P3_SAMPLE_STEP=32 (8 sampled values). This adds ~2048 × 8 × 5 frames ≈ 82,000 frames per game — about 1.4 minutes at 1000x. Acceptable. Expected: `0x075F` (world) and `0x075C` (area) should show up with many unique VRAM hashes.
 
-1. **Enhanced Mesen2 Lua recorder** — extend from single-frame capture to full-state-per-frame recording with delta compression
-2. **RAM mutation content enumerator** — the Phase 1-4 algorithm from the spec
-3. **Physics sampling module** — controlled input sequences for physics derivation
-4. **Node.js orchestrator** — spawn Mesen2, capture output, store recordings
+**Priority 2 — Phase 5: BASELINE quality + OAM tracking**
+- Fix BASELINE capture: after Phase 1 confirms control, wait for player to be standing on ground (OAM Y > 160 and stable for N frames) before saving BASELINE. This avoids the mid-jump/pipe-entry problem.
+- Fix OAM tracking: scan multiple slots per frame and pick the one that consistently changes with directional input instead of locking in from Phase 1.
 
-**Critical tests this session:**
-- TEST 1: SMB full pipeline validation (compare against known community data)
-- TEST 2: MM2 + Zelda + Contra three-game battery
+**Priority 3 — Zelda boot handling**
+Zelda needs a name-entry bypass. After 10 failed cycles, try pressing Down × 8 then A to select "End" and register blank name. Or: detect name-entry screen by OAM pattern and send the bypass sequence.
 
-**If Test 1 fails:** Stop, debug, do not proceed.
-**If Test 2 fails on 2+ games:** Architectural problem, redesign before scaling.
+### Session 13: Recording Analyzer + Manifest Generation
 
-### Session 12: Analysis & Manifest Generation (UE-2)
-
-- Recording analyzer (tile dedup, sprite clustering, layout stitching)
-- Physics derivation from position-over-time curves
-- Enemy behavior pattern extraction
-- Claude interpretation pipeline (summary → API → manifest JSON)
-- TEST 3: 12-game diversity battery
-
-### Session 13: Scale Run + Integration (UE-3)
-
-- Batch orchestrator for full library
-- SNES ROM acquisition + SNES validation
-- Manifest → game state loader
-- TEST 4: End-to-end creative pipeline
-- TEST 5: Full library overnight run
-
-### Session 14+: Unified Engine Build (Phase 1)
-
-- Core engine loading from manifests
-- Rendering modes: tile_2d_sideview first, then additional modes
-- CAS integration layer
-- Diagnostics pipeline
-
----
-
-## Key Decisions This Session
-
-- **Decision 83:** RAM mutation content enumerator replaces chaos player
-- **Decision 84:** Unified engine with 7 rendering modes replaces 7 separate clusters
-- **Decision 85:** Manifest as ingredient library populating game state (not replacing it)
-- **Decision 86:** Scope expanded to ~1,605 games (all US NES/SNES + Genesis/arcade/PC)
+- Deduplicate tiles, cluster sprites, stitch level layouts
+- Derive physics constants from position-over-time curves
+- Claude interpretation pipeline (VRAM state → manifest JSON)
+- TEST: 12-game diversity battery
 
 ---
 
 ## Key Open Questions
 
-1. ~~CHR-RAM extraction~~ → Validated (RESOLVED)
-2. **SNES ROM set acquisition** — needed for Session 13
-3. **Genesis emulation** — Mesen2 may not support Genesis; may need separate emulator
-4. **Game Genie code database** — needed for infinite-lives during extraction
-5. **Pairwise RAM mutation** — how much does testing variable pairs improve coverage? (Test empirically)
-6. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
+1. **Phase 3 constant address sweep** — confirm that level variables show up with sufficient VRAM variance (need full 256-value sampling, not just 8)
+2. **BASELINE position quality** — need ground-state verification before save
+3. **SNES ROM set acquisition** — needed for Session 13
+4. **Genesis emulation** — Mesen2 may not support Genesis; may need separate emulator
+5. **Zelda name-entry bypass** — game-specific boot handling needed
+6. Meta-game specification — flagged, unchanged

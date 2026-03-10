@@ -1,5 +1,5 @@
 -- extraction-enumerator.lua
--- Session UE-1: Universal NES content extraction via RAM mutation
+-- Session UE-1 / Session 11b: Universal NES content extraction via RAM mutation
 --
 -- Run via Mesen2 headless:
 --   ~/mesen2/Mesen.app/Contents/MacOS/Mesen --testrunner <rom.nes> tools/extraction-enumerator.lua
@@ -15,42 +15,33 @@
 -- ============================================================
 
 local CFG = {
-  -- Phase 1: player-control detection
-  P1_NO_SPRITE_MIN_FRAME = 300,   -- don't watch for no-sprite before this frame
-                                   -- Prevents false positives during OAM initialization
-                                   -- (frames 0-3 have zeros = no sprites) and title animation
-  P1_NO_SPRITE_THRESHOLD = 10,   -- consecutive no-sprite frames required to trigger Start press
-                                   -- 10 filters brief OAM clears between demo cycles (~3 frames)
-                                   -- while catching the title waiting screen (hundreds of frames)
-  P1_INITIAL_DELAY      = 4800,   -- fallback: fixed-interval presses after this frame
-                                   -- Handles games whose title always shows sprites (no-sprite
-                                   -- trigger never fires). At 1000x speed, ≈ 0.08 real seconds.
-  P1_START_INTERVAL     = 60,     -- frames between fallback Start presses
-  P1_WAIT_AFTER_START   = 300,    -- frames to wait after Start before testing control
-                                   -- SMB title card is ~180 frames; 300 safely clears it
-  P1_RIGHT_FRAMES       = 15,     -- frames to hold Right during control test
-  P1_MOVE_THRESHOLD     = 5,      -- pixels of X movement required to confirm control
-  P1_MAX_ATTEMPTS       = 12,     -- max Start presses before forced fallback
+  -- Phase 1: boot detection
+  -- Cycles alternate pressing Start (odd cycles) and A (even cycles).
+  -- Each cycle is ~75 frames: 10 press + 40 wait + ~3 save + 10 right + 10 left + eval.
+  -- At 1800 frames we get ~24 cycles before timeout.
+  P1_TIMEOUT           = 1800,  -- give up after this many frames (~30s), flag for manual inspection
 
-  NT_FILL_THRESHOLD     = 576,    -- non-zero nametable tiles (60% of 960)
+  NT_FILL_THRESHOLD    = 576,   -- non-zero nametable tiles (60% of 960) — used in Phase 4
 
-  SNAP_COUNT            = 5,
-  SNAP_INTERVAL         = 60,     -- frames between RAM snapshots (Phase 2)
+  SNAP_COUNT           = 5,
+  SNAP_INTERVAL        = 60,    -- frames between RAM snapshots (Phase 2)
 
-  P3_FRAMES_PER_VAL     = 3,      -- frames to wait after writing test value
-  P3_SETTLE_FRAMES      = 1,      -- frames to wait after restoring original
-  P3_SAMPLE_STEP        = 32,     -- step through values 0..255 in Phase 3 (1=all 256, 32=8 values)
-  P3_UNIQUE_THRESHOLD   = 3,      -- min unique VRAM hashes to qualify as content var
-  P3_PROGRESS_INTERVAL  = 50,
+  P3_FRAMES_PER_VAL    = 3,     -- frames to wait after writing test value
+  P3_SETTLE_FRAMES     = 1,     -- frames to wait after restoring original
+  P3_SAMPLE_STEP       = 32,    -- step through values 0..255 (1=all 256, 32=8 sampled values)
+  P3_UNIQUE_THRESHOLD  = 3,     -- min unique VRAM hashes to qualify as content var
+  P3_PROGRESS_INTERVAL = 50,
 
-  P4_LOAD_FRAMES        = 120,    -- frames to wait for level load
-  P4_OAM_INTERVAL       = 10,     -- frames between OAM animation snapshots
-  P4_OAM_COUNT          = 10,     -- total OAM snapshots per state
+  P4_LOAD_FRAMES       = 120,   -- frames to wait for level load
+  P4_OAM_INTERVAL      = 10,    -- frames between OAM animation snapshots
+  P4_OAM_COUNT         = 10,    -- total OAM snapshots per state
 
-  P5_PLAYER_ID_SAMPLES  = 10,     -- (unused; player slot reused from Phase 1)
-  P5_PLAYER_ID_INTERVAL = 10,     -- (unused)
+  P5_PLAYER_ID_SAMPLES  = 10,   -- (unused; player slot reused from Phase 1)
+  P5_PLAYER_ID_INTERVAL = 10,   -- (unused)
+  P5_WARMUP_FRAMES      = 5,    -- clear-input frames after loadstate before physics test starts
+                                -- lets Mesen2 process the loaded state before we apply inputs
 
-  MAX_TOTAL_FRAMES      = 700000, -- safety limit (~12 min at 1000x)
+  MAX_TOTAL_FRAMES     = 700000, -- safety limit (~12 min at 1000x)
 }
 
 -- ============================================================
@@ -156,15 +147,17 @@ local sub       = "init"
 local waitUntil = 0
 
 -- Phase 1
+-- Strategy: each cycle presses a button (Start or A, alternating) then runs a
+-- bidirectional movement test on all 64 OAM sprites. Any sprite whose X increases
+-- during Right AND decreases during Left is the player sprite — real gameplay confirmed.
+-- Attract demos use pre-recorded input and won't respond to Left when scripted Right.
 local BASELINE          = nil
-local p1Attempts        = 0    -- number of Start presses tried
-local p1CandSlot        = -1   -- OAM slot of candidate sprite during control test
-local p1CandX0          = 0    -- candidate sprite X at start of directional test
-local p1RightFrames     = 0    -- frames Right has been held in current test
-local p1LeftFrames      = 0    -- frames Left has been held in current test
-local p1PreTestState    = nil  -- savestate captured before directional test (becomes BASELINE)
-local p1DxRight         = 0    -- stored dx_right for logging
-local p1NoSpriteFrames  = 0    -- consecutive frames with no sprite in Y=50-200 (title screen detector)
+local p1CandSlot        = -1   -- OAM slot of confirmed player sprite (used in Phase 5)
+local p1CycleNum        = 0    -- how many press+test cycles have run
+local p1HoldCount       = 0    -- frames spent in current hold sub-state
+local p1PreX            = {}   -- pre-test X position for each of 64 OAM slots
+local p1MidX            = {}   -- mid-test X position (after Right press)
+local p1BaselineState   = nil  -- savestate captured at pre-test moment; promoted to BASELINE on confirm
 
 -- Phase 2
 local snapshots = {}   -- {[1..5]} = arrays indexed [0..2047]
@@ -191,11 +184,12 @@ local LEVEL_CAND = nil  -- {addr, val} for physics phase
 local p4ChrCache = nil  -- {hex, sz, src} — CHR-ROM is fixed; capture once
 
 -- Phase 5
-local LEVEL_STATE = nil
-local p5Slot    = -1
-local p5TestIdx = 1
-local p5FrameN  = 0
-local p5Positions = {}
+local LEVEL_STATE   = nil
+local p5Slot        = -1
+local p5TestIdx     = 1
+local p5FrameN      = 0
+local p5Positions   = {}
+local p5WarmupCount = 0
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
 local P5_TESTS = {
@@ -222,218 +216,155 @@ local P5_TESTS = {
 }
 
 -- ============================================================
--- PHASE 1: BOOT TO GAMEPLAY — PLAYER CONTROL DETECTION
+-- PHASE 1: BOOT TO GAMEPLAY — BIDIRECTIONAL CONTROL DETECTION
 --
--- Strategy: wait for the title screen (no sprite in Y=50-200 for 3+ frames),
--- then press Start. After P1_WAIT_AFTER_START frames, run a BIDIRECTIONAL test:
---   1. Find a sprite with Y in 50-200 (candidate player sprite).
---   2. Record its X position. Save pre-test state.
---   3. Hold Right for P1_RIGHT_FRAMES frames. Check dx_right > P1_MOVE_THRESHOLD.
---   4. Restore pre-test state. Hold Left for P1_RIGHT_FRAMES frames.
---   5. Check dx_left < -P1_MOVE_THRESHOLD.
---   Both must pass → real gameplay. Either failing → return to boot.
+-- Each ~75-frame cycle:
+--   1. Press Start (odd cycles) or A (even cycles) for 10 frames
+--      Some games need Start to advance menus; others need A for confirmations.
+--   2. Wait 40 frames — let the game react to the button press.
+--   3. Read all 64 OAM sprite X positions → p1PreX[]. Save state (→ p1BaselineState).
+--   4. Hold Right for 10 frames. Read all 64 OAM X positions → p1MidX[].
+--   5. Hold Left for 10 frames. Read all 64 OAM X positions → postX[].
+--   6. For each slot: if mid > pre (moved right) AND post < mid (moved left) →
+--      that is the player sprite. Control confirmed. p1BaselineState → BASELINE.
+--      Proceed to Phase 2.
+--   7. If no slot confirms: print status, start next cycle.
 --
--- WHY NO-SPRITE TRIGGER: SMB1's attract demo always has Mario visible in OAM
--- (Y=176). The title screen has no player sprite. Pressing Start at the first
--- no-sprite frame reliably hits the title waiting screen and starts actual gameplay,
--- rather than restarting the attract demo.
+-- WHY BIDIRECTIONAL: Attract demos use pre-recorded input. If the demo moves Mario
+-- right, pressing Right shows movement (false positive on right test alone). But the
+-- demo ignores our Left input — the sprite keeps moving right — so post.X >= mid.X,
+-- meaning dxLeft >= 0, and the test correctly rejects it.
 --
--- WHY BIDIRECTIONAL: The attract demo moves Mario right with pre-recorded input.
--- Pressing Right shows dx > 0 (false positive). Left test confirms: demo can't
--- respond left when scripted right.
+-- WHY ALTERNATE START/A: Some games require A to confirm menus. Alternating ensures
+-- both are tried regardless of which the game needs.
 --
--- Fallback: after P1_INITIAL_DELAY frames, also press Start at fixed intervals
--- (handles games whose title screen always has sprites).
--- After P1_MAX_ATTEMPTS → save BASELINE as fallback (no confirmed control).
+-- TIMEOUT: After 1800 frames (~24 cycles), flag game for manual inspection.
 -- ============================================================
 
 local function runPhase1()
-  if sub == "init" then sub = "boot" end
+  -- Timeout: give up and flag for manual inspection
+  if frame >= CFG.P1_TIMEOUT then
+    print("STATUS_PHASE1:TIMEOUT no control confirmed after " .. frame .. " frames")
+    print("DATA_EXTRACTION:INCOMPLETE")
+    emu.stop(); return
+  end
 
-  -- ---- BOOT: wait for title screen, then press Start ----
-  --
-  -- PRIMARY TRIGGER: "no sprite in Y=50-200 for 3+ consecutive frames"
-  -- During attract/demo mode, the player character is always visible in OAM
-  -- (Y=50-200). The title screen has NO player sprite in that range.
-  -- So 3 consecutive no-sprite frames reliably signals the title waiting screen.
-  --
-  -- FALLBACK: after P1_INITIAL_DELAY frames, press Start every P1_START_INTERVAL
-  -- regardless. This handles games where the title screen has sprites, or where
-  -- the demo lasts so long that we never see a no-sprite window.
-  if sub == "boot" then
-    if p1Attempts >= CFG.P1_MAX_ATTEMPTS then
-      print("STATUS_PHASE1:Fallback save (control not confirmed) frame=" .. frame)
-      sub = "saving"; doSavestate("save"); return
-    end
-    -- Check for sprite in Y=50-200
-    local hasSpriteInRange = false
-    for slot = 0, 15 do
-      local y = emu.read(slot * 4, emu.memType.nesSpriteRam)
-      if y >= 50 and y <= 200 then hasSpriteInRange = true; break end
-    end
-    if frame >= CFG.P1_NO_SPRITE_MIN_FRAME then
-      if not hasSpriteInRange then
-        p1NoSpriteFrames = p1NoSpriteFrames + 1
-      else
-        p1NoSpriteFrames = 0
-      end
+  -- Initialize on first call
+  if sub == "init" then sub = "start_cycle" end
+
+  -- ---- START CYCLE: increment counter, transition to press_button ----
+  if sub == "start_cycle" then
+    p1CycleNum  = p1CycleNum + 1
+    p1HoldCount = 0
+    local btn = (p1CycleNum % 2 == 1) and "start" or "a"
+    print("STATUS_PHASE1:Cycle=" .. p1CycleNum .. " pressing=" .. btn .. " frame=" .. frame)
+    sub = "press_button"
+    -- fall through to press_button on same frame
+  end
+
+  -- ---- PRESS BUTTON (10 frames): Start on odd cycles, A on even cycles ----
+  if sub == "press_button" then
+    if p1CycleNum % 2 == 1 then
+      emu.setInput({right=false,left=false,up=false,down=false,
+                    a=false,b=false,start=true,select=false}, 0)
     else
-      p1NoSpriteFrames = 0  -- skip early frames (OAM uninitialized, title animation)
-    end
-    -- Primary: N consecutive no-sprite frames → title screen → press Start
-    if p1NoSpriteFrames >= CFG.P1_NO_SPRITE_THRESHOLD then
-      p1NoSpriteFrames = 0
-      print("STATUS_PHASE1:Title screen detected (no sprite) frame=" .. frame)
       emu.setInput({right=false,left=false,up=false,down=false,
-                    a=false,b=false,start=true,select=false}, 0)
-      p1Attempts = p1Attempts + 1
-      waitUntil = frame + CFG.P1_WAIT_AFTER_START
-      sub = "wait_post_start"
-      return
+                    a=true,b=false,start=false,select=false}, 0)
     end
-    -- Fallback: after a long delay, also try fixed-interval Start presses
-    -- (handles games where title screen always has sprites, or very long demos)
-    if frame >= CFG.P1_INITIAL_DELAY and frame % CFG.P1_START_INTERVAL == 0 then
-      print("STATUS_PHASE1:Fallback Start press frame=" .. frame)
-      emu.setInput({right=false,left=false,up=false,down=false,
-                    a=false,b=false,start=true,select=false}, 0)
-      p1Attempts = p1Attempts + 1
-      waitUntil = frame + CFG.P1_WAIT_AFTER_START
-      sub = "wait_post_start"
-      return
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 10 then
+      p1HoldCount = 0
+      sub = "wait_after_press"
     end
-    clearInput()
     return
   end
 
-  -- ---- WAIT 60 FRAMES after Start press ----
-  if sub == "wait_post_start" then
+  -- ---- WAIT 40 FRAMES: let the game process the button press ----
+  if sub == "wait_after_press" then
     clearInput()
-    if frame < waitUntil then return end
-    -- Find a candidate sprite with Y in 50-200
-    p1CandSlot = -1
-    for slot = 0, 15 do
-      local y = emu.read(slot * 4, emu.memType.nesSpriteRam)
-      if y >= 50 and y <= 200 then
-        p1CandSlot = slot
-        p1CandX0   = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
-        break
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 40 then
+      -- Read pre-test OAM X positions for all 64 sprite slots
+      for slot = 0, 63 do
+        p1PreX[slot] = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
       end
+      -- Save state — this becomes BASELINE if control is confirmed this cycle
+      doSavestate("save")
+      sub = "wait_save"
     end
-    if p1CandSlot < 0 then
-      -- No suitable sprite yet; wait for next Start press
-      sub = "boot"; return
-    end
-    local foundY = emu.read(p1CandSlot * 4, emu.memType.nesSpriteRam)
-    print("STATUS_PHASE1:Candidate slot=" .. p1CandSlot ..
-          " X=" .. p1CandX0 .. " Y=" .. foundY .. " frame=" .. frame)
-    -- Save the state now — this becomes BASELINE if control is confirmed.
-    -- Saving before any directional input means BASELINE is always at a clean
-    -- standing position with the player sprite visible and controllable.
-    doSavestate("save")
-    sub = "save_pre_test"
     return
   end
 
-  -- ---- WAIT for pre-test savestate ----
-  if sub == "save_pre_test" then
+  -- ---- WAIT FOR SAVESTATE ----
+  if sub == "wait_save" then
+    clearInput()
     if ssPending then return end
-    p1PreTestState = ssResult
-    p1RightFrames  = 0
+    p1BaselineState = ssResult
+    p1HoldCount     = 0
     sub = "hold_right"
     return
   end
 
-  -- ---- HOLD RIGHT for 15 frames ----
+  -- ---- HOLD RIGHT (10 frames), then read mid positions ----
   if sub == "hold_right" then
     emu.setInput({right=true,left=false,up=false,down=false,
                   a=false,b=false,start=false,select=false}, 0)
-    p1RightFrames = p1RightFrames + 1
-    if p1RightFrames >= CFG.P1_RIGHT_FRAMES then
-      sub = "check_right"
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 10 then
+      -- Capture mid-test X positions after Right press
+      for slot = 0, 63 do
+        p1MidX[slot] = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+      end
+      p1HoldCount = 0
+      sub = "hold_left"
     end
     return
   end
 
-  -- ---- CHECK right movement (first leg of bidirectional test) ----
-  if sub == "check_right" then
-    clearInput()
-    local newX = emu.read(p1CandSlot * 4 + 3, emu.memType.nesSpriteRam)
-    local dx = newX - p1CandX0
-    if dx > 128  then dx = dx - 256 end
-    if dx < -128 then dx = dx + 256 end
-    if dx > CFG.P1_MOVE_THRESHOLD then
-      -- Sprite moved RIGHT (positive dx) — first leg confirmed.
-      -- Now restore pre-test state and test Left.
-      p1DxRight = dx
-      doSavestate("load", p1PreTestState)
-      sub = "restore_for_left"
-    else
-      -- dx ≤ threshold: sprite didn't move right (attract demo or not in gameplay).
-      -- Return to boot. Boot will wait for the title screen (no-sprite for 3 frames)
-      -- before pressing Start again, ensuring the next attempt hits real gameplay.
-      print("STATUS_PHASE1:No rightward movement slot=" .. p1CandSlot ..
-            " X0=" .. p1CandX0 .. " newX=" .. newX .. " dx=" .. dx ..
-            " attempt=" .. p1Attempts)
-      sub = "boot"
-    end
-    return
-  end
-
-  -- ---- RESTORE pre-test state before Left test ----
-  if sub == "restore_for_left" then
-    if ssPending then return end
-    p1LeftFrames = 0
-    sub = "hold_left"
-    return
-  end
-
-  -- ---- HOLD LEFT for 15 frames ----
+  -- ---- HOLD LEFT (10 frames), then evaluate ----
   if sub == "hold_left" then
     emu.setInput({right=false,left=true,up=false,down=false,
                   a=false,b=false,start=false,select=false}, 0)
-    p1LeftFrames = p1LeftFrames + 1
-    if p1LeftFrames >= CFG.P1_RIGHT_FRAMES then
-      sub = "check_left"
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 10 then
+      clearInput()
+      -- Read post-test X positions and check each slot
+      local foundSlot = -1
+      local foundDxR, foundDxL = 0, 0
+      for slot = 0, 63 do
+        local pre  = p1PreX[slot]
+        local mid  = p1MidX[slot]
+        local post = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+        -- Signed 8-bit delta (sprites wrap at 256)
+        local dxR = mid - pre
+        if dxR > 128  then dxR = dxR - 256 end
+        if dxR < -128 then dxR = dxR + 256 end
+        local dxL = post - mid
+        if dxL > 128  then dxL = dxL - 256 end
+        if dxL < -128 then dxL = dxL + 256 end
+        -- Both directions confirm real player control
+        if dxR > 0 and dxL < 0 then
+          foundSlot = slot
+          foundDxR  = dxR
+          foundDxL  = dxL
+          break
+        end
+      end
+
+      if foundSlot >= 0 then
+        p1CandSlot = foundSlot
+        BASELINE   = p1BaselineState
+        print("STATUS_PHASE1:Control confirmed cycle=" .. p1CycleNum ..
+              " frame=" .. frame .. " slot=" .. foundSlot ..
+              " dxRight=" .. foundDxR .. " dxLeft=" .. foundDxL)
+        print("DATA_PHASE1:COMPLETE frame=" .. frame)
+        phase = 2; sub = "init"
+      else
+        print("STATUS_PHASE1:No control found cycle=" .. p1CycleNum .. " frame=" .. frame)
+        sub = "start_cycle"
+      end
     end
     return
-  end
-
-  -- ---- CHECK left movement (second leg — confirms real input responsiveness) ----
-  -- Demo/attract mode plays pre-recorded movement. If the demo moves Mario right,
-  -- it will fail the left test because demo input is not responsive to our input.
-  -- Only real gameplay responds to BOTH right AND left independently.
-  if sub == "check_left" then
-    clearInput()
-    local newX = emu.read(p1CandSlot * 4 + 3, emu.memType.nesSpriteRam)
-    local dx = newX - p1CandX0
-    if dx > 128  then dx = dx - 256 end
-    if dx < -128 then dx = dx + 256 end
-    if dx < -CFG.P1_MOVE_THRESHOLD then
-      -- Both directions confirmed: real player control (not demo/attract mode)
-      print("STATUS_PHASE1:Control confirmed frame=" .. frame ..
-            " slot=" .. p1CandSlot ..
-            " dx_right=" .. p1DxRight .. " dx_left=" .. dx)
-      BASELINE = p1PreTestState
-      print("DATA_PHASE1:COMPLETE frame=" .. frame)
-      phase = 2; sub = "init"
-    else
-      -- Moved right but not left → attract/demo mode false positive.
-      -- Return to boot. Boot will watch for the title screen (no-sprite detection)
-      -- and press Start at the right moment to start actual gameplay.
-      print("STATUS_PHASE1:Demo mode (dx_right=" .. p1DxRight ..
-            " dx_left=" .. dx .. ") attempt=" .. p1Attempts)
-      sub = "boot"
-    end
-    return
-  end
-
-  -- ---- SAVE BASELINE (fallback path: max attempts reached) ----
-  if sub == "saving" then
-    if ssPending then return end
-    BASELINE = ssResult
-    print("DATA_PHASE1:COMPLETE frame=" .. frame)
-    phase = 2; sub = "init"
   end
 end
 
@@ -705,12 +636,26 @@ local function runPhase5()
       emu.stop(); return
     end
     doSavestate("load", LEVEL_STATE)
-    p5FrameN = 0; p5Positions = {}
-    sub = "run_test_frames"; return
+    p5FrameN = 0; p5Positions = {}; p5WarmupCount = 0
+    sub = "warmup"; return
+  end
+
+  -- Post-savestate warmup: clear inputs for P5_WARMUP_FRAMES frames.
+  -- After loading a savestate in Mesen2, the first frame(s) may not process
+  -- setInput correctly (controller poll timing vs. savestate resume point).
+  -- Clearing inputs here ensures the game processes real input from a clean state
+  -- before the physics test starts.
+  if sub == "warmup" then
+    if ssPending then clearInput(); return end
+    clearInput()
+    p5WarmupCount = p5WarmupCount + 1
+    if p5WarmupCount >= CFG.P5_WARMUP_FRAMES then
+      sub = "run_test_frames"
+    end
+    return
   end
 
   if sub == "run_test_frames" then
-    if ssPending then return end
     local test = P5_TESTS[p5TestIdx]
     p5FrameN = p5FrameN + 1
     if p5FrameN > test.frames then
