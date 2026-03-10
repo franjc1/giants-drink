@@ -1,60 +1,67 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-10 (Session 11b)
+**Last updated:** 2026-03-10 (Phase 1, Session 11a/11b)
 
 ---
 
-## What Just Happened (Session 11b)
+## What Just Happened (Sessions 11a + 11b)
 
-### Phase 1 Boot Detection — Rewritten and Validated
+### Pre-Session Housekeeping (11a)
+- `claude.md` updated with manifest architecture (Decisions 85-88), unified engine + 7 rendering modes, extraction pipeline status, Mesen2 API reference, revised generation flow
+- `decisions-log.md` merged with Session 10 additions (Decisions 85-88)
+- Decision numbering corrected in `universal-extraction-spec.md` (83-86 → 85-88)
 
-**The problem:** Session 11a's Phase 1 used passive sprite-count heuristics (no-sprite-window detection, nametable density) to detect when the game reached gameplay. SMB1's attract demo looks identical to gameplay from those metrics — BASELINE was being captured during the demo, causing Phase 3 to find no real content variables.
+### Mesen2 Lua API Verified (11a)
+Critical API findings from source code analysis:
+- **Savestates:** `emu.createSavestate()` / `emu.loadSavestate(state)` — NOT `saveSavestate`. Returns binary string, not slot-based. **Only callable from exec memory callbacks**, not from startFrame or top-level script.
+- **Workaround:** Register exec callback on demand via `emu.addMemoryCallback()`, do savestate op, unregister via `emu.removeMemoryCallback()`. Confirmed working.
+- **Read/write/setInput:** Work from ANY callback including startFrame. No constraint.
+- **Memory types:** `emu.memType.nesInternalRam` for CPU RAM writes, `nesSpriteRam` for OAM, `nesNametableRam`, `nesPaletteRam`, `nesChrRam`/`nesChrRom` all confirmed.
+- **Input format:** `emu.setInput({a=true, b=false, ...}, 0)` — lowercase button names, port 0.
 
-**The fix:** Replaced all passive heuristics with an active bidirectional control test as the PRIMARY detection mechanism. Each ~75-frame cycle:
-1. Press Start (odd cycles) or A (even cycles) for 10 frames
-2. Wait 40 frames for the game to react
-3. Snapshot all 64 OAM sprite X positions (pre-test)
-4. Hold Right 10 frames, snapshot again (mid-test)
-5. Hold Left 10 frames, snapshot (post-test)
-6. Any sprite where mid > pre (moved right) AND post < mid (moved left) = player confirmed
+### Extraction Pipeline Built (11a + 11b)
+Built `tools/extraction-enumerator.lua` — a 600+ line Mesen2 Lua script implementing all 5 extraction phases as a state machine driven by startFrame callbacks with exec callbacks for savestate operations.
 
-This correctly rejects attract demos (pre-recorded input ignores Left button). Only real gameplay responds to both directions.
+**Phase 1 — Boot to Gameplay: ✅ WORKING**
+- Bidirectional control test: press Right 10 frames, press Left 10 frames, check if any OAM sprite moved in both directions
+- Alternates Start and A presses between tests to advance past menus
+- Results: SMB ✅ (frame 710), Mega Man 2 ✅ (frame 639), Contra ✅ (frame 284), Zelda ❌ (timeout — stuck on name-entry screen)
+- Known issue: BASELINE can be contaminated if captured mid-jump (the A press in the control test cycle can trigger a jump). Needs a "settle" period after control confirmation.
 
-**Results on 4 games:**
+**Phase 2 — RAM Candidate Identification: ✅ WORKING**
+- Snapshots RAM 5 times over 300 frames, classifies bytes as constant/ticker/volatile
+- SMB: 54 volatile candidates identified
+- Known architectural issue: level-switching variables (like SMB's 0x075C/0x075F) are CONSTANT during gameplay and get filtered out. Phase 2's volatility filter is counterproductive for the very variables we most want to find. Fix needed: add a second sweep of ALL 2048 addresses (or at minimum, addresses in the $0700-$07FF region where NES games commonly store game state).
 
-| Game | Result | Frame | Cycle | Slot | dxRight / dxLeft |
-|------|--------|-------|-------|------|-----------------|
-| SMB1 | ✅ | 710 | 10 (A) | 52 | 36 / -44 |
-| Mega Man 2 | ✅ | 639 | 9 (Start) | 57 | 105 / -105 |
-| Contra | ✅ | 284 | 4 (A) | 18 | 44 / -105 |
-| Legend of Zelda | ❌ TIMEOUT | 1800 | 26 | — | — |
+**Phase 3 — Mutation Sweep: ✅ STRUCTURALLY WORKING**
+- Batched restores per address (~200 restores total, not ~51,200)
+- SMB: found 2 content variables (0x06D4, 0x073D) with unique VRAM hashes > 30
+- Missed the primary level variables (0x075C, 0x075F) due to Phase 2 filtering issue above
+- Tuning: `P3_UNIQUE_THRESHOLD` raised from 3 to 30 to filter noise
+- CHR-ROM caching added (capture once, not per-state) — major Phase 4 speedup
 
-**Zelda timeout:** Zelda's new-game boot sequence requires navigating a name-entry screen (type your name, press Start). Button-mashing Start/A doesn't resolve it — needs Down+A to select "End" and register a blank name. Game-specific issue, not a fundamental failure of the bidirectional test.
+**Phase 4 — Deep Enumeration: ✅ STRUCTURALLY WORKING**
+- Captures full state (RAM, VRAM, nametable, palette, OAM, CHR, PPUCTRL) per unique VRAM state
+- Records OAM every 10 frames for 300 frames (enemy behavior observation)
+- Currently captures data for Phase 3's found variables; will capture more once Phase 2 filtering is fixed
 
----
+**Phase 5 — Physics Sampling: ⚠️ STRUCTURALLY COMPLETE, DATA UNRELIABLE**
+- All 6 test sequences run (WALK_RIGHT, FRICTION, JUMP_TAP, JUMP_HOLD, RUNNING_JUMP, DUCK)
+- Position capture works (X movement confirmed during walk tests)
+- Known issues:
+  - All tests produce identical trajectories (input sequencing not correctly differentiating between tests)
+  - BASELINE contamination (captured mid-jump) corrupts starting state for all tests
+  - OAM slot multiplexing: SMB cycles 3 sprites through same OAM slot on alternating frames, making position tracking noisy
 
-### Phase 3 Content Variables — Working, With Architectural Limitation
+### Supporting Scripts Built (11a)
+- `tools/orchestrator.js` — Node.js wrapper that spawns Mesen2, captures stdout, parses DATA_ lines into JSON
+- `tools/physics-derivation.js` — reads position arrays, derives gravity/walk speed/jump velocity/friction
+- Several diagnostic test scripts (`test-exec-callback.lua`, `test-savestate-callback.lua`, `test-readwrite-callback.lua`, `test-jump.lua`)
 
-Phase 3 found 2 content variables in SMB1: `0x06D4` (unique=5) and `0x073D` (unique=5). Phase 4 captured 10 distinct states. Pipeline structurally complete.
-
-**The limitation:** Expected level variables (`0x075C` area pointer, `0x075F` world number) were NOT found. Reason: Phase 2 classifies these as CONSTANT (they don't change while playing World 1-1) and excludes them from the mutation sweep. The Phase 2 candidate filter removes exactly the variables we need.
-
-**Fix needed (Session 12):** Phase 3 should also sweep constant addresses. Option: after the candidate-only sweep, do a second pass over ALL 2048 addresses with a larger P3_SAMPLE_STEP to catch constant level variables without blowing up runtime.
-
----
-
-### Phase 5 Physics — Structurally Complete, Data Unreliable
-
-All 6 physics tests run and produce output. But all 6 tests produce **identical trajectories** — inputs are not affecting the game state after savestate load, OR the OAM slot from Phase 1 is unreliable.
-
-**Identified issues:**
-1. **BASELINE captured mid-jump:** Phase 1 cycle 10 pressed A (jump button in SMB1), waited 40 frames, saved BASELINE. At the 40-frame mark, Mario may be mid-air and about to enter a pipe. Pipe entry animations (~33 frames) ignore all player input → all tests produce the same pipe-entry trajectory.
-2. **OAM sprite multiplexing:** SMB1 uses slot 52 for multiple sprites on alternating frames (3-frame cycling visible in data). The slot that passed Phase 1's bidirectional test doesn't reliably track Mario in Phase 5.
-3. **Post-savestate input initialization:** Added 5-frame input warmup after loadstate (P5_WARMUP_FRAMES=5) but identical trajectories persist. Suggests the state issue is BASELINE quality (#1), not input timing.
-
-**Fix needed (Session 12):**
-- For BASELINE quality: before saving BASELINE, verify Mario is on the ground (OAM Y ≈ 175 for SMB) and not in a transition animation. Or: save BASELINE only AFTER the Right directional test (use a second savestate in Phase 1).
-- For OAM slot tracking: probe multiple slots per frame to find which one tracks a moving entity, rather than locking in one slot from Phase 1.
+### Decisions Made (11b, recorded by Claude Code)
+- **Decision 89:** Bidirectional control test as primary gameplay detector (replaces passive heuristics)
+- **Decision 90:** Phase 2 filtering needs full-address sweep to catch constant-during-gameplay level variables
+- **Decision 91:** BASELINE needs settle period after control confirmation to avoid mid-action contamination
 
 ---
 
@@ -63,56 +70,85 @@ All 6 physics tests run and produce output. But all 6 tests produce **identical 
 ### File Structure
 ```
 giants-drink/
-  claude.md                              ← Architectural blueprint (current)
+  claude.md                              ← Updated Session 11a (manifest architecture)
   tools/
-    extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (✅ complete)
-    extraction-enumerator.lua            ← Session 11b: Phase 1 rewritten
-    mesen-extract.lua                    ← Older single-frame capture (superseded)
-    render-screen.js                     ← NES screen renderer (✅ validated)
+    extraction-enumerator.lua            ← NEW: main extraction script (P1-P5, ~600 lines)
+    orchestrator.js                      ← NEW: Node.js Mesen2 runner + stdout parser
+    physics-derivation.js                ← NEW: position data → physics constants
+    extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (Session 8)
+    mesen-extract.lua                    ← Single-frame capture (Sessions 9-10, superseded by extraction-enumerator.lua)
+    render-screen.js                     ← NES screen renderer (Sessions 9-10)
+    test-exec-callback.lua               ← Diagnostic
+    test-savestate-callback.lua          ← Diagnostic
+    test-readwrite-callback.lua          ← Diagnostic
+    test-jump.lua                        ← Diagnostic
+  src/
+    (unchanged from Session 10)
+  data/
+    (unchanged)
   docs/
     current-status.md                    ← THIS FILE
-    decisions-log.md                     ← Decisions 83-88
+    decisions-log.md                     ← Updated through Decision 91
     design/
-      universal-extraction-spec.md       ← Extraction + manifest architecture
+      universal-extraction-spec.md       ← Decision numbers corrected (85-88)
+      (other docs unchanged)
 ```
 
 ### External (not in repo)
 ```
 ~/nes-roms/                              ← No-Intro NES ROM set (~3,146 .nes files)
-~/nes-extracted/                         ← CHR-ROM tile sheets (2,383 games)
-~/mesen2/                                ← Mesen2 emulator
+~/nes-extracted/                         ← CHR-ROM tile sheets + extraction output
+~/mesen2/                                ← Mesen2 emulator binary
 ```
+
+### Deployed
+- Vercel: two-fixture platformer (unchanged)
+- Cloudflare R2: TSR catalog + partial sprites (unchanged)
 
 ---
 
 ## What's Next
 
-### Immediate: Session 12 — Phase 3 + Phase 5 Fixes
+### Immediate: Session 12 — Fix Phase 2 + Phase 5, Validate SMB, Three-Game Battery
 
-**Priority 1 — Phase 3: sweep constant addresses**
-Add second pass in Phase 3 to test ALL 2048 RAM addresses (not just volatile candidates). Use P3_SAMPLE_STEP=32 (8 sampled values). This adds ~2048 × 8 × 5 frames ≈ 82,000 frames per game — about 1.4 minutes at 1000x. Acceptable. Expected: `0x075F` (world) and `0x075C` (area) should show up with many unique VRAM hashes.
+Three focused fixes, then validation:
 
-**Priority 2 — Phase 5: BASELINE quality + OAM tracking**
-- Fix BASELINE capture: after Phase 1 confirms control, wait for player to be standing on ground (OAM Y > 160 and stable for N frames) before saving BASELINE. This avoids the mid-jump/pipe-entry problem.
-- Fix OAM tracking: scan multiple slots per frame and pick the one that consistently changes with directional input instead of locking in from Phase 1.
+**Fix 1: Phase 2 — Full-address sweep**
+Add a second pass that sweeps ALL 2048 RAM addresses (or a targeted range like $0700-$07FF) in addition to the volatile candidates. Level variables are constant during gameplay — the volatility filter misses them. This is Decision 90.
 
-**Priority 3 — Zelda boot handling**
-Zelda needs a name-entry bypass. After 10 failed cycles, try pressing Down × 8 then A to select "End" and register blank name. Or: detect name-entry screen by OAM pattern and send the bypass sequence.
+**Fix 2: Phase 1 — BASELINE settle period**
+After bidirectional control test confirms gameplay, release all inputs and wait 60-120 frames for the player to land and the game to reach a neutral state before saving BASELINE. This is Decision 91.
 
-### Session 13: Recording Analyzer + Manifest Generation
+**Fix 3: Phase 5 — Input sequencing and slot tracking**
+- Ensure each physics test applies its specific input sequence (not all defaulting to walk-right)
+- Handle OAM slot multiplexing (SMB cycles sprites through slots — track by proximity/continuity, not fixed slot)
+- After restoring BASELINE for each test, explicitly clear all inputs for 2 frames before starting test inputs
 
-- Deduplicate tiles, cluster sprites, stitch level layouts
-- Derive physics constants from position-over-time curves
-- Claude interpretation pipeline (VRAM state → manifest JSON)
-- TEST: 12-game diversity battery
+**Validation:**
+- TEST 1: Full pipeline on SMB — content variables found, physics data shows distinct movement per test
+- Boot hardening: Phase 1 on 6-8 diverse games (MM2, Zelda, Contra, Castlevania, Metroid, Kirby)
+- TEST 2: Full pipeline on MM2, Contra (Zelda needs name-entry navigation fix)
+
+### Session 13: Zelda/RPG Boot Fix + 12-Game Battery
+
+- Add directional input + A sequences for name-entry/file-select screens
+- Run extraction on 12-game diversity battery from spec
+- Begin manifest generation (recording analyzer, Claude interpretation)
+
+### Session 14+: Scale Run + Engine Build
+
+- Batch orchestrator for full NES library
+- SNES ROM acquisition + validation
+- Manifest → game state loader
+- Unified engine core build begins
 
 ---
 
 ## Key Open Questions
 
-1. **Phase 3 constant address sweep** — confirm that level variables show up with sufficient VRAM variance (need full 256-value sampling, not just 8)
-2. **BASELINE position quality** — need ground-state verification before save
-3. **SNES ROM set acquisition** — needed for Session 13
-4. **Genesis emulation** — Mesen2 may not support Genesis; may need separate emulator
-5. **Zelda name-entry bypass** — game-specific boot handling needed
-6. Meta-game specification — flagged, unchanged
+1. **Phase 2 full-address sweep timing:** Sweeping all 2048 addresses × 256 values × 3 frames = significant time. May need sampling (every 4th value) or targeted address ranges. Test empirically.
+2. **Zelda name-entry navigation:** Need to add directional + A input pattern to get past file select. Similar issue expected for Final Fantasy, Dragon Quest, and other RPGs with character creation.
+3. **OAM slot multiplexing:** SMB cycles 3 sprites through the same slot. Need a tracking approach that follows the player sprite by position continuity rather than fixed OAM slot index.
+4. **SNES ROM set acquisition** — needed for Session 13+
+5. **Game Genie code database** — needed for infinite-lives during extraction
+6. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
