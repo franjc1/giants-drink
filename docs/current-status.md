@@ -1,6 +1,44 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-10 (Session 11c)
+**Last updated:** 2026-03-10 (Session 11d)
+
+---
+
+## What Just Happened (Session 11d)
+
+### Phase 5: RAM-Correlated Player Position Tracking ✅ CORE WORKING
+
+Replaced OAM proximity tracking in Phase 5 with direct RAM reads.
+
+**What was built:**
+- Phase 1 now captures 3 full 2048-byte RAM snapshots (pre-movement, post-right, post-left) alongside OAM snapshots
+- X correlation: direction matching (dR≥2 during Right, dL≤-2 during Left) on all 2048 addresses; select zero-page candidate with largest rightward delta
+- Y correlation: Phase 5 jump test using p1BaselineState + `base > 128` filter (game ground Y is always >128; timers cycle 0-128 and are excluded)
+- Phase 5 uses `emu.read(p1PlayerXAddr/p1PlayerYAddr, emu.memType.nesInternalRam)` directly — no OAM scanning
+- Physics test savestates load p1BaselineState (not BASELINE — BASELINE has Mario in a pipe transition)
+- 60-frame settle between savestate load and test start (SMB1 takes ~45 frames to fully decelerate)
+
+**Three-game results:**
+
+| Game | X addr | Y addr | X correct? | Y correct? |
+|------|--------|--------|-----------|-----------|
+| SMB | 0x0086 | 0x00CE | ✅ known | ✅ known |
+| MM2 | 0x0023 | y_delta=0 | unknown | ❌ jump test found no Y change |
+| Contra | 0x0100 | 0x0028 | unknown | uncertain |
+
+**Iterations to get here:**
+- Exact-delta X matching: 0 candidates (OAM slot ≠ Mario's main body; camera scroll complicates delta)
+- Direction matching: found 0x0086 ✓
+- Phase 1 Y stability filter: found 0x00EA (wrong — refSlotY heuristic picked wrong address)
+- Jump test with BASELINE: found timer (pipe animation broke jump)
+- Jump test with p1BaselineState: found timer (0x000A/0x000D had larger delta than 0x00CE)
+- base>128 filter: found 0x00CE ✓ (timers have base=128, player Y has base=160)
+
+**Known issues for next session:**
+1. JUMP_TAP and JUMP_HOLD produce identical arcs — variable-height jump mechanic not captured (A-hold during ascent)
+2. WALK_RIGHT Y reaches 110 (pipe entrance) — physics test records into pipe if Mario walks that far
+3. MM2 Y detection: y_delta=0 (jump test found no Y change — likely MM2 jump timing or non-zero-page Y)
+4. Contra X at 0x0100 (page 1 RAM) needs cross-validation against known address
 
 ---
 
@@ -139,24 +177,16 @@ giants-drink/
 
 ## What's Next
 
-### Immediate: Session 12 — Fix Phase 5 via RAM Correlation
+### Immediate: Session 12 — Fix Physics Test Quality Issues
 
-**Fix 1 ✅ Done. Fix 2 ✅ Done. Fix 3 — new approach:**
+**Phase 5 RAM correlation: ✅ DONE (Session 11d)**
 
-**Phase 5 player tracking via RAM correlation (not OAM proximity)**
+Remaining Phase 5 issues to fix:
 
-During Phase 1's control test (hold Right, then hold Left), simultaneously log ALL RAM addresses whose values change. The RAM addresses that change in sync with the OAM X movement are the player X position variables. Store these as `p1PlayerXAddrs[]` alongside `p1CandSlot`.
-
-In Phase 5, read player position directly from these RAM addresses each frame instead of scanning OAM. This is:
-- Definitive (we know exactly which bytes are player X/Y)
-- Game-agnostic (works regardless of OAM multiplexing)
-- Immune to enemy interference (enemy RAM addresses won't move bidirectionally with player input)
-
-Implementation: in `hold_right` and `hold_left` sub-states, snapshot RAM before and after, diff against pre-test values. Addresses that moved right then left = player X candidates.
-
-**Then validate:** distinct trajectories for all 6 tests (WALK_RIGHT: X increases; JUMP: Y arc; FRICTION: X decelerates; DUCK: constant).
-
-**Then three-game battery:** SMB + MM2 + Contra with valid physics data.
+1. **JUMP_TAP vs JUMP_HOLD identical** — A-hold mechanism needs investigation. Possibly: the jump needs to be initiated while A is held from frame 1 (not set A=true then game processes on a later frame). Or: A=hold only matters for the ascending portion and the test window needs adjustment.
+2. **WALK_RIGHT entering pipe** — physics test records past pipe entrance. Fix: reduce test frames OR confirm Mario's starting position doesn't lead to pipe.
+3. **MM2 Y detection fails** — y_delta=0. Options: extend the jump detection window (snapshot at frame 20 not 10), or try pressing A for more frames, or MM2's player Y may be a compound register.
+4. **Validate MM2 and Contra addresses** — cross-reference against known ROM data or manually check.
 
 ### Session 13: Zelda/RPG Boot Fix + 12-Game Battery
 
