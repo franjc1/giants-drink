@@ -27,7 +27,7 @@ local CFG = {
   SNAP_INTERVAL        = 60,    -- frames between RAM snapshots (Phase 2)
 
   P3_FRAMES_PER_VAL    = 3,     -- frames to wait after writing test value
-  P3_SETTLE_FRAMES     = 1,     -- frames to wait after restoring original
+  P3_SETTLE_FRAMES     = 0,     -- frames to wait after restoring original (0 = immediate)
   P3_SAMPLE_STEP       = 32,    -- step through values 0..255 (1=all 256, 32=8 sampled values)
   P3_UNIQUE_THRESHOLD  = 3,     -- min unique VRAM hashes to qualify as content var
   P3_PROGRESS_INTERVAL = 50,
@@ -60,6 +60,9 @@ local function doSavestate(op, data)
   ssPending = true
   ssResult  = nil
   local cbRef
+  -- Use full CPU address range (0x0000-0xFFFF) so the callback fires even when the
+  -- game is executing RAM code. Some games enter RAM trampolines after certain memory
+  -- writes, causing the $8000-$FFFF exec range to never fire. One-shot: removes itself.
   cbRef = emu.addMemoryCallback(function()
     if op == "save" then
       ssResult = emu.createSavestate()
@@ -68,8 +71,8 @@ local function doSavestate(op, data)
       ssResult = true
     end
     ssPending = false
-    emu.removeMemoryCallback(cbRef, emu.callbackType.exec, 0x8000, 0xFFFF)
-  end, emu.callbackType.exec, 0x8000, 0xFFFF)
+    emu.removeMemoryCallback(cbRef, emu.callbackType.exec, 0x0000, 0xFFFF)
+  end, emu.callbackType.exec, 0x0000, 0xFFFF)
 end
 
 -- ============================================================
@@ -392,23 +395,50 @@ local function runPhase2()
     return
   end
 
-  -- Classify
-  candidates = {}
+  -- Classify all addresses first
+  local isVolatile = {}
   for addr = 0, 2047 do
     local v1,v2,v3,v4,v5 = snapshots[1][addr],snapshots[2][addr],
                              snapshots[3][addr],snapshots[4][addr],snapshots[5][addr]
     local isConst  = (v1==v2 and v2==v3 and v3==v4 and v4==v5)
     local isTicker = (v1<v2 and v2<v3 and v3<v4 and v4<v5) or
                      (v1>v2 and v2>v3 and v3>v4 and v4>v5)
-      if not isConst and not isTicker then
+    isVolatile[addr] = not isConst and not isTicker
+  end
+
+  -- Build candidates in priority order:
+  --   Priority 1: Upper page ($0700-$07FF) — ALL addresses regardless of volatility.
+  --     Level/world/room variables are CONSTANT during gameplay (never detected as volatile)
+  --     but are the most important content switches. NES games store them here.
+  --     Processed FIRST so they're never missed by the Mesen2 testrunner time limit.
+  --   Priority 2: Zero page ($0000-$00FF) — ALL addresses regardless of volatility.
+  --     Frequently-accessed 6502 variables; may hold mode/phase flags.
+  --   Priority 3: Volatile mid-range ($0100-$06FF) — only volatile ones.
+  --     Sprite/entity data, audio state, etc. Detected by Phase 2 sweep.
+  candidates = {}
+  local inCandidates = {}
+  for i = 0x700, 0x7FF do
+    table.insert(candidates, i); inCandidates[i] = true
+  end
+  for i = 0, 255 do
+    if not inCandidates[i] then
+      table.insert(candidates, i); inCandidates[i] = true
+    end
+  end
+  for addr = 0, 2047 do
+    if isVolatile[addr] and not inCandidates[addr] then
       table.insert(candidates, addr)
     end
   end
 
-  print("DATA_PHASE2:COMPLETE candidates=" .. #candidates)
+  -- Batch all candidate addresses into one print() to avoid per-call I/O overhead.
+  -- Mesen2 testrunner has a ~100s wall-clock limit; 765 individual print()s waste ~5s.
+  local candParts = {}
   for _, addr in ipairs(candidates) do
-    print("DATA_CANDIDATE:addr=0x" .. string.format("%04X", addr))
+    candParts[#candParts + 1] = string.format("0x%04X", addr)
   end
+  print("DATA_PHASE2:COMPLETE candidates=" .. #candidates)
+  print("DATA_CANDIDATES:" .. table.concat(candParts, ","))
   phase = 3; sub = "init"
 end
 
