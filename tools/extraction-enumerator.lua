@@ -36,10 +36,10 @@ local CFG = {
   P4_OAM_INTERVAL      = 10,    -- frames between OAM animation snapshots
   P4_OAM_COUNT         = 10,    -- total OAM snapshots per state
 
-  P5_PLAYER_ID_SAMPLES  = 10,   -- (unused; player slot reused from Phase 1)
-  P5_PLAYER_ID_INTERVAL = 10,   -- (unused)
-  P5_WARMUP_FRAMES      = 5,    -- clear-input frames after loadstate before physics test starts
-                                -- lets Mesen2 process the loaded state before we apply inputs
+  P5_ID_WARMUP          = 20,   -- clearInput frames before mini bidirectional id test
+                                --   20 frames lets Mario land from p1BaselineState's A-press jump
+  P5_ID_HOLD            = 5,    -- frames to hold right/left in mini bidirectional id test
+  P5_ID_SETTLE          = 30,   -- clearInput settle frames after id test (player returns to rest)
 
   MAX_TOTAL_FRAMES     = 700000, -- safety limit (~12 min at 1000x)
 }
@@ -161,6 +161,8 @@ local p1HoldCount       = 0    -- frames spent in current hold sub-state
 local p1PreX            = {}   -- pre-test X position for each of 64 OAM slots
 local p1MidX            = {}   -- mid-test X position (after Right press)
 local p1BaselineState   = nil  -- savestate captured at pre-test moment; promoted to BASELINE on confirm
+local p1PlayerVisX      = 0    -- X of nearest visible sprite to confirmed slot at BASELINE-save time
+local p1PlayerVisY      = 128  -- Y of nearest visible sprite to confirmed slot at BASELINE-save time
 
 -- Phase 2
 local snapshots = {}   -- {[1..5]} = arrays indexed [0..2047]
@@ -193,6 +195,10 @@ local p5TestIdx     = 1
 local p5FrameN      = 0
 local p5Positions   = {}
 local p5WarmupCount = 0
+local p5LastX       = 0   -- last known player X for proximity tracking
+local p5LastY       = 0   -- last known player Y for proximity tracking
+local p5IdPreX      = {}  -- OAM X positions before hold-right (mini id test)
+local p5IdMidX      = {}  -- OAM X positions after hold-right (mini id test)
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
 local P5_TESTS = {
@@ -389,6 +395,45 @@ local function runPhase1()
     clearInput()
     if ssPending then return end
     BASELINE = ssResult
+    -- Capture player's on-screen position at BASELINE time for Phase 5 proximity init.
+    -- The confirmed slot may be off-screen (y>224) at this moment due to NES sprite
+    -- multiplexing — the same OAM slot is shared by multiple sprites across frames.
+    -- If off-screen, scan all 64 slots for the nearest visible sprite by X proximity.
+    local slotX = emu.read(p1CandSlot * 4 + 3, emu.memType.nesSpriteRam)
+    local slotY = emu.read(p1CandSlot * 4,     emu.memType.nesSpriteRam)
+    if slotY >= 16 and slotY <= 224 then
+      p1PlayerVisX = slotX
+      p1PlayerVisY = slotY
+      print("STATUS_PHASE1:PlayerVis from slot " .. p1CandSlot ..
+            " (" .. p1PlayerVisX .. "," .. p1PlayerVisY .. ")")
+    else
+      -- y >= 32 skips the top status bar (HUD sprites in most NES games sit at y≈8-24).
+      -- This avoids latching onto score/coin counter sprites in games like SMB1.
+      local bestDist = 9999
+      for s = 0, 63 do
+        local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
+        local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+        if vy >= 32 and vy <= 224 then
+          local d = math.abs(vx - slotX)
+          if d < bestDist then
+            bestDist = d; p1PlayerVisX = vx; p1PlayerVisY = vy
+          end
+        end
+      end
+        -- DEBUG: dump all visible sprites so we can see the full OAM layout at BASELINE
+      local visSlots = {}
+      for s = 0, 63 do
+        local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
+        local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+        if vy >= 16 and vy <= 224 then
+          visSlots[#visSlots+1] = "s" .. s .. ":(" .. vx .. "," .. vy .. ")"
+        end
+      end
+      print("STATUS_PHASE1:VisSprites=" .. table.concat(visSlots, " "))
+      print("STATUS_PHASE1:Slot " .. p1CandSlot .. " off-screen (y=" .. slotY ..
+            "), PlayerVis=nearest visible (" .. p1PlayerVisX .. "," .. p1PlayerVisY ..
+            ") dist=" .. bestDist)
+    end
     print("STATUS_PHASE1:BASELINE saved at frame=" .. frame)
     print("DATA_PHASE1:COMPLETE frame=" .. frame)
     phase = 2; sub = "init"
@@ -672,15 +717,16 @@ end
 
 local function runPhase5()
   if sub == "init" then
-    -- BASELINE is the confirmed-control state from Phase 1.
-    -- Use it directly as the level state for physics tests — no wait period.
-    -- Waiting N frames after loading BASELINE puts Mario into unpredictable positions
-    -- (pipe entries, animation states, etc.). BASELINE is the one state we KNOW
-    -- Mario is controllable, standing at a valid position, ready to respond to input.
-    LEVEL_STATE = BASELINE
+    -- Use p1BaselineState (pre-directional-test save from the confirmed cycle).
+    -- This is captured ~30 frames after the level entry animation ends, before hold_right
+    -- and hold_left moved Mario around. After P5_WARMUP_FRAMES of clearInput, Mario
+    -- will have landed from any in-air state and be at rest in the spawn area on flat ground.
+    -- BASELINE (post-settle) is NOT used here because the settle period can leave Mario
+    -- in a non-interactive state (e.g., block-hit animation, pipe area, elevated block).
+    LEVEL_STATE = p1BaselineState
     -- Reuse the OAM slot confirmed in Phase 1's control test.
     p5Slot = p1CandSlot
-    print("STATUS_PHASE5:Player slot=" .. p5Slot .. " using BASELINE directly")
+    print("STATUS_PHASE5:Player slot=" .. p5Slot .. " using p1BaselineState")
     p5TestIdx = 1; sub = "run_test"; return
   end
 
@@ -691,20 +737,130 @@ local function runPhase5()
       emu.stop(); return
     end
     doSavestate("load", LEVEL_STATE)
-    p5FrameN = 0; p5Positions = {}; p5WarmupCount = 0
-    sub = "warmup"; return
+    p5FrameN = 0; p5Positions = {}; p5WarmupCount = 0; p5IdPreX = {}; p5IdMidX = {}
+    sub = "id_warmup"; return
   end
 
-  -- Post-savestate warmup: clear inputs for P5_WARMUP_FRAMES frames.
-  -- After loading a savestate in Mesen2, the first frame(s) may not process
-  -- setInput correctly (controller poll timing vs. savestate resume point).
-  -- Clearing inputs here ensures the game processes real input from a clean state
-  -- before the physics test starts.
-  if sub == "warmup" then
+  -- Mini bidirectional player ID test (same principle as Phase 1):
+  -- 1. id_warmup  — 20 clearInput frames (Mario lands from any mid-air state in p1BaselineState)
+  -- 2. id_right   — 5 frames hold Right; record mid-X for each OAM slot
+  -- 3. id_left    — 5 frames hold Left; find slot with dxR>0 AND dxL<0 → confirmed player
+  -- 4. id_settle  — 30 clearInput frames; proximity-track player back to rest
+  -- Total: 55 frames per test before run_test_frames begins.
+  -- Fallback: if bidirectional check finds nothing, use leftmost sprite cluster.
+
+  if sub == "id_warmup" then
     if ssPending then clearInput(); return end
     clearInput()
     p5WarmupCount = p5WarmupCount + 1
-    if p5WarmupCount >= CFG.P5_WARMUP_FRAMES then
+    if p5WarmupCount >= CFG.P5_ID_WARMUP then
+      for s = 0, 63 do
+        p5IdPreX[s] = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+      end
+      p5WarmupCount = 0; sub = "id_right"
+    end
+    return
+  end
+
+  if sub == "id_right" then
+    emu.setInput({right=true,left=false,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    p5WarmupCount = p5WarmupCount + 1
+    if p5WarmupCount >= CFG.P5_ID_HOLD then
+      for s = 0, 63 do
+        p5IdMidX[s] = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+      end
+      p5WarmupCount = 0; sub = "id_left"
+    end
+    return
+  end
+
+  if sub == "id_left" then
+    emu.setInput({right=false,left=true,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    p5WarmupCount = p5WarmupCount + 1
+    if p5WarmupCount >= CFG.P5_ID_HOLD then
+      clearInput()
+      -- Find the slot with bidirectional response; prefer highest magnitude.
+      -- Only consider on-screen sprites (y in [16,224]) — off-screen slots
+      -- can have X values that change without representing a visible player.
+      local bestSlot = -1
+      local bestScore = 0
+      for s = 0, 63 do
+        local postX = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+        local postY = emu.read(s * 4,     emu.memType.nesSpriteRam)
+        if postY >= 16 and postY <= 224 then  -- on-screen only
+          local dxR = p5IdMidX[s] - p5IdPreX[s]
+          if dxR > 128  then dxR = dxR - 256 end
+          if dxR < -128 then dxR = dxR + 256 end
+          local dxL = postX - p5IdMidX[s]
+          if dxL > 128  then dxL = dxL - 256 end
+          if dxL < -128 then dxL = dxL + 256 end
+          if dxR > 0 and dxL < 0 then
+            local score = dxR + (-dxL)
+            if score > bestScore then
+              bestScore = score; bestSlot = s
+              p5LastX = postX; p5LastY = postY
+            end
+          end
+        end
+      end
+      if bestSlot >= 0 then
+        print("STATUS_PHASE5:Test " .. p5TestIdx .. " id slot=" .. bestSlot ..
+              " pos=(" .. p5LastX .. "," .. p5LastY .. ") score=" .. bestScore)
+      else
+        -- Fallback: leftmost cluster (enemies come from the right in most NES games)
+        local visSprites = {}
+        for s = 0, 63 do
+          local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
+          local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
+          if vy >= 32 and vy <= 224 then visSprites[#visSprites+1] = {x=vx, y=vy} end
+        end
+        if #visSprites > 0 then
+          table.sort(visSprites, function(a, b)
+            if a.x ~= b.x then return a.x < b.x end
+            return a.y > b.y
+          end)
+          local anchorX, anchorY = visSprites[1].x, visSprites[1].y
+          local sumX, sumY, cnt = 0, 0, 0
+          for _, sp in ipairs(visSprites) do
+            if math.abs(sp.x - anchorX) <= 16 and math.abs(sp.y - anchorY) <= 16 then
+              sumX = sumX + sp.x; sumY = sumY + sp.y; cnt = cnt + 1
+            end
+          end
+          p5LastX = math.floor(sumX / cnt); p5LastY = math.floor(sumY / cnt)
+        end
+        print("STATUS_PHASE5:Test " .. p5TestIdx .. " id FALLBACK pos=(" ..
+              p5LastX .. "," .. p5LastY .. ")")
+      end
+      p5WarmupCount = 0; sub = "id_settle"
+    end
+    return
+  end
+
+  -- id_settle: 30 clearInput frames; proximity-track player back to rest position.
+  -- p5LastX/p5LastY was confirmed by bidirectional test; tracking here ensures it
+  -- stays accurate as the player decelerates from the id test's right/left movement.
+  if sub == "id_settle" then
+    clearInput()
+    local bestSlot = -1
+    local bestDist  = 9999
+    for slot = 0, 63 do
+      local sy = emu.read(slot * 4,     emu.memType.nesSpriteRam)
+      local sx = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+      if sy >= 16 and sy <= 224 then
+        local dist = math.abs(sx - p5LastX) + math.abs(sy - p5LastY)
+        if dist < bestDist then bestDist = dist; bestSlot = slot end
+      end
+    end
+    if bestSlot >= 0 then
+      p5LastX = emu.read(bestSlot * 4 + 3, emu.memType.nesSpriteRam)
+      p5LastY = emu.read(bestSlot * 4,     emu.memType.nesSpriteRam)
+    end
+    p5WarmupCount = p5WarmupCount + 1
+    if p5WarmupCount >= CFG.P5_ID_SETTLE then
+      print("STATUS_PHASE5:Test " .. p5TestIdx .. " settle pos=(" ..
+            p5LastX .. "," .. p5LastY .. ")")
       sub = "run_test_frames"
     end
     return
@@ -720,8 +876,24 @@ local function runPhase5()
       p5TestIdx = p5TestIdx + 1; sub = "run_test"; return
     end
     emu.setInput(test.inputFn(p5FrameN), 0)
-    local px, py = 0, 0
-    if p5Slot >= 0 then px, py = p5PlayerXY(p5Slot) end
+    -- Proximity tracking: find the sprite closest to last known player position.
+    -- Handles OAM slot multiplexing (NES games cycle sprites through slots).
+    local px, py = p5LastX, p5LastY
+    local bestSlot = -1
+    local bestDist = 9999
+    for slot = 0, 63 do
+      local sy = emu.read(slot * 4,     emu.memType.nesSpriteRam)
+      local sx = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+      if sy >= 16 and sy <= 224 then  -- valid on-screen sprite range
+        local dist = math.abs(sx - p5LastX) + math.abs(sy - p5LastY)
+        if dist < bestDist then bestDist = dist; bestSlot = slot end
+      end
+    end
+    if bestSlot >= 0 then
+      px = emu.read(bestSlot * 4 + 3, emu.memType.nesSpriteRam)
+      py = emu.read(bestSlot * 4,     emu.memType.nesSpriteRam)
+      p5LastX = px; p5LastY = py
+    end
     table.insert(p5Positions, px .. "," .. py)
     return
   end
