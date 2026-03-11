@@ -803,26 +803,33 @@ local function runPhase5()
   end
 
   if sub == "init" then
-    -- Use BASELINE (post-settle): player is at rest on the ground.
-    LEVEL_STATE = BASELINE
+    -- Use p1BaselineState for both Y detection and physics tests.
+    -- p1BaselineState is captured before hold_right/hold_left walked Mario into
+    -- the pipe area — at that point Mario is near the level start, jumpable.
+    -- BASELINE has Mario in a pipe transition (entered during the 120-frame
+    -- settle after the bidirectional test ran Mario far right) and is not usable.
+    LEVEL_STATE = p1BaselineState
     print("STATUS_PHASE5:x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
-          " starting Y detection via jump test")
-    -- Always find Y via jump test (horizontal test in Phase 1 is unreliable for Y).
-    doSavestate("load", BASELINE)
-    p5JumpCount = 0; sub = "find_y_base"; return
+          " starting Y detection via jump test (using p1BaselineState)")
+    doSavestate("load", p1BaselineState)
+    p5JumpCount = 0; sub = "find_y_land"; return
   end
 
-  -- ---- FIND Y: load BASELINE, snapshot, jump, compare ----
-  -- Snapshot RAM at rest, then hold A for 10 frames (jump). The player Y address
-  -- has the largest NEGATIVE change (screen Y decreases = moving up). Much more
-  -- reliable than the horizontal stability test which can't distinguish player Y
-  -- from other stable variables at similar values.
+  -- ---- FIND Y: load p1BaselineState, wait for landing, snapshot, jump, compare ----
+  -- p1BaselineState has Mario at the pre-movement snapshot (possibly 1-2 frames from
+  -- landing after an A-press jump). We wait 20 clearInput frames first so he lands,
+  -- then snapshot the on-ground RAM, then jump and compare.
 
-  if sub == "find_y_base" then
+  if sub == "find_y_land" then
     clearInput()
-    if ssPending then return end
-    for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
-    p5JumpCount = 0; sub = "find_y_jump"; return
+    if ssPending then return end   -- wait for loadstate
+    p5JumpCount = p5JumpCount + 1
+    if p5JumpCount >= 20 then
+      -- Mario should have landed by now; snapshot ground state
+      for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
+      p5JumpCount = 0; sub = "find_y_jump"
+    end
+    return
   end
 
   if sub == "find_y_jump" then
@@ -835,26 +842,47 @@ local function runPhase5()
     elseif p5JumpCount > 15 then
       clearInput()
       -- Find zero-page address with the largest negative (upward) change during jump.
-      -- Primary sort: most-negative delta (player Y decreases the most going up).
-      -- Tiebreaker: largest BASE value — player on the ground has a high screen Y
-      -- (e.g., ~172 for SMB1), while frame counters that coincidentally share the
-      -- same delta magnitude tend to have lower values (e.g., timers near 0-128).
+      -- Filter: base value must be > 128. Game ground positions are in the lower
+      -- screen portion (Y > 128 in NES coordinates where 0=top, 239=bottom). Frame
+      -- counters and timers typically cycle through 0-128 range and are excluded by
+      -- this filter. Tiebreaker: largest base value (player on ground = large Y).
       local yBestAddr = -1
       local yBestDelta = 0
       local yBestBase  = 0
       for addr = 0, 255 do
-        local d = p5RamJump[addr] - p5RamBase[addr]
-        if d > 128  then d = d - 256 end
-        if d < -128 then d = d + 256 end
-        if d < yBestDelta or
-           (d == yBestDelta and p5RamBase[addr] > yBestBase) then
-          yBestDelta = d; yBestBase = p5RamBase[addr]; yBestAddr = addr
+        local base = p5RamBase[addr]
+        if base > 128 then  -- only consider plausible ground-Y range
+          local d = p5RamJump[addr] - base
+          if d > 128  then d = d - 256 end
+          if d < -128 then d = d + 256 end
+          if d < yBestDelta or
+             (d == yBestDelta and base > yBestBase) then
+            yBestDelta = d; yBestBase = base; yBestAddr = addr
+          end
         end
       end
       p1PlayerYAddr = yBestAddr
       local yStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
       print("STATUS_PHASE5:PlayerRAM x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
             " y_addr=" .. yStr .. " y_delta=" .. yBestDelta)
+      -- Debug: dump the 5 most-negative-delta zero-page addresses to diagnose Y detection
+      local debugList = {}
+      for addr = 0, 255 do
+        local d = p5RamJump[addr] - p5RamBase[addr]
+        if d > 128  then d = d - 256 end
+        if d < -128 then d = d + 256 end
+        if d < -5 then debugList[#debugList+1] = {addr=addr, d=d, base=p5RamBase[addr]} end
+      end
+      table.sort(debugList, function(a, b)
+        if a.d ~= b.d then return a.d < b.d end
+        return a.base > b.base
+      end)
+      local dbParts = {}
+      for i = 1, math.min(8, #debugList) do
+        local e = debugList[i]
+        dbParts[i] = string.format("0x%02X(b=%d,d=%d)", e.addr, e.base, e.d)
+      end
+      print("STATUS_PHASE5:JumpCands=" .. table.concat(dbParts, " "))
       p5TestIdx = 1; sub = "run_test"; return
     end
     return
@@ -874,8 +902,14 @@ local function runPhase5()
   if sub == "wait_load" then
     clearInput()
     if ssPending then return end
-    -- Savestate loaded; proceed immediately — BASELINE is already a clean ground state.
-    sub = "run_test_frames"; return
+    -- 60-frame settle: lets Mario land from any mid-air state AND fully
+    -- decelerate from residual horizontal velocity in p1BaselineState.
+    -- SMB1 takes ~45 frames to decelerate from full speed to stopped.
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 60 then
+      p5FrameN = 0; sub = "run_test_frames"
+    end
+    return
   end
 
   if sub == "run_test_frames" then
