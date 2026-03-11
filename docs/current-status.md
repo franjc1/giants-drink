@@ -1,6 +1,43 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-11 (Session 12)
+**Last updated:** 2026-03-11 (Session 13)
+
+---
+
+## What Just Happened (Session 13)
+
+### Replaced Mesen2 with jsnes — Phase 5 Now Unblocked
+
+Phase 5 physics extraction has been blocked by Mesen2's `--testrunner` mode silently ignoring controller input. After three sessions of workarounds, switched to a Node.js NES emulator library (jsnes) that runs entirely in-process with no Lua sandbox, no callback restrictions, and working input.
+
+**What was done:**
+
+1. **Evaluated npm packages** — `jsnes` (v2.0.0, March 2026) selected. Pure ES module, zero dependencies beyond itself, works in Node.js directly.
+
+2. **Installed jsnes** — Added to project `package.json` alongside `sharp`.
+
+3. **Wrote and ran validation test** (`tools/jsnes-validate.js`) against SMB ROM — all 6 checks passed:
+   - ROM loads in-process (no subprocess, no Lua, no stdout parsing)
+   - Mario X ($0086) increases by 17 pixels over 30 frames of Right held — confirmed
+   - Mario Y ($00CE) decreases by 66 pixels at jump peak during A held — confirmed
+   - PPU VRAM accessible at `nes.ppu.vramMem` (32KB) — confirmed
+   - OAM accessible at `nes.ppu.spriteMem` (256 bytes) — confirmed
+   - Save/restore via `nes.toJSON()` / `nes.fromJSON()` round-trips correctly
+
+**jsnes API surface for the extraction pipeline:**
+```js
+const nes = new NES({ onFrame: () => {}, emulateSound: false });
+nes.loadROM(romData);              // load from binary string
+nes.frame();                       // step one frame (synchronous)
+nes.buttonDown(1, Controller.BUTTON_RIGHT);  // set input
+nes.buttonUp(1, btn);
+nes.cpu.mem[addr]                  // read/write CPU RAM (Uint8Array, 64KB)
+nes.ppu.vramMem                    // PPU address space (Uint8Array, 32KB)
+nes.ppu.spriteMem                  // OAM (Uint8Array, 256 bytes)
+nes.toJSON() / nes.fromJSON(state) // save/restore state
+```
+
+**What this changes:** The entire extraction pipeline (Phases 1–5) will be ported from `extraction-enumerator.lua` + Mesen2 to a Node.js script using jsnes. The algorithms are identical — only the substrate changes. No orchestrator subprocess needed. No stdout parsing. State saves/restores are in-memory objects.
 
 ---
 
@@ -104,38 +141,46 @@ giants-drink/
 
 ## What's Next
 
-### Session 13 — Phase 5 Fixes + Physics Analysis
+### Session 14 — Port Extraction Pipeline to jsnes
 
-Three targeted fixes to complete Phase 5 data quality:
+Port all 5 phases from `extraction-enumerator.lua` to a Node.js jsnes script. The algorithms are already proven — this is a substrate swap, not a redesign.
 
-**Fix 1: Contra sanity check false positive**
-- Change `if dx <= 0` to `if math.abs(dx) <= 2` in `sanity_right`
-- Movement in either direction confirms input is reaching the game
-- Auto-scrolling games (Contra) will pass; frozen states (INPUT truly broken) still fail
+**Port map (Lua → Node.js):**
 
-**Fix 2: SMB mid-air test start**
-- Add Y stability check at `wait_load_xstable`: read Y twice, 30 frames apart
-- If |dY| > 2 → player is airborne → reload LEVEL_STATE and try again (with counter, max 3 retries)
-- This catches SMB1 World 1-1's mid-jump p1BaselineState and waits for landing
+| Lua construct | Node.js equivalent |
+|---|---|
+| `emu.read(addr)` | `nes.cpu.mem[addr]` |
+| `emu.write(addr, val)` | `nes.cpu.mem[addr] = val` |
+| `emu.saveSavestate()` | `state = nes.toJSON()` |
+| `emu.loadSavestate()` | `nes.fromJSON(state)` |
+| `emu.setInput(port, input)` | `nes.buttonDown(1, btn)` / `nes.buttonUp()` |
+| `print("DATA_RAM:...")` (stdout export) | Direct JS object — no serialization needed |
+| `emu.addEventCallback(fn, "startFrame")` | `for` loop calling `nes.frame()` |
 
-**Fix 3: MM2 Y detection**
-- Extend jump window: hold A for 20 frames (not 15), snapshot at frame 15 (peak should be later for MM2)
-- Alternative: scan for largest-delta address ignoring the base>128 filter, with a tighter sanity check on the result (verify round-trip returns to ±3 of baseline)
+**Phase 5 fixes to carry over from Session 12/13 decisions:**
+- Sanity check: `Math.abs(dx) > 2` (not `dx > 0`) — handles auto-scrollers
+- Y stability check before each test: if `|dY| > 2` over 30 frames → player airborne → reload + retry (max 3)
+- MM2 jump window: hold A for 20 frames (not 15), snapshot at frame 15
 
-**After fixes, begin physics analysis pipeline:**
-- `tools/physics-derivation.js` already exists — wire it to the position arrays from `extraction.json`
-- Derive: gravity constant (from Y descent arc), walk speed (from WALK_RIGHT X delta per frame), jump velocity (from Y at frame 1 of jump), variable jump height (JUMP_TAP vs JUMP_HOLD peak Y delta)
-- Output derived constants to `manifest.json` physics section
+**OAM scanning (Phase 1 player detection):**
+- jsnes `nes.ppu.spriteMem` is a live 256-byte array — read directly each frame
+- Same slot detection logic: any slot with `dxRight > 0 && dxLeft < 0` = player
 
-### Session 14: Zelda/RPG Boot Fix + 12-Game Battery
+**Output format:** Phase 1–5 results go directly into a JS object, no DATA_ prefix parsing needed. Orchestrator becomes a simple `node extract.js <rom>` call.
 
-- Add directional input + A sequences for name-entry/file-select screens
-- Run extraction on 12-game diversity battery from spec
+**No subprocess, no stdout, no Lua.** The new extractor will be ~400 lines of straightforward Node.js.
+
+### Session 15: 12-Game Diversity Battery + Physics Analysis
+
+- Run jsnes extractor against 12-game diversity battery from spec
+- Wire `tools/physics-derivation.js` to position arrays from extraction output
+- Derive constants: gravity (Y descent arc), walk speed (WALK_RIGHT dX/frame), jump velocity (Y at frame 1), variable jump height (JUMP_TAP vs JUMP_HOLD peak delta)
+- Add directional input + A sequences for name-entry/file-select screens (Zelda/RPGs)
 - Begin manifest generation (recording analyzer, Claude interpretation)
 
-### Session 15+: Scale Run + Engine Build
+### Session 16+: Scale Run + Engine Build
 
-- Batch orchestrator for full NES library
+- Batch orchestrator for full NES library (~760 CHR-RAM games)
 - SNES ROM acquisition + validation
 - Manifest → game state loader
 - Unified engine core build begins
@@ -148,6 +193,6 @@ Three targeted fixes to complete Phase 5 data quality:
 2. **Y round-trip robustness**: The base>128 filter works for SMB but may exclude valid Y addresses in other games. Need a fallback: scan ALL addresses for the largest round-trip delta, then verify the result makes physical sense (values in 0-240 range, round-trip within ±5).
 3. **Zelda name-entry navigation**: Need directional + A input pattern to get past file select.
 4. **OAM slot multiplexing**: SMB cycles 3 sprites through the same slot. Need a tracking approach that follows the player sprite by position continuity rather than fixed OAM slot index.
-5. **SNES ROM set acquisition** — needed for Session 14+
+5. **SNES ROM set acquisition** — needed for Session 16+
 6. **Game Genie code database** — needed for infinite-lives during extraction
 7. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
