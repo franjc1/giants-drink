@@ -356,17 +356,42 @@ local function runPhase1()
 
       if foundSlot >= 0 then
         p1CandSlot = foundSlot
-        BASELINE   = p1BaselineState
         print("STATUS_PHASE1:Control confirmed cycle=" .. p1CycleNum ..
               " frame=" .. frame .. " slot=" .. foundSlot ..
               " dxRight=" .. foundDxR .. " dxLeft=" .. foundDxL)
-        print("DATA_PHASE1:COMPLETE frame=" .. frame)
-        phase = 2; sub = "init"
+        print("STATUS_PHASE1:Settling 120 frames before BASELINE save")
+        p1HoldCount = 0  -- reset for settle countdown
+        sub = "settle_wait"
       else
         print("STATUS_PHASE1:No control found cycle=" .. p1CycleNum .. " frame=" .. frame)
         sub = "start_cycle"
       end
     end
+    return
+  end
+
+  -- ---- SETTLE (120 frames): release all inputs, let player land and reach idle state ----
+  -- The A press from Phase 1 control tests can trigger a jump, leaving the player mid-air
+  -- or in a pipe animation. BASELINE must be saved at a neutral ground state so all
+  -- Phase 5 physics tests start from a known, controllable position.
+  if sub == "settle_wait" then
+    clearInput()
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 120 then
+      doSavestate("save")
+      p1HoldCount = 0
+      sub = "settle_save"
+    end
+    return
+  end
+
+  if sub == "settle_save" then
+    clearInput()
+    if ssPending then return end
+    BASELINE = ssResult
+    print("STATUS_PHASE1:BASELINE saved at frame=" .. frame)
+    print("DATA_PHASE1:COMPLETE frame=" .. frame)
+    phase = 2; sub = "init"
     return
   end
 end
