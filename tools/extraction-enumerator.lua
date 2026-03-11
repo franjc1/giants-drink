@@ -36,11 +36,6 @@ local CFG = {
   P4_OAM_INTERVAL      = 10,    -- frames between OAM animation snapshots
   P4_OAM_COUNT         = 10,    -- total OAM snapshots per state
 
-  P5_ID_WARMUP          = 20,   -- clearInput frames before mini bidirectional id test
-                                --   20 frames lets Mario land from p1BaselineState's A-press jump
-  P5_ID_HOLD            = 5,    -- frames to hold right/left in mini bidirectional id test
-  P5_ID_SETTLE          = 30,   -- clearInput settle frames after id test (player returns to rest)
-
   MAX_TOTAL_FRAMES     = 700000, -- safety limit (~12 min at 1000x)
 }
 
@@ -159,10 +154,17 @@ local p1CandSlot        = -1   -- OAM slot of confirmed player sprite (used in P
 local p1CycleNum        = 0    -- how many press+test cycles have run
 local p1HoldCount       = 0    -- frames spent in current hold sub-state
 local p1PreX            = {}   -- pre-test X position for each of 64 OAM slots
+local p1PreY            = {}   -- pre-test Y position for each of 64 OAM slots
 local p1MidX            = {}   -- mid-test X position (after Right press)
 local p1BaselineState   = nil  -- savestate captured at pre-test moment; promoted to BASELINE on confirm
-local p1PlayerVisX      = 0    -- X of nearest visible sprite to confirmed slot at BASELINE-save time
-local p1PlayerVisY      = 128  -- Y of nearest visible sprite to confirmed slot at BASELINE-save time
+local p1RamPre          = {}   -- 2048-byte RAM snapshot before Right press (for player addr correlation)
+local p1RamMid          = {}   -- 2048-byte RAM snapshot after Right press
+local p1RamPost         = {}   -- 2048-byte RAM snapshot after Left press
+local p1RamSettle       = {}   -- 2048-byte RAM snapshot after 120-frame settle (for Y disambiguation)
+local p1YCandList       = {}   -- candidate Y addresses from hold_left; finalized in settle_save
+local p1RefSlotY        = -1   -- OAM Y of the lowest-numbered on-screen slot at test time (Y reference)
+local p1PlayerXAddr     = -1   -- confirmed CPU RAM address of player X position
+local p1PlayerYAddr     = -1   -- confirmed CPU RAM address of player Y position
 
 -- Phase 2
 local snapshots = {}   -- {[1..5]} = arrays indexed [0..2047]
@@ -190,15 +192,12 @@ local p4ChrCache = nil  -- {hex, sz, src} — CHR-ROM is fixed; capture once
 
 -- Phase 5
 local LEVEL_STATE   = nil
-local p5Slot        = -1
 local p5TestIdx     = 1
 local p5FrameN      = 0
 local p5Positions   = {}
-local p5WarmupCount = 0
-local p5LastX       = 0   -- last known player X for proximity tracking
-local p5LastY       = 0   -- last known player Y for proximity tracking
-local p5IdPreX      = {}  -- OAM X positions before hold-right (mini id test)
-local p5IdMidX      = {}  -- OAM X positions after hold-right (mini id test)
+local p5RamBase     = {}   -- RAM snapshot at BASELINE before jump (for Y detection)
+local p5RamJump     = {}   -- RAM snapshot ~10 frames into A-hold jump (near peak)
+local p5JumpCount   = 0    -- frame counter for Y-detection jump
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
 local P5_TESTS = {
@@ -296,7 +295,10 @@ local function runPhase1()
       -- Read pre-test OAM X positions for all 64 sprite slots
       for slot = 0, 63 do
         p1PreX[slot] = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+        p1PreY[slot] = emu.read(slot * 4,     emu.memType.nesSpriteRam)
       end
+      -- Snapshot all 2048 RAM bytes before Right press (for player position correlation)
+      for i = 0, 2047 do p1RamPre[i] = emu.read(i, emu.memType.nesInternalRam) end
       -- Save state — this becomes BASELINE if control is confirmed this cycle
       doSavestate("save")
       sub = "wait_save"
@@ -324,6 +326,8 @@ local function runPhase1()
       for slot = 0, 63 do
         p1MidX[slot] = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
       end
+      -- Snapshot RAM after Right press
+      for i = 0, 2047 do p1RamMid[i] = emu.read(i, emu.memType.nesInternalRam) end
       p1HoldCount = 0
       sub = "hold_left"
     end
@@ -365,6 +369,82 @@ local function runPhase1()
         print("STATUS_PHASE1:Control confirmed cycle=" .. p1CycleNum ..
               " frame=" .. frame .. " slot=" .. foundSlot ..
               " dxRight=" .. foundDxR .. " dxLeft=" .. foundDxL)
+
+        -- Snapshot RAM after Left press
+        for i = 0, 2047 do p1RamPost[i] = emu.read(i, emu.memType.nesInternalRam) end
+
+        -- Player X correlation: direction matching, not exact delta.
+        -- The confirmed OAM slot may not be Mario's main body sprite (NES multiplexes
+        -- sprites across slots), so the OAM delta can't be used as the target magnitude.
+        -- Instead: find addresses that INCREASED (signed) during Right and DECREASED
+        -- during Left, with a minimum change of 2 pixels to filter noise.
+        -- From zero-page candidates, prefer the one with the LARGEST rightward movement —
+        -- player X changes more than any incidental bidirectional variable.
+        local xCand = {}
+        for addr = 0, 2047 do
+          local dR = p1RamMid[addr] - p1RamPre[addr]
+          if dR > 128  then dR = dR - 256 end
+          if dR < -128 then dR = dR + 256 end
+          if dR >= 2 then
+            local dL = p1RamPost[addr] - p1RamMid[addr]
+            if dL > 128  then dL = dL - 256 end
+            if dL < -128 then dL = dL + 256 end
+            if dL <= -2 then
+              xCand[#xCand+1] = addr
+            end
+          end
+        end
+
+        -- Select best X: in zero page, pick the address with the LARGEST rightward delta
+        -- (player X moves the most of any bidirectional variable).
+        p1PlayerXAddr = -1
+        local xBestMag = 0
+        for _, addr in ipairs(xCand) do
+          if addr <= 0xFF then
+            local dR = p1RamMid[addr] - p1RamPre[addr]
+            if dR > 128 then dR = dR - 256 end
+            if dR < -128 then dR = dR + 256 end
+            if dR > xBestMag then xBestMag = dR; p1PlayerXAddr = addr end
+          end
+        end
+        if p1PlayerXAddr < 0 then
+          for _, addr in ipairs(xCand) do
+            if addr >= 0x700 and addr <= 0x7FF then p1PlayerXAddr = addr; break end
+          end
+        end
+        if p1PlayerXAddr < 0 and #xCand > 0 then p1PlayerXAddr = xCand[1] end
+
+        -- Player Y candidates: addresses constant during BOTH Right AND Left presses,
+        -- with a plausible screen Y value (24-240). Final selection deferred to settle_save
+        -- where a third RAM snapshot filters out velocity/counter variables that change
+        -- during deceleration — critical for excluding addresses like X velocity ($0088)
+        -- that are coincidentally stable during the brief bidirectional test but change
+        -- during the longer settle period.
+        p1YCandList = {}
+        for addr = 0, 2047 do
+          local v = p1RamPre[addr]
+          if v >= 24 and v <= 240 and
+             p1RamMid[addr] == v and p1RamPost[addr] == v then
+            p1YCandList[#p1YCandList+1] = addr
+          end
+        end
+
+        -- Capture the OAM Y of the lowest-numbered on-screen sprite as a Y reference.
+        -- NES games allocate low OAM slot numbers to the main player, so slot 0 (or
+        -- whichever low slot is visible) should be near the player's actual screen Y.
+        -- Used in settle_save to prefer Y candidates close to this value over e.g.
+        -- velocity variables that are coincidentally stable at a similar address.
+        p1RefSlotY = -1
+        for s = 0, 63 do
+          local vy = emu.read(s * 4, emu.memType.nesSpriteRam)
+          if vy >= 32 and vy <= 224 then p1RefSlotY = vy; break end
+        end
+
+        local xStr = (p1PlayerXAddr >= 0) and string.format("0x%04X", p1PlayerXAddr) or "none"
+        print("STATUS_PHASE1:PlayerX x_addr=" .. xStr ..
+              " x_cands=" .. #xCand .. " y_cands_pending=" .. #p1YCandList ..
+              " refSlotY=" .. p1RefSlotY)
+
         print("STATUS_PHASE1:Settling 120 frames before BASELINE save")
         p1HoldCount = 0  -- reset for settle countdown
         sub = "settle_wait"
@@ -395,45 +475,45 @@ local function runPhase1()
     clearInput()
     if ssPending then return end
     BASELINE = ssResult
-    -- Capture player's on-screen position at BASELINE time for Phase 5 proximity init.
-    -- The confirmed slot may be off-screen (y>224) at this moment due to NES sprite
-    -- multiplexing — the same OAM slot is shared by multiple sprites across frames.
-    -- If off-screen, scan all 64 slots for the nearest visible sprite by X proximity.
-    local slotX = emu.read(p1CandSlot * 4 + 3, emu.memType.nesSpriteRam)
-    local slotY = emu.read(p1CandSlot * 4,     emu.memType.nesSpriteRam)
-    if slotY >= 16 and slotY <= 224 then
-      p1PlayerVisX = slotX
-      p1PlayerVisY = slotY
-      print("STATUS_PHASE1:PlayerVis from slot " .. p1CandSlot ..
-            " (" .. p1PlayerVisX .. "," .. p1PlayerVisY .. ")")
-    else
-      -- y >= 32 skips the top status bar (HUD sprites in most NES games sit at y≈8-24).
-      -- This avoids latching onto score/coin counter sprites in games like SMB1.
-      local bestDist = 9999
-      for s = 0, 63 do
-        local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
-        local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-        if vy >= 32 and vy <= 224 then
-          local d = math.abs(vx - slotX)
-          if d < bestDist then
-            bestDist = d; p1PlayerVisX = vx; p1PlayerVisY = vy
-          end
-        end
+    -- Snapshot RAM after the 120-frame settle. X velocity and other motion variables
+    -- will have changed during deceleration; Y position stays constant on the ground.
+    -- Filter p1YCandList to only addresses that ALSO didn't change during settle.
+    for i = 0, 2047 do p1RamSettle[i] = emu.read(i, emu.memType.nesInternalRam) end
+    local yFinal = {}
+    for _, addr in ipairs(p1YCandList) do
+      if p1RamSettle[addr] == p1RamPre[addr] then
+        yFinal[#yFinal+1] = addr
       end
-        -- DEBUG: dump all visible sprites so we can see the full OAM layout at BASELINE
-      local visSlots = {}
-      for s = 0, 63 do
-        local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
-        local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-        if vy >= 16 and vy <= 224 then
-          visSlots[#visSlots+1] = "s" .. s .. ":(" .. vx .. "," .. vy .. ")"
-        end
-      end
-      print("STATUS_PHASE1:VisSprites=" .. table.concat(visSlots, " "))
-      print("STATUS_PHASE1:Slot " .. p1CandSlot .. " off-screen (y=" .. slotY ..
-            "), PlayerVis=nearest visible (" .. p1PlayerVisX .. "," .. p1PlayerVisY ..
-            ") dist=" .. bestDist)
     end
+    -- Select best Y: among zero-page candidates, prefer the one whose value is CLOSEST
+    -- to p1RefSlotY (OAM Y of the lowest-numbered on-screen slot = likely the player body).
+    -- This disambiguates from velocity/timer variables that are also stable but at wrong values.
+    -- Falls back to lowest-address if no reference was captured.
+    p1PlayerYAddr = -1
+    if p1RefSlotY >= 0 then
+      local yBestDist = 9999
+      for _, addr in ipairs(yFinal) do
+        if addr <= 0xFF then
+          local dist = math.abs(p1RamPre[addr] - p1RefSlotY)
+          if dist < yBestDist then yBestDist = dist; p1PlayerYAddr = addr end
+        end
+      end
+    end
+    if p1PlayerYAddr < 0 then
+      for _, addr in ipairs(yFinal) do
+        if addr <= 0xFF then p1PlayerYAddr = addr; break end
+      end
+    end
+    if p1PlayerYAddr < 0 then
+      for _, addr in ipairs(yFinal) do
+        if addr >= 0x700 and addr <= 0x7FF then p1PlayerYAddr = addr; break end
+      end
+    end
+    if p1PlayerYAddr < 0 and #yFinal > 0 then p1PlayerYAddr = yFinal[1] end
+    local xStr = (p1PlayerXAddr >= 0) and string.format("0x%04X", p1PlayerXAddr) or "none"
+    local yStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
+    print("STATUS_PHASE1:PlayerRAM x_addr=" .. xStr .. " y_addr=" .. yStr ..
+          " y_after_settle=" .. #yFinal)
     print("STATUS_PHASE1:BASELINE saved at frame=" .. frame)
     print("DATA_PHASE1:COMPLETE frame=" .. frame)
     phase = 2; sub = "init"
@@ -707,27 +787,77 @@ end
 
 -- ============================================================
 -- PHASE 5: PHYSICS SAMPLING
+--
+-- Uses RAM addresses found in Phase 1 (p1PlayerXAddr, p1PlayerYAddr) for direct,
+-- drift-free position reads. No OAM scanning or proximity tracking needed.
+-- Two bytes per frame. Immune to sprite multiplexing.
 -- ============================================================
 
-local function p5PlayerXY(slot)
-  local y = emu.read(slot * 4,     emu.memType.nesSpriteRam) + 1
-  local x = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
-  return x, y
-end
-
 local function runPhase5()
+  -- Require that Phase 1 found a valid player X address.
+  if p1PlayerXAddr < 0 then
+    print("STATUS_PHASE5:SKIP no player X RAM address found")
+    print("DATA_PHASE5:COMPLETE tests=0")
+    print("DATA_EXTRACTION:COMPLETE")
+    emu.stop(); return
+  end
+
   if sub == "init" then
-    -- Use p1BaselineState (pre-directional-test save from the confirmed cycle).
-    -- This is captured ~30 frames after the level entry animation ends, before hold_right
-    -- and hold_left moved Mario around. After P5_WARMUP_FRAMES of clearInput, Mario
-    -- will have landed from any in-air state and be at rest in the spawn area on flat ground.
-    -- BASELINE (post-settle) is NOT used here because the settle period can leave Mario
-    -- in a non-interactive state (e.g., block-hit animation, pipe area, elevated block).
-    LEVEL_STATE = p1BaselineState
-    -- Reuse the OAM slot confirmed in Phase 1's control test.
-    p5Slot = p1CandSlot
-    print("STATUS_PHASE5:Player slot=" .. p5Slot .. " using p1BaselineState")
-    p5TestIdx = 1; sub = "run_test"; return
+    -- Use BASELINE (post-settle): player is at rest on the ground.
+    LEVEL_STATE = BASELINE
+    print("STATUS_PHASE5:x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
+          " starting Y detection via jump test")
+    -- Always find Y via jump test (horizontal test in Phase 1 is unreliable for Y).
+    doSavestate("load", BASELINE)
+    p5JumpCount = 0; sub = "find_y_base"; return
+  end
+
+  -- ---- FIND Y: load BASELINE, snapshot, jump, compare ----
+  -- Snapshot RAM at rest, then hold A for 10 frames (jump). The player Y address
+  -- has the largest NEGATIVE change (screen Y decreases = moving up). Much more
+  -- reliable than the horizontal stability test which can't distinguish player Y
+  -- from other stable variables at similar values.
+
+  if sub == "find_y_base" then
+    clearInput()
+    if ssPending then return end
+    for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
+    p5JumpCount = 0; sub = "find_y_jump"; return
+  end
+
+  if sub == "find_y_jump" then
+    p5JumpCount = p5JumpCount + 1
+    emu.setInput({right=false,left=false,up=false,down=false,
+                  a=true,b=false,start=false,select=false}, 0)
+    if p5JumpCount == 10 then
+      -- Snapshot near jump peak — player Y should be well off the ground
+      for i = 0, 2047 do p5RamJump[i] = emu.read(i, emu.memType.nesInternalRam) end
+    elseif p5JumpCount > 15 then
+      clearInput()
+      -- Find zero-page address with the largest negative (upward) change during jump.
+      -- Primary sort: most-negative delta (player Y decreases the most going up).
+      -- Tiebreaker: largest BASE value — player on the ground has a high screen Y
+      -- (e.g., ~172 for SMB1), while frame counters that coincidentally share the
+      -- same delta magnitude tend to have lower values (e.g., timers near 0-128).
+      local yBestAddr = -1
+      local yBestDelta = 0
+      local yBestBase  = 0
+      for addr = 0, 255 do
+        local d = p5RamJump[addr] - p5RamBase[addr]
+        if d > 128  then d = d - 256 end
+        if d < -128 then d = d + 256 end
+        if d < yBestDelta or
+           (d == yBestDelta and p5RamBase[addr] > yBestBase) then
+          yBestDelta = d; yBestBase = p5RamBase[addr]; yBestAddr = addr
+        end
+      end
+      p1PlayerYAddr = yBestAddr
+      local yStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
+      print("STATUS_PHASE5:PlayerRAM x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
+            " y_addr=" .. yStr .. " y_delta=" .. yBestDelta)
+      p5TestIdx = 1; sub = "run_test"; return
+    end
+    return
   end
 
   if sub == "run_test" then
@@ -737,133 +867,15 @@ local function runPhase5()
       emu.stop(); return
     end
     doSavestate("load", LEVEL_STATE)
-    p5FrameN = 0; p5Positions = {}; p5WarmupCount = 0; p5IdPreX = {}; p5IdMidX = {}
-    sub = "id_warmup"; return
+    p5FrameN = 0; p5Positions = {}
+    sub = "wait_load"; return
   end
 
-  -- Mini bidirectional player ID test (same principle as Phase 1):
-  -- 1. id_warmup  — 20 clearInput frames (Mario lands from any mid-air state in p1BaselineState)
-  -- 2. id_right   — 5 frames hold Right; record mid-X for each OAM slot
-  -- 3. id_left    — 5 frames hold Left; find slot with dxR>0 AND dxL<0 → confirmed player
-  -- 4. id_settle  — 30 clearInput frames; proximity-track player back to rest
-  -- Total: 55 frames per test before run_test_frames begins.
-  -- Fallback: if bidirectional check finds nothing, use leftmost sprite cluster.
-
-  if sub == "id_warmup" then
-    if ssPending then clearInput(); return end
+  if sub == "wait_load" then
     clearInput()
-    p5WarmupCount = p5WarmupCount + 1
-    if p5WarmupCount >= CFG.P5_ID_WARMUP then
-      for s = 0, 63 do
-        p5IdPreX[s] = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-      end
-      p5WarmupCount = 0; sub = "id_right"
-    end
-    return
-  end
-
-  if sub == "id_right" then
-    emu.setInput({right=true,left=false,up=false,down=false,
-                  a=false,b=false,start=false,select=false}, 0)
-    p5WarmupCount = p5WarmupCount + 1
-    if p5WarmupCount >= CFG.P5_ID_HOLD then
-      for s = 0, 63 do
-        p5IdMidX[s] = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-      end
-      p5WarmupCount = 0; sub = "id_left"
-    end
-    return
-  end
-
-  if sub == "id_left" then
-    emu.setInput({right=false,left=true,up=false,down=false,
-                  a=false,b=false,start=false,select=false}, 0)
-    p5WarmupCount = p5WarmupCount + 1
-    if p5WarmupCount >= CFG.P5_ID_HOLD then
-      clearInput()
-      -- Find the slot with bidirectional response; prefer highest magnitude.
-      -- Only consider on-screen sprites (y in [16,224]) — off-screen slots
-      -- can have X values that change without representing a visible player.
-      local bestSlot = -1
-      local bestScore = 0
-      for s = 0, 63 do
-        local postX = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-        local postY = emu.read(s * 4,     emu.memType.nesSpriteRam)
-        if postY >= 16 and postY <= 224 then  -- on-screen only
-          local dxR = p5IdMidX[s] - p5IdPreX[s]
-          if dxR > 128  then dxR = dxR - 256 end
-          if dxR < -128 then dxR = dxR + 256 end
-          local dxL = postX - p5IdMidX[s]
-          if dxL > 128  then dxL = dxL - 256 end
-          if dxL < -128 then dxL = dxL + 256 end
-          if dxR > 0 and dxL < 0 then
-            local score = dxR + (-dxL)
-            if score > bestScore then
-              bestScore = score; bestSlot = s
-              p5LastX = postX; p5LastY = postY
-            end
-          end
-        end
-      end
-      if bestSlot >= 0 then
-        print("STATUS_PHASE5:Test " .. p5TestIdx .. " id slot=" .. bestSlot ..
-              " pos=(" .. p5LastX .. "," .. p5LastY .. ") score=" .. bestScore)
-      else
-        -- Fallback: leftmost cluster (enemies come from the right in most NES games)
-        local visSprites = {}
-        for s = 0, 63 do
-          local vy = emu.read(s * 4,     emu.memType.nesSpriteRam)
-          local vx = emu.read(s * 4 + 3, emu.memType.nesSpriteRam)
-          if vy >= 32 and vy <= 224 then visSprites[#visSprites+1] = {x=vx, y=vy} end
-        end
-        if #visSprites > 0 then
-          table.sort(visSprites, function(a, b)
-            if a.x ~= b.x then return a.x < b.x end
-            return a.y > b.y
-          end)
-          local anchorX, anchorY = visSprites[1].x, visSprites[1].y
-          local sumX, sumY, cnt = 0, 0, 0
-          for _, sp in ipairs(visSprites) do
-            if math.abs(sp.x - anchorX) <= 16 and math.abs(sp.y - anchorY) <= 16 then
-              sumX = sumX + sp.x; sumY = sumY + sp.y; cnt = cnt + 1
-            end
-          end
-          p5LastX = math.floor(sumX / cnt); p5LastY = math.floor(sumY / cnt)
-        end
-        print("STATUS_PHASE5:Test " .. p5TestIdx .. " id FALLBACK pos=(" ..
-              p5LastX .. "," .. p5LastY .. ")")
-      end
-      p5WarmupCount = 0; sub = "id_settle"
-    end
-    return
-  end
-
-  -- id_settle: 30 clearInput frames; proximity-track player back to rest position.
-  -- p5LastX/p5LastY was confirmed by bidirectional test; tracking here ensures it
-  -- stays accurate as the player decelerates from the id test's right/left movement.
-  if sub == "id_settle" then
-    clearInput()
-    local bestSlot = -1
-    local bestDist  = 9999
-    for slot = 0, 63 do
-      local sy = emu.read(slot * 4,     emu.memType.nesSpriteRam)
-      local sx = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
-      if sy >= 16 and sy <= 224 then
-        local dist = math.abs(sx - p5LastX) + math.abs(sy - p5LastY)
-        if dist < bestDist then bestDist = dist; bestSlot = slot end
-      end
-    end
-    if bestSlot >= 0 then
-      p5LastX = emu.read(bestSlot * 4 + 3, emu.memType.nesSpriteRam)
-      p5LastY = emu.read(bestSlot * 4,     emu.memType.nesSpriteRam)
-    end
-    p5WarmupCount = p5WarmupCount + 1
-    if p5WarmupCount >= CFG.P5_ID_SETTLE then
-      print("STATUS_PHASE5:Test " .. p5TestIdx .. " settle pos=(" ..
-            p5LastX .. "," .. p5LastY .. ")")
-      sub = "run_test_frames"
-    end
-    return
+    if ssPending then return end
+    -- Savestate loaded; proceed immediately — BASELINE is already a clean ground state.
+    sub = "run_test_frames"; return
   end
 
   if sub == "run_test_frames" then
@@ -876,24 +888,9 @@ local function runPhase5()
       p5TestIdx = p5TestIdx + 1; sub = "run_test"; return
     end
     emu.setInput(test.inputFn(p5FrameN), 0)
-    -- Proximity tracking: find the sprite closest to last known player position.
-    -- Handles OAM slot multiplexing (NES games cycle sprites through slots).
-    local px, py = p5LastX, p5LastY
-    local bestSlot = -1
-    local bestDist = 9999
-    for slot = 0, 63 do
-      local sy = emu.read(slot * 4,     emu.memType.nesSpriteRam)
-      local sx = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
-      if sy >= 16 and sy <= 224 then  -- valid on-screen sprite range
-        local dist = math.abs(sx - p5LastX) + math.abs(sy - p5LastY)
-        if dist < bestDist then bestDist = dist; bestSlot = slot end
-      end
-    end
-    if bestSlot >= 0 then
-      px = emu.read(bestSlot * 4 + 3, emu.memType.nesSpriteRam)
-      py = emu.read(bestSlot * 4,     emu.memType.nesSpriteRam)
-      p5LastX = px; p5LastY = py
-    end
+    -- Read player position directly from RAM — two bytes, no OAM, no drift.
+    local px = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+    local py = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or 0
     table.insert(p5Positions, px .. "," .. py)
     return
   end

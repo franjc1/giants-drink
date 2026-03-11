@@ -1192,3 +1192,129 @@ Estimated time: ~3 minutes per game. Zero per-game configuration. 100% generaliz
 **Decision:** Two fixes required for Phase 5 physics reliability: (1) BASELINE quality gate — before saving BASELINE, verify the player sprite is on the ground (OAM Y stable in ground range for N frames). Discard and retry if Mario is mid-air or mid-animation. (2) OAM multi-slot probe — scan ALL 64 OAM slots every frame and identify the slot with consistent directional response, rather than locking in one slot from Phase 1's single bidirectional test.
 
 **Rationale:** These are correctness requirements. The physics data (walk speed, jump arc, friction) is the mechanical ground truth for the entire extraction pipeline. Noisy data here propagates to all downstream uses. Better to retry BASELINE capture than to lock in a bad state.
+## Session: 2026-03-10 — LLM Runtime Strategy & Social Ecology Deepening (Design Thread)
+
+### Decision 87: Open-Weight LLM API as Runtime Backbone (DeepSeek V3.2 / Grok 4.1 Fast)
+
+**Context:** The biggest cost barrier to public release is that every runtime LLM call (generation, CAS interpretation, dialog, entity conversations) goes through Claude's API at $3/$15 per million tokens. At scale, this makes the product economically unviable — a single intense game session could cost $10-15 in API fees.
+
+**Decision:** Ship with an open-weight frontier LLM (current frontrunner: DeepSeek V3.2) accessed via third-party inference provider (current frontrunner: Fireworks for dialog, DeepInfra for background calls). Develop with Claude (best quality, calibrates diagnostic pipeline). Benchmark DeepSeek/Grok/alternatives against diagnostic pipeline before switching. Architecture is already model-agnostic — switching is a deployment decision, not a redesign.
+
+DeepSeek V3.2 specifics: $0.28/$0.42 per million tokens (cache miss), $0.028 cache hit (90% discount). MIT license (self-host escape hatch). 1421 Chatbot Arena rating (frontier conversational quality). OpenAI-compatible API format. 128K context window.
+
+**Cost estimate:** ~$0.15-0.30 per intense game session (50 conversations, 6 episodes, full CAS interpretation). ~$3,600-15,000 for 100K heavy sessions depending on intensity. Compare to ~$300K+ at Claude API rates.
+
+**Rationale:** The value is in the constraint surface (sequencing grammar, CAS architecture, OCEAN profiles, bounded knowledge), not the model. The model is a commodity. The architecture was always model-agnostic — GameState schema, CAS interpretation input/output contracts, dialog system all define structured interfaces that don't care which model sits behind the endpoint. DeepSeek V3.2 specifically chosen for: frontier conversational quality (critical for entity dialog), MIT license (no vendor lock-in), automatic context caching (system prompts and entity schemas cache at 90% discount), and price point that makes previously cost-prohibitive features viable.
+
+**Fallback chain:** DeepSeek API → Grok 4.1 Fast API → self-hosted DeepSeek (MIT weights on own GPU if needed at massive scale). Multiple providers serve same model (Fireworks, DeepInfra, Novita, etc.) — no single point of failure.
+
+---
+
+### Decision 88: Provider Routing by Call Type for Latency Optimization
+
+**Context:** DeepSeek V3.2 latency varies dramatically by provider. DeepSeek's own API: ~7s time-to-first-token. DeepInfra: ~1.05s TTFT but only 11.1 tokens/sec output. Fireworks: slightly higher TTFT but 129.4 tokens/sec output. Different call types have different latency profiles.
+
+**Decision:** Route different call types to different providers serving the same model:
+- **Dialog (player-facing):** Fireworks — fast output speed matters because player watches text appear
+- **CAS interpretation (background):** DeepInfra — low TTFT matters, output speed less critical (structured JSON processed as batch, not streamed to player)
+- **Generation pipeline (pre-game):** Either — not latency-sensitive, cost-optimize
+
+This is a deployment-time optimization, not an architecture change. All providers serve DeepSeek V3.2 with identical quality. Single-provider deployment works fine initially.
+
+**Rationale:** Dialog latency is the most player-visible quality signal. At 129 tokens/sec through Fireworks, a typical entity response (~50-80 tokens) renders in under a second once generation starts — feels instant. CAS interpretation happens during between-episode windows or background processing — 1s TTFT is fine, output speed doesn't matter. Pricing across providers is nearly identical ($0.29-0.31 blended), so routing is free optimization.
+
+---
+
+### Decision 89: Physical Proximity as Third Information Propagation Channel
+
+**Context:** Current CAS spec has two propagation mechanisms: affect contagion through bonds (continuous, no attribution) and information propagation through bonds (discrete, attribution travels). Both require bonds. An entity with no bond to someone standing next to them is informationally isolated even in a crowded room. This is unrealistic — you can overhear conversations, observe events, and absorb ambient social information through physical co-location.
+
+**Decision:** Add proximity-based information propagation as a third CAS channel. Entities within awareness_radius of an active conversation or significant event receive degraded knowledge packets. Gated by: physical distance (closer = higher fidelity), eavesdropper's arousal level (alert entities catch more), emotional charge of the exchange (loud arguments propagate further than whispers), and openness (high-O entities attend more to ambient information).
+
+Proximity packets have lower accuracy and lower charge than bond-propagated packets. They represent overheard fragments and impressions, not deliberate communication. They enter the same knowledge system and compete for relevance like everything else.
+
+**Rationale:** This closes a gap where the CAS models social network distance but not physical distance. Both dimensions are important for realistic information dynamics. The player having a conversation with an ally while an enemy stands nearby should risk information leakage — that's a real social dynamic that creates strategic depth. Implementation is lightweight: same propagation math with a spatial distance check instead of bond strength check.
+
+---
+
+### Decision 90: Entity Backstory as Generation-Time Investment
+
+**Context:** Named entities are generated with OCEAN profiles, faction allegiance, bonds, and initial knowledge distribution. But they lack biographical context — the accumulated life experience that makes a person feel like a person rather than a stat block. When the LLM voices an entity in conversation, richer backstory context produces dramatically better dialog.
+
+**Decision:** At game creation, the Game Compiler generates a short backstory paragraph (~50-80 words) for each named entity. Contains: key life events, relationships, core beliefs, and personality-shaping experiences. Stored as permanent context attached to the entity. Sent as part of the system prompt for all dialog calls and interpretation calls involving that entity.
+
+Population entities receive backstory only upon promotion to named (first player interaction). Their backstory is generated at promotion time, informed by their zone's narrative context and faction role.
+
+**Rationale:** A 50-80 word backstory costs a fraction of a cent to generate and dramatically enriches every subsequent interaction. The LLM doesn't have to infer personality from OCEAN numbers alone — it has narrative material that grounds the entity as a character. "Elderly widow, lost her husband in the faction conflict twelve years ago, distrusts outsiders but is warm to neighbors she's known for decades" produces fundamentally different dialog than "OCEAN: O=0.3, C=0.6, E=0.4, A=0.7, N=0.6."
+
+---
+
+### Decision 91: Narrative Feedback Loop — Claude Writes to CAS Primitives
+
+**Context:** The two-layer architecture (deterministic CAS + Claude interpretation) was designed with a clean separation: CAS produces state, Claude interprets state. But Claude's narrative decisions need to feed back into CAS structure. If Claude narrates "a rebel cell formed," that needs to change bond strengths, propagation rates, and cluster dynamics — not just exist as flavor text.
+
+**Decision:** Claude's interpretation output includes explicit CAS directives alongside narrative content. When Claude interprets at any scale (episode boundary, zone pulse, etc.), it produces both narrative description AND specific writes to existing CAS primitives: bond strength/valence adjustments, entity status changes, resource level changes, propagation rate modifications, entity location changes, new knowledge packets with content.
+
+**Critical constraint:** Claude can write to any existing CAS primitive but cannot create new primitive types. This keeps Layer 1 clean and deterministic. The CAS doesn't know it's a cult — it just sees tighter bonds, more insular information flow, and a high-influence node. Claude knows it's a cult and adjusts the CAS structure accordingly.
+
+**Rationale:** Without this feedback loop, the narrative layer is observational only — it describes what the CAS produced but can't drive further CAS evolution. With it, the narrative and CAS form a generative cycle: CAS dynamics → Claude narrates + adjusts CAS → adjusted CAS produces new dynamics → Claude narrates next development. This is how the cult tightens over time, how the rebellion gains momentum, how the general's loyalty erodes. The narrative isn't just interpreting — it's authoring CAS-level consequences of its narrative decisions.
+
+---
+
+### Decision 92: Drama-Ensuring Narrative Prompt
+
+**Context:** A pure CAS can settle into equilibrium — affect drifts toward baselines, bonds stabilize, information stops being novel. The game needs continuous social drama to remain compelling.
+
+**Decision:** Claude's interpretation system prompt includes a drama-ensuring directive: actively push for interesting dynamics — alliances should be tested, power should be contested, secrets should have consequences, quiet periods should build toward disruption. Not scripting — Claude has full creative latitude. But constrained by CAS state — Claude cannot narrate events that contradict the structural reality. If bonds show unity, Claude can't narrate fragmentation. But Claude can narrate *seeds* of future disruption (a whispered conversation, a suspicious glance, an opportunistic move) that then produce CAS directives (slight bond weakening, new information packet) which the CAS amplifies through its own dynamics.
+
+**Rationale:** This is the "game director" function — ensuring the social ecology produces compelling gameplay, not just realistic simulation. Real social ecologies can be boring (decades of stability). Game social ecologies need consistent dramatic texture. The constraint is that all drama must emerge from CAS-plausible dynamics — Claude is steering, not scripting.
+
+---
+
+### Decision 93: Conceptual Knowledge Lives in the LLM, Not in a Simplified Representation
+
+**Context:** Extended design exploration of how to model entity "minds" — conceptual knowledge, beliefs, causal models, internal world representations. Explored multiple approaches: knowledge packets with mutable content, world model summaries, concern hierarchies, impulse vectors, mind paragraphs rewritten each tick, bottom-up autonomous agents.
+
+**Decision:** Conceptual knowledge cannot be reduced to a CAS primitive simpler than itself. Unlike affect (reducible to valence + arousal) or social structure (reducible to bonds + propagation), conceptual knowledge is irreducibly rich — it IS natural language meaning. The LLM operating on the entity's accumulated context IS the Barrett mind, implemented literally. No simplified cognitive architecture is layered on top.
+
+The LLM is invoked when the entity needs to "think": processing new input, making decisions, speaking in conversation, reacting to significant events. Between invocations, the CAS carries forward structural consequences (affect, bonds, information flow) and the entity's behavioral parameters reflect the residue of their last "thinking" moment. Frequency of invocation is a tuning parameter — more frequent = more alive-feeling but more expensive.
+
+**Rationale:** Barrett's constructionist framework says meaning is constructed from affect + conceptual knowledge + current input. Conceptual knowledge in humans encompasses everything a person knows, believes, and can reason about — "for every noun, verb, and adjective, we have a corresponding concept" (Joe). This cannot be compressed to scalars or structured data without losing the generative richness that makes entity behavior feel human. The LLM IS the only technology that can represent this. Attempting to build a simplified cognitive architecture is either essentialist (violating Barrett) or so complex it recreates an LLM poorly.
+
+---
+
+### Decision 94: Top-Down Narrative Authoring Constrained by Bottom-Up CAS Dynamics
+
+**Context:** Extended exploration of whether the social ecology should be purely bottom-up (emergent from individual agent cognition) or incorporate top-down narrative authoring. Bottom-up is theoretically purer (true CAS) but computationally intractable — generating autonomous agent behavior requires LLM invocation per entity per tick. Top-down is tractable but risks feeling scripted.
+
+**Decision:** Hybrid architecture. The CAS (Layer 1) runs bottom-up: deterministic dynamics producing emergent structural patterns (cluster formation, faction fragmentation, bond networks). Claude (Layer 2) reads those patterns top-down at multiple scales and authors the narrative — deciding what specific events, decisions, and actions occurred, then writing consequences back into the CAS.
+
+The six interpretation scales: (1) ecology-wide macro narrative, (2) faction-scale dynamics, (3) inter-cluster relationships, (4) cluster-scale events, (5) interpersonal dynamics, (6) individual broad strokes.
+
+Claude works top-down for coherence (higher scales constrain lower scales) but is constrained by bottom-up CAS dynamics (can't contradict structural reality). The "keyhole principle" — the player experiences the world through local interaction and cannot distinguish bottom-up emergence from CAS-constrained top-down narration.
+
+**Rationale:** Pure bottom-up social CAS requires every entity to have autonomous cognition (LLM per entity per tick) — computationally intractable at current technology. But pure top-down narration ignores the CAS entirely. The hybrid preserves CAS dynamics as the structural ground truth while using Claude's narrative intelligence to produce the specific content (events, dialog, decisions) that makes the world feel alive. The CAS prevents Claude from scripting — all narrative must be consistent with structural reality. Claude prevents the CAS from being merely numerical — structural changes get narrated into specific, compelling social content.
+
+---
+
+### Decision 95: Increased Interpretation Frequency from Cost Reduction
+
+**Context:** At Claude API rates, interpretation calls were necessarily infrequent (episode boundaries only) due to cost. At DeepSeek rates (~30x cheaper), more frequent interpretation becomes economically viable.
+
+**Decision:** In addition to episode-boundary interpretation (already spec'd), add zone-level narrative pulses at higher frequency (every N social timer ticks, where N is a tuning parameter). Zone pulses produce: zone mood/atmosphere updates, 2-3 most significant social dynamics in play, new content items (gossip, events, visible social behavior) that enter the CAS as knowledge packets, and CAS directives adjusting bonds/affect/propagation for that zone.
+
+Also viable at these costs: entity-initiated contact (entities seek out the player when CAS state + narrative warrant it), richer conversational memory (relationship trajectory summaries in dialog context), and ambient behavioral cues (batched per zone — "given these 8 entities in this configuration, what behavioral cues does each display?").
+
+**Rationale:** The cost headroom from Decision 87 should go toward *frequency* and *breadth* of interpretation calls (more zones interpreted, more ambient cues, richer dialog context), NOT toward making each individual call longer. Keep prompts tight and outputs SNES-paced. The breathing room increases the *resolution* of the social ecology, not the wordcount.
+
+---
+
+### Decision 96: Entity-Initiated Contact as CAS-Driven Mechanic
+
+**Context:** Current spec has player-initiated contact only (player hails entity, spends exchange from daily budget). But in a living social ecology, entities should sometimes seek out the player — an ally with urgent news, an enemy confronting the player, a nervous informant finding the player in a quiet corner.
+
+**Decision:** Entities can initiate contact with the player when narrative conditions warrant. Gated by: bond strength with player (need meaningful relationship), arousal level (need urgency), and narrative context from Claude's interpretation (Claude decides who has reason to seek the player). Entity-initiated contact costs from the same daily exchange budget as player-initiated, creating strategic tension (save exchanges for seeking information vs. receiving unsolicited contact).
+
+Redundancy prevention: after any entity-initiated contact, suppress further initiation from entities in the same social cluster for N social timer ticks. This falls naturally from CAS dynamics — once one entity in a cluster has communicated with the player, the information "player has been contacted" propagates through the cluster, reducing urgency for others.
+
+**Rationale:** Transforms the social ecology from "player extracts information" to "the world has opinions about the player and acts on them." Dramatically increases the feeling of a living world. Cost at DeepSeek rates: one additional dialog call, ~$0.001. The exchange budget mechanic prevents entity-initiated contact from becoming overwhelming.
