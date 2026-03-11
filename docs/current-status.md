@@ -1,6 +1,108 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-11 (Session 13)
+**Last updated:** 2026-03-11 (Session 15)
+
+---
+
+## What Just Happened (Session 15)
+
+### Write-Verify Oracle + Phase 3 Timeout + 30-Frame Settle
+
+Three root causes from Session 14 fixed in `tools/jsnes-extractor.js`:
+
+**Fix 1: Write-verify oracle for X/Y address detection**
+
+Replaced bidir X linearity test and jump-arc Y detection with `findPositionAddrs(nes, baseState)`:
+- Scans 0x0000–0x00FF. For each addr: restore baseState, write +20, step **2 frames**, compare OAM to reference (also +2 frames, no write).
+- X match: |dx−20| ≤ 8 AND dy ≤ 3. Y match: |dy−20| ≤ 8 AND dx ≤ 3.
+- **Critical finding**: must step 2 frames, not 1. OAM DMA runs at vblank start and shows the *previous* frame's computed positions — 1 frame always produces delta=0.
+- Oracle is primary. Bidir xAddr is fallback if oracle fails (e.g. stage-select cursor = BG tiles, no sprites to detect).
+- 258 frames total (1 ref + 257 test frames = very fast).
+
+**Fix 2: Phase 3 settle 3→30 frames**
+- Level-init routines need ~20 frames after state change to load tile data. 3f was too short.
+
+**Fix 3: Phase 3 timeout + progress**
+- 5-minute timeout on coarse sweep (aborts cleanly, proceeds with content vars found so far)
+- Progress log every 50 addresses with elapsed time
+
+**Session 15 battery results:**
+
+| Game | Phase 1 | X addr | Y addr | Content vars | States | Notes |
+|------|---------|--------|--------|--------------|--------|-------|
+| SMB | ✓ frame 360 | $0086 ✓ | $00CE ✓ | 4 ($0773,$07f8,$07f9,$07fa) | 694 | Oracle finds Mario correctly |
+| MM2 | ✓ frame 600 | $0008 (bidir fallback) | NOT FOUND | 2 ($001b 87 states, $0051 37 states) | 188 | Stage-select cursor = BG; oracle correctly skips |
+
+**SMB improvement**: Phase 3 now finds 4 content vars (vs 1 in Session 14). $0773 scroll confirmed; $07f8/$07f9/$07fa are new — likely world/level/area ID registers that require 30f settle to manifest as tile changes.
+
+**MM2 limitation**: Phase 1 boots into stage-select screen. Stage-select cursor is BG tile overlay (not a sprite), so oracle correctly finds no sprites to correlate. xAddr=$0008 comes from bidir RAM scan (cursor X position). To get actual Mega Man in-game X/Y, would need to navigate past stage select — a separate problem.
+
+**Key technical facts confirmed:**
+- jsnes OAM DMA timing: `spriteMem` reflects positions computed 2 frames ago (not current frame)
+- SMB: world X register ($0086) moves OAM X by exactly +20 when scroll is 0; scroll-tracking games cancel out in 1 frame but work in 2
+- Sub-pixel registers ($0005/$0002) do NOT produce +20 OAM movement → oracle filters them out correctly
+
+---
+
+## What Just Happened (Session 14)
+
+### jsnes Extraction Pipeline — All 5 Phases, 4-Game Battery
+
+Built `tools/jsnes-extractor.js` — the complete extraction pipeline (Phases 1, 2, 3, 5, 4 in that order). Runs end-to-end on any NES ROM without crashing. Wrote `tools/probe-jsnes.js` to establish jsnes internals (CPU mem size, PPU flags, RAM mirrors, etc.).
+
+**4-game battery results:**
+
+| Game | Phase 1 | X addr | Y addr | Content vars | States | Phase 5 |
+|------|---------|--------|--------|--------------|--------|---------|
+| SMB | ✓ frame 360 | $0005 (sub-px) | $0002 (sub-px) | 1 ($0773) | 84 | partial |
+| MM2 | ✓ frame 600 | $0008 | NOT FOUND | 2 ($001b, $0051) | 187 | skipped |
+| Contra | ✓ frame 720 | $01fb (screen-rel) | $0268 | 1 ($0077) | 14 | bad data |
+| Zelda | ✗ (file select) | NOT FOUND | NOT FOUND | 1 ($0014) | 102 | skipped |
+
+**What's working:**
+- Full pipeline runs to completion on all 4 games without crashing
+- Phase 1 control detection: confirmed for 3/4 (Zelda expected failure — file select)
+- Phase 3 content variables found for all 4 games, with significant unique state counts
+- Phase 4 deep capture working: 14–187 unique states per game, VRAM/RAM/OAM/palette saved
+- Per-value baseline restore (fix for false positives from continuous game animation)
+- try/catch around CPU steps (fix for invalid opcode crashes on bad RAM mutations)
+
+**Three root causes to fix (Session 15):**
+
+**Root cause 1: Address detection finds sub-pixel positions, not main pixel positions**
+- Current algorithm: pick RAM address with highest combined delta in a 15-frame test
+- Problem: sub-pixel counters change faster/more than main position registers, so they score higher
+- SMB: found $0005 (sub-pixel) instead of $0086 (world X); $0002 instead of $00CE (screen Y)
+- Fix: Walk 60 frames from baseline, find the address with the most LINEAR trajectory (lowest variance in per-frame deltas). Sub-pixel counters are noisier. Main position registers have steady, predictable increment.
+
+**Root cause 2: Phase 3 finds continuous variables (scroll), not discrete level selectors**
+- Current: writing a value + stepping 3 frames → compare VRAM hash to reference
+- Problem: SMB level variables ($075C/$075F) only take visual effect during level initialization. 3 frames after writing is too short. Scroll position ($0773) responds immediately.
+- Fix: increase settle time from 3 frames to 30 frames for Phase 3 hash capture. Level-init routines typically run within 20 frames of state change. Slower but catches more real content variables.
+
+**Root cause 3: Phase 5 Y detection base>128 filter is too strict**
+- SMB: Mario ground Y ≈ 176 (passes filter) → $0002 found (sub-pixel, base=208)
+- MM2: Mega Man ground Y may be < 128 depending on level → filter excluded all candidates
+- Contra: Y detection found $0268 (base=244) but it's not writable for gravity test
+- Fix: Run jump test WITHOUT base>128 filter first. From all candidates showing a clean arc (decrease at peak, return at land), pick the one with the most parabolic trajectory. Fall back to base>128 filter only if too many false positives.
+
+**MM2 content variables look promising:**
+- $001b: 86 unique states, $0051: 37 unique states, pairwise gave 187 total
+- MM2 has 8 robot master stages + fortress stages. 187 states plausibly covers stage variants.
+- These may be actual stage/room ID variables (MM2 is CHR-RAM — changing stage loads different tile data immediately, so 3 frames is enough)
+
+**Zelda content variable $0014 (102 states):**
+- Zelda has 128 overworld screens + 9 dungeons. 102 unique states from one variable is significant.
+- $0014 is likely the screen ID or room coordinate variable.
+- This is exactly what we want — even though Phase 1 failed (file select), Phase 3 got useful data.
+
+**jsnes probe findings (documented once, stable forever):**
+- `nes.cpu.mem` = 65,536 bytes (full address space). NES RAM at 0x0000–0x07FF only.
+- Mirrors NOT active in `cpu.mem[]` → scan/iterate 0x0000–0x07FF only
+- `cpu.mem[0x2000-0x2007]` = plain array reads (no side effects, no PPU register routing)
+- `nes.ppu.f_bgPatternTable` = 1 means BG tiles at $1000, 0 = at $0000
+- `nes.papu` exists; `nes.apu` does not; `cpu.mem[0x4015]` returns 0 (no APU data)
+- `nes.toJSON()` / `nes.fromJSON()` = fast, complete, reliable
 
 ---
 
@@ -141,44 +243,24 @@ giants-drink/
 
 ## What's Next
 
-### Session 14 — Port Extraction Pipeline to jsnes
+### Session 16: Contra + Zelda + Physics Analysis
 
-Port all 5 phases from `extraction-enumerator.lua` to a Node.js jsnes script. The algorithms are already proven — this is a substrate swap, not a redesign.
+**Immediate: run Contra and Zelda through updated extractor**
+- Contra: expected to find X/Y via oracle (previous runs found $01fb/$0268 which are screen-relative; oracle should find the actual pixel registers)
+- Zelda: Phase 1 fails (file select), Phase 3 still finds content vars — run to confirm $0014 still stable
 
-**Port map (Lua → Node.js):**
+**Physics derivation: wire `tools/physics-derivation.js`**
+- SMB Phase 5 has position arrays in `physics-raw.json` — connect to derivation script
+- Derive: gravity (Y descent arc), walk speed (WALK_RIGHT dX/frame), jump velocity (Y at frame 1), variable jump height (JUMP_TAP vs JUMP_HOLD peak delta)
 
-| Lua construct | Node.js equivalent |
-|---|---|
-| `emu.read(addr)` | `nes.cpu.mem[addr]` |
-| `emu.write(addr, val)` | `nes.cpu.mem[addr] = val` |
-| `emu.saveSavestate()` | `state = nes.toJSON()` |
-| `emu.loadSavestate()` | `nes.fromJSON(state)` |
-| `emu.setInput(port, input)` | `nes.buttonDown(1, btn)` / `nes.buttonUp()` |
-| `print("DATA_RAM:...")` (stdout export) | Direct JS object — no serialization needed |
-| `emu.addEventCallback(fn, "startFrame")` | `for` loop calling `nes.frame()` |
+**12-game diversity battery**
+- Run full battery against updated extractor: SMB, MM2, Contra, Zelda, Metroid, Castlevania, Ninja Gaiden, DuckTales, Kirby, Mega Man 3, Batman, Bionic Commando
+- Goal: confirm oracle works on games with different player sprite configurations (multi-sprite players, CHR-RAM games, etc.)
 
-**Phase 5 fixes to carry over from Session 12/13 decisions:**
-- Sanity check: `Math.abs(dx) > 2` (not `dx > 0`) — handles auto-scrollers
-- Y stability check before each test: if `|dY| > 2` over 30 frames → player airborne → reload + retry (max 3)
-- MM2 jump window: hold A for 20 frames (not 15), snapshot at frame 15
+**MM2 in-level extraction** (nice-to-have, not blocking)
+- To get actual Mega Man in-game position, need to navigate past stage select (press A on a stage) — requires extending the boot loop
 
-**OAM scanning (Phase 1 player detection):**
-- jsnes `nes.ppu.spriteMem` is a live 256-byte array — read directly each frame
-- Same slot detection logic: any slot with `dxRight > 0 && dxLeft < 0` = player
-
-**Output format:** Phase 1–5 results go directly into a JS object, no DATA_ prefix parsing needed. Orchestrator becomes a simple `node extract.js <rom>` call.
-
-**No subprocess, no stdout, no Lua.** The new extractor will be ~400 lines of straightforward Node.js.
-
-### Session 15: 12-Game Diversity Battery + Physics Analysis
-
-- Run jsnes extractor against 12-game diversity battery from spec
-- Wire `tools/physics-derivation.js` to position arrays from extraction output
-- Derive constants: gravity (Y descent arc), walk speed (WALK_RIGHT dX/frame), jump velocity (Y at frame 1), variable jump height (JUMP_TAP vs JUMP_HOLD peak delta)
-- Add directional input + A sequences for name-entry/file-select screens (Zelda/RPGs)
-- Begin manifest generation (recording analyzer, Claude interpretation)
-
-### Session 16+: Scale Run + Engine Build
+### Session 17+: Scale Run + Manifest Generation
 
 - Batch orchestrator for full NES library (~760 CHR-RAM games)
 - SNES ROM acquisition + validation

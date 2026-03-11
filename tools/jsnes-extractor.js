@@ -131,6 +131,106 @@ function toHex(uint8arr) {
   return Buffer.from(uint8arr).toString("hex");
 }
 
+/**
+ * Write-verify oracle: find player X and Y RAM addresses.
+ *
+ * Scans 0x0000–0x00FF. For each address:
+ *   1. Restore baseState
+ *   2. Write (current_value + 20) mod 256 to that address
+ *   3. Step 1 frame
+ *   4. Compare all OAM sprites to a 1-frame reference (baseState + 1 frame, no write)
+ *
+ * If a sprite moved ~+20px horizontally → that address is player X.
+ * If a sprite moved ~+20px vertically   → that address is player Y.
+ *
+ * Why this beats bidir/arc approaches:
+ *   - No input needed — works in any game state
+ *   - Direct causation: only the true position register produces exactly +20px OAM movement
+ *   - Sub-pixel registers: writing +20 moves the sprite by only 20/sub_px_factor px (≠ 20, fails)
+ *   - 257 frames total (1 reference + 1 per address = very fast)
+ */
+function findPositionAddrs(nes, baseState) {
+  const SCAN_END    = 0x100;   // 0x0000–0x00FF (zero page)
+  const WRITE_DELTA = 20;
+  const TOLERANCE   = 8;       // ±8px to allow minor velocity/sub-pixel rounding
+
+  // Reference: baseState + 2 frames, no write.
+  // 2 frames needed because OAM DMA runs at vblank start and shows the *previous*
+  // frame's computed positions — a write-then-1-frame produces OAM delta=0.
+  nes.fromJSON(baseState);
+  clearInput(nes);
+  nes.frame(); nes.frame();
+  const oamRef = snapshotOAM(nes);
+
+  // Collect visible slots from reference (Y < 0xEF means on-screen)
+  const visibleSlots = [];
+  for (let i = 0; i < 64; i++) {
+    if (oamRef[i * 4] < 0xEF) visibleSlots.push(i);
+  }
+
+  if (visibleSlots.length === 0) {
+    console.log(`  ⚠ Oracle: no visible sprites in reference — cannot scan`);
+    return { xAddr: -1, yAddr: -1, playerOAMSlot: -1 };
+  }
+  console.log(`  Oracle: scanning 0x0000–0x00FF  (${visibleSlots.length} visible sprite slots)`);
+
+  let xAddr = -1;
+  let yAddr = -1;
+  let playerOAMSlot = -1;
+
+  for (let addr = 0; addr < SCAN_END; addr++) {
+    nes.fromJSON(baseState);
+    const origVal = nes.cpu.mem[addr];
+    nes.cpu.mem[addr] = (origVal + WRITE_DELTA) & 0xFF;
+
+    try {
+      nes.frame(); nes.frame();
+    } catch (_e) {
+      continue;  // bad write → skip
+    }
+
+    const oamTest = snapshotOAM(nes);
+
+    for (const slot of visibleSlots) {
+      if (oamTest[slot * 4] >= 0xEF) continue;  // slot became invisible — skip
+
+      // Unsigned delta handles screen-edge wrapping cleanly
+      const dx = (oamTest[slot * 4 + 3] - oamRef[slot * 4 + 3] + 256) & 0xFF;
+      const dy = (oamTest[slot * 4 + 0] - oamRef[slot * 4 + 0] + 256) & 0xFF;
+
+      if (xAddr < 0 && Math.abs(dx - WRITE_DELTA) <= TOLERANCE && dy <= 3) {
+        xAddr = addr;
+        playerOAMSlot = slot;
+        console.log(
+          `  Oracle X: $${addr.toString(16).padStart(4, "0")}  ` +
+            `orig=${origVal}→${(origVal + WRITE_DELTA) & 0xFF}  ` +
+            `slot ${slot}: dx=${dx} dy=${dy}`
+        );
+      }
+
+      if (yAddr < 0 && Math.abs(dy - WRITE_DELTA) <= TOLERANCE && dx <= 3) {
+        yAddr = addr;
+        if (playerOAMSlot < 0) playerOAMSlot = slot;
+        console.log(
+          `  Oracle Y: $${addr.toString(16).padStart(4, "0")}  ` +
+            `orig=${origVal}→${(origVal + WRITE_DELTA) & 0xFF}  ` +
+            `slot ${slot}: dx=${dx} dy=${dy}`
+        );
+      }
+    }
+
+    if (xAddr >= 0 && yAddr >= 0) break;  // found both — stop early
+  }
+
+  // Restore to baseState so caller continues from a known position
+  nes.fromJSON(baseState);
+
+  if (xAddr < 0) console.log(`  ⚠ Oracle: X not found in 0x0000–0x00FF`);
+  if (yAddr < 0) console.log(`  ⚠ Oracle: Y not found in 0x0000–0x00FF`);
+
+  return { xAddr, yAddr, playerOAMSlot };
+}
+
 // ── Phase 1: Boot + Player Discovery ─────────────────────────────────────────
 
 function phase1(nes) {
@@ -249,77 +349,24 @@ function phase1(nes) {
     p1BaselineState = nes.toJSON();
   }
 
-  // ── 1c. Settle 120 frames ─────────────────────────────────────────────────
-  // Restore to the confirmed interactive state, then settle.
+  // ── 1b. Settle 120 frames ─────────────────────────────────────────────────
   nes.fromJSON(p1BaselineState);
   clearInput(nes);
   step(nes, 120);
   totalFrames += 120;
   console.log(`  Settled 120 frames (total ~${totalFrames} frames run)`);
 
-  // ── 1d. Y address discovery ───────────────────────────────────────────────
-  console.log("  Discovering Y address (jump test)...");
-
-  const ram_y_pre = snapshotRAM(nes);
-
-  // Hold A 20 frames (extended window for MM2 compatibility)
-  nes.buttonDown(1, Controller.BUTTON_A);
-  step(nes, 20);
-  nes.buttonUp(1, Controller.BUTTON_A);
-
-  // Snapshot at frame 20 from A press (immediately after release — ascending)
-  const ram_y_peak = snapshotRAM(nes);
-
-  // Wait for landing: 60 more frames
-  step(nes, 60);
-  const ram_y_land = snapshotRAM(nes);
-  totalFrames += 80;
-
-  // Find Y: base > 128 (NES ground Y > 128), decreased at peak, returned at land
-  let yAddr = -1;
-  let bestYDelta = 0;
-
-  for (let addr = 0; addr < 0x800; addr++) {
-    const base = ram_y_pre[addr];
-    if (base <= 128) continue; // filter timers: NES platform ground Y always > 128
-
-    const atPeak = ram_y_peak[addr];
-    const atLand = ram_y_land[addr];
-    const dPeak = base - atPeak; // positive = Y decreased (went up)
-    const dLand = Math.abs(base - atLand);
-
-    if (dPeak > 15 && dLand <= 8 && dPeak > bestYDelta) {
-      bestYDelta = dPeak;
-      yAddr = addr;
-    }
-  }
-
-  if (yAddr >= 0) {
-    console.log(
-      `  Y addr: $${yAddr.toString(16).padStart(4, "0")}  ` +
-        `base=${ram_y_pre[yAddr]} peak=${ram_y_peak[yAddr]} land=${ram_y_land[yAddr]}  ` +
-        `delta=${bestYDelta}`
-    );
-  } else {
-    // Fallback: scan all, no base filter
-    console.log(`  ⚠ Y not found with base>128 filter — trying without...`);
-    for (let addr = 0; addr < 0x800; addr++) {
-      const base = ram_y_pre[addr];
-      const dPeak = base - ram_y_peak[addr];
-      const dLand = Math.abs(base - ram_y_land[addr]);
-      if (dPeak > 15 && dLand <= 8 && dPeak > bestYDelta) {
-        bestYDelta = dPeak;
-        yAddr = addr;
-      }
-    }
-    if (yAddr >= 0) {
-      console.log(
-        `  Y addr (no filter): $${yAddr.toString(16).padStart(4, "0")}  delta=${bestYDelta}`
-      );
-    } else {
-      console.log(`  ⚠ Y address not found`);
-    }
-  }
+  // ── 1c. Write-verify oracle: find X and Y addresses ───────────────────────
+  // Run from settled state so the player is standing still.
+  // Oracle is primary (more precise). Bidir xAddr is fallback if oracle misses
+  // (e.g. game uses BG cursor in stage-select, no sprite movement to detect).
+  const settledState = nes.toJSON();
+  const bidirXAddr = xAddr;  // from bidir RAM scan above (may be -1)
+  const oracle = findPositionAddrs(nes, settledState);
+  xAddr = oracle.xAddr >= 0 ? oracle.xAddr : bidirXAddr;
+  let yAddr = oracle.yAddr;
+  if (oracle.playerOAMSlot >= 0) playerOAMSlot = oracle.playerOAMSlot;
+  // findPositionAddrs restores to settledState at end; continue from there
 
   // ── 1e. Settle + save BASELINE ────────────────────────────────────────────
   clearInput(nes);
@@ -408,42 +455,60 @@ function phase3(nes, baseline, candidates) {
   console.log("\n╔══════════════════════════════╗");
   console.log("║  PHASE 3: Mutation Sweep      ║");
   console.log("╚══════════════════════════════╝");
-  console.log(`  Scanning ${candidates.length} candidates...`);
+
+  // Two-pass design:
+  //   Pass 1 (COARSE): test 32 evenly-spaced values (0,8,16,...248) per candidate.
+  //              Cost: N_candidates × 32 × 30 frames.
+  //   Pass 2 (FINE):   test all 256 values, ONLY for addresses that scored >3 unique
+  //              hashes in Pass 1.  Cost: N_content_vars × 256 × 30 frames.
+  // Per-value baseline restore ensures mutations are compared against identical state,
+  // not against drifted-animation state.
 
   const COARSE_VALUES = Array.from({ length: 32 }, (_, i) => i * 8); // 0,8,16,...248
+  const PHASE3_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes — abort coarse sweep if exceeded
 
-  // Compute reference hash: baseline + 3 frames with NO writes.
-  // We compare every mutation against this, not against the static baseline hash.
-  // This eliminates false positives from animations/scroll updating every few frames.
+  // Compute reference hashes: baseline + 30 frames with NO writes.
+  // 30-frame settle allows level-init routines (which fire within 20 frames) to
+  // propagate to VRAM. We sample 4 refs to capture any frame-to-frame variance.
   const referenceHashes = new Set();
   for (let rep = 0; rep < 4; rep++) {
-    // Sample 4 reference hashes to account for any frame-to-frame variance
     nes.fromJSON(baseline);
-    step(nes, 3);
+    step(nes, 30);
     referenceHashes.add(hashScreen(nes));
   }
+  console.log(`  Reference hashes: ${referenceHashes.size} (baseline+30f, 4 samples)`);
+  console.log(`  Pass 1 (coarse): ${candidates.length} candidates × 32 values × 30f`);
+  console.log(`  Timeout: 5 minutes on coarse sweep`);
 
+  // ── Pass 1: coarse sweep ──────────────────────────────────────────────────
   const contentVars = [];
   let processed = 0;
-  const logInterval = Math.max(1, Math.floor(candidates.length / 10));
+  let timedOut = false;
+  const coarseStart = Date.now();
 
   for (const addr of candidates) {
-    // Restore BASELINE before each value (per-value restore).
-    // "Restore once per address" caused false positives: 96 continuous frames of
-    // game animation produced unique hashes at every 3-frame step even without
-    // any meaningful RAM change. Per-value restore compares identical starting
-    // conditions.
-    const uniqueHashes = new Set();
+    // Timeout check — abort coarse sweep if we've run too long
+    if (Date.now() - coarseStart > PHASE3_TIMEOUT_MS) {
+      const elapsed = ((Date.now() - coarseStart) / 1000).toFixed(0);
+      console.log(
+        `  ⏰ Coarse sweep timed out after ${elapsed}s — ` +
+          `processed ${processed}/${candidates.length} addresses, ` +
+          `found ${contentVars.length} content vars so far`
+      );
+      timedOut = true;
+      break;
+    }
 
+    const uniqueHashes = new Set();
     for (const val of COARSE_VALUES) {
       nes.fromJSON(baseline);
       nes.cpu.mem[addr] = val;
       try {
-        step(nes, 3);
+        step(nes, 30);
         const h = hashScreen(nes);
         if (!referenceHashes.has(h)) uniqueHashes.add(h);
       } catch (_e) {
-        // Invalid opcode from corrupted CPU state — skip this value, not a problem
+        // Invalid opcode from corrupted CPU state — skip this value
       }
     }
 
@@ -452,45 +517,60 @@ function phase3(nes, baseline, candidates) {
     }
 
     processed++;
-    if (processed % logInterval === 0) {
-      process.stdout.write(`  ${processed}/${candidates.length}...\r`);
+    if (processed % 50 === 0) {
+      const elapsed = ((Date.now() - coarseStart) / 1000).toFixed(0);
+      console.log(
+        `  [${elapsed}s] coarse ${processed}/${candidates.length}  content vars so far: ${contentVars.length}`
+      );
     }
   }
 
-  console.log(`  Coarse sweep complete. Content variables found: ${contentVars.length}`);
+  const coarseElapsed = ((Date.now() - coarseStart) / 1000).toFixed(1);
+  console.log(
+    `  Pass 1 done in ${coarseElapsed}s — ` +
+      `${timedOut ? `PARTIAL (${processed}/${candidates.length})` : "complete"}  ` +
+      `content vars: ${contentVars.length}`
+  );
 
-  // Fine sweep: all 256 values for each content variable
-  for (const cv of contentVars) {
-    const seen = new Map(); // hash → value
+  // ── Pass 2: fine sweep (only for content vars found in Pass 1) ────────────
+  if (contentVars.length > 0) {
+    console.log(`  Pass 2 (fine): ${contentVars.length} vars × 256 values × 30f`);
+    const fineStart = Date.now();
 
-    for (let val = 0; val <= 255; val++) {
-      nes.fromJSON(baseline);
-      nes.cpu.mem[cv.addr] = val;
-      try {
-        step(nes, 3);
-        const h = hashScreen(nes);
-        if (!referenceHashes.has(h) && !seen.has(h)) {
-          seen.set(h, val);
-          cv.uniqueValues.push(val);
+    for (const cv of contentVars) {
+      const seen = new Map(); // hash → first value that produced it
+
+      for (let val = 0; val <= 255; val++) {
+        nes.fromJSON(baseline);
+        nes.cpu.mem[cv.addr] = val;
+        try {
+          step(nes, 30);
+          const h = hashScreen(nes);
+          if (!referenceHashes.has(h) && !seen.has(h)) {
+            seen.set(h, val);
+            cv.uniqueValues.push(val);
+          }
+        } catch (_e) {
+          // skip
         }
-      } catch (_e) {
-        // skip
       }
+
+      cv.fineSweepUniqueCount = seen.size;
+      console.log(
+        `  Content var $${cv.addr.toString(16).padStart(4, "0")}: ` +
+          `${cv.fineSweepUniqueCount} unique VRAM states  ` +
+          `values=[${cv.uniqueValues.slice(0, 16).join(",")}${cv.uniqueValues.length > 16 ? "..." : ""}]`
+      );
     }
 
-    cv.fineSweepUniqueCount = seen.size; // no baseline subtraction (reference hashes filtered)
-
-    console.log(
-      `  Content var $${cv.addr.toString(16).padStart(4, "0")}: ` +
-        `${cv.fineSweepUniqueCount} unique VRAM states  ` +
-        `values=[${cv.uniqueValues.slice(0, 16).join(",")}${cv.uniqueValues.length > 16 ? "..." : ""}]`
-    );
+    const fineElapsed = ((Date.now() - fineStart) / 1000).toFixed(1);
+    console.log(`  Pass 2 done in ${fineElapsed}s`);
   }
 
   if (contentVars.length === 0) {
     console.log(`  ⚠ No content variables found!`);
     console.log(
-      `    Possible causes: game needs longer settle, or level vars don't affect VRAM in 3 frames.`
+      `    Possible causes: game needs longer settle, or level vars don't affect VRAM in 30 frames.`
     );
   }
 
