@@ -1,6 +1,36 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-10 (Phase 1, Session 11a/11b)
+**Last updated:** 2026-03-10 (Session 11c)
+
+---
+
+## What Just Happened (Session 11c)
+
+### Three-Game Battery Results
+
+All three games ran Phases 1-4 successfully. Phase 5 produces output but trajectories are wrong — deferred.
+
+| Game | P1 Frame | P3 Content Vars | P4 States | P5 Status |
+|------|----------|-----------------|-----------|-----------|
+| SMB | 831 | 3 (0x0773, 0x00B5, 0x06D4) | 16 | ❌ tracking wrong entity |
+| Mega Man 2 | 639 | 2 | 9 | ❌ stuck at (61,40) |
+| Contra | 405 | 1 | 5 | ❌ stuck at (44,154) |
+
+### Fix 1: Phase 2 full-address sweep ✅ WORKING
+Force-add ALL $0700-$07FF and $0000-$00FF addresses as Phase 3 candidates regardless of volatility. Level variables (SMB: 0x0773, others) are constant during gameplay — the old volatility filter missed them. Now they're always included. SMB found 3 content variables in the current run (was finding 0-1 before this fix).
+
+### Fix 2: Phase 1 BASELINE settle ✅ WORKING
+After bidirectional control confirmation, wait 120 frames with cleared input before saving BASELINE. Prevents mid-jump contamination from the A-press in the control test cycle.
+
+### Fix 3: Phase 5 sprite tracking ❌ NOT RESOLVED
+Implemented mini bidirectional test (same logic as Phase 1) to uniquely identify player sprite per test. Code is in the file but has a runtime issue causing complete silence (no Phase 1 output either). Reverted concept, deferred to Session 12.
+
+**Root cause of all Phase 5 failures:** The player sprite cannot be reliably identified via OAM proximity alone. All three games showed the tracker latching onto non-player entities:
+- SMB: Goomba walks into player spawn area during warmup, sits at distance 6 from centroid vs Mario's tiles at distance 8
+- MM2: Tracker latched onto a static HUD/score element at (61,40)
+- Contra: Tracker latched onto static element at (44,154)
+
+**Correct fix for Session 12:** Correlate OAM movement with RAM writes during the Phase 1 control test to identify the exact RAM addresses holding player X/Y. Use those RAM addresses directly in Phase 5 instead of OAM proximity. This approach is game-agnostic and definitive.
 
 ---
 
@@ -109,25 +139,24 @@ giants-drink/
 
 ## What's Next
 
-### Immediate: Session 12 — Fix Phase 2 + Phase 5, Validate SMB, Three-Game Battery
+### Immediate: Session 12 — Fix Phase 5 via RAM Correlation
 
-Three focused fixes, then validation:
+**Fix 1 ✅ Done. Fix 2 ✅ Done. Fix 3 — new approach:**
 
-**Fix 1: Phase 2 — Full-address sweep**
-Add a second pass that sweeps ALL 2048 RAM addresses (or a targeted range like $0700-$07FF) in addition to the volatile candidates. Level variables are constant during gameplay — the volatility filter misses them. This is Decision 90.
+**Phase 5 player tracking via RAM correlation (not OAM proximity)**
 
-**Fix 2: Phase 1 — BASELINE settle period**
-After bidirectional control test confirms gameplay, release all inputs and wait 60-120 frames for the player to land and the game to reach a neutral state before saving BASELINE. This is Decision 91.
+During Phase 1's control test (hold Right, then hold Left), simultaneously log ALL RAM addresses whose values change. The RAM addresses that change in sync with the OAM X movement are the player X position variables. Store these as `p1PlayerXAddrs[]` alongside `p1CandSlot`.
 
-**Fix 3: Phase 5 — Input sequencing and slot tracking**
-- Ensure each physics test applies its specific input sequence (not all defaulting to walk-right)
-- Handle OAM slot multiplexing (SMB cycles sprites through slots — track by proximity/continuity, not fixed slot)
-- After restoring BASELINE for each test, explicitly clear all inputs for 2 frames before starting test inputs
+In Phase 5, read player position directly from these RAM addresses each frame instead of scanning OAM. This is:
+- Definitive (we know exactly which bytes are player X/Y)
+- Game-agnostic (works regardless of OAM multiplexing)
+- Immune to enemy interference (enemy RAM addresses won't move bidirectionally with player input)
 
-**Validation:**
-- TEST 1: Full pipeline on SMB — content variables found, physics data shows distinct movement per test
-- Boot hardening: Phase 1 on 6-8 diverse games (MM2, Zelda, Contra, Castlevania, Metroid, Kirby)
-- TEST 2: Full pipeline on MM2, Contra (Zelda needs name-entry navigation fix)
+Implementation: in `hold_right` and `hold_left` sub-states, snapshot RAM before and after, diff against pre-test values. Addresses that moved right then left = player X candidates.
+
+**Then validate:** distinct trajectories for all 6 tests (WALK_RIGHT: X increases; JUMP: Y arc; FRICTION: X decelerates; DUCK: constant).
+
+**Then three-game battery:** SMB + MM2 + Contra with valid physics data.
 
 ### Session 13: Zelda/RPG Boot Fix + 12-Game Battery
 
