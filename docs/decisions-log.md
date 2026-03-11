@@ -1318,3 +1318,35 @@ Also viable at these costs: entity-initiated contact (entities seek out the play
 Redundancy prevention: after any entity-initiated contact, suppress further initiation from entities in the same social cluster for N social timer ticks. This falls naturally from CAS dynamics — once one entity in a cluster has communicated with the player, the information "player has been contacted" propagates through the cluster, reducing urgency for others.
 
 **Rationale:** Transforms the social ecology from "player extracts information" to "the world has opinions about the player and acts on them." Dramatically increases the feeling of a living world. Cost at DeepSeek rates: one additional dialog call, ~$0.001. The exchange budget mechanic prevents entity-initiated contact from becoming overwhelming.
+
+---
+
+## Session: 2026-03-11 — Phase 5 Physics Sampling (Session 12)
+
+### Decision 97: Phase 5 Sanity Check — Use Absolute Delta, Not Directional
+
+**Context:** Phase 5 sanity check presses Right for 10 frames and verifies `dx > 0` before running physics tests. Contra Stage 1 is a forced horizontal auto-scroller: the RAM X address (0x0100) is screen-relative, and during auto-scroll the player's screen X can *decrease* even while pressing Right. This caused a false INPUT_BROKEN on Contra — input IS reaching the game, the check is wrong.
+
+**Decision:** Change the sanity check to `math.abs(dx) <= 2` (fail if |dx| ≤ 2, pass if |dx| > 2). Movement in either direction confirms `emu.setInput` is reaching the game. The check's purpose is to detect frozen/non-interactive states, not to verify rightward movement specifically.
+
+**Rationale:** Auto-scrolling games (Contra, many shmups) have player X that moves opposite to the scroll direction. Bidirectional movement confirmation is the correct invariant. The threshold of 2 pixels provides noise margin for stationary states (timers, counters) while catching any genuine movement.
+
+---
+
+### Decision 98: p1BaselineState Is The Only Reliable Physics Test Starting Point
+
+**Context:** Session 11 tried multiple starting states for Phase 5: `BASELINE` (post-settle, Mario in castle-walk), `PHYSICS_BASE` (captured in Phase 4 when game loads a level — fooled by level-complete animations), and `p1BaselineState` (pre-directional-test snapshot from Phase 1). Only `p1BaselineState` consistently places the player in an interactive state.
+
+**Decision:** Phase 5 always uses `p1BaselineState` as LEVEL_STATE. PHYSICS_BASE is retired as a concept for physics testing. BASELINE (the Phase 1 post-settle state) is retained for Phases 2-4 content mutation but not for Phase 5.
+
+**Rationale:** `p1BaselineState` is the snapshot taken *before* the bidirectional control test. Phase 1's bidirectional test confirmed that the game responds to input from this state — it is the only state with a hard guarantee that the player is in a responsive, interactive position. PHYSICS_BASE and BASELINE have no such guarantee and have both been demonstrated to land in non-interactive animations.
+
+---
+
+### Decision 99: Y Stability Check Required at Physics Test Start
+
+**Context:** SMB1 World 1-1 is short. Phase 1 takes 10 cycles (710 frames) to confirm bidirectional control, naturally advancing Mario to near the level end (~x=165). `p1BaselineState` captures Mario mid-air near a wall. All 6 physics tests start with Mario already airborne — input has no effect while in the air, so all tests produce identical data.
+
+**Decision:** Add a Y stability check alongside the existing X stability check in `wait_load_xstable`. Read Y at start of the 30-frame stability window and again at end. If |dY| > 2, player is airborne — reload LEVEL_STATE and try again (max 3 retries with exponential backoff: 30, 60, 120 frames). If still airborne after 3 retries, log `STATUS_PHASE5:AIRBORNE_SKIP` and skip the test (record reason in DATA_PHYSICS).
+
+**Rationale:** Airborne test data is useless for walk/duck/friction measurements (only JUMP tests would be valid, and even those are confounded by initial conditions). The retry loop handles the common case where Mario is in mid-air from a jump or fall — waiting for landing is sufficient. If after 3 retries the player is still airborne, it's likely a game state issue (Mario in pipe transition, etc.) that won't resolve by waiting.

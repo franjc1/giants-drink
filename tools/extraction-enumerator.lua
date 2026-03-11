@@ -214,6 +214,8 @@ local p5RamBase     = {}   -- RAM snapshot at BASELINE before jump (for Y detect
 local p5RamJump     = {}   -- RAM snapshot ~10 frames into A-hold jump (near peak)
 local p5JumpCount   = 0    -- frame counter for Y-detection jump
 local p5JumpButton  = "a"  -- button for Y detection: "a" first; retries "b" if Y not found
+local p5SanityX1    = 0    -- X before sanity Right press (input verification)
+local p5XStable1    = 0    -- X at first stability read (before 30-frame re-check)
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
 local P5_TESTS = {
@@ -467,9 +469,14 @@ local function runPhase1()
               " x_cands=" .. #xCand .. " y_cands_pending=" .. #p1YCandList ..
               " refSlotY=" .. p1RefSlotY)
 
-        print("STATUS_PHASE1:Settling 120 frames before BASELINE save")
-        p1HoldCount = 0  -- reset for settle countdown
-        sub = "settle_wait"
+        -- Reload p1BaselineState (pre-directional-test snapshot) before settling.
+        -- The Right press in the control test may have pushed Mario to the flagpole,
+        -- triggering a level-complete animation that ignores all input. Starting the
+        -- settle from p1BaselineState guarantees Mario is in a playable position.
+        print("STATUS_PHASE1:Reloading p1BaselineState before settle to avoid flag contamination")
+        doSavestate("load", p1BaselineState)
+        p1HoldCount = 0
+        sub = "settle_reload"
       else
         print("STATUS_PHASE1:No control found cycle=" .. p1CycleNum .. " frame=" .. frame)
         sub = "start_cycle"
@@ -478,11 +485,23 @@ local function runPhase1()
     return
   end
 
-  -- ---- SETTLE (120 + 5 + 60 frames): clear inputs, counter-momentum, final rest ----
-  -- Phase 1 control tests can leave Mario mid-jump or with residual horizontal velocity.
-  -- After 120 clearInput frames (landing + rough decel), press Left for 5 frames to cancel
-  -- any rightward $57 carry-over, then wait 60 more clearInput frames for full stop.
-  -- BASELINE is saved with Mario guaranteed stationary.
+  -- ---- SETTLE (settle_reload → 120 + 5 + 60 frames) ----
+  -- settle_reload: wait for p1BaselineState loadstate to complete (ssPending guard).
+  -- settle_wait (120f): clearInput from the clean pre-test position (landing + decel).
+  -- settle_left (5f): press Left to cancel any rightward carry-over.
+  -- settle_final (60f): final clearInput for full stop.
+  -- BASELINE saved with Mario guaranteed stationary in a playable game state.
+  if sub == "settle_reload" then
+    clearInput()
+    if ssPending then return end  -- wait for p1BaselineState to load
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 5 then  -- brief stabilisation after load before counting settle
+      p1HoldCount = 0
+      sub = "settle_wait"
+    end
+    return
+  end
+
   if sub == "settle_wait" then
     clearInput()
     p1HoldCount = p1HoldCount + 1
@@ -851,46 +870,21 @@ local function runPhase4()
 end
 
 -- ============================================================
--- PHASE 5: PHYSICS SAMPLING  *** WIP — BROKEN AS OF SESSION 11e ***
+-- PHASE 5: PHYSICS SAMPLING  (Session 12 rewrite)
 --
--- STATUS: Phases 1-4 are validated and working. Phase 5 has unresolved issues.
--- DO NOT rely on Phase 5 data from the current implementation.
---
--- WHAT WORKS:
---   - X address detection (Phase 1 bidirectional RAM correlation) ✅
---   - Y detection approach: round-trip filter (press jump for 5 frames, snapshot at
---     frame 15, snapshot at frame 60, find address that decreased AND returned to ±2
---     of original) ✅ correct algorithm
---   - Zero-page-first two-pass (prevents page-3+ false positives) ✅
---   - APU register capture alongside physics positions ✅
---
--- KNOWN BROKEN:
---   1. Y detection finds wrong address (0x009F, delta=-2 instead of 0x00CE, delta=-60).
---      Root cause: Mario cannot jump from p1BaselineState — either blocked or still in
---      walk-in animation after the 200-frame clearInput settle. Small noise delta passes
---      the round-trip filter.
---   2. All 6 physics tests produce IDENTICAL position trajectories (x frozen at 138 for
---      all tests including WALK_RIGHT with right=true pressed every frame).
---      Root cause: emu.setInput() may not reach the game during savestate-restored
---      gameplay. Needs investigation — either the input injection timing is wrong, or
---      Mario is in a state where the game overrides all input (walk-in, pipe animation,
---      pause, etc.) after the 200-frame settle.
---   3. BASELINE capture: Phase 1's control-test directional movement (Right 10 frames)
---      can push Mario to the level's flagpole (World 1-1 in SMB), triggering a
---      level-complete animation that makes the game non-interactive for all subsequent
---      frames. Counter-momentum fix (Left 5 frames + 60 clearInput) is in Phase 1 settle
---      but doesn't prevent this because the flagpole is hit BEFORE the settle starts.
---
--- INVESTIGATION NEEDED FOR SESSION 12:
---   A. Add debug: in Phase 5 run_test_frames, print x every 10 frames for WALK_RIGHT.
---      Verify if x changes at all. If not, emu.setInput issue. If yes, x detection issue.
---   B. Check emu.setInput: does it work inside startFrame callbacks after loadSavestate?
---      Known from Session 11a: should work. But Phase 5 results contradict this.
---   C. Alternative: use emu.addMemoryCallback (exec type) instead of startFrame for
---      input injection — exec fires during NES execution, guaranteeing input is set
---      before the controller latch read.
---   D. Check what state the game is in during Phase 5 tests: read $0E (SMB1 game mode)
---      to see if it's 0x08 (gameplay) or some other mode (pause, title, etc.)
+-- Flow:
+--   1. LEVEL_STATE = PHYSICS_BASE if available (Phase 4 natural level-load state:
+--      Mario at spawn, zero velocity), else p1BaselineState.
+--   2. Y detection: load LEVEL_STATE, 60-frame settle, snapshot ground RAM, hold
+--      jump 5 frames, snapshot at frame 15 (peak) and 60 (landing). Y = address
+--      that DECREASED at peak AND returned within ±2 at landing (round-trip filter).
+--      Zero-page first. Retry with B-button if A yields nothing.
+--   3. Input sanity check: reload LEVEL_STATE, 60-frame settle, read X, press Right
+--      10 frames, read X again. If X didn't increase → INPUT_BROKEN, stop.
+--   4. Physics tests: per test, load LEVEL_STATE + structured settle
+--      (60 clearInput + Left 5 + 60 clearInput + 30-frame X stability check),
+--      then inject inputs frame-by-frame recording (X,Y). WALK_RIGHT logs X every
+--      10 frames for diagnostics.
 -- ============================================================
 
 local function runPhase5()
@@ -903,35 +897,25 @@ local function runPhase5()
   end
 
   if sub == "init" then
-    -- LEVEL_STATE: base state for physics tests.
-    -- Prefer PHYSICS_BASE (captured in Phase 4 when the game loaded a level naturally —
-    -- Mario spawns with zero velocity, no contamination from our control-test inputs).
-    -- Fall back to p1BaselineState if Phase 4 didn't find a playable state (e.g. games
-    -- with no Phase 3 content variables).
-    -- Use p1BaselineState: captured right before the bidirectional test that confirmed
-    -- control. The game is GUARANTEED interactive from this state (the test proved it).
-    -- Using BASELINE risks capturing Mario in a level-complete or walk-in state if the
-    -- control-test directional movement triggered a flagpole/pipe/staircase transition.
+    -- Always use p1BaselineState as LEVEL_STATE.
+    -- PHYSICS_BASE (Phase 4 natural level-load) sounds cleaner but is unreliable:
+    -- p4IsPlayable() can be fooled by end-of-level animations (full nametable + sprites
+    -- in range during castle walk or world-complete screen). p1BaselineState is the
+    -- ONLY state guaranteed interactive — Phase 1 confirmed control there via the
+    -- bidirectional test. PHYSICS_BASE is left available for future use in analysis.
     LEVEL_STATE = p1BaselineState
-    print("STATUS_PHASE5:x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
-          " level_state=p1BaselineState" ..
-          " starting Y detection via round-trip jump test")
-    doSavestate("load", p1BaselineState)
+    print("STATUS_PHASE5:level_state=p1BaselineState x_addr=" ..
+          string.format("0x%04X", p1PlayerXAddr))
+    doSavestate("load", LEVEL_STATE)
     p5JumpCount = 0; sub = "find_y_land"; return
   end
-
-  -- ---- FIND Y: load p1BaselineState, wait for landing, snapshot, jump, compare ----
-  -- p1BaselineState has Mario at the pre-movement snapshot (possibly 1-2 frames from
-  -- landing after an A-press jump). We wait 20 clearInput frames first so he lands,
-  -- then snapshot the on-ground RAM, then jump and compare.
 
   if sub == "find_y_land" then
     clearInput()
     if ssPending then return end   -- wait for loadstate
     p5JumpCount = p5JumpCount + 1
-    if p5JumpCount >= 30 then
-      -- Player should have landed by now; snapshot ground state.
-      -- 30 frames gives slower-starting games (e.g. MM2) time to reach idle state.
+    if p5JumpCount >= 60 then
+      -- 60 frames: enough for any walk-in animation to finish and Mario to reach idle.
       for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
       p5JumpCount = 0; sub = "find_y_jump"
     end
@@ -978,14 +962,61 @@ local function runPhase5()
             " y_addr=" .. yStr .. " y_delta=" .. yBestDelta .. " button=" .. p5JumpButton)
       if yBestAddr < 0 and p5JumpButton == "a" then
         print("STATUS_PHASE5:No Y with A-button, retrying with B-button")
-        p5JumpButton = "b"; doSavestate("load", p1BaselineState)
+        p5JumpButton = "b"; doSavestate("load", LEVEL_STATE)
         p5JumpCount = 0; sub = "find_y_land"; return
       end
-      p5TestIdx = 1; sub = "run_test"; return
+      -- Y detection done. Reload LEVEL_STATE for input sanity check.
+      doSavestate("load", LEVEL_STATE)
+      p5FrameN = 0; sub = "sanity_settle"; return
     end
     return
   end
 
+  -- ----------------------------------------------------------------
+  -- INPUT SANITY CHECK: verify emu.setInput reaches the game.
+  -- Settle 60 frames, read X, press Right 10 frames, read X again.
+  -- If X didn't increase → INPUT_BROKEN: skip all physics tests.
+  -- ----------------------------------------------------------------
+  if sub == "sanity_settle" then
+    clearInput()
+    if ssPending then return end
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 60 then
+      p5SanityX1 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+      print("STATUS_PHASE5:SanitySettle done x=" .. p5SanityX1)
+      p5FrameN = 0; sub = "sanity_right"
+    end
+    return
+  end
+
+  if sub == "sanity_right" then
+    emu.setInput({right=true,left=false,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 10 then
+      clearInput()
+      local x2 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+      local dx = x2 - p5SanityX1
+      if dx > 128 then dx = dx - 256 end
+      if dx < -128 then dx = dx + 256 end
+      print("STATUS_PHASE5:SanityCheck right10 x_before=" .. p5SanityX1 ..
+            " x_after=" .. x2 .. " dx=" .. dx)
+      if dx <= 0 then
+        print("STATUS_PHASE5:INPUT_BROKEN emu.setInput not reaching game — skipping physics tests")
+        print("DATA_PHASE5:COMPLETE tests=0")
+        print("DATA_EXTRACTION:COMPLETE")
+        emu.stop(); return
+      end
+      print("STATUS_PHASE5:INPUT_VERIFIED")
+      p5TestIdx = 1; sub = "run_test"
+    end
+    return
+  end
+
+  -- ----------------------------------------------------------------
+  -- PHYSICS TESTS: load LEVEL_STATE per test, structured settle,
+  -- then inject inputs and record (X,Y) per frame.
+  -- ----------------------------------------------------------------
   if sub == "run_test" then
     if p5TestIdx > #P5_TESTS then
       print("DATA_PHASE5:COMPLETE tests=" .. (p5TestIdx - 1))
@@ -997,21 +1028,59 @@ local function runPhase5()
     sub = "wait_load"; return
   end
 
+  -- Structured settle step 1: 60 frames clearInput
   if sub == "wait_load" then
     clearInput()
     if ssPending then return end
     p5FrameN = p5FrameN + 1
-    -- 200-frame clearInput settle: handles walk-in animation (up to ~70 frames) plus
-    -- full velocity deceleration from any speed. p1BaselineState may have Mario
-    -- mid-jump or mid-walk-in; 200 frames guarantees landing + full stop.
-    if p5FrameN >= 200 then
-      local dbgX = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
-      local v57  = emu.read(0x0057, emu.memType.nesInternalRam)
-      local v58  = emu.read(0x0058, emu.memType.nesInternalRam)
-      local inp1 = P5_TESTS[p5TestIdx].inputFn(1)
-      print("STATUS_PHASE5:TestStart=" .. P5_TESTS[p5TestIdx].name ..
-            " x=" .. dbgX .. " vel=$57:" .. v57 .. ",$58:" .. v58 ..
-            " inp1_right=" .. tostring(inp1.right) .. " inp1_a=" .. tostring(inp1.a))
+    if p5FrameN >= 60 then
+      p5FrameN = 0; sub = "wait_load_left"
+    end
+    return
+  end
+
+  -- Structured settle step 2: Left 5 frames (cancel rightward inertia)
+  if sub == "wait_load_left" then
+    emu.setInput({right=false,left=true,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 5 then
+      p5FrameN = 0; sub = "wait_load_settle2"
+    end
+    return
+  end
+
+  -- Structured settle step 3: 60 more clearInput, snapshot X for stability check
+  if sub == "wait_load_settle2" then
+    clearInput()
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 60 then
+      p5XStable1 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+      p5FrameN = 0; sub = "wait_load_xstable"
+    end
+    return
+  end
+
+  -- Structured settle step 4: 30-frame X stability check; log instability but proceed
+  if sub == "wait_load_xstable" then
+    clearInput()
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 30 then
+      local x2 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+      local dx = x2 - p5XStable1
+      if dx > 128 then dx = dx - 256 end
+      if dx < -128 then dx = dx + 256 end
+      local test = P5_TESTS[p5TestIdx]
+      if math.abs(dx) > 1 then
+        print("STATUS_PHASE5:UNSTABLE test=" .. test.name ..
+              " x1=" .. p5XStable1 .. " x2=" .. x2 .. " dx=" .. dx)
+      end
+      local v57 = emu.read(0x0057, emu.memType.nesInternalRam)
+      local v58 = emu.read(0x0058, emu.memType.nesInternalRam)
+      print("STATUS_PHASE5:TestStart=" .. test.name ..
+            " x=" .. x2 .. " vel=$57:" .. v57 .. ",$58:" .. v58 ..
+            " inp1_right=" .. tostring(test.inputFn(1).right) ..
+            " inp1_a="     .. tostring(test.inputFn(1).a))
       p5FrameN = 0; sub = "run_test_frames"
     end
     return
@@ -1030,6 +1099,10 @@ local function runPhase5()
     -- Read player position directly from RAM — two bytes, no OAM, no drift.
     local px = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
     local py = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or 0
+    -- Debug: log X every 10 frames for WALK_RIGHT to diagnose input injection issues
+    if test.name == "WALK_RIGHT" and p5FrameN % 10 == 0 then
+      print("STATUS_PHASE5:WALK_RIGHT_DBG frame=" .. p5FrameN .. " x=" .. px)
+    end
     table.insert(p5Positions, px .. "," .. py)
     return
   end
