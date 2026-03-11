@@ -1,6 +1,44 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-10 (Session 11d)
+**Last updated:** 2026-03-11 (Session 11e)
+
+---
+
+## What Just Happened (Session 11e)
+
+### Phase 5: Deep Debugging — Unresolved, Deferred to Session 12
+
+Session 11e focused entirely on Phase 5 physics sampling. Despite significant debugging effort, the core Phase 5 issue remains unresolved. **Phases 1-4 are unaffected and continue to work.**
+
+**Changes made this session:**
+
+1. **Round-trip Y detection** (replaces dual-snapshot approach):
+   - Press jump for 5 frames, snapshot at frame 15 (peak), snapshot at frame 60 (landing)
+   - Select address where value DECREASED at peak AND RETURNED to ±2 of baseline at landing
+   - Zero-page-first two-pass to avoid false positives from page-3+ tile/level data
+   - This is the correct algorithm — clean, deterministic, no heuristics
+
+2. **APU capture**: `DATA_APU` per Phase 4 state and `DATA_APU_FRAME` alongside `DATA_OAM_FRAME` ✅ working
+
+3. **Orchestrator**: parses `DATA_APU`, `DATA_APU_FRAME`, `DATA_CANDIDATES` lines; writes apu-frames.json ✅
+
+4. **Phase 1 settle improvement**: After 120 clearInput frames, added Left press for 5 frames + 60 more clearInput frames to cancel any rightward momentum before saving BASELINE. Also logs `STATUS_PHASE1:BASELINE saved ... x=NNN` for position tracking.
+
+5. **PHYSICS_BASE concept**: Introduced in Phase 4 (saves a state when game loads a level naturally). Ultimately not used for Phase 5 — the captured state still had residual walk-in velocity.
+
+**Phase 5 symptoms observed:**
+
+| Attempt | LEVEL_STATE | Settle | Result |
+|---------|-------------|--------|--------|
+| Original (Session 11d) | p1BaselineState | 60f clearInput | $57=24, all tests identical rightward |
+| PHYSICS_BASE approach | PHYSICS_BASE | 60f clearInput | $57=30, all tests identical rightward |
+| BASELINE + counter-momentum | BASELINE | 120f clearInput | $57=240, all tests identical leftward (castle walk animation) |
+| p1BaselineState + long settle | p1BaselineState | 200f clearInput | x frozen at 138 for all tests, WALK_RIGHT doesn't move Mario |
+
+**Root causes identified:**
+1. **Flagpole contamination**: Phase 1's directional test (Right 10 frames) pushes Mario toward the flagpole in SMB1's World 1-1. At frame 710, Mario has walked deep into the level. The Right press in the control test moves Mario from ~x=141 to ~x=177 (the flagpole). After that, BASELINE captures Mario in the castle walk animation where game ignores all input.
+2. **Input injection uncertainty**: With p1BaselineState + 200-frame clearInput settle, x stays at 138 for ALL 6 tests including WALK_RIGHT (right=true every frame). Either emu.setInput isn't reaching the game during savestate-restored gameplay, OR Mario is in a state where input is ignored (walk-in, pause, etc.).
+3. **Y detection**: Round-trip found 0x009F with delta=-2 (wrong; correct is 0x00CE with delta~-60). The tiny delta suggests Mario can't actually jump from the settlement state — either blocked against a wall (x=138 in World 1-1 might be at a pipe or block) or still in an animated state.
 
 ---
 
@@ -26,20 +64,6 @@ Replaced OAM proximity tracking in Phase 5 with direct RAM reads.
 | MM2 | 0x0023 | y_delta=0 | unknown | ❌ jump test found no Y change |
 | Contra | 0x0100 | 0x0028 | unknown | uncertain |
 
-**Iterations to get here:**
-- Exact-delta X matching: 0 candidates (OAM slot ≠ Mario's main body; camera scroll complicates delta)
-- Direction matching: found 0x0086 ✓
-- Phase 1 Y stability filter: found 0x00EA (wrong — refSlotY heuristic picked wrong address)
-- Jump test with BASELINE: found timer (pipe animation broke jump)
-- Jump test with p1BaselineState: found timer (0x000A/0x000D had larger delta than 0x00CE)
-- base>128 filter: found 0x00CE ✓ (timers have base=128, player Y has base=160)
-
-**Known issues for next session:**
-1. JUMP_TAP and JUMP_HOLD produce identical arcs — variable-height jump mechanic not captured (A-hold during ascent)
-2. WALK_RIGHT Y reaches 110 (pipe entrance) — physics test records into pipe if Mario walks that far
-3. MM2 Y detection: y_delta=0 (jump test found no Y change — likely MM2 jump timing or non-zero-page Y)
-4. Contra X at 0x0100 (page 1 RAM) needs cross-validation against known address
-
 ---
 
 ## What Just Happened (Session 11c)
@@ -63,74 +87,6 @@ After bidirectional control confirmation, wait 120 frames with cleared input bef
 ### Fix 3: Phase 5 sprite tracking ❌ NOT RESOLVED
 Implemented mini bidirectional test (same logic as Phase 1) to uniquely identify player sprite per test. Code is in the file but has a runtime issue causing complete silence (no Phase 1 output either). Reverted concept, deferred to Session 12.
 
-**Root cause of all Phase 5 failures:** The player sprite cannot be reliably identified via OAM proximity alone. All three games showed the tracker latching onto non-player entities:
-- SMB: Goomba walks into player spawn area during warmup, sits at distance 6 from centroid vs Mario's tiles at distance 8
-- MM2: Tracker latched onto a static HUD/score element at (61,40)
-- Contra: Tracker latched onto static element at (44,154)
-
-**Correct fix for Session 12:** Correlate OAM movement with RAM writes during the Phase 1 control test to identify the exact RAM addresses holding player X/Y. Use those RAM addresses directly in Phase 5 instead of OAM proximity. This approach is game-agnostic and definitive.
-
----
-
-## What Just Happened (Sessions 11a + 11b)
-
-### Pre-Session Housekeeping (11a)
-- `claude.md` updated with manifest architecture (Decisions 85-88), unified engine + 7 rendering modes, extraction pipeline status, Mesen2 API reference, revised generation flow
-- `decisions-log.md` merged with Session 10 additions (Decisions 85-88)
-- Decision numbering corrected in `universal-extraction-spec.md` (83-86 → 85-88)
-
-### Mesen2 Lua API Verified (11a)
-Critical API findings from source code analysis:
-- **Savestates:** `emu.createSavestate()` / `emu.loadSavestate(state)` — NOT `saveSavestate`. Returns binary string, not slot-based. **Only callable from exec memory callbacks**, not from startFrame or top-level script.
-- **Workaround:** Register exec callback on demand via `emu.addMemoryCallback()`, do savestate op, unregister via `emu.removeMemoryCallback()`. Confirmed working.
-- **Read/write/setInput:** Work from ANY callback including startFrame. No constraint.
-- **Memory types:** `emu.memType.nesInternalRam` for CPU RAM writes, `nesSpriteRam` for OAM, `nesNametableRam`, `nesPaletteRam`, `nesChrRam`/`nesChrRom` all confirmed.
-- **Input format:** `emu.setInput({a=true, b=false, ...}, 0)` — lowercase button names, port 0.
-
-### Extraction Pipeline Built (11a + 11b)
-Built `tools/extraction-enumerator.lua` — a 600+ line Mesen2 Lua script implementing all 5 extraction phases as a state machine driven by startFrame callbacks with exec callbacks for savestate operations.
-
-**Phase 1 — Boot to Gameplay: ✅ WORKING**
-- Bidirectional control test: press Right 10 frames, press Left 10 frames, check if any OAM sprite moved in both directions
-- Alternates Start and A presses between tests to advance past menus
-- Results: SMB ✅ (frame 710), Mega Man 2 ✅ (frame 639), Contra ✅ (frame 284), Zelda ❌ (timeout — stuck on name-entry screen)
-- Known issue: BASELINE can be contaminated if captured mid-jump (the A press in the control test cycle can trigger a jump). Needs a "settle" period after control confirmation.
-
-**Phase 2 — RAM Candidate Identification: ✅ WORKING**
-- Snapshots RAM 5 times over 300 frames, classifies bytes as constant/ticker/volatile
-- SMB: 54 volatile candidates identified
-- Known architectural issue: level-switching variables (like SMB's 0x075C/0x075F) are CONSTANT during gameplay and get filtered out. Phase 2's volatility filter is counterproductive for the very variables we most want to find. Fix needed: add a second sweep of ALL 2048 addresses (or at minimum, addresses in the $0700-$07FF region where NES games commonly store game state).
-
-**Phase 3 — Mutation Sweep: ✅ STRUCTURALLY WORKING**
-- Batched restores per address (~200 restores total, not ~51,200)
-- SMB: found 2 content variables (0x06D4, 0x073D) with unique VRAM hashes > 30
-- Missed the primary level variables (0x075C, 0x075F) due to Phase 2 filtering issue above
-- Tuning: `P3_UNIQUE_THRESHOLD` raised from 3 to 30 to filter noise
-- CHR-ROM caching added (capture once, not per-state) — major Phase 4 speedup
-
-**Phase 4 — Deep Enumeration: ✅ STRUCTURALLY WORKING**
-- Captures full state (RAM, VRAM, nametable, palette, OAM, CHR, PPUCTRL) per unique VRAM state
-- Records OAM every 10 frames for 300 frames (enemy behavior observation)
-- Currently captures data for Phase 3's found variables; will capture more once Phase 2 filtering is fixed
-
-**Phase 5 — Physics Sampling: ⚠️ STRUCTURALLY COMPLETE, DATA UNRELIABLE**
-- All 6 test sequences run (WALK_RIGHT, FRICTION, JUMP_TAP, JUMP_HOLD, RUNNING_JUMP, DUCK)
-- Position capture works (X movement confirmed during walk tests)
-- Known issues:
-  - All tests produce identical trajectories (input sequencing not correctly differentiating between tests)
-  - BASELINE contamination (captured mid-jump) corrupts starting state for all tests
-  - OAM slot multiplexing: SMB cycles 3 sprites through same OAM slot on alternating frames, making position tracking noisy
-
-### Supporting Scripts Built (11a)
-- `tools/orchestrator.js` — Node.js wrapper that spawns Mesen2, captures stdout, parses DATA_ lines into JSON
-- `tools/physics-derivation.js` — reads position arrays, derives gravity/walk speed/jump velocity/friction
-- Several diagnostic test scripts (`test-exec-callback.lua`, `test-savestate-callback.lua`, `test-readwrite-callback.lua`, `test-jump.lua`)
-
-### Decisions Made (11b, recorded by Claude Code)
-- **Decision 89:** Bidirectional control test as primary gameplay detector (replaces passive heuristics)
-- **Decision 90:** Phase 2 filtering needs full-address sweep to catch constant-during-gameplay level variables
-- **Decision 91:** BASELINE needs settle period after control confirmation to avoid mid-action contamination
-
 ---
 
 ## Current Repo State
@@ -140,11 +96,11 @@ Built `tools/extraction-enumerator.lua` — a 600+ line Mesen2 Lua script implem
 giants-drink/
   claude.md                              ← Updated Session 11a (manifest architecture)
   tools/
-    extraction-enumerator.lua            ← NEW: main extraction script (P1-P5, ~600 lines)
-    orchestrator.js                      ← NEW: Node.js Mesen2 runner + stdout parser
+    extraction-enumerator.lua            ← Main extraction script (~1090 lines; Phase 5 marked WIP)
+    orchestrator.js                      ← Node.js Mesen2 runner + stdout parser (APU support added)
     physics-derivation.js                ← NEW: position data → physics constants
     extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (Session 8)
-    mesen-extract.lua                    ← Single-frame capture (Sessions 9-10, superseded by extraction-enumerator.lua)
+    mesen-extract.lua                    ← Single-frame capture (Sessions 9-10, superseded)
     render-screen.js                     ← NES screen renderer (Sessions 9-10)
     test-exec-callback.lua               ← Diagnostic
     test-savestate-callback.lua          ← Diagnostic
@@ -177,16 +133,27 @@ giants-drink/
 
 ## What's Next
 
-### Immediate: Session 12 — Fix Physics Test Quality Issues
+### Session 12 — Phase 5 Debugging (Fresh Context)
 
-**Phase 5 RAM correlation: ✅ DONE (Session 11d)**
+Phase 5 needs focused debugging with a clean context window. Key investigation tasks:
 
-Remaining Phase 5 issues to fix:
+**A. Diagnose emu.setInput in Phase 5:**
+- Add debug: print x every 10 frames inside run_test_frames for WALK_RIGHT
+- Verify: does x change AT ALL during the test? If not → emu.setInput issue
+- Check: read SMB1's game mode register ($000E) to verify game is in play state (0x08), not pause/transition
 
-1. **JUMP_TAP vs JUMP_HOLD identical** — A-hold mechanism needs investigation. Possibly: the jump needs to be initiated while A is held from frame 1 (not set A=true then game processes on a later frame). Or: A=hold only matters for the ascending portion and the test window needs adjustment.
-2. **WALK_RIGHT entering pipe** — physics test records past pipe entrance. Fix: reduce test frames OR confirm Mario's starting position doesn't lead to pipe.
-3. **MM2 Y detection fails** — y_delta=0. Options: extend the jump detection window (snapshot at frame 20 not 10), or try pressing A for more frames, or MM2's player Y may be a compound register.
-4. **Validate MM2 and Contra addresses** — cross-reference against known ROM data or manually check.
+**B. Fix BASELINE contamination (flagpole issue):**
+- Phase 1's control test Right-press is pushing Mario to World 1-1's flagpole (~x=177) by the time control is confirmed at cycle 10
+- Fix: after control confirmation, reload p1BaselineState (pre-directional-test state) and do a SHORT settle (30-60 frames) from there, instead of settling from the post-flagpole position
+- This guarantees BASELINE is in the safe starting area
+
+**C. Y detection with round-trip:**
+- Round-trip algorithm is correct but found 0x009F (delta=-2) instead of 0x00CE (delta~-60)
+- Mario can't jump from the current settle state (frozen at x=138, likely against a wall)
+- Fix: use the corrected BASELINE (from fix B) and verify Mario can actually jump
+
+**D. Validate SMB1 game state address:**
+- Read $000E (or $0770 — SMB1's area/mode register) at the start of each test to confirm game is in playable mode
 
 ### Session 13: Zelda/RPG Boot Fix + 12-Game Battery
 
@@ -205,9 +172,10 @@ Remaining Phase 5 issues to fix:
 
 ## Key Open Questions
 
-1. **Phase 2 full-address sweep timing:** Sweeping all 2048 addresses × 256 values × 3 frames = significant time. May need sampling (every 4th value) or targeted address ranges. Test empirically.
-2. **Zelda name-entry navigation:** Need to add directional + A input pattern to get past file select. Similar issue expected for Final Fantasy, Dragon Quest, and other RPGs with character creation.
-3. **OAM slot multiplexing:** SMB cycles 3 sprites through the same slot. Need a tracking approach that follows the player sprite by position continuity rather than fixed OAM slot index.
-4. **SNES ROM set acquisition** — needed for Session 13+
-5. **Game Genie code database** — needed for infinite-lives during extraction
-6. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)
+1. **emu.setInput during Phase 5**: Does input injection work correctly after loadSavestate? The Phase 5 data strongly suggests it doesn't — WALK_RIGHT (right=true every frame) fails to move Mario. Possible fix: inject input via exec callbacks (fires during NES execution) rather than startFrame callbacks.
+2. **BASELINE contamination**: Phase 1's many cycles navigate deep into levels before confirming control. At cycle 10 in SMB1 (frame 710), Mario is at ~x=141 and the Right-press test moves him to the flagpole. Need to reload p1BaselineState after confirmation to avoid this.
+3. **Zelda name-entry navigation:** Need to add directional + A input pattern to get past file select. Similar issue expected for Final Fantasy, Dragon Quest, and other RPGs with character creation.
+4. **OAM slot multiplexing:** SMB cycles 3 sprites through the same slot. Need a tracking approach that follows the player sprite by position continuity rather than fixed OAM slot index.
+5. **SNES ROM set acquisition** — needed for Session 13+
+6. **Game Genie code database** — needed for infinite-lives during extraction
+7. Meta-game specification — flagged as needing its own thread (Decision 70, unchanged)

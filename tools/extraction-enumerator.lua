@@ -135,6 +135,18 @@ local function clearInput()
                 a=false,b=false,start=false,select=false}, 0)
 end
 
+-- Read all 24 NES APU register bytes ($4000-$4017) via the CPU debug bus.
+-- Most registers are write-only on real hardware; emulator shadow registers may
+-- return non-zero. $4015 (channel enable/status) is always readable.
+local function readApuHex()
+  local parts = {}
+  for addr = 0x4000, 0x4017 do
+    local ok, v = pcall(function() return emu.read(addr, emu.memType.nesDebug) end)
+    table.insert(parts, string.format("%02x", (ok and v) or 0))
+  end
+  return table.concat(parts)
+end
+
 -- ============================================================
 -- GLOBAL STATE
 -- ============================================================
@@ -187,8 +199,11 @@ local p4ValIdx  = 1
 local p4OamCount = 0
 local p4NextOam = 0
 local p4Captured = 0
-local LEVEL_CAND = nil  -- {addr, val} for physics phase
-local p4ChrCache = nil  -- {hex, sz, src} — CHR-ROM is fixed; capture once
+local LEVEL_CAND  = nil  -- {addr, val} for physics phase
+local PHYSICS_BASE = nil  -- savestate captured inside Phase 4 when level is playable;
+                           -- game loaded level itself → Mario at spawn with zero velocity.
+                           -- Used as the base state for Phase 5 physics tests.
+local p4ChrCache  = nil  -- {hex, sz, src} — CHR-ROM is fixed; capture once
 
 -- Phase 5
 local LEVEL_STATE   = nil
@@ -198,28 +213,35 @@ local p5Positions   = {}
 local p5RamBase     = {}   -- RAM snapshot at BASELINE before jump (for Y detection)
 local p5RamJump     = {}   -- RAM snapshot ~10 frames into A-hold jump (near peak)
 local p5JumpCount   = 0    -- frame counter for Y-detection jump
+local p5JumpButton  = "a"  -- button for Y detection: "a" first; retries "b" if Y not found
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
 local P5_TESTS = {
-  { name="WALK_RIGHT",   frames=120, inputFn=function(f)
+  -- WALK_RIGHT: 60 frames (reaches max speed in ~20; stops before any pipe at level start)
+  { name="WALK_RIGHT",   frames=60,  inputFn=function(f)
       return {right=true,left=false,up=false,down=false,a=false,b=false,start=false,select=false}
     end },
-  { name="FRICTION",     frames=120, inputFn=function(f)
-      local r = (f <= 60)
+  -- FRICTION: 30 frames Right + 30 frames release = 60 total
+  { name="FRICTION",     frames=60,  inputFn=function(f)
+      local r = (f <= 30)
       return {right=r,left=false,up=false,down=false,a=false,b=false,start=false,select=false}
     end },
-  { name="JUMP_TAP",     frames=90,  inputFn=function(f)
+  -- JUMP_TAP: A for exactly 1 frame then release (short hop if game supports variable jump)
+  { name="JUMP_TAP",     frames=60,  inputFn=function(f)
       return {right=false,left=false,up=false,down=false,a=(f==1),b=false,start=false,select=false}
     end },
-  { name="JUMP_HOLD",    frames=90,  inputFn=function(f)
-      return {right=false,left=false,up=false,down=false,a=(f<=30),b=false,start=false,select=false}
+  -- JUMP_HOLD: A held for the ENTIRE duration (max-height jump)
+  { name="JUMP_HOLD",    frames=60,  inputFn=function(f)
+      return {right=false,left=false,up=false,down=false,a=true,b=false,start=false,select=false}
     end },
-  { name="RUNNING_JUMP", frames=120, inputFn=function(f)
-      local a = (f <= 30)
+  -- RUNNING_JUMP: Right+A for 20 frames, then Right only for 30 frames = 50 total
+  { name="RUNNING_JUMP", frames=50,  inputFn=function(f)
+      local a = (f <= 20)
       return {right=true,left=false,up=false,down=false,a=a,b=false,start=false,select=false}
     end },
-  { name="DUCK",         frames=60,  inputFn=function(f)
-      return {right=false,left=false,up=false,down=(f<=30),a=false,b=false,start=false,select=false}
+  -- DUCK: hold Down for all 20 frames
+  { name="DUCK",         frames=20,  inputFn=function(f)
+      return {right=false,left=false,up=false,down=true,a=false,b=false,start=false,select=false}
     end },
 }
 
@@ -456,14 +478,36 @@ local function runPhase1()
     return
   end
 
-  -- ---- SETTLE (120 frames): release all inputs, let player land and reach idle state ----
-  -- The A press from Phase 1 control tests can trigger a jump, leaving the player mid-air
-  -- or in a pipe animation. BASELINE must be saved at a neutral ground state so all
-  -- Phase 5 physics tests start from a known, controllable position.
+  -- ---- SETTLE (120 + 5 + 60 frames): clear inputs, counter-momentum, final rest ----
+  -- Phase 1 control tests can leave Mario mid-jump or with residual horizontal velocity.
+  -- After 120 clearInput frames (landing + rough decel), press Left for 5 frames to cancel
+  -- any rightward $57 carry-over, then wait 60 more clearInput frames for full stop.
+  -- BASELINE is saved with Mario guaranteed stationary.
   if sub == "settle_wait" then
     clearInput()
     p1HoldCount = p1HoldCount + 1
     if p1HoldCount >= 120 then
+      p1HoldCount = 0
+      sub = "settle_left"
+    end
+    return
+  end
+
+  if sub == "settle_left" then
+    emu.setInput({right=false,left=true,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 5 then
+      p1HoldCount = 0
+      sub = "settle_final"
+    end
+    return
+  end
+
+  if sub == "settle_final" then
+    clearInput()
+    p1HoldCount = p1HoldCount + 1
+    if p1HoldCount >= 60 then
       doSavestate("save")
       p1HoldCount = 0
       sub = "settle_save"
@@ -514,7 +558,8 @@ local function runPhase1()
     local yStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
     print("STATUS_PHASE1:PlayerRAM x_addr=" .. xStr .. " y_addr=" .. yStr ..
           " y_after_settle=" .. #yFinal)
-    print("STATUS_PHASE1:BASELINE saved at frame=" .. frame)
+    local baseX = (p1PlayerXAddr >= 0) and emu.read(p1PlayerXAddr, emu.memType.nesInternalRam) or -1
+    print("STATUS_PHASE1:BASELINE saved at frame=" .. frame .. " x=" .. baseX)
     print("DATA_PHASE1:COMPLETE frame=" .. frame)
     phase = 2; sub = "init"
     return
@@ -707,6 +752,9 @@ local function p4CaptureState(addr, val)
   print("DATA_PPUCTRL:" .. aStr ..
         " ctrl=0x" .. string.format("%02X", ctrl) ..
         " mask=0x" .. string.format("%02X", mask))
+  -- APU registers $4000-$4017 (24 bytes). Most are write-only on real hardware;
+  -- emulator shadow state may return non-zero. $4015 (channel enable) is always readable.
+  print("DATA_APU:" .. aStr .. " data=" .. readApuHex())
 end
 
 local function p4IsPlayable()
@@ -763,7 +811,22 @@ local function runPhase4()
     p4Captured = p4Captured + 1
     if LEVEL_CAND == nil and p4IsPlayable() then
       LEVEL_CAND = {addr=cv.addr, val=val}
+      -- Save PHYSICS_BASE here: the game loaded this level normally, so Mario is at
+      -- his spawn point with zero velocity (not contaminated by our control-test inputs).
+      -- This is a much cleaner starting point for physics tests than p1BaselineState.
+      doSavestate("save")
+      sub = "save_physics_base"; return
     end
+    p4OamCount = 0; p4NextOam = frame
+    sub = "record_oam"; return
+  end
+
+  if sub == "save_physics_base" then
+    if ssPending then return end
+    PHYSICS_BASE = ssResult
+    print("STATUS_PHASE4:PHYSICS_BASE saved at frame=" .. frame)
+    local cv  = p3CVars[p4CvIdx]
+    local val = cv.values[p4ValIdx]
     p4OamCount = 0; p4NextOam = frame
     sub = "record_oam"; return
   end
@@ -775,6 +838,8 @@ local function runPhase4()
       print("DATA_OAM_FRAME:addr=0x" .. string.format("%04X", cv.addr) ..
             " value=" .. val .. " frame=" .. p4OamCount ..
             " data=" .. readHex(emu.memType.nesSpriteRam, 0, 256))
+      print("DATA_APU_FRAME:addr=0x" .. string.format("%04X", cv.addr) ..
+            " value=" .. val .. " frame=" .. p4OamCount .. " data=" .. readApuHex())
       p4OamCount = p4OamCount + 1
       p4NextOam  = frame + CFG.P4_OAM_INTERVAL
     end
@@ -786,11 +851,46 @@ local function runPhase4()
 end
 
 -- ============================================================
--- PHASE 5: PHYSICS SAMPLING
+-- PHASE 5: PHYSICS SAMPLING  *** WIP — BROKEN AS OF SESSION 11e ***
 --
--- Uses RAM addresses found in Phase 1 (p1PlayerXAddr, p1PlayerYAddr) for direct,
--- drift-free position reads. No OAM scanning or proximity tracking needed.
--- Two bytes per frame. Immune to sprite multiplexing.
+-- STATUS: Phases 1-4 are validated and working. Phase 5 has unresolved issues.
+-- DO NOT rely on Phase 5 data from the current implementation.
+--
+-- WHAT WORKS:
+--   - X address detection (Phase 1 bidirectional RAM correlation) ✅
+--   - Y detection approach: round-trip filter (press jump for 5 frames, snapshot at
+--     frame 15, snapshot at frame 60, find address that decreased AND returned to ±2
+--     of original) ✅ correct algorithm
+--   - Zero-page-first two-pass (prevents page-3+ false positives) ✅
+--   - APU register capture alongside physics positions ✅
+--
+-- KNOWN BROKEN:
+--   1. Y detection finds wrong address (0x009F, delta=-2 instead of 0x00CE, delta=-60).
+--      Root cause: Mario cannot jump from p1BaselineState — either blocked or still in
+--      walk-in animation after the 200-frame clearInput settle. Small noise delta passes
+--      the round-trip filter.
+--   2. All 6 physics tests produce IDENTICAL position trajectories (x frozen at 138 for
+--      all tests including WALK_RIGHT with right=true pressed every frame).
+--      Root cause: emu.setInput() may not reach the game during savestate-restored
+--      gameplay. Needs investigation — either the input injection timing is wrong, or
+--      Mario is in a state where the game overrides all input (walk-in, pipe animation,
+--      pause, etc.) after the 200-frame settle.
+--   3. BASELINE capture: Phase 1's control-test directional movement (Right 10 frames)
+--      can push Mario to the level's flagpole (World 1-1 in SMB), triggering a
+--      level-complete animation that makes the game non-interactive for all subsequent
+--      frames. Counter-momentum fix (Left 5 frames + 60 clearInput) is in Phase 1 settle
+--      but doesn't prevent this because the flagpole is hit BEFORE the settle starts.
+--
+-- INVESTIGATION NEEDED FOR SESSION 12:
+--   A. Add debug: in Phase 5 run_test_frames, print x every 10 frames for WALK_RIGHT.
+--      Verify if x changes at all. If not, emu.setInput issue. If yes, x detection issue.
+--   B. Check emu.setInput: does it work inside startFrame callbacks after loadSavestate?
+--      Known from Session 11a: should work. But Phase 5 results contradict this.
+--   C. Alternative: use emu.addMemoryCallback (exec type) instead of startFrame for
+--      input injection — exec fires during NES execution, guaranteeing input is set
+--      before the controller latch read.
+--   D. Check what state the game is in during Phase 5 tests: read $0E (SMB1 game mode)
+--      to see if it's 0x08 (gameplay) or some other mode (pause, title, etc.)
 -- ============================================================
 
 local function runPhase5()
@@ -803,14 +903,19 @@ local function runPhase5()
   end
 
   if sub == "init" then
-    -- Use p1BaselineState for both Y detection and physics tests.
-    -- p1BaselineState is captured before hold_right/hold_left walked Mario into
-    -- the pipe area — at that point Mario is near the level start, jumpable.
-    -- BASELINE has Mario in a pipe transition (entered during the 120-frame
-    -- settle after the bidirectional test ran Mario far right) and is not usable.
+    -- LEVEL_STATE: base state for physics tests.
+    -- Prefer PHYSICS_BASE (captured in Phase 4 when the game loaded a level naturally —
+    -- Mario spawns with zero velocity, no contamination from our control-test inputs).
+    -- Fall back to p1BaselineState if Phase 4 didn't find a playable state (e.g. games
+    -- with no Phase 3 content variables).
+    -- Use p1BaselineState: captured right before the bidirectional test that confirmed
+    -- control. The game is GUARANTEED interactive from this state (the test proved it).
+    -- Using BASELINE risks capturing Mario in a level-complete or walk-in state if the
+    -- control-test directional movement triggered a flagpole/pipe/staircase transition.
     LEVEL_STATE = p1BaselineState
     print("STATUS_PHASE5:x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
-          " starting Y detection via jump test (using p1BaselineState)")
+          " level_state=p1BaselineState" ..
+          " starting Y detection via round-trip jump test")
     doSavestate("load", p1BaselineState)
     p5JumpCount = 0; sub = "find_y_land"; return
   end
@@ -824,65 +929,58 @@ local function runPhase5()
     clearInput()
     if ssPending then return end   -- wait for loadstate
     p5JumpCount = p5JumpCount + 1
-    if p5JumpCount >= 20 then
-      -- Mario should have landed by now; snapshot ground state
+    if p5JumpCount >= 30 then
+      -- Player should have landed by now; snapshot ground state.
+      -- 30 frames gives slower-starting games (e.g. MM2) time to reach idle state.
       for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
       p5JumpCount = 0; sub = "find_y_jump"
     end
     return
   end
 
+  -- ---- FIND Y (round-trip): hold jump for 5 frames, snapshot peak at frame 15,
+  -- snapshot landing at frame 60, then select address that DECREASED at peak AND
+  -- RETURNED within ±2 at landing. Round-trip eliminates timers, counters, and
+  -- everything that changes during a jump but doesn't return to its starting value.
   if sub == "find_y_jump" then
     p5JumpCount = p5JumpCount + 1
     emu.setInput({right=false,left=false,up=false,down=false,
-                  a=true,b=false,start=false,select=false}, 0)
-    if p5JumpCount == 10 then
-      -- Snapshot near jump peak — player Y should be well off the ground
+                  a=(p5JumpCount<=5 and p5JumpButton=="a"),
+                  b=(p5JumpCount<=5 and p5JumpButton=="b"),
+                  start=false,select=false}, 0)
+    if p5JumpCount == 15 then
       for i = 0, 2047 do p5RamJump[i] = emu.read(i, emu.memType.nesInternalRam) end
-    elseif p5JumpCount > 15 then
+    elseif p5JumpCount == 60 then
       clearInput()
-      -- Find zero-page address with the largest negative (upward) change during jump.
-      -- Filter: base value must be > 128. Game ground positions are in the lower
-      -- screen portion (Y > 128 in NES coordinates where 0=top, 239=bottom). Frame
-      -- counters and timers typically cycle through 0-128 range and are excluded by
-      -- this filter. Tiebreaker: largest base value (player on ground = large Y).
-      local yBestAddr = -1
-      local yBestDelta = 0
-      local yBestBase  = 0
-      for addr = 0, 255 do
-        local base = p5RamBase[addr]
-        if base > 128 then  -- only consider plausible ground-Y range
-          local d = p5RamJump[addr] - base
-          if d > 128  then d = d - 256 end
-          if d < -128 then d = d + 256 end
-          if d < yBestDelta or
-             (d == yBestDelta and base > yBestBase) then
-            yBestDelta = d; yBestBase = base; yBestAddr = addr
-          end
+      -- Snapshot landing state (full 2048 bytes) for round-trip comparison.
+      local land = {}
+      for i = 0, 2047 do land[i] = emu.read(i, emu.memType.nesInternalRam) end
+      local yBestAddr = -1; local yBestDelta = 0
+      local function tryRoundTrip(i)
+        local dPeak = p5RamJump[i] - p5RamBase[i]
+        if dPeak > 128 then dPeak = dPeak - 256 elseif dPeak < -128 then dPeak = dPeak + 256 end
+        local dLand = land[i] - p5RamBase[i]
+        if dLand > 128 then dLand = dLand - 256 elseif dLand < -128 then dLand = dLand + 256 end
+        if dPeak < 0 and math.abs(dLand) <= 2 and dPeak < yBestDelta then
+          yBestDelta = dPeak; yBestAddr = i
         end
       end
+      -- Zero-page first (0x00-0xFF): player Y is almost always in zero page on NES.
+      -- Only expand to full 2048 if zero page yields nothing — avoids false positives
+      -- from page-3+ addresses that happen to pass the round-trip filter.
+      for i = 0, 255 do tryRoundTrip(i) end
+      if yBestAddr < 0 then
+        for i = 256, 2047 do tryRoundTrip(i) end
+      end
       p1PlayerYAddr = yBestAddr
-      local yStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
+      local yStr = (yBestAddr >= 0) and string.format("0x%04X", yBestAddr) or "none"
       print("STATUS_PHASE5:PlayerRAM x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
-            " y_addr=" .. yStr .. " y_delta=" .. yBestDelta)
-      -- Debug: dump the 5 most-negative-delta zero-page addresses to diagnose Y detection
-      local debugList = {}
-      for addr = 0, 255 do
-        local d = p5RamJump[addr] - p5RamBase[addr]
-        if d > 128  then d = d - 256 end
-        if d < -128 then d = d + 256 end
-        if d < -5 then debugList[#debugList+1] = {addr=addr, d=d, base=p5RamBase[addr]} end
+            " y_addr=" .. yStr .. " y_delta=" .. yBestDelta .. " button=" .. p5JumpButton)
+      if yBestAddr < 0 and p5JumpButton == "a" then
+        print("STATUS_PHASE5:No Y with A-button, retrying with B-button")
+        p5JumpButton = "b"; doSavestate("load", p1BaselineState)
+        p5JumpCount = 0; sub = "find_y_land"; return
       end
-      table.sort(debugList, function(a, b)
-        if a.d ~= b.d then return a.d < b.d end
-        return a.base > b.base
-      end)
-      local dbParts = {}
-      for i = 1, math.min(8, #debugList) do
-        local e = debugList[i]
-        dbParts[i] = string.format("0x%02X(b=%d,d=%d)", e.addr, e.base, e.d)
-      end
-      print("STATUS_PHASE5:JumpCands=" .. table.concat(dbParts, " "))
       p5TestIdx = 1; sub = "run_test"; return
     end
     return
@@ -902,11 +1000,18 @@ local function runPhase5()
   if sub == "wait_load" then
     clearInput()
     if ssPending then return end
-    -- 60-frame settle: lets Mario land from any mid-air state AND fully
-    -- decelerate from residual horizontal velocity in p1BaselineState.
-    -- SMB1 takes ~45 frames to decelerate from full speed to stopped.
     p5FrameN = p5FrameN + 1
-    if p5FrameN >= 60 then
+    -- 200-frame clearInput settle: handles walk-in animation (up to ~70 frames) plus
+    -- full velocity deceleration from any speed. p1BaselineState may have Mario
+    -- mid-jump or mid-walk-in; 200 frames guarantees landing + full stop.
+    if p5FrameN >= 200 then
+      local dbgX = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+      local v57  = emu.read(0x0057, emu.memType.nesInternalRam)
+      local v58  = emu.read(0x0058, emu.memType.nesInternalRam)
+      local inp1 = P5_TESTS[p5TestIdx].inputFn(1)
+      print("STATUS_PHASE5:TestStart=" .. P5_TESTS[p5TestIdx].name ..
+            " x=" .. dbgX .. " vel=$57:" .. v57 .. ",$58:" .. v58 ..
+            " inp1_right=" .. tostring(inp1.right) .. " inp1_a=" .. tostring(inp1.a))
       p5FrameN = 0; sub = "run_test_frames"
     end
     return

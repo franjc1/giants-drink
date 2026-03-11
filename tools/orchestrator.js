@@ -109,7 +109,7 @@ function runMesen(romPath) {
           const truncated = (line.length > 100)
             ? `${line.slice(0, 100)}...(${line.length} chars)`
             : line;
-          if (!['DATA_RAM','DATA_CHR','DATA_VRAM','DATA_OAM','DATA_OAM_FRAME'].includes(key)) {
+          if (!['DATA_RAM','DATA_CHR','DATA_VRAM','DATA_OAM','DATA_OAM_FRAME','DATA_APU_FRAME'].includes(key)) {
             console.log('  ' + truncated);
           } else {
             const colon = line.indexOf(':');
@@ -241,7 +241,7 @@ function parseLines(lines, slug) {
             s => s.addr === addr && s.value === stateVal
           );
           if (!existing) {
-            const s = { addr, value: stateVal, oamFrames: [] };
+            const s = { addr, value: stateVal, oamFrames: [], apuFrames: [] };
             extraction.phase4.states.push(s);
             stateMap.set(mapKey, s);
           } else {
@@ -282,6 +282,43 @@ function parseLines(lines, slug) {
           frame: frameM ? parseInt(frameM[1]) : 0,
           data:  dataM  ? dataM[1] : '',
         });
+        break;
+      }
+
+      case 'DATA_APU': {
+        const { addr, val: stateVal } = parseAddrVal(val);
+        if (addr === null) break;
+        const mapKey = `${addr}-${stateVal}`;
+        const state  = stateMap.get(mapKey);
+        if (!state) break;
+        const dataM = val.match(/ data=([0-9a-f]*)$/);
+        state.apuRegisters = dataM ? dataM[1] : '';
+        break;
+      }
+
+      case 'DATA_APU_FRAME': {
+        const { addr, val: stateVal } = parseAddrVal(val);
+        if (addr === null) break;
+        const mapKey = `${addr}-${stateVal}`;
+        const state  = stateMap.get(mapKey);
+        if (!state) break;
+        if (!state.apuFrames) state.apuFrames = [];
+        const frameM = val.match(/frame=(\d+)/);
+        const dataM  = val.match(/ data=([0-9a-f]*)$/);
+        state.apuFrames.push({
+          frame: frameM ? parseInt(frameM[1]) : 0,
+          data:  dataM  ? dataM[1] : '',
+        });
+        break;
+      }
+
+      // Bulk candidate list (comma-separated hex addresses from Phase 2)
+      case 'DATA_CANDIDATES': {
+        const addrs = val.split(',').filter(Boolean);
+        for (const a of addrs) {
+          const m = a.match(/0x([0-9A-Fa-f]+)/);
+          if (m) extraction.phase2.candidates.push(parseInt(m[1], 16));
+        }
         break;
       }
 
@@ -358,6 +395,11 @@ function saveExtraction(extraction, outDir) {
         JSON.stringify(state.oamFrames, null, 2));
       state.oamFrames = `[saved to ${prefix}.oam-frames.json, ${state.oamFrames.length} frames]`;
     }
+    if (state.apuFrames && state.apuFrames.length > 0) {
+      writeFileSync(join(outDir, `${prefix}.apu-frames.json`),
+        JSON.stringify(state.apuFrames, null, 2));
+      state.apuFrames = `[saved to ${prefix}.apu-frames.json, ${state.apuFrames.length} frames]`;
+    }
   }
 
   const jsonPath = join(outDir, 'extraction.json');
@@ -392,6 +434,10 @@ function printSummary(extraction) {
 
   const p4 = extraction.phase4;
   console.log(`Phase 4 (Enumeration): ${p4.complete ? 'OK' : 'FAILED'} — ${p4.statesCaptured} states captured`);
+  const statesWithApu = extraction.phase4.states.filter(s => s.apuRegisters).length;
+  if (statesWithApu > 0) {
+    console.log(`  Audio (APU): ${statesWithApu}/${p4.statesCaptured} states with APU register snapshot`);
+  }
 
   const p5 = extraction.phase5;
   console.log(`Phase 5 (Physics):     ${p5.complete ? 'OK' : 'FAILED'} — ${p5.testsCount} tests, player slot=${p5.playerSlot}`);
