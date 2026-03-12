@@ -1,6 +1,61 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-12 (Session 17)
+**Last updated:** 2026-03-12 (Session 18)
+
+---
+
+## What Just Happened (Session 18)
+
+### SMB1 Manifest — 4 More Bug Fixes + Schematic Renderer
+
+Fixed four bugs in `tools/smb-manifest-complete.js` that were producing wrong area data, then built a browser schematic renderer to verify layout data visually.
+
+**Fix 1: Wrong LO pointer table address ($9D28 → $9D2C)**
+- `$9D28` is a 4-byte area-type BASE OFFSET table `[0x00, 0x03, 0x19, 0x1C]` — not the LO pointer table
+- LO pointer table actually starts at `$9D2C`
+- Added separate `areaTypeBases = cpuRead(0x9D28, 4)` and changed LO read to `cpuRead(0x9D2C, 34)`
+- This was causing all 34 area pointers to be offset by 4 bytes
+
+**Fix 2: Wrong page advance mechanism (explicit row=0xF → implicit column-decrease)**
+- `CMP #$0F` at `$95A7` is in the ENEMY handler, NOT the area object handler
+- Area objects use implicit page advance: when `x_col <= prevCol`, page increments
+- Replaced `if (y_row === 0xF) { page++; }` with `if (x_col <= prevCol) page++; prevCol = x_col;`
+
+**Fix 3: Wrong global area index (`areas[aoIdx]` → two-level lookup)**
+- `aoIdx` is 0-3 (area type), not a flat index into 34 areas
+- Correct formula: `global_index = areaTypeBases[aoIdx] + levelOffset`
+- Fixed in both the worldLevelMap loop and the per-level file loop
+
+**Fix 4: Wrong AREA_TYPE_NAMES mapping**
+- h1 bits 5-4 encode background SCENERY type, not the area category
+- Old mapping `['above_ground', 'underground', 'underwater', 'castle']` was wrong
+- Correct: `['above_ground', 'above_ground_hills', 'underwater', 'underground']`
+  - 0 = above_ground (plain sky — bonus rooms, bridge levels)
+  - 1 = above_ground_hills (standard levels with scenery — W1-1 etc.)
+  - 2 = underwater (unused in SMB1)
+  - 3 = underground (W1-2, W4-2, W7-2)
+
+**Results after fixes (W1-1 = area 8):**
+- `area_ptr: 0xA68E` (was 0xAE03 — 4 bytes off due to wrong LO table)
+- `area_type: above_ground_hills` (was "underground")
+- `total_pages: 13`, `object_count: 48`, `enemy_count: 29`
+
+**Schematic renderer created:**
+- `~/nes-manifests/super-mario-bros/engine/test3.html` — standalone, no CHR/tiles/palettes
+- Loads `manifest.json`, reads `areas[8].objects` + `enemy_areas[11].enemies`
+- Colored shapes: blue sky, brown ground, yellow ?blocks, dark red bricks, green pipes, gray stairs, white flagpole shaft, red circles for enemies (abbreviated labels)
+- Arrow key scrolling across 224 columns (14 pages × 16)
+- Purpose: verify layout data correctness independent of tile rendering
+
+**Also updated `engine/index.html`:**
+- Replaced hand-coded `buildLevelGrid()` with `buildGridFromArea(areaObjects)` that reads manifest
+- Fixed enemy loop: `areaKey = 11` (was `'1'` string), added `.enemies` accessor
+
+**Server:** `python3 -m http.server 8080` rooted at `~/nes-manifests/super-mario-bros/`
+- test3.html URL: `http://localhost:8080/engine/test3.html`
+- Hard refresh: Cmd+Shift+R
+
+**Not yet verified:** test3.html layout correctness — user will test next
 
 ---
 

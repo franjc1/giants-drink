@@ -674,7 +674,13 @@ const LEVEL_OBJ_TYPE_NAMES = [
   'staircase',        'bridge',          'pipe',           'flagpole',
 ];
 
-const AREA_TYPE_NAMES = ['above_ground', 'underground', 'underwater', 'castle'];
+// SMB1 area header bits 5-4 = background SCENERY type (not the fundamental area category):
+//   0 = sky_plain      — above_ground, no scenic bg elements (bonus rooms, bridge levels)
+//   1 = sky_hills      — above_ground with hills/clouds scenery (most standard levels + castles)
+//   2 = underwater     — unused in SMB1 (no dedicated underwater levels)
+//   3 = underground    — underground cavern (W1-2, W4-2, W7-2, etc.)
+// Castle visual theme comes from ao_type=3 (CHR tile set) + isCastle flag; NOT from bg_raw.
+const AREA_TYPE_NAMES = ['above_ground', 'above_ground_hills', 'underwater', 'underground'];
 
 function decodeAreaHeader(b1, b2) {
   const timeEncoding = (b1 >> 6) & 0x3;
@@ -695,7 +701,7 @@ function decodeArea(areaIdx, ptr) {
   const data = Array.from(rom.slice(startOff, startOff + maxBytes));
   const header = decodeAreaHeader(data[0], data[1]);
   const objects = [];
-  let offset = 2, page = 0;
+  let offset = 2, page = 0, prevCol = -1;
   while (offset + 1 < data.length) {
     const b1 = data[offset];
     if (b1 === 0xFD) { offset++; break; }
@@ -705,10 +711,11 @@ function decodeArea(areaIdx, ptr) {
     const y_row = b1 & 0xF;
     const type  = (b2 >> 4) & 0xF;
     const param = b2 & 0xF;
-    if (y_row === 0xF) {
-      page++;
-      objects.push({ kind: 'page_advance', page_after: page, raw: [b1, b2] });
-    } else if (y_row === 0xD) {
+    // SMB1 area objects use IMPLICIT page advance: when x_col <= prevCol, page increments.
+    // There is no explicit page-advance marker (row=0xF was the enemy handler, not area objects).
+    if (x_col <= prevCol) page++;
+    prevCol = x_col;
+    if (y_row === 0xD) {
       objects.push({ kind: 'scenery', page, x: page * 16 + x_col, style: b2, raw: [b1, b2] });
     } else if (y_row === 0xE) {
       objects.push({ kind: 'color_change', page, x: page * 16 + x_col, style: b2, raw: [b1, b2] });
@@ -767,7 +774,10 @@ function decodeEnemyArea(areaIdx, ptr) {
 }
 
 // Read pointer tables
-const levelLoTable  = cpuRead(0x9D28, 34);
+// $9D28: 4-byte area-type BASE OFFSET table (not the LO ptr table!)
+// $9D2C: 34-byte LO pointer table (actual start of area LO ptrs)
+const areaTypeBases = cpuRead(0x9D28, 4);
+const levelLoTable  = cpuRead(0x9D2C, 34);
 const levelHiTable  = cpuRead(0x9D4E, 34);
 const enemyLoTable  = cpuRead(0x9CE4, 34);
 const enemyHiTable  = cpuRead(0x9D06, 34);
@@ -907,7 +917,9 @@ for (let w = 0; w < 8; w++) {
        (w+1 === 4 && playerLabel === 'W4-2')));
 
     // Determine area type from area header
-    const areaObj  = areas[aoIdx];
+    // Two-level lookup: BASE_TBL[$9D28][aoIdx] + levelOffset = global area index
+    const globalAreaIdx = areaTypeBases[aoIdx] + levelOffset;
+    const areaObj  = areas[globalAreaIdx];
     const areaType = areaObj?.area_type ?? 'unknown';
 
     worldLevelMap.push({
@@ -1162,8 +1174,9 @@ const manifest = {
   music,
 
   level_pointer_table: {
-    lo_addr: '0x9D28', hi_addr: '0x9D4E', count: 34,
-    _src: 'ROM:$9D28/$9D4E (confirmed by ZP $E7/$E8 loader at $9C50)',
+    lo_addr: '0x9D2C', hi_addr: '0x9D4E', count: 34,
+    area_type_base_tbl: '0x9D28',
+    _src: 'ROM:$9D28 (4-byte type-base tbl) + $9D2C/$9D4E (LO/HI ptrs, confirmed by $9C4E LDA $9D2C,Y)',
     entries: areas.map(a => ({ area: a.area, ptr: a.ptr, source: a.source })),
   },
 
@@ -1254,8 +1267,9 @@ for (let w = 0; w < 8; w++) {
 
     const levelNum = isCastle ? 4 : (isBonusRoom || isWarpZoneArea) ? 0 : playerLevelNum;
 
-    // Get area data
-    const areaObjData = areas[aoIdx];
+    // Get area data — two-level lookup: BASE_TBL[$9D28][aoIdx] + levelOffset = global area index
+    const globalAreaIdx = areaTypeBases[aoIdx] + levelOffset;
+    const areaObjData = areas[globalAreaIdx];
     const enemyData   = validEnemy ? enemyAreas[enemyArea] : null;
 
     // Determine level type from area header
