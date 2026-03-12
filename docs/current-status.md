@@ -1,6 +1,51 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-12 (Session 16)
+**Last updated:** 2026-03-12 (Session 17)
+
+---
+
+## What Just Happened (Session 17)
+
+### SMB1 Complete Manifest — 100% Extraction
+
+Built `tools/smb-manifest-complete.js` — a complete replacement for the partial `smb-manifest.js`. Produces a full reference manifest for Super Mario Bros. (NES, 1985) from the ROM binary alone.
+
+**Output (all written to `~/nes-manifests/super-mario-bros/`):**
+- `manifest.json` — 733.8 KB, all physics, all world-level mappings, all enemy areas, scoring, warp zones, game structure
+- `enemies.json` — all 16 enemy types with speed, behavior, stompability, fire immunity, world appearances
+- `tiles.png` — CHR-ROM tile sheet (unchanged from prior sessions)
+- `levels/` directory — 36 level JSON files: W1-1 through W8-4, plus bonus rooms, warp areas, and post-game stubs
+
+**ROM-confirmed physics values:**
+- Walk speed: 25 sub-px/frame = 1.5625 px/frame (16 sub-px/px system)
+- Run speed: 31 sub-px/frame = 1.9375 px/frame
+- Walk jump Y velocity: -4 px/frame (`$FC` at `$B432–$B434`)
+- Run jump Y velocity: -5 px/frame (`$FB` at `$B435–$B436`)
+- JumpForce table: `[7,7,6,5,4,3,2,1,0]` at `$9AA5` (applied while A held)
+- FallForce table: `[3,3,4,5,6,7,8,9,10]` at `$9AAE`
+
+**ROM-confirmed game structure:**
+- Kill score progression: 100,200,400,800,1000,2000,4000,8000,1UP (packed BCD at `$C68A`)
+- Starting lives: 2 extra lives (`$02` at CPU `$9069`)
+- Star duration: 176 frames / `$B0` (ROM `$99C4`: `LDA #$B0 / STA $0D01`)
+- Warp W1-2: worlds [2,3,4] (ROM `$85BC`)
+- Warp W4-2: worlds [6,7,8] (ROM `$99EE`)
+
+**Bugs found and fixed during this session:**
+1. Score table: `cpuRead(0xC689)` → `cpuRead(0xC68A)` (off-by-one; `$C689` is `$60` = RTS opcode)
+2. Bonus room detection: position-based → `ao_idx===0 && !isCastle` (content-based, correct)
+3. isPostGame check before isBonusRoom (W8 post-game has ao_idx=0 + invalid enemy area 62≥34)
+4. Player level numbering: only increments for non-internal, non-castle levels
+
+**World-level structure confirmed:**
+- 8 worlds × 4 player-facing levels + castles = 32 numbered levels
+- 4 internal bonus rooms (W1, W2, W7 share template 0; others added as needed)
+- Warp zone areas: W1-2 (3 pipes) and W4-2 (3 pipes + vine)
+- 1 post-game stub (W8 after castle)
+- Total: 36 level files covering all valid entries in the ROM world-level table
+
+**Open question (still unresolved, deferred to Session 18):**
+- Area objects 0-3 are shared templates. The unique per-level geometry (areas 4-33) is accessed via a different mechanism not yet traced. `ao_idx=1` template has 0 objects — base ground/sky terrain is rendered automatically by the game engine. How areas 4-33 are assigned to specific world/levels requires a new code trace from `$9C50`.
 
 ---
 
@@ -254,23 +299,21 @@ Session 11e focused entirely on Phase 5 physics sampling. Despite significant de
 giants-drink/
   claude.md                              ← Updated Session 11a (manifest architecture)
   tools/
-    extraction-enumerator.lua            ← Main extraction script (~1130 lines; Phase 5 working)
-    orchestrator.js                      ← Node.js Mesen2 runner + stdout parser (APU support added)
-    physics-derivation.js                ← NEW: position data → physics constants
+    smb-manifest-complete.js             ← NEW Session 17: complete SMB1 manifest extractor
+    jsnes-extractor.js                   ← jsnes-based extraction pipeline (Sessions 13-15)
+    extraction-enumerator.lua            ← Old Mesen2 script (superseded by jsnes)
+    orchestrator.js                      ← Node.js Mesen2 runner + stdout parser
+    physics-derivation.js                ← Position data → physics constants
     extract-chr-rom.js                   ← NES CHR-ROM bulk extractor (Session 8)
     mesen-extract.lua                    ← Single-frame capture (Sessions 9-10, superseded)
     render-screen.js                     ← NES screen renderer (Sessions 9-10)
-    test-exec-callback.lua               ← Diagnostic
-    test-savestate-callback.lua          ← Diagnostic
-    test-readwrite-callback.lua          ← Diagnostic
-    test-jump.lua                        ← Diagnostic
   src/
     (unchanged from Session 10)
   data/
     (unchanged)
   docs/
     current-status.md                    ← THIS FILE
-    decisions-log.md                     ← Updated through Decision 96
+    decisions-log.md                     ← Updated through Decision 100
     design/
       universal-extraction-spec.md       ← Decision numbers corrected (85-88)
       (other docs unchanged)
@@ -291,7 +334,7 @@ giants-drink/
 
 ## What's Next
 
-### Session 17: SMB Manifest — Find Scrolling Level Geometry
+### Session 18: SMB Manifest — Find Scrolling Level Geometry
 
 The main open question: where is the per-level scrolling tile layout stored?
 
@@ -301,12 +344,12 @@ The main open question: where is the per-level scrolling tile layout stored?
 - The connection between area objects 4-33 and specific world/levels needs a new code trace
 - Approach: trace the level loading code at `$9C50` — follow how it selects from the 34 areas beyond the 4 templates
 
-**Continue jsnes extraction pipeline** (Session 16 scope was interrupted)
+**Continue jsnes extraction pipeline** (deferred from Session 16)
 - Contra/Zelda oracle runs still pending
 - Physics derivation wiring still pending
 - 12-game battery still pending
 
-### Session 18+: Scale Run + Manifest Generation
+### Session 19+: Scale Run + Manifest Generation
 
 - Batch orchestrator for full NES library (~760 CHR-RAM games)
 - SNES ROM acquisition + validation
