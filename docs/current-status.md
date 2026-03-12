@@ -1,6 +1,54 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-11 (Session 15)
+**Last updated:** 2026-03-12 (Session 16)
+
+---
+
+## What Just Happened (Session 16)
+
+### SMB1 Manifest Extractor — Three Bug Fixes + World/Level Map
+
+`tools/smb-manifest.js` was producing wrong output due to three bugs inherited from previous sessions. All three fixed and verified against ROM binary.
+
+**Fix 1: Area pointer tables (critical)**
+- Old: `$805A`/`$806D` (19 entries) — these are the **palette setup tables**, not level geometry
+- New: `$9D28`/`$9D4E` (34 entries) — the actual area object pointer tables used by the ZP `$E7/$E8` area loader
+- Result: all 34 areas now decoded correctly (was 19 before, all from wrong palette data)
+
+**Fix 2: Area object terminator**
+- Old: `if (b2 === 0xFD || b2 === 0xFE) { break; }` — checked byte 2, never fired, read 200+ objects per area
+- New: `if (b1 === 0xFD) { break; }` — byte 1 is the terminator, checked before nibble decode
+- Confirmed by `CMP #$FD` at CPU `$9516`/`$95A1`: `LDA ($E7),Y; CMP #$FD; BEQ end`
+- Note: `b2` may validly be `$FD` (e.g. flagpole type) — it is NOT a terminator
+
+**Fix 3: Area type label mapping**
+- Old: `['ground','underground','underwater','castle']` — index 0 was wrong
+- New: `['above_ground','underground','underwater','castle']`
+- Verified: area 1 (W1-1 template) has header `h0=0x4D` → bits 5-4 = `00` → `above_ground` ✓
+- Verified: castle areas (3, 6, 12, 16, 20) have bits 5-4 = `11` = 3 → `castle` ✓
+
+**Fix 4: Enemy format (page embedded in byte 1)**
+- Old: `x_col=bits6-4, y_row=bits3-0` in byte 1 + separate page-advance detection (never fired → all enemies on page 0)
+- New: `page=bits6-4, col=bits3-0` in byte 1; `type=bits7-4, y=bits3-0` in byte 2
+- Result: enemies now spread across pages 0-7 with realistic distributions
+
+**Added: World/level → area_obj + enemy_area mapping**
+- Decoded `$9CB4` (world bases) + `$9CBC` (40 level info entries) + `$9CE0` (enemy base by type)
+- `world_level_map` field in manifest: all 36 valid levels across 8 worlds
+- W1-1 → ao_idx=1, enemy_area=11 ✓
+- Castle levels use enemy areas 0-5 (one per world, with sharing between W1/W6 and W2/W5)
+- W1-5/W2-5/etc. are the internal castle entries; player-facing "W1-4" is internal sub-level 4
+
+**Manifest output (verified):**
+- 34 area objects, correct area types, object counts plausible (area 12 = castle 87 objects/8 pages = likely W8-4)
+- 34 enemy areas, enemies distributed across pages 0-7
+- World/level map for all 36 valid levels
+- Physics tables (unchanged, still verified)
+- 707 KB manifest.json + tiles.png
+
+**Remaining unknowns (not blocking):**
+- W1-1 area object template (ao_idx=1) has 0 regular objects — the level geometry for scrolling above-ground levels may use a different system (not yet found)
+- Enemy area 11 (W1-1 enemy data) contains hammer brothers and spinies which don't appear in W1-1 normal play — the exact level-to-enemy-area mapping may need further verification
 
 ---
 
@@ -243,24 +291,22 @@ giants-drink/
 
 ## What's Next
 
-### Session 16: Contra + Zelda + Physics Analysis
+### Session 17: SMB Manifest — Find Scrolling Level Geometry
 
-**Immediate: run Contra and Zelda through updated extractor**
-- Contra: expected to find X/Y via oracle (previous runs found $01fb/$0268 which are screen-relative; oracle should find the actual pixel registers)
-- Zelda: Phase 1 fails (file select), Phase 3 still finds content vars — run to confirm $0014 still stable
+The main open question: where is the per-level scrolling tile layout stored?
 
-**Physics derivation: wire `tools/physics-derivation.js`**
-- SMB Phase 5 has position arrays in `physics-raw.json` — connect to derivation script
-- Derive: gravity (Y descent arc), walk speed (WALK_RIGHT dX/frame), jump velocity (Y at frame 1), variable jump height (JUMP_TAP vs JUMP_HOLD peak delta)
+- Area objects at `$9D28/$9D4E` define only the EXTRA features (custom pipes, bricks, question blocks)
+- Most levels use ao_idx=1 (template with 0 objects) — the base ground/sky terrain is rendered automatically
+- Long unique areas (4-33) in the area object table are accessed via a DIFFERENT mechanism not yet identified
+- The connection between area objects 4-33 and specific world/levels needs a new code trace
+- Approach: trace the level loading code at `$9C50` — follow how it selects from the 34 areas beyond the 4 templates
 
-**12-game diversity battery**
-- Run full battery against updated extractor: SMB, MM2, Contra, Zelda, Metroid, Castlevania, Ninja Gaiden, DuckTales, Kirby, Mega Man 3, Batman, Bionic Commando
-- Goal: confirm oracle works on games with different player sprite configurations (multi-sprite players, CHR-RAM games, etc.)
+**Continue jsnes extraction pipeline** (Session 16 scope was interrupted)
+- Contra/Zelda oracle runs still pending
+- Physics derivation wiring still pending
+- 12-game battery still pending
 
-**MM2 in-level extraction** (nice-to-have, not blocking)
-- To get actual Mega Man in-game position, need to navigate past stage select (press A on a stage) — requires extending the boot loop
-
-### Session 17+: Scale Run + Manifest Generation
+### Session 18+: Scale Run + Manifest Generation
 
 - Batch orchestrator for full NES library (~760 CHR-RAM games)
 - SNES ROM acquisition + validation
