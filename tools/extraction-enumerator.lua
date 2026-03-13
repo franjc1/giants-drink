@@ -205,44 +205,59 @@ local PHYSICS_BASE = nil  -- savestate captured inside Phase 4 when level is pla
                            -- Used as the base state for Phase 5 physics tests.
 local p4ChrCache  = nil  -- {hex, sz, src} — CHR-ROM is fixed; capture once
 
--- Phase 5
-local LEVEL_STATE   = nil
-local p5TestIdx     = 1
-local p5FrameN      = 0
-local p5Positions   = {}
-local p5RamBase     = {}   -- RAM snapshot at BASELINE before jump (for Y detection)
-local p5RamJump     = {}   -- RAM snapshot ~10 frames into A-hold jump (near peak)
-local p5JumpCount   = 0    -- frame counter for Y-detection jump
-local p5JumpButton  = "a"  -- button for Y detection: "a" first; retries "b" if Y not found
-local p5SanityX1    = 0    -- X before sanity Right press (input verification)
-local p5XStable1    = 0    -- X at first stability read (before 30-frame re-check)
+-- Phase 5 (oracle-based rewrite)
+local LEVEL_STATE    = nil
+local p5TestIdx      = 1
+local p5FrameN       = 0
+local p5Positions    = {}
+local p5GroundY      = -1   -- player Y at ground level (read from BASELINE after load)
+local p5SafeX        = -1   -- player X at BASELINE (safe starting position)
+-- Velocity discovery: scan $0050-$005F for bytes that track position deltas.
+-- Covers typical NES velocity registers ($57/$58 X vel, $59/$5A Y vel) while
+-- AVOIDING $006x which holds critical state in many NES games: $006D = SMB1
+-- horizontal page counter; zeroing it snaps Mario's world position.
+local P5_VEL_RANGE   = {lo=0x0050, hi=0x005F}
+local p5VelDiscPre   = {}   -- full RAM snapshot before discovery step
+local p5VelDiscPhase = 0    -- 0=X discovery step, 1=Y discovery step, 2=done
+-- Populated by discovery; printed as DATA_PHYSICS_VEL for downstream use.
+local p5XVelAddrs    = {}   -- {addr, initial_val} for X velocity bytes found
+local p5YVelAddrs    = {}   -- {addr, initial_val} for Y velocity bytes found
+local p5YVerifyGround  = {}  -- zero-page snapshot at ground for Y addr verification
+local p5YVerifyAirSnap = {}  -- zero-page snapshot mid-jump for Y addr verification
 
 -- Physics test definitions. inputFn(f) returns input for frame f (1-based).
+-- air=true  → oracle places player 48px above groundY before test
+-- air=false → oracle places player at groundY (on ground)
 local P5_TESTS = {
-  -- WALK_RIGHT: 60 frames (reaches max speed in ~20; stops before any pipe at level start)
-  { name="WALK_RIGHT",   frames=60,  inputFn=function(f)
+  -- GRAVITY: no input, 30 frames in the air. Y deltas give fall velocity;
+  -- delta-of-deltas gives gravitational acceleration in pixels/frame².
+  { name="GRAVITY",      frames=30,  air=true,  inputFn=function(f)
+      return {right=false,left=false,up=false,down=false,a=false,b=false,start=false,select=false}
+    end },
+  -- WALK_RIGHT: 60 frames pressing Right from ground. Delta stabilises at max walk speed.
+  { name="WALK_RIGHT",   frames=60,  air=false, inputFn=function(f)
       return {right=true,left=false,up=false,down=false,a=false,b=false,start=false,select=false}
     end },
-  -- FRICTION: 30 frames Right + 30 frames release = 60 total
-  { name="FRICTION",     frames=60,  inputFn=function(f)
+  -- FRICTION: Right for 30 frames then release for 30 frames. Deceleration curve.
+  { name="FRICTION",     frames=60,  air=false, inputFn=function(f)
       local r = (f <= 30)
       return {right=r,left=false,up=false,down=false,a=false,b=false,start=false,select=false}
     end },
-  -- JUMP_TAP: A for exactly 1 frame then release (short hop if game supports variable jump)
-  { name="JUMP_TAP",     frames=60,  inputFn=function(f)
+  -- JUMP_TAP: A for exactly 1 frame then release. Short hop / min jump height.
+  { name="JUMP_TAP",     frames=60,  air=false, inputFn=function(f)
       return {right=false,left=false,up=false,down=false,a=(f==1),b=false,start=false,select=false}
     end },
-  -- JUMP_HOLD: A held for the ENTIRE duration (max-height jump)
-  { name="JUMP_HOLD",    frames=60,  inputFn=function(f)
+  -- JUMP_HOLD: A held for entire duration. Max jump height curve.
+  { name="JUMP_HOLD",    frames=60,  air=false, inputFn=function(f)
       return {right=false,left=false,up=false,down=false,a=true,b=false,start=false,select=false}
     end },
-  -- RUNNING_JUMP: Right+A for 20 frames, then Right only for 30 frames = 50 total
-  { name="RUNNING_JUMP", frames=50,  inputFn=function(f)
+  -- RUNNING_JUMP: Right+A for 20 frames then Right only for 30 frames.
+  { name="RUNNING_JUMP", frames=50,  air=false, inputFn=function(f)
       local a = (f <= 20)
       return {right=true,left=false,up=false,down=false,a=a,b=false,start=false,select=false}
     end },
-  -- DUCK: hold Down for all 20 frames
-  { name="DUCK",         frames=20,  inputFn=function(f)
+  -- DUCK: hold Down for 20 frames.
+  { name="DUCK",         frames=20,  air=false, inputFn=function(f)
       return {right=false,left=false,up=false,down=true,a=false,b=false,start=false,select=false}
     end },
 }
@@ -369,22 +384,29 @@ local function runPhase1()
       local foundSlot = -1
       local foundDxR, foundDxL = 0, 0
       for slot = 0, 63 do
-        local pre  = p1PreX[slot]
-        local mid  = p1MidX[slot]
-        local post = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
-        -- Signed 8-bit delta (sprites wrap at 256)
-        local dxR = mid - pre
-        if dxR > 128  then dxR = dxR - 256 end
-        if dxR < -128 then dxR = dxR + 256 end
-        local dxL = post - mid
-        if dxL > 128  then dxL = dxL - 256 end
-        if dxL < -128 then dxL = dxL + 256 end
-        -- Both directions confirm real player control
-        if dxR > 0 and dxL < 0 then
-          foundSlot = slot
-          foundDxR  = dxR
-          foundDxL  = dxL
-          break
+        -- *** ON-SCREEN FILTER: only consider sprites with visible Y ***
+        -- OAM Y byte is display_row - 1. Off-screen / hidden sprites have Y >= 239.
+        -- Attract demo sprites are often off-screen or at high OAM slots with
+        -- anomalous Y values — this filter prevents false positives.
+        local sprY = p1PreY[slot]
+        if sprY < 239 and sprY > 0 then
+          local pre  = p1PreX[slot]
+          local mid  = p1MidX[slot]
+          local post = emu.read(slot * 4 + 3, emu.memType.nesSpriteRam)
+          -- Signed 8-bit delta (sprites wrap at 256)
+          local dxR = mid - pre
+          if dxR > 128  then dxR = dxR - 256 end
+          if dxR < -128 then dxR = dxR + 256 end
+          local dxL = post - mid
+          if dxL > 128  then dxL = dxL - 256 end
+          if dxL < -128 then dxL = dxL + 256 end
+          -- Both directions confirm real player control
+          if dxR > 0 and dxL < 0 then
+            foundSlot = slot
+            foundDxR  = dxR
+            foundDxL  = dxL
+            break
+          end
         end
       end
 
@@ -870,25 +892,52 @@ local function runPhase4()
 end
 
 -- ============================================================
--- PHASE 5: PHYSICS SAMPLING  (Session 12 rewrite)
+-- PHASE 5: ORACLE-BASED PHYSICS SAMPLING  (Session 13 rewrite)
 --
--- Flow:
---   1. LEVEL_STATE = PHYSICS_BASE if available (Phase 4 natural level-load state:
---      Mario at spawn, zero velocity), else p1BaselineState.
---   2. Y detection: load LEVEL_STATE, 60-frame settle, snapshot ground RAM, hold
---      jump 5 frames, snapshot at frame 15 (peak) and 60 (landing). Y = address
---      that DECREASED at peak AND returned within ±2 at landing (round-trip filter).
---      Zero-page first. Retry with B-button if A yields nothing.
---   3. Input sanity check: reload LEVEL_STATE, 60-frame settle, read X, press Right
---      10 frames, read X again. If X didn't increase → INPUT_BROKEN, stop.
---   4. Physics tests: per test, load LEVEL_STATE + structured settle
---      (60 clearInput + Left 5 + 60 clearInput + 30-frame X stability check),
---      then inject inputs frame-by-frame recording (X,Y). WALK_RIGHT logs X every
---      10 frames for diagnostics.
+-- Approach: instead of settling from a savestate (prone to velocity contamination),
+-- use oracle RAM writes to place the player at exact positions with all physics
+-- state zeroed. No settle sequence needed — initial conditions are known exactly.
+--
+-- Per-test flow:
+--   1. Load BASELINE savestate
+--   2. Wait 3 frames for loadstate to settle
+--   3. Oracle write: set X = safeX, Y = groundY (or groundY-48 for air tests)
+--      Zero velocity range P5_VEL_RANGE ($0050-$006F) — covers all NES player physics
+--   4. Clear input, step frames recording (X,Y) each frame
+--
+-- Velocity discovery (runs once before tests):
+--   - Place on ground, zero vel range, step 1 frame Right → scan for bytes that
+--     now contain delta_x. These are X velocity addresses.
+--   - Place in air, zero vel range, step 1 frame no input → scan for bytes that
+--     now contain delta_y. These are Y velocity addresses.
+--
+-- Analysis inline after each test:
+--   GRAVITY    → initial fall velocity + gravitational acceleration (px/frame²)
+--   WALK_RIGHT → max walk speed (px/frame, frame where delta stabilises)
+--   JUMP_HOLD  → jump curve summary (peak height, airtime)
 -- ============================================================
 
+-- targetY = nil means "don't write Y" — used for ground tests where writing the
+-- actual Y address ($00CE in SMB1) triggers unexpected game behavior (internal
+-- timers / un-pause sequences). For ground tests Mario stands at his natural Y;
+-- for air tests (GRAVITY) we write Y explicitly to place him above ground.
+local function p5OracleWrite(targetX, targetY)
+  if p1PlayerXAddr >= 0 then emu.write(p1PlayerXAddr, targetX, emu.memType.nesInternalRam) end
+  if targetY ~= nil and p1PlayerYAddr >= 0 then
+    emu.write(p1PlayerYAddr, targetY, emu.memType.nesInternalRam)
+  end
+  for addr = P5_VEL_RANGE.lo, P5_VEL_RANGE.hi do
+    emu.write(addr, 0, emu.memType.nesInternalRam)
+  end
+end
+
+local function p5SignedDelta(a, b)
+  local d = b - a
+  if d > 128 then d = d - 256 elseif d < -128 then d = d + 256 end
+  return d
+end
+
 local function runPhase5()
-  -- Require that Phase 1 found a valid player X address.
   if p1PlayerXAddr < 0 then
     print("STATUS_PHASE5:SKIP no player X RAM address found")
     print("DATA_PHASE5:COMPLETE tests=0")
@@ -896,126 +945,209 @@ local function runPhase5()
     emu.stop(); return
   end
 
+  -- ----------------------------------------------------------------
+  -- init → load BASELINE
+  -- ----------------------------------------------------------------
   if sub == "init" then
-    -- Always use p1BaselineState as LEVEL_STATE.
-    -- PHYSICS_BASE (Phase 4 natural level-load) sounds cleaner but is unreliable:
-    -- p4IsPlayable() can be fooled by end-of-level animations (full nametable + sprites
-    -- in range during castle walk or world-complete screen). p1BaselineState is the
-    -- ONLY state guaranteed interactive — Phase 1 confirmed control there via the
-    -- bidirectional test. PHYSICS_BASE is left available for future use in analysis.
+    -- p1BaselineState: confirmed gameplay state (40-frame post-Start/A settle).
+    -- Writing Y to the actual player address ($00CE) triggers unexpected game behavior
+    -- (internal timers / un-pause sequences). Using p1BaselineState lets Mario stand
+    -- at his natural Y; oracle only writes Y for AIR tests where we need to place him
+    -- above ground. For ground tests, we READ groundY from RAM without writing it.
     LEVEL_STATE = p1BaselineState
-    print("STATUS_PHASE5:level_state=p1BaselineState x_addr=" ..
-          string.format("0x%04X", p1PlayerXAddr))
+    print("STATUS_PHASE5:oracle_mode x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
+          " y_addr=" .. (p1PlayerYAddr >= 0 and string.format("0x%04X", p1PlayerYAddr) or "none") ..
+          " vel_range=" .. string.format("0x%04X-0x%04X", P5_VEL_RANGE.lo, P5_VEL_RANGE.hi))
     doSavestate("load", LEVEL_STATE)
-    p5JumpCount = 0; sub = "find_y_land"; return
-  end
-
-  if sub == "find_y_land" then
-    clearInput()
-    if ssPending then return end   -- wait for loadstate
-    p5JumpCount = p5JumpCount + 1
-    if p5JumpCount >= 60 then
-      -- 60 frames: enough for any walk-in animation to finish and Mario to reach idle.
-      for i = 0, 2047 do p5RamBase[i] = emu.read(i, emu.memType.nesInternalRam) end
-      p5JumpCount = 0; sub = "find_y_jump"
-    end
-    return
-  end
-
-  -- ---- FIND Y (round-trip): hold jump for 5 frames, snapshot peak at frame 15,
-  -- snapshot landing at frame 60, then select address that DECREASED at peak AND
-  -- RETURNED within ±2 at landing. Round-trip eliminates timers, counters, and
-  -- everything that changes during a jump but doesn't return to its starting value.
-  if sub == "find_y_jump" then
-    p5JumpCount = p5JumpCount + 1
-    emu.setInput({right=false,left=false,up=false,down=false,
-                  a=(p5JumpCount<=5 and p5JumpButton=="a"),
-                  b=(p5JumpCount<=5 and p5JumpButton=="b"),
-                  start=false,select=false}, 0)
-    if p5JumpCount == 15 then
-      for i = 0, 2047 do p5RamJump[i] = emu.read(i, emu.memType.nesInternalRam) end
-    elseif p5JumpCount == 60 then
-      clearInput()
-      -- Snapshot landing state (full 2048 bytes) for round-trip comparison.
-      local land = {}
-      for i = 0, 2047 do land[i] = emu.read(i, emu.memType.nesInternalRam) end
-      local yBestAddr = -1; local yBestDelta = 0
-      local function tryRoundTrip(i)
-        local dPeak = p5RamJump[i] - p5RamBase[i]
-        if dPeak > 128 then dPeak = dPeak - 256 elseif dPeak < -128 then dPeak = dPeak + 256 end
-        local dLand = land[i] - p5RamBase[i]
-        if dLand > 128 then dLand = dLand - 256 elseif dLand < -128 then dLand = dLand + 256 end
-        if dPeak < 0 and math.abs(dLand) <= 2 and dPeak < yBestDelta then
-          yBestDelta = dPeak; yBestAddr = i
-        end
-      end
-      -- Zero-page first (0x00-0xFF): player Y is almost always in zero page on NES.
-      -- Only expand to full 2048 if zero page yields nothing — avoids false positives
-      -- from page-3+ addresses that happen to pass the round-trip filter.
-      for i = 0, 255 do tryRoundTrip(i) end
-      if yBestAddr < 0 then
-        for i = 256, 2047 do tryRoundTrip(i) end
-      end
-      p1PlayerYAddr = yBestAddr
-      local yStr = (yBestAddr >= 0) and string.format("0x%04X", yBestAddr) or "none"
-      print("STATUS_PHASE5:PlayerRAM x_addr=" .. string.format("0x%04X", p1PlayerXAddr) ..
-            " y_addr=" .. yStr .. " y_delta=" .. yBestDelta .. " button=" .. p5JumpButton)
-      if yBestAddr < 0 and p5JumpButton == "a" then
-        print("STATUS_PHASE5:No Y with A-button, retrying with B-button")
-        p5JumpButton = "b"; doSavestate("load", LEVEL_STATE)
-        p5JumpCount = 0; sub = "find_y_land"; return
-      end
-      -- Y detection done. Reload LEVEL_STATE for input sanity check.
-      doSavestate("load", LEVEL_STATE)
-      p5FrameN = 0; sub = "sanity_settle"; return
-    end
-    return
+    p5FrameN = 0; sub = "y_verify_settle"; return
   end
 
   -- ----------------------------------------------------------------
-  -- INPUT SANITY CHECK: verify emu.setInput reaches the game.
-  -- Settle 60 frames, read X, press Right 10 frames, read X again.
-  -- If X didn't increase → INPUT_BROKEN: skip all physics tests.
+  -- y_verify_settle: 60 frames after BASELINE load, read groundY and
+  -- safeX, take zero-page ground snapshot. Then jump to verify or
+  -- discover the player Y RAM address.
+  -- base>128 filter: NES platform ground Y is always >128; counters/
+  -- timers cycle 0..128, so requiring ground_val>128 eliminates them.
   -- ----------------------------------------------------------------
-  if sub == "sanity_settle" then
+  if sub == "y_verify_settle" then
     clearInput()
     if ssPending then return end
     p5FrameN = p5FrameN + 1
     if p5FrameN >= 60 then
-      p5SanityX1 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
-      print("STATUS_PHASE5:SanitySettle done x=" .. p5SanityX1)
-      p5FrameN = 0; sub = "sanity_right"
-    end
-    return
-  end
-
-  if sub == "sanity_right" then
-    emu.setInput({right=true,left=false,up=false,down=false,
-                  a=false,b=false,start=false,select=false}, 0)
-    p5FrameN = p5FrameN + 1
-    if p5FrameN >= 10 then
-      clearInput()
-      local x2 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
-      local dx = x2 - p5SanityX1
-      if dx > 128 then dx = dx - 256 end
-      if dx < -128 then dx = dx + 256 end
-      print("STATUS_PHASE5:SanityCheck right10 x_before=" .. p5SanityX1 ..
-            " x_after=" .. x2 .. " dx=" .. dx)
-      if dx <= 0 then
-        print("STATUS_PHASE5:INPUT_BROKEN emu.setInput not reaching game — skipping physics tests")
-        print("DATA_PHASE5:COMPLETE tests=0")
-        print("DATA_EXTRACTION:COMPLETE")
-        emu.stop(); return
-      end
-      print("STATUS_PHASE5:INPUT_VERIFIED")
-      p5TestIdx = 1; sub = "run_test"
+      p5SafeX   = (p1PlayerXAddr >= 0) and emu.read(p1PlayerXAddr, emu.memType.nesInternalRam) or 128
+      p5SafeX   = math.max(p5SafeX, 80)   -- keep away from left wall/edge
+      p5GroundY = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or 200
+      for i = 0, 255 do p5YVerifyGround[i] = emu.read(i, emu.memType.nesInternalRam) end
+      print("STATUS_PHASE5:ground_ref safeX=" .. p5SafeX .. " groundY=" .. p5GroundY ..
+            " (pre-verify; y_addr=" ..
+            (p1PlayerYAddr >= 0 and string.format("0x%04X", p1PlayerYAddr) or "none") .. ")")
+      p5FrameN = 0; sub = "y_verify_jump"
     end
     return
   end
 
   -- ----------------------------------------------------------------
-  -- PHYSICS TESTS: load LEVEL_STATE per test, structured settle,
-  -- then inject inputs and record (X,Y) per frame.
+  -- y_verify_jump: hold A for 15 frames; snapshot zero-page at frame 10
+  -- (well into the jump arc before peak velocity fades).
+  -- ----------------------------------------------------------------
+  if sub == "y_verify_jump" then
+    p5FrameN = p5FrameN + 1
+    emu.setInput({right=false,left=false,up=false,down=false,
+                  a=true,b=false,start=false,select=false}, 0)
+    if p5FrameN == 10 then
+      for i = 0, 255 do p5YVerifyAirSnap[i] = emu.read(i, emu.memType.nesInternalRam) end
+    end
+    if p5FrameN >= 15 then
+      clearInput(); sub = "y_verify_read"
+    end
+    return
+  end
+
+  -- ----------------------------------------------------------------
+  -- y_verify_read: find zero-page address with largest upward movement
+  -- (ground_val > 128 AND ground_val - air_val > 0). Updates
+  -- p1PlayerYAddr and p5GroundY if a better candidate is found.
+  -- Reloads BASELINE for clean vel_discover start.
+  -- ----------------------------------------------------------------
+  if sub == "y_verify_read" then
+    clearInput()
+    local bestAddr, bestDelta = -1, 0
+    for addr = 0, 255 do
+      local gv = p5YVerifyGround[addr]
+      local av = p5YVerifyAirSnap[addr]
+      if gv > 128 then                     -- filter timers/counters (0..128 range)
+        local delta = gv - av              -- positive = Y decreased = player moved up
+        -- Require plausible jump magnitude: 4..80px in 10 frames.
+        -- < 4: not a real jump movement (noise).
+        -- > 80: timer/counter wrapping to 0, not actual player movement
+        --   (e.g., SMB1 $0007 is a frame counter that reads 154 at ground and 0 mid-jump).
+        if delta >= 4 and delta < 80 and delta > bestDelta then
+          bestDelta = delta; bestAddr = addr
+        end
+      end
+    end
+    local prevStr = (p1PlayerYAddr >= 0) and string.format("0x%04X", p1PlayerYAddr) or "none"
+    if bestAddr >= 0 then
+      if bestAddr ~= p1PlayerYAddr then
+        print("STATUS_PHASE5:Y_VERIFY corrected y_addr=" .. prevStr ..
+              " -> 0x" .. string.format("%04X", bestAddr) ..
+              " (jump_delta=" .. bestDelta .. ")")
+        p1PlayerYAddr = bestAddr
+        p5GroundY     = p5YVerifyGround[bestAddr]
+      else
+        print("STATUS_PHASE5:Y_VERIFY confirmed y_addr=" .. prevStr ..
+              " (jump_delta=" .. bestDelta .. ")")
+      end
+    else
+      print("STATUS_PHASE5:Y_VERIFY FAILED no jump detected; keeping y_addr=" .. prevStr)
+    end
+    -- Reload BASELINE for a clean state before velocity discovery
+    doSavestate("load", LEVEL_STATE)
+    p5FrameN = 0; sub = "read_ground_wait"; return
+  end
+
+  -- ----------------------------------------------------------------
+  -- read_ground_wait: brief pause after BASELINE reload.
+  -- safeX/groundY already established in y_verify_settle above.
+  -- ----------------------------------------------------------------
+  if sub == "read_ground_wait" then
+    clearInput()
+    if ssPending then return end
+    p5FrameN = p5FrameN + 1
+    if p5FrameN >= 3 then
+      sub = "vel_discover_x"
+    end
+    return
+  end
+
+  -- ----------------------------------------------------------------
+  -- vel_discover_x: oracle-place on ground, zero vel range, step 1 frame Right.
+  -- Velocity bytes: started at 0, now contain a value matching delta_x.
+  -- velocity = delta_position (game stores velocity as the value it adds to position).
+  -- ----------------------------------------------------------------
+  if sub == "vel_discover_x" then
+    clearInput()
+    p5OracleWrite(p5SafeX, p5GroundY)
+    for i = 0, 2047 do p5VelDiscPre[i] = emu.read(i, emu.memType.nesInternalRam) end
+    emu.setInput({right=true,left=false,up=false,down=false,
+                  a=false,b=false,start=false,select=false}, 0)
+    sub = "vel_discover_x_read"; return
+  end
+
+  if sub == "vel_discover_x_read" then
+    clearInput()
+    local newX = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+    local dX = p5SignedDelta(p5VelDiscPre[p1PlayerXAddr], newX)
+    p5XVelAddrs = {}
+    local nonzero = {}
+    for addr = P5_VEL_RANGE.lo, P5_VEL_RANGE.hi do
+      local v = emu.read(addr, emu.memType.nesInternalRam)
+      if v ~= 0 then
+        nonzero[#nonzero+1] = string.format("0x%04X=%d", addr, v)
+        if addr ~= p1PlayerXAddr and addr ~= p1PlayerYAddr then
+          -- Match absolute delta in both signed and unsigned form
+          if v == dX or v == (256 - dX) then
+            p5XVelAddrs[#p5XVelAddrs+1] = {addr=addr, val=v}
+          end
+        end
+      end
+    end
+    local xStr = {}
+    for _, e in ipairs(p5XVelAddrs) do xStr[#xStr+1] = string.format("0x%04X=%d", e.addr, e.val) end
+    print("STATUS_PHASE5:vel_disc_x delta_x=" .. dX ..
+          " vel_candidates=[" .. table.concat(xStr, ",") .. "]")
+    print("STATUS_PHASE5:vel_range_nonzero=[" .. table.concat(nonzero, ",") .. "]")
+    sub = "vel_discover_y"; return
+  end
+
+  -- ----------------------------------------------------------------
+  -- vel_discover_y: oracle-place 48px above ground, zero vel range,
+  -- step 1 frame no input. Find bytes now containing delta_y (gravity).
+  -- ----------------------------------------------------------------
+  if sub == "vel_discover_y" then
+    clearInput()
+    p5OracleWrite(p5SafeX, p5GroundY - 48)
+    for i = 0, 2047 do p5VelDiscPre[i] = emu.read(i, emu.memType.nesInternalRam) end
+    sub = "vel_discover_y_read"; return
+  end
+
+  if sub == "vel_discover_y_read" then
+    clearInput()
+    local newY = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or 0
+    local dY = (p1PlayerYAddr >= 0) and p5SignedDelta(p5VelDiscPre[p1PlayerYAddr], newY) or 0
+    p5YVelAddrs = {}
+    local nonzero = {}
+    for addr = P5_VEL_RANGE.lo, P5_VEL_RANGE.hi do
+      local v = emu.read(addr, emu.memType.nesInternalRam)
+      if v ~= 0 then
+        nonzero[#nonzero+1] = string.format("0x%04X=%d", addr, v)
+        if addr ~= p1PlayerXAddr and addr ~= p1PlayerYAddr then
+          if v == dY or v == (256 - dY) then
+            p5YVelAddrs[#p5YVelAddrs+1] = {addr=addr, val=v}
+          end
+        end
+      end
+    end
+    local yStr = {}
+    for _, e in ipairs(p5YVelAddrs) do yStr[#yStr+1] = string.format("0x%04X=%d", e.addr, e.val) end
+    print("STATUS_PHASE5:vel_disc_y delta_y=" .. dY ..
+          " vel_candidates=[" .. table.concat(yStr, ",") .. "]")
+    print("STATUS_PHASE5:vel_range_nonzero_y=[" .. table.concat(nonzero, ",") .. "]")
+    -- Emit structured velocity address record for downstream manifest builder
+    local allVel = {}
+    for _, e in ipairs(p5XVelAddrs) do allVel[#allVel+1] = string.format("x:0x%04X", e.addr) end
+    for _, e in ipairs(p5YVelAddrs) do allVel[#allVel+1] = string.format("y:0x%04X", e.addr) end
+    print("DATA_PHYSICS_VEL:x_pos=0x" .. string.format("%04X", p1PlayerXAddr) ..
+          " y_pos=" .. (p1PlayerYAddr >= 0 and "0x" .. string.format("%04X", p1PlayerYAddr) or "none") ..
+          " vel_range=0x" .. string.format("%04X", P5_VEL_RANGE.lo) ..
+          "-0x" .. string.format("%04X", P5_VEL_RANGE.hi) ..
+          " discovered=[" .. table.concat(allVel, ",") .. "]")
+    p5TestIdx = 1; sub = "run_test"; return
+  end
+
+  -- ----------------------------------------------------------------
+  -- run_test: load BASELINE + oracle write → record frames.
+  -- No settle sequence — oracle write establishes exact initial conditions.
   -- ----------------------------------------------------------------
   if sub == "run_test" then
     if p5TestIdx > #P5_TESTS then
@@ -1025,62 +1157,33 @@ local function runPhase5()
     end
     doSavestate("load", LEVEL_STATE)
     p5FrameN = 0; p5Positions = {}
-    sub = "wait_load"; return
+    sub = "oracle_load_wait"; return
   end
 
-  -- Structured settle step 1: 60 frames clearInput
-  if sub == "wait_load" then
+  -- 3 frames after loadstate to stabilize, then oracle-write position.
+  if sub == "oracle_load_wait" then
     clearInput()
     if ssPending then return end
     p5FrameN = p5FrameN + 1
-    if p5FrameN >= 60 then
-      p5FrameN = 0; sub = "wait_load_left"
-    end
-    return
-  end
-
-  -- Structured settle step 2: Left 5 frames (cancel rightward inertia)
-  if sub == "wait_load_left" then
-    emu.setInput({right=false,left=true,up=false,down=false,
-                  a=false,b=false,start=false,select=false}, 0)
-    p5FrameN = p5FrameN + 1
-    if p5FrameN >= 5 then
-      p5FrameN = 0; sub = "wait_load_settle2"
-    end
-    return
-  end
-
-  -- Structured settle step 3: 60 more clearInput, snapshot X for stability check
-  if sub == "wait_load_settle2" then
-    clearInput()
-    p5FrameN = p5FrameN + 1
-    if p5FrameN >= 60 then
-      p5XStable1 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
-      p5FrameN = 0; sub = "wait_load_xstable"
-    end
-    return
-  end
-
-  -- Structured settle step 4: 30-frame X stability check; log instability but proceed
-  if sub == "wait_load_xstable" then
-    clearInput()
-    p5FrameN = p5FrameN + 1
-    if p5FrameN >= 30 then
-      local x2 = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
-      local dx = x2 - p5XStable1
-      if dx > 128 then dx = dx - 256 end
-      if dx < -128 then dx = dx + 256 end
+    if p5FrameN >= 3 then
       local test = P5_TESTS[p5TestIdx]
-      if math.abs(dx) > 1 then
-        print("STATUS_PHASE5:UNSTABLE test=" .. test.name ..
-              " x1=" .. p5XStable1 .. " x2=" .. x2 .. " dx=" .. dx)
-      end
-      local v57 = emu.read(0x0057, emu.memType.nesInternalRam)
-      local v58 = emu.read(0x0058, emu.memType.nesInternalRam)
+      -- Read current natural Y from RAM BEFORE any oracle write.
+      -- For ground tests: don't write Y — writing $00CE directly triggers
+      -- unexpected game behavior (un-pause / timer sequences). Mario stands at
+      -- whatever Y the loaded state gives him; we read it for the air-test offset.
+      -- For air tests: write Y = groundY - 48 to place Mario above ground.
+      local naturalY = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or p5GroundY
+      p5GroundY = naturalY   -- refresh groundY from this load so air tests use correct offset
+      local targetY = nil    -- ground tests: don't write Y
+      if test.air then targetY = p5GroundY - 48 end
+      p5OracleWrite(p5SafeX, targetY)
+      clearInput()
+      local ax = (p1PlayerXAddr >= 0) and emu.read(p1PlayerXAddr, emu.memType.nesInternalRam) or -1
+      local ay = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or -1
+      local tyStr = (targetY ~= nil) and tostring(targetY) or "none(ground)"
       print("STATUS_PHASE5:TestStart=" .. test.name ..
-            " x=" .. x2 .. " vel=$57:" .. v57 .. ",$58:" .. v58 ..
-            " inp1_right=" .. tostring(test.inputFn(1).right) ..
-            " inp1_a="     .. tostring(test.inputFn(1).a))
+            " oracle_x=" .. ax .. " oracle_y=" .. ay ..
+            " target_y=" .. tyStr .. " air=" .. tostring(test.air))
       p5FrameN = 0; sub = "run_test_frames"
     end
     return
@@ -1093,16 +1196,64 @@ local function runPhase5()
       local posStr = table.concat(p5Positions, ";")
       print("DATA_PHYSICS:test=" .. test.name ..
             " frames=" .. test.frames .. " positions=" .. posStr)
+
+      -- Inline analysis: derive physics constants from position sequence.
+      local xs, ys = {}, {}
+      for _, pos in ipairs(p5Positions) do
+        local px, py = pos:match("(-?%d+),(-?%d+)")
+        if px then xs[#xs+1] = tonumber(px); ys[#ys+1] = tonumber(py) end
+      end
+
+      if test.name == "GRAVITY" and #ys >= 3 then
+        local dy1 = p5SignedDelta(ys[1], ys[2])
+        local dy2 = p5SignedDelta(ys[2], ys[3])
+        local grav = dy2 - dy1
+        local termVel = dy1
+        for i = 2, #ys - 1 do
+          local dy = p5SignedDelta(ys[i], ys[i+1])
+          if dy > termVel then termVel = dy end
+        end
+        print("ANALYSIS_GRAVITY:dy1=" .. dy1 .. " dy2=" .. dy2 ..
+              " accel_px_per_frame2=" .. grav ..
+              " terminal_vel_approx=" .. termVel)
+
+      elseif test.name == "WALK_RIGHT" and #xs >= 2 then
+        local maxDx, stableFrame = 0, 0
+        for i = 2, #xs do
+          local dx = p5SignedDelta(xs[i-1], xs[i])
+          if dx > maxDx then maxDx = dx end
+        end
+        for i = 2, #xs do
+          local dx = p5SignedDelta(xs[i-1], xs[i])
+          if dx == maxDx and stableFrame == 0 then stableFrame = i end
+        end
+        print("ANALYSIS_WALK:max_speed_px_per_frame=" .. maxDx ..
+              " plateau_start_frame=" .. stableFrame)
+
+      elseif test.name == "JUMP_HOLD" and #ys >= 2 then
+        local startY = ys[1]
+        local peakY, peakFrame = startY, 1
+        for i = 1, #ys do if ys[i] < peakY then peakY = ys[i]; peakFrame = i end end
+        local airtime = #ys
+        for i = peakFrame, #ys do
+          if math.abs(p5SignedDelta(startY, ys[i])) <= 2 then airtime = i; break end
+        end
+        print("ANALYSIS_JUMP_HOLD:peak_height_px=" .. p5SignedDelta(peakY, startY) ..
+              " peak_frame=" .. peakFrame .. " airtime_frames=" .. airtime)
+
+      elseif test.name == "JUMP_TAP" and #ys >= 2 then
+        local startY = ys[1]
+        local peakY = startY
+        for i = 1, #ys do if ys[i] < peakY then peakY = ys[i] end end
+        print("ANALYSIS_JUMP_TAP:peak_height_px=" .. p5SignedDelta(peakY, startY))
+      end
+
       p5TestIdx = p5TestIdx + 1; sub = "run_test"; return
     end
+
     emu.setInput(test.inputFn(p5FrameN), 0)
-    -- Read player position directly from RAM — two bytes, no OAM, no drift.
-    local px = emu.read(p1PlayerXAddr, emu.memType.nesInternalRam)
+    local px = (p1PlayerXAddr >= 0) and emu.read(p1PlayerXAddr, emu.memType.nesInternalRam) or 0
     local py = (p1PlayerYAddr >= 0) and emu.read(p1PlayerYAddr, emu.memType.nesInternalRam) or 0
-    -- Debug: log X every 10 frames for WALK_RIGHT to diagnose input injection issues
-    if test.name == "WALK_RIGHT" and p5FrameN % 10 == 0 then
-      print("STATUS_PHASE5:WALK_RIGHT_DBG frame=" .. p5FrameN .. " x=" .. px)
-    end
     table.insert(p5Positions, px .. "," .. py)
     return
   end
