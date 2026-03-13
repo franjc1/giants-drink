@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Color Test</title>
+</head>
+<body style="background: #000; color: #0f0; font-family: monospace; padding: 20px;">
+    <h1>🧪 Simple Test</h1>
+
+    <button onclick="testClaudeAPI()">Test Claude API Call</button>
+    <button onclick="testColors()">Test Color Change</button>
+
+    <div id="output" style="margin-top: 20px; padding: 10px; background: #222; border: 1px solid #444;">
+        Click buttons above to test...
+    </div>
+
+    <script>
+        function log(msg) {
+            document.getElementById('output').innerHTML += msg + '<br>';
+        }
+
+        async function testClaudeAPI() {
+            log('🚀 Testing Claude API...');
+            try {
+                const response = await fetch('http://localhost:3000/api/anthropic', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': localStorage.getItem('anthropic_api_key'),
+                        'anthropic-version': '2023-06-01'
+                    },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-6',
+                        max_tokens: 500,
+                        messages: [{
+                            role: 'user',
+                            content: 'Return exactly this JSON with no other text: {"test": [1, 2, 3, 4], "colors": [[15, 33, 18, 7]]}'
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                let content = data.content[0].text.trim();
+
+                log('📨 Raw response: ' + content);
+
+                // Try to parse
+                try {
+                    const parsed = JSON.parse(content);
+                    log('✅ JSON parsed successfully: ' + JSON.stringify(parsed));
+                } catch (e) {
+                    log('❌ JSON parse failed: ' + e.message);
+                    log('❌ Failed content: ' + content);
+                }
+
+            } catch (error) {
+                log('❌ API error: ' + error.message);
+            }
+        }
+
+        function testColors() {
+            log('🎨 Testing colors...');
+            log('Current localStorage API key: ' + (localStorage.getItem('anthropic_api_key') ? 'Present' : 'Missing'));
+        }
+    </script>
+</body>
+</html>
