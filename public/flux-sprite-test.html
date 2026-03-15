@@ -42,8 +42,9 @@
   <div class="game-col">
     <div id="nes"></div>
     <div class="controls">
-      <button id="btn-inject" onclick="injectFluxSprites()" disabled>Inject FLUX Sprites</button>
-      <button id="btn-reset"  onclick="resetOriginal()"    disabled>Reset Original</button>
+      <button id="btn-inject"      onclick="injectFluxSprites('sprites')" disabled>Inject FLUX Sprites ($1000)</button>
+      <button id="btn-inject-both" onclick="injectFluxSprites('both')"    disabled>Inject Both Tables</button>
+      <button id="btn-reset"       onclick="resetOriginal()"              disabled>Reset Original</button>
     </div>
     <div class="status" id="status">Loading game...</div>
   </div>
@@ -70,7 +71,8 @@
       2. Rendered as 128×128 grid → upscaled 512×512<br>
       3. FLUX Kontext transforms to medieval fantasy style<br>
       4. Downscale → per-tile NES palette quantization → 2bpp CHR<br>
-      5. Live injection into jsnes vramMem[0x0000–0x0FFF]<br><br>
+      5. Inject Sprites → vramMem[0x1000–0x1FFF] (sprite pattern table)<br>
+      &nbsp;&nbsp;&nbsp;Inject Both → overwrites BG ($0000) + sprites ($1000)<br><br>
       <strong>Controls:</strong> Arrow keys + Z (jump) + X (fire/run)<br>
       <strong>File served from:</strong> /experiment-output/smb-sprites-quantized.chr
     </div>
@@ -80,7 +82,8 @@
 <script src="jsnes.min.js"></script>
 <script>
 let browser = null;
-let originalChrData = null;
+let originalTable0 = null;  // snapshot of vramMem[0x0000-0x0FFF] (BG pattern table)
+let originalTable1 = null;  // snapshot of vramMem[0x1000-0x1FFF] (sprite pattern table)
 let fluxChrData = null;
 let loaded = false;
 
@@ -108,28 +111,31 @@ async function loadChrFile() {
   return new Uint8Array(buf);
 }
 
-// ── Snapshot original CHR from running emulator ──────────────────────────────
-function snapshotOriginalChr() {
+// ── Snapshot both pattern tables from running emulator ───────────────────────
+function snapshotChr() {
   const nes = browser.nes;
-  const snapshot = new Uint8Array(4096);
+  const t0 = new Uint8Array(4096);
+  const t1 = new Uint8Array(4096);
   for (let i = 0; i < 4096; i++) {
-    snapshot[i] = nes.ppu.vramMem[i];
+    t0[i] = nes.ppu.vramMem[0x0000 + i];  // BG pattern table
+    t1[i] = nes.ppu.vramMem[0x1000 + i];  // Sprite pattern table
   }
-  return snapshot;
+  return { t0, t1 };
 }
 
-// ── Write CHR data to PPU vramMem (sprite pattern table 0 = $0000-$0FFF) ────
-function writeChrToVram(chrBytes) {
+// ── Write 4096 bytes into one pattern table ───────────────────────────────────
+function writePatternTable(chrBytes, baseAddr) {
   const nes = browser.nes;
   for (let i = 0; i < 4096; i++) {
-    nes.ppu.vramMem[i] = chrBytes[i];
+    nes.ppu.vramMem[baseAddr + i] = chrBytes[i];
   }
 }
 
 // ── Inject FLUX sprites ────────────────────────────────────────────────────────
-async function injectFluxSprites() {
+async function injectFluxSprites(mode) {
   if (!loaded) return;
   document.getElementById("btn-inject").disabled = true;
+  document.getElementById("btn-inject-both").disabled = true;
 
   if (!fluxChrData) {
     setStatus("Loading quantized CHR file...");
@@ -139,20 +145,32 @@ async function injectFluxSprites() {
     } catch (err) {
       setStatus("Error: " + err.message);
       document.getElementById("btn-inject").disabled = false;
+      document.getElementById("btn-inject-both").disabled = false;
       return;
     }
   }
 
-  writeChrToVram(fluxChrData);
-  setStatus("FLUX sprites injected into vramMem[0x0000-0x0FFF]. Game running with transformed sprites.");
+  if (mode === "both") {
+    // Write same FLUX CHR data to both pattern tables
+    writePatternTable(fluxChrData, 0x0000);  // BG pattern table
+    writePatternTable(fluxChrData, 0x1000);  // Sprite pattern table
+    setStatus("FLUX sprites injected into BOTH pattern tables: vramMem[0x0000-0x0FFF] (BG) + vramMem[0x1000-0x1FFF] (sprites).");
+  } else {
+    // Sprites only: $1000-$1FFF
+    writePatternTable(fluxChrData, 0x1000);
+    setStatus("FLUX sprites injected into sprite pattern table: vramMem[0x1000-0x1FFF].");
+  }
+
   document.getElementById("btn-inject").disabled = false;
+  document.getElementById("btn-inject-both").disabled = false;
 }
 
 // ── Reset to original sprites ────────────────────────────────────────────────
 function resetOriginal() {
-  if (!loaded || !originalChrData) return;
-  writeChrToVram(originalChrData);
-  setStatus("Original SMB sprites restored.");
+  if (!loaded || !originalTable0 || !originalTable1) return;
+  writePatternTable(originalTable0, 0x0000);
+  writePatternTable(originalTable1, 0x1000);
+  setStatus("Original SMB sprites and tiles restored.");
 }
 
 // ── Preview images ────────────────────────────────────────────────────────────
@@ -200,15 +218,18 @@ window.onload = async function() {
     for (let i = 0; i < romBytes.length; i++) romStr += String.fromCharCode(romBytes[i]);
     browser.loadROM(romStr);
 
-    // Wait 3 frames for the emulator to fully initialize, then snapshot CHR
+    // Wait a few frames for emulator to fully initialize, then snapshot both CHR tables
     setTimeout(() => {
-      originalChrData = snapshotOriginalChr();
-      console.log("Original CHR snapshot saved:", originalChrData.length, "bytes");
+      const { t0, t1 } = snapshotChr();
+      originalTable0 = t0;
+      originalTable1 = t1;
+      console.log("CHR snapshot: table0 (BG $0000-$0FFF):", t0.length, "bytes, table1 (sprites $1000-$1FFF):", t1.length, "bytes");
 
-      document.getElementById("btn-inject").disabled = false;
-      document.getElementById("btn-reset").disabled  = false;
+      document.getElementById("btn-inject").disabled      = false;
+      document.getElementById("btn-inject-both").disabled = false;
+      document.getElementById("btn-reset").disabled       = false;
       loaded = true;
-      setStatus("Game loaded. Arrow keys + Z/X to play. Use buttons to swap sprite graphics.");
+      setStatus("Game loaded. Arrow keys + Z/X to play. Inject sprites → $1000-$1FFF, Inject Both → overwrites all tiles.");
     }, 200);
 
   } catch (e) {
