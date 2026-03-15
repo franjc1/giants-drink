@@ -42,8 +42,9 @@
   <div class="game-col">
     <div id="nes"></div>
     <div class="controls">
-      <button id="btn-inject"      onclick="injectFluxSprites('sprites')" disabled>Inject FLUX Sprites ($1000)</button>
+      <button id="btn-inject"      onclick="injectFluxSprites('sprites')" disabled>Inject Sprites ($1000)</button>
       <button id="btn-inject-both" onclick="injectFluxSprites('both')"    disabled>Inject Both Tables</button>
+      <button id="btn-persistent"  onclick="togglePersistent()"          disabled>Inject Persistent</button>
       <button id="btn-reset"       onclick="resetOriginal()"              disabled>Reset Original</button>
     </div>
     <div class="status" id="status">Loading game...</div>
@@ -71,8 +72,9 @@
       2. Rendered as 128×128 grid → upscaled 512×512<br>
       3. FLUX Kontext transforms to medieval fantasy style<br>
       4. Downscale → per-tile NES palette quantization → 2bpp CHR<br>
-      5. Inject Sprites → vramMem[0x1000–0x1FFF] (sprite pattern table)<br>
-      &nbsp;&nbsp;&nbsp;Inject Both → overwrites BG ($0000) + sprites ($1000)<br><br>
+      5. PPU renders from <strong>ptTile[]</strong> cache, NOT vramMem directly<br>
+      &nbsp;&nbsp;&nbsp;Fix: use <code>ppu.writeMem()</code> to update both vramMem + ptTile<br>
+      &nbsp;&nbsp;&nbsp;Persistent: re-writes ptTile via setScanline() every frame<br><br>
       <strong>Controls:</strong> Arrow keys + Z (jump) + X (fire/run)<br>
       <strong>File served from:</strong> /experiment-output/smb-sprites-quantized.chr
     </div>
@@ -86,6 +88,7 @@ let originalTable0 = null;  // snapshot of vramMem[0x0000-0x0FFF] (BG pattern ta
 let originalTable1 = null;  // snapshot of vramMem[0x1000-0x1FFF] (sprite pattern table)
 let fluxChrData = null;
 let loaded = false;
+let persistentActive = false;
 
 function setStatus(msg) {
   document.getElementById("status").textContent = msg;
@@ -123,12 +126,86 @@ function snapshotChr() {
   return { t0, t1 };
 }
 
-// ── Write 4096 bytes into one pattern table ───────────────────────────────────
+// ── Write 4096 bytes into one pattern table ──────────────────────────────────
+// FIX: must use ppu.writeMem() not direct vramMem assignment.
+// The PPU renders from ptTile[] (512 pre-decoded Tile objects), NOT from vramMem.
+// Direct vramMem writes bypass the ptTile cache → no visual change.
+// ppu.writeMem(addr, val) does BOTH: vramMem[addr]=val AND patternWrite(addr,val)
+// which calls ptTile[addr>>4].setScanline(...) to rebuild the decoded tile cache.
 function writePatternTable(chrBytes, baseAddr) {
-  const nes = browser.nes;
+  const ppu = browser.nes.ppu;
   for (let i = 0; i < 4096; i++) {
-    nes.ppu.vramMem[baseAddr + i] = chrBytes[i];
+    ppu.writeMem(baseAddr + i, chrBytes[i]);
   }
+}
+
+// ── Per-frame persistent rewrite (for "Inject Persistent" button) ────────────
+// Wraps _frameTimer.onGenerateFrame so after every nes.frame() call we
+// re-decode the CHR bytes straight into ptTile via setScanline().
+// This is the belt-and-suspenders version: even if anything resets ptTile
+// (mapper writes, savestate, etc.) our data gets restored next frame.
+function installPersistentHook(chrBytes) {
+  const ft = browser._frameTimer;
+  const ppu = browser.nes.ppu;
+  const orig = ft._persistHookOrig || ft.onGenerateFrame;
+  ft._persistHookOrig = orig;
+
+  ft.onGenerateFrame = function() {
+    orig();
+    // Re-inject both pattern tables directly into ptTile after every frame.
+    // ptTile indices: 0-255 = table 0 ($0000), 256-511 = table 1 ($1000).
+    for (let tileNum = 0; tileNum < 256; tileNum++) {
+      const base = tileNum * 16;
+      const t0 = ppu.ptTile[tileNum];
+      const t1 = ppu.ptTile[256 + tileNum];
+      for (let row = 0; row < 8; row++) {
+        t0.setScanline(row, chrBytes[base + row], chrBytes[base + 8 + row]);
+        t1.setScanline(row, chrBytes[base + row], chrBytes[base + 8 + row]);
+      }
+    }
+  };
+}
+
+function removePersistentHook() {
+  const ft = browser._frameTimer;
+  if (ft._persistHookOrig) {
+    ft.onGenerateFrame = ft._persistHookOrig;
+    ft._persistHookOrig = null;
+  }
+}
+
+// ── Toggle persistent injection ───────────────────────────────────────────────
+async function togglePersistent() {
+  if (!loaded) return;
+
+  if (persistentActive) {
+    removePersistentHook();
+    persistentActive = false;
+    document.getElementById("btn-persistent").textContent = "Inject Persistent";
+    document.getElementById("btn-persistent").style.borderColor = "#e94560";
+    setStatus("Persistent injection stopped.");
+    return;
+  }
+
+  if (!fluxChrData) {
+    setStatus("Loading quantized CHR file...");
+    try {
+      fluxChrData = await loadChrFile();
+    } catch (err) {
+      setStatus("Error: " + err.message);
+      return;
+    }
+  }
+
+  // One-shot write first (so it takes effect immediately on the current frame)
+  writePatternTable(fluxChrData, 0x0000);
+  writePatternTable(fluxChrData, 0x1000);
+  // Then hook every subsequent frame
+  installPersistentHook(fluxChrData);
+  persistentActive = true;
+  document.getElementById("btn-persistent").textContent = "Stop Persistent";
+  document.getElementById("btn-persistent").style.borderColor = "#44ff88";
+  setStatus("Persistent injection active — re-writing both ptTile tables after every frame.");
 }
 
 // ── Inject FLUX sprites ────────────────────────────────────────────────────────
@@ -168,6 +245,13 @@ async function injectFluxSprites(mode) {
 // ── Reset to original sprites ────────────────────────────────────────────────
 function resetOriginal() {
   if (!loaded || !originalTable0 || !originalTable1) return;
+  // Kill persistent hook first
+  if (persistentActive) {
+    removePersistentHook();
+    persistentActive = false;
+    document.getElementById("btn-persistent").textContent = "Inject Persistent";
+    document.getElementById("btn-persistent").style.borderColor = "#e94560";
+  }
   writePatternTable(originalTable0, 0x0000);
   writePatternTable(originalTable1, 0x1000);
   setStatus("Original SMB sprites and tiles restored.");
@@ -227,9 +311,10 @@ window.onload = async function() {
 
       document.getElementById("btn-inject").disabled      = false;
       document.getElementById("btn-inject-both").disabled = false;
+      document.getElementById("btn-persistent").disabled  = false;
       document.getElementById("btn-reset").disabled       = false;
       loaded = true;
-      setStatus("Game loaded. Arrow keys + Z/X to play. Inject sprites → $1000-$1FFF, Inject Both → overwrites all tiles.");
+      setStatus("Game loaded. Arrow keys + Z/X to play. Try the buttons — Persistent re-writes ptTile every frame.");
     }, 200);
 
   } catch (e) {
