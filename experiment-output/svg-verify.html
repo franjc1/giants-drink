@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SVG Verify — Ryu Original</title>
+<style>
+  body { background: #1a1a2e; color: #eee; font-family: monospace; padding: 40px; }
+  h1 { color: #7ec8e3; }
+  .row { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .panel { text-align: center; }
+  .panel h2 { font-size: 14px; color: #aaa; margin-bottom: 12px; }
+  canvas, img, object { image-rendering: pixelated; display: block; }
+  .info { margin-top: 8px; font-size: 12px; color: #888; }
+</style>
+</head>
+<body>
+  <h1>Ryu SVG Losslessness Verification</h1>
+  <p>Original PNG vs SVG at 4x scale. Should look identical.</p>
+
+  <div class="row">
+    <div class="panel">
+      <h2>Original PNG (4x)</h2>
+      <img id="orig" src="ryu-original.png" style="width: auto; height: auto; transform-origin: top left;">
+      <div class="info" id="png-info">loading...</div>
+    </div>
+    <div class="panel">
+      <h2>SVG Conversion (4x)</h2>
+      <img id="svg-img" src="ryu-original.svg" style="width: auto; height: auto; transform-origin: top left;">
+      <div class="info" id="svg-info">loading...</div>
+    </div>
+  </div>
+
+  <script>
+    function scale(id, infoId) {
+      const img = document.getElementById(id);
+      img.onload = function() {
+        const SCALE = 4;
+        img.style.width = (img.naturalWidth * SCALE) + 'px';
+        img.style.height = (img.naturalHeight * SCALE) + 'px';
+        document.getElementById(infoId).textContent =
+          img.naturalWidth + 'x' + img.naturalHeight + ' → ' +
+          (img.naturalWidth * SCALE) + 'x' + (img.naturalHeight * SCALE) + 'px at 4x';
+      };
+      if (img.complete) img.onload();
+    }
+    scale('orig', 'png-info');
+    scale('svg-img', 'svg-info');
+  </script>
+</body>
+</html>
