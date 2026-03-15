@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FLUX Sprite Round-Trip Demo</title>
+<style>
+  body { background: #1a1a2e; color: #eee; font-family: monospace; margin: 0; padding: 20px; }
+  h1 { color: #e94560; margin-bottom: 4px; font-size: 18px; }
+  .subtitle { color: #888; font-size: 12px; margin-bottom: 20px; }
+  .layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .game-col { flex: 0 0 auto; }
+  .info-col { flex: 1; min-width: 280px; max-width: 420px; }
+  #nes { width: 512px; height: 480px; display: block; border: 2px solid #444; }
+  .controls { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+  button {
+    background: #16213e; color: #eee; border: 1px solid #e94560;
+    padding: 8px 16px; cursor: pointer; font-family: monospace; font-size: 13px;
+    transition: background 0.15s;
+  }
+  button:hover { background: #e94560; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; border-color: #555; }
+  .status {
+    margin-top: 12px; padding: 10px; background: #0f0f23;
+    border-left: 3px solid #e94560; font-size: 12px; line-height: 1.6;
+    min-height: 40px;
+  }
+  .sprite-preview { margin-top: 16px; }
+  .sprite-preview h3 { font-size: 12px; color: #888; margin: 0 0 6px 0; text-transform: uppercase; }
+  .sprite-preview img {
+    width: 256px; height: 256px; image-rendering: pixelated;
+    border: 1px solid #333; display: block;
+  }
+  .sprite-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .legend { font-size: 11px; color: #666; margin-top: 16px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<h1>FLUX Sprite Round-Trip Demo</h1>
+<p class="subtitle">SMB sprites → FLUX Kontext transform → NES CHR quantize → live injection into running game</p>
+
+<div class="layout">
+  <div class="game-col">
+    <div id="nes"></div>
+    <div class="controls">
+      <button id="btn-inject" onclick="injectFluxSprites()" disabled>Inject FLUX Sprites</button>
+      <button id="btn-reset"  onclick="resetOriginal()"    disabled>Reset Original</button>
+    </div>
+    <div class="status" id="status">Loading game...</div>
+  </div>
+
+  <div class="info-col">
+    <div class="sprite-row">
+      <div class="sprite-preview">
+        <h3>Original sprites</h3>
+        <img id="img-original" src="" alt="original">
+      </div>
+      <div class="sprite-preview">
+        <h3>FLUX transformed</h3>
+        <img id="img-flux" src="" alt="flux">
+      </div>
+      <div class="sprite-preview">
+        <h3>Quantized (NES CHR)</h3>
+        <img id="img-quantized" src="" alt="quantized">
+      </div>
+    </div>
+
+    <div class="legend">
+      <strong>How this works:</strong><br>
+      1. SMB CHR-ROM sprite tiles extracted (pattern table 0, 256 tiles)<br>
+      2. Rendered as 128×128 grid → upscaled 512×512<br>
+      3. FLUX Kontext transforms to medieval fantasy style<br>
+      4. Downscale → per-tile NES palette quantization → 2bpp CHR<br>
+      5. Live injection into jsnes vramMem[0x0000–0x0FFF]<br><br>
+      <strong>Controls:</strong> Arrow keys + Z (jump) + X (fire/run)<br>
+      <strong>File served from:</strong> /experiment-output/smb-sprites-quantized.chr
+    </div>
+  </div>
+</div>
+
+<script src="jsnes.min.js"></script>
+<script>
+let browser = null;
+let originalChrData = null;
+let fluxChrData = null;
+let loaded = false;
+
+function setStatus(msg) {
+  document.getElementById("status").textContent = msg;
+  console.log("[status]", msg);
+}
+
+// ── Load ROM from smb-rom-base64.txt ──────────────────────────────────────────
+async function loadRomBase64() {
+  const resp = await fetch("/smb-rom-base64.txt");
+  if (!resp.ok) throw new Error("Failed to load ROM base64: " + resp.status);
+  const b64 = (await resp.text()).trim();
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+// ── Load quantized CHR file ────────────────────────────────────────────────────
+async function loadChrFile() {
+  const resp = await fetch("/experiment-output/smb-sprites-quantized.chr");
+  if (!resp.ok) throw new Error("CHR file not found. Run tools/flux-roundtrip-test.js first. Status: " + resp.status);
+  const buf = await resp.arrayBuffer();
+  return new Uint8Array(buf);
+}
+
+// ── Snapshot original CHR from running emulator ──────────────────────────────
+function snapshotOriginalChr() {
+  const nes = browser.nes;
+  const snapshot = new Uint8Array(4096);
+  for (let i = 0; i < 4096; i++) {
+    snapshot[i] = nes.ppu.vramMem[i];
+  }
+  return snapshot;
+}
+
+// ── Write CHR data to PPU vramMem (sprite pattern table 0 = $0000-$0FFF) ────
+function writeChrToVram(chrBytes) {
+  const nes = browser.nes;
+  for (let i = 0; i < 4096; i++) {
+    nes.ppu.vramMem[i] = chrBytes[i];
+  }
+}
+
+// ── Inject FLUX sprites ────────────────────────────────────────────────────────
+async function injectFluxSprites() {
+  if (!loaded) return;
+  document.getElementById("btn-inject").disabled = true;
+
+  if (!fluxChrData) {
+    setStatus("Loading quantized CHR file...");
+    try {
+      fluxChrData = await loadChrFile();
+      setStatus(`Loaded: ${fluxChrData.length} bytes of quantized CHR data`);
+    } catch (err) {
+      setStatus("Error: " + err.message);
+      document.getElementById("btn-inject").disabled = false;
+      return;
+    }
+  }
+
+  writeChrToVram(fluxChrData);
+  setStatus("FLUX sprites injected into vramMem[0x0000-0x0FFF]. Game running with transformed sprites.");
+  document.getElementById("btn-inject").disabled = false;
+}
+
+// ── Reset to original sprites ────────────────────────────────────────────────
+function resetOriginal() {
+  if (!loaded || !originalChrData) return;
+  writeChrToVram(originalChrData);
+  setStatus("Original SMB sprites restored.");
+}
+
+// ── Preview images ────────────────────────────────────────────────────────────
+function loadPreviewImages() {
+  const ts = Date.now();
+  const orig = document.getElementById("img-original");
+  const flux = document.getElementById("img-flux");
+  const quant = document.getElementById("img-quantized");
+
+  orig.src  = "/experiment-output/smb-sprites-original.png?" + ts;
+  orig.onerror = () => orig.style.opacity = "0.2";
+
+  flux.src  = "/experiment-output/smb-sprites-flux-transformed.png?" + ts;
+  flux.onerror = () => { flux.alt = "Run flux-roundtrip-test.js first"; flux.style.opacity = "0.2"; };
+
+  quant.src = "/experiment-output/smb-sprites-quantized-preview.png?" + ts;
+  quant.onerror = () => quant.style.opacity = "0.2";
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+window.onload = async function() {
+  setStatus("Loading ROM...");
+  loadPreviewImages();
+
+  let romBytes;
+  try {
+    romBytes = await loadRomBase64();
+    setStatus(`ROM loaded: ${romBytes.length} bytes`);
+  } catch (err) {
+    setStatus("ROM load failed: " + err.message);
+    return;
+  }
+
+  try {
+    browser = new jsnes.Browser({
+      container: document.getElementById("nes"),
+      onError: function(e) {
+        console.error("jsnes error:", e);
+        setStatus("Emulator error: " + (e.message || e));
+      }
+    });
+
+    // Convert Uint8Array to string for jsnes
+    let romStr = "";
+    for (let i = 0; i < romBytes.length; i++) romStr += String.fromCharCode(romBytes[i]);
+    browser.loadROM(romStr);
+
+    // Wait 3 frames for the emulator to fully initialize, then snapshot CHR
+    setTimeout(() => {
+      originalChrData = snapshotOriginalChr();
+      console.log("Original CHR snapshot saved:", originalChrData.length, "bytes");
+
+      document.getElementById("btn-inject").disabled = false;
+      document.getElementById("btn-reset").disabled  = false;
+      loaded = true;
+      setStatus("Game loaded. Arrow keys + Z/X to play. Use buttons to swap sprite graphics.");
+    }, 200);
+
+  } catch (e) {
+    console.error(e);
+    setStatus("Failed to start emulator: " + e.message);
+  }
+};
+</script>
+</body>
+</html>
