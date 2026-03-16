@@ -1,6 +1,6 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-13 (Thread 10: Emulator-as-Engine Paradigm Shift)
+**Last updated:** 2026-03-16 (Universal Sprite Extractor v3 — 85.3% coverage)
 
 ---
 
@@ -143,6 +143,46 @@ giants-drink/
       manifest-architecture-spec.md      ← from Sessions 10-18 (still valid as behavioral map format reference)
       universal-extraction-spec.md       ← extraction pipeline spec
       [other design docs]
+```
+
+---
+
+---
+
+## New This Session (2026-03-16): Universal Sprite Extractor v3
+
+### Tool: `tools/universal-sprite-extractor.js`
+
+Universal NES sprite + tile extractor using jsnes. **Validated on SMB: 85.3% total coverage (435/510 non-blank tiles).**
+
+#### What it does
+1. Boots any NES game to gameplay state
+2. Global oracle: probes every RAM byte ($0000-$07FF), identifies TILE_CHANGERs (bytes that change what OAM sprites appear)
+3. Multi-baseline oracle: uses "context changer" bytes (many OAM slots affected) to find additional TILE_CHANGERs from different game states
+4. Snapshot collection: 20 gameplay snapshots (600f right-hold) + 60 context snapshots = 80 total
+5. Best-snapshot sweep: for each TILE_CHANGER, find the snapshot where its entity slot is most active, then sweep 0-255 values
+6. **Time-based animation capture**: after main sweep, advance game 4-64 frames in 4f increments per entity type to capture natural animation cycles (universal — no animation byte hardcoding needed)
+7. **Combination sweep**: sweeps nearby TILE_CHANGER addresses with 16 values to find tiles visible only in specific entity-pair combinations
+8. **All CHR-ROM BG tiles**: includes every non-blank tile from BG bank directly (not just nametable-discovered tiles)
+9. Renders sprite sheet: black bg cells, 2px white borders, left row labels, player group first, deduplicated animation frames
+10. Coverage report: sprite bank % + BG bank % + total
+
+#### Coverage results on SMB
+| Version | Sprite | BG | Total |
+|---------|--------|-----|-------|
+| v1 | 38% | ~20% | ~30% |
+| v2 | 52.5% | 22.7% | 36.7% |
+| v3 final | **70.6%** (180/255) | **100%** (255/255) | **85.3%** (435/510) |
+
+#### Key algorithm insights
+- **Time-based animation > animation byte probe**: The global animation counter ($0046 in SMB) isn't found by the oracle because writing it alone doesn't change tile *multiset* from baseline. Advancing time naturally by N frames is universal and captures all animation phases.
+- **BG coverage ceiling for CHR-ROM**: Nametable capture only sees tiles used in current level. For CHR-ROM games, all tiles are statically loaded — include them all.
+- **Combination sweep finds entity-pair tiles**: Nearby TILE_CHANGERs are usually other entity-slot type bytes. Sweeping them reveals tiles only visible when two specific entity types coexist.
+- **Remaining ~15% gap**: Big Mario tiles ($50-$57 range), end-game sprites ($D0+), specific enemy combinations requiring multi-byte state changes (Mario size + physics + animation simultaneously). Single-byte oracle cannot trigger these.
+
+#### Usage
+```bash
+node tools/universal-sprite-extractor.js <rom.nes> <output-dir>
 ```
 
 ---
