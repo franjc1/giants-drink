@@ -1,6 +1,64 @@
 # Two Fires — Current Status
 
-**Last updated:** 2026-03-16 (Universal Sprite Extractor v3 — 85.3% coverage)
+**Last updated:** 2026-03-22 (PixelLab Background Stress Test)
+
+---
+
+## What Just Happened (2026-03-22): PixelLab Background Stress Test
+
+### Goal
+Determine whether PixelLab can generate backgrounds (parallax layers) at quality comparable to 16-bit SNES games. Visual quality is the entire question.
+
+### Assets Generated
+
+| Asset | Tool | Status | Notes |
+|-------|------|--------|-------|
+| bg-layer1-sky.png | create_tiles_pro 128×128 side | ✅ Complete | Dark blue industrial skyline silhouette |
+| bg-layer2-buildings.png | create_tiles_pro 128×128 side | ✅ Complete | Factory buildings with lit windows |
+| bg-layer3-machinery.png | create_tiles_pro 128×128 side | ✅ Complete | Near-ground gears/pipes/scaffolding |
+| character-soldier.png | create_character 48×48 side | ✅ Complete | Armored commando, east rotation |
+| character-soldier-west.png | create_character 48×48 side | ✅ Complete | West rotation |
+| enemy-drone.png | create_character 32×32 side | ✅ Complete | Patrol drone, east rotation |
+| enemy-drone-west.png | create_character 32×32 side | ✅ Complete | West rotation |
+| obj-crate.png | create_map_object 48×48 | ✅ Complete | Metal hazard crate |
+| obj-pipe.png | create_map_object 48×64 | ✅ Complete | Steam pipe with valve |
+| obj-light.png | create_map_object 32×40 | ✅ Complete | Wall alarm light |
+| obj-conveyor.png | create_map_object 64×32 | ✅ Complete | Broken conveyor belt |
+| tileset-industrial.png | create_tiles_pro 16×16 (6 tiles) | ⏳ Server congestion (stuck at 71%) | Procedural fallback active in game |
+| Walk/idle animations | animate_character | ⏳ Server congestion (stuck at 90%) | Static rotation sprites used instead |
+
+**Sidescroller tileset tool** (`create_sidescroller_tileset`) failed twice with "Generation completed but no tiles were produced." — unclear why. Used `create_tiles_pro` as alternative.
+
+### Output Files
+```
+experiments/pixellab-bg-test/
+  index.html    — Phaser 3 playable scene (3× SNES res, parallax scrolling, physics)
+  assets.html   — Individual asset review + tiling previews + composite stack
+  assets/       — All 13 generated PNGs
+```
+
+### Scene Features
+- 3-layer parallax (scrollFactors 0.05 / 0.22 / 0.48)
+- Player character: left/right/jump (arrow keys + WASD + Space)
+- 5 patrol drones with vertical bobbing
+- Ground platform + 5 floating platforms
+- Decorative objects: crates, pipes, lights, conveyor belts
+- Tileset visual: procedural fallback (dark steel with rivets) when PNG not available
+- Level is 1440px wide (~3 screens)
+
+### PixelLab Operational Notes
+- `create_tiles_pro` (128×128 side) → good background layers, ~120s
+- `create_character` → ~3-5 min for rotations, animation jobs run parallel but hit concurrent job limits
+- `create_map_object` → ~90s, works well for scene props
+- Server was under heavy load during this session — animation and tileset jobs stuck at 70-90% for 10+ minutes each
+- Tiles_pro generates individual tile_0.png / tile_1.png files (not a pre-assembled sheet) — need to download and combine with ImageMagick for Phaser tilesets
+
+### What Joe Should Do
+1. Open `experiments/pixellab-bg-test/assets.html` (serve locally or open in browser) to evaluate individual assets
+2. Open `experiments/pixellab-bg-test/index.html` to play the scene
+3. Answer the question: does this look like a real SNES game, or AI-generated?
+4. The bg layers and decorations are the primary test artifacts (characters are small/secondary)
+5. If tileset PNG later downloads successfully: run `node tools/assemble-tileset.js` (not yet written — needs ImageMagick montage) and refresh scene
 
 ---
 

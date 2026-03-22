@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PixelLab Asset Review — Industrial SNES Test</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1120; color: #ccc; font: 12px/1.6 monospace; padding: 24px 28px; }
+    h1 { color: #e87040; margin-bottom: 3px; font-size: 15px; letter-spacing: 0.04em; }
+    .subtitle { color: #555; margin-bottom: 32px; font-size: 11px; }
+    h2 { color: #7090b8; margin: 36px 0 14px; font-size: 12px;
+         border-bottom: 1px solid #1e2535; padding-bottom: 5px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .note { color: #888; font-size: 10px; margin: -8px 0 14px; font-style: italic; }
+
+    .cards { display: flex; flex-wrap: wrap; gap: 16px; }
+    .card {
+      background: #111825; border: 1px solid #222c40;
+      border-radius: 3px; padding: 14px;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    }
+    .card img {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      background: #080c14;
+      border: 1px solid #1e2840;
+      display: block;
+    }
+    .label { color: #778; font-size: 10px; }
+    .dims  { color: #445; font-size: 9px; }
+
+    /* tiling preview strip */
+    .tile-strip {
+      background-repeat: repeat-x;
+      background-size: auto 100%;
+      height: 128px; width: 960px; max-width: 100%;
+      border: 1px solid #222;
+      image-rendering: pixelated;
+    }
+
+    /* bg section */
+    .bg-group { display: flex; flex-direction: column; gap: 20px; max-width: 980px; }
+    .bg-item { display: flex; flex-direction: column; gap: 8px; }
+    .bg-item .row { display: flex; gap: 12px; align-items: flex-start; }
+
+    /* composited stack */
+    .composite { position: relative; display: inline-block; }
+    .composite img { display: block; image-rendering: pixelated; }
+    .composite img + img { position: absolute; top: 0; left: 0; }
+
+    /* status badge */
+    .badge { display: inline-block; font-size: 9px; padding: 1px 6px; border-radius: 2px; }
+    .ok  { background: #183020; color: #4a8; border: 1px solid #2a5040; }
+    .pending { background: #281800; color: #a80; border: 1px solid #503010; }
+  </style>
+</head>
+<body>
+<h1>PixelLab Asset Review — Industrial SNES Parallax Test</h1>
+<p class="subtitle">Two Fires · Visual Quality Validation · All pixel art by PixelLab AI · 2026-03-22</p>
+
+<!-- ── BG LAYERS ─────────────────────────────────────────────────────────── -->
+<h2>Background Layers — 128×128px tiles (scroll-repeating)</h2>
+
+<div class="bg-group">
+  <!-- Layer 1 -->
+  <div class="bg-item">
+    <div class="label">Layer 1 — Distant sky / cityscape silhouette &nbsp;<span class="badge ok">✓ ready</span>&nbsp; scrollFactor 0.05</div>
+    <div class="row">
+      <img src="assets/bg-layer1-sky.png" style="width:256px;height:256px;" title="2× zoom">
+      <div style="flex:1;">
+        <div class="label" style="margin-bottom:6px;">Tiling preview →</div>
+        <div class="tile-strip" style="background-image:url('assets/bg-layer1-sky.png')"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layer 2 -->
+  <div class="bg-item">
+    <div class="label">Layer 2 — Mid-far factory buildings / smokestacks &nbsp;<span class="badge ok">✓ ready</span>&nbsp; scrollFactor 0.22</div>
+    <div class="row">
+      <img src="assets/bg-layer2-buildings.png" style="width:256px;height:256px;" title="2× zoom">
+      <div style="flex:1;">
+        <div class="label" style="margin-bottom:6px;">Tiling preview →</div>
+        <div class="tile-strip" style="background-image:url('assets/bg-layer2-buildings.png')"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layer 3 -->
+  <div class="bg-item">
+    <div class="label">Layer 3 — Near-ground machinery / scaffolding &nbsp;<span class="badge ok">✓ ready</span>&nbsp; scrollFactor 0.48</div>
+    <div class="row">
+      <img src="assets/bg-layer3-machinery.png" style="width:256px;height:256px;" title="2× zoom">
+      <div style="flex:1;">
+        <div class="label" style="margin-bottom:6px;">Tiling preview →</div>
+        <div class="tile-strip" style="background-image:url('assets/bg-layer3-machinery.png')"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── COMPOSITE ─────────────────────────────────────────────────────────── -->
+<h2>Composite Stack — all 3 BG layers overlaid</h2>
+<div class="cards">
+  <div class="card">
+    <div class="label">1× (128×128)</div>
+    <div class="composite" style="width:128px;height:128px;">
+      <img src="assets/bg-layer1-sky.png"       style="width:128px;height:128px;opacity:1.0;">
+      <img src="assets/bg-layer2-buildings.png" style="width:128px;height:128px;opacity:0.80;">
+      <img src="assets/bg-layer3-machinery.png" style="width:128px;height:128px;opacity:0.85;">
+    </div>
+  </div>
+  <div class="card">
+    <div class="label">2× (256×256)</div>
+    <div class="composite" style="width:256px;height:256px;">
+      <img src="assets/bg-layer1-sky.png"       style="width:256px;height:256px;opacity:1.0;">
+      <img src="assets/bg-layer2-buildings.png" style="width:256px;height:256px;opacity:0.80;">
+      <img src="assets/bg-layer3-machinery.png" style="width:256px;height:256px;opacity:0.85;">
+    </div>
+  </div>
+  <div class="card">
+    <div class="label">4× (512×512)</div>
+    <div class="composite" style="width:512px;height:512px;">
+      <img src="assets/bg-layer1-sky.png"       style="width:512px;height:512px;opacity:1.0;">
+      <img src="assets/bg-layer2-buildings.png" style="width:512px;height:512px;opacity:0.80;">
+      <img src="assets/bg-layer3-machinery.png" style="width:512px;height:512px;opacity:0.85;">
+    </div>
+  </div>
+</div>
+
+<!-- ── TILESET ────────────────────────────────────────────────────────────── -->
+<h2>Platform Tileset — 16×16 (6-tile strip)</h2>
+<p class="note">6 tiles: top-edge, fill, left-cap, right-cap, grating, rust-plate</p>
+<div class="cards">
+  <div class="card">
+    <div class="label">Raw strip &nbsp;<span id="tileset-badge" class="badge pending">⟳ generating</span></div>
+    <img src="assets/tileset-industrial.png" id="tileset-raw" style="height:16px;image-rendering:pixelated;">
+  </div>
+  <div class="card">
+    <div class="label">8× zoom</div>
+    <img src="assets/tileset-industrial.png" id="tileset-zoom" style="height:128px;image-rendering:pixelated;">
+  </div>
+</div>
+
+<!-- ── CHARACTERS ─────────────────────────────────────────────────────────── -->
+<h2>Player — Armored Soldier (48×48)</h2>
+<p class="note">East and west facing rotations. Walk animation sheet: pending server queue.</p>
+<div class="cards">
+  <div class="card">
+    <img src="assets/character-soldier.png" style="width:48px;height:48px;" title="raw">
+    <div class="label">East (facing right) — 1×</div>
+  </div>
+  <div class="card">
+    <img src="assets/character-soldier.png" style="width:144px;height:144px;">
+    <div class="label">East — 3×</div>
+  </div>
+  <div class="card">
+    <img src="assets/character-soldier.png" style="width:240px;height:240px;">
+    <div class="label">East — 5×</div>
+  </div>
+  <div class="card">
+    <img src="assets/character-soldier-west.png" style="width:144px;height:144px;">
+    <div class="label">West (facing left) — 3×</div>
+  </div>
+  <!-- Animated canvas: bob between east/west -->
+  <div class="card">
+    <canvas id="soldier-canvas" width="144" height="144"
+      style="image-rendering:pixelated;border:1px solid #1e2840;background:#080c14;"></canvas>
+    <div class="label">Preview (east + west alternating)</div>
+  </div>
+</div>
+
+<h2>Enemy — Patrol Drone (32×32)</h2>
+<p class="note">East and west facing rotations. Idle breathing animation: pending server queue.</p>
+<div class="cards">
+  <div class="card">
+    <img src="assets/enemy-drone.png" style="width:32px;height:32px;" title="raw">
+    <div class="label">East — 1×</div>
+  </div>
+  <div class="card">
+    <img src="assets/enemy-drone.png" style="width:128px;height:128px;">
+    <div class="label">East — 4×</div>
+  </div>
+  <div class="card">
+    <img src="assets/enemy-drone.png" style="width:192px;height:192px;">
+    <div class="label">East — 6×</div>
+  </div>
+  <div class="card">
+    <img src="assets/enemy-drone-west.png" style="width:128px;height:128px;">
+    <div class="label">West (facing left) — 4×</div>
+  </div>
+  <div class="card">
+    <canvas id="drone-canvas" width="128" height="128"
+      style="image-rendering:pixelated;border:1px solid #1e2840;background:#080c14;"></canvas>
+    <div class="label">Preview (east + west alternating)</div>
+  </div>
+</div>
+
+<!-- ── DECORATIVE OBJECTS ─────────────────────────────────────────────────── -->
+<h2>Decorative Map Objects (transparent background)</h2>
+<div class="cards">
+  <div class="card">
+    <img src="assets/obj-crate.png" style="width:96px;height:96px;background:#0a0e1a;">
+    <div class="label">Metal Crate</div>
+    <div class="dims">48×48 · hazard stripes</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-crate.png" style="width:192px;height:192px;background:#0a0e1a;">
+    <div class="label">Metal Crate — 4×</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-pipe.png" style="width:96px;height:128px;background:#0a0e1a;">
+    <div class="label">Steam Pipe</div>
+    <div class="dims">48×64 · valve + steam</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-pipe.png" style="width:192px;height:256px;background:#0a0e1a;">
+    <div class="label">Steam Pipe — 4×</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-light.png" style="width:64px;height:80px;background:#0a0e1a;">
+    <div class="label">Warning Light</div>
+    <div class="dims">32×40 · red alarm</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-light.png" style="width:128px;height:160px;background:#0a0e1a;">
+    <div class="label">Warning Light — 4×</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-conveyor.png" style="width:128px;height:64px;background:#0a0e1a;">
+    <div class="label">Conveyor Belt</div>
+    <div class="dims">64×64 · rusted rollers</div>
+  </div>
+  <div class="card">
+    <img src="assets/obj-conveyor.png" style="width:256px;height:128px;background:#0a0e1a;">
+    <div class="label">Conveyor Belt — 4×</div>
+  </div>
+</div>
+
+<!-- ── SCENE PREVIEW ──────────────────────────────────────────────────────── -->
+<h2>Scene Preview — Objects on Background</h2>
+<p class="note">Simulates how assets look layered together (no Phaser — pure CSS compositing)</p>
+<div style="position:relative;width:960px;height:270px;overflow:hidden;border:1px solid #222;image-rendering:pixelated;">
+  <!-- bg layers stacked -->
+  <div style="position:absolute;inset:0;background-image:url('assets/bg-layer1-sky.png');background-size:128px 270px;background-repeat:repeat-x;"></div>
+  <div style="position:absolute;inset:0;opacity:0.85;background-image:url('assets/bg-layer2-buildings.png');background-size:128px 270px;background-repeat:repeat-x;"></div>
+  <div style="position:absolute;inset:0;opacity:0.9;background-image:url('assets/bg-layer3-machinery.png');background-size:128px 270px;background-repeat:repeat-x;"></div>
+  <!-- ground bar -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:68px;background:#1a2236;border-top:2px solid #3a4a6a;"></div>
+  <!-- objects -->
+  <img src="assets/obj-pipe.png"     style="position:absolute;bottom:68px;left:80px; width:32px;height:43px;image-rendering:pixelated;">
+  <img src="assets/obj-crate.png"    style="position:absolute;bottom:68px;left:150px;width:32px;height:32px;image-rendering:pixelated;">
+  <img src="assets/obj-light.png"    style="position:absolute;top:8px;   left:240px;width:21px;height:27px;image-rendering:pixelated;">
+  <img src="assets/obj-conveyor.png" style="position:absolute;bottom:68px;left:320px;width:43px;height:21px;image-rendering:pixelated;">
+  <img src="assets/obj-crate.png"    style="position:absolute;bottom:68px;left:500px;width:32px;height:32px;image-rendering:pixelated;">
+  <img src="assets/obj-pipe.png"     style="position:absolute;bottom:68px;left:680px;width:32px;height:43px;image-rendering:pixelated;">
+  <img src="assets/obj-light.png"    style="position:absolute;top:8px;   left:760px;width:21px;height:27px;image-rendering:pixelated;">
+  <img src="assets/obj-conveyor.png" style="position:absolute;bottom:68px;left:840px;width:43px;height:21px;image-rendering:pixelated;">
+  <!-- characters -->
+  <img src="assets/character-soldier.png" style="position:absolute;bottom:68px;left:200px;width:32px;height:32px;image-rendering:pixelated;">
+  <img src="assets/enemy-drone.png"       style="position:absolute;bottom:110px;left:440px;width:21px;height:21px;image-rendering:pixelated;">
+  <img src="assets/enemy-drone-west.png"  style="position:absolute;bottom:100px;left:700px;width:21px;height:21px;image-rendering:pixelated;">
+</div>
+
+<script>
+// ── Directional flip preview ──────────────────────────────────────────────────
+function flipPreview(canvasId, imgEastSrc, imgWestSrc, w, h, fps) {
+  const canvas = document.getElementById(canvasId);
+  canvas.width  = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+
+  const imgE = new Image(), imgW = new Image();
+  imgE.src = imgEastSrc;
+  imgW.src = imgWestSrc;
+
+  let frame = 0;
+  setInterval(() => {
+    ctx.clearRect(0, 0, w, h);
+    const img = (Math.floor(frame / 3) % 2 === 0) ? imgE : imgW;
+    ctx.drawImage(img, 0, 0, w, h);
+    frame++;
+  }, 1000 / fps);
+}
+
+window.addEventListener('load', () => {
+  flipPreview('soldier-canvas', 'assets/character-soldier.png', 'assets/character-soldier-west.png', 144, 144, 4);
+  flipPreview('drone-canvas',   'assets/enemy-drone.png',       'assets/enemy-drone-west.png',       128, 128, 3);
+
+  // Check if tileset is present
+  const img = new Image();
+  img.onload = () => {
+    document.getElementById('tileset-badge').className = 'badge ok';
+    document.getElementById('tileset-badge').textContent = '✓ ready';
+  };
+  img.src = 'assets/tileset-industrial.png?' + Date.now();
+});
+</script>
+</body>
+</html>
