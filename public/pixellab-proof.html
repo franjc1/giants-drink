@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Harry Potter — Hogwarts Challenge</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #07071a;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh; font-family: monospace; color: #555;
+    }
+    canvas { display: block; image-rendering: pixelated; }
+    #info { margin-top: 8px; font-size: 11px; text-align: center; line-height: 1.7; }
+    #info b { color: #888; }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  <div id="info">
+    <b>← → / A D</b> move &nbsp; <b>↑ / W</b> jump &nbsp; <b>Jump ON</b> enemies to stomp them
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+  <script>
+  // ══════════════════════════════════════════════════════════════════
+  //  ASSET FLAGS — flip to true as each PixelLab batch is downloaded
+  // ══════════════════════════════════════════════════════════════════
+  const ASSETS = {
+    harry:    true,   // idle_0..3, walk_0..3  in assets/harry/
+    enemies:  true,   // dementor_0..3, deathEater_0..3  in assets/enemies/
+    snitch:   true,   // assets/collectibles/snitch.png
+    dungeon:  true,   // assets/tileset/dark_dungeon.png
+
+    // frame counts
+    harryIdleN:      4,
+    harryWalkN:      4,
+    dementorN:       4,   // breathing-idle east, 4 frames
+    deathEaterN:     4,   // walking-4-frames east, 4 frames
+
+    // Castle tileset (already downloaded 64×64, 4×4 grid of 16×16 tiles)
+    TILE_TOP:        3,   // wang_12 — stone top edge / moss surface
+    TILE_SOLID:      12,  // wang_15 — full solid block
+
+    // Dungeon tileset — same Wang numbering, same frame indices
+    DUNGEON_TOP:     3,
+    DUNGEON_SOLID:   12,
+  };
+
+  // ══════════════════════════════════════════════════════════════════
+  //  LEVEL DATA
+  // ══════════════════════════════════════════════════════════════════
+  const LEVEL_W = 4800;
+  const GAME_H  = 480;
+  const TILE    = 16;
+
+  // Ground row: Math.floor((480-16)/16) = 29. Platform top y = row*16.
+  // Jump physics: gravity=1500, jump=-500. Max height ≈ 83px = 5.2 tiles.
+  // Keep height changes ≤ 4 tiles (64px) for reliable jumps.
+
+  // Platforms: [startCol, row, widthCols, section]
+  //   section 0 = castle tileset (x < 2400)
+  //   section 1 = dungeon tileset (x ≥ 2400)
+  const PLATFORMS = [
+    // ─── Castle: Easy intro — wide platforms, gentle steps ─────────
+    [7,  25, 8, 0],   // first hop from ground (4-row gap, comfortable)
+    [17, 23, 7, 0],   // +2
+    [26, 25, 8, 0],   // -2
+    [35, 22, 7, 0],   // +3
+    [44, 24, 7, 0],   // -2
+    [53, 21, 6, 0],   // +3
+    [61, 23, 6, 0],   // -2
+    [69, 19, 6, 0],   // +4  ← first real leap
+    [77, 22, 6, 0],   // -3
+
+    // ─── Castle: Getting harder — narrower, taller ──────────────────
+    [85, 19, 5, 0],
+    [92, 21, 5, 0],   // -2
+    [99, 17, 5, 0],   // +4
+    [106,20, 5, 0],   // -3
+    [113,16, 4, 0],   // +4  ← near max height
+    [119,19, 5, 0],   // -3
+    [126,15, 4, 0],   // +4  ← high section
+    [132,18, 5, 0],   // -3
+    [139,14, 4, 0],   // +4  ← apex of castle
+    [145,18, 5, 0],   // -4
+    [152,22, 4, 0],   // -4  (transition approach)
+
+    // ─── Underground: Dungeon — tight, unpredictable ────────────────
+    [158,25, 4, 1],   // drop into dungeon (low landing)
+    [163,21, 3, 1],   // +4
+    [168,17, 3, 1],   // +4
+    [173,21, 4, 1],   // -4
+    [179,17, 3, 1],   // +4
+    [184,20, 3, 1],   // -3
+    [189,16, 3, 1],   // +4
+    [194,20, 4, 1],   // -4
+    [200,15, 3, 1],   // +5  ← hardest jump
+    [205,18, 4, 1],   // -3
+    [211,22, 3, 1],   // -4
+    [216,17, 3, 1],   // +5
+    [221,21, 4, 1],   // -4
+    [227,16, 3, 1],   // +5
+    [232,21, 3, 1],   // -5 (fall ok)
+    [237,18, 3, 1],   // +3
+    [242,22, 4, 1],   // -4
+    [248,17, 3, 1],   // +5
+    [253,20, 4, 1],   // -3
+    [259,15, 3, 1],   // +5
+    [264,19, 3, 1],   // -4
+    [269,22, 4, 1],   // -3
+    [275,18, 3, 1],   // +4
+    [280,21, 3, 1],   // -3
+    [286,25, 5, 1],   // final landing (low, easy)
+    [293,23, 4, 1],   // end
+  ];
+
+  // Enemies: { type, x, floatY|spawnY, patrolHalfW, speed }
+  //   Dementors: gravity OFF, manually bobbed. floatY = hover center.
+  //   DeathEaters: gravity ON, fall onto platform. spawnY = spawn above plat.
+  const ENEMIES = [
+    // — Dementors (castle section, guard high platforms) —
+    { type:'dementor',   x:69*16+48,  floatY:19*16-32, patrol:72,  speed:48  },
+    { type:'dementor',   x:99*16+40,  floatY:17*16-32, patrol:64,  speed:52  },
+    { type:'dementor',   x:126*16+32, floatY:15*16-32, patrol:56,  speed:56  },
+    { type:'dementor',   x:200*16+24, floatY:15*16-32, patrol:48,  speed:60  },
+    // — Death Eaters (underground section, walk platforms) —
+    { type:'deathEater', x:163*16+24, spawnY:21*16-30, patrol:48,  speed:70  },
+    { type:'deathEater', x:189*16+24, spawnY:16*16-30, patrol:40,  speed:75  },
+    { type:'deathEater', x:237*16+24, spawnY:18*16-30, patrol:48,  speed:80  },
+  ];
+
+  // Snitches: [col, row] — placed above platforms, slightly off-center
+  const SNITCHES = [
+    // Castle section
+    [11,22], [21,20], [30,22], [40,18], [48,21],
+    [58,18], [72,16], [80,19], [90,16], [103,14],
+    // Underground
+    [161,18],[170,14],[181,17],[196,12],[213,19],
+    [228,13],[255,17],[265,16],[277,15],[290,22],
+  ];
+
+  // ══════════════════════════════════════════════════════════════════
+  //  SCENE
+  // ══════════════════════════════════════════════════════════════════
+  class HogwartsScene extends Phaser.Scene {
+    constructor() { super('HogwartsScene'); }
+
+    // ── Preload ────────────────────────────────────────────────────
+    preload() {
+      this.load.spritesheet('castle_tiles', 'assets/tileset/stone_castle.png', {
+        frameWidth: TILE, frameHeight: TILE,
+      });
+      if (ASSETS.harry) {
+        for (let i = 0; i < ASSETS.harryIdleN; i++)
+          this.load.image(`h_idle_${i}`, `assets/harry/idle_${i}.png`);
+        for (let i = 0; i < ASSETS.harryWalkN; i++)
+          this.load.image(`h_walk_${i}`, `assets/harry/walk_${i}.png`);
+      }
+      if (ASSETS.enemies) {
+        for (let i = 0; i < ASSETS.dementorN; i++)
+          this.load.image(`dem_${i}`,   `assets/enemies/dementor_${i}.png`);
+        for (let i = 0; i < ASSETS.deathEaterN; i++)
+          this.load.image(`de_${i}`,    `assets/enemies/deathEater_${i}.png`);
+      }
+      if (ASSETS.snitch)
+        this.load.image('snitch', 'assets/collectibles/snitch.png');
+      if (ASSETS.dungeon)
+        this.load.spritesheet('dungeon_tiles', 'assets/tileset/dark_dungeon.png', {
+          frameWidth: TILE, frameHeight: TILE,
+        });
+    }
+
+    // ── Create ─────────────────────────────────────────────────────
+    create() {
+      this.lives      = 3;
+      this.snitchCount= 0;
+      this.invincible = false;
+      this.gameOver   = false;
+      this.won        = false;
+
+      this._makePlaceholderTextures();
+      this._buildBackground();
+
+      this.platforms = this.physics.add.staticGroup();
+      this._buildLevel();
+
+      this._createPlayer();
+      this._createEnemies();
+      this._createSnitches();
+      this._buildAnims();
+      this._setupColliders();
+      this._createHUD();
+
+      // Camera: zoom 1.5 → visible world ≈ 533×320px
+      // Harry body (~28px) × 1.5 = 42px screen ≈ 1/11 of 480 canvas ✓
+      this.cameras.main.setBounds(0, 0, LEVEL_W, GAME_H);
+      this.cameras.main.setZoom(1.5);
+      this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+      this.cameras.main.setFollowOffset(-60, 0); // show more of what's ahead
+
+      this.physics.world.setBounds(0, -300, LEVEL_W, GAME_H + 400);
+
+      this.cursors  = this.input.keyboard.createCursorKeys();
+      this.wasd     = this.input.keyboard.addKeys({
+        left:  Phaser.Input.Keyboard.KeyCodes.A,
+        right: Phaser.Input.Keyboard.KeyCodes.D,
+        up:    Phaser.Input.Keyboard.KeyCodes.W,
+      });
+      this.spaceKey = this.input.keyboard.addKey(
+        Phaser.Input.Keyboard.KeyCodes.SPACE
+      );
+
+      this.player.play('p_idle');
+    }
+
+    // ── Update ─────────────────────────────────────────────────────
+    update(time) {
+      if (this.gameOver || this.won) {
+        if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) this.scene.restart();
+        return;
+      }
+
+      const { left, right, up } = this.cursors;
+      const w = this.wasd;
+      const onGround = this.player.body.blocked.down;
+      const goLeft   = left.isDown  || w.left.isDown;
+      const goRight  = right.isDown || w.right.isDown;
+      const goUp     = up.isDown    || w.up.isDown;
+
+      if      (goLeft)  { this.player.setVelocityX(-220); this.player.setFlipX(true);  }
+      else if (goRight) { this.player.setVelocityX( 220); this.player.setFlipX(false); }
+      else              { this.player.setVelocityX(0); }
+
+      if (goUp && onGround) this.player.setVelocityY(-500);
+      this.player.play((goLeft || goRight) ? 'p_walk' : 'p_idle', true);
+
+      // Enemy patrol AI
+      this._updateEnemies(time);
+
+      // Pit respawn
+      if (this.player.y > GAME_H + 120) this._loseLife(true /* pit */);
+
+      // Scroll-linked background section tint
+      this._updateBgTint();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  TEXTURES — placeholder graphics used until real assets load
+    // ══════════════════════════════════════════════════════════════
+    _makePlaceholderTextures() {
+      const mk = (key, w, h, fn) => {
+        const g = this.make.graphics({ add: false });
+        fn(g); g.generateTexture(key, w, h); g.destroy();
+      };
+
+      if (!ASSETS.harry) {
+        // Harry: 24×36, robes + glasses + scarf
+        mk('harry_ph', 24, 36, g => {
+          g.fillStyle(0x1c1c2c); g.fillRect(4, 14, 16, 22);   // robe
+          g.fillStyle(0x282840); g.fillRect(9, 16, 2, 18);    // robe fold
+          g.fillStyle(0xf0c890); g.fillRect(6, 2, 12, 13);   // head
+          g.fillStyle(0x0f0f0f); g.fillRect(6, 2, 12, 6);    // hair
+          g.fillStyle(0xaa8844); g.fillRect(7, 9, 4, 3);     // glasses L
+          g.fillStyle(0xaa8844); g.fillRect(13, 9, 4, 3);    // glasses R
+          g.fillStyle(0xaa8844); g.fillRect(11, 10, 2, 1);   // bridge
+          g.fillStyle(0xff4444); g.fillRect(11, 4, 2, 2);    // scar
+          g.fillStyle(0xcc2200); g.fillRect(5, 14, 14, 3);   // scarf red
+          g.fillStyle(0xffcc00); g.fillRect(5, 17, 14, 2);   // scarf gold
+          g.fillStyle(0x7a4020); g.fillRect(0, 24, 5, 2);    // wand
+        });
+      }
+
+      // Dementor: 24×30, dark hooded figure with glowing eyes
+      if (!ASSETS.enemies) {
+        mk('dem_ph', 24, 30, g => {
+          // Tattered robe body
+          g.fillStyle(0x18181e); g.fillRect(3, 7, 18, 22);
+          // Hood
+          g.fillStyle(0x101015); g.fillRect(2, 2, 20, 10);
+          g.fillStyle(0x101015); g.fillRect(0, 6, 4, 6);
+          g.fillStyle(0x101015); g.fillRect(20, 6, 4, 6);
+          // Glowing eyes
+          g.fillStyle(0x66ffaa); g.fillRect(7, 7, 4, 3);
+          g.fillStyle(0x66ffaa); g.fillRect(13, 7, 4, 3);
+          g.fillStyle(0xaaffcc, 0.5); g.fillRect(8, 8, 2, 1);  // eye glow
+          g.fillStyle(0xaaffcc, 0.5); g.fillRect(14, 8, 2, 1);
+          // Skeletal hands
+          g.fillStyle(0xd4c8b0); g.fillRect(0, 16, 4, 2);
+          g.fillStyle(0xd4c8b0); g.fillRect(20, 16, 4, 2);
+          // Tattered hem
+          g.fillStyle(0x0c0c10); g.fillRect(4, 26, 4, 4);
+          g.fillStyle(0x0c0c10); g.fillRect(10, 27, 3, 3);
+          g.fillStyle(0x0c0c10); g.fillRect(16, 25, 4, 5);
+        });
+        // Death Eater: 22×30, dark robes + white mask + wand
+        mk('de_ph', 22, 30, g => {
+          g.fillStyle(0x1a1a28); g.fillRect(3, 8, 16, 22);    // robe
+          g.fillStyle(0x0d0d18); g.fillRect(5, 5, 12, 10);    // hood/shoulders
+          g.fillStyle(0xeee8cc); g.fillRect(6, 5, 10, 9);     // mask (white)
+          g.fillStyle(0x222230); g.fillRect(7, 7, 3, 3);      // eye L
+          g.fillStyle(0x222230); g.fillRect(12, 7, 3, 3);     // eye R
+          g.fillStyle(0x88884a); g.fillRect(19, 12, 2, 10);   // wand
+          g.fillStyle(0xaaaa66); g.fillRect(19, 22, 3, 1);    // wand tip
+        });
+      }
+
+      // Snitch placeholder: golden ball + wings
+      if (!ASSETS.snitch) {
+        mk('snitch_ph', 16, 12, g => {
+          g.fillStyle(0x886600); g.fillCircle(8, 6, 5);       // shadow
+          g.fillStyle(0xffcc00); g.fillCircle(7, 5, 5);       // body
+          g.fillStyle(0xffee88); g.fillCircle(6, 4, 3);       // highlight
+          g.fillStyle(0xffffff, 0.7); g.fillRect(0, 3, 5, 3); // wing L
+          g.fillStyle(0xffffff, 0.7); g.fillRect(11, 3, 5, 3);// wing R
+        });
+      }
+
+      // Dungeon tile placeholder: dark cracked stone with water drip
+      if (!ASSETS.dungeon) {
+        mk('dung_ph', TILE, TILE, g => {
+          g.fillStyle(0x151520); g.fillRect(0, 0, TILE, TILE);
+          g.fillStyle(0x0a0a12); g.fillRect(0, 0, TILE, 1);
+          g.fillStyle(0x252535); g.fillRect(0, TILE-1, TILE, 1);
+          g.fillStyle(0x0a0a12); g.fillRect(1, 2, 5, 5);
+          g.fillStyle(0x0a0a12); g.fillRect(9, 9, 5, 4);
+          // crack
+          g.fillStyle(0x080810); g.fillRect(7, 0, 1, 9);
+          g.fillStyle(0x080810); g.fillRect(8, 8, 1, 4);
+          // water drip
+          g.fillStyle(0x224488, 0.6); g.fillRect(4, 12, 2, 4);
+        });
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  BACKGROUND
+    // ══════════════════════════════════════════════════════════════
+    _buildBackground() {
+      const W = LEVEL_W, H = GAME_H;
+      const mk = (key, w, h, fn) => {
+        const g = this.make.graphics({ add: false });
+        fn(g); g.generateTexture(key, w, h); g.destroy();
+      };
+
+      // Full-level background strip (2 sections: castle / dungeon)
+      mk('bg', W, H, g => {
+        // Castle section (0–2400): deep indigo night
+        g.fillGradientStyle(0x04041c, 0x04041c, 0x0d103c, 0x0d103c, 1);
+        g.fillRect(0, 0, 2400, H);
+        // Dungeon section (2400–4800): near-black underground
+        g.fillGradientStyle(0x030308, 0x030308, 0x060618, 0x060618, 1);
+        g.fillRect(2400, 0, W - 2400, H);
+        // Ground fog — lighter band helps dark characters contrast
+        g.fillStyle(0x1c1c3c, 0.35); g.fillRect(0, H - 130, 2400, 130);
+        g.fillStyle(0x0a0a20, 0.45); g.fillRect(2400, H - 130, W - 2400, 130);
+        // Transition gradient
+        g.fillStyle(0x000008, 0.5); g.fillRect(2280, 0, 240, H);
+      });
+      this.add.image(W / 2, H / 2, 'bg').setDepth(-10);
+
+      // ── Stars (castle section) ──
+      const rng = new Phaser.Math.RandomDataGenerator(['hp3']);
+      const stars = this.add.graphics().setDepth(-9);
+      stars.fillStyle(0xffffff, 0.9);
+      for (let i = 0; i < 90; i++)
+        stars.fillRect(rng.between(0, 2400), rng.between(0, H * 0.6), 2, 2);
+      // Dim stars in far distance
+      stars.fillStyle(0xffffff, 0.4);
+      for (let i = 0; i < 40; i++)
+        stars.fillRect(rng.between(0, 2400), rng.between(0, H * 0.55), 1, 1);
+
+      // ── Moon (crescent) ──
+      const moon = this.add.graphics().setDepth(-8);
+      moon.fillStyle(0xffffc8); moon.fillCircle(180, 80, 36);
+      moon.fillStyle(0x04041c); moon.fillCircle(198, 70, 30);
+
+      // ── Hogwarts silhouette ──
+      const cas = this.add.graphics().setDepth(-7);
+      cas.fillStyle(0x06061a);
+      this._drawCastleSilhouette(cas, 0, H - 120, 2400);
+
+      // ── Underground stalactites ──
+      const stal = this.add.graphics().setDepth(-7);
+      stal.fillStyle(0x0e0e22);
+      for (let x = 2430; x < W; x += 55) {
+        const h = 18 + Math.sin(x * 0.07) * 12;
+        stal.fillTriangle(x, 0, x + 22, 0, x + 11, h);
+      }
+      // Drip dots
+      stal.fillStyle(0x2244aa, 0.4);
+      for (let x = 2460; x < W; x += 90)
+        stal.fillRect(x, 14 + Math.sin(x * 0.07) * 12, 2, 6);
+
+      // ── Ambient torches in underground ──
+      const torch = this.add.graphics().setDepth(-6);
+      torch.fillStyle(0xff8800, 0.12);
+      for (let x = 2600; x < W; x += 280) {
+        torch.fillRect(x, H - 140, 60, 120);     // warm light cone
+        torch.fillStyle(0xffcc00, 0.08);
+        torch.fillRect(x + 10, H - 200, 40, 180);
+        torch.fillStyle(0xff8800, 0.12);
+      }
+    }
+
+    _drawCastleSilhouette(g, x0, baseY, totalW) {
+      for (let x = x0; x < x0 + totalW; x += 120) {
+        const tw = 38 + Math.sin(x * 0.04) * 9;
+        const th = 80 + Math.cos(x * 0.022) * 38;
+        g.fillRect(x, baseY - th, tw, th + 200);
+        g.fillStyle(0x03031a);
+        for (let bx = x; bx < x + tw - 6; bx += 13)
+          g.fillRect(bx + 1, baseY - th - 18, 9, 20);
+        g.fillStyle(0x06061a);
+      }
+      g.fillStyle(0xffcc44, 0.22);
+      for (let x = x0 + 20; x < x0 + totalW; x += 65)
+        g.fillRect(x, baseY - 35 - Math.abs(Math.sin(x*0.022)) * 72, 4, 8);
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  LEVEL GEOMETRY
+    // ══════════════════════════════════════════════════════════════
+    _buildLevel() {
+      const gRow = Math.floor((GAME_H - TILE) / TILE); // = 29
+
+      const placeTile = (col, row, isUnderground) => {
+        const x = col * TILE + TILE / 2;
+        const y = row * TILE + TILE / 2;
+        let sprite;
+        if (isUnderground) {
+          if (ASSETS.dungeon)
+            sprite = this.platforms.create(x, y, 'dungeon_tiles', ASSETS.DUNGEON_TOP);
+          else
+            sprite = this.platforms.create(x, y, 'dung_ph');
+        } else {
+          sprite = this.platforms.create(x, y, 'castle_tiles', ASSETS.TILE_TOP);
+        }
+        sprite.setImmovable(true).refreshBody();
+        return sprite;
+      };
+
+      const placeGround = (col, row, isUnderground) => {
+        const x = col * TILE + TILE / 2;
+        const y = row * TILE + TILE / 2;
+        let sprite;
+        if (isUnderground) {
+          sprite = ASSETS.dungeon
+            ? this.platforms.create(x, y, 'dungeon_tiles', ASSETS.DUNGEON_SOLID)
+            : this.platforms.create(x, y, 'dung_ph');
+        } else {
+          sprite = this.platforms.create(x, y, 'castle_tiles', ASSETS.TILE_SOLID);
+        }
+        sprite.setImmovable(true).refreshBody();
+        return sprite;
+      };
+
+      // Ground — 2 rows, castle and dungeon sections
+      for (let c = 0; c < LEVEL_W / TILE; c++) {
+        const underground = c * TILE >= 2400;
+        placeTile( c, gRow,     underground);
+        placeGround(c, gRow + 1, underground);
+      }
+
+      // Platforms
+      for (const [startCol, row, w, sec] of PLATFORMS) {
+        const underground = sec === 1;
+        for (let i = 0; i < w; i++)
+          placeTile(startCol + i, row, underground);
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  PLAYER
+    // ══════════════════════════════════════════════════════════════
+    _createPlayer() {
+      const key = ASSETS.harry ? 'h_idle_0' : 'harry_ph';
+      this.player = this.physics.add.sprite(120, GAME_H - 90, key);
+      // Real Harry sprites: 48×48 px. Actual body is narrower, centered.
+      if (ASSETS.harry)
+        this.player.body.setSize(18, 30).setOffset(15, 12);
+      else
+        this.player.body.setSize(16, 28).setOffset(4, 6);
+      this.physics.add.collider(this.player, this.platforms);
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  ENEMIES
+    // ══════════════════════════════════════════════════════════════
+    _createEnemies() {
+      this.enemySprites = [];
+
+      for (const def of ENEMIES) {
+        const isDem = def.type === 'dementor';
+
+        let key;
+        if (isDem)    key = ASSETS.enemies ? 'dem_0'  : 'dem_ph';
+        else          key = ASSETS.enemies ? 'de_0'   : 'de_ph';
+
+        const spawnY = isDem ? def.floatY : def.spawnY;
+        const e = this.physics.add.sprite(def.x, spawnY, key);
+        e.setDepth(5);
+
+        if (isDem) {
+          e.body.setAllowGravity(false);
+          e.body.setSize(
+            ASSETS.enemies ? 20 : 16,
+            ASSETS.enemies ? 22 : 20
+          );
+          if (ASSETS.enemies) e.body.setOffset(6, 4);
+          e.floatCenterY = def.floatY;
+          e.floatPhase   = Math.random() * Math.PI * 2;
+        } else {
+          this.physics.add.collider(e, this.platforms);
+          e.body.setSize(
+            ASSETS.enemies ? 18 : 14,
+            ASSETS.enemies ? 24 : 22
+          );
+          if (ASSETS.enemies) e.body.setOffset(7, 4);
+        }
+
+        e.enemyType  = def.type;
+        e.patrolMin  = def.x - def.patrol;
+        e.patrolMax  = def.x + def.patrol;
+        e.patrolSpd  = def.speed;
+        e.dir        = 1;
+
+        this.enemySprites.push(e);
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  SNITCHES
+    // ══════════════════════════════════════════════════════════════
+    _createSnitches() {
+      this.snitchGroup = this.physics.add.staticGroup();
+      const key = ASSETS.snitch ? 'snitch' : 'snitch_ph';
+      for (const [col, row] of SNITCHES) {
+        const s = this.snitchGroup.create(
+          col * TILE + 8,
+          row * TILE - 4,
+          key
+        );
+        s.setDepth(4);
+        s.baseY = s.y;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  ANIMATIONS
+    // ══════════════════════════════════════════════════════════════
+    _buildAnims() {
+      const mk = (key, frames, rate) => {
+        if (!this.anims.exists(key))
+          this.anims.create({ key, frames, frameRate: rate, repeat: -1 });
+      };
+
+      // Harry
+      if (ASSETS.harry) {
+        mk('p_idle',
+          Array.from({length: ASSETS.harryIdleN}, (_, i) => ({ key: `h_idle_${i}` })), 4);
+        mk('p_walk',
+          Array.from({length: ASSETS.harryWalkN}, (_, i) => ({ key: `h_walk_${i}` })), 10);
+      } else {
+        mk('p_idle', [{ key:'harry_ph' }], 1);
+        mk('p_walk', [{ key:'harry_ph' }], 1);
+      }
+
+      // Enemies
+      if (ASSETS.enemies) {
+        mk('dem_anim',
+          Array.from({length: ASSETS.dementorN},    (_, i) => ({ key: `dem_${i}` })), 4);
+        mk('de_anim',
+          Array.from({length: ASSETS.deathEaterN},  (_, i) => ({ key: `de_${i}` })), 8);
+      }
+
+      // Play enemy animations
+      for (const e of this.enemySprites) {
+        if (ASSETS.enemies) {
+          e.play(e.enemyType === 'dementor' ? 'dem_anim' : 'de_anim');
+        }
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  COLLIDERS
+    // ══════════════════════════════════════════════════════════════
+    _setupColliders() {
+      // Player ↔ enemies
+      for (const e of this.enemySprites) {
+        this.physics.add.overlap(this.player, e, (player, enemy) => {
+          if (!this.invincible && enemy.active) this._onHitEnemy(player, enemy);
+        });
+      }
+      // Player ↔ snitches
+      this.physics.add.overlap(
+        this.player, this.snitchGroup,
+        this._onCollectSnitch, null, this
+      );
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  COMBAT
+    // ══════════════════════════════════════════════════════════════
+    _onHitEnemy(player, enemy) {
+      // Stomp: player moving downward AND player bottom is near enemy top
+      const stomping = player.body.velocity.y > 30 &&
+                       player.body.bottom <= enemy.body.top + 14;
+      if (stomping) {
+        this._stompEnemy(enemy);
+        this.player.setVelocityY(-380); // stomp bounce
+      } else {
+        this._hitPlayer();
+      }
+    }
+
+    _stompEnemy(enemy) {
+      enemy.setActive(false);
+      // Pop effect: scale out
+      this.tweens.add({
+        targets: enemy,
+        scaleX: 2.2, scaleY: 0.1, alpha: 0,
+        duration: 180,
+        ease: 'Power2',
+        onComplete: () => { enemy.destroy(); },
+      });
+      // Remove from patrol list
+      this.enemySprites = this.enemySprites.filter(e => e !== enemy);
+      // Score pop
+      const pts = this.add.text(enemy.x, enemy.y - 16, '+100', {
+        fontFamily: 'monospace', fontSize: '11px', fill: '#ffdd00',
+        stroke: '#000', strokeThickness: 2,
+      }).setDepth(200);
+      this.tweens.add({
+        targets: pts, y: pts.y - 36, alpha: 0, duration: 550,
+        onComplete: () => pts.destroy(),
+      });
+    }
+
+    _hitPlayer() {
+      this.invincible = true;
+      // Flash red
+      this.tweens.add({
+        targets: this.player,
+        alpha: 0.25,
+        duration: 80,
+        yoyo: true,
+        repeat: 7,
+        onComplete: () => {
+          this.player.setAlpha(1);
+          this.invincible = false;
+        },
+      });
+      this._loseLife(false);
+    }
+
+    _loseLife(pit) {
+      this.lives = Math.max(0, this.lives - 1);
+      this._updateHUD();
+      if (this.lives <= 0) { this._doGameOver(); return; }
+
+      // Respawn at start of current section
+      const px = Math.max(120, this.cameras.main.scrollX);
+      this.player.setPosition(px, GAME_H - 90);
+      this.player.setVelocity(0, 0);
+      if (!pit) return; // _hitPlayer handles its own invincibility window
+      this.invincible = true;
+      this.time.delayedCall(2000, () => { this.invincible = false; });
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  SNITCHES
+    // ══════════════════════════════════════════════════════════════
+    _onCollectSnitch(player, snitch) {
+      this.snitchCount++;
+      this._updateHUD();
+      snitch.destroy();
+      // Sparkle pop
+      const s = this.add.text(snitch.x, snitch.y, '✦', {
+        fontFamily: 'monospace', fontSize: '13px', fill: '#ffffaa',
+        stroke: '#886600', strokeThickness: 1,
+      }).setDepth(200);
+      this.tweens.add({
+        targets: s, y: s.y - 44, alpha: 0, duration: 500,
+        onComplete: () => s.destroy(),
+      });
+      if (this.snitchCount >= SNITCHES.length) this._doWin();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  ENEMY AI
+    // ══════════════════════════════════════════════════════════════
+    _updateEnemies(time) {
+      for (const e of this.enemySprites) {
+        if (!e.active) continue;
+        const t = time / 1000;
+
+        if (e.enemyType === 'dementor') {
+          // Float bob (manual Y control, gravity is off)
+          e.y = e.floatCenterY + Math.sin(t * 1.6 + e.floatPhase) * 9;
+          // Horizontal patrol
+          if (e.x <= e.patrolMin) e.dir = 1;
+          if (e.x >= e.patrolMax) e.dir = -1;
+          e.setVelocityX(e.patrolSpd * e.dir);
+          e.setFlipX(e.dir < 0);
+        } else {
+          // Death eater: gravity-based walking patrol
+          if (e.x <= e.patrolMin) e.dir = 1;
+          if (e.x >= e.patrolMax) e.dir = -1;
+          e.setVelocityX(e.patrolSpd * e.dir);
+          e.setFlipX(e.dir < 0);
+        }
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  HUD
+    // ══════════════════════════════════════════════════════════════
+    _createHUD() {
+      const sf = { fontFamily: 'monospace' };
+      const sd = { scrollFactor: 0, depth: 100 };
+
+      this.hudLives = this.add.text(8, 8, '', {
+        ...sf, fontSize: '14px', fill: '#ff5566',
+        stroke: '#000', strokeThickness: 3,
+      }).setScrollFactor(0).setDepth(100);
+
+      this.hudSnitches = this.add.text(8, 28, '', {
+        ...sf, fontSize: '12px', fill: '#ffcc00',
+        stroke: '#000', strokeThickness: 2,
+      }).setScrollFactor(0).setDepth(100);
+
+      this.add.text(400, 8, '⚡ Hogwarts Challenge', {
+        ...sf, fontSize: '11px', fill: '#ffdd88',
+        stroke: '#000', strokeThickness: 2,
+      }).setScrollFactor(0).setDepth(100).setOrigin(0.5, 0);
+
+      const assetLine = [
+        ASSETS.harry   ? '✅ Harry'   : '⬜ Harry',
+        ASSETS.enemies ? '✅ Enemies' : '⬜ Enemies',
+        ASSETS.snitch  ? '✅ Snitch'  : '⬜ Snitch',
+        ASSETS.dungeon ? '✅ Dungeon' : '⬜ Dungeon',
+      ].join('  ');
+      this.add.text(400, 465, assetLine, {
+        ...sf, fontSize: '9px', fill: '#666677',
+      }).setScrollFactor(0).setDepth(100).setOrigin(0.5, 0);
+
+      this.add.text(8, 465, '← → jump ↑  |  stomp enemies  |  collect ✦', {
+        ...sf, fontSize: '9px', fill: '#444466',
+      }).setScrollFactor(0).setDepth(100);
+
+      this._updateHUD();
+    }
+
+    _updateHUD() {
+      const hearts = '♥'.repeat(this.lives) + '♡'.repeat(Math.max(0, 3 - this.lives));
+      this.hudLives.setText(hearts);
+      this.hudSnitches.setText(`✦ ${this.snitchCount}/${SNITCHES.length} snitches`);
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    //  WIN / LOSE
+    // ══════════════════════════════════════════════════════════════
+    _doGameOver() {
+      this.gameOver = true;
+      this.player.setActive(false).setVisible(false);
+
+      this.add.text(400, 190, 'GAME OVER', {
+        fontFamily: 'monospace', fontSize: '36px', fill: '#ff4444',
+        stroke: '#000', strokeThickness: 5,
+      }).setScrollFactor(0).setDepth(200).setOrigin(0.5);
+
+      this.add.text(400, 236, 'Press SPACE to try again', {
+        fontFamily: 'monospace', fontSize: '13px', fill: '#aaaacc',
+        stroke: '#000', strokeThickness: 2,
+      }).setScrollFactor(0).setDepth(200).setOrigin(0.5);
+    }
+
+    _doWin() {
+      this.won = true;
+      this.add.text(400, 190, '⚡  YOU WIN!  ⚡', {
+        fontFamily: 'monospace', fontSize: '32px', fill: '#ffdd00',
+        stroke: '#000', strokeThickness: 5,
+      }).setScrollFactor(0).setDepth(200).setOrigin(0.5);
+      this.add.text(400, 234, 'All snitches caught!  SPACE to replay', {
+        fontFamily: 'monospace', fontSize: '12px', fill: '#ffcc66',
+        stroke: '#000', strokeThickness: 2,
+      }).setScrollFactor(0).setDepth(200).setOrigin(0.5);
+    }
+
+    // ── Background section tint (castle→dungeon) ──────────────────
+    _updateBgTint() {
+      const cx = this.cameras.main.scrollX + 266; // approx camera center world X
+      if (cx > 2100 && cx < 2600) {
+        // Transition zone: slowly darken scene
+        const t = (cx - 2100) / 500; // 0→1
+        this.cameras.main.setBackgroundColor(
+          Phaser.Display.Color.Interpolate.ColorWithColor(
+            Phaser.Display.Color.ValueToColor(0x04041c),
+            Phaser.Display.Color.ValueToColor(0x030308),
+            100, Math.floor(t * 100)
+          )
+        );
+      }
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  new Phaser.Game({
+    type:   Phaser.AUTO,
+    width:  800,
+    height: 480,
+    parent: 'game-container',
+    backgroundColor: '#04041c',
+    physics: {
+      default: 'arcade',
+      arcade:  { gravity: { y: 1500 }, debug: false },
+    },
+    scene: HogwartsScene,
+  });
+  </script>
+</body>
+</html>

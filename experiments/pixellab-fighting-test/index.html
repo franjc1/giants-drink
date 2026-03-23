@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PixelLab Fighting Game Sprite Test — ChatGPT Fighter</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #111; color: #ccc; font-family: monospace; padding: 20px; }
+h1 { color: #4f4; font-size: 18px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 12px; margin-bottom: 24px; }
+.section { margin-bottom: 28px; }
+.section h2 { color: #aaa; font-size: 13px; text-transform: uppercase;
+              letter-spacing: 2px; border-bottom: 1px solid #333;
+              padding-bottom: 6px; margin-bottom: 12px; }
+.row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.sprite-box { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.sprite-box canvas {
+  image-rendering: pixelated;
+  background: #1e1e2e;
+  border: 1px solid #333;
+}
+.sprite-box .label { font-size: 10px; color: #666; }
+.badge { display: inline-block; font-size: 10px; padding: 2px 6px;
+         border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+.badge.done  { background: #1a4a1a; color: #4f4; border: 1px solid #2a7a2a; }
+.badge.wait  { background: #3a2a00; color: #fa0; border: 1px solid #6a4a00; }
+.badge.miss  { background: #3a0000; color: #f44; border: 1px solid #6a0000; }
+.assessment { background: #1a1a2e; border: 1px solid #333; padding: 16px;
+              font-size: 12px; line-height: 1.8; border-radius: 4px; }
+.assessment h3 { color: #7af; font-size: 12px; margin-bottom: 8px; }
+.assessment .good  { color: #4f4; }
+.assessment .bad   { color: #f84; }
+.assessment .note  { color: #888; }
+.status-bar { background: #0a1a0a; border: 1px solid #2a4a2a; padding: 10px 14px;
+              border-radius: 4px; font-size: 11px; color: #6a8; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<h1>PixelLab Fighting Game Sprite Test</h1>
+<div class="subtitle">Character: "ChatGPT Fighter" — Green humanoid robot martial artist, 128×128px, side view, heroic proportions</div>
+
+<div class="status-bar">
+  ⏳ GENERATION STATUS: PixelLab queue under load — animations processing in background (character ID: edfa579e-37ce-46f1-90d2-42f6617a3896).
+  Rotation images (idle poses) are ready. Animation frames will populate once ZIP unlocks.
+  Refresh this page after running extract.sh to update with animation frames.
+</div>
+
+<!-- STEP 1: IDLE REFERENCE POSES -->
+<div class="section">
+  <h2>Step 1 — Idle Reference Poses <span class="badge done">✓ DONE</span></h2>
+  <div class="row" id="idle-row"></div>
+</div>
+
+<!-- STEP 2: WALK -->
+<div class="section">
+  <h2>Step 2 — Walk Cycle <span class="badge wait" id="walk-badge">⏳ PROCESSING</span></h2>
+  <div class="row" id="walk-row"><div style="color:#555;font-size:11px">Waiting for animation frames...</div></div>
+</div>
+
+<!-- STEP 3: PUNCH -->
+<div class="section">
+  <h2>Step 3 — Punch Animation <span class="badge wait" id="punch-badge">⏳ PROCESSING</span></h2>
+  <div class="row" id="punch-row"><div style="color:#555;font-size:11px">Waiting for animation frames...</div></div>
+</div>
+
+<!-- STEP 4: KICK -->
+<div class="section">
+  <h2>Step 4 — Kick Animation <span class="badge wait" id="kick-badge">⏳ PROCESSING</span></h2>
+  <div class="row" id="kick-row"><div style="color:#555;font-size:11px">Waiting for animation frames...</div></div>
+</div>
+
+<!-- STEP 5: SPECIAL -->
+<div class="section">
+  <h2>Step 5 — Special Move (Fireball) <span class="badge wait" id="special-badge">⏳ PROCESSING</span></h2>
+  <div class="row" id="special-row"><div style="color:#555;font-size:11px">Waiting for animation frames...</div></div>
+</div>
+
+<!-- ASSESSMENT -->
+<div class="section">
+  <h2>Quality Assessment</h2>
+  <div class="assessment">
+    <h3>Based on Idle/Rotation Images (Steps 1 complete, 2-5 pending)</h3>
+
+    <p class="good">✓ Character design: Clearly reads as a green robot — good silhouette with sci-fi armor plating and glowing accents. Color identity is strong (green metal with green energy highlights).</p>
+    <br>
+    <p class="good">✓ Proportions: Heroic preset worked — wider shoulders, thick legs. Feels like a fighting game fighter rather than a generic character.</p>
+    <br>
+    <p class="good">✓ Outline quality: Clean single-color outline, detail holds at 128px. This is the sweet spot for 16-bit sprite work — visible detail, not overly noisy.</p>
+    <br>
+    <p class="bad">⚠ SF2 comparison: The idle pose lacks the "weight" and tension of a real SF2 idle. Template skeleton drives the pose, so it defaults to a neutral stand rather than an aggressive fighting stance. "fight-stance-idle-8-frames" template should help this once frames arrive.</p>
+    <br>
+    <p class="bad">⚠ Side view artifacts: At "side" view, the south/north-facing rotations look top-down-ish rather than pure side-scroll. For a fighting game you'd only use east/west and they look solid.</p>
+    <br>
+    <p class="note">→ Frame counts: lead-jab = 3 frames (not 4), walking-4-frames = 4 frames. PixelLab template animations have fixed frame counts regardless of spec.</p>
+    <br>
+    <p class="note">→ Queue behavior: Experienced repeated job-stall pattern (~1-3 jobs per batch getting 1000-3000s ETAs that then recover). This adds unpredictability to batch generation. Not a quality issue but a workflow issue.</p>
+    <br>
+    <p class="note">→ Fireball animation queued but not appearing in job list — needs verification once queue clears.</p>
+  </div>
+</div>
+
+<script>
+const SCALE = 2; // 2× upscale for display
+
+// ── Load rotation images as idle sprites ──────────────────────────────────
+const DIRS = ['east','west','north','south'];
+const ANIM_DATA = {
+  // populated once animation frames are extracted from ZIP
+  walk:    { frames: [], dir: 'east', fps: 8,  template: 'walking-4-frames' },
+  punch:   { frames: [], dir: 'east', fps: 10, template: 'lead-jab' },
+  kick:    { frames: [], dir: 'east', fps: 10, template: 'roundhouse-kick' },
+  special: { frames: [], dir: 'east', fps: 8,  template: 'fireball' },
+};
+
+function makeCanvas(w, h) {
+  const c = document.createElement('canvas');
+  c.width = w * SCALE; c.height = h * SCALE;
+  c.style.width  = (w * SCALE) + 'px';
+  c.style.height = (h * SCALE) + 'px';
+  return c;
+}
+
+function drawImage(canvas, img) {
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+}
+
+// Idle rotation images
+const idleRow = document.getElementById('idle-row');
+DIRS.forEach(dir => {
+  const box = document.createElement('div');
+  box.className = 'sprite-box';
+  const canvas = makeCanvas(128, 128);
+  const lbl = document.createElement('div');
+  lbl.className = 'label';
+  lbl.textContent = `idle / ${dir}`;
+  box.appendChild(canvas);
+  box.appendChild(lbl);
+  idleRow.appendChild(box);
+
+  const img = new Image();
+  img.onload = () => drawImage(canvas, img);
+  img.onerror = () => { const ctx = canvas.getContext('2d'); ctx.fillStyle='#333'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#555'; ctx.font='10px monospace'; ctx.fillText('missing', 10, canvas.height/2); };
+  img.src = `sprites/rotations/${dir}.png`;
+});
+
+// Animation frame display function (called if frames exist)
+function showAnim(rowId, badgeId, animKey, frameDir) {
+  const anim = ANIM_DATA[animKey];
+  if (!anim.frames.length) return;
+
+  const row = document.getElementById(rowId);
+  const badge = document.getElementById(badgeId);
+  row.innerHTML = '';
+  badge.className = 'badge done';
+  badge.textContent = '✓ DONE';
+
+  // Show individual frames
+  anim.frames.forEach((src, i) => {
+    const box = document.createElement('div');
+    box.className = 'sprite-box';
+    const canvas = makeCanvas(128, 128);
+    const lbl = document.createElement('div');
+    lbl.className = 'label';
+    lbl.textContent = `frame ${i}`;
+    box.appendChild(canvas);
+    box.appendChild(lbl);
+    row.appendChild(box);
+
+    const img = new Image();
+    img.onload = () => drawImage(canvas, img);
+    img.src = src;
+  });
+
+  // Animated preview
+  const box = document.createElement('div');
+  box.className = 'sprite-box';
+  const canvas = makeCanvas(128, 128);
+  const lbl = document.createElement('div');
+  lbl.className = 'label';
+  lbl.textContent = `▶ animated (${anim.fps}fps)`;
+  box.appendChild(canvas);
+  box.appendChild(lbl);
+  row.appendChild(box);
+
+  let fi = 0;
+  const imgs = anim.frames.map(src => { const i = new Image(); i.src = src; return i; });
+  setInterval(() => {
+    if (imgs[fi] && imgs[fi].complete) drawImage(canvas, imgs[fi]);
+    fi = (fi + 1) % imgs.length;
+  }, 1000 / anim.fps);
+}
+
+// Try loading frames (will be populated by extract.sh → sprites/ directory)
+const ANIMS = [
+  { key:'walk',    row:'walk-row',    badge:'walk-badge',    template:'walking-4-frames',   nFrames:4 },
+  { key:'punch',   row:'punch-row',   badge:'punch-badge',   template:'lead-jab',           nFrames:3 },
+  { key:'kick',    row:'kick-row',    badge:'kick-badge',    template:'roundhouse-kick',     nFrames:8 },
+  { key:'special', row:'special-row', badge:'special-badge', template:'fireball',            nFrames:8 },
+];
+
+ANIMS.forEach(({ key, row, badge, template, nFrames }) => {
+  const frames = [];
+  let loaded = 0;
+  for (let i = 0; i < nFrames; i++) {
+    const src = `sprites/${template}/east/frame_${String(i).padStart(3,'0')}.png`;
+    const img = new Image();
+    img.onload = () => {
+      frames[i] = src;
+      loaded++;
+      if (loaded === nFrames) {
+        ANIM_DATA[key].frames = frames;
+        showAnim(row, badge, key, 'east');
+      }
+    };
+    img.src = src;
+  }
+});
+</script>
+</body>
+</html>

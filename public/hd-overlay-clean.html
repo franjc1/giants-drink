@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head><title>SMB HD Overlay</title>
+<style>
+body { background:#1a1a2e; color:#eee; font-family:monospace; margin:20px; }
+#wrap { position:relative; display:inline-block; }
+#nes  { display:block; image-rendering:pixelated; }
+#ov   { position:absolute; top:0; left:0; z-index:10; pointer-events:none; image-rendering:pixelated; }
+button { background:#16213e; color:#eee; border:1px solid #e94560;
+         padding:8px 14px; cursor:pointer; font-family:monospace; margin-top:8px; }
+button:hover { background:#e94560; }
+button.on { background:#0a2a14; border-color:#44ff88; color:#44ff88; }
+</style>
+</head>
+<body>
+
+<div id="status">Loading...</div>
+<div id="wrap">
+  <canvas id="nes" width="256" height="240" style="width:512px;height:480px"></canvas>
+  <canvas id="ov"  width="512" height="480" style="display:none"></canvas>
+</div>
+<button id="btn" onclick="toggle()">HD Overlay ON/OFF</button>
+<div id="snapshots" style="margin-top:8px;font-size:12px;line-height:1.8;color:#8f8"></div>
+
+<script src="jsnes.min.js"></script>
+<script>
+const W = 256, H = 240, SC = 2;
+
+const nesCtx = document.getElementById('nes').getContext('2d');
+const ovEl   = document.getElementById('ov');
+const ovCtx  = ovEl.getContext('2d');
+ovCtx.imageSmoothingEnabled = false;
+
+// Pre-allocated ImageData for NES framebuffer
+const imgBuf  = new ArrayBuffer(W * H * 4);
+const imgData = new ImageData(new Uint8ClampedArray(imgBuf), W, H);
+const imgU8   = new Uint8ClampedArray(imgBuf);
+
+let nes      = null;
+let framebuf = null;
+let hdTiles  = new Map();   // NES tile index → 16×16 canvas
+let hdOn     = false;
+let lastTs   = 0;
+
+function log(msg) { document.getElementById('status').textContent = msg; console.log(msg); }
+
+// ── Frame loop ─────────────────────────────────────────────────────────────────
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (!nes || ts - lastTs < 16) return;
+  lastTs = ts;
+
+  nes.frame();
+
+  // Draw NES framebuffer. jsnes packs pixels as 0x00RRGGBB.
+  if (framebuf) {
+    for (let i = 0; i < W * H; i++) {
+      const p = framebuf[i], o = i << 2;
+      imgU8[o]   = (p >> 16) & 0xFF;
+      imgU8[o+1] = (p >>  8) & 0xFF;
+      imgU8[o+2] =  p        & 0xFF;
+      imgU8[o+3] = 0xFF;
+    }
+    nesCtx.putImageData(imgData, 0, 0);
+  }
+
+  if (!hdOn) return;
+
+  ovCtx.clearRect(0, 0, W * SC, H * SC);
+  const oam = nes.ppu.spriteMem;
+  const visibleTiles = [];
+
+  for (let i = 0; i < 64; i++) {
+    const base = i * 4;
+    const y    = oam[base] + 1;       // NES Y is stored -1
+    const tile = oam[base + 1];
+    const attr = oam[base + 2];
+    const x    = oam[base + 3];
+    if (y >= H) continue;
+
+    visibleTiles.push(tile);
+
+    const hd = hdTiles.get(tile);
+    if (!hd) continue;
+
+    const dx = x * SC, dy = y * SC, dw = 8 * SC, dh = 8 * SC;
+    const fH = (attr & 0x40) !== 0, fV = (attr & 0x80) !== 0;
+
+    if (fH || fV) {
+      ovCtx.save();
+      ovCtx.translate(dx + (fH ? dw : 0), dy + (fV ? dh : 0));
+      ovCtx.scale(fH ? -1 : 1, fV ? -1 : 1);
+      ovCtx.drawImage(hd, 0, 0, dw, dh);
+      ovCtx.restore();
+    } else {
+      ovCtx.drawImage(hd, dx, dy, dw, dh);
+    }
+  }
+
+  // OAM tile readout — unique indices, sorted, in hex
+  const unique = [...new Set(visibleTiles)].sort((a, b) => a - b)
+    .map(t => t.toString(16).padStart(2, '0')).join(' ');
+  const label = 'OAM tiles on screen: ' + (unique || '(none)');
+  ovCtx.font = 'bold 13px monospace';
+  ovCtx.shadowColor   = '#000';
+  ovCtx.shadowBlur    = 4;
+  ovCtx.fillStyle     = '#fff';
+  ovCtx.fillText(label, 6, 18);
+}
+requestAnimationFrame(loop);
+
+// ── Load ROM ───────────────────────────────────────────────────────────────────
+async function loadROM() {
+  const b64 = (await (await fetch('/public/smb-rom-base64.txt')).text()).trim();
+  nes = new jsnes.NES({
+    onFrame:       buf => { framebuf = buf; },
+    onAudioSample: ()  => {},
+  });
+  nes.loadROM(atob(b64));
+  log('ROM loaded — booting...');
+
+  // Two START presses: title → 1P select → game
+  setTimeout(() => nes.buttonDown(1, jsnes.Controller.BUTTON_START), 1000);
+  setTimeout(() => nes.buttonUp  (1, jsnes.Controller.BUTTON_START), 1150);
+  setTimeout(() => nes.buttonDown(1, jsnes.Controller.BUTTON_START), 2500);
+  setTimeout(() => nes.buttonUp  (1, jsnes.Controller.BUTTON_START), 2650);
+  setTimeout(() => log('Controls: Arrow · Z=jump · X=run'), 3200);
+}
+
+// ── Load HD tiles ──────────────────────────────────────────────────────────────
+async function loadHDTiles() {
+  const [tm, img] = await Promise.all([
+    fetch('/experiment-output/all-tiles-tilemap.json').then(r => r.json()),
+    new Promise((res, rej) => {
+      const el = new Image();
+      el.onload = () => res(el); el.onerror = rej;
+      el.src = '/experiment-output/all-tiles-output.png';
+    }),
+  ]);
+
+  // Draw FLUX image at native size for cropping
+  const src = document.createElement('canvas');
+  src.width = img.naturalWidth; src.height = img.naturalHeight;
+  src.getContext('2d').drawImage(img, 0, 0);
+
+  const fx = img.naturalWidth  / tm.input_width;
+  const fy = img.naturalHeight / tm.input_height;
+  const seen = new Set();
+
+  for (const t of tm.tiles) {
+    if (seen.has(t.chr_tile_idx)) continue;
+    seen.add(t.chr_tile_idx);
+
+    const sx = Math.round(t.canvas_x * fx), sy = Math.round(t.canvas_y * fy);
+    const sw = Math.round(t.canvas_w * fx), sh = Math.round(t.canvas_h * fy);
+
+    const tc = document.createElement('canvas');
+    tc.width = tc.height = 16;
+    tc.getContext('2d').drawImage(src, sx, sy, sw, sh, 0, 0, 16, 16);
+    hdTiles.set(t.chr_tile_idx, tc);
+  }
+
+  console.log(`Loaded ${hdTiles.size} HD tiles`);
+}
+
+// ── Keyboard ───────────────────────────────────────────────────────────────────
+const KEYS = {
+  ArrowUp:    jsnes.Controller.BUTTON_UP,    ArrowDown:  jsnes.Controller.BUTTON_DOWN,
+  ArrowLeft:  jsnes.Controller.BUTTON_LEFT,  ArrowRight: jsnes.Controller.BUTTON_RIGHT,
+  KeyZ:       jsnes.Controller.BUTTON_A,     KeyX:       jsnes.Controller.BUTTON_B,
+  Enter:      jsnes.Controller.BUTTON_START, ShiftRight: jsnes.Controller.BUTTON_SELECT,
+};
+document.addEventListener('keydown', e => {
+  if (e.code === 'KeyL' && nes) { const oam = nes.ppu.spriteMem; const tiles = []; for (let i = 0; i < 64; i++) { const y = oam[i*4]+1; if (y < H) tiles.push(oam[i*4+1]); } const line = [...new Set(tiles)].sort((a,b)=>a-b).map(t => t.toString(16).padStart(2,'0')+'('+(hdTiles.has(t)?'YES':'NO')+')').join(' '); document.getElementById('snapshots').innerHTML += 'SNAPSHOT: ' + line + '<br>'; return; }
+  if (nes && KEYS[e.code] != null) { nes.buttonDown(1, KEYS[e.code]); e.preventDefault(); }
+});
+document.addEventListener('keyup',   e => { if (nes && KEYS[e.code] != null) { nes.buttonUp  (1, KEYS[e.code]); e.preventDefault(); } });
+
+// ── Toggle ─────────────────────────────────────────────────────────────────────
+function toggle() {
+  hdOn = !hdOn;
+  ovEl.style.display = hdOn ? 'block' : 'none';
+  document.getElementById('btn').classList.toggle('on', hdOn);
+}
+
+// ── Boot ───────────────────────────────────────────────────────────────────────
+loadROM();
+loadHDTiles();
+</script>
+</body>
+</html>

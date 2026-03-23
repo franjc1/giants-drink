@@ -42,7 +42,7 @@
   <div class="game-col">
     <div id="nes"></div>
     <div class="controls">
-      <button id="btn-inject"      onclick="injectFluxSprites('sprites')" disabled>Inject Sprites ($1000)</button>
+      <button id="btn-inject"      onclick="injectFluxSprites('sprites')" disabled>Inject Sprites ($0000)</button>
       <button id="btn-inject-both" onclick="injectFluxSprites('both')"    disabled>Inject Both Tables</button>
       <button id="btn-persistent"  onclick="togglePersistent()"          disabled>Inject Persistent</button>
       <button id="btn-reset"       onclick="resetOriginal()"              disabled>Reset Original</button>
@@ -68,13 +68,14 @@
 
     <div class="legend">
       <strong>How this works:</strong><br>
-      1. SMB CHR-ROM sprite tiles extracted (pattern table 0, 256 tiles)<br>
-      2. Rendered as 128×128 grid → upscaled 512×512<br>
-      3. FLUX Kontext transforms to medieval fantasy style<br>
-      4. Downscale → per-tile NES palette quantization → 2bpp CHR<br>
+      1. SMB OAM captured across 230 frames → 14 unique character groups<br>
+      2. Composed into 960×120 sprite row PNG (3× scale)<br>
+      3. FLUX Kontext transforms to medieval knight style<br>
+      4. Per-tile extraction → NES palette quantization → 2bpp CHR<br>
       5. PPU renders from <strong>ptTile[]</strong> cache, NOT vramMem directly<br>
       &nbsp;&nbsp;&nbsp;Fix: use <code>ppu.writeMem()</code> to update both vramMem + ptTile<br>
-      &nbsp;&nbsp;&nbsp;Persistent: re-writes ptTile via setScanline() every frame<br><br>
+      &nbsp;&nbsp;&nbsp;Persistent: re-writes ptTile[0-255] via setScanline() every frame<br>
+      &nbsp;&nbsp;&nbsp;<strong>SMB sprites at PT0 ($0000)</strong>; BG at PT1 ($1000) — ppuFlags.spPatternTable=0<br><br>
       <strong>Controls:</strong> Arrow keys + Z (jump) + X (fire/run)<br>
       <strong>File served from:</strong> /experiment-output/smb-sprites-quantized.chr
     </div>
@@ -84,8 +85,8 @@
 <script src="jsnes.min.js"></script>
 <script>
 let browser = null;
-let originalTable0 = null;  // snapshot of vramMem[0x0000-0x0FFF] (BG pattern table)
-let originalTable1 = null;  // snapshot of vramMem[0x1000-0x1FFF] (sprite pattern table)
+let originalTable0 = null;  // snapshot of vramMem[0x0000-0x0FFF] (sprite PT in SMB — spPatternTable=0)
+let originalTable1 = null;  // snapshot of vramMem[0x1000-0x1FFF] (BG PT in SMB — bgPatternTable=1)
 let fluxChrData = null;
 let loaded = false;
 let persistentActive = false;
@@ -97,7 +98,7 @@ function setStatus(msg) {
 
 // ── Load ROM from smb-rom-base64.txt ──────────────────────────────────────────
 async function loadRomBase64() {
-  const resp = await fetch("/smb-rom-base64.txt");
+  const resp = await fetch("/public/smb-rom-base64.txt");
   if (!resp.ok) throw new Error("Failed to load ROM base64: " + resp.status);
   const b64 = (await resp.text()).trim();
   const bin = atob(b64);
@@ -120,8 +121,8 @@ function snapshotChr() {
   const t0 = new Uint8Array(4096);
   const t1 = new Uint8Array(4096);
   for (let i = 0; i < 4096; i++) {
-    t0[i] = nes.ppu.vramMem[0x0000 + i];  // BG pattern table
-    t1[i] = nes.ppu.vramMem[0x1000 + i];  // Sprite pattern table
+    t0[i] = nes.ppu.vramMem[0x0000 + i];  // sprite pattern table (PT0)
+    t1[i] = nes.ppu.vramMem[0x1000 + i];  // BG pattern table (PT1)
   }
   return { t0, t1 };
 }
@@ -132,10 +133,11 @@ function snapshotChr() {
 // Direct vramMem writes bypass the ptTile cache → no visual change.
 // ppu.writeMem(addr, val) does BOTH: vramMem[addr]=val AND patternWrite(addr,val)
 // which calls ptTile[addr>>4].setScanline(...) to rebuild the decoded tile cache.
-function writePatternTable(chrBytes, baseAddr) {
+// srcOffset: byte offset into chrBytes (0 for tiles 0-255, 4096 for tiles 256-511)
+function writePatternTable(chrBytes, baseAddr, srcOffset = 0) {
   const ppu = browser.nes.ppu;
   for (let i = 0; i < 4096; i++) {
-    ppu.writeMem(baseAddr + i, chrBytes[i]);
+    ppu.writeMem(baseAddr + i, chrBytes[srcOffset + i]);
   }
 }
 
@@ -152,15 +154,14 @@ function installPersistentHook(chrBytes) {
 
   ft.onGenerateFrame = function() {
     orig();
-    // Re-inject both pattern tables directly into ptTile after every frame.
-    // ptTile indices: 0-255 = table 0 ($0000), 256-511 = table 1 ($1000).
+    // Re-inject sprite pattern table (PT0, $0000) every frame.
+    // SMB sprites use PT0 (ppuFlags.spPatternTable: 0).
+    // ptTile[0-255] = PT0, ptTile[256-511] = PT1 (BG — leave untouched).
     for (let tileNum = 0; tileNum < 256; tileNum++) {
       const base = tileNum * 16;
-      const t0 = ppu.ptTile[tileNum];
-      const t1 = ppu.ptTile[256 + tileNum];
+      const t = ppu.ptTile[tileNum];  // PT0 only
       for (let row = 0; row < 8; row++) {
-        t0.setScanline(row, chrBytes[base + row], chrBytes[base + 8 + row]);
-        t1.setScanline(row, chrBytes[base + row], chrBytes[base + 8 + row]);
+        t.setScanline(row, chrBytes[base + row], chrBytes[base + 8 + row]);
       }
     }
   };
@@ -198,8 +199,8 @@ async function togglePersistent() {
   }
 
   // One-shot write first (so it takes effect immediately on the current frame)
-  writePatternTable(fluxChrData, 0x0000);
-  writePatternTable(fluxChrData, 0x1000);
+  // SMB sprites are in PT0 ($0000); leave PT1 ($1000, BG) untouched.
+  writePatternTable(fluxChrData, 0x0000, 0);
   // Then hook every subsequent frame
   installPersistentHook(fluxChrData);
   persistentActive = true;
@@ -228,14 +229,15 @@ async function injectFluxSprites(mode) {
   }
 
   if (mode === "both") {
-    // Write same FLUX CHR data to both pattern tables
-    writePatternTable(fluxChrData, 0x0000);  // BG pattern table
-    writePatternTable(fluxChrData, 0x1000);  // Sprite pattern table
-    setStatus("FLUX sprites injected into BOTH pattern tables: vramMem[0x0000-0x0FFF] (BG) + vramMem[0x1000-0x1FFF] (sprites).");
+    // SMB: sprites use PT0 ($0000), BG uses PT1 ($1000)
+    // CHR file: bytes 0-4095 = tiles 0-255 (sprites), bytes 4096-8191 = tiles 256-511 (BG)
+    writePatternTable(fluxChrData, 0x0000, 0);     // sprite table: tiles 0-255 with knight sprites
+    writePatternTable(fluxChrData, 0x1000, 4096);  // BG table: tiles 256-511 (original preserved in chr)
+    setStatus("FLUX sprites injected: knight sprites at $0000 + original BG tiles restored at $1000.");
   } else {
-    // Sprites only: $1000-$1FFF
-    writePatternTable(fluxChrData, 0x1000);
-    setStatus("FLUX sprites injected into sprite pattern table: vramMem[0x1000-0x1FFF].");
+    // Sprites only: PT0 = $0000 (where SMB sprite tiles live — ppuFlags.spPatternTable: 0)
+    writePatternTable(fluxChrData, 0x0000, 0);
+    setStatus("FLUX sprites injected into sprite pattern table: vramMem[0x0000-0x0FFF] (PT0).");
   }
 
   document.getElementById("btn-inject").disabled = false;
@@ -264,11 +266,11 @@ function loadPreviewImages() {
   const flux = document.getElementById("img-flux");
   const quant = document.getElementById("img-quantized");
 
-  orig.src  = "/experiment-output/smb-sprites-original.png?" + ts;
+  orig.src  = "/experiment-output/smb-sprites-for-flux.png?" + ts;
   orig.onerror = () => orig.style.opacity = "0.2";
 
-  flux.src  = "/experiment-output/smb-sprites-flux-transformed.png?" + ts;
-  flux.onerror = () => { flux.alt = "Run flux-roundtrip-test.js first"; flux.style.opacity = "0.2"; };
+  flux.src  = "/experiment-output/smb-sprites-flux-out.png?" + ts;
+  flux.onerror = () => { flux.alt = "Run smb-composer.js first"; flux.style.opacity = "0.2"; };
 
   quant.src = "/experiment-output/smb-sprites-quantized-preview.png?" + ts;
   quant.onerror = () => quant.style.opacity = "0.2";
@@ -307,7 +309,7 @@ window.onload = async function() {
       const { t0, t1 } = snapshotChr();
       originalTable0 = t0;
       originalTable1 = t1;
-      console.log("CHR snapshot: table0 (BG $0000-$0FFF):", t0.length, "bytes, table1 (sprites $1000-$1FFF):", t1.length, "bytes");
+      console.log("CHR snapshot: table0 (sprites $0000-$0FFF, PT0):", t0.length, "bytes, table1 (BG $1000-$1FFF, PT1):", t1.length, "bytes");
 
       document.getElementById("btn-inject").disabled      = false;
       document.getElementById("btn-inject-both").disabled = false;

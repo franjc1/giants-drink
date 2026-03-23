@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FLUX Knight Round-Trip Demo</title>
+<style>
+  body { background: #1a1a2e; color: #eee; font-family: monospace; margin: 0; padding: 20px; }
+  h1 { color: #e94560; margin-bottom: 4px; font-size: 18px; }
+  .subtitle { color: #888; font-size: 12px; margin-bottom: 20px; }
+  .top-row { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .game-col { flex: 0 0 auto; }
+  .info-col { flex: 1; min-width: 300px; max-width: 560px; }
+
+  /* ── NES + overlay stacking ──────────────────────────────────────────────── */
+  /* #nes-wrapper: the stacking context both canvases live inside */
+  #nes-wrapper {
+    position: relative;
+    display: inline-block;   /* shrink-wrap to canvas size */
+    line-height: 0;           /* remove inline-block gap */
+  }
+  /* jsnes appends its canvas into #nes-host; we do NOT size this div */
+  #nes-host { display: block; }
+  /* HD overlay: absolutely positioned over the NES canvas, same CSS size */
+  #hd-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    /* CSS size matched to NES canvas in JS */
+    pointer-events: none;
+    z-index: 10;
+    display: none;    /* shown when HD mode is active */
+  }
+
+  .controls { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+  button {
+    background: #16213e; color: #eee; border: 1px solid #e94560;
+    padding: 7px 13px; cursor: pointer; font-family: monospace; font-size: 12px;
+    transition: background 0.15s;
+  }
+  button:hover { background: #e94560; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; border-color: #555; }
+  button.active { border-color: #44ff88; background: #0a2a14; color: #44ff88; }
+
+  .status {
+    margin-top: 10px; padding: 10px; background: #0f0f23;
+    border-left: 3px solid #e94560; font-size: 12px; line-height: 1.5;
+    min-height: 48px; white-space: pre-wrap;
+  }
+  .panels { margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .panel h3 { font-size: 10px; color: #888; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 1px; }
+  .panel img { display: block; border: 1px solid #333; image-rendering: pixelated; max-width: 180px; }
+  hr.sep { border: none; border-top: 1px solid #2a2a4a; margin: 10px 0; }
+  .legend { font-size: 11px; color: #666; line-height: 1.9; }
+  .legend strong { color: #aaa; }
+
+  /* ── Diagnostic panel ────────────────────────────────────────────────────── */
+  #debug-wrap { margin-top: 14px; }
+  #debug-wrap summary { font-size: 11px; color: #888; cursor: pointer; user-select: none; }
+  #debug {
+    margin-top: 6px; padding: 8px; background: #070714;
+    border: 1px solid #2a2a2a; font-size: 10px; line-height: 1.4;
+    color: #8a8; white-space: pre; overflow-x: auto; max-height: 220px; overflow-y: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>FLUX Knight Round-Trip Demo</h1>
+<p class="subtitle">Mario → FLUX Kontext (medieval knight) → HD canvas overlay + NES CHR injection — compare both</p>
+
+<div class="top-row">
+  <!-- ── Game canvas column ─────────────────────────────────────────────────── -->
+  <div class="game-col">
+    <!-- #nes-wrapper: relative container so #hd-overlay stacks over #nes-host -->
+    <div id="nes-wrapper">
+      <div id="nes-host"></div>
+      <canvas id="hd-overlay"></canvas>
+    </div>
+
+    <div class="controls">
+      <button id="btn-hd"         onclick="toggleHD()"          disabled>HD Overlay</button>
+      <button id="btn-inject"     onclick="injectOnce()"         disabled>Inject CHR (2bpp)</button>
+      <button id="btn-persistent" onclick="togglePersistent()"   disabled>Persistent CHR</button>
+      <button id="btn-nuclear"       onclick="toggleNuclear()"       disabled>☢ Nuclear Test</button>
+      <button id="btn-knight-nuclear" onclick="toggleKnightNuclear()" disabled>Knight (Nuclear)</button>
+      <button id="btn-reset"         onclick="resetOriginal()"       disabled>Reset</button>
+    </div>
+    <div class="status" id="status">Loading game...</div>
+
+    <!-- Diagnostic panel (collapsed by default) -->
+    <details id="debug-wrap">
+      <summary>▶ Diagnostic (OAM + overlay)</summary>
+      <pre id="debug">— waiting for game —</pre>
+    </details>
+
+    <!-- Tile canvas dump panel -->
+    <details id="dump-wrap" style="margin-top:8px">
+      <summary style="font-size:11px;color:#888;cursor:pointer;user-select:none">▶ Tile canvas dump</summary>
+      <div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <input id="dump-idx" type="text" placeholder="0x3a" maxlength="6"
+               style="width:60px;background:#070714;color:#eee;border:1px solid #555;padding:4px 6px;font-family:monospace;font-size:12px">
+        <button onclick="dumpTile(parseInt($('dump-idx').value, 16).toString(16))" style="font-size:11px;padding:4px 8px">Dump tile</button>
+        <button onclick="dumpFirstMatch()" style="font-size:11px;padding:4px 8px">First matched tile</button>
+        <button onclick="dumpFirstMissing()" style="font-size:11px;padding:4px 8px">First missing tile</button>
+      </div>
+      <div id="dump-label" style="margin-top:4px;font-size:10px;color:#8a8;font-family:monospace">—</div>
+      <!-- image is shown at 8× zoom so individual pixels are visible -->
+      <img id="dump-img" style="display:none;margin-top:6px;image-rendering:pixelated;border:1px solid #444;max-width:320px">
+    </details>
+  </div>
+
+  <!-- ── Info column ───────────────────────────────────────────────────────── -->
+  <div class="info-col">
+    <div class="panels">
+      <div class="panel">
+        <h3>Input (v3)</h3>
+        <img id="img-input" src="" alt="">
+      </div>
+      <div class="panel">
+        <h3>FLUX output (v3)</h3>
+        <img id="img-output" src="" alt="">
+      </div>
+      <div class="panel">
+        <h3>NES CHR quantized</h3>
+        <img id="img-quantized" src="" alt="">
+      </div>
+      <div class="panel">
+        <h3>Knight Nuclear CHR</h3>
+        <img id="img-knight-nuclear" src="" alt="">
+      </div>
+    </div>
+
+    <hr class="sep">
+    <div class="legend">
+      <strong>HD Overlay</strong> — reads OAM every frame, draws full-color FLUX tiles<br>
+      &nbsp;&nbsp;on a transparent canvas layered over the emulator via z-index.<br>
+      &nbsp;&nbsp;CHR palette index 0 → alpha=0. OAM flip flags applied.<br>
+      <strong>Inject CHR (2bpp)</strong> — quantized knight tiles → ppu.writeMem()<br>
+      <strong>Persistent CHR</strong> — re-writes ptTile[0–255] every frame<br>
+      <strong>☢ Nuclear Test</strong> — all tiles → white stripes (injection proof)<br>
+      <strong>Knight (Nuclear)</strong> — area-avg + k-means CHR via writeMem() (same path as nuclear)<br>
+      <strong>Reset</strong> — restore original SMB sprites<br>
+      <hr class="sep">
+      SMB sprite mode: 8×8 (PPUCTRL $90, bit5=0). No 8×16 decoding needed.<br>
+      <strong>Controls:</strong> Arrow keys · Z = jump · X = run/fire
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<script src="jsnes.min.js"></script>
+<script>
+// ── Globals ───────────────────────────────────────────────────────────────────
+let browser        = null;
+let originalPT0    = null;   // Uint8Array(4096) — snapshot before any injection
+let originalPal0   = null;   // Uint8Array(4) — snapshot of $3F10-$3F13 (sprite palette 0)
+let knightChr      = null;   // Uint8Array(4096) — mario-flux-quantized-v3.chr
+let knightPalette  = null;   // [idx1, idx2, idx3] — NES hw palette entries for $3F11-$3F13
+let loaded         = false;
+
+let persistentActive    = false;
+let hdActive            = false;
+let nuclearActive       = false;
+let knightNuclearActive = false;
+let knightPT0Built      = false;  // true when knightPT0 + knightPalArr are ready to inject
+let knightPT0           = null;   // Uint8Array(4096) — original CHR with knight tiles overlaid
+let knightPalArr        = null;   // Uint8Array(3) — $3F11-$3F13 palette indices
+let knightFrameCount    = 0;      // for timing first 10 frames
+
+// Pre-built nuclear CHR: alternating 0xFF/0x00 bytes across all 4096 addresses.
+// Each 8×8 tile → even rows fully ON (palette idx 3), odd rows transparent (idx 0).
+// All 3 sprite palette colors will be written to NES white (0x30) → bright white stripes.
+const nuclearChr = new Uint8Array(4096);
+for (let i = 0; i < 4096; i++) nuclearChr[i] = (i % 2 === 0) ? 0xFF : 0x00;
+
+// HD overlay state
+let overlayEl  = null;       // <canvas id="hd-overlay">
+let overlayCtx = null;
+let hdTiles    = new Map();  // chr_tile_idx (number) → HTMLCanvasElement (32×32)
+let hdReady    = false;
+let scaleX     = 2;          // NES px → overlay canvas px (set from actual canvas size)
+let scaleY     = 2;
+let oamDrawCount   = 0;       // updated by renderOverlay each frame
+let lastOAMSnap    = [];      // updated every frame by renderOverlay — read by diagnostic interval
+
+// Frame hook
+let hookInstalled = false;
+let hookOrig      = null;
+
+// Debug
+let debugInterval = null;
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+function setStatus(msg) { $("status").textContent = msg; console.log("[status]", msg); }
+function setActive(id, on) { $(id).classList.toggle("active", on); }
+
+// ── ROM loading ───────────────────────────────────────────────────────────────
+async function loadRom() {
+  const r = await fetch("/public/smb-rom-base64.txt");
+  if (!r.ok) throw new Error("smb-rom-base64.txt not found (" + r.status + ")");
+  const b64 = (await r.text()).trim();
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+// ── CHR helpers ───────────────────────────────────────────────────────────────
+function writePT0(chrBytes) {
+  const ppu = browser.nes.ppu;
+  for (let i = 0; i < 4096; i++) ppu.writeMem(i, chrBytes[i]);
+}
+function snapshotPT0() {
+  const out = new Uint8Array(4096);
+  for (let i = 0; i < 4096; i++) out[i] = browser.nes.ppu.vramMem[i];
+  return out;
+}
+function snapshotPal0() {
+  // Sprite palette 0: PPU $3F10-$3F13 (shared bg + 3 colors)
+  const out = new Uint8Array(4);
+  for (let i = 0; i < 4; i++) out[i] = browser.nes.ppu.vramMem[0x3F10 + i];
+  return out;
+}
+function writeKnightPalette() {
+  if (!knightPalette) return;
+  const ppu = browser.nes.ppu;
+  ppu.writeMem(0x3F11, knightPalette[0]);
+  ppu.writeMem(0x3F12, knightPalette[1]);
+  ppu.writeMem(0x3F13, knightPalette[2]);
+}
+function restoreOriginalPalette() {
+  if (!originalPal0) return;
+  const ppu = browser.nes.ppu;
+  ppu.writeMem(0x3F11, originalPal0[1]);
+  ppu.writeMem(0x3F12, originalPal0[2]);
+  ppu.writeMem(0x3F13, originalPal0[3]);
+}
+async function ensureKnightPalette() {
+  if (knightPalette) return true;
+  const r = await fetch("/experiment-output/mario-flux-tilemap-v3.json");
+  if (!r.ok) { setStatus("mario-flux-tilemap-v3.json not found"); return false; }
+  const tm = await r.json();
+  if (!tm.knight_palette_nes_indices) {
+    setStatus("Tilemap missing knight_palette_nes_indices. Re-run: node tools/requantize-v3.js");
+    return false;
+  }
+  knightPalette = tm.knight_palette_nes_indices;
+  console.log("Knight palette loaded:", knightPalette.map(x => "0x"+x.toString(16)).join(", "));
+  return true;
+}
+// Build the pre-merged knightPT0 array: originalPT0 with knight tiles overlaid.
+// Called once before activating knight nuclear mode.
+// rawChr: Uint8Array(4096) from .chr file — only knight tiles have non-zero data.
+// palIndices: [idx1, idx2, idx3] from .json file.
+function buildKnightPT0(rawChr, palIndices) {
+  // Start from original ROM CHR — non-knight sprites (coins, fireballs…) stay intact
+  const pt0 = new Uint8Array(originalPT0.slice(0, 4096));
+
+  // Overlay only tiles that have at least one non-zero byte in the knight CHR
+  let knightTileCount = 0;
+  for (let t = 0; t < 256; t++) {
+    const base = t * 16;
+    let hasData = false;
+    for (let b = 0; b < 16; b++) {
+      if (rawChr[base + b] !== 0) { hasData = true; break; }
+    }
+    if (hasData) {
+      for (let b = 0; b < 16; b++) pt0[base + b] = rawChr[base + b];
+      knightTileCount++;
+    }
+  }
+
+  const pal = new Uint8Array([palIndices[0], palIndices[1], palIndices[2]]);
+  console.log(
+    `Knight data ready: CHR bytes=${rawChr.length}  knight tiles=${knightTileCount}/256` +
+    `  palette=${Array.from(pal).map(x => "0x"+x.toString(16)).join(",")}`
+  );
+  return { pt0, pal };
+}
+
+async function ensureKnightChr() {
+  if (knightChr) return true;
+  const r = await fetch("/experiment-output/mario-flux-quantized-v3.chr");
+  if (!r.ok) {
+    setStatus("mario-flux-quantized-v3.chr not found.\nRun: node tools/mario-flux-compose-v3.js");
+    return false;
+  }
+  knightChr = new Uint8Array(await r.arrayBuffer());
+  return true;
+}
+
+// ── Unified frame hook ────────────────────────────────────────────────────────
+function installHook() {
+  if (hookInstalled || !browser || !browser._frameTimer) return;
+  const ft = browser._frameTimer;
+  hookOrig = ft.onGenerateFrame || (function(){});
+  ft.onGenerateFrame = function() {
+    hookOrig();
+    if (knightNuclearActive)                reinjectKnightNuclear();
+    else if (nuclearActive)                 reinjectNuclear();
+    else if (persistentActive && knightChr) reinjectPT0();
+    if (hdActive && hdReady)           renderOverlay();
+  };
+  hookInstalled = true;
+  console.log("Frame hook installed. ft.onGenerateFrame =", typeof ft.onGenerateFrame);
+}
+
+function reinjectPT0() {
+  // Re-decode the quantized CHR bytes directly into ptTile cache every frame.
+  // ptTile[0-255] = PT0 (sprites in SMB, ppuFlags.spPatternTable=0)
+  const ppu = browser.nes.ppu;
+  for (let t = 0; t < 256; t++) {
+    const base = t * 16, tile = ppu.ptTile[t];
+    for (let r = 0; r < 8; r++) tile.setScanline(r, knightChr[base+r], knightChr[base+8+r]);
+  }
+  // Also re-write knight palette — SMB's NMI handler overwrites sprite palette each frame
+  writeKnightPalette();
+}
+
+function reinjectNuclear() {
+  // Write alternating FF/00 to ALL 4096 PT0 addresses via ppu.writeMem().
+  // Also overwrite sprite palette 0 with NES white (0x30) so the stripes are visible.
+  const ppu = browser.nes.ppu;
+  for (let i = 0; i < 4096; i++) ppu.writeMem(i, nuclearChr[i]);
+  ppu.writeMem(0x3F11, 0x30);   // NES white → palette idx 1
+  ppu.writeMem(0x3F12, 0x30);   // NES white → palette idx 2
+  ppu.writeMem(0x3F13, 0x30);   // NES white → palette idx 3
+}
+
+function toggleNuclear() {
+  if (!loaded) return;
+
+  if (nuclearActive) {
+    nuclearActive = false;
+    setActive("btn-nuclear", false);
+    $("btn-nuclear").textContent = "☢ Nuclear Test";
+    writePT0(originalPT0);
+    restoreOriginalPalette();
+    setStatus("Nuclear test off. Original CHR + palette restored.");
+    return;
+  }
+
+  // Disable other CHR modes first
+  if (persistentActive) {
+    persistentActive = false;
+    setActive("btn-persistent", false);
+    $("btn-persistent").textContent = "Persistent CHR";
+  }
+
+  nuclearActive = true;
+  setActive("btn-nuclear", true);
+  $("btn-nuclear").textContent = "☢ Nuclear ACTIVE";
+  reinjectNuclear();
+  installHook();
+  setStatus(
+    "Nuclear test ACTIVE — all 256 PT0 tiles overwritten with white stripes.\n" +
+    "Sprite palette 0 → NES white (0x30) × 3.\n" +
+    "Every sprite reading from PT0 should be bright white horizontal bands.\n" +
+    "If any Mario state still looks normal → that state reads from somewhere else."
+  );
+}
+
+function reinjectKnightNuclear() {
+  // Identical structure to reinjectNuclear() — pre-built array, one tight loop.
+  const t0  = performance.now();
+  const ppu = browser.nes.ppu;
+  for (let i = 0; i < 4096; i++) ppu.writeMem(i, knightPT0[i]);
+  ppu.writeMem(0x3F11, knightPalArr[0]);
+  ppu.writeMem(0x3F12, knightPalArr[1]);
+  ppu.writeMem(0x3F13, knightPalArr[2]);
+  if (knightFrameCount < 10) {
+    console.log(`Frame callback time: ${(performance.now() - t0).toFixed(2)}ms`);
+    knightFrameCount++;
+  }
+}
+
+async function toggleKnightNuclear() {
+  if (!loaded) return;
+
+  // Toggle off
+  if (knightNuclearActive) {
+    knightNuclearActive = false;
+    setActive("btn-knight-nuclear", false);
+    $("btn-knight-nuclear").textContent = "Knight (Nuclear)";
+    writePT0(originalPT0);
+    restoreOriginalPalette();
+    setStatus("Knight Nuclear off. Original CHR + palette restored.");
+    return;
+  }
+
+  // Load and build pre-merged array if not done yet — do NOT activate until ready
+  if (!knightPT0Built) {
+    $("btn-knight-nuclear").disabled = true;
+    $("btn-knight-nuclear").textContent = "Loading...";
+    setStatus("Loading knight nuclear data...");
+
+    const [chrResp, jsonResp] = await Promise.all([
+      fetch("/experiment-output/mario-flux-knight-nuclear.chr"),
+      fetch("/experiment-output/mario-flux-knight-nuclear.json"),
+    ]);
+
+    $("btn-knight-nuclear").disabled = false;
+    $("btn-knight-nuclear").textContent = "Knight (Nuclear)";
+
+    if (!chrResp.ok) {
+      setStatus("mario-flux-knight-nuclear.chr not found.\nRun: node tools/knight-nuclear-build.js");
+      return;
+    }
+    if (!jsonResp.ok) {
+      setStatus("mario-flux-knight-nuclear.json not found.\nRun: node tools/knight-nuclear-build.js");
+      return;
+    }
+
+    const rawChr = new Uint8Array(await chrResp.arrayBuffer());
+    const meta   = await jsonResp.json();
+
+    // Build pre-merged PT0 array (originalPT0 + knight tiles overlaid)
+    const { pt0, pal } = buildKnightPT0(rawChr, meta.nes_palette_indices);
+    knightPT0     = pt0;
+    knightPalArr  = pal;
+    knightPT0Built = true;
+    // "Knight data ready: CHR bytes=... palette=..." already printed by buildKnightPT0
+  }
+
+  // Disable other CHR modes
+  if (persistentActive) {
+    persistentActive = false;
+    setActive("btn-persistent", false);
+    $("btn-persistent").textContent = "Persistent CHR";
+  }
+  if (nuclearActive) {
+    nuclearActive = false;
+    setActive("btn-nuclear", false);
+    $("btn-nuclear").textContent = "☢ Nuclear Test";
+  }
+
+  knightNuclearActive = true;
+  knightFrameCount    = 0;
+  setActive("btn-knight-nuclear", true);
+  $("btn-knight-nuclear").textContent = "Knight Nuclear ACTIVE";
+  reinjectKnightNuclear();   // first inject before frame hook fires
+  installHook();
+  const palStr = Array.from(knightPalArr).map(x => "0x"+x.toString(16)).join(", ");
+  setStatus(
+    "Knight Nuclear ACTIVE — area-averaged + k-means CHR via writeMem().\n" +
+    `NES palette: [${palStr}] → $3F11-$3F13 (re-written every frame)\n` +
+    "Frame callback timing in console (first 10 frames). Should be <5ms like nuclear test."
+  );
+}
+
+// ── HD overlay rendering ──────────────────────────────────────────────────────
+//
+// Called once per frame from the frame hook (after the NES frame renders).
+//
+// Coordinate system:
+//   NES native:     256 × 240 pixels
+//   Overlay canvas: nesCanvas.width × nesCanvas.height (set in initOverlay())
+//   scaleX = overlayEl.width  / 256   (e.g. 2.0 if NES canvas is 512px wide)
+//   scaleY = overlayEl.height / 240
+//
+// OAM format (CPU $0200, 64 sprites × 4 bytes):
+//   [0] Y-1    (top edge minus 1; sprite visible when Y+1 < 240)
+//   [1] tile   (CHR tile index in PT0; SMB uses 8×8 mode, no 8×16 decoding)
+//   [2] attrs  (bit6=flip_h, bit7=flip_v, bits1-0=palette)
+//   [3] X      (left edge)
+//
+// FLUX tile source: 32×32 px (4× NES scale)
+// Destination on overlay: 8×scaleX × 8×scaleY (same as one NES tile on screen)
+//
+function renderOverlay() {
+  const ctx = overlayCtx;
+  const W   = overlayEl.width;
+  const H   = overlayEl.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // ── Diagnostic: always draw a red square at (50,50) ──────────────────────
+  // If you can see this square, the overlay canvas IS visible and drawing.
+  ctx.fillStyle = "rgba(255,0,0,0.85)";
+  ctx.fillRect(50, 50, 20, 20);
+
+  if (!hdReady) return;
+
+  ctx.imageSmoothingEnabled = false;
+
+  const cpu   = browser.nes.cpu.mem;
+  const drawW = 8 * scaleX;
+  const drawH = 8 * scaleY;
+  let drawn = 0;
+  const snap = [];   // fresh OAM snapshot for this frame
+
+  for (let i = 0; i < 64; i++) {
+    const base    = 0x0200 + i * 4;
+    const oam_y   = cpu[base];       // stored as screen_top - 1
+    const oam_tile= cpu[base + 1];   // CHR PT0 tile index (8×8 mode)
+    const oam_attr= cpu[base + 2];
+    const oam_x   = cpu[base + 3];
+
+    const screenY = oam_y + 1;      // actual top-left Y on NES screen (0-239)
+    if (screenY >= 240) continue;   // off-screen (0xF0 / 0xFF)
+
+    const hd = hdTiles.get(oam_tile);
+    snap.push({ slot: i, tile: oam_tile, x: oam_x, y: screenY,
+                hasHD: !!hd, w: hd ? hd.width : 0, h: hd ? hd.height : 0 });
+    if (!hd) continue;
+
+    const flip_h = (oam_attr & 0x40) !== 0;
+    const flip_v = (oam_attr & 0x80) !== 0;
+    const dx = oam_x   * scaleX;
+    const dy = screenY * scaleY;
+
+    ctx.save();
+    if (flip_h || flip_v) {
+      ctx.translate(
+        dx + (flip_h ? drawW : 0),
+        dy + (flip_v ? drawH : 0)
+      );
+      ctx.scale(flip_h ? -1 : 1, flip_v ? -1 : 1);
+      ctx.drawImage(hd, 0, 0, drawW, drawH);
+    } else {
+      ctx.drawImage(hd, dx, dy, drawW, drawH);
+    }
+    ctx.restore();
+    drawn++;
+  }
+  oamDrawCount  = drawn;
+  lastOAMSnap   = snap;    // publish for diagnostic interval
+}
+
+// ── HD tile loading ───────────────────────────────────────────────────────────
+//
+// v3 approach: scale-factor crop (no full-image resize, no magenta detection)
+//
+// 1. Load mario-flux-tilemap-v3.json → tile positions + input_width/input_height
+// 2. Load mario-flux-output-v3.png   → draw at NATIVE size onto offscreen canvas
+// 3. Compute fx = fluxW/input_width, fy = fluxH/input_height
+// 4. Load mario-flux-quantized-v3.chr → use as pixel-exact transparency mask
+// 5. For each unique tile: crop (canvas_x*fx, canvas_y*fy, canvas_w*fx, canvas_h*fy)
+//    from native FLUX; mask out pixels where CHR palette index = 0 (transparent)
+//
+async function loadHDTiles() {
+  // ── Load tilemap ────────────────────────────────────────────────────────────
+  const tmr = await fetch("/experiment-output/mario-flux-tilemap-v3.json");
+  if (!tmr.ok) {
+    throw new Error("mario-flux-tilemap-v3.json not found. Run: node tools/mario-flux-compose-v3.js");
+  }
+  const tileMap = await tmr.json();
+  const { input_width: inW, input_height: inH, tiles } = tileMap;
+  if (!knightPalette && tileMap.knight_palette_nes_indices) {
+    knightPalette = tileMap.knight_palette_nes_indices;
+    console.log("Knight palette from tilemap:", knightPalette.map(x => "0x"+x.toString(16)).join(", "));
+  }
+  setStatus(`Tilemap v3 loaded: ${tiles.length} tile entries in ${inW}×${inH} input`);
+
+  // ── Load quantized CHR (for transparency mask) ──────────────────────────────
+  const chrResp = await fetch("/experiment-output/mario-flux-quantized-v3.chr");
+  if (!chrResp.ok) throw new Error("mario-flux-quantized-v3.chr not found");
+  const chrBuf = new Uint8Array(await chrResp.arrayBuffer());
+
+  // Returns NES palette index 0-3 for pixel (px, py) in given CHR tile
+  function getChrIndex(tileIdx, px, py) {
+    const base  = tileIdx * 16;
+    const plane0 = chrBuf[base + py];
+    const plane1 = chrBuf[base + 8 + py];
+    const bit    = 7 - px;
+    return ((plane0 >> bit) & 1) | (((plane1 >> bit) & 1) << 1);
+  }
+
+  // ── Load FLUX output at native resolution ───────────────────────────────────
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  await new Promise((res, rej) => {
+    img.onload  = res;
+    img.onerror = () => rej(new Error("Failed to load mario-flux-output-v3.png"));
+    img.src = "/experiment-output/mario-flux-output-v3.png?" + Date.now();
+  });
+  const fluxW = img.naturalWidth, fluxH = img.naturalHeight;
+  const fx = fluxW / inW, fy = fluxH / inH;
+  setStatus(`FLUX v3 loaded: ${fluxW}×${fluxH}  scale fx=${fx.toFixed(3)} fy=${fy.toFixed(3)}`);
+
+  // Draw FLUX image at native size
+  const offscreen = document.createElement("canvas");
+  offscreen.width  = fluxW;
+  offscreen.height = fluxH;
+  offscreen.getContext("2d").drawImage(img, 0, 0);
+
+  // ── Extract each unique tile using scale-factor crop ────────────────────────
+  hdTiles.clear();
+  let processed = 0, skipped = 0;
+  const seen = new Set();
+
+  for (const tile of tiles) {
+    const { chr_tile_idx, canvas_x, canvas_y, canvas_w, canvas_h } = tile;
+    if (seen.has(chr_tile_idx)) continue;   // first occurrence wins
+    seen.add(chr_tile_idx);
+
+    // Scale tile region from input canvas coords → FLUX native coords
+    const sx = Math.round(canvas_x * fx);
+    const sy = Math.round(canvas_y * fy);
+    const sw = Math.max(1, Math.round(canvas_w * fx));
+    const sh = Math.max(1, Math.round(canvas_h * fy));
+
+    if (sx + sw > fluxW || sy + sh > fluxH) {
+      console.warn(`Tile $${chr_tile_idx.toString(16)} OOB: src (${sx},${sy} ${sw}×${sh}) in ${fluxW}×${fluxH}`);
+      skipped++;
+      continue;
+    }
+
+    // Crop from native FLUX
+    const tc   = document.createElement("canvas");
+    tc.width   = sw;
+    tc.height  = sh;
+    const tctx = tc.getContext("2d");
+    tctx.imageSmoothingEnabled = false;
+    tctx.drawImage(offscreen, sx, sy, sw, sh, 0, 0, sw, sh);
+
+    // Apply CHR transparency mask: NES palette index 0 → alpha=0
+    // This gives pixel-exact transparency matching what the NES PPU renders.
+    const idata = tctx.getImageData(0, 0, sw, sh);
+    const d     = idata.data;
+    for (let py = 0; py < sh; py++) {
+      for (let px = 0; px < sw; px++) {
+        const nx = Math.min(7, Math.floor(px * 8 / sw));
+        const ny = Math.min(7, Math.floor(py * 8 / sh));
+        if (getChrIndex(chr_tile_idx, nx, ny) === 0) {
+          d[(py * sw + px) * 4 + 3] = 0;
+        }
+      }
+    }
+    tctx.putImageData(idata, 0, 0);
+
+    hdTiles.set(chr_tile_idx, tc);
+    processed++;
+  }
+
+  console.log(`loadHDTiles v3: ${processed} tiles processed, ${skipped} skipped`);
+  console.log(`hdTiles keys:`, [...hdTiles.keys()].map(v => "0x"+v.toString(16)).join(", "));
+  hdReady = true;
+  return { processed, skipped };
+}
+
+// ── Overlay canvas initialization ─────────────────────────────────────────────
+//
+// Called after jsnes.Browser initializes its canvas.
+// We match the overlay's actual pixel buffer to the NES canvas so coordinates align.
+//
+function initOverlay() {
+  overlayEl  = $("hd-overlay");
+  overlayCtx = overlayEl.getContext("2d");
+
+  // Find the canvas jsnes created inside #nes-host
+  const nesCanvas = document.querySelector("#nes-host canvas");
+  let nesW = 512, nesH = 480;  // fallback
+
+  if (nesCanvas) {
+    // Use the actual backing-buffer size (canvas.width, not CSS width)
+    nesW = nesCanvas.width  || nesCanvas.offsetWidth  || 512;
+    nesH = nesCanvas.height || nesCanvas.offsetHeight || 480;
+    console.log(`NES canvas: actual=${nesCanvas.width}×${nesCanvas.height}  CSS=${nesCanvas.offsetWidth}×${nesCanvas.offsetHeight}`);
+  } else {
+    console.warn("NES canvas not found in #nes-host — using 512×480 fallback");
+    // Search wider
+    const anyCanvas = document.querySelector("#nes-wrapper canvas:not(#hd-overlay)");
+    if (anyCanvas) {
+      nesW = anyCanvas.width  || 512;
+      nesH = anyCanvas.height || 480;
+      console.log(`Found NES canvas via wider search: ${nesW}×${nesH}`);
+    }
+  }
+
+  // Set overlay backing buffer to SAME actual pixel size as the NES canvas
+  overlayEl.width  = nesW;
+  overlayEl.height = nesH;
+
+  // Match CSS display size
+  overlayEl.style.width  = nesW + "px";
+  overlayEl.style.height = nesH + "px";
+
+  // Compute scale factors: NES native (256×240) → overlay canvas pixels
+  scaleX = nesW / 256;
+  scaleY = nesH / 240;
+
+  console.log(`Overlay init: buffer=${nesW}×${nesH}  scale=${scaleX.toFixed(2)}×${scaleY.toFixed(2)}`);
+  setStatus(
+    `Game loaded. Overlay canvas: ${nesW}×${nesH} (scale ${scaleX.toFixed(1)}×)\n` +
+    `Controls: Arrow keys · Z=jump · X=run · Click "HD Overlay" to test`
+  );
+}
+
+// ── Diagnostic loop ───────────────────────────────────────────────────────────
+// Runs at 200ms. Reads lastOAMSnap (populated every frame by renderOverlay).
+function startDiagnostic() {
+  if (debugInterval) clearInterval(debugInterval);
+  debugInterval = setInterval(() => {
+    if (!loaded || !browser) return;
+
+    const ppu     = browser.nes.ppu;
+    const sprSize = ppu.f_spriteSize;
+    const spPT    = ppu.f_spPatternTable !== undefined ? ppu.f_spPatternTable : "?";
+    const lines   = [];
+
+    lines.push(`PPU: spriteSize=${sprSize===0?"8x8":"8x16"}  spPT=${spPT} (SMB=0→PT0=$0000-$0FFF)`);
+    lines.push(`Overlay: ${overlayEl ? overlayEl.width+"×"+overlayEl.height : "not init"}  scale=${scaleX.toFixed(1)}×${scaleY.toFixed(1)}  hdReady=${hdReady}  hdActive=${hdActive}  nuclear=${nuclearActive}  knightNuclear=${knightNuclearActive}`);
+    lines.push(`hdTiles loaded: ${hdTiles.size}  tiles drawn last frame: ${oamDrawCount}`);
+    lines.push(`hdTiles keys: ${[...hdTiles.keys()].map(v=>"$"+v.toString(16)).join(" ")}`);
+    lines.push("");
+
+    // ── OAM from last frame snapshot ──────────────────────────────────────────
+    // lastOAMSnap is populated by renderOverlay() every frame when hdActive.
+    // When hdActive=false, fall back to reading cpu.mem directly.
+    let snap = lastOAMSnap;
+    if (!hdActive || snap.length === 0) {
+      // Rebuild from cpu.mem so diagnostic works even without HD overlay
+      snap = [];
+      const cpu = browser.nes.cpu.mem;
+      for (let i = 0; i < 64; i++) {
+        const base = 0x0200 + i * 4;
+        const oam_y = cpu[base], oam_tile = cpu[base+1], oam_x = cpu[base+3];
+        const screenY = oam_y + 1;
+        if (screenY >= 240) continue;
+        const hd = hdTiles.get(oam_tile);
+        snap.push({ slot: i, tile: oam_tile, x: oam_x, y: screenY,
+                    hasHD: !!hd, w: hd ? hd.width : 0, h: hd ? hd.height : 0 });
+      }
+    }
+
+    const missing = [...new Set(snap.filter(s => !s.hasHD).map(s => s.tile))];
+    const matched = snap.filter(s => s.hasHD).length;
+    lines.push(`Visible sprites: ${snap.length}  HD matched: ${matched}  NO match: ${snap.length - matched}`);
+    if (missing.length) {
+      lines.push(`MISSING from hdTiles: ${missing.map(t => "0x"+t.toString(16).padStart(2,"0")).join("  ")}`);
+    }
+    lines.push("");
+    lines.push("slot  tile   in_hdTiles?  canvas        X    Y");
+    lines.push("────  ─────  ───────────  ────────────  ───  ───");
+
+    for (const s of snap) {
+      const matchStr = s.hasHD
+        ? `YES  ${(s.w+"×"+s.h).padEnd(12)}`
+        : `NO   —           `;
+      lines.push(
+        `[${s.slot.toString().padStart(2)}]  ` +
+        `0x${s.tile.toString(16).padStart(2,"0")}   ` +
+        `${matchStr}  ` +
+        `${s.x.toString().padStart(3)}  ${s.y.toString().padStart(3)}`
+      );
+    }
+
+    $("debug").textContent = lines.join("\n");
+
+    // ── Auto-populate tile dump input with first missing tile ─────────────────
+    if (missing.length && $("dump-idx").value === "") {
+      $("dump-idx").value = "0x" + missing[0].toString(16).padStart(2,"0");
+    }
+  }, 200);
+}
+
+// ── Tile canvas dump ──────────────────────────────────────────────────────────
+function dumpTile(idxStr) {
+  const idx = parseInt(idxStr, 16);
+  if (isNaN(idx)) { $("dump-label").textContent = "Bad hex: " + idxStr; return; }
+  const tc = hdTiles.get(idx);
+  if (!tc) {
+    $("dump-label").textContent = "Tile 0x"+idx.toString(16).padStart(2,"0")+" NOT in hdTiles.";
+    $("dump-img").style.display = "none";
+    return;
+  }
+  $("dump-img").src = tc.toDataURL();
+  $("dump-img").style.display = "block";
+  $("dump-label").textContent =
+    "Tile 0x"+idx.toString(16).padStart(2,"0")+" — stored canvas: "+tc.width+"×"+tc.height+"px";
+}
+
+function dumpFirstMissing() {
+  const cpu = browser.nes.cpu.mem;
+  for (let i = 0; i < 64; i++) {
+    const base = 0x0200 + i * 4;
+    if (cpu[base] + 1 >= 240) continue;
+    const tile = cpu[base+1];
+    if (!hdTiles.has(tile)) {
+      $("dump-idx").value = "0x"+tile.toString(16).padStart(2,"0");
+      $("dump-label").textContent = "Tile 0x"+tile.toString(16).padStart(2,"0")+" is MISSING from hdTiles (first visible missing tile).";
+      $("dump-img").style.display = "none";
+      return;
+    }
+  }
+  $("dump-label").textContent = "All visible OAM tiles are present in hdTiles.";
+}
+
+function dumpFirstMatch() {
+  const cpu = browser.nes.cpu.mem;
+  for (let i = 0; i < 64; i++) {
+    const base = 0x0200 + i * 4;
+    if (cpu[base] + 1 >= 240) continue;
+    const tile = cpu[base+1];
+    if (hdTiles.has(tile)) {
+      $("dump-idx").value = "0x"+tile.toString(16).padStart(2,"0");
+      dumpTile(tile.toString(16));
+      return;
+    }
+  }
+  $("dump-label").textContent = "No visible OAM tiles matched hdTiles.";
+}
+
+// ── Button handlers ───────────────────────────────────────────────────────────
+async function toggleHD() {
+  if (!loaded) return;
+
+  if (hdActive) {
+    hdActive = false;
+    overlayEl.style.display = "none";
+    setActive("btn-hd", false);
+    $("btn-hd").textContent = "HD Overlay";
+    setStatus("HD overlay off. Red test square gone.");
+    return;
+  }
+
+  // Load HD tiles if first activation
+  if (!hdReady) {
+    $("btn-hd").disabled = true;
+    setStatus("Loading FLUX tiles...");
+    try {
+      const { processed, skipped } = await loadHDTiles();
+      setStatus(`HD tiles ready: ${processed} tiles loaded (${skipped} skipped)`);
+    } catch (err) {
+      setStatus("HD load error: " + err.message);
+      $("btn-hd").disabled = false;
+      return;
+    }
+    $("btn-hd").disabled = false;
+  }
+
+  // Show overlay and install frame hook
+  overlayEl.style.display = "block";
+  hdActive = true;
+  installHook();
+  setActive("btn-hd", true);
+  $("btn-hd").textContent = "HD Overlay ON";
+  setStatus(
+    "HD overlay active.\n" +
+    "Red square at (50,50) = overlay is visible.\n" +
+    "Knight tiles replace Mario wherever OAM tile matches hdTiles map.\n" +
+    "Check diagnostic panel for OAM → hdTiles match details."
+  );
+}
+
+async function injectOnce() {
+  if (!loaded) return;
+  if (!await ensureKnightChr()) return;
+  await ensureKnightPalette();
+  writePT0(knightChr);
+  writeKnightPalette();
+  setStatus("Knight CHR + palette injected (v3).\nUse Persistent to prevent overwriting.");
+}
+
+async function togglePersistent() {
+  if (!loaded) return;
+  if (persistentActive) {
+    persistentActive = false;
+    setActive("btn-persistent", false);
+    $("btn-persistent").textContent = "Persistent CHR";
+    restoreOriginalPalette();
+    setStatus("Persistent CHR off. Original palette restored.");
+    return;
+  }
+  if (!await ensureKnightChr()) return;
+  await ensureKnightPalette();
+  writePT0(knightChr);
+  writeKnightPalette();
+  installHook();
+  persistentActive = true;
+  setActive("btn-persistent", true);
+  $("btn-persistent").textContent = "Persistent ON";
+  const palStr = knightPalette ? knightPalette.map(x => "0x"+x.toString(16)).join(", ") : "?";
+  setStatus(`Persistent CHR + palette active.\nKnight palette: [${palStr}] → $3F11-$3F13\nRe-writes CHR + palette every frame.`);
+}
+
+function resetOriginal() {
+  if (!loaded || !originalPT0) return;
+  if (persistentActive) {
+    persistentActive = false;
+    setActive("btn-persistent", false);
+    $("btn-persistent").textContent = "Persistent CHR";
+  }
+  if (nuclearActive) {
+    nuclearActive = false;
+    setActive("btn-nuclear", false);
+    $("btn-nuclear").textContent = "☢ Nuclear Test";
+  }
+  if (knightNuclearActive) {
+    knightNuclearActive = false;
+    setActive("btn-knight-nuclear", false);
+    $("btn-knight-nuclear").textContent = "Knight (Nuclear)";
+  }
+  writePT0(originalPT0);
+  restoreOriginalPalette();
+  setStatus("Original SMB sprites + palette restored.");
+}
+
+// ── Preview images ────────────────────────────────────────────────────────────
+function loadPreviews() {
+  const ts = Date.now();
+  [["img-input",          "/experiment-output/mario-flux-input-v3.png"],
+   ["img-output",         "/experiment-output/mario-flux-output-v3.png"],
+   ["img-quantized",      "/experiment-output/mario-flux-quantized-v3.png"],
+   ["img-knight-nuclear", "/experiment-output/mario-flux-knight-nuclear.png"],
+  ].forEach(([id, src]) => {
+    const el = $(id);
+    el.src = src + "?" + ts;
+    el.onerror = () => { el.alt = "not generated"; el.style.opacity = "0.3"; };
+  });
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+window.onload = async function() {
+  loadPreviews();
+  setStatus("Loading ROM...");
+
+  let romBytes;
+  try { romBytes = await loadRom(); }
+  catch (err) { setStatus("ROM load failed: " + err.message); return; }
+  setStatus(`ROM loaded (${romBytes.length} bytes). Starting emulator...`);
+
+  try {
+    browser = new jsnes.Browser({
+      container: $("nes-host"),
+      onError: e => { console.error("jsnes error:", e); setStatus("Emulator error: " + (e.message||e)); },
+    });
+
+    let romStr = "";
+    for (let i = 0; i < romBytes.length; i++) romStr += String.fromCharCode(romBytes[i]);
+    browser.loadROM(romStr);
+
+    // Give jsnes time to create its canvas and render first frames
+    setTimeout(() => {
+      // ── Snapshot original PT0 + palette ─────────────────────────────────
+      originalPT0  = snapshotPT0();
+      originalPal0 = snapshotPal0();
+
+      // ── Initialize overlay canvas (match size to NES canvas) ────────────
+      initOverlay();
+
+      // ── Enable controls ─────────────────────────────────────────────────
+      ["btn-hd","btn-inject","btn-persistent","btn-nuclear","btn-knight-nuclear","btn-reset"].forEach(id => $(id).disabled = false);
+      loaded = true;
+
+      // ── Start diagnostic loop ────────────────────────────────────────────
+      startDiagnostic();
+
+      console.log("Game ready. browser._frameTimer:", typeof browser._frameTimer);
+      console.log("originalPT0 length:", originalPT0.length);
+    }, 300);
+
+  } catch (e) {
+    console.error(e);
+    setStatus("Emulator start failed: " + e.message);
+  }
+};
+</script>
+</body>
+</html>
