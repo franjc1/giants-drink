@@ -1,7 +1,9 @@
-# Two Fires — Architectural Blueprint (claude.md)
+# SMCE (Sic Mundus Creatus Est) — Architectural Blueprint (claude.md)
 ## Source of truth for all Claude Code and Claude.ai sessions
 
-**Last updated:** 2026-03-13 (Thread 10: Emulator-as-Engine Paradigm Shift)
+**Last updated:** 2026-03-23 (Thread 16: Procedural Generation Exploration & Boundary Finding)
+
+**Project rename (Decision 115):** Formerly "Two Fires." Internal shorthand: SMCE. Repo remains `giants-drink`. "Two Fires" is the lore concept (the stolen cosmic fires).
 
 ---
 
@@ -28,14 +30,11 @@
 | `docs/decisions-log.md` | Append-only decision record with full rationale | When decisions are made |
 | `docs/design/cas-engine-spec.md` | CAS engine specification — primitives, rules, interpretation layer | When CAS design changes |
 | `docs/design/game-state-schema.md` | JSON data structures between all systems | When schema changes |
-| `docs/design/manifest-architecture-spec.md` | Dual-layer manifest spec (now: behavioral map format reference) | When map format changes |
-| `docs/design/build-plan-v4.md` | Build plan (needs revision for new architecture) | When plan changes |
-| `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
 | `docs/design/sequencing-grammar-framework.md` | Intermediate layer theory + grammar seeds | When sequencing logic evolves |
 | `docs/design/paradigm-shift-principles.md` | Constraint document for paradigm shifts | When shift principles evolve |
-| `docs/design/vme-spec.md` | Visual Manifestation Engine (partially superseded by emulator-as-engine) | Reference for creative operations taxonomy |
+| `docs/design/diagnostic-framework.md` | Fast-fail quality evaluation specification | When diagnostic approach changes |
+| `docs/design/build-plan-v4.md` | Build plan (STALE — needs full revision for v5) | When plan changes |
 | `docs/lore/two-fires.md` | Mythology, endgame mechanics, narrative backbone | When lore decisions are made |
-| `docs/design/thread-transfer-post-session18.md` | Sessions 10-18 marathon summary (historical reference) | Rarely |
 
 ### Cross-environment sync:
 - **Claude.ai → repo:** Joe downloads docs from Claude.ai, drops them in repo folders, tells Claude Code to commit and push (or does it manually)
@@ -46,7 +45,7 @@
 
 ## Design Philosophy
 
-Two Fires produces emergent game experiences from the mutual constraint of primitives (Barrett's constructionist model applied to game design). No single system dominates. Quality is guaranteed by the shape of the constraint space, not by prescription of outcomes.
+SMCE produces emergent game experiences from the mutual constraint of primitives (Barrett's constructionist model applied to game design). No single system dominates. Quality is guaranteed by the shape of the constraint space, not by prescription of outcomes.
 
 - CAS is a primitive, not the whole system
 - Agents define constraints, not content
@@ -54,14 +53,40 @@ Two Fires produces emergent game experiences from the mutual constraint of primi
 - Over-constraining = scripted (bad). Under-constraining = incoherent (bad). The art is in constraint design.
 - Debugging = constraint diagnosis: which surface is miscalibrated?
 - **Ground truth over vibes:** Every generated element is grounded in data extracted from real games, not Claude's imagination of what a game should be
-- **Never reconstruct what you can reuse:** Real game engines run real game code; our systems modify, not recreate
 - **Claude's creative contribution is compositional and semantic, not generative:** Claude selects, combines, arranges, and themes real ingredients — it doesn't generate raw game output from scratch
+- **Specialized tools for specialized jobs:** PixelLab generates visuals. Phaser renders gameplay. jsfxr produces SFX. p5.js generates atmospheric backgrounds. Claude designs levels and orchestrates the CAS. Each tool does what it's best at.
 
 See `docs/decisions-log.md` Decision 1 (Constraint Surface Model) for full rationale.
 
+### The Tire Principle (Decision 104)
+
+**Claude must never "meet road."** For every primitive in the game, there must be a high-quality implementation layer between Claude's creative direction and the actual game output. Claude is the driver (making intentional, creative, compositional decisions). The implementation layer is the tire (translating intent into high-quality concrete output). The game is the road.
+
+If, for any primitive, the answer to "what's the tire?" is "Claude generates it directly," that's an architectural red flag.
+
+**Current implementation layers ("tires") per primitive:**
+
+| Primitive | Tire | How It Works | Status |
+|-----------|------|-------------|--------|
+| Foreground visuals | PixelLab | Claude describes → PixelLab generates pixel art → PNG in game | ✅ Validated |
+| Backgrounds (side-view) | p5.js procedural | Claude parameterizes → p5 renders atmosphere + parallax | ✅ Validated (Decision 117) |
+| Physics | ROM parameter DB | Claude selects reference game → exact values loaded → engine config | ✅ Validated |
+| SFX | jsfxr presets | Claude describes function → parameter preset → audio synthesis | 🟡 Identified |
+| Music | Tone.js + ground truth patterns | Claude describes mood → structural patterns selected → real-time synthesis | 🟡 Direction set |
+| Mechanics | **Mechanical Pattern Library** | Claude selects + configures patterns → proven code instantiated | ❌ Needs building |
+| Layouts | **Composition System + Section Templates** | Claude defines zones → edges auto-detected → PixelLab tilesets fill roles | ❌ Needs building (architecture validated, Decision 119) |
+
+### Big Thing 1 = Gap B (Composition), Big Thing 2 = CAS (Decision 116)
+
+The project's remaining arc is two "big things":
+- **Big Thing 1:** Gap B — Composition system, Section Template Library, fill patterns, mechanical patterns, game feel. Everything needed to generate games that look and play great WITHOUT the CAS.
+- **Big Thing 2:** CAS — Social ecology engine, entity minds, meta-narrative, Overseer.
+
+Big Thing 1 must be solid before Big Thing 2 can land.
+
 ### SNES Comfort Model (Default Difficulty Philosophy)
 
-Two Fires defaults to SNES-era difficulty: the game respects your time and assumes you want to make progress, not prove yourself. Difficulty comes from complexity layering and spatial pressure, not punishment severity.
+SMCE defaults to SNES-era difficulty: the game respects your time and assumes you want to make progress. Difficulty comes from complexity layering and spatial pressure, not punishment severity.
 
 **Default forgiveness parameters:**
 - Checkpoints: player never loses more than ~60-90s of progress
@@ -69,226 +94,172 @@ Two Fires defaults to SNES-era difficulty: the game respects your time and assum
 - Enemy telegraphs: 400-600ms (thoughtful reaction, not reflex)
 - Teachability: consequence-free introduction *zones* for every new element
 - Complexity ceiling: conservative (2-3 simultaneous challenge types max)
-- Ramp shape: concave (fast early progress, slow difficulty increase, hardest sections near end)
-
-**Rationale:** The social ecology requires cognitive bandwidth to land. The Competence Bias is both a taste preference and an architectural requirement.
+- Ramp shape: concave (fast early progress, slow difficulty increase)
 
 ---
 
-## Core Runtime Architecture: Emulator as Engine (Decision 91)
+## Core Runtime Architecture: PixelLab + Phaser (Decision 99)
 
-**This is the fundamental architectural change from Thread 10.** The game engine is NOT a custom-built renderer. The game engine IS the original game, running its original code in an emulated environment, with our systems modifying it through memory writes.
+The game engine is Phaser 3 (browser-based 2D game framework). All foreground visual assets are generated by PixelLab's AI pixel art API. Game mechanics use physics parameters extracted from real ROMs. Levels are designed by Claude using patterns from the ingestion library. Atmospheric backgrounds are procedurally generated by p5.js.
 
-### Three Layers
+### Three Layers (Revised)
 
-**Layer 1 — Emulator Runtime**
-- jsnes for NES games (validated). SNES/Genesis equivalents TBD.
-- Runs actual ROM code: physics, collision, entity AI, rendering, audio — all at original quality
-- Provides: frame buffer output, audio output, synchronous RAM/VRAM read/write, savestates, frame stepping
-- We do NOT build game engines. We use proven emulators.
-- jsnes API: `nes.cpu.mem[addr]` (RAM), `nes.ppu.vramMem[addr]` (VRAM/CHR/palettes), `nes.ppu.spriteMem[addr]` (OAM), `nes.frame()` (step), `nes.toJSON()`/`nes.fromJSON()` (savestates)
+**Layer 1 — Phaser 3 Game Engine (browser-based)**
+- Renders all gameplay: sprite animation, tilemap rendering, physics, collision, camera, input
+- Loads assets from PixelLab-generated PNGs (sprite sheets, tilesets)
+- Loads level layouts from JSON manifest (tilemap arrays, entity placements, physics parameters)
+- Handles multiple paradigms: sidescroller, top-down, Mode 7, raycasting, etc.
 
-**Layer 2 — Behavioral Map**
-- Per-game database mapping semantic concepts to specific memory addresses
-- Built automatically through hybrid trace analysis + write-verify oracle
-- Format: `{ "player_x": {"addr": "0x0086", "verified": true}, "enemy_table": {"base": "0x0300", "stride": 16, "fields": {"x": 4, "y": 5, "speed": 8, "type": 0}}, ... }`
-- Zero per-game configuration. Automated pipeline processes any ROM.
-- Tools: `nes-trace-analyzer.cjs` (primary), `verified-behavioral-map.cjs` (causation verification)
+**Layer 2 — PixelLab Visual Pipeline (foreground art)**
+- Generates all foreground visual assets via API/MCP
+- **Role-based tileset generation (Decision 119):** Instead of individual tiles, PixelLab generates complete tilesets per material zone: 1 fill tile, 4 edge tiles (N/S/E/W), 4 outer corners, 4 inner corners, 2-3 detail variants ≈ 15-20 images per material
+- Character creator: 4/8 directional views with animation (walk, idle, attack, death)
+- Style consistency: reference images ensure all assets in a game look cohesive
+- Combat animations validated (Thread 14): Kick, punch, fireball, reactions, custom specials
 
-**Layer 3 — Creative Controller**
-- Translates Claude's creative intent and CAS state changes into specific memory writes
-- Uses the behavioral map to find the right addresses
-- Channels: palette writes (visual theming), tile data writes (texture changes), RAM writes (entity behavior, physics, level content), pattern table writes (sprite appearance)
-- This is the ONLY layer that requires AI/creative intelligence
+**Layer 2b — p5.js Procedural Background Pipeline (Decision 117)**
+- Generates atmospheric/parallax background layers for side-view paradigms
+- Parameterized by Claude: sky color ramp, silhouette profile, parallax layer count/speeds, mood
+- Zero cost, instant generation, infinite variation (no two games have identical backgrounds)
+- Covers ~70% of background needs (all side-view paradigms)
+- PixelLab handles the remaining ~30% (scenic illustrated objects, fighting game stages)
+- **Camera-derived boundary (Decision 121):** Side/angled view → p5 atmosphere. Top-down/FPS → no separate background (tilemap is everything).
 
-### Six Modification Channels
+**Layer 3 — Game Manifest (JSON)**
+- Complete game description: entity definitions, physics parameters, level layouts, game rules
+- Physics values sourced from ROM extraction library
+- Level structures built by composition system (zones → edges → roles → tileset references)
+- Mechanical patterns referenced by name, resolved to proven code at build time
+- Section templates referenced by intention, resolved to spatial layouts at build time
+- CAS initial conditions, faction definitions, social graph
+- References to PixelLab-generated asset files and p5 background parameters
 
-All game modifications flow through one of six channels, each corresponding to memory regions in the emulator:
+### PixelLab Integration Details
 
-| Channel | What Changes | Memory Target | Proven? |
-|---------|-------------|---------------|---------|
-| Visual (palettes) | Color schemes, mood, theming | PPU $3F00-$3F1F | ✅ Yes |
-| Visual (tiles) | Ground textures, wall appearance, decorative elements | CHR pattern tables $0000-$1FFF | ✅ Yes |
-| Visual (sprites) | Character appearance, enemy looks | CHR sprite tables + OAM | ✅ Yes (single tile) |
-| Mechanical | Entity behavior, speed, aggression, patrol patterns | RAM (behavioral map addresses) | ✅ Partial |
-| Physical | Gravity, jump arc, friction, player speed | RAM (physics addresses) | ✅ Yes (via ROM extraction) |
-| Structural | Level layouts, enemy placement, item positions | RAM (level data addresses) | ⚠️ Not yet tested at scale |
-| Musical | Background music, SFX | APU registers $4000-$4017 | ⚠️ Not yet tested |
+**MCP (Model Context Protocol):** Claude Code calls PixelLab tools directly — `create_character`, `animate_character`, `create_sidescroller_tileset`, `create_topdown_tileset`, `create_map_object`.
 
-### Track A / Track B
+**API v2:** For production runtime, direct REST API calls.
 
-**Track A (development, internal demos):** Run unmodified commercial ROMs in the emulator. Modify in real-time. Perfect fidelity. No legal issues for internal use.
+**Key capabilities validated:**
+- Character recognition: Harry Potter, Mega Man, Winston Churchill, Tony Soprano all recognizable at 48-128px
+- Walk cycle animation: consistent across frames
+- Wang tilesets: proper 16-tile terrain transitions, chainable
+- Sidescroller tilesets: platform tiles with decorations
+- Style consistency across session
+- Fighting game combat animations (Thread 14)
+- Custom Animation V3: arbitrary actions up to 16 frames
 
-**Track B (public release):** "Engine ROMs" — commercial ROMs with all creative expression (tiles, sprites, level data, music, palettes) stripped. Only functional code remains (physics, collision, entity management, rendering pipeline). At generation time, the Creative Controller populates the engine ROM with 100% original content through the modification pipeline. Automatic distribution shift guarantees no output matches any source ROM.
+**Latency:** Single image ~20-30s. Character creator ~3-5 min. Tileset ~30-60s.
+
+**Cost:** Full game asset set (~30-40 calls) ~$0.30-0.60. With asset banking (80% cache hits) ~$0.05-0.15 per game.
+
+### Asset Banking Strategy
+
+Three-tier cache: Universal bank (particles, UI), Semantic bank (tagged by concept/style), Per-game unique. Stored on Cloudflare R2.
 
 ---
 
-## Behavioral Map Pipeline
+## Composition System Architecture (Decision 119) — NEEDS BUILDING
 
-### Step 1: Hybrid Trace Analysis (nes-trace-analyzer.cjs)
+This is the core architecture for Gap B / Big Thing 1. Validated in Thread 16 proof-of-concept.
 
-Boot game in jsnes → get to gameplay via bidirectional control test → record CPU execution trace for 600 frames → classify every RAM variable by observed read/write patterns:
-- Position variables (updated in movement-pattern routines)
-- Speed variables (used in position update calculations)
-- State variables (control game mode, entity states)
-- Counter variables (timers, animation frames)
-- Flag variables (boolean conditions)
+### The Process (Top-Down, Not Bottom-Up)
 
-Universal across mappers — the emulator resolves all bank switching internally.
+The critical insight from Thread 16: composition works top-down (spatial intent → tile roles), not bottom-up (make tiles → arrange them). Bottom-up produces "tiled-looking" output. Top-down produces spatially coherent scenes.
 
-### Step 2: Write-Verify Oracle (verified-behavioral-map.cjs)
+**Step 1 — Zone Painting:** Define material zones on a grid (wall, ground, sky, grass, dirt, water, path, etc.). This is the macro-level spatial design. Claude designs this based on section templates and sequencing grammar.
 
-For each candidate from Step 1: save state → write test value → step frames → check OAM/observable effect → restore state. Only verified controls enter the final behavioral map.
+**Step 2 — Edge Detection:** Automatically classify every cell: fill (all neighbors same zone), edge-N/S/E/W (neighbor in that direction is different zone), outer corner (two adjacent edges meet), inner corner (diagonal neighbor different). Uses marching-squares-style neighbor analysis.
 
-### Step 3: Claude Semantic Labeling (future)
+**Step 3 — Detail Placement:** Place detail elements on fill tiles following rhythm rules: never adjacent to each other, density varies by zone type, only on interior tiles (never on edges). Breaks visual repetition.
 
-Feed the verified behavioral map to Claude with the game's ROM analysis. Claude adds semantic labels: "this is the main boss HP variable," "this entity table contains the flying enemies," "this routine is the level transition handler." One API call per game (~$0.10-0.15).
+**Step 4 — Role-Based Rendering:** Each cell renders based on its zone + edge classification + detail assignment. The rendering layer looks up the appropriate tile from a PixelLab-generated role-based tileset.
 
-### Known Limitations (to be resolved)
+### Integration with Three-Layer Composition Model (Decision 113)
 
-- Sub-pixel buffered games (MM2 type) need longer oracle observation windows
-- Speed variables often computed indirectly — need alternative detection strategy
-- Entity table field identification needs improvement (know the table exists, need to know which field is which)
+| Composition Layer | What It Does | What Feeds It |
+|---|---|---|
+| Layer 1: Sequencing | What sections in what order | CCST + Kishōtenketsu + sequencing grammar |
+| Layer 2: Section Templates | Spatial skeleton (zone layout per section) | Real game level analysis |
+| Layer 3: Fill Patterns + Edge Resolution | How tiles fill zones + how edges transition | Composition system + PixelLab role-based tilesets |
+
+The composition system IS Layer 3. Section templates provide the zone layouts; the composition system resolves edges and assigns tile roles; PixelLab tilesets provide the visual art.
+
+### Role-Based Tileset Specification
+
+Per material zone, PixelLab generates:
+- 1 fill tile (interior, no edges)
+- 4 edge tiles (N, S, E, W — where this zone meets a different zone)
+- 4 outer corner tiles (NE, NW, SE, SW)
+- 4 inner corner tiles (for L-shaped zone boundaries)
+- 2-3 detail variant tiles (decorative breaks for fill areas)
+- **Total: ~15-20 images per material zone**
+
+A typical game might have 4-6 material zones → 60-120 PixelLab images for the complete tileset. At ~$0.01/image, that's $0.60-1.20 for all level art.
+
+---
+
+## Procedural Generation Boundaries (Thread 16 Findings)
+
+### What Procedural JS Can Do Well
+- **Atmospheric backgrounds:** Sky gradients, mountain silhouettes, star fields, city skylines, parallax depth layers. p5.js validated at 9.5/10 quality for sunset scene.
+- **Geometric structure at distance:** Building silhouettes, support columns, industrial shapes. Serviceable for background elements the player doesn't closely inspect.
+- **Composition logic:** Zone painting, edge detection, detail placement rules. The architecture for arranging tiles.
+- **Infinite variation:** Each procedural generation is unique. No two skies, no two cityscapes are identical.
+
+### What Procedural JS Cannot Do
+- **Organic shapes:** Trees, bushes, grass blade clusters, natural terrain transitions. Look "clip art" or "childish."
+- **Recognizable objects:** Houses, specific machines, illustrated features. Look like programmer art.
+- **SNES-quality tile art:** Despite four progressively sophisticated attempts (declarative operations, SNES-grade enhancements, Perlin/Worley/FBM noise, painterly palettes), procedural tiles consistently produced NES/early-PC quality output.
+- **Anything the player stares at:** The quality gap between procedural and hand-crafted is immediately visible for foreground gameplay elements.
+
+### The Camera-Derived Boundary Rule (Decision 121)
+- **Side/angled view** → p5 for atmosphere behind gameplay, PixelLab for foreground
+- **Top-down view** → no background, everything is PixelLab tiles in composition system
+- **First-person** → PixelLab wall textures, no separate background
+- **Mode 7** → p5 for horizon/sky, PixelLab for track surface
+
+---
+
+## Mechanical Pattern Library (Decision 105) — NEEDS BUILDING
+
+A curated registry of parameterized Phaser 3 code modules, each extracted from a real working open-source JS game implementation. Claude's Builder references patterns by name and configures them with parameters.
+
+Each pattern carries: Code (Phaser 3 module), Parameters (configurable), Required animation states (for PixelLab), Required sound events (for jsfxr), Hitbox/collision definitions, Composition rules.
+
+Source: Open-source JS game clone ecosystem (Decision 109). 20-40 patterns per paradigm × 7 clusters = 140-280 total. Validate with ONE pattern before building full library.
+
+---
+
+## Section Template Library (Decision 106) — NEEDS BUILDING
+
+Pre-built spatial zone arrangements derived from real game levels. Templates categorized by intention: introduction, escalation, combination, rest, puzzle, boss arena, reward, transition, climax, provocation.
+
+Templates output zone maps that feed into the composition system (Decision 119). The composition system resolves edges and assigns tile roles. 10-20 templates per paradigm cluster.
+
+---
+
+## Audio Pipeline
+
+### Sound Effects: jsfxr (browser library, zero cost)
+Retro SFX from parameter presets. Zero API cost, zero latency.
+
+### Background Music: Tone.js + Ground Truth Patterns (Decision 107)
+Tone.js driven by structural patterns from the 103,262-track music library. Not yet validated.
+
+---
+
+## Physics and Game Feel
+
+Physics parameters from ROM extraction data. The entire feel derives from two designer-chosen values — max jump height and time to apex. Everything else is calculable.
 
 ---
 
 ## CAS Engine Architecture (Two-Layer Design)
 
-**Unchanged from Thread 9.** Full specification: `docs/design/cas-engine-spec.md`
+**Unchanged.** Full specification: `docs/design/cas-engine-spec.md`
 
-CAS state changes now manifest through the emulator modification pipeline:
-- Affect changes → behavioral map writes (entity speed, aggression, patrol range)
-- Faction territory changes → palette/tile modifications for zone theming
-- Dramatic events → tile replacements, sprite modifications, audio changes
-- Paradigm shifts → ROM swap with entity state serialization
-
-### The Two Layers
-
-**Layer 1 — CAS Engine (deterministic JavaScript).** Propagates valence, arousal, and information through bond networks. Unchanged.
-
-**Layer 2 — Claude Interpretation.** At episode boundaries, Claude reads CAS state and produces: behavioral directives (→ RAM writes via behavioral map), visual directives (→ palette/tile writes), audio directives (→ APU writes), narrative updates. Claude directs behavior → behavior creates events → events enter CAS → CAS updates → Claude interprets.
-
-### Integration with Emulator-as-Engine
-
-CAS modulation is now direct parameter modification on the running game:
-- "Faction demoralized, enemies 30% slower" → write speed × 0.7 to enemy speed addresses
-- "Territory corrupted" → swap palette to darker values, replace ground tiles
-- "Alliance formed" → modify NPC behavior state from hostile to neutral
-
-The CAS never modifies ROM code. It modifies RAM values that the ROM code reads. The game's own engine processes the modified values correctly because it doesn't know they've been changed.
-
----
-
-## Composition System
-
-### Six Parameter Clusters (Decision 95)
-
-When composing content from multiple source games, these clusters of parameters must travel together (one source authority per cluster):
-
-1. **Movement feel** — gravity, acceleration, friction, jump height/arc, air control, player speed
-2. **Combat system** — player damage, enemy HP, invincibility frames, knockback, weakness graphs
-3. **Level grammar** — progression gating, key/lock patterns, teachability arcs, challenge density
-4. **Entity design philosophy** — pattern-based vs reactive vs swarm, difficulty scaling approach
-5. **Audiovisual identity** — palettes, tile style, proportions, music, SFX vocabulary
-6. **Rule economy** — lives, scoring, currency, power-ups, resource management
-
-### Composition Heuristics (Decision 96)
-
-1. **Ratio preservation** — transplanted elements maintain source game's inter-parameter ratios
-2. **One authority per cluster** — no mixing sources within a cluster
-3. **Constraint inheritance** — mix of eras uses the more constrained source's limits
-4. **Semantic bridging** — Claude's creativity lives in the thematic/naming layer, not raw parameters
-5. **Precedent validation** — composed parameter sets checked against real game parameter space
-6. **Graceful degradation** — when uncertain, fall back toward a single proven source
-
-### Generation Tiers
-
-| Tier | Example | What's Extracted | What Claude Generates | Quality Risk |
-|------|---------|------------------|-----------------------|-------------|
-| 0: Exact replica | "Mega Man 2, exactly" | Everything | Nothing | Zero |
-| 1: Surface variation | "MM2 but underwater theme" | All mechanics + structure | Palette + tile choices | Very low |
-| 2: Entity reskin | "MM2 but Harry Potter" | All mechanics + structure | Character visuals + theme mapping | Low-moderate |
-| 3: Cross-game composition | "Zelda gameplay in Mario world" | Mechanics from A, visuals from B | Composition strategy + entity mapping | Moderate |
-| 4: CAS transformation | Bob-omb nuclear weapon | Base game + behavioral map | Parameter modifications + visual changes | Moderate |
-| 5: Paradigm shift | MM2 → Zelda top-down | Multiple ROMs + behavioral maps | Transition orchestration + entity crosswalk | Moderate-high |
-| 6: Fully original | "Something no one's ever seen" | Distributional patterns only | Everything within constraints | Highest |
-
-**Design principle:** Keep everything in Tiers 0-4. Tier 5 is achievable. Tier 6 should be decomposed into lower tiers whenever possible (Claude's job is decomposition, not generation from scratch).
-
----
-
-## Visual Generation for Novel Entities (Decision 98)
-
-When novel visual content is needed (Track B characters, CAS-driven transformations), the pipeline is:
-
-1. Claude generates SVG constrained by source game's extracted visual identity (palette, dimensions, animation frame count, proportion grid)
-2. SVG is rasterized to tile format (2bpp for NES, 4bpp for SNES) at correct dimensions
-3. Tile data is injected into emulator's CHR memory (pattern tables)
-4. The emulator's own PPU renders the injected tiles alongside all original art
-
-Claude never generates pixel art directly. SVG → rasterization → CHR injection leverages Claude's strength (structured code) and the emulator's strength (rendering).
-
----
-
-## Level Construction Architecture
-
-**Unchanged from Thread 9.** Three components: Designer (Claude) + Builder (Claude, Sonnet) + Validator (deterministic).
-
-In the emulator-as-engine paradigm, constructed levels are expressed as:
-- Level data writes to RAM (using behavioral map's level data addresses)
-- Entity placement writes to entity table RAM
-- Tile modifications for visual theming
-- The game's own engine renders and runs the level
-
-For games where the ROM's level loader is identified in the behavioral map, the ROM-as-compiler concept still applies: write semantic level objects in the format the game's own level loader expects, let the game's engine build the nametables.
-
----
-
-## Agent Execution Order
-
-```
-Pre-game:
-  Experience Interpreter (prompt → game concept)
-    → Selects source ROM(s) based on mechanical feel
-    → Artistic Director (aesthetic direction)
-    → Design Philosopher (constraint philosophy)
-    → Game Compiler:
-        Loads source behavioral map(s)
-        Instantiates skeleton from source game's structural grammar
-        Sets CAS initial conditions, social graph, personality distributions
-        Assigns parameter cluster authorities (which source for which cluster)
-        Generates modification spec: palette theme, tile replacements,
-          entity behavior modifications, physics adjustments
-        Places social hook at episode 1-2 boundary
-    → Creative Controller applies modification spec to running emulator
-
-Per-episode level construction:
-  Game Compiler produces Episode Brief
-    → Designer produces Episode Vision
-    → For each section:
-        Builder constructs → Validator verifies → Designer evaluates taste
-    → Episode served as emulator state modifications
-    → Vocabulary Record Update written
-
-Runtime loop:
-  Emulator runs game ROM continuously (Layer 1)
-  CAS engine ticks on social timer (deterministic, continuous)
-  
-  At paradigm tick (episode boundary):
-    → Claude receives: CAS snapshot + previous narrative + drama signal
-    → Claude interprets → produces modification directives
-    → Creative Controller translates directives to memory writes via behavioral map
-    → Next episode state applied to running emulator
-  
-  Player conversations:
-    → Exchange budget system, CAS events generated
-    → Population → named promotion on first contact
-
-Diagnostic wrapper:
-  Simulated Player Agent → Gate 1 auto-checks
-  → Moment Extractor → Testing UI → Joe rates
-  → Pattern Distiller → Living Taste Document
-```
+CAS manifests through Phaser: affect changes → entity parameters, faction territory → tileset swaps, dramatic events → new spawns, paradigm shifts → full scene reconstruction.
 
 ---
 
@@ -302,51 +273,81 @@ Fast-fail funnel: Gate 1 (automated) → Gate 2 (Joe reviews clips) → Gate 3 (
 
 ## The Lore System
 
-**Unchanged.** Full lore document: `docs/lore/two-fires.md`. The Giant/Overseer operates through the CAS two-layer architecture. Lore discovery through attribution system.
+**Unchanged.** Full lore document: `docs/lore/two-fires.md`.
 
 ---
 
 ## Tools Reference
 
-### Extraction & Analysis
+### Visual Generation
 | Tool | What It Does |
 |------|-------------|
-| `tools/jsnes-extractor.js` | 5-phase extraction pipeline (boot, candidates, mutation sweep, deep capture, physics) |
-| `tools/nes-trace-analyzer.cjs` | **Primary analysis tool.** Hybrid trace-based behavioral map generator |
-| `tools/verified-behavioral-map.cjs` | Write-verify oracle for causal address verification |
-| `tools/nes-disasm.cjs` | 6502 disassembler (supplemental to trace analysis) |
-| `tools/nes-analyzer.cjs` | Static code pattern analyzer (supplemental) |
+| PixelLab MCP | AI pixel art generation via Claude Code — characters, animations, tilesets, items |
+| PixelLab API v2 | Same capabilities via REST for production runtime |
+| p5.js | Procedural atmospheric backgrounds — parallax layers, sky gradients, city silhouettes (Decision 117) |
 
-### Runtime Modification
+### Game Engine
 | Tool | What It Does |
 |------|-------------|
-| `tools/live-mod-experiment.js` | Proof-of-concept: live game modification via memory writes |
-| `tools/map-to-mod-test.cjs` | Tests behavioral map → live modification pipeline |
+| Phaser 3 | Browser-based 2D game engine — rendering, physics, collision, camera, input |
 
-### Demo
+### Audio
 | Tool | What It Does |
 |------|-------------|
-| `public/simple-demo.html` | Browser demo: SMB + palette theme preset buttons |
+| jsfxr | Browser-based retro SFX generator from parameter presets |
+| Tone.js | Browser-based synthesizer for chiptune music driven by ground truth patterns |
 
-### Legacy (from Sessions 8-18, partially superseded)
-| Tool | What It Does | Status |
-|------|-------------|--------|
-| `tools/extract-chr-rom.js` | NES CHR-ROM bulk extractor | Still useful for tile extraction |
-| `tools/render-screen.js` | NES screen renderer | Superseded by emulator rendering |
-| `tools/smb-manifest-complete.js` | SMB manifest builder | Reference only |
+### Extraction & Analysis (retained for physics data)
+| Tool | What It Does |
+|------|-------------|
+| `tools/jsnes-extractor.js` | 5-phase extraction pipeline — physics params from NES ROMs |
+| `tools/nes-trace-analyzer.cjs` | Hybrid trace-based behavioral map generator |
+
+### Pattern Library Source Material (Decision 109)
+| Resource | What It Is |
+|----------|------------|
+| osgameclones.com | Structured database of open-source game clones, 157+ JS entries |
+| awesome-game-remakes (GitHub) | Curated list of actively maintained open-source game remakes |
+| awesome-open-source-games (GitHub) | Massive genre-organized list of open-source games |
+
+### Demos & Proofs
+| Tool | What It Does |
+|------|-------------|
+| `public/pixellab-proof.html` | Sidescroller POC: Harry Potter platformer with PixelLab assets |
+| `public/pixellab-zelda-proof.html` | Top-down POC: Zelda-style RPG with PixelLab assets |
+| `experiments/pixellab-fighting-test/` | Fighting game sprite test (Thread 14) |
+| `experiments/pixellab-bg-test/` | PixelLab background stress test (Thread 15) |
 
 ---
 
 ## Key Architectural Principles
 
-1. **The emulator IS the engine.** We never build custom renderers, physics engines, or audio systems. Proven emulators provide all of this at original quality.
+1. **The Tire Principle: Claude must never "meet road."** Every primitive needs a high-quality implementation layer. PixelLab for foreground visuals. p5.js for atmospheric backgrounds. ROM data for physics. jsfxr for SFX. Mechanical Pattern Library for mechanics. Composition System + Section Templates for layouts. Claude selects, configures, and composes — specialized tools implement.
 
-2. **Modifications are memory writes, not code generation.** The Creative Controller writes data values to specific addresses. The game's own code processes those values. This is why modifications are stable — the game engine handles all the edge cases.
+2. **Ground truth from real games.** Physics parameters, level patterns, difficulty curves, structural grammars, mechanical code patterns, and spatial templates are extracted from real games.
 
-3. **The behavioral map is the control surface.** Automated analysis discovers what each memory address does. The Creative Controller uses this map to translate semantic intent ("make enemies slower") into specific writes ("write 0x01 to $0423").
+3. **Generate once, reuse everywhere.** Asset banking keeps costs under $0.15 per game and creation time under 2 minutes for repeat styles.
 
-4. **Claude's role is decomposition and semantic mapping.** Claude breaks creative requests into compositions of extracted pieces, selects source authorities, and generates the thematic layer. Claude does not generate raw game output.
+4. **Claude's role is compositional and semantic.** Claude assembles manifests from extracted data + patterns + templates + asset descriptions. Claude decides intent. Tools execute.
 
-5. **Ground truth from real games.** Every parameter value, every behavioral pattern, every structural grammar, every visual constraint is extracted from real games. Nothing is invented from vibes.
+5. **Composition is top-down, not bottom-up (Decision 119).** Zone painting → edge detection → role assignment → tile rendering. Never "make tiles, then arrange." Always "define spatial intent, then fill with art."
 
-6. **Quality floor is the original game.** The worst possible output is a real game running unmodified. Every modification can only add to or transform this baseline, never degrade below it.
+6. **The procedural/PixelLab boundary is camera-derived (Decision 121).** Side view = p5 atmosphere + PixelLab foreground. Top-down = all PixelLab. FPS = PixelLab walls. This rule is principled, falsifiable, and complete across all 7 paradigm clusters.
+
+7. **The CAS modifies parameters, not assets.** At episode boundaries, CAS changes entity speeds, behaviors, placements. Rarely triggers new asset generation.
+
+8. **Validate end-to-end before scaling.** Every architectural decision validated by building something playable first.
+
+---
+
+## Accounts & Infrastructure
+
+- **GitHub:** franjc1 (repo: giants-drink)
+- **Vercel:** giants-drink.vercel.app
+- **Cloudflare R2:** asset storage (planned for asset bank)
+- **PixelLab:** Tier 3 ($50/month, 10,000 images, 20 concurrent jobs)
+- **Anthropic API:** ~$150 credits
+- **Inference:** Fireworks (dialog, low latency), DeepInfra (background CAS)
+- **ROM library:** ~3,146 NES ROMs in `~/nes-roms/`
+- **Ingestion library:** ~7,800 structured JSON files across ~1,603 retro games
+- **Music library:** 103,262 tracks across 7,068 games (NES/SNES/Genesis chiptune formats)

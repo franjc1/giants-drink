@@ -1362,3 +1362,159 @@ Redundancy prevention: after any entity-initiated contact, suppress further init
 **Decision:** Replace Mesen2 and the Lua extraction script with jsnes (npm package, v2.0.0) running in Node.js. The full extraction pipeline (Phases 1–5) will be rewritten as a Node.js script (~400 lines). Key jsnes API surface: `nes.cpu.mem[addr]` for RAM read/write, `nes.buttonDown(1, btn)` / `nes.buttonUp()` for input, `nes.frame()` for synchronous single-frame step, `nes.ppu.vramMem` for PPU state, `nes.ppu.spriteMem` for OAM, `nes.toJSON()` / `nes.fromJSON()` for save/restore. All validated against SMB in `tools/jsnes-validate.js`: Right input confirmed (X +17 over 30 frames), A input confirmed (Y peak delta 66 pixels), save/restore confirmed.
 
 **Rationale:** jsnes runs entirely in-process. No subprocess, no Lua sandbox, no stdout pipe, no broken input API. Controller state is set by directly mutating `nes.controllers[1].state` (or via the provided `buttonDown`/`buttonUp` API) and is read on the very next call to `nes.frame()` — no callback timing involved. The extraction algorithms (RAM mutation sweep, content variable identification, OAM slot detection, physics sampling) are entirely substrate-agnostic: they only require read RAM, write RAM, step frame, and set input. All of these work in jsnes. The Lua script is retired; `orchestrator.js` becomes a thin wrapper or is absorbed into the new extractor directly. Mesen2 may still be used for visual verification (render-screen.js) but is no longer part of the extraction hot path.
+# Decisions Log — Thread 15 & 16 Additions
+
+**Append these to the existing decisions-log.md after the last entry (Decision 109).**
+
+---
+
+## Thread 15 — Rubber Meets Road: Visual Composition Breakthrough (2026-03-22)
+
+### Decision 110: Gap A (Backgrounds) Dissolved Into Gap B (Tilemap Composition)
+
+**Context:** PixelLab background stress test generated an industrial SNES-style scene. Individual pixel art quality was SNES-caliber, but the composed scene was terrible — dense repetitive wallpaper with no depth layering or spatial variety. Analysis of real game screenshots (Metal Man, Storm Eagle, SNES Mario, Turtles in Time, SF2, Mario Kart, Link to the Past) revealed that backgrounds in great retro games are mostly empty. The visual richness comes from the foreground tilemap, not background layers.
+
+**Decision:** Backgrounds are not a separate problem to solve. They are part of the tilemap composition problem. PixelLab is sufficient for generating visual ingredients (tiles, sprites, objects, textures). The unsolved challenge is how tiles are arranged in a 2D grid to create levels that look authored and play well. This is Gap B (level layout / tilemap composition), and solving it automatically solves visual composition.
+
+**Rationale:** The PixelLab test proved ingredients are good but composition is bad. Real game analysis proved that great games achieve visual quality through tilemap composition, not through elaborate background images. Reframing backgrounds as "part of composition" rather than "a separate visual pipeline problem" eliminates a whole category of work and focuses effort on the actual bottleneck.
+
+---
+
+### Decision 111: Three Visual Situations Model
+
+**Context:** Pressure-testing the "backgrounds are mostly empty" claim against diverse examples: Turtles in Time (sewer + pirate ship), SF2 (Sagat's stage), Mario Kart, Link to the Past overworld.
+
+**Decision:** Three distinct visual situations exist across paradigms:
+
+1. **Tilemap-dominant (5/7 paradigms):** Platformer, top-down RPG, shmup, Mode 7/racing, RTS. The tilemap carries 80-100% of visual weight. Background is empty, gradient, or simple atmospheric layer.
+2. **Scenic backdrop (partial, 2/7):** Beat-em-ups, some platformers (e.g., Turtles pirate ship level). Simple play surface + themed scenic illustration (3-5 illustrated elements composed behind the tilemap).
+3. **Stage illustration (fighting games only):** Flat floor + full composed background painting. The only paradigm where background generation is the primary visual challenge.
+
+**Rationale:** Different paradigms have genuinely different visual requirements. The three-situation model allocates effort correctly.
+
+---
+
+### Decision 112: All 7 Paradigm Clusters Are Tilemap-Based
+
+**Context:** Needed to determine whether the composition system being designed for platformers would extend to Mode 7 racing, raycasting FPS, and RTS.
+
+**Decision:** All 7 paradigm clusters use a 2D grid as their fundamental spatial data structure. Mode 7 is a top-down tilemap viewed through a perspective warp. Wolfenstein is a 2D wall grid with raycasting. RTS is a terrain tilemap with Wang tile transitions. The Section Template Library feeds all paradigms. Unique per-paradigm work is in the renderer, not the visual assets or composition methodology.
+
+**Rationale:** Validated by technical analysis of how each paradigm's renderer actually works.
+
+---
+
+### Decision 113: Three-Layer Composition Model for 90%+ Hit Rate
+
+**Context:** Need a systematic approach to tilemap composition that produces authored-looking results consistently.
+
+**Decision:** Three-layer composition model:
+1. **Layer 1 — Sequencing:** What sections appear in what order. CCST + Kishōtenketsu + sequencing grammar. Claude handles this.
+2. **Layer 2 — Section Templates:** Spatial skeleton for each section. Derived from real game levels. 10-20 templates per paradigm.
+3. **Layer 3 — Fill Patterns:** How tiles are actually placed within sections. Statistical distributions extracted from real game tilemaps.
+
+Layers constrain each other like an indeterminate equation: all solutions within the constraint surface are "authored-quality."
+
+**Rationale:** Templates alone give skeleton without texture. Fill patterns alone give texture without structure. Three layers = macro (flow) + meso (section) + micro (tile composition).
+
+---
+
+### Decision 114: 20 Grounded Principles as Composition Constraints
+
+**Context:** Needed to ensure the composition system is grounded in actual design knowledge, not intuition.
+
+**Decision:** 20 principles organized into four categories: Universal visual design (5), Pixel art-specific (5), Game visual composition (5), Level structure (5). Sourced from CCST Framework (Holleman), Kishōtenketsu (Hayashida), SLYNYRD Pixelblog (Schlitter), The Level Design Book (Yang et al.). Each principle must be formalized as an implementable constraint.
+
+**Rationale:** "Vibes = slop, ground truth = gold" applies to design principles as much as physics parameters.
+
+---
+
+### Decision 115: Project Officially Renamed SMCE (Sic Mundus Creatus Est)
+
+**Context:** Joe renamed the project. Internal shorthand: SMCE. Repo remains `giants-drink`.
+
+**Decision:** All future documents use SMCE as the project name. "Two Fires" remains as the lore concept.
+
+---
+
+### Decision 116: Big Thing 1 = Gap B (Composition), Big Thing 2 = CAS
+
+**Context:** After the 26-primitive audit and background reframing, remaining work crystallized into two categories.
+
+**Decision:** Big Thing 1 = Gap B (composition system, templates, fill patterns, mechanics, game feel). Big Thing 2 = CAS (social ecology, entity minds, meta-narrative). Big Thing 1 must be solid before Big Thing 2 can land.
+
+**Rationale:** The social ecology requires cognitive bandwidth from the player. Bad level design wastes that bandwidth. Great game foundation makes the CAS feel magical.
+
+---
+
+## Thread 16 — Procedural Generation Exploration & Boundary Finding (2026-03-23)
+
+### Decision 117: p5.js Validated as Background Atmosphere Tire
+
+**Context:** Built and tested six p5.js procedural background styles at SNES native resolution (256×224). Sunset sky scored 9.5/10. Others ranged 5-7/10 but showed clear improvement potential. Second round (v2) tested harder cases: Heat Man style, SMW hills, forest, castle, underwater.
+
+**Decision:** p5.js procedural generation is the tire for atmospheric/parallax background layers in side-view paradigms (platformer, beat-em-up, fighter, shmup, Mode 7 racing — approximately 4-5 of 7 paradigm clusters). Zero cost, instant generation, infinite variation. Parameterized by Claude at game creation time.
+
+**Does NOT cover:** Top-down paradigms (no "behind the gameplay" space), FPS (walls are the gameplay), or backgrounds requiring specific illustrated objects (scenic backdrops, fighting game stages).
+
+**Rationale:** The sunset test proved the ceiling is high when design principles are applied. The boundary with PixelLab is clean: p5 handles atmosphere, PixelLab handles illustrated objects. This eliminates PixelLab background calls for ~70% of generated games.
+
+---
+
+### Decision 118: Procedural Tile Rendering Has a Hard Quality Ceiling
+
+**Context:** Built four progressively sophisticated procedural tile rendering systems: RetroTile v1 (declarative operations, NES-grade), v2 (graduated bevels, structured noise, SNES attempt), v3 (Perlin/Worley/FBM noise, PBR lighting), v4 (painterly approach with deliberate palettes). Also attempted direct scene painting without tile abstraction.
+
+**Decision:** Procedural tile rendering cannot match SNES or modern indie quality for foreground gameplay tiles, regardless of technique sophistication. Every attempt produced NES/early-PC quality output. The quality gap between "algorithmically generated" and "artistically crafted" is immediately visible for tiles the player stares at during gameplay. This is a fundamental limitation of the approach, not a tuning problem.
+
+**What procedural CAN do well:** Geometric structure at distance (city silhouettes, support columns), atmospheric gradients, parallax layers, simple panel/grid patterns for background elements.
+
+**What procedural CANNOT do:** Organic shapes (trees, terrain edges, grass), recognizable objects (houses, specific machines), anything requiring the subtle artistry of hand-placed pixels.
+
+**Rationale:** Six empirical tests across different approaches all converged on the same boundary. The definitive test was direct scene painting of a Link to the Past overworld — the organic elements (trees, house, grass-dirt transitions) looked "childish" despite the composition being sound. PixelLab is necessary for visual quality; procedural is a supplement for speed/cost optimization, not a replacement.
+
+---
+
+### Decision 119: Top-Down Composition Is the Right Architecture for Gap B
+
+**Context:** Joe's critical reframe: "The answer probably isn't design a bunch of random tiles and hope for the best... it's probably a process of going from general shape and composition to specific." Built a proof-of-concept compositional system: spatial zones → automatic edge detection → detail placement by rhythm rules → contextual tile rendering (each tile knows its role).
+
+**Decision:** The composition system architecture for Gap B is top-down, not bottom-up:
+
+1. **Zone painting:** Define material zones on a grid (wall, ground, sky, grass, dirt, water, etc.)
+2. **Edge detection:** Auto-classify every cell: fill, edge-N/S/E/W, corner, inner-corner
+3. **Detail placement:** Place detail elements on fill tiles following rhythm rules (never adjacent, density per zone)
+4. **Role-based rendering:** Each cell renders according to its zone + edge classification + detail assignment
+
+This architecture is the implementation framework for the Section Template Library and Fill Pattern system described in Thread 15's three-layer composition model (Decision 113). The composition system and the tile system are the same system viewed from different ends.
+
+**PixelLab integration:** Instead of generating individual tiles, PixelLab generates ROLE-BASED TILESETS per material zone: 1 fill tile, 4 edge tiles, 4 outer corners, 4 inner corners, 2-3 detail variants ≈ 15-20 images per material. The composition system slots them into position based on edge analysis.
+
+**Rationale:** The proof-of-concept demonstrated dramatically better composition than any bottom-up tile approach. The MMX vertical shaft and LttP overworld both read as spatially coherent scenes despite simple rendering. The architecture is sound; it just needs PixelLab art instead of procedural art as its rendering layer.
+
+---
+
+### Decision 120: "p5 Always, PixelLab Sometimes on Top" for Side-View Backgrounds
+
+**Context:** Testing whether the background pipeline should be "p5 OR PixelLab" or "p5 AND PixelLab."
+
+**Decision:** For side-view paradigms, p5.js procedural generation handles ALL background atmospheric layers (sky gradients, distant silhouettes, parallax depth). PixelLab contributes specific illustrated objects on top ONLY when the scene requires recognizable elements (e.g., a pirate ship in a beat-em-up scenic backdrop, specific machinery in a Mega Man stage).
+
+The decision is not "p5 or PixelLab" — it's "p5 always, PixelLab sometimes layered on top."
+
+**Rationale:** p5 excels at the atmospheric base that 5/7 paradigms need. PixelLab's 20-30 second generation time and per-image cost are wasted on gradient skies and mountain silhouettes. But some scenes need specific illustrated elements that procedural generation cannot produce. The layered approach optimizes both cost and quality.
+
+---
+
+### Decision 121: Procedural/PixelLab Boundary Is Camera-Derived
+
+**Context:** Needed a clear, principled rule for when to use procedural generation vs PixelLab, applicable across all 7 paradigm clusters.
+
+**Decision:** The boundary between procedural generation and PixelLab is determined by the camera perspective:
+
+- **Side/angled view** (platformer, beat-em-up, fighter, shmup): Camera creates a natural "behind the gameplay" space. p5.js handles the atmospheric background. PixelLab handles foreground tiles and illustrated objects.
+- **Top-down view** (RPG, RTS): No "behind" space exists. The tilemap IS the entire visual field. Everything visible is PixelLab-generated tiles arranged by the composition system.
+- **First-person view** (raycasting FPS): Walls are the gameplay geometry. Wall textures are PixelLab tiles. No separate background layer.
+- **Mode 7 / pseudo-3D** (racing): Distant sky/horizon is p5 procedural. Track surface is PixelLab tiles.
+
+**Rationale:** This rule is derived from the fundamental visual structure of each paradigm, not from arbitrary categorization. It's falsifiable (test any paradigm against the rule) and complete (covers all 7 clusters).

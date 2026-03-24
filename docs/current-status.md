@@ -1,72 +1,64 @@
 # SMCE (Sic Mundus Creatus Est) — Current Status
 
-**Last updated:** 2026-03-22 (Thread 15: Rubber Meets Road — Visual Composition Breakthrough)
-
-**Project rename:** Two Fires is now officially **SMCE** (Sic Mundus Creatus Est). Repo remains `giants-drink`. Internal shorthand: SMCE.
+**Last updated:** 2026-03-23 (Thread 16: Procedural Generation Exploration & Boundary Finding)
 
 ---
 
-## What Just Happened (Thread 15)
+## What Just Happened (Thread 16)
 
-### Session Focus: Where does rubber meet road for making games great?
+### Session Focus: Can procedural JS generation be a tire for visual output?
 
-This was the most important design session since the PixelLab breakthrough (Thread 13). The central question: now that we have PixelLab for visual ingredients and the Tire Principle for architecture, what SPECIFICALLY must be solved to make generated games genuinely great — not "technically functional" but "I'd actually play this"?
+This was an empirical exploration session. Rather than planning (as Thread 15 suggested), Joe wanted to test whether procedural generation via JavaScript could serve as a visual tire — reducing or eliminating PixelLab calls for backgrounds, tiles, and scene composition. The session ran six progressive experiments, each building on the previous one's lessons.
 
-### The 26-Primitive Audit
+### Experiment 1: p5.js Procedural Backgrounds (v1)
 
-Systematically mapped every place where quality can fail, organized by how fast a player notices:
+Built six background styles at SNES native resolution (256×224): starfield, sunset sky, Mega Man industrial, ocean/water, cave/underground, night city. Each with parallax scrolling.
 
-- **Tier 1 (first 5 seconds):** Visual impression, game feel, camera, audio
-- **Tier 2 (first 30 seconds):** Onboarding, enemy behavior, mechanical clarity, pacing
-- **Tier 3 (first 5 minutes):** Difficulty curve, level design craft, progression, bosses, narrative
-- **Tier 4 (sustained play):** Mechanical depth, variety, music, surprise, CAS coherence
-- **Tier 5 (meta-layer):** CAS legibility, entity minds, meta-narrative, cross-game persistence
-- **Infrastructure:** Generation time, cost, prompt fidelity, paradigm breadth
+**Results:** Sunset sky scored 9.5/10 — genuinely excellent. Others ranged 5-7/10. The sunset worked because it accidentally followed good design principles (full vertical space, distinct layers with different character, intentional negative space, clear depth via parallax speed). The failures (especially Mega Man industrial) had empty space that wasn't intentional, unclear layer separation, and missing recognizable detail.
 
-Classification: 0 fully validated, 12 tire-identified-needs-validation, 8 tire-needed, 4 can't-address-yet, 2 split-status.
+**Key insight:** Quality variance was a design problem, not a capability problem. The tool works; it needs the 20 grounded principles applied.
 
-### The Background Reframing (Critical Insight)
+### Experiment 2: p5.js Backgrounds v2 (Hard Cases)
 
-**Ran a PixelLab background stress test** — generated a full industrial/SNES scene with parallax layers, character, enemy, and decorative objects. Result: individual pixel art quality is SNES-caliber, but composition was terrible (dense repetitive wallpaper, no depth layering, no spatial variety).
+Attempted Heat Man-style tech backgrounds, SMW overworld hills, improved industrial, forest canopy, castle interior, underwater. These tested whether p5 could handle recognizable background elements beyond pure atmosphere.
 
-**Key realization from analyzing real game screenshots** (Metal Man, Storm Eagle, SNES Mario, Turtles in Time, SF2, Mario Kart, Link to the Past):
+**Results:** All showed potential but weren't quite there. Joe's assessment: procedural backgrounds work well for platformer/sidescroller backgrounds and far-distance layers in beat-em-ups, racing, fighters. They do NOT work for top-down, RTS, or FPS paradigms because those have no "behind the gameplay" space — the tilemap IS the visual field.
 
-> Backgrounds in great retro games are mostly EMPTY. The visual richness comes from the foreground tilemap — the platforms, walls, and terrain the player interacts with. Backgrounds provide atmosphere through simplicity and negative space.
+**Key insight:** The boundary is camera-derived. Side/angled view → p5 handles atmosphere. Top-down/first-person → no separate background exists.
 
-**Gap A (backgrounds) dissolved into Gap B (level layout / tilemap composition).** The "background problem" was a misframing. The real problem is how tiles are arranged in a 2D grid — and that's the same problem as level design. Solving level design automatically solves visual composition because they're the same tilemap.
+### Experiment 3: RetroTile.js — Declarative Tile Library (v1)
 
-### Three Visual Situations Across Paradigms
+Built a declarative tile generation library where tiles are described via chained operations: `.fill()`, `.mortarGrid()`, `.bevel()`, `.noise()`, `.rivets()`, `.circuit()`, `.cylinderGradient()`. Twelve operations that compose to create any geometric tile. Tested with Mario, Mega Man, Castlevania, and Metroid tilesets arranged in level layouts.
 
-1. **Tilemap-dominant (5/7 paradigms):** Platformer, top-down RPG, shmup, Mode 7, RTS. The tilemap IS the visual richness. Simple atmospheric backgrounds behind it.
-2. **Scenic backdrop (partial, 2/7):** Beat-em-ups, some platformers. Simple play surface + themed scenic illustration behind it (3-5 illustrated elements composed with spatial intent).
-3. **Stage illustration (fighting games only):** Flat floor + full background painting. The one paradigm where "generate a pretty background" is the actual problem.
+**Results:** The library concept is sound — tiles are a closed visual domain expressible with finite operations. But output quality was NES-grade. Individual tiles looked like decent ingredients, but arranged in grids they looked "like really repetitive tiles — childish."
 
-### All 7 Paradigms Are Tilemap-Based
+**Key insight:** Bottom-up (make tiles → arrange them) produces tiled-looking output. Composition is the bottleneck, not tile quality.
 
-Detailed analysis of Mode 7, raycasting FPS, and RTS confirmed: every paradigm uses a 2D grid as its fundamental spatial data structure. Mode 7 is a top-down tilemap viewed through a perspective warp. Wolfenstein is a 2D wall grid with raycasting. RTS is a terrain tilemap with Wang tile transitions.
+### Experiment 4: RetroTile v2-v3 (SNES/Max Quality Attempts)
 
-The Section Template Library feeds ALL paradigms. Unique per-paradigm work is in the renderer (Mode 7 warp, raycaster, etc.), not the visual assets or composition.
+Attempted SNES-grade tiles with graduated bevels, structured noise, cell variation, PBR-style lighting, Perlin/Worley/FBM noise functions. Then attempted maximum quality with no retro constraints.
 
-### 20 Grounded Visual/Design Principles
+**Results:** Despite increasingly sophisticated rendering, output consistently looked NES/early-PC grade. Joe's feedback: "These look like good NES tiles, or Minecraft style stuff. Not SNES." Even the max-quality version with proper noise functions and normal-based lighting couldn't escape the procedural look.
 
-Identified and sourced 20 specific principles from:
-- **CCST Framework** (Patrick Holleman, *Reverse Design: Super Mario World* — Routledge academic press)
-- **Kishōtenketsu** (Nintendo's Koichi Hayashida, confirmed in GDC talks)
-- **SLYNYRD Pixelblog** (Raymond Schlitter, 59 pixel art tutorials — practitioner methodology)
-- **The Level Design Book** (Robert Yang et al. — open-source textbook grounded in architecture)
-- **Visual design fundamentals** (hierarchy, contrast, negative space, shape language)
+**Key insight:** The problem wasn't technical sophistication — it was that I kept unconsciously constraining to retro aesthetics. More fundamentally, procedural texture generation has a quality ceiling for the kinds of tiles players stare at during gameplay.
 
-Principles organized into: Universal visual design (5), Pixel art-specific (5), Game visual composition (5), Level structure (5). All grounded in research or confirmed developer methodology, not intuition.
+### Experiment 5: Top-Down Compositional System
 
-### Three-Layer Composition Model
+Joe's critical reframe: "The answer probably isn't design a bunch of random tiles and hope for the best... it's probably a process of going from general shape and composition to specific." Built a compositional painting system: spatial zones → edge detection → detail placement → contextual tile rendering. Each tile knows its role (fill, edge-N, corner-NW, detail) and renders accordingly.
 
-For 90%+ hit rate on "looks and plays great":
+Three scenes: MMX corridor, LttP overworld, MMX vertical shaft. Showed zone map alongside rendered output.
 
-1. **Layer 1: Sequencing** — What sections appear in what order. CCST + Kishōtenketsu + our sequencing grammar. Already specified.
-2. **Layer 2: Section Templates** — Spatial skeleton for each section. Derived from real game levels. Proposed, needs building.
-3. **Layer 3: Fill Patterns** — How tiles are actually placed within sections. Statistical distributions extracted from real game tilemaps. Needs research project.
+**Results:** Composition was dramatically better — you could read the spatial intent (shaft, platforms, lava, walls). But art quality was still "MS-DOS feeling." The architecture works; the rendering quality doesn't.
 
-The coupled constraint equations between fill variables (the "indeterminate equation" insight) ensure all solutions are in the "authored" zone. Set X (section type), Y (challenge configuration) is constrained, X+Y constrain Z (fill parameters), result is always good.
+**Key insight:** Top-down composition → edge detection → contextual rendering is the RIGHT PROCESS for Gap B. It just needs PixelLab art as its rendering layer, not procedural art.
+
+### Experiment 6: Direct Scene Painting (No Tiles)
+
+Final test: paint MMX highway stage and LttP overworld pixel-by-pixel, no tile abstraction, trying to match the actual games. Full compositional approach with direct rendering.
+
+**Results:** MMX was serviceable ("not something that blows me away, but not something I'd be embarrassed about"). LttP was poor ("childish — pretty terrible"). Geometric/industrial scenes in dark palettes are forgiving. Organic scenes with trees, houses, natural terrain expose every weakness of procedural rendering.
+
+**Key insight:** The definitive boundary. Procedural = atmosphere + geometric structure at distance. PixelLab = anything the player looks at closely, especially organic/illustrated content.
 
 ---
 
@@ -74,81 +66,71 @@ The coupled constraint equations between fill variables (the "indeterminate equa
 
 | # | Decision | Summary |
 |---|----------|---------|
-| 110 | Gap A dissolved into Gap B | Backgrounds are not a separate problem; they're part of tilemap composition. PixelLab sufficient for ingredients. |
-| 111 | Three visual situations model | Tilemap-dominant (5/7), scenic backdrop (partial 2/7), stage illustration (fighting only) |
-| 112 | All paradigms are tilemap-based | Mode 7, raycasting, RTS all use 2D grids. Section Template Library feeds all 7 paradigms. |
-| 113 | Three-layer composition model | Sequencing (grammar) → Section Templates (spatial skeleton) → Fill Patterns (empirical statistics) |
-| 114 | 20 grounded principles framework | Visual and design principles sourced from CCST, Kishōtenketsu, SLYNYRD, Level Design Book. Not intuition. |
-| 115 | Project officially renamed SMCE | Sic Mundus Creatus Est. Repo remains giants-drink. |
-| 116 | Big Thing 1 = Gap B (composition), Big Thing 2 = CAS | Priority reframing: game quality through composition is the primary engineering challenge; CAS is secondary. |
+| 117 | p5.js validated as background atmosphere tire | Works for parallax layers in side-view paradigms (4-5 of 7). Zero cost, instant, infinite variation. Not for top-down/FPS. |
+| 118 | Procedural tile rendering has a hard quality ceiling | Cannot match SNES/modern quality for foreground gameplay tiles regardless of technique sophistication. |
+| 119 | Top-down composition is the right architecture for Gap B | Zone painting → edge detection → contextual rendering. The composition system decides what goes where; the art comes from PixelLab tilesets. |
+| 120 | "p5 always, PixelLab sometimes on top" for backgrounds | p5 handles all atmospheric background layers. PixelLab contributes illustrated objects on top only when the scene needs recognizable specific elements. |
+| 121 | Procedural boundary is camera-derived | Side/angled view paradigms have a "behind" space suitable for procedural backgrounds. Top-down/FPS paradigms have no separate background — the tilemap is everything. |
 
 ---
 
 ## What's Next
 
-### Immediate: Full Project Re-Orientation (Next Session — Thread 16)
+### Immediate: Full Project Re-Orientation (Thread 17)
 
-The project plan (build-plan-v4) is stale. Sessions 1-14 explored and validated the visual pipeline (emulator-as-engine → ROM extraction → PixelLab pivot) and design architecture (CAS, agents, sequencing grammar). Thread 15 reframed the remaining work into "Big Thing 1" (composition/game quality) and "Big Thing 2" (CAS/social ecology).
-
-Next session must produce:
-- Revised project plan reflecting all Thread 10-15 learnings
-- Clear session sequence for Big Thing 1 (composition system)
+Thread 16 was supposed to be the planning session but became an exploration session. The planning still needs to happen. Thread 17 should produce:
+- Revised build plan (v5) reflecting all Thread 10-16 learnings
+- Concrete session sequence for Big Thing 1 (composition system + PixelLab tilesets)
 - Clear dependencies and placeholders for Big Thing 2 (CAS)
-- Concrete next steps that can be executed in Claude Code sessions
+- The 20 grounded principles formalized into a design spec
+- Updated canonical repo files (claude.md, decisions-log.md have not been committed to canonical locations since Thread 1)
 
-### Big Thing 1: Tilemap Composition System (Gap B)
+### What Thread 16 Validated for the Build Plan
 
-The core of making games great. Includes:
-- Formalizing the 20 principles into implementable constraints
-- Building the Section Template Library (per-paradigm templates derived from real games)
-- The empirical research project: measure fill patterns from 20-30 real game tilemaps
-- Building the fill pattern system that populates sections using extracted statistics
-- Integrating with PixelLab tileset generation and Phaser rendering
-- Validating end-to-end: does a composed level look and play great?
+1. **Background pipeline:** p5.js procedural backgrounds for side-view paradigms. Parameterized by Claude, rendered at game creation time. Zero PixelLab cost for backgrounds in ~70% of cases.
 
-### Big Thing 2: CAS Social Ecology
+2. **Composition system architecture:** Zone painting → edge detection → role assignment → rendering. This IS the Section Template Library / Fill Pattern system, viewed from the rendering side. Claude designs zones; the system resolves edges; PixelLab tilesets fill the roles (fill tile, edge-N tile, corner tile, detail tile).
 
-The specs exist (CAS engine, entity minds, sequencing grammar, paradigm shift principles). Building this comes after Big Thing 1 proves the game foundation is solid.
+3. **PixelLab tileset generation strategy:** Instead of generating individual tiles, generate ROLE-BASED TILESETS: one fill tile, 4 edge tiles, 4 corners, 4 inner corners, 2-3 detail variants = ~15-20 images per material zone. The composition system arranges them. This is a much more efficient PixelLab usage pattern.
 
-### Other Gaps (from the 26-primitive audit)
-
-- Game feel / juice layer (Gap C) — solvable with preset system, lower priority than composition
-- Camera patterns (Gap D) — unaddressed, needed per-paradigm
-- Fighting game stage illustrations — special case, after core composition system
-- Music validation — Tone.js + ground truth patterns, unvalidated
-- Mechanical Pattern Library — still needed for enemy behaviors, game mechanics systems
+4. **The procedural/PixelLab boundary is clear:** Procedural handles atmosphere (backgrounds, parallax), geometric structure (panel grids, support columns), and composition logic (what goes where). PixelLab handles visual art quality (the tiles themselves, organic content, illustrated objects, anything the player stares at).
 
 ---
 
 ## Repo State
 
-### New files from this session:
+### Experiments from this session (not committed to repo):
+```
+All experiments were built in Claude.ai's sandbox environment:
+  p5-bg-test.html          — v1 p5 backgrounds (6 styles)
+  p5-bg-test-v2.html       — v2 backgrounds (hard cases)
+  retrotile-test.html       — RetroTile v1 (declarative NES-grade tiles)
+  retrotile-v2-snes.html    — RetroTile v2 (SNES attempt)
+  retrotile-v3-maxquality.html — RetroTile v3 (max quality noise-based)
+  retrotile-v4-painterly.html  — RetroTile v4 (painterly clean style)
+  compositional-tiles-v1.html  — Compositional system (zone → edge → render)
+  direct-paint-v1.html         — Direct scene painting (MMX + LttP)
+```
 
-```
-experiments/pixellab-bg-test/          — PixelLab background stress test
-  index.html                           — Phaser scene (controls broken, visual test only)
-  assets.html                          — Individual asset review page
-  assets/                              — Generated PNGs (11 assets)
-    bg-layer1-sky.png, bg-layer2-buildings.png, bg-layer3-machinery.png
-    character-soldier-east.png, character-soldier-west.png
-    enemy-drone-east.png, enemy-drone-west.png
-    obj-crate.png, obj-pipe.png, obj-light.png, obj-conveyor.png
-```
+These are proofs-of-concept for learning, not production code. The key outputs are the DECISIONS, not the code.
 
 ### Key docs needing update:
 ```
-claude.md                              ← NEEDS UPDATE (Gap A/B reframing, 3-layer model, SMCE rename)
-docs/decisions-log.md                  ← NEEDS UPDATE (decisions 110-116)
+claude.md                              ← NEEDS UPDATE (procedural findings, composition system architecture)
+docs/decisions-log.md                  ← NEEDS UPDATE (decisions 110-121, threads 15-16)
 docs/design/build-plan-v4.md           ← NEEDS FULL REVISION (next session)
 ```
+
+### CRITICAL: Canonical repo files are stale
+`docs/current-status.md` in the repo is still from Thread 1 (March 2). `docs/decisions-log.md` in the repo is missing decisions 110-121. `claude.md` is missing threads 13-16 content. The next session MUST commit all updates to canonical locations.
 
 ---
 
 ## Session Notes for Next Thread
 
-- Thread 16 should be a PLANNING session, not a building session. Output = revised build plan + concrete session sequence.
-- The project has gone through three major pivots (emulator-as-engine → ROM extraction → PixelLab + composition). Each was necessary and each narrowed the problem. We're now at the real problem: making composed tilemaps that look and play great.
-- "Big Thing 1" (composition) and "Big Thing 2" (CAS) is the right high-level framing. Everything else is either solved (PixelLab, physics) or downstream (per-paradigm renderers, audio).
-- The 20 principles need to be formally documented in a design spec — maybe `docs/design/composition-principles.md`. That's a Thread 16 deliverable.
-- The empirical research project (measuring real game tilemaps) is the critical dependency for the fill pattern system. Without those numbers, we're guessing. With them, we have ground truth.
-- Joe has lost the "wonderful sense of all specific steps" — Thread 16's primary job is restoring that clarity with a plan that accounts for everything learned.
+- Thread 17 should be the PLANNING session. Output = revised build plan v5 + concrete session sequence.
+- The composition system proof-of-concept (zone → edge → role → render) should be formalized as the architecture for the Section Template Library + Fill Pattern system.
+- The p5.js background system should be added to the tool stack in claude.md as a validated tire.
+- PixelLab tileset generation should shift from "generate individual tiles" to "generate role-based tilesets" (fill, edges, corners, details).
+- Joe needs the "wonderful sense of all specific steps" restored — the planning session must provide that clarity.
+- The 20 grounded principles from Thread 15 still need to be formalized into `docs/design/composition-principles.md`.
