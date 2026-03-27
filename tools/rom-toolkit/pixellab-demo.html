@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SMB — PixelLab AI Knight</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#111;color:#eee;font-family:monospace;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  h1{margin:12px 0 4px;font-size:18px;color:#c8a}
+  #info{font-size:12px;color:#888;margin-bottom:8px}
+  #game{position:relative;image-rendering:pixelated}
+  canvas{image-rendering:pixelated;display:block;background:#000}
+  #status{margin-top:6px;font-size:13px;color:#aaa}
+  #load{text-align:center;padding:60px 20px}
+  #load label{display:inline-block;padding:16px 32px;background:#26a;color:#fff;border-radius:8px;cursor:pointer;font-size:16px;font-family:monospace}
+  #load input{display:none}
+  .badge{position:absolute;top:8px;right:8px;padding:4px 10px;background:rgba(0,0,0,.7);border-radius:4px;font-size:11px;pointer-events:none}
+  .badge.on{color:#c8a} .badge.off{color:#f84}
+</style>
+</head>
+<body>
+<h1>SMB — PixelLab AI Knight</h1>
+<div id="info">Arrows=D-pad Z/X=Jump A/S=Run Enter=Start <b>T=Toggle Knight/Mario</b></div>
+<div id="load"><p id="ls">Loading ROM...</p><label id="fl" style="display:none">Select SMB ROM (.nes)<input type="file" id="fi" accept=".nes"></label></div>
+<div id="game" style="display:none"><canvas id="cv" width="256" height="240"></canvas><div id="badge" class="badge on">KNIGHT</div></div>
+<div id="status"></div>
+
+<script src="jsnes.min.js"></script>
+<script src="rom-data.js"></script>
+<script src="pixellab-data.js"></script>
+<script>
+var KEY_MAP={ArrowUp:[1,jsnes.Controller.BUTTON_UP],ArrowDown:[1,jsnes.Controller.BUTTON_DOWN],ArrowLeft:[1,jsnes.Controller.BUTTON_LEFT],ArrowRight:[1,jsnes.Controller.BUTTON_RIGHT],KeyZ:[1,jsnes.Controller.BUTTON_A],KeyX:[1,jsnes.Controller.BUTTON_A],KeyA:[1,jsnes.Controller.BUTTON_B],KeyS:[1,jsnes.Controller.BUTTON_B],Enter:[1,jsnes.Controller.BUTTON_START],ShiftRight:[1,jsnes.Controller.BUTTON_SELECT],ShiftLeft:[1,jsnes.Controller.BUTTON_SELECT]};
+
+var nes,ctx,imageData,buf,buf32,frameBuf;
+var running=false,replaceOn=true;
+var audioCtx,audioNode,audioSamples=[];
+var animFrame=0,lastX=0;
+
+var cv=document.getElementById('cv');
+cv.style.width=(256*3)+'px';cv.style.height=(240*3)+'px';
+ctx=cv.getContext('2d');
+imageData=ctx.createImageData(256,240);
+buf=new ArrayBuffer(imageData.data.length);
+buf32=new Uint32Array(buf);
+
+document.getElementById('fi').addEventListener('change',function(e){
+  var f=e.target.files[0];if(!f)return;var r=new FileReader();
+  r.onload=function(ev){var b=new Uint8Array(ev.target.result),s='';for(var i=0;i<b.length;i++)s+=String.fromCharCode(b[i]);startGame(s)};
+  r.readAsArrayBuffer(f);
+});
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.ROM_BASE64)startGame(atob(ROM_BASE64));
+  else{document.getElementById('ls').textContent='Run: node build-rom-data.cjs';document.getElementById('fl').style.display='inline-block'}
+});
+
+function initAudio(){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)({sampleRate:44100});audioNode=audioCtx.createScriptProcessor(4096,0,2);audioNode.onaudioprocess=function(e){var L=e.outputBuffer.getChannelData(0),R=e.outputBuffer.getChannelData(1);for(var i=0;i<L.length;i++){if(audioSamples.length>=2){L[i]=audioSamples.shift();R[i]=audioSamples.shift()}else{L[i]=0;R[i]=0}}};audioNode.connect(audioCtx.destination)}catch(e){}}
+
+// ============================================================
+// PIXELLAB KNIGHT — Based on PROVEN Link demo OAM timing
+// Writes to $0200 BEFORE nes.frame()
+// Simple 2×3 grid, 6 tiles, feet-aligned with Mario
+// ============================================================
+function installTiles(poseName) {
+  var tiles = PL_SPRITES.poses[poseName];
+  if (!tiles) return;
+  for (var i = 0; i < tiles.length; i++) {
+    var t = nes.ppu.ptTile[0xF0 + i];
+    if (t && t.pix) for (var p = 0; p < 64; p++) t.pix[p] = tiles[i].px[p];
+  }
+}
+
+function doReplace() {
+  if (!replaceOn) return;
+  var state = nes.cpu.mem[0x000E];
+  if (state === 0x0B || state === 0x06) return;
+
+  var s5Y = nes.cpu.mem[0x0200 + 5*4];
+  var s5X = nes.cpu.mem[0x0200 + 5*4 + 3];
+  var s5A = nes.cpu.mem[0x0200 + 5*4 + 2];
+  var s7Y = nes.cpu.mem[0x0200 + 7*4];
+  var facingLeft = (s5A & 0x40) !== 0;
+
+  var curX = nes.cpu.mem[0x0086];
+  var isMoving = (curX !== lastX);
+  lastX = curX;
+  var isJumping = (nes.cpu.mem[0x009F] !== 0);
+
+  var pose;
+  if (isJumping) { pose = 'jump'; }
+  else if (isMoving) { var wp = ['walk1','walk2','walk3']; pose = wp[Math.floor(animFrame/8)%wp.length]; animFrame++; }
+  else { pose = 'stand'; animFrame = 0; }
+
+  var powerup = nes.cpu.mem[0x0756];
+  var pal = (powerup === 2) ? PL_SPRITES.palette.fire : PL_SPRITES.palette.normal;
+  nes.ppu.vramMem[0x3F11] = pal[1]; nes.ppu.vramMem[0x3F12] = pal[2]; nes.ppu.vramMem[0x3F13] = pal[3];
+
+  installTiles(pose);
+
+  var baseX = s5X;
+  var baseY = s7Y + 8 - 24; // feet-aligned
+  var hFlip = facingLeft ? 0x40 : 0x00;
+
+  for (var s = 1; s <= 8; s++) nes.cpu.mem[0x0200 + s*4] = 0xFF;
+  for (var i = 0; i < 6; i++) {
+    var col = i % 2, row = Math.floor(i / 2);
+    var slot = 1 + i, base = 0x0200 + slot * 4;
+    var dx = facingLeft ? (1 - col) * 8 : col * 8;
+    nes.cpu.mem[base]     = baseY + row * 8;
+    nes.cpu.mem[base + 1] = 0xF0 + (facingLeft ? (row*2+(1-col)) : i);
+    nes.cpu.mem[base + 2] = hFlip;
+    nes.cpu.mem[base + 3] = baseX + dx;
+  }
+}
+
+function renderFrame(){if(!frameBuf)return;for(var i=0;i<256*240;i++)buf32[i]=0xFF000000|frameBuf[i];imageData.data.set(new Uint8ClampedArray(buf));ctx.putImageData(imageData,0,0)}
+
+var tileCD=0;
+function gameLoop(){
+  if(!running)return;
+  if(replaceOn&&tileCD<=0){installTiles('stand');tileCD=30}tileCD--;
+  doReplace();
+  nes.frame();
+  renderFrame();
+  requestAnimationFrame(gameLoop);
+}
+
+function startGame(romStr){
+  document.getElementById('load').style.display='none';
+  document.getElementById('game').style.display='block';
+  initAudio();
+  nes=new jsnes.NES({onFrame:function(fb){frameBuf=fb},onAudioSample:function(l,r){if(audioSamples.length<16384){audioSamples.push(l,r)}}});
+  nes.loadROM(romStr);
+  running=true;
+  document.getElementById('status').textContent='Playing — press T to toggle Knight/Mario';
+  requestAnimationFrame(gameLoop);
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.code==='KeyT'){replaceOn=!replaceOn;var b=document.getElementById('badge');b.textContent=replaceOn?'KNIGHT':'MARIO';b.className='badge '+(replaceOn?'on':'off');document.getElementById('status').textContent=replaceOn?'AI Knight mode':'Original Mario';return}
+  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+  var m=KEY_MAP[e.code];if(m&&nes){nes.buttonDown(m[0],m[1]);e.preventDefault()}
+});
+document.addEventListener('keyup',function(e){var m=KEY_MAP[e.code];if(m&&nes){nes.buttonUp(m[0],m[1]);e.preventDefault()}});
+</script>
+</body>
+</html>
