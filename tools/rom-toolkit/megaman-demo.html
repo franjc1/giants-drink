@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SMB — Mega Man Edition</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#111;color:#eee;font-family:monospace;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  h1{margin:12px 0 4px;font-size:18px;color:#4af}
+  #info{font-size:12px;color:#888;margin-bottom:8px}
+  #game{position:relative;image-rendering:pixelated}
+  canvas{image-rendering:pixelated;display:block;background:#000}
+  #status{margin-top:6px;font-size:13px;color:#aaa}
+  #load{text-align:center;padding:60px 20px}
+  #load label{display:inline-block;padding:16px 32px;background:#26a;color:#fff;border-radius:8px;cursor:pointer;font-size:16px;font-family:monospace}
+  #load label:hover{background:#38c}
+  #load input{display:none}
+  .badge{position:absolute;top:8px;right:8px;padding:4px 10px;background:rgba(0,0,0,.7);border-radius:4px;font-size:11px;pointer-events:none}
+  .badge.on{color:#4af} .badge.off{color:#f84}
+</style>
+</head>
+<body>
+<h1>SMB — Mega Man Edition</h1>
+<div id="info">Arrows=D-pad Z/X=Jump A/S=Run Enter=Start <b>T=Toggle Mega Man/Mario</b></div>
+<div id="load"><p id="ls">Loading ROM...</p><label id="fl" style="display:none">Select SMB ROM (.nes)<input type="file" id="fi" accept=".nes"></label></div>
+<div id="game" style="display:none"><canvas id="cv" width="256" height="240"></canvas><div id="badge" class="badge on">MEGA MAN</div></div>
+<div id="status"></div>
+
+<script src="jsnes.min.js"></script>
+<script src="rom-data.js"></script>
+<script src="megaman-data.js"></script>
+<script>
+var KEY_MAP={ArrowUp:[1,jsnes.Controller.BUTTON_UP],ArrowDown:[1,jsnes.Controller.BUTTON_DOWN],ArrowLeft:[1,jsnes.Controller.BUTTON_LEFT],ArrowRight:[1,jsnes.Controller.BUTTON_RIGHT],KeyZ:[1,jsnes.Controller.BUTTON_A],KeyX:[1,jsnes.Controller.BUTTON_A],KeyA:[1,jsnes.Controller.BUTTON_B],KeyS:[1,jsnes.Controller.BUTTON_B],Enter:[1,jsnes.Controller.BUTTON_START],ShiftRight:[1,jsnes.Controller.BUTTON_SELECT],ShiftLeft:[1,jsnes.Controller.BUTTON_SELECT]};
+
+var nes,ctx,imageData,buf,buf32,frameBuf;
+var running=false, replaceOn=true;
+var audioCtx,audioNode,audioSamples=[];
+var animFrame=0, lastX=0, lastDir=0; // 0=right, 1=left
+
+var cv=document.getElementById('cv');
+cv.style.width=(256*3)+'px'; cv.style.height=(240*3)+'px';
+ctx=cv.getContext('2d');
+imageData=ctx.createImageData(256,240);
+buf=new ArrayBuffer(imageData.data.length);
+buf32=new Uint32Array(buf);
+
+function setStatus(m){document.getElementById('status').textContent=m}
+
+// ROM loading
+document.getElementById('fi').addEventListener('change',function(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){var b=new Uint8Array(ev.target.result),s='';for(var i=0;i<b.length;i++)s+=String.fromCharCode(b[i]);startGame(s)};
+  r.readAsArrayBuffer(f);
+});
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.ROM_BASE64)startGame(atob(ROM_BASE64));
+  else{document.getElementById('ls').textContent='Run: node build-rom-data.cjs';document.getElementById('fl').style.display='inline-block'}
+});
+
+// Audio
+function initAudio(){
+  try{
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)({sampleRate:44100});
+    audioNode=audioCtx.createScriptProcessor(4096,0,2);
+    audioNode.onaudioprocess=function(e){var L=e.outputBuffer.getChannelData(0),R=e.outputBuffer.getChannelData(1);for(var i=0;i<L.length;i++){if(audioSamples.length>=2){L[i]=audioSamples.shift();R[i]=audioSamples.shift()}else{L[i]=0;R[i]=0}}};
+    audioNode.connect(audioCtx.destination);
+  }catch(e){}
+}
+
+// ============================================================
+// MEGA MAN REPLACEMENT ENGINE
+// ============================================================
+function installPoseTiles(poseName) {
+  var tiles = MM_SPRITES.poses[poseName];
+  if (!tiles) return;
+  for (var i = 0; i < tiles.length; i++) {
+    var t = nes.ppu.ptTile[0xF0 + i];
+    if (t && t.pix) for (var p = 0; p < 64; p++) t.pix[p] = tiles[i].px[p];
+  }
+}
+
+function setPalette(palName) {
+  var pal = MM_SPRITES.pal[palName] || MM_SPRITES.pal.normal;
+  nes.ppu.vramMem[0x3F11] = pal[1];
+  nes.ppu.vramMem[0x3F12] = pal[2];
+  nes.ppu.vramMem[0x3F13] = pal[3];
+}
+
+function doMegaManReplace() {
+  if (!replaceOn) return;
+  var state = nes.cpu.mem[0x000E];
+  if (state === 0x0B || state === 0x06) return; // death/transition
+
+  // Read game's OAM positions
+  var s5Y = nes.cpu.mem[0x0200 + 5*4];
+  var s5X = nes.cpu.mem[0x0200 + 5*4 + 3];
+  var s5A = nes.cpu.mem[0x0200 + 5*4 + 2];
+  var s7Y = nes.cpu.mem[0x0200 + 7*4];
+
+  // Detect direction from game's OAM attribute
+  var facingLeft = (s5A & 0x40) !== 0;
+  if (facingLeft) lastDir = 1; else lastDir = 0;
+
+  // Detect movement (X changed since last frame)
+  var curX = nes.cpu.mem[0x0086];
+  var isMoving = (curX !== lastX);
+  lastX = curX;
+
+  // Detect jumping (Y velocity non-zero)
+  var yVel = nes.cpu.mem[0x009F];
+  var isJumping = (yVel !== 0);
+
+  // Select pose
+  var pose;
+  if (isJumping) {
+    pose = 'jump';
+  } else if (isMoving) {
+    var walkPoses = ['walk1', 'walk2', 'walk3'];
+    var idx = Math.floor(animFrame / 6) % walkPoses.length;
+    pose = walkPoses[idx];
+    animFrame++;
+  } else {
+    pose = 'stand';
+    animFrame = 0;
+  }
+
+  // Powerup → palette
+  var powerup = nes.cpu.mem[0x0756];
+  var star = nes.cpu.mem[0x079E];
+  var palName = 'normal';
+  if (powerup === 2) palName = 'fire';
+  if (star > 0 && (animFrame & 4)) palName = (palName === 'fire') ? 'normal' : 'fire'; // flash
+
+  installPoseTiles(pose);
+  setPalette(palName);
+
+  var hFlip = facingLeft ? 0x40 : 0x00;
+  var tiles = MM_SPRITES.poses[pose];
+
+  // Suppress slots 1-2
+  nes.cpu.mem[0x0200 + 1*4] = 0xFF;
+  nes.cpu.mem[0x0200 + 2*4] = 0xFF;
+
+  // Write 6 tiles to slots 3-8
+  // row 0=head at s5Y-8, row 1=torso at s5Y, row 2=legs at s7Y
+  var rowYs = [s5Y - 8, s5Y, s7Y];
+  for (var i = 0; i < tiles.length && i < 6; i++) {
+    var t = tiles[i];
+    var slot = 3 + i;
+    var base = 0x0200 + slot * 4;
+    var col = facingLeft ? (1 - t.c) : t.c;
+    var chrIdx = 0xF0 + (facingLeft ? tiles.findIndex(function(x){return x.c===(1-t.c)&&x.r===t.r}) : i);
+    if (chrIdx < 0xF0) chrIdx = 0xF0 + i; // fallback
+
+    nes.cpu.mem[base]     = rowYs[t.r];
+    nes.cpu.mem[base + 1] = 0xF0 + i; // always use sequential CHR indices
+    nes.cpu.mem[base + 2] = hFlip; // palette 0 + flip
+    nes.cpu.mem[base + 3] = s5X + col * 8;
+  }
+}
+
+// Render
+function renderFrame(){
+  if(!frameBuf)return;
+  for(var i=0;i<256*240;i++)buf32[i]=0xFF000000|frameBuf[i];
+  imageData.data.set(new Uint8ClampedArray(buf));
+  ctx.putImageData(imageData,0,0);
+}
+
+// Game loop
+var tileCD=0;
+function gameLoop(){
+  if(!running)return;
+  if(replaceOn){if(tileCD<=0){installPoseTiles('stand');tileCD=30}tileCD--}
+  doMegaManReplace();
+  nes.frame();
+  renderFrame();
+  requestAnimationFrame(gameLoop);
+}
+
+function startGame(romStr){
+  document.getElementById('load').style.display='none';
+  document.getElementById('game').style.display='block';
+  initAudio();
+  nes=new jsnes.NES({onFrame:function(fb){frameBuf=fb},onAudioSample:function(l,r){if(audioSamples.length<16384){audioSamples.push(l,r)}}});
+  nes.loadROM(romStr);
+  running=true;
+  setStatus('Playing — press T to toggle Mega Man/Mario');
+  requestAnimationFrame(gameLoop);
+}
+
+// Keyboard
+document.addEventListener('keydown',function(e){
+  if(e.code==='KeyT'){
+    replaceOn=!replaceOn;
+    var b=document.getElementById('badge');
+    b.textContent=replaceOn?'MEGA MAN':'MARIO';
+    b.className='badge '+(replaceOn?'on':'off');
+    setStatus(replaceOn?'Mega Man mode':'Original Mario');
+    return;
+  }
+  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+  var m=KEY_MAP[e.code];if(m&&nes){nes.buttonDown(m[0],m[1]);e.preventDefault()}
+});
+document.addEventListener('keyup',function(e){var m=KEY_MAP[e.code];if(m&&nes){nes.buttonUp(m[0],m[1]);e.preventDefault()}});
+</script>
+</body>
+</html>
