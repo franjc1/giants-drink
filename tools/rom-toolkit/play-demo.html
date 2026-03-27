@@ -37,10 +37,10 @@
 </div>
 
 <div id="load-screen">
-  <label>Select Super Mario Bros ROM (.nes)
+  <p id="load-status">Loading ROM...</p>
+  <label id="fallback-label" style="display:none;">Select Super Mario Bros ROM (.nes)
     <input type="file" id="rom-input" accept=".nes">
   </label>
-  <p>The ROM is loaded locally and never uploaded anywhere.</p>
 </div>
 
 <div id="game-container" style="display:none;">
@@ -50,6 +50,7 @@
 <div id="status"></div>
 
 <script src="jsnes.min.js"></script>
+<script src="rom-data.js"></script>
 <script>
 // ============================================================
 // KNIGHT CHARACTER TILE DATA (from converter output)
@@ -123,20 +124,36 @@ imageData = ctx.createImageData(256, 240);
 function setStatus(msg) { document.getElementById('status').textContent = msg; }
 
 // ============================================================
-// ROM LOADING
+// ROM LOADING — auto-start from rom-data.js, fallback to file input
 // ============================================================
+function b64ToRomStr(b64) {
+  const bin = atob(b64);
+  return bin; // atob already returns a binary string, which is what jsnes wants
+}
+
+// File input fallback
 document.getElementById('rom-input').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = function(ev) {
     const buf = new Uint8Array(ev.target.result);
-    // Convert to binary string (jsnes expects this)
     let romStr = '';
     for (let i = 0; i < buf.length; i++) romStr += String.fromCharCode(buf[i]);
     startGame(romStr);
   };
   reader.readAsArrayBuffer(file);
+});
+
+// Auto-start if rom-data.js loaded successfully
+window.addEventListener('DOMContentLoaded', function() {
+  if (window.ROM_BASE64) {
+    startGame(b64ToRomStr(window.ROM_BASE64));
+  } else {
+    // rom-data.js missing — show file picker
+    document.getElementById('load-status').textContent = 'rom-data.js not found. Run: node build-rom-data.cjs';
+    document.getElementById('fallback-label').style.display = 'inline-block';
+  }
 });
 
 // ============================================================
