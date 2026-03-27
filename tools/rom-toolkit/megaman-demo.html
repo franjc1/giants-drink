@@ -90,73 +90,74 @@ function setPalette(palName) {
 function doMegaManReplace() {
   if (!replaceOn) return;
   var state = nes.cpu.mem[0x000E];
-  if (state === 0x0B || state === 0x06) return; // death/transition
+  if (state === 0x0B || state === 0x06) return;
 
-  // Read game's OAM positions
+  // Read game's OAM for Mario's visible area
   var s5Y = nes.cpu.mem[0x0200 + 5*4];
   var s5X = nes.cpu.mem[0x0200 + 5*4 + 3];
   var s5A = nes.cpu.mem[0x0200 + 5*4 + 2];
   var s7Y = nes.cpu.mem[0x0200 + 7*4];
 
-  // Detect direction from game's OAM attribute
+  // Direction from game's OAM H-flip
   var facingLeft = (s5A & 0x40) !== 0;
-  if (facingLeft) lastDir = 1; else lastDir = 0;
 
-  // Detect movement (X changed since last frame)
+  // Movement detection
   var curX = nes.cpu.mem[0x0086];
   var isMoving = (curX !== lastX);
   lastX = curX;
 
-  // Detect jumping (Y velocity non-zero)
+  // Jump detection
   var yVel = nes.cpu.mem[0x009F];
   var isJumping = (yVel !== 0);
 
-  // Select pose
+  // Pose selection
   var pose;
   if (isJumping) {
     pose = 'jump';
   } else if (isMoving) {
-    var walkPoses = ['walk1', 'walk2', 'walk3'];
-    var idx = Math.floor(animFrame / 6) % walkPoses.length;
-    pose = walkPoses[idx];
+    var wp = ['walk3', 'walk4', 'walk5'];
+    pose = wp[Math.floor(animFrame / 6) % wp.length];
     animFrame++;
   } else {
     pose = 'stand';
     animFrame = 0;
   }
 
-  // Powerup → palette
+  // Palette
   var powerup = nes.cpu.mem[0x0756];
   var star = nes.cpu.mem[0x079E];
-  var palName = 'normal';
-  if (powerup === 2) palName = 'fire';
-  if (star > 0 && (animFrame & 4)) palName = (palName === 'fire') ? 'normal' : 'fire'; // flash
+  var palName = (powerup === 2) ? 'fire' : 'normal';
+  if (star > 0 && (animFrame & 4)) palName = (palName === 'fire') ? 'normal' : 'fire';
 
   installPoseTiles(pose);
   setPalette(palName);
 
-  var hFlip = facingLeft ? 0x40 : 0x00;
   var tiles = MM_SPRITES.poses[pose];
+  if (!tiles) return;
 
-  // Suppress slots 1-2
-  nes.cpu.mem[0x0200 + 1*4] = 0xFF;
-  nes.cpu.mem[0x0200 + 2*4] = 0xFF;
+  // Mega Man base position: feet aligned with Mario's feet
+  // Mario feet bottom = s7Y + 8. MM is 24px tall.
+  // baseY = s7Y + 8 - 24 = s7Y - 16
+  // baseX = s5X - 4 (MM is ~24px wide, Mario is 16px, center align)
+  var baseX = s5X - 4;
+  var baseY = s7Y - 16;
 
-  // Write 6 tiles to slots 3-8
-  // row 0=head at s5Y-8, row 1=torso at s5Y, row 2=legs at s7Y
-  var rowYs = [s5Y - 8, s5Y, s7Y];
-  for (var i = 0; i < tiles.length && i < 6; i++) {
+  // Suppress ALL Mario slots 1-8
+  for (var s = 1; s <= 8; s++) nes.cpu.mem[0x0200 + s*4] = 0xFF;
+
+  // Write Mega Man tiles using PER-TILE offsets (dx, dy from extraction)
+  for (var i = 0; i < tiles.length && i < 8; i++) {
     var t = tiles[i];
-    var slot = 3 + i;
+    var slot = 1 + i;
     var base = 0x0200 + slot * 4;
-    var col = facingLeft ? (1 - t.c) : t.c;
-    var chrIdx = 0xF0 + (facingLeft ? tiles.findIndex(function(x){return x.c===(1-t.c)&&x.r===t.r}) : i);
-    if (chrIdx < 0xF0) chrIdx = 0xF0 + i; // fallback
 
-    nes.cpu.mem[base]     = rowYs[t.r];
-    nes.cpu.mem[base + 1] = 0xF0 + i; // always use sequential CHR indices
-    nes.cpu.mem[base + 2] = hFlip; // palette 0 + flip
-    nes.cpu.mem[base + 3] = s5X + col * 8;
+    var dx = t.dx, dy = t.dy;
+    if (facingLeft) dx = 24 - 8 - dx; // mirror horizontally within 24px width
+
+    nes.cpu.mem[base]     = baseY + dy;
+    nes.cpu.mem[base + 1] = 0xF0 + i;
+    nes.cpu.mem[base + 2] = facingLeft ? 0x40 : 0x00;
+    nes.cpu.mem[base + 3] = baseX + dx;
   }
 }
 
