@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SMB Sprite Replace Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: #eee; font-family: monospace; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  h1 { margin: 12px 0 4px; font-size: 18px; color: #6cf; }
+  #controls-info { font-size: 12px; color: #888; margin-bottom: 8px; }
+  #game-container { position: relative; image-rendering: pixelated; }
+  canvas { image-rendering: pixelated; display: block; background: #000; }
+  #status { margin-top: 6px; font-size: 13px; color: #aaa; }
+  #load-screen { text-align: center; padding: 60px 20px; }
+  #load-screen label {
+    display: inline-block; padding: 16px 32px; background: #26a; color: #fff;
+    border-radius: 8px; cursor: pointer; font-size: 16px; font-family: monospace;
+  }
+  #load-screen label:hover { background: #38c; }
+  #load-screen input { display: none; }
+  #load-screen p { margin-top: 16px; color: #666; font-size: 12px; }
+  .toggle-badge {
+    position: absolute; top: 8px; right: 8px; padding: 4px 10px;
+    background: rgba(0,0,0,0.7); border-radius: 4px; font-size: 11px;
+    pointer-events: none;
+  }
+  .toggle-badge.knight { color: #6cf; }
+  .toggle-badge.mario { color: #f84; }
+</style>
+</head>
+<body>
+
+<h1>SMB Sprite Replace Demo</h1>
+<div id="controls-info">
+  Arrows = D-pad &nbsp;|&nbsp; Z/X = Jump &nbsp;|&nbsp; A/S = Run &nbsp;|&nbsp;
+  Enter = Start &nbsp;|&nbsp; <b>T = Toggle Knight/Mario</b>
+</div>
+
+<div id="load-screen">
+  <label>Select Super Mario Bros ROM (.nes)
+    <input type="file" id="rom-input" accept=".nes">
+  </label>
+  <p>The ROM is loaded locally and never uploaded anywhere.</p>
+</div>
+
+<div id="game-container" style="display:none;">
+  <canvas id="screen" width="256" height="240"></canvas>
+  <div id="toggle-badge" class="toggle-badge knight">KNIGHT</div>
+</div>
+<div id="status"></div>
+
+<script src="jsnes.min.js"></script>
+<script>
+// ============================================================
+// KNIGHT CHARACTER TILE DATA (from converter output)
+// ============================================================
+const KNIGHT_TILES = [
+  // Row 0 col 0 — blank (small Mario top padding)
+  new Array(64).fill(0),
+  // Row 0 col 1 — blank
+  new Array(64).fill(0),
+  // Row 1 col 0 — blank
+  new Array(64).fill(0),
+  // Row 1 col 1 — blank
+  new Array(64).fill(0),
+  // Row 2 col 0 — Robot/Knight head left
+  [0,0,1,1,1,1,1,1, 0,1,2,2,2,2,2,1, 0,1,2,3,3,2,2,1, 0,1,2,3,3,2,2,1,
+   0,1,2,2,2,2,2,1, 0,1,1,2,2,1,1,1, 0,0,1,1,1,1,0,0, 0,0,1,2,2,1,0,0],
+  // Row 2 col 1 — Robot/Knight head right
+  [1,1,1,1,1,1,0,0, 1,2,2,2,2,2,1,0, 1,2,2,3,3,2,1,0, 1,2,2,3,3,2,1,0,
+   1,2,2,2,2,2,1,0, 1,1,1,2,2,1,1,0, 0,0,1,1,1,1,0,0, 0,0,1,2,2,1,0,0],
+  // Row 3 col 0 — Robot/Knight body left
+  [0,1,1,2,2,1,1,0, 0,1,2,2,2,2,1,0, 0,1,2,3,3,2,1,0, 0,1,1,1,1,1,1,0,
+   0,0,1,2,0,1,2,0, 0,0,1,2,0,1,2,0, 0,0,1,1,0,1,1,0, 0,0,1,1,0,1,1,0],
+  // Row 3 col 1 — Robot/Knight body right
+  [0,1,1,2,2,1,1,0, 0,1,2,2,2,2,1,0, 0,1,2,3,3,2,1,0, 0,1,1,1,1,1,1,0,
+   0,2,1,0,2,1,0,0, 0,2,1,0,2,1,0,0, 0,1,1,0,1,1,0,0, 0,1,1,0,1,1,0,0],
+];
+
+const CHR_BASE = 0xF0;
+const KNIGHT_PALETTE = [0x0F, 0x12, 0x30, 0x28]; // black, blue, white, yellow
+
+// ============================================================
+// KEYBOARD MAPPING
+// ============================================================
+const KEY_MAP = {
+  'ArrowUp':    [1, jsnes.Controller.BUTTON_UP],
+  'ArrowDown':  [1, jsnes.Controller.BUTTON_DOWN],
+  'ArrowLeft':  [1, jsnes.Controller.BUTTON_LEFT],
+  'ArrowRight': [1, jsnes.Controller.BUTTON_RIGHT],
+  'KeyZ':       [1, jsnes.Controller.BUTTON_A],
+  'KeyX':       [1, jsnes.Controller.BUTTON_A],
+  'KeyA':       [1, jsnes.Controller.BUTTON_B],
+  'KeyS':       [1, jsnes.Controller.BUTTON_B],
+  'Enter':      [1, jsnes.Controller.BUTTON_START],
+  'ShiftRight': [1, jsnes.Controller.BUTTON_SELECT],
+  'ShiftLeft':  [1, jsnes.Controller.BUTTON_SELECT],
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let nes = null;
+let ctx = null;
+let imageData = null;
+let frameBuf = null;
+let running = false;
+let replaceEnabled = true;
+let audioCtx = null;
+let audioScriptNode = null;
+const audioSamples = [];
+
+// ============================================================
+// INIT
+// ============================================================
+const canvas = document.getElementById('screen');
+const SCALE = 3;
+canvas.style.width = (256 * SCALE) + 'px';
+canvas.style.height = (240 * SCALE) + 'px';
+ctx = canvas.getContext('2d');
+imageData = ctx.createImageData(256, 240);
+
+function setStatus(msg) { document.getElementById('status').textContent = msg; }
+
+// ============================================================
+// ROM LOADING
+// ============================================================
+document.getElementById('rom-input').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const buf = new Uint8Array(ev.target.result);
+    // Convert to binary string (jsnes expects this)
+    let romStr = '';
+    for (let i = 0; i < buf.length; i++) romStr += String.fromCharCode(buf[i]);
+    startGame(romStr);
+  };
+  reader.readAsArrayBuffer(file);
+});
+
+// ============================================================
+// AUDIO SETUP
+// ============================================================
+function initAudio() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+    audioScriptNode = audioCtx.createScriptProcessor(4096, 0, 2);
+    audioScriptNode.onaudioprocess = function(e) {
+      const left = e.outputBuffer.getChannelData(0);
+      const right = e.outputBuffer.getChannelData(1);
+      const len = left.length;
+      for (let i = 0; i < len; i++) {
+        if (audioSamples.length >= 2) {
+          left[i] = audioSamples.shift();
+          right[i] = audioSamples.shift();
+        } else {
+          left[i] = 0;
+          right[i] = 0;
+        }
+      }
+    };
+    audioScriptNode.connect(audioCtx.destination);
+  } catch (e) {
+    console.warn('Audio unavailable:', e);
+  }
+}
+
+// ============================================================
+// GAME STARTUP
+// ============================================================
+function startGame(romStr) {
+  document.getElementById('load-screen').style.display = 'none';
+  document.getElementById('game-container').style.display = 'block';
+
+  initAudio();
+
+  nes = new jsnes.NES({
+    onFrame: function(fb) { frameBuf = fb; },
+    onAudioSample: function(l, r) {
+      if (audioSamples.length < 16384) { audioSamples.push(l, r); }
+    }
+  });
+
+  nes.loadROM(romStr);
+  installKnightTiles();
+  running = true;
+  setStatus('Playing — press T to toggle knight/mario');
+  requestAnimationFrame(gameLoop);
+}
+
+// ============================================================
+// INSTALL KNIGHT TILES INTO CHR
+// ============================================================
+function installKnightTiles() {
+  for (let i = 0; i < 8; i++) {
+    const tile = nes.ppu.ptTile[CHR_BASE + i];
+    if (tile && tile.pix) {
+      for (let p = 0; p < 64; p++) tile.pix[p] = KNIGHT_TILES[i][p];
+    }
+  }
+  // Set sprite palette 1
+  nes.ppu.vramMem[0x3F14] = KNIGHT_PALETTE[0];
+  nes.ppu.vramMem[0x3F15] = KNIGHT_PALETTE[1];
+  nes.ppu.vramMem[0x3F16] = KNIGHT_PALETTE[2];
+  nes.ppu.vramMem[0x3F17] = KNIGHT_PALETTE[3];
+}
+
+// ============================================================
+// SUPPRESS AND REPLACE
+// ============================================================
+function doSpriteReplace() {
+  if (!replaceEnabled) return;
+
+  const marioX = nes.cpu.mem[0x0086];
+  const marioY = nes.cpu.mem[0x00CE];
+  const playerState = nes.cpu.mem[0x000E];
+
+  // Don't replace during death or level-complete
+  if (playerState === 0x0B || playerState === 0x06) return;
+
+  // Detect facing from game's OAM slot 5
+  const slot5Attr = nes.ppu.spriteMem[5 * 4 + 2];
+  const facingLeft = (slot5Attr & 0x40) !== 0;
+  const hFlip = facingLeft ? 0x40 : 0x00;
+  const palette = 0x01;
+
+  // Suppress Mario's OAM slots (1-8)
+  for (let s = 1; s <= 8; s++) nes.ppu.spriteMem[s * 4] = 0xFF;
+
+  // Write knight sprites: 2 cols × 4 rows
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 2; col++) {
+      const slot = 1 + row * 2 + col;
+      const base = slot * 4;
+      const tileCol = facingLeft ? (1 - col) : col;
+      const tileIdx = CHR_BASE + row * 2 + tileCol;
+      const spriteX = facingLeft ? marioX + (1 - col) * 8 : marioX + col * 8;
+      const spriteY = marioY + row * 8;
+
+      nes.ppu.spriteMem[base]     = spriteY;
+      nes.ppu.spriteMem[base + 1] = tileIdx;
+      nes.ppu.spriteMem[base + 2] = palette | hFlip;
+      nes.ppu.spriteMem[base + 3] = spriteX;
+    }
+  }
+
+  // Re-install palette each frame (game may overwrite during transitions)
+  nes.ppu.vramMem[0x3F14] = KNIGHT_PALETTE[0];
+  nes.ppu.vramMem[0x3F15] = KNIGHT_PALETTE[1];
+  nes.ppu.vramMem[0x3F16] = KNIGHT_PALETTE[2];
+  nes.ppu.vramMem[0x3F17] = KNIGHT_PALETTE[3];
+}
+
+// ============================================================
+// RENDER FRAME TO CANVAS
+// ============================================================
+function renderFrame() {
+  if (!frameBuf) return;
+  const data = imageData.data;
+  for (let i = 0; i < 256 * 240; i++) {
+    const px = frameBuf[i];
+    data[i * 4]     = (px >> 16) & 0xFF;
+    data[i * 4 + 1] = (px >> 8) & 0xFF;
+    data[i * 4 + 2] = px & 0xFF;
+    data[i * 4 + 3] = 255;
+  }
+  ctx.putImageData(imageData, 0, 0);
+}
+
+// ============================================================
+// GAME LOOP
+// ============================================================
+function gameLoop() {
+  if (!running) return;
+
+  nes.frame();
+  doSpriteReplace();
+  renderFrame();
+
+  requestAnimationFrame(gameLoop);
+}
+
+// ============================================================
+// KEYBOARD HANDLING
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  // Toggle sprite replacement
+  if (e.code === 'KeyT') {
+    replaceEnabled = !replaceEnabled;
+    const badge = document.getElementById('toggle-badge');
+    badge.textContent = replaceEnabled ? 'KNIGHT' : 'MARIO';
+    badge.className = 'toggle-badge ' + (replaceEnabled ? 'knight' : 'mario');
+    setStatus(replaceEnabled ? 'Knight mode ON' : 'Original Mario');
+    // Re-install tiles when re-enabling
+    if (replaceEnabled && nes) installKnightTiles();
+    return;
+  }
+
+  // Resume audio context on first key press
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+
+  const mapping = KEY_MAP[e.code];
+  if (mapping && nes) {
+    nes.buttonDown(mapping[0], mapping[1]);
+    e.preventDefault();
+  }
+});
+
+document.addEventListener('keyup', function(e) {
+  const mapping = KEY_MAP[e.code];
+  if (mapping && nes) {
+    nes.buttonUp(mapping[0], mapping[1]);
+    e.preventDefault();
+  }
+});
+</script>
+</body>
+</html>
