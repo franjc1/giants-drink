@@ -115,7 +115,7 @@ function doMegaManReplace() {
   if (isJumping) {
     pose = 'jump';
   } else if (isMoving) {
-    var wp = ['walk3', 'walk4', 'walk5'];
+    var wp = ['walk1', 'walk4', 'walk7'];
     pose = wp[Math.floor(animFrame / 6) % wp.length];
     animFrame++;
   } else {
@@ -152,7 +152,10 @@ function doMegaManReplace() {
     var base = 0x0200 + slot * 4;
 
     var dx = t.dx, dy = t.dy;
-    if (facingLeft) dx = 24 - 8 - dx; // mirror horizontally within 24px width
+    // Stored offsets are for LEFT-facing (captured with H-flip on).
+    // For RIGHT-facing: mirror dx and don't flip tiles.
+    // For LEFT-facing: use offsets as-is and apply H-flip.
+    if (!facingLeft) dx = 24 - 8 - dx;
 
     nes.cpu.mem[base]     = baseY + dy;
     nes.cpu.mem[base + 1] = 0xF0 + i;
