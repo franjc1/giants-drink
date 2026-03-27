@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SMB Sprite Replace Demo</title>
+<title>SMB — Link Sprite Replace Demo</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #111; color: #eee; font-family: monospace; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
@@ -16,15 +16,15 @@
   #load-screen label:hover { background: #38c; }
   #load-screen input { display: none; }
   .toggle-badge { position: absolute; top: 8px; right: 8px; padding: 4px 10px; background: rgba(0,0,0,0.7); border-radius: 4px; font-size: 11px; pointer-events: none; }
-  .toggle-badge.knight { color: #6cf; }
+  .toggle-badge.knight { color: #4c4; }
   .toggle-badge.mario { color: #f84; }
 </style>
 </head>
 <body>
-<h1>SMB Sprite Replace Demo</h1>
+<h1>SMB — Link Sprite Replace</h1>
 <div id="controls-info">
   Arrows = D-pad &nbsp;|&nbsp; Z/X = Jump &nbsp;|&nbsp; A/S = Run &nbsp;|&nbsp;
-  Enter = Start &nbsp;|&nbsp; <b>T = Toggle Knight/Mario</b>
+  Enter = Start &nbsp;|&nbsp; <b>T = Toggle Link/Mario</b>
 </div>
 <div id="load-screen">
   <p id="load-status">Loading ROM...</p>
@@ -32,7 +32,7 @@
 </div>
 <div id="game-container" style="display:none;">
   <canvas id="screen" width="256" height="240"></canvas>
-  <div id="toggle-badge" class="toggle-badge knight">KNIGHT</div>
+  <div id="toggle-badge" class="toggle-badge knight">LINK</div>
 </div>
 <div id="status"></div>
 
@@ -43,18 +43,20 @@
 // KNIGHT: 4 visible tiles (head-L, head-R, body-L, body-R)
 // These go into CHR $F0-$F3 (sprite pattern table, verified unused)
 // ============================================================
-var KNIGHT_TILES = [
-  [0,0,1,1,1,1,1,1, 0,1,2,2,2,2,2,1, 0,1,2,3,3,2,2,1, 0,1,2,3,3,2,2,1,
-   0,1,2,2,2,2,2,1, 0,1,1,2,2,1,1,1, 0,0,1,1,1,1,0,0, 0,0,1,2,2,1,0,0],
-  [1,1,1,1,1,1,0,0, 1,2,2,2,2,2,1,0, 1,2,2,3,3,2,1,0, 1,2,2,3,3,2,1,0,
-   1,2,2,2,2,2,1,0, 1,1,1,2,2,1,1,0, 0,0,1,1,1,1,0,0, 0,0,1,2,2,1,0,0],
-  [0,1,1,2,2,1,1,0, 0,1,2,2,2,2,1,0, 0,1,2,3,3,2,1,0, 0,1,1,1,1,1,1,0,
-   0,0,1,2,0,1,2,0, 0,0,1,2,0,1,2,0, 0,0,1,1,0,1,1,0, 0,0,1,1,0,1,1,0],
-  [0,1,1,2,2,1,1,0, 0,1,2,2,2,2,1,0, 0,1,2,3,3,2,1,0, 0,1,1,1,1,1,1,0,
-   0,2,1,0,2,1,0,0, 0,2,1,0,2,1,0,0, 0,1,1,0,1,1,0,0, 0,1,1,0,1,1,0,0],
+// Link's sprite tiles extracted from The Legend of Zelda CHR-RAM
+// Facing down, standing pose. 4 tiles in 2x2 grid: TL, TR, BL, BR
+var LINK_TILES = [
+  // TL: cap + face upper-left
+  [0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,2,0,1,3,3,3,0,0,2,0,3,3,3,3,0,0,2,2,3,2,1,2,0,0,2,2,3,2,3,2,0,0,3,2,2,2,2,2,0,0,3,3,1,2,2,3],
+  // TR: cap + face upper-right
+  [1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,3,3,3,1,0,2,0,0,3,3,3,3,0,2,0,0,2,1,2,3,2,2,0,0,2,3,2,3,2,2,0,0,2,2,2,2,2,3,0,0,3,2,2,1,1,3,0,0],
+  // BL: tunic + legs lower-left
+  [0,0,2,1,1,1,2,2,0,0,2,1,1,1,1,1,0,0,0,3,1,1,3,3,0,0,0,1,3,3,3,1,0,0,0,1,1,1,3,3,0,0,0,0,3,1,1,1,0,0,0,0,3,3,3,0,0,0,0,0,3,3,3,0],
+  // BR: tunic + legs lower-right
+  [2,2,1,1,3,3,3,0,1,1,1,1,2,3,3,0,3,1,1,2,2,2,3,0,3,3,3,3,2,2,2,0,3,1,1,1,1,2,0,0,1,1,1,1,0,0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0],
 ];
-// Sprite palette 0: BG, dark-blue($02), light-gray($20), yellow($28)
-var KNIGHT_PAL = [0x0F, 0x02, 0x20, 0x28];
+// Link's palette: $29=green(tunic/cap), $27=skin, $07=dark brown(outline/hair)
+var LINK_PAL = [0x0F, 0x29, 0x27, 0x07];
 
 // ============================================================
 // KEYBOARD
@@ -123,15 +125,14 @@ function initAudio() {
 // ============================================================
 // INSTALL KNIGHT CHR TILES ($F0-$F3 in sprite pattern table)
 // ============================================================
-function installKnightTiles() {
+function installLinkTiles() {
   for (var t = 0; t < 4; t++) {
     var tile = nes.ppu.ptTile[0xF0 + t];
-    if (tile && tile.pix) for (var p = 0; p < 64; p++) tile.pix[p] = KNIGHT_TILES[t][p];
+    if (tile && tile.pix) for (var p = 0; p < 64; p++) tile.pix[p] = LINK_TILES[t][p];
   }
-  // Sprite palette 0 at VRAM $3F10 (bg) $3F11-$3F13 (colors 1-3)
-  nes.ppu.vramMem[0x3F11] = KNIGHT_PAL[1];
-  nes.ppu.vramMem[0x3F12] = KNIGHT_PAL[2];
-  nes.ppu.vramMem[0x3F13] = KNIGHT_PAL[3];
+  nes.ppu.vramMem[0x3F11] = LINK_PAL[1]; // green
+  nes.ppu.vramMem[0x3F12] = LINK_PAL[2]; // skin
+  nes.ppu.vramMem[0x3F13] = LINK_PAL[3]; // dark brown
 }
 
 // ============================================================
@@ -182,9 +183,9 @@ function doSpriteReplace() {
   }
 
   // Reinstall palette (game may change it during level transitions)
-  nes.ppu.vramMem[0x3F11] = KNIGHT_PAL[1];
-  nes.ppu.vramMem[0x3F12] = KNIGHT_PAL[2];
-  nes.ppu.vramMem[0x3F13] = KNIGHT_PAL[3];
+  nes.ppu.vramMem[0x3F11] = LINK_PAL[1];
+  nes.ppu.vramMem[0x3F12] = LINK_PAL[2];
+  nes.ppu.vramMem[0x3F13] = LINK_PAL[3];
 }
 
 // ============================================================
@@ -206,7 +207,7 @@ function gameLoop() {
 
   // Reinstall CHR tiles periodically
   if (replaceEnabled) {
-    if (tileCountdown <= 0) { installKnightTiles(); tileCountdown = 30; }
+    if (tileCountdown <= 0) { installLinkTiles(); tileCountdown = 30; }
     tileCountdown--;
   }
 
@@ -231,7 +232,7 @@ function startGame(romStr) {
     onAudioSample: function(l,r) { if(audioSamples.length<16384){audioSamples.push(l,r);} }
   });
   nes.loadROM(romStr);
-  installKnightTiles();
+  installLinkTiles();
   running = true;
   setStatus('Playing — press T to toggle Knight/Mario');
   requestAnimationFrame(gameLoop);
@@ -244,10 +245,10 @@ document.addEventListener('keydown', function(e) {
   if (e.code === 'KeyT') {
     replaceEnabled = !replaceEnabled;
     var badge = document.getElementById('toggle-badge');
-    badge.textContent = replaceEnabled ? 'KNIGHT' : 'MARIO';
+    badge.textContent = replaceEnabled ? 'LINK' : 'MARIO';
     badge.className = 'toggle-badge ' + (replaceEnabled ? 'knight' : 'mario');
-    setStatus(replaceEnabled ? 'Knight mode ON' : 'Original Mario');
-    if (replaceEnabled && nes) installKnightTiles();
+    setStatus(replaceEnabled ? 'Link mode ON' : 'Original Mario');
+    if (replaceEnabled && nes) installLinkTiles();
     return;
   }
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
