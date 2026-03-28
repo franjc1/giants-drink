@@ -169,14 +169,13 @@ function drawHarry() {
 
   var powerup = nes.cpu.mem[0x0756]; // 0=small, 1=big, 2=fire
   var yVel = nes.cpu.mem[0x009F];
-  var curX = nes.cpu.mem[0x0086];
-  var isMoving = (curX !== lastX);
+  var xSpeed = nes.cpu.mem[0x0700]; // horizontal speed (reliable, non-zero while moving)
+  var isMoving = (xSpeed !== 0);
   var isJumping = (yVel !== 0);
 
-  // Direction tracking
-  if (curX > lastX) facingLeft = false;
-  else if (curX < lastX) facingLeft = true;
-  lastX = curX;
+  // Direction from game's OAM H-flip attribute
+  var s5A = nes.cpu.mem[0x0200 + 5 * 4 + 2];
+  facingLeft = (s5A & 0x40) !== 0;
 
   // Select sprite set based on powerup
   var prefix;
