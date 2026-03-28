@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Super Harry Bros</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#111;color:#eee;font-family:monospace;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  h1{margin:12px 0 4px;font-size:20px;color:#fc4}
+  #info{font-size:12px;color:#888;margin-bottom:8px}
+  #game{position:relative;image-rendering:pixelated}
+  canvas{image-rendering:pixelated;display:block;background:#000}
+  #status{margin-top:6px;font-size:13px;color:#aaa}
+  #load{text-align:center;padding:60px 20px}
+  #load label{display:inline-block;padding:16px 32px;background:#840;color:#fff;border-radius:8px;cursor:pointer;font-size:16px;font-family:monospace}
+  #load input{display:none}
+  .badge{position:absolute;top:8px;right:8px;padding:4px 10px;background:rgba(0,0,0,.8);border-radius:4px;font-size:11px;pointer-events:none}
+  .badge.hp{color:#fc4} .badge.mario{color:#f84}
+</style>
+</head>
+<body>
+<h1>Super Harry Bros</h1>
+<div id="info">Arrows=D-pad Z/X=Jump A/S=Run Enter=Start <b>T=Toggle Harry/Mario</b></div>
+<div id="load"><p id="ls">Loading...</p><label id="fl" style="display:none">Select SMB ROM<input type="file" id="fi" accept=".nes"></label></div>
+<div id="game" style="display:none"><canvas id="cv" width="256" height="240"></canvas><div id="badge" class="badge hp">HARRY</div></div>
+<div id="status"></div>
+
+<script src="jsnes.min.js"></script>
+<script src="rom-data.js"></script>
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+var SCALE = 3;
+var SPRITE_BASE = 'hp-sprites/';
+var SPRITE_LIST = {
+  'small-stand': 'hp-stand-small.png',
+  'small-walk1': 'hp-walk1-small.png', 'small-walk2': 'hp-walk2-small.png', 'small-walk3': 'hp-walk3-small.png',
+  'small-jump':  'hp-jump-small.png',
+  'big-stand':   'hp-stand-big.png',
+  'big-walk1':   'hp-walk1-big.png', 'big-walk2': 'hp-walk2-big.png', 'big-walk3': 'hp-walk3-big.png',
+  'big-jump':    'hp-jump-big.png',
+  'fire-stand':  'hp-stand-fire.png',
+  'fire-walk1':  'hp-walk1-fire.png', 'fire-walk2': 'hp-walk2-fire.png', 'fire-walk3': 'hp-walk3-fire.png',
+  'fire-jump':   'hp-jump-fire.png',
+};
+
+// NES pixel dimensions for each state
+var SMALL_W = 16, SMALL_H = 24;
+var BIG_W = 16, BIG_H = 32;
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+var KEY_MAP = {
+  ArrowUp:[1,jsnes.Controller.BUTTON_UP], ArrowDown:[1,jsnes.Controller.BUTTON_DOWN],
+  ArrowLeft:[1,jsnes.Controller.BUTTON_LEFT], ArrowRight:[1,jsnes.Controller.BUTTON_RIGHT],
+  KeyZ:[1,jsnes.Controller.BUTTON_A], KeyX:[1,jsnes.Controller.BUTTON_A],
+  KeyA:[1,jsnes.Controller.BUTTON_B], KeyS:[1,jsnes.Controller.BUTTON_B],
+  Enter:[1,jsnes.Controller.BUTTON_START],
+  ShiftRight:[1,jsnes.Controller.BUTTON_SELECT], ShiftLeft:[1,jsnes.Controller.BUTTON_SELECT],
+};
+
+// ============================================================
+// STATE
+// ============================================================
+var nes, ctx, imageData, buf, buf32, frameBuf;
+var running = false, harryMode = true;
+var audioCtx, audioNode, audioSamples = [];
+var sprites = {};
+var animFrame = 0, lastX = 0, facingLeft = false;
+
+// ============================================================
+// INIT
+// ============================================================
+var cv = document.getElementById('cv');
+cv.style.width = (256 * SCALE) + 'px';
+cv.style.height = (240 * SCALE) + 'px';
+ctx = cv.getContext('2d');
+imageData = ctx.createImageData(256, 240);
+buf = new ArrayBuffer(imageData.data.length);
+buf32 = new Uint32Array(buf);
+
+// ============================================================
+// SPRITE LOADING
+// ============================================================
+function loadSprites() {
+  var keys = Object.keys(SPRITE_LIST);
+  var loaded = 0;
+  return new Promise(function(resolve) {
+    keys.forEach(function(key) {
+      var img = new Image();
+      img.onload = function() {
+        sprites[key] = img;
+        loaded++;
+        document.getElementById('ls').textContent = 'Loading sprites... ' + loaded + '/' + keys.length;
+        if (loaded === keys.length) resolve();
+      };
+      img.onerror = function() {
+        console.warn('Failed to load: ' + SPRITE_LIST[key]);
+        sprites[key] = null;
+        loaded++;
+        if (loaded === keys.length) resolve();
+      };
+      img.src = SPRITE_BASE + SPRITE_LIST[key];
+    });
+  });
+}
+
+// ============================================================
+// ROM LOADING
+// ============================================================
+document.getElementById('fi').addEventListener('change', function(e) {
+  var f = e.target.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function(ev) {
+    var b = new Uint8Array(ev.target.result), s = '';
+    for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+    startGame(s);
+  };
+  r.readAsArrayBuffer(f);
+});
+
+// ============================================================
+// AUDIO
+// ============================================================
+function initAudio() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 44100});
+    audioNode = audioCtx.createScriptProcessor(4096, 0, 2);
+    audioNode.onaudioprocess = function(e) {
+      var L = e.outputBuffer.getChannelData(0), R = e.outputBuffer.getChannelData(1);
+      for (var i = 0; i < L.length; i++) {
+        if (audioSamples.length >= 2) { L[i] = audioSamples.shift(); R[i] = audioSamples.shift(); }
+        else { L[i] = 0; R[i] = 0; }
+      }
+    };
+    audioNode.connect(audioCtx.destination);
+  } catch(e) {}
+}
+
+// ============================================================
+// RENDER NES FRAME TO CANVAS
+// ============================================================
+function renderNESFrame() {
+  if (!frameBuf) return;
+  for (var i = 0; i < 256 * 240; i++) buf32[i] = 0xFF000000 | frameBuf[i];
+  imageData.data.set(new Uint8ClampedArray(buf));
+  ctx.putImageData(imageData, 0, 0);
+}
+
+// ============================================================
+// SUPPRESS MARIO'S OAM SPRITES
+// Write to $0200 shadow RAM BEFORE nes.frame() — DMA copies to PPU
+// ============================================================
+function suppressMario() {
+  // Mario uses OAM slots 1-8
+  for (var s = 1; s <= 8; s++) {
+    nes.cpu.mem[0x0200 + s * 4] = 0xFF; // Y = offscreen
+  }
+}
+
+// ============================================================
+// DRAW HARRY POTTER ON CANVAS (overdraw after NES render)
+// ============================================================
+function drawHarry() {
+  var playerState = nes.cpu.mem[0x000E];
+  if (playerState === 0x0B || playerState === 0x06) return; // death/transition
+
+  var powerup = nes.cpu.mem[0x0756]; // 0=small, 1=big, 2=fire
+  var yVel = nes.cpu.mem[0x009F];
+  var curX = nes.cpu.mem[0x0086];
+  var isMoving = (curX !== lastX);
+  var isJumping = (yVel !== 0);
+
+  // Direction tracking
+  if (curX > lastX) facingLeft = false;
+  else if (curX < lastX) facingLeft = true;
+  lastX = curX;
+
+  // Select sprite set based on powerup
+  var prefix;
+  if (powerup === 2) prefix = 'fire';
+  else if (powerup === 1) prefix = 'big';
+  else prefix = 'small';
+
+  // Select pose
+  var pose;
+  if (isJumping) {
+    pose = 'jump';
+  } else if (isMoving) {
+    var walkFrames = ['walk1', 'walk2', 'walk3'];
+    pose = walkFrames[Math.floor(animFrame / 6) % walkFrames.length];
+    animFrame++;
+  } else {
+    pose = 'stand';
+    animFrame = 0;
+  }
+
+  var spriteKey = prefix + '-' + pose;
+  var sprite = sprites[spriteKey];
+  if (!sprite) sprite = sprites[prefix + '-stand']; // fallback
+  if (!sprite) sprite = sprites['small-stand']; // ultimate fallback
+  if (!sprite) return;
+
+  // Get Mario's screen position from OAM shadow
+  // Slot 5 = first visible Mario tile (head area for small, mid for big)
+  var s5Y = nes.cpu.mem[0x0200 + 5 * 4];
+  var s5X = nes.cpu.mem[0x0200 + 5 * 4 + 3];
+  var s7Y = nes.cpu.mem[0x0200 + 7 * 4];
+
+  // Mario feet bottom = s7Y + 8 + 1 (NES OAM Y+1 quirk)
+  var marioFeetY = s7Y + 9;
+
+  // Determine draw dimensions in NES pixels
+  var drawW, drawH;
+  if (prefix === 'small') {
+    drawW = SMALL_W; drawH = SMALL_H;
+  } else {
+    drawW = BIG_W; drawH = BIG_H;
+  }
+
+  // Position: center horizontally on Mario, feet-aligned vertically
+  var drawX = s5X; // left edge = Mario's left edge
+  var drawY = marioFeetY - drawH; // feet at Mario's feet
+
+  // Scale to canvas coordinates
+  // Canvas is rendered at 1:1 (256x240) then CSS-scaled.
+  // We draw at native resolution, CSS handles display scaling.
+  ctx.imageSmoothingEnabled = false;
+
+  if (facingLeft) {
+    ctx.save();
+    ctx.scale(-1, 1);
+    ctx.drawImage(sprite, -(drawX + drawW), drawY, drawW, drawH);
+    ctx.restore();
+  } else {
+    ctx.drawImage(sprite, drawX, drawY, drawW, drawH);
+  }
+}
+
+// ============================================================
+// GAME LOOP
+// ============================================================
+function gameLoop() {
+  if (!running) return;
+
+  if (harryMode) suppressMario();
+  nes.frame();
+  renderNESFrame();
+  if (harryMode) drawHarry();
+
+  requestAnimationFrame(gameLoop);
+}
+
+// ============================================================
+// START GAME
+// ============================================================
+function startGame(romStr) {
+  document.getElementById('load').style.display = 'none';
+  document.getElementById('game').style.display = 'block';
+  initAudio();
+
+  nes = new jsnes.NES({
+    onFrame: function(fb) { frameBuf = fb; },
+    onAudioSample: function(l, r) { if (audioSamples.length < 16384) { audioSamples.push(l, r); } }
+  });
+  nes.loadROM(romStr);
+  running = true;
+  document.getElementById('status').textContent = 'Playing — press T to toggle Harry/Mario';
+  requestAnimationFrame(gameLoop);
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+window.addEventListener('DOMContentLoaded', function() {
+  loadSprites().then(function() {
+    var loaded = Object.values(sprites).filter(function(s) { return s !== null; }).length;
+    console.log('Sprites loaded: ' + loaded + '/' + Object.keys(SPRITE_LIST).length);
+
+    if (window.ROM_BASE64) {
+      startGame(atob(ROM_BASE64));
+    } else {
+      document.getElementById('ls').textContent = 'Run: node build-rom-data.cjs';
+      document.getElementById('fl').style.display = 'inline-block';
+    }
+  });
+});
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  if (e.code === 'KeyT') {
+    harryMode = !harryMode;
+    var b = document.getElementById('badge');
+    b.textContent = harryMode ? 'HARRY' : 'MARIO';
+    b.className = 'badge ' + (harryMode ? 'hp' : 'mario');
+    document.getElementById('status').textContent = harryMode ? 'Harry Potter mode' : 'Original Mario';
+    return;
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  var m = KEY_MAP[e.code];
+  if (m && nes) { nes.buttonDown(m[0], m[1]); e.preventDefault(); }
+});
+document.addEventListener('keyup', function(e) {
+  var m = KEY_MAP[e.code];
+  if (m && nes) { nes.buttonUp(m[0], m[1]); e.preventDefault(); }
+});
+</script>
+</body>
+</html>
