@@ -24,6 +24,7 @@
 <div id="load"><p id="ls">Loading...</p><label id="fl" style="display:none">Select SMB ROM<input type="file" id="fi" accept=".nes"></label></div>
 <div id="game" style="display:none"><canvas id="cv" width="256" height="240"></canvas><div id="badge" class="badge hp">HARRY</div></div>
 <div id="status"></div>
+<div id="debug" style="font-size:12px;color:#0f0;background:#000;padding:4px 8px;margin-top:4px;font-family:monospace;white-space:pre"></div>
 
 <script src="jsnes.min.js"></script>
 <script src="rom-data.js"></script>
@@ -197,6 +198,18 @@ function drawHarry() {
   }
 
   var spriteKey = prefix + '-' + pose;
+
+  // DEBUG DISPLAY
+  document.getElementById('debug').textContent =
+    '$0700=' + xSpeed.toString().padStart(3) +
+    ' (typeof=' + (typeof xSpeed) + ', !==0:' + (xSpeed !== 0) + ')' +
+    '  $009F=' + yVel.toString().padStart(3) +
+    '  moving=' + isMoving +
+    '  jump=' + isJumping +
+    '  POSE=' + spriteKey +
+    '  anim=' + animFrame +
+    '  sprite=' + (sprite ? 'loaded' : 'NULL');
+
   var sprite = sprites[spriteKey];
   if (!sprite) sprite = sprites[prefix + '-stand']; // fallback
   if (!sprite) sprite = sprites['small-stand']; // ultimate fallback
@@ -235,6 +248,14 @@ function drawHarry() {
     ctx.restore();
   } else {
     ctx.drawImage(sprite, drawX, drawY, drawW, drawH);
+  }
+
+  // Debug: draw walk frame indicator dot (red/green/blue for walk1/2/3)
+  if (isMoving && !isJumping) {
+    var dotColors = ['#f00', '#0f0', '#00f'];
+    var walkIdx = Math.floor(animFrame / 6) % 3;
+    ctx.fillStyle = dotColors[walkIdx];
+    ctx.fillRect(drawX, drawY - 3, 4, 2);
   }
 }
 
